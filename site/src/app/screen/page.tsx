@@ -20,15 +20,22 @@ export const dynamic = 'force-dynamic'
  */
 
 const TIER_LABEL: Record<string, string> = {
-  T1: 'T1 — core metaresearch',
-  T2: 'T2 — metaresearch',
-  T3: 'T3 — adjacent',
+  T1: 'T1 — core metaresearch (counts as IN)',
+  T2: 'T2 — metaresearch (counts as IN)',
+  T3: 'T3 — adjacent. Does NOT count as in scope.',
   OUT: 'out of scope',
 }
 
+/**
+ * T1 and T2 are in scope. T3 is ADJACENT and is NOT, which is the rubric's own
+ * definition: `n_in` counts T1 and T2 only. Colouring T3 as in-scope would make the
+ * table contradict the histogram above it -- a work all three models call T3 has
+ * n_in = 0 and is not in the dossier at all.
+ */
 function tierColor(tier: string | null): string {
-  if (!tier || tier === 'OUT') return 'var(--out)'
-  return 'var(--in-scope)'
+  if (tier === 'T1' || tier === 'T2') return 'var(--in-scope)'
+  if (tier === 'T3') return 'var(--contested)'
+  return 'var(--out)'
 }
 
 function Verdict({ tier, conf }: { tier: string | null; conf: string | null }) {
@@ -135,8 +142,9 @@ export default async function Screen({
       <section className="card p-6">
         <h2 className="font-serif text-xl">The three models are not interchangeable</h2>
         <p className="mt-1 text-sm" style={{ color: 'var(--ink-4)' }}>
-          How many of the {s.n_screened.toLocaleString('en-CA')} works each model called metaresearch, on identical
-          input.
+          How many of the {s.n_screened.toLocaleString('en-CA')} works each model called metaresearch (tier T1 or T2),
+          on identical input. T3 is <em>adjacent</em> and does not count as in scope, which is why a model&apos;s count
+          can never exceed the {s.any_in} works in the dossier.
         </p>
         <div className="mt-4 space-y-2">
           {s.per_model.map((m) => {

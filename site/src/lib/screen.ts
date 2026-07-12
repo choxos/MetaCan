@@ -71,6 +71,17 @@ export interface ScreenSummary {
   strata: Array<{ stratum: string; n: number }>
 }
 
+/**
+ * The tiers that count as "in scope".
+ *
+ * T1 (core metaresearch) and T2 (metaresearch). T3 is ADJACENT, and it is NOT in
+ * scope: the rubric's own `n_in` counts T1 and T2 only, verified against all 1,000
+ * rows (zero mismatches). Counting T3 as "in" -- the obvious reading of "tier is
+ * not OUT" -- makes each model's count larger than the union of all three, which is
+ * arithmetically impossible and was exactly the bug this constant now prevents.
+ */
+export const IN_SCOPE_TIERS = ['T1', 'T2'] as const
+
 export const getScreenSummary = unstable_cache(
   async (): Promise<ScreenSummary> => {
     const [c] = await prisma.$queryRaw<Array<Record<string, bigint>>>`
@@ -79,9 +90,9 @@ export const getScreenSummary = unstable_cache(
              COUNT(*) FILTER (WHERE n_in = 1)                          AS n1,
              COUNT(*) FILTER (WHERE n_in = 2)                          AS n2,
              COUNT(*) FILTER (WHERE n_in = 3)                          AS n3,
-             COUNT(*) FILTER (WHERE opus_tier IS NOT NULL AND opus_tier <> 'OUT') AS opus,
-             COUNT(*) FILTER (WHERE gpt_tier  IS NOT NULL AND gpt_tier  <> 'OUT') AS gpt,
-             COUNT(*) FILTER (WHERE grok_tier IS NOT NULL AND grok_tier <> 'OUT') AS grok
+             COUNT(*) FILTER (WHERE opus_tier IN ('T1','T2'))          AS opus,
+             COUNT(*) FILTER (WHERE gpt_tier  IN ('T1','T2'))          AS gpt,
+             COUNT(*) FILTER (WHERE grok_tier IN ('T1','T2'))          AS grok
       FROM screened`
 
     const strataRows = await prisma.$queryRaw<Array<Record<string, unknown>>>`

@@ -59,14 +59,18 @@ function ModelCard({
   confidence: string | null
   reason: string | null
 }) {
-  const isIn = tier !== null && tier !== 'OUT' && tier !== ''
-  const color = isIn ? 'var(--in-scope)' : 'var(--out)'
+  // T1/T2 are in scope; T3 is ADJACENT and is NOT (the rubric's `n_in` counts T1 and
+  // T2 only). Painting T3 as in-scope would contradict the consensus banner above:
+  // a work all three call T3 has n_in = 0.
+  const isIn = tier === 'T1' || tier === 'T2'
+  const color = isIn ? 'var(--in-scope)' : tier === 'T3' ? 'var(--contested)' : 'var(--out)'
+  const label = tier === 'T3' ? 'T3 · adjacent, not in scope' : tier || 'OUT'
   return (
     <div className="card p-4">
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between gap-2">
         <span className="font-medium">{model}</span>
         <span className="chip" style={{ borderColor: color, color, background: 'transparent' }}>
-          {tier || 'OUT'}
+          {label}
         </span>
       </div>
       <div className="mt-2 space-y-1 text-xs" style={{ color: 'var(--ink-4)' }}>
