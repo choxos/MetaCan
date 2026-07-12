@@ -82,7 +82,6 @@ export default async function Analytics() {
       <Frame
         title="Works by year"
         note={`The frame over time, with the works that carry NO Canadian affiliation drawn underneath. The gap between the two lines is what an affiliation-only frame silently loses — ${pctNoAff}% of the frame, ${n(summary.no_aff)} works.`}
-        height={340}
       >
         <ByYearChart data={byYear} />
       </Frame>
@@ -91,7 +90,6 @@ export default async function Analytics() {
         <Frame
           title="Works by route"
           note={`Why each work is in the frame. The four routes OVERLAP — a work can be admitted by several — so these bars sum to ${n(sumMarginals)}, which is ${n(overcount)} more than the ${n(byRoute.total)} works in the frame. That overlap is the next chart.`}
-          height={260}
         >
           <ByRouteChart data={byRoute} />
         </Frame>
@@ -99,21 +97,19 @@ export default async function Analytics() {
         <Frame
           title="The overlap: exact route combinations"
           note="Each work counted once, under the exact set of routes that admitted it. Teal bars are works admitted by a SINGLE route: remove that route from the design and those works vanish from the frame entirely."
-          height={260}
         >
           <RouteOverlapChart data={byRoute} />
         </Frame>
       </div>
 
       <div className="grid gap-6 lg:grid-cols-2">
-        <Frame title="Works by field" note="OpenAlex's primary field, as recorded." height={360}>
+        <Frame title="Works by field" note="OpenAlex's primary field, as recorded.">
           <ByFieldChart data={byField} />
         </Frame>
 
         <Frame
           title="Works by language"
           note="French is highlighted. It is 6% of the frame, it is oversampled in the screen on purpose, and it is the language the abstract cascade rescues worst (15.4% recovery against 38.8% for English)."
-          height={360}
         >
           <ByLangChart data={byLang} />
         </Frame>
@@ -122,7 +118,6 @@ export default async function Analytics() {
       <Frame
         title="The abstract gap is structural, not noise"
         note={`Share of works with NO abstract, by type, worst first. ${pctNoAbs}% of the frame has no abstract, and the screen finds HALF as much metaresearch there. If the gap were random, a better index would fix it. It is not random: it is concentrated in types that never carry an abstract at all — so "just screen the works that have abstracts" is a selection on a covariate that predicts the outcome.`}
-        height={400}
       >
         <AbstractGapChart data={gap} />
       </Frame>
@@ -130,7 +125,6 @@ export default async function Analytics() {
       <Frame
         title="The post-publication record has four states, and OpenAlex has a boolean"
         note={`${n(noticesTotal)} works in the frame carry a Retraction Watch notice. The solid bar is what OpenAlex flags; the hatched bar is what it reports as “false” — ${n(missedTotal)} works whose notice OpenAlex does not carry, which a reader takes to mean “fine”. An expression of concern is not a retraction, and \`is_retracted\` has no way to say so.`}
-        height={320}
       >
         <RetractionChart data={retractions} />
       </Frame>
@@ -161,13 +155,12 @@ export default async function Analytics() {
       </div>
 
       <div className="grid gap-6 lg:grid-cols-2">
-        <Frame title="Top venues" note="By work count in the frame." height={380}>
+        <Frame title="Top venues" note="By work count in the frame.">
           <VenueChart data={venues} />
         </Frame>
         <Frame
           title="Top funders"
           note="Split from the semicolon-separated funder string. The funder route admits works that carry no Canadian affiliation at all."
-          height={380}
         >
           <FunderChart data={funders} />
         </Frame>
