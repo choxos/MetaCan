@@ -1,0 +1,454 @@
+{
+  "request": {
+    "endpoint": "works",
+    "params": {
+      "filter": "title_and_abstract.search:\"Ontario\" OR \"Quebec\" OR \"Québec\" OR \"British Columbia\" OR \"Alberta\" OR \"Manitoba\" OR \"Saskatchewan\" OR \"Nova Scotia\" OR \"New Brunswick\" OR \"Newfoundland\" OR \"Prince Edward Island\"",
+      "per-page": "1",
+      "mailto": "ahmad.pub@gmail.com"
+    }
+  },
+  "retrieved_at_utc": "2026-07-11T12:37:02Z",
+  "payload": {
+    "meta": {
+      "count": 643413,
+      "db_response_time_ms": 92,
+      "page": 1,
+      "per_page": 1,
+      "groups_count": null,
+      "x_query": {
+        "oql": "works where title/abstract has (\n    stemmed \"Alberta\" or stemmed \"British Columbia\" or stemmed \"Manitoba\"\n    or stemmed \"New Brunswick\" or stemmed \"Newfoundland\"\n    or stemmed \"Nova Scotia\" or stemmed \"Ontario\"\n    or stemmed \"Prince Edward Island\" or stemmed \"Québec\" or stemmed \"Quebec\"\n    or stemmed \"Saskatchewan\"\n  )",
+        "oqo": {
+          "get_rows": "works",
+          "filter_rows": [
+            {
+              "join": "or",
+              "filters": [
+                {
+                  "column_id": "title_and_abstract.search",
+                  "value": "\"Alberta\"",
+                  "operator": "has"
+                },
+                {
+                  "column_id": "title_and_abstract.search",
+                  "value": "\"British Columbia\"",
+                  "operator": "has"
+                },
+                {
+                  "column_id": "title_and_abstract.search",
+                  "value": "\"Manitoba\"",
+                  "operator": "has"
+                },
+                {
+                  "column_id": "title_and_abstract.search",
+                  "value": "\"New Brunswick\"",
+                  "operator": "has"
+                },
+                {
+                  "column_id": "title_and_abstract.search",
+                  "value": "\"Newfoundland\"",
+                  "operator": "has"
+                },
+                {
+                  "column_id": "title_and_abstract.search",
+                  "value": "\"Nova Scotia\"",
+                  "operator": "has"
+                },
+                {
+                  "column_id": "title_and_abstract.search",
+                  "value": "\"Ontario\"",
+                  "operator": "has"
+                },
+                {
+                  "column_id": "title_and_abstract.search",
+                  "value": "\"Prince Edward Island\"",
+                  "operator": "has"
+                },
+                {
+                  "column_id": "title_and_abstract.search",
+                  "value": "\"Québec\"",
+                  "operator": "has"
+                },
+                {
+                  "column_id": "title_and_abstract.search",
+                  "value": "\"Quebec\"",
+                  "operator": "has"
+                },
+                {
+                  "column_id": "title_and_abstract.search",
+                  "value": "\"Saskatchewan\"",
+                  "operator": "has"
+                }
+              ]
+            }
+          ],
+          "per_page": 1
+        },
+        "url": "/works?filter=title_and_abstract.search:%22Alberta%22|%22British Columbia%22|%22Manitoba%22|%22New Brunswick%22|%22Newfoundland%22|%22Nova Scotia%22|%22Ontario%22|%22Prince Edward Island%22|%22Qu%C3%A9bec%22|%22Quebec%22|%22Saskatchewan%22&per_page=1"
+      },
+      "cost_usd": 0.001
+    },
+    "results": [
+      {
+        "id": "https://openalex.org/W1544781843",
+        "doi": null,
+        "title": "Ecosystems of British Columbia",
+        "display_name": "Ecosystems of British Columbia",
+        "relevance_score": 779.7485,
+        "publication_year": 1991,
+        "publication_date": "1991-01-01",
+        "ids": {
+          "openalex": "https://openalex.org/W1544781843",
+          "mag": "1544781843"
+        },
+        "language": "en",
+        "primary_location": {
+          "id": "mag:1544781843",
+          "is_oa": false,
+          "landing_page_url": "https://bibliotecadigital.infor.cl/handle/20.500.12220/21460",
+          "pdf_url": null,
+          "source": null,
+          "license": null,
+          "license_id": null,
+          "version": null,
+          "is_accepted": false,
+          "is_published": false,
+          "raw_source_name": null,
+          "raw_type": null
+        },
+        "type": "article",
+        "indexed_in": [],
+        "open_access": {
+          "is_oa": false,
+          "oa_status": "closed",
+          "oa_url": null,
+          "any_repository_has_fulltext": false
+        },
+        "authorships": [
+          {
+            "author_position": "first",
+            "author": {
+              "id": "https://openalex.org/A5023358584",
+              "display_name": "Del Meidinger",
+              "orcid": null
+            },
+            "institutions": [],
+            "countries": [],
+            "is_corresponding": false,
+            "raw_author_name": "Del Meidinger",
+            "raw_affiliation_strings": [],
+            "raw_orcid": null,
+            "affiliations": []
+          },
+          {
+            "author_position": "last",
+            "author": {
+              "id": "https://openalex.org/A5035974631",
+              "display_name": "J. Pojar",
+              "orcid": null
+            },
+            "institutions": [],
+            "countries": [],
+            "is_corresponding": false,
+            "raw_author_name": "J. Pojar",
+            "raw_affiliation_strings": [],
+            "raw_orcid": null,
+            "affiliations": []
+          }
+        ],
+        "institutions": [],
+        "countries_distinct_count": 0,
+        "institutions_distinct_count": 2,
+        "corresponding_author_ids": [],
+        "corresponding_institution_ids": [],
+        "apc_list": null,
+        "apc_paid": null,
+        "fwci": 9.8342,
+        "has_fulltext": false,
+        "cited_by_count": 1360,
+        "citation_normalized_percentile": {
+          "value": 0.9855,
+          "is_in_top_1_percent": false,
+          "is_in_top_10_percent": true
+        },
+        "cited_by_percentile_year": {
+          "min": 99,
+          "max": 100
+        },
+        "biblio": {
+          "volume": null,
+          "issue": "6",
+          "first_page": null,
+          "last_page": null
+        },
+        "is_retracted": false,
+        "is_paratext": false,
+        "is_xpac": false,
+        "primary_topic": {
+          "id": "https://openalex.org/T13388",
+          "display_name": "Rangeland and Wildlife Management",
+          "score": 0.7946,
+          "subfield": {
+            "id": "https://openalex.org/subfields/2303",
+            "display_name": "Ecology"
+          },
+          "field": {
+            "id": "https://openalex.org/fields/23",
+            "display_name": "Environmental Science"
+          },
+          "domain": {
+            "id": "https://openalex.org/domains/3",
+            "display_name": "Physical Sciences"
+          }
+        },
+        "topics": [
+          {
+            "id": "https://openalex.org/T13388",
+            "display_name": "Rangeland and Wildlife Management",
+            "score": 0.7946,
+            "subfield": {
+              "id": "https://openalex.org/subfields/2303",
+              "display_name": "Ecology"
+            },
+            "field": {
+              "id": "https://openalex.org/fields/23",
+              "display_name": "Environmental Science"
+            },
+            "domain": {
+              "id": "https://openalex.org/domains/3",
+              "display_name": "Physical Sciences"
+            }
+          },
+          {
+            "id": "https://openalex.org/T10005",
+            "display_name": "Ecology and Vegetation Dynamics Studies",
+            "score": 0.7263,
+            "subfield": {
+              "id": "https://openalex.org/subfields/2309",
+              "display_name": "Nature and Landscape Conservation"
+            },
+            "field": {
+              "id": "https://openalex.org/fields/23",
+              "display_name": "Environmental Science"
+            },
+            "domain": {
+              "id": "https://openalex.org/domains/3",
+              "display_name": "Physical Sciences"
+            }
+          },
+          {
+            "id": "https://openalex.org/T13015",
+            "display_name": "Botany, Ecology, and Taxonomy Studies",
+            "score": 0.6635,
+            "subfield": {
+              "id": "https://openalex.org/subfields/1110",
+              "display_name": "Plant Science"
+            },
+            "field": {
+              "id": "https://openalex.org/fields/11",
+              "display_name": "Agricultural and Biological Sciences"
+            },
+            "domain": {
+              "id": "https://openalex.org/domains/1",
+              "display_name": "Life Sciences"
+            }
+          }
+        ],
+        "keywords": [
+          {
+            "id": "https://openalex.org/keywords/ecosystem",
+            "display_name": "Ecosystem",
+            "score": 0.5907
+          },
+          {
+            "id": "https://openalex.org/keywords/ecology",
+            "display_name": "Ecology",
+            "score": 0.4251
+          },
+          {
+            "id": "https://openalex.org/keywords/environmental-resource-management",
+            "display_name": "Environmental resource management",
+            "score": 0.3742
+          },
+          {
+            "id": "https://openalex.org/keywords/geography",
+            "display_name": "Geography",
+            "score": 0.3702
+          },
+          {
+            "id": "https://openalex.org/keywords/environmental-science",
+            "display_name": "Environmental science",
+            "score": 0.3355
+          },
+          {
+            "id": "https://openalex.org/keywords/biology",
+            "display_name": "Biology",
+            "score": 0.2141
+          }
+        ],
+        "concepts": [
+          {
+            "id": "https://openalex.org/C110872660",
+            "wikidata": "https://www.wikidata.org/wiki/Q37813",
+            "display_name": "Ecosystem",
+            "level": 2,
+            "score": 0.5907
+          },
+          {
+            "id": "https://openalex.org/C18903297",
+            "wikidata": "https://www.wikidata.org/wiki/Q7150",
+            "display_name": "Ecology",
+            "level": 1,
+            "score": 0.4251
+          },
+          {
+            "id": "https://openalex.org/C107826830",
+            "wikidata": "https://www.wikidata.org/wiki/Q929380",
+            "display_name": "Environmental resource management",
+            "level": 1,
+            "score": 0.3742
+          },
+          {
+            "id": "https://openalex.org/C205649164",
+            "wikidata": "https://www.wikidata.org/wiki/Q1071",
+            "display_name": "Geography",
+            "level": 0,
+            "score": 0.3702
+          },
+          {
+            "id": "https://openalex.org/C39432304",
+            "wikidata": "https://www.wikidata.org/wiki/Q188847",
+            "display_name": "Environmental science",
+            "level": 0,
+            "score": 0.3355
+          },
+          {
+            "id": "https://openalex.org/C86803240",
+            "wikidata": "https://www.wikidata.org/wiki/Q420",
+            "display_name": "Biology",
+            "level": 0,
+            "score": 0.2141
+          }
+        ],
+        "mesh": [],
+        "locations_count": 1,
+        "locations": [
+          {
+            "id": "mag:1544781843",
+            "is_oa": false,
+            "landing_page_url": "https://bibliotecadigital.infor.cl/handle/20.500.12220/21460",
+            "pdf_url": null,
+            "source": null,
+            "license": null,
+            "license_id": null,
+            "version": null,
+            "is_accepted": false,
+            "is_published": null,
+            "raw_source_name": null,
+            "raw_type": null
+          }
+        ],
+        "best_oa_location": null,
+        "sustainable_development_goals": [
+          {
+            "id": "https://metadata.un.org/sdg/15",
+            "display_name": "Life in Land",
+            "score": 0.41
+          }
+        ],
+        "awards": [],
+        "funders": [],
+        "has_content": {
+          "grobid_xml": false,
+          "pdf": false
+        },
+        "content_urls": null,
+        "referenced_works_count": 0,
+        "referenced_works": [],
+        "related_works": [
+          "https://openalex.org/W2143777190",
+          "https://openalex.org/W2139156166",
+          "https://openalex.org/W2002368560",
+          "https://openalex.org/W1949467692",
+          "https://openalex.org/W1877601592",
+          "https://openalex.org/W1537452988",
+          "https://openalex.org/W2009435671",
+          "https://openalex.org/W2047810995",
+          "https://openalex.org/W2110901606",
+          "https://openalex.org/W2015929638",
+          "https://openalex.org/W2520921442",
+          "https://openalex.org/W2006746984",
+          "https://openalex.org/W1563480203",
+          "https://openalex.org/W2089455746",
+          "https://openalex.org/W1993140637",
+          "https://openalex.org/W2582743722",
+          "https://openalex.org/W2259230665",
+          "https://openalex.org/W2054580376",
+          "https://openalex.org/W2085648853",
+          "https://openalex.org/W1967370812"
+        ],
+        "abstract_inverted_index": null,
+        "counts_by_year": [
+          {
+            "year": 2025,
+            "cited_by_count": 9
+          },
+          {
+            "year": 2024,
+            "cited_by_count": 20
+          },
+          {
+            "year": 2023,
+            "cited_by_count": 26
+          },
+          {
+            "year": 2022,
+            "cited_by_count": 28
+          },
+          {
+            "year": 2021,
+            "cited_by_count": 24
+          },
+          {
+            "year": 2020,
+            "cited_by_count": 37
+          },
+          {
+            "year": 2019,
+            "cited_by_count": 24
+          },
+          {
+            "year": 2018,
+            "cited_by_count": 12
+          },
+          {
+            "year": 2017,
+            "cited_by_count": 30
+          },
+          {
+            "year": 2016,
+            "cited_by_count": 33
+          },
+          {
+            "year": 2015,
+            "cited_by_count": 34
+          },
+          {
+            "year": 2014,
+            "cited_by_count": 41
+          },
+          {
+            "year": 2013,
+            "cited_by_count": 54
+          },
+          {
+            "year": 2012,
+            "cited_by_count": 54
+          }
+        ],
+        "updated_date": "2026-06-11T09:08:48.828518",
+        "created_date": "2025-10-10T00:00:00"
+      }
+    ],
+    "group_by": []
+  }
+}

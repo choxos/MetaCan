@@ -1,0 +1,765 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =============================================================
+   MétaCan • Canadian metaresearch. Design system.
+
+   Same token architecture as the Xera retraction tracker (custom properties on
+   :root + .dark; Tailwind aliases them; every rule below reads through var() /
+   color-mix). Different palette, different semantics.
+
+   The semantic axis encodes this project's thesis: what the pipeline FOUND
+   (t1/t2/t3, the screening tiers) versus what it MISSED (--gap, amber).
+
+   Depth comes from 1px borders and surface tints. There is no box-shadow in
+   this file and there should not be one; that is the defining trait.
+   ============================================================= */
+
+:root {
+  /* Brand */
+  --metacan: #0E7490;
+  --metacan-light: #22A5BF;
+  --metacan-dark: #0A5566;
+
+  /* Text colour on a solid brand fill (.btn-primary, .skip-link, the checkbox
+     tick). A token rather than a literal `white`, because the dark-mode brand
+     is a *light* teal: white-on-#35B0C7 is 2.57:1 and fails AA outright.
+     Light: #FFF on --metacan 5.36:1, on --metacan-dark (hover) 8.39:1.
+     Dark:  #0A1114 on --metacan 7.42:1, on --metacan-dark (hover) 4.84:1. */
+  --on-brand: #FFFFFF;
+
+  /* Semantic: the screening tiers, and the coverage gap.
+     Tier text is rendered on a pale tint of itself (see .chip-*), so each tone
+     must clear WCAG AA against `color-mix(in oklab, <tone> 8%, var(--surface))`,
+     not merely against white. Measured on that tint:
+       --t1  4.78:1   --t2  5.11:1   --t3  6.02:1   --gap  4.51:1
+     --t3 is darkened from the slate-500 #64748B used for charts, which lands at
+     4.29:1 on its own tint and fails. Same split the tracker applies to
+     `concern` (#D97706 in tailwind.config, #B45309 here). The saturated value
+     lives in tailwind.config.ts, where Recharts can reach it. */
+  --t1:  #0E7490;  /* core metaresearch                     : teal (= brand) */
+  --t2:  #7C3AED;  /* adjacent: STS, LIS                    : violet */
+  --t3:  #4E5C70;  /* contextual: policy, editorials        : slate */
+  --gap: #B45309;  /* what the pipeline MISSED              : amber. The thesis colour. */
+
+  /* Neutrals: cool paper with a faint teal cast */
+  --bg: #F5F7F7;
+  --surface: #FFFFFF;
+  --surface-2: #EDF1F1;
+  --surface-3: #E3E9E9;
+  --border: #DCE3E3;
+  --border-strong: #C8D2D2;
+  --ink: #0A0F10;
+  --ink-2: #262E30;
+  --ink-3: #4F5B5D;
+  --ink-4: #5C6968;  /* WCAG AA: 5.71:1 on --surface, 5.02:1 on --surface-2
+                        (also 4.65:1 on --surface-3, 5.31:1 on --bg).
+                        Darkened from #64716F, which was 4.46:1 on --surface-2
+                        and failed; .tbl th renders ink-4 on exactly that. */
+  --ink-5: #A9B4B3;  /* decorative only (dividers/dots), never body text */
+
+  /* Radii */
+  --r-sm: 4px;
+  --r-md: 6px;
+  --r-lg: 10px;
+  --r-xl: 16px;
+
+  /* Density (single mode: regular) */
+  --pad: 20px;
+  --pad-sm: 12px;
+  --row-h: 44px;
+  --text-base: 14px;
+
+  /* Easing */
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+
+  /* Chart helpers (recharts reads these) */
+  --chart-grid: var(--border);
+  --chart-axis: var(--ink-3);
+  --chart-tooltip-bg: var(--surface);
+  --chart-tooltip-border: var(--border);
+}
+
+.dark {
+  --bg: #0A1114;
+  --surface: #0F171B;
+  --surface-2: #152025;
+  --surface-3: #1C2A30;
+  --border: #22333A;
+  --border-strong: #2E434C;
+  --ink: #EEF3F4;
+  --ink-2: #D3DBDD;
+  --ink-3: #98A6A9;
+  --ink-4: #87979A;  /* WCAG AA: 5.98:1 on --surface, 5.47:1 on --surface-2
+                        (also 4.86:1 on --surface-3, 6.28:1 on --bg). */
+  --ink-5: #46565B;  /* decorative only */
+
+  --metacan: #35B0C7;
+  --metacan-light: #5FC8DB;
+  --metacan-dark: #1E8CA3;
+
+  /* Dark-mode brand is light, so brand-filled text flips to near-black. */
+  --on-brand: #0A1114;
+
+  /* Semantic (dark): lifted for contrast on dark surfaces. On their own 8%
+     tints: --t1 6.42:1, --t2 6.07:1, --t3 6.43:1, --gap 6.48:1. */
+  --t1:  #35B0C7;
+  --t2:  #A78BFA;
+  --t3:  #94A3B8;
+  --gap: #E0913F;
+
+  --chart-grid: var(--border);
+  --chart-axis: var(--ink-3);
+  --chart-tooltip-bg: var(--surface);
+  --chart-tooltip-border: var(--border);
+}
+
+/* =============================================================
+   Base
+   ============================================================= */
+@layer base {
+  * { box-sizing: border-box; }
+
+  html {
+    scroll-behavior: smooth;
+    transition: color-scheme 0.3s ease;
+  }
+  html.dark { color-scheme: dark; }
+
+  body {
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+    line-height: 1.55;
+    color: var(--ink);
+    background: var(--bg);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: "ss01", "cv11";
+    transition: background-color 0.2s var(--ease), color 0.2s var(--ease);
+  }
+
+  button { font: inherit; color: inherit; }
+  a { color: inherit; text-decoration: none; }
+  input, select, textarea { font: inherit; color: inherit; }
+
+  /* Visible keyboard focus for every interactive element. Pointer clicks
+     don't trigger :focus-visible, so this won't show on mouse use. */
+  :focus-visible {
+    outline: 2px solid var(--metacan);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--metacan) 25%, transparent);
+    color: var(--ink);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-thumb {
+    background: var(--border-strong);
+    border-radius: 999px;
+    border: 2px solid var(--bg);
+  }
+  ::-webkit-scrollbar-thumb:hover { background: var(--ink-4); }
+}
+
+/* =============================================================
+   Components
+   ============================================================= */
+@layer components {
+  /* Layout shell */
+  .shell {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 32px;
+    width: 100%;
+  }
+  @media (max-width: 900px) {
+    .shell { padding: 0 20px; }
+  }
+
+  /* Typography */
+  .h-display {
+    font-family: var(--font-serif);
+    font-size: clamp(34px, 8vw, 64px);
+    line-height: 1.04;
+    letter-spacing: -0.025em;
+    font-weight: 400;
+    color: var(--ink);
+    margin: 0;
+  }
+  .h-section {
+    font-family: var(--font-serif);
+    font-size: clamp(26px, 4.5vw, 32px);
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+    font-weight: 400;
+    color: var(--ink);
+    margin: 0;
+  }
+  .h-page {
+    font-family: var(--font-serif);
+    font-size: clamp(28px, 5vw, 38px);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    font-weight: 400;
+    color: var(--ink);
+    margin: 0;
+  }
+  .h-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-4);
+    font-weight: 500;
+  }
+  .h-card {
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin: 0;
+    color: var(--ink);
+  }
+  .muted { color: var(--ink-3); }
+  .muted-sm { color: var(--ink-4); font-size: 12px; }
+
+  /* Prose: used by /methods, which renders rubric- and protocol-style content. */
+  .prose-block p {
+    color: var(--ink-3);
+    margin: 0 0 12px;
+    max-width: 68ch;
+  }
+  .prose-block p:last-child { margin-bottom: 0; }
+  .prose-block strong { color: var(--ink); font-weight: 600; }
+  .prose-block code {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    padding: 1px 5px;
+    border-radius: var(--r-sm);
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    color: var(--ink-2);
+  }
+
+  /* Cards */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-lg);
+  }
+  .card-pad { padding: var(--pad); }
+  .card-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    padding: 16px var(--pad);
+    border-bottom: 1px solid var(--border);
+  }
+  .card-head h3 {
+    margin: 0;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+  }
+  .card-head .meta {
+    font-size: 11px;
+    color: var(--ink-4);
+    font-family: var(--font-mono);
+  }
+
+  /* Buttons */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 12px;
+    border-radius: var(--r-md);
+    border: 1px solid var(--border);
+    background: var(--surface);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s var(--ease);
+    white-space: nowrap;
+    color: var(--ink);
+  }
+  .btn:hover { border-color: var(--border-strong); }
+  .btn-primary {
+    background: var(--metacan);
+    border-color: var(--metacan);
+    color: var(--on-brand);
+  }
+  .btn-primary:hover {
+    background: var(--metacan-dark);
+    border-color: var(--metacan-dark);
+    color: var(--on-brand);
+  }
+  .btn-ghost {
+    border-color: transparent;
+    background: transparent;
+    color: var(--ink-3);
+  }
+  .btn-ghost:hover { background: var(--surface-2); color: var(--ink); }
+  .btn-lg { padding: 10px 16px; font-size: 14px; }
+
+  /* Chips / Pills */
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 8px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 500;
+    font-family: var(--font-mono);
+    letter-spacing: -0.01em;
+    background: var(--surface-2);
+    color: var(--ink-2);
+    border: 1px solid var(--border);
+    white-space: nowrap;
+  }
+  .chip .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 999px;
+    background: currentColor;
+    /* Space the dot from the label with a real margin, and pin its size so it
+       never shrinks. Relying on the chip's flex `gap` breaks under fractional
+       page zoom and CSS-injecting extensions, which can compute it as 0 and
+       collapse the dot onto the first letter. A margin is immune to that. */
+    flex: 0 0 6px;
+    margin-right: 5px;
+  }
+  .chip-t1 {
+    color: var(--t1);
+    background: color-mix(in oklab, var(--t1) 8%, var(--surface));
+    border-color: color-mix(in oklab, var(--t1) 20%, var(--border));
+  }
+  .chip-t2 {
+    color: var(--t2);
+    background: color-mix(in oklab, var(--t2) 8%, var(--surface));
+    border-color: color-mix(in oklab, var(--t2) 20%, var(--border));
+  }
+  .chip-t3 {
+    color: var(--t3);
+    background: color-mix(in oklab, var(--t3) 8%, var(--surface));
+    border-color: color-mix(in oklab, var(--t3) 20%, var(--border));
+  }
+  .chip-gap {
+    color: var(--gap);
+    background: color-mix(in oklab, var(--gap) 8%, var(--surface));
+    border-color: color-mix(in oklab, var(--gap) 20%, var(--border));
+  }
+  .chip-plain { background: transparent; }
+
+  /* Stats strip */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-lg);
+    overflow: hidden;
+  }
+  .stat {
+    padding: 22px 24px;
+    border-right: 1px solid var(--border);
+  }
+  .stat:last-child { border-right: none; }
+  .stat-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--ink-4);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .stat-value {
+    font-family: var(--font-serif);
+    font-size: 40px;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-top: 6px;
+    font-variant-numeric: tabular-nums;
+    color: var(--ink);
+  }
+  .stat-trend {
+    margin-top: 6px;
+    font-size: 12px;
+    color: var(--ink-3);
+  }
+  /* `up` is the direction that hurts here: a widening blind spot. */
+  .stat-trend.up { color: var(--gap); }
+  .stat-trend.down { color: var(--t1); }
+  @media (max-width: 900px) {
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .stat:nth-child(2) { border-right: none; }
+    .stat:nth-child(1), .stat:nth-child(2) { border-bottom: 1px solid var(--border); }
+  }
+
+  /* Tables */
+  .tbl {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  .tbl th {
+    text-align: left;
+    font-weight: 500;
+    font-size: 11px;
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--ink-4);
+    padding: 12px var(--pad);
+    border-bottom: 1px solid var(--border);
+    background: var(--surface-2);
+  }
+  .tbl td {
+    padding: 14px var(--pad);
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  .tbl tr:last-child td { border-bottom: none; }
+  .tbl tr.clickable { cursor: pointer; }
+  .tbl tr.clickable:hover td { background: var(--surface-2); }
+
+  /* Search field */
+  .search-field {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 0 6px 0 16px;
+    height: 48px;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  .search-field:focus-within {
+    border-color: var(--metacan);
+    box-shadow: 0 0 0 4px color-mix(in oklab, var(--metacan) 14%, transparent);
+  }
+  .search-field input {
+    flex: 1;
+    border: 0;
+    background: transparent;
+    outline: none;
+    font-size: 14px;
+    font-family: var(--font-sans);
+    color: var(--ink);
+  }
+  .search-field input::placeholder { color: var(--ink-4); }
+  .search-field .search-btn {
+    background: var(--ink);
+    color: var(--bg);
+    border: 0;
+    border-radius: 999px;
+    padding: 8px 18px;
+    font-weight: 500;
+    font-size: 13px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .search-field-lg { height: 62px; padding: 0 8px 0 22px; }
+  .search-field-lg input { font-size: 17px; }
+  .search-field-lg .search-btn { padding: 12px 24px; font-size: 14px; }
+
+  /* Boxed input/select wrapper. The inner control clears its own outline, so
+     the wrapper carries the focus ring for keyboard users. */
+  .field {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 7px 10px;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  .field:focus-within {
+    border-color: var(--metacan);
+    box-shadow: 0 0 0 3px color-mix(in oklab, var(--metacan) 16%, transparent);
+  }
+  .field > input,
+  .field > select {
+    flex: 1;
+    min-width: 0;
+    background: transparent;
+    border: 0;
+    outline: 0;
+    font-size: 13px;
+    color: var(--ink);
+  }
+
+  /* Tabs */
+  .tabs {
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid var(--border);
+    overflow-x: auto;
+  }
+  .tab {
+    padding: 10px 16px;
+    font-size: 13px;
+    color: var(--ink-3);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    white-space: nowrap;
+    font-weight: 500;
+    background: transparent;
+  }
+  .tab:hover { color: var(--ink); }
+  .tab.active {
+    color: var(--ink);
+    border-bottom-color: var(--ink);
+  }
+
+  /* Banner. The base tone is --gap, because in this project the thing that
+     needs calling out is always the blind spot. .banner-t1 is the calm variant. */
+  .banner {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 20px;
+    background: color-mix(in oklab, var(--gap) 7%, var(--surface));
+    border: 1px solid color-mix(in oklab, var(--gap) 25%, var(--border));
+    border-radius: var(--r-lg);
+  }
+  .banner-t1 {
+    background: color-mix(in oklab, var(--t1) 7%, var(--surface));
+    border-color: color-mix(in oklab, var(--t1) 25%, var(--border));
+  }
+  .banner-tag {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--gap);
+    background: var(--surface);
+    border: 1px solid color-mix(in oklab, var(--gap) 30%, var(--border));
+    padding: 4px 8px;
+    border-radius: var(--r-sm);
+    white-space: nowrap;
+  }
+  .banner-t1 .banner-tag {
+    color: var(--t1);
+    border-color: color-mix(in oklab, var(--t1) 30%, var(--border));
+  }
+
+  /* Filter sidebar */
+  .filter-group {
+    padding: var(--pad-sm) 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .filter-group:last-child { border-bottom: none; }
+  .filter-label {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-4);
+    margin-bottom: 10px;
+  }
+  .check {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 5px 0;
+    cursor: pointer;
+    font-size: 13px;
+    color: var(--ink-2);
+  }
+  .check .box {
+    width: 14px;
+    height: 14px;
+    border: 1px solid var(--border-strong);
+    border-radius: 3px;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    background: var(--surface);
+  }
+  .check.on .box {
+    background: var(--metacan);
+    border-color: var(--metacan);
+  }
+  .check.on .box::after {
+    content: "";
+    width: 7px;
+    height: 4px;
+    /* --on-brand, not white: the dark-mode brand is a light teal and a white
+       tick on it is 2.57:1, under the 3:1 floor for a non-text graphic. */
+    border-left: 1.5px solid var(--on-brand);
+    border-bottom: 1.5px solid var(--on-brand);
+    transform: rotate(-45deg) translate(1px, -1px);
+  }
+  .check .count {
+    margin-left: auto;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--ink-4);
+  }
+  .check:hover { color: var(--ink); }
+
+  /* Record row (used in listings) */
+  .paper-card {
+    display: block;
+    padding: var(--pad);
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .paper-card:hover { background: var(--surface-2); }
+  .paper-card:last-child { border-bottom: none; }
+  .paper-title {
+    font-family: var(--font-serif);
+    font-size: 18px;
+    letter-spacing: -0.01em;
+    line-height: 1.3;
+    color: var(--ink);
+    margin: 0 0 4px;
+    font-weight: 500;
+  }
+  .paper-meta {
+    font-size: 12px;
+    color: var(--ink-3);
+    margin-bottom: 10px;
+  }
+  .paper-meta .dot-sep { color: var(--ink-5); margin: 0 6px; }
+
+  /* Tiny bar/progress element */
+  .bar-bg {
+    height: 4px;
+    background: var(--surface-3);
+    border-radius: 999px;
+    overflow: hidden;
+  }
+  .bar-fill {
+    height: 100%;
+    background: var(--metacan);
+    border-radius: 999px;
+  }
+
+  /* Proportion bar: the found/missed split. Teal is what the pipeline
+     retrieved; amber is what it did not. Two segments, one track, no gap
+     between them, so the eye reads a single quantity being divided. */
+  .prop-bar {
+    display: flex;
+    height: 8px;
+    border-radius: 999px;
+    overflow: hidden;
+    background: var(--surface-3);
+  }
+  .prop-found {
+    background: var(--t1);
+    /* A found-share of 0 (finding 1: no OpenAlex topic names the field) must
+       still be visible as a hairline, or the bar silently reads as "no data"
+       rather than "we found none of it". */
+    min-width: 2px;
+  }
+  .prop-missed {
+    background: var(--gap);
+    min-width: 2px;
+  }
+  .prop-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 8px;
+    font-size: 11px;
+    font-family: var(--font-mono);
+    color: var(--ink-4);
+  }
+  .prop-legend .key {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .prop-legend .swatch {
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+    flex: 0 0 8px;
+  }
+
+  /* Divider / spacers */
+  .divider {
+    height: 1px;
+    background: var(--border);
+    margin: 32px 0;
+  }
+}
+
+/* =============================================================
+   Utilities
+   ============================================================= */
+@layer utilities {
+  .skip-link {
+    position: absolute;
+    left: 8px;
+    top: -48px;
+    z-index: 100;
+    padding: 8px 14px;
+    border-radius: var(--r-md);
+    background: var(--metacan);
+    color: var(--on-brand);
+    font-size: 13px;
+    font-weight: 500;
+    transition: top 0.15s var(--ease);
+  }
+  .skip-link:focus {
+    top: 8px;
+  }
+
+  .mono {
+    font-family: var(--font-mono);
+    font-feature-settings: "zero", "ss01";
+  }
+  .serif { font-family: var(--font-serif); }
+  .num {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum", "ss01";
+  }
+
+  .scrollbar-thin { scrollbar-width: thin; }
+  .scrollbar-thin::-webkit-scrollbar { width: 6px; height: 6px; }
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background: var(--border-strong);
+    border-radius: 999px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb:hover { background: var(--ink-4); }
+
+  .fade-in {
+    animation: fadeIn 0.35s var(--ease);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

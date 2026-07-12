@@ -1,0 +1,475 @@
+{
+  "request": {
+    "endpoint": "works",
+    "params": {
+      "filter": "title_and_abstract.search:métascience OR métarecherche OR \"méta-recherche\" OR bibliométrie OR bibliométrique OR scientométrie OR scientométrique OR \"intégrité scientifique\" OR \"intégrité en recherche\" OR \"communication savante\" OR \"évaluation de la recherche\" OR \"libre accès\" OR \"science ouverte\" OR \"biais de publication\" OR \"révision par les pairs\"",
+      "per-page": "1",
+      "mailto": "ahmad.pub@gmail.com"
+    }
+  },
+  "retrieved_at_utc": "2026-07-11T12:33:02Z",
+  "payload": {
+    "meta": {
+      "count": 4682,
+      "db_response_time_ms": 77,
+      "page": 1,
+      "per_page": 1,
+      "groups_count": null,
+      "x_query": {
+        "oql": "works where title/abstract has (\n    stemmed \"évaluation de la recherche\" or stemmed \"biais de publication\"\n    or stemmed \"communication savante\" or stemmed \"intégrité en recherche\"\n    or stemmed \"intégrité scientifique\" or stemmed \"libre accès\"\n    or stemmed \"méta-recherche\" or stemmed \"révision par les pairs\"\n    or stemmed \"science ouverte\" or bibliométrie or bibliométrique\n    or métarecherche or métascience or scientométrie or scientométrique\n  )",
+        "oqo": {
+          "get_rows": "works",
+          "filter_rows": [
+            {
+              "join": "or",
+              "filters": [
+                {
+                  "column_id": "title_and_abstract.search",
+                  "value": "\"évaluation de la recherche\"",
+                  "operator": "has"
+                },
+                {
+                  "column_id": "title_and_abstract.search",
+                  "value": "\"biais de publication\"",
+                  "operator": "has"
+                },
+                {
+                  "column_id": "title_and_abstract.search",
+                  "value": "\"communication savante\"",
+                  "operator": "has"
+                },
+                {
+                  "column_id": "title_and_abstract.search",
+                  "value": "\"intégrité en recherche\"",
+                  "operator": "has"
+                },
+                {
+                  "column_id": "title_and_abstract.search",
+                  "value": "\"intégrité scientifique\"",
+                  "operator": "has"
+                },
+                {
+                  "column_id": "title_and_abstract.search",
+                  "value": "\"libre accès\"",
+                  "operator": "has"
+                },
+                {
+                  "column_id": "title_and_abstract.search",
+                  "value": "\"méta-recherche\"",
+                  "operator": "has"
+                },
+                {
+                  "column_id": "title_and_abstract.search",
+                  "value": "\"révision par les pairs\"",
+                  "operator": "has"
+                },
+                {
+                  "column_id": "title_and_abstract.search",
+                  "value": "\"science ouverte\"",
+                  "operator": "has"
+                },
+                {
+                  "column_id": "title_and_abstract.search",
+                  "value": "bibliométrie",
+                  "operator": "has"
+                },
+                {
+                  "column_id": "title_and_abstract.search",
+                  "value": "bibliométrique",
+                  "operator": "has"
+                },
+                {
+                  "column_id": "title_and_abstract.search",
+                  "value": "métarecherche",
+                  "operator": "has"
+                },
+                {
+                  "column_id": "title_and_abstract.search",
+                  "value": "métascience",
+                  "operator": "has"
+                },
+                {
+                  "column_id": "title_and_abstract.search",
+                  "value": "scientométrie",
+                  "operator": "has"
+                },
+                {
+                  "column_id": "title_and_abstract.search",
+                  "value": "scientométrique",
+                  "operator": "has"
+                }
+              ]
+            }
+          ],
+          "per_page": 1
+        },
+        "url": "/works?filter=title_and_abstract.search:%22%C3%A9valuation de la recherche%22|%22biais de publication%22|%22communication savante%22|%22int%C3%A9grit%C3%A9 en recherche%22|%22int%C3%A9grit%C3%A9 scientifique%22|%22libre acc%C3%A8s%22|%22m%C3%A9ta-recherche%22|%22r%C3%A9vision par les pairs%22|%22science ouverte%22|bibliom%C3%A9trie|bibliom%C3%A9trique|m%C3%A9tarecherche|m%C3%A9tascience|scientom%C3%A9trie|scientom%C3%A9trique&per_page=1"
+      },
+      "cost_usd": 0.001
+    },
+    "results": [
+      {
+        "id": "https://openalex.org/W2752914715",
+        "doi": null,
+        "title": "La bibliométrie et ses techniques",
+        "display_name": "La bibliométrie et ses techniques",
+        "relevance_score": 120.0264,
+        "publication_year": 1996,
+        "publication_date": "1996-01-01",
+        "ids": {
+          "openalex": "https://openalex.org/W2752914715",
+          "mag": "2752914715"
+        },
+        "language": "fr",
+        "primary_location": {
+          "id": "pmh:oai:HAL:hal-01579948v1",
+          "is_oa": false,
+          "landing_page_url": "https://hal.science/hal-01579948",
+          "pdf_url": null,
+          "source": {
+            "id": "https://openalex.org/S4306402512",
+            "display_name": "HAL (Le Centre pour la Communication Scientifique Directe)",
+            "issn_l": null,
+            "issn": null,
+            "is_oa": false,
+            "is_in_doaj": false,
+            "is_core": false,
+            "host_organization": "https://openalex.org/I1294671590",
+            "host_organization_name": "Centre National de la Recherche Scientifique",
+            "host_organization_lineage": [
+              "https://openalex.org/I1294671590"
+            ],
+            "host_organization_lineage_names": [],
+            "type": "repository"
+          },
+          "license": null,
+          "license_id": null,
+          "version": "submittedVersion",
+          "is_accepted": false,
+          "is_published": false,
+          "raw_source_name": "Sciences de la Société; Centre de Recherche Rétrospective de Marseille 1996, Outils et méthodes",
+          "raw_type": "info:eu-repo/semantics/book"
+        },
+        "type": "preprint",
+        "indexed_in": [],
+        "open_access": {
+          "is_oa": false,
+          "oa_status": "closed",
+          "oa_url": null,
+          "any_repository_has_fulltext": false
+        },
+        "authorships": [
+          {
+            "author_position": "first",
+            "author": {
+              "id": "https://openalex.org/A5032580474",
+              "display_name": "Hervé Rostaing",
+              "orcid": "https://orcid.org/0000-0003-0723-3109"
+            },
+            "institutions": [],
+            "countries": [],
+            "is_corresponding": true,
+            "raw_author_name": "Rostaing, Hervé",
+            "raw_affiliation_strings": [
+              "Centre de recherche rétrospective de Marseille"
+            ],
+            "raw_orcid": null,
+            "affiliations": [
+              {
+                "raw_affiliation_string": "Centre de recherche rétrospective de Marseille",
+                "institution_ids": []
+              }
+            ]
+          }
+        ],
+        "institutions": [],
+        "countries_distinct_count": 0,
+        "institutions_distinct_count": 0,
+        "corresponding_author_ids": [
+          "https://openalex.org/A5032580474"
+        ],
+        "corresponding_institution_ids": [],
+        "apc_list": null,
+        "apc_paid": null,
+        "fwci": 2.093,
+        "has_fulltext": false,
+        "cited_by_count": 38,
+        "citation_normalized_percentile": {
+          "value": 0.8883,
+          "is_in_top_1_percent": false,
+          "is_in_top_10_percent": false
+        },
+        "cited_by_percentile_year": {
+          "min": 89,
+          "max": 99
+        },
+        "biblio": {
+          "volume": null,
+          "issue": null,
+          "first_page": null,
+          "last_page": null
+        },
+        "is_retracted": false,
+        "is_paratext": false,
+        "is_xpac": false,
+        "primary_topic": {
+          "id": "https://openalex.org/T10102",
+          "display_name": "scientometrics and bibliometrics research",
+          "score": 0.9871,
+          "subfield": {
+            "id": "https://openalex.org/subfields/1804",
+            "display_name": "Statistics, Probability and Uncertainty"
+          },
+          "field": {
+            "id": "https://openalex.org/fields/18",
+            "display_name": "Decision Sciences"
+          },
+          "domain": {
+            "id": "https://openalex.org/domains/2",
+            "display_name": "Social Sciences"
+          }
+        },
+        "topics": [
+          {
+            "id": "https://openalex.org/T10102",
+            "display_name": "scientometrics and bibliometrics research",
+            "score": 0.9871,
+            "subfield": {
+              "id": "https://openalex.org/subfields/1804",
+              "display_name": "Statistics, Probability and Uncertainty"
+            },
+            "field": {
+              "id": "https://openalex.org/fields/18",
+              "display_name": "Decision Sciences"
+            },
+            "domain": {
+              "id": "https://openalex.org/domains/2",
+              "display_name": "Social Sciences"
+            }
+          }
+        ],
+        "keywords": [
+          {
+            "id": "https://openalex.org/keywords/political-science",
+            "display_name": "Political science",
+            "score": 0.3804
+          }
+        ],
+        "concepts": [
+          {
+            "id": "https://openalex.org/C17744445",
+            "wikidata": "https://www.wikidata.org/wiki/Q36442",
+            "display_name": "Political science",
+            "level": 0,
+            "score": 0.3804
+          }
+        ],
+        "mesh": [],
+        "locations_count": 1,
+        "locations": [
+          {
+            "id": "pmh:oai:HAL:hal-01579948v1",
+            "is_oa": false,
+            "landing_page_url": "https://hal.science/hal-01579948",
+            "pdf_url": null,
+            "source": {
+              "id": "https://openalex.org/S4306402512",
+              "display_name": "HAL (Le Centre pour la Communication Scientifique Directe)",
+              "issn_l": null,
+              "issn": null,
+              "is_oa": false,
+              "is_in_doaj": false,
+              "is_core": false,
+              "host_organization": "https://openalex.org/I1294671590",
+              "host_organization_name": "Centre National de la Recherche Scientifique",
+              "host_organization_lineage": [
+                "https://openalex.org/I1294671590"
+              ],
+              "host_organization_lineage_names": [],
+              "type": "repository"
+            },
+            "license": null,
+            "license_id": null,
+            "version": "submittedVersion",
+            "is_accepted": false,
+            "is_published": false,
+            "raw_source_name": "Sciences de la Société; Centre de Recherche Rétrospective de Marseille 1996, Outils et méthodes",
+            "raw_type": "info:eu-repo/semantics/book"
+          }
+        ],
+        "best_oa_location": null,
+        "sustainable_development_goals": [
+          {
+            "score": 0.46,
+            "id": "https://metadata.un.org/sdg/4",
+            "display_name": "Quality Education"
+          }
+        ],
+        "awards": [],
+        "funders": [],
+        "has_content": {
+          "grobid_xml": false,
+          "pdf": false
+        },
+        "content_urls": null,
+        "referenced_works_count": 101,
+        "referenced_works": [
+          "https://openalex.org/W151092498",
+          "https://openalex.org/W172119612",
+          "https://openalex.org/W370575574",
+          "https://openalex.org/W408759535",
+          "https://openalex.org/W604081263",
+          "https://openalex.org/W1487863191",
+          "https://openalex.org/W1492487633",
+          "https://openalex.org/W1499206742",
+          "https://openalex.org/W1961909250",
+          "https://openalex.org/W1964715718",
+          "https://openalex.org/W1966538856",
+          "https://openalex.org/W1966649369",
+          "https://openalex.org/W1967252334",
+          "https://openalex.org/W1967291170",
+          "https://openalex.org/W1968283201",
+          "https://openalex.org/W1968592061",
+          "https://openalex.org/W1970859146",
+          "https://openalex.org/W1970875062",
+          "https://openalex.org/W1972959291",
+          "https://openalex.org/W1973816953",
+          "https://openalex.org/W1983857714",
+          "https://openalex.org/W1984229739",
+          "https://openalex.org/W1987685882",
+          "https://openalex.org/W1989454616",
+          "https://openalex.org/W1995058801",
+          "https://openalex.org/W1996997927",
+          "https://openalex.org/W1999862380",
+          "https://openalex.org/W2002431318",
+          "https://openalex.org/W2004073580",
+          "https://openalex.org/W2004890562",
+          "https://openalex.org/W2005207065",
+          "https://openalex.org/W2006034180",
+          "https://openalex.org/W2006048546",
+          "https://openalex.org/W2007550088",
+          "https://openalex.org/W2009135966",
+          "https://openalex.org/W2009221989",
+          "https://openalex.org/W2011922430",
+          "https://openalex.org/W2016089463",
+          "https://openalex.org/W2018634897",
+          "https://openalex.org/W2019020697",
+          "https://openalex.org/W2019700139",
+          "https://openalex.org/W2022667631",
+          "https://openalex.org/W2024207596",
+          "https://openalex.org/W2026273736",
+          "https://openalex.org/W2029088861",
+          "https://openalex.org/W2030387892",
+          "https://openalex.org/W2038215514",
+          "https://openalex.org/W2040540480",
+          "https://openalex.org/W2047452388",
+          "https://openalex.org/W2048400900",
+          "https://openalex.org/W2049493699",
+          "https://openalex.org/W2051781197",
+          "https://openalex.org/W2055579162",
+          "https://openalex.org/W2057562803",
+          "https://openalex.org/W2061312249",
+          "https://openalex.org/W2062035457",
+          "https://openalex.org/W2062652446",
+          "https://openalex.org/W2063360622",
+          "https://openalex.org/W2064945560",
+          "https://openalex.org/W2071840056",
+          "https://openalex.org/W2072618356",
+          "https://openalex.org/W2079656678",
+          "https://openalex.org/W2080450835",
+          "https://openalex.org/W2082212189",
+          "https://openalex.org/W2087154368",
+          "https://openalex.org/W2088324517",
+          "https://openalex.org/W2092307040",
+          "https://openalex.org/W2094243257",
+          "https://openalex.org/W2094983029",
+          "https://openalex.org/W2098521253",
+          "https://openalex.org/W2106407485",
+          "https://openalex.org/W2108460799",
+          "https://openalex.org/W2108584103",
+          "https://openalex.org/W2108953344",
+          "https://openalex.org/W2110886033",
+          "https://openalex.org/W2121639104",
+          "https://openalex.org/W2124689559",
+          "https://openalex.org/W2133028771",
+          "https://openalex.org/W2140673067",
+          "https://openalex.org/W2142944882",
+          "https://openalex.org/W2149342699",
+          "https://openalex.org/W2150884886",
+          "https://openalex.org/W2155640152",
+          "https://openalex.org/W2155791520",
+          "https://openalex.org/W2157146439",
+          "https://openalex.org/W2159013112",
+          "https://openalex.org/W2160511080",
+          "https://openalex.org/W2170589381",
+          "https://openalex.org/W2275696275",
+          "https://openalex.org/W2463095032",
+          "https://openalex.org/W2463867570",
+          "https://openalex.org/W2474648179",
+          "https://openalex.org/W2486422080",
+          "https://openalex.org/W2519218527",
+          "https://openalex.org/W2520819722",
+          "https://openalex.org/W2740706997",
+          "https://openalex.org/W2782175989",
+          "https://openalex.org/W2792319211",
+          "https://openalex.org/W2896997231",
+          "https://openalex.org/W3111461570",
+          "https://openalex.org/W3141841331"
+        ],
+        "related_works": [
+          "https://openalex.org/W2748952813",
+          "https://openalex.org/W2955725829",
+          "https://openalex.org/W2949263084",
+          "https://openalex.org/W2743539335",
+          "https://openalex.org/W594353338",
+          "https://openalex.org/W2922049016",
+          "https://openalex.org/W2724734218",
+          "https://openalex.org/W4382466601",
+          "https://openalex.org/W2955504986",
+          "https://openalex.org/W2216817687"
+        ],
+        "abstract_inverted_index": {
+          "National": [
+            0
+          ],
+          "audience": [
+            1
+          ]
+        },
+        "counts_by_year": [
+          {
+            "year": 2019,
+            "cited_by_count": 2
+          },
+          {
+            "year": 2018,
+            "cited_by_count": 1
+          },
+          {
+            "year": 2016,
+            "cited_by_count": 1
+          },
+          {
+            "year": 2015,
+            "cited_by_count": 2
+          },
+          {
+            "year": 2014,
+            "cited_by_count": 1
+          },
+          {
+            "year": 2013,
+            "cited_by_count": 7
+          },
+          {
+            "year": 2012,
+            "cited_by_count": 5
+          }
+        ],
+        "updated_date": "2026-07-02T06:18:51.028212",
+        "created_date": "2025-10-10T00:00:00"
+      }
+    ],
+    "group_by": []
+  }
+}

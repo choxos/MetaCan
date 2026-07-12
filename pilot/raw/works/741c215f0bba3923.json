@@ -1,0 +1,1951 @@
+{
+  "request": {
+    "endpoint": "works",
+    "params": {
+      "filter": "title_and_abstract.search:metascience OR metaresearch OR \"meta-research\" OR \"research on research\" OR bibliometric OR scientometric OR \"research integrity\" OR \"research waste\" OR \"questionable research practices\" OR \"reporting guideline\" OR \"scholarly communication\" OR \"research assessment\" OR \"publication bias\",authorships.institutions.country_code:ca",
+      "per-page": "1",
+      "mailto": "ahmad.pub@gmail.com"
+    }
+  },
+  "retrieved_at_utc": "2026-07-11T12:32:59Z",
+  "payload": {
+    "meta": {
+      "count": 8026,
+      "db_response_time_ms": 122,
+      "page": 1,
+      "per_page": 1,
+      "groups_count": null,
+      "x_query": {
+        "oql": "works where authorships.institutions.country_code is (ca)\n  and title/abstract has (\n    stemmed \"meta-research\" or stemmed \"publication bias\"\n    or stemmed \"questionable research practices\"\n    or stemmed \"reporting guideline\" or stemmed \"research assessment\"\n    or stemmed \"research integrity\" or stemmed \"research on research\"\n    or stemmed \"research waste\" or stemmed \"scholarly communication\"\n    or bibliometric or metaresearch or metascience or scientometric\n  )",
+        "oqo": {
+          "get_rows": "works",
+          "filter_rows": [
+            {
+              "column_id": "authorships.institutions.country_code",
+              "value": "ca"
+            },
+            {
+              "join": "or",
+              "filters": [
+                {
+                  "column_id": "title_and_abstract.search",
+                  "value": "\"meta-research\"",
+                  "operator": "has"
+                },
+                {
+                  "column_id": "title_and_abstract.search",
+                  "value": "\"publication bias\"",
+                  "operator": "has"
+                },
+                {
+                  "column_id": "title_and_abstract.search",
+                  "value": "\"questionable research practices\"",
+                  "operator": "has"
+                },
+                {
+                  "column_id": "title_and_abstract.search",
+                  "value": "\"reporting guideline\"",
+                  "operator": "has"
+                },
+                {
+                  "column_id": "title_and_abstract.search",
+                  "value": "\"research assessment\"",
+                  "operator": "has"
+                },
+                {
+                  "column_id": "title_and_abstract.search",
+                  "value": "\"research integrity\"",
+                  "operator": "has"
+                },
+                {
+                  "column_id": "title_and_abstract.search",
+                  "value": "\"research on research\"",
+                  "operator": "has"
+                },
+                {
+                  "column_id": "title_and_abstract.search",
+                  "value": "\"research waste\"",
+                  "operator": "has"
+                },
+                {
+                  "column_id": "title_and_abstract.search",
+                  "value": "\"scholarly communication\"",
+                  "operator": "has"
+                },
+                {
+                  "column_id": "title_and_abstract.search",
+                  "value": "bibliometric",
+                  "operator": "has"
+                },
+                {
+                  "column_id": "title_and_abstract.search",
+                  "value": "metaresearch",
+                  "operator": "has"
+                },
+                {
+                  "column_id": "title_and_abstract.search",
+                  "value": "metascience",
+                  "operator": "has"
+                },
+                {
+                  "column_id": "title_and_abstract.search",
+                  "value": "scientometric",
+                  "operator": "has"
+                }
+              ]
+            }
+          ],
+          "per_page": 1
+        },
+        "url": "/works?filter=authorships.institutions.country_code:ca,title_and_abstract.search:%22meta-research%22|%22publication bias%22|%22questionable research practices%22|%22reporting guideline%22|%22research assessment%22|%22research integrity%22|%22research on research%22|%22research waste%22|%22scholarly communication%22|bibliometric|metaresearch|metascience|scientometric&per_page=1"
+      },
+      "cost_usd": 0.001
+    },
+    "results": [
+      {
+        "id": "https://openalex.org/W2990648940",
+        "doi": "https://doi.org/10.1136/bmj.l6890",
+        "title": "Synthesis without meta-analysis (SWiM) in systematic reviews: reporting guideline",
+        "display_name": "Synthesis without meta-analysis (SWiM) in systematic reviews: reporting guideline",
+        "relevance_score": 875.93,
+        "publication_year": 2020,
+        "publication_date": "2020-01-16",
+        "ids": {
+          "openalex": "https://openalex.org/W2990648940",
+          "doi": "https://doi.org/10.1136/bmj.l6890",
+          "mag": "2990648940",
+          "pmid": "https://pubmed.ncbi.nlm.nih.gov/31948937"
+        },
+        "language": "en",
+        "primary_location": {
+          "id": "doi:10.1136/bmj.l6890",
+          "is_oa": true,
+          "landing_page_url": "https://doi.org/10.1136/bmj.l6890",
+          "pdf_url": null,
+          "source": {
+            "id": "https://openalex.org/S4393917726",
+            "display_name": "BMJ",
+            "issn_l": "1756-1833",
+            "issn": [
+              "1756-1833"
+            ],
+            "is_oa": false,
+            "is_in_doaj": false,
+            "is_core": true,
+            "host_organization": null,
+            "host_organization_name": null,
+            "host_organization_lineage": [],
+            "host_organization_lineage_names": [],
+            "type": "journal"
+          },
+          "license": "cc-by",
+          "license_id": "https://openalex.org/licenses/cc-by",
+          "version": "publishedVersion",
+          "is_accepted": true,
+          "is_published": true,
+          "raw_source_name": "BMJ",
+          "raw_type": "journal-article"
+        },
+        "type": "article",
+        "indexed_in": [
+          "crossref",
+          "pubmed"
+        ],
+        "open_access": {
+          "is_oa": true,
+          "oa_status": "hybrid",
+          "oa_url": "https://doi.org/10.1136/bmj.l6890",
+          "any_repository_has_fulltext": true
+        },
+        "authorships": [
+          {
+            "author_position": "first",
+            "author": {
+              "id": "https://openalex.org/A5002470490",
+              "display_name": "Mhairi Campbell",
+              "orcid": "https://orcid.org/0000-0002-4416-7270"
+            },
+            "institutions": [
+              {
+                "id": "https://openalex.org/I4210112050",
+                "display_name": "MRC/CSO Social and Public Health Sciences Unit",
+                "ror": "https://ror.org/02v3sdn51",
+                "country_code": "GB",
+                "type": "facility",
+                "lineage": [
+                  "https://openalex.org/I4210087105",
+                  "https://openalex.org/I4210112050",
+                  "https://openalex.org/I7882870",
+                  "https://openalex.org/I90344618"
+                ]
+              },
+              {
+                "id": "https://openalex.org/I7882870",
+                "display_name": "University of Glasgow",
+                "ror": "https://ror.org/00vtgdb53",
+                "country_code": "GB",
+                "type": "education",
+                "lineage": [
+                  "https://openalex.org/I7882870"
+                ]
+              }
+            ],
+            "countries": [
+              "GB"
+            ],
+            "is_corresponding": true,
+            "raw_author_name": "Mhairi Campbell",
+            "raw_affiliation_strings": [
+              "MRC/CSO Social and Public Health Sciences Unit, University of Glasgow, UK Mhairi.Campbell@glasgow.ac.uk",
+              "MRC/CSO Social and Public Health Sciences Unit, University of Glasgow, UK"
+            ],
+            "raw_orcid": "https://orcid.org/0000-0002-4416-7270",
+            "affiliations": [
+              {
+                "raw_affiliation_string": "MRC/CSO Social and Public Health Sciences Unit, University of Glasgow, UK Mhairi.Campbell@glasgow.ac.uk",
+                "institution_ids": [
+                  "https://openalex.org/I4210112050"
+                ]
+              },
+              {
+                "raw_affiliation_string": "MRC/CSO Social and Public Health Sciences Unit, University of Glasgow, UK",
+                "institution_ids": [
+                  "https://openalex.org/I4210112050",
+                  "https://openalex.org/I7882870"
+                ]
+              }
+            ]
+          },
+          {
+            "author_position": "middle",
+            "author": {
+              "id": "https://openalex.org/A5015844348",
+              "display_name": "Joanne E. McKenzie",
+              "orcid": "https://orcid.org/0000-0003-3534-1641"
+            },
+            "institutions": [
+              {
+                "id": "https://openalex.org/I56590836",
+                "display_name": "Monash University",
+                "ror": "https://ror.org/02bfwt286",
+                "country_code": "AU",
+                "type": "education",
+                "lineage": [
+                  "https://openalex.org/I56590836"
+                ]
+              }
+            ],
+            "countries": [
+              "AU"
+            ],
+            "is_corresponding": false,
+            "raw_author_name": "Joanne E McKenzie",
+            "raw_affiliation_strings": [
+              "School of Public Health and Preventive Medicine, Monash University, Melbourne, Australia"
+            ],
+            "raw_orcid": null,
+            "affiliations": [
+              {
+                "raw_affiliation_string": "School of Public Health and Preventive Medicine, Monash University, Melbourne, Australia",
+                "institution_ids": [
+                  "https://openalex.org/I56590836"
+                ]
+              }
+            ]
+          },
+          {
+            "author_position": "middle",
+            "author": {
+              "id": "https://openalex.org/A5004496681",
+              "display_name": "Amanda Sowden",
+              "orcid": "https://orcid.org/0000-0001-9741-8427"
+            },
+            "institutions": [
+              {
+                "id": "https://openalex.org/I52099693",
+                "display_name": "University of York",
+                "ror": "https://ror.org/04m01e293",
+                "country_code": "GB",
+                "type": "education",
+                "lineage": [
+                  "https://openalex.org/I52099693"
+                ]
+              }
+            ],
+            "countries": [
+              "GB"
+            ],
+            "is_corresponding": false,
+            "raw_author_name": "Amanda Sowden",
+            "raw_affiliation_strings": [
+              "Centre for Reviews and Dissemination, University of York, York, UK"
+            ],
+            "raw_orcid": null,
+            "affiliations": [
+              {
+                "raw_affiliation_string": "Centre for Reviews and Dissemination, University of York, York, UK",
+                "institution_ids": [
+                  "https://openalex.org/I52099693"
+                ]
+              }
+            ]
+          },
+          {
+            "author_position": "middle",
+            "author": {
+              "id": "https://openalex.org/A5021335144",
+              "display_name": "Srinivasa Vittal Katikireddi",
+              "orcid": "https://orcid.org/0000-0001-6593-9092"
+            },
+            "institutions": [
+              {
+                "id": "https://openalex.org/I4210112050",
+                "display_name": "MRC/CSO Social and Public Health Sciences Unit",
+                "ror": "https://ror.org/02v3sdn51",
+                "country_code": "GB",
+                "type": "facility",
+                "lineage": [
+                  "https://openalex.org/I4210087105",
+                  "https://openalex.org/I4210112050",
+                  "https://openalex.org/I7882870",
+                  "https://openalex.org/I90344618"
+                ]
+              },
+              {
+                "id": "https://openalex.org/I7882870",
+                "display_name": "University of Glasgow",
+                "ror": "https://ror.org/00vtgdb53",
+                "country_code": "GB",
+                "type": "education",
+                "lineage": [
+                  "https://openalex.org/I7882870"
+                ]
+              }
+            ],
+            "countries": [
+              "GB"
+            ],
+            "is_corresponding": false,
+            "raw_author_name": "Srinivasa Vittal Katikireddi",
+            "raw_affiliation_strings": [
+              "MRC/CSO Social and Public Health Sciences Unit, University of Glasgow, UK"
+            ],
+            "raw_orcid": null,
+            "affiliations": [
+              {
+                "raw_affiliation_string": "MRC/CSO Social and Public Health Sciences Unit, University of Glasgow, UK",
+                "institution_ids": [
+                  "https://openalex.org/I4210112050",
+                  "https://openalex.org/I7882870"
+                ]
+              }
+            ]
+          },
+          {
+            "author_position": "middle",
+            "author": {
+              "id": "https://openalex.org/A5012486829",
+              "display_name": "Sue Brennan",
+              "orcid": "https://orcid.org/0000-0003-1789-8809"
+            },
+            "institutions": [
+              {
+                "id": "https://openalex.org/I56590836",
+                "display_name": "Monash University",
+                "ror": "https://ror.org/02bfwt286",
+                "country_code": "AU",
+                "type": "education",
+                "lineage": [
+                  "https://openalex.org/I56590836"
+                ]
+              }
+            ],
+            "countries": [
+              "AU"
+            ],
+            "is_corresponding": false,
+            "raw_author_name": "Sue E Brennan",
+            "raw_affiliation_strings": [
+              "School of Public Health and Preventive Medicine, Monash University, Melbourne, Australia"
+            ],
+            "raw_orcid": null,
+            "affiliations": [
+              {
+                "raw_affiliation_string": "School of Public Health and Preventive Medicine, Monash University, Melbourne, Australia",
+                "institution_ids": [
+                  "https://openalex.org/I56590836"
+                ]
+              }
+            ]
+          },
+          {
+            "author_position": "middle",
+            "author": {
+              "id": "https://openalex.org/A5034571517",
+              "display_name": "Simon Ellis",
+              "orcid": "https://orcid.org/0000-0002-5463-4098"
+            },
+            "institutions": [
+              {
+                "id": "https://openalex.org/I332035737",
+                "display_name": "National Institute for Health and Care Excellence",
+                "ror": "https://ror.org/015ah0c92",
+                "country_code": "GB",
+                "type": "government",
+                "lineage": [
+                  "https://openalex.org/I332035737"
+                ]
+              }
+            ],
+            "countries": [
+              "GB"
+            ],
+            "is_corresponding": false,
+            "raw_author_name": "Simon Ellis",
+            "raw_affiliation_strings": [
+              "Centre for Guidelines, National Institute for Health and Care Excellence, London, UK"
+            ],
+            "raw_orcid": null,
+            "affiliations": [
+              {
+                "raw_affiliation_string": "Centre for Guidelines, National Institute for Health and Care Excellence, London, UK",
+                "institution_ids": [
+                  "https://openalex.org/I332035737"
+                ]
+              }
+            ]
+          },
+          {
+            "author_position": "middle",
+            "author": {
+              "id": "https://openalex.org/A5085681303",
+              "display_name": "Jamie Hartmann‐Boyce",
+              "orcid": "https://orcid.org/0000-0001-9898-3049"
+            },
+            "institutions": [
+              {
+                "id": "https://openalex.org/I40120149",
+                "display_name": "University of Oxford",
+                "ror": "https://ror.org/052gg0110",
+                "country_code": "GB",
+                "type": "education",
+                "lineage": [
+                  "https://openalex.org/I40120149"
+                ]
+              }
+            ],
+            "countries": [
+              "GB"
+            ],
+            "is_corresponding": false,
+            "raw_author_name": "Jamie Hartmann-Boyce",
+            "raw_affiliation_strings": [
+              "Nuffield Department of Primary Care Health Sciences, University of Oxford, Oxford, UK"
+            ],
+            "raw_orcid": null,
+            "affiliations": [
+              {
+                "raw_affiliation_string": "Nuffield Department of Primary Care Health Sciences, University of Oxford, Oxford, UK",
+                "institution_ids": [
+                  "https://openalex.org/I40120149"
+                ]
+              }
+            ]
+          },
+          {
+            "author_position": "middle",
+            "author": {
+              "id": "https://openalex.org/A5003733918",
+              "display_name": "Rebecca Ryan",
+              "orcid": "https://orcid.org/0000-0002-9097-2078"
+            },
+            "institutions": [
+              {
+                "id": "https://openalex.org/I196829312",
+                "display_name": "La Trobe University",
+                "ror": "https://ror.org/01rxfrp27",
+                "country_code": "AU",
+                "type": "education",
+                "lineage": [
+                  "https://openalex.org/I196829312"
+                ]
+              }
+            ],
+            "countries": [
+              "AU"
+            ],
+            "is_corresponding": false,
+            "raw_author_name": "Rebecca Ryan",
+            "raw_affiliation_strings": [
+              "School of Psychology and Public Health, La Trobe University, Melbourne, Australia"
+            ],
+            "raw_orcid": null,
+            "affiliations": [
+              {
+                "raw_affiliation_string": "School of Psychology and Public Health, La Trobe University, Melbourne, Australia",
+                "institution_ids": [
+                  "https://openalex.org/I196829312"
+                ]
+              }
+            ]
+          },
+          {
+            "author_position": "middle",
+            "author": {
+              "id": "https://openalex.org/A5057600712",
+              "display_name": "Sasha Shepperd",
+              "orcid": "https://orcid.org/0000-0001-6384-8322"
+            },
+            "institutions": [
+              {
+                "id": "https://openalex.org/I40120149",
+                "display_name": "University of Oxford",
+                "ror": "https://ror.org/052gg0110",
+                "country_code": "GB",
+                "type": "education",
+                "lineage": [
+                  "https://openalex.org/I40120149"
+                ]
+              }
+            ],
+            "countries": [
+              "GB"
+            ],
+            "is_corresponding": false,
+            "raw_author_name": "Sasha Shepperd",
+            "raw_affiliation_strings": [
+              "Nuffield Department of Population Health, University of Oxford, Oxford, UK"
+            ],
+            "raw_orcid": null,
+            "affiliations": [
+              {
+                "raw_affiliation_string": "Nuffield Department of Population Health, University of Oxford, Oxford, UK",
+                "institution_ids": [
+                  "https://openalex.org/I40120149"
+                ]
+              }
+            ]
+          },
+          {
+            "author_position": "middle",
+            "author": {
+              "id": "https://openalex.org/A5090183643",
+              "display_name": "James Thomas",
+              "orcid": "https://orcid.org/0000-0003-4805-4190"
+            },
+            "institutions": [
+              {
+                "id": "https://openalex.org/I45129253",
+                "display_name": "University College London",
+                "ror": "https://ror.org/02jx3x895",
+                "country_code": "GB",
+                "type": "education",
+                "lineage": [
+                  "https://openalex.org/I124357947",
+                  "https://openalex.org/I45129253"
+                ]
+              }
+            ],
+            "countries": [
+              "GB"
+            ],
+            "is_corresponding": false,
+            "raw_author_name": "James Thomas",
+            "raw_affiliation_strings": [
+              "Evidence for Policy and Practice Information and Coordinating Centre, University College London, London, UK"
+            ],
+            "raw_orcid": null,
+            "affiliations": [
+              {
+                "raw_affiliation_string": "Evidence for Policy and Practice Information and Coordinating Centre, University College London, London, UK",
+                "institution_ids": [
+                  "https://openalex.org/I45129253"
+                ]
+              }
+            ]
+          },
+          {
+            "author_position": "middle",
+            "author": {
+              "id": "https://openalex.org/A5029006782",
+              "display_name": "Vivian Welch",
+              "orcid": "https://orcid.org/0000-0002-5238-7097"
+            },
+            "institutions": [
+              {
+                "id": "https://openalex.org/I4210145570",
+                "display_name": "Bruyère",
+                "ror": "https://ror.org/05bznkw77",
+                "country_code": "CA",
+                "type": "healthcare",
+                "lineage": [
+                  "https://openalex.org/I4210145570"
+                ]
+              }
+            ],
+            "countries": [
+              "CA"
+            ],
+            "is_corresponding": false,
+            "raw_author_name": "Vivian Welch",
+            "raw_affiliation_strings": [
+              "Bruyere Research Institute, Ottawa, Canada"
+            ],
+            "raw_orcid": null,
+            "affiliations": [
+              {
+                "raw_affiliation_string": "Bruyere Research Institute, Ottawa, Canada",
+                "institution_ids": [
+                  "https://openalex.org/I4210145570"
+                ]
+              }
+            ]
+          },
+          {
+            "author_position": "last",
+            "author": {
+              "id": "https://openalex.org/A5072945568",
+              "display_name": "Hilary Thomson",
+              "orcid": "https://orcid.org/0000-0002-6810-9948"
+            },
+            "institutions": [
+              {
+                "id": "https://openalex.org/I4210112050",
+                "display_name": "MRC/CSO Social and Public Health Sciences Unit",
+                "ror": "https://ror.org/02v3sdn51",
+                "country_code": "GB",
+                "type": "facility",
+                "lineage": [
+                  "https://openalex.org/I4210087105",
+                  "https://openalex.org/I4210112050",
+                  "https://openalex.org/I7882870",
+                  "https://openalex.org/I90344618"
+                ]
+              },
+              {
+                "id": "https://openalex.org/I7882870",
+                "display_name": "University of Glasgow",
+                "ror": "https://ror.org/00vtgdb53",
+                "country_code": "GB",
+                "type": "education",
+                "lineage": [
+                  "https://openalex.org/I7882870"
+                ]
+              }
+            ],
+            "countries": [
+              "GB"
+            ],
+            "is_corresponding": false,
+            "raw_author_name": "Hilary Thomson",
+            "raw_affiliation_strings": [
+              "MRC/CSO Social and Public Health Sciences Unit, University of Glasgow, UK"
+            ],
+            "raw_orcid": null,
+            "affiliations": [
+              {
+                "raw_affiliation_string": "MRC/CSO Social and Public Health Sciences Unit, University of Glasgow, UK",
+                "institution_ids": [
+                  "https://openalex.org/I4210112050",
+                  "https://openalex.org/I7882870"
+                ]
+              }
+            ]
+          }
+        ],
+        "institutions": [],
+        "countries_distinct_count": 3,
+        "institutions_distinct_count": 9,
+        "corresponding_author_ids": [
+          "https://openalex.org/A5002470490"
+        ],
+        "corresponding_institution_ids": [
+          "https://openalex.org/I4210112050",
+          "https://openalex.org/I7882870"
+        ],
+        "apc_list": null,
+        "apc_paid": null,
+        "fwci": 283.6684,
+        "has_fulltext": true,
+        "cited_by_count": 3997,
+        "citation_normalized_percentile": {
+          "value": 0.9998,
+          "is_in_top_1_percent": true,
+          "is_in_top_10_percent": true
+        },
+        "cited_by_percentile_year": {
+          "min": 89,
+          "max": 100
+        },
+        "biblio": {
+          "volume": "368",
+          "issue": null,
+          "first_page": "l6890",
+          "last_page": "l6890"
+        },
+        "is_retracted": false,
+        "is_paratext": false,
+        "is_xpac": false,
+        "primary_topic": {
+          "id": "https://openalex.org/T10206",
+          "display_name": "Meta-analysis and systematic reviews",
+          "score": 0.9983,
+          "subfield": {
+            "id": "https://openalex.org/subfields/1804",
+            "display_name": "Statistics, Probability and Uncertainty"
+          },
+          "field": {
+            "id": "https://openalex.org/fields/18",
+            "display_name": "Decision Sciences"
+          },
+          "domain": {
+            "id": "https://openalex.org/domains/2",
+            "display_name": "Social Sciences"
+          }
+        },
+        "topics": [
+          {
+            "id": "https://openalex.org/T10206",
+            "display_name": "Meta-analysis and systematic reviews",
+            "score": 0.9983,
+            "subfield": {
+              "id": "https://openalex.org/subfields/1804",
+              "display_name": "Statistics, Probability and Uncertainty"
+            },
+            "field": {
+              "id": "https://openalex.org/fields/18",
+              "display_name": "Decision Sciences"
+            },
+            "domain": {
+              "id": "https://openalex.org/domains/2",
+              "display_name": "Social Sciences"
+            }
+          },
+          {
+            "id": "https://openalex.org/T12443",
+            "display_name": "Delphi Technique in Research",
+            "score": 0.9549,
+            "subfield": {
+              "id": "https://openalex.org/subfields/3312",
+              "display_name": "Sociology and Political Science"
+            },
+            "field": {
+              "id": "https://openalex.org/fields/33",
+              "display_name": "Social Sciences"
+            },
+            "domain": {
+              "id": "https://openalex.org/domains/2",
+              "display_name": "Social Sciences"
+            }
+          },
+          {
+            "id": "https://openalex.org/T10629",
+            "display_name": "Health Policy Implementation Science",
+            "score": 0.9391,
+            "subfield": {
+              "id": "https://openalex.org/subfields/3600",
+              "display_name": "General Health Professions"
+            },
+            "field": {
+              "id": "https://openalex.org/fields/36",
+              "display_name": "Health Professions"
+            },
+            "domain": {
+              "id": "https://openalex.org/domains/4",
+              "display_name": "Health Sciences"
+            }
+          }
+        ],
+        "keywords": [
+          {
+            "id": "https://openalex.org/keywords/guideline",
+            "display_name": "Guideline",
+            "score": 0.8109
+          },
+          {
+            "id": "https://openalex.org/keywords/meta-analysis",
+            "display_name": "Meta-analysis",
+            "score": 0.6102
+          },
+          {
+            "id": "https://openalex.org/keywords/psychological-intervention",
+            "display_name": "Psychological intervention",
+            "score": 0.5956
+          },
+          {
+            "id": "https://openalex.org/keywords/systematic-review",
+            "display_name": "Systematic review",
+            "score": 0.5808
+          },
+          {
+            "id": "https://openalex.org/keywords/transparency",
+            "display_name": "Transparency (behavior)",
+            "score": 0.5587
+          },
+          {
+            "id": "https://openalex.org/keywords/computer-science",
+            "display_name": "Computer science",
+            "score": 0.5537
+          },
+          {
+            "id": "https://openalex.org/keywords/data-extraction",
+            "display_name": "Data extraction",
+            "score": 0.4244
+          },
+          {
+            "id": "https://openalex.org/keywords/medicine",
+            "display_name": "Medicine",
+            "score": 0.3716
+          },
+          {
+            "id": "https://openalex.org/keywords/medline",
+            "display_name": "MEDLINE",
+            "score": 0.3576
+          },
+          {
+            "id": "https://openalex.org/keywords/management-science",
+            "display_name": "Management science",
+            "score": 0.3379
+          },
+          {
+            "id": "https://openalex.org/keywords/pathology",
+            "display_name": "Pathology",
+            "score": 0.1267
+          },
+          {
+            "id": "https://openalex.org/keywords/engineering",
+            "display_name": "Engineering",
+            "score": 0.0993
+          },
+          {
+            "id": "https://openalex.org/keywords/nursing",
+            "display_name": "Nursing",
+            "score": 0.0785
+          },
+          {
+            "id": "https://openalex.org/keywords/political-science",
+            "display_name": "Political science",
+            "score": 0.0654
+          }
+        ],
+        "concepts": [
+          {
+            "id": "https://openalex.org/C2780182762",
+            "wikidata": "https://www.wikidata.org/wiki/Q1630279",
+            "display_name": "Guideline",
+            "level": 2,
+            "score": 0.8109
+          },
+          {
+            "id": "https://openalex.org/C95190672",
+            "wikidata": "https://www.wikidata.org/wiki/Q815382",
+            "display_name": "Meta-analysis",
+            "level": 2,
+            "score": 0.6102
+          },
+          {
+            "id": "https://openalex.org/C27415008",
+            "wikidata": "https://www.wikidata.org/wiki/Q7256382",
+            "display_name": "Psychological intervention",
+            "level": 2,
+            "score": 0.5956
+          },
+          {
+            "id": "https://openalex.org/C189708586",
+            "wikidata": "https://www.wikidata.org/wiki/Q1504425",
+            "display_name": "Systematic review",
+            "level": 3,
+            "score": 0.5808
+          },
+          {
+            "id": "https://openalex.org/C2780233690",
+            "wikidata": "https://www.wikidata.org/wiki/Q535347",
+            "display_name": "Transparency (behavior)",
+            "level": 2,
+            "score": 0.5587
+          },
+          {
+            "id": "https://openalex.org/C41008148",
+            "wikidata": "https://www.wikidata.org/wiki/Q21198",
+            "display_name": "Computer science",
+            "level": 0,
+            "score": 0.5537
+          },
+          {
+            "id": "https://openalex.org/C2777466982",
+            "wikidata": "https://www.wikidata.org/wiki/Q5227287",
+            "display_name": "Data extraction",
+            "level": 3,
+            "score": 0.4244
+          },
+          {
+            "id": "https://openalex.org/C71924100",
+            "wikidata": "https://www.wikidata.org/wiki/Q11190",
+            "display_name": "Medicine",
+            "level": 0,
+            "score": 0.3716
+          },
+          {
+            "id": "https://openalex.org/C2779473830",
+            "wikidata": "https://www.wikidata.org/wiki/Q1540899",
+            "display_name": "MEDLINE",
+            "level": 2,
+            "score": 0.3576
+          },
+          {
+            "id": "https://openalex.org/C539667460",
+            "wikidata": "https://www.wikidata.org/wiki/Q2414942",
+            "display_name": "Management science",
+            "level": 1,
+            "score": 0.3379
+          },
+          {
+            "id": "https://openalex.org/C142724271",
+            "wikidata": "https://www.wikidata.org/wiki/Q7208",
+            "display_name": "Pathology",
+            "level": 1,
+            "score": 0.1267
+          },
+          {
+            "id": "https://openalex.org/C127413603",
+            "wikidata": "https://www.wikidata.org/wiki/Q11023",
+            "display_name": "Engineering",
+            "level": 0,
+            "score": 0.0993
+          },
+          {
+            "id": "https://openalex.org/C159110408",
+            "wikidata": "https://www.wikidata.org/wiki/Q121176",
+            "display_name": "Nursing",
+            "level": 1,
+            "score": 0.0785
+          },
+          {
+            "id": "https://openalex.org/C17744445",
+            "wikidata": "https://www.wikidata.org/wiki/Q36442",
+            "display_name": "Political science",
+            "level": 0,
+            "score": 0.0654
+          },
+          {
+            "id": "https://openalex.org/C199539241",
+            "wikidata": "https://www.wikidata.org/wiki/Q7748",
+            "display_name": "Law",
+            "level": 1,
+            "score": 0
+          },
+          {
+            "id": "https://openalex.org/C38652104",
+            "wikidata": "https://www.wikidata.org/wiki/Q3510521",
+            "display_name": "Computer security",
+            "level": 1,
+            "score": 0
+          }
+        ],
+        "mesh": [
+          {
+            "descriptor_ui": "D000068598",
+            "descriptor_name": "Data Accuracy",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D000068598",
+            "descriptor_name": "Data Accuracy",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D000068598",
+            "descriptor_name": "Data Accuracy",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D000068598",
+            "descriptor_name": "Data Accuracy",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D000078202",
+            "descriptor_name": "Systematic Reviews as Topic",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": true
+          },
+          {
+            "descriptor_ui": "D000078202",
+            "descriptor_name": "Systematic Reviews as Topic",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": true
+          },
+          {
+            "descriptor_ui": "D000078202",
+            "descriptor_name": "Systematic Reviews as Topic",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": true
+          },
+          {
+            "descriptor_ui": "D000078202",
+            "descriptor_name": "Systematic Reviews as Topic",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": true
+          },
+          {
+            "descriptor_ui": "D003627",
+            "descriptor_name": "Data Interpretation, Statistical",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D003627",
+            "descriptor_name": "Data Interpretation, Statistical",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D003627",
+            "descriptor_name": "Data Interpretation, Statistical",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D003627",
+            "descriptor_name": "Data Interpretation, Statistical",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D006801",
+            "descriptor_name": "Humans",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D006801",
+            "descriptor_name": "Humans",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D006801",
+            "descriptor_name": "Humans",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D006801",
+            "descriptor_name": "Humans",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D012107",
+            "descriptor_name": "Research Design",
+            "qualifier_ui": "Q000592",
+            "qualifier_name": "standards",
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D012107",
+            "descriptor_name": "Research Design",
+            "qualifier_ui": "Q000592",
+            "qualifier_name": "standards",
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D012107",
+            "descriptor_name": "Research Design",
+            "qualifier_ui": "Q000592",
+            "qualifier_name": "standards",
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D012107",
+            "descriptor_name": "Research Design",
+            "qualifier_ui": "Q000592",
+            "qualifier_name": "standards",
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D015201",
+            "descriptor_name": "Meta-Analysis as Topic",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D015201",
+            "descriptor_name": "Meta-Analysis as Topic",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D015201",
+            "descriptor_name": "Meta-Analysis as Topic",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D015201",
+            "descriptor_name": "Meta-Analysis as Topic",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D017063",
+            "descriptor_name": "Outcome Assessment, Health Care",
+            "qualifier_ui": "Q000379",
+            "qualifier_name": "methods",
+            "is_major_topic": true
+          },
+          {
+            "descriptor_ui": "D017063",
+            "descriptor_name": "Outcome Assessment, Health Care",
+            "qualifier_ui": "Q000379",
+            "qualifier_name": "methods",
+            "is_major_topic": true
+          },
+          {
+            "descriptor_ui": "D017063",
+            "descriptor_name": "Outcome Assessment, Health Care",
+            "qualifier_ui": "Q000379",
+            "qualifier_name": "methods",
+            "is_major_topic": true
+          },
+          {
+            "descriptor_ui": "D017063",
+            "descriptor_name": "Outcome Assessment, Health Care",
+            "qualifier_ui": "Q000379",
+            "qualifier_name": "methods",
+            "is_major_topic": true
+          },
+          {
+            "descriptor_ui": "D017063",
+            "descriptor_name": "Outcome Assessment, Health Care",
+            "qualifier_ui": "Q000592",
+            "qualifier_name": "standards",
+            "is_major_topic": true
+          },
+          {
+            "descriptor_ui": "D017063",
+            "descriptor_name": "Outcome Assessment, Health Care",
+            "qualifier_ui": "Q000592",
+            "qualifier_name": "standards",
+            "is_major_topic": true
+          },
+          {
+            "descriptor_ui": "D017063",
+            "descriptor_name": "Outcome Assessment, Health Care",
+            "qualifier_ui": "Q000592",
+            "qualifier_name": "standards",
+            "is_major_topic": true
+          },
+          {
+            "descriptor_ui": "D017063",
+            "descriptor_name": "Outcome Assessment, Health Care",
+            "qualifier_ui": "Q000592",
+            "qualifier_name": "standards",
+            "is_major_topic": true
+          }
+        ],
+        "locations_count": 10,
+        "locations": [
+          {
+            "id": "doi:10.1136/bmj.l6890",
+            "is_oa": true,
+            "landing_page_url": "https://doi.org/10.1136/bmj.l6890",
+            "pdf_url": null,
+            "source": {
+              "id": "https://openalex.org/S4393917726",
+              "display_name": "BMJ",
+              "issn_l": "1756-1833",
+              "issn": [
+                "1756-1833"
+              ],
+              "is_oa": false,
+              "is_in_doaj": false,
+              "is_core": true,
+              "host_organization": null,
+              "host_organization_name": null,
+              "host_organization_lineage": [],
+              "host_organization_lineage_names": [],
+              "type": "journal"
+            },
+            "license": "cc-by",
+            "license_id": "https://openalex.org/licenses/cc-by",
+            "version": "publishedVersion",
+            "is_accepted": true,
+            "is_published": true,
+            "raw_source_name": "BMJ",
+            "raw_type": "journal-article"
+          },
+          {
+            "id": "pmid:31948937",
+            "is_oa": false,
+            "landing_page_url": "https://pubmed.ncbi.nlm.nih.gov/31948937",
+            "pdf_url": null,
+            "source": {
+              "id": "https://openalex.org/S4306525036",
+              "display_name": "PubMed",
+              "issn_l": null,
+              "issn": null,
+              "is_oa": false,
+              "is_in_doaj": false,
+              "is_core": false,
+              "host_organization": "https://openalex.org/I1299303238",
+              "host_organization_name": "National Institutes of Health",
+              "host_organization_lineage": [
+                "https://openalex.org/I1299303238"
+              ],
+              "host_organization_lineage_names": [],
+              "type": "repository"
+            },
+            "license": null,
+            "license_id": null,
+            "version": "publishedVersion",
+            "is_accepted": true,
+            "is_published": true,
+            "raw_source_name": "BMJ (Clinical research ed.)",
+            "raw_type": null
+          },
+          {
+            "id": "pmh:oai:monash.edu:openaire/a287f1ca-ca16-4c52-9c6f-dc86bc73e178",
+            "is_oa": true,
+            "landing_page_url": "https://research.monash.edu/en/publications/a287f1ca-ca16-4c52-9c6f-dc86bc73e178",
+            "pdf_url": "https://researchmgt.monash.edu/ws/files/303495023/296074424_oa.pdf",
+            "source": {
+              "id": "https://openalex.org/S4306402625",
+              "display_name": "Monash University Research Portal (Monash University)",
+              "issn_l": null,
+              "issn": null,
+              "is_oa": false,
+              "is_in_doaj": false,
+              "is_core": false,
+              "host_organization": "https://openalex.org/I56590836",
+              "host_organization_name": "Monash University",
+              "host_organization_lineage": [
+                "https://openalex.org/I56590836"
+              ],
+              "host_organization_lineage_names": [],
+              "type": "repository"
+            },
+            "license": null,
+            "license_id": null,
+            "version": "acceptedVersion",
+            "is_accepted": true,
+            "is_published": false,
+            "raw_source_name": "Campbell, M, McKenzie, J E, Sowden, A, Katikireddi, S V, Brennan, S E, Ellis, S, Hartmann-Boyce, J, Ryan, R, Shepperd, S, Thomas, J, Welch, V & Thomson, H 2020, 'Synthesis without meta-analysis (SWiM) in systematic reviews : reporting guideline', BMJ, vol. 368, l6890. https://doi.org/10.1136/bmj.l6890",
+            "raw_type": "info:eu-repo/semantics/article"
+          },
+          {
+            "id": "pmh:oai:eprints.whiterose.ac.uk:156306",
+            "is_oa": true,
+            "landing_page_url": "https://orcid.org/0000-0001-9741-8427>",
+            "pdf_url": "https://eprints.whiterose.ac.uk/id/eprint/156306/1/bmj.l6890.full.pdf",
+            "source": {
+              "id": "https://openalex.org/S4306400854",
+              "display_name": "White Rose Research Online (University of Leeds, The University of Sheffield, University of York)",
+              "issn_l": null,
+              "issn": null,
+              "is_oa": false,
+              "is_in_doaj": false,
+              "is_core": false,
+              "host_organization": "https://openalex.org/I2800616092",
+              "host_organization_name": "White Rose University Consortium",
+              "host_organization_lineage": [
+                "https://openalex.org/I2800616092"
+              ],
+              "host_organization_lineage_names": [],
+              "type": "repository"
+            },
+            "license": null,
+            "license_id": null,
+            "version": "acceptedVersion",
+            "is_accepted": true,
+            "is_published": false,
+            "raw_source_name": null,
+            "raw_type": "Article"
+          },
+          {
+            "id": "pmh:oai:eprints.gla.ac.uk:199794",
+            "is_oa": true,
+            "landing_page_url": null,
+            "pdf_url": null,
+            "source": {
+              "id": "https://openalex.org/S4210235606",
+              "display_name": "ENLIGHTEN (Jurnal Bimbingan dan Konseling Islam)",
+              "issn_l": "2622-8912",
+              "issn": [
+                "2622-8912",
+                "2622-8920"
+              ],
+              "is_oa": true,
+              "is_in_doaj": true,
+              "is_core": false,
+              "host_organization": null,
+              "host_organization_name": null,
+              "host_organization_lineage": [],
+              "host_organization_lineage_names": [],
+              "type": "journal"
+            },
+            "license": "cc-by-sa",
+            "license_id": "https://openalex.org/licenses/cc-by-sa",
+            "version": "acceptedVersion",
+            "is_accepted": true,
+            "is_published": false,
+            "raw_source_name": "",
+            "raw_type": "Articles"
+          },
+          {
+            "id": "pmh:oai:eprints.ucl.ac.uk.OAI2:10092670",
+            "is_oa": false,
+            "landing_page_url": "https://discovery.ucl.ac.uk/id/eprint/10092670/",
+            "pdf_url": null,
+            "source": {
+              "id": "https://openalex.org/S4306400024",
+              "display_name": "UCL Discovery (University College London)",
+              "issn_l": null,
+              "issn": null,
+              "is_oa": false,
+              "is_in_doaj": false,
+              "is_core": false,
+              "host_organization": "https://openalex.org/I45129253",
+              "host_organization_name": "University College London",
+              "host_organization_lineage": [
+                "https://openalex.org/I45129253"
+              ],
+              "host_organization_lineage_names": [],
+              "type": "repository"
+            },
+            "license": null,
+            "license_id": null,
+            "version": "submittedVersion",
+            "is_accepted": false,
+            "is_published": false,
+            "raw_source_name": "   BMJ-British Medical Journal , 368     , Article l6890. (2020)      ",
+            "raw_type": "Article"
+          },
+          {
+            "id": "pmh:oai:monash.edu:publications/a287f1ca-ca16-4c52-9c6f-dc86bc73e178",
+            "is_oa": true,
+            "landing_page_url": "http://www.scopus.com/inward/record.url?scp=85077941623&partnerID=8YFLogxK",
+            "pdf_url": null,
+            "source": {
+              "id": "https://openalex.org/S4306402625",
+              "display_name": "Monash University Research Portal (Monash University)",
+              "issn_l": null,
+              "issn": null,
+              "is_oa": false,
+              "is_in_doaj": false,
+              "is_core": false,
+              "host_organization": "https://openalex.org/I56590836",
+              "host_organization_name": "Monash University",
+              "host_organization_lineage": [
+                "https://openalex.org/I56590836"
+              ],
+              "host_organization_lineage_names": [],
+              "type": "repository"
+            },
+            "license": "other-oa",
+            "license_id": "https://openalex.org/licenses/other-oa",
+            "version": "submittedVersion",
+            "is_accepted": false,
+            "is_published": false,
+            "raw_source_name": "Campbell , M , McKenzie , J E , Sowden , A , Katikireddi , S V , Brennan , S E , Ellis , S , Hartmann-Boyce , J , Ryan , R , Shepperd , S , Thomas , J , Welch , V &amp; Thomson , H 2020 , ' Synthesis without meta-analysis (SWiM) in systematic reviews : reporting guideline ' , The BMJ , vol. 368 , l6890 . https://doi.org/10.1136/bmj.l6890",
+            "raw_type": "article"
+          },
+          {
+            "id": "pmh:oai:open-archive.highwire.org:bmj:368/jan16_3/l6890",
+            "is_oa": false,
+            "landing_page_url": "http://www.bmj.com/cgi/content/short/368/jan16_3/l6890",
+            "pdf_url": null,
+            "source": {
+              "id": "https://openalex.org/S4406923041",
+              "display_name": "HighWire Press Open Archive",
+              "issn_l": null,
+              "issn": null,
+              "is_oa": false,
+              "is_in_doaj": false,
+              "is_core": false,
+              "host_organization": null,
+              "host_organization_name": null,
+              "host_organization_lineage": [],
+              "host_organization_lineage_names": [],
+              "type": "repository"
+            },
+            "license": null,
+            "license_id": null,
+            "version": "submittedVersion",
+            "is_accepted": false,
+            "is_published": false,
+            "raw_source_name": "",
+            "raw_type": "TEXT"
+          },
+          {
+            "id": "pmh:oai:ora.ox.ac.uk:uuid:5587fb7d-ab83-47f4-9b70-1d644c94d246",
+            "is_oa": true,
+            "landing_page_url": "https://ora.ox.ac.uk/objects/uuid:5587fb7d-ab83-47f4-9b70-1d644c94d246",
+            "pdf_url": null,
+            "source": {
+              "id": "https://openalex.org/S4306402636",
+              "display_name": "Oxford University Research Archive (ORA) (University of Oxford)",
+              "issn_l": null,
+              "issn": null,
+              "is_oa": false,
+              "is_in_doaj": false,
+              "is_core": false,
+              "host_organization": "https://openalex.org/I40120149",
+              "host_organization_name": "University of Oxford",
+              "host_organization_lineage": [
+                "https://openalex.org/I40120149"
+              ],
+              "host_organization_lineage_names": [],
+              "type": "repository"
+            },
+            "license": "cc-by",
+            "license_id": "https://openalex.org/licenses/cc-by",
+            "version": "submittedVersion",
+            "is_accepted": false,
+            "is_published": false,
+            "raw_source_name": "",
+            "raw_type": "Journal article"
+          },
+          {
+            "id": "pmh:oai:pubmedcentral.nih.gov:7190266",
+            "is_oa": true,
+            "landing_page_url": "https://www.ncbi.nlm.nih.gov/pmc/articles/7190266",
+            "pdf_url": null,
+            "source": {
+              "id": "https://openalex.org/S2764455111",
+              "display_name": "PubMed Central",
+              "issn_l": null,
+              "issn": null,
+              "is_oa": true,
+              "is_in_doaj": false,
+              "is_core": false,
+              "host_organization": "https://openalex.org/I1299303238",
+              "host_organization_name": "National Institutes of Health",
+              "host_organization_lineage": [
+                "https://openalex.org/I1299303238"
+              ],
+              "host_organization_lineage_names": [],
+              "type": "repository"
+            },
+            "license": "cc-by",
+            "license_id": "https://openalex.org/licenses/cc-by",
+            "version": "submittedVersion",
+            "is_accepted": false,
+            "is_published": false,
+            "raw_source_name": "BMJ",
+            "raw_type": "Text"
+          }
+        ],
+        "best_oa_location": {
+          "id": "doi:10.1136/bmj.l6890",
+          "is_oa": true,
+          "landing_page_url": "https://doi.org/10.1136/bmj.l6890",
+          "pdf_url": null,
+          "source": {
+            "id": "https://openalex.org/S4393917726",
+            "display_name": "BMJ",
+            "issn_l": "1756-1833",
+            "issn": [
+              "1756-1833"
+            ],
+            "is_oa": false,
+            "is_in_doaj": false,
+            "is_core": true,
+            "host_organization": null,
+            "host_organization_name": null,
+            "host_organization_lineage": [],
+            "host_organization_lineage_names": [],
+            "type": "journal"
+          },
+          "license": "cc-by",
+          "license_id": "https://openalex.org/licenses/cc-by",
+          "version": "publishedVersion",
+          "is_accepted": true,
+          "is_published": true,
+          "raw_source_name": "BMJ",
+          "raw_type": "journal-article"
+        },
+        "sustainable_development_goals": [],
+        "awards": [
+          {
+            "id": "https://openalex.org/G188017575",
+            "display_name": null,
+            "funder_award_id": "SPHSU13",
+            "funder_id": "https://openalex.org/F4320313269",
+            "funder_display_name": "Scottish Government"
+          },
+          {
+            "id": "https://openalex.org/G2162646731",
+            "display_name": null,
+            "funder_award_id": "MC_UU_00022/2",
+            "funder_id": "https://openalex.org/F4320334626",
+            "funder_display_name": "Medical Research Council"
+          },
+          {
+            "id": "https://openalex.org/G2915140960",
+            "display_name": null,
+            "funder_award_id": "RSES/PDA/C2/017",
+            "funder_id": "https://openalex.org/F4320319990",
+            "funder_display_name": "National Institute for Health and Care Research"
+          },
+          {
+            "id": "https://openalex.org/G3227224082",
+            "display_name": null,
+            "funder_award_id": "MC_UU_12017/13",
+            "funder_id": "https://openalex.org/F4320334626",
+            "funder_display_name": "Medical Research Council"
+          },
+          {
+            "id": "https://openalex.org/G3297223890",
+            "display_name": null,
+            "funder_award_id": "MC_UU_12017/15",
+            "funder_id": "https://openalex.org/F4320334626",
+            "funder_display_name": "Medical Research Council"
+          },
+          {
+            "id": "https://openalex.org/G3770657026",
+            "display_name": null,
+            "funder_award_id": "MC_UU_12017",
+            "funder_id": "https://openalex.org/F4320334626",
+            "funder_display_name": "Medical Research Council"
+          },
+          {
+            "id": "https://openalex.org/G4001648953",
+            "display_name": null,
+            "funder_award_id": "SPHSU15",
+            "funder_id": "https://openalex.org/F4320334626",
+            "funder_display_name": "Medical Research Council"
+          },
+          {
+            "id": "https://openalex.org/G4075087335",
+            "display_name": null,
+            "funder_award_id": "MC_UU_12017-13",
+            "funder_id": "https://openalex.org/F4320334626",
+            "funder_display_name": "Medical Research Council"
+          },
+          {
+            "id": "https://openalex.org/G5231239147",
+            "display_name": null,
+            "funder_award_id": "SCAF/15/02",
+            "funder_id": "https://openalex.org/F4320313269",
+            "funder_display_name": "Scottish Government"
+          },
+          {
+            "id": "https://openalex.org/G5889604929",
+            "display_name": null,
+            "funder_award_id": "SPHSU15",
+            "funder_id": "https://openalex.org/F4320313269",
+            "funder_display_name": "Scottish Government"
+          },
+          {
+            "id": "https://openalex.org/G7208770452",
+            "display_name": null,
+            "funder_award_id": "SPHSU13",
+            "funder_id": "https://openalex.org/F4320334626",
+            "funder_display_name": "Medical Research Council"
+          },
+          {
+            "id": "https://openalex.org/G8035986854",
+            "display_name": null,
+            "funder_award_id": "MC_UU_12017-15",
+            "funder_id": "https://openalex.org/F4320334626",
+            "funder_display_name": "Medical Research Council"
+          },
+          {
+            "id": "https://openalex.org/G8133576777",
+            "display_name": "A multi-centre randomised controlled trial of Comprehensive Geriatric Assessment in an admission avoidance hospital at home setting",
+            "funder_award_id": "12/209/66",
+            "funder_id": "https://openalex.org/F4320319990",
+            "funder_display_name": "National Institute for Health and Care Research"
+          },
+          {
+            "id": "https://openalex.org/G8585613087",
+            "display_name": "Methodological research in meta-analysis and evidence synthesis: An evidence-based methods approach",
+            "funder_award_id": "1143429",
+            "funder_id": "https://openalex.org/F4320334705",
+            "funder_display_name": "National Health and Medical Research Council"
+          },
+          {
+            "id": "https://openalex.org/G8989501819",
+            "display_name": null,
+            "funder_award_id": "SCAF/15/02",
+            "funder_id": "https://openalex.org/F4320334626",
+            "funder_display_name": "Medical Research Council"
+          }
+        ],
+        "funders": [
+          {
+            "id": "https://openalex.org/F4320313269",
+            "display_name": "Scottish Government",
+            "ror": "https://ror.org/04v2xmd71"
+          },
+          {
+            "id": "https://openalex.org/F4320319990",
+            "display_name": "National Institute for Health and Care Research",
+            "ror": "https://ror.org/0187kwz08"
+          },
+          {
+            "id": "https://openalex.org/F4320334626",
+            "display_name": "Medical Research Council",
+            "ror": "https://ror.org/03x94j517"
+          },
+          {
+            "id": "https://openalex.org/F4320334705",
+            "display_name": "National Health and Medical Research Council",
+            "ror": "https://ror.org/011kf5r70"
+          }
+        ],
+        "has_content": {
+          "pdf": false,
+          "grobid_xml": false
+        },
+        "content_urls": null,
+        "referenced_works_count": 36,
+        "referenced_works": [
+          "https://openalex.org/W145325731",
+          "https://openalex.org/W1530749683",
+          "https://openalex.org/W1598602811",
+          "https://openalex.org/W1617328014",
+          "https://openalex.org/W1964146567",
+          "https://openalex.org/W1984052269",
+          "https://openalex.org/W2042184870",
+          "https://openalex.org/W2044414901",
+          "https://openalex.org/W2066480210",
+          "https://openalex.org/W2072301364",
+          "https://openalex.org/W2085001923",
+          "https://openalex.org/W2093038967",
+          "https://openalex.org/W2120732572",
+          "https://openalex.org/W2125192512",
+          "https://openalex.org/W2134833483",
+          "https://openalex.org/W2135572748",
+          "https://openalex.org/W2156098321",
+          "https://openalex.org/W2263572070",
+          "https://openalex.org/W2396846174",
+          "https://openalex.org/W2609015099",
+          "https://openalex.org/W2733261733",
+          "https://openalex.org/W2789982275",
+          "https://openalex.org/W2791737235",
+          "https://openalex.org/W2808826267",
+          "https://openalex.org/W2890588440",
+          "https://openalex.org/W2891378911",
+          "https://openalex.org/W2895689886",
+          "https://openalex.org/W2895713118",
+          "https://openalex.org/W2905074652",
+          "https://openalex.org/W2940428027",
+          "https://openalex.org/W2973393295",
+          "https://openalex.org/W2973875029",
+          "https://openalex.org/W2974082440",
+          "https://openalex.org/W2974450979",
+          "https://openalex.org/W2991792334",
+          "https://openalex.org/W4256513592"
+        ],
+        "related_works": [
+          "https://openalex.org/W2339422290",
+          "https://openalex.org/W2397653702",
+          "https://openalex.org/W4294636802",
+          "https://openalex.org/W4200065965",
+          "https://openalex.org/W2129543081",
+          "https://openalex.org/W2085472103",
+          "https://openalex.org/W2567700705",
+          "https://openalex.org/W3124148945",
+          "https://openalex.org/W2167191881",
+          "https://openalex.org/W4389574659"
+        ],
+        "abstract_inverted_index": {
+          "In": [
+            0
+          ],
+          "systematic": [
+            1
+          ],
+          "reviews": [
+            2,
+            52
+          ],
+          "that": [
+            3
+          ],
+          "lack": [
+            4,
+            22
+          ],
+          "data": [
+            5,
+            81
+          ],
+          "amenable": [
+            6
+          ],
+          "to": [
+            7,
+            47,
+            60
+          ],
+          "meta-analysis,": [
+            8
+          ],
+          "alternative": [
+            9,
+            57
+          ],
+          "synthesis": [
+            10,
+            58,
+            78
+          ],
+          "methods": [
+            11,
+            17,
+            27,
+            59
+          ],
+          "are": [
+            12,
+            18,
+            65
+          ],
+          "commonly": [
+            13
+          ],
+          "used,": [
+            14
+          ],
+          "but": [
+            15
+          ],
+          "these": [
+            16
+          ],
+          "rarely": [
+            19
+          ],
+          "reported.": [
+            20
+          ],
+          "This": [
+            21,
+            67
+          ],
+          "of": [
+            23,
+            34,
+            53,
+            62,
+            72,
+            79,
+            82
+          ],
+          "transparency": [
+            24
+          ],
+          "in": [
+            25,
+            51,
+            55
+          ],
+          "the": [
+            26,
+            32,
+            35,
+            70,
+            73,
+            77,
+            87
+          ],
+          "can": [
+            28
+          ],
+          "cast": [
+            29
+          ],
+          "doubt": [
+            30
+          ],
+          "on": [
+            31
+          ],
+          "validity": [
+            33
+          ],
+          "review": [
+            36
+          ],
+          "findings.": [
+            37
+          ],
+          "The": [
+            38
+          ],
+          "Synthesis": [
+            39
+          ],
+          "Without": [
+            40
+          ],
+          "Meta-analysis": [
+            41
+          ],
+          "(SWiM)": [
+            42
+          ],
+          "guideline": [
+            43,
+            75
+          ],
+          "has": [
+            44
+          ],
+          "been": [
+            45
+          ],
+          "developed": [
+            46
+          ],
+          "guide": [
+            48
+          ],
+          "clear": [
+            49
+          ],
+          "reporting": [
+            50,
+            90
+          ],
+          "interventions": [
+            54
+          ],
+          "which": [
+            56
+          ],
+          "meta-analysis": [
+            61
+          ],
+          "effect": [
+            63
+          ],
+          "estimates": [
+            64
+          ],
+          "used.": [
+            66
+          ],
+          "article": [
+            68
+          ],
+          "describes": [
+            69
+          ],
+          "development": [
+            71
+          ],
+          "SWiM": [
+            74,
+            89
+          ],
+          "for": [
+            76
+          ],
+          "quantitative": [
+            80
+          ],
+          "intervention": [
+            83
+          ],
+          "effects": [
+            84
+          ],
+          "and": [
+            85,
+            95
+          ],
+          "presents": [
+            86
+          ],
+          "nine": [
+            88
+          ],
+          "items": [
+            91
+          ],
+          "with": [
+            92
+          ],
+          "accompanying": [
+            93
+          ],
+          "explanations": [
+            94
+          ],
+          "examples.": [
+            96
+          ]
+        },
+        "counts_by_year": [
+          {
+            "year": 2026,
+            "cited_by_count": 529
+          },
+          {
+            "year": 2025,
+            "cited_by_count": 814
+          },
+          {
+            "year": 2024,
+            "cited_by_count": 825
+          },
+          {
+            "year": 2023,
+            "cited_by_count": 687
+          },
+          {
+            "year": 2022,
+            "cited_by_count": 562
+          },
+          {
+            "year": 2021,
+            "cited_by_count": 401
+          },
+          {
+            "year": 2020,
+            "cited_by_count": 176
+          },
+          {
+            "year": 2019,
+            "cited_by_count": 2
+          },
+          {
+            "year": 2012,
+            "cited_by_count": 1
+          }
+        ],
+        "updated_date": "2026-07-10T07:45:09.275182",
+        "created_date": "2025-10-10T00:00:00"
+      }
+    ],
+    "group_by": []
+  }
+}

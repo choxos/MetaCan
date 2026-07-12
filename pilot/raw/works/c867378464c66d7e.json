@@ -1,0 +1,1581 @@
+{
+  "request": {
+    "endpoint": "works",
+    "params": {
+      "filter": "title_and_abstract.search:\"peer review\",authorships.institutions.country_code:ca,primary_topic.id:T10102|T13607|T13516|T11937|T10206|T10582|T10267|T10778|T13558|T13284|T11875",
+      "per-page": "1",
+      "mailto": "ahmad.pub@gmail.com"
+    }
+  },
+  "retrieved_at_utc": "2026-07-11T12:33:03Z",
+  "payload": {
+    "meta": {
+      "count": 795,
+      "db_response_time_ms": 30,
+      "page": 1,
+      "per_page": 1,
+      "groups_count": null,
+      "x_query": {
+        "oql": "works where authorships.institutions.country_code is (ca)\n  and title/abstract has (stemmed \"peer review\")\n  and topic is (\n    T10102 or T10206 or T10267 or T10582 or T10778 or T11875 or T11937 or T13284\n    or T13516 or T13558 or T13607\n  )",
+        "oqo": {
+          "get_rows": "works",
+          "filter_rows": [
+            {
+              "column_id": "authorships.institutions.country_code",
+              "value": "ca"
+            },
+            {
+              "column_id": "title_and_abstract.search",
+              "value": "\"peer review\"",
+              "operator": "has"
+            },
+            {
+              "join": "or",
+              "filters": [
+                {
+                  "column_id": "primary_topic.id",
+                  "value": "T10102"
+                },
+                {
+                  "column_id": "primary_topic.id",
+                  "value": "T10206"
+                },
+                {
+                  "column_id": "primary_topic.id",
+                  "value": "T10267"
+                },
+                {
+                  "column_id": "primary_topic.id",
+                  "value": "T10582"
+                },
+                {
+                  "column_id": "primary_topic.id",
+                  "value": "T10778"
+                },
+                {
+                  "column_id": "primary_topic.id",
+                  "value": "T11875"
+                },
+                {
+                  "column_id": "primary_topic.id",
+                  "value": "T11937"
+                },
+                {
+                  "column_id": "primary_topic.id",
+                  "value": "T13284"
+                },
+                {
+                  "column_id": "primary_topic.id",
+                  "value": "T13516"
+                },
+                {
+                  "column_id": "primary_topic.id",
+                  "value": "T13558"
+                },
+                {
+                  "column_id": "primary_topic.id",
+                  "value": "T13607"
+                }
+              ]
+            }
+          ],
+          "per_page": 1
+        },
+        "url": "/works?filter=authorships.institutions.country_code:ca,title_and_abstract.search:%22peer review%22,primary_topic.id:T10102|T10206|T10267|T10582|T10778|T11875|T11937|T13284|T13516|T13558|T13607&per_page=1"
+      },
+      "cost_usd": 0.001
+    },
+    "results": [
+      {
+        "id": "https://openalex.org/W2299177375",
+        "doi": "https://doi.org/10.1016/j.jclinepi.2016.01.021",
+        "title": "PRESS Peer Review of Electronic Search Strategies: 2015 Guideline Statement",
+        "display_name": "PRESS Peer Review of Electronic Search Strategies: 2015 Guideline Statement",
+        "relevance_score": 888.4241,
+        "publication_year": 2016,
+        "publication_date": "2016-03-19",
+        "ids": {
+          "openalex": "https://openalex.org/W2299177375",
+          "doi": "https://doi.org/10.1016/j.jclinepi.2016.01.021",
+          "mag": "2299177375",
+          "pmid": "https://pubmed.ncbi.nlm.nih.gov/27005575"
+        },
+        "language": "en",
+        "primary_location": {
+          "id": "doi:10.1016/j.jclinepi.2016.01.021",
+          "is_oa": true,
+          "landing_page_url": "https://doi.org/10.1016/j.jclinepi.2016.01.021",
+          "pdf_url": null,
+          "source": {
+            "id": "https://openalex.org/S64418186",
+            "display_name": "Journal of Clinical Epidemiology",
+            "issn_l": "0895-4356",
+            "issn": [
+              "0895-4356",
+              "1878-5921"
+            ],
+            "is_oa": false,
+            "is_in_doaj": false,
+            "is_core": true,
+            "host_organization": "https://openalex.org/P4310320990",
+            "host_organization_name": "Elsevier BV",
+            "host_organization_lineage": [
+              "https://openalex.org/P4310320990"
+            ],
+            "host_organization_lineage_names": [
+              "Elsevier BV"
+            ],
+            "type": "journal"
+          },
+          "license": "cc-by-nc-nd",
+          "license_id": "https://openalex.org/licenses/cc-by-nc-nd",
+          "version": "publishedVersion",
+          "is_accepted": true,
+          "is_published": true,
+          "raw_source_name": "Journal of Clinical Epidemiology",
+          "raw_type": "journal-article"
+        },
+        "type": "article",
+        "indexed_in": [
+          "crossref",
+          "pubmed"
+        ],
+        "open_access": {
+          "is_oa": true,
+          "oa_status": "hybrid",
+          "oa_url": "https://doi.org/10.1016/j.jclinepi.2016.01.021",
+          "any_repository_has_fulltext": false
+        },
+        "authorships": [
+          {
+            "author_position": "first",
+            "author": {
+              "id": "https://openalex.org/A5081964815",
+              "display_name": "Jessie McGowan",
+              "orcid": "https://orcid.org/0000-0002-2201-7546"
+            },
+            "institutions": [
+              {
+                "id": "https://openalex.org/I153718931",
+                "display_name": "University of Ottawa",
+                "ror": "https://ror.org/03c4mmv16",
+                "country_code": "CA",
+                "type": "education",
+                "lineage": [
+                  "https://openalex.org/I153718931"
+                ]
+              }
+            ],
+            "countries": [
+              "CA"
+            ],
+            "is_corresponding": true,
+            "raw_author_name": "Jessie McGowan",
+            "raw_affiliation_strings": [
+              "School of Epidemiology, Public Health and Preventive Medicine, University of Ottawa, 85 Primrose Avenue, Ottawa, Ontario K1N 6M1, Canada; Cochrane Information Retrieval Methods Group. Electronic address: jmcgowan@uottawa.ca",
+              "Cochrane Information Retrieval Methods Group",
+              "School of Epidemiology, Public Health and Preventive Medicine, University of Ottawa, 85 Primrose Avenue, Ottawa, Ontario K1N 6M1, Canada"
+            ],
+            "raw_orcid": "https://orcid.org/0000-0002-2201-7546",
+            "affiliations": [
+              {
+                "raw_affiliation_string": "School of Epidemiology, Public Health and Preventive Medicine, University of Ottawa, 85 Primrose Avenue, Ottawa, Ontario K1N 6M1, Canada; Cochrane Information Retrieval Methods Group. Electronic address: jmcgowan@uottawa.ca",
+                "institution_ids": [
+                  "https://openalex.org/I153718931"
+                ]
+              },
+              {
+                "raw_affiliation_string": "Cochrane Information Retrieval Methods Group",
+                "institution_ids": []
+              },
+              {
+                "raw_affiliation_string": "School of Epidemiology, Public Health and Preventive Medicine, University of Ottawa, 85 Primrose Avenue, Ottawa, Ontario K1N 6M1, Canada",
+                "institution_ids": [
+                  "https://openalex.org/I153718931"
+                ]
+              }
+            ]
+          },
+          {
+            "author_position": "middle",
+            "author": {
+              "id": "https://openalex.org/A5028699945",
+              "display_name": "Margaret Sampson",
+              "orcid": "https://orcid.org/0000-0003-2550-9893"
+            },
+            "institutions": [
+              {
+                "id": "https://openalex.org/I2799330578",
+                "display_name": "Children's Hospital of Eastern Ontario",
+                "ror": "https://ror.org/05nsbhw27",
+                "country_code": "CA",
+                "type": "healthcare",
+                "lineage": [
+                  "https://openalex.org/I2799330578"
+                ]
+              }
+            ],
+            "countries": [
+              "CA"
+            ],
+            "is_corresponding": false,
+            "raw_author_name": "Margaret Sampson",
+            "raw_affiliation_strings": [
+              "Children's Hospital of Eastern Ontario, 401 Smyth Road, Ottawa, Ontario K1H 8L1, Canada"
+            ],
+            "raw_orcid": "https://orcid.org/0000-0003-2550-9893",
+            "affiliations": [
+              {
+                "raw_affiliation_string": "Children's Hospital of Eastern Ontario, 401 Smyth Road, Ottawa, Ontario K1H 8L1, Canada",
+                "institution_ids": [
+                  "https://openalex.org/I2799330578"
+                ]
+              }
+            ]
+          },
+          {
+            "author_position": "middle",
+            "author": {
+              "id": "https://openalex.org/A5033293589",
+              "display_name": "Douglas M Salzwedel",
+              "orcid": "https://orcid.org/0000-0003-0115-862X"
+            },
+            "institutions": [],
+            "countries": [],
+            "is_corresponding": false,
+            "raw_author_name": "Douglas M. Salzwedel",
+            "raw_affiliation_strings": [
+              "1003 Pacific Street, Ste. 1106, Vancouver, British Columbia V6E 4P2, Canada"
+            ],
+            "raw_orcid": null,
+            "affiliations": [
+              {
+                "raw_affiliation_string": "1003 Pacific Street, Ste. 1106, Vancouver, British Columbia V6E 4P2, Canada",
+                "institution_ids": []
+              }
+            ]
+          },
+          {
+            "author_position": "middle",
+            "author": {
+              "id": "https://openalex.org/A5021810096",
+              "display_name": "Elise Cogo",
+              "orcid": "https://orcid.org/0000-0003-2480-3652"
+            },
+            "institutions": [],
+            "countries": [],
+            "is_corresponding": false,
+            "raw_author_name": "Elise Cogo",
+            "raw_affiliation_strings": [
+              "55 Livingston Road, Ste. 1014, Scarborough, Ontario M1E 1K9, Canada"
+            ],
+            "raw_orcid": null,
+            "affiliations": [
+              {
+                "raw_affiliation_string": "55 Livingston Road, Ste. 1014, Scarborough, Ontario M1E 1K9, Canada",
+                "institution_ids": []
+              }
+            ]
+          },
+          {
+            "author_position": "middle",
+            "author": {
+              "id": "https://openalex.org/A5059334403",
+              "display_name": "Vicki Foerster",
+              "orcid": "https://orcid.org/0000-0002-7102-5091"
+            },
+            "institutions": [],
+            "countries": [],
+            "is_corresponding": false,
+            "raw_author_name": "Vicki Foerster",
+            "raw_affiliation_strings": [
+              "Porter Road, Oxford Station, Ontario K0G 1T, Canada"
+            ],
+            "raw_orcid": "https://orcid.org/0000-0002-7102-5091",
+            "affiliations": [
+              {
+                "raw_affiliation_string": "Porter Road, Oxford Station, Ontario K0G 1T, Canada",
+                "institution_ids": []
+              }
+            ]
+          },
+          {
+            "author_position": "last",
+            "author": {
+              "id": "https://openalex.org/A5028720464",
+              "display_name": "Carol Lefebvre",
+              "orcid": "https://orcid.org/0000-0003-2052-9529"
+            },
+            "institutions": [
+              {
+                "id": "https://openalex.org/I72054575",
+                "display_name": "Cochrane",
+                "ror": "https://ror.org/00dbkrq51",
+                "country_code": "GB",
+                "type": "nonprofit",
+                "lineage": [
+                  "https://openalex.org/I72054575"
+                ]
+              }
+            ],
+            "countries": [
+              "GB"
+            ],
+            "is_corresponding": false,
+            "raw_author_name": "Carol Lefebvre",
+            "raw_affiliation_strings": [
+              "Cochrane Information Retrieval Methods Group; Lefebvre Associates Ltd, Manor Farm Cottage, Thrupp, Kidlington, OX5 1JY, UK",
+              "Lefebvre Associates Ltd, Manor Farm Cottage, Thrupp, Kidlington, OX5 1JY, UK",
+              "Cochrane Information Retrieval Methods Group"
+            ],
+            "raw_orcid": null,
+            "affiliations": [
+              {
+                "raw_affiliation_string": "Cochrane Information Retrieval Methods Group; Lefebvre Associates Ltd, Manor Farm Cottage, Thrupp, Kidlington, OX5 1JY, UK",
+                "institution_ids": [
+                  "https://openalex.org/I72054575"
+                ]
+              },
+              {
+                "raw_affiliation_string": "Lefebvre Associates Ltd, Manor Farm Cottage, Thrupp, Kidlington, OX5 1JY, UK",
+                "institution_ids": []
+              },
+              {
+                "raw_affiliation_string": "Cochrane Information Retrieval Methods Group",
+                "institution_ids": []
+              }
+            ]
+          }
+        ],
+        "institutions": [],
+        "countries_distinct_count": 2,
+        "institutions_distinct_count": 3,
+        "corresponding_author_ids": [
+          "https://openalex.org/A5081964815"
+        ],
+        "corresponding_institution_ids": [
+          "https://openalex.org/I153718931"
+        ],
+        "apc_list": {
+          "value": 3870,
+          "currency": "USD",
+          "value_usd": 3870
+        },
+        "apc_paid": {
+          "value": 3870,
+          "currency": "USD",
+          "value_usd": 3870
+        },
+        "fwci": 115.4651,
+        "has_fulltext": false,
+        "cited_by_count": 5681,
+        "citation_normalized_percentile": {
+          "value": 0.9996,
+          "is_in_top_1_percent": true,
+          "is_in_top_10_percent": true
+        },
+        "cited_by_percentile_year": {
+          "min": 99,
+          "max": 100
+        },
+        "biblio": {
+          "volume": "75",
+          "issue": null,
+          "first_page": "40",
+          "last_page": "46"
+        },
+        "is_retracted": false,
+        "is_paratext": false,
+        "is_xpac": false,
+        "primary_topic": {
+          "id": "https://openalex.org/T10206",
+          "display_name": "Meta-analysis and systematic reviews",
+          "score": 0.7759,
+          "subfield": {
+            "id": "https://openalex.org/subfields/1804",
+            "display_name": "Statistics, Probability and Uncertainty"
+          },
+          "field": {
+            "id": "https://openalex.org/fields/18",
+            "display_name": "Decision Sciences"
+          },
+          "domain": {
+            "id": "https://openalex.org/domains/2",
+            "display_name": "Social Sciences"
+          }
+        },
+        "topics": [
+          {
+            "id": "https://openalex.org/T10206",
+            "display_name": "Meta-analysis and systematic reviews",
+            "score": 0.7759,
+            "subfield": {
+              "id": "https://openalex.org/subfields/1804",
+              "display_name": "Statistics, Probability and Uncertainty"
+            },
+            "field": {
+              "id": "https://openalex.org/fields/18",
+              "display_name": "Decision Sciences"
+            },
+            "domain": {
+              "id": "https://openalex.org/domains/2",
+              "display_name": "Social Sciences"
+            }
+          },
+          {
+            "id": "https://openalex.org/T11744",
+            "display_name": "Health Sciences Research and Education",
+            "score": 0.0677,
+            "subfield": {
+              "id": "https://openalex.org/subfields/3600",
+              "display_name": "General Health Professions"
+            },
+            "field": {
+              "id": "https://openalex.org/fields/36",
+              "display_name": "Health Professions"
+            },
+            "domain": {
+              "id": "https://openalex.org/domains/4",
+              "display_name": "Health Sciences"
+            }
+          },
+          {
+            "id": "https://openalex.org/T10629",
+            "display_name": "Health Policy Implementation Science",
+            "score": 0.0215,
+            "subfield": {
+              "id": "https://openalex.org/subfields/3600",
+              "display_name": "General Health Professions"
+            },
+            "field": {
+              "id": "https://openalex.org/fields/36",
+              "display_name": "Health Professions"
+            },
+            "domain": {
+              "id": "https://openalex.org/domains/4",
+              "display_name": "Health Sciences"
+            }
+          }
+        ],
+        "keywords": [
+          {
+            "id": "https://openalex.org/keywords/checklist",
+            "display_name": "Checklist",
+            "score": 0.6732
+          },
+          {
+            "id": "https://openalex.org/keywords/guideline",
+            "display_name": "Guideline",
+            "score": 0.6629
+          },
+          {
+            "id": "https://openalex.org/keywords/medline",
+            "display_name": "MEDLINE",
+            "score": 0.5825
+          },
+          {
+            "id": "https://openalex.org/keywords/evidence-based-medicine",
+            "display_name": "Evidence-based medicine",
+            "score": 0.4772
+          },
+          {
+            "id": "https://openalex.org/keywords/computer-science",
+            "display_name": "Computer science",
+            "score": 0.4604
+          },
+          {
+            "id": "https://openalex.org/keywords/information-retrieval",
+            "display_name": "Information retrieval",
+            "score": 0.4381
+          },
+          {
+            "id": "https://openalex.org/keywords/peer-review",
+            "display_name": "Peer review",
+            "score": 0.4182
+          },
+          {
+            "id": "https://openalex.org/keywords/systematic-review",
+            "display_name": "Systematic review",
+            "score": 0.413
+          },
+          {
+            "id": "https://openalex.org/keywords/world-wide-web",
+            "display_name": "World Wide Web",
+            "score": 0.3696
+          },
+          {
+            "id": "https://openalex.org/keywords/medicine",
+            "display_name": "Medicine",
+            "score": 0.3614
+          },
+          {
+            "id": "https://openalex.org/keywords/psychology",
+            "display_name": "Psychology",
+            "score": 0.3053
+          },
+          {
+            "id": "https://openalex.org/keywords/political-science",
+            "display_name": "Political science",
+            "score": 0.1483
+          }
+        ],
+        "concepts": [
+          {
+            "id": "https://openalex.org/C2779356329",
+            "wikidata": "https://www.wikidata.org/wiki/Q922625",
+            "display_name": "Checklist",
+            "level": 2,
+            "score": 0.6732
+          },
+          {
+            "id": "https://openalex.org/C2780182762",
+            "wikidata": "https://www.wikidata.org/wiki/Q1630279",
+            "display_name": "Guideline",
+            "level": 2,
+            "score": 0.6629
+          },
+          {
+            "id": "https://openalex.org/C2779473830",
+            "wikidata": "https://www.wikidata.org/wiki/Q1540899",
+            "display_name": "MEDLINE",
+            "level": 2,
+            "score": 0.5825
+          },
+          {
+            "id": "https://openalex.org/C19648533",
+            "wikidata": "https://www.wikidata.org/wiki/Q691640",
+            "display_name": "Evidence-based medicine",
+            "level": 3,
+            "score": 0.4772
+          },
+          {
+            "id": "https://openalex.org/C41008148",
+            "wikidata": "https://www.wikidata.org/wiki/Q21198",
+            "display_name": "Computer science",
+            "level": 0,
+            "score": 0.4604
+          },
+          {
+            "id": "https://openalex.org/C23123220",
+            "wikidata": "https://www.wikidata.org/wiki/Q816826",
+            "display_name": "Information retrieval",
+            "level": 1,
+            "score": 0.4381
+          },
+          {
+            "id": "https://openalex.org/C138368954",
+            "wikidata": "https://www.wikidata.org/wiki/Q215028",
+            "display_name": "Peer review",
+            "level": 2,
+            "score": 0.4182
+          },
+          {
+            "id": "https://openalex.org/C189708586",
+            "wikidata": "https://www.wikidata.org/wiki/Q1504425",
+            "display_name": "Systematic review",
+            "level": 3,
+            "score": 0.413
+          },
+          {
+            "id": "https://openalex.org/C136764020",
+            "wikidata": "https://www.wikidata.org/wiki/Q466",
+            "display_name": "World Wide Web",
+            "level": 1,
+            "score": 0.3696
+          },
+          {
+            "id": "https://openalex.org/C71924100",
+            "wikidata": "https://www.wikidata.org/wiki/Q11190",
+            "display_name": "Medicine",
+            "level": 0,
+            "score": 0.3614
+          },
+          {
+            "id": "https://openalex.org/C15744967",
+            "wikidata": "https://www.wikidata.org/wiki/Q9418",
+            "display_name": "Psychology",
+            "level": 0,
+            "score": 0.3053
+          },
+          {
+            "id": "https://openalex.org/C17744445",
+            "wikidata": "https://www.wikidata.org/wiki/Q36442",
+            "display_name": "Political science",
+            "level": 0,
+            "score": 0.1483
+          },
+          {
+            "id": "https://openalex.org/C199539241",
+            "wikidata": "https://www.wikidata.org/wiki/Q7748",
+            "display_name": "Law",
+            "level": 1,
+            "score": 0
+          },
+          {
+            "id": "https://openalex.org/C142724271",
+            "wikidata": "https://www.wikidata.org/wiki/Q7208",
+            "display_name": "Pathology",
+            "level": 1,
+            "score": 0
+          },
+          {
+            "id": "https://openalex.org/C180747234",
+            "wikidata": "https://www.wikidata.org/wiki/Q23373",
+            "display_name": "Cognitive psychology",
+            "level": 1,
+            "score": 0
+          }
+        ],
+        "mesh": [
+          {
+            "descriptor_ui": "D006801",
+            "descriptor_name": "Humans",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D006801",
+            "descriptor_name": "Humans",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D006801",
+            "descriptor_name": "Humans",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D010380",
+            "descriptor_name": "Peer Review",
+            "qualifier_ui": "Q000379",
+            "qualifier_name": "methods",
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D010380",
+            "descriptor_name": "Peer Review",
+            "qualifier_ui": "Q000379",
+            "qualifier_name": "methods",
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D010380",
+            "descriptor_name": "Peer Review",
+            "qualifier_ui": "Q000379",
+            "qualifier_name": "methods",
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D012196",
+            "descriptor_name": "Review Literature as Topic",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": true
+          },
+          {
+            "descriptor_ui": "D012196",
+            "descriptor_name": "Review Literature as Topic",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": true
+          },
+          {
+            "descriptor_ui": "D012196",
+            "descriptor_name": "Review Literature as Topic",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": true
+          },
+          {
+            "descriptor_ui": "D013673",
+            "descriptor_name": "Technology Assessment, Biomedical",
+            "qualifier_ui": "Q000379",
+            "qualifier_name": "methods",
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D013673",
+            "descriptor_name": "Technology Assessment, Biomedical",
+            "qualifier_ui": "Q000379",
+            "qualifier_name": "methods",
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D013673",
+            "descriptor_name": "Technology Assessment, Biomedical",
+            "qualifier_ui": "Q000379",
+            "qualifier_name": "methods",
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D016208",
+            "descriptor_name": "Databases, Factual",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D016208",
+            "descriptor_name": "Databases, Factual",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D016208",
+            "descriptor_name": "Databases, Factual",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D016239",
+            "descriptor_name": "MEDLINE",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D016239",
+            "descriptor_name": "MEDLINE",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D016239",
+            "descriptor_name": "MEDLINE",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D016247",
+            "descriptor_name": "Information Storage and Retrieval",
+            "qualifier_ui": "Q000379",
+            "qualifier_name": "methods",
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D016247",
+            "descriptor_name": "Information Storage and Retrieval",
+            "qualifier_ui": "Q000379",
+            "qualifier_name": "methods",
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D016247",
+            "descriptor_name": "Information Storage and Retrieval",
+            "qualifier_ui": "Q000379",
+            "qualifier_name": "methods",
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D017408",
+            "descriptor_name": "Guidelines as Topic",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": true
+          },
+          {
+            "descriptor_ui": "D017408",
+            "descriptor_name": "Guidelines as Topic",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": true
+          },
+          {
+            "descriptor_ui": "D017408",
+            "descriptor_name": "Guidelines as Topic",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": true
+          },
+          {
+            "descriptor_ui": "D019317",
+            "descriptor_name": "Evidence-Based Medicine",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D019317",
+            "descriptor_name": "Evidence-Based Medicine",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D019317",
+            "descriptor_name": "Evidence-Based Medicine",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": false
+          }
+        ],
+        "locations_count": 2,
+        "locations": [
+          {
+            "id": "doi:10.1016/j.jclinepi.2016.01.021",
+            "is_oa": true,
+            "landing_page_url": "https://doi.org/10.1016/j.jclinepi.2016.01.021",
+            "pdf_url": null,
+            "source": {
+              "id": "https://openalex.org/S64418186",
+              "display_name": "Journal of Clinical Epidemiology",
+              "issn_l": "0895-4356",
+              "issn": [
+                "0895-4356",
+                "1878-5921"
+              ],
+              "is_oa": false,
+              "is_in_doaj": false,
+              "is_core": true,
+              "host_organization": "https://openalex.org/P4310320990",
+              "host_organization_name": "Elsevier BV",
+              "host_organization_lineage": [
+                "https://openalex.org/P4310320990"
+              ],
+              "host_organization_lineage_names": [
+                "Elsevier BV"
+              ],
+              "type": "journal"
+            },
+            "license": "cc-by-nc-nd",
+            "license_id": "https://openalex.org/licenses/cc-by-nc-nd",
+            "version": "publishedVersion",
+            "is_accepted": true,
+            "is_published": true,
+            "raw_source_name": "Journal of Clinical Epidemiology",
+            "raw_type": "journal-article"
+          },
+          {
+            "id": "pmid:27005575",
+            "is_oa": false,
+            "landing_page_url": "https://pubmed.ncbi.nlm.nih.gov/27005575",
+            "pdf_url": null,
+            "source": {
+              "id": "https://openalex.org/S4306525036",
+              "display_name": "PubMed",
+              "issn_l": null,
+              "issn": null,
+              "is_oa": false,
+              "is_in_doaj": false,
+              "is_core": false,
+              "host_organization": "https://openalex.org/I1299303238",
+              "host_organization_name": "National Institutes of Health",
+              "host_organization_lineage": [
+                "https://openalex.org/I1299303238"
+              ],
+              "host_organization_lineage_names": [],
+              "type": "repository"
+            },
+            "license": null,
+            "license_id": null,
+            "version": "publishedVersion",
+            "is_accepted": true,
+            "is_published": true,
+            "raw_source_name": "Journal of clinical epidemiology",
+            "raw_type": null
+          }
+        ],
+        "best_oa_location": {
+          "id": "doi:10.1016/j.jclinepi.2016.01.021",
+          "is_oa": true,
+          "landing_page_url": "https://doi.org/10.1016/j.jclinepi.2016.01.021",
+          "pdf_url": null,
+          "source": {
+            "id": "https://openalex.org/S64418186",
+            "display_name": "Journal of Clinical Epidemiology",
+            "issn_l": "0895-4356",
+            "issn": [
+              "0895-4356",
+              "1878-5921"
+            ],
+            "is_oa": false,
+            "is_in_doaj": false,
+            "is_core": true,
+            "host_organization": "https://openalex.org/P4310320990",
+            "host_organization_name": "Elsevier BV",
+            "host_organization_lineage": [
+              "https://openalex.org/P4310320990"
+            ],
+            "host_organization_lineage_names": [
+              "Elsevier BV"
+            ],
+            "type": "journal"
+          },
+          "license": "cc-by-nc-nd",
+          "license_id": "https://openalex.org/licenses/cc-by-nc-nd",
+          "version": "publishedVersion",
+          "is_accepted": true,
+          "is_published": true,
+          "raw_source_name": "Journal of Clinical Epidemiology",
+          "raw_type": "journal-article"
+        },
+        "sustainable_development_goals": [],
+        "awards": [],
+        "funders": [],
+        "has_content": {
+          "grobid_xml": false,
+          "pdf": false
+        },
+        "content_urls": null,
+        "referenced_works_count": 11,
+        "referenced_works": [
+          "https://openalex.org/W1562929073",
+          "https://openalex.org/W1783530167",
+          "https://openalex.org/W1976863236",
+          "https://openalex.org/W1987609279",
+          "https://openalex.org/W2003774556",
+          "https://openalex.org/W2109450144",
+          "https://openalex.org/W2114232665",
+          "https://openalex.org/W2147469877",
+          "https://openalex.org/W3022903699",
+          "https://openalex.org/W4313371821",
+          "https://openalex.org/W6633548418"
+        ],
+        "related_works": [
+          "https://openalex.org/W4234875088",
+          "https://openalex.org/W2013796470",
+          "https://openalex.org/W1971633942",
+          "https://openalex.org/W2420514274",
+          "https://openalex.org/W4362687946",
+          "https://openalex.org/W2902805979",
+          "https://openalex.org/W2145923542",
+          "https://openalex.org/W4293224540",
+          "https://openalex.org/W1929023914",
+          "https://openalex.org/W3007693273"
+        ],
+        "abstract_inverted_index": {
+          "OBJECTIVE:": [
+            0
+          ],
+          "To": [
+            1
+          ],
+          "develop": [
+            2
+          ],
+          "an": [
+            3
+          ],
+          "evidence-based": [
+            4
+          ],
+          "guideline": [
+            5
+          ],
+          "for": [
+            6,
+            14,
+            74,
+            222
+          ],
+          "Peer": [
+            7
+          ],
+          "Review": [
+            8
+          ],
+          "of": [
+            9,
+            33,
+            56,
+            91,
+            107,
+            112,
+            152,
+            178,
+            199,
+            250
+          ],
+          "Electronic": [
+            10
+          ],
+          "Search": [
+            11
+          ],
+          "Strategies": [
+            12
+          ],
+          "(PRESS)": [
+            13
+          ],
+          "systematic": [
+            15
+          ],
+          "reviews": [
+            16
+          ],
+          "(SRs),": [
+            17
+          ],
+          "health": [
+            18
+          ],
+          "technology": [
+            19
+          ],
+          "assessments,": [
+            20
+          ],
+          "and": [
+            21,
+            35,
+            52,
+            84,
+            103,
+            157,
+            167,
+            170,
+            172,
+            229,
+            245
+          ],
+          "other": [
+            22,
+            137
+          ],
+          "evidence": [
+            23,
+            88
+          ],
+          "syntheses.": [
+            24
+          ],
+          "STUDY": [
+            25
+          ],
+          "DESIGN": [
+            26
+          ],
+          "AND": [
+            27
+          ],
+          "SETTING:": [
+            28
+          ],
+          "An": [
+            29,
+            201
+          ],
+          "SR,": [
+            30
+          ],
+          "Web-based": [
+            31,
+            110
+          ],
+          "survey": [
+            32,
+            111
+          ],
+          "experts,": [
+            34
+          ],
+          "consensus": [
+            36,
+            190
+          ],
+          "development": [
+            37,
+            140
+          ],
+          "forum": [
+            38
+          ],
+          "were": [
+            39,
+            72,
+            149
+          ],
+          "undertaken": [
+            40,
+            122
+          ],
+          "to": [
+            41,
+            53,
+            60,
+            76,
+            136,
+            182,
+            196,
+            243
+          ],
+          "identify": [
+            42,
+            100
+          ],
+          "checklists": [
+            43
+          ],
+          "that": [
+            44,
+            96,
+            117,
+            191
+          ],
+          "evaluated": [
+            45
+          ],
+          "or": [
+            46,
+            63
+          ],
+          "validated": [
+            47
+          ],
+          "electronic": [
+            48,
+            251
+          ],
+          "literature": [
+            49,
+            252
+          ],
+          "search": [
+            50,
+            61,
+            70,
+            101,
+            108,
+            126,
+            180,
+            253
+          ],
+          "strategies": [
+            51
+          ],
+          "determine": [
+            54
+          ],
+          "which": [
+            55,
+            209
+          ],
+          "their": [
+            57
+          ],
+          "elements": [
+            58,
+            71
+          ],
+          "related": [
+            59
+          ],
+          "quality": [
+            62
+          ],
+          "errors.": [
+            64
+          ],
+          "RESULTS:": [
+            65
+          ],
+          "Systematic": [
+            66
+          ],
+          "review:": [
+            67
+          ],
+          "No": [
+            68
+          ],
+          "new": [
+            69
+          ],
+          "identified": [
+            73
+          ],
+          "addition": [
+            75
+          ],
+          "the": [
+            77,
+            105,
+            124,
+            143,
+            153,
+            179,
+            197,
+            211,
+            247
+          ],
+          "existing": [
+            78
+          ],
+          "(2008-2010)": [
+            79
+          ],
+          "PRESS": [
+            80,
+            98,
+            146,
+            203,
+            215,
+            219,
+            225,
+            230,
+            237
+          ],
+          "2015": [
+            81,
+            204,
+            216,
+            220,
+            226,
+            231,
+            238
+          ],
+          "Evidence-Based": [
+            82,
+            217
+          ],
+          "Checklist,": [
+            83,
+            218
+          ],
+          "there": [
+            85,
+            188
+          ],
+          "was": [
+            86,
+            185,
+            189,
+            207
+          ],
+          "no": [
+            87
+          ],
+          "refuting": [
+            89
+          ],
+          "any": [
+            90
+          ],
+          "its": [
+            92
+          ],
+          "elements.": [
+            93
+          ],
+          "Results": [
+            94
+          ],
+          "suggested": [
+            95
+          ],
+          "structured": [
+            97
+          ],
+          "could": [
+            99
+          ],
+          "errors": [
+            102
+          ],
+          "improve": [
+            104,
+            246
+          ],
+          "selection": [
+            106
+          ],
+          "terms.": [
+            109
+          ],
+          "experts:": [
+            113
+          ],
+          "Most": [
+            114
+          ],
+          "respondents": [
+            115
+          ],
+          "felt": [
+            116
+          ],
+          "peer": [
+            118,
+            248
+          ],
+          "review": [
+            119,
+            249
+          ],
+          "should": [
+            120,
+            193,
+            241
+          ],
+          "be": [
+            121,
+            194
+          ],
+          "after": [
+            123
+          ],
+          "MEDLINE": [
+            125
+          ],
+          "had": [
+            127,
+            133
+          ],
+          "been": [
+            128,
+            134
+          ],
+          "prepared": [
+            129
+          ],
+          "but": [
+            130
+          ],
+          "before": [
+            131
+          ],
+          "it": [
+            132
+          ],
+          "translated": [
+            135
+          ],
+          "databases.": [
+            138
+          ],
+          "Consensus": [
+            139
+          ],
+          "forum:": [
+            141
+          ],
+          "Of": [
+            142
+          ],
+          "seven": [
+            144
+          ],
+          "original": [
+            145
+          ],
+          "elements,": [
+            147
+          ],
+          "six": [
+            148
+          ],
+          "retained:": [
+            150
+          ],
+          "translation": [
+            151,
+            177
+          ],
+          "research": [
+            154
+          ],
+          "question;": [
+            155
+          ],
+          "Boolean": [
+            156
+          ],
+          "proximity": [
+            158
+          ],
+          "operators;": [
+            159
+          ],
+          "subject": [
+            160
+          ],
+          "headings;": [
+            161
+          ],
+          "text": [
+            162
+          ],
+          "word": [
+            163
+          ],
+          "search;": [
+            164
+          ],
+          "spelling,": [
+            165
+          ],
+          "syntax": [
+            166
+          ],
+          "line": [
+            168
+          ],
+          "numbers;": [
+            169
+          ],
+          "limits": [
+            171
+          ],
+          "filters.": [
+            173
+          ],
+          "The": [
+            174,
+            236
+          ],
+          "seventh": [
+            175
+          ],
+          "(skilled": [
+            176
+          ],
+          "strategy": [
+            181
+          ],
+          "additional": [
+            183
+          ],
+          "databases)": [
+            184
+          ],
+          "removed,": [
+            186
+          ],
+          "as": [
+            187
+          ],
+          "this": [
+            192
+          ],
+          "left": [
+            195
+          ],
+          "discretion": [
+            198
+          ],
+          "searchers.": [
+            200
+          ],
+          "updated": [
+            202
+          ],
+          "Guideline": [
+            205,
+            232,
+            239
+          ],
+          "Statement": [
+            206,
+            240
+          ],
+          "developed,": [
+            208
+          ],
+          "includes": [
+            210
+          ],
+          "following": [
+            212
+          ],
+          "four": [
+            213
+          ],
+          "documents:": [
+            214
+          ],
+          "Recommendations": [
+            221
+          ],
+          "Librarian": [
+            223
+          ],
+          "Practice,": [
+            224
+          ],
+          "Implementation": [
+            227
+          ],
+          "Strategies,": [
+            228
+          ],
+          "Assessment": [
+            233
+          ],
+          "Form.": [
+            234
+          ],
+          "CONCLUSION:": [
+            235
+          ],
+          "help": [
+            242
+          ],
+          "guide": [
+            244
+          ],
+          "strategies.": [
+            254
+          ]
+        },
+        "counts_by_year": [
+          {
+            "year": 2026,
+            "cited_by_count": 527
+          },
+          {
+            "year": 2025,
+            "cited_by_count": 930
+          },
+          {
+            "year": 2024,
+            "cited_by_count": 1167
+          },
+          {
+            "year": 2023,
+            "cited_by_count": 847
+          },
+          {
+            "year": 2022,
+            "cited_by_count": 731
+          },
+          {
+            "year": 2021,
+            "cited_by_count": 614
+          },
+          {
+            "year": 2020,
+            "cited_by_count": 445
+          },
+          {
+            "year": 2019,
+            "cited_by_count": 207
+          },
+          {
+            "year": 2018,
+            "cited_by_count": 123
+          },
+          {
+            "year": 2017,
+            "cited_by_count": 73
+          },
+          {
+            "year": 2016,
+            "cited_by_count": 13
+          }
+        ],
+        "updated_date": "2026-07-10T07:45:09.275182",
+        "created_date": "2025-10-10T00:00:00"
+      }
+    ],
+    "group_by": []
+  }
+}

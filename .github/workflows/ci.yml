@@ -1,0 +1,49 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+# The Next.js app lives in app/, not at the repository root — the root of this
+# repo is the research project (R pilot, protocol, proposal), and the site is one
+# artefact of it.
+defaults:
+  run:
+    working-directory: app
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: app/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Type check
+        run: npm run type-check
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Build
+        run: npm run build
+        env:
+          NEXT_PUBLIC_BASE_PATH: ''
+
+      - name: Check the site's figures still match the pilot output
+        # src/data/findings.json is a copy of the pilot's own artefact. If the
+        # pilot is re-run and the copy is not refreshed, the site would keep
+        # displaying stale numbers while claiming they came from findings.json —
+        # which is the exact failure mode this project exists to talk about. Fail
+        # the build instead.
+        working-directory: .
+        run: diff -u pilot/results/findings.json app/src/data/findings.json

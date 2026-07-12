@@ -1,0 +1,235 @@
+{
+  "request": {
+    "endpoint": "works",
+    "params": {
+      "filter": "primary_topic.id:T10102|T13607|T13516|T11937|T10206|T10582|T10267|T10778|T13558|T13284|T11875,authorships.institutions.country_code:ca",
+      "group_by": "language",
+      "mailto": "ahmad.pub@gmail.com"
+    }
+  },
+  "retrieved_at_utc": "2026-07-11T12:32:59Z",
+  "payload": {
+    "meta": {
+      "count": 14873,
+      "db_response_time_ms": 14,
+      "page": 1,
+      "per_page": 200,
+      "groups_count": 29,
+      "x_query": {
+        "oql": "works where authorships.institutions.country_code is (ca)\n  and topic is (\n    T10102 or T10206 or T10267 or T10582 or T10778 or T11875 or T11937 or T13284\n    or T13516 or T13558 or T13607\n  )\ngroup by language",
+        "oqo": {
+          "get_rows": "works",
+          "filter_rows": [
+            {
+              "column_id": "authorships.institutions.country_code",
+              "value": "ca"
+            },
+            {
+              "join": "or",
+              "filters": [
+                {
+                  "column_id": "primary_topic.id",
+                  "value": "T10102"
+                },
+                {
+                  "column_id": "primary_topic.id",
+                  "value": "T10206"
+                },
+                {
+                  "column_id": "primary_topic.id",
+                  "value": "T10267"
+                },
+                {
+                  "column_id": "primary_topic.id",
+                  "value": "T10582"
+                },
+                {
+                  "column_id": "primary_topic.id",
+                  "value": "T10778"
+                },
+                {
+                  "column_id": "primary_topic.id",
+                  "value": "T11875"
+                },
+                {
+                  "column_id": "primary_topic.id",
+                  "value": "T11937"
+                },
+                {
+                  "column_id": "primary_topic.id",
+                  "value": "T13284"
+                },
+                {
+                  "column_id": "primary_topic.id",
+                  "value": "T13516"
+                },
+                {
+                  "column_id": "primary_topic.id",
+                  "value": "T13558"
+                },
+                {
+                  "column_id": "primary_topic.id",
+                  "value": "T13607"
+                }
+              ]
+            }
+          ],
+          "group_by": [
+            {
+              "column_id": "language"
+            }
+          ]
+        },
+        "url": "/works?filter=authorships.institutions.country_code:ca,primary_topic.id:T10102|T10206|T10267|T10582|T10778|T11875|T11937|T13284|T13516|T13558|T13607&group_by=language"
+      },
+      "cost_usd": 0.0001
+    },
+    "group_by": [
+      {
+        "key": "https://openalex.org/languages/en",
+        "key_display_name": "English",
+        "count": 14028
+      },
+      {
+        "key": "https://openalex.org/languages/fr",
+        "key_display_name": "French",
+        "count": 395
+      },
+      {
+        "key": "https://openalex.org/languages/de",
+        "key_display_name": "German",
+        "count": 79
+      },
+      {
+        "key": "https://openalex.org/languages/es",
+        "key_display_name": "Spanish",
+        "count": 72
+      },
+      {
+        "key": "https://openalex.org/languages/pt",
+        "key_display_name": "Portuguese",
+        "count": 18
+      },
+      {
+        "key": "https://openalex.org/languages/ja",
+        "key_display_name": "Japanese",
+        "count": 7
+      },
+      {
+        "key": "https://openalex.org/languages/nl",
+        "key_display_name": "Dutch",
+        "count": 5
+      },
+      {
+        "key": "https://openalex.org/languages/fi",
+        "key_display_name": "Finnish",
+        "count": 4
+      },
+      {
+        "key": "https://openalex.org/languages/he",
+        "key_display_name": "Hebrew",
+        "count": 4
+      },
+      {
+        "key": "https://openalex.org/languages/it",
+        "key_display_name": "Italian",
+        "count": 4
+      },
+      {
+        "key": "https://openalex.org/languages/no",
+        "key_display_name": "Norwegian",
+        "count": 3
+      },
+      {
+        "key": "https://openalex.org/languages/zh",
+        "key_display_name": "Chinese",
+        "count": 3
+      },
+      {
+        "key": "https://openalex.org/languages/ang",
+        "key_display_name": null,
+        "count": 2
+      },
+      {
+        "key": "https://openalex.org/languages/gl",
+        "key_display_name": "Galician",
+        "count": 2
+      },
+      {
+        "key": "https://openalex.org/languages/id",
+        "key_display_name": "Indonesian",
+        "count": 2
+      },
+      {
+        "key": "https://openalex.org/languages/ru",
+        "key_display_name": "Russian",
+        "count": 2
+      },
+      {
+        "key": "https://openalex.org/languages/bg",
+        "key_display_name": "Bulgarian",
+        "count": 1
+      },
+      {
+        "key": "https://openalex.org/languages/br",
+        "key_display_name": "Breton",
+        "count": 1
+      },
+      {
+        "key": "https://openalex.org/languages/ca",
+        "key_display_name": "Catalan",
+        "count": 1
+      },
+      {
+        "key": "https://openalex.org/languages/ceb",
+        "key_display_name": null,
+        "count": 1
+      },
+      {
+        "key": "https://openalex.org/languages/da",
+        "key_display_name": "Danish",
+        "count": 1
+      },
+      {
+        "key": "https://openalex.org/languages/eo",
+        "key_display_name": "Esperanto",
+        "count": 1
+      },
+      {
+        "key": "https://openalex.org/languages/et",
+        "key_display_name": "Estonian",
+        "count": 1
+      },
+      {
+        "key": "https://openalex.org/languages/hr",
+        "key_display_name": "Croatian",
+        "count": 1
+      },
+      {
+        "key": "https://openalex.org/languages/ht",
+        "key_display_name": "Haitian",
+        "count": 1
+      },
+      {
+        "key": "https://openalex.org/languages/hu",
+        "key_display_name": "Hungarian",
+        "count": 1
+      },
+      {
+        "key": "https://openalex.org/languages/lt",
+        "key_display_name": "Lithuanian",
+        "count": 1
+      },
+      {
+        "key": "https://openalex.org/languages/pl",
+        "key_display_name": "Polish",
+        "count": 1
+      },
+      {
+        "key": "https://openalex.org/languages/sv",
+        "key_display_name": "Swedish",
+        "count": 1
+      }
+    ]
+  }
+}

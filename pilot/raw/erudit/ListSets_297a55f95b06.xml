@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/
+                             http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+  <responseDate>2026-07-11T12:32:58Z</responseDate>
+  <request verb="ListSets" resumptionToken="X320091120/7">http://oai.prod.erudit.org:8073/fedora-oai-provider/request</request>
+<ListSets>
+<set>
+  <setSpec>erudit.revue.relier</setSpec>
+  <setName>RELIER: Revue interdisciplinaire d’études religieuses</setName>
+
+  <setDescription>
+    <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+      <dc:title>RELIER: Revue interdisciplinaire d’études religieuses</dc:title>
+      <dc:identifier>urn:eissn:2817-8513</dc:identifier>
+      <dc:identifier>https://www.erudit.org/revue/relier/</dc:identifier>
+      <dc:publisher>Institut d’études religieuses de l’Université de Montréal</dc:publisher>
+      <dc:subject xml:lang="fr">Sciences humaines et sociales</dc:subject>
+      <dc:subject xml:lang="en">Humanities and Social Sciences</dc:subject>
+      <dc:subject xml:lang="fr">Théologie</dc:subject>
+      <dc:subject xml:lang="en">Theology</dc:subject>
+    </oai_dc:dc>
+  </setDescription>
+</set>
+<set>
+  <setSpec>erudit.revue.monstrum</setSpec>
+  <setName>Monstrum</setName>
+
+  <setDescription>
+    <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+      <dc:title>Monstrum</dc:title>
+      <dc:identifier>urn:eissn:2561-5629</dc:identifier>
+      <dc:identifier>https://www.erudit.org/revue/monstrum/</dc:identifier>
+      <dc:publisher>Montréal Monstrum Society</dc:publisher>
+      <dc:description xml:lang="en">A description will soon be available!</dc:description>
+      <dc:subject xml:lang="fr">Arts</dc:subject>
+      <dc:subject xml:lang="en">Arts</dc:subject>
+      <dc:subject xml:lang="fr">Études littéraires</dc:subject>
+      <dc:subject xml:lang="en">Literary Studies</dc:subject>
+      <dc:subject xml:lang="fr">Sciences humaines et sociales</dc:subject>
+      <dc:subject xml:lang="en">Humanities and Social Sciences</dc:subject>
+    </oai_dc:dc>
+  </setDescription>
+</set>
+<set>
+  <setSpec>erudit.revue.olr</setSpec>
+  <setName>Ottawa Law Review / Revue de droit d’Ottawa</setName>
+
+  <setDescription>
+    <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+      <dc:title>Ottawa Law Review / Revue de droit d’Ottawa</dc:title>
+      <dc:identifier>urn:eissn:2816-7732</dc:identifier>
+      <dc:identifier>urn:issn:0048-2331</dc:identifier>
+      <dc:identifier>https://www.erudit.org/revue/olr/</dc:identifier>
+      <dc:publisher>Ottawa Law Review / Revue de droit d’Ottawa</dc:publisher>
+      <dc:description xml:lang="fr">A description will soon be available!</dc:description>
+      <dc:description xml:lang="en">A description will soon be available!</dc:description>
+      <dc:subject xml:lang="fr">Droit</dc:subject>
+      <dc:subject xml:lang="en">Law</dc:subject>
+    </oai_dc:dc>
+  </setDescription>
+</set>
+<set>
+  <setSpec>erudit.revue.jaed</setSpec>
+  <setName>Journal of Aboriginal Economic Development</setName>
+<setDescription><oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd"><dc:title>Journal of Aboriginal Economic Development</dc:title><dc:identifier>http://www.erudit.org/revue/jaed/</dc:identifier><dc:publisher>CANDO</dc:publisher><dc:subject lang="en">Economics</dc:subject><dc:subject lang="fr">Économie</dc:subject><dc:subject lang="en">Humanities and Social Sciences</dc:subject><dc:subject lang="fr">Sciences humaines et sociales</dc:subject><dc:subject lang="en">Political Science</dc:subject><dc:subject lang="fr">Sciences politiques</dc:subject></oai_dc:dc></setDescription></set>
+<set>
+  <setSpec>erudit.revue.aqelfs</setSpec>
+  <setName>La Revue de l’AQEFLS: Revue de l’Association québécoise des enseignants de français langue seconde</setName>
+
+  <setDescription>
+    <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+      <dc:title>La Revue de l’AQEFLS: Revue de l’Association québécoise des enseignants de français langue seconde</dc:title>
+      <dc:identifier>urn:eissn:2563-7800</dc:identifier>
+      <dc:identifier>https://www.erudit.org/revue/aqelfs/</dc:identifier>
+      <dc:publisher>Association québécoise des enseignants de français langue seconde</dc:publisher>
+      <dc:description xml:lang="fr">A description will soon be available!</dc:description>
+      <dc:subject xml:lang="fr">Études des langues</dc:subject>
+      <dc:subject xml:lang="en">Language Studies</dc:subject>
+    </oai_dc:dc>
+  </setDescription>
+</set>
+<set>
+  <setSpec>erudit.revue.cat</setSpec>
+  <setName>The Canadian Art Teacher / Enseigner les arts au Canada</setName>
+
+  <setDescription>
+    <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+      <dc:title>The Canadian Art Teacher / Enseigner les arts au Canada</dc:title>
+      <dc:identifier>urn:eissn:2817-5867</dc:identifier>
+      <dc:identifier>urn:issn:1701-8587</dc:identifier>
+      <dc:identifier>https://www.erudit.org/revue/cat/</dc:identifier>
+      <dc:publisher>Canadian Society for Education through Art / Société canadienne d’éducation par l’art</dc:publisher>
+      <dc:subject xml:lang="fr">Arts</dc:subject>
+      <dc:subject xml:lang="en">Arts</dc:subject>
+      <dc:subject xml:lang="fr">Éducation</dc:subject>
+      <dc:subject xml:lang="en">Education</dc:subject>
+    </oai_dc:dc>
+  </setDescription>
+</set>
+<set>
+  <setSpec>erudit.revue.climatoscope</setSpec>
+  <setName>Le Climatoscope: Portrait des avancées scientifiques sur les changements climatiques</setName>
+
+  <setDescription>
+    <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+      <dc:title>Le Climatoscope: Portrait des avancées scientifiques sur les changements climatiques</dc:title>
+      <dc:identifier>urn:eissn:2562-8011</dc:identifier>
+      <dc:identifier>urn:issn:2562-8003</dc:identifier>
+      <dc:identifier>https://www.erudit.org/revue/climatoscope/</dc:identifier>
+      <dc:publisher>Université de Sherbrooke - École de politique appliquée</dc:publisher>
+      <dc:subject xml:lang="fr">Eau et environnement</dc:subject>
+      <dc:subject xml:lang="en">Water and Environment</dc:subject>
+      <dc:subject xml:lang="fr">Génie</dc:subject>
+      <dc:subject xml:lang="en">Engineering</dc:subject>
+      <dc:subject xml:lang="fr">Sciences politiques</dc:subject>
+      <dc:subject xml:lang="en">Political Science</dc:subject>
+    </oai_dc:dc>
+  </setDescription>
+</set>
+<set>
+  <setSpec>erudit.revue.aequitas</setSpec>
+  <setName>Aequitas: Revue de développement humain, handicap et changement social / Aequitas: Journal of human development, disability, and social change</setName>
+
+  <setDescription>
+    <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+      <dc:title>Aequitas: Revue de développement humain, handicap et changement social / Aequitas: Journal of human development, disability, and social change</dc:title>
+      <dc:identifier>urn:eissn:2563-1276</dc:identifier>
+      <dc:identifier>urn:issn:2563-1268</dc:identifier>
+      <dc:identifier>https://www.erudit.org/revue/aequitas/</dc:identifier>
+      <dc:publisher>Réseau international sur le Processus de production du handicap (RIPPH)</dc:publisher>
+      <dc:subject xml:lang="fr">Sciences humaines et sociales</dc:subject>
+      <dc:subject xml:lang="en">Humanities and Social Sciences</dc:subject>
+      <dc:subject xml:lang="fr">Service social</dc:subject>
+      <dc:subject xml:lang="en">Social Work</dc:subject>
+      <dc:subject xml:lang="fr">Sociologie</dc:subject>
+      <dc:subject xml:lang="en">Sociology</dc:subject>
+    </oai_dc:dc>
+  </setDescription>
+</set>
+<set>
+  <setSpec>erudit.revue.percees</setSpec>
+  <setName>Percées: Explorations en arts vivants</setName>
+
+  <setDescription>
+    <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+      <dc:title>Percées: Explorations en arts vivants</dc:title>
+      <dc:identifier>urn:eissn:2563-660X</dc:identifier>
+      <dc:identifier>https://www.erudit.org/revue/percees/</dc:identifier>
+      <dc:publisher>Société québécoise d&apos;études théâtrales (SQET)</dc:publisher>
+      <dc:description xml:lang="fr">A description will soon be available!</dc:description>
+      <dc:subject xml:lang="fr">Arts</dc:subject>
+      <dc:subject xml:lang="en">Arts</dc:subject>
+    </oai_dc:dc>
+  </setDescription>
+</set>
+<set>
+  <setSpec>erudit.revue.prp</setSpec>
+  <setName>Petite revue de philosophie</setName>
+
+  <setDescription>
+    <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+      <dc:title>Petite revue de philosophie</dc:title>
+      <dc:identifier>urn:eissn:2817-3295</dc:identifier>
+      <dc:identifier>urn:issn:0709-4469</dc:identifier>
+      <dc:identifier>https://www.erudit.org/revue/prp/</dc:identifier>
+      <dc:publisher>Collège Édouard-Montpetit</dc:publisher>
+      <dc:subject xml:lang="fr">Philosophie</dc:subject>
+      <dc:subject xml:lang="en">Philosophy</dc:subject>
+    </oai_dc:dc>
+  </setDescription>
+</set>
+<set>
+  <setSpec>erudit.revue.reauto</setSpec>
+  <setName>Revue d’études autochtones</setName>
+
+  <setDescription>
+    <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+      <dc:title>Revue d’études autochtones</dc:title>
+      <dc:identifier>urn:eissn:2564-4955</dc:identifier>
+      <dc:identifier>urn:issn:2564-4947</dc:identifier>
+      <dc:identifier>https://www.erudit.org/revue/reauto/</dc:identifier>
+      <dc:publisher>Société Recherches autochtones au Québec</dc:publisher>
+      <dc:description xml:lang="fr">A description will soon be available!</dc:description>
+      <dc:subject xml:lang="fr">Anthropologie et ethnologie</dc:subject>
+      <dc:subject xml:lang="en">Anthropology and Ethnology</dc:subject>
+    </oai_dc:dc>
+  </setDescription>
+</set>
+<set>
+  <setSpec>erudit.revue.jrnshs</setSpec>
+  <setName>Journal of the Royal Nova Scotia Historical Society</setName>
+
+  <setDescription>
+    <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+      <dc:title>Journal of the Royal Nova Scotia Historical Society</dc:title>
+      <dc:identifier>urn:eissn:2816-833X</dc:identifier>
+      <dc:identifier>urn:issn:1486-5920</dc:identifier>
+      <dc:identifier>https://www.erudit.org/revue/jrnshs/</dc:identifier>
+      <dc:publisher>Royal Nova Scotia Historical Society</dc:publisher>
+      <dc:description xml:lang="en">A description will soon be available!</dc:description>
+      <dc:subject xml:lang="fr">Histoire</dc:subject>
+      <dc:subject xml:lang="en">History</dc:subject>
+    </oai_dc:dc>
+  </setDescription>
+</set>
+<set>
+  <setSpec>erudit.revue.interots</setSpec>
+  <setName>Intervention</setName>
+
+  <setDescription>
+    <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+      <dc:title>Intervention</dc:title>
+      <dc:identifier>urn:eissn:2564-2375</dc:identifier>
+      <dc:identifier>https://www.erudit.org/revue/interots/</dc:identifier>
+      <dc:publisher>Ordre des travailleurs sociaux et des thérapeutes conjugaux et familiaux du Québec (OTSTCFQ)</dc:publisher>
+      <dc:description xml:lang="fr">A description will soon be available!</dc:description>
+      <dc:subject xml:lang="fr">Service social</dc:subject>
+      <dc:subject xml:lang="en">Social Work</dc:subject>
+    </oai_dc:dc>
+  </setDescription>
+</set>
+<set>
+  <setSpec>erudit.revue.anthro</setSpec>
+  <setName>Anthropologica</setName>
+
+  <setDescription>
+    <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+      <dc:title>Anthropologica</dc:title>
+      <dc:identifier>urn:eissn:2292-3586</dc:identifier>
+      <dc:identifier>urn:issn:0003-5459</dc:identifier>
+      <dc:identifier>https://www.erudit.org/revue/anthro/</dc:identifier>
+      <dc:publisher>University of Victoria</dc:publisher>
+      <dc:description xml:lang="fr">A description will soon be available!</dc:description>
+      <dc:subject xml:lang="fr">Anthropologie et ethnologie</dc:subject>
+      <dc:subject xml:lang="en">Anthropology and Ethnology</dc:subject>
+    </oai_dc:dc>
+  </setDescription>
+</set>
+<set>
+  <setSpec>erudit.revue.fp</setSpec>
+  <setName>Formation et profession: Revue scientifique internationale en éducation</setName>
+
+  <setDescription>
+    <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+      <dc:title>Formation et profession: Revue scientifique internationale en éducation</dc:title>
+      <dc:identifier>urn:eissn:2368-9226</dc:identifier>
+      <dc:identifier>urn:issn:1718-8237</dc:identifier>
+      <dc:identifier>https://www.erudit.org/revue/fp/</dc:identifier>
+      <dc:publisher>Centre de recherche interuniversitaire sur la formation et la profession enseignante (CRIFPE)</dc:publisher>
+      <dc:subject xml:lang="fr">Éducation</dc:subject>
+      <dc:subject xml:lang="en">Education</dc:subject>
+    </oai_dc:dc>
+  </setDescription>
+</set>
+<set>
+  <setSpec>erudit.revue.analyses</setSpec>
+  <setName>Analyses: Revue de littératures franco-canadiennes et québécoise</setName>
+
+  <setDescription>
+    <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+      <dc:title>Analyses: Revue de littératures franco-canadiennes et québécoise</dc:title>
+      <dc:identifier>urn:eissn:1715-9261</dc:identifier>
+      <dc:identifier>https://www.erudit.org/revue/analyses/</dc:identifier>
+      <dc:publisher>Centre de recherche sur les francophonies canadiennes (CRCCF)</dc:publisher>
+      <dc:description xml:lang="fr">A description will soon be available!</dc:description>
+      <dc:subject xml:lang="fr">Études littéraires</dc:subject>
+      <dc:subject xml:lang="en">Literary Studies</dc:subject>
+    </oai_dc:dc>
+  </setDescription>
+</set>
+<set>
+  <setSpec>erudit.revue.cygnenoir</setSpec>
+  <setName>Cygne noir: Revue d&apos;exploration sémiotique</setName>
+
+  <setDescription>
+    <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+      <dc:title>Cygne noir: Revue d&apos;exploration sémiotique</dc:title>
+      <dc:identifier>urn:eissn:1929-090X</dc:identifier>
+      <dc:identifier>urn:issn:1929-0896</dc:identifier>
+      <dc:identifier>https://www.erudit.org/revue/cygnenoir/</dc:identifier>
+      <dc:publisher>Cygne noir</dc:publisher>
+      <dc:description xml:lang="fr">A description will soon be available!</dc:description>
+      <dc:subject xml:lang="fr">Sciences humaines et sociales</dc:subject>
+      <dc:subject xml:lang="en">Humanities and Social Sciences</dc:subject>
+      <dc:subject xml:lang="fr">Sémiologie</dc:subject>
+      <dc:subject xml:lang="en">Semiology</dc:subject>
+    </oai_dc:dc>
+  </setDescription>
+</set>
+<set>
+  <setSpec>erudit.revue.archeo</setSpec>
+  <setName>Archéologiques</setName>
+
+  <setDescription>
+    <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+      <dc:title>Archéologiques</dc:title>
+      <dc:identifier>urn:eissn:2564-2480</dc:identifier>
+      <dc:identifier>urn:issn:1190-9110</dc:identifier>
+      <dc:identifier>https://www.erudit.org/revue/archeo/</dc:identifier>
+      <dc:publisher>Associations des archéologues du Québec</dc:publisher>
+      <dc:description xml:lang="fr">A description will soon be available!</dc:description>
+      <dc:subject xml:lang="fr">Archéologie</dc:subject>
+      <dc:subject xml:lang="en">Archaeology</dc:subject>
+    </oai_dc:dc>
+  </setDescription>
+</set>
+<set>
+  <setSpec>erudit.revue.jcaa</setSpec>
+  <setName>Canadian acoustics: Journal of the Canadian Acoustical Association/Acoustique canadienne: Revue de l&apos;Association canadienne d&apos;acoustique</setName>
+<setDescription><oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd"><dc:title>Canadian acoustics: Journal of the Canadian Acoustical Association / Acoustique canadienne: Revue de l'Association canadienne d'acoustique</dc:title><dc:identifier>http://www.erudit.org/revue/jcaa/</dc:identifier><dc:publisher>Association canadienne d’acoustique / Canadian Acoustical Association</dc:publisher><dc:subject lang="en">Biology</dc:subject><dc:subject lang="fr">Biologie</dc:subject><dc:subject lang="en">Engineering</dc:subject><dc:subject lang="fr">Génie</dc:subject><dc:subject lang="en">Humanities and Social Sciences</dc:subject><dc:subject lang="fr">Sciences humaines et sociales</dc:subject></oai_dc:dc></setDescription></set>
+<set>
+  <setSpec>erudit.revue.histos</setSpec>
+  <setName>Histos: The Online Journal of Ancient Historiography</setName>
+<setDescription><oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd"><dc:title>Histos: The Online Journal of Ancient Historiography</dc:title><dc:identifier>http://www.erudit.org/revue/histos/</dc:identifier><dc:publisher>University of Alberta Library</dc:publisher><dc:subject lang="en">Literary Studies</dc:subject><dc:subject lang="fr">Études littéraires</dc:subject><dc:subject lang="en">History</dc:subject><dc:subject lang="fr">Histoire</dc:subject><dc:subject lang="en">Humanities and Social Sciences</dc:subject><dc:subject lang="fr">Sciences humaines et sociales</dc:subject></oai_dc:dc></setDescription></set>
+<set>
+  <setSpec>erudit.revue.joci</setSpec>
+  <setName>The journal of community informatics</setName>
+<setDescription><oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd"><dc:title>The journal of community informatics</dc:title><dc:identifier>http://www.erudit.org/revue/joci/</dc:identifier><dc:publisher>University of Waterloo Library</dc:publisher><dc:subject lang="en">Management</dc:subject><dc:subject lang="fr">Sciences de la gestion</dc:subject><dc:subject lang="en">Humanities and Social Sciences</dc:subject><dc:subject lang="fr">Sciences humaines et sociales</dc:subject></oai_dc:dc></setDescription></set>
+<set>
+  <setSpec>erudit.revue.ijoh</setSpec>
+  <setName>International Journal on Homelessness</setName>
+<setDescription><oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd"><dc:title>International Journal on Homelessness</dc:title><dc:identifier>http://www.erudit.org/revue/ijoh/</dc:identifier><dc:publisher>Western Libraries, University of Western Ontario</dc:publisher><dc:subject lang="en">Urban Studies</dc:subject><dc:subject lang="fr">Études urbaines</dc:subject><dc:subject lang="en">Health Sciences</dc:subject><dc:subject lang="fr">Sciences de la santé</dc:subject><dc:subject lang="en">Humanities and Social Sciences</dc:subject><dc:subject lang="fr">Sciences humaines et sociales</dc:subject></oai_dc:dc></setDescription></set>
+<set>
+  <setSpec>erudit.revue.carnet</setSpec>
+  <setName>Le Carnet. Histoires de l&apos;art</setName>
+<setDescription><oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd"><dc:title>Le carnet, histoires de l’art</dc:title><dc:identifier>http://www.erudit.org/revue/carnet/</dc:identifier><dc:publisher>UQAM</dc:publisher><dc:subject lang="en">Arts</dc:subject><dc:subject lang="fr">Arts</dc:subject><dc:subject lang="en">Women Studies</dc:subject><dc:subject lang="fr">Études féministes</dc:subject><dc:subject lang="en">History</dc:subject><dc:subject lang="fr">Histoire</dc:subject></oai_dc:dc></setDescription></set>
+<set>
+  <setSpec>erudit.revue.tnm</setSpec>
+  <setName>The Northern Mariner/Le marin du nord</setName>
+<setDescription><oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd"><dc:title>The Northern Mariner / Le marin du nord</dc:title><dc:identifier>http://www.erudit.org/revue/tnm/</dc:identifier><dc:publisher>Canadian Nautical Research Society and North American Society for Oceanic History</dc:publisher><dc:subject lang="en">Archaeology</dc:subject><dc:subject lang="fr">Archéologie</dc:subject><dc:subject lang="en">History</dc:subject><dc:subject lang="fr">Histoire</dc:subject><dc:subject lang="en">Humanities and Social Sciences</dc:subject><dc:subject lang="fr">Sciences humaines et sociales</dc:subject></oai_dc:dc></setDescription></set>
+<set>
+  <setSpec>erudit.revue.eei</setSpec>
+  <setName>Exceptionality Education International</setName>
+<setDescription><oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd"><dc:title>Exceptionality Education International</dc:title><dc:identifier>http://www.erudit.org/revue/eei/</dc:identifier><dc:publisher>University of Western Ontario</dc:publisher><dc:subject lang="en">Education</dc:subject><dc:subject lang="fr">Éducation</dc:subject></oai_dc:dc></setDescription></set>
+<set>
+  <setSpec>erudit.revue.philofed</setSpec>
+  <setName>Philosophy of Education</setName>
+<setDescription><oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd"><dc:title>Philosophy of Education</dc:title><dc:identifier>http://www.erudit.org/revue/philofed/</dc:identifier><dc:publisher>Philosophy of Education Society</dc:publisher><dc:subject lang="en">Education</dc:subject><dc:subject lang="fr">Éducation</dc:subject><dc:subject lang="en">Philosophy</dc:subject><dc:subject lang="fr">Philosophie</dc:subject></oai_dc:dc></setDescription></set>
+<set>
+  <setSpec>erudit.revue.rqdm</setSpec>
+  <setName>Revue québécoise de didactique des mathématiques</setName>
+<setDescription><oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd"><dc:title>Revue québécoise de didactique des mathématiques</dc:title><dc:identifier>http://www.erudit.org/revue/rqdm/</dc:identifier><dc:publisher>Université Laval</dc:publisher><dc:subject lang="en">Education</dc:subject><dc:subject lang="fr">Éducation</dc:subject><dc:subject lang="en">Mathematics</dc:subject><dc:subject lang="fr">Mathématiques</dc:subject></oai_dc:dc></setDescription></set>
+<set>
+  <setSpec>erudit.revue.interc</setSpec>
+  <setName>Interconnections: Journal of Posthumanism/Interconnexions: Revue de posthumanisme</setName>
+<setDescription><oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd"><dc:title>Interconnections: Journal of Posthumanism / Interconnexions: Revue de posthumanisme</dc:title><dc:identifier>http://www.erudit.org/revue/interc/</dc:identifier><dc:publisher>Posthumanism Research Institute</dc:publisher><dc:subject lang="en">Arts</dc:subject><dc:subject lang="fr">Arts</dc:subject><dc:subject lang="en">Philosophy</dc:subject><dc:subject lang="fr">Philosophie</dc:subject><dc:subject lang="en">Humanities and Social Sciences</dc:subject><dc:subject lang="fr">Sciences humaines et sociales</dc:subject></oai_dc:dc></setDescription></set>
+<set>
+  <setSpec>.revue.anthrosante</setSpec>
+  <setName>Anthropologie &amp; Santé</setName>
+</set>
+<resumptionToken cursor="350"/>
+</ListSets>
+</OAI-PMH>

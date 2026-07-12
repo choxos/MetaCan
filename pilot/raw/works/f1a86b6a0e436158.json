@@ -1,0 +1,1903 @@
+{
+  "request": {
+    "endpoint": "works",
+    "params": {
+      "filter": "title_and_abstract.search:\"open access\",authorships.institutions.country_code:ca,primary_topic.id:T10102|T13607|T13516|T11937|T10206|T10582|T10267|T10778|T13558|T13284|T11875",
+      "per-page": "1",
+      "mailto": "ahmad.pub@gmail.com"
+    }
+  },
+  "retrieved_at_utc": "2026-07-11T12:33:03Z",
+  "payload": {
+    "meta": {
+      "count": 634,
+      "db_response_time_ms": 19,
+      "page": 1,
+      "per_page": 1,
+      "groups_count": null,
+      "x_query": {
+        "oql": "works where authorships.institutions.country_code is (ca)\n  and title/abstract has (stemmed \"open access\")\n  and topic is (\n    T10102 or T10206 or T10267 or T10582 or T10778 or T11875 or T11937 or T13284\n    or T13516 or T13558 or T13607\n  )",
+        "oqo": {
+          "get_rows": "works",
+          "filter_rows": [
+            {
+              "column_id": "authorships.institutions.country_code",
+              "value": "ca"
+            },
+            {
+              "column_id": "title_and_abstract.search",
+              "value": "\"open access\"",
+              "operator": "has"
+            },
+            {
+              "join": "or",
+              "filters": [
+                {
+                  "column_id": "primary_topic.id",
+                  "value": "T10102"
+                },
+                {
+                  "column_id": "primary_topic.id",
+                  "value": "T10206"
+                },
+                {
+                  "column_id": "primary_topic.id",
+                  "value": "T10267"
+                },
+                {
+                  "column_id": "primary_topic.id",
+                  "value": "T10582"
+                },
+                {
+                  "column_id": "primary_topic.id",
+                  "value": "T10778"
+                },
+                {
+                  "column_id": "primary_topic.id",
+                  "value": "T11875"
+                },
+                {
+                  "column_id": "primary_topic.id",
+                  "value": "T11937"
+                },
+                {
+                  "column_id": "primary_topic.id",
+                  "value": "T13284"
+                },
+                {
+                  "column_id": "primary_topic.id",
+                  "value": "T13516"
+                },
+                {
+                  "column_id": "primary_topic.id",
+                  "value": "T13558"
+                },
+                {
+                  "column_id": "primary_topic.id",
+                  "value": "T13607"
+                }
+              ]
+            }
+          ],
+          "per_page": 1
+        },
+        "url": "/works?filter=authorships.institutions.country_code:ca,title_and_abstract.search:%22open access%22,primary_topic.id:T10102|T10206|T10267|T10582|T10778|T11875|T11937|T13284|T13516|T13558|T13607&per_page=1"
+      },
+      "cost_usd": 0.001
+    },
+    "results": [
+      {
+        "id": "https://openalex.org/W2089604928",
+        "doi": "https://doi.org/10.1371/journal.pbio.0040157",
+        "title": "Citation Advantage of Open Access Articles",
+        "display_name": "Citation Advantage of Open Access Articles",
+        "relevance_score": 462.5381,
+        "publication_year": 2006,
+        "publication_date": "2006-05-09",
+        "ids": {
+          "openalex": "https://openalex.org/W2089604928",
+          "doi": "https://doi.org/10.1371/journal.pbio.0040157",
+          "mag": "2089604928",
+          "pmid": "https://pubmed.ncbi.nlm.nih.gov/16683865"
+        },
+        "language": "en",
+        "primary_location": {
+          "id": "doi:10.1371/journal.pbio.0040157",
+          "is_oa": true,
+          "landing_page_url": "https://doi.org/10.1371/journal.pbio.0040157",
+          "pdf_url": "https://journals.plos.org/plosbiology/article/file?id=10.1371/journal.pbio.0040157&type=printable",
+          "source": {
+            "id": "https://openalex.org/S154343897",
+            "display_name": "PLoS Biology",
+            "issn_l": "1544-9173",
+            "issn": [
+              "1544-9173",
+              "1545-7885"
+            ],
+            "is_oa": true,
+            "is_in_doaj": true,
+            "is_core": true,
+            "host_organization": "https://openalex.org/P4310315706",
+            "host_organization_name": "Public Library of Science",
+            "host_organization_lineage": [
+              "https://openalex.org/P4310315706"
+            ],
+            "host_organization_lineage_names": [
+              "Public Library of Science"
+            ],
+            "type": "journal"
+          },
+          "license": "cc-by",
+          "license_id": "https://openalex.org/licenses/cc-by",
+          "version": "publishedVersion",
+          "is_accepted": true,
+          "is_published": true,
+          "raw_source_name": "PLoS Biology",
+          "raw_type": "journal-article"
+        },
+        "type": "article",
+        "indexed_in": [
+          "crossref",
+          "doaj",
+          "pubmed"
+        ],
+        "open_access": {
+          "is_oa": true,
+          "oa_status": "gold",
+          "oa_url": "https://journals.plos.org/plosbiology/article/file?id=10.1371/journal.pbio.0040157&type=printable",
+          "any_repository_has_fulltext": true
+        },
+        "authorships": [
+          {
+            "author_position": "first",
+            "author": {
+              "id": "https://openalex.org/A5032622638",
+              "display_name": "Günther Eysenbach",
+              "orcid": "https://orcid.org/0000-0001-6479-5330"
+            },
+            "institutions": [
+              {
+                "id": "https://openalex.org/I1325899441",
+                "display_name": "University Health Network",
+                "ror": "https://ror.org/042xt5161",
+                "country_code": "CA",
+                "type": "healthcare",
+                "lineage": [
+                  "https://openalex.org/I1325899441"
+                ]
+              },
+              {
+                "id": "https://openalex.org/I185261750",
+                "display_name": "University of Toronto",
+                "ror": "https://ror.org/03dbr7087",
+                "country_code": "CA",
+                "type": "education",
+                "lineage": [
+                  "https://openalex.org/I185261750"
+                ]
+              },
+              {
+                "id": "https://openalex.org/I4210150183",
+                "display_name": "eHealth Initiative",
+                "ror": "https://ror.org/04j2hyd53",
+                "country_code": "US",
+                "type": "nonprofit",
+                "lineage": [
+                  "https://openalex.org/I4210150183"
+                ]
+              }
+            ],
+            "countries": [
+              "CA",
+              "US"
+            ],
+            "is_corresponding": true,
+            "raw_author_name": "Gunther Eysenbach",
+            "raw_affiliation_strings": [
+              "Centre for Global eHealth Innovation, University Health Network, Toronto, Ontario, Canada. geysenba@uhnres.utoronto.ca",
+              "Department of Health Policy, Management and Evaluation, University of Toronto, Toronto, Ontario, Canada",
+              "Centre for Global eHealth Innovation, University Health Network"
+            ],
+            "raw_orcid": null,
+            "affiliations": [
+              {
+                "raw_affiliation_string": "Centre for Global eHealth Innovation, University Health Network, Toronto, Ontario, Canada. geysenba@uhnres.utoronto.ca",
+                "institution_ids": [
+                  "https://openalex.org/I1325899441"
+                ]
+              },
+              {
+                "raw_affiliation_string": "Department of Health Policy, Management and Evaluation, University of Toronto, Toronto, Ontario, Canada",
+                "institution_ids": [
+                  "https://openalex.org/I185261750"
+                ]
+              },
+              {
+                "raw_affiliation_string": "Centre for Global eHealth Innovation, University Health Network",
+                "institution_ids": [
+                  "https://openalex.org/I4210150183",
+                  "https://openalex.org/I1325899441"
+                ]
+              }
+            ]
+          }
+        ],
+        "institutions": [],
+        "countries_distinct_count": 2,
+        "institutions_distinct_count": 3,
+        "corresponding_author_ids": [
+          "https://openalex.org/A5032622638"
+        ],
+        "corresponding_institution_ids": [
+          "https://openalex.org/I1325899441",
+          "https://openalex.org/I185261750",
+          "https://openalex.org/I4210150183"
+        ],
+        "apc_list": {
+          "value": 5300,
+          "currency": "USD",
+          "value_usd": 5300
+        },
+        "apc_paid": {
+          "value": 5300,
+          "currency": "USD",
+          "value_usd": 5300
+        },
+        "fwci": 67.8023,
+        "has_fulltext": true,
+        "cited_by_count": 832,
+        "citation_normalized_percentile": {
+          "value": 0.9996,
+          "is_in_top_1_percent": true,
+          "is_in_top_10_percent": true
+        },
+        "cited_by_percentile_year": {
+          "min": 99,
+          "max": 100
+        },
+        "biblio": {
+          "volume": "4",
+          "issue": "5",
+          "first_page": "e157",
+          "last_page": "e157"
+        },
+        "is_retracted": false,
+        "is_paratext": false,
+        "is_xpac": false,
+        "primary_topic": {
+          "id": "https://openalex.org/T10102",
+          "display_name": "scientometrics and bibliometrics research",
+          "score": 0.999,
+          "subfield": {
+            "id": "https://openalex.org/subfields/1804",
+            "display_name": "Statistics, Probability and Uncertainty"
+          },
+          "field": {
+            "id": "https://openalex.org/fields/18",
+            "display_name": "Decision Sciences"
+          },
+          "domain": {
+            "id": "https://openalex.org/domains/2",
+            "display_name": "Social Sciences"
+          }
+        },
+        "topics": [
+          {
+            "id": "https://openalex.org/T10102",
+            "display_name": "scientometrics and bibliometrics research",
+            "score": 0.999,
+            "subfield": {
+              "id": "https://openalex.org/subfields/1804",
+              "display_name": "Statistics, Probability and Uncertainty"
+            },
+            "field": {
+              "id": "https://openalex.org/fields/18",
+              "display_name": "Decision Sciences"
+            },
+            "domain": {
+              "id": "https://openalex.org/domains/2",
+              "display_name": "Social Sciences"
+            }
+          },
+          {
+            "id": "https://openalex.org/T13976",
+            "display_name": "Web visibility and informetrics",
+            "score": 0.9874,
+            "subfield": {
+              "id": "https://openalex.org/subfields/1710",
+              "display_name": "Information Systems"
+            },
+            "field": {
+              "id": "https://openalex.org/fields/17",
+              "display_name": "Computer Science"
+            },
+            "domain": {
+              "id": "https://openalex.org/domains/3",
+              "display_name": "Physical Sciences"
+            }
+          }
+        ],
+        "keywords": [
+          {
+            "id": "https://openalex.org/keywords/citation",
+            "display_name": "Citation",
+            "score": 0.7266
+          },
+          {
+            "id": "https://openalex.org/keywords/confidence-interval",
+            "display_name": "Confidence interval",
+            "score": 0.6438
+          },
+          {
+            "id": "https://openalex.org/keywords/confounding",
+            "display_name": "Confounding",
+            "score": 0.6303
+          },
+          {
+            "id": "https://openalex.org/keywords/logistic-regression",
+            "display_name": "Logistic regression",
+            "score": 0.5293
+          },
+          {
+            "id": "https://openalex.org/keywords/bibliometrics",
+            "display_name": "Bibliometrics",
+            "score": 0.4466
+          },
+          {
+            "id": "https://openalex.org/keywords/demography",
+            "display_name": "Demography",
+            "score": 0.426
+          },
+          {
+            "id": "https://openalex.org/keywords/relative-risk",
+            "display_name": "Relative risk",
+            "score": 0.4233
+          },
+          {
+            "id": "https://openalex.org/keywords/medicine",
+            "display_name": "Medicine",
+            "score": 0.3842
+          },
+          {
+            "id": "https://openalex.org/keywords/library-science",
+            "display_name": "Library science",
+            "score": 0.3233
+          },
+          {
+            "id": "https://openalex.org/keywords/internal-medicine",
+            "display_name": "Internal medicine",
+            "score": 0.3184
+          },
+          {
+            "id": "https://openalex.org/keywords/computer-science",
+            "display_name": "Computer science",
+            "score": 0.1331
+          }
+        ],
+        "concepts": [
+          {
+            "id": "https://openalex.org/C2778805511",
+            "wikidata": "https://www.wikidata.org/wiki/Q1713",
+            "display_name": "Citation",
+            "level": 2,
+            "score": 0.7266
+          },
+          {
+            "id": "https://openalex.org/C44249647",
+            "wikidata": "https://www.wikidata.org/wiki/Q208498",
+            "display_name": "Confidence interval",
+            "level": 2,
+            "score": 0.6438
+          },
+          {
+            "id": "https://openalex.org/C77350462",
+            "wikidata": "https://www.wikidata.org/wiki/Q1125472",
+            "display_name": "Confounding",
+            "level": 2,
+            "score": 0.6303
+          },
+          {
+            "id": "https://openalex.org/C151956035",
+            "wikidata": "https://www.wikidata.org/wiki/Q1132755",
+            "display_name": "Logistic regression",
+            "level": 2,
+            "score": 0.5293
+          },
+          {
+            "id": "https://openalex.org/C178315738",
+            "wikidata": "https://www.wikidata.org/wiki/Q603441",
+            "display_name": "Bibliometrics",
+            "level": 2,
+            "score": 0.4466
+          },
+          {
+            "id": "https://openalex.org/C149923435",
+            "wikidata": "https://www.wikidata.org/wiki/Q37732",
+            "display_name": "Demography",
+            "level": 1,
+            "score": 0.426
+          },
+          {
+            "id": "https://openalex.org/C82789193",
+            "wikidata": "https://www.wikidata.org/wiki/Q2142611",
+            "display_name": "Relative risk",
+            "level": 3,
+            "score": 0.4233
+          },
+          {
+            "id": "https://openalex.org/C71924100",
+            "wikidata": "https://www.wikidata.org/wiki/Q11190",
+            "display_name": "Medicine",
+            "level": 0,
+            "score": 0.3842
+          },
+          {
+            "id": "https://openalex.org/C161191863",
+            "wikidata": "https://www.wikidata.org/wiki/Q199655",
+            "display_name": "Library science",
+            "level": 1,
+            "score": 0.3233
+          },
+          {
+            "id": "https://openalex.org/C126322002",
+            "wikidata": "https://www.wikidata.org/wiki/Q11180",
+            "display_name": "Internal medicine",
+            "level": 1,
+            "score": 0.3184
+          },
+          {
+            "id": "https://openalex.org/C41008148",
+            "wikidata": "https://www.wikidata.org/wiki/Q21198",
+            "display_name": "Computer science",
+            "level": 0,
+            "score": 0.1331
+          },
+          {
+            "id": "https://openalex.org/C144024400",
+            "wikidata": "https://www.wikidata.org/wiki/Q21201",
+            "display_name": "Sociology",
+            "level": 0,
+            "score": 0
+          }
+        ],
+        "mesh": [
+          {
+            "descriptor_ui": "D010506",
+            "descriptor_name": "Periodicals as Topic",
+            "qualifier_ui": "Q000191",
+            "qualifier_name": "economics",
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D010506",
+            "descriptor_name": "Periodicals as Topic",
+            "qualifier_ui": "Q000191",
+            "qualifier_name": "economics",
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D010506",
+            "descriptor_name": "Periodicals as Topic",
+            "qualifier_ui": "Q000191",
+            "qualifier_name": "economics",
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D010506",
+            "descriptor_name": "Periodicals as Topic",
+            "qualifier_ui": "Q000639",
+            "qualifier_name": "trends",
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D010506",
+            "descriptor_name": "Periodicals as Topic",
+            "qualifier_ui": "Q000639",
+            "qualifier_name": "trends",
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D010506",
+            "descriptor_name": "Periodicals as Topic",
+            "qualifier_ui": "Q000639",
+            "qualifier_name": "trends",
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D010506",
+            "descriptor_name": "Periodicals as Topic",
+            "qualifier_ui": "Q000706",
+            "qualifier_name": "statistics & numerical data",
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D010506",
+            "descriptor_name": "Periodicals as Topic",
+            "qualifier_ui": "Q000706",
+            "qualifier_name": "statistics & numerical data",
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D010506",
+            "descriptor_name": "Periodicals as Topic",
+            "qualifier_ui": "Q000706",
+            "qualifier_name": "statistics & numerical data",
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D011643",
+            "descriptor_name": "Publishing",
+            "qualifier_ui": "Q000191",
+            "qualifier_name": "economics",
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D011643",
+            "descriptor_name": "Publishing",
+            "qualifier_ui": "Q000191",
+            "qualifier_name": "economics",
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D011643",
+            "descriptor_name": "Publishing",
+            "qualifier_ui": "Q000191",
+            "qualifier_name": "economics",
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D011643",
+            "descriptor_name": "Publishing",
+            "qualifier_ui": "Q000639",
+            "qualifier_name": "trends",
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D011643",
+            "descriptor_name": "Publishing",
+            "qualifier_ui": "Q000639",
+            "qualifier_name": "trends",
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D011643",
+            "descriptor_name": "Publishing",
+            "qualifier_ui": "Q000639",
+            "qualifier_name": "trends",
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D011643",
+            "descriptor_name": "Publishing",
+            "qualifier_ui": "Q000706",
+            "qualifier_name": "statistics & numerical data",
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D011643",
+            "descriptor_name": "Publishing",
+            "qualifier_ui": "Q000706",
+            "qualifier_name": "statistics & numerical data",
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D011643",
+            "descriptor_name": "Publishing",
+            "qualifier_ui": "Q000706",
+            "qualifier_name": "statistics & numerical data",
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D015706",
+            "descriptor_name": "Bibliometrics",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": true
+          },
+          {
+            "descriptor_ui": "D015706",
+            "descriptor_name": "Bibliometrics",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": true
+          },
+          {
+            "descriptor_ui": "D015706",
+            "descriptor_name": "Bibliometrics",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": true
+          },
+          {
+            "descriptor_ui": "D016014",
+            "descriptor_name": "Linear Models",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D016014",
+            "descriptor_name": "Linear Models",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D016014",
+            "descriptor_name": "Linear Models",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D016017",
+            "descriptor_name": "Odds Ratio",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D016017",
+            "descriptor_name": "Odds Ratio",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D016017",
+            "descriptor_name": "Odds Ratio",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D017150",
+            "descriptor_name": "Public Sector",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": true
+          },
+          {
+            "descriptor_ui": "D017150",
+            "descriptor_name": "Public Sector",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": true
+          },
+          {
+            "descriptor_ui": "D017150",
+            "descriptor_name": "Public Sector",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": true
+          },
+          {
+            "descriptor_ui": "D020407",
+            "descriptor_name": "Internet",
+            "qualifier_ui": "Q000639",
+            "qualifier_name": "trends",
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D020407",
+            "descriptor_name": "Internet",
+            "qualifier_ui": "Q000639",
+            "qualifier_name": "trends",
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D020407",
+            "descriptor_name": "Internet",
+            "qualifier_ui": "Q000639",
+            "qualifier_name": "trends",
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D020407",
+            "descriptor_name": "Internet",
+            "qualifier_ui": "Q000706",
+            "qualifier_name": "statistics & numerical data",
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D020407",
+            "descriptor_name": "Internet",
+            "qualifier_ui": "Q000706",
+            "qualifier_name": "statistics & numerical data",
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D020407",
+            "descriptor_name": "Internet",
+            "qualifier_ui": "Q000706",
+            "qualifier_name": "statistics & numerical data",
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D035843",
+            "descriptor_name": "Biomedical Research",
+            "qualifier_ui": "Q000639",
+            "qualifier_name": "trends",
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D035843",
+            "descriptor_name": "Biomedical Research",
+            "qualifier_ui": "Q000639",
+            "qualifier_name": "trends",
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D035843",
+            "descriptor_name": "Biomedical Research",
+            "qualifier_ui": "Q000639",
+            "qualifier_name": "trends",
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D035843",
+            "descriptor_name": "Biomedical Research",
+            "qualifier_ui": "Q000706",
+            "qualifier_name": "statistics & numerical data",
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D035843",
+            "descriptor_name": "Biomedical Research",
+            "qualifier_ui": "Q000706",
+            "qualifier_name": "statistics & numerical data",
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D035843",
+            "descriptor_name": "Biomedical Research",
+            "qualifier_ui": "Q000706",
+            "qualifier_name": "statistics & numerical data",
+            "is_major_topic": false
+          }
+        ],
+        "locations_count": 5,
+        "locations": [
+          {
+            "id": "doi:10.1371/journal.pbio.0040157",
+            "is_oa": true,
+            "landing_page_url": "https://doi.org/10.1371/journal.pbio.0040157",
+            "pdf_url": "https://journals.plos.org/plosbiology/article/file?id=10.1371/journal.pbio.0040157&type=printable",
+            "source": {
+              "id": "https://openalex.org/S154343897",
+              "display_name": "PLoS Biology",
+              "issn_l": "1544-9173",
+              "issn": [
+                "1544-9173",
+                "1545-7885"
+              ],
+              "is_oa": true,
+              "is_in_doaj": true,
+              "is_core": true,
+              "host_organization": "https://openalex.org/P4310315706",
+              "host_organization_name": "Public Library of Science",
+              "host_organization_lineage": [
+                "https://openalex.org/P4310315706"
+              ],
+              "host_organization_lineage_names": [
+                "Public Library of Science"
+              ],
+              "type": "journal"
+            },
+            "license": "cc-by",
+            "license_id": "https://openalex.org/licenses/cc-by",
+            "version": "publishedVersion",
+            "is_accepted": true,
+            "is_published": true,
+            "raw_source_name": "PLoS Biology",
+            "raw_type": "journal-article"
+          },
+          {
+            "id": "pmid:16683865",
+            "is_oa": false,
+            "landing_page_url": "https://pubmed.ncbi.nlm.nih.gov/16683865",
+            "pdf_url": null,
+            "source": {
+              "id": "https://openalex.org/S4306525036",
+              "display_name": "PubMed",
+              "issn_l": null,
+              "issn": null,
+              "is_oa": false,
+              "is_in_doaj": false,
+              "is_core": false,
+              "host_organization": "https://openalex.org/I1299303238",
+              "host_organization_name": "National Institutes of Health",
+              "host_organization_lineage": [
+                "https://openalex.org/I1299303238"
+              ],
+              "host_organization_lineage_names": [],
+              "type": "repository"
+            },
+            "license": null,
+            "license_id": null,
+            "version": "publishedVersion",
+            "is_accepted": true,
+            "is_published": true,
+            "raw_source_name": "PLoS biology",
+            "raw_type": null
+          },
+          {
+            "id": "pmh:oai:RePEc:plo:pbio00:0040157",
+            "is_oa": false,
+            "landing_page_url": "https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.0040157",
+            "pdf_url": null,
+            "source": {
+              "id": "https://openalex.org/S4306401271",
+              "display_name": "RePEc: Research Papers in Economics",
+              "issn_l": null,
+              "issn": null,
+              "is_oa": false,
+              "is_in_doaj": false,
+              "is_core": false,
+              "host_organization": "https://openalex.org/I77793887",
+              "host_organization_name": "Federal Reserve Bank of St. Louis",
+              "host_organization_lineage": [
+                "https://openalex.org/I77793887"
+              ],
+              "host_organization_lineage_names": [],
+              "type": "repository"
+            },
+            "license": null,
+            "license_id": null,
+            "version": "submittedVersion",
+            "is_accepted": false,
+            "is_published": false,
+            "raw_source_name": null,
+            "raw_type": "article"
+          },
+          {
+            "id": "pmh:oai:doaj.org/article:3a0a89c0957449e09fdb1ddd38da472a",
+            "is_oa": true,
+            "landing_page_url": "https://doaj.org/article/3a0a89c0957449e09fdb1ddd38da472a",
+            "pdf_url": null,
+            "source": {
+              "id": "https://openalex.org/S4306401280",
+              "display_name": "DOAJ (DOAJ: Directory of Open Access Journals)",
+              "issn_l": null,
+              "issn": null,
+              "is_oa": false,
+              "is_in_doaj": false,
+              "is_core": false,
+              "host_organization": null,
+              "host_organization_name": null,
+              "host_organization_lineage": [],
+              "host_organization_lineage_names": [],
+              "type": "repository"
+            },
+            "license": "cc-by-sa",
+            "license_id": "https://openalex.org/licenses/cc-by-sa",
+            "version": "submittedVersion",
+            "is_accepted": false,
+            "is_published": false,
+            "raw_source_name": "PLoS Biology, Vol 4, Iss 5, p e157 (2006)",
+            "raw_type": "article"
+          },
+          {
+            "id": "pmh:oai:pubmedcentral.nih.gov:1459247",
+            "is_oa": true,
+            "landing_page_url": "https://www.ncbi.nlm.nih.gov/pmc/articles/1459247",
+            "pdf_url": null,
+            "source": {
+              "id": "https://openalex.org/S2764455111",
+              "display_name": "PubMed Central",
+              "issn_l": null,
+              "issn": null,
+              "is_oa": true,
+              "is_in_doaj": false,
+              "is_core": false,
+              "host_organization": "https://openalex.org/I1299303238",
+              "host_organization_name": "National Institutes of Health",
+              "host_organization_lineage": [
+                "https://openalex.org/I1299303238"
+              ],
+              "host_organization_lineage_names": [],
+              "type": "repository"
+            },
+            "license": "cc-by",
+            "license_id": "https://openalex.org/licenses/cc-by",
+            "version": "submittedVersion",
+            "is_accepted": false,
+            "is_published": false,
+            "raw_source_name": "PLoS Biol",
+            "raw_type": "Text"
+          }
+        ],
+        "best_oa_location": {
+          "id": "doi:10.1371/journal.pbio.0040157",
+          "is_oa": true,
+          "landing_page_url": "https://doi.org/10.1371/journal.pbio.0040157",
+          "pdf_url": "https://journals.plos.org/plosbiology/article/file?id=10.1371/journal.pbio.0040157&type=printable",
+          "source": {
+            "id": "https://openalex.org/S154343897",
+            "display_name": "PLoS Biology",
+            "issn_l": "1544-9173",
+            "issn": [
+              "1544-9173",
+              "1545-7885"
+            ],
+            "is_oa": true,
+            "is_in_doaj": true,
+            "is_core": true,
+            "host_organization": "https://openalex.org/P4310315706",
+            "host_organization_name": "Public Library of Science",
+            "host_organization_lineage": [
+              "https://openalex.org/P4310315706"
+            ],
+            "host_organization_lineage_names": [
+              "Public Library of Science"
+            ],
+            "type": "journal"
+          },
+          "license": "cc-by",
+          "license_id": "https://openalex.org/licenses/cc-by",
+          "version": "publishedVersion",
+          "is_accepted": true,
+          "is_published": true,
+          "raw_source_name": "PLoS Biology",
+          "raw_type": "journal-article"
+        },
+        "sustainable_development_goals": [
+          {
+            "id": "https://metadata.un.org/sdg/17",
+            "display_name": "Partnerships for the goals",
+            "score": 0.57
+          }
+        ],
+        "awards": [],
+        "funders": [],
+        "has_content": {
+          "pdf": false,
+          "grobid_xml": false
+        },
+        "content_urls": null,
+        "referenced_works_count": 15,
+        "referenced_works": [
+          "https://openalex.org/W1576570672",
+          "https://openalex.org/W1659541576",
+          "https://openalex.org/W1715687586",
+          "https://openalex.org/W1994530080",
+          "https://openalex.org/W1996356097",
+          "https://openalex.org/W2010053250",
+          "https://openalex.org/W2016698734",
+          "https://openalex.org/W2042879541",
+          "https://openalex.org/W2048034115",
+          "https://openalex.org/W2073202060",
+          "https://openalex.org/W2086496065",
+          "https://openalex.org/W2089745446",
+          "https://openalex.org/W2096345420",
+          "https://openalex.org/W2104772551",
+          "https://openalex.org/W2137725064"
+        ],
+        "related_works": [
+          "https://openalex.org/W4386031268",
+          "https://openalex.org/W2994176440",
+          "https://openalex.org/W2481749367",
+          "https://openalex.org/W2510575233",
+          "https://openalex.org/W2495367848",
+          "https://openalex.org/W830718730",
+          "https://openalex.org/W2939697310",
+          "https://openalex.org/W2083188054",
+          "https://openalex.org/W1975073195",
+          "https://openalex.org/W2318187771"
+        ],
+        "abstract_inverted_index": {
+          "Open": [
+            0
+          ],
+          "access": [
+            1
+          ],
+          "(OA)": [
+            2
+          ],
+          "to": [
+            3,
+            10,
+            210,
+            238,
+            287,
+            294,
+            316,
+            384
+          ],
+          "the": [
+            4,
+            8,
+            48,
+            54,
+            69,
+            153,
+            172,
+            179,
+            303,
+            312,
+            333,
+            378
+          ],
+          "research": [
+            5,
+            16,
+            139,
+            361,
+            393
+          ],
+          "literature": [
+            6
+          ],
+          "has": [
+            7
+          ],
+          "potential": [
+            9,
+            282
+          ],
+          "accelerate": [
+            11
+          ],
+          "recognition": [
+            12
+          ],
+          "and": [
+            13,
+            35,
+            43,
+            63,
+            93,
+            112,
+            122,
+            129,
+            155,
+            369,
+            390
+          ],
+          "dissemination": [
+            14,
+            389
+          ],
+          "of": [
+            15,
+            30,
+            33,
+            53,
+            57,
+            106,
+            117,
+            136,
+            145,
+            171,
+            178,
+            230,
+            232,
+            392
+          ],
+          "findings,": [
+            17
+          ],
+          "but": [
+            18
+          ],
+          "its": [
+            19
+          ],
+          "actual": [
+            20
+          ],
+          "effects": [
+            21
+          ],
+          "are": [
+            22,
+            365
+          ],
+          "controversial.": [
+            23
+          ],
+          "This": [
+            24
+          ],
+          "was": [
+            25,
+            235
+          ],
+          "a": [
+            26,
+            31,
+            276,
+            354
+          ],
+          "longitudinal": [
+            27
+          ],
+          "bibliometric": [
+            28
+          ],
+          "analysis": [
+            29
+          ],
+          "cohort": [
+            32
+          ],
+          "OA": [
+            34,
+            149,
+            180,
+            233,
+            284,
+            330,
+            345,
+            363,
+            381
+          ],
+          "non-OA": [
+            36,
+            159,
+            173,
+            204,
+            239,
+            288,
+            374
+          ],
+          "articles": [
+            37,
+            140,
+            150,
+            174,
+            181,
+            205,
+            234,
+            240,
+            285,
+            289,
+            364,
+            375
+          ],
+          "published": [
+            38,
+            326,
+            376
+          ],
+          "between": [
+            39,
+            68
+          ],
+          "June": [
+            40
+          ],
+          "8,": [
+            41
+          ],
+          "2004,": [
+            42,
+            46,
+            81
+          ],
+          "December": [
+            44
+          ],
+          "20,": [
+            45
+          ],
+          "in": [
+            47,
+            76,
+            86,
+            94,
+            127,
+            302,
+            353,
+            360,
+            377
+          ],
+          "same": [
+            49,
+            379
+          ],
+          "journal": [
+            50,
+            334,
+            355
+          ],
+          "(PNAS:": [
+            51
+          ],
+          "Proceedings": [
+            52
+          ],
+          "National": [
+            55
+          ],
+          "Academy": [
+            56
+          ],
+          "Sciences).": [
+            58
+          ],
+          "Article": [
+            59
+          ],
+          "characteristics": [
+            60
+          ],
+          "were": [
+            61,
+            66,
+            124,
+            141,
+            148,
+            158,
+            182,
+            206
+          ],
+          "extracted,": [
+            62
+          ],
+          "citation": [
+            64
+          ],
+          "data": [
+            65
+          ],
+          "compared": [
+            67,
+            237,
+            286
+          ],
+          "two": [
+            70
+          ],
+          "groups": [
+            71
+          ],
+          "at": [
+            72,
+            78
+          ],
+          "three": [
+            73
+          ],
+          "different": [
+            74
+          ],
+          "points": [
+            75
+          ],
+          "time:": [
+            77
+          ],
+          "\"quasi-baseline\"": [
+            79
+          ],
+          "(December": [
+            80
+          ],
+          "0-6": [
+            82
+          ],
+          "mo": [
+            83,
+            90,
+            98,
+            197,
+            306,
+            320
+          ],
+          "after": [
+            84,
+            91,
+            99,
+            167,
+            202,
+            307,
+            321
+          ],
+          "publication),": [
+            85,
+            92,
+            168,
+            203
+          ],
+          "April": [
+            87,
+            162
+          ],
+          "2005": [
+            88,
+            96,
+            163
+          ],
+          "(4-10": [
+            89
+          ],
+          "October": [
+            95,
+            258
+          ],
+          "(10-16": [
+            97
+          ],
+          "publication).": [
+            100
+          ],
+          "Potentially": [
+            101
+          ],
+          "confounding": [
+            102
+          ],
+          "variables,": [
+            103
+          ],
+          "including": [
+            104
+          ],
+          "number": [
+            105,
+            229
+          ],
+          "authors,": [
+            107
+          ],
+          "authors'": [
+            108
+          ],
+          "lifetime": [
+            109
+          ],
+          "publication": [
+            110,
+            308,
+            322
+          ],
+          "count": [
+            111
+          ],
+          "impact,": [
+            113
+          ],
+          "submission": [
+            114
+          ],
+          "track,": [
+            115
+          ],
+          "country": [
+            116
+          ],
+          "corresponding": [
+            118
+          ],
+          "author,": [
+            119,
+            154
+          ],
+          "funding": [
+            120
+          ],
+          "organization,": [
+            121
+          ],
+          "discipline,": [
+            123
+          ],
+          "adjusted": [
+            125
+          ],
+          "for": [
+            126,
+            281
+          ],
+          "logistic": [
+            128,
+            277
+          ],
+          "linear": [
+            130
+          ],
+          "multiple": [
+            131
+          ],
+          "regression": [
+            132,
+            278
+          ],
+          "models.": [
+            133
+          ],
+          "A": [
+            134
+          ],
+          "total": [
+            135
+          ],
+          "1,492": [
+            137
+          ],
+          "original": [
+            138
+          ],
+          "analyzed:": [
+            142
+          ],
+          "212": [
+            143
+          ],
+          "(14.2%": [
+            144
+          ],
+          "all": [
+            146
+          ],
+          "articles)": [
+            147
+          ],
+          "paid": [
+            151
+          ],
+          "by": [
+            152,
+            371,
+            387
+          ],
+          "1,280": [
+            156
+          ],
+          "(85.8%)": [
+            157
+          ],
+          "articles.": [
+            160,
+            346
+          ],
+          "In": [
+            161,
+            275
+          ],
+          "(mean": [
+            164,
+            199
+          ],
+          "206": [
+            165
+          ],
+          "d": [
+            166,
+            201
+          ],
+          "627": [
+            169
+          ],
+          "(49.0%)": [
+            170
+          ],
+          "versus": [
+            175,
+            247,
+            264
+          ],
+          "78": [
+            176
+          ],
+          "(36.8%)": [
+            177
+          ],
+          "not": [
+            183
+          ],
+          "cited": [
+            184,
+            296,
+            370
+          ],
+          "(relative": [
+            185
+          ],
+          "risk": [
+            186,
+            220
+          ],
+          "=": [
+            187,
+            194,
+            221,
+            245,
+            250,
+            253,
+            256,
+            262,
+            267,
+            270,
+            299
+          ],
+          "1.3": [
+            188
+          ],
+          "[95%": [
+            189
+          ],
+          "Confidence": [
+            190
+          ],
+          "Interval:": [
+            191
+          ],
+          "1.1-1.6];": [
+            192
+          ],
+          "p": [
+            193,
+            224,
+            255,
+            272
+          ],
+          "0.001).": [
+            195,
+            226,
+            274
+          ],
+          "6": [
+            196
+          ],
+          "later": [
+            198
+          ],
+          "288": [
+            200
+          ],
+          "still": [
+            207
+          ],
+          "more": [
+            208,
+            366
+          ],
+          "likely": [
+            209,
+            293,
+            383
+          ],
+          "be": [
+            211,
+            295
+          ],
+          "uncited": [
+            212
+          ],
+          "(non-OA:": [
+            213
+          ],
+          "172": [
+            214
+          ],
+          "[13.6%],": [
+            215
+          ],
+          "OA:": [
+            216
+          ],
+          "11": [
+            217
+          ],
+          "[5.2%];": [
+            218
+          ],
+          "relative": [
+            219
+          ],
+          "2.6": [
+            222
+          ],
+          "[1.4-4.7];": [
+            223
+          ],
+          "<": [
+            225,
+            273
+          ],
+          "The": [
+            227
+          ],
+          "average": [
+            228
+          ],
+          "citations": [
+            231
+          ],
+          "higher": [
+            236,
+            337
+          ],
+          "(April": [
+            241,
+            309
+          ],
+          "2005:": [
+            242,
+            259
+          ],
+          "1.5": [
+            243
+          ],
+          "[SD": [
+            244,
+            249,
+            261,
+            266
+          ],
+          "2.5]": [
+            246
+          ],
+          "1.2": [
+            248
+          ],
+          "2.0];": [
+            251
+          ],
+          "Z": [
+            252,
+            269
+          ],
+          "3.123;": [
+            254
+          ],
+          "0.002;": [
+            257
+          ],
+          "6.4": [
+            260
+          ],
+          "10.4]": [
+            263
+          ],
+          "4.5": [
+            265
+          ],
+          "4.9];": [
+            268
+          ],
+          "4.058;": [
+            271
+          ],
+          "model,": [
+            279
+          ],
+          "controlling": [
+            280
+          ],
+          "confounders,": [
+            283
+          ],
+          "remained": [
+            290
+          ],
+          "twice": [
+            291
+          ],
+          "as": [
+            292,
+            327
+          ],
+          "(odds": [
+            297
+          ],
+          "ratio": [
+            298,
+            314
+          ],
+          "2.1": [
+            300
+          ],
+          "[1.5-2.9])": [
+            301
+          ],
+          "first": [
+            304
+          ],
+          "4-10": [
+            305
+          ],
+          "2005),": [
+            310
+          ],
+          "with": [
+            311
+          ],
+          "odds": [
+            313
+          ],
+          "increasing": [
+            315
+          ],
+          "2.9": [
+            317
+          ],
+          "(1.5-5.5)": [
+            318
+          ],
+          "10-16": [
+            319
+          ],
+          "(October": [
+            323
+          ],
+          "2005).": [
+            324
+          ],
+          "Articles": [
+            325
+          ],
+          "an": [
+            328
+          ],
+          "immediate": [
+            329
+          ],
+          "article": [
+            331
+          ],
+          "on": [
+            332
+          ],
+          "site": [
+            335
+          ],
+          "have": [
+            336
+          ],
+          "impact": [
+            338
+          ],
+          "than": [
+            339,
+            373
+          ],
+          "self-archived": [
+            340
+          ],
+          "or": [
+            341
+          ],
+          "otherwise": [
+            342
+          ],
+          "openly": [
+            343
+          ],
+          "accessible": [
+            344
+          ],
+          "We": [
+            347
+          ],
+          "found": [
+            348
+          ],
+          "strong": [
+            349
+          ],
+          "evidence": [
+            350
+          ],
+          "that,": [
+            351
+          ],
+          "even": [
+            352
+          ],
+          "that": [
+            356
+          ],
+          "is": [
+            357,
+            382
+          ],
+          "widely": [
+            358
+          ],
+          "available": [
+            359
+          ],
+          "libraries,": [
+            362
+          ],
+          "immediately": [
+            367
+          ],
+          "recognized": [
+            368
+          ],
+          "peers": [
+            372
+          ],
+          "journal.": [
+            380
+          ],
+          "benefit": [
+            385
+          ],
+          "science": [
+            386
+          ],
+          "accelerating": [
+            388
+          ],
+          "uptake": [
+            391
+          ],
+          "findings.": [
+            394
+          ]
+        },
+        "counts_by_year": [
+          {
+            "year": 2026,
+            "cited_by_count": 14
+          },
+          {
+            "year": 2025,
+            "cited_by_count": 18
+          },
+          {
+            "year": 2024,
+            "cited_by_count": 27
+          },
+          {
+            "year": 2023,
+            "cited_by_count": 32
+          },
+          {
+            "year": 2022,
+            "cited_by_count": 32
+          },
+          {
+            "year": 2021,
+            "cited_by_count": 54
+          },
+          {
+            "year": 2020,
+            "cited_by_count": 67
+          },
+          {
+            "year": 2019,
+            "cited_by_count": 42
+          },
+          {
+            "year": 2018,
+            "cited_by_count": 38
+          },
+          {
+            "year": 2017,
+            "cited_by_count": 43
+          },
+          {
+            "year": 2016,
+            "cited_by_count": 41
+          },
+          {
+            "year": 2015,
+            "cited_by_count": 39
+          },
+          {
+            "year": 2014,
+            "cited_by_count": 45
+          },
+          {
+            "year": 2013,
+            "cited_by_count": 47
+          },
+          {
+            "year": 2012,
+            "cited_by_count": 46
+          }
+        ],
+        "updated_date": "2026-07-08T08:33:18.762332",
+        "created_date": "2025-10-10T00:00:00"
+      }
+    ],
+    "group_by": []
+  }
+}

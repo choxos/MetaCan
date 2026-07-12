@@ -1,0 +1,31 @@
+[SYSTEM PROMPT: the full contents of protocol/rubric.md, verbatim.]
+
+You are screening works for MetaCan, a map of Canadian metaresearch.
+
+Apply the rubric above to every record in the JSON array below. Return a JSON array
+with one object per work, conforming to protocol/screening-schema.json:
+
+  {"id": "W...", "tier": "T1|T2|T3|OUT", "genre": "...", "about_ca": true|false,
+   "confidence": "high|medium|low", "reason": "..."}
+
+Return the array and nothing else. No prose, no preamble, no code fences.
+Every input id must appear exactly once in the output.
+
+RECORDS:
+<<<CHUNK_JSON>>>
+
+--------------------------------------------------------------------------------
+NB, AND THIS IS THE POINT (DEVIATIONS.md D1):
+
+<<<CHUNK_JSON>>> was interpolated with SIX fields per work:
+
+    id, title, abstract, year, lang, type
+
+The rubric above tells the screener it will see EIGHT:
+
+    title, abstract, publication year, language, VENUE, OPENALEX TOPIC AND FIELD,
+    CANADIAN INSTITUTIONAL AFFILIATIONS, FUNDERS
+
+Venue, topic, field, affiliations and funders were WITHHELD. This file is archived
+as it was actually run, because archiving the prompt you meant to send is not
+archiving the prompt that produced your numbers.

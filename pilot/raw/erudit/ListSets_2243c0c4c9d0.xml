@@ -1,0 +1,944 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/
+                             http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+  <responseDate>2026-07-11T12:32:57Z</responseDate>
+  <request verb="ListSets" resumptionToken="X320091120/4">http://oai.prod.erudit.org:8073/fedora-oai-provider/request</request>
+<ListSets>
+<set>
+  <setSpec>erudit.revue.csi</setSpec>
+  <setName>Critical Studies in Improvisation / Études critiques en improvisation</setName>
+<setDescription><oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd"><dc:title>Critical Studies in Improvisation / Études critiques en improvisation</dc:title><dc:identifier>http://www.erudit.org/revue/csi/</dc:identifier><dc:publisher>University of Guelph College of Arts</dc:publisher><dc:subject lang="en">Arts</dc:subject><dc:subject lang="fr">Arts</dc:subject><dc:subject lang="en">Humanities and Social Sciences</dc:subject><dc:subject lang="fr">Sciences humaines et sociales</dc:subject></oai_dc:dc></setDescription></set>
+<set>
+  <setSpec>erudit.revue.ethiqueedufor</setSpec>
+  <setName>Éthique en éducation et en formation: Les dossiers du GREE</setName>
+
+  <setDescription>
+    <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+      <dc:title>Éthique en éducation et en formation: Les Dossiers du GREE</dc:title>
+      <dc:identifier>urn:eissn:2561-1488</dc:identifier>
+      <dc:identifier>https://www.erudit.org/revue/ethiqueedufor/</dc:identifier>
+      <dc:publisher>UQAM, Faculté des sciences de l’éducation</dc:publisher>
+      <dc:subject xml:lang="fr">Éducation</dc:subject>
+      <dc:subject xml:lang="en">Education</dc:subject>
+    </oai_dc:dc>
+  </setDescription>
+</set>
+<set>
+  <setSpec>erudit.revue.crs</setSpec>
+  <setName>Cahiers de recherche sociologique</setName>
+
+  <setDescription>
+    <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+      <dc:title>Cahiers de recherche sociologique</dc:title>
+      <dc:identifier>urn:eissn:1923-5771</dc:identifier>
+      <dc:identifier>urn:issn:0831-1048</dc:identifier>
+      <dc:identifier>https://www.erudit.org/revue/crs/</dc:identifier>
+      <dc:publisher>Cahiers de recherche sociologique</dc:publisher>
+      <dc:description xml:lang="fr">Cahiers de recherche sociologique est la revue du département de sociologie de l’Université du Québec à Montréal. 
+     Fondée en 1983, elle fait état des recherches sociologiques et des débats théoriques et méthodologiques contemporains. 
+     Elle constitue un espace pluraliste de réflexion critique ouvert aux sociologues et aux sociologies du monde entier.</dc:description>
+      <dc:description xml:lang="en">Cahiers de recherche sociologique is the journal of the Department of sociology at Université du Québec à Montreal. 
+     Founded in 1983, it brings out sociological researches as well as theoretical and methodological contemporary debates. 
+     The journal is a pluralistic space of critical debate open to sociologists throughout the world.</dc:description>
+      <dc:subject xml:lang="fr">Sociologie</dc:subject>
+      <dc:subject xml:lang="en">Sociology</dc:subject>
+    </oai_dc:dc>
+  </setDescription>
+</set>
+<set>
+  <setSpec>erudit.revue.npss</setSpec>
+  <setName>Nouvelles perspectives en sciences sociales: Revue internationale de systémique complexe et d&apos;études relationnelles</setName>
+
+  <setDescription>
+    <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+      <dc:title>Nouvelles perspectives en sciences sociales</dc:title>
+      <dc:identifier>urn:eissn:1918-7475</dc:identifier>
+      <dc:identifier>urn:issn:1712-8307</dc:identifier>
+      <dc:identifier>http://www.erudit.org/revue/npss/</dc:identifier>
+      <dc:publisher>Prise de parole</dc:publisher>
+      <dc:description xml:lang="fr">Depuis mars 2005, la revue Nouvelles perspectives en sciences sociales (NPSS) entend accompagner
+       les chercheurs qui s’aventurent dans de nouveaux espaces des sciences sociales. Dans cet espace pourront être diffusés les travaux
+       qui, sans évidemment sacrifier à la rigueur, osent proposer des analyses qui sont capables de surmonter des obstacles qui s’élèvent
+       devant les modélisations instituées. Elle ne se pose pas en rupture par rapport à ces modélisations. Elle en connaît la puissance. 
+       Mais cette reconnaissance ne lui suffit pas pour interdire qu’on affronte les modèles établis, qu’on les contourne ou qu’on s’en affranchisse. 
+       Car toute puissance porte en elle ses faiblesses, peut aussi bien propulser que handicaper, favoriser la découverte que l’empêcher. 
+       NPSS se veut ouverte à toutes les disciplines des sciences sociales, à chacune d’elles aussi bien qu’à leurs combinaisons. 
+       Tous les textes sont publiés en français.</dc:description>
+      <dc:description xml:lang="en">Since March 2005, the journal Nouvelles perspectives en sciences sociales (NPSS) has provided 
+     a forum for researchers venturing into new areas of social sciences. These areas include studies that, without sacrificing scientific 
+     rigor, put forward analyses that strive to overcome obstacles posed by the established models, not as a complete break from these 
+     models, which they recognize as being powerful. But such recognition does not prevent these studies from confronting the established 
+     models, from working around them or surpassing them. For all power contains the seeds of its own weakness; it can propel or hold back, 
+     foster discovery or prevent it. NPSS is open to all disciplines of the social sciences, individually or in combination. All texts are published in French.</dc:description>
+      <dc:subject xml:lang="fr">Sciences humaines et sociales</dc:subject>
+      <dc:subject xml:lang="en">Humanities and Social Sciences</dc:subject>
+    </oai_dc:dc>
+  </setDescription>
+</set>
+<set>
+  <setSpec>erudit.revue.histoire</setSpec>
+  <setName>Cahiers d&apos;histoire</setName>
+
+  <setDescription>
+    <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+      <dc:title>Cahiers d&apos;histoire</dc:title>
+      <dc:identifier>urn:eissn:1929-610X</dc:identifier>
+      <dc:identifier>urn:issn:0712-2330</dc:identifier>
+      <dc:identifier>http://www.erudit.org/revue/histoire/</dc:identifier>
+      <dc:publisher>Cahiers d&apos;histoire</dc:publisher>
+      <dc:description xml:lang="fr">La revue bisannuelle Les Cahiers d&apos;histoire a été fondée en 1981 au  département d&apos;histoire de l&apos;Université de Montréal. La diffusion  d&apos;articles scientifiques est sa vocation première, et ce, depuis les  tout débuts. Historiens chevronnés de l&apos;Antiquité, médiévistes,  modernistes, contemporanistes, archéologues, professeurs et étudiants  aux cycles supérieurs y livrent ici les résultats de leurs recherches. 
+ Le contenu de chaque numéro est soumis à un comité de lecture différent  dont la spécialisation se recoupe avec la thématique abordée.
+
+ Les Cahiers d&apos;histoire reçoivent l&apos;appui financier du département  d&apos;histoire de l&apos;Université de Montréal.</dc:description>
+      <dc:description xml:lang="en">Les Cahiers d&apos;histoire is a semi annually French language publication  first published in 1981 at the department of history of the Université  de Montréal. The dissemination of scientific knowledge in the field of  history is at the root of this enterprise. In the past three decades,  scholars studying Ancient history, the Middle Ages, the Early Modern and  Modern eras as well as archeologists, sociologists and linguists have  used Les Cahiers d&apos;histoire to publish the results of their research. 
+ The content of each issue is reviewed by a reading committee whose  services have been retained in function of the selected theme.
+
+ Les Cahiers d&apos;histoire receives financial support of the History  Department of the Université de Montréal.</dc:description>
+      <dc:subject xml:lang="fr">Histoire</dc:subject>
+      <dc:subject xml:lang="en">History</dc:subject>
+      <dc:subject xml:lang="fr">Sciences humaines et sociales</dc:subject>
+      <dc:subject xml:lang="en">Humanities and Social Sciences</dc:subject>
+    </oai_dc:dc>
+  </setDescription>
+</set>
+<set>
+  <setSpec>erudit.culture.lecture</setSpec>
+  <setName>Les Cahiers de lecture de L&apos;Action nationale</setName>
+
+  <setDescription>
+    <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+      <dc:title>Les Cahiers de lecture de L&apos;Action nationale</dc:title>
+      <dc:identifier>urn:eissn:1929-5561</dc:identifier>
+      <dc:identifier>urn:issn:1911-9372</dc:identifier>
+      <dc:identifier>http://www.erudit.org/culture/lecture/</dc:identifier>
+      <dc:publisher>Ligue d&apos;action nationale</dc:publisher>
+      <dc:subject xml:lang="fr">Sciences humaines et sociales</dc:subject>
+      <dc:subject xml:lang="en">Humanities and Social Sciences</dc:subject>
+    </oai_dc:dc>
+  </setDescription>
+</set>
+<set>
+  <setSpec>erudit.revue.mens</setSpec>
+  <setName>Mens: Revue d&apos;histoire intellectuelle et culturelle</setName>
+
+  <setDescription>
+    <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+      <dc:title>Mens: Revue d&apos;histoire intellectuelle et culturelle</dc:title>
+      <dc:identifier>urn:eissn:1927-9299</dc:identifier>
+      <dc:identifier>urn:issn:1492-8647</dc:identifier>
+      <dc:identifier>https://www.erudit.org/revue/mens/</dc:identifier>
+      <dc:publisher>Centre de recherche sur les francophonies canadiennes (CRCCF)</dc:publisher>
+      <dc:subject xml:lang="fr">Études littéraires</dc:subject>
+      <dc:subject xml:lang="en">Literary Studies</dc:subject>
+      <dc:subject xml:lang="fr">Histoire</dc:subject>
+      <dc:subject xml:lang="en">History</dc:subject>
+      <dc:subject xml:lang="fr">Sciences humaines et sociales</dc:subject>
+      <dc:subject xml:lang="en">Humanities and Social Sciences</dc:subject>
+    </oai_dc:dc>
+  </setDescription>
+</set>
+<set>
+  <setSpec>erudit.culture.etcmedia</setSpec>
+  <setName>ETC Media</setName>
+
+  <setDescription>
+    <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+      <dc:title>ETC MEDIA</dc:title>
+      <dc:identifier>urn:eissn:2368-0318</dc:identifier>
+      <dc:identifier>urn:issn:2368-030X</dc:identifier>
+      <dc:identifier>http://www.erudit.org/culture/etcmedia/</dc:identifier>
+      <dc:publisher>Revue d&apos;art contemporain ETC inc.</dc:publisher>
+      <dc:description xml:lang="fr">ETC MEDIA se distingue de la scène des revues d’art actuel, en proposant l&apos;unique périodique québécois à se consacrer aux pratiques médiatiques et numériques. La revue informe et analyse les œuvres issues des scènes internationales provenant des technologies du numérique, de l&apos;électronique, de l&apos;audio, des nouveaux médias, de l&apos;immersif, de l&apos;interactif, de la photo, du cinéma, de la vidéo, et du Web.</dc:description>
+      <dc:subject xml:lang="fr">Arts visuels</dc:subject>
+      <dc:subject xml:lang="en">Visual Arts</dc:subject>
+    </oai_dc:dc>
+  </setDescription>
+</set>
+<set>
+  <setSpec>erudit.revue.rseau</setSpec>
+  <setName>Revue des sciences de l’eau / Journal of Water Science</setName>
+
+  <setDescription>
+    <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+      <dc:title>Revue des Sciences de l’Eau / Journal of Water Science</dc:title>
+      <dc:identifier>urn:eissn:1718-8598</dc:identifier>
+      <dc:identifier>urn:issn:0992-7158</dc:identifier>
+      <dc:identifier>http://www.erudit.org/revue/rseau/</dc:identifier>
+      <dc:publisher>Université du Québec - INRS-Eau, Terre et Environnement (INRS-ETE)</dc:publisher>
+      <dc:description xml:lang="fr">A description will soon be available!</dc:description>
+      <dc:description xml:lang="en">A description will soon be available!</dc:description>
+      <dc:subject xml:lang="fr">Biologie</dc:subject>
+      <dc:subject xml:lang="en">Biology</dc:subject>
+      <dc:subject xml:lang="fr">Eau et environnement</dc:subject>
+      <dc:subject xml:lang="en">Water and Environment</dc:subject>
+    </oai_dc:dc>
+  </setDescription>
+</set>
+<set>
+  <setSpec>erudit.revue.eblip</setSpec>
+  <setName>Evidence Based Library and Information Practice</setName>
+<setDescription><oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd"><dc:title>Evidence Based Library and Information Practice</dc:title><dc:identifier>http://www.erudit.org/revue/eblip/</dc:identifier><dc:publisher>University of Alberta Library</dc:publisher><dc:subject lang="en">Humanities and Social Sciences</dc:subject><dc:subject lang="fr">Sciences humaines et sociales</dc:subject></oai_dc:dc></setDescription></set>
+<set>
+  <setSpec>erudit.revue.rs</setSpec>
+  <setName>Recherches sociographiques</setName>
+
+  <setDescription>
+    <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+      <dc:title>Recherches sociographiques</dc:title>
+      <dc:identifier>urn:eissn:0034-1282</dc:identifier>
+      <dc:identifier>https://www.erudit.org/revue/rs/</dc:identifier>
+      <dc:publisher>Département de sociologie, Faculté des sciences sociales, Université Laval</dc:publisher>
+      <dc:description xml:lang="fr">A description will soon be available!</dc:description>
+      <dc:subject xml:lang="fr">Sociologie</dc:subject>
+      <dc:subject xml:lang="en">Sociology</dc:subject>
+    </oai_dc:dc>
+  </setDescription>
+</set>
+<set>
+  <setSpec>erudit.culture.mgaspesie</setSpec>
+  <setName>Magazine Gaspésie</setName>
+
+  <setDescription>
+    <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+      <dc:title>Magazine Gaspésie</dc:title>
+      <dc:identifier>urn:eissn:1207-5080</dc:identifier>
+      <dc:identifier>urn:issn:1207-5280</dc:identifier>
+      <dc:identifier>http://www.erudit.org/culture/mgaspesie/</dc:identifier>
+      <dc:publisher>Musée de la Gaspésie</dc:publisher>
+      <dc:subject xml:lang="fr">Histoire</dc:subject>
+      <dc:subject xml:lang="en">History</dc:subject>
+    </oai_dc:dc>
+  </setDescription>
+</set>
+<set>
+  <setSpec>erudit.revue.sst</setSpec>
+  <setName>Simmel Studies</setName>
+<setDescription><oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd"><dc:title>Simmel Studies: Journal for Sociology and Philosophy of Culture</dc:title><dc:identifier>http://www.erudit.org/revue/sst/</dc:identifier><dc:publisher>Edizioni ETS</dc:publisher><dc:subject lang="en">Philosophy</dc:subject><dc:subject lang="fr">Philosophie</dc:subject><dc:subject lang="en">Sociology</dc:subject><dc:subject lang="fr">Sociologie</dc:subject></oai_dc:dc></setDescription></set>
+<set>
+  <setSpec>erudit.revue.psyedu</setSpec>
+  <setName>Revue de psychoéducation</setName>
+
+  <setDescription>
+    <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+      <dc:title>Revue de psychoéducation</dc:title>
+      <dc:identifier>urn:eissn:2371-6053</dc:identifier>
+      <dc:identifier>urn:issn:1713-1782</dc:identifier>
+      <dc:identifier>http://www.erudit.org/revue/psyedu/</dc:identifier>
+      <dc:publisher>Revue de Psychoéducation</dc:publisher>
+      <dc:subject xml:lang="fr">Éducation</dc:subject>
+      <dc:subject xml:lang="en">Education</dc:subject>
+      <dc:subject xml:lang="fr">Psychologie</dc:subject>
+      <dc:subject xml:lang="en">Psychology</dc:subject>
+    </oai_dc:dc>
+  </setDescription>
+</set>
+<set>
+  <setSpec>erudit.culture.lq</setSpec>
+  <setName>Lettres québécoises: La revue de l’actualité littéraire</setName>
+
+  <setDescription>
+    <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+      <dc:title>Lettres québécoises : La revue de l’actualité littéraire</dc:title>
+      <dc:identifier>urn:eissn:1923-239X</dc:identifier>
+      <dc:identifier>urn:issn:0382-084X</dc:identifier>
+      <dc:identifier>http://www.erudit.org/culture/lq/</dc:identifier>
+      <dc:publisher></dc:publisher>
+      <dc:description xml:lang="fr">Informer. Aider le lecteur à s’y retrouver parmi les centaines d’ouvrages que les éditeurs québécois lui proposent. 
+    Vivantes analyses, descriptions claires des œuvres qui permettent de porter un jugement personnel. Le critique laisse toute liberté pour une 
+    appréciation différente. Le lecteur peut partager leur engouement. Si ce n’est pas le cas, il saura rapidement pourquoi telle œuvre qui les a enthousiasmés 
+    ne le passionnera pas. Il saura que tel poète qui les a laissés indifférents répondra à ses secrètes attentes. Portraits d’auteurs, entretiens, 
+    nouvelles du milieu littéraire… l’actualité des lettres québécoises. 
+  </dc:description>
+      <dc:description xml:lang="en">A must for everyone wishing to know more about Quebec’s contemporary literature. Each issue features numerous articles 
+    on renowned authors and introduces newcomers on the literary scene. The magazine also presents interviews, portraits and reviews (novels, stories, novellas, poetry, essays, etc.). 
+  </dc:description>
+      <dc:subject xml:lang="fr">Littérature</dc:subject>
+      <dc:subject xml:lang="en">Literature</dc:subject>
+    </oai_dc:dc>
+  </setDescription>
+</set>
+<set>
+  <setSpec>erudit.revue.rhe</setSpec>
+  <setName>Revue hybride de l&apos;éducation</setName>
+<setDescription><oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd"><dc:title>Revue hybride de l'éducation</dc:title><dc:identifier>http://www.erudit.org/revue/rhe/</dc:identifier><dc:publisher>Département des sciences de l’éducation de l’Université du Québec à Chicoutimi</dc:publisher><dc:subject lang="en">Education</dc:subject><dc:subject lang="fr">Éducation</dc:subject></oai_dc:dc></setDescription></set>
+<set>
+  <setSpec>erudit.revue.bhp</setSpec>
+  <setName>Bulletin d&apos;histoire politique</setName>
+
+  <setDescription>
+    <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+      <dc:title>Bulletin d&apos;histoire politique</dc:title>
+      <dc:identifier>urn:eissn:1929-7653</dc:identifier>
+      <dc:identifier>urn:issn:1201-0421</dc:identifier>
+      <dc:identifier>https://www.erudit.org/revue/bhp/</dc:identifier>
+      <dc:publisher>Association québécoise d&apos;histoire politique</dc:publisher>
+      <dc:description xml:lang="fr">Une description sera bientôt disponible !</dc:description>
+      <dc:description xml:lang="en">A description will soon be available</dc:description>
+      <dc:subject xml:lang="fr">Histoire</dc:subject>
+      <dc:subject xml:lang="en">History</dc:subject>
+      <dc:subject xml:lang="fr">Sciences politiques</dc:subject>
+      <dc:subject xml:lang="en">Political Science</dc:subject>
+      <dc:subject xml:lang="fr">Sociologie</dc:subject>
+      <dc:subject xml:lang="en">Sociology</dc:subject>
+    </oai_dc:dc>
+  </setDescription>
+</set>
+<set>
+  <setSpec>erudit.revue.memoires</setSpec>
+  <setName>Mémoires du livre / Studies in Book Culture</setName>
+
+  <setDescription>
+    <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+      <dc:title>Mémoires du livre / Studies in Book Culture</dc:title>
+      <dc:identifier>urn:eissn:1920-602X</dc:identifier>
+      <dc:identifier>http://www.erudit.org/revue/memoires/</dc:identifier>
+      <dc:publisher>Groupe de recherches et d’études sur le livre au Québec</dc:publisher>
+      <dc:description xml:lang="fr">À l’ère du numérique et de cette « Troisième révolution du livre » qui touche tant les supports que 
+    les pratiques et les agents, la recherche en sciences humaines et sociales s’adapte elle aussi aux changements technologiques 
+    et emprunte de nouveaux canaux de diffusion. Les sites Internet et les listes de diffusion se multiplient : pensons à SOCIUS, 
+    liste consacrée à la sociologie de la littérature et à l’histoire culturelle, ou au site d’information Fabula.org. De même, le nombre 
+    de revues qui ajoutent une version numérique à la publication papier ou qui d’emblée optent uniquement pour la diffusion 
+    électronique ne cesse de croître, un phénomène qui se mesure entre autres au succès des portails spécialisés Érudit et Revues.org.
+    La recherche en histoire du livre suit aussi la tendance, le site Internet et la liste de diffusion de la Society for the History of Autorship, 
+    Reading and Publishing (SHARP) en étant des exemples probants. Accueillant chaque jour des centaines d’usagers, SHARP-Web 
+    est devenu un lieu incontournable où trouver de l’information, nouer des relations, savoir ce qui se passe dans le petit monde des 
+    historiens du livre. En France, le site de l’Institut d’histoire du livre, qui a pour partenaires l’ENSSIB et le Musée de l’imprimerie de Lyon, 
+    joue un rôle similaire. Ironiquement, l’histoire du livre semble néanmoins résister encore à la publication électronique, du moins dans 
+    le monde francophone. Si l’on trouve parfois des textes et des articles sur des sites personnels ou institutionnels, aucune revue 
+    spécialisée n’a encore vu le jour. C’est pour pallier ce manque que nous lançons Mémoires du livre / Studies in Book Culture.
+    Dédiée à la diffusion de travaux d’histoire du livre, Mémoires du livre / Studies in Book Culture accueille des études portant sur tous 
+    les supports de l’écrit, du manuscrit à l’écran, en passant par l’imprimé. La perspective historique n’exclut pas ici les recherches 
+    portant sur des phénomènes contemporains, envisagés sous l’angle de la sociologie, de la bibliothéconomie, de la statistique 
+    et de l’analyse des professions. Mémoires du livre / Studies in Book Culture privilégie plutôt l’interdisciplinarité et le décloisonnement 
+    des objets. En réalité, Mémoires du livre / Studies in Book Culture entend s’ouvrir à tous les corpus et à toutes les approches 
+    qui permettent de mieux comprendre le système-livre, le mot « livre » étant pris ici dans son sens le plus large.
+  </dc:description>
+      <dc:description xml:lang="en">In this era of the “Third Book Revolution”, where digitization influences not only the various print media 
+    but also many of the practices and people involved in the field of textual production, research in the social sciences and humanities
+    is adapting to technological change, and taking advantage of the new means of transmitting and circulating ideas. The number of 
+    websites and discussion lists is growing everyday: SOCIUS, a list devoted to the sociology of literature and to cultural history, 
+    and the information web site Fabula.org, are only a few examples. Furthermore, several academic journals now appear in digital 
+    as well as print formats, while others have opted for electronic distribution only. This phenomenon can be observed by the success 
+    of specialized portals such as Érudit and Revues.org.
+    Research in book history is following suit. The website and dissemination list created by the Society for the History of Authorship, 
+    Reading and Publishing (sharpweb.org and SHARP-L) is host to hundreds of users every day; these resources have become 
+    essential for acquiring information, creating networks between researchers, and for staying up-to-date on new developments of the 
+    small world of book historians. In France, the website created by the Institut d’histoire du livre, which counts among its partners 
+    the ENSSIB and the Musée de l’imprimerie de Lyon (Lyon’s Museum of Print), plays a similar role. Despite these innovations, 
+    however, the field of book history has largely resisted the transition to on-line publication (at least in the Francophone world). 
+    Although specific essays and articles can be found on personal or institutional websites, no specialized on-line academic journal 
+    has yet been created. In order to compensate for this lack of a valuable resource, we have launched Mémoires du livre / Studies in Book Culture.
+    Dedicated to the dissemination of research in the history and culture of the book, Mémoires du livre / Studies in Book 
+    Culture welcomes studies pertaining to all types of media for the written word, from manuscript to print to the screen. 
+    Our historical perspective broadens to include research on contemporary phenomena undertaken from a sociological point of view, 
+    whether in library and information studies, statistics, or an analysis of the various trades related to the book world. Mémoires du livre / Studies 
+    in Book Culture generally aims for interdisciplinarity and for crossing boundaries among the various fields related to book history. 
+    Indeed, Mémoires du livre / Studies in Book Culture is open to all genres and approaches that will provide insight on the 201Cbook-system”, 
+    the word 201Cbook” being understood in all possible meanings.
+  </dc:description>
+      <dc:subject xml:lang="fr">Études littéraires</dc:subject>
+      <dc:subject xml:lang="fr">Histoire</dc:subject>
+      <dc:subject xml:lang="en"> Literary Studies</dc:subject>
+      <dc:subject xml:lang="en">History</dc:subject>
+    </oai_dc:dc>
+  </setDescription>
+</set>
+<set>
+  <setSpec>erudit.revue.mcr</setSpec>
+  <setName>Material Culture Review / Revue de la culture matérielle</setName>
+
+  <setDescription>
+    <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+      <dc:title>Material Culture Review / Revue de la culture matérielle</dc:title>
+      <dc:identifier>urn:eissn:1927-9264</dc:identifier>
+      <dc:identifier>urn:issn:1718-1259</dc:identifier>
+      <dc:identifier>http://www.erudit.org/revue/mcr/</dc:identifier>
+      <dc:publisher>Cape Breton University Press</dc:publisher>
+      <dc:description xml:lang="en">Material Culture Review/Revue de la culture matérielle
+                (MCR/RCM) is Canada&apos;s only scholarly journal dedicated to the study of material
+                culture. MCR/RCM provides a venue for refereed articles and research reports
+                encompassing a range of approaches to interpreting culture and history through an
+                analysis of people&apos;s relationships to their material world. In addition to
+                peer-reviewed articles and research reports, MCR/RCM publishes other high quality
+                academic work including research notes, exhibition reviews, book reviews and book
+                review essays. Material Culture Review/Revue de la culture matérielle invites
+                submissions of new research on material culture and its related topics from the
+                fields of cultural history, public history, art history, cultural geography,
+                folklore and/or ethnology, archaeology, anthropology, architecture, and museum,
+                conservation and heritage studies. The editors encourage submissions from scholars
+                at any phase of their career, curators and professionals from the museum and
+                heritage world, and from independent scholars with an interest in material culture.
+                Papers may be submitted in English or French languages. MCR is published twice
+                annually by Cape Breton University Press in Sydney, Nova Scotia. Contact Dr. Richard
+                MacKinnon Editor-in-Chief Material Culture Review/Revue de la culture matérielle
+                Cape Breton University P.O. Box 5300 1250 Grand Lake Road Sydney, NS, B1P 6L2 Canada
+                Tel: 902.563.1980 | Email: mcr_rcm@cbu.ca </dc:description>
+      <dc:description xml:lang="fr">Material Culture Review/Revue de la culture matérielle
+                (MCR) est la seule revue savante du Canada consacrée à l&apos;étude de la culture
+                matérielle. Elle documente les artefacts culturels, en décrivant leur contexte
+                historique et leur rôle dans la société. MCR est publiée deux fois par année par
+                Cape Breton University Press à Sydney (Nouvelle-Écosse) en partenariat avec la
+                Chaire de recherche du Canada en patrimoine culturel immatériel. Coordonnées Dr.
+                Richard MacKinnon Material Culture Review Cape Breton University P.O. Box 5300
+                Sydney, Nova Scotia Canada B1P 6L2 Téléphone: 902.563.1284 Adresse courriel:
+                mcr_rcm@cbu.ca </dc:description>
+      <dc:subject xml:lang="en">Humanities and Social Sciences</dc:subject>
+      <dc:subject xml:lang="fr">Sciences humaines et sociales</dc:subject>
+    </oai_dc:dc>
+  </setDescription>
+</set>
+<set>
+  <setSpec>erudit.revue.rechqual</setSpec>
+  <setName>Recherches qualitatives</setName>
+
+  <setDescription>
+    <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+      <dc:title>Recherches qualitatives</dc:title>
+      <dc:identifier>urn:eissn:1715-8702</dc:identifier>
+      <dc:identifier>https://www.erudit.org/revue/rechqual/</dc:identifier>
+      <dc:publisher>Association pour la recherche qualitative (ARQ)</dc:publisher>
+      <dc:subject xml:lang="fr">Éducation</dc:subject>
+      <dc:subject xml:lang="en">Education</dc:subject>
+      <dc:subject xml:lang="fr">Sciences humaines et sociales</dc:subject>
+      <dc:subject xml:lang="en">Humanities and Social Sciences</dc:subject>
+      <dc:subject xml:lang="fr">Sociologie</dc:subject>
+      <dc:subject xml:lang="en">Sociology</dc:subject>
+    </oai_dc:dc>
+  </setDescription>
+</set>
+<set>
+  <setSpec>erudit.revue.ethno</setSpec>
+  <setName>Ethnologies</setName>
+
+  <setDescription>
+    <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+      <dc:title>Ethnologies</dc:title>
+      <dc:identifier>urn:eissn:1708-0401</dc:identifier>
+      <dc:identifier>urn:issn:1481-5974</dc:identifier>
+      <dc:identifier>http://www.erudit.org/revue/ethno/</dc:identifier>
+      <dc:publisher>Association Canadienne d’Ethnologie et de Folklore</dc:publisher>
+      <dc:description xml:lang="fr">La revue Ethnologies est le principal instrument de promotion de l’enseignement, de la recherche et 
+    de la diffusion des connaissances dans le domaine de l’ethnologie au Québec et au Canada. Anciennement Canadian Folklore 
+    Canadien, fondée en 1979, elle s’est muée en 1998 en Ethnologies, au pluriel, titre qui exprime aussi bien en français qu’en anglais 
+    le bilinguisme qui lui est propre et qui lui permet de rejoindre de nombreux ethnologues dans divers pays. Ce pluriel évoque aussi 
+    la diversité des approches contemporaines et la multiplicité des champs d’étude de la discipline. Ethnologies rassemble ces 
+    multiples approches sous forme de numéros thématiques dont les couvertures sont illustrées, de manière tout aussi variée, 
+    par des artistes canadiens actuels.
+  </dc:description>
+      <dc:description xml:lang="en">Ethnologies is the primary instrument for the promotion of teaching, research and knowledge transfer 
+    in the field of ethnology in Quebec and the rest of Canada. Founded in 1979 and formerly called Canadian Folklore Canadien, 
+    in 1998 it changed its name to Ethnologies, a pluralized title that expresses the publication&apos;s bilingualism, a characteristic that 
+    enables it to connect with numerous ethnologists in various countries. The plural name also reflects the discipline&apos;s diverse contemporary 
+    approaches and its multiple areas of study. Ethnologies brings together these multiple approaches in theme issues whose equally 
+    varied covers are illustrated by contemporary Canadian artists.
+  </dc:description>
+      <dc:subject xml:lang="fr">Anthropologie et ethnologie</dc:subject>
+      <dc:subject xml:lang="en">Anthropology and Ethnology</dc:subject>
+    </oai_dc:dc>
+  </setDescription>
+</set>
+<set>
+  <setSpec>erudit.revue.imaginations</setSpec>
+  <setName>Imaginations: Journal of Cross-Cultural Image Studies / Imaginations: Revue d’études interculturelles de l’image</setName>
+<setDescription><oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd"><dc:title>Imaginations: Journal of Cross-Cultural Image Studies / Imaginations: Revue d’études interculturelles de l’image</dc:title><dc:identifier>http://www.erudit.org/revue/imaginations/</dc:identifier><dc:publisher>York University</dc:publisher><dc:subject lang="en">Sociology</dc:subject><dc:subject lang="fr">Sociologie</dc:subject></oai_dc:dc></setDescription></set>
+<set>
+  <setSpec>erudit.revue.cjalib</setSpec>
+  <setName>Canadian Journal of Academic Librarianship / Revue canadienne de bibliothéconomie universitaire</setName>
+<setDescription><oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd"><dc:title>Canadian Journal of Academic Librarianship / Revue canadienne de bibliothéconomie universitaire</dc:title><dc:identifier>http://www.erudit.org/revue/cjalib/</dc:identifier><dc:publisher>Canadian Association of Professional Academic Librarians / Association Canadienne des Bibliothécaires en Enseignement Supérieur</dc:publisher><dc:subject lang="en">Humanities and Social Sciences</dc:subject><dc:subject lang="fr">Sciences humaines et sociales</dc:subject></oai_dc:dc></setDescription></set>
+<set>
+  <setSpec>erudit.culture.linconvenient</setSpec>
+  <setName>L&apos;Inconvénient</setName>
+
+  <setDescription>
+    <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+      <dc:title>L&apos;Inconvénient</dc:title>
+      <dc:identifier>urn:eissn:2369-2359</dc:identifier>
+      <dc:identifier>urn:issn:1492-1197</dc:identifier>
+      <dc:identifier>http://www.erudit.org/culture/linconvenient/</dc:identifier>
+      <dc:publisher>L&apos;inconvénient</dc:publisher>
+      <dc:subject xml:lang="fr">Études des arts et des lettres</dc:subject>
+      <dc:subject xml:lang="en">Arts and Literature Studies</dc:subject>
+      <dc:subject xml:lang="fr">Littérature</dc:subject>
+      <dc:subject xml:lang="en">Literature</dc:subject>
+      <dc:subject xml:lang="fr">Sciences humaines et sociales</dc:subject>
+      <dc:subject xml:lang="en">Humanities and Social Sciences</dc:subject>
+    </oai_dc:dc>
+  </setDescription>
+</set>
+<set>
+  <setSpec>erudit.revue.es</setSpec>
+  <setName>Économie et Solidarités</setName>
+
+  <setDescription>
+    <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+      <dc:title>Économie et Solidarités</dc:title>
+      <dc:identifier>urn:eissn:1923-0818</dc:identifier>
+      <dc:identifier>http://www.erudit.org/revue/es/</dc:identifier>
+      <dc:publisher>CIRIEC-Canada</dc:publisher>
+      <dc:description xml:lang="fr">Économie et Solidarités est la revue du Centre interdisciplinaire de recherche et d’information 
+    sur les entreprises collectives (CIRIEC-Canada). Elle démarra ses activités en 1967, sous l’appellation Revue du CIRIEC, 
+    avant de devenir Coopératives et développement en 1985. Depuis, son contenu s’est élargit et la revue adopta le nom 
+    Économie et Solidarités à partir de 1996 pour mieux refléter ses préoccupations. La revue est donc aujourd’hui vouée à 
+    l’économie sociale et publique, à leur rôle comme agents de développement économique, à leur gestion, aux secteurs 
+    d’activité où elles sont engagées, tant au Québec et au Canada qu’ailleurs dans le monde. Cette publication est destinée aux 
+    professeurs, aux chercheurs, aux étudiants et aux praticiens intéressés par l’économie sociale et publique, ses initiatives 
+    et son développement.
+  </dc:description>
+      <dc:description xml:lang="en">Économies et Solidarités is the journal of the Canadian Centre for Interdisciplinary Research 
+    and Information on Community Entreprises (CIRIEC-Canada). It was first published in 1967 under the name Revue du CIRIEC 
+    and became Coopératives et développement in 1985. Since then, its scope has widened and the journal became Économies 
+    et Solidarités in 1996 in order to better reflect its fields of interest. The journal is thus dedicated to the social and public economy, 
+    to their role as agents of economic development, to their management and to the sectors in which they are involved – in Québec 
+    and in Canada as well as elsewhere around the globe. The journal is intended for professors, researchers, students and practitioners 
+    interested in the social and public economy, their initiatives and their development.
+  </dc:description>
+      <dc:subject xml:lang="fr">Économie</dc:subject>
+      <dc:subject xml:lang="en">Economics</dc:subject>
+    </oai_dc:dc>
+  </setDescription>
+</set>
+<set>
+  <setSpec>erudit.revue.documentation</setSpec>
+  <setName>Documentation et bibliothèques</setName>
+
+  <setDescription>
+    <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+      <dc:title>Documentation et bibliothèques</dc:title>
+      <dc:identifier>urn:eissn:2291-8949</dc:identifier>
+      <dc:identifier>urn:issn:0315-2340</dc:identifier>
+      <dc:identifier>https://www.erudit.org/revue/documentation/</dc:identifier>
+      <dc:publisher>Les Éditions ASTED</dc:publisher>
+      <dc:subject xml:lang="fr">Sciences humaines et sociales</dc:subject>
+      <dc:subject xml:lang="en">Humanities and Social Sciences</dc:subject>
+    </oai_dc:dc>
+  </setDescription>
+</set>
+<set>
+  <setSpec>erudit.revue.ri</setSpec>
+  <setName>Relations industrielles / Industrial Relations</setName>
+
+  <setDescription>
+    <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+      <dc:title>Relations industrielles / Industrial Relations / Industrial Relations</dc:title>
+      <dc:identifier>urn:eissn:1703-8138</dc:identifier>
+      <dc:identifier>urn:issn:0034-379X</dc:identifier>
+      <dc:identifier>https://www.erudit.org/revue/ri/</dc:identifier>
+      <dc:publisher>Département des relations industrielles de l’Université Laval</dc:publisher>
+      <dc:description xml:lang="fr">La revue Relations industrielles / Industrial Relations est la première revue scientifique de 
+     relations industrielles au monde et la seule au Canada. Elle s&apos;adresse à toutes les personnes de la pratique, du monde 
+     universitaire et aux observateurs du domaine.</dc:description>
+      <dc:description xml:lang="en">Relations industrielles / Industrial Relations, the world’s first scientific journal on industrial 
+     relations and Canada’s only such publication, addresses all practitioners of the discipline, interested academics 
+     and observers of the field</dc:description>
+      <dc:subject xml:lang="fr">Relations industrielles</dc:subject>
+      <dc:subject xml:lang="en">Industrial Relations</dc:subject>
+    </oai_dc:dc>
+  </setDescription>
+</set>
+<set>
+  <setSpec>erudit.revue.rjs</setSpec>
+  <setName>Revue Jeunes et Société</setName>
+<setDescription><oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd"><dc:title>Revue Jeunes et Société</dc:title><dc:identifier>http://www.erudit.org/revue/rjs/</dc:identifier><dc:publisher>Institut national de la recherche scientifique (INRS)</dc:publisher><dc:subject lang="en">Humanities and Social Sciences</dc:subject><dc:subject lang="fr">Sciences humaines et sociales</dc:subject></oai_dc:dc></setDescription></set>
+<set>
+  <setSpec>erudit.culture.xyz</setSpec>
+  <setName>XYZ. La revue de la nouvelle</setName>
+
+  <setDescription>
+    <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+      <dc:title>XYZ. La revue de la nouvelle</dc:title>
+      <dc:identifier>urn:eissn:1923-0907</dc:identifier>
+      <dc:identifier>urn:issn:0828-5608</dc:identifier>
+      <dc:identifier>https://www.erudit.org/culture/xyz1016803//</dc:identifier>
+      <dc:publisher>Publications Gaëtan Lévesque</dc:publisher>
+      <dc:description xml:lang="fr">Bref. Tout dire en quelques phrases. S’en tenir à l’essentiel. Exprimer en quelques pages. 
+     L’art du nouvellier relève d’une habileté particulière. XYZ publie des auteurs reconnus ou en émergence, des numéros thématiques ou en thème libre. 
+     La revue propose aussi des critiques et des comptes rendus de recueils de nouvelles, des textes de réflexion sur le genre et l’histoire de la nouvelle, 
+     s’attarde en un large tour d’horizon à tel ou tel écrivain qui s’adonne à cet art exigeant. XYZ. La revue de la nouvelle a publié son centième numéro 
+     en novembre 2009 et a fêté son quart de siècle d’existence en 2010.</dc:description>
+      <dc:description xml:lang="en">A magazine that presents previously unpublished work by Quebec authors who excel in the art of short story writing. 
+     It also publishes the work of writers from other countries, interviews with authors, reflections on this literary style and reviews of the latest 
+     short story collections published.</dc:description>
+      <dc:subject xml:lang="fr">Littérature</dc:subject>
+      <dc:subject xml:lang="en">Literature</dc:subject>
+    </oai_dc:dc>
+  </setDescription>
+</set>
+<set>
+  <setSpec>erudit.revue.jripe</setSpec>
+  <setName>Journal of Research in Interprofessional Practice and Education</setName>
+<setDescription><oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd"><dc:title>Journal of Research in Interprofessional Practice and Education</dc:title><dc:identifier>http://www.erudit.org/revue/jripe/</dc:identifier><dc:publisher>Canadian Institute for Studies in Publishing Press (Simon Fraser University at Harbour Centre)</dc:publisher><dc:subject lang="en">Education</dc:subject><dc:subject lang="fr">Éducation</dc:subject><dc:subject lang="en">Health Sciences</dc:subject><dc:subject lang="fr">Sciences de la santé</dc:subject><dc:subject lang="en">Humanities and Social Sciences</dc:subject><dc:subject lang="fr">Sciences humaines et sociales</dc:subject></oai_dc:dc></setDescription></set>
+<set>
+  <setSpec>erudit.revue.rf</setSpec>
+  <setName>Recherches féministes</setName>
+
+  <setDescription>
+    <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+      <dc:title>Recherches féministes</dc:title>
+      <dc:identifier>urn:eissn:1705-9240</dc:identifier>
+      <dc:identifier>urn:issn:0838-4479</dc:identifier>
+      <dc:identifier>http://www.erudit.org/revue/rf/</dc:identifier>
+      <dc:publisher>Revue Recherches féministes</dc:publisher>
+      <dc:description xml:lang="fr">Recherches féministes s&apos;adresse à toutes les personnes qui s&apos;intéressent au changement 
+    dans les rapports sociaux de sexe et dans la production des connaissances. Elle constitue une source d&apos;information essentielle 
+    pour l&apos;enseignement, la recherche et l&apos;action féministes.
+    La revue publie des articles, des notes de recherche et des notes d&apos;action, des comptes rendus de livres, des bibliographies et des 
+    dossiers sur les grandes questions débattues dans le mouvement des femmes. Elle paraît deux fois l&apos;an, à l&apos;été et à l&apos;hiver. 
+    Trois numéros sur quatre sont thématiques et incluent à l&apos;occation des articles hors thème.
+    Recherches féministes est publiée par le Groupe de recherche multidisciplinaire féministe, le GREMF, de la Faculté des 
+    sciences sociales, Université Laval.
+  </dc:description>
+      <dc:description xml:lang="en">Recherches féministes addresses all readers interested in the changes in the social relationships
+    between the sexes and the production of knowledge. A source of essential information on feminist teaching, research and action,
+    the journal publishes articles, research and action notes, book summaries, bibliographies and common-theme articles concerning
+    the major debates involving the feminist movement. It is published twice a year (summer and winter), three out of four issues are
+    theme-based and non-theme articles are occasionally included.
+    Recherches féministes is published by Le Groupe de recherche multidisciplinaire féministe (GREMF) of the Faculty of social 
+    sciences at Université Laval.
+  </dc:description>
+      <dc:subject xml:lang="fr">Études féministes</dc:subject>
+      <dc:subject xml:lang="en">Women Studies</dc:subject>
+    </oai_dc:dc>
+  </setDescription>
+</set>
+<set>
+  <setSpec>erudit.revue.telescope</setSpec>
+  <setName>Télescope: Revue d’analyse comparée en administration publique</setName>
+
+  <setDescription>
+    <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+      <dc:title>Télescope: Revue d’analyse comparée en administration publique</dc:title>
+      <dc:identifier>urn:eissn:1929-3348</dc:identifier>
+      <dc:identifier>urn:issn:1203-3294</dc:identifier>
+      <dc:identifier>http://www.erudit.org/revue/telescope/</dc:identifier>
+      <dc:publisher>L’Observatoire de l’administration publique</dc:publisher>
+      <dc:subject xml:lang="fr">Sciences de la gestion</dc:subject>
+      <dc:subject xml:lang="en">Management</dc:subject>
+      <dc:subject xml:lang="fr">Sciences politiques</dc:subject>
+      <dc:subject xml:lang="en">Political Science</dc:subject>
+    </oai_dc:dc>
+  </setDescription>
+</set>
+<set>
+  <setSpec>erudit.revue.renref</setSpec>
+  <setName>Renaissance and Reformation / Renaissance et Réforme</setName>
+<setDescription><oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd"><dc:title>Renaissance and Reformation / Renaissance et Réforme</dc:title><dc:identifier>http://www.erudit.org/revue/renref/</dc:identifier><dc:publisher>Iter Press</dc:publisher><dc:subject lang="en">Literary Studies</dc:subject><dc:subject lang="fr">Études littéraires</dc:subject><dc:subject lang="en">History</dc:subject><dc:subject lang="fr">Histoire</dc:subject></oai_dc:dc></setDescription></set>
+<set>
+  <setSpec>erudit.revue.nflds</setSpec>
+  <setName>Newfoundland and Labrador Studies</setName>
+
+  <setDescription>
+    <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+      <dc:title>Newfoundland and Labrador Studies</dc:title>
+      <dc:identifier>urn:eissn:1715-1430</dc:identifier>
+      <dc:identifier>urn:issn:1719-1726</dc:identifier>
+      <dc:identifier>http://www.erudit.org/revue/nflds/</dc:identifier>
+      <dc:publisher>Faculty of Arts, Memorial University</dc:publisher>
+      <dc:description xml:lang="en">Newfoundland and Labrador Studies is a refereed,
+                interdisciplinary academic journal devoted to the history and culture (broadly
+                defined) of Newfoundland and Labrador. It is a publication of Memorial University&apos;s
+                Faculty of Arts. Special editions are published from time to time on specific
+                themes. Recent examples include &quot;Confederation&quot; (17:2) and &quot;The New Early Modern
+                Newfoundland&quot; (17:2 and 19:1). Documents, reviews and review articles are included
+                in most issues. Contact Alison Carr Managing Editor Faculty of Arts Publications, MS
+                1004 Memorial University PO Box 4200 St. John’s, NL A1C 5S7 Phone: 709-864-2144 Fax:
+                709-864-4342 Email: acarr@mun.ca </dc:description>
+      <dc:description xml:lang="fr">Newfoundland and Labrador Studies (anciennement
+                Newfoundland Studies) est une revue savante interdisciplinaire consacrée à
+                l&apos;histoire et la culture (au sens large) de la province de Terre-Neuve-et-Labrador.
+                Basée à la Faculté des arts de la Memorial University, la revue est publiée depuis
+                1985. Coordonnées Alison Carr Rédactrice en chef Faculty of Arts Publications, MS
+                1004 Memorial University PO Box 4200 St. John’s, NL A1C 5S7 Téléphone: 709-864-2144
+                Fax: 709-864-4342 Adresse courriel: acarr@mun.ca Site web de la revue:
+                www.mun.ca/nls </dc:description>
+      <dc:subject xml:lang="en">Humanities and Social Sciences</dc:subject>
+      <dc:subject xml:lang="fr">Sciences humaines et sociales</dc:subject>
+    </oai_dc:dc>
+  </setDescription>
+</set>
+<set>
+  <setSpec>erudit.revue.dwr</setSpec>
+  <setName>Discourse and Writing/Rédactologie</setName>
+<setDescription><oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd"><dc:title>Discourse and Writing/Rédactologie</dc:title><dc:identifier>http://www.erudit.org/revue/dwr/</dc:identifier><dc:publisher>Canadian Association for the Study of Discourse and Writing</dc:publisher><dc:subject lang="en">Language Studies</dc:subject><dc:subject lang="fr">Études des langues</dc:subject><dc:subject lang="en">Humanities and Social Sciences</dc:subject><dc:subject lang="fr">Sciences humaines et sociales</dc:subject></oai_dc:dc></setDescription></set>
+<set>
+  <setSpec>erudit.revue.is</setSpec>
+  <setName>Intersections: Canadian Journal of Music / Intersections: Revue canadienne de musique</setName>
+
+  <setDescription>
+    <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+      <dc:title>Intersections: Canadian Journal of Music / Intersections: Revue canadienne de musique</dc:title>
+      <dc:identifier>urn:eissn:1918-512X</dc:identifier>
+      <dc:identifier>urn:issn:1911-0146</dc:identifier>
+      <dc:identifier>https://www.erudit.org/revue/is/</dc:identifier>
+      <dc:publisher>Canadian University Music Society / Société de musique des universités canadiennes</dc:publisher>
+      <dc:description xml:lang="fr">Intersections: Canadian Journal of Music / Intersections : revue canadienne de musique, 
+     anciennement Canadian University Music Review / Revue de musique des universités canadiennes, est un périodique 
+     bilingue, fondé in 1980 par la Société de musique des universités canadiennes. À titre de principal véhicule canadien pour 
+     la recherche en musique faisant l&apos;objet d&apos;une évaluation académique, il bénéficie de l&apos;appui du Conseil de recherche en 
+     sciences humaines et sociales du Canada.
+     Ce périodique a pour premier objectif de publier la recherche de chercheurs du monde entier. Dans un second temps, 
+     il cherche également à favoriser la diffusion de la recherche canadienne auprès des canadiens, et par là, encourager l&apos;interaction 
+     entre les Canadiens s&apos;intéressant à la recherche musicale, ainsi qu&apos;à représenter la recherche et la musique canadiennes 
+     dans le monde entier.
+     Les thématiques abordées par la revue représentent dans une large mesure les champs traditionnels de la recherche musicale, 
+     mais les travaux touchant la musique populaire et les études culturelles occupent une place croissante dans ses pages.</dc:description>
+      <dc:description xml:lang="en">Intersections: Canadian Journal of Music / Intersections : revue canadienne de musique, formerly 
+     Canadian University Music Review / Revue de musique des universités canadiennes, a bilingual journal, was founded in 1980 
+     by the Canadian University Music Society. As the principal Canadian outlet for refereed scholarly research, it is supported by 
+     the Social Sciences and Humanities Research Council of Canada.
+     The global aim of the journal is to publish research by scholars from around the world. Its particular mandate is to represent 
+     Canadian research to other Canadians, and thus to support awareness and interaction among Canadians interested in music research, 
+     as well as to represent Canadian research and Canadian music to the world.
+     The current focus of the journal is in large part upon the traditional fields of music scholarship and research, but studies in popular music 
+     and culture are playing a greater role in the journal’s output.</dc:description>
+      <dc:subject xml:lang="fr">Arts</dc:subject>
+      <dc:subject xml:lang="en">Arts</dc:subject>
+    </oai_dc:dc>
+  </setDescription>
+</set>
+<set>
+  <setSpec>erudit.revue.rot</setSpec>
+  <setName>Revue Organisations &amp; territoires</setName>
+<setDescription><oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd"><dc:title>Revue Organisations &amp; territoires</dc:title><dc:identifier>http://www.erudit.org/revue/rot/</dc:identifier><dc:publisher>Université du Québec à Chicoutimi</dc:publisher><dc:subject lang="en">Urban Studies</dc:subject><dc:subject lang="fr">Études urbaines</dc:subject><dc:subject lang="en">Geography</dc:subject><dc:subject lang="fr">Géographie</dc:subject><dc:subject lang="en">Management</dc:subject><dc:subject lang="fr">Sciences de la gestion</dc:subject></oai_dc:dc></setDescription></set>
+<set>
+  <setSpec>erudit.revue.theologi</setSpec>
+  <setName>Théologiques</setName>
+
+  <setDescription>
+    <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+      <dc:title>Théologiques: Revue interdisciplinaire d’études religieuses</dc:title>
+      <dc:identifier>urn:eissn:1492-1413</dc:identifier>
+      <dc:identifier>urn:issn:1188-7109</dc:identifier>
+      <dc:identifier>https://www.erudit.org/revue/theologi/</dc:identifier>
+      <dc:publisher>Institut d’études religieuses de l’Université de Montréal</dc:publisher>
+      <dc:description xml:lang="fr">Fondée en 1993, animée par une équipe interdisciplinaire, cette revue scientifique aborde les questions
+     théologiques actuelles en dialogue avec les autres sciences humaines. Le thème de chaque numéro est traité par des auteurs d&apos;horizons
+     différents réfléchissant autour d&apos;une problématique commune. La revue explore la contribution des recherches théologiques aux grands
+     débats éthiques, sociaux et culturels contemporains. Ouverte à une diversité de traditions religieuses, de théologies et de courants de pensée,
+     elle participe au renouvellement des discours sur Dieu et sur l&apos;expérience des croyants et croyantes. Elle s&apos;interroge également sur les
+     recompositions constantes des champs du savoir et leur impact sur la démarche théologique. La plupart des articles sont en français, 
+     quelques-uns en anglais.</dc:description>
+      <dc:description xml:lang="en">Founded in 1993 and headed by an interdisciplinary team, this scientific journal looks at current theological 
+     questions in dialogue with the other human sciences. Each issue&apos;s theme is examined by writers from different fields reflecting upon a common 
+     subject. Théologiques explores the contribution of theological research to the great ethical, social and cultural debates of our day. Open to a diversity 
+     of religious and theological traditions and lines of thought, the journal participates in advancing the discourse on God and on believers&apos; experiences. 
+     It also studies the ongoing reconstruction of the different fields of knowledge and their impact on the theological process. Most articles are in French; 
+     a few appear in English.</dc:description>
+      <dc:subject xml:lang="fr">Théologie</dc:subject>
+      <dc:subject xml:lang="en">Theology</dc:subject>
+    </oai_dc:dc>
+  </setDescription>
+</set>
+<set>
+  <setSpec>erudit.revue.alterstice</setSpec>
+  <setName>Alterstice: Revue internationale de la recherche interculturelle / Alterstice: International Journal of Intercultural Research / Alterstice: Revista International de la Investigacion Intercultural</setName>
+
+  <setDescription>
+    <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+      <dc:title>Alterstice: Revue internationale de la recherche interculturelle / Alterstice: International Journal of Intercultural Research / Alterstice: Revista International de la Investigacion Intercultural</dc:title>
+      <dc:identifier>urn:eissn:1923-919X</dc:identifier>
+      <dc:identifier>http://www.erudit.org/revue/alterstice/</dc:identifier>
+      <dc:publisher>Alterstice</dc:publisher>
+      <dc:subject xml:lang="fr">Éducation</dc:subject>
+      <dc:subject xml:lang="en">Education</dc:subject>
+      <dc:subject xml:lang="fr">Sciences humaines et sociales</dc:subject>
+      <dc:subject xml:lang="en">Humanities and Social Sciences</dc:subject>
+      <dc:subject xml:lang="fr">Sociologie</dc:subject>
+      <dc:subject xml:lang="en">Sociology</dc:subject>
+    </oai_dc:dc>
+  </setDescription>
+</set>
+<set>
+  <setSpec>erudit.revue.trumpeter</setSpec>
+  <setName>The Trumpeter: Journal of Ecosophy</setName>
+<setDescription><oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd"><dc:title>The Trumpeter: Journal of Ecosophy</dc:title><dc:identifier>http://www.erudit.org/revue/trumpeter/</dc:identifier><dc:publisher>Athabasca University Press</dc:publisher><dc:subject lang="en">Humanities and Social Sciences</dc:subject><dc:subject lang="fr">Sciences humaines et sociales</dc:subject></oai_dc:dc></setDescription></set>
+<set>
+  <setSpec>erudit.revue.pr</setSpec>
+  <setName>Protée</setName>
+
+  <setDescription>
+    <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+      <dc:title>Protée</dc:title>
+      <dc:identifier>urn:eissn:1708-2307</dc:identifier>
+      <dc:identifier>urn:issn:0300-3523</dc:identifier>
+      <dc:identifier>http://www.erudit.org/revue/pr/</dc:identifier>
+      <dc:publisher>Département des arts et lettres - Université du Québec à Chicoutimi</dc:publisher>
+      <dc:description xml:lang="fr">Protée est une revue universitaire dans le champ diversifié de la sémiotique, définie comme science 
+    des signes, du langage et des discours. On y aborde des problèmes d’ordre théorique et pratique liés à l’explication, 
+    à la modélisation et à l’interprétation d’objets ou de phénomènes langagiers, textuels, symboliques et culturels, où se pose, 
+    de façon diverse, la question de la signification. Les réflexions et les analyses peuvent prendre pour objet la langue, les textes, 
+    les oeuvres d’art et les pratiques culturelles de toutes sortes et mettre à contribution les diverses approches sémiotiques développées 
+    dans le cadre des différentes sciences du langage et des signes : linguistique, théories littéraires, philosophie du langage, esthétique, 
+    théorie de l’art, théorie du cinéma et du théâtre, etc.
+  </dc:description>
+      <dc:description xml:lang="en">Protée is a university journal that deals with the diverse field of semiotics, defined as the science of signs, 
+    language and discourse. It treats issues of a theoretical and practical nature involving the explanation, modeling and interpretation 
+    of language, textual, symbolic and cultural objects or phenomena involving, in various ways, the question of meaning. 
+    Reflections and analyses concern language, texts, art works or cultural practices of all kinds and employ the diverse semiotic 
+    approaches developed within the different sciences of language and signs: linguistics, literary theory, language philosophy, aesthetics, 
+    art theory, film and theatre theory, etc.
+  </dc:description>
+      <dc:subject xml:lang="fr">Arts</dc:subject>
+      <dc:subject xml:lang="fr">Études littéraires </dc:subject>
+      <dc:subject xml:lang="en">Arts</dc:subject>
+      <dc:subject xml:lang="en">Literary Studies</dc:subject>
+    </oai_dc:dc>
+  </setDescription>
+</set>
+<set>
+  <setSpec>erudit.revue.ere</setSpec>
+  <setName>Éducation relative à l&apos;environnement</setName>
+</set>
+<set>
+  <setSpec>erudit.revue.surfaces</setSpec>
+  <setName>Surfaces</setName>
+
+  <setDescription>
+    <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+      <dc:title>Surfaces</dc:title>
+      <dc:identifier>urn:eissn:1200-5320</dc:identifier>
+      <dc:identifier>urn:issn:1188-2492</dc:identifier>
+      <dc:identifier>http://www.erudit.org/revue/surfaces/</dc:identifier>
+      <dc:publisher>Les Presses de l’Université de Montréal</dc:publisher>
+      <dc:description xml:lang="fr">A description will soon be available!</dc:description>
+      <dc:subject xml:lang="fr">Sciences humaines et sociales</dc:subject>
+      <dc:subject xml:lang="en">Humanities and Social Sciences</dc:subject>
+    </oai_dc:dc>
+  </setDescription>
+</set>
+<set>
+  <setSpec>erudit.culture.bc</setSpec>
+  <setName>Biscuit Chinois: Littérature pop</setName>
+
+  <setDescription>
+    <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+      <dc:title>Biscuit Chinois : Littérature pop</dc:title>
+      <dc:identifier>urn:eissn:1920-7840</dc:identifier>
+      <dc:identifier>urn:issn:1718-9578</dc:identifier>
+      <dc:identifier>http://www.erudit.org/culture/bc/</dc:identifier>
+      <dc:publisher>Éditions Biscuit Chinois</dc:publisher>
+      <dc:description xml:lang="fr">Biscuit Chinois se consacre entièrement à la culture populaire. 
+    Dans populaire, il y a « pop », comme dans musique pop, comme dans pop art, comme dans pop corn. 
+    Notre intention, c’est de publier de la littérature qui ne se prend pas trop au sérieux, histoire de la désacraliser 
+    et de la rendre accessible à tous, sans pour autant négliger la qualité.</dc:description>
+      <dc:subject xml:lang="fr">Littérature</dc:subject>
+      <dc:subject xml:lang="en">Literature</dc:subject>
+    </oai_dc:dc>
+  </setDescription>
+</set>
+<set>
+  <setSpec>erudit.culture.cb</setSpec>
+  <setName>Ciné-Bulles</setName>
+
+  <setDescription>
+    <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+      <dc:title>Ciné-Bulles</dc:title>
+      <dc:identifier>urn:eissn:1923-3221</dc:identifier>
+      <dc:identifier>urn:issn:0820-8921</dc:identifier>
+      <dc:identifier>http://www.erudit.org/culture/cb/</dc:identifier>
+      <dc:publisher></dc:publisher>
+      <dc:description xml:lang="fr">Quelques lignes qui résument un scénario, quelques étoiles décernées par un critique peuvent suffire 
+    lorsque se prend la décision d&apos;une sortie au cinéma. Lire ensuite Ciné-Bulles, c&apos;est s’ouvrir aux oeuvres, pousser sa réflexion, 
+    approfondir sa pensée. C’est aussi découvrir les motivations de cinéastes grâce à de longs entretiens, des parcours de réalisateurs par 
+    l’étude de leur filmographie. La revue se démarque également par les portraits d’organismes ou d’institutions, mettant ainsi en lumière les 
+    coulisses du cinéma. Des textes étoffés, mais accessibles, permettent de se familiariser avec un cinéma de qualité, québécois ou étranger. 
+  </dc:description>
+      <dc:description xml:lang="en">Published by the Association des cinémas parallèles du Québec, this dynamic magazine, which covers current events, 
+    leads moviegoers on the various paths of national and international cinematography. In its pages, one can find interviews with directors, event, film 
+    and book reviews and editorials that comment on important questions pertaining to this art form. 
+ </dc:description>
+      <dc:subject xml:lang="fr">Cinéma</dc:subject>
+      <dc:subject xml:lang="en">Cinema</dc:subject>
+    </oai_dc:dc>
+  </setDescription>
+</set>
+<set>
+  <setSpec>erudit.revue.sp</setSpec>
+  <setName>Sens public</setName>
+
+  <setDescription>
+    <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+      <dc:title>Sens public</dc:title>
+      <dc:identifier>urn:eissn:2104-3272</dc:identifier>
+      <dc:identifier>https://www.erudit.org/revue/sp/</dc:identifier>
+      <dc:publisher>Département des littératures de langue française, Université de Montréal</dc:publisher>
+      <dc:subject xml:lang="fr">Études littéraires</dc:subject>
+      <dc:subject xml:lang="en">Literary Studies</dc:subject>
+      <dc:subject xml:lang="fr">Philosophie</dc:subject>
+      <dc:subject xml:lang="en">Philosophy</dc:subject>
+      <dc:subject xml:lang="fr">Sciences humaines et sociales</dc:subject>
+      <dc:subject xml:lang="en">Humanities and Social Sciences</dc:subject>
+    </oai_dc:dc>
+  </setDescription>
+</set>
+<set>
+  <setSpec>erudit.revue.cswr</setSpec>
+  <setName>Canadian Social Work Review / Revue canadienne de service social</setName>
+
+  <setDescription>
+    <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+      <dc:title>Canadian Social Work Review / Revue canadienne de service social</dc:title>
+      <dc:identifier>urn:eissn:2369-5757</dc:identifier>
+      <dc:identifier>http://www.erudit.org/revue/cswr/</dc:identifier>
+      <dc:publisher>Canadian Association of Social Work Education / Association canadienne pour la formation en travail social (CASWE-ACFTS)</dc:publisher>
+      <dc:description xml:lang="fr">A description will soon be available!</dc:description>
+      <dc:subject xml:lang="fr">Service social</dc:subject>
+      <dc:subject xml:lang="en">Social Work</dc:subject>
+    </oai_dc:dc>
+  </setDescription>
+</set>
+<set>
+  <setSpec>erudit.revue.globe</setSpec>
+  <setName>Globe: Revue internationale d’études québécoises</setName>
+
+  <setDescription>
+    <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+      <dc:title>Globe : Revue internationale d’études québécoises</dc:title>
+      <dc:identifier>urn:eissn:1923-8231</dc:identifier>
+      <dc:identifier>urn:issn:1481-5869</dc:identifier>
+      <dc:identifier>http://www.erudit.org/revue/globe/</dc:identifier>
+      <dc:publisher>Globe, Revue internationale d’études québécoises</dc:publisher>
+      <dc:description xml:lang="fr">Globe : revue internationale d’études québécoises s’est donné pour mandat de diffuser la recherche 
+    scientifique sur le Québec en publiant, deux fois par année, des numéros thématiques pluridisciplinaires liés 
+    à la culture et à la société québécoises.
+  </dc:description>
+      <dc:description xml:lang="en">Globe : revue internationale d’études québécoises is a multidisciplinary review devoted 
+    to the dissemination of scientific research on Quebec by publishing two themed issues a year relating to Quebec society and culture.
+  </dc:description>
+      <dc:subject xml:lang="fr">Sciences humaines et sociales</dc:subject>
+      <dc:subject xml:lang="en">Humanities and Social Sciences</dc:subject>
+    </oai_dc:dc>
+  </setDescription>
+</set>
+<set>
+  <setSpec>erudit.revue.rbanq</setSpec>
+  <setName>Revue de Bibliothèque et Archives nationales du Québec</setName>
+
+  <setDescription>
+    <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+      <dc:title>Revue de Bibliothèque et Archives nationales du Québec</dc:title>
+      <dc:identifier>urn:eissn:1920-0269</dc:identifier>
+      <dc:identifier>urn:issn:1920-0250</dc:identifier>
+      <dc:identifier>http://www.erudit.org/revue/rbanq/</dc:identifier>
+      <dc:publisher>Bibliothèque et Archives nationales du Québec</dc:publisher>
+      <dc:subject xml:lang="fr">Arts</dc:subject>
+      <dc:subject xml:lang="en">Arts</dc:subject>
+      <dc:subject xml:lang="fr">Études littéraires</dc:subject>
+      <dc:subject xml:lang="en">Literary Studies</dc:subject>
+      <dc:subject xml:lang="fr">Études urbaines</dc:subject>
+      <dc:subject xml:lang="en">Urban Studies</dc:subject>
+      <dc:subject xml:lang="fr">Géographie</dc:subject>
+      <dc:subject xml:lang="en">Geography</dc:subject>
+      <dc:subject xml:lang="fr">Histoire</dc:subject>
+      <dc:subject xml:lang="en">History</dc:subject>
+    </oai_dc:dc>
+  </setDescription>
+</set>
+<set>
+  <setSpec>erudit.revue.ijtdc</setSpec>
+  <setName>International Journal for Talent Development and Creativity</setName>
+<setDescription><oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd"><dc:title>International Journal for Talent Development and Creativity</dc:title><dc:identifier>http://www.erudit.org/revue/ijtdc/</dc:identifier><dc:publisher>International Centre for Innovation in Education/Lost Prizes International</dc:publisher><dc:subject lang="en">Education</dc:subject><dc:subject lang="fr">Éducation</dc:subject><dc:subject lang="en">Psychology</dc:subject><dc:subject lang="fr">Psychologie</dc:subject></oai_dc:dc></setDescription></set>
+<resumptionToken cursor="200">X320091120/5</resumptionToken>
+</ListSets>
+</OAI-PMH>

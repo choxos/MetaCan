@@ -1,0 +1,38 @@
+# The OpenAlex snapshot partition (815 MB). Not committed: it is a public,
+# immutable artefact addressable by release date, so committing it would bloat
+# the repo without adding reproducibility. R/snapshot.R fetches it on demand and
+# the release is pinned (SNAPSHOT_RELEASE), which is what actually makes the
+# extraction reproducible.
+data/snapshot/
+*.parquet
+
+# Rendered output. The .md source and the Makefile are the artefacts; the PDF is
+# a build product and `make proposal` regenerates it (and fails on a third page).
+proposal/*.pdf
+proposal/*.aux
+proposal/*.log
+
+# Node
+app/node_modules/
+app/.next/
+app/out/
+.DS_Store
+
+# R
+.Rhistory
+.RData
+.Rproj.user/
+
+# Scratch
+*.tmp
+
+# Saved-webpage asset dumps (JS/CSS/images from the call-for-proposals and
+# Scholar pages). The readable source is kept; the scraped chrome is not.
+documentation/*_files/
+documentation/*.html
+documentation/*.htm
+# The screening inputs and labels ARE the study. findings 09-13 all read
+# canadian_sample.rds, so excluding it would mean a fresh clone cannot run
+# `make pilot-offline` -- and the proposal's central reproducibility claim
+# would be false. 3.1 MB is a fine price for that claim being true.
+.gstack/

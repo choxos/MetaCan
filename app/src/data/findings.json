@@ -1,0 +1,404 @@
+{
+  "affiliation_gap": {
+    "headline": "508,744 of 793,883 works (64%) in the metaresearch topic space have no raw affiliation strings in OpenAlex.",
+    "values": {
+      "topic_space_total": 793883,
+      "with_raw_affiliation": 285139,
+      "without_raw_affiliation": 508744,
+      "pct_without": 64.1
+    },
+    "computed_at_utc": "2026-07-12T01:30:49Z"
+  },
+  "agreement": {
+    "headline": "Swap which model is called 'the screener' and the base rate moves from 1.06% to 2.37%: a 2.2x spread, from 37,032 to 83,022 works in the frame. The two screeners agree on in/out for 98.4% of the frame (design-weighted), but that figure is dominated by the settled rejects: agreement falls to 95% inside the contested boundary. THE SCREENER-SWAP RANGE, NOT THE BINOMIAL CI ON EITHER MODEL ALONE, IS THE HONEST UNCERTAINTY ON THE FIELD'S SIZE.",
+    "values": {
+      "n_double_screened": 1290,
+      "base_rate_screener_a_pct": 1.06,
+      "base_rate_screener_b_pct": 2.37,
+      "swap_ratio_x": 2.24,
+      "field_size_screener_a": 37032,
+      "field_size_screener_b": 83022,
+      "published_binomial_ci_contains_b": false,
+      "screener_a": "claude-sonnet-4-6 (40 agents, medium effort)",
+      "screener_b": "gpt-5.6-sol (codex)",
+      "sampling": "stratified on screener A's label; positives/paratext/boundary taken whole, settled-OUT sampled",
+      "raw_agreement_inout_pct": 96.6,
+      "weighted_agreement_pct": 98.4,
+      "cohens_kappa_inout": 0.681,
+      "n_disagree_inout": 44,
+      "gpt_in_claude_out": 37,
+      "claude_in_gpt_out": 7,
+      "agreement_by_stratum": {
+        "stratum": [
+          "settled_out",
+          "boundary",
+          "positive",
+          "paratext"
+        ],
+        "n": [
+          600,
+          599,
+          58,
+          33
+        ],
+        "sel_prob": [
+          0.124921923797626,
+          1,
+          1,
+          1
+        ],
+        "agree_pct": [
+          99,
+          95,
+          87.9,
+          97
+        ],
+        "a_says_in": [
+          0,
+          0,
+          58,
+          0
+        ],
+        "b_says_in": [
+          6,
+          30,
+          51,
+          1
+        ]
+      },
+      "caveat": "PROCESS METRIC, NOT ACCURACY. Two LLMs share training data and failure modes; their errors are correlated and most correlated on the boundary. This is not 'duplicate screening': that term's warrant comes from independent human judgement. Accuracy rests on the human-coded probability sample (PROTOCOL s6.2). Agreement is reported per stratum because a pooled kappa on a 1.3% base rate is dominated by the cell where agreement is free (the kappa paradox). And note what the high agreement figure CONCEALS: it is dominated by the settled-OUT mass, while the two screeners imply base rates a factor of two apart. Quoting agreement without the swap would be presenting the reassuring statistic."
+    },
+    "computed_at_utc": "2026-07-12T01:30:53Z"
+  },
+  "audit_power": {
+    "headline": "The audit as first specified could not measure what it exists to measure. A simple random sample of the 3,461,261-record screened-out mass yields an expected 0.4 hits from the 600 records budgeted; seeing 20 would take 2,009 coder-hours against the 65 planned. Score-stratified oversampling rescues it only partly (the pilot shows 30 of 37 disputed works sit at the contested boundary), and it stays BLIND to the confident rejects. Which works those are is a MECHANISM, not a measured differential: the rubric says judge on the title alone with no abstract, and says T2 work may use none of the field's vocabulary, so a work with neither is rejected confidently and never sampled. (An earlier version cited a 3.6x figure here as if it were measured; it rested on four works and is withdrawn.) So recall is measured two other ways: against the 5,737 works that already carry rubric labels, and by KNOWN-ITEM recall on a venue reference set, because venue is an external criterion immune to the aboutness that defeats everything else.",
+    "values": {
+      "problem": "A simple random sample of the screened-out stratum cannot measure screening sensitivity: the works the screen wrongly rejected are a vanishing fraction of a 3.2M-record rejected mass.",
+      "screened_out_pool": 3461261,
+      "screened_out_is_the_screens_rejects": true,
+      "audit_screened_out_budgeted": 600,
+      "expected_hits_at_95_recall": 0.4,
+      "codings_needed_for_20_hits_at_95_recall": 30134,
+      "coder_hours_needed": 2009,
+      "coder_hours_budgeted": 65,
+      "naive_audit_is_powered": false,
+      "disputed_in_boundary": 30,
+      "disputed_in_settled_rejects": 6,
+      "misses_concentrate_near_threshold": true,
+      "blind_spot": "Score-stratified oversampling finds the works the screener ALMOST caught; it is blind to the ones it rejected CONFIDENTLY. WHICH works those are is a MECHANISM, not a measurement: the rubric says judge on the title alone when the abstract is missing, and the rubric also says T2 work may use none of the field's vocabulary, so a work with neither is rejected confidently and sits deep in the settled rejects. An earlier version cited a 3.6x differential from finding 11 as if this were measured. It is not, and that figure is withdrawn (DEVIATIONS.md D6). The venue instrument is how the prediction gets tested rather than asserted.",
+      "blind_spot_is_a_mechanism_not_a_measurement": true,
+      "instrument_1": "Measure any filter's recall against the 5737 works that already carry full-rubric labels, exactly as finding 12 scored the topic route. Free, and it needs no needle-hunting in the discarded mass.",
+      "instrument_2": "Known-item recall on an external criterion: VENUE. A Canadian-authored paper in Social Studies of Science is T2 by where it was published, whatever its abstract is about. Venue is immune to aboutness, which is what defeats topic retrieval (finding 12) and title-only screening (finding 11), so it is the only instrument that can see into the blind spot.",
+      "reference_venues": [
+        "Social Studies of Science",
+        "Scientometrics",
+        "Quantitative Science Studies",
+        "Research Integrity and Peer Review",
+        "Journal of the Association for Information Science and Technology",
+        "Research Evaluation",
+        "Accountability in Research",
+        "PLOS ONE (metaresearch collection)",
+        "Recherches qualitatives",
+        "Documentation et bibliotheques"
+      ],
+      "n_labelled_works": 5737,
+      "n_in_scope": 75,
+      "caveat": "The recall grid assumes the screen's misses are uniform in the rejected mass, which the pilot shows they are not (they concentrate at the boundary). That makes the naive design LESS hopeless than the grid implies but does not save it, and it does nothing at all about the confident-reject blind spot. Known-item recall on a venue reference set is a non-probability estimate: it bounds and diagnoses recall on the hard cases, it does not replace the design-weighted population estimate."
+    },
+    "computed_at_utc": "2026-07-12T01:30:55Z"
+  },
+  "base_rate": {
+    "headline": "Screening 5,737 unfiltered Canadian works against the rubric puts metaresearch at 1.31% of Canadian research, implying ~45,850 works in the 3.5M-work frame, sizing the field without a search strategy at all. The 95% CI on this screener's labels is 1.03-1.64%, but that is sampling error, NOT the uncertainty: swap the screener and the estimate lands outside it (finding 10). The field is somewhere between 37,000 and 83,000 works, and only the human audit can narrow that.",
+    "values": {
+      "n_screened": 5737,
+      "screener": "claude-sonnet-4-6, 40 agents, medium effort, locked rubric",
+      "sampling_frame": "unfiltered Canadian works from the pinned 2026-06-24 snapshot partition",
+      "tier_counts": {
+        "OUT": 5621,
+        "T1": 40,
+        "T2": 35,
+        "T3": 41
+      },
+      "n_in_scope_t1_t2": 75,
+      "base_rate_pct": 1.31,
+      "base_rate_ci_lo_pct": 1.03,
+      "base_rate_ci_hi_pct": 1.64,
+      "canadian_frame_size": 3507205,
+      "estimated_field_size": 45850,
+      "estimated_field_lo": 36111,
+      "estimated_field_hi": 57378,
+      "topic_route_retrieved": 14873,
+      "binomial_ci_is_not_the_uncertainty": true,
+      "caveat": "Machine labels, not a human gold standard, and the binomial CI above is sampling error on ONE screener; the honest uncertainty is the screener-swap range in finding 10 (1.06% to 2.37%). The partition is also not a uniform draw: it under-represents works with abstracts, where the screen finds 2x more metaresearch (finding 11). This is a hypothesis with a denominator; the human-coded probability sample tests it. Do NOT divide topic_route_retrieved by estimated_field_size; see finding 12."
+    },
+    "computed_at_utc": "2026-07-12T01:30:53Z"
+  },
+  "base_rate_robustness": {
+    "headline": "The base rate's real bias is not recency but MISSING ABSTRACTS: 31.5% of the partition has none, and the screen finds 0.78% metaresearch there against 1.55% where an abstract exists (chi-square p = 0.023, robust to adjustment for year and language). A third of the frame is screened on its title alone. What this does NOT show, and an earlier draft wrongly claimed, is that the blindness is DIFFERENTIAL by tradition: the T2 no-abstract cell holds 4 works and the interaction is not significant (p = 0.141). That claim is withdrawn, as is 'Erudit's exact profile' (the stratum is 99% English and the works are NEWER, not older). The main effect is the finding.",
+    "values": {
+      "partition": "updated_date=2026-06-24",
+      "records_sent_to_screener": 6202,
+      "records_silently_lost": 465,
+      "records_lost_pct": 7.5,
+      "pct_no_abstract_among_lost": 40.2,
+      "pct_no_abstract_among_labelled": 31.5,
+      "chisq_p_loss_bias": 0.00013,
+      "losses_are_biased": true,
+      "works_2000_09": 2704,
+      "works_2020_25": 1195,
+      "old_to_new_ratio": 2.3,
+      "partition_skews_old": true,
+      "base_rate_by_era_pct": {
+        "2000-09": 1.24,
+        "2010-19": 1.35,
+        "2020-25": 1.4
+      },
+      "chisq_p_era": 0.906,
+      "era_events": 75,
+      "era_check_is_underpowered": true,
+      "no_abstract_share_pct": 31.5,
+      "base_rate_no_abstract_pct": 0.78,
+      "base_rate_has_abstract_pct": 1.55,
+      "chisq_p_abstract": 0.023,
+      "abstract_effect_x": 2,
+      "t1_penalty_x": 1.4,
+      "t2_penalty_x": 3.6,
+      "t2_no_abstract_cell_count": 4,
+      "interaction_p": 0.141,
+      "differential_is_supported": false,
+      "differential_claim_withdrawn": true,
+      "no_abstract_mean_year": 2013.7,
+      "has_abstract_mean_year": 2010.3,
+      "no_abstract_stratum_pct_english": 99,
+      "p_no_abstract_given_english_pct": 32,
+      "p_no_abstract_given_non_english_pct": 12.7,
+      "erudit_profile_claim_holds": false,
+      "residual_bias_direction": "anti-conservative for coverage claims: the partition over-represents abstract-less works (31.5%), where the screen finds 2x less metaresearch, so 1.31% likely UNDER-states the frame's base rate, and the field is larger than the headline implies",
+      "supersedes": "THREE retractions live here. (1) An earlier version tested ERA only, called the base rate robust, and published 3100/2900/1500 as percentages (a dplyr summarise() column-masking bug). (2) It then claimed the blindness is DIFFERENTIAL, T2 losing 3.6x against T1's 1.4x, and made that the proposal's whole answer to the inclusiveness criterion. The T2 no-abstract cell holds FOUR works and the interaction is not significant (p = 0.141). WITHDRAWN. (3) It claimed missing abstracts track 'older, non-English' records, 'Erudit's exact profile'. Backwards: they are NEWER, and the stratum is 99% ENGLISH. WITHDRAWN. See DEVIATIONS.md D4, D5, D6.",
+      "caveat": "What survives is the MAIN EFFECT and only the main effect: a third of the frame is screened on its title alone and the screen finds half as much metaresearch there (p = 0.023, robust to adjustment for year and language). That is a real coverage problem and a reason to stratify the audit on abstract availability. It is NOT evidence of differential blindness by tradition, and this finding no longer says it is. Separately, the era check is underpowered (75 events, 3 strata) and cannot refute an era effect; it merely fails to detect one. And note D2: the harness silently dropped 465 records, non-randomly, on this very covariate."
+    },
+    "computed_at_utc": "2026-07-12T01:30:54Z"
+  },
+  "canadian_linkage": {
+    "headline": "Affiliation finds 14,873 works; a further 3,964 are about Canada with no Canadian affiliation. NSERC has 9.2x SSHRC's linked works, so funder-based rules under-count the social sciences.",
+    "values": {
+      "by_affiliation": 14873,
+      "by_funder": 1331,
+      "about_canada": 5704,
+      "about_canada_no_affiliation": 3964,
+      "funder_works": {
+        "Canadian Institutes of Health Research": 194681,
+        "Natural Sciences and Engineering Research Council of Canada": 433090,
+        "Social Sciences and Humanities Research Council of Canada": 46913,
+        "Canada Foundation for Innovation": 16753
+      },
+      "sshrc_works": 46913,
+      "nserc_works": 433090,
+      "nserc_to_sshrc_ratio": 9.2,
+      "affiliation_noise": {
+        "University of London": 494,
+        "Impact": 475
+      }
+    },
+    "computed_at_utc": "2026-07-12T01:30:52Z"
+  },
+  "capture_recapture_fails": {
+    "headline": "Naive two-route capture-recapture estimates 467,541 Canadian metaresearch works, implying Canada produces 59% of the world's metaresearch against an observed 1.9%. The estimator is void here; we cut it rather than dress it up as a lower bound.",
+    "values": {
+      "route1_topic": 14873,
+      "route2_naive_lexical": 77583,
+      "overlap": 2468,
+      "observed_union": 89988,
+      "lincoln_petersen_estimate": 467541,
+      "entire_topic_space_all_countries": 793883,
+      "canada_observed_share_pct": 1.9,
+      "canada_implied_share_pct": 58.9,
+      "estimator_void": true
+    },
+    "computed_at_utc": "2026-07-12T01:30:51Z"
+  },
+  "erudit": {
+    "headline": "Erudit matches 0 sources in OpenAlex, but its OAI-PMH endpoint is live and exposes 379 harvestable sets.",
+    "values": {
+      "openalex_sources_matching_erudit": 0,
+      "oai_endpoint": "https://oai.erudit.org/oai/request",
+      "oai_repository_name": "Erudit",
+      "oai_earliest_datestamp": "2011-06-03",
+      "oai_harvestable_sets": 379
+    },
+    "computed_at_utc": "2026-07-12T01:30:50Z"
+  },
+  "label_limits": {
+    "headline": "Two limits on the machine labels, found by attacking the fixes. (A) The topic route's recall is 12% against screener A and 7% against screener B: finding 14's instrument (ii) scores filters against MACHINE labels, so it measures agreement with a machine, not accuracy, and finding 10 already showed that swings by a factor of two. The conclusion strengthens (the second screener thinks the route is WORSE) but 12% is not truth. (B) The pilot holds exactly 1 French in-scope work, so seeing 20 French positives needs ~1,620 coded French records against an audit budget of 1,000. FRENCH SENSITIVITY IS NOT ESTIMABLE IN AN OPENALEX-ONLY FRAME. That is an argument for the Erudit harvest, not against the French claim, but the pilot did not run that harvest, so the power is stated as a condition rather than a promise.",
+    "values": {
+      "route_recall_vs_screener_a_pct": 12,
+      "route_recall_vs_screener_b_pct": 7,
+      "route_recall_a_ci": [5.6, 21.6],
+      "route_recall_b_ci": [2.5, 14.3],
+      "positives_screener_a": 75,
+      "positives_screener_b": 88,
+      "instrument_ii_is_model_dependent": true,
+      "instrument_ii_caveat": "Finding 14's instrument (ii) scores a filter against the 5,737 MACHINE labels. That measures agreement with a machine, not accuracy. Swap the machine and the topic route's recall moves from 12% to 7%. The conclusion (the route finds a small fraction) survives and strengthens; the NUMBER is not a measurement against truth.",
+      "french_records_in_pilot": 81,
+      "french_in_scope_in_pilot": 1,
+      "french_records_needed_for_20_positives": 1620,
+      "audit_budget_records": 1000,
+      "french_stratum_is_powered": false,
+      "french_power_depends_on": "the Erudit harvest, which the pilot did NOT run (it verified the endpoint: 379 live sets)",
+      "caveat": "(A) is a limit on every recall number this project quotes against machine labels, including its own headline. (B) is a limit on the inclusiveness promise: French sensitivity cannot be estimated in an OpenAlex-only frame, because Erudit matches zero OpenAlex sources and the francophone literature is therefore largely absent from the frame rather than merely sparse in it. Both are stated in the proposal rather than left for a reviewer."
+    },
+    "computed_at_utc": "2026-07-12T01:30:56Z"
+  },
+  "language_gap": {
+    "headline": "French is 2.7% (395/14,873) of Canadian metaresearch in OpenAlex. A dedicated French lexicon finds 168 Canadian works, against 8,026 in English.",
+    "values": {
+      "canadian_topic_works": 14873,
+      "n_english": 14028,
+      "n_french": 395,
+      "pct_french": 2.7,
+      "en_lexicon_canadian_hits": 8026,
+      "fr_lexicon_canadian_hits": 168,
+      "fr_lexicon_world_hits": 4682,
+      "canada_share_of_world_french": 3.6
+    },
+    "computed_at_utc": "2026-07-12T01:30:50Z"
+  },
+  "openalex_is_metered": {
+    "headline": "The OpenAlex API is metered (1,000 credits per ~11h; $0.10 free tier). Enumerating the 3,507,205-work Canadian frame needs 17,537 cursor-paged calls: 8.2 days per pass on the free tier. An API-based pipeline at this scale is neither free nor reproducible; the pinned snapshot is both.",
+    "values": {
+      "observed_retry_after_s": 40268,
+      "observed_ratelimit_limit": 1000,
+      "observed_free_tier_usd": 0.1,
+      "observed_cost_per_call_usd": 0.0001,
+      "frame_size_works": 3507205,
+      "per_page_max": 200,
+      "calls_for_one_pass": 17537,
+      "days_on_free_tier_per_pass": 8.2,
+      "prepaid_cost_per_pass_usd": 1.75
+    },
+    "computed_at_utc": "2026-07-12T01:30:52Z"
+  },
+  "polysemy": {
+    "headline": "The single term reproducibility retrieves 43,392 Canadian works, of which only 0.8% fall in the metaresearch topic space. Keyword retrieval cannot separate the metaresearch sense from the everyday one.",
+    "values": {
+      "hits_alone": {
+        "reproducibility": 43392,
+        "\"peer review\"": 21234,
+        "\"open access\"": 6609,
+        "\"open science\"": 1925
+      },
+      "hits_alone_and_on_topic": {
+        "reproducibility": 362,
+        "\"peer review\"": 795,
+        "\"open access\"": 634,
+        "\"open science\"": 325
+      },
+      "topic_space_precision_pct": {
+        "reproducibility": 0.8,
+        "\"peer review\"": 3.7,
+        "\"open access\"": 9.6,
+        "\"open science\"": 16.9
+      },
+      "disciplined_lexicon_hits": 8026,
+      "worst_term": "reproducibility"
+    },
+    "computed_at_utc": "2026-07-12T01:30:51Z"
+  },
+  "screening_cost": {
+    "headline": "The full rubric over the 3,507,205-work frame with two screeners costs $4,767, not the $24,379 an earlier version of this script reported: the rubric is a system prompt sent once per CALL, and the pilot's own chunks batch 155 works per call, so it was overcharged 5.1x. That error was not cosmetic. It made me propose a cheap TRIAGE in front of the screen, which is a RETRIEVAL STEP in a project whose central finding is that retrieval destroys these maps. With the arithmetic right the triage is unnecessary: the full rubric over EVERY work in the frame, plus a second screener on a 20,000-record sample, costs $808 and leaves ~$2,092 for the human coder. THE PREFILTER IS DELETED.",
+    "values": {
+      "measured_from": "pilot/screening/chunks/*.json and protocol/rubric.md, not asserted",
+      "chars_per_token_assumed": 4,
+      "tokens_per_work": 256,
+      "tokens_rubric": 1876,
+      "tokens_per_label": 37,
+      "batch_works_per_call": 155,
+      "frame_size": 3507205,
+      "grant_usd_approx": 2900,
+      "naive_cost_charging_rubric_per_work_usd": 24379,
+      "corrected_cost_two_screeners_usd": 4767,
+      "cost_overstatement_x": 5.1,
+      "cost_full_rubric_whole_frame_cheap_usd": 795,
+      "cost_full_rubric_whole_frame_sonnet_usd": 2384,
+      "cost_second_screener_on_sample_usd": 14,
+      "second_screener_n": 20000,
+      "total_no_prefilter_usd": 808,
+      "left_for_human_coder_usd": 2092,
+      "prefilter_needed": false,
+      "prefilter_design_total_usd": 698,
+      "prefilter_saving_usd": -110,
+      "prefilter_deleted_because": "It is a RETRIEVAL STEP, in a project whose central finding is that retrieval destroys these maps (finding 12: the topic route finds 12% of the field). It existed only because the rubric was miscosted at once per WORK rather than once per CALL, overstating the alternative 5.1x. With the arithmetic right it saves almost nothing and costs the thesis. Deleted.",
+      "pilot_works_screened": 6202,
+      "frame_to_pilot_ratio": 565,
+      "method_that_scales": "batch inference, not agent fan-out",
+      "supersedes": "an earlier version charged the rubric once per work, reported $24,379 for the full-frame two-screener design, called it 'eight times the grant', and used that to justify a cheap prefilter. The rubric is a system prompt sent once per CALL, and the pilot's own chunks batch 155 works per call. DEVIATIONS.md D7.",
+      "caveat": "Token counts use a 4-chars-per-token approximation and list prices as of 2026-07; both will move, and the conclusion is robust to +/-25% in either. Screening the frame with a cheaper model than the pilot used makes the CHOICE OF MODEL more consequential, not less: finding 10 shows two screeners already imply base rates a factor of two apart. That is precisely why the second screener and the screener-swap range are reported, and why the human audit is the study."
+    },
+    "computed_at_utc": "2026-07-12T01:30:55Z"
+  },
+  "topic_route_recall": {
+    "headline": "Scored against the rubric, the topic route retrieves 12% of Canadian metaresearch (95% CI 5.6-21.6%) at 60% precision: it misses 66 of 75. It fails because OpenAlex files a work by what it is about, and metaresearch about cardiology reads as cardiology: the field is invisible to topic retrieval precisely because it is about other fields.",
+    "values": {
+      "n_screened": 5737,
+      "n_metaresearch": 75,
+      "n_retrieved_by_route": 15,
+      "true_positives": 9,
+      "false_positives": 6,
+      "false_negatives": 66,
+      "recall_pct": 12,
+      "recall_ci_lo_pct": 5.6,
+      "recall_ci_hi_pct": 21.6,
+      "precision_pct": 60,
+      "precision_ci_lo_pct": 32.3,
+      "precision_ci_hi_pct": 83.7,
+      "missed_works_by_field": {
+        "Social Sciences": 17,
+        "Medicine": 16,
+        "Health Professions": 7,
+        "Business, Management and Accounting": 4,
+        "Economics, Econometrics and Finance": 4,
+        "Computer Science": 3
+      },
+      "scored_by": "primary_topic.id (the key R/frame.R defines the route with), not display name",
+      "route_size_implied_by_sample": 9170,
+      "route_size_from_api": 14873,
+      "reconciliation_gap_x": 1.62,
+      "supersedes": "the earlier 32.4% figure (14,873/45,850), which divided a retrieved set by a true field size",
+      "caveat": "Small n on the positive class ( 75 metaresearch works, of which 15 were on the route), so the intervals are wide. Separately, the sample-implied route size does not reconcile with the API's 14,873 and I cannot say why at n = 15 on-route works; the likeliest cause is that one updated_date partition is not a uniform draw (finding 11). Recall is unaffected: it is a within-sample ratio, not an extrapolation."
+    },
+    "computed_at_utc": "2026-07-12T01:30:54Z"
+  },
+  "topics": {
+    "headline": "Of 4,516 OpenAlex topics, 0 name metaresearch as a field. The 11 topics that do carry metaresearch content are scattered across 7 different OpenAlex fields.",
+    "values": {
+      "n_topics_in_taxonomy": 4516,
+      "n_topics_naming_field": 0,
+      "topics_naming_field": [],
+      "n_candidate_topics": 11,
+      "n_fields_spanned": 7,
+      "fields_spanned": [
+        "Arts and Humanities",
+        "Computer Science",
+        "Decision Sciences",
+        "Mathematics",
+        "Medicine",
+        "Psychology",
+        "Social Sciences"
+      ],
+      "candidate_topic_ids": [
+        "T10102",
+        "T13607",
+        "T13516",
+        "T11937",
+        "T10206",
+        "T10582",
+        "T10267",
+        "T10778",
+        "T13558",
+        "T13284",
+        "T11875"
+      ]
+    },
+    "computed_at_utc": "2026-07-12T01:30:49Z"
+  }
+}

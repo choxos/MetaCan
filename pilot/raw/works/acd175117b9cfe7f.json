@@ -1,0 +1,1090 @@
+{
+  "request": {
+    "endpoint": "works",
+    "params": {
+      "filter": "primary_topic.id:T10102|T13607|T13516|T11937|T10206|T10582|T10267|T10778|T13558|T13284|T11875,authorships.institutions.country_code:ca",
+      "group_by": "authorships.institutions.lineage",
+      "mailto": "ahmad.pub@gmail.com"
+    }
+  },
+  "retrieved_at_utc": "2026-07-11T12:33:09Z",
+  "payload": {
+    "meta": {
+      "count": 14873,
+      "db_response_time_ms": 45,
+      "page": 1,
+      "per_page": 200,
+      "groups_count": 200,
+      "x_query": {
+        "oql": "works where authorships.institutions.country_code is (ca)\n  and topic is (\n    T10102 or T10206 or T10267 or T10582 or T10778 or T11875 or T11937 or T13284\n    or T13516 or T13558 or T13607\n  )\ngroup by institution",
+        "oqo": {
+          "get_rows": "works",
+          "filter_rows": [
+            {
+              "column_id": "authorships.institutions.country_code",
+              "value": "ca"
+            },
+            {
+              "join": "or",
+              "filters": [
+                {
+                  "column_id": "primary_topic.id",
+                  "value": "T10102"
+                },
+                {
+                  "column_id": "primary_topic.id",
+                  "value": "T10206"
+                },
+                {
+                  "column_id": "primary_topic.id",
+                  "value": "T10267"
+                },
+                {
+                  "column_id": "primary_topic.id",
+                  "value": "T10582"
+                },
+                {
+                  "column_id": "primary_topic.id",
+                  "value": "T10778"
+                },
+                {
+                  "column_id": "primary_topic.id",
+                  "value": "T11875"
+                },
+                {
+                  "column_id": "primary_topic.id",
+                  "value": "T11937"
+                },
+                {
+                  "column_id": "primary_topic.id",
+                  "value": "T13284"
+                },
+                {
+                  "column_id": "primary_topic.id",
+                  "value": "T13516"
+                },
+                {
+                  "column_id": "primary_topic.id",
+                  "value": "T13558"
+                },
+                {
+                  "column_id": "primary_topic.id",
+                  "value": "T13607"
+                }
+              ]
+            }
+          ],
+          "group_by": [
+            {
+              "column_id": "authorships.institutions.lineage"
+            }
+          ]
+        },
+        "url": "/works?filter=authorships.institutions.country_code:ca,primary_topic.id:T10102|T10206|T10267|T10582|T10778|T11875|T11937|T13284|T13516|T13558|T13607&group_by=authorships.institutions.lineage"
+      },
+      "cost_usd": 0.0001
+    },
+    "group_by": [
+      {
+        "key": "https://openalex.org/I185261750",
+        "key_display_name": "University of Toronto",
+        "count": 2330
+      },
+      {
+        "key": "https://openalex.org/I98251732",
+        "key_display_name": "McMaster University",
+        "count": 1695
+      },
+      {
+        "key": "https://openalex.org/I153718931",
+        "key_display_name": "University of Ottawa",
+        "count": 1530
+      },
+      {
+        "key": "https://openalex.org/I5023651",
+        "key_display_name": "McGill University",
+        "count": 1191
+      },
+      {
+        "key": "https://openalex.org/I141945490",
+        "key_display_name": "University of British Columbia",
+        "count": 1148
+      },
+      {
+        "key": "https://openalex.org/I154425047",
+        "key_display_name": "University of Alberta",
+        "count": 864
+      },
+      {
+        "key": "https://openalex.org/I2800722420",
+        "key_display_name": "Ottawa Hospital",
+        "count": 849
+      },
+      {
+        "key": "https://openalex.org/I125749732",
+        "key_display_name": "Western University",
+        "count": 779
+      },
+      {
+        "key": "https://openalex.org/I70931966",
+        "key_display_name": "Université de Montréal",
+        "count": 655
+      },
+      {
+        "key": "https://openalex.org/I4388482656",
+        "key_display_name": "Ottawa Hospital Research Institute",
+        "count": 634
+      },
+      {
+        "key": "https://openalex.org/I168635309",
+        "key_display_name": "University of Calgary",
+        "count": 547
+      },
+      {
+        "key": "https://openalex.org/I204722609",
+        "key_display_name": "Queen's University",
+        "count": 504
+      },
+      {
+        "key": "https://openalex.org/I124357947",
+        "key_display_name": "University of London",
+        "count": 494
+      },
+      {
+        "key": "https://openalex.org/I4210161256",
+        "key_display_name": "Impact",
+        "count": 475
+      },
+      {
+        "key": "https://openalex.org/I49663120",
+        "key_display_name": "Université du Québec",
+        "count": 455
+      },
+      {
+        "key": "https://openalex.org/I129902397",
+        "key_display_name": "Dalhousie University",
+        "count": 430
+      },
+      {
+        "key": "https://openalex.org/I18014758",
+        "key_display_name": "Simon Fraser University",
+        "count": 404
+      },
+      {
+        "key": "https://openalex.org/I40120149",
+        "key_display_name": "University of Oxford",
+        "count": 403
+      },
+      {
+        "key": "https://openalex.org/I192455969",
+        "key_display_name": "York University",
+        "count": 375
+      },
+      {
+        "key": "https://openalex.org/I1325899441",
+        "key_display_name": "University Health Network",
+        "count": 357
+      },
+      {
+        "key": "https://openalex.org/I159129438",
+        "key_display_name": "Université du Québec à Montréal",
+        "count": 349
+      },
+      {
+        "key": "https://openalex.org/I4399598460",
+        "key_display_name": "Unity Health Toronto",
+        "count": 338
+      },
+      {
+        "key": "https://openalex.org/I1297363086",
+        "key_display_name": "St. Michael's Hospital",
+        "count": 313
+      },
+      {
+        "key": "https://openalex.org/I79817857",
+        "key_display_name": "University of Guelph",
+        "count": 313
+      },
+      {
+        "key": "https://openalex.org/I151746483",
+        "key_display_name": "University of Waterloo",
+        "count": 277
+      },
+      {
+        "key": "https://openalex.org/I46247651",
+        "key_display_name": "University of Manitoba",
+        "count": 269
+      },
+      {
+        "key": "https://openalex.org/I212119943",
+        "key_display_name": "University of Victoria",
+        "count": 266
+      },
+      {
+        "key": "https://openalex.org/I76442945",
+        "key_display_name": "Hamilton Health Sciences",
+        "count": 264
+      },
+      {
+        "key": "https://openalex.org/I32625721",
+        "key_display_name": "University of Saskatchewan",
+        "count": 251
+      },
+      {
+        "key": "https://openalex.org/I97018004",
+        "key_display_name": "Stanford University",
+        "count": 251
+      },
+      {
+        "key": "https://openalex.org/I154526488",
+        "key_display_name": "Inserm",
+        "count": 248
+      },
+      {
+        "key": "https://openalex.org/I136199984",
+        "key_display_name": "Harvard University",
+        "count": 243
+      },
+      {
+        "key": "https://openalex.org/I2801317318",
+        "key_display_name": "Hospital for Sick Children",
+        "count": 240
+      },
+      {
+        "key": "https://openalex.org/I1294671590",
+        "key_display_name": "Centre National de la Recherche Scientifique",
+        "count": 219
+      },
+      {
+        "key": "https://openalex.org/I1299022934",
+        "key_display_name": "United States Department of Health and Human Services",
+        "count": 214
+      },
+      {
+        "key": "https://openalex.org/I67031392",
+        "key_display_name": "Carleton University",
+        "count": 203
+      },
+      {
+        "key": "https://openalex.org/I45129253",
+        "key_display_name": "University College London",
+        "count": 202
+      },
+      {
+        "key": "https://openalex.org/I4210125326",
+        "key_display_name": "Public Health Ontario",
+        "count": 189
+      },
+      {
+        "key": "https://openalex.org/I110535807",
+        "key_display_name": "Winnipeg Regional Health Authority",
+        "count": 183
+      },
+      {
+        "key": "https://openalex.org/I56590836",
+        "key_display_name": "Monash University",
+        "count": 183
+      },
+      {
+        "key": "https://openalex.org/I2799330578",
+        "key_display_name": "Children's Hospital of Eastern Ontario",
+        "count": 182
+      },
+      {
+        "key": "https://openalex.org/I2801766832",
+        "key_display_name": "McGill University Health Centre",
+        "count": 182
+      },
+      {
+        "key": "https://openalex.org/I72054575",
+        "key_display_name": "Cochrane",
+        "count": 177
+      },
+      {
+        "key": "https://openalex.org/I59293822",
+        "key_display_name": "St. Joseph’s Healthcare Hamilton",
+        "count": 176
+      },
+      {
+        "key": "https://openalex.org/I145311948",
+        "key_display_name": "Johns Hopkins University",
+        "count": 173
+      },
+      {
+        "key": "https://openalex.org/I2802362269",
+        "key_display_name": "Health Sciences Centre",
+        "count": 173
+      },
+      {
+        "key": "https://openalex.org/I43406934",
+        "key_display_name": "Université Laval",
+        "count": 166
+      },
+      {
+        "key": "https://openalex.org/I204730241",
+        "key_display_name": "Université Paris Cité",
+        "count": 164
+      },
+      {
+        "key": "https://openalex.org/I1323843004",
+        "key_display_name": "Sunnybrook Health Science Centre",
+        "count": 162
+      },
+      {
+        "key": "https://openalex.org/I887064364",
+        "key_display_name": "University of Amsterdam",
+        "count": 158
+      },
+      {
+        "key": "https://openalex.org/I592451",
+        "key_display_name": "Indiana University",
+        "count": 155
+      },
+      {
+        "key": "https://openalex.org/I4210141030",
+        "key_display_name": "SickKids Foundation",
+        "count": 153
+      },
+      {
+        "key": "https://openalex.org/I60158472",
+        "key_display_name": "Concordia University",
+        "count": 150
+      },
+      {
+        "key": "https://openalex.org/I2802286613",
+        "key_display_name": "Government of Canada",
+        "count": 149
+      },
+      {
+        "key": "https://openalex.org/I129604602",
+        "key_display_name": "The University of Sydney",
+        "count": 146
+      },
+      {
+        "key": "https://openalex.org/I4210088668",
+        "key_display_name": "Institut National de Recherche pour l'Agriculture, l'Alimentation et l'Environnement",
+        "count": 145
+      },
+      {
+        "key": "https://openalex.org/I1299303238",
+        "key_display_name": "National Institutes of Health",
+        "count": 144
+      },
+      {
+        "key": "https://openalex.org/I4210089966",
+        "key_display_name": "London School of Hygiene & Tropical Medicine",
+        "count": 141
+      },
+      {
+        "key": "https://openalex.org/I130438778",
+        "key_display_name": "Memorial University of Newfoundland",
+        "count": 138
+      },
+      {
+        "key": "https://openalex.org/I4210151833",
+        "key_display_name": "Amsterdam University Medical Centers",
+        "count": 138
+      },
+      {
+        "key": "https://openalex.org/I1330342723",
+        "key_display_name": "Mayo Clinic",
+        "count": 136
+      },
+      {
+        "key": "https://openalex.org/I4210147079",
+        "key_display_name": "Institute for Clinical Evaluative Sciences",
+        "count": 136
+      },
+      {
+        "key": "https://openalex.org/I48633490",
+        "key_display_name": "Mass General Brigham",
+        "count": 132
+      },
+      {
+        "key": "https://openalex.org/I201448701",
+        "key_display_name": "University of Washington",
+        "count": 128
+      },
+      {
+        "key": "https://openalex.org/I36234482",
+        "key_display_name": "University of Bristol",
+        "count": 126
+      },
+      {
+        "key": "https://openalex.org/I97565354",
+        "key_display_name": "University of Lausanne",
+        "count": 126
+      },
+      {
+        "key": "https://openalex.org/I165779595",
+        "key_display_name": "The University of Melbourne",
+        "count": 125
+      },
+      {
+        "key": "https://openalex.org/I176337269",
+        "key_display_name": "Canadian Institutes of Health Research",
+        "count": 125
+      },
+      {
+        "key": "https://openalex.org/I2802542264",
+        "key_display_name": "University Hospital of Basel",
+        "count": 124
+      },
+      {
+        "key": "https://openalex.org/I1850255",
+        "key_display_name": "University of Basel",
+        "count": 119
+      },
+      {
+        "key": "https://openalex.org/I52099693",
+        "key_display_name": "University of York",
+        "count": 117
+      },
+      {
+        "key": "https://openalex.org/I118564535",
+        "key_display_name": "University of Bern",
+        "count": 116
+      },
+      {
+        "key": "https://openalex.org/I2802654988",
+        "key_display_name": "Princess Margaret Cancer Centre",
+        "count": 116
+      },
+      {
+        "key": "https://openalex.org/I4210087105",
+        "key_display_name": "UK Research and Innovation",
+        "count": 116
+      },
+      {
+        "key": "https://openalex.org/I135117807",
+        "key_display_name": "Université de Sherbrooke",
+        "count": 114
+      },
+      {
+        "key": "https://openalex.org/I99464096",
+        "key_display_name": "KU Leuven",
+        "count": 112
+      },
+      {
+        "key": "https://openalex.org/I98677209",
+        "key_display_name": "University of Edinburgh",
+        "count": 111
+      },
+      {
+        "key": "https://openalex.org/I75381157",
+        "key_display_name": "Wilfrid Laurier University",
+        "count": 110
+      },
+      {
+        "key": "https://openalex.org/I2801816099",
+        "key_display_name": "Women's College Hospital",
+        "count": 108
+      },
+      {
+        "key": "https://openalex.org/I4210161245",
+        "key_display_name": "Cochrane",
+        "count": 108
+      },
+      {
+        "key": "https://openalex.org/I98635879",
+        "key_display_name": "American University of Beirut",
+        "count": 105
+      },
+      {
+        "key": "https://openalex.org/I126859394",
+        "key_display_name": "Alberta Health Services",
+        "count": 104
+      },
+      {
+        "key": "https://openalex.org/I1322918889",
+        "key_display_name": "United States Department of Veterans Affairs",
+        "count": 104
+      },
+      {
+        "key": "https://openalex.org/I79619799",
+        "key_display_name": "University of Birmingham",
+        "count": 104
+      },
+      {
+        "key": "https://openalex.org/I4210119109",
+        "key_display_name": "Indiana University Bloomington",
+        "count": 103
+      },
+      {
+        "key": "https://openalex.org/I74413500",
+        "key_display_name": "University of Windsor",
+        "count": 102
+      },
+      {
+        "key": "https://openalex.org/I114027177",
+        "key_display_name": "University of North Carolina at Chapel Hill",
+        "count": 101
+      },
+      {
+        "key": "https://openalex.org/I130238516",
+        "key_display_name": "University of Minnesota",
+        "count": 101
+      },
+      {
+        "key": "https://openalex.org/I2799886695",
+        "key_display_name": "Veterans Health Administration",
+        "count": 99
+      },
+      {
+        "key": "https://openalex.org/I4210145570",
+        "key_display_name": "Bruyère",
+        "count": 99
+      },
+      {
+        "key": "https://openalex.org/I79576946",
+        "key_display_name": "University of Pennsylvania",
+        "count": 99
+      },
+      {
+        "key": "https://openalex.org/I193662353",
+        "key_display_name": "Utrecht University",
+        "count": 98
+      },
+      {
+        "key": "https://openalex.org/I195460627",
+        "key_display_name": "University of Aberdeen",
+        "count": 98
+      },
+      {
+        "key": "https://openalex.org/I530967",
+        "key_display_name": "Toronto Metropolitan University",
+        "count": 97
+      },
+      {
+        "key": "https://openalex.org/I241749",
+        "key_display_name": "University of Cambridge",
+        "count": 94
+      },
+      {
+        "key": "https://openalex.org/I2801824472",
+        "key_display_name": "Jewish General Hospital",
+        "count": 94
+      },
+      {
+        "key": "https://openalex.org/I2801902503",
+        "key_display_name": "Gouvernement du Québec",
+        "count": 94
+      },
+      {
+        "key": "https://openalex.org/I4210097159",
+        "key_display_name": "Assistance Publique – Hôpitaux de Paris",
+        "count": 94
+      },
+      {
+        "key": "https://openalex.org/I4210147381",
+        "key_display_name": "Oxford University Hospitals NHS Trust",
+        "count": 93
+      },
+      {
+        "key": "https://openalex.org/I2802229882",
+        "key_display_name": "University Hospital of Lausanne",
+        "count": 92
+      },
+      {
+        "key": "https://openalex.org/I1283280774",
+        "key_display_name": "Brigham and Women's Hospital",
+        "count": 91
+      },
+      {
+        "key": "https://openalex.org/I27837315",
+        "key_display_name": "University of Michigan",
+        "count": 91
+      },
+      {
+        "key": "https://openalex.org/I4210153126",
+        "key_display_name": "Istituti di Ricovero e Cura a Carattere Scientifico",
+        "count": 91
+      },
+      {
+        "key": "https://openalex.org/I170897317",
+        "key_display_name": "Duke University",
+        "count": 90
+      },
+      {
+        "key": "https://openalex.org/I315704651",
+        "key_display_name": "Leibniz Association",
+        "count": 90
+      },
+      {
+        "key": "https://openalex.org/I4210135124",
+        "key_display_name": "Institute of Social and Preventive Medicine",
+        "count": 90
+      },
+      {
+        "key": "https://openalex.org/I31746571",
+        "key_display_name": "UNSW Sydney",
+        "count": 89
+      },
+      {
+        "key": "https://openalex.org/I4210130843",
+        "key_display_name": "Sinai Health System",
+        "count": 89
+      },
+      {
+        "key": "https://openalex.org/I78577930",
+        "key_display_name": "Columbia University",
+        "count": 89
+      },
+      {
+        "key": "https://openalex.org/I180670191",
+        "key_display_name": "University of California, San Francisco",
+        "count": 88
+      },
+      {
+        "key": "https://openalex.org/I2801259263",
+        "key_display_name": "McMaster University Medical Centre",
+        "count": 88
+      },
+      {
+        "key": "https://openalex.org/I4210139015",
+        "key_display_name": "Ministère de la Santé et des Services Sociaux (Québec)",
+        "count": 88
+      },
+      {
+        "key": "https://openalex.org/I5681781",
+        "key_display_name": "The University of Adelaide",
+        "count": 86
+      },
+      {
+        "key": "https://openalex.org/I183935753",
+        "key_display_name": "King's College London",
+        "count": 85
+      },
+      {
+        "key": "https://openalex.org/I36258959",
+        "key_display_name": "University of California San Diego",
+        "count": 84
+      },
+      {
+        "key": "https://openalex.org/I57206974",
+        "key_display_name": "New York University",
+        "count": 84
+      },
+      {
+        "key": "https://openalex.org/I91136226",
+        "key_display_name": "University of Sheffield",
+        "count": 84
+      },
+      {
+        "key": "https://openalex.org/I177969490",
+        "key_display_name": "University of Southern Denmark",
+        "count": 81
+      },
+      {
+        "key": "https://openalex.org/I205783295",
+        "key_display_name": "Cornell University",
+        "count": 81
+      },
+      {
+        "key": "https://openalex.org/I4405256057",
+        "key_display_name": "CIUSSS du Centre-Ouest-de-l'Île-de-Montréal",
+        "count": 81
+      },
+      {
+        "key": "https://openalex.org/I47508984",
+        "key_display_name": "Imperial College London",
+        "count": 80
+      },
+      {
+        "key": "https://openalex.org/I106938459",
+        "key_display_name": "University of New Brunswick",
+        "count": 79
+      },
+      {
+        "key": "https://openalex.org/I90344618",
+        "key_display_name": "Medical Research Council",
+        "count": 79
+      },
+      {
+        "key": "https://openalex.org/I165690674",
+        "key_display_name": "Oregon Health & Science University",
+        "count": 77
+      },
+      {
+        "key": "https://openalex.org/I1291836623",
+        "key_display_name": "Mount Sinai Hospital",
+        "count": 75
+      },
+      {
+        "key": "https://openalex.org/I4210091279",
+        "key_display_name": "Université Sorbonne Paris Nord",
+        "count": 75
+      },
+      {
+        "key": "https://openalex.org/I865915315",
+        "key_display_name": "Vrije Universiteit Amsterdam",
+        "count": 75
+      },
+      {
+        "key": "https://openalex.org/I161046081",
+        "key_display_name": "University of Freiburg",
+        "count": 74
+      },
+      {
+        "key": "https://openalex.org/I166337079",
+        "key_display_name": "Queen Mary University of London",
+        "count": 74
+      },
+      {
+        "key": "https://openalex.org/I2801357902",
+        "key_display_name": "Instituto de Salud Carlos III",
+        "count": 74
+      },
+      {
+        "key": "https://openalex.org/I4387152914",
+        "key_display_name": "Ministerio de Ciencia, Innovación y Universidades",
+        "count": 74
+      },
+      {
+        "key": "https://openalex.org/I142263535",
+        "key_display_name": "University of Nottingham",
+        "count": 73
+      },
+      {
+        "key": "https://openalex.org/I2801809904",
+        "key_display_name": "Nuffield Orthopaedic Centre",
+        "count": 73
+      },
+      {
+        "key": "https://openalex.org/I2802834092",
+        "key_display_name": "Population Health Research Institute",
+        "count": 73
+      },
+      {
+        "key": "https://openalex.org/I28407311",
+        "key_display_name": "University of Manchester",
+        "count": 72
+      },
+      {
+        "key": "https://openalex.org/I161318765",
+        "key_display_name": "University of California, Los Angeles",
+        "count": 71
+      },
+      {
+        "key": "https://openalex.org/I84884186",
+        "key_display_name": "Newcastle University",
+        "count": 71
+      },
+      {
+        "key": "https://openalex.org/I1288894424",
+        "key_display_name": "Health Canada",
+        "count": 70
+      },
+      {
+        "key": "https://openalex.org/I134820265",
+        "key_display_name": "Consejo Superior de Investigaciones Científicas",
+        "count": 70
+      },
+      {
+        "key": "https://openalex.org/I170201317",
+        "key_display_name": "University of Pittsburgh",
+        "count": 70
+      },
+      {
+        "key": "https://openalex.org/I2802567020",
+        "key_display_name": "Copenhagen University Hospital",
+        "count": 70
+      },
+      {
+        "key": "https://openalex.org/I4210124185",
+        "key_display_name": "Purdue Pharma (United States)",
+        "count": 70
+      },
+      {
+        "key": "https://openalex.org/I4210142730",
+        "key_display_name": "Centre Hospitalier de l’Université de Montréal",
+        "count": 70
+      },
+      {
+        "key": "https://openalex.org/I4210150854",
+        "key_display_name": "Institut des Sciences Humaines et Sociales",
+        "count": 70
+      },
+      {
+        "key": "https://openalex.org/I141074466",
+        "key_display_name": "Vancouver Coastal Health",
+        "count": 69
+      },
+      {
+        "key": "https://openalex.org/I23923803",
+        "key_display_name": "University of Exeter",
+        "count": 69
+      },
+      {
+        "key": "https://openalex.org/I4210143003",
+        "key_display_name": "Ottawa Public Health",
+        "count": 69
+      },
+      {
+        "key": "https://openalex.org/I112260969",
+        "key_display_name": "Ontario Institute for Cancer Research",
+        "count": 68
+      },
+      {
+        "key": "https://openalex.org/I120125038",
+        "key_display_name": "Bond University",
+        "count": 68
+      },
+      {
+        "key": "https://openalex.org/I121797337",
+        "key_display_name": "Leiden University",
+        "count": 68
+      },
+      {
+        "key": "https://openalex.org/I19391748",
+        "key_display_name": "Purdue Pharma (Canada)",
+        "count": 68
+      },
+      {
+        "key": "https://openalex.org/I107949126",
+        "key_display_name": "University of Lethbridge",
+        "count": 67
+      },
+      {
+        "key": "https://openalex.org/I194028371",
+        "key_display_name": "University of Regina",
+        "count": 67
+      },
+      {
+        "key": "https://openalex.org/I202697423",
+        "key_display_name": "University of Zurich",
+        "count": 67
+      },
+      {
+        "key": "https://openalex.org/I2801453606",
+        "key_display_name": "Australian Government",
+        "count": 67
+      },
+      {
+        "key": "https://openalex.org/I3018483916",
+        "key_display_name": "University Medical Center Utrecht",
+        "count": 67
+      },
+      {
+        "key": "https://openalex.org/I4387154308",
+        "key_display_name": "Centre de Recherche Épidémiologie et Statistique",
+        "count": 67
+      },
+      {
+        "key": "https://openalex.org/I165143802",
+        "key_display_name": "The University of Queensland",
+        "count": 66
+      },
+      {
+        "key": "https://openalex.org/I24185976",
+        "key_display_name": "Sichuan University",
+        "count": 66
+      },
+      {
+        "key": "https://openalex.org/I32971472",
+        "key_display_name": "Yale University",
+        "count": 66
+      },
+      {
+        "key": "https://openalex.org/I111979921",
+        "key_display_name": "Northwestern University",
+        "count": 65
+      },
+      {
+        "key": "https://openalex.org/I87048295",
+        "key_display_name": "Wellcome Trust",
+        "count": 65
+      },
+      {
+        "key": "https://openalex.org/I2800925808",
+        "key_display_name": "London Health Sciences Centre",
+        "count": 64
+      },
+      {
+        "key": "https://openalex.org/I4210091437",
+        "key_display_name": "Sorbonne Paris Cité",
+        "count": 64
+      },
+      {
+        "key": "https://openalex.org/I4210105654",
+        "key_display_name": "World Health Organization",
+        "count": 64
+      },
+      {
+        "key": "https://openalex.org/I4210149587",
+        "key_display_name": "Institute for Work & Health",
+        "count": 64
+      },
+      {
+        "key": "https://openalex.org/I2746051580",
+        "key_display_name": "Université Paris Sciences et Lettres",
+        "count": 63
+      },
+      {
+        "key": "https://openalex.org/I43439940",
+        "key_display_name": "University of Southampton",
+        "count": 63
+      },
+      {
+        "key": "https://openalex.org/I1289530486",
+        "key_display_name": "BC Cancer Agency",
+        "count": 62
+      },
+      {
+        "key": "https://openalex.org/I26092322",
+        "key_display_name": "Stellenbosch University",
+        "count": 62
+      },
+      {
+        "key": "https://openalex.org/I4210149208",
+        "key_display_name": "Iberoamerican Cochrane Centre",
+        "count": 62
+      },
+      {
+        "key": "https://openalex.org/I28166907",
+        "key_display_name": "Karolinska Institutet",
+        "count": 61
+      },
+      {
+        "key": "https://openalex.org/I4210159778",
+        "key_display_name": "National Research Council Canada",
+        "count": 60
+      },
+      {
+        "key": "https://openalex.org/I7882870",
+        "key_display_name": "University of Glasgow",
+        "count": 60
+      },
+      {
+        "key": "https://openalex.org/I95457486",
+        "key_display_name": "University of California, Berkeley",
+        "count": 60
+      },
+      {
+        "key": "https://openalex.org/I111088046",
+        "key_display_name": "Boston University",
+        "count": 59
+      },
+      {
+        "key": "https://openalex.org/I145872427",
+        "key_display_name": "Radboud University Nijmegen",
+        "count": 59
+      },
+      {
+        "key": "https://openalex.org/I2802394193",
+        "key_display_name": "Nova Scotia Health Authority",
+        "count": 59
+      },
+      {
+        "key": "https://openalex.org/I33213144",
+        "key_display_name": "University of Florida",
+        "count": 59
+      },
+      {
+        "key": "https://openalex.org/I34352273",
+        "key_display_name": "Maastricht University",
+        "count": 59
+      },
+      {
+        "key": "https://openalex.org/I34931013",
+        "key_display_name": "National Institute for Health and Care Research",
+        "count": 59
+      },
+      {
+        "key": "https://openalex.org/I4210153200",
+        "key_display_name": "BC Children's Hospital",
+        "count": 59
+      },
+      {
+        "key": "https://openalex.org/I194019607",
+        "key_display_name": "University of Ioannina",
+        "count": 57
+      },
+      {
+        "key": "https://openalex.org/I2799376586",
+        "key_display_name": "The Scarborough Hospital",
+        "count": 57
+      },
+      {
+        "key": "https://openalex.org/I662221",
+        "key_display_name": "Trent University",
+        "count": 57
+      },
+      {
+        "key": "https://openalex.org/I133731052",
+        "key_display_name": "University of Helsinki",
+        "count": 56
+      },
+      {
+        "key": "https://openalex.org/I146655781",
+        "key_display_name": "University of Liverpool",
+        "count": 55
+      },
+      {
+        "key": "https://openalex.org/I118347636",
+        "key_display_name": "Australian National University",
+        "count": 54
+      },
+      {
+        "key": "https://openalex.org/I186803428",
+        "key_display_name": "Brock University",
+        "count": 54
+      },
+      {
+        "key": "https://openalex.org/I204337017",
+        "key_display_name": "Aarhus University",
+        "count": 54
+      },
+      {
+        "key": "https://openalex.org/I2799475292",
+        "key_display_name": "Vancouver Hospital and Health Sciences Centre",
+        "count": 54
+      },
+      {
+        "key": "https://openalex.org/I277688954",
+        "key_display_name": "Université Paris-Saclay",
+        "count": 53
+      },
+      {
+        "key": "https://openalex.org/I110736937",
+        "key_display_name": "Délégation Paris 5",
+        "count": 52
+      },
+      {
+        "key": "https://openalex.org/I130769515",
+        "key_display_name": "Pennsylvania State University",
+        "count": 52
+      },
+      {
+        "key": "https://openalex.org/I1321305853",
+        "key_display_name": "National Bureau of Economic Research",
+        "count": 52
+      },
+      {
+        "key": "https://openalex.org/I51101395",
+        "key_display_name": "Université Paris 1 Panthéon-Sorbonne",
+        "count": 52
+      },
+      {
+        "key": "https://openalex.org/I135310074",
+        "key_display_name": "University of Wisconsin–Madison",
+        "count": 51
+      },
+      {
+        "key": "https://openalex.org/I196829312",
+        "key_display_name": "La Trobe University",
+        "count": 51
+      },
+      {
+        "key": "https://openalex.org/I102322142",
+        "key_display_name": "Rutgers, The State University of New Jersey",
+        "count": 50
+      },
+      {
+        "key": "https://openalex.org/I126231945",
+        "key_display_name": "Queen's University Belfast",
+        "count": 50
+      }
+    ]
+  }
+}

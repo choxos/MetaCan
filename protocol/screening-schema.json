@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/choxos/CaRN-data-challenge/protocol/screening-schema.json",
+  "title": "MetaCan screening label",
+  "description": "The output contract for one screened work. protocol/rubric.md instructs both machine screeners and both human coders to return exactly this. It did not exist until 2026-07-11 (DEVIATIONS.md D9): the rubric pointed at a file that was not in the repository, and the schema was inlined in the prompts instead. A locked instrument that references a missing file is not locked.",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["id", "tier", "genre", "about_ca", "confidence"],
+    "properties": {
+      "id": {
+        "type": "string",
+        "pattern": "^W[0-9]+$",
+        "description": "OpenAlex work ID, bare (W123456789), not the full URL."
+      },
+      "tier": {
+        "enum": ["T1", "T2", "T3", "OUT"],
+        "description": "T1 core metaresearch; T2 adjacent (STS, LIS, research infrastructure); T3 contextual (policy, editorials: mapped, never pooled with T1/T2); OUT otherwise. The in-scope decision that gates the corpus is tier in {T1, T2}."
+      },
+      "genre": {
+        "enum": ["empirical", "review", "methods", "commentary", "editorial", "protocol", "dataset", "software", "other"],
+        "description": "OpenAlex `type` is unreliable and this field is commentary-heavy, so genre is screened rather than inherited."
+      },
+      "about_ca": {
+        "type": "boolean",
+        "description": "Is the work ABOUT the Canadian research system, irrespective of author location? This is the secondary estimand (PROTOCOL s3) and is recorded separately from the primary."
+      },
+      "confidence": {
+        "enum": ["high", "medium", "low"],
+        "description": "The screener's own confidence. The rubric requires `low` whenever the abstract is missing and the judgement rests on the title alone. NB (DEVIATIONS.md D1): the pilot harness withheld five of the eight fields the rubric mandates, so pilot confidence values reflect a title-and-abstract screen, not the specified one."
+      },
+      "reason": {
+        "type": "string",
+        "maxLength": 200,
+        "description": "Optional. One clause naming the rubric criterion that decided it. Required when confidence is `low` or tier is T2 (the contested boundary)."
+      }
+    }
+  }
+}

@@ -1,0 +1,478 @@
+{
+  "request": {
+    "endpoint": "works",
+    "params": {
+      "filter": "title_and_abstract.search:Canada OR Canadian OR canadien OR canadienne",
+      "per-page": "1",
+      "mailto": "ahmad.pub@gmail.com"
+    }
+  },
+  "retrieved_at_utc": "2026-07-11T12:37:02Z",
+  "payload": {
+    "meta": {
+      "count": 1215119,
+      "db_response_time_ms": 36,
+      "page": 1,
+      "per_page": 1,
+      "groups_count": null,
+      "x_query": {
+        "oql": "works where title/abstract has (Canada or Canadian or canadien or canadienne)",
+        "oqo": {
+          "get_rows": "works",
+          "filter_rows": [
+            {
+              "join": "or",
+              "filters": [
+                {
+                  "column_id": "title_and_abstract.search",
+                  "value": "Canada",
+                  "operator": "has"
+                },
+                {
+                  "column_id": "title_and_abstract.search",
+                  "value": "Canadian",
+                  "operator": "has"
+                },
+                {
+                  "column_id": "title_and_abstract.search",
+                  "value": "canadien",
+                  "operator": "has"
+                },
+                {
+                  "column_id": "title_and_abstract.search",
+                  "value": "canadienne",
+                  "operator": "has"
+                }
+              ]
+            }
+          ],
+          "per_page": 1
+        },
+        "url": "/works?filter=title_and_abstract.search:Canada|Canadian|canadien|canadienne&per_page=1"
+      },
+      "cost_usd": 0.001
+    },
+    "results": [
+      {
+        "id": "https://openalex.org/W4302767823",
+        "doi": null,
+        "title": "Canadian Institute for Health Information.",
+        "display_name": "Canadian Institute for Health Information.",
+        "relevance_score": 1213.8854,
+        "publication_year": 1994,
+        "publication_date": "1994-01-01",
+        "ids": {
+          "openalex": "https://openalex.org/W4302767823",
+          "pmid": "https://pubmed.ncbi.nlm.nih.gov/10132972"
+        },
+        "language": "en",
+        "primary_location": {
+          "id": "pmid:10132972",
+          "is_oa": false,
+          "landing_page_url": "https://pubmed.ncbi.nlm.nih.gov/10132972",
+          "pdf_url": null,
+          "source": {
+            "id": "https://openalex.org/S4306525036",
+            "display_name": "PubMed",
+            "issn_l": null,
+            "issn": null,
+            "is_oa": false,
+            "is_in_doaj": false,
+            "is_core": false,
+            "host_organization": "https://openalex.org/I1299303238",
+            "host_organization_name": "National Institutes of Health",
+            "host_organization_lineage": [
+              "https://openalex.org/I1299303238"
+            ],
+            "host_organization_lineage_names": [],
+            "type": "repository"
+          },
+          "license": null,
+          "license_id": null,
+          "version": "publishedVersion",
+          "is_accepted": true,
+          "is_published": true,
+          "raw_source_name": "Canadian journal of medical technology",
+          "raw_type": null
+        },
+        "type": "article",
+        "indexed_in": [
+          "pubmed"
+        ],
+        "open_access": {
+          "is_oa": false,
+          "oa_status": "closed",
+          "oa_url": null,
+          "any_repository_has_fulltext": false
+        },
+        "authorships": [
+          {
+            "author_position": "first",
+            "author": {
+              "id": "https://openalex.org/A5010144224",
+              "display_name": "A Lalonde",
+              "orcid": null
+            },
+            "institutions": [
+              {
+                "id": "https://openalex.org/I4210143367",
+                "display_name": "Mistras Group (United States)",
+                "ror": "https://ror.org/04ckfrk21",
+                "country_code": "US",
+                "type": "company",
+                "lineage": [
+                  "https://openalex.org/I4210143367"
+                ]
+              }
+            ],
+            "countries": [
+              "US"
+            ],
+            "is_corresponding": true,
+            "raw_author_name": "A Lalonde",
+            "raw_affiliation_strings": [
+              "The MIS Group"
+            ],
+            "affiliations": [
+              {
+                "raw_affiliation_string": "The MIS Group",
+                "institution_ids": [
+                  "https://openalex.org/I4210143367"
+                ]
+              }
+            ]
+          }
+        ],
+        "institutions": [],
+        "countries_distinct_count": 1,
+        "institutions_distinct_count": 1,
+        "corresponding_author_ids": [
+          "https://openalex.org/A5010144224"
+        ],
+        "corresponding_institution_ids": [
+          "https://openalex.org/I4210143367"
+        ],
+        "apc_list": null,
+        "apc_paid": null,
+        "fwci": 6.1679,
+        "has_fulltext": false,
+        "cited_by_count": 4861,
+        "citation_normalized_percentile": {
+          "value": 0.9696,
+          "is_in_top_1_percent": false,
+          "is_in_top_10_percent": true
+        },
+        "cited_by_percentile_year": {
+          "min": 99,
+          "max": 100
+        },
+        "biblio": {
+          "volume": "56",
+          "issue": "1",
+          "first_page": "15",
+          "last_page": "6"
+        },
+        "is_retracted": false,
+        "is_paratext": false,
+        "is_xpac": false,
+        "primary_topic": {
+          "id": "https://openalex.org/T14400",
+          "display_name": "Medical Coding and Health Information",
+          "score": 0.4354,
+          "subfield": {
+            "id": "https://openalex.org/subfields/3605",
+            "display_name": "Health Information Management"
+          },
+          "field": {
+            "id": "https://openalex.org/fields/36",
+            "display_name": "Health Professions"
+          },
+          "domain": {
+            "id": "https://openalex.org/domains/4",
+            "display_name": "Health Sciences"
+          }
+        },
+        "topics": [
+          {
+            "id": "https://openalex.org/T14400",
+            "display_name": "Medical Coding and Health Information",
+            "score": 0.4354,
+            "subfield": {
+              "id": "https://openalex.org/subfields/3605",
+              "display_name": "Health Information Management"
+            },
+            "field": {
+              "id": "https://openalex.org/fields/36",
+              "display_name": "Health Professions"
+            },
+            "domain": {
+              "id": "https://openalex.org/domains/4",
+              "display_name": "Health Sciences"
+            }
+          }
+        ],
+        "keywords": [
+          {
+            "id": "https://openalex.org/keywords/medicine",
+            "display_name": "Medicine",
+            "score": 0.35
+          }
+        ],
+        "concepts": [
+          {
+            "id": "https://openalex.org/C71924100",
+            "wikidata": "https://www.wikidata.org/wiki/Q11190",
+            "display_name": "Medicine",
+            "level": 0,
+            "score": 0.35
+          }
+        ],
+        "mesh": [
+          {
+            "descriptor_ui": "D000047",
+            "descriptor_name": "Academies and Institutes",
+            "qualifier_ui": "Q000458",
+            "qualifier_name": "organization & administration",
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D000047",
+            "descriptor_name": "Academies and Institutes",
+            "qualifier_ui": "Q000458",
+            "qualifier_name": "organization & administration",
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D000047",
+            "descriptor_name": "Academies and Institutes",
+            "qualifier_ui": "Q000458",
+            "qualifier_name": "organization & administration",
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D002170",
+            "descriptor_name": "Canada",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D002170",
+            "descriptor_name": "Canada",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D002170",
+            "descriptor_name": "Canada",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D008331",
+            "descriptor_name": "Management Information Systems",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": true
+          },
+          {
+            "descriptor_ui": "D008331",
+            "descriptor_name": "Management Information Systems",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": true
+          },
+          {
+            "descriptor_ui": "D008331",
+            "descriptor_name": "Management Information Systems",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": true
+          },
+          {
+            "descriptor_ui": "D008499",
+            "descriptor_name": "Medical Records",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D008499",
+            "descriptor_name": "Medical Records",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D008499",
+            "descriptor_name": "Medical Records",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D009313",
+            "descriptor_name": "National Health Programs",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": true
+          },
+          {
+            "descriptor_ui": "D009313",
+            "descriptor_name": "National Health Programs",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": true
+          },
+          {
+            "descriptor_ui": "D009313",
+            "descriptor_name": "National Health Programs",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": true
+          },
+          {
+            "descriptor_ui": "D009937",
+            "descriptor_name": "Organizational Objectives",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D009937",
+            "descriptor_name": "Organizational Objectives",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D009937",
+            "descriptor_name": "Organizational Objectives",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": false
+          }
+        ],
+        "locations_count": 1,
+        "locations": [
+          {
+            "id": "pmid:10132972",
+            "is_oa": false,
+            "landing_page_url": "https://pubmed.ncbi.nlm.nih.gov/10132972",
+            "pdf_url": null,
+            "source": {
+              "id": "https://openalex.org/S4306525036",
+              "display_name": "PubMed",
+              "issn_l": null,
+              "issn": null,
+              "is_oa": false,
+              "is_in_doaj": false,
+              "is_core": false,
+              "host_organization": "https://openalex.org/I1299303238",
+              "host_organization_name": "National Institutes of Health",
+              "host_organization_lineage": [
+                "https://openalex.org/I1299303238"
+              ],
+              "host_organization_lineage_names": [],
+              "type": "repository"
+            },
+            "license": null,
+            "license_id": null,
+            "version": "publishedVersion",
+            "is_accepted": true,
+            "is_published": true,
+            "raw_source_name": "Canadian journal of medical technology",
+            "raw_type": null
+          }
+        ],
+        "best_oa_location": null,
+        "sustainable_development_goals": [],
+        "awards": [],
+        "funders": [],
+        "has_content": {
+          "pdf": false,
+          "grobid_xml": false
+        },
+        "content_urls": null,
+        "referenced_works_count": 0,
+        "referenced_works": [],
+        "related_works": [
+          "https://openalex.org/W2899084033",
+          "https://openalex.org/W2748952813",
+          "https://openalex.org/W3032375762",
+          "https://openalex.org/W2080531066",
+          "https://openalex.org/W2039318446",
+          "https://openalex.org/W3108674512",
+          "https://openalex.org/W1506200166",
+          "https://openalex.org/W2998699411",
+          "https://openalex.org/W2048182022",
+          "https://openalex.org/W2604872355"
+        ],
+        "abstract_inverted_index": null,
+        "counts_by_year": [
+          {
+            "year": 2025,
+            "cited_by_count": 317
+          },
+          {
+            "year": 2024,
+            "cited_by_count": 494
+          },
+          {
+            "year": 2023,
+            "cited_by_count": 529
+          },
+          {
+            "year": 2022,
+            "cited_by_count": 463
+          },
+          {
+            "year": 2021,
+            "cited_by_count": 519
+          },
+          {
+            "year": 2020,
+            "cited_by_count": 418
+          },
+          {
+            "year": 2019,
+            "cited_by_count": 341
+          },
+          {
+            "year": 2018,
+            "cited_by_count": 241
+          },
+          {
+            "year": 2017,
+            "cited_by_count": 254
+          },
+          {
+            "year": 2016,
+            "cited_by_count": 264
+          },
+          {
+            "year": 2015,
+            "cited_by_count": 194
+          },
+          {
+            "year": 2014,
+            "cited_by_count": 131
+          },
+          {
+            "year": 2013,
+            "cited_by_count": 117
+          },
+          {
+            "year": 2012,
+            "cited_by_count": 102
+          }
+        ],
+        "updated_date": "2025-11-06T04:12:42.849631",
+        "created_date": "2025-10-10T00:00:00"
+      }
+    ],
+    "group_by": []
+  }
+}

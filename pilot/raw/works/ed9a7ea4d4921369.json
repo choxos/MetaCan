@@ -1,0 +1,1567 @@
+{
+  "request": {
+    "endpoint": "works",
+    "params": {
+      "filter": "primary_topic.id:T10102|T13607|T13516|T11937|T10206|T10582|T10267|T10778|T13558|T13284|T11875,funders.id:F4320334506|F4320334593|F4320334617|F4320319952",
+      "per-page": "1",
+      "mailto": "ahmad.pub@gmail.com"
+    }
+  },
+  "retrieved_at_utc": "2026-07-11T12:33:08Z",
+  "payload": {
+    "meta": {
+      "count": 1331,
+      "db_response_time_ms": 38,
+      "page": 1,
+      "per_page": 1,
+      "groups_count": null,
+      "x_query": {
+        "oql": "works where funder is (F4320319952 or F4320334506 or F4320334593 or F4320334617)\n  and topic is (\n    T10102 or T10206 or T10267 or T10582 or T10778 or T11875 or T11937 or T13284\n    or T13516 or T13558 or T13607\n  )",
+        "oqo": {
+          "get_rows": "works",
+          "filter_rows": [
+            {
+              "join": "or",
+              "filters": [
+                {
+                  "column_id": "funders.id",
+                  "value": "F4320319952"
+                },
+                {
+                  "column_id": "funders.id",
+                  "value": "F4320334506"
+                },
+                {
+                  "column_id": "funders.id",
+                  "value": "F4320334593"
+                },
+                {
+                  "column_id": "funders.id",
+                  "value": "F4320334617"
+                }
+              ]
+            },
+            {
+              "join": "or",
+              "filters": [
+                {
+                  "column_id": "primary_topic.id",
+                  "value": "T10102"
+                },
+                {
+                  "column_id": "primary_topic.id",
+                  "value": "T10206"
+                },
+                {
+                  "column_id": "primary_topic.id",
+                  "value": "T10267"
+                },
+                {
+                  "column_id": "primary_topic.id",
+                  "value": "T10582"
+                },
+                {
+                  "column_id": "primary_topic.id",
+                  "value": "T10778"
+                },
+                {
+                  "column_id": "primary_topic.id",
+                  "value": "T11875"
+                },
+                {
+                  "column_id": "primary_topic.id",
+                  "value": "T11937"
+                },
+                {
+                  "column_id": "primary_topic.id",
+                  "value": "T13284"
+                },
+                {
+                  "column_id": "primary_topic.id",
+                  "value": "T13516"
+                },
+                {
+                  "column_id": "primary_topic.id",
+                  "value": "T13558"
+                },
+                {
+                  "column_id": "primary_topic.id",
+                  "value": "T13607"
+                }
+              ]
+            }
+          ],
+          "per_page": 1
+        },
+        "url": "/works?filter=funders.id:F4320319952|F4320334506|F4320334593|F4320334617,primary_topic.id:T10102|T10206|T10267|T10582|T10778|T11875|T11937|T13284|T13516|T13558|T13607&per_page=1"
+      },
+      "cost_usd": 0.0001
+    },
+    "results": [
+      {
+        "id": "https://openalex.org/W2156098321",
+        "doi": "https://doi.org/10.1136/bmj.b2535",
+        "title": "Preferred reporting items for systematic reviews and meta-analyses: the PRISMA statement",
+        "display_name": "Preferred reporting items for systematic reviews and meta-analyses: the PRISMA statement",
+        "publication_year": 2009,
+        "publication_date": "2009-07-21",
+        "ids": {
+          "openalex": "https://openalex.org/W2156098321",
+          "doi": "https://doi.org/10.1136/bmj.b2535",
+          "mag": "2156098321",
+          "pmid": "https://pubmed.ncbi.nlm.nih.gov/19622551"
+        },
+        "language": "en",
+        "primary_location": {
+          "id": "doi:10.1136/bmj.b2535",
+          "is_oa": true,
+          "landing_page_url": "https://doi.org/10.1136/bmj.b2535",
+          "pdf_url": "https://www.bmj.com/content/bmj/339/bmj.b2535.full.pdf",
+          "source": {
+            "id": "https://openalex.org/S4393911389",
+            "display_name": "BMJ",
+            "issn_l": "0007-1447",
+            "issn": [
+              "0007-1447",
+              "0267-0623",
+              "1468-5833"
+            ],
+            "is_oa": false,
+            "is_in_doaj": false,
+            "is_core": false,
+            "host_organization": null,
+            "host_organization_name": null,
+            "host_organization_lineage": [],
+            "host_organization_lineage_names": [],
+            "type": "journal"
+          },
+          "license": "cc-by-nc",
+          "license_id": "https://openalex.org/licenses/cc-by-nc",
+          "version": "publishedVersion",
+          "is_accepted": true,
+          "is_published": true,
+          "raw_source_name": "BMJ",
+          "raw_type": "journal-article"
+        },
+        "type": "article",
+        "indexed_in": [
+          "crossref",
+          "pubmed"
+        ],
+        "open_access": {
+          "is_oa": true,
+          "oa_status": "hybrid",
+          "oa_url": "https://www.bmj.com/content/bmj/339/bmj.b2535.full.pdf",
+          "any_repository_has_fulltext": true
+        },
+        "authorships": [
+          {
+            "author_position": "first",
+            "author": {
+              "id": "https://openalex.org/A5068353058",
+              "display_name": "David Moher",
+              "orcid": "https://orcid.org/0000-0003-2434-4206"
+            },
+            "institutions": [
+              {
+                "id": "https://openalex.org/I153718931",
+                "display_name": "University of Ottawa",
+                "ror": "https://ror.org/03c4mmv16",
+                "country_code": "CA",
+                "type": "education",
+                "lineage": [
+                  "https://openalex.org/I153718931"
+                ]
+              },
+              {
+                "id": "https://openalex.org/I2800722420",
+                "display_name": "Ottawa Hospital",
+                "ror": "https://ror.org/03c62dg59",
+                "country_code": "CA",
+                "type": "healthcare",
+                "lineage": [
+                  "https://openalex.org/I2800722420"
+                ]
+              },
+              {
+                "id": "https://openalex.org/I4388482656",
+                "display_name": "Ottawa Hospital Research Institute",
+                "ror": "https://ror.org/05jtef216",
+                "country_code": null,
+                "type": "healthcare",
+                "lineage": [
+                  "https://openalex.org/I153718931",
+                  "https://openalex.org/I2800722420",
+                  "https://openalex.org/I4388482656"
+                ]
+              }
+            ],
+            "countries": [
+              "CA"
+            ],
+            "is_corresponding": false,
+            "raw_author_name": "D. Moher",
+            "raw_affiliation_strings": [
+              "Ottawa Methods Centre, Ottawa Hospital Research Institute, Ottawa, Ontario, Canada. dmoher@ohri.ca",
+              "Ottawa Methods Centre, Ottawa Hospital Research Institute, Ottawa, Ontario, Canada",
+              "Department of Epidemiology and Community Medicine, Faculty of Medicine, University of Ottawa, Ottawa, Ontario, Canada"
+            ],
+            "raw_orcid": null,
+            "affiliations": [
+              {
+                "raw_affiliation_string": "Ottawa Methods Centre, Ottawa Hospital Research Institute, Ottawa, Ontario, Canada. dmoher@ohri.ca",
+                "institution_ids": [
+                  "https://openalex.org/I2800722420"
+                ]
+              },
+              {
+                "raw_affiliation_string": "Ottawa Methods Centre, Ottawa Hospital Research Institute, Ottawa, Ontario, Canada",
+                "institution_ids": [
+                  "https://openalex.org/I2800722420",
+                  "https://openalex.org/I4388482656"
+                ]
+              },
+              {
+                "raw_affiliation_string": "Department of Epidemiology and Community Medicine, Faculty of Medicine, University of Ottawa, Ottawa, Ontario, Canada",
+                "institution_ids": [
+                  "https://openalex.org/I153718931"
+                ]
+              }
+            ]
+          },
+          {
+            "author_position": "middle",
+            "author": {
+              "id": "https://openalex.org/A5113580052",
+              "display_name": "A. Liberati",
+              "orcid": null
+            },
+            "institutions": [
+              {
+                "id": "https://openalex.org/I122346577",
+                "display_name": "University of Modena and Reggio Emilia",
+                "ror": "https://ror.org/02d4c4y02",
+                "country_code": "IT",
+                "type": "education",
+                "lineage": [
+                  "https://openalex.org/I122346577"
+                ]
+              },
+              {
+                "id": "https://openalex.org/I19630809",
+                "display_name": "Mario Negri Institute for Pharmacological Research",
+                "ror": "https://ror.org/05aspc753",
+                "country_code": "IT",
+                "type": "nonprofit",
+                "lineage": [
+                  "https://openalex.org/I19630809",
+                  "https://openalex.org/I4210110338",
+                  "https://openalex.org/I4210153126"
+                ]
+              }
+            ],
+            "countries": [
+              "IT"
+            ],
+            "is_corresponding": false,
+            "raw_author_name": "A. Liberati",
+            "raw_affiliation_strings": [
+              "Centro Cochrane Italiano, Istituto Ricerche Farmacologiche Mario Negri, Milan, Italy",
+              "Università di Modena e Reggio Emilia, Modena, Italy"
+            ],
+            "raw_orcid": null,
+            "affiliations": [
+              {
+                "raw_affiliation_string": "Centro Cochrane Italiano, Istituto Ricerche Farmacologiche Mario Negri, Milan, Italy",
+                "institution_ids": [
+                  "https://openalex.org/I19630809"
+                ]
+              },
+              {
+                "raw_affiliation_string": "Università di Modena e Reggio Emilia, Modena, Italy",
+                "institution_ids": [
+                  "https://openalex.org/I122346577"
+                ]
+              }
+            ]
+          },
+          {
+            "author_position": "middle",
+            "author": {
+              "id": "https://openalex.org/A5076572041",
+              "display_name": "Jennifer Tetzlaff",
+              "orcid": "https://orcid.org/0000-0003-0787-5363"
+            },
+            "institutions": [
+              {
+                "id": "https://openalex.org/I2800722420",
+                "display_name": "Ottawa Hospital",
+                "ror": "https://ror.org/03c62dg59",
+                "country_code": "CA",
+                "type": "healthcare",
+                "lineage": [
+                  "https://openalex.org/I2800722420"
+                ]
+              },
+              {
+                "id": "https://openalex.org/I4388482656",
+                "display_name": "Ottawa Hospital Research Institute",
+                "ror": "https://ror.org/05jtef216",
+                "country_code": null,
+                "type": "healthcare",
+                "lineage": [
+                  "https://openalex.org/I153718931",
+                  "https://openalex.org/I2800722420",
+                  "https://openalex.org/I4388482656"
+                ]
+              }
+            ],
+            "countries": [
+              "CA"
+            ],
+            "is_corresponding": false,
+            "raw_author_name": "J. Tetzlaff",
+            "raw_affiliation_strings": [
+              "Ottawa Methods Centre, Ottawa Hospital Research Institute, Ottawa, Ontario, Canada"
+            ],
+            "raw_orcid": null,
+            "affiliations": [
+              {
+                "raw_affiliation_string": "Ottawa Methods Centre, Ottawa Hospital Research Institute, Ottawa, Ontario, Canada",
+                "institution_ids": [
+                  "https://openalex.org/I2800722420",
+                  "https://openalex.org/I4388482656"
+                ]
+              }
+            ]
+          },
+          {
+            "author_position": "middle",
+            "author": {
+              "id": "https://openalex.org/A5042962646",
+              "display_name": "Douglas G. Altman",
+              "orcid": "https://orcid.org/0000-0002-7183-4083"
+            },
+            "institutions": [
+              {
+                "id": "https://openalex.org/I40120149",
+                "display_name": "University of Oxford",
+                "ror": "https://ror.org/052gg0110",
+                "country_code": "GB",
+                "type": "education",
+                "lineage": [
+                  "https://openalex.org/I40120149"
+                ]
+              }
+            ],
+            "countries": [
+              "GB"
+            ],
+            "is_corresponding": false,
+            "raw_author_name": "D. G Altman",
+            "raw_affiliation_strings": [
+              "Centre for Statistics in Medicine, University of Oxford, Oxford, United Kingdom"
+            ],
+            "raw_orcid": null,
+            "affiliations": [
+              {
+                "raw_affiliation_string": "Centre for Statistics in Medicine, University of Oxford, Oxford, United Kingdom",
+                "institution_ids": [
+                  "https://openalex.org/I40120149"
+                ]
+              }
+            ]
+          },
+          {
+            "author_position": "last",
+            "author": {
+              "id": null,
+              "display_name": "for the PRISMA Group",
+              "orcid": null
+            },
+            "institutions": [],
+            "countries": [],
+            "is_corresponding": false,
+            "raw_author_name": "for the PRISMA Group",
+            "raw_affiliation_strings": [],
+            "raw_orcid": null,
+            "affiliations": []
+          }
+        ],
+        "institutions": [],
+        "countries_distinct_count": 3,
+        "institutions_distinct_count": 6,
+        "corresponding_author_ids": [],
+        "corresponding_institution_ids": [],
+        "apc_list": null,
+        "apc_paid": null,
+        "fwci": 623.7529,
+        "has_fulltext": true,
+        "cited_by_count": 83369,
+        "citation_normalized_percentile": {
+          "value": 1,
+          "is_in_top_1_percent": true,
+          "is_in_top_10_percent": true
+        },
+        "cited_by_percentile_year": {
+          "min": 99,
+          "max": 100
+        },
+        "biblio": {
+          "volume": "339",
+          "issue": "jul21 1",
+          "first_page": "b2535",
+          "last_page": "b2535"
+        },
+        "is_retracted": false,
+        "is_paratext": false,
+        "is_xpac": false,
+        "primary_topic": {
+          "id": "https://openalex.org/T10206",
+          "display_name": "Meta-analysis and systematic reviews",
+          "score": 0.9988,
+          "subfield": {
+            "id": "https://openalex.org/subfields/1804",
+            "display_name": "Statistics, Probability and Uncertainty"
+          },
+          "field": {
+            "id": "https://openalex.org/fields/18",
+            "display_name": "Decision Sciences"
+          },
+          "domain": {
+            "id": "https://openalex.org/domains/2",
+            "display_name": "Social Sciences"
+          }
+        },
+        "topics": [
+          {
+            "id": "https://openalex.org/T10206",
+            "display_name": "Meta-analysis and systematic reviews",
+            "score": 0.9988,
+            "subfield": {
+              "id": "https://openalex.org/subfields/1804",
+              "display_name": "Statistics, Probability and Uncertainty"
+            },
+            "field": {
+              "id": "https://openalex.org/fields/18",
+              "display_name": "Decision Sciences"
+            },
+            "domain": {
+              "id": "https://openalex.org/domains/2",
+              "display_name": "Social Sciences"
+            }
+          },
+          {
+            "id": "https://openalex.org/T12443",
+            "display_name": "Delphi Technique in Research",
+            "score": 0.9846,
+            "subfield": {
+              "id": "https://openalex.org/subfields/3312",
+              "display_name": "Sociology and Political Science"
+            },
+            "field": {
+              "id": "https://openalex.org/fields/33",
+              "display_name": "Social Sciences"
+            },
+            "domain": {
+              "id": "https://openalex.org/domains/2",
+              "display_name": "Social Sciences"
+            }
+          },
+          {
+            "id": "https://openalex.org/T11744",
+            "display_name": "Health Sciences Research and Education",
+            "score": 0.9638,
+            "subfield": {
+              "id": "https://openalex.org/subfields/3600",
+              "display_name": "General Health Professions"
+            },
+            "field": {
+              "id": "https://openalex.org/fields/36",
+              "display_name": "Health Professions"
+            },
+            "domain": {
+              "id": "https://openalex.org/domains/4",
+              "display_name": "Health Sciences"
+            }
+          }
+        ],
+        "keywords": [
+          {
+            "id": "https://openalex.org/keywords/systematic-review",
+            "display_name": "Systematic review",
+            "score": 0.7104
+          },
+          {
+            "id": "https://openalex.org/keywords/statement",
+            "display_name": "Statement (logic)",
+            "score": 0.6836
+          },
+          {
+            "id": "https://openalex.org/keywords/computer-science",
+            "display_name": "Computer science",
+            "score": 0.5353
+          },
+          {
+            "id": "https://openalex.org/keywords/information-retrieval",
+            "display_name": "Information retrieval",
+            "score": 0.495
+          },
+          {
+            "id": "https://openalex.org/keywords/data-science",
+            "display_name": "Data science",
+            "score": 0.4717
+          },
+          {
+            "id": "https://openalex.org/keywords/medline",
+            "display_name": "MEDLINE",
+            "score": 0.4247
+          },
+          {
+            "id": "https://openalex.org/keywords/medicine",
+            "display_name": "Medicine",
+            "score": 0.3672
+          },
+          {
+            "id": "https://openalex.org/keywords/world-wide-web",
+            "display_name": "World Wide Web",
+            "score": 0.3506
+          },
+          {
+            "id": "https://openalex.org/keywords/biology",
+            "display_name": "Biology",
+            "score": 0.0825
+          },
+          {
+            "id": "https://openalex.org/keywords/political-science",
+            "display_name": "Political science",
+            "score": 0.0808
+          }
+        ],
+        "concepts": [
+          {
+            "id": "https://openalex.org/C189708586",
+            "wikidata": "https://www.wikidata.org/wiki/Q1504425",
+            "display_name": "Systematic review",
+            "level": 3,
+            "score": 0.7104
+          },
+          {
+            "id": "https://openalex.org/C2777026412",
+            "wikidata": "https://www.wikidata.org/wiki/Q2684591",
+            "display_name": "Statement (logic)",
+            "level": 2,
+            "score": 0.6836
+          },
+          {
+            "id": "https://openalex.org/C41008148",
+            "wikidata": "https://www.wikidata.org/wiki/Q21198",
+            "display_name": "Computer science",
+            "level": 0,
+            "score": 0.5353
+          },
+          {
+            "id": "https://openalex.org/C23123220",
+            "wikidata": "https://www.wikidata.org/wiki/Q816826",
+            "display_name": "Information retrieval",
+            "level": 1,
+            "score": 0.495
+          },
+          {
+            "id": "https://openalex.org/C2522767166",
+            "wikidata": "https://www.wikidata.org/wiki/Q2374463",
+            "display_name": "Data science",
+            "level": 1,
+            "score": 0.4717
+          },
+          {
+            "id": "https://openalex.org/C2779473830",
+            "wikidata": "https://www.wikidata.org/wiki/Q1540899",
+            "display_name": "MEDLINE",
+            "level": 2,
+            "score": 0.4247
+          },
+          {
+            "id": "https://openalex.org/C71924100",
+            "wikidata": "https://www.wikidata.org/wiki/Q11190",
+            "display_name": "Medicine",
+            "level": 0,
+            "score": 0.3672
+          },
+          {
+            "id": "https://openalex.org/C136764020",
+            "wikidata": "https://www.wikidata.org/wiki/Q466",
+            "display_name": "World Wide Web",
+            "level": 1,
+            "score": 0.3506
+          },
+          {
+            "id": "https://openalex.org/C86803240",
+            "wikidata": "https://www.wikidata.org/wiki/Q420",
+            "display_name": "Biology",
+            "level": 0,
+            "score": 0.0825
+          },
+          {
+            "id": "https://openalex.org/C17744445",
+            "wikidata": "https://www.wikidata.org/wiki/Q36442",
+            "display_name": "Political science",
+            "level": 0,
+            "score": 0.0808
+          },
+          {
+            "id": "https://openalex.org/C199539241",
+            "wikidata": "https://www.wikidata.org/wiki/Q7748",
+            "display_name": "Law",
+            "level": 1,
+            "score": 0
+          },
+          {
+            "id": "https://openalex.org/C55493867",
+            "wikidata": "https://www.wikidata.org/wiki/Q7094",
+            "display_name": "Biochemistry",
+            "level": 1,
+            "score": 0
+          }
+        ],
+        "mesh": [
+          {
+            "descriptor_ui": "D006801",
+            "descriptor_name": "Humans",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D006801",
+            "descriptor_name": "Humans",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D006801",
+            "descriptor_name": "Humans",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D006801",
+            "descriptor_name": "Humans",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D006801",
+            "descriptor_name": "Humans",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D009626",
+            "descriptor_name": "Terminology as Topic",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": true
+          },
+          {
+            "descriptor_ui": "D009626",
+            "descriptor_name": "Terminology as Topic",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": true
+          },
+          {
+            "descriptor_ui": "D009626",
+            "descriptor_name": "Terminology as Topic",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": true
+          },
+          {
+            "descriptor_ui": "D009626",
+            "descriptor_name": "Terminology as Topic",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": true
+          },
+          {
+            "descriptor_ui": "D009626",
+            "descriptor_name": "Terminology as Topic",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": true
+          },
+          {
+            "descriptor_ui": "D010506",
+            "descriptor_name": "Periodicals as Topic",
+            "qualifier_ui": "Q000592",
+            "qualifier_name": "standards",
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D010506",
+            "descriptor_name": "Periodicals as Topic",
+            "qualifier_ui": "Q000592",
+            "qualifier_name": "standards",
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D010506",
+            "descriptor_name": "Periodicals as Topic",
+            "qualifier_ui": "Q000592",
+            "qualifier_name": "standards",
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D010506",
+            "descriptor_name": "Periodicals as Topic",
+            "qualifier_ui": "Q000592",
+            "qualifier_name": "standards",
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D010506",
+            "descriptor_name": "Periodicals as Topic",
+            "qualifier_ui": "Q000592",
+            "qualifier_name": "standards",
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D011643",
+            "descriptor_name": "Publishing",
+            "qualifier_ui": "Q000592",
+            "qualifier_name": "standards",
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D011643",
+            "descriptor_name": "Publishing",
+            "qualifier_ui": "Q000592",
+            "qualifier_name": "standards",
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D011643",
+            "descriptor_name": "Publishing",
+            "qualifier_ui": "Q000592",
+            "qualifier_name": "standards",
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D011643",
+            "descriptor_name": "Publishing",
+            "qualifier_ui": "Q000592",
+            "qualifier_name": "standards",
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D011643",
+            "descriptor_name": "Publishing",
+            "qualifier_ui": "Q000592",
+            "qualifier_name": "standards",
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D011786",
+            "descriptor_name": "Quality Control",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D011786",
+            "descriptor_name": "Quality Control",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D011786",
+            "descriptor_name": "Quality Control",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D011786",
+            "descriptor_name": "Quality Control",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D011786",
+            "descriptor_name": "Quality Control",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D012196",
+            "descriptor_name": "Review Literature as Topic",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": true
+          },
+          {
+            "descriptor_ui": "D012196",
+            "descriptor_name": "Review Literature as Topic",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": true
+          },
+          {
+            "descriptor_ui": "D012196",
+            "descriptor_name": "Review Literature as Topic",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": true
+          },
+          {
+            "descriptor_ui": "D012196",
+            "descriptor_name": "Review Literature as Topic",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": true
+          },
+          {
+            "descriptor_ui": "D012196",
+            "descriptor_name": "Review Literature as Topic",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": true
+          },
+          {
+            "descriptor_ui": "D015201",
+            "descriptor_name": "Meta-Analysis as Topic",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": true
+          },
+          {
+            "descriptor_ui": "D015201",
+            "descriptor_name": "Meta-Analysis as Topic",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": true
+          },
+          {
+            "descriptor_ui": "D015201",
+            "descriptor_name": "Meta-Analysis as Topic",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": true
+          },
+          {
+            "descriptor_ui": "D015201",
+            "descriptor_name": "Meta-Analysis as Topic",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": true
+          },
+          {
+            "descriptor_ui": "D015201",
+            "descriptor_name": "Meta-Analysis as Topic",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": true
+          },
+          {
+            "descriptor_ui": "D017594",
+            "descriptor_name": "Publication Bias",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D017594",
+            "descriptor_name": "Publication Bias",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D017594",
+            "descriptor_name": "Publication Bias",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D017594",
+            "descriptor_name": "Publication Bias",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D017594",
+            "descriptor_name": "Publication Bias",
+            "qualifier_ui": null,
+            "qualifier_name": null,
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D055317",
+            "descriptor_name": "Evidence-Based Practice",
+            "qualifier_ui": "Q000592",
+            "qualifier_name": "standards",
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D055317",
+            "descriptor_name": "Evidence-Based Practice",
+            "qualifier_ui": "Q000592",
+            "qualifier_name": "standards",
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D055317",
+            "descriptor_name": "Evidence-Based Practice",
+            "qualifier_ui": "Q000592",
+            "qualifier_name": "standards",
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D055317",
+            "descriptor_name": "Evidence-Based Practice",
+            "qualifier_ui": "Q000592",
+            "qualifier_name": "standards",
+            "is_major_topic": false
+          },
+          {
+            "descriptor_ui": "D055317",
+            "descriptor_name": "Evidence-Based Practice",
+            "qualifier_ui": "Q000592",
+            "qualifier_name": "standards",
+            "is_major_topic": false
+          }
+        ],
+        "locations_count": 6,
+        "locations": [
+          {
+            "id": "doi:10.1136/bmj.b2535",
+            "is_oa": true,
+            "landing_page_url": "https://doi.org/10.1136/bmj.b2535",
+            "pdf_url": "https://www.bmj.com/content/bmj/339/bmj.b2535.full.pdf",
+            "source": {
+              "id": "https://openalex.org/S4393911389",
+              "display_name": "BMJ",
+              "issn_l": "0007-1447",
+              "issn": [
+                "0007-1447",
+                "0267-0623",
+                "1468-5833"
+              ],
+              "is_oa": false,
+              "is_in_doaj": false,
+              "is_core": false,
+              "host_organization": null,
+              "host_organization_name": null,
+              "host_organization_lineage": [],
+              "host_organization_lineage_names": [],
+              "type": "journal"
+            },
+            "license": "cc-by-nc",
+            "license_id": "https://openalex.org/licenses/cc-by-nc",
+            "version": "publishedVersion",
+            "is_accepted": true,
+            "is_published": true,
+            "raw_source_name": "BMJ",
+            "raw_type": "journal-article"
+          },
+          {
+            "id": "pmid:19622551",
+            "is_oa": false,
+            "landing_page_url": "https://pubmed.ncbi.nlm.nih.gov/19622551",
+            "pdf_url": null,
+            "source": {
+              "id": "https://openalex.org/S4306525036",
+              "display_name": "PubMed",
+              "issn_l": null,
+              "issn": null,
+              "is_oa": false,
+              "is_in_doaj": false,
+              "is_core": false,
+              "host_organization": "https://openalex.org/I1299303238",
+              "host_organization_name": "National Institutes of Health",
+              "host_organization_lineage": [
+                "https://openalex.org/I1299303238"
+              ],
+              "host_organization_lineage_names": [],
+              "type": "repository"
+            },
+            "license": null,
+            "license_id": null,
+            "version": "publishedVersion",
+            "is_accepted": true,
+            "is_published": true,
+            "raw_source_name": "BMJ (Clinical research ed.)",
+            "raw_type": null
+          },
+          {
+            "id": "pmid:19631508",
+            "is_oa": false,
+            "landing_page_url": "https://pubmed.ncbi.nlm.nih.gov/19631508",
+            "pdf_url": null,
+            "source": {
+              "id": "https://openalex.org/S4306525036",
+              "display_name": "PubMed",
+              "issn_l": null,
+              "issn": null,
+              "is_oa": false,
+              "is_in_doaj": false,
+              "is_core": false,
+              "host_organization": "https://openalex.org/I1299303238",
+              "host_organization_name": "National Institutes of Health",
+              "host_organization_lineage": [
+                "https://openalex.org/I1299303238"
+              ],
+              "host_organization_lineage_names": [],
+              "type": "repository"
+            },
+            "license": null,
+            "license_id": null,
+            "version": "publishedVersion",
+            "is_accepted": true,
+            "is_published": true,
+            "raw_source_name": "Journal of clinical epidemiology",
+            "raw_type": null
+          },
+          {
+            "id": "pmh:oai:air.unimi.it:2434/211973",
+            "is_oa": true,
+            "landing_page_url": "http://hdl.handle.net/2434/211973",
+            "pdf_url": "http://hdl.handle.net/2434/211973",
+            "source": {
+              "id": "https://openalex.org/S4306400516",
+              "display_name": "Archivio Istituzionale della Ricerca (Universita Degli Studi Di Milano)",
+              "issn_l": null,
+              "issn": null,
+              "is_oa": false,
+              "is_in_doaj": false,
+              "is_core": false,
+              "host_organization": "https://openalex.org/I189158943",
+              "host_organization_name": "University of Milan",
+              "host_organization_lineage": [
+                "https://openalex.org/I189158943"
+              ],
+              "host_organization_lineage_names": [],
+              "type": "repository"
+            },
+            "license": "other-oa",
+            "license_id": "https://openalex.org/licenses/other-oa",
+            "version": "submittedVersion",
+            "is_accepted": false,
+            "is_published": false,
+            "raw_source_name": null,
+            "raw_type": "info:eu-repo/semantics/article"
+          },
+          {
+            "id": "pmh:oai:air.unimi.it:2434/211629",
+            "is_oa": true,
+            "landing_page_url": "http://hdl.handle.net/2434/211629",
+            "pdf_url": null,
+            "source": {
+              "id": "https://openalex.org/S4306400516",
+              "display_name": "Archivio Istituzionale della Ricerca (Universita Degli Studi Di Milano)",
+              "issn_l": null,
+              "issn": null,
+              "is_oa": false,
+              "is_in_doaj": false,
+              "is_core": false,
+              "host_organization": "https://openalex.org/I189158943",
+              "host_organization_name": "University of Milan",
+              "host_organization_lineage": [
+                "https://openalex.org/I189158943"
+              ],
+              "host_organization_lineage_names": [],
+              "type": "repository"
+            },
+            "license": "other-oa",
+            "license_id": "https://openalex.org/licenses/other-oa",
+            "version": "submittedVersion",
+            "is_accepted": false,
+            "is_published": false,
+            "raw_source_name": null,
+            "raw_type": "info:eu-repo/semantics/article"
+          },
+          {
+            "id": "pmh:oai:europepmc.org:1865975",
+            "is_oa": false,
+            "landing_page_url": "https://www.ncbi.nlm.nih.gov/pmc/articles/2714657",
+            "pdf_url": null,
+            "source": {
+              "id": "https://openalex.org/S4306400806",
+              "display_name": "Europe PMC (PubMed Central)",
+              "issn_l": null,
+              "issn": null,
+              "is_oa": false,
+              "is_in_doaj": false,
+              "is_core": false,
+              "host_organization": "https://openalex.org/I1303153112",
+              "host_organization_name": "European Bioinformatics Institute",
+              "host_organization_lineage": [
+                "https://openalex.org/I1303153112"
+              ],
+              "host_organization_lineage_names": [],
+              "type": "repository"
+            },
+            "license": null,
+            "license_id": null,
+            "version": "submittedVersion",
+            "is_accepted": false,
+            "is_published": false,
+            "raw_source_name": null,
+            "raw_type": "Text"
+          }
+        ],
+        "best_oa_location": {
+          "id": "doi:10.1136/bmj.b2535",
+          "is_oa": true,
+          "landing_page_url": "https://doi.org/10.1136/bmj.b2535",
+          "pdf_url": "https://www.bmj.com/content/bmj/339/bmj.b2535.full.pdf",
+          "source": {
+            "id": "https://openalex.org/S4393911389",
+            "display_name": "BMJ",
+            "issn_l": "0007-1447",
+            "issn": [
+              "0007-1447",
+              "0267-0623",
+              "1468-5833"
+            ],
+            "is_oa": false,
+            "is_in_doaj": false,
+            "is_core": false,
+            "host_organization": null,
+            "host_organization_name": null,
+            "host_organization_lineage": [],
+            "host_organization_lineage_names": [],
+            "type": "journal"
+          },
+          "license": "cc-by-nc",
+          "license_id": "https://openalex.org/licenses/cc-by-nc",
+          "version": "publishedVersion",
+          "is_accepted": true,
+          "is_published": true,
+          "raw_source_name": "BMJ",
+          "raw_type": "journal-article"
+        },
+        "sustainable_development_goals": [],
+        "awards": [],
+        "funders": [
+          {
+            "id": "https://openalex.org/F4320307773",
+            "display_name": "GlaxoSmithKline",
+            "ror": "https://ror.org/01xsqw823"
+          },
+          {
+            "id": "https://openalex.org/F4320309610",
+            "display_name": "Health Services Research and Development",
+            "ror": "https://ror.org/05rsv9s98"
+          },
+          {
+            "id": "https://openalex.org/F4320310145",
+            "display_name": "Johns Hopkins University",
+            "ror": "https://ror.org/00za53h95"
+          },
+          {
+            "id": "https://openalex.org/F4320310630",
+            "display_name": "University of Ottawa",
+            "ror": "https://ror.org/03c4mmv16"
+          },
+          {
+            "id": "https://openalex.org/F4320310992",
+            "display_name": "University of Bern",
+            "ror": "https://ror.org/02k7v4d05"
+          },
+          {
+            "id": "https://openalex.org/F4320311323",
+            "display_name": "Ottawa Hospital Research Institute",
+            "ror": "https://ror.org/03c62dg59"
+          },
+          {
+            "id": "https://openalex.org/F4320311526",
+            "display_name": "McMaster University",
+            "ror": "https://ror.org/02fa3aq29"
+          },
+          {
+            "id": "https://openalex.org/F4320319985",
+            "display_name": "Cancer Research UK",
+            "ror": "https://ror.org/054225q67"
+          },
+          {
+            "id": "https://openalex.org/F4320331527",
+            "display_name": "University of Ioannina",
+            "ror": "https://ror.org/01qg3j183"
+          },
+          {
+            "id": "https://openalex.org/F4320332669",
+            "display_name": "Johns Hopkins Bloomberg School of Public Health",
+            "ror": "https://ror.org/00za53h95"
+          },
+          {
+            "id": "https://openalex.org/F4320334506",
+            "display_name": "Canadian Institutes of Health Research",
+            "ror": "https://ror.org/01gavpb45"
+          },
+          {
+            "id": "https://openalex.org/F4320334626",
+            "display_name": "Medical Research Council",
+            "ror": "https://ror.org/03x94j517"
+          },
+          {
+            "id": "https://openalex.org/F4320335608",
+            "display_name": "Care and Public Health Research Institute, Universiteit Maastricht",
+            "ror": null
+          }
+        ],
+        "has_content": {
+          "grobid_xml": true,
+          "pdf": false
+        },
+        "content_urls": {
+          "grobid_xml": "https://content.openalex.org/works/W2156098321.grobid-xml"
+        },
+        "referenced_works_count": 57,
+        "referenced_works": [
+          "https://openalex.org/W160580327",
+          "https://openalex.org/W1490605517",
+          "https://openalex.org/W1522513710",
+          "https://openalex.org/W1560778466",
+          "https://openalex.org/W1590137713",
+          "https://openalex.org/W1690786713",
+          "https://openalex.org/W1774591799",
+          "https://openalex.org/W1853602163",
+          "https://openalex.org/W1971186240",
+          "https://openalex.org/W1972054739",
+          "https://openalex.org/W1980300818",
+          "https://openalex.org/W1982260074",
+          "https://openalex.org/W1983540313",
+          "https://openalex.org/W2000442546",
+          "https://openalex.org/W2012932483",
+          "https://openalex.org/W2015421910",
+          "https://openalex.org/W2029163232",
+          "https://openalex.org/W2043759984",
+          "https://openalex.org/W2058084426",
+          "https://openalex.org/W2065267852",
+          "https://openalex.org/W2066896354",
+          "https://openalex.org/W2067550511",
+          "https://openalex.org/W2068694980",
+          "https://openalex.org/W2068769841",
+          "https://openalex.org/W2093211493",
+          "https://openalex.org/W2093579014",
+          "https://openalex.org/W2098631889",
+          "https://openalex.org/W2100729569",
+          "https://openalex.org/W2102487800",
+          "https://openalex.org/W2112505828",
+          "https://openalex.org/W2116810060",
+          "https://openalex.org/W2129303461",
+          "https://openalex.org/W2129829737",
+          "https://openalex.org/W2132161915",
+          "https://openalex.org/W2133774931",
+          "https://openalex.org/W2134833483",
+          "https://openalex.org/W2135010675",
+          "https://openalex.org/W2140521029",
+          "https://openalex.org/W2144086043",
+          "https://openalex.org/W2147581820",
+          "https://openalex.org/W2158379591",
+          "https://openalex.org/W2159096825",
+          "https://openalex.org/W2163839878",
+          "https://openalex.org/W2165010366",
+          "https://openalex.org/W2599076725",
+          "https://openalex.org/W2811157820",
+          "https://openalex.org/W2912597760",
+          "https://openalex.org/W2918689133",
+          "https://openalex.org/W2982712704",
+          "https://openalex.org/W2986772077",
+          "https://openalex.org/W3022903699",
+          "https://openalex.org/W4240149506",
+          "https://openalex.org/W4254160334",
+          "https://openalex.org/W4285719527",
+          "https://openalex.org/W6679206833",
+          "https://openalex.org/W7073935243",
+          "https://openalex.org/W7074072182"
+        ],
+        "related_works": [
+          "https://openalex.org/W167088980",
+          "https://openalex.org/W2475705533",
+          "https://openalex.org/W186129870",
+          "https://openalex.org/W3200522959",
+          "https://openalex.org/W4389944781",
+          "https://openalex.org/W2997993211",
+          "https://openalex.org/W120415280",
+          "https://openalex.org/W4383099232",
+          "https://openalex.org/W2070311887",
+          "https://openalex.org/W2115099528"
+        ],
+        "abstract_inverted_index": {
+          "Structured": [
+            0
+          ],
+          "summary": [
+            1,
+            6
+          ],
+          "2": [
+            2
+          ],
+          "Provide": [
+            3
+          ],
+          "a": [
+            4,
+            44
+          ],
+          "structured": [
+            5
+          ],
+          "including,": [
+            7
+          ],
+          "as": [
+            8
+          ],
+          "applicable,": [
+            9
+          ],
+          "background,": [
+            10
+          ],
+          "objectives,": [
+            11
+          ],
+          "data": [
+            12
+          ],
+          "sources,": [
+            13
+          ],
+          "study": [
+            14,
+            19
+          ],
+          "eligibility": [
+            15
+          ],
+          "criteria,": [
+            16
+          ],
+          "participants,": [
+            17
+          ],
+          "interventions,": [
+            18
+          ],
+          "appraisal": [
+            20
+          ],
+          "and": [
+            21,
+            27
+          ],
+          "synthesis": [
+            22,
+            74,
+            81
+          ],
+          "methods,": [
+            23
+          ],
+          "results,": [
+            24
+          ],
+          "limitations,": [
+            25
+          ],
+          "conclusions": [
+            26
+          ],
+          "implications": [
+            28
+          ],
+          "of": [
+            29,
+            37,
+            43,
+            48,
+            55,
+            63,
+            69,
+            76
+          ],
+          "key": [
+            30
+          ],
+          "findings,": [
+            31
+          ],
+          "systematic": [
+            32,
+            45
+          ],
+          "review": [
+            33,
+            46
+          ],
+          "registration": [
+            34
+          ],
+          "number": [
+            35
+          ],
+          "Flow": [
+            36
+          ],
+          "information": [
+            38
+          ],
+          "through": [
+            39,
+            51,
+            59
+          ],
+          "the": [
+            40
+          ],
+          "different": [
+            41
+          ],
+          "phases": [
+            42
+          ],
+          "No": [
+            47,
+            54,
+            62,
+            68,
+            75
+          ],
+          "records": [
+            49,
+            57,
+            64
+          ],
+          "identified": [
+            50,
+            58
+          ],
+          "database": [
+            52
+          ],
+          "searching": [
+            53
+          ],
+          "additional": [
+            56
+          ],
+          "other": [
+            60
+          ],
+          "sources": [
+            61
+          ],
+          "after": [
+            65
+          ],
+          "duplicates": [
+            66
+          ],
+          "removed": [
+            67
+          ],
+          "studies": [
+            70,
+            77
+          ],
+          "included": [
+            71,
+            78
+          ],
+          "in": [
+            72,
+            79
+          ],
+          "qualitative": [
+            73
+          ],
+          "quantitative": [
+            80
+          ],
+          "(meta-analysis)": [
+            82
+          ]
+        },
+        "counts_by_year": [
+          {
+            "year": 2026,
+            "cited_by_count": 801
+          },
+          {
+            "year": 2025,
+            "cited_by_count": 2214
+          },
+          {
+            "year": 2024,
+            "cited_by_count": 3612
+          },
+          {
+            "year": 2023,
+            "cited_by_count": 4980
+          },
+          {
+            "year": 2022,
+            "cited_by_count": 7218
+          },
+          {
+            "year": 2021,
+            "cited_by_count": 14939
+          },
+          {
+            "year": 2020,
+            "cited_by_count": 12429
+          },
+          {
+            "year": 2019,
+            "cited_by_count": 8588
+          },
+          {
+            "year": 2018,
+            "cited_by_count": 6545
+          },
+          {
+            "year": 2017,
+            "cited_by_count": 6024
+          },
+          {
+            "year": 2016,
+            "cited_by_count": 5117
+          },
+          {
+            "year": 2015,
+            "cited_by_count": 3908
+          },
+          {
+            "year": 2014,
+            "cited_by_count": 2909
+          },
+          {
+            "year": 2013,
+            "cited_by_count": 1931
+          },
+          {
+            "year": 2012,
+            "cited_by_count": 1167
+          }
+        ],
+        "updated_date": "2026-07-10T07:45:09.275182",
+        "created_date": "2025-10-10T00:00:00"
+      }
+    ],
+    "group_by": []
+  }
+}

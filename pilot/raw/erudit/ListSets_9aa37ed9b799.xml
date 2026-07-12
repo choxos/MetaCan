@@ -1,0 +1,949 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/
+                             http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+  <responseDate>2026-07-11T12:32:57Z</responseDate>
+  <request verb="ListSets" resumptionToken="X320091120/1">http://oai.prod.erudit.org:8073/fedora-oai-provider/request</request>
+<ListSets>
+<set>
+  <setSpec>erudit.revue.ijcar</setSpec>
+  <setName>International Journal of Child and Adolescent Resilience / Revue internationale de la résilience des enfants et des adolescents</setName>
+<setDescription><oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd"><dc:title>International Journal of Child and Adolescent Resilience / Revue internationale de la résilience des enfants et des adolescents</dc:title><dc:identifier>http://www.erudit.org/revue/ijcar/</dc:identifier><dc:publisher>Canada Research Chair in Interpersonal Traumas and Resilience/Chaire de recherche du Canada sur les traumas interpersonnels et la résilience</dc:publisher><dc:subject lang="en">Psychology</dc:subject><dc:subject lang="fr">Psychologie</dc:subject></oai_dc:dc></setDescription></set>
+<set>
+  <setSpec>erudit.revue.sessions</setSpec>
+  <setName>Sessions d&apos;étude - Société canadienne d&apos;histoire de l&apos;Église catholique</setName>
+</set>
+<set>
+  <setSpec>erudit.culture.rel</setSpec>
+  <setName>Relations: Pour qui veut une société juste</setName>
+
+  <setDescription>
+    <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+      <dc:title>Relations</dc:title>
+      <dc:identifier>urn:eissn:1929-3097</dc:identifier>
+      <dc:identifier>urn:issn:0034-3781</dc:identifier>
+      <dc:identifier>http://www.erudit.org/culture/rel/</dc:identifier>
+      <dc:publisher>Centre justice et foi</dc:publisher>
+      <dc:subject xml:lang="fr">Sciences humaines et sociales</dc:subject>
+      <dc:subject xml:lang="en">Humanities and Social Sciences</dc:subject>
+    </oai_dc:dc>
+  </setDescription>
+</set>
+<set>
+  <setSpec>erudit.revue.ac</setSpec>
+  <setName>Acta Criminologica</setName>
+
+  <setDescription>
+    <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+      <dc:title>Acta Criminologica</dc:title>
+      <dc:identifier>urn:eissn:1718-3243</dc:identifier>
+      <dc:identifier>urn:issn:0065-1168</dc:identifier>
+      <dc:identifier>http://www.erudit.org/revue/ac/</dc:identifier>
+      <dc:publisher>Les Presses de l&apos;Université de Montréal</dc:publisher>
+      <dc:description xml:lang="fr">Criminologie, revue fondée par Denis Szabo en 1968, présente
+        principalement des résultats de recherche et s&apos;adresse tant aux scientifiques qu’aux
+        professionnels de la justice pénale. C’est une revue thématique répondant aux préoccupations
+        et aux intérêts actuels des criminologues québécois et étrangers. Les thèmes abordés sont
+        souvent pluridisciplinaires et la revue fait appel à des chercheurs de différentes
+        disciplines : criminologues, sociologues, psychologues, juristes, etc. Elle est la seule
+        revue de criminologie publiée en français en Amérique. Criminologie paraît grâce à des
+        subventions du Conseil de recherches en sciences humaines du Canada et du Fonds québécois de
+        la recherche sur la société et la culture. </dc:description>
+      <dc:description xml:lang="en">Founded in 1968 by Denis Szabo, Criminologie is primarily
+        dedicated to presenting research results and addresses both scientists and criminal-justice
+        professionals. This theme-based journal deals with the current concerns and interests of
+        criminologists in Quebec and elsewhere. Themes are often multidisciplinary in nature and the
+        publication calls upon researchers in various fields: criminologists, sociologists,
+        psychologists, jurists, etc. It is the only French-language criminology journal published in
+        North America. Criminologie is made possible thanks to grants from the Canadian Human
+        Sciences Research Council of Canada and the Fonds québécois de la recherche sur la société
+        et la culture. </dc:description>
+      <dc:subject xml:lang="fr">Droit</dc:subject>
+      <dc:subject xml:lang="fr">Sociologie</dc:subject>
+      <dc:subject xml:lang="en">Law</dc:subject>
+      <dc:subject xml:lang="en">Sociology</dc:subject>
+    </oai_dc:dc>
+  </setDescription>
+</set>
+<set>
+  <setSpec>erudit.revue.euro</setSpec>
+  <setName>Eurostudia</setName>
+
+  <setDescription>
+    <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+      <dc:title>Eurostudia</dc:title>
+      <dc:identifier>urn:eissn:1718-8946</dc:identifier>
+      <dc:identifier>http://www.erudit.org/revue/euro/</dc:identifier>
+      <dc:publisher>Le Centre canadien d’études allemandes et européennes</dc:publisher>
+      <dc:description xml:lang="fr">Eurostudia : revue transatlantique de recherche sur l’Europe est une revue numérique et trilingue 
+    (français, anglais et allemand) évaluée par les pairs dont le premier numéro a été publié en juin 2005. Son objectif principal 
+    est de mieux éclairer l’histoire, les spécificités et les enjeux principaux du discours sur l’« Europe ». La revue vise plus 
+    particulièrement une mise en relation systématique d’analyses empiriques portant sur l’intégration politique, juridique 
+    et économique de l’Europe d’une part avec une réflexion de base sur les enjeux culturels (au sens large) de l’« Europe » 
+    d’autre part. Conséquemment elle s’adresse à la fois aux chercheuses et chercheurs analysant, dans le cadre des sciences sociales, 
+    les différents aspects de l’intégration européenne et aux spécialistes recherchant, dans le cadre des sciences humaines, le discours 
+    sur l’identité culturelle de l’Europe, l’Européanité etc.
+  </dc:description>
+      <dc:description xml:lang="en">Eurostudia: Transatlantic Journal for European Studies is an electronic and trilingual 
+    (French, English, and German) peer-reviewed journal whose first issue was published in June 2005. Its principal objective is to 
+    shed better light on the history, the specificities, and the key challenges of the discourse on “Europe”. The journal aims more 
+    specifically toward a systematic comparison of empirical analyses relating to the political, legal, and economic integration of Europe, 
+    on the one hand, with a basic reflection upon the cultural stakes (in a broad sense) of “Europe”, on the other. Consequently, it is addressed 
+    to and addresses at once analytical researchers, within the framework of social sciences, and the various aspects of European integration, 
+    as well as research specialists, in the framework of human sciences, and the discourse on the cultural identity of Europe, Europeanity, etc.
+  </dc:description>
+      <dc:subject xml:lang="fr">Sciences politiques</dc:subject>
+      <dc:subject xml:lang="en">Political Science</dc:subject>
+    </oai_dc:dc>
+  </setDescription>
+</set>
+<set>
+  <setSpec>erudit.revue.ae</setSpec>
+  <setName>L&apos;Actualité économique</setName>
+
+  <setDescription>
+    <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+      <dc:title>L&apos;Actualité économique</dc:title>
+      <dc:identifier>urn:eissn:1710-3991</dc:identifier>
+      <dc:identifier>urn:issn:0001-771X</dc:identifier>
+      <dc:identifier>http://www.erudit.org/revue/ae/</dc:identifier>
+      <dc:publisher>HEC Montréal</dc:publisher>
+      <dc:description xml:lang="fr">L&apos;Actualité économique est une revue scientifique de langue française vouée à la diffusion de nouvelles 
+    connaissances en science économique et en finance. Fondée en 1925 par l&apos;École des Hautes Études Commerciales (HEC Montréal), 
+    la revue est depuis 1973 sous la responsabilité éditoriale de la Société canadienne de science économique (SCSE). L&apos;association de la 
+    revue à une société savante telle la SCSE avait pour but d&apos;en accentuer le caractère scientifique et d&apos;en faire une véritable revue de recherche. 
+    L&apos;Actualité économique se veut un moyen de diffusion privilégié en Amérique du Nord et en Europe pour les économistes et les spécialistes 
+    de la finance qui désirent publier des textes en français. Ses articles sont répertoriés notamment dans l&apos;Index des périodiques canadiens, 
+    l&apos;Index of Economic Articles, le Journal of Economic Literature et Point de repère.
+  </dc:description>
+      <dc:description xml:lang="en">L&apos;Actualité économique is a French-language scientific journal dedicated to the dissemination 
+    of new knowledge in the fields of economic science and finance. Founded in 1925 by the École des Hautes Études Commerciales 
+    (HEC Montreal), the journal has since 1973 been under the editorial supervision of the Société canadienne de science économique (SCSE). 
+    Association with a learned society such as SCSE was intended to enhance the journal’s scientific nature and make it a true research publication. 
+    L’Actualité économique’s mission is to serve as a preferred communications vehicle in North American and European for economists and finance 
+    specialists who wish to publish texts in French. Its articles are listed notably in the Canadian Periodicals Index, the Index of Economic Articles, 
+    the Journal of Economic Literature and Point de repère.
+  </dc:description>
+      <dc:subject xml:lang="fr">Économie</dc:subject>
+      <dc:subject xml:lang="en">Economics</dc:subject>
+    </oai_dc:dc>
+  </setDescription>
+</set>
+<set>
+  <setSpec>erudit.revue.esj</setSpec>
+  <setName>Engaged Scholar Journal: Community-Engaged Research, Teaching and Learning</setName>
+<setDescription><oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd"><dc:title>Engaged Scholar Journal: Community-Engaged Research, Teaching and Learning</dc:title><dc:identifier>http://www.erudit.org/revue/esj/</dc:identifier><dc:publisher>University of Saskatchewan</dc:publisher><dc:subject lang="en">Anthropology and Ethnology</dc:subject><dc:subject lang="fr">Anthropologie et ethnologie</dc:subject><dc:subject lang="en">Humanities and Social Sciences</dc:subject><dc:subject lang="fr">Sciences humaines et sociales</dc:subject><dc:subject lang="en">Sociology</dc:subject><dc:subject lang="fr">Sociologie</dc:subject></oai_dc:dc></setDescription></set>
+<set>
+  <setSpec>erudit.revue.nw</setSpec>
+  <setName>Narrative Works</setName>
+
+  <setDescription>
+    <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+      <dc:title>Narrative Works</dc:title>
+      <dc:identifier>urn:eissn:1925-0622</dc:identifier>
+      <dc:identifier>http://www.erudit.org/revue/nw/</dc:identifier>
+      <dc:publisher>The University of New Brunswick</dc:publisher>
+      <dc:description xml:lang="en">Narrative Works is an online, open-access, peer-reviewed,
+                interdisciplinary journal committed to exploring the complex role of narrative in
+                countless aspects of human life. Just as narratives commonly concern many topics at
+                once (emotions, relationships, beliefs, etc.), so “narrative” itself can be
+                understood in numerous ways–in terms, for instance, of narrative theory, narrative
+                inquiry, narrative analysis, or narrative practice. For such reasons, scholarship on
+                narrative often reflects, and connects, a wide range of academic disciplines and
+                professional fields. Those from which manuscripts for Narrative Works are invited
+                include, but are not limited to, psychology, sociology, anthropology, gerontology,
+                literary studies, gender studies, cultural studies, religious studies, social work,
+                education, healthcare, ethics, theology, and the arts. Submissions may concern a
+                range of contexts, topics, and themes; employ a variety of approaches and
+                methodologies; and represent individual or collaborative work by theorists,
+                researchers, or practitioners. Whatever the discipline or approach, however, the
+                submissions should explore in some way the narrative complexity of human life,
+                display a sufficient theoretical foundation, and reflect a good grasp of relevant
+                narrative scholarship. They should be clearly, correctly, and engagingly written,
+                and should be accessible to readers who are not specialists in the writer’s
+                discipline. Contact William Randall, EdD &amp; Elizabeth McKim, PhD Co-Editors Centre
+                for Interdisciplinary Research on Narrative St. Thomas University Fredericton, New
+                Brunswick, Canada E3B 5G3 Phone: (506) 452-0448 Email: narrativeworks@stu.ca </dc:description>
+      <dc:description xml:lang="fr">Narrative Works est une revue numérique en libre d&apos;accès
+                interdisciplinaire. Elle est engagée à explorer le rôle complexe du récit dans
+                d&apos;innombrables aspects de la vie humaine. Tout comme les récits portent souvent sur
+                de nombreux sujets à la fois (les émotions, les relations, les croyances, etc.), le
+                terme «récit» peut lui-même être compris selon de nombreuses façons: théorie
+                narrative, recherche narrative, analyse narrative, ou encore pratique narrative.
+                Pour ces raisons, l&apos;étude sur le récit reflète souvent un large éventail de
+                disciplines et domaines professionnels: la psychologie, la sociologie,
+                l&apos;anthropologie, la gérontologie, les études littéraires, les études sur le genre,
+                les études culturelles, les études religieuses, le travail social, l&apos;éducation, la
+                santé, l&apos;éthique, la théologie et les arts. Coordonnées William Randall, EdD &amp;
+                Elizabeth McKim, PhD Co-éditeurs Centre for Interdisciplinary Research on Narrative
+                St. Thomas University Fredericton, New Brunswick, Canada E3B 5G3 Phone: (506)
+                452-0448 Email: narrativeworks@stu.ca </dc:description>
+      <dc:subject xml:lang="en">Humanities and Social Sciences</dc:subject>
+      <dc:subject xml:lang="fr">Sciences humaines et sociales</dc:subject>
+    </oai_dc:dc>
+  </setDescription>
+</set>
+<set>
+  <setSpec>erudit.revue.aor</setSpec>
+  <setName>Algorithmic Operations Research</setName>
+
+  <setDescription>
+    <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+      <dc:title>Algorithmic Operations Research</dc:title>
+      <dc:identifier>urn:eissn:1718-3235</dc:identifier>
+      <dc:identifier>http://www.erudit.org/revue/aor/</dc:identifier>
+      <dc:publisher>Preeminent Academic Facets Inc.</dc:publisher>
+      <dc:description xml:lang="en">Algorithmic Operations Research publishes original
+                research papers in the area of operations research and mathematical optimization
+                with an algorithmic focus. The topics of interest include linear programming,
+                integer programming, non-linear programming, combinatorial optimization,
+                semidefinite programming, graph algorithms, approximation algorithms,
+                metaheuristics, online algorithms, randomized algorithms, Optimization algorithms in
+                computational molecular biology, medicine, and all other application areas. The
+                journal welcomes submissions involving development of algorithms, implementation and
+                testing, theoretical analysis of algorithms, computational complexity, experimental
+                analysis, and application and modeling papers with substantial algorithmic contents.
+                Survey papers, short communications, invited software reviews, and invited book
+                reviews are also of interest to the journal. Contact Email: apunnen@sfu.ca </dc:description>
+      <dc:description xml:lang="fr">La revue Algorithmic Operations Research publie des
+                articles de recherche originaux dans le domaine de la recherche opérationnelle et
+                l&apos;optimisation mathématique. Les sujets d&apos;intérêt incluent la programmation
+                linéaire, la programmation en nombres entiers, la programmation non-linéaire,
+                l&apos;optimisation combinatoire, la programmation semidéfinie, les algorithmes de
+                graphes et d&apos;approximation, les algorithmes en ligne, les algorithmes aléatoires,
+                les algorithmes d&apos;optimisation de la biologie moléculaire informatique, la médecine,
+                et tous les autres domaines d&apos;application des algorithmes. La revue accueille les
+                soumissions portant sur le développement d&apos;algorithmes, la mise en œuvre et les
+                tests, l&apos;analyse théorique des algorithmes, la complexité de calcul, l&apos;analyse
+                expérimentale, l&apos;application et la modélisation des documents avec des contenus
+                algorithmiques importants. Coordonnées Adresse courriel: apunnen@sfu.ca </dc:description>
+      <dc:subject xml:lang="en">Mathematics</dc:subject>
+      <dc:subject xml:lang="fr">Mathématiques</dc:subject>
+    </oai_dc:dc>
+  </setDescription>
+</set>
+<set>
+  <setSpec>erudit.revue.philoso</setSpec>
+  <setName>Philosophiques</setName>
+
+  <setDescription>
+    <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+      <dc:title>Philosophiques</dc:title>
+      <dc:identifier>urn:eissn:1492-1391</dc:identifier>
+      <dc:identifier>urn:issn:0316-2923</dc:identifier>
+      <dc:identifier>http://www.erudit.org/revue/philoso/</dc:identifier>
+      <dc:publisher>Société de philosophie du Québec</dc:publisher>
+      <dc:description xml:lang="fr">Philosophiques est une revue semestrielle fondée en 1974 par Yvon Lafrance (Université d’Ottawa), 
+    elle est depuis le 1er janvier 1977 l’organe officiel de la Société de philosophie du Québec. Elle publie des articles qui contribuent 
+    au progrès de la connaissance dans tous les domaines de la philosophie et de l&apos;histoire de la philosophie et qui sont sélectionnés 
+    uniquement en fonction de leur qualité. Elle ne fait la promotion d&apos;aucune école, doctrine ou méthodologie et a pour seul souci 
+    de contribuer à stimuler la recherche philosophique. Elle publie aussi, mais seulement sur invitation, des études critiques et des 
+    comptes rendus d&apos;ouvrages philosophiques récemment parus.
+  </dc:description>
+      <dc:description xml:lang="en">A semi-annual founded in 1974 by Yvon Lafrance (University of Ottawa), Philosophiques has, 
+    since January 1, 1977, been the official organ of the Société de philosophie du Québec. The journal publishes articles that contribute 
+    to the advancement of knowledge in all areas of philosophy and philosophy history and are selected strictly on the basis of quality. 
+    Promoting no one school, doctrine or methodology, Philosophiques is devoted solely to encouraging philosophical research. 
+    It also publishes, upon invitation only, critical studies and summaries of recently published philosophical works.
+  </dc:description>
+      <dc:subject xml:lang="fr">Philosophie</dc:subject>
+      <dc:subject xml:lang="en">Philosophy</dc:subject>
+    </oai_dc:dc>
+  </setDescription>
+</set>
+<set>
+  <setSpec>erudit.revue.ateliers</setSpec>
+  <setName>Les Ateliers de l&apos;éthique / The Ethics Forum</setName>
+
+  <setDescription>
+    <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+      <dc:title>Les ateliers de l&apos;éthique / The Ethics Forum</dc:title>
+      <dc:identifier>urn:eissn:1718-9977</dc:identifier>
+      <dc:identifier>https://www.erudit.org/revue/ateliers/</dc:identifier>
+      <dc:publisher>Centre de recherche en éthique (CRÉ)</dc:publisher>
+      <dc:description xml:lang="fr">A description will soon be available!</dc:description>
+      <dc:subject xml:lang="fr">Sciences humaines et sociales</dc:subject>
+      <dc:subject xml:lang="en">Humanities and Social Sciences</dc:subject>
+    </oai_dc:dc>
+  </setDescription>
+</set>
+<set>
+  <setSpec>erudit.culture.entrevous</setSpec>
+  <setName>EntreVous: Littérature organique</setName>
+
+  <setDescription>
+    <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+      <dc:title>Entrevous: Revue d&apos;arts littéraires</dc:title>
+      <dc:identifier>urn:eissn:2371-1590</dc:identifier>
+      <dc:identifier>urn:issn:2371-1582</dc:identifier>
+      <dc:identifier>http://www.erudit.org/culture/entrevous/</dc:identifier>
+      <dc:publisher>Société littéraire de Laval</dc:publisher>
+      <dc:description xml:lang="fr">La Société littéraire de Laval est un organisme professionnel de recherche, de création, de diffusion et de promotion dont la discipline principale est la littérature. Elle est aussi éditrice du périodique culturel Entrevous.</dc:description>
+      <dc:subject xml:lang="fr">Littérature</dc:subject>
+      <dc:subject xml:lang="en">Literature</dc:subject>
+    </oai_dc:dc>
+  </setDescription>
+</set>
+<set>
+  <setSpec>erudit.revue.natcan</setSpec>
+  <setName>Le Naturaliste canadien</setName>
+
+  <setDescription>
+    <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+      <dc:title>Le Naturaliste canadien</dc:title>
+      <dc:identifier>urn:eissn:1929-3208</dc:identifier>
+      <dc:identifier>urn:issn:0028-0798</dc:identifier>
+      <dc:identifier>https://www.erudit.org/revue/natcan/</dc:identifier>
+      <dc:publisher>Société Provancher d&apos;histoire naturelle du Canada</dc:publisher>
+      <dc:subject xml:lang="fr">Biologie</dc:subject>
+      <dc:subject xml:lang="en">Biology</dc:subject>
+      <dc:subject xml:lang="fr">Eau et environnement</dc:subject>
+      <dc:subject xml:lang="en">Water and Environment</dc:subject>
+    </oai_dc:dc>
+  </setDescription>
+</set>
+<set>
+  <setSpec>erudit.revue.bioethics</setSpec>
+  <setName>Canadian Journal of Bioethics / Revue canadienne de bioéthique</setName>
+<setDescription><oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd"><dc:title>Canadian Journal of Bioethics / Revue canadienne de bioéthique</dc:title><dc:identifier>urn:eissn:2561-4665</dc:identifier><dc:identifier>http://www.erudit.org/revue/bioethics/</dc:identifier><dc:publisher>Programmes de bioéthique, École de santé publique de l'Université de Montréal</dc:publisher><dc:subject lang="en">Humanities and Social Sciences</dc:subject><dc:subject lang="fr">Sciences humaines et sociales</dc:subject></oai_dc:dc></setDescription></set>
+<set>
+  <setSpec>erudit.revue.rmo</setSpec>
+  <setName>Revue musicale OICRM</setName>
+
+  <setDescription>
+    <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+      <dc:title>Revue musicale OICRM</dc:title>
+      <dc:identifier>urn:eissn:2368-7061</dc:identifier>
+      <dc:identifier>http://www.erudit.org/revue/rmo/</dc:identifier>
+      <dc:publisher>Observatoire interdisciplinaire de création et recherche en musique (OICRM)</dc:publisher>
+      <dc:subject xml:lang="fr">Arts</dc:subject>
+      <dc:subject xml:lang="en">Arts</dc:subject>
+    </oai_dc:dc>
+  </setDescription>
+</set>
+<set>
+  <setSpec>erudit.revue.man</setSpec>
+  <setName>Man and Nature / L&apos;homme et la nature</setName>
+
+  <setDescription>
+    <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+      <dc:title>Man and Nature / L&apos;homme et la nature</dc:title>
+      <dc:identifier>urn:eissn:1927-8810</dc:identifier>
+      <dc:identifier>urn:issn:0824-3298</dc:identifier>
+      <dc:identifier>http://www.erudit.org/revue/man/</dc:identifier>
+      <dc:publisher>Canadian Society for Eighteenth-Century Studies / Société canadienne d&apos;étude du dix-huitième siècle</dc:publisher>
+      <dc:subject xml:lang="fr">Histoire</dc:subject>
+      <dc:subject xml:lang="en">History</dc:subject>
+    </oai_dc:dc>
+  </setDescription>
+</set>
+<set>
+  <setSpec>erudit.culture.nb</setSpec>
+  <setName>Nuit blanche, le magazine du livre</setName>
+
+  <setDescription>
+    <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+      <dc:title>Nuit blanche: Revue des littératures francophones</dc:title>
+      <dc:identifier>urn:eissn:1923-3191</dc:identifier>
+      <dc:identifier>urn:issn:0823-2490</dc:identifier>
+      <dc:identifier>https://www.erudit.org/culture/nb1073421//</dc:identifier>
+      <dc:publisher>Nuit blanche, revue des littératures francophones</dc:publisher>
+      <dc:description xml:lang="fr">Toutes les littératures, écrites ou traduites en français, dans un seul magazine. 
+     Entrevues, grands dossiers, rubriques originales comme Le livre jamais lu et Écrivains méconnus du XXe siècle font de 
+     Nuit blanche un magazine pluriel et curieux de tous les genres littéraires. De partout au Québec et d’ailleurs dans la francophonie, 
+     des écrivains, professeurs, journalistes, traducteurs et autres grands lecteurs présentent chaque saison quelque 80 parutions récentes – œuvres de fiction et essais. 
+     La version électronique de Nuit blanche propose 15 ans d’archives du magazine.</dc:description>
+      <dc:description xml:lang="en">This magazine presents a vast panorama of books written or translated in French. 
+     It publishes articles dedicated to writers, themes, styles and literary eras as well as features on international literature 
+     (Costa Rica, Hungary, Poland, etc.). Interviews and numerous book reviews can also be found.</dc:description>
+      <dc:subject xml:lang="fr">Littérature</dc:subject>
+      <dc:subject xml:lang="en">Literature</dc:subject>
+    </oai_dc:dc>
+  </setDescription>
+</set>
+<set>
+  <setSpec>erudit.revue.rum</setSpec>
+  <setName>Revue de l’Université de Moncton</setName>
+
+  <setDescription>
+    <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+      <dc:title>Revue de l’Université de Moncton</dc:title>
+      <dc:identifier>urn:eissn:1712-2139</dc:identifier>
+      <dc:identifier>urn:issn:0316-6368</dc:identifier>
+      <dc:identifier>https://www.erudit.org/revue/rum/</dc:identifier>
+      <dc:publisher>Revue de l’Université de Moncton</dc:publisher>
+      <dc:description xml:lang="fr">Fondée au même moment que l’Université de Moncton, en 1963, la Revue de l’Université de Moncton 
+     est de caractère pluridisciplinaire et humaniste. Elle publie des textes en français provenant de la communauté universitaire régionale, 
+     nationale et internationale. Lieu de convergence et d’échange, la Revue privilégie des réflexions d’actualité autour de problématiques précises, 
+     dans des numéros thématiques disciplinaires ou interdisciplinaires. S’adressant à un public averti, ses textes, arbitrés par des pairs, font le point 
+     des connaissances et explorent les avenues nouvelles de la recherche. La Revue publie aussi des numéros hors-série (annales de colloques 
+     et de congrès). La Revue de l’Université de Moncton est membre de l’Association canadienne des revues savantes.</dc:description>
+      <dc:description xml:lang="en">Founded in 1963, the same year as the University of Moncton, Revue de l’Université de Moncton 
+     is a multidisciplinary, humanist-based journal that publishes French-language texts contributed by the regional, national and 
+     international academic communities. A site of convergence and exchange, the journal serves primarily as a forum for timely 
+     reflections on specific questions presented in disciplinary- or interdisciplinary-theme issues. Addressed to a learned readership, 
+     its peer-refereed texts take stock of a given body of knowledge and explore new lines of research. The journal also publishes special 
+     issues reporting on symposiums and conferences. Revue de l’Université de Moncton is a member of the Canadian Association of Learned Journals.</dc:description>
+      <dc:subject xml:lang="fr">Sciences humaines et sociales</dc:subject>
+      <dc:subject xml:lang="en">Humanities and Social Sciences</dc:subject>
+    </oai_dc:dc>
+  </setDescription>
+</set>
+<set>
+  <setSpec>erudit.revue.raq</setSpec>
+  <setName>Recherches amérindiennes au Québec</setName>
+
+  <setDescription>
+    <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+      <dc:title>Recherches amérindiennes au Québec</dc:title>
+      <dc:identifier>urn:eissn:1923-5151</dc:identifier>
+      <dc:identifier>urn:issn:0318-4137</dc:identifier>
+      <dc:identifier>http://www.erudit.org/revue/raq/</dc:identifier>
+      <dc:publisher>Recherches amérindiennes au Québec</dc:publisher>
+      <dc:description xml:lang="fr">Revue de langue française publiée au Québec depuis 1971, Recherches amérindiennes au Québec 
+    a pour objectif de contribuer à la connaissance des cultures et des réalités socio-politiques des Premières Nations. 
+    Celles du Québec d&apos;abord mais aussi, plus généralement, celles de l&apos;ensemble des Amériques. Multidisciplinaire, 
+    elle ouvre ses pages à tous les chercheurs travaillant sur des sujets relatifs aux Premières Nations notamment, mais non 
+    exclusivement, aux anthropologues et archéologues, aux historiens et ethnohistoriens, aux ethnolinguistes et aussi aux 
+    spécialistes des dossiers juridiques, politiques, économiques, littéraires, artistiques et autres concernant les Premières Nations. 
+    La revue Recherches amérindiennes au Québec accueille différents courants théoriques et traditions intellectuelles. 
+    Elle s&apos;adresse non seulement aux spécialistes mais aussi à un public plus large, autochtone ou non.
+  </dc:description>
+      <dc:description xml:lang="en">Published in Québec since 1971, the French-language journal Recherches amérindiennes 
+    au Québec aims to contribute to the knowledge of the cultures and socio-political realities of First Nations—primarily 
+    of Québec, but also, more generally, of all the Americas. As a multidisciplinary journal, it opens its pages to all researchers 
+    working on topics related to First Nations, including, but not limited to, anthropologists and archaeologists, historians 
+    and ethnohistorians, ethnolinguists, and specialists involved in, among other things, the legal, political, economic, literary, 
+    and artistic aspects of First Nations. The journal Recherches amérindiennes au Québec welcomes various theoretical currents 
+    and intellectual traditions. It is aimed not only at specialists but also at a wider audience, native or not.
+  </dc:description>
+      <dc:subject xml:lang="fr">Anthropologie et ethnologie</dc:subject>
+      <dc:subject xml:lang="en">Anthropology and Ethnology</dc:subject>
+    </oai_dc:dc>
+  </setDescription>
+</set>
+<set>
+  <setSpec>erudit.revue.etudfr</setSpec>
+  <setName>Études françaises</setName>
+
+  <setDescription>
+    <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+      <dc:title>Études françaises</dc:title>
+      <dc:identifier>urn:eissn:1492-1405</dc:identifier>
+      <dc:identifier>urn:issn:0014-2085</dc:identifier>
+      <dc:identifier>http://www.erudit.org/revue/etudfr/</dc:identifier>
+      <dc:publisher>Les Presses de l’Université de Montréal</dc:publisher>
+      <dc:description xml:lang="fr">Fondée en 1965, Études françaises est une revue de critique et de théorie publiée en français. 
+    Elle s&apos;intéresse aux littératures de langue française, aux rapports entre les arts et les sciences humaines, les discours et l&apos;écriture. 
+    Chaque numéro contient un ensemble thématique ainsi que diverses études. Elle s’adresse particulièrement aux spécialistes des 
+    littératures française et québécoise, mais aussi à toute personne qu’intéresse la littérature.
+   </dc:description>
+      <dc:description xml:lang="en">Founded in 1965, Études françaises is a French-language journal of criticism and theory. It examines 
+    French-language literature and the relationships between the arts and the human sciences, discourse and writing. 
+    Each issue concentrates on a specific theme and presents diverse studies. While aimed particularly at specialists of French and Québécois literature, 
+    Études françaises addresses anyone with an interest in literature.
+  </dc:description>
+      <dc:subject xml:lang="fr">Études littéraires</dc:subject>
+      <dc:subject xml:lang="en">Literary Studies</dc:subject>
+    </oai_dc:dc>
+  </setDescription>
+</set>
+<set>
+  <setSpec>erudit.revue.fpcfr</setSpec>
+  <setName>First Peoples Child &amp; Family Review: An Interdisciplinary Journal Honouring the Voices, Perspectives, and Knowledges of First Peoples</setName>
+<setDescription><oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd"><dc:title>First Peoples Child &amp; Family Review: An Interdisciplinary Journal Honouring the Voices, Perspectives, and Knowledges of First Peoples</dc:title><dc:identifier>http://www.erudit.org/revue/fpcfr/</dc:identifier><dc:publisher>First Nations Child and Family Caring Society of Canada</dc:publisher><dc:subject lang="en">Education</dc:subject><dc:subject lang="fr">Éducation</dc:subject><dc:subject lang="en">Humanities and Social Sciences</dc:subject><dc:subject lang="fr">Sciences humaines et sociales</dc:subject><dc:subject lang="en">Social Work</dc:subject><dc:subject lang="fr">Service social</dc:subject></oai_dc:dc></setDescription></set>
+<set>
+  <setSpec>erudit.revue.lex</setSpec>
+  <setName>Lex Electronica</setName>
+
+  <setDescription>
+    <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+      <dc:title>Lex Electronica</dc:title>
+      <dc:identifier>urn:eissn:1480-1787</dc:identifier>
+      <dc:identifier>https://www.erudit.org/revue/lex/</dc:identifier>
+      <dc:publisher>Centre de recherche en droit public Université de Montréal</dc:publisher>
+      <dc:description xml:lang="fr">A description will soon be available!</dc:description>
+      <dc:subject xml:lang="fr">Droit</dc:subject>
+      <dc:subject xml:lang="en">Law</dc:subject>
+      <dc:subject xml:lang="fr">Sciences humaines et sociales</dc:subject>
+      <dc:subject xml:lang="en">Humanities and Social Sciences</dc:subject>
+    </oai_dc:dc>
+  </setDescription>
+</set>
+<set>
+  <setSpec>erudit.culture.lesecrits</setSpec>
+  <setName>Les écrits</setName>
+</set>
+<set>
+  <setSpec>erudit.revue.lumen</setSpec>
+  <setName>Lumen: Selected Proceedings from the Canadian Society for Eighteenth-Century Studies / Lumen: Travaux choisis de la Société canadienne d&apos;étude du dix-huitième siècle</setName>
+
+  <setDescription>
+    <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+      <dc:title>Lumen: Selected Proceedings from the Canadian Society for Eighteenth-Century Studies / Lumen: Travaux choisis de la Société canadienne d&apos;étude du dix-huitième siècle</dc:title>
+      <dc:identifier>urn:eissn:1927-8284</dc:identifier>
+      <dc:identifier>urn:issn:1209-3696</dc:identifier>
+      <dc:identifier>http://www.erudit.org/revue/lumen/</dc:identifier>
+      <dc:publisher>Canadian Society for Eighteenth-Century Studies / Société canadienne d&apos;étude du dix-huitième siècle</dc:publisher>
+      <dc:subject xml:lang="fr">Études littéraires</dc:subject>
+      <dc:subject xml:lang="en">Literary Studies</dc:subject>
+      <dc:subject xml:lang="fr">Histoire</dc:subject>
+      <dc:subject xml:lang="en">History</dc:subject>
+    </oai_dc:dc>
+  </setDescription>
+</set>
+<set>
+  <setSpec>erudit.revue.ijcs</setSpec>
+  <setName>International Journal of Canadian Studies / Revue internationale d’études canadiennes</setName>
+
+  <setDescription>
+    <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+      <dc:title>International Journal of Canadian Studies / Revue internationale d’études canadiennes</dc:title>
+      <dc:identifier>urn:eissn:1923-5291</dc:identifier>
+      <dc:identifier>urn:issn:1180-3991</dc:identifier>
+      <dc:identifier>http://www.erudit.org/revue/ijcs/</dc:identifier>
+      <dc:publisher>Conseil international d’études canadiennes</dc:publisher>
+      <dc:description xml:lang="fr">Lancée en 1989, la International Journal of Canadian Studies / Revue internationale d&apos;études canadiennes, 
+    revue multidisciplinaire et internationale, est une publication savante et bilingue consacrée à la promotion de l’étude du Canada. 
+    Bien que chaque numéro porte sur un thème particulier, chacun réserve des articles à l’intérieur d’une section hors-thème. 
+    Les lecteurs de la Revue sont des universitaires des diverses disciplines qui enseignent et font des recherches dans le domaine 
+    des études canadiennes, et ce tant au Canada qu’à l’étranger. L’objectif de la International Journal of Canadian Studies / Revue 
+    internationale d&apos;études canadiennes est de faciliter les échanges de résultats de recherche en études canadiennes. 
+    La International Journal of Canadian Studies / Revue internationale d&apos;études canadiennes permet aux Canadianistes d’en dehors 
+    du Canada d’y diffuser le fruit de leurs travaux ; inversement, elle permet aussi aux Canadianistes de l’étranger de se tenir au fait de 
+    l’état de la recherche au Canada.
+  </dc:description>
+      <dc:description xml:lang="en">Launched in 1989, the International Journal of Canadian Studies / Revue internationale d&apos;études canadiennes
+    is a multidisciplinary and international bilingual scholarly journal. It is dedicated to the advancement of the study of Canada. 
+    Although each volume deals with a specific theme, each reserve a number of pages for articles not related to the theme in an 
+    open-topic section. Readers of the journal are scholars from various disciplines teaching and researching in the field of Canadian Studies, 
+    within Canada as well as outside the country. The aim of the International Journal of Canadian Studies / Revue internationale d&apos;études 
+    canadiennes is to exchange research results in the field of Canadian studies. The International Journal of Canadian Studies / Revue internationale 
+    d&apos;études canadiennes enables Canadianists outside Canada to disseminate in Canada the results of their research; conversely it enables 
+    Canadianists abroad to receive current research from Canadian scholars.
+  </dc:description>
+      <dc:subject xml:lang="fr">Sciences humaines et sociales</dc:subject>
+      <dc:subject xml:lang="en">Humanities and Social Sciences</dc:subject>
+    </oai_dc:dc>
+  </setDescription>
+</set>
+<set>
+  <setSpec>erudit.revue.atlantis</setSpec>
+  <setName>Atlantis: Critical Studies in Gender, Culture &amp; Social Justice / Atlantis: Études critiques sur le genre, la culture, et la justice</setName>
+<setDescription><oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd"><dc:title>Atlantis: Critical Studies in Gender, Culture &amp; Social Justice / Atlantis: Études critiques sur le genre, la culture, et la justice</dc:title><dc:identifier>http://www.erudit.org/revue/atlantis/</dc:identifier><dc:publisher>Mount Saint Vincent University</dc:publisher><dc:subject lang="en">Women Studies</dc:subject><dc:subject lang="fr">Études féministes</dc:subject><dc:subject lang="en">Sociology</dc:subject><dc:subject lang="fr">Sociologie</dc:subject></oai_dc:dc></setDescription></set>
+<set>
+  <setSpec>erudit.revue.gouvernance</setSpec>
+  <setName>Revue Gouvernance</setName>
+
+  <setDescription>
+    <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+      <dc:title>Revue Gouvernance / Governance Review</dc:title>
+      <dc:identifier>urn:eissn:1912-0362</dc:identifier>
+      <dc:identifier>http://www.erudit.org/revue/gouvernance/</dc:identifier>
+      <dc:publisher>Centre d’études en gouvernance de l’Université d’Ottawa</dc:publisher>
+      <dc:subject xml:lang="fr">Sciences de la gestion</dc:subject>
+      <dc:subject xml:lang="en">Management</dc:subject>
+      <dc:subject xml:lang="fr">Sciences humaines et sociales</dc:subject>
+      <dc:subject xml:lang="en">Humanities and Social Sciences</dc:subject>
+      <dc:subject xml:lang="fr">Sciences politiques</dc:subject>
+      <dc:subject xml:lang="en">Political Science</dc:subject>
+    </oai_dc:dc>
+  </setDescription>
+</set>
+<set>
+  <setSpec>erudit.revue.rqpsy</setSpec>
+  <setName>Revue québécoise de psychologie</setName>
+
+  <setDescription>
+    <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+      <dc:title>Revue québécoise de psychologie</dc:title>
+      <dc:identifier>urn:eissn:2560-6530</dc:identifier>
+      <dc:identifier>http://www.erudit.org/revue/rqpsy/</dc:identifier>
+      <dc:publisher>Revue québécoise de psychologie</dc:publisher>
+      <dc:subject xml:lang="fr">Psychologie</dc:subject>
+      <dc:subject xml:lang="en">Psychology</dc:subject>
+      <dc:subject xml:lang="fr">Sciences humaines et sociales</dc:subject>
+      <dc:subject xml:lang="en">Humanities and Social Sciences</dc:subject>
+    </oai_dc:dc>
+  </setDescription>
+</set>
+<set>
+  <setSpec>erudit.revue.ref</setSpec>
+  <setName>Reflets: Revue d’intervention sociale et communautaire</setName>
+
+  <setDescription>
+    <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+      <dc:title>Reflets : Revue d’intervention sociale et communautaire</dc:title>
+      <dc:identifier>urn:eissn:1712-8498</dc:identifier>
+      <dc:identifier>urn:issn:1203-4576</dc:identifier>
+      <dc:identifier>http://www.erudit.org/revue/ref/</dc:identifier>
+      <dc:publisher>Reflets, Revue d’intervention sociale et communautaire</dc:publisher>
+      <dc:description xml:lang="fr">La revue Reflets: Revue ontaroise d&apos;intervention sociale et communautaire a été fondée en 1995. 
+    Elle traite des stratégies d&apos;intervention, des défis et succès des professionnelles, professionnels et des bénévoles oeuvrant 
+    dans les organismes communautaires, soit les services sociaux, correctionnels, juridiques, de l&apos;éducation ou de la santé 
+    communautaire. Son objectif principal consiste à susciter chez les intervenantes et intervenants francophones, une réflexion 
+    sur les diverses pratiques sociales et communautaires en Ontario.
+  </dc:description>
+      <dc:description xml:lang="en">Reflets : Revue ontaroise d&apos;intervention sociale et communautaire was founded in 1995. 
+    The publication examines the intervention strategies, challenges and successes of professionals and volunteers working within 
+    community organizations in the fields of social, correctional and legal services, education and community health. The journal&apos;s 
+    primary goal is to promote reflection among French-speaking interveners with regard to diverse social and community practices in Ontario.
+  </dc:description>
+      <dc:subject xml:lang="fr">Service social</dc:subject>
+      <dc:subject xml:lang="en">Social Work</dc:subject>
+    </oai_dc:dc>
+  </setDescription>
+</set>
+<set>
+  <setSpec>erudit.revue.aestimatio</setSpec>
+  <setName>Aestimatio: Sources and Studies in the History of Science</setName>
+<setDescription><oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd"><dc:title>Aestimatio: Sources and Studies in the History of Science</dc:title><dc:identifier>http://www.erudit.org/revue/aestimatio/</dc:identifier><dc:publisher>Institute for Research in Classical Philosophy and Science</dc:publisher><dc:subject lang="en">History</dc:subject><dc:subject lang="fr">Histoire</dc:subject><dc:subject lang="en">Humanities and Social Sciences</dc:subject><dc:subject lang="fr">Sciences humaines et sociales</dc:subject></oai_dc:dc></setDescription></set>
+<set>
+  <setSpec>erudit.revue.ronbrit</setSpec>
+  <setName>Romanticism on the Net: An open access journal devoted to British Romantic literature</setName>
+<setDescription>
+ <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+ <dc:title>Romanticism on the Net: An open access journal devoted to British Romantic literature</dc:title>
+ <dc:identifier>https://www.erudit.org/revue/ronbrit/</dc:identifier>
+ <dc:publisher>Université de Montréal</dc:publisher>
+ <dc:subject xml:lang="fr">Études littéraires</dc:subject>
+ <dc:subject xml:lang="en">Literary Studies</dc:subject>
+ </oai_dc:dc>
+ </setDescription></set>
+<set>
+  <setSpec>erudit.revue.efg</setSpec>
+  <setName>Enfances, Familles, Générations</setName>
+
+  <setDescription>
+    <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+      <dc:title>Enfances, Familles, Générations</dc:title>
+      <dc:identifier>urn:eissn:1708-6310</dc:identifier>
+      <dc:identifier>http://www.erudit.org/revue/efg/</dc:identifier>
+      <dc:publisher>INRS-UCS</dc:publisher>
+      <dc:description xml:lang="fr">Enfances, Familles, Générations est une revue internationale dont la thématique est centrée 
+     sur les questions de la famille et de l’enfance, dans une perspective intergénérationnelle. Interdisciplinaire, elle contient 
+     des articles scientifiques inédits, issus des travaux des chercheurs ainsi que des textes visant à la fois la synthèse critique, 
+     le transfert et la diffusion des recherches. Les auteurs proviennent de la communauté internationale.</dc:description>
+      <dc:description xml:lang="en">Enfances, Familles, Générations is an interdisciplinary social sciences and humanities journal that focuses 
+     on family and childhood issues from an intergenerational perspective. Interdisciplinary, it contains previously unpublished research-based 
+     scientific articles as well as providing critical synthesis, transfer and dissemination of research. The authors published are from elsewhere.</dc:description>
+      <dc:subject xml:lang="fr">Anthropologie et ethnologie</dc:subject>
+      <dc:subject xml:lang="en">Anthropology and Ethnology</dc:subject>
+      <dc:subject xml:lang="fr">Service social</dc:subject>
+      <dc:subject xml:lang="en">Social Work</dc:subject>
+      <dc:subject xml:lang="fr">Sociologie</dc:subject>
+      <dc:subject xml:lang="en">Sociology</dc:subject>
+    </oai_dc:dc>
+  </setDescription>
+</set>
+<set>
+  <setSpec>erudit.revue.partnership</setSpec>
+  <setName>Partnership: Canadian journal of library and information practice and research / Partnership: Revue canadienne de la pratique et de la recherche en bibliothéconomie et sciences de l’information</setName>
+<setDescription><oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd"><dc:title>Partnership: Canadian journal of library and information practice and research / Partnership: Revue canadienne de la pratique et de la recherche en bibliothéconomie et sciences de l’information</dc:title><dc:identifier>http://www.erudit.org/revue/partnership/</dc:identifier><dc:publisher>The Partnership: The Provincial and Territorial Library Associations of Canada</dc:publisher><dc:subject lang="en">Humanities and Social Sciences</dc:subject><dc:subject lang="fr">Sciences humaines et sociales</dc:subject></oai_dc:dc></setDescription></set>
+<set>
+  <setSpec>erudit.revue.recma</setSpec>
+  <setName>Revue internationale de l&apos;économie sociale: Recma</setName>
+
+  <setDescription>
+    <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+      <dc:title>Revue internationale de l&apos;économie sociale: Recma</dc:title>
+      <dc:identifier>urn:eissn:2261-2599</dc:identifier>
+      <dc:identifier>urn:issn:1626-1682</dc:identifier>
+      <dc:identifier>http://www.erudit.org/revue/recma/</dc:identifier>
+      <dc:publisher>Association Recma</dc:publisher>
+      <dc:subject xml:lang="fr">Économie</dc:subject>
+      <dc:subject xml:lang="en">Economics</dc:subject>
+      <dc:subject xml:lang="fr">Sciences humaines et sociales</dc:subject>
+      <dc:subject xml:lang="en">Humanities and Social Sciences</dc:subject>
+      <dc:subject xml:lang="fr">Sciences politiques</dc:subject>
+      <dc:subject xml:lang="en">Political Science</dc:subject>
+    </oai_dc:dc>
+  </setDescription>
+</set>
+<set>
+  <setSpec>erudit.culture.liberte</setSpec>
+  <setName>Liberté</setName>
+
+  <setDescription>
+    <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+      <dc:title>Liberté</dc:title>
+      <dc:identifier>urn:eissn:1923-0915</dc:identifier>
+      <dc:identifier>urn:issn:0024-2020</dc:identifier>
+      <dc:identifier>http://www.erudit.org/culture/liberte/</dc:identifier>
+      <dc:publisher>Collectif Liberté</dc:publisher>
+      <dc:description xml:lang="fr">Liberté se préoccupe de littérature, de théâtre, de cinéma, de philosophie, bref de tout ce qui relève de la réflexion et de la beauté, 
+    ce qui n’est en rien contradictoire avec le désir de s’arrimer au politique dans son sens le plus large. L’art devient une condition du politique, 
+    un lieu de parole plutôt qu’une spécialisation. Liberté se définit comme un véritable lieu de débats en dehors de toute sphère d’influence, aiguillonné 
+    par une urgence : la nécessité de faire acte de résistance tant au bavardage médiatique qu’au murmure marchand ambiant. 
+  </dc:description>
+      <dc:description xml:lang="en">A literary and intellectual magazine published since 1959, Liberté is a witness of time and its many contradictions.
+    It publishes special reports (&quot;The Mystic Experience&quot;, &quot;The Poet’s Room&quot;, &quot;Freedom to Indians&quot;) as well as critical, reflective and creative essays, 
+    always with independence and audacity in mind. The magazine is meant to be a place of freedom where, at once, ideas circulate, shake things up, 
+    amuse, disturb and enlighten. 
+  </dc:description>
+      <dc:subject xml:lang="fr">Littérature</dc:subject>
+      <dc:subject xml:lang="en">Literature</dc:subject>
+    </oai_dc:dc>
+  </setDescription>
+</set>
+<set>
+  <setSpec>erudit.culture.inter</setSpec>
+  <setName>Inter: Art actuel</setName>
+
+  <setDescription>
+    <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+      <dc:title>Intervention</dc:title>
+      <dc:identifier>urn:eissn:1923-2764</dc:identifier>
+      <dc:identifier>urn:issn:0825-8708</dc:identifier>
+      <dc:identifier>http://www.erudit.org/culture/inter/</dc:identifier>
+      <dc:publisher>Intervention</dc:publisher>
+      <dc:description xml:lang="fr">Inter informe, analyse, donne la parole et donne à voir les diverses formes de l’art actuel : performance, 
+    installation, poésie, manoeuvre, multimédia… tout en interrogeant les rapports de l’art au social et au culturel, au politique et à l’éthique. 
+    Entièrement produite à Québec depuis 1978, Inter diffuse une information riche sur les actes et pratiques artistiques d’ici et d’ailleurs. 
+    Inter a des antennes en région au Québec et au Canada ainsi qu’un comité de rédaction international composé d’experts dans divers 
+    secteurs névralgiques de la scène mondiale artistique. 
+  </dc:description>
+      <dc:description xml:lang="en">A Québec-based magazine of international renown that encourages artists to speak about art. It focuses 
+    on artist groups of all kinds as well as on mutant forms of contemporary art: poetry, installation, performance, new media, dance, architecture, postal art, etc. 
+  </dc:description>
+      <dc:subject xml:lang="fr">Arts visuels</dc:subject>
+      <dc:subject xml:lang="en">Visual Arts</dc:subject>
+    </oai_dc:dc>
+  </setDescription>
+</set>
+<set>
+  <setSpec>erudit.revue.voixpl</setSpec>
+  <setName>Voix plurielles: Revue de l&apos;Association des professeur.e.s de français des universités et collèges canadiens (APFUCC)</setName>
+<setDescription><oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd"><dc:title>Voix plurielles: Revue de l'Association des professeur.e.s de français des universités et collèges canadiens (APFUCC)</dc:title><dc:identifier>http://www.erudit.org/revue/voixpl/</dc:identifier><dc:publisher>Association des professeur.e.s de français des universités et collèges canadiens (APFUCC)</dc:publisher><dc:subject lang="en">Visual Arts</dc:subject><dc:subject lang="fr">Arts visuels</dc:subject><dc:subject lang="en">Language Studies</dc:subject><dc:subject lang="fr">Études des langues</dc:subject><dc:subject lang="en">Literary Studies</dc:subject><dc:subject lang="fr">Études littéraires</dc:subject></oai_dc:dc></setDescription></set>
+<set>
+  <setSpec>erudit.revue.crimino</setSpec>
+  <setName>Criminologie</setName>
+
+  <setDescription>
+    <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+      <dc:title>Criminologie</dc:title>
+      <dc:identifier>urn:eissn:1492-1367</dc:identifier>
+      <dc:identifier>urn:issn:0316-0041</dc:identifier>
+      <dc:identifier>http://www.erudit.org/revue/crimino/</dc:identifier>
+      <dc:publisher>Les Presses de l’Université de Montréal</dc:publisher>
+      <dc:description xml:lang="fr">Criminologie, revue fondée par Denis Szabo en 1968, présente principalement des résultats de recherche et s&apos;adresse 
+    tant aux scientifiques qu’aux professionnels de la justice pénale. C’est une revue thématique répondant aux préoccupations et aux intérêts actuels des 
+    criminologues québécois et étrangers. Les thèmes abordés sont souvent pluridisciplinaires et la revue fait appel à des chercheurs de différentes 
+    disciplines : criminologues, sociologues, psychologues, juristes, etc. Elle est la seule revue de criminologie publiée en français en Amérique. 
+    Criminologie paraît grâce à des subventions du Conseil de recherches en sciences humaines du Canada et du Fonds québécois de la recherche 
+    sur la société et la culture.
+  </dc:description>
+      <dc:description xml:lang="en">Founded in 1968 by Denis Szabo, Criminologie is primarily dedicated to presenting research results and addresses both scientists 
+    and criminal-justice professionals. This theme-based journal deals with the current concerns and interests of criminologists in Quebec and elsewhere. 
+    Themes are often multidisciplinary in nature and the publication calls upon researchers in various fields: criminologists, sociologists, psychologists, 
+    jurists, etc. It is the only French-language criminology journal published in North America. Criminologie is made possible thanks to grants from the 
+    Canadian Human Sciences Research Council of Canada and the Fonds québécois de la recherche sur la société et la culture.
+  </dc:description>
+      <dc:subject xml:lang="fr">Droit</dc:subject>
+      <dc:subject xml:lang="fr">Sociologie</dc:subject>
+      <dc:subject xml:lang="en">Law</dc:subject>
+      <dc:subject xml:lang="en">Sociology</dc:subject>
+    </oai_dc:dc>
+  </setDescription>
+</set>
+<set>
+  <setSpec>erudit.revue.ric</setSpec>
+  <setName>Revue internationale du CRIRES: Innover dans la tradition de Vygotsky / CRI_SAS international Journal: Vygotsky&apos;s Heritage: Innovation in Education</setName>
+<setDescription><oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd"><dc:title>Revue internationale du CRIRES: Innover dans la tradition de Vygotsky / CRI_SAS international Journal: Vygotsky's Heritage: Innovation in Education</dc:title><dc:identifier>http://www.erudit.org/revue/ric/</dc:identifier><dc:publisher>Centre de recherche et d’intervention sur la réussite scolaire</dc:publisher><dc:subject lang="en">Education</dc:subject><dc:subject lang="fr">Éducation</dc:subject><dc:subject lang="en">Humanities and Social Sciences</dc:subject><dc:subject lang="fr">Sciences humaines et sociales</dc:subject></oai_dc:dc></setDescription></set>
+<set>
+  <setSpec>erudit.culture.spirale</setSpec>
+  <setName>Spirale: Arts • Lettres • Sciences humaines</setName>
+
+  <setDescription>
+    <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+      <dc:title>Spirale: arts • lettres • sciences humaines</dc:title>
+      <dc:identifier>urn:eissn:1923-3213</dc:identifier>
+      <dc:identifier>urn:issn:0225-9044</dc:identifier>
+      <dc:identifier>http://www.erudit.org/culture/spirale/</dc:identifier>
+      <dc:publisher>Spirale magazine culturel inc.</dc:publisher>
+      <dc:description xml:lang="fr">Où finit la critique, où commence l’essai? Pourquoi ne pas porter un regard philosophique sur une production en arts visuels? 
+    Qu’en est-il de l’esthétique d’une écriture, de la pertinence formelle d’une réflexion? Et si on en finissait avec la superficielle recension de l’actualité culturelle? 
+    Spirale se fait l’écho de la richesse du monde, du déploiement de ses différences et de ses contradictions, invite critiques et créateurs à communiquer, dans une 
+    langue claire et accessible, l’état de leur réflexion sur tout ce qui les fascine, à soupeser les enjeux politiques, sociaux, moraux et théoriques 
+    de la production artistique contemporaine.</dc:description>
+      <dc:description xml:lang="en">This interdisciplinary magazine is characterized by the regular publication of special reports based on current-events. 
+    It focuses on culture in general and fosters the development of critical thoughts in regards to literature (essays, novels, stories, poems), the visual arts, 
+    film, theater, music and human sciences (psychiatry, philosophy, politics, history, etc.).</dc:description>
+      <dc:subject xml:lang="fr">Études des arts et des lettres</dc:subject>
+      <dc:subject xml:lang="en">Arts and Literature Studies</dc:subject>
+    </oai_dc:dc>
+  </setDescription>
+</set>
+<set>
+  <setSpec>erudit.revue.mee</setSpec>
+  <setName>Mesure et évaluation en éducation</setName>
+
+  <setDescription>
+    <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+      <dc:title>Mesure et évaluation en éducation</dc:title>
+      <dc:identifier>urn:eissn:2368-2000</dc:identifier>
+      <dc:identifier>urn:issn:0823-3993</dc:identifier>
+      <dc:identifier>https://www.erudit.org/revue/mee/</dc:identifier>
+      <dc:publisher>ADMEE-Canada</dc:publisher>
+    </oai_dc:dc>
+  </setDescription>
+</set>
+<set>
+  <setSpec>erudit.revue.crae</setSpec>
+  <setName>Canadian Review of Art Education: Research and Issues / Revue canadienne d&apos;éducation artistique: Recherche et questions d&apos;actualité artistique</setName>
+<setDescription><oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd"><dc:title>Canadian Review of Art Education: Research and Issues / Revue canadienne d'éducation artistique: Recherche et questions d'actualité artistique</dc:title><dc:identifier>http://www.erudit.org/revue/crae/</dc:identifier><dc:publisher>Canadian Society for Education through Art</dc:publisher><dc:subject lang="en">Visual Arts</dc:subject><dc:subject lang="fr">Arts visuels</dc:subject><dc:subject lang="en">Education</dc:subject><dc:subject lang="fr">Éducation</dc:subject></oai_dc:dc></setDescription></set>
+<set>
+  <setSpec>erudit.revue.llt</setSpec>
+  <setName>Labour: Journal of Canadian Labour Studies / Le Travail: Revue d’Études Ouvrières Canadiennes</setName>
+
+  <setDescription>
+    <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+      <dc:title>Labour: Journal of Canadian Labour Studies / Le Travail: Revue d’Études
+                Ouvrières Canadiennes</dc:title>
+      <dc:identifier>urn:eissn:1911-4842</dc:identifier>
+      <dc:identifier>urn:issn:0700-3862</dc:identifier>
+      <dc:identifier>http://www.erudit.org/revue/llt/</dc:identifier>
+      <dc:publisher>Canadian Committee on Labour History</dc:publisher>
+      <dc:description xml:lang="en">Labour/Le Travail is the official, semi-annual publication
+                of the Canadian Committee on Labour History. Since it began publishing in 1976, it
+                has carried many important articles in the field of working-class history,
+                industrial sociology, labour economics, and labour relations. Although primarily
+                interested in a historical perspective on Canadian workers, the journal is
+                interdisciplinary in scope. In addition to articles, the journal features documents,
+                conference reports, an annual bibliography of materials in Canadian labour studies,
+                review essays, and reviews. While the main focus of the journal&apos;s articles is
+                Canadian, the review essays and reviews consider international work of interest to
+                Canadian labour studies. Many of Labour&apos;s articles are illustrated and each issue is
+                book length, averaging 350 pages an issue. Contact Kathy Killoh Managing Editor
+                Athabasca University Press Phone: (780) 421-2528 Fax: (780) 421-3298 Email:
+                kathyk@athabascau.ca </dc:description>
+      <dc:description xml:lang="fr">Labour: Journal of Canadian Labour Studies / Le Travail :
+                revue d&apos;Études Ouvrières Canadiennes est la publication semestrielle officielle du
+                Comité canadien sur l&apos;histoire du travail. Depuis son premier numéro en 1976, la
+                revue a réalisé de nombreux articles importants dans le domaine de l&apos;histoire de la
+                classe ouvrière, de la sociologie industrielle, de l&apos;économie du travail et les
+                relations de travail. Bien que principalement intéressé par une perspective
+                historique sur les travailleurs canadiens, la revue possède une portée
+                interdisciplinaire. En plus des articles, Labour / Le Travail propose des rapports
+                de conférence, une bibliographie annuelle des données dans les études canadiennes du
+                travail ainsi que des essais critiques et commentaires. Coordonnées Kathy Killoh
+                Rédactrice en chef Athabasca University Press Téléphone: (780) 421-2528 Fax: (780)
+                421-3298 Adresse courriel: kathyk@athabascau.ca Site web de la revue:
+                www.lltjournal.ca/index.php/llt </dc:description>
+      <dc:subject xml:lang="en">History</dc:subject>
+      <dc:subject xml:lang="fr">Histoire</dc:subject>
+    </oai_dc:dc>
+  </setDescription>
+</set>
+<set>
+  <setSpec>erudit.revue.mje</setSpec>
+  <setName>McGill Journal of Education / Revue des sciences de l&apos;éducation de McGill</setName>
+<setDescription><oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd"><dc:title>McGill Journal of Education / Revue des sciences de l'éducation de McGill</dc:title><dc:identifier>http://www.erudit.org/revue/mje/</dc:identifier><dc:publisher>Faculty of Education, McGill University</dc:publisher><dc:subject lang="en">Education</dc:subject><dc:subject lang="fr">Éducation</dc:subject></oai_dc:dc></setDescription></set>
+<set>
+  <setSpec>erudit.revue.topiques</setSpec>
+  <setName>Topiques, études satoriennes / Topoï Studies, Journal of the SATOR</setName>
+<setDescription><oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd"><dc:title>Topiques, études satoriennes / Topoï Studies, Journal of the SATOR</dc:title><dc:identifier>http://www.erudit.org/revue/topiques/</dc:identifier><dc:publisher>SATOR, Société d'Analyse de la Topique Romanesque d'Ancien Régime</dc:publisher><dc:subject lang="en">Literary Studies</dc:subject><dc:subject lang="fr">Études littéraires</dc:subject></oai_dc:dc></setDescription></set>
+<set>
+  <setSpec>erudit.revue.ela</setSpec>
+  <setName>Études littéraires africaines</setName>
+
+  <setDescription>
+    <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+      <dc:title>Études littéraires africaines</dc:title>
+      <dc:identifier>urn:eissn:2270-0374</dc:identifier>
+      <dc:identifier>urn:issn:0769-4563</dc:identifier>
+      <dc:identifier>http://www.erudit.org/revue/ela/</dc:identifier>
+      <dc:publisher>Association pour l&apos;Étude des Littératures africaines (APELA)</dc:publisher>
+      <dc:subject xml:lang="fr">Études littéraires</dc:subject>
+      <dc:subject xml:lang="en">Literary Studies</dc:subject>
+    </oai_dc:dc>
+  </setDescription>
+</set>
+<set>
+  <setSpec>erudit.revue.smq</setSpec>
+  <setName>Santé mentale au Québec</setName>
+
+  <setDescription>
+    <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+      <dc:title>Santé mentale au Québec</dc:title>
+      <dc:identifier>urn:eissn:1708-3923</dc:identifier>
+      <dc:identifier>urn:issn:0383-6320</dc:identifier>
+      <dc:identifier>https://www.erudit.org/revue/smq/</dc:identifier>
+      <dc:publisher>Revue Santé mentale au Québec</dc:publisher>
+      <dc:description xml:lang="fr">Santé mentale au Québec a pour objectifs de répondre aux besoins de perfectionnement des professionnels
+     de la santé mentale, et de formation des étudiants collégiaux et universitaires dans les diverses disciplines impliquées dans ce champ
+     d’activités (psychiatrie, psychologie, travail social, sciences infirmières, ergothérapie, etc). D’orientation psychosociale, la revue publie des
+     articles de recherche et d’innovation sociale issus du Québec, du Canada et de l’étranger. Fondée en 1976, Santé mentale au Québec
+     est issue du milieu de la pratique. Portant le même nom depuis sa fondation, elle a toujours poursuivi l’objectif de rapprocher le milieu de la
+     recherche et de la pratique en vue d’améliorer la qualité des interventions en santé mentale. La revue publie exclusivement en français.</dc:description>
+      <dc:description xml:lang="en">Santé mentale au Québec seeks to promote continuing education among mental health professionals and 
+     the training of college and university students within the diverse disciplines that make up this field of activity (psychiatry, psychology, social work, 
+     nursing sciences, occupational therapy, etc.). Psychosocial in orientation, the journal publishes articles on research efforts and socially innovative 
+     practices submitted from Quebec, elsewhere in Canada and abroad. Founded in 1976, Santé mentale au Québec is rooted in the practicing community. 
+     Bearing the same name since its inception, it has always aimed to bring the research and practicing communities closer together, with the goal of 
+     enhancing the quality of mental health services. The journal publishes exclusively in French.</dc:description>
+      <dc:subject xml:lang="fr">Sciences de la santé</dc:subject>
+      <dc:subject xml:lang="en">Health Sciences</dc:subject>
+      <dc:subject xml:lang="fr">Service social</dc:subject>
+      <dc:subject xml:lang="en">Social Work</dc:subject>
+    </oai_dc:dc>
+  </setDescription>
+</set>
+<set>
+  <setSpec>erudit.revue.rechercheslmm</setSpec>
+  <setName>Revue de recherches en littératie médiatique multimodale</setName>
+
+  <setDescription>
+    <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+      <dc:title>Revue de recherches en littératie médiatique multimodale</dc:title>
+      <dc:identifier>http://www.erudit.org/revue/rechercheslmm/</dc:identifier>
+      <dc:publisher>Groupe de recherche en littératie médiatique multimodale</dc:publisher>
+      <dc:subject xml:lang="fr">Arts</dc:subject>
+      <dc:subject xml:lang="en">Arts</dc:subject>
+      <dc:subject xml:lang="fr">Éducation</dc:subject>
+      <dc:subject xml:lang="en">Education</dc:subject>
+      <dc:subject xml:lang="fr">Études des langues</dc:subject>
+      <dc:subject xml:lang="en">Language Studies</dc:subject>
+      <dc:subject xml:lang="fr">Études littéraires</dc:subject>
+      <dc:subject xml:lang="en">Literary Studies</dc:subject>
+    </oai_dc:dc>
+  </setDescription>
+</set>
+<set>
+  <setSpec>.revue.culture</setSpec>
+  <setName>Culture</setName>
+</set>
+<set>
+  <setSpec>erudit.revue.po</setSpec>
+  <setName>Politique</setName>
+
+  <setDescription>
+    <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+      <dc:title>Politique</dc:title>
+      <dc:identifier>urn:eissn:0711-608X</dc:identifier>
+      <dc:identifier>http://www.erudit.org/revue/po/</dc:identifier>
+      <dc:publisher>Société québécoise de science politique</dc:publisher>
+      <dc:description xml:lang="fr">Politique et Sociétés est une revue générale de science politique dont l&apos;objectif est de diffuser 
+    la réflexion et la recherche de langue française provenant tant du Québec que de l&apos;étranger. Respectant les exigences 
+    académiques en vigueur dans la discipline, la revue publie des articles originaux dans toutes les orientations ainsi que 
+    sur tous les aspects de ce domaine de recherche. Si la revue n&apos;hésite pas à affirmer sa différence en accordant une attention
+    particulière à la société québécoise, elle demeure aussi attentive aux événements et aux phénomènes qui animent les autres 
+    sociétés. La revue joue ainsi un rôle important dans la mise en perspective des faits saillants de l&apos;actualité ainsi que dans l&apos;analyse 
+    des enjeux variés que soulève l&apos;organisation de la vie politique.
+  </dc:description>
+      <dc:description xml:lang="en">Politique et Sociétés is a general political science journal whose objective is to disseminate 
+    French-language reflection and research from Québec and abroad. Respecting the academic requirements of the discipline, 
+    the journal publishes original articles from all perspectives and on all aspects of this field of research. While the journal does 
+    not hesitate to assert its difference in paying particular attention to Québec society, it is also attentive to the events and phenomena 
+    that motivate other societies. Consequently, the journal plays an important role in putting into perspective current events and in analyzing 
+    the various issues raised by the organization of political life.
+  </dc:description>
+      <dc:subject xml:lang="fr">Sciences politiques</dc:subject>
+      <dc:subject xml:lang="en">Political Science</dc:subject>
+    </oai_dc:dc>
+  </setDescription>
+</set>
+<resumptionToken cursor="50">X320091120/2</resumptionToken>
+</ListSets>
+</OAI-PMH>

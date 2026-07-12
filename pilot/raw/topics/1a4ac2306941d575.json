@@ -1,0 +1,2042 @@
+{
+  "request": {
+    "endpoint": "topics",
+    "params": {
+      "select": "id,display_name,description,field,works_count",
+      "per-page": "200",
+      "cursor": "IlsxMTU3MzIsICdodHRwczovL29wZW5hbGV4Lm9yZy9UMTAzOTMnXSI=",
+      "mailto": "ahmad.pub@gmail.com"
+    }
+  },
+  "retrieved_at_utc": "2026-07-11T12:32:48Z",
+  "payload": {
+    "meta": {
+      "count": 4516,
+      "db_response_time_ms": 8,
+      "page": null,
+      "per_page": 200,
+      "next_cursor": "IlsxMDM2MTYsICdodHRwczovL29wZW5hbGV4Lm9yZy9UMTAzMDYnXSI=",
+      "groups_count": null,
+      "x_query": {
+        "oql": "topics",
+        "oqo": {
+          "get_rows": "topics",
+          "select": [
+            "id",
+            "display_name",
+            "description",
+            "field",
+            "works_count"
+          ],
+          "per_page": 200,
+          "cursor": "IlsxMTU3MzIsICdodHRwczovL29wZW5hbGV4Lm9yZy9UMTAzOTMnXSI="
+        },
+        "url": "/topics?select=id,display_name,description,field,works_count&per_page=200&cursor=IlsxMTU3MzIsICdodHRwczovL29wZW5hbGV4Lm9yZy9UMTAzOTMnXSI%3D"
+      },
+      "cost_usd": 0.0001
+    },
+    "results": [
+      {
+        "id": "https://openalex.org/T14012",
+        "display_name": "Comparative and International Law Studies",
+        "description": "This cluster of papers explores the globalization of law, with a focus on comparative legal methodology, intersectionality in human rights, financialization, employment relationships, regulatory sanctions in financial markets, and the impact of globalization on legal education. It delves into the challenges and opportunities presented by the intersection of different legal systems in a globalized world.",
+        "field": {
+          "id": "https://openalex.org/fields/33",
+          "display_name": "Social Sciences"
+        },
+        "works_count": 115683
+      },
+      {
+        "id": "https://openalex.org/T10616",
+        "display_name": "Smart Agriculture and AI",
+        "description": "This cluster of papers focuses on the advancements in precision agriculture technologies, including the use of deep learning, machine learning, and image processing for plant disease detection, crop yield prediction, and environmental monitoring. It also explores the integration of Internet of Things (IoT) and wireless sensor networks in smart farming, as well as the application of agricultural robotics for automated tasks. The research emphasizes the potential of these technologies to revolutionize farming practices and contribute to sustainable agriculture.",
+        "field": {
+          "id": "https://openalex.org/fields/11",
+          "display_name": "Agricultural and Biological Sciences"
+        },
+        "works_count": 115669
+      },
+      {
+        "id": "https://openalex.org/T14506",
+        "display_name": "Historical and Architectural Studies",
+        "description": "This cluster of papers explores the intersection of astronomy, cultural landscapes, and ancient architecture, focusing on topics such as religious orientation, solar alignments, ethno-botanical studies, and megalithic structures. It delves into the historical astronomy practices of various civilizations, urban planning influenced by astronomical considerations, and the role of celestial phenomena in shaping ancient beliefs and architectural designs.",
+        "field": {
+          "id": "https://openalex.org/fields/12",
+          "display_name": "Arts and Humanities"
+        },
+        "works_count": 115656
+      },
+      {
+        "id": "https://openalex.org/T14270",
+        "display_name": "Simulation and Modeling Applications",
+        "description": "This cluster of papers focuses on the simulation and optimization of industrial processes, including the use of virtual reality, training systems, network simulation, collision detection, and tactical communication. It covers topics such as Flexsim, modeling, and industrial enterprise applications.",
+        "field": {
+          "id": "https://openalex.org/fields/22",
+          "display_name": "Engineering"
+        },
+        "works_count": 115544
+      },
+      {
+        "id": "https://openalex.org/T11464",
+        "display_name": "Homelessness and Social Issues",
+        "description": "This cluster of papers explores the impact of homelessness on health, with a focus on mental illness, substance abuse, and the effectiveness of interventions such as Housing First. It also examines the challenges faced by homeless individuals in accessing healthcare and the prevalence of HIV risk behaviors among this population.",
+        "field": {
+          "id": "https://openalex.org/fields/36",
+          "display_name": "Health Professions"
+        },
+        "works_count": 115522
+      },
+      {
+        "id": "https://openalex.org/T10833",
+        "display_name": "Vaccine Coverage and Hesitancy",
+        "description": "This cluster of papers explores the multifaceted issue of vaccine hesitancy, including its determinants, impact on immunization coverage, and implications for global health. It delves into factors such as risk perception, herd immunity, and the influence of social media on vaccination attitudes. The research also addresses strategies to improve vaccine acceptance and access, highlighting the importance of trust in vaccination efforts.",
+        "field": {
+          "id": "https://openalex.org/fields/33",
+          "display_name": "Social Sciences"
+        },
+        "works_count": 115400
+      },
+      {
+        "id": "https://openalex.org/T10586",
+        "display_name": "Robotic Path Planning Algorithms",
+        "description": "This cluster of papers focuses on sampling-based algorithms, optimal motion planning, and path planning for robot navigation. It covers topics such as collision avoidance, real-time planning, kinodynamic planning, probabilistic roadmaps, multi-agent systems, and autonomous vehicles.",
+        "field": {
+          "id": "https://openalex.org/fields/17",
+          "display_name": "Computer Science"
+        },
+        "works_count": 115380
+      },
+      {
+        "id": "https://openalex.org/T10640",
+        "display_name": "Spectroscopy and Chemometric Analyses",
+        "description": "This cluster of papers covers a wide range of topics in chemometrics, with a focus on applications in analytical chemistry and food technology. It includes methods such as near-infrared spectroscopy, multivariate calibration, hyperspectral imaging, variable selection, and machine vision for quality assessment and food authentication.",
+        "field": {
+          "id": "https://openalex.org/fields/16",
+          "display_name": "Chemistry"
+        },
+        "works_count": 115334
+      },
+      {
+        "id": "https://openalex.org/T13198",
+        "display_name": "Historical, Religious, and Philosophical Studies",
+        "description": "This cluster of papers explores various aspects of ancient magical practices and beliefs, including Gnosticism, Hermeticism, alchemy, astrology, Manichaeism, rituals, divination, cultural transmission, and religious syncretism.",
+        "field": {
+          "id": "https://openalex.org/fields/12",
+          "display_name": "Arts and Humanities"
+        },
+        "works_count": 115215
+      },
+      {
+        "id": "https://openalex.org/T10679",
+        "display_name": "Service-Oriented Architecture and Web Services",
+        "description": "This cluster of papers focuses on Quality of Service (QoS)-aware middleware for Web services composition, semantic matching of Web services, and service-oriented computing. It covers topics such as automated web service discovery, dynamic service composition, and service selection algorithms, with an emphasis on QoS and semantic web services.",
+        "field": {
+          "id": "https://openalex.org/fields/17",
+          "display_name": "Computer Science"
+        },
+        "works_count": 115130
+      },
+      {
+        "id": "https://openalex.org/T10712",
+        "display_name": "Library Science and Information Literacy",
+        "description": "This cluster of papers explores the concepts and practices of information literacy, digital literacy, and library instruction in the context of higher education. It delves into topics such as information behavior of different generations, critical thinking skills, user-centered design of academic libraries, and the impact of digital technologies on research and learning. The papers also discuss the evolving role of academic librarians, assessment of information literacy skills, and the challenges and opportunities for integrating information literacy into the curriculum.",
+        "field": {
+          "id": "https://openalex.org/fields/33",
+          "display_name": "Social Sciences"
+        },
+        "works_count": 115051
+      },
+      {
+        "id": "https://openalex.org/T14244",
+        "display_name": "Consumer Behavior and Marketing Influence",
+        "description": "This cluster of papers focuses on consumer behavior, purchase decision making, and the factors influencing consumer choices in various industries such as retail, hospitality, and e-commerce. It explores the impact of brand image, service quality, customer satisfaction, e-wallet usage, online shopping, marketing mix elements, product quality, and trust on consumer preferences and decisions.",
+        "field": {
+          "id": "https://openalex.org/fields/14",
+          "display_name": "Business, Management and Accounting"
+        },
+        "works_count": 115033
+      },
+      {
+        "id": "https://openalex.org/T10337",
+        "display_name": "Liver Disease and Transplantation",
+        "description": "This cluster of papers focuses on the management, prognosis, and complications of liver cirrhosis, including topics such as hepatic encephalopathy, portal hypertension, ascites, hepatorenal syndrome, variceal hemorrhage, MELD score, transjugular intrahepatic portosystemic shunt (TIPS), acute-on-chronic liver failure, and coagulopathy.",
+        "field": {
+          "id": "https://openalex.org/fields/27",
+          "display_name": "Medicine"
+        },
+        "works_count": 114969
+      },
+      {
+        "id": "https://openalex.org/T13172",
+        "display_name": "Economic Issues in Ukraine",
+        "description": "This cluster of papers explores various factors affecting economic development and recovery, including public finance management, industrial policy, fiscal risks, smart industry development, social quality, globalization, financial security, territorial decentralization, and the interrelation between science and the economy.",
+        "field": {
+          "id": "https://openalex.org/fields/20",
+          "display_name": "Economics, Econometrics and Finance"
+        },
+        "works_count": 114917
+      },
+      {
+        "id": "https://openalex.org/T10415",
+        "display_name": "International Business and FDI",
+        "description": "This cluster of papers focuses on the international business strategies of multinational enterprises, particularly in emerging economies. It explores topics such as foreign direct investment, institutional environments, internationalization processes, market entry strategies, innovation, entrepreneurship, and their impact on economic growth and globalization.",
+        "field": {
+          "id": "https://openalex.org/fields/14",
+          "display_name": "Business, Management and Accounting"
+        },
+        "works_count": 114913
+      },
+      {
+        "id": "https://openalex.org/T10103",
+        "display_name": "Reading and Literacy Development",
+        "description": "This cluster of papers covers a wide range of topics related to the development of reading skills, dyslexia, and literacy instruction. It includes research on visual word recognition, language development, reading comprehension, phonological awareness, and the neurological basis of reading. The cluster also explores interventions for children with reading difficulties and the impact of vocabulary development on reading ability.",
+        "field": {
+          "id": "https://openalex.org/fields/32",
+          "display_name": "Psychology"
+        },
+        "works_count": 114885
+      },
+      {
+        "id": "https://openalex.org/T10061",
+        "display_name": "Algebraic Geometry and Number Theory",
+        "description": "This cluster of papers covers a wide range of topics in algebraic geometry and moduli theory, including Gromov-Witten theory, log canonical singularities, motivic cohomology, minimal models, tropical geometry, intersection theory, symplectic geometry, birational geometry, and diophantine equations.",
+        "field": {
+          "id": "https://openalex.org/fields/26",
+          "display_name": "Mathematics"
+        },
+        "works_count": 114816
+      },
+      {
+        "id": "https://openalex.org/T10461",
+        "display_name": "Gas Sensing Nanomaterials and Sensors",
+        "description": "This cluster of papers focuses on the development, materials, and mechanisms of gas sensing technology, with an emphasis on metal oxide-based gas sensors, nanomaterials, semiconductors, and room temperature operation. It also covers the application of gas sensors for selective detection of various gases and humidity sensing.",
+        "field": {
+          "id": "https://openalex.org/fields/22",
+          "display_name": "Engineering"
+        },
+        "works_count": 114713
+      },
+      {
+        "id": "https://openalex.org/T11971",
+        "display_name": "World Wars: History, Literature, and Impact",
+        "description": "This cluster of papers covers a wide range of topics related to the global impact of World Wars, international relations, League of Nations, cultural memory, military history, colonialism, humanitarianism, gender roles, and psychological trauma. It explores the interconnectedness of these themes and their significance in shaping the modern world.",
+        "field": {
+          "id": "https://openalex.org/fields/33",
+          "display_name": "Social Sciences"
+        },
+        "works_count": 114696
+      },
+      {
+        "id": "https://openalex.org/T12250",
+        "display_name": "Experimental and Theoretical Physics Studies",
+        "description": "This cluster of papers explores innovative methods in physics education, utilizing smartphones as experimental tools, video analysis, and high-speed cameras. It covers topics such as pendulum motion, dimensional analysis, friction experiments, and acoustic phenomena. The use of Arduino for physics experiments and the application of acceleration sensors are also prominent themes.",
+        "field": {
+          "id": "https://openalex.org/fields/31",
+          "display_name": "Physics and Astronomy"
+        },
+        "works_count": 114681
+      },
+      {
+        "id": "https://openalex.org/T11813",
+        "display_name": "Library Collection Development and Digital Resources",
+        "description": "This cluster of papers explores the usage and impact of e-books, digital textbooks, and other electronic reading materials in academic settings. It covers topics such as reading behavior, user attitudes, learning experiences, and the comparison between print and digital formats. The cluster also delves into the role of academic libraries in managing e-book collections and the implications for educational technology.",
+        "field": {
+          "id": "https://openalex.org/fields/17",
+          "display_name": "Computer Science"
+        },
+        "works_count": 114678
+      },
+      {
+        "id": "https://openalex.org/T12363",
+        "display_name": "Academic Research in Diverse Fields",
+        "description": "This cluster of papers covers a wide range of topics related to distance education, including the use of video lectures for training, legislation in education, impact of distance learning on healthcare, and the role of digital business. It also addresses issues such as inclusion, research methodologies, and educational policies.",
+        "field": {
+          "id": "https://openalex.org/fields/33",
+          "display_name": "Social Sciences"
+        },
+        "works_count": 114544
+      },
+      {
+        "id": "https://openalex.org/T10173",
+        "display_name": "Computational Fluid Dynamics and Aerodynamics",
+        "description": "This cluster of papers covers advances in computational fluid dynamics, including high-order schemes, turbulence modeling, shock-wave interactions, adaptive mesh refinement, supersonic combustion, finite volume methods, detached-eddy simulation, hyperbolic conservation laws, aerostructural analysis, and the use of radial basis functions.",
+        "field": {
+          "id": "https://openalex.org/fields/22",
+          "display_name": "Engineering"
+        },
+        "works_count": 114499
+      },
+      {
+        "id": "https://openalex.org/T10560",
+        "display_name": "Diabetes Management and Research",
+        "description": "This cluster of papers focuses on the management of diabetes mellitus, with an emphasis on intensive insulin therapy, continuous glucose monitoring, and the impact of glycemic control on cardiovascular disease and complications. It also covers the prevalence and management of hypoglycemia, especially in pediatric patients, and the development of artificial pancreas systems for improved diabetes management.",
+        "field": {
+          "id": "https://openalex.org/fields/27",
+          "display_name": "Medicine"
+        },
+        "works_count": 114424
+      },
+      {
+        "id": "https://openalex.org/T10401",
+        "display_name": "Diabetes Treatment and Management",
+        "description": "This cluster of papers focuses on the management of diabetes mellitus, with a particular emphasis on cardiovascular outcomes, glucose control, and the use of incretin hormones, SGLT2 inhibitors, and dipeptidyl peptidase-4 inhibitors. It also covers topics such as heart failure, glycemic control, insulin therapy, and clinical guidelines for the treatment of type 2 diabetes.",
+        "field": {
+          "id": "https://openalex.org/fields/27",
+          "display_name": "Medicine"
+        },
+        "works_count": 114416
+      },
+      {
+        "id": "https://openalex.org/T10932",
+        "display_name": "Microbial Metabolic Engineering and Bioproduction",
+        "description": "This cluster of papers focuses on the field of metabolic engineering and synthetic biology, with an emphasis on genome-scale models, constraint-based models, and their application in biofuel production, microbial metabolism, pathway reconstruction, and biorefineries. The papers cover topics such as flux balance analysis, high-quality genome-scale metabolic reconstructions, programming cells for accelerated evolution, and the use of synthetic protein scaffolds to control metabolic flux.",
+        "field": {
+          "id": "https://openalex.org/fields/13",
+          "display_name": "Biochemistry, Genetics and Molecular Biology"
+        },
+        "works_count": 114251
+      },
+      {
+        "id": "https://openalex.org/T10703",
+        "display_name": "Business Process Modeling and Analysis",
+        "description": "This cluster of papers focuses on workflow mining, business process management, and process modeling. It covers topics such as discovering process models from event logs, conformance checking, flexibility in workflows, semantic business process management, and predictive process monitoring.",
+        "field": {
+          "id": "https://openalex.org/fields/14",
+          "display_name": "Business, Management and Accounting"
+        },
+        "works_count": 114215
+      },
+      {
+        "id": "https://openalex.org/T11388",
+        "display_name": "Grief, Bereavement, and Mental Health",
+        "description": "This cluster of papers focuses on the psychological impact of bereavement and grief, particularly on complicated grief, prolonged grief disorder, and traumatic grief. It explores the prevalence, predictors, treatment, and long-term effects of complicated grief, as well as the resilience and mental health outcomes of individuals experiencing bereavement. The cluster also delves into the unique challenges of suicide bereavement and parental loss.",
+        "field": {
+          "id": "https://openalex.org/fields/32",
+          "display_name": "Psychology"
+        },
+        "works_count": 114189
+      },
+      {
+        "id": "https://openalex.org/T10188",
+        "display_name": "Advanced machining processes and optimization",
+        "description": "This cluster of papers focuses on advanced monitoring and optimization of machining operations, including topics such as surface integrity, tool wear, cutting parameters, chatter vibration, minimum quantity lubrication, and high speed machining. It also covers the machining of composite materials and the control of surface roughness in various machining processes.",
+        "field": {
+          "id": "https://openalex.org/fields/22",
+          "display_name": "Engineering"
+        },
+        "works_count": 113982
+      },
+      {
+        "id": "https://openalex.org/T10878",
+        "display_name": "CRISPR and Genetic Engineering",
+        "description": "This cluster of papers focuses on the use of CRISPR-Cas systems for genome engineering, RNA-guided gene editing, and bacterial immunity. It covers topics such as Cas9 nucleases, off-target effects, multiplex genome editing, and genetic screening using CRISPR technology.",
+        "field": {
+          "id": "https://openalex.org/fields/13",
+          "display_name": "Biochemistry, Genetics and Molecular Biology"
+        },
+        "works_count": 113959
+      },
+      {
+        "id": "https://openalex.org/T12428",
+        "display_name": "Global Trade and Competitiveness",
+        "description": "This cluster of papers explores the concept and measurement of regional competitiveness, focusing on indices, revealed comparative advantage, global competitiveness reports, and their implications for regional development policy. It delves into the relationship between international specialization, sustainable development, and firm competitiveness, while also examining trade patterns and the application of Michael Porter's framework in assessing national productivity.",
+        "field": {
+          "id": "https://openalex.org/fields/14",
+          "display_name": "Business, Management and Accounting"
+        },
+        "works_count": 113938
+      },
+      {
+        "id": "https://openalex.org/T10137",
+        "display_name": "Multiple Sclerosis Research Studies",
+        "description": "This cluster of papers focuses on the diagnosis, pathogenesis, and treatment of multiple sclerosis (MS) and related disorders such as neuromyelitis optica. It covers topics such as the diagnostic criteria for MS, genetic risk factors, immune mechanisms involved in MS, cognitive impairment, axonal injury, and the autoimmune pathology underlying the disease. The papers also discuss the use of various therapies and their effects on MS patients.",
+        "field": {
+          "id": "https://openalex.org/fields/27",
+          "display_name": "Medicine"
+        },
+        "works_count": 113578
+      },
+      {
+        "id": "https://openalex.org/T10636",
+        "display_name": "Innovative Teaching and Learning Methods",
+        "description": "This cluster of papers explores the concept of self-regulated learning, encompassing topics such as metacognition, collaborative learning, scaffolding, cognitive apprenticeship, and cooperative learning. It delves into the role of motivation, educational technology, and design-based research in fostering self-regulated learning. Additionally, it discusses the application of social interdependence theory in educational settings.",
+        "field": {
+          "id": "https://openalex.org/fields/32",
+          "display_name": "Psychology"
+        },
+        "works_count": 113473
+      },
+      {
+        "id": "https://openalex.org/T10108",
+        "display_name": "Electoral Systems and Political Participation",
+        "description": "This cluster of papers covers a wide range of topics in political science, including empirical analyses of voter behavior, party polarization, public opinion formation, economic policy, campaign effects, electoral systems, and policy formation in democracies. The papers delve into understanding the dynamics of political behavior and institutions through rigorous empirical methods.",
+        "field": {
+          "id": "https://openalex.org/fields/33",
+          "display_name": "Social Sciences"
+        },
+        "works_count": 113379
+      },
+      {
+        "id": "https://openalex.org/T11744",
+        "display_name": "Health Sciences Research and Education",
+        "description": "This cluster of papers focuses on the implementation of evidence-based practice in healthcare, exploring the attitudes, knowledge, behaviors, and barriers among healthcare professionals, particularly nurses. It addresses the challenges and strategies in developing research capacity, promoting evidence-based practice, and improving clinical decision-making. The cluster also delves into the role of organizational culture, knowledge management, and information-seeking behavior in facilitating research utilization and advancing evidence-based medicine.",
+        "field": {
+          "id": "https://openalex.org/fields/36",
+          "display_name": "Health Professions"
+        },
+        "works_count": 113359
+      },
+      {
+        "id": "https://openalex.org/T11089",
+        "display_name": "Radioactive contamination and transfer",
+        "description": "This cluster of papers focuses on the environmental and health impacts of the Fukushima Daiichi nuclear disaster, including the release and dispersion of radionuclides such as cesium-137 and iodine-131, contamination of soil and marine environments, uptake of radionuclides by plants, and the long-term consequences on wildlife and human health.",
+        "field": {
+          "id": "https://openalex.org/fields/23",
+          "display_name": "Environmental Science"
+        },
+        "works_count": 113263
+      },
+      {
+        "id": "https://openalex.org/T10223",
+        "display_name": "Microgrid Control and Optimization",
+        "description": "This cluster of papers focuses on the control, synchronization, and management of microgrid systems, with an emphasis on distributed power generation, energy storage technologies, and grid integration of renewable energy sources. The research covers various aspects such as voltage and frequency control, decentralized control strategies, virtual synchronous generators, and the application of power electronics in smart grid environments.",
+        "field": {
+          "id": "https://openalex.org/fields/22",
+          "display_name": "Engineering"
+        },
+        "works_count": 113181
+      },
+      {
+        "id": "https://openalex.org/T11544",
+        "display_name": "Gender, Labor, and Family Dynamics",
+        "description": "This cluster of papers explores the intersection of gender inequality, labor force dynamics, welfare reform, and household decision making. It delves into topics such as the impact of income tax policies on female labor supply, the effects of welfare reform on work incentives, and the role of gender in shaping economic development and intrahousehold resource allocation.",
+        "field": {
+          "id": "https://openalex.org/fields/33",
+          "display_name": "Social Sciences"
+        },
+        "works_count": 113105
+      },
+      {
+        "id": "https://openalex.org/T10296",
+        "display_name": "Vector-borne infectious diseases",
+        "description": "This cluster of papers focuses on the epidemiology, diagnosis, treatment, and prevention of tick-borne diseases such as Lyme disease, babesiosis, anaplasmosis, and various rickettsioses. It also explores the role of tick vectors, pathogen transmission, host-pathogen interactions, and the impact on public health.",
+        "field": {
+          "id": "https://openalex.org/fields/24",
+          "display_name": "Immunology and Microbiology"
+        },
+        "works_count": 113074
+      },
+      {
+        "id": "https://openalex.org/T13508",
+        "display_name": "Agricultural Economics and Practices",
+        "description": "This cluster of papers focuses on agricultural development, policy analysis, and economic sustainability in South Asia, particularly in India. It covers topics such as production technology, climate change impact, food security, and the economic analysis of agricultural practices. The papers also discuss the challenges and potential strategies for sustainable agricultural development in the region.",
+        "field": {
+          "id": "https://openalex.org/fields/11",
+          "display_name": "Agricultural and Biological Sciences"
+        },
+        "works_count": 112996
+      },
+      {
+        "id": "https://openalex.org/T10497",
+        "display_name": "Fungal and yeast genetics research",
+        "description": "This cluster of papers focuses on the genomic expression programs, protein production, and cellular responses of yeast organisms to environmental changes, stress, and fungal pathogens. It also explores the genetic and metabolic regulation, gene knockout techniques, and signaling pathways in yeast.",
+        "field": {
+          "id": "https://openalex.org/fields/13",
+          "display_name": "Biochemistry, Genetics and Molecular Biology"
+        },
+        "works_count": 112906
+      },
+      {
+        "id": "https://openalex.org/T13061",
+        "display_name": "Literacy and Educational Practices",
+        "description": "This cluster of papers explores reading habits, literacy education, and the impact of digital learning on student achievement. It delves into topics such as booktubers, informal learning trends, metacognitive strategies for reading comprehension, and the promotion of literature. The papers also discuss the influence of educational technology on youth reading trends and the development of digital literacy skills.",
+        "field": {
+          "id": "https://openalex.org/fields/33",
+          "display_name": "Social Sciences"
+        },
+        "works_count": 112564
+      },
+      {
+        "id": "https://openalex.org/T10492",
+        "display_name": "Microtubule and mitosis dynamics",
+        "description": "This cluster of papers explores the regulation and function of microtubules in cell division, with a focus on topics such as mitotic checkpoint, molecular motors, aneuploidy, and the role of kinesin proteins and Aurora kinases. It also delves into the implications of chromosomal instability and the potential applications for cancer therapy.",
+        "field": {
+          "id": "https://openalex.org/fields/13",
+          "display_name": "Biochemistry, Genetics and Molecular Biology"
+        },
+        "works_count": 112557
+      },
+      {
+        "id": "https://openalex.org/T10126",
+        "display_name": "Logic, programming, and type systems",
+        "description": "This cluster of papers covers a wide range of program analysis and verification techniques, including static analysis, formal verification, type inference, memory management, concurrency, garbage collection, separation logic, model checking, abstract interpretation, and programming language semantics.",
+        "field": {
+          "id": "https://openalex.org/fields/17",
+          "display_name": "Computer Science"
+        },
+        "works_count": 112476
+      },
+      {
+        "id": "https://openalex.org/T10248",
+        "display_name": "Nonlinear Waves and Solitons",
+        "description": "This cluster of papers focuses on the study of rogue waves in nonlinear systems, including their generation, dynamics, and properties. It explores various mathematical and physical aspects such as soliton solutions, integrable equations, modulation instability, and optical solitons in the context of rogue wave phenomena.",
+        "field": {
+          "id": "https://openalex.org/fields/31",
+          "display_name": "Physics and Astronomy"
+        },
+        "works_count": 112408
+      },
+      {
+        "id": "https://openalex.org/T10226",
+        "display_name": "Land Use and Ecosystem Services",
+        "description": "This cluster of papers focuses on the global analysis of ecosystem services and land use, including the impacts of urbanization, biodiversity conservation, and sustainability. It explores the spatial dynamics of human-nature interactions and provides insights for environmental policy and the management of social-ecological systems.",
+        "field": {
+          "id": "https://openalex.org/fields/23",
+          "display_name": "Environmental Science"
+        },
+        "works_count": 112381
+      },
+      {
+        "id": "https://openalex.org/T10493",
+        "display_name": "Ion channel regulation and function",
+        "description": "This cluster of papers explores the molecular mechanisms, structure, regulation, and physiological roles of ion channels, with a focus on voltage-gated potassium and calcium channels. It covers topics such as channel structure, membrane proteins, neuronal function, and cell signaling.",
+        "field": {
+          "id": "https://openalex.org/fields/13",
+          "display_name": "Biochemistry, Genetics and Molecular Biology"
+        },
+        "works_count": 112346
+      },
+      {
+        "id": "https://openalex.org/T12234",
+        "display_name": "Mollusks and Parasites Studies",
+        "description": "This cluster of papers focuses on the parasitism of snails, particularly by the Angiostrongylus nematode, and the associated diseases such as eosinophilic meningitis. It also explores the impact of invasive snail species on ecosystems and biodiversity.",
+        "field": {
+          "id": "https://openalex.org/fields/11",
+          "display_name": "Agricultural and Biological Sciences"
+        },
+        "works_count": 112338
+      },
+      {
+        "id": "https://openalex.org/T10206",
+        "display_name": "Meta-analysis and systematic reviews",
+        "description": "This cluster of papers focuses on methods and guidelines for conducting systematic reviews, meta-analyses, and evidence synthesis in research. It covers topics such as the PRISMA statement, measuring inconsistency in meta-analyses, assessing risk of bias, detecting publication bias, and interpreting effect sizes. The papers also discuss reporting guidelines, quality assessment tools, and diagnostic accuracy in research.",
+        "field": {
+          "id": "https://openalex.org/fields/18",
+          "display_name": "Decision Sciences"
+        },
+        "works_count": 112312
+      },
+      {
+        "id": "https://openalex.org/T10584",
+        "display_name": "Reproductive Physiology in Livestock",
+        "description": "This cluster of papers focuses on various aspects of reproductive health in high-producing dairy cattle, including uterine diseases, metabolic stress, follicular development, oxidative stress, and embryo survival. It explores the impact of energy balance and postpartum health on conceptus development and overall reproductive performance.",
+        "field": {
+          "id": "https://openalex.org/fields/11",
+          "display_name": "Agricultural and Biological Sciences"
+        },
+        "works_count": 112099
+      },
+      {
+        "id": "https://openalex.org/T12550",
+        "display_name": "Politics and Conflicts in Afghanistan, Pakistan, and Middle East",
+        "description": "This cluster of papers focuses on the complex issues of conflict reconstruction, state-building, and security in Afghanistan and Pakistan, with a particular emphasis on the influence of the Taliban, militant Islam, and the challenges of nation-building in Central Asia. The papers explore the historical, political, economic, and cultural dimensions of these conflicts and their implications for reconstruction efforts.",
+        "field": {
+          "id": "https://openalex.org/fields/33",
+          "display_name": "Social Sciences"
+        },
+        "works_count": 111886
+      },
+      {
+        "id": "https://openalex.org/T10858",
+        "display_name": "Clinical Nutrition and Gastroenterology",
+        "description": "This cluster of papers focuses on the provision and assessment of nutrition support therapy, particularly in critically ill patients. It covers topics such as enteral and parenteral nutrition, intestinal failure, the role of glutamine, metabolic rate measurement, immunonutrition, and management of short bowel syndrome. The cluster also addresses the use of home parenteral nutrition and the impact of nutrition support on clinical outcomes.",
+        "field": {
+          "id": "https://openalex.org/fields/29",
+          "display_name": "Nursing"
+        },
+        "works_count": 111490
+      },
+      {
+        "id": "https://openalex.org/T10518",
+        "display_name": "Gallbladder and Bile Duct Disorders",
+        "description": "This cluster of papers focuses on the diagnosis and management of biliary tract disorders, including cholecystitis, pancreatitis, gallstones, cholangiocarcinoma, and bile duct injuries. It covers various techniques such as ERCP, endoscopic ultrasound, biliary drainage, and the use of metal stents. The cluster also discusses guidelines such as the Tokyo Guidelines for the management of acute cholangitis and cholecystitis.",
+        "field": {
+          "id": "https://openalex.org/fields/27",
+          "display_name": "Medicine"
+        },
+        "works_count": 111453
+      },
+      {
+        "id": "https://openalex.org/T10036",
+        "display_name": "Advanced Neural Network Applications",
+        "description": "This cluster of papers focuses on the application of deep learning, particularly convolutional neural networks, in computer vision tasks such as image recognition, object detection, and semantic segmentation. It covers various neural network architectures, model compression techniques, and their applications in fields like autonomous driving.",
+        "field": {
+          "id": "https://openalex.org/fields/17",
+          "display_name": "Computer Science"
+        },
+        "works_count": 111436
+      },
+      {
+        "id": "https://openalex.org/T12788",
+        "display_name": "Space Science and Extraterrestrial Life",
+        "description": "This cluster of papers explores the search for extraterrestrial life and intelligence, including topics such as astrobiology, SETI (Search for Extraterrestrial Intelligence), galactic habitable zones, global catastrophic risks, the Fermi Paradox, planetary biology, technosignatures, and space exploration.",
+        "field": {
+          "id": "https://openalex.org/fields/31",
+          "display_name": "Physics and Astronomy"
+        },
+        "works_count": 111386
+      },
+      {
+        "id": "https://openalex.org/T11482",
+        "display_name": "RNA modifications and cancer",
+        "description": "This cluster of papers explores the diverse landscape of RNA methylation, with a focus on m6A modification, its impact on gene expression, ribosome biogenesis, and its role in cancer progression. The research covers various aspects such as m6A-seq, tRNA fragments, YTHDF proteins, and the involvement of methyltransferases in mRNA modification.",
+        "field": {
+          "id": "https://openalex.org/fields/13",
+          "display_name": "Biochemistry, Genetics and Molecular Biology"
+        },
+        "works_count": 111350
+      },
+      {
+        "id": "https://openalex.org/T12071",
+        "display_name": "Marine Biology and Environmental Chemistry",
+        "description": "This cluster of papers focuses on the development, impact, and regulation of antifouling coatings for marine applications. It covers topics such as biofouling, organotin compounds, fouling-release mechanisms, environmental impact, use of biocides, polymer-based coatings, larval settlement, and the exploration of ecofriendly solutions.",
+        "field": {
+          "id": "https://openalex.org/fields/22",
+          "display_name": "Engineering"
+        },
+        "works_count": 111338
+      },
+      {
+        "id": "https://openalex.org/T12095",
+        "display_name": "Vehicle emissions and performance",
+        "description": "This cluster of papers focuses on estimating vehicle fuel consumption and emissions, with an emphasis on real-world measurements, driving cycles, eco-driving, and the impact of traffic conditions on emission factors. The research covers a wide range of topics related to vehicle emissions, including NOx and CO2 emissions, fuel consumption, and the influence of road transport on environmental pollution.",
+        "field": {
+          "id": "https://openalex.org/fields/22",
+          "display_name": "Engineering"
+        },
+        "works_count": 111236
+      },
+      {
+        "id": "https://openalex.org/T10291",
+        "display_name": "Dialysis and Renal Disease Management",
+        "description": "This cluster of papers focuses on chronic kidney disease, dialysis treatment, and associated complications such as inflammation, cardiovascular disease, and malnutrition. It explores the impact of dialysis dose, intradialytic hypotension, uremic toxins, and the role of nutrition in improving outcomes and quality of life for patients. The cluster also addresses the epidemiology of kidney disease and mortality risk factors in hemodialysis and peritoneal dialysis patients.",
+        "field": {
+          "id": "https://openalex.org/fields/27",
+          "display_name": "Medicine"
+        },
+        "works_count": 111201
+      },
+      {
+        "id": "https://openalex.org/T13125",
+        "display_name": "Agricultural pest management studies",
+        "description": "This cluster of papers focuses on the genetics, breeding, and utilization of cowpea as a sustainable and climate-resilient legume crop. It covers topics such as drought tolerance, nutritional quality, genetic diversity, marker development, and agricultural sustainability.",
+        "field": {
+          "id": "https://openalex.org/fields/11",
+          "display_name": "Agricultural and Biological Sciences"
+        },
+        "works_count": 111073
+      },
+      {
+        "id": "https://openalex.org/T11786",
+        "display_name": "Geomagnetism and Paleomagnetism Studies",
+        "description": "This cluster of papers focuses on the formation of magnetosomes in prokaryotes, the study of geomagnetic field variations over centuries, the application of dynamo simulations, and the analysis of magnetic properties and biomineralization processes. It also includes research on paleomagnetic data, environmental magnetism, and the development of geomagnetic models.",
+        "field": {
+          "id": "https://openalex.org/fields/13",
+          "display_name": "Biochemistry, Genetics and Molecular Biology"
+        },
+        "works_count": 111051
+      },
+      {
+        "id": "https://openalex.org/T10264",
+        "display_name": "Asphalt Pavement Performance Evaluation",
+        "description": "This cluster of papers encompasses advancements in asphalt materials and technology, including research on bitumen modification, rheological properties, recycled materials, polymer modification, warm mix technologies, rejuvenators, nanomaterials, pavement engineering, and life cycle assessment.",
+        "field": {
+          "id": "https://openalex.org/fields/22",
+          "display_name": "Engineering"
+        },
+        "works_count": 110869
+      },
+      {
+        "id": "https://openalex.org/T10844",
+        "display_name": "Radiation Dose and Imaging",
+        "description": "This cluster of papers focuses on the health risks associated with radiation exposure from medical imaging, particularly computed tomography (CT) scans. It explores the potential cancer risks, dose optimization techniques, and radiological protection measures related to ionizing radiation. The cluster also addresses the impact of pediatric CT scans and occupational exposure to radiation.",
+        "field": {
+          "id": "https://openalex.org/fields/27",
+          "display_name": "Medicine"
+        },
+        "works_count": 110826
+      },
+      {
+        "id": "https://openalex.org/T10695",
+        "display_name": "Parasites and Host Interactions",
+        "description": "This cluster of papers focuses on the global impact, epidemiology, control strategies, and immune responses related to helminth infections, with a specific emphasis on schistosomiasis and soil-transmitted helminths. The papers cover topics such as disease burden, neglected tropical diseases, immunomodulation by parasites, and the use of praziquantel for treatment.",
+        "field": {
+          "id": "https://openalex.org/fields/24",
+          "display_name": "Immunology and Microbiology"
+        },
+        "works_count": 110820
+      },
+      {
+        "id": "https://openalex.org/T10428",
+        "display_name": "Reproductive tract infections research",
+        "description": "This cluster of papers explores the vaginal microbiome, its association with sexually transmitted infections, including bacterial vaginosis, Chlamydia trachomatis, and Neisseria gonorrhoeae. It also investigates the impact on women's reproductive health, including preterm delivery and HIV transmission.",
+        "field": {
+          "id": "https://openalex.org/fields/24",
+          "display_name": "Immunology and Microbiology"
+        },
+        "works_count": 110775
+      },
+      {
+        "id": "https://openalex.org/T10725",
+        "display_name": "RNA Interference and Gene Delivery",
+        "description": "This cluster of papers explores the mechanisms, delivery methods, and therapeutic applications of RNA interference (RNAi) in mammalian cells. It covers topics such as siRNA delivery, gene silencing, non-viral vectors, cell-penetrating peptides, lipid nanoparticles, and the potential of RNAi for gene therapy. The research also delves into the challenges and future directions of RNAi-based therapeutics.",
+        "field": {
+          "id": "https://openalex.org/fields/13",
+          "display_name": "Biochemistry, Genetics and Molecular Biology"
+        },
+        "works_count": 110706
+      },
+      {
+        "id": "https://openalex.org/T10883",
+        "display_name": "Ethics and Social Impacts of AI",
+        "description": "This cluster of papers explores the ethical implications of artificial intelligence, focusing on fairness, algorithmic bias, and accountability in the context of big data, machine learning, and surveillance. It delves into topics such as the societal impact of AI, discrimination in algorithms, transparency in decision-making processes, and the challenges of ensuring fairness and ethics in AI applications.",
+        "field": {
+          "id": "https://openalex.org/fields/33",
+          "display_name": "Social Sciences"
+        },
+        "works_count": 110685
+      },
+      {
+        "id": "https://openalex.org/T12664",
+        "display_name": "Clinical practice guidelines implementation",
+        "description": "This cluster of papers focuses on the development, evaluation, and implementation of clinical practice guidelines in healthcare. It covers topics such as the quality assessment of guidelines, evidence-based medicine, international collaboration in guideline development, and the impact of pathways on patient outcomes.",
+        "field": {
+          "id": "https://openalex.org/fields/27",
+          "display_name": "Medicine"
+        },
+        "works_count": 110643
+      },
+      {
+        "id": "https://openalex.org/T12838",
+        "display_name": "Photovoltaic Systems and Sustainability",
+        "description": "This cluster of papers focuses on the environmental impacts, life cycle assessment, energy payback time, and greenhouse gas emissions of solar energy technologies, particularly photovoltaic systems. It also explores the integration of solar panels with agriculture (agrivoltaic systems) and the recycling and end-of-life management of photovoltaic modules.",
+        "field": {
+          "id": "https://openalex.org/fields/23",
+          "display_name": "Environmental Science"
+        },
+        "works_count": 110628
+      },
+      {
+        "id": "https://openalex.org/T10529",
+        "display_name": "Stress Responses and Cortisol",
+        "description": "This cluster of papers explores the effects of stress on brain function, behavior, and cognition, with a focus on the role of cortisol, neurobiology, and the HPA axis. It covers topics such as the impact of stress on the immune system, neuroendocrine regulation, and the association between stress and disorders like depression. The research also delves into the neurobiology of resilience, hippocampal volume reduction, and the long-term consequences of prenatal stress.",
+        "field": {
+          "id": "https://openalex.org/fields/28",
+          "display_name": "Neuroscience"
+        },
+        "works_count": 110604
+      },
+      {
+        "id": "https://openalex.org/T10434",
+        "display_name": "Chromosomal and Genetic Variations",
+        "description": "This cluster of papers explores the evolution of plant genomes, with a focus on polyploidy, transposable elements, small RNAs, and the role of repetitive elements. It investigates the impact of genome duplication on genetic diversity, speciation, and epigenetic regulation, shedding light on the evolutionary significance of these processes in plants.",
+        "field": {
+          "id": "https://openalex.org/fields/11",
+          "display_name": "Agricultural and Biological Sciences"
+        },
+        "works_count": 110588
+      },
+      {
+        "id": "https://openalex.org/T14311",
+        "display_name": "Electrical and Electromagnetic Research",
+        "description": "This cluster of papers focuses on the study of dielectric properties, including piezoelectricity, ferromagnetism, and the role of hydrogen bonds in crystals. It also explores applications in electrical engineering, semiconductor science, and educational settings. The cluster delves into topics such as noble metals, electret analysis, and radio technology.",
+        "field": {
+          "id": "https://openalex.org/fields/31",
+          "display_name": "Physics and Astronomy"
+        },
+        "works_count": 110570
+      },
+      {
+        "id": "https://openalex.org/T11126",
+        "display_name": "Metallurgical Processes and Thermodynamics",
+        "description": "This cluster of papers focuses on the development, application, and optimization of thermochemical software and databases in metallurgical processes, particularly in the context of steel casting, slag chemistry, inclusion control, solidification modeling, mold fluxes, and heat recovery. The research encompasses a wide range of topics such as thermodynamic modeling, phase equilibrium, fluid flow, and the utilization of waste heat in the steelmaking industry.",
+        "field": {
+          "id": "https://openalex.org/fields/22",
+          "display_name": "Engineering"
+        },
+        "works_count": 110452
+      },
+      {
+        "id": "https://openalex.org/T13591",
+        "display_name": "Pasture and Agricultural Systems",
+        "description": "This cluster of papers focuses on the management of perennial pasture systems in Australia, with an emphasis on topics such as grazing management, water use efficiency, drought survival strategies, soil water balance, and the impact of climate change. The research explores the characteristics and performance of temperate grasses, sustainable grazing systems, and the potential contribution of perennial legumes to agricultural sustainability in dryland cropping systems.",
+        "field": {
+          "id": "https://openalex.org/fields/11",
+          "display_name": "Agricultural and Biological Sciences"
+        },
+        "works_count": 110356
+      },
+      {
+        "id": "https://openalex.org/T10826",
+        "display_name": "Behavioral and Psychological Studies",
+        "description": "This cluster of papers focuses on the use of behavioral interventions and evidence-based practices in special education, with an emphasis on functional analysis, positive behavior support, single-subject research, and intervention design standards. It explores topics such as classroom management, functional communication training, and response to intervention in the context of addressing behavioral challenges and promoting academic and social success for students with emotional or behavioral disorders.",
+        "field": {
+          "id": "https://openalex.org/fields/32",
+          "display_name": "Psychology"
+        },
+        "works_count": 110316
+      },
+      {
+        "id": "https://openalex.org/T10074",
+        "display_name": "Carbon Nanotubes in Composites",
+        "description": "This cluster of papers explores the science, properties, synthesis, and diverse applications of carbon nanotubes. It covers topics such as nanotube composites, functionalization, electronics, mechanical properties, and chemistry.",
+        "field": {
+          "id": "https://openalex.org/fields/25",
+          "display_name": "Materials Science"
+        },
+        "works_count": 110313
+      },
+      {
+        "id": "https://openalex.org/T13091",
+        "display_name": "Human Health and Disease",
+        "description": "This cluster of papers focuses on the assessment and management of health risks in children and adolescents, covering factors such as environmental exposure, oxidative stress, educational technologies, nutrition, and physical development. The research also delves into hygienic assessments, epidemiological wellbeing, and the impact of socioeconomic factors on child health.",
+        "field": {
+          "id": "https://openalex.org/fields/27",
+          "display_name": "Medicine"
+        },
+        "works_count": 110268
+      },
+      {
+        "id": "https://openalex.org/T10090",
+        "display_name": "ZnO doping and properties",
+        "description": "This cluster of papers explores the synthesis, properties, and applications of zinc oxide (ZnO) nanostructures, focusing on its use in semiconductors, photodetectors, optoelectronics, and transparent conductors. The papers also investigate the phenomenon of ferromagnetism in ZnO and its potential for spintronics applications.",
+        "field": {
+          "id": "https://openalex.org/fields/25",
+          "display_name": "Materials Science"
+        },
+        "works_count": 110251
+      },
+      {
+        "id": "https://openalex.org/T12886",
+        "display_name": "Historical and Cultural Studies of Poland",
+        "description": "This cluster of papers covers a wide range of topics related to the cultural and social history of Poland and Eastern Europe, including the role of the Polish nobility, religious symbolism in art and architecture, urban and rural development, diplomatic relations, and intellectual movements. It provides insights into the historical linguistics, artistic patronage, traditional architecture, and the rural landscape of the region.",
+        "field": {
+          "id": "https://openalex.org/fields/12",
+          "display_name": "Arts and Humanities"
+        },
+        "works_count": 110208
+      },
+      {
+        "id": "https://openalex.org/T10892",
+        "display_name": "Drilling and Well Engineering",
+        "description": "This cluster of papers focuses on advancements in drilling fluid technology, with a particular emphasis on well integrity, nanoparticles, rheological properties, CO2 sequestration, shale inhibition, cement degradation, vibration analysis, lost circulation, and formation damage in the oil and gas industry.",
+        "field": {
+          "id": "https://openalex.org/fields/22",
+          "display_name": "Engineering"
+        },
+        "works_count": 110196
+      },
+      {
+        "id": "https://openalex.org/T13854",
+        "display_name": "Historical Geography and Cartography",
+        "description": "This cluster of papers focuses on map projections, geodesy algorithms, and their applications in cartography and spatial analysis. It covers topics such as georeferencing, equal-area projections, celestial navigation, historical maps, spatial distortion, coordinate transformation, and spherical geometry.",
+        "field": {
+          "id": "https://openalex.org/fields/33",
+          "display_name": "Social Sciences"
+        },
+        "works_count": 110190
+      },
+      {
+        "id": "https://openalex.org/T10969",
+        "display_name": "Water resources management and optimization",
+        "description": "This cluster of papers focuses on the optimal operation and management of water resources systems, addressing challenges such as reservoir operation, water demand forecasting, climate change impacts, sustainability, hydro-economic modeling, urbanization effects, system dynamics applications, robust decision making, and groundwater management.",
+        "field": {
+          "id": "https://openalex.org/fields/22",
+          "display_name": "Engineering"
+        },
+        "works_count": 110131
+      },
+      {
+        "id": "https://openalex.org/T12413",
+        "display_name": "Health and Medical Education",
+        "description": "This cluster of papers covers a wide range of topics related to public health, healthcare systems, epidemiology, social determinants of health, and healthcare quality. It includes discussions on health policy, medical education, health promotion, and global health issues. The papers also address community health, healthcare workforce, and the impact of technology on healthcare delivery.",
+        "field": {
+          "id": "https://openalex.org/fields/36",
+          "display_name": "Health Professions"
+        },
+        "works_count": 110090
+      },
+      {
+        "id": "https://openalex.org/T10317",
+        "display_name": "Advanced Database Systems and Queries",
+        "description": "This cluster of papers focuses on data stream management systems and techniques, including continuous queries, XML and relational database systems, query optimization, stream processing, approximate query processing, column-oriented database systems, complex event processing, and main memory databases.",
+        "field": {
+          "id": "https://openalex.org/fields/17",
+          "display_name": "Computer Science"
+        },
+        "works_count": 110040
+      },
+      {
+        "id": "https://openalex.org/T11164",
+        "display_name": "Remote Sensing and LiDAR Applications",
+        "description": "This cluster of papers focuses on the use of Lidar remote sensing technology for mapping and assessing various forest attributes such as carbon stocks, aboveground biomass, tree height, and canopy structure at global and regional scales. The papers cover techniques like airborne and terrestrial laser scanning, data fusion, individual tree detection, and biomass estimation, highlighting the importance of Lidar in sustainable forest management and ecological research.",
+        "field": {
+          "id": "https://openalex.org/fields/23",
+          "display_name": "Environmental Science"
+        },
+        "works_count": 109978
+      },
+      {
+        "id": "https://openalex.org/T12844",
+        "display_name": "Psychology and Mental Health",
+        "description": "This cluster of papers encompasses a wide range of topics related to psychoanalysis, mental health, clinical practice, social determinants of mental health, diagnostic labels in depression, parenting, adolescence, and qualitative research methods in psychopathology.",
+        "field": {
+          "id": "https://openalex.org/fields/32",
+          "display_name": "Psychology"
+        },
+        "works_count": 109968
+      },
+      {
+        "id": "https://openalex.org/T12010",
+        "display_name": "Evaluation and Performance Assessment",
+        "description": "This cluster of papers focuses on theory-based evaluation methods, such as concept mapping and realist synthesis, for analyzing complex interventions. It also explores evaluation capacity building, logic models, empowerment evaluation, and the role of evidence-based policy in shaping evaluation practices.",
+        "field": {
+          "id": "https://openalex.org/fields/18",
+          "display_name": "Decision Sciences"
+        },
+        "works_count": 109965
+      },
+      {
+        "id": "https://openalex.org/T10696",
+        "display_name": "Gastric Cancer Management and Outcomes",
+        "description": "This cluster of papers represents a comprehensive exploration of gastric cancer, covering topics such as chemotherapy, endoscopic resection, molecular characterization, lymph node dissection, adjuvant and neoadjuvant therapy, clinical practice guidelines, metastatic gastric cancer, and survival analysis.",
+        "field": {
+          "id": "https://openalex.org/fields/27",
+          "display_name": "Medicine"
+        },
+        "works_count": 109898
+      },
+      {
+        "id": "https://openalex.org/T11610",
+        "display_name": "Food Security and Health in Diverse Populations",
+        "description": "This cluster of papers explores the impact of food insecurity on health outcomes, focusing on the association between food insecurity and chronic diseases, mental health, nutritional consequences, and children's health. It also examines the role of social determinants and public assistance in addressing household food security among low-income families.",
+        "field": {
+          "id": "https://openalex.org/fields/36",
+          "display_name": "Health Professions"
+        },
+        "works_count": 109849
+      },
+      {
+        "id": "https://openalex.org/T11111",
+        "display_name": "Spectroscopy and Laser Applications",
+        "description": "This cluster of papers focuses on molecular spectroscopic databases such as HITRAN, HITEMP, and GEISA, as well as the applications of various types of lasers in gas sensing, breath analysis, and high-temperature molecular spectroscopy. It covers topics such as terahertz quantum-cascade lasers, infrared laser absorption, photoacoustic spectroscopy, diode laser absorption, and cavity ring-down spectroscopy.",
+        "field": {
+          "id": "https://openalex.org/fields/16",
+          "display_name": "Chemistry"
+        },
+        "works_count": 109747
+      },
+      {
+        "id": "https://openalex.org/T10193",
+        "display_name": "Coronary Interventions and Diagnostics",
+        "description": "This cluster of papers focuses on clinical studies related to coronary stents, myocardial revascularization, and the use of drug-eluting stents in the treatment of coronary artery disease. It covers topics such as the comparison of different stent types, optimal medical therapy with or without percutaneous coronary intervention, plaque vulnerability, and the assessment of stent thrombosis using various imaging techniques.",
+        "field": {
+          "id": "https://openalex.org/fields/27",
+          "display_name": "Medicine"
+        },
+        "works_count": 109673
+      },
+      {
+        "id": "https://openalex.org/T10260",
+        "display_name": "Software Engineering Research",
+        "description": "This cluster of papers focuses on empirical studies in software engineering, covering topics such as refactoring, code clone detection, software defect prediction, requirements traceability, static code attributes, machine learning, software maintenance, source code analysis, bug localization, and API usage patterns.",
+        "field": {
+          "id": "https://openalex.org/fields/17",
+          "display_name": "Computer Science"
+        },
+        "works_count": 109562
+      },
+      {
+        "id": "https://openalex.org/T12217",
+        "display_name": "Higher Education Teaching and Evaluation",
+        "description": "This cluster of papers focuses on the implementation and development of competence-based education in higher education, particularly within the context of the European Higher Education Area. It covers topics such as teaching competencies, professional development, learning assessment, and the role of tutoring in fostering competence development. The papers also discuss challenges and strategies for integrating competence-based approaches into university curricula and the implications for educators and students.",
+        "field": {
+          "id": "https://openalex.org/fields/33",
+          "display_name": "Social Sciences"
+        },
+        "works_count": 109444
+      },
+      {
+        "id": "https://openalex.org/T13717",
+        "display_name": "Advanced Algorithms and Applications",
+        "description": "This cluster of papers focuses on the application of control systems, neural networks, and advanced algorithms in various domains such as industrial processes, environmental monitoring, networked manufacturing, and robotic systems. The research spans topics like PID control, support vector machines, fuzzy logic, genetic algorithms, wireless sensor networks, remote sensing, and Internet of Things.",
+        "field": {
+          "id": "https://openalex.org/fields/22",
+          "display_name": "Engineering"
+        },
+        "works_count": 109438
+      },
+      {
+        "id": "https://openalex.org/T13911",
+        "display_name": "Employment, Labor, and Gender Studies",
+        "description": "This cluster of papers covers a wide range of topics related to labor markets, social policies, work-life balance, employment relations, and the impact of globalization on the workforce. It delves into issues such as precarious work, gender equality in the workplace, the role of trade unions, and the challenges of achieving work-life balance in modern economies.",
+        "field": {
+          "id": "https://openalex.org/fields/33",
+          "display_name": "Social Sciences"
+        },
+        "works_count": 109357
+      },
+      {
+        "id": "https://openalex.org/T12675",
+        "display_name": "Financial Reporting and Valuation Research",
+        "description": "This cluster of papers focuses on value-based management, economic performance measurement, and corporate valuation. It explores concepts such as Economic Value Added, Shareholder Value, Cash Flow Valuation, WACC, Market Value Added, and Sustainable Growth Rate. The papers also delve into the relationship between performance measures and wealth creation, as well as the impact of tax shields on financial performance.",
+        "field": {
+          "id": "https://openalex.org/fields/14",
+          "display_name": "Business, Management and Accounting"
+        },
+        "works_count": 109348
+      },
+      {
+        "id": "https://openalex.org/T14118",
+        "display_name": "Social and Demographic Issues in Germany",
+        "description": "This cluster of papers explores the challenges and implications of an aging population, including topics such as elderly care, demographic transition, migrant health, healthcare workforce management, dementia management, social policy, family caregiving, healthcare innovation, and intergenerational justice.",
+        "field": {
+          "id": "https://openalex.org/fields/36",
+          "display_name": "Health Professions"
+        },
+        "works_count": 109304
+      },
+      {
+        "id": "https://openalex.org/T10266",
+        "display_name": "Plant Water Relations and Carbon Dynamics",
+        "description": "This cluster of papers explores the impact of drought and heat-induced tree mortality on global forests, highlighting emerging climate change risks. It delves into mechanisms of plant survival and mortality during drought, ecosystem dynamics, carbon cycling, and the role of stomata in driving environmental change. The research also evaluates the vulnerability of forests to drought, the global distribution of terrestrial carbon dioxide uptake, and the implications of widespread tree mortality triggered by climate stress.",
+        "field": {
+          "id": "https://openalex.org/fields/23",
+          "display_name": "Environmental Science"
+        },
+        "works_count": 109298
+      },
+      {
+        "id": "https://openalex.org/T13619",
+        "display_name": "Geotechnical and Geomechanical Engineering",
+        "description": "This cluster of papers focuses on the study of wave propagation, rock mechanics, and geomechanical processes in block media. It includes research on seismicity induced by mining activities, modeling of elastic wave propagation, analysis of pendulum waves in stressed geomedia, and the performance of drilling equipment in rock stiffness. The cluster also covers topics such as hydraulic drilling, geomechanical assessment, and the influence of nonmetallic inclusions on percussive machine endurance.",
+        "field": {
+          "id": "https://openalex.org/fields/22",
+          "display_name": "Engineering"
+        },
+        "works_count": 109286
+      },
+      {
+        "id": "https://openalex.org/T12470",
+        "display_name": "Caribbean and African Literature and Culture",
+        "description": "This cluster of papers explores the cultural, historical, and sociopolitical aspects of Haiti and the broader Caribbean region. It delves into topics such as colonialism, race, diaspora, Vodou, postcolonial literature, and identity in the context of Haitian and Caribbean history and society.",
+        "field": {
+          "id": "https://openalex.org/fields/12",
+          "display_name": "Arts and Humanities"
+        },
+        "works_count": 108996
+      },
+      {
+        "id": "https://openalex.org/T11641",
+        "display_name": "Insect and Pesticide Research",
+        "description": "This cluster of papers focuses on the impact of neonicotinoid insecticides, Varroa mites, viral pathogens, and pesticide exposure on honey bee health, including colony collapse disorder. It also explores the role of gut microbiota, immune system, and pollen nutrition in honey bee health. The environmental risks associated with pesticide use are also a key area of investigation.",
+        "field": {
+          "id": "https://openalex.org/fields/11",
+          "display_name": "Agricultural and Biological Sciences"
+        },
+        "works_count": 108960
+      },
+      {
+        "id": "https://openalex.org/T13315",
+        "display_name": "Occupational Health and Safety in Workplaces",
+        "description": "This cluster of papers covers a wide range of topics related to occupational health and safety in workplaces, including ergonomics, teleworking, risk assessment, musculoskeletal disorders, and safety management systems. It also addresses health promotion, industrial hygiene, and relevant legislation. The papers discuss various aspects of creating healthy and safe work environments, identifying and mitigating workplace hazards, and promoting employee well-being.",
+        "field": {
+          "id": "https://openalex.org/fields/36",
+          "display_name": "Health Professions"
+        },
+        "works_count": 108931
+      },
+      {
+        "id": "https://openalex.org/T10376",
+        "display_name": "Suicide and Self-Harm Studies",
+        "description": "This cluster of papers focuses on the epidemiology, risk factors, and prevention strategies related to suicidal behavior, particularly among adolescents and young adults. It covers topics such as the interpersonal theory of suicide, psychological autopsy studies, non-suicidal self-injury, and the assessment of suicidal behavior. The research also delves into the global patterns of mortality, neurobiology, and the impact of various interventions in mitigating suicide risk.",
+        "field": {
+          "id": "https://openalex.org/fields/32",
+          "display_name": "Psychology"
+        },
+        "works_count": 108889
+      },
+      {
+        "id": "https://openalex.org/T14006",
+        "display_name": "Linguistics, Language Diversity, and Identity",
+        "description": "This cluster of papers explores linguistic borrowing, language contact phenomena, and the influence of one language on another. It delves into topics such as anglicisms, neologisms, pragmatic borrowing, sociolinguistics, and the cultural and semantic implications of lexical influence. The papers also discuss bilingualism and the impact of English on various European languages.",
+        "field": {
+          "id": "https://openalex.org/fields/12",
+          "display_name": "Arts and Humanities"
+        },
+        "works_count": 108882
+      },
+      {
+        "id": "https://openalex.org/T11920",
+        "display_name": "Pulsed Power Technology Applications",
+        "description": "This cluster of papers focuses on the technology and applications of pulsed power, including electron beam surface modification, high current systems, solid-state generators, high-power microwave sources, semiconductor switches, plasma sources, and radiography systems.",
+        "field": {
+          "id": "https://openalex.org/fields/22",
+          "display_name": "Engineering"
+        },
+        "works_count": 108872
+      },
+      {
+        "id": "https://openalex.org/T11688",
+        "display_name": "Microbial infections and disease research",
+        "description": "This cluster of papers focuses on the pathogenesis, virulence factors, antimicrobial resistance, and genomic sequencing of bacterial pathogens such as Mycoplasma and Pasteurella, particularly in the context of bovine respiratory disease and human cell line authentication. It also explores host-pathogen interactions, vaccine development, and the impact of bacterial infections on animal and human health.",
+        "field": {
+          "id": "https://openalex.org/fields/24",
+          "display_name": "Immunology and Microbiology"
+        },
+        "works_count": 108859
+      },
+      {
+        "id": "https://openalex.org/T12646",
+        "display_name": "Inorganic Fluorides and Related Compounds",
+        "description": "This cluster of papers explores the chemistry of noble gas compounds, particularly focusing on their interactions with fluoride ions, metal fluorides, Lewis acidity, and transition metal hexafluorides. It also delves into the use of solid state NMR and matrix isolation spectroscopy to study these compounds, as well as their applications in high surface area materials and fluoride ion batteries.",
+        "field": {
+          "id": "https://openalex.org/fields/16",
+          "display_name": "Chemistry"
+        },
+        "works_count": 108846
+      },
+      {
+        "id": "https://openalex.org/T10748",
+        "display_name": "Growth Hormone and Insulin-like Growth Factors",
+        "description": "This cluster of papers explores the role of insulin-like growth factors (IGFs) in various aspects of health and disease, including their involvement in cancer development and progression, regulation of metabolism, impact on bone growth, neuroendocrine control, and association with conditions like hypopituitarism. It also discusses the signaling pathways and potential therapeutic implications related to IGFs.",
+        "field": {
+          "id": "https://openalex.org/fields/27",
+          "display_name": "Medicine"
+        },
+        "works_count": 108831
+      },
+      {
+        "id": "https://openalex.org/T10860",
+        "display_name": "Speech and Audio Processing",
+        "description": "This cluster of papers focuses on the advances in speech enhancement techniques, including audio-visual speech recognition, deep learning methods, noise reduction, source separation, reverberation handling, objective quality measures, beamforming, and lipreading. The papers cover a wide range of topics related to improving the quality and intelligibility of speech signals in various challenging acoustic environments.",
+        "field": {
+          "id": "https://openalex.org/fields/17",
+          "display_name": "Computer Science"
+        },
+        "works_count": 108829
+      },
+      {
+        "id": "https://openalex.org/T10604",
+        "display_name": "RNA Research and Splicing",
+        "description": "This cluster of papers focuses on the regulation of RNA processing and function, including topics such as alternative splicing, RNA-binding proteins, phase separation, mRNA decay, stress granules, transcriptome analysis, exon junctions, polyadenylation, nonsense-mediated decay, and RNA phase transitions.",
+        "field": {
+          "id": "https://openalex.org/fields/13",
+          "display_name": "Biochemistry, Genetics and Molecular Biology"
+        },
+        "works_count": 108817
+      },
+      {
+        "id": "https://openalex.org/T11745",
+        "display_name": "Potato Plant Research",
+        "description": "This cluster of papers focuses on the formation, health effects, metabolism, and mitigation strategies of acrylamide in food, particularly in relation to heated foodstuffs such as potatoes. It covers topics such as the Maillard reaction, carcinogenicity, neurotoxicity, antioxidants, and the role of glycoalkaloids.",
+        "field": {
+          "id": "https://openalex.org/fields/11",
+          "display_name": "Agricultural and Biological Sciences"
+        },
+        "works_count": 108762
+      },
+      {
+        "id": "https://openalex.org/T10107",
+        "display_name": "Ferroelectric and Piezoelectric Materials",
+        "description": "This cluster of papers focuses on the advancements in lead-free piezoelectric materials, particularly on ferroelectric and relaxor ferroelectric materials with high piezoelectric properties. It covers topics such as perovskite structure, thin film ferroelectrics, electrocaloric effect, domain wall nanoelectronics, and high energy storage materials.",
+        "field": {
+          "id": "https://openalex.org/fields/25",
+          "display_name": "Materials Science"
+        },
+        "works_count": 108757
+      },
+      {
+        "id": "https://openalex.org/T13912",
+        "display_name": "Language, Linguistics, Cultural Analysis",
+        "description": "This cluster of papers explores the subgrouping and linguistic diversity of Semitic languages, focusing on topics such as verb morphology, Neo-Aramaic dialects, language contact, diglossia, and language teaching. It delves into the ethnolinguistic landscape and cognitive grammar of Middle Eastern languages.",
+        "field": {
+          "id": "https://openalex.org/fields/12",
+          "display_name": "Arts and Humanities"
+        },
+        "works_count": 108734
+      },
+      {
+        "id": "https://openalex.org/T12748",
+        "display_name": "Molecular spectroscopy and chirality",
+        "description": "This cluster of papers focuses on the application of chiroptical spectroscopic methods, such as vibrational circular dichroism and optical rotation, combined with computational techniques like density functional theory and NMR, for the determination of absolute configuration, conformational analysis, and stereochemistry in organic compounds, particularly natural products. The cluster also explores the role of chiroptical spectroscopy in structure elucidation and its use in studying the chiral properties of molecules.",
+        "field": {
+          "id": "https://openalex.org/fields/16",
+          "display_name": "Chemistry"
+        },
+        "works_count": 108680
+      },
+      {
+        "id": "https://openalex.org/T12144",
+        "display_name": "Colonialism, slavery, and trade",
+        "description": "This cluster of papers explores the Transatlantic Slave Trade, its historical impact, and the experiences of enslaved Africans in the Americas. It delves into topics such as slave resistance, colonial economies, racial identity, legal rights, and the African diaspora in the Atlantic world.",
+        "field": {
+          "id": "https://openalex.org/fields/33",
+          "display_name": "Social Sciences"
+        },
+        "works_count": 108643
+      },
+      {
+        "id": "https://openalex.org/T10278",
+        "display_name": "Electric Motor Design and Analysis",
+        "description": "This cluster of papers focuses on the design, optimization, and application of electric motor drives for electric and hybrid electric vehicles. It covers topics such as permanent magnet machines, thermal analysis, switched reluctance motors, torque ripple reduction, high-speed applications, magnetic gearing, cogging torque reduction, and motor design optimization.",
+        "field": {
+          "id": "https://openalex.org/fields/22",
+          "display_name": "Engineering"
+        },
+        "works_count": 108635
+      },
+      {
+        "id": "https://openalex.org/T13465",
+        "display_name": "Graphite, nuclear technology, radiation studies",
+        "description": "This cluster of papers focuses on the characterization, behavior, and properties of nuclear graphite materials used in high temperature gas-cooled reactors. It covers topics such as oxidation behavior, microstructural characterization, irradiation damage, thermal properties, Raman spectroscopy, pore structure analysis, fracture behavior, and decontamination methods.",
+        "field": {
+          "id": "https://openalex.org/fields/25",
+          "display_name": "Materials Science"
+        },
+        "works_count": 108569
+      },
+      {
+        "id": "https://openalex.org/T11283",
+        "display_name": "Experimental Learning in Engineering",
+        "description": "This cluster of papers explores the role and impact of remote laboratories in engineering education, focusing on topics such as virtual labs, control systems, hands-on experiments, STEM education, and simulation-based learning. It discusses the effectiveness of remote laboratories in providing access to practical learning experiences, particularly in the context of distance education and internet-accessible labs.",
+        "field": {
+          "id": "https://openalex.org/fields/22",
+          "display_name": "Engineering"
+        },
+        "works_count": 108517
+      },
+      {
+        "id": "https://openalex.org/T13938",
+        "display_name": "Historical and Contemporary Political Dynamics",
+        "description": "This cluster of papers explores the history of international humanitarianism, human rights, and the role of non-governmental organizations in global aid efforts. It delves into topics such as colonialism, decolonization, the Global South, Amnesty International, the New International Economic Order, and civil rights movements. The papers provide insights into the evolution of humanitarian action and its intersection with political and social developments.",
+        "field": {
+          "id": "https://openalex.org/fields/12",
+          "display_name": "Arts and Humanities"
+        },
+        "works_count": 108487
+      },
+      {
+        "id": "https://openalex.org/T10762",
+        "display_name": "Migration, Health and Trauma",
+        "description": "This cluster of papers focuses on the mental health challenges faced by refugees and immigrants, including the prevalence of serious mental disorders, trauma exposure, post-migration stress, and the impact of resettlement and acculturation. It also addresses the disparities in healthcare access and utilization, as well as interventions and policies aimed at improving the mental health and well-being of these populations.",
+        "field": {
+          "id": "https://openalex.org/fields/32",
+          "display_name": "Psychology"
+        },
+        "works_count": 108464
+      },
+      {
+        "id": "https://openalex.org/T12364",
+        "display_name": "Archaeological Research and Protection",
+        "description": "This cluster of papers focuses on the use of remote sensing techniques, such as LiDAR and satellite imagery, in archaeological research and cultural heritage preservation. The papers cover topics such as aerial survey, machine learning for feature detection, detection of looting activities, and the use of digital elevation models for understanding historical landscapes.",
+        "field": {
+          "id": "https://openalex.org/fields/19",
+          "display_name": "Earth and Planetary Sciences"
+        },
+        "works_count": 108431
+      },
+      {
+        "id": "https://openalex.org/T12935",
+        "display_name": "Healthcare Systems and Public Health",
+        "description": "This cluster of papers focuses on the epidemiology, risk factors, prevention, and mortality trends of cardiovascular diseases in Russia. It includes studies on the prevalence of non-communicable disease risk factors, occupational health risks in the Arctic population, economic burden, and healthcare policy related to cardiovascular health.",
+        "field": {
+          "id": "https://openalex.org/fields/27",
+          "display_name": "Medicine"
+        },
+        "works_count": 108425
+      },
+      {
+        "id": "https://openalex.org/T13152",
+        "display_name": "French Language Learning Methods",
+        "description": "This cluster of papers covers a wide range of topics related to multilingual language education, intercultural communication, migration, and integration. It explores pedagogical strategies, cultural diversity, learning technologies, and social justice in the context of language education. The papers also delve into the challenges and opportunities of multilingualism, as well as the impact of migration on language acquisition and educational practices.",
+        "field": {
+          "id": "https://openalex.org/fields/33",
+          "display_name": "Social Sciences"
+        },
+        "works_count": 108414
+      },
+      {
+        "id": "https://openalex.org/T12002",
+        "display_name": "Computability, Logic, AI Algorithms",
+        "description": "This cluster of papers explores topics in computational complexity and algorithmic information theory, including Kolmogorov complexity, randomness, Turing machines, compression-based distance measures, universal intelligence, computational depth, fractal dimension, and causal discovery.",
+        "field": {
+          "id": "https://openalex.org/fields/17",
+          "display_name": "Computer Science"
+        },
+        "works_count": 108112
+      },
+      {
+        "id": "https://openalex.org/T10122",
+        "display_name": "Toxic Organic Pollutants Impact",
+        "description": "This cluster of papers focuses on the impact of persistent organic pollutants, including polycyclic aromatic hydrocarbons (PAHs), brominated flame retardants, and dioxins, on the environment and human health. It covers their sources, distribution, bioaccumulation, and potential toxic effects, highlighting the need for regulation and remediation measures to mitigate their adverse impacts.",
+        "field": {
+          "id": "https://openalex.org/fields/23",
+          "display_name": "Environmental Science"
+        },
+        "works_count": 107997
+      },
+      {
+        "id": "https://openalex.org/T14483",
+        "display_name": "Education and Teacher Training",
+        "description": "This cluster of papers focuses on educational leadership, quality education, teacher development, and the impact of school culture on student performance. It also explores pedagogical leadership, educational innovation, curriculum design, and the importance of organizational commitment in educational settings. Additionally, it delves into ethical education and its role in shaping the future of education.",
+        "field": {
+          "id": "https://openalex.org/fields/33",
+          "display_name": "Social Sciences"
+        },
+        "works_count": 107946
+      },
+      {
+        "id": "https://openalex.org/T10718",
+        "display_name": "Political Philosophy and Ethics",
+        "description": "This cluster of papers explores theoretical perspectives on global justice, including discussions on human rights, cosmopolitanism, equality, distributive justice, democratic theory, Rawlsian justice, multiculturalism, social responsibility, and international law.",
+        "field": {
+          "id": "https://openalex.org/fields/33",
+          "display_name": "Social Sciences"
+        },
+        "works_count": 107926
+      },
+      {
+        "id": "https://openalex.org/T10531",
+        "display_name": "Advanced Vision and Imaging",
+        "description": "This cluster of papers focuses on various aspects of stereo vision, depth estimation, optical flow, and scene reconstruction. It covers topics such as multi-view stereo, unsupervised learning for depth estimation, monocular depth estimation using deep learning, visual servoing, and the use of light field cameras for scene reconstruction.",
+        "field": {
+          "id": "https://openalex.org/fields/17",
+          "display_name": "Computer Science"
+        },
+        "works_count": 107722
+      },
+      {
+        "id": "https://openalex.org/T14163",
+        "display_name": "Astronomical Observations and Instrumentation",
+        "description": "This cluster of papers focuses on the optimization and improvement of optical 3D laser measurement systems, including techniques such as position-sensitive detectors, machine vision systems, and frequency measurement. It also explores applications in robotic navigation, structural health monitoring, and astronomical data analysis through virtual observatories.",
+        "field": {
+          "id": "https://openalex.org/fields/22",
+          "display_name": "Engineering"
+        },
+        "works_count": 107711
+      },
+      {
+        "id": "https://openalex.org/T10262",
+        "display_name": "Microwave Engineering and Waveguides",
+        "description": "This cluster of papers covers advances in microwave engineering, with a focus on substrate integrated waveguide, planar circuits, microstrip antennas, leaky-wave structures, and bandpass filters. It explores topics such as dual-band design, artificial neural networks in RF and microwave design, and applications in millimeter-wave technologies. The research also delves into space mapping techniques for engineering optimization.",
+        "field": {
+          "id": "https://openalex.org/fields/22",
+          "display_name": "Engineering"
+        },
+        "works_count": 107702
+      },
+      {
+        "id": "https://openalex.org/T10681",
+        "display_name": "Rare-earth and actinide compounds",
+        "description": "This cluster of papers focuses on the study of superconductivity in heavy fermion systems, including the exploration of quantum criticality, non-Fermi-liquid behavior, unconventional superconductivity, magnetic phase transitions, and the properties of actinide metals. It also covers topics related to Fermi surfaces, topological insulators, and spin-triplet order in superconductors.",
+        "field": {
+          "id": "https://openalex.org/fields/31",
+          "display_name": "Physics and Astronomy"
+        },
+        "works_count": 107690
+      },
+      {
+        "id": "https://openalex.org/T10283",
+        "display_name": "Hearing Loss and Rehabilitation",
+        "description": "This cluster of papers explores the relationship between hearing loss and cognitive decline, with a focus on the impact of cochlear implants, speech perception, and age-related hearing loss. It also delves into the effects on quality of life, language development, and social isolation among older adults.",
+        "field": {
+          "id": "https://openalex.org/fields/28",
+          "display_name": "Neuroscience"
+        },
+        "works_count": 107675
+      },
+      {
+        "id": "https://openalex.org/T14254",
+        "display_name": "Digital Media and Visual Art",
+        "description": "This cluster of papers focuses on the innovations and applications of visual communication design, digital media technology, and artificial intelligence in various fields such as art, education, urban landscape design, and animation. It explores the intersection of technology and design, including topics like interactive design, virtual reality, multimedia technology, and the impact of color research on graphic design.",
+        "field": {
+          "id": "https://openalex.org/fields/17",
+          "display_name": "Computer Science"
+        },
+        "works_count": 107630
+      },
+      {
+        "id": "https://openalex.org/T10218",
+        "display_name": "Sepsis Diagnosis and Treatment",
+        "description": "This cluster of papers focuses on the epidemiology, diagnosis, management, and prognosis of sepsis and septic shock. It covers topics such as the definition of sepsis, assessment of clinical criteria, evaluation of prediction models, use of biomarkers, antimicrobial therapy, and the impact of various factors on patient outcomes in critical care settings.",
+        "field": {
+          "id": "https://openalex.org/fields/27",
+          "display_name": "Medicine"
+        },
+        "works_count": 107571
+      },
+      {
+        "id": "https://openalex.org/T10170",
+        "display_name": "Retinal Diseases and Treatments",
+        "description": "This cluster of papers focuses on research related to age-related macular degeneration (AMD) and diabetic retinopathy. It covers topics such as the role of oxidative stress, vascular endothelial growth factor, complement factor H polymorphism, and choroidal thickness in the pathogenesis and treatment of these diseases. Additionally, it explores the use of intravitreal injections and optical coherence tomography angiography in understanding and managing AMD and diabetic retinopathy.",
+        "field": {
+          "id": "https://openalex.org/fields/27",
+          "display_name": "Medicine"
+        },
+        "works_count": 107531
+      },
+      {
+        "id": "https://openalex.org/T10267",
+        "display_name": "Higher Education Research Studies",
+        "description": "This cluster of papers explores the various factors influencing higher education outcomes and experiences, including student engagement, academic performance, college retention, social support, diversity, and the challenges faced by first-generation students. It also delves into issues of educational inequality, financial aid, and the transition of students into the university environment.",
+        "field": {
+          "id": "https://openalex.org/fields/33",
+          "display_name": "Social Sciences"
+        },
+        "works_count": 107487
+      },
+      {
+        "id": "https://openalex.org/T10041",
+        "display_name": "COVID-19 Clinical Research Studies",
+        "description": "This cluster of papers focuses on the clinical characteristics, epidemiology, immune response, and treatment of Coronavirus Disease 2019 (COVID-19), caused by the SARS-CoV-2 virus. It covers topics such as thrombosis, ACE2 receptor, cytokine storm, and the pandemic's impact on various populations.",
+        "field": {
+          "id": "https://openalex.org/fields/27",
+          "display_name": "Medicine"
+        },
+        "works_count": 107478
+      },
+      {
+        "id": "https://openalex.org/T10835",
+        "display_name": "Carbohydrate Chemistry and Synthesis",
+        "description": "This cluster of papers explores the chemical glycobiology, focusing on glycosidase inhibitors, oligosaccharide synthesis, carbohydrate vaccines, glycoprotein synthesis, iminosugars, enzymatic glycoside synthesis, glycosylation mechanisms, carbohydrate-based drug design, automated synthesis, and anticancer vaccines.",
+        "field": {
+          "id": "https://openalex.org/fields/16",
+          "display_name": "Chemistry"
+        },
+        "works_count": 107476
+      },
+      {
+        "id": "https://openalex.org/T14235",
+        "display_name": "Linguistic, Cultural, and Literary Studies",
+        "description": "This cluster of papers explores the intersection of religion, culture, and social identity, with a focus on Islam, Malay language and literature, Sharia law, and the historical and philosophical aspects of science. It delves into the influence of social factors on religious practices and the development of religious and cultural identities.",
+        "field": {
+          "id": "https://openalex.org/fields/33",
+          "display_name": "Social Sciences"
+        },
+        "works_count": 107456
+      },
+      {
+        "id": "https://openalex.org/T10196",
+        "display_name": "Pain Mechanisms and Treatments",
+        "description": "This cluster of papers explores the mechanisms, diagnosis, and treatment of neuropathic pain, focusing on central sensitization, neuroinflammation, glial activation, and the modulation of pain perception. It covers topics such as nociception, neuronal plasticity, chronic pain, hyperalgesia, and diabetic neuropathy.",
+        "field": {
+          "id": "https://openalex.org/fields/27",
+          "display_name": "Medicine"
+        },
+        "works_count": 107455
+      },
+      {
+        "id": "https://openalex.org/T10947",
+        "display_name": "Fluorine in Organic Chemistry",
+        "description": "This cluster of papers focuses on the diverse roles of fluorine in medicinal chemistry and pharmaceuticals, including its use in bioisosteres, trifluoromethylation, enantioselective fluorination, PET imaging, and agrochemicals. The papers cover a wide range of topics such as organofluorine chemistry, C–F bond activation, and the introduction of fluorine-containing functional groups.",
+        "field": {
+          "id": "https://openalex.org/fields/30",
+          "display_name": "Pharmacology, Toxicology and Pharmaceutics"
+        },
+        "works_count": 107411
+      },
+      {
+        "id": "https://openalex.org/T11990",
+        "display_name": "Global Health Workforce Issues",
+        "description": "This cluster of papers explores the challenges and solutions related to the rural health workforce, focusing on issues such as geographical imbalances, physician and nurse migration, retention strategies, recruitment programs, and the impact of these factors on global health and health policy. The research delves into the complexities of rural healthcare delivery, workforce shortages, and the implications for primary care in underserved areas.",
+        "field": {
+          "id": "https://openalex.org/fields/36",
+          "display_name": "Health Professions"
+        },
+        "works_count": 107376
+      },
+      {
+        "id": "https://openalex.org/T10880",
+        "display_name": "Environmental Sustainability in Business",
+        "description": "This cluster of papers explores the drivers, impacts, and implications of green consumer behavior, environmental innovation, and sustainable business practices. It delves into topics such as corporate environmental strategy, green marketing, ethical consumption, and the influence of stakeholders on sustainability practices. The research also investigates the relationship between consumer behavior and environmental management, aiming to understand the motivations and barriers to green consumption.",
+        "field": {
+          "id": "https://openalex.org/fields/14",
+          "display_name": "Business, Management and Accounting"
+        },
+        "works_count": 107367
+      },
+      {
+        "id": "https://openalex.org/T11178",
+        "display_name": "Receptor Mechanisms and Signaling",
+        "description": "This cluster of papers explores the structure, function, and signaling mechanisms of G protein-coupled receptors (GPCRs), with a focus on crystal structures, signal transduction, arrestin-mediated pathways, pharmacology, drug discovery, receptor activation, biased signaling, and the molecular mechanisms involved. The research covers a wide range of topics related to GPCRs and their implications in various biological processes.",
+        "field": {
+          "id": "https://openalex.org/fields/13",
+          "display_name": "Biochemistry, Genetics and Molecular Biology"
+        },
+        "works_count": 107335
+      },
+      {
+        "id": "https://openalex.org/T13246",
+        "display_name": "Agriculture, Plant Science, Crop Management",
+        "description": "This cluster of papers explores the effects of using effective microorganisms (EM) in agriculture, focusing on topics such as organic fertilizers, nutrient sources, seed yield, microbial inoculants, soil properties, plant growth, waste management, antioxidant properties, and sustainable agriculture.",
+        "field": {
+          "id": "https://openalex.org/fields/11",
+          "display_name": "Agricultural and Biological Sciences"
+        },
+        "works_count": 107330
+      },
+      {
+        "id": "https://openalex.org/T10731",
+        "display_name": "Educational Games and Gamification",
+        "description": "This cluster of papers explores the use of gamification, game-based learning, and digital games to enhance education and learning outcomes. It covers topics such as motivation, student engagement, intrinsic motivation, and the impact of gamification on health. The research delves into the effectiveness of various game elements in educational contexts and their influence on learning and instructional design.",
+        "field": {
+          "id": "https://openalex.org/fields/32",
+          "display_name": "Psychology"
+        },
+        "works_count": 107245
+      },
+      {
+        "id": "https://openalex.org/T11285",
+        "display_name": "Hearing Impairment and Communication",
+        "description": "This cluster of papers focuses on the acquisition and development of sign language, including topics such as the role of gesture in language acquisition, cognitive development in deaf children, bilingualism, neural correlates of sign language processing, and strategies for early intervention and literacy development. The research encompasses various aspects of sign language acquisition and its impact on cognitive and linguistic development in deaf individuals.",
+        "field": {
+          "id": "https://openalex.org/fields/32",
+          "display_name": "Psychology"
+        },
+        "works_count": 107226
+      },
+      {
+        "id": "https://openalex.org/T12658",
+        "display_name": "Language and Culture",
+        "description": "This cluster of papers explores the intersection of language and culture in multicultural contexts, covering topics such as multilingualism, ethnolinguistics, cultural identity, media discourse, sociolinguistics, and lexicography. It delves into the complexities of language use, communication, and cultural representation in diverse communities.",
+        "field": {
+          "id": "https://openalex.org/fields/33",
+          "display_name": "Social Sciences"
+        },
+        "works_count": 107199
+      },
+      {
+        "id": "https://openalex.org/T14159",
+        "display_name": "Discourse Analysis and Cultural Communication",
+        "description": "This cluster of papers focuses on discourse analysis, cultural communication patterns, and language use in the context of the pandemic. It explores topics such as media representation, persuasion strategies, linguistic aspects of pandemics, and the impact of social media on language and culture.",
+        "field": {
+          "id": "https://openalex.org/fields/33",
+          "display_name": "Social Sciences"
+        },
+        "works_count": 106833
+      },
+      {
+        "id": "https://openalex.org/T10830",
+        "display_name": "Airway Management and Intubation Techniques",
+        "description": "This cluster of papers focuses on the management of difficult airways in anesthesia practice, covering topics such as tracheal intubation, airway management complications, preoxygenation techniques, laryngoscopy methods, and specific challenges related to pediatric and obese patients. It also discusses the use of videolaryngoscopy and provides guidelines for emergency tracheal intubation.",
+        "field": {
+          "id": "https://openalex.org/fields/27",
+          "display_name": "Medicine"
+        },
+        "works_count": 106755
+      },
+      {
+        "id": "https://openalex.org/T10926",
+        "display_name": "Peripheral Artery Disease Management",
+        "description": "This cluster of papers focuses on the management, treatment, and epidemiology of peripheral arterial disease (PAD), covering topics such as guidelines for diagnosis and treatment, comparison of revascularization methods, risk factors, and the impact of PAD on patients with diabetes. It also includes discussions on the use of ankle-brachial index, stents, and the prevalence of atherosclerosis-related conditions.",
+        "field": {
+          "id": "https://openalex.org/fields/27",
+          "display_name": "Medicine"
+        },
+        "works_count": 106705
+      },
+      {
+        "id": "https://openalex.org/T11470",
+        "display_name": "Legume Nitrogen Fixing Symbiosis",
+        "description": "This cluster of papers focuses on the symbiotic nitrogen fixation in legumes, particularly the interactions between legumes and nitrogen-fixing bacteria such as Rhizobium. It covers topics such as plant signaling, nodule development, genome analysis of symbionts, molecular regulation of symbiosis, host recognition of microbial associations, and the importance of legumes in nitrogen fixation.",
+        "field": {
+          "id": "https://openalex.org/fields/11",
+          "display_name": "Agricultural and Biological Sciences"
+        },
+        "works_count": 106523
+      },
+      {
+        "id": "https://openalex.org/T10341",
+        "display_name": "Coral and Marine Ecosystems Studies",
+        "description": "This cluster of papers focuses on the resilience of coral reef ecosystems to the impacts of climate change, including ocean acidification, bleaching, and disease. It explores the role of marine reserves, symbiotic dinoflagellates, and population connectivity in maintaining the health and biodiversity of coral reefs. The cluster also addresses the importance of the coral microbiome and the potential effects of nutrient pollution on coral reef ecosystems.",
+        "field": {
+          "id": "https://openalex.org/fields/23",
+          "display_name": "Environmental Science"
+        },
+        "works_count": 106489
+      },
+      {
+        "id": "https://openalex.org/T13801",
+        "display_name": "Urban Arborization and Environmental Studies",
+        "description": "This cluster of papers focuses on the study and management of urban greenery, including arborization, green areas, and public spaces. It encompasses topics such as urban forestry, biodiversity conservation, community perception of green spaces, and sustainable urban planning. The papers also cover floristic analysis and geospatial mapping to assess the environmental quality of urban areas.",
+        "field": {
+          "id": "https://openalex.org/fields/23",
+          "display_name": "Environmental Science"
+        },
+        "works_count": 106461
+      },
+      {
+        "id": "https://openalex.org/T10887",
+        "display_name": "Bioinformatics and Genomic Networks",
+        "description": "This cluster of papers focuses on the analysis and interpretation of gene interaction networks, including gene set enrichment analysis, protein-protein interaction networks, functional annotation, pathway analysis, biological network integration, co-expression networks, disease pathways, genomic data integration, and the development of Cytoscape plugins. The research aims to understand the functional organization of genes and proteins within cellular systems and their implications for human diseases.",
+        "field": {
+          "id": "https://openalex.org/fields/13",
+          "display_name": "Biochemistry, Genetics and Molecular Biology"
+        },
+        "works_count": 106428
+      },
+      {
+        "id": "https://openalex.org/T10542",
+        "display_name": "Vestibular and auditory disorders",
+        "description": "This cluster of papers focuses on the role of the cerebellum in neurological disorders and functions, including its involvement in motor control, cognition, vestibular processing, and conditions such as dizziness, vertigo, and sudden hearing loss. The papers cover topics such as cerebellar neuroimaging, functional connectivity, and the impact of cerebellar damage on cognitive and affective development.",
+        "field": {
+          "id": "https://openalex.org/fields/28",
+          "display_name": "Neuroscience"
+        },
+        "works_count": 106383
+      },
+      {
+        "id": "https://openalex.org/T13347",
+        "display_name": "Christian Theology and Mission",
+        "description": "This cluster of papers explores the transformation of global Christianity since 1945, focusing on topics such as the impact of short-term missions, the role of religious experience, migration and mission, public theology, African Christianity, missionary movements, ecological crisis, and the church in global cities. It delves into the changing landscape of Christian mission and the diverse challenges and opportunities it faces in a rapidly evolving world.",
+        "field": {
+          "id": "https://openalex.org/fields/12",
+          "display_name": "Arts and Humanities"
+        },
+        "works_count": 106279
+      },
+      {
+        "id": "https://openalex.org/T10436",
+        "display_name": "Anesthesia and Sedative Agents",
+        "description": "This cluster of papers covers a wide range of topics related to anesthesia and sedation management, including the use of dexmedetomidine, bispectral index monitoring, pharmacokinetics of anesthetic agents, pediatric anesthesia, and neuromuscular blockade reversal. It also explores consciousness monitoring, propofol administration, and the application of sedation in endoscopic procedures.",
+        "field": {
+          "id": "https://openalex.org/fields/27",
+          "display_name": "Medicine"
+        },
+        "works_count": 106265
+      },
+      {
+        "id": "https://openalex.org/T11260",
+        "display_name": "Tracheal and airway disorders",
+        "description": "This cluster of papers focuses on the clinical management of tracheal and airway disorders, including topics such as tracheostomy, airway stenosis, tissue engineering for tracheal replacement, bronchomalacia, percutaneous tracheotomy, laryngotracheal stenosis, pediatric airway surgery, endobronchial stents, and the impact of mechanical ventilation.",
+        "field": {
+          "id": "https://openalex.org/fields/27",
+          "display_name": "Medicine"
+        },
+        "works_count": 106228
+      },
+      {
+        "id": "https://openalex.org/T12395",
+        "display_name": "Educational Innovations and Technology",
+        "description": "This cluster of papers explores the impact of Information and Communication Technology (ICT) in education, with a focus on distance learning, virtual teaching, and the challenges posed by the COVID-19 pandemic. It addresses topics such as the digital divide, e-learning, pedagogical strategies for online education, and the development of digital competence among educators and students.",
+        "field": {
+          "id": "https://openalex.org/fields/17",
+          "display_name": "Computer Science"
+        },
+        "works_count": 106219
+      },
+      {
+        "id": "https://openalex.org/T10994",
+        "display_name": "Terrorism, Counterterrorism, and Political Violence",
+        "description": "This cluster of papers explores the multifaceted aspects of terrorism, including its causes, effects, and countermeasures. It delves into the psychology, sociology, and economics of radicalization, as well as the impact of terrorism on global politics, economies, and societies. The papers also examine the role of education, poverty, and political freedom in relation to terrorism.",
+        "field": {
+          "id": "https://openalex.org/fields/33",
+          "display_name": "Social Sciences"
+        },
+        "works_count": 105990
+      },
+      {
+        "id": "https://openalex.org/T10778",
+        "display_name": "Philosophy and History of Science",
+        "description": "This cluster of papers explores the concept of mechanistic explanation in scientific discovery and evolution, encompassing topics such as evolutionary synthesis, causation, genetic information, scientific models, social mechanisms, and the philosophy of science. It delves into the intricacies of biological explanation, genetic code, and developmental biology.",
+        "field": {
+          "id": "https://openalex.org/fields/12",
+          "display_name": "Arts and Humanities"
+        },
+        "works_count": 105918
+      },
+      {
+        "id": "https://openalex.org/T11462",
+        "display_name": "Museums and Cultural Heritage",
+        "description": "This cluster of papers focuses on informal learning in museums and science centers, exploring topics such as visitor experience, family engagement, free-choice learning, and the impact of digital engagement. It also delves into the role of school field trips, interactive exhibits, and cultural sustainability in enhancing museum learning experiences.",
+        "field": {
+          "id": "https://openalex.org/fields/12",
+          "display_name": "Arts and Humanities"
+        },
+        "works_count": 105913
+      },
+      {
+        "id": "https://openalex.org/T10156",
+        "display_name": "LGBTQ Health, Identity, and Policy",
+        "description": "This cluster of papers explores the intersectionality of LGBTQ+ identities and its impact on mental health, stigma, discrimination, and health disparities. It delves into the complexities of gender identity, social stress, and minority stress within the LGBTQ+ community, providing a comprehensive understanding of the unique challenges faced by individuals with diverse sexual orientations and gender identities.",
+        "field": {
+          "id": "https://openalex.org/fields/32",
+          "display_name": "Psychology"
+        },
+        "works_count": 105887
+      },
+      {
+        "id": "https://openalex.org/T12831",
+        "display_name": "School Health and Nursing Education",
+        "description": "This cluster of papers focuses on the comprehensive approach to promoting health in school settings, encompassing aspects such as school nursing practice, mental health support, capacity building, and creating healthy environments within schools and youth sports clubs. The research emphasizes the importance of integrating health promotion into education and addressing the diverse needs of students through a settings-based approach.",
+        "field": {
+          "id": "https://openalex.org/fields/36",
+          "display_name": "Health Professions"
+        },
+        "works_count": 105826
+      },
+      {
+        "id": "https://openalex.org/T11527",
+        "display_name": "3D IC and TSV technologies",
+        "description": "This cluster of papers focuses on the advancements, challenges, and technologies related to Three-Dimensional Integrated Circuits (3D ICs), with a particular emphasis on Through-Silicon Via (TSV) technology, interconnect design, wafer bonding techniques, thermal management strategies, and system integration. The research spans from electrical modeling and microarchitecture to heterogeneous integration and chip stacking.",
+        "field": {
+          "id": "https://openalex.org/fields/22",
+          "display_name": "Engineering"
+        },
+        "works_count": 105743
+      },
+      {
+        "id": "https://openalex.org/T11217",
+        "display_name": "Cardiac Arrhythmias and Treatments",
+        "description": "This cluster of papers focuses on the use of catheter ablation, including techniques such as radiofrequency ablation and electroanatomic mapping, for the treatment of various cardiac arrhythmias such as ventricular tachycardia, supraventricular tachycardia, and atrial flutter. The papers also discuss the management of cardiomyopathy induced by tachycardia and the identification of scar substrate for ablation procedures.",
+        "field": {
+          "id": "https://openalex.org/fields/27",
+          "display_name": "Medicine"
+        },
+        "works_count": 105530
+      },
+      {
+        "id": "https://openalex.org/T11556",
+        "display_name": "Poverty, Education, and Child Welfare",
+        "description": "This cluster of papers focuses on the impact of interventions and policies related to child labor, education, and poverty reduction, particularly in the context of conditional cash transfers, school subsidies, and orphan care. It explores the effects of these interventions on household vulnerability, social protection, gender inequality, and primary education in low- and middle-income countries.",
+        "field": {
+          "id": "https://openalex.org/fields/33",
+          "display_name": "Social Sciences"
+        },
+        "works_count": 105493
+      },
+      {
+        "id": "https://openalex.org/T10130",
+        "display_name": "Mathematics Education and Teaching Techniques",
+        "description": "This cluster of papers explores the concept of Pedagogical Content Knowledge (PCK) in the context of education research, focusing on the knowledge and skills required by teachers to effectively teach specific content areas. The cluster delves into topics such as technological pedagogical content knowledge, teacher professional development, mathematics instruction, classroom discourse, and lesson study.",
+        "field": {
+          "id": "https://openalex.org/fields/33",
+          "display_name": "Social Sciences"
+        },
+        "works_count": 105244
+      },
+      {
+        "id": "https://openalex.org/T10027",
+        "display_name": "Diabetes, Cardiovascular Risks, and Lipoproteins",
+        "description": "This cluster of papers focuses on the metabolic syndrome, its association with cardiovascular disease, diabetes, insulin resistance, obesity, and atherosclerosis. It includes studies on glucose metabolism, lifestyle interventions, and global prevalence of related conditions.",
+        "field": {
+          "id": "https://openalex.org/fields/27",
+          "display_name": "Medicine"
+        },
+        "works_count": 105226
+      },
+      {
+        "id": "https://openalex.org/T10930",
+        "display_name": "Flood Risk Assessment and Management",
+        "description": "This cluster of papers focuses on the assessment, mapping, and management of global flood risk, incorporating aspects such as remote sensing, climate change impacts, surface water mapping, flood inundation modeling, urban flooding, risk perception, hydrological modeling, satellite imagery, and disaster management.",
+        "field": {
+          "id": "https://openalex.org/fields/23",
+          "display_name": "Environmental Science"
+        },
+        "works_count": 105123
+      },
+      {
+        "id": "https://openalex.org/T10179",
+        "display_name": "Supercapacitor Materials and Fabrication",
+        "description": "This cluster of papers focuses on the materials and technologies for electrochemical supercapacitors, including graphene-based materials, carbon-based electrodes, pseudocapacitive materials, and flexible energy storage devices. It explores the use of nanomaterials and metal-organic frameworks for high-performance energy storage applications.",
+        "field": {
+          "id": "https://openalex.org/fields/25",
+          "display_name": "Materials Science"
+        },
+        "works_count": 105119
+      },
+      {
+        "id": "https://openalex.org/T14469",
+        "display_name": "Renaissance Literature and Culture",
+        "description": "This cluster of papers encompasses a wide range of interdisciplinary studies focused on the Renaissance period, including literature, art, history, gender, culture, religion, philosophy, science, and society. The topics covered include the works of prominent figures such as Marguerite de Navarre, Montaigne, and Rabelais, as well as broader themes related to the intellectual and cultural developments of the era.",
+        "field": {
+          "id": "https://openalex.org/fields/12",
+          "display_name": "Arts and Humanities"
+        },
+        "works_count": 105086
+      },
+      {
+        "id": "https://openalex.org/T12282",
+        "display_name": "Mineral Processing and Grinding",
+        "description": "This cluster of papers focuses on the process of comminution in mineral processing, including topics such as mineral liberation analysis, grinding circuits, particle size distribution, DEM modelling, energy efficiency in comminution, stirred media mills, high voltage pulses for ore pre-weakening, ore sorting technologies, and machine learning applications in mineral processing.",
+        "field": {
+          "id": "https://openalex.org/fields/22",
+          "display_name": "Engineering"
+        },
+        "works_count": 105065
+      },
+      {
+        "id": "https://openalex.org/T11955",
+        "display_name": "Urban and spatial planning",
+        "description": "This cluster of papers focuses on the conservation, management, and sustainability of Satoyama landscapes in Japan, emphasizing traditional agricultural practices, biodiversity preservation, community participation, and ecosystem management. The research covers topics such as landscape conservation, vegetation management, urban fringe agriculture, and the cultural significance of Satoyama landscapes.",
+        "field": {
+          "id": "https://openalex.org/fields/23",
+          "display_name": "Environmental Science"
+        },
+        "works_count": 105050
+      },
+      {
+        "id": "https://openalex.org/T12017",
+        "display_name": "Recycling and Waste Management Techniques",
+        "description": "This cluster of papers focuses on the global production, environmental impacts, recycling techniques, management practices, and legislation related to electronic waste (e-waste). It covers topics such as metal recovery, hazardous substances, health consequences, and the challenges and opportunities in e-waste recycling.",
+        "field": {
+          "id": "https://openalex.org/fields/23",
+          "display_name": "Environmental Science"
+        },
+        "works_count": 105016
+      },
+      {
+        "id": "https://openalex.org/T11059",
+        "display_name": "Market Dynamics and Volatility",
+        "description": "This cluster of papers focuses on the impact of oil price shocks on the global economy, including the stock market, volatility spillovers, commodity markets, and the macroeconomic effects of economic policy uncertainty. It explores the role of financialization, speculation, and monetary policy in shaping the response to oil price fluctuations.",
+        "field": {
+          "id": "https://openalex.org/fields/20",
+          "display_name": "Economics, Econometrics and Finance"
+        },
+        "works_count": 104927
+      },
+      {
+        "id": "https://openalex.org/T10380",
+        "display_name": "Intimate Partner and Family Violence",
+        "description": "This cluster of papers focuses on the prevalence, health consequences, risk factors, and interventions related to intimate partner violence. It covers topics such as mental and physical health effects, gender-based violence, HIV infection, adolescent dating violence, and the impact of child exposure to domestic violence.",
+        "field": {
+          "id": "https://openalex.org/fields/33",
+          "display_name": "Social Sciences"
+        },
+        "works_count": 104795
+      },
+      {
+        "id": "https://openalex.org/T10329",
+        "display_name": "Thyroid Cancer Diagnosis and Treatment",
+        "description": "This cluster of papers focuses on the management, diagnosis, and molecular genetics of thyroid cancer, including differentiated and medullary thyroid carcinoma. It covers topics such as the management guidelines for thyroid nodules, the role of BRAF mutation in papillary thyroid carcinoma, ultrasound imaging for thyroid nodules, and the use of radioactive iodine therapy. The cluster also discusses the molecular pathogenesis and genetic alterations associated with thyroid cancer.",
+        "field": {
+          "id": "https://openalex.org/fields/27",
+          "display_name": "Medicine"
+        },
+        "works_count": 104771
+      },
+      {
+        "id": "https://openalex.org/T13838",
+        "display_name": "Plant and soil sciences",
+        "description": "This cluster of papers covers a wide range of topics related to agroecology, sustainable agriculture, and organic farming. It includes research on soil management, biodiversity, crop production, environmental impact, and climate change adaptation in rural communities. The papers also discuss the importance of food security and the challenges of agricultural practices in diverse ecological contexts.",
+        "field": {
+          "id": "https://openalex.org/fields/11",
+          "display_name": "Agricultural and Biological Sciences"
+        },
+        "works_count": 104720
+      },
+      {
+        "id": "https://openalex.org/T10003",
+        "display_name": "Innovation and Knowledge Management",
+        "description": "This cluster of papers revolves around the topics of knowledge management, organizational innovation, and strategic capabilities. It encompasses research on dynamic capabilities, knowledge transfer, business models, innovation networks, organizational learning, absorptive capacity, strategic alliances, social capital, resource-based view, and market orientation.",
+        "field": {
+          "id": "https://openalex.org/fields/14",
+          "display_name": "Business, Management and Accounting"
+        },
+        "works_count": 104665
+      },
+      {
+        "id": "https://openalex.org/T12629",
+        "display_name": "Island Studies and Pacific Affairs",
+        "description": "This cluster of papers encompasses an interdisciplinary study of islands and island nations, focusing on their economic development, vulnerability, sustainability, governance, decolonization, and resilience. It explores the unique challenges and opportunities faced by small states and island communities, particularly in the Pacific region, and delves into the complexities of globalization, political representation, and environmental impact.",
+        "field": {
+          "id": "https://openalex.org/fields/33",
+          "display_name": "Social Sciences"
+        },
+        "works_count": 104606
+      },
+      {
+        "id": "https://openalex.org/T14246",
+        "display_name": "E-Learning and Knowledge Management",
+        "description": "This cluster of papers focuses on the innovation and management of e-learning, knowledge, and technology in educational settings. It encompasses topics such as remote learning, digital marketing, open access, informal learning, and the impact of technology on education. The cluster also explores the challenges and opportunities presented by the COVID-19 pandemic for e-learning and educational innovation.",
+        "field": {
+          "id": "https://openalex.org/fields/17",
+          "display_name": "Computer Science"
+        },
+        "works_count": 104574
+      },
+      {
+        "id": "https://openalex.org/T14342",
+        "display_name": "Military, Security, and Education Studies",
+        "description": "This cluster of papers explores the historical institutional abuse of children, focusing on survivor testimony, redress schemes, transitional justice, public inquiries, and the impact of trauma narratives. It delves into topics such as apology politics, military education, and the complexities of addressing child sexual assault. The cluster also examines the role of reparations in acknowledging and addressing past abuses.",
+        "field": {
+          "id": "https://openalex.org/fields/33",
+          "display_name": "Social Sciences"
+        },
+        "works_count": 104547
+      },
+      {
+        "id": "https://openalex.org/T13506",
+        "display_name": "Botanical Research and Chemistry",
+        "description": "This cluster of papers explores the evolution, nutritional evaluation, and health benefits of lupin seeds, focusing on secondary metabolites, protein crops, quinolizidine alkaloids, and molecular phylogeny. It also delves into the genomic insights, antioxidant activity, and marker development related to lupin seeds.",
+        "field": {
+          "id": "https://openalex.org/fields/11",
+          "display_name": "Agricultural and Biological Sciences"
+        },
+        "works_count": 104503
+      },
+      {
+        "id": "https://openalex.org/T13877",
+        "display_name": "Law in Society and Culture",
+        "description": "This cluster of papers explores the intersection of visual representation, semiotics, and jurisprudence, with a focus on courtroom design, the use of imagery in law and film, the portrayal of affect and emotion in legal proceedings, and the cultural diplomacy of legal art. It delves into topics such as transitional justice, human rights in art, and the ethics of courtroom imagery, offering a multidisciplinary perspective on the visual aspects of law and justice.",
+        "field": {
+          "id": "https://openalex.org/fields/33",
+          "display_name": "Social Sciences"
+        },
+        "works_count": 104497
+      },
+      {
+        "id": "https://openalex.org/T11515",
+        "display_name": "Bacillus and Francisella bacterial research",
+        "description": "This cluster of papers focuses on the study of biological agents with potential for bioterrorism, including anthrax, tularemia, Bacillus cereus, and Francisella tularensis. The research covers various aspects such as pathogenesis, genomic analysis, inhalational anthrax cases, toxins, and public health assessments related to these biological agents.",
+        "field": {
+          "id": "https://openalex.org/fields/13",
+          "display_name": "Biochemistry, Genetics and Molecular Biology"
+        },
+        "works_count": 104347
+      },
+      {
+        "id": "https://openalex.org/T13367",
+        "display_name": "Cultural and Sociopolitical Studies",
+        "description": "This cluster of papers covers a wide range of topics related to Turkish folklore, including mythology, rituals, traditional beliefs, storytelling, and cultural heritage. It explores the digitization and virtualization of folklore, as well as the biological activities of specific plants in folklore. The papers also delve into the social dynamics and gender roles within Turkish culture.",
+        "field": {
+          "id": "https://openalex.org/fields/12",
+          "display_name": "Arts and Humanities"
+        },
+        "works_count": 104070
+      },
+      {
+        "id": "https://openalex.org/T11634",
+        "display_name": "Water Quality and Pollution Assessment",
+        "description": "This cluster of papers focuses on the assessment of surface water quality, utilizing multivariate statistical techniques, water quality indices, and spatial and temporal variations analysis. The impact of land use, urbanization, and environmental factors on water quality is extensively explored. Additionally, the cluster covers groundwater quality assessment and the use of chemometric analysis in evaluating water pollution sources.",
+        "field": {
+          "id": "https://openalex.org/fields/23",
+          "display_name": "Environmental Science"
+        },
+        "works_count": 104061
+      },
+      {
+        "id": "https://openalex.org/T10071",
+        "display_name": "Bone health and osteoporosis research",
+        "description": "This cluster of papers focuses on the prevention, diagnosis, and treatment of osteoporosis, with an emphasis on fractures, bone mineral density, microstructure, and the effects of various medications and signaling pathways on bone health.",
+        "field": {
+          "id": "https://openalex.org/fields/27",
+          "display_name": "Medicine"
+        },
+        "works_count": 104056
+      },
+      {
+        "id": "https://openalex.org/T10478",
+        "display_name": "Diamond and Carbon-based Materials Research",
+        "description": "This cluster of papers covers a wide range of topics related to diamond nanotechnology, including quantum sensing using nitrogen-vacancy centers, applications in biomedical and quantum computing, Raman spectroscopy of diamond-like materials, and the synthesis and characterization of nanodiamonds. The research also explores the potential for nanoscale imaging, magnetometry, thermometry, and photonics using diamond-based materials.",
+        "field": {
+          "id": "https://openalex.org/fields/25",
+          "display_name": "Materials Science"
+        },
+        "works_count": 104050
+      },
+      {
+        "id": "https://openalex.org/T10873",
+        "display_name": "Bacterial Infections and Vaccines",
+        "description": "This cluster of papers focuses on the epidemiology, pathogenesis, and clinical management of bacterial meningitis, with a specific emphasis on Neisseria meningitidis and pertussis. It covers topics such as vaccine development, outer membrane vesicles, immunity, molecular mechanisms of infection, and global epidemiology.",
+        "field": {
+          "id": "https://openalex.org/fields/24",
+          "display_name": "Immunology and Microbiology"
+        },
+        "works_count": 104016
+      },
+      {
+        "id": "https://openalex.org/T14225",
+        "display_name": "Advanced Sensor and Control Systems",
+        "description": "This cluster of papers focuses on the design and application of intelligent monitoring systems, including topics such as neural network algorithms, wireless sensor networks, temperature monitoring, fuzzy control, PID controllers, real-time monitoring, and data fusion. The research covers a wide range of applications including geotechnical parameters prediction, heating ventilating and air-conditioning systems, wetland landscape classification, urban building energy consumption prediction, weather monitoring, industrial temperature monitoring, fault prediction in power plants, and more.",
+        "field": {
+          "id": "https://openalex.org/fields/22",
+          "display_name": "Engineering"
+        },
+        "works_count": 104002
+      },
+      {
+        "id": "https://openalex.org/T10392",
+        "display_name": "Cutaneous Melanoma Detection and Management",
+        "description": "This cluster of papers focuses on the diagnosis, treatment, and epidemiology of melanoma, a type of skin cancer. It covers topics such as dermatologist-level classification, genetic alterations, sentinel lymph node biopsy, immunotherapy, tumor staging, deep learning for melanoma recognition, and survival analysis. The papers also discuss the epidemiological trends and risk factors associated with melanoma.",
+        "field": {
+          "id": "https://openalex.org/fields/27",
+          "display_name": "Medicine"
+        },
+        "works_count": 103969
+      },
+      {
+        "id": "https://openalex.org/T11640",
+        "display_name": "Linguistic Variation and Morphology",
+        "description": "This cluster of papers explores sociolinguistic variation, language change, and the perception of dialects and accents. It delves into the social meanings and identities associated with different linguistic features, such as indexicality, ethnicity, and speech perception. The research also covers the influence of media, social networks, and historical factors on language variation and change.",
+        "field": {
+          "id": "https://openalex.org/fields/33",
+          "display_name": "Social Sciences"
+        },
+        "works_count": 103750
+      },
+      {
+        "id": "https://openalex.org/T10198",
+        "display_name": "Heart Failure Treatment and Management",
+        "description": "This cluster of papers focuses on the diagnosis, treatment, and management of heart failure, including guidelines, epidemiology, B-type natriuretic peptide testing, cardiovascular disease burden, hospital readmission rates, risk prediction models, and the impact of renal function on outcomes.",
+        "field": {
+          "id": "https://openalex.org/fields/27",
+          "display_name": "Medicine"
+        },
+        "works_count": 103726
+      },
+      {
+        "id": "https://openalex.org/T14115",
+        "display_name": "Legal processes and jurisprudence",
+        "description": "This cluster of papers focuses on the assessment, standards, and management of legal evidence in judicial proceedings. It covers topics such as standards of proof, credibility assessment, trial procedures, court decisions, human rights litigation, legal translation, and criminal justice.",
+        "field": {
+          "id": "https://openalex.org/fields/33",
+          "display_name": "Social Sciences"
+        },
+        "works_count": 103705
+      },
+      {
+        "id": "https://openalex.org/T10784",
+        "display_name": "Muscle activation and electromyography studies",
+        "description": "This cluster of papers focuses on the analysis of electromyography (EMG) signal processing, including topics such as muscle fatigue, prosthetic control using EMG signals, musculoskeletal modeling, neural strategies extraction, surface EMG applications, myoelectric control systems, motor unit recruitment, sensory feedback in prosthetics, and gait analysis.",
+        "field": {
+          "id": "https://openalex.org/fields/22",
+          "display_name": "Engineering"
+        },
+        "works_count": 103686
+      },
+      {
+        "id": "https://openalex.org/T12781",
+        "display_name": "Global Health Care Issues",
+        "description": "This cluster of papers explores the determinants of health care expenditure, focusing on the impact of an ageing population, longevity, and medical innovation. It investigates the relationship between health care spending, economic growth, and public health outcomes, with a particular emphasis on the implications for chronic disease management and government health expenditures.",
+        "field": {
+          "id": "https://openalex.org/fields/36",
+          "display_name": "Health Professions"
+        },
+        "works_count": 103645
+      },
+      {
+        "id": "https://openalex.org/T10306",
+        "display_name": "Liquid Crystal Research Advancements",
+        "description": "This cluster of papers explores advancements in liquid crystal research, focusing on self-organized soft materials, photoinduced motions, functional liquid crystalline assemblies, optoelectronic applications, nanoparticles in liquid crystals, colloidal crystals, polymer-stabilized blue phases, chiral nematic phases, and nanostructured materials.",
+        "field": {
+          "id": "https://openalex.org/fields/25",
+          "display_name": "Materials Science"
+        },
+        "works_count": 103616
+      }
+    ],
+    "group_by": []
+  }
+}

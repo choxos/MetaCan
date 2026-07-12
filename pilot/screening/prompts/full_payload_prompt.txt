@@ -1,0 +1,37 @@
+[SYSTEM PROMPT: the full contents of protocol/rubric.md, verbatim.]
+
+You are screening works for MetaCan, a map of Canadian metaresearch.
+
+Apply the rubric above to every record in the JSON array below. Return a JSON array
+with one object per work, conforming to protocol/screening-schema.json:
+
+  {"id": "W...", "tier": "T1|T2|T3|OUT", "genre": "...", "about_ca": true|false,
+   "confidence": "high|medium|low", "reason": "..."}
+
+Return the array and nothing else. No prose, no preamble, no code fences.
+Every input id must appear exactly once in the output.
+
+RECORDS:
+<<<CHUNK_JSON>>>
+
+--------------------------------------------------------------------------------
+THE PAYLOAD THE RUBRIC ACTUALLY SPECIFIES. This is what the full screen sends, and
+what the pilot should have sent:
+
+    {"id":        "W...",
+     "title":     "...",
+     "abstract":  "...",
+     "year":      2020,
+     "lang":      "en",
+     "type":      "article",
+     "venue":     "Social Studies of Science",          <- withheld in the pilot
+     "topic":     "Scientometrics and bibliometrics",   <- withheld in the pilot
+     "field":     "Decision Sciences",                  <- withheld in the pilot
+     "ca_institutions": ["McGill University"],          <- withheld in the pilot
+     "funders":   ["SSHRC"]}                            <- withheld in the pilot
+
+VENUE IS THE ONE THAT MATTERS MOST. A Canadian-authored paper in *Social Studies of
+Science* is T2 by where it was published, whatever its abstract is about. Venue is
+immune to the ABOUTNESS that defeats topic retrieval (finding 12: the topic route
+finds 12% of the field) and defeats a title-only screen (finding 11). Withholding it
+removed the single signal that could see past what a work appears to be about.

@@ -1,0 +1,1973 @@
+{
+  "request": {
+    "endpoint": "works",
+    "params": {
+      "filter": "title_and_abstract.search:\"open science\",authorships.institutions.country_code:ca,primary_topic.id:T10102|T13607|T13516|T11937|T10206|T10582|T10267|T10778|T13558|T13284|T11875",
+      "per-page": "1",
+      "mailto": "ahmad.pub@gmail.com"
+    }
+  },
+  "retrieved_at_utc": "2026-07-11T12:33:04Z",
+  "payload": {
+    "meta": {
+      "count": 325,
+      "db_response_time_ms": 28,
+      "page": 1,
+      "per_page": 1,
+      "groups_count": null,
+      "x_query": {
+        "oql": "works where authorships.institutions.country_code is (ca)\n  and title/abstract has (stemmed \"open science\")\n  and topic is (\n    T10102 or T10206 or T10267 or T10582 or T10778 or T11875 or T11937 or T13284\n    or T13516 or T13558 or T13607\n  )",
+        "oqo": {
+          "get_rows": "works",
+          "filter_rows": [
+            {
+              "column_id": "authorships.institutions.country_code",
+              "value": "ca"
+            },
+            {
+              "column_id": "title_and_abstract.search",
+              "value": "\"open science\"",
+              "operator": "has"
+            },
+            {
+              "join": "or",
+              "filters": [
+                {
+                  "column_id": "primary_topic.id",
+                  "value": "T10102"
+                },
+                {
+                  "column_id": "primary_topic.id",
+                  "value": "T10206"
+                },
+                {
+                  "column_id": "primary_topic.id",
+                  "value": "T10267"
+                },
+                {
+                  "column_id": "primary_topic.id",
+                  "value": "T10582"
+                },
+                {
+                  "column_id": "primary_topic.id",
+                  "value": "T10778"
+                },
+                {
+                  "column_id": "primary_topic.id",
+                  "value": "T11875"
+                },
+                {
+                  "column_id": "primary_topic.id",
+                  "value": "T11937"
+                },
+                {
+                  "column_id": "primary_topic.id",
+                  "value": "T13284"
+                },
+                {
+                  "column_id": "primary_topic.id",
+                  "value": "T13516"
+                },
+                {
+                  "column_id": "primary_topic.id",
+                  "value": "T13558"
+                },
+                {
+                  "column_id": "primary_topic.id",
+                  "value": "T13607"
+                }
+              ]
+            }
+          ],
+          "per_page": 1
+        },
+        "url": "/works?filter=authorships.institutions.country_code:ca,title_and_abstract.search:%22open science%22,primary_topic.id:T10102|T10206|T10267|T10582|T10778|T11875|T11937|T13284|T13516|T13558|T13607&per_page=1"
+      },
+      "cost_usd": 0.001
+    },
+    "results": [
+      {
+        "id": "https://openalex.org/W2156555857",
+        "doi": "https://doi.org/10.1890/es14-00402.1",
+        "title": "The Tao of open science for ecology",
+        "display_name": "The Tao of open science for ecology",
+        "relevance_score": 228.6166,
+        "publication_year": 2015,
+        "publication_date": "2015-07-01",
+        "ids": {
+          "openalex": "https://openalex.org/W2156555857",
+          "doi": "https://doi.org/10.1890/es14-00402.1",
+          "mag": "2156555857"
+        },
+        "language": "en",
+        "primary_location": {
+          "id": "doi:10.1890/es14-00402.1",
+          "is_oa": true,
+          "landing_page_url": "https://doi.org/10.1890/es14-00402.1",
+          "pdf_url": null,
+          "source": {
+            "id": "https://openalex.org/S98723585",
+            "display_name": "Ecosphere",
+            "issn_l": "2150-8925",
+            "issn": [
+              "2150-8925"
+            ],
+            "is_oa": true,
+            "is_in_doaj": true,
+            "is_core": true,
+            "host_organization": "https://openalex.org/P4310320595",
+            "host_organization_name": "Wiley",
+            "host_organization_lineage": [
+              "https://openalex.org/P4310320595"
+            ],
+            "host_organization_lineage_names": [
+              "Wiley"
+            ],
+            "type": "journal"
+          },
+          "license": "cc-by",
+          "license_id": "https://openalex.org/licenses/cc-by",
+          "version": "publishedVersion",
+          "is_accepted": true,
+          "is_published": true,
+          "raw_source_name": "Ecosphere",
+          "raw_type": "journal-article"
+        },
+        "type": "article",
+        "indexed_in": [
+          "crossref",
+          "doaj"
+        ],
+        "open_access": {
+          "is_oa": true,
+          "oa_status": "gold",
+          "oa_url": "https://doi.org/10.1890/es14-00402.1",
+          "any_repository_has_fulltext": true
+        },
+        "authorships": [
+          {
+            "author_position": "first",
+            "author": {
+              "id": "https://openalex.org/A5074875508",
+              "display_name": "Stephanie E. Hampton",
+              "orcid": "https://orcid.org/0000-0003-2389-4249"
+            },
+            "institutions": [
+              {
+                "id": "https://openalex.org/I72951846",
+                "display_name": "Washington State University",
+                "ror": "https://ror.org/05dk0ce17",
+                "country_code": "US",
+                "type": "education",
+                "lineage": [
+                  "https://openalex.org/I72951846"
+                ]
+              }
+            ],
+            "countries": [
+              "US"
+            ],
+            "is_corresponding": true,
+            "raw_author_name": "Stephanie E. Hampton",
+            "raw_affiliation_strings": [
+              "Center for Environmental Research, Education and Outreach, Washington State University, Pullman, Washington 99164 USA",
+              "Center for Environmental Research Education and Outreach Washington State University Pullman Washington 99164 USA"
+            ],
+            "raw_orcid": null,
+            "affiliations": [
+              {
+                "raw_affiliation_string": "Center for Environmental Research, Education and Outreach, Washington State University, Pullman, Washington 99164 USA",
+                "institution_ids": [
+                  "https://openalex.org/I72951846"
+                ]
+              },
+              {
+                "raw_affiliation_string": "Center for Environmental Research Education and Outreach Washington State University Pullman Washington 99164 USA",
+                "institution_ids": [
+                  "https://openalex.org/I72951846"
+                ]
+              }
+            ]
+          },
+          {
+            "author_position": "middle",
+            "author": {
+              "id": "https://openalex.org/A5076012373",
+              "display_name": "Sean Anderson",
+              "orcid": "https://orcid.org/0000-0002-3828-0795"
+            },
+            "institutions": [
+              {
+                "id": "https://openalex.org/I194388944",
+                "display_name": "California State University, Channel Islands",
+                "ror": "https://ror.org/04v097707",
+                "country_code": "US",
+                "type": "education",
+                "lineage": [
+                  "https://openalex.org/I194388944"
+                ]
+              }
+            ],
+            "countries": [
+              "US"
+            ],
+            "is_corresponding": false,
+            "raw_author_name": "Sean S. Anderson",
+            "raw_affiliation_strings": [
+              "Environmental Science and Resource Management Program and Pacific Institute for Restoration Ecology, California State University Channel Islands, Camarillo, California 93012 USA"
+            ],
+            "raw_orcid": null,
+            "affiliations": [
+              {
+                "raw_affiliation_string": "Environmental Science and Resource Management Program and Pacific Institute for Restoration Ecology, California State University Channel Islands, Camarillo, California 93012 USA",
+                "institution_ids": [
+                  "https://openalex.org/I194388944"
+                ]
+              }
+            ]
+          },
+          {
+            "author_position": "middle",
+            "author": {
+              "id": "https://openalex.org/A5087168979",
+              "display_name": "Sarah C. Bagby",
+              "orcid": "https://orcid.org/0000-0002-1795-3161"
+            },
+            "institutions": [
+              {
+                "id": "https://openalex.org/I154570441",
+                "display_name": "University of California, Santa Barbara",
+                "ror": "https://ror.org/02t274463",
+                "country_code": "US",
+                "type": "education",
+                "lineage": [
+                  "https://openalex.org/I154570441"
+                ]
+              }
+            ],
+            "countries": [
+              "US"
+            ],
+            "is_corresponding": false,
+            "raw_author_name": "Sarah C. Bagby",
+            "raw_affiliation_strings": [
+              "Marine Science Institute and Department of Earth Science, University of California, Santa Barbara, California 93106 USA"
+            ],
+            "raw_orcid": null,
+            "affiliations": [
+              {
+                "raw_affiliation_string": "Marine Science Institute and Department of Earth Science, University of California, Santa Barbara, California 93106 USA",
+                "institution_ids": [
+                  "https://openalex.org/I154570441"
+                ]
+              }
+            ]
+          },
+          {
+            "author_position": "middle",
+            "author": {
+              "id": "https://openalex.org/A5035121052",
+              "display_name": "Corinna Gries",
+              "orcid": "https://orcid.org/0000-0002-9091-6543"
+            },
+            "institutions": [
+              {
+                "id": "https://openalex.org/I135310074",
+                "display_name": "University of Wisconsin–Madison",
+                "ror": "https://ror.org/01y2jtd41",
+                "country_code": "US",
+                "type": "education",
+                "lineage": [
+                  "https://openalex.org/I135310074"
+                ]
+              }
+            ],
+            "countries": [
+              "US"
+            ],
+            "is_corresponding": false,
+            "raw_author_name": "Corinna Gries",
+            "raw_affiliation_strings": [
+              "Center for Limnology, University of Wisconsin, Madison, Wisconsin 53706 USA",
+              "Center for Limnology, University of Wisconsin, Madison, Wisconsin 53706, USA"
+            ],
+            "raw_orcid": null,
+            "affiliations": [
+              {
+                "raw_affiliation_string": "Center for Limnology, University of Wisconsin, Madison, Wisconsin 53706 USA",
+                "institution_ids": [
+                  "https://openalex.org/I135310074"
+                ]
+              },
+              {
+                "raw_affiliation_string": "Center for Limnology, University of Wisconsin, Madison, Wisconsin 53706, USA",
+                "institution_ids": [
+                  "https://openalex.org/I135310074"
+                ]
+              }
+            ]
+          },
+          {
+            "author_position": "middle",
+            "author": {
+              "id": "https://openalex.org/A5012685006",
+              "display_name": "Xueying Han",
+              "orcid": "https://orcid.org/0000-0003-4643-2880"
+            },
+            "institutions": [
+              {
+                "id": "https://openalex.org/I154570441",
+                "display_name": "University of California, Santa Barbara",
+                "ror": "https://ror.org/02t274463",
+                "country_code": "US",
+                "type": "education",
+                "lineage": [
+                  "https://openalex.org/I154570441"
+                ]
+              }
+            ],
+            "countries": [
+              "US"
+            ],
+            "is_corresponding": false,
+            "raw_author_name": "Xueying Han",
+            "raw_affiliation_strings": [
+              "Center for Nanotechnology in Society, University of California, Santa Barbara, California 93106 USA",
+              "Center for Nanotechnology in Society, University of California, Santa Barbara, California 93106, USA"
+            ],
+            "raw_orcid": null,
+            "affiliations": [
+              {
+                "raw_affiliation_string": "Center for Nanotechnology in Society, University of California, Santa Barbara, California 93106 USA",
+                "institution_ids": [
+                  "https://openalex.org/I154570441"
+                ]
+              },
+              {
+                "raw_affiliation_string": "Center for Nanotechnology in Society, University of California, Santa Barbara, California 93106, USA",
+                "institution_ids": [
+                  "https://openalex.org/I154570441"
+                ]
+              }
+            ]
+          },
+          {
+            "author_position": "middle",
+            "author": {
+              "id": "https://openalex.org/A5082834234",
+              "display_name": "Edmund Hart",
+              "orcid": "https://orcid.org/0000-0001-7367-7969"
+            },
+            "institutions": [
+              {
+                "id": "https://openalex.org/I28670366",
+                "display_name": "National Ecological Observatory Network",
+                "ror": "https://ror.org/04j43p132",
+                "country_code": "US",
+                "type": "facility",
+                "lineage": [
+                  "https://openalex.org/I1311060795",
+                  "https://openalex.org/I28670366"
+                ]
+              }
+            ],
+            "countries": [
+              "US"
+            ],
+            "is_corresponding": false,
+            "raw_author_name": "Edmund M. Hart",
+            "raw_affiliation_strings": [
+              "National Ecological Observatory Network, 1685 38th Street, Suite 100, Boulder, Colorado 80301 USA"
+            ],
+            "raw_orcid": null,
+            "affiliations": [
+              {
+                "raw_affiliation_string": "National Ecological Observatory Network, 1685 38th Street, Suite 100, Boulder, Colorado 80301 USA",
+                "institution_ids": [
+                  "https://openalex.org/I28670366"
+                ]
+              }
+            ]
+          },
+          {
+            "author_position": "middle",
+            "author": {
+              "id": "https://openalex.org/A5081390013",
+              "display_name": "Matthew B. Jones",
+              "orcid": "https://orcid.org/0000-0003-0077-4738"
+            },
+            "institutions": [
+              {
+                "id": "https://openalex.org/I154570441",
+                "display_name": "University of California, Santa Barbara",
+                "ror": "https://ror.org/02t274463",
+                "country_code": "US",
+                "type": "education",
+                "lineage": [
+                  "https://openalex.org/I154570441"
+                ]
+              },
+              {
+                "id": "https://openalex.org/I159548981",
+                "display_name": "State Street (United States)",
+                "ror": "https://ror.org/0116zdb24",
+                "country_code": "US",
+                "type": "company",
+                "lineage": [
+                  "https://openalex.org/I159548981"
+                ]
+              },
+              {
+                "id": "https://openalex.org/I4210100421",
+                "display_name": "National Center for Ecological Analysis and Synthesis",
+                "ror": "https://ror.org/0146z4r19",
+                "country_code": "US",
+                "type": "nonprofit",
+                "lineage": [
+                  "https://openalex.org/I154570441",
+                  "https://openalex.org/I4210100421"
+                ]
+              }
+            ],
+            "countries": [
+              "US"
+            ],
+            "is_corresponding": false,
+            "raw_author_name": "Matthew B. Jones",
+            "raw_affiliation_strings": [
+              "National Center for Ecological Analysis and Synthesis, University of California, Santa Barbara, 735 State Street, Suite 300, Santa Barbara, California 93101 USA",
+              "National Center for Ecological Analysis and Synthesis, University of California Santa Barbara, 735 State Street, Suite 300, Santa Barbara, California 93101, USA"
+            ],
+            "raw_orcid": null,
+            "affiliations": [
+              {
+                "raw_affiliation_string": "National Center for Ecological Analysis and Synthesis, University of California, Santa Barbara, 735 State Street, Suite 300, Santa Barbara, California 93101 USA",
+                "institution_ids": [
+                  "https://openalex.org/I4210100421",
+                  "https://openalex.org/I159548981",
+                  "https://openalex.org/I154570441"
+                ]
+              },
+              {
+                "raw_affiliation_string": "National Center for Ecological Analysis and Synthesis, University of California Santa Barbara, 735 State Street, Suite 300, Santa Barbara, California 93101, USA",
+                "institution_ids": [
+                  "https://openalex.org/I4210100421"
+                ]
+              }
+            ]
+          },
+          {
+            "author_position": "middle",
+            "author": {
+              "id": "https://openalex.org/A5085281820",
+              "display_name": "W. Christopher Lenhardt",
+              "orcid": "https://orcid.org/0000-0001-9677-784X"
+            },
+            "institutions": [
+              {
+                "id": "https://openalex.org/I114027177",
+                "display_name": "University of North Carolina at Chapel Hill",
+                "ror": "https://ror.org/0130frc33",
+                "country_code": "US",
+                "type": "education",
+                "lineage": [
+                  "https://openalex.org/I114027177"
+                ]
+              },
+              {
+                "id": "https://openalex.org/I69048370",
+                "display_name": "Renaissance Computing Institute",
+                "ror": "https://ror.org/01s91ey96",
+                "country_code": "US",
+                "type": "education",
+                "lineage": [
+                  "https://openalex.org/I137902535",
+                  "https://openalex.org/I170897317",
+                  "https://openalex.org/I69048370"
+                ]
+              }
+            ],
+            "countries": [
+              "US"
+            ],
+            "is_corresponding": false,
+            "raw_author_name": "W. Christopher Lenhardt",
+            "raw_affiliation_strings": [
+              "Renaissance Computing Institute (RENCI), University of North Carolina at Chapel Hill, Chapel Hill, North Carolina 27517 USA"
+            ],
+            "raw_orcid": null,
+            "affiliations": [
+              {
+                "raw_affiliation_string": "Renaissance Computing Institute (RENCI), University of North Carolina at Chapel Hill, Chapel Hill, North Carolina 27517 USA",
+                "institution_ids": [
+                  "https://openalex.org/I69048370",
+                  "https://openalex.org/I114027177"
+                ]
+              }
+            ]
+          },
+          {
+            "author_position": "middle",
+            "author": {
+              "id": "https://openalex.org/A5043209789",
+              "display_name": "A Macdonald",
+              "orcid": "https://orcid.org/0000-0002-4268-9227"
+            },
+            "institutions": [
+              {
+                "id": "https://openalex.org/I141945490",
+                "display_name": "University of British Columbia",
+                "ror": "https://ror.org/03rmrcq20",
+                "country_code": "CA",
+                "type": "education",
+                "lineage": [
+                  "https://openalex.org/I141945490"
+                ]
+              }
+            ],
+            "countries": [
+              "CA"
+            ],
+            "is_corresponding": false,
+            "raw_author_name": "Andrew MacDonald",
+            "raw_affiliation_strings": [
+              "Department of Zoology, University of British Columbia, Vancouver, British Columbia V6T 1Z4 Canada",
+              "Department of Zoology, University of British Columbia, Vancouver, British Columbia V6T 1Z4, Canada"
+            ],
+            "raw_orcid": null,
+            "affiliations": [
+              {
+                "raw_affiliation_string": "Department of Zoology, University of British Columbia, Vancouver, British Columbia V6T 1Z4 Canada",
+                "institution_ids": [
+                  "https://openalex.org/I141945490"
+                ]
+              },
+              {
+                "raw_affiliation_string": "Department of Zoology, University of British Columbia, Vancouver, British Columbia V6T 1Z4, Canada",
+                "institution_ids": [
+                  "https://openalex.org/I141945490"
+                ]
+              }
+            ]
+          },
+          {
+            "author_position": "middle",
+            "author": {
+              "id": "https://openalex.org/A5014984299",
+              "display_name": "William K. Michener",
+              "orcid": "https://orcid.org/0000-0002-8341-1141"
+            },
+            "institutions": [
+              {
+                "id": "https://openalex.org/I169521973",
+                "display_name": "University of New Mexico",
+                "ror": "https://ror.org/05fs6jp91",
+                "country_code": "US",
+                "type": "education",
+                "lineage": [
+                  "https://openalex.org/I169521973"
+                ]
+              }
+            ],
+            "countries": [
+              "US"
+            ],
+            "is_corresponding": false,
+            "raw_author_name": "William K. Michener",
+            "raw_affiliation_strings": [
+              "College of University Libraries and Learning Science, MSC05 3020, University of New Mexico, Albuquerque, New Mexico 87131 USA"
+            ],
+            "raw_orcid": null,
+            "affiliations": [
+              {
+                "raw_affiliation_string": "College of University Libraries and Learning Science, MSC05 3020, University of New Mexico, Albuquerque, New Mexico 87131 USA",
+                "institution_ids": [
+                  "https://openalex.org/I169521973"
+                ]
+              }
+            ]
+          },
+          {
+            "author_position": "middle",
+            "author": {
+              "id": "https://openalex.org/A5041105433",
+              "display_name": "Joe Mudge",
+              "orcid": null
+            },
+            "institutions": [
+              {
+                "id": "https://openalex.org/I12315562",
+                "display_name": "Texas Tech University",
+                "ror": "https://ror.org/0405mnx93",
+                "country_code": "US",
+                "type": "education",
+                "lineage": [
+                  "https://openalex.org/I12315562"
+                ]
+              }
+            ],
+            "countries": [
+              "US"
+            ],
+            "is_corresponding": false,
+            "raw_author_name": "Joe Mudge",
+            "raw_affiliation_strings": [
+              "The Institute of Environmental and Human Health, Department of Environmental Toxicology, Texas Tech University, Lubbock, Texas 79416 USA"
+            ],
+            "raw_orcid": null,
+            "affiliations": [
+              {
+                "raw_affiliation_string": "The Institute of Environmental and Human Health, Department of Environmental Toxicology, Texas Tech University, Lubbock, Texas 79416 USA",
+                "institution_ids": [
+                  "https://openalex.org/I12315562"
+                ]
+              }
+            ]
+          },
+          {
+            "author_position": "middle",
+            "author": {
+              "id": "https://openalex.org/A5052713395",
+              "display_name": "Afshin Pourmokhtarian",
+              "orcid": "https://orcid.org/0000-0003-2453-1212"
+            },
+            "institutions": [
+              {
+                "id": "https://openalex.org/I111088046",
+                "display_name": "Boston University",
+                "ror": "https://ror.org/05qwgg493",
+                "country_code": "US",
+                "type": "education",
+                "lineage": [
+                  "https://openalex.org/I111088046"
+                ]
+              }
+            ],
+            "countries": [
+              "US"
+            ],
+            "is_corresponding": false,
+            "raw_author_name": "Afshin Pourmokhtarian",
+            "raw_affiliation_strings": [
+              "Department of Earth and Environment, Room 130, 685 Commonwealth Avenue, Boston University, Boston, Massachusetts 02215 USA"
+            ],
+            "raw_orcid": null,
+            "affiliations": [
+              {
+                "raw_affiliation_string": "Department of Earth and Environment, Room 130, 685 Commonwealth Avenue, Boston University, Boston, Massachusetts 02215 USA",
+                "institution_ids": [
+                  "https://openalex.org/I111088046"
+                ]
+              }
+            ]
+          },
+          {
+            "author_position": "middle",
+            "author": {
+              "id": "https://openalex.org/A5011057199",
+              "display_name": "Mark Schildhauer",
+              "orcid": "https://orcid.org/0000-0003-0632-7576"
+            },
+            "institutions": [
+              {
+                "id": "https://openalex.org/I154570441",
+                "display_name": "University of California, Santa Barbara",
+                "ror": "https://ror.org/02t274463",
+                "country_code": "US",
+                "type": "education",
+                "lineage": [
+                  "https://openalex.org/I154570441"
+                ]
+              },
+              {
+                "id": "https://openalex.org/I159548981",
+                "display_name": "State Street (United States)",
+                "ror": "https://ror.org/0116zdb24",
+                "country_code": "US",
+                "type": "company",
+                "lineage": [
+                  "https://openalex.org/I159548981"
+                ]
+              },
+              {
+                "id": "https://openalex.org/I4210100421",
+                "display_name": "National Center for Ecological Analysis and Synthesis",
+                "ror": "https://ror.org/0146z4r19",
+                "country_code": "US",
+                "type": "nonprofit",
+                "lineage": [
+                  "https://openalex.org/I154570441",
+                  "https://openalex.org/I4210100421"
+                ]
+              }
+            ],
+            "countries": [
+              "US"
+            ],
+            "is_corresponding": false,
+            "raw_author_name": "Mark P. Schildhauer",
+            "raw_affiliation_strings": [
+              "National Center for Ecological Analysis and Synthesis, University of California, Santa Barbara, 735 State Street, Suite 300, Santa Barbara, California 93101 USA",
+              "National Center for Ecological Analysis and Synthesis, University of California Santa Barbara, 735 State Street, Suite 300, Santa Barbara, California 93101, USA"
+            ],
+            "raw_orcid": null,
+            "affiliations": [
+              {
+                "raw_affiliation_string": "National Center for Ecological Analysis and Synthesis, University of California, Santa Barbara, 735 State Street, Suite 300, Santa Barbara, California 93101 USA",
+                "institution_ids": [
+                  "https://openalex.org/I4210100421",
+                  "https://openalex.org/I159548981",
+                  "https://openalex.org/I154570441"
+                ]
+              },
+              {
+                "raw_affiliation_string": "National Center for Ecological Analysis and Synthesis, University of California Santa Barbara, 735 State Street, Suite 300, Santa Barbara, California 93101, USA",
+                "institution_ids": [
+                  "https://openalex.org/I4210100421"
+                ]
+              }
+            ]
+          },
+          {
+            "author_position": "middle",
+            "author": {
+              "id": "https://openalex.org/A5004427441",
+              "display_name": "Kara Woo",
+              "orcid": "https://orcid.org/0000-0002-5125-4188"
+            },
+            "institutions": [
+              {
+                "id": "https://openalex.org/I154570441",
+                "display_name": "University of California, Santa Barbara",
+                "ror": "https://ror.org/02t274463",
+                "country_code": "US",
+                "type": "education",
+                "lineage": [
+                  "https://openalex.org/I154570441"
+                ]
+              },
+              {
+                "id": "https://openalex.org/I159548981",
+                "display_name": "State Street (United States)",
+                "ror": "https://ror.org/0116zdb24",
+                "country_code": "US",
+                "type": "company",
+                "lineage": [
+                  "https://openalex.org/I159548981"
+                ]
+              },
+              {
+                "id": "https://openalex.org/I4210100421",
+                "display_name": "National Center for Ecological Analysis and Synthesis",
+                "ror": "https://ror.org/0146z4r19",
+                "country_code": "US",
+                "type": "nonprofit",
+                "lineage": [
+                  "https://openalex.org/I154570441",
+                  "https://openalex.org/I4210100421"
+                ]
+              }
+            ],
+            "countries": [
+              "US"
+            ],
+            "is_corresponding": false,
+            "raw_author_name": "Kara H. Woo",
+            "raw_affiliation_strings": [
+              "National Center for Ecological Analysis and Synthesis, University of California, Santa Barbara, 735 State Street, Suite 300, Santa Barbara, California 93101 USA",
+              "National Center for Ecological Analysis and Synthesis, University of California Santa Barbara, 735 State Street, Suite 300, Santa Barbara, California 93101, USA"
+            ],
+            "raw_orcid": null,
+            "affiliations": [
+              {
+                "raw_affiliation_string": "National Center for Ecological Analysis and Synthesis, University of California, Santa Barbara, 735 State Street, Suite 300, Santa Barbara, California 93101 USA",
+                "institution_ids": [
+                  "https://openalex.org/I4210100421",
+                  "https://openalex.org/I159548981",
+                  "https://openalex.org/I154570441"
+                ]
+              },
+              {
+                "raw_affiliation_string": "National Center for Ecological Analysis and Synthesis, University of California Santa Barbara, 735 State Street, Suite 300, Santa Barbara, California 93101, USA",
+                "institution_ids": [
+                  "https://openalex.org/I4210100421"
+                ]
+              }
+            ]
+          },
+          {
+            "author_position": "last",
+            "author": {
+              "id": "https://openalex.org/A5021152616",
+              "display_name": "Naupaka Zimmerman",
+              "orcid": "https://orcid.org/0000-0003-2168-6390"
+            },
+            "institutions": [
+              {
+                "id": "https://openalex.org/I138006243",
+                "display_name": "University of Arizona",
+                "ror": "https://ror.org/03m2x1q45",
+                "country_code": "US",
+                "type": "education",
+                "lineage": [
+                  "https://openalex.org/I138006243"
+                ]
+              }
+            ],
+            "countries": [
+              "US"
+            ],
+            "is_corresponding": false,
+            "raw_author_name": "Naupaka Zimmerman",
+            "raw_affiliation_strings": [
+              "School of Plant Sciences, University of Arizona, 1145 East 4th Street, Tucson, Arizona 85721 USA"
+            ],
+            "raw_orcid": null,
+            "affiliations": [
+              {
+                "raw_affiliation_string": "School of Plant Sciences, University of Arizona, 1145 East 4th Street, Tucson, Arizona 85721 USA",
+                "institution_ids": [
+                  "https://openalex.org/I138006243"
+                ]
+              }
+            ]
+          }
+        ],
+        "institutions": [],
+        "countries_distinct_count": 2,
+        "institutions_distinct_count": 15,
+        "corresponding_author_ids": [
+          "https://openalex.org/A5074875508"
+        ],
+        "corresponding_institution_ids": [
+          "https://openalex.org/I72951846"
+        ],
+        "apc_list": {
+          "value": 1550,
+          "currency": "EUR",
+          "value_usd": 1925
+        },
+        "apc_paid": {
+          "value": 1550,
+          "currency": "EUR",
+          "value_usd": 1925
+        },
+        "fwci": 49.4409,
+        "has_fulltext": false,
+        "cited_by_count": 195,
+        "citation_normalized_percentile": {
+          "value": 0.9983,
+          "is_in_top_1_percent": true,
+          "is_in_top_10_percent": true
+        },
+        "cited_by_percentile_year": {
+          "min": 90,
+          "max": 100
+        },
+        "biblio": {
+          "volume": "6",
+          "issue": "7",
+          "first_page": "1",
+          "last_page": "13"
+        },
+        "is_retracted": false,
+        "is_paratext": false,
+        "is_xpac": false,
+        "primary_topic": {
+          "id": "https://openalex.org/T11937",
+          "display_name": "Research Data Management Practices",
+          "score": 0.9994,
+          "subfield": {
+            "id": "https://openalex.org/subfields/1710",
+            "display_name": "Information Systems"
+          },
+          "field": {
+            "id": "https://openalex.org/fields/17",
+            "display_name": "Computer Science"
+          },
+          "domain": {
+            "id": "https://openalex.org/domains/3",
+            "display_name": "Physical Sciences"
+          }
+        },
+        "topics": [
+          {
+            "id": "https://openalex.org/T11937",
+            "display_name": "Research Data Management Practices",
+            "score": 0.9994,
+            "subfield": {
+              "id": "https://openalex.org/subfields/1710",
+              "display_name": "Information Systems"
+            },
+            "field": {
+              "id": "https://openalex.org/fields/17",
+              "display_name": "Computer Science"
+            },
+            "domain": {
+              "id": "https://openalex.org/domains/3",
+              "display_name": "Physical Sciences"
+            }
+          },
+          {
+            "id": "https://openalex.org/T11986",
+            "display_name": "Scientific Computing and Data Management",
+            "score": 0.9983,
+            "subfield": {
+              "id": "https://openalex.org/subfields/1802",
+              "display_name": "Information Systems and Management"
+            },
+            "field": {
+              "id": "https://openalex.org/fields/18",
+              "display_name": "Decision Sciences"
+            },
+            "domain": {
+              "id": "https://openalex.org/domains/2",
+              "display_name": "Social Sciences"
+            }
+          },
+          {
+            "id": "https://openalex.org/T10895",
+            "display_name": "Species Distribution and Climate Change",
+            "score": 0.9864,
+            "subfield": {
+              "id": "https://openalex.org/subfields/2302",
+              "display_name": "Ecological Modeling"
+            },
+            "field": {
+              "id": "https://openalex.org/fields/23",
+              "display_name": "Environmental Science"
+            },
+            "domain": {
+              "id": "https://openalex.org/domains/3",
+              "display_name": "Physical Sciences"
+            }
+          }
+        ],
+        "keywords": [
+          {
+            "id": "https://openalex.org/keywords/mindset",
+            "display_name": "Mindset",
+            "score": 0.8995
+          },
+          {
+            "id": "https://openalex.org/keywords/open-science",
+            "display_name": "Open science",
+            "score": 0.7313
+          },
+          {
+            "id": "https://openalex.org/keywords/transparency",
+            "display_name": "Transparency (behavior)",
+            "score": 0.7179
+          },
+          {
+            "id": "https://openalex.org/keywords/openness-to-experience",
+            "display_name": "Openness to experience",
+            "score": 0.6785
+          },
+          {
+            "id": "https://openalex.org/keywords/process",
+            "display_name": "Process (computing)",
+            "score": 0.4599
+          },
+          {
+            "id": "https://openalex.org/keywords/stewardship",
+            "display_name": "Stewardship (theology)",
+            "score": 0.4533
+          },
+          {
+            "id": "https://openalex.org/keywords/data-sharing",
+            "display_name": "Data sharing",
+            "score": 0.4445
+          },
+          {
+            "id": "https://openalex.org/keywords/open-data",
+            "display_name": "Open data",
+            "score": 0.4317
+          },
+          {
+            "id": "https://openalex.org/keywords/best-practice",
+            "display_name": "Best practice",
+            "score": 0.4149
+          },
+          {
+            "id": "https://openalex.org/keywords/ecology",
+            "display_name": "Ecology",
+            "score": 0.4135
+          },
+          {
+            "id": "https://openalex.org/keywords/computer-science",
+            "display_name": "Computer science",
+            "score": 0.3934
+          },
+          {
+            "id": "https://openalex.org/keywords/sociology",
+            "display_name": "Sociology",
+            "score": 0.3923
+          },
+          {
+            "id": "https://openalex.org/keywords/knowledge-management",
+            "display_name": "Knowledge management",
+            "score": 0.3712
+          },
+          {
+            "id": "https://openalex.org/keywords/engineering-ethics",
+            "display_name": "Engineering ethics",
+            "score": 0.3325
+          },
+          {
+            "id": "https://openalex.org/keywords/political-science",
+            "display_name": "Political science",
+            "score": 0.2995
+          },
+          {
+            "id": "https://openalex.org/keywords/psychology",
+            "display_name": "Psychology",
+            "score": 0.2128
+          },
+          {
+            "id": "https://openalex.org/keywords/engineering",
+            "display_name": "Engineering",
+            "score": 0.1971
+          },
+          {
+            "id": "https://openalex.org/keywords/world-wide-web",
+            "display_name": "World Wide Web",
+            "score": 0.1893
+          },
+          {
+            "id": "https://openalex.org/keywords/social-psychology",
+            "display_name": "Social psychology",
+            "score": 0.0995
+          },
+          {
+            "id": "https://openalex.org/keywords/biology",
+            "display_name": "Biology",
+            "score": 0.0964
+          },
+          {
+            "id": "https://openalex.org/keywords/computer-security",
+            "display_name": "Computer security",
+            "score": 0.0922
+          },
+          {
+            "id": "https://openalex.org/keywords/law",
+            "display_name": "Law",
+            "score": 0.0903
+          }
+        ],
+        "concepts": [
+          {
+            "id": "https://openalex.org/C2778491294",
+            "wikidata": "https://www.wikidata.org/wiki/Q1339824",
+            "display_name": "Mindset",
+            "level": 2,
+            "score": 0.8995
+          },
+          {
+            "id": "https://openalex.org/C2778149293",
+            "wikidata": "https://www.wikidata.org/wiki/Q309823",
+            "display_name": "Open science",
+            "level": 2,
+            "score": 0.7313
+          },
+          {
+            "id": "https://openalex.org/C2780233690",
+            "wikidata": "https://www.wikidata.org/wiki/Q535347",
+            "display_name": "Transparency (behavior)",
+            "level": 2,
+            "score": 0.7179
+          },
+          {
+            "id": "https://openalex.org/C84976871",
+            "wikidata": "https://www.wikidata.org/wiki/Q2015673",
+            "display_name": "Openness to experience",
+            "level": 2,
+            "score": 0.6785
+          },
+          {
+            "id": "https://openalex.org/C98045186",
+            "wikidata": "https://www.wikidata.org/wiki/Q205663",
+            "display_name": "Process (computing)",
+            "level": 2,
+            "score": 0.4599
+          },
+          {
+            "id": "https://openalex.org/C2777950569",
+            "wikidata": "https://www.wikidata.org/wiki/Q17021836",
+            "display_name": "Stewardship (theology)",
+            "level": 3,
+            "score": 0.4533
+          },
+          {
+            "id": "https://openalex.org/C2779965156",
+            "wikidata": "https://www.wikidata.org/wiki/Q5227350",
+            "display_name": "Data sharing",
+            "level": 3,
+            "score": 0.4445
+          },
+          {
+            "id": "https://openalex.org/C2780535194",
+            "wikidata": "https://www.wikidata.org/wiki/Q309901",
+            "display_name": "Open data",
+            "level": 2,
+            "score": 0.4317
+          },
+          {
+            "id": "https://openalex.org/C184356942",
+            "wikidata": "https://www.wikidata.org/wiki/Q830382",
+            "display_name": "Best practice",
+            "level": 2,
+            "score": 0.4149
+          },
+          {
+            "id": "https://openalex.org/C18903297",
+            "wikidata": "https://www.wikidata.org/wiki/Q7150",
+            "display_name": "Ecology",
+            "level": 1,
+            "score": 0.4135
+          },
+          {
+            "id": "https://openalex.org/C41008148",
+            "wikidata": "https://www.wikidata.org/wiki/Q21198",
+            "display_name": "Computer science",
+            "level": 0,
+            "score": 0.3934
+          },
+          {
+            "id": "https://openalex.org/C144024400",
+            "wikidata": "https://www.wikidata.org/wiki/Q21201",
+            "display_name": "Sociology",
+            "level": 0,
+            "score": 0.3923
+          },
+          {
+            "id": "https://openalex.org/C56739046",
+            "wikidata": "https://www.wikidata.org/wiki/Q192060",
+            "display_name": "Knowledge management",
+            "level": 1,
+            "score": 0.3712
+          },
+          {
+            "id": "https://openalex.org/C55587333",
+            "wikidata": "https://www.wikidata.org/wiki/Q1133029",
+            "display_name": "Engineering ethics",
+            "level": 1,
+            "score": 0.3325
+          },
+          {
+            "id": "https://openalex.org/C17744445",
+            "wikidata": "https://www.wikidata.org/wiki/Q36442",
+            "display_name": "Political science",
+            "level": 0,
+            "score": 0.2995
+          },
+          {
+            "id": "https://openalex.org/C15744967",
+            "wikidata": "https://www.wikidata.org/wiki/Q9418",
+            "display_name": "Psychology",
+            "level": 0,
+            "score": 0.2128
+          },
+          {
+            "id": "https://openalex.org/C127413603",
+            "wikidata": "https://www.wikidata.org/wiki/Q11023",
+            "display_name": "Engineering",
+            "level": 0,
+            "score": 0.1971
+          },
+          {
+            "id": "https://openalex.org/C136764020",
+            "wikidata": "https://www.wikidata.org/wiki/Q466",
+            "display_name": "World Wide Web",
+            "level": 1,
+            "score": 0.1893
+          },
+          {
+            "id": "https://openalex.org/C77805123",
+            "wikidata": "https://www.wikidata.org/wiki/Q161272",
+            "display_name": "Social psychology",
+            "level": 1,
+            "score": 0.0995
+          },
+          {
+            "id": "https://openalex.org/C86803240",
+            "wikidata": "https://www.wikidata.org/wiki/Q420",
+            "display_name": "Biology",
+            "level": 0,
+            "score": 0.0964
+          },
+          {
+            "id": "https://openalex.org/C38652104",
+            "wikidata": "https://www.wikidata.org/wiki/Q3510521",
+            "display_name": "Computer security",
+            "level": 1,
+            "score": 0.0922
+          },
+          {
+            "id": "https://openalex.org/C199539241",
+            "wikidata": "https://www.wikidata.org/wiki/Q7748",
+            "display_name": "Law",
+            "level": 1,
+            "score": 0.0903
+          },
+          {
+            "id": "https://openalex.org/C121332964",
+            "wikidata": "https://www.wikidata.org/wiki/Q413",
+            "display_name": "Physics",
+            "level": 0,
+            "score": 0
+          },
+          {
+            "id": "https://openalex.org/C1276947",
+            "wikidata": "https://www.wikidata.org/wiki/Q333",
+            "display_name": "Astronomy",
+            "level": 1,
+            "score": 0
+          },
+          {
+            "id": "https://openalex.org/C154945302",
+            "wikidata": "https://www.wikidata.org/wiki/Q11660",
+            "display_name": "Artificial intelligence",
+            "level": 1,
+            "score": 0
+          },
+          {
+            "id": "https://openalex.org/C94625758",
+            "wikidata": "https://www.wikidata.org/wiki/Q7163",
+            "display_name": "Politics",
+            "level": 2,
+            "score": 0
+          },
+          {
+            "id": "https://openalex.org/C111919701",
+            "wikidata": "https://www.wikidata.org/wiki/Q9135",
+            "display_name": "Operating system",
+            "level": 1,
+            "score": 0
+          },
+          {
+            "id": "https://openalex.org/C71924100",
+            "wikidata": "https://www.wikidata.org/wiki/Q11190",
+            "display_name": "Medicine",
+            "level": 0,
+            "score": 0
+          },
+          {
+            "id": "https://openalex.org/C204787440",
+            "wikidata": "https://www.wikidata.org/wiki/Q188504",
+            "display_name": "Alternative medicine",
+            "level": 2,
+            "score": 0
+          },
+          {
+            "id": "https://openalex.org/C142724271",
+            "wikidata": "https://www.wikidata.org/wiki/Q7208",
+            "display_name": "Pathology",
+            "level": 1,
+            "score": 0
+          }
+        ],
+        "mesh": [],
+        "locations_count": 2,
+        "locations": [
+          {
+            "id": "doi:10.1890/es14-00402.1",
+            "is_oa": true,
+            "landing_page_url": "https://doi.org/10.1890/es14-00402.1",
+            "pdf_url": null,
+            "source": {
+              "id": "https://openalex.org/S98723585",
+              "display_name": "Ecosphere",
+              "issn_l": "2150-8925",
+              "issn": [
+                "2150-8925"
+              ],
+              "is_oa": true,
+              "is_in_doaj": true,
+              "is_core": true,
+              "host_organization": "https://openalex.org/P4310320595",
+              "host_organization_name": "Wiley",
+              "host_organization_lineage": [
+                "https://openalex.org/P4310320595"
+              ],
+              "host_organization_lineage_names": [
+                "Wiley"
+              ],
+              "type": "journal"
+            },
+            "license": "cc-by",
+            "license_id": "https://openalex.org/licenses/cc-by",
+            "version": "publishedVersion",
+            "is_accepted": true,
+            "is_published": true,
+            "raw_source_name": "Ecosphere",
+            "raw_type": "journal-article"
+          },
+          {
+            "id": "pmh:oai:repository.usfca.edu:biol_fac-1032",
+            "is_oa": true,
+            "landing_page_url": "https://repository.usfca.edu/biol_fac/36",
+            "pdf_url": "https://repository.usfca.edu/biol_fac/36",
+            "source": {
+              "id": "https://openalex.org/S4377196440",
+              "display_name": "USF Scholarship Repository (University of San Francisco)",
+              "issn_l": null,
+              "issn": null,
+              "is_oa": false,
+              "is_in_doaj": false,
+              "is_core": false,
+              "host_organization": "https://openalex.org/I76766440",
+              "host_organization_name": "University of San Francisco",
+              "host_organization_lineage": [
+                "https://openalex.org/I76766440"
+              ],
+              "host_organization_lineage_names": [],
+              "type": "repository"
+            },
+            "license": null,
+            "license_id": null,
+            "version": "submittedVersion",
+            "is_accepted": false,
+            "is_published": false,
+            "raw_source_name": "Biology Faculty Publications",
+            "raw_type": "text"
+          }
+        ],
+        "best_oa_location": {
+          "id": "doi:10.1890/es14-00402.1",
+          "is_oa": true,
+          "landing_page_url": "https://doi.org/10.1890/es14-00402.1",
+          "pdf_url": null,
+          "source": {
+            "id": "https://openalex.org/S98723585",
+            "display_name": "Ecosphere",
+            "issn_l": "2150-8925",
+            "issn": [
+              "2150-8925"
+            ],
+            "is_oa": true,
+            "is_in_doaj": true,
+            "is_core": true,
+            "host_organization": "https://openalex.org/P4310320595",
+            "host_organization_name": "Wiley",
+            "host_organization_lineage": [
+              "https://openalex.org/P4310320595"
+            ],
+            "host_organization_lineage_names": [
+              "Wiley"
+            ],
+            "type": "journal"
+          },
+          "license": "cc-by",
+          "license_id": "https://openalex.org/licenses/cc-by",
+          "version": "publishedVersion",
+          "is_accepted": true,
+          "is_published": true,
+          "raw_source_name": "Ecosphere",
+          "raw_type": "journal-article"
+        },
+        "sustainable_development_goals": [
+          {
+            "display_name": "Responsible consumption and production",
+            "score": 0.43,
+            "id": "https://metadata.un.org/sdg/12"
+          }
+        ],
+        "awards": [],
+        "funders": [
+          {
+            "id": "https://openalex.org/F4320306076",
+            "display_name": "National Science Foundation",
+            "ror": "https://ror.org/021nxhr62"
+          }
+        ],
+        "has_content": {
+          "grobid_xml": false,
+          "pdf": false
+        },
+        "content_urls": null,
+        "referenced_works_count": 60,
+        "referenced_works": [
+          "https://openalex.org/W272732183",
+          "https://openalex.org/W406046854",
+          "https://openalex.org/W1559063789",
+          "https://openalex.org/W1566952006",
+          "https://openalex.org/W1622128722",
+          "https://openalex.org/W1821688283",
+          "https://openalex.org/W1965631677",
+          "https://openalex.org/W1984964713",
+          "https://openalex.org/W1995054497",
+          "https://openalex.org/W1997809363",
+          "https://openalex.org/W1999424502",
+          "https://openalex.org/W2003037312",
+          "https://openalex.org/W2007794259",
+          "https://openalex.org/W2019866696",
+          "https://openalex.org/W2023703534",
+          "https://openalex.org/W2044701702",
+          "https://openalex.org/W2054305681",
+          "https://openalex.org/W2058578276",
+          "https://openalex.org/W2076381052",
+          "https://openalex.org/W2077072541",
+          "https://openalex.org/W2081678239",
+          "https://openalex.org/W2081851871",
+          "https://openalex.org/W2084876821",
+          "https://openalex.org/W2089391420",
+          "https://openalex.org/W2094749143",
+          "https://openalex.org/W2098498251",
+          "https://openalex.org/W2099065843",
+          "https://openalex.org/W2100117397",
+          "https://openalex.org/W2104772551",
+          "https://openalex.org/W2126879800",
+          "https://openalex.org/W2128910357",
+          "https://openalex.org/W2128980381",
+          "https://openalex.org/W2130126144",
+          "https://openalex.org/W2130273181",
+          "https://openalex.org/W2131966673",
+          "https://openalex.org/W2133016961",
+          "https://openalex.org/W2140503409",
+          "https://openalex.org/W2143964357",
+          "https://openalex.org/W2145113311",
+          "https://openalex.org/W2151577432",
+          "https://openalex.org/W2159604615",
+          "https://openalex.org/W2163082210",
+          "https://openalex.org/W2164306581",
+          "https://openalex.org/W2169969573",
+          "https://openalex.org/W2277395478",
+          "https://openalex.org/W2329738111",
+          "https://openalex.org/W2331632799",
+          "https://openalex.org/W2401056726",
+          "https://openalex.org/W2581331746",
+          "https://openalex.org/W2587262656",
+          "https://openalex.org/W2762566243",
+          "https://openalex.org/W2776474505",
+          "https://openalex.org/W2962920512",
+          "https://openalex.org/W3125363972",
+          "https://openalex.org/W3192160949",
+          "https://openalex.org/W4234378029",
+          "https://openalex.org/W4252803189",
+          "https://openalex.org/W4285719527",
+          "https://openalex.org/W4298863727",
+          "https://openalex.org/W6747428410"
+        ],
+        "related_works": [
+          "https://openalex.org/W2400751427",
+          "https://openalex.org/W2482697570",
+          "https://openalex.org/W2738396072",
+          "https://openalex.org/W2345835657",
+          "https://openalex.org/W4285196440",
+          "https://openalex.org/W4229077818",
+          "https://openalex.org/W3017109063",
+          "https://openalex.org/W2188588845",
+          "https://openalex.org/W3006255515",
+          "https://openalex.org/W2727121255"
+        ],
+        "abstract_inverted_index": {
+          "The": [
+            0,
+            24
+          ],
+          "field": [
+            1,
+            135
+          ],
+          "of": [
+            2,
+            9,
+            19,
+            26,
+            31,
+            53,
+            61,
+            136,
+            152,
+            167,
+            192
+          ],
+          "ecology": [
+            3,
+            137
+          ],
+          "is": [
+            4
+          ],
+          "poised": [
+            5
+          ],
+          "to": [
+            6,
+            41,
+            57,
+            63,
+            89,
+            132,
+            144,
+            173,
+            195
+          ],
+          "take": [
+            7
+          ],
+          "advantage": [
+            8
+          ],
+          "emerging": [
+            10
+          ],
+          "technologies": [
+            11
+          ],
+          "that": [
+            12,
+            66,
+            85,
+            157
+          ],
+          "facilitate": [
+            13
+          ],
+          "the": [
+            14,
+            32,
+            50,
+            87,
+            109,
+            134,
+            168,
+            187
+          ],
+          "gathering,": [
+            15
+          ],
+          "analyzing,": [
+            16
+          ],
+          "and": [
+            17,
+            22,
+            38,
+            44,
+            112,
+            115,
+            122,
+            141,
+            146,
+            154,
+            178,
+            190
+          ],
+          "sharing": [
+            18
+          ],
+          "data,": [
+            20,
+            42
+          ],
+          "methods,": [
+            21
+          ],
+          "results.": [
+            23
+          ],
+          "concept": [
+            25
+          ],
+          "transparency": [
+            27,
+            107
+          ],
+          "at": [
+            28,
+            125,
+            164
+          ],
+          "all": [
+            29
+          ],
+          "stages": [
+            30
+          ],
+          "research": [
+            33,
+            169,
+            188,
+            197
+          ],
+          "process,": [
+            34,
+            170,
+            189
+          ],
+          "coupled": [
+            35
+          ],
+          "with": [
+            36
+          ],
+          "free": [
+            37
+          ],
+          "open": [
+            39,
+            55,
+            91
+          ],
+          "access": [
+            40,
+            143,
+            194
+          ],
+          "code,": [
+            43
+          ],
+          "papers,": [
+            45
+          ],
+          "constitutes": [
+            46
+          ],
+          "“open": [
+            47
+          ],
+          "science.”": [
+            48
+          ],
+          "Despite": [
+            49
+          ],
+          "many": [
+            51
+          ],
+          "benefits": [
+            52
+          ],
+          "an": [
+            54,
+            150
+          ],
+          "approach": [
+            56
+          ],
+          "science,": [
+            58
+          ],
+          "a": [
+            59
+          ],
+          "number": [
+            60
+          ],
+          "barriers": [
+            62
+          ],
+          "entry": [
+            64
+          ],
+          "exist": [
+            65
+          ],
+          "may": [
+            67
+          ],
+          "prevent": [
+            68
+          ],
+          "researchers": [
+            69
+          ],
+          "from": [
+            70
+          ],
+          "embracing": [
+            71,
+            106
+          ],
+          "openness": [
+            72
+          ],
+          "in": [
+            73,
+            83,
+            95,
+            118,
+            129,
+            162
+          ],
+          "their": [
+            74
+          ],
+          "own": [
+            75
+          ],
+          "work.": [
+            76
+          ],
+          "Here": [
+            77
+          ],
+          "we": [
+            78
+          ],
+          "describe": [
+            79
+          ],
+          "several": [
+            80
+          ],
+          "key": [
+            81
+          ],
+          "shifts": [
+            82,
+            94,
+            161
+          ],
+          "mindset": [
+            84,
+            96,
+            163
+          ],
+          "underpin": [
+            86
+          ],
+          "transition": [
+            88
+          ],
+          "more": [
+            90
+          ],
+          "science.": [
+            92
+          ],
+          "These": [
+            93
+          ],
+          "include": [
+            97
+          ],
+          "thinking": [
+            98,
+            130
+          ],
+          "about": [
+            99
+          ],
+          "data": [
+            100,
+            104,
+            110,
+            145,
+            175
+          ],
+          "stewardship": [
+            101
+          ],
+          "rather": [
+            102
+          ],
+          "than": [
+            103
+          ],
+          "ownership,": [
+            105
+          ],
+          "throughout": [
+            108,
+            186
+          ],
+          "life‐cycle": [
+            111
+          ],
+          "project": [
+            113
+          ],
+          "duration,": [
+            114
+          ],
+          "accepting": [
+            116
+          ],
+          "critique": [
+            117
+          ],
+          "public.": [
+            119
+          ],
+          "Though": [
+            120
+          ],
+          "foreign": [
+            121
+          ],
+          "perhaps": [
+            123
+          ],
+          "frightening": [
+            124
+          ],
+          "first,": [
+            126
+          ],
+          "these": [
+            127,
+            160
+          ],
+          "changes": [
+            128
+          ],
+          "stand": [
+            131
+          ],
+          "benefit": [
+            133
+          ],
+          "by": [
+            138
+          ],
+          "fostering": [
+            139
+          ],
+          "collegiality": [
+            140
+          ],
+          "broadening": [
+            142,
+            193
+          ],
+          "findings.": [
+            147
+          ],
+          "We": [
+            148
+          ],
+          "present": [
+            149
+          ],
+          "overview": [
+            151
+          ],
+          "tools": [
+            153,
+            172
+          ],
+          "best": [
+            155
+          ],
+          "practices": [
+            156
+          ],
+          "can": [
+            158
+          ],
+          "enable": [
+            159
+          ],
+          "each": [
+            165
+          ],
+          "stage": [
+            166
+          ],
+          "including": [
+            171
+          ],
+          "support": [
+            174
+          ],
+          "management": [
+            176
+          ],
+          "planning": [
+            177
+          ],
+          "reproducible": [
+            179
+          ],
+          "analyses,": [
+            180
+          ],
+          "strategies": [
+            181
+          ],
+          "for": [
+            182
+          ],
+          "soliciting": [
+            183
+          ],
+          "constructive": [
+            184
+          ],
+          "feedback": [
+            185
+          ],
+          "methods": [
+            191
+          ],
+          "final": [
+            196
+          ],
+          "products.": [
+            198
+          ]
+        },
+        "counts_by_year": [
+          {
+            "year": 2026,
+            "cited_by_count": 5
+          },
+          {
+            "year": 2025,
+            "cited_by_count": 14
+          },
+          {
+            "year": 2024,
+            "cited_by_count": 14
+          },
+          {
+            "year": 2023,
+            "cited_by_count": 12
+          },
+          {
+            "year": 2022,
+            "cited_by_count": 23
+          },
+          {
+            "year": 2021,
+            "cited_by_count": 33
+          },
+          {
+            "year": 2020,
+            "cited_by_count": 19
+          },
+          {
+            "year": 2019,
+            "cited_by_count": 14
+          },
+          {
+            "year": 2018,
+            "cited_by_count": 24
+          },
+          {
+            "year": 2017,
+            "cited_by_count": 17
+          },
+          {
+            "year": 2016,
+            "cited_by_count": 10
+          },
+          {
+            "year": 2015,
+            "cited_by_count": 9
+          },
+          {
+            "year": 2014,
+            "cited_by_count": 1
+          }
+        ],
+        "updated_date": "2026-06-19T15:47:20.252518",
+        "created_date": "2025-10-10T00:00:00"
+      }
+    ],
+    "group_by": []
+  }
+}
