@@ -1,0 +1,51 @@
+# MetaCan -- nginx vhost. Proxies to the Next.js server pm2 runs on :3111.
+#
+# Install (needs root):
+#   sudo cp /var/www/metacan/deploy/nginx/metacan.xera.ac /etc/nginx/sites-available/metacan.xera.ac
+#   sudo ln -sf /etc/nginx/sites-available/metacan.xera.ac /etc/nginx/sites-enabled/metacan.xera.ac
+#   sudo nginx -t && sudo systemctl reload nginx
+#   sudo certbot --nginx -d metacan.xera.ac --agree-tos -m ahmad.pub@gmail.com --redirect
+#
+# This file is HTTP-only on purpose. certbot --nginx rewrites it in place, adding
+# the listen 443 block, the certificate paths and the 80 -> 443 redirect, exactly
+# as it did for the sibling sites on this box. Writing the TLS block by hand here
+# would collide with the one certbot generates.
+
+server {
+    listen 80;
+    listen [::]:80;
+    server_name metacan.xera.ac;
+
+    location / {
+        proxy_pass http://127.0.0.1:3111;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_cache_bypass $http_upgrade;
+
+        # /works and /analytics run GROUP BYs over 4.3M rows on a cold cache. The
+        # default 60s read timeout is enough in practice, but a cold /analytics
+        # after a deploy is the one request that can beat it.
+        proxy_read_timeout 120s;
+        proxy_connect_timeout 120s;
+        proxy_send_timeout 120s;
+    }
+
+    # Next.js content-hashes these, so they are safe to cache hard and forever.
+    location /_next/static {
+        proxy_pass http://127.0.0.1:3111;
+        proxy_cache_valid 60m;
+        add_header Cache-Control "public, immutable, max-age=31536000";
+    }
+
+    location /_next/image {
+        proxy_pass http://127.0.0.1:3111;
+        proxy_cache_valid 60m;
+    }
+
+    client_max_body_size 10M;
+}
