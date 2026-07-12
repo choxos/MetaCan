@@ -49,6 +49,8 @@ export async function GET(req: NextRequest) {
         one_model_only: summary.n_in_1,
         pct_single_model: summary.pct_single_model,
         note: `Of the ${summary.any_in} works ANY model called metaresearch, only ${summary.n_in_3} (${summary.pct_all_three}%) were called metaresearch by all three. The sample is stratified: any rate computed from it must use the design weight.`,
+        tiers: 'T1 (core metaresearch) and T2 (metaresearch) count as IN SCOPE. T3 is ADJACENT and does NOT: n_in counts T1 and T2 only. Treating "tier != OUT" as in-scope will give you a per-model count larger than the union of all three, which is impossible.',
+        per_model_in_scope: summary.per_model,
       },
     },
     results: rows.map((r) => ({
