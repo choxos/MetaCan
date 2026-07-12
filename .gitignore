@@ -36,3 +36,17 @@ documentation/*.htm
 # `make pilot-offline` -- and the proposal's central reproducibility claim
 # would be false. 3.1 MB is a fine price for that claim being true.
 .gstack/
+.env
+.env.*
+*.key
+secrets/
+deploy/.dbpass
+data/db/
+
+# The MetaCan site (site/). Build products and dependencies only -- the source is
+# committed. `data/db/` above already keeps the 2.1 GB works.csv out; it ships to
+# the host by scp, because a 2 GB CSV in git history is forever.
+site/node_modules/
+site/.next/
+site/out/
+site/*.tsbuildinfo

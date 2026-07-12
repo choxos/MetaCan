@@ -1,0 +1,94 @@
+-- MetaCan: the Canadian research frame, its screening, and its provenance.
+--
+-- Every row here traces to data/frame/canadian_works.parquet, which is a
+-- projection of a pinned OpenAlex snapshot (all 482 partitions). Nothing in this
+-- database is inferred, and every work carries the ROUTES that admitted it, so a
+-- reader can always ask "why is this here?" and get an answer.
+
+DROP TABLE IF EXISTS screened CASCADE;
+DROP TABLE IF EXISTS retractions CASCADE;
+DROP TABLE IF EXISTS works CASCADE;
+
+-- ---------------------------------------------------------------------------
+-- works: the frame. All 4,299,418 of them.
+--
+-- No abstract column, and that is a measured decision rather than a shortcut:
+-- the abstract inverted indexes are 8.6 GB of the frame's 9.3 GB of text, and the
+-- host has 13 GB free. The detail page fetches an abstract live from OpenAlex.
+-- `has_abstract` is stored, because WHETHER a work has one is itself a finding
+-- (23.3% do not, and the screen finds half as much metaresearch there).
+-- ---------------------------------------------------------------------------
+CREATE TABLE works (
+  id              VARCHAR(20) PRIMARY KEY,     -- OpenAlex W-id, prefix stripped
+  -- TEXT, not VARCHAR(255). OpenAlex carries malformed DOIs: the longest in the
+  -- frame is 294 characters, a PDF URL with query parameters glued onto a DOI
+  -- prefix. Truncating it to fit would silently corrupt the record, and a project
+  -- whose thesis is that the data must be recorded as it actually is does not get
+  -- to quietly trim the inconvenient rows. Postgres TEXT costs nothing to widen.
+  doi             TEXT,
+  title           TEXT NOT NULL,
+  year            SMALLINT,
+  lang            VARCHAR(8),
+  type            VARCHAR(32),
+  venue           TEXT,
+  topic           TEXT,
+  field           TEXT,
+  cited_by        INTEGER DEFAULT 0,
+  is_retracted    BOOLEAN DEFAULT FALSE,
+  has_abstract    BOOLEAN DEFAULT FALSE,
+  -- PROVENANCE. Why is this work in the frame? A frame that forgets how it found
+  -- something cannot be audited, and that is the whole thesis.
+  route_ca_aff    BOOLEAN DEFAULT FALSE,
+  route_ca_fund   BOOLEAN DEFAULT FALSE,
+  route_ca_venue  BOOLEAN DEFAULT FALSE,
+  route_about_ca  BOOLEAN DEFAULT FALSE,
+  ca_institutions TEXT,
+  funders         TEXT,
+  keywords        TEXT
+);
+
+-- ---------------------------------------------------------------------------
+-- retractions: Retraction Watch's post-publication state (finding 17).
+--
+-- Separate from works.is_retracted ON PURPOSE. OpenAlex's flag is a BOOLEAN over
+-- a state space with at least four values, so it can express "retracted" and
+-- silently reports expression-of-concern, correction and reinstatement as FALSE,
+-- which reads as "fine". This table carries the state OpenAlex cannot.
+-- ---------------------------------------------------------------------------
+CREATE TABLE retractions (
+  work_id          VARCHAR(20) PRIMARY KEY REFERENCES works(id) ON DELETE CASCADE,
+  nature           VARCHAR(64),   -- Retraction | Expression of concern | Correction | Reinstatement
+  reason           TEXT,
+  retraction_date  VARCHAR(32),
+  openalex_flagged BOOLEAN        -- FALSE here = OpenAlex missed it
+);
+
+-- ---------------------------------------------------------------------------
+-- screened: the three-model screen over 1,000 works drawn from the real frame.
+--
+-- Three frontier models, one locked rubric, the rubric's FULL eight-field
+-- payload. `n_in` is how many of the three called the work in scope, and it is
+-- the most honest column in this database: of the works ANY model called
+-- metaresearch, only 37% were called metaresearch by all three.
+--
+-- `weight` is the design weight (inverse selection probability). The sample is
+-- stratified, so any rate computed from it must use the weight or it is wrong.
+-- ---------------------------------------------------------------------------
+CREATE TABLE screened (
+  id              VARCHAR(20) PRIMARY KEY REFERENCES works(id) ON DELETE CASCADE,
+  stratum         VARCHAR(32),
+  stratum_n       INTEGER,
+  weight          DOUBLE PRECISION,
+  title           TEXT,
+  abstract        TEXT,           -- stored HERE, where it is evidence
+  year            SMALLINT,
+  lang            VARCHAR(8),
+  type            VARCHAR(32),
+  venue           TEXT,
+  topic           TEXT,
+  field           TEXT,
+  opus_tier       VARCHAR(8),  opus_genre VARCHAR(48),  opus_about_ca BOOLEAN,  opus_confidence VARCHAR(8),  opus_reason TEXT,
+  gpt_tier        VARCHAR(8),  gpt_genre  VARCHAR(48),  gpt_about_ca  BOOLEAN,  gpt_confidence  VARCHAR(8),  gpt_reason  TEXT,
+  grok_tier       VARCHAR(8),  grok_genre VARCHAR(48),  grok_about_ca BOOLEAN,  grok_confidence VARCHAR(8),  grok_reason TEXT,
+  n_in            SMALLINT     -- 0..3: how many models called it in scope
+);
