@@ -61,16 +61,26 @@ function ChartTip({
   )
 }
 
+/**
+ * The card around a chart. It does NOT wrap the chart in a ResponsiveContainer.
+ *
+ * That distinction is load-bearing and cost an hour. ResponsiveContainer measures
+ * itself and then injects `width` and `height` into its DIRECT child by cloning it.
+ * If the direct child is a wrapper component (<ByYearChart/>) rather than the chart
+ * itself (<AreaChart/>), the wrapper receives those props and drops them, the chart
+ * underneath is left with no dimensions, and Recharts renders NOTHING -- silently,
+ * with no console error, leaving a correctly-sized empty box that looks like a
+ * styling bug. Every chart below therefore owns its own ResponsiveContainer, whose
+ * direct child is a real Recharts chart.
+ */
 export function Frame({
   title,
   note,
   children,
-  height = 300,
 }: {
   title: string
   note?: string
-  children: React.ReactElement
-  height?: number
+  children: React.ReactNode
 }) {
   return (
     <section className="card p-5">
@@ -80,115 +90,132 @@ export function Frame({
           {note}
         </p>
       )}
-      <div className="mt-4" style={{ width: '100%', height }}>
-        <ResponsiveContainer width="100%" height="100%">
-          {children}
-        </ResponsiveContainer>
-      </div>
+      <div className="mt-4">{children}</div>
     </section>
   )
 }
 
-export function ByYearChart({ data }: { data: YearPoint[] }) {
+/** The one place ResponsiveContainer is allowed, so its child is always a chart. */
+function Responsive({ height, children }: { height: number; children: React.ReactElement }) {
   return (
-    <AreaChart data={data} margin={{ top: 4, right: 8, left: 0, bottom: 0 }}>
-      <defs>
-        <linearGradient id="gWorks" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="var(--mc)" stopOpacity={0.5} />
-          <stop offset="100%" stopColor="var(--mc)" stopOpacity={0.04} />
-        </linearGradient>
-        <linearGradient id="gNoAff" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="var(--mc-accent)" stopOpacity={0.5} />
-          <stop offset="100%" stopColor="var(--mc-accent)" stopOpacity={0.04} />
-        </linearGradient>
-      </defs>
-      <CartesianGrid strokeDasharray="3 3" stroke="var(--chart-grid)" vertical={false} />
-      <XAxis dataKey="year" tick={AXIS} stroke="var(--border-strong)" minTickGap={24} />
-      <YAxis tick={AXIS} stroke="var(--border-strong)" tickFormatter={compact} width={48} />
-      <Tooltip content={<ChartTip />} />
-      <Legend wrapperStyle={{ fontSize: 12 }} />
-      <Area
-        type="monotone"
-        dataKey="works"
-        name="All works"
-        stroke="var(--mc)"
-        fill="url(#gWorks)"
-        strokeWidth={2}
-      />
-      <Area
-        type="monotone"
-        dataKey="no_aff"
-        name="No Canadian affiliation"
-        stroke="var(--mc-accent)"
-        fill="url(#gNoAff)"
-        strokeWidth={2}
-      />
-    </AreaChart>
+    <div style={{ width: '100%', height }}>
+      <ResponsiveContainer width="100%" height="100%">
+        {children}
+      </ResponsiveContainer>
+    </div>
   )
 }
 
-export function ByRouteChart({ data }: { data: RouteStats }) {
+export function ByYearChart({ data, height = 340 }: { data: YearPoint[]; height?: number }) {
   return (
-    <BarChart data={data.marginals} layout="vertical" margin={{ top: 4, right: 48, left: 8, bottom: 0 }}>
-      <CartesianGrid strokeDasharray="3 3" stroke="var(--chart-grid)" horizontal={false} />
-      <XAxis type="number" tick={AXIS} stroke="var(--border-strong)" tickFormatter={compact} />
-      <YAxis type="category" dataKey="label" tick={AXIS} stroke="var(--border-strong)" width={140} />
-      <Tooltip content={<ChartTip />} cursor={{ fill: 'var(--surface-2)' }} />
-      <Bar dataKey="works" name="Works" fill="var(--mc)" radius={[0, 4, 4, 0]} />
-    </BarChart>
+    <Responsive height={height}>
+      <AreaChart data={data} margin={{ top: 4, right: 8, left: 0, bottom: 0 }}>
+        <defs>
+          <linearGradient id="gWorks" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="var(--mc)" stopOpacity={0.5} />
+            <stop offset="100%" stopColor="var(--mc)" stopOpacity={0.04} />
+          </linearGradient>
+          <linearGradient id="gNoAff" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="var(--mc-accent)" stopOpacity={0.5} />
+            <stop offset="100%" stopColor="var(--mc-accent)" stopOpacity={0.04} />
+          </linearGradient>
+        </defs>
+        <CartesianGrid strokeDasharray="3 3" stroke="var(--chart-grid)" vertical={false} />
+        <XAxis dataKey="year" tick={AXIS} stroke="var(--border-strong)" minTickGap={24} />
+        <YAxis tick={AXIS} stroke="var(--border-strong)" tickFormatter={compact} width={48} />
+        <Tooltip content={<ChartTip />} />
+        <Legend wrapperStyle={{ fontSize: 12 }} />
+        <Area
+          type="monotone"
+          dataKey="works"
+          name="All works"
+          stroke="var(--mc)"
+          fill="url(#gWorks)"
+          strokeWidth={2}
+        />
+        <Area
+          type="monotone"
+          dataKey="no_aff"
+          name="No Canadian affiliation"
+          stroke="var(--mc-accent)"
+          fill="url(#gNoAff)"
+          strokeWidth={2}
+        />
+      </AreaChart>
+    </Responsive>
+  )
+}
+
+export function ByRouteChart({ data, height = 260 }: { data: RouteStats; height?: number }) {
+  return (
+    <Responsive height={height}>
+      <BarChart data={data.marginals} layout="vertical" margin={{ top: 4, right: 48, left: 8, bottom: 0 }}>
+        <CartesianGrid strokeDasharray="3 3" stroke="var(--chart-grid)" horizontal={false} />
+        <XAxis type="number" tick={AXIS} stroke="var(--border-strong)" tickFormatter={compact} />
+        <YAxis type="category" dataKey="label" tick={AXIS} stroke="var(--border-strong)" width={140} />
+        <Tooltip content={<ChartTip />} cursor={{ fill: 'var(--surface-2)' }} />
+        <Bar dataKey="works" name="Works" fill="var(--mc)" radius={[0, 4, 4, 0]} />
+      </BarChart>
+    </Responsive>
   )
 }
 
 /** The overlap. The routes are not exclusive, so the combinations are the honest view. */
-export function RouteOverlapChart({ data }: { data: RouteStats }) {
+export function RouteOverlapChart({ data, height = 260 }: { data: RouteStats; height?: number }) {
   const top = data.combinations.filter((c) => c.combo !== 'none').slice(0, 10)
   return (
-    <BarChart data={top} layout="vertical" margin={{ top: 4, right: 48, left: 8, bottom: 0 }}>
-      <CartesianGrid strokeDasharray="3 3" stroke="var(--chart-grid)" horizontal={false} />
-      <XAxis type="number" tick={AXIS} stroke="var(--border-strong)" tickFormatter={compact} />
-      <YAxis type="category" dataKey="combo" tick={AXIS} stroke="var(--border-strong)" width={140} />
-      <Tooltip content={<ChartTip />} cursor={{ fill: 'var(--surface-2)' }} />
-      <Bar dataKey="works" name="Works" radius={[0, 4, 4, 0]}>
-        {top.map((c, i) => (
-          <Cell
-            key={i}
-            // Single-route works are the ones a narrower frame would lose entirely.
-            fill={c.n_routes === 1 ? 'var(--mc-accent)' : 'var(--mc)'}
-          />
-        ))}
-      </Bar>
-    </BarChart>
+    <Responsive height={height}>
+      <BarChart data={top} layout="vertical" margin={{ top: 4, right: 48, left: 8, bottom: 0 }}>
+        <CartesianGrid strokeDasharray="3 3" stroke="var(--chart-grid)" horizontal={false} />
+        <XAxis type="number" tick={AXIS} stroke="var(--border-strong)" tickFormatter={compact} />
+        <YAxis type="category" dataKey="combo" tick={AXIS} stroke="var(--border-strong)" width={140} />
+        <Tooltip content={<ChartTip />} cursor={{ fill: 'var(--surface-2)' }} />
+        <Bar dataKey="works" name="Works" radius={[0, 4, 4, 0]}>
+          {top.map((c, i) => (
+            <Cell
+              key={i}
+              // Single-route works are the ones a narrower frame would lose entirely.
+              fill={c.n_routes === 1 ? 'var(--mc-accent)' : 'var(--mc)'}
+            />
+          ))}
+        </Bar>
+      </BarChart>
+    </Responsive>
   )
 }
 
-export function ByFieldChart({ data }: { data: FieldPoint[] }) {
+export function ByFieldChart({ data, height = 360 }: { data: FieldPoint[]; height?: number }) {
   const top = data.slice(0, 14)
   return (
-    <BarChart data={top} layout="vertical" margin={{ top: 4, right: 48, left: 8, bottom: 0 }}>
-      <CartesianGrid strokeDasharray="3 3" stroke="var(--chart-grid)" horizontal={false} />
-      <XAxis type="number" tick={AXIS} stroke="var(--border-strong)" tickFormatter={compact} />
-      <YAxis type="category" dataKey="field" tick={{ ...AXIS, fontSize: 10 }} stroke="var(--border-strong)" width={170} />
-      <Tooltip content={<ChartTip />} cursor={{ fill: 'var(--surface-2)' }} />
-      <Bar dataKey="works" name="Works" fill="var(--mc)" radius={[0, 4, 4, 0]} />
-    </BarChart>
+    <Responsive height={height}>
+      <BarChart data={top} layout="vertical" margin={{ top: 4, right: 48, left: 8, bottom: 0 }}>
+        <CartesianGrid strokeDasharray="3 3" stroke="var(--chart-grid)" horizontal={false} />
+        <XAxis type="number" tick={AXIS} stroke="var(--border-strong)" tickFormatter={compact} />
+        <YAxis type="category" dataKey="field" tick={{ ...AXIS, fontSize: 10 }} stroke="var(--border-strong)" width={170} />
+        <Tooltip content={<ChartTip />} cursor={{ fill: 'var(--surface-2)' }} />
+        <Bar dataKey="works" name="Works" fill="var(--mc)" radius={[0, 4, 4, 0]} />
+      </BarChart>
+    </Responsive>
   )
 }
 
-export function ByLangChart({ data }: { data: LangPoint[] }) {
+export function ByLangChart({ data, height = 360 }: { data: LangPoint[]; height?: number }) {
   const top = data.slice(0, 10)
   return (
-    <BarChart data={top} margin={{ top: 4, right: 8, left: 0, bottom: 0 }}>
-      <CartesianGrid strokeDasharray="3 3" stroke="var(--chart-grid)" vertical={false} />
-      <XAxis dataKey="lang" tick={AXIS} stroke="var(--border-strong)" />
-      <YAxis tick={AXIS} stroke="var(--border-strong)" tickFormatter={compact} width={48} />
-      <Tooltip content={<ChartTip />} cursor={{ fill: 'var(--surface-2)' }} />
-      <Bar dataKey="works" name="Works" radius={[4, 4, 0, 0]}>
-        {top.map((l, i) => (
-          // French is the language the frame oversamples and the cascade rescues worst.
-          <Cell key={i} fill={l.lang === 'fr' ? 'var(--mc-accent)' : 'var(--mc)'} />
-        ))}
-      </Bar>
-    </BarChart>
+    <Responsive height={height}>
+      <BarChart data={top} margin={{ top: 4, right: 8, left: 0, bottom: 0 }}>
+        <CartesianGrid strokeDasharray="3 3" stroke="var(--chart-grid)" vertical={false} />
+        <XAxis dataKey="lang" tick={AXIS} stroke="var(--border-strong)" />
+        <YAxis tick={AXIS} stroke="var(--border-strong)" tickFormatter={compact} width={48} />
+        <Tooltip content={<ChartTip />} cursor={{ fill: 'var(--surface-2)' }} />
+        <Bar dataKey="works" name="Works" radius={[4, 4, 0, 0]}>
+          {top.map((l, i) => (
+            // French is the language the frame oversamples and the cascade rescues worst.
+            <Cell key={i} fill={l.lang === 'fr' ? 'var(--mc-accent)' : 'var(--mc)'} />
+          ))}
+        </Bar>
+      </BarChart>
+    </Responsive>
   )
 }
 
@@ -197,48 +224,54 @@ export function ByLangChart({ data }: { data: LangPoint[] }) {
  * the finding is that the gap is structural — concentrated in types that never
  * carry an abstract — rather than uniform noise a better index would fix.
  */
-export function AbstractGapChart({ data }: { data: TypePoint[] }) {
+export function AbstractGapChart({ data, height = 400 }: { data: TypePoint[]; height?: number }) {
   const sorted = [...data].sort((a, b) => b.pct_no_abstract - a.pct_no_abstract)
   return (
-    <BarChart data={sorted} layout="vertical" margin={{ top: 4, right: 48, left: 8, bottom: 0 }}>
-      <CartesianGrid strokeDasharray="3 3" stroke="var(--chart-grid)" horizontal={false} />
-      <XAxis
-        type="number"
-        domain={[0, 100]}
-        tick={AXIS}
-        stroke="var(--border-strong)"
-        tickFormatter={(v: number) => `${v}%`}
-      />
-      <YAxis type="category" dataKey="type" tick={{ ...AXIS, fontSize: 10 }} stroke="var(--border-strong)" width={110} />
-      <Tooltip content={<ChartTip suffix="%" />} cursor={{ fill: 'var(--surface-2)' }} />
-      <Bar dataKey="pct_no_abstract" name="No abstract" fill="var(--contested)" radius={[0, 4, 4, 0]} />
-    </BarChart>
+    <Responsive height={height}>
+      <BarChart data={sorted} layout="vertical" margin={{ top: 4, right: 48, left: 8, bottom: 0 }}>
+        <CartesianGrid strokeDasharray="3 3" stroke="var(--chart-grid)" horizontal={false} />
+        <XAxis
+          type="number"
+          domain={[0, 100]}
+          tick={AXIS}
+          stroke="var(--border-strong)"
+          tickFormatter={(v: number) => `${v}%`}
+        />
+        <YAxis type="category" dataKey="type" tick={{ ...AXIS, fontSize: 10 }} stroke="var(--border-strong)" width={110} />
+        <Tooltip content={<ChartTip suffix="%" />} cursor={{ fill: 'var(--surface-2)' }} />
+        <Bar dataKey="pct_no_abstract" name="No abstract" fill="var(--contested)" radius={[0, 4, 4, 0]} />
+      </BarChart>
+    </Responsive>
   )
 }
 
-export function VenueChart({ data }: { data: Array<{ venue: string; works: number }> }) {
+export function VenueChart({ data, height = 380 }: { data: Array<{ venue: string; works: number }>; height?: number }) {
   const top = data.slice(0, 12)
   return (
-    <BarChart data={top} layout="vertical" margin={{ top: 4, right: 48, left: 8, bottom: 0 }}>
-      <CartesianGrid strokeDasharray="3 3" stroke="var(--chart-grid)" horizontal={false} />
-      <XAxis type="number" tick={AXIS} stroke="var(--border-strong)" tickFormatter={compact} />
-      <YAxis type="category" dataKey="venue" tick={{ ...AXIS, fontSize: 10 }} stroke="var(--border-strong)" width={190} />
-      <Tooltip content={<ChartTip />} cursor={{ fill: 'var(--surface-2)' }} />
-      <Bar dataKey="works" name="Works" fill="var(--mc)" radius={[0, 4, 4, 0]} />
-    </BarChart>
+    <Responsive height={height}>
+      <BarChart data={top} layout="vertical" margin={{ top: 4, right: 48, left: 8, bottom: 0 }}>
+        <CartesianGrid strokeDasharray="3 3" stroke="var(--chart-grid)" horizontal={false} />
+        <XAxis type="number" tick={AXIS} stroke="var(--border-strong)" tickFormatter={compact} />
+        <YAxis type="category" dataKey="venue" tick={{ ...AXIS, fontSize: 10 }} stroke="var(--border-strong)" width={190} />
+        <Tooltip content={<ChartTip />} cursor={{ fill: 'var(--surface-2)' }} />
+        <Bar dataKey="works" name="Works" fill="var(--mc)" radius={[0, 4, 4, 0]} />
+      </BarChart>
+    </Responsive>
   )
 }
 
-export function FunderChart({ data }: { data: Array<{ funder: string; works: number }> }) {
+export function FunderChart({ data, height = 380 }: { data: Array<{ funder: string; works: number }>; height?: number }) {
   const top = data.slice(0, 12)
   return (
-    <BarChart data={top} layout="vertical" margin={{ top: 4, right: 48, left: 8, bottom: 0 }}>
-      <CartesianGrid strokeDasharray="3 3" stroke="var(--chart-grid)" horizontal={false} />
-      <XAxis type="number" tick={AXIS} stroke="var(--border-strong)" tickFormatter={compact} />
-      <YAxis type="category" dataKey="funder" tick={{ ...AXIS, fontSize: 10 }} stroke="var(--border-strong)" width={190} />
-      <Tooltip content={<ChartTip />} cursor={{ fill: 'var(--surface-2)' }} />
-      <Bar dataKey="works" name="Works" fill="var(--mc-accent)" radius={[0, 4, 4, 0]} />
-    </BarChart>
+    <Responsive height={height}>
+      <BarChart data={top} layout="vertical" margin={{ top: 4, right: 48, left: 8, bottom: 0 }}>
+        <CartesianGrid strokeDasharray="3 3" stroke="var(--chart-grid)" horizontal={false} />
+        <XAxis type="number" tick={AXIS} stroke="var(--border-strong)" tickFormatter={compact} />
+        <YAxis type="category" dataKey="funder" tick={{ ...AXIS, fontSize: 10 }} stroke="var(--border-strong)" width={190} />
+        <Tooltip content={<ChartTip />} cursor={{ fill: 'var(--surface-2)' }} />
+        <Bar dataKey="works" name="Works" fill="var(--mc-accent)" radius={[0, 4, 4, 0]} />
+      </BarChart>
+    </Responsive>
   )
 }
 
@@ -247,7 +280,7 @@ export function FunderChart({ data }: { data: Array<{ funder: string; works: num
  * the works whose post-publication status OpenAlex's `is_retracted` reports as
  * false, which a reader takes to mean "fine".
  */
-export function RetractionChart({ data }: { data: RetractionState[] }) {
+export function RetractionChart({ data, height = 320 }: { data: RetractionState[]; height?: number }) {
   const color = (nature: string) => {
     const n = nature.toLowerCase()
     if (n.includes('concern')) return 'var(--concern)'
@@ -256,22 +289,24 @@ export function RetractionChart({ data }: { data: RetractionState[] }) {
     return 'var(--retraction)'
   }
   return (
-    <BarChart data={data} margin={{ top: 4, right: 8, left: 0, bottom: 0 }}>
-      <CartesianGrid strokeDasharray="3 3" stroke="var(--chart-grid)" vertical={false} />
-      <XAxis dataKey="nature" tick={{ ...AXIS, fontSize: 10 }} stroke="var(--border-strong)" />
-      <YAxis tick={AXIS} stroke="var(--border-strong)" width={40} allowDecimals={false} />
-      <Tooltip content={<ChartTip />} cursor={{ fill: 'var(--surface-2)' }} />
-      <Legend wrapperStyle={{ fontSize: 12 }} />
-      <Bar dataKey="openalex_flagged" name="OpenAlex flags it" stackId="a" radius={[0, 0, 0, 0]}>
-        {data.map((d, i) => (
-          <Cell key={i} fill={color(d.nature)} fillOpacity={0.85} />
-        ))}
-      </Bar>
-      <Bar dataKey="openalex_missed" name="OpenAlex reports FALSE" stackId="a" radius={[4, 4, 0, 0]}>
-        {data.map((d, i) => (
-          <Cell key={i} fill={color(d.nature)} fillOpacity={0.28} stroke={color(d.nature)} strokeDasharray="3 2" />
-        ))}
-      </Bar>
-    </BarChart>
+    <Responsive height={height}>
+      <BarChart data={data} margin={{ top: 4, right: 8, left: 0, bottom: 0 }}>
+        <CartesianGrid strokeDasharray="3 3" stroke="var(--chart-grid)" vertical={false} />
+        <XAxis dataKey="nature" tick={{ ...AXIS, fontSize: 10 }} stroke="var(--border-strong)" />
+        <YAxis tick={AXIS} stroke="var(--border-strong)" width={40} allowDecimals={false} />
+        <Tooltip content={<ChartTip />} cursor={{ fill: 'var(--surface-2)' }} />
+        <Legend wrapperStyle={{ fontSize: 12 }} />
+        <Bar dataKey="openalex_flagged" name="OpenAlex flags it" stackId="a" radius={[0, 0, 0, 0]}>
+          {data.map((d, i) => (
+            <Cell key={i} fill={color(d.nature)} fillOpacity={0.85} />
+          ))}
+        </Bar>
+        <Bar dataKey="openalex_missed" name="OpenAlex reports FALSE" stackId="a" radius={[4, 4, 0, 0]}>
+          {data.map((d, i) => (
+            <Cell key={i} fill={color(d.nature)} fillOpacity={0.28} stroke={color(d.nature)} strokeDasharray="3 2" />
+          ))}
+        </Bar>
+      </BarChart>
+    </Responsive>
   )
 }
