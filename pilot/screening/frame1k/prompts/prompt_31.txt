@@ -1,0 +1,810 @@
+# MétaCan screening rubric (v1.0)
+
+**Locked before screening. Version-controlled. Any change is a new version with a dated entry in `DEVIATIONS.md`.**
+
+Both machine screeners and both human coders work from this document and nothing else. The rubric is the
+instrument; if two coders disagree, the rubric is what they are adjudicated against.
+
+---
+
+## The unit
+
+One work (journal article, preprint, book chapter, report, dataset, or software), identified by its OpenAlex ID.
+You see: title, abstract, publication year, language, venue, OpenAlex topic and field, Canadian institutional
+affiliations, funders.
+
+## The question
+
+**Is the object of study *research itself*?**
+
+Metaresearch studies how research is done, reported, funded, evaluated, disseminated, or governed. The test is
+what the work is *about*, not what field it appears in and not what vocabulary it uses.
+
+A cardiology trial is not metaresearch. A study of *how cardiology trials report their outcomes* is.
+
+---
+
+## Tier
+
+Assign exactly one.
+
+### T1: Core metaresearch
+The primary object of study is research itself. Typical objects:
+
+- research **methods** and their properties (bias, reporting, statistical practice, study design)
+- **reproducibility**, replication, data and code sharing
+- **research integrity**: misconduct, retraction, questionable research practices, authorship
+- **peer review** and editorial process *as objects of study*
+- **research evaluation**, metrics, rankings, funding allocation
+- **scholarly communication**: publishing models, open access, preprints *as objects of study*
+- **bibliometrics and scientometrics** applied to a research literature
+- the **research workforce**: careers, equity, training, capacity
+- **evidence synthesis methodology** (not an individual systematic review's clinical answer, but work *about* how
+  syntheses are done)
+
+### T2: Adjacent
+Empirically or conceptually grounded work on science as a social system that is not framed as metaresearch but
+studies it:
+
+- **science and technology studies (STS)**: social studies of scientific knowledge, practice, controversy
+- **library and information science**: information behaviour of researchers, repositories, discovery
+- **research infrastructure** studies: platforms, data repositories, identifiers, standards
+- **history and philosophy of science** *when the object is contemporary research practice*
+- **research policy** analysis grounded in evidence
+
+T2 is where the field's diversity lives. Be generous here: a paper does not have to call itself metaresearch to
+be studying research.
+
+### T3: Contextual
+Relevant to the ecosystem, mapped and released, but **never pooled into the analytic corpus**:
+
+- editorials, commentaries, opinion pieces about research practice
+- policy documents and position statements
+- announcements of infrastructure, tools, or initiatives
+- news, obituaries, corrections, letters
+
+### OUT: Not metaresearch
+Everything else. Includes, and this is the most common error:
+
+- **A study that uses a method is not a study of the method.** A meta-analysis answering a clinical question is
+  OUT. A study of how meta-analyses handle heterogeneity is T1.
+- **Mentioning a metaresearch term is not studying it.** A lab paper reporting "assay reproducibility", a methods
+  section saying "peer reviewed", a licence note saying "open access": all OUT.
+- **Domain research that happens to be bibliometric in method** but whose object is the domain, not the research:
+  e.g. a bibliometric map of diabetes treatments, produced to summarise diabetes knowledge. Borderline; see below.
+
+---
+
+## The three errors that matter most
+
+These are where the pilot showed retrieval and screening break down. Read them twice.
+
+1. **Polysemy.** `reproducibility` in a biochemistry paper means the assay gives the same reading twice. In a
+   metaresearch paper it means the reproducibility crisis. Only the second is in scope. The same applies to
+   `validation`, `replication`, `bias`, `peer review`, `open access`. **Judge the sense, not the token.**
+
+2. **Method vs. object.** Using bibliometrics ≠ studying research. Ask: *if this paper is right, what do we now
+   know more about: a scientific question, or the practice of science?* If the former, OUT.
+
+3. **Absence of vocabulary is not absence of content.** An STS paper about laboratory practice, or an LIS paper
+   about how researchers find data, may use none of the field's keywords and still be squarely T2. **Do not
+   require the vocabulary.** This is the error that makes the field look smaller and more anglophone than it is.
+
+---
+
+## Canadian linkage
+
+Record which apply (this is metadata, not an inclusion test; the estimand is defined separately in
+`PROTOCOL.md`):
+
+- `CA_AFF`: at least one author affiliated with a Canadian institution
+- `CA_FUND`: funded by CIHR, NSERC, SSHRC, or CFI
+- `ABOUT_CA`: the Canadian research system is a substantive object of study (not a passing mention, not one
+  country among forty in a global comparison)
+
+## Genre
+
+`empirical` · `conceptual` · `editorial/commentary` · `policy` · `infrastructure/announcement` · `other`
+
+OpenAlex's `type` is unreliable and this field is commentary-heavy, so genre is coded, not inherited.
+
+## Language of the work
+
+As published. Do not infer from the venue.
+
+---
+
+## Confidence
+
+- `high`: the rubric decides this cleanly.
+- `medium`: the rubric decides, but a reasonable coder could differ.
+- `low`: genuinely on the boundary, or the abstract is missing/too thin to judge.
+
+**`low` is a legitimate answer and is not a failure.** Records coded `low` by either screener are routed to
+adjudication. A screener that never says `low` is not being careful; it is being confident.
+
+---
+
+## Worked examples
+
+| Title (abridged) | Tier | Why |
+|---|---|---|
+| "Data sharing practices in 500 randomised trials" | **T1** | The object is reporting practice. |
+| "Reproducibility of a Western blot protocol" | **OUT** | Assay reproducibility. Polysemy trap. |
+| "Trends in citation of retracted papers" | **T1** | Object is the literature's own behaviour. |
+| "Laboratory life in a Canadian genomics centre: an ethnography" | **T2** | STS. No metaresearch vocabulary; still studies research. |
+| "How do researchers discover datasets? A survey" | **T2** | LIS, information behaviour of researchers. |
+| "Effectiveness of statins: a network meta-analysis" | **OUT** | Uses a synthesis method to answer a clinical question. |
+| "How network meta-analyses handle inconsistency: a review of 200 reviews" | **T1** | Object is the method. |
+| "Announcing the Canadian Research Data Repository" | **T3** | Infrastructure announcement. Mapped, not pooled. |
+| "Open access mandates are failing early-career researchers" (editorial) | **T3** | Commentary about research practice. |
+| "Bibliometric analysis of diabetes research 2000–2020" | **T2** | Borderline. Bibliometric method, and the object *is* a research literature, so it studies research output. Code T2, `medium`. |
+| "Le libre accès dans les revues québécoises : état des lieux" | **T1** | Scholarly communication, object is publishing practice. French. |
+
+---
+
+## Instructions to the screener
+
+Read the title and abstract. Apply the rubric. Do not use outside knowledge of the authors or the journal's
+reputation. If the abstract is missing, judge on the title alone and set confidence to `low` unless the title is
+unambiguous.
+
+Return the schema in `protocol/screening-schema.json`. One object per work. No prose, no preamble.
+--------------------------------------------------------------------------------
+You are screening works for MetaCan, a map of Canadian metaresearch.
+
+Apply the rubric above to every record in the JSON array below. Return a JSON
+array with one object per work, conforming to protocol/screening-schema.json:
+
+  {"id": "W...", "tier": "T1|T2|T3|OUT", "genre": "...", "about_ca": true|false,
+   "confidence": "high|medium|low", "reason": "one sentence"}
+
+Rules:
+- Return the JSON array and NOTHING else. No prose, no preamble, no code fences.
+- Every input id must appear exactly once in the output.
+- Do not run commands, read files, or browse. Classify from the RECORDS alone.
+
+RECORDS:
+[
+  {
+    "id": "W2823857660",
+    "title": "Misuse of Coauthorship in Medical Theses in Sweden",
+    "abstract": "The aim of this study was to explore experiences of authorship issues among persons who have recently received their doctoral degree in medicine in Sweden. A survey was mailed to all who received their PhD at a medical faculty at a Swedish university the first half of 2016. Questions concerned experiences of violations of the first three authorship criteria in the Vancouver rules and of misuse of authorship order in the articles of their thesis, and the respondents' attitudes to these matters. The questionnaire was returned by 285 respondents (68%). According to the majority (53%), the Vancouver rules were not fully respected in the articles of their thesis. A vast majority (97%) found it important that authorship issues are handled correctly, but only 19% responded that their department has a clear and consistently applied policy. We conclude that authorship guidelines are frequently disrespected at medical faculties in Sweden. The universities seem to provide limited support on authorship issues.",
+    "year": 2018,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Empirical Research on Human Research Ethics",
+    "topic": "Ethics in Clinical Research",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4389672413",
+    "title": "Quantification of bone surface textures: exploring a new method of ontogenetic ageing",
+    "abstract": "Abstract Identification of ontogenetic age classes plays an important role in the fields of zoology, palaeontology and archaeology, where accurate age classifications of (sub)fossil remains are a crucial component for the reconstruction of past life. Textural ageing—the identification of age-related bone surface textures—provides a size-independent method for age assessment of vertebrate material. However, most of the work so far is limited to qualitative results. While qualitative approaches provide helpful insights on textural ageing patterns, they are heavily subject to observer bias and fall short of quantitative data relevant for detailed statistical analyses and cross-comparisons. Here, we present a pilot study on the application of 3D surface digital microscopy to quantify bone surface textures on the long bones of the grey heron ( Ardea cinerea ) and the Canada goose ( Branta canadensis ) using internationally verified roughness parameters. Using a standardised measuring protocol, computed roughness values show a strong correlation with qualitative descriptions of textural patterns. Overall, higher roughness values correspond to increased numbers of grooves and pits and vice versa. Most of the roughness parameters allowed distinguishing between different ontogenetic classes and closely followed the typical sigmoidal animal growth curve. Our results show that bone texture quantification is a feasible approach to identifying ontogenetic age classes.",
+    "year": 2023,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Analytical Science & Technology",
+    "topic": "Paleontology and Evolutionary Biology",
+    "field": "Earth and Planetary Sciences",
+    "ca_institutions": [],
+    "funders": ["Nederlandse Organisatie voor Wetenschappelijk Onderzoek", "Technische Universiteit Delft", "Universiteit Leiden"]
+  },
+  {
+    "id": "W3214353075",
+    "title": "Reducing Waste Outflow to Motivate Water Conservation",
+    "abstract": "Abstract Resource-consumption systems can be defined by a resource inlet, a control volume where the resource is used, and a waste outlet. Specific to water, many existing conservation strategies focus on reducing the in-flow of water into a control volume. Instead, this work explores reducing waste out-flow, which causes accumulation in the control volume. This strategy aims to motivate users to reduce resource in-flow in response to accumulation in the control volume, and thus modify behavior. To test this strategy, Amazon Mechanical Turk workers completed three randomly ordered handwashing simulations with different sink-outflow rates online. Study participants (N = 74) significantly reduced consumption of water when it accumulated quickly in the sink (p &amp;lt; 0.0001). Participants reduced water consumption, on average by 14% at lower outflow rates, as they decreased inflow rates to prevent sink overflow. Many pro-environmental behavior interventions are limited in their reliance on user motivation and intention to reduce resource consumption. In contrast, the reduced-outflow intervention significantly reduced water usage (p &amp;lt; 0.001) of individuals, regardless of self-reported daily pro-environmental behavior. This result suggests that the developed intervention relies less on user intention. Overall results support that reducing outflow can increase sustainable user behavior when properly executed. In-person testing is discussed as future work.",
+    "year": 2021,
+    "lang": "en",
+    "type": "article",
+    "topic": "Environmental Education and Sustainability",
+    "field": "Environmental Science",
+    "ca_institutions": "University of Toronto",
+    "funders": []
+  },
+  {
+    "id": "W4406399281",
+    "title": "10.1016/0967-0653(95)90395-f",
+    "abstract": "",
+    "year": 2000,
+    "lang": "en",
+    "type": "article",
+    "venue": "Time to knit",
+    "topic": "Oceanographic and Atmospheric Processes",
+    "field": "Earth and Planetary Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2048639016",
+    "title": "Impaired Trunk and Ankle Stability in Subjects with Functional Ankle Instability",
+    "abstract": "PURPOSE: To examine differences between subjects with and without functional ankle instability (FAI) for measures of trunk and ankle stability. METHODS: Twelve healthy individuals and 12 individuals with FAI participated. Subjects were assessed for self-rated disability, time to stabilization (TTS), and muscle reflex responses to sudden trunk perturbation. TTS results were calculated using an unbounded third-order polynomial. Trunk reflexes to a sudden unloading task were tested during flexion and extension movements. Loads were 65 N for males and 40 N for females. ANOVA procedures were used to compare TTS times, latency times, and trunk displacement data between groups. Regression analyses were used to determine the relationship between TTS and trunk latency times. RESULTS: Subjects with FAI had worse perceptions of their ankle disability but had the same vertical jump height. TTS times were delayed in the FAI group (6.0 +/- 2.8 vs 2.9 +/- 1.0 s; F(1,22) = 12.7, P = 0.002). Trunk muscle onsets were delayed in FAI subjects in both flexion (F(1,22) = 7.6, P = 0.01) and extension (F(1,22) = 4.5, P = 0.04). Regression and analysis identified x-axis TTS times as significantly associated with extension latency times (r2 = 0.19, P = 0.043). CONCLUSIONS: This study has provided evidence for proximal nervous system adaptations associated with FAI. Delayed trunk reflexes have been shown to predispose individuals to developing low back pain. A cause or effect relationship between trunk and ankle instability has not been established here.",
+    "year": 2009,
+    "lang": "en",
+    "type": "article",
+    "venue": "Medicine & Science in Sports & Exercise",
+    "topic": "Musculoskeletal pain and rehabilitation",
+    "field": "Medicine",
+    "ca_institutions": "Ontario Tech University",
+    "funders": []
+  },
+  {
+    "id": "W2005993359",
+    "title": "Late Patrology: The Example of Giorgio Agamben",
+    "abstract": "Abstract: After a long exile in the quaintly titled files of “irrationality and superstition,” theology and the issue of religion in general have resurfaced as central topics to theory-making in the Western tradition of thought. With this in mind, the intent of this article is to propose a name for this phenomenon: “late patrology.” The implication of the use of this term is that theology is experiencing a posthumous life following the demise of the Enlightenment project. Thinkers such as Giorgio Agamben, Slavoj Žižek, Alain Badiou, John D. Caputo, Gianni Vattimo, John Milbank, and others are in many ways revisiting (in new and different conditions) important theological matters we read about in patristic literature. Patrology ceased many centuries ago, but it has not disappeared. Contemporary thinkers are partaking in the same interpretive enterprise modelled and initiated by the authors of patristic literature: that of talking about the received name of God, arguing on all sides about the significance of its transmission from the past and its pertinence to the present and near future. I will focus on one exponent of this resurgent interest in theology, Giorgio Agamben. Specifically, I provide examples from some of his works that illustrate his project of grasping in their dispersion the effaced yet preponderant signs of theology hidden in our current political and cultural practices.",
+    "year": 2013,
+    "lang": "en",
+    "type": "article",
+    "venue": "Toronto Journal of Theology",
+    "topic": "Political Theology and Sovereignty",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4391332676",
+    "title": "Woods, Marjorie Currie. Weeping for Dido: The Classics in the Medieval Classroom",
+    "abstract": "",
+    "year": 2019,
+    "lang": "en",
+    "type": "article",
+    "venue": "Renaissance and Reformation",
+    "topic": "Medieval Literature and History",
+    "field": "Arts and Humanities",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W3008810374",
+    "title": "Spontaneous Subgaleal Hematoma in a Sickle Cell Disease Patient: A Case Report",
+    "abstract": "Sickle cell disease (SCD) is one of the most commonly inherited conditions on the Arabian Peninsula. We report a case of a 17-year-old boy, who had previously been diagnosed with SCD and glucose-6-phosphate dehydrogenase (G6PD) deficiency and recently presented to our hospital with spontaneous subgaleal hematoma (SGH), which was managed conservatively. We also present a literature review on the topic of spontaneous intra- and/or extra-cranial bleeds.",
+    "year": 2020,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Medical Cases",
+    "topic": "Hemoglobinopathies and Related Disorders",
+    "field": "Medicine",
+    "ca_institutions": "London Health Sciences Centre",
+    "funders": []
+  },
+  {
+    "id": "W7000491063",
+    "title": "Feature Story: Sesquicentennial flashback: February 1967",
+    "abstract": "As Canadians were celebrating the nation’s 100th birthday in 1967, Regina Campus was a busy place. It had been less than two years since the first classes had been held at the new campus. The main talk in 1967 was Centennial Year – and making plans for a trip to the world’s fair, Expo 67 in Montreal, which would open in late April. An ad in the Carillon newspaper offered air fare and accommodation for 10 nights for $235.",
+    "year": 2017,
+    "lang": "en",
+    "type": "other",
+    "venue": "oURspace (University of Regina)",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4392735737",
+    "title": "A unifying approach for the pricing of debt securities",
+    "abstract": "We propose a unifying framework for the pricing of debt securities under general time-inhomogeneous short-rate diffusion processes. The pricing of bonds, bond options, callable/putable bonds, and convertible bonds (CBs) is covered. Using continuous-time Markov chain (CTMC) approximations, we obtain closed-form matrix expressions to approximate the price of bonds and bond options under general one-dimensional short-rate processes. A simple and efficient algorithm is also developed to price callable/putable debt. The availability of a closed-form expression for the price of zero-coupon bonds allows for the perfect fit of the approximated model to the current market term structure of interest rates, regardless of the complexity of the underlying diffusion process selected. We further consider the pricing of CBs under general bi-dimensional time-inhomogeneous diffusion processes to model equity and short-rate dynamics. Credit risk is also incorporated into the model using the approach of Tsiveriotis and Fernandes (1998). Based on a two-layer CTMC method, an efficient algorithm is developed to approximate the price of convertible bonds. When conversion is only allowed at maturity, a closed-form matrix expression is obtained. Numerical experiments show the accuracy and efficiency of the method across a wide range of model parameters and short-rate models.",
+    "year": 2024,
+    "lang": "en",
+    "type": "article",
+    "venue": "Quantitative Finance",
+    "topic": "Stochastic processes and financial applications",
+    "field": "Economics, Econometrics and Finance",
+    "ca_institutions": ["Université de Sherbrooke", "Université du Québec à Montréal"],
+    "funders": ["Fonds de recherche du Québec – Nature et technologies", "Natural Sciences and Engineering Research Council of Canada", "Université du Québec à Montréal"]
+  },
+  {
+    "id": "W4213081429",
+    "title": "Typing math",
+    "abstract": "",
+    "year": 2007,
+    "lang": "en",
+    "type": "book-chapter",
+    "topic": "Mathematics Education and Teaching Techniques",
+    "field": "Social Sciences",
+    "ca_institutions": "University of Manitoba",
+    "funders": []
+  },
+  {
+    "id": "W2462395650",
+    "title": "The lithostratigraphy and history of the Caledonian mélange basin rocks below the Jotun Nappe in Bøverdalen, South Central Norway.",
+    "abstract": "The Scandinavian Caledonides have been long studied, yet their ever unfolding complexity renders them far from being fully understood. It has been recognized that the Caledonian Allochthons have neither a linear nor straightforward along-strike relationship. A mélange unit has been recently identified as a separate tectonic unit. This unit is structurally positioned below crystalline nappes previously assigned to the Middle Allochthon. The mélange comprises meta-sediments and minor meta-basalt/gabbro, but most intriguingly, numerous solitary meta-peridotites. These occur as Alpine type meta-peridotites, serpentinites, soapstones and detrital serpentinites. This thesis presents results of a field study of the mélange in the Bøverdalen area structurally below the Jotun nappe, and suggests that this provides evidence that the regional mélange unit was formed in a hyperextended passive margin. The meta-peridotites represent exhumed serpentinized mantle and are intimately associated with meta-sediments. The sediments are garnetiferous chlorite-muscovite schists, graphitic schists, phyllites, amphibolites, meta-sandstones as well as quartzite-pebble dominated conglomerates. It is suggested that this highly heterogeneous mélange unit formed during the early stages of rifting and hyperextension along the Baltican passive margin. Characteristics of the detrital peridotites suggests that serpentinite-talc protrusions may have formed islands. The processes involved are observed in modern margins where the best-studied example is the Iberia-Newfoundland passive margin. Work in present-day margins (mostly seismic reflection data) elucidate the large-scale structure of hyperextended margins, while studies of ancient exposed examples in mountain belts provide insight into the lithology, geochemistry and details of these margins. The widespread distribution of hyperextended margins in modern margins and the increasing number of recognizable ancient margins in mountain-belts indicates the importance of hyperextension during the early stages of the Wilson cycle. Samples collected from the melange unit in the Samnanger area (Bergen) have been dated using U-Pb data from ID-TIMS (isotope-dilution thermal ionization mass spectrometry) analysis of zircon and rutile. These yielded two age groups, ~420 Ma and ~476.23 - 487 Ma, however, both of these bodies are thought to represent intrusive activity post-dating the development of the mélange. Tectonic reconstructions that account for such complexity may not only explain the origin of peridotite bearing mélange units, they may also aid the understanding of the exotic terranes identified in the Scandinavian Caledonides.",
+    "year": 2015,
+    "lang": "en",
+    "type": "dissertation",
+    "venue": "Duo Research Archive (University of Oslo)",
+    "topic": "Geological Studies and Exploration",
+    "field": "Earth and Planetary Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4407901979",
+    "title": "Examining How Adults With Diabetes Use Technologies to Support Diabetes Self-Management: Mixed Methods Study",
+    "abstract": "BACKGROUND: Technologies such as mobile apps, continuous glucose monitors (CGMs), and activity trackers are available to support adults with diabetes, but it is not clear how they are used together for diabetes self-management. OBJECTIVE: This study aims to understand how adults with diabetes with differing clinical profiles and digital health literacy levels integrate data from multiple behavior tracking technologies for diabetes self-management. METHODS: Adults with type 1 or 2 diabetes who used ≥1 diabetes medications responded to a web-based survey about health app and activity tracker use in 6 categories: blood glucose level, diet, exercise and activity, weight, sleep, and stress. Digital health literacy was assessed using the Digital Health Care Literacy Scale, and general health literacy was assessed using the Brief Health Literacy Screen. We analyzed descriptive statistics among respondents and compared health technology use using independent 2-tailed t tests for continuous variables, chi-square for categorical variables, and Fisher exact tests for digital health literacy levels. Semistructured interviews examined how these technologies were and could be used to support daily diabetes self-management. We summarized interview themes using content analysis. RESULTS: Of the 61 survey respondents, 21 (34%) were Black, 23 (38%) were female, and 29 (48%) were aged ≥45 years; moreover, 44 (72%) had type 2 diabetes, 36 (59%) used insulin, and 34 (56%) currently or previously used a CGM. Respondents had high levels of digital and general health literacy: 87% (46/53) used at least 1 health app, 59% (36/61) had used an activity tracker, and 62% (33/53) used apps to track ≥1 health behaviors. CGM users and nonusers used non-CGM health apps at similar rates (16/28, 57% vs 12/20, 60%; P=.84). Activity tracker use was also similar between CGM users and nonusers (20/33, 61% vs 14/22, 64%; P=.82). Respondents reported sharing self-monitor data with health care providers at similar rates across age groups (17/32, 53% for those aged 18-44 y vs 16/29, 55% for those aged 45-70 y; P=.87). Combined activity tracker and health app use was higher among those with higher Digital Health Care Literacy Scale scores, but this difference was not statistically significant (P=.09). Interviewees (18/61, 30%) described using blood glucose level tracking apps to personalize dietary choices but less frequently used data from apps or activity trackers to meet other self-management goals. Interviewees desired data that were passively collected, easily integrated across data sources, visually presented, and tailorable to self-management priorities. CONCLUSIONS: Adults with diabetes commonly used apps and activity trackers, often alongside CGMs, to track multiple behaviors that impact diabetes self-management but found it challenging to link tracked behaviors to glycemic and diabetes self-management goals. The findings indicate that there are untapped opportunities to integrate data from apps and activity trackers to support patient-centered diabetes self-management.",
+    "year": 2025,
+    "lang": "en",
+    "type": "article",
+    "venue": "JMIR Diabetes",
+    "topic": "Mobile Health and mHealth Applications",
+    "field": "Health Professions",
+    "ca_institutions": [],
+    "funders": ["National Center for Advancing Translational Sciences", "National Institute of Diabetes and Digestive and Kidney Diseases"]
+  },
+  {
+    "id": "W6961011817",
+    "title": "West Coast Vanc. Isld.",
+    "abstract": "View of beach rocks at West Coast Vancouver Island. On verso, there is a label by Heffel Fine Art Auction House.",
+    "year": 2024,
+    "lang": "en",
+    "type": "other",
+    "venue": "cIRcle (University of British Columbia)",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2553447544",
+    "title": "The Voyage North in Nicole Brossard’s <i>La capture du sombre<\/i>",
+    "abstract": "The important symbolic and discursive role that the North plays in the Canadian imagination has often been noted. The present essay proposes to consider resonances between the inscriptions of an imagined North in Hubert Aquin’s 1974 novel Neige noire and those in Nicole Brossard’s 2007 novel La capture du sombre . Brossard’s narrative ventures into an Arctic landscape that readers of Aquin’s novel immediately recognize. This quintessentially narrative voyage poses the question of what it may mean to step out of a familiar landscape into a landscape of erasure. The final passages of the two novels have a parabolic density that provokes and resists interpretation. Yet the penultimate scenes seem to suggest a momentary glimmer, a readable trace of that passage through the North.",
+    "year": 2014,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Quebec Studies",
+    "topic": "Canadian Identity and History",
+    "field": "Social Sciences",
+    "ca_institutions": "Université Laval",
+    "funders": []
+  },
+  {
+    "id": "W2034316014",
+    "title": "Pregnancy in women with congenital heart disease",
+    "abstract": "Due to advances in paediatric congenital heart surgery, there are a growing number of women with congenital heart disease (CHD) reaching childbearing age. Pregnancy, however, is associated with haemodynamic stresses which can result in cardiac decompensation in women with CHD. Many women with CHD are aware of their cardiac condition prior to pregnancy, and preconception counselling is an important aspect of their care. Preconception counselling allows women to make informed pregnancy decisions, provides an opportunity for modifications of teratogenic medications and, when necessary, repair of cardiac lesions prior to pregnancy. Less commonly, the haemodynamic changes of pregnancy unmask a previously unrecognised heart lesion. In general, pregnancy outcomes are favourable for women with CHD, but there are some cardiac lesions that carry high risk for both the mother and the baby, and this group of women require care by an experienced multidisciplinary team. This review discusses preconception counselling including contraception, an approach to risk stratification and management recommendations in women with some common CHDs.",
+    "year": 2015,
+    "lang": "en",
+    "type": "review",
+    "venue": "Obstetric Medicine",
+    "topic": "Cardiovascular Issues in Pregnancy",
+    "field": "Medicine",
+    "ca_institutions": ["University Health Network", "University of Toronto", "Mount Sinai Hospital"],
+    "funders": []
+  },
+  {
+    "id": "W4231601541",
+    "title": "Museums Other than Art",
+    "abstract": "",
+    "year": 2014,
+    "lang": "en",
+    "type": "book-chapter",
+    "topic": "Museums and Cultural Heritage",
+    "field": "Arts and Humanities",
+    "ca_institutions": ["Brandon University", "University of Northern British Columbia"],
+    "funders": []
+  },
+  {
+    "id": "W2974443830",
+    "title": "Evaluation of the JBI scoping reviews methodology by current users",
+    "abstract": "BACKGROUND: In 2014, JBI Database of Systematic Reviews and Implementation Reports published a comprehensive methodology for the conduct and reporting of scoping reviews based on previous frameworks and guidance. Further work on scoping review methodology and particularly reporting is needed. To assist with refinements to the methodology, this survey was undertaken to evaluate users' experiences of following the process methodology. An electronic survey was generated to explore authors' experiences with the methodology and to seek feedback on the stages of scoping review development. METHOD: An online survey administered using Qualtrics - a secure survey platform - was distributed through invitations to a total of 51 registered users in the Joanna Briggs Database of Systematic reviews and Implementation reports. We analysed the questionnaire data using descriptive statistics. The qualitative data were grouped together, and free text comments were inductively themed and coded by the authors. RESULTS: Thirty-one participants completed the survey (response rate of 61%). The majority of the participants identified themselves as researchers (55%) followed by educators (25%). Most participants were university employees (77%) and only 10% were based in hospitals. Forty-two percent of the participants reported that the scoping review they had been involved with had taken between 6 and 12 months, and 32% of participants spent over a year completing their reviews. Eighty-seven percent of participants stated that their scoping reviews led to further work such as developing a systematic review, a basis for a grant application, formation of a part of students' doctoral studies, and informing further work in a research project. Some of the limitations listed by the participants were the lack of examples in each section of the methodology, especially in the inclusion criteria, and presentation of the results sections. CONCLUSION: The overall evaluation by the participants of the JBI scoping review methodology highlighted the need for additional detailed guidance for inclusion criteria and presentation of the results. Provision of clear examples for each step was also requested for future improvement.",
+    "year": 2019,
+    "lang": "en",
+    "type": "article",
+    "venue": "International Journal of Evidence-Based Healthcare",
+    "topic": "Meta-analysis and systematic reviews",
+    "field": "Decision Sciences",
+    "ca_institutions": "Queen's University",
+    "funders": []
+  },
+  {
+    "id": "W2102088501",
+    "title": "Tempora Mutantur: In Search of a New Testament for NEG",
+    "abstract": "",
+    "year": 2010,
+    "lang": "en",
+    "type": "article",
+    "venue": "SSRN Electronic Journal",
+    "topic": "Migration and Labor Dynamics",
+    "field": "Social Sciences",
+    "ca_institutions": "Université du Québec à Montréal",
+    "funders": []
+  },
+  {
+    "id": "W2164346250",
+    "title": "Quantum-wire conductance manipulating by asymmetric quantum dot-molecules",
+    "abstract": "The electronic conductance at zero temperature through a quantum wire with side-attached asymmetric quantum dot-molecules (as a scatter system) is theoretically studied using the non-interacting Anderson tunneling Hamiltonian method. We show that the asymmetric configuration of QD-scatter system strongly impresses the amplitude and spectrum of quantum wire nanostructure transmission characteristics. It is shown that whenever the balanced number of chains-quantum dots in one molecule is substituted by unbalanced scheme, the number of forbidden mini-bands in quantum wire conductance increases to the sum of the number of quantum dots in two chains and thus the QW-nanostructure electronic conductance contains rich spectral properties due to appearance of the new anti-resonance and resonance points in spectrum. Considering the suitable inner gap between QD-chains in one molecule or outer gap between QD-molecules, can strengthen the amplitude of new resonant peaks in QW conductance spectrum. The proposed asymmetric-QD scatter system idea in this paper opens a new insight on designing quantum wire nanostructures for given electronic conductance.",
+    "year": 2010,
+    "lang": "en",
+    "type": "article",
+    "topic": "Quantum and electron transport phenomena",
+    "field": "Physics and Astronomy",
+    "ca_institutions": "Toronto Metropolitan University",
+    "funders": []
+  },
+  {
+    "id": "W6980660683",
+    "title": "Combining spin-orbit coupling and multi-orbital interactions: a recipe for novel magnetism and superconductivity",
+    "abstract": "This thesis explores a multi-orbital model with a strong spin-orbit coupling where interactions are tuned via a compressive strain.The platform used to explore this type of physics is the perovskite iridate Sr 2 IrO 4 .Undoped and unstrained, this iridate compound is a spin-orbit coupled antiferromagnet.Under doping, Sr 2 IrO 4 has been predicted to host superconductivity.Applying a compressive strain to the compound tunes the dispersion of electrons in each orbital and consequently the interactions between electrons.In a model considering strain and doping, iridate physics is shown to encompass the two cases of either the interacting order being dominated by spin-orbit physics or multi-orbital interactions and spin-orbit coupling being of comparable size.This thesis focuses on modeling magnetism and superconductivity.Firstly, the magnetic order parameters are modeled with a mean field approximation.For undoped Sr 2 IrO 4 under compressive strain the multi-orbital nature of the order is determined, and a strain-induced phase transition takes place.An external magnetic field is included to further determine signatures of the order.Secondly, superconductivity is modeled with an effective interaction calculated via the random phase approximation (RPA).For realistic parameter values for doped Sr 2 IrO 4 a strain-induced superconducting order is found to be possible.Considering a wider range of parameters reveals a theoretical phase diagram rich with magnetic and superconducting orders.As the compressive strain is increased, several types of magnetic fluctuations compete.For the found novel superconducting orders a classification of symmetries as well as determination of topological properties is performed.Strain in the iridates is thus not only shown to be a useful tool to expand a possible superconducting region at high spin-orbit coupling.It is also a good tool to explore the complex system of underlying interactions.",
+    "year": 2023,
+    "lang": "en",
+    "type": "dissertation",
+    "venue": "eScholarship@McGill (McGill)",
+    "topic": "Urban and Rural Development Challenges",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": ["Fonds de recherche du Québec – Nature et technologies", "Natural Sciences and Engineering Research Council of Canada", "Courtois Foundation", "McGill University"]
+  },
+  {
+    "id": "W1993461553",
+    "title": "Selectivity of cyclooxygenase isoform activity and prostanoid production in normal and diseased Han:SPRD-<i>cy<\/i>rat kidneys",
+    "abstract": "Renal prostanoids are important regulators of normal renal function and maintenance of renal homeostasis. In diseased kidneys, renal cylooxygenase (COX) expression and prostanoid formation are altered. With the use of the Han:Sprague-Dawley-cy rat, the aim of this study was to determine the relative contribution of renal COX isoforms (protein, gene expression, and activity) on renal prostanoid production [thromboxane B(2) (TXB(2), stable metabolite of TXA(2)), prostaglandin E(2) (PGE(2)), and 6-keto-prostaglandin F(1alpha) (6-keto-PGF(1alpha), stable metabolite of PGI(2))] in normal and diseased kidneys. In diseased kidneys, COX-1-immunoreactive protein and mRNA levels were higher and COX-2 levels were lower compared with normal kidneys. In contrast, COX activities were higher in diseased compared with normal kidneys for both COX-1 [0.05 +/- 0.02 vs. 0.45 +/- 0.11 ng prostanoids x min(-1) x mg protein(-1) (P < 0.001)] and COX-2 [0.64 +/- 0.10 vs. 2.32 +/- 0.22 ng prostanoids x min(-1).mg protein(-1) (P < 0.001)]. As the relative difference in activity was greater for COX-1, the ratio of COX-1/COX-2 was higher in diseased compared with normal kidneys, although the predominant activity was still due to the COX-2 isoform in both genotypes. Endogenous and steady-state in vitro levels of prostanoids were approximately 2-10 times higher in diseased compared with normal kidneys. The differences between normal and diseased kidney prostanoids were in the order of TXB(2) > 6-keto-PGF(1alpha) > PGE(2), as determined by higher renal prostanoid levels and COX activity ratios of TXB(2)/6-keto-PGF(1alpha), TXB(2)/PGE(2), and 6-keto-PGF(1alpha)/PGE(2). This specificity in both the COX isoform type and for the prostanoids produced has implications for normal and diseased kidneys in treatments involving selective inhibition of COX isoforms.",
+    "year": 2005,
+    "lang": "en",
+    "type": "article",
+    "venue": "American Journal of Physiology-Renal Physiology",
+    "topic": "Inflammatory mediators and NSAID effects",
+    "field": "Medicine",
+    "ca_institutions": "University of Manitoba",
+    "funders": []
+  },
+  {
+    "id": "W4416389534",
+    "title": "Therapeutic potential of cinnamaldehyde in melanoma: An in silico and in vitro analysis of stratifin and DNMT expression",
+    "abstract": "",
+    "year": 2025,
+    "lang": "en",
+    "type": "article",
+    "venue": "Gene Reports",
+    "topic": "Epigenetics and DNA Methylation",
+    "field": "Biochemistry, Genetics and Molecular Biology",
+    "ca_institutions": "University of Saskatchewan",
+    "funders": "Kerman University of Medical Sciences"
+  },
+  {
+    "id": "W2797491912",
+    "title": "Cytokine profiles among patients co-infected with Plasmodium falciparum malaria and soil borne helminths attending Kampala International University Teaching Hospital, in Uganda",
+    "abstract": "Malaria and helminths share the same geographical distribution in tropical Africa. Studies of the interaction of helminth and malaria co-infection in humans have been few and are mainly epidemiological, with little information on cellular immune responses. This study aimed to determine Cytokine profiles among patients co-infected with Plasmodium falciparum malaria and soil borne helminth attending Kampala International University Teaching Hospital (KIU). A case control study of 240 patients were recruited at KIU teaching hospital. Patients with Plasmodium falciparum malaria were 55 (22.9%) and those with soil-borne helminths were 63 (26.3%). The controls were 89 (37.1%), while those co-infected with Plasmodium falciparum malaria and soil-borne helminths were 33 (13.8%). Cases were defined as having a positive blood smear for P. falciparum malaria, those with helminths or co-infections of the two. Negative controls were those with a negative blood smear for P. falciparum malaria and those with no stool parasitic infections. Patients presenting with signs and symptoms of malaria or those suspected of having helminths were recruited for the study. A panel of five cytokines (IFN-γ, TNF-α, IL-6, TGF-β and IL-10) were assayed from plasma samples in patients with and without Plasmodium falciparum malaria, patients with and without helminth, and then those co-infected with the two diseases diagnosis was done using thick blood smears stained with 10% Giemsa and stool examination was done following the Kato Katz technique following standard procedures. The prevalence of Plasmodium falciparum malaria by sex was 28 (11.7%) and 27 (11.3%) in male and female respectively. The overall prevalence of soil borne helminth was 26.3%, and among those harbouring helminths, 13.8% were co-infected with Plasmodium falciparum. Cytokine levels significantly differed across Plasmodium falciparum malaria, soil borne helminth infected patients and health controls for IFN-γ (P = 0.023), IL-10 (P = 0.008) and TGF-β (P = 0.0001). Cytokine levels significantly differed across Plasmodium falciparum malaria, soil borne helminth infected patients and patients co-infected with Plasmodium falciparum malaria and soil borne helminth for IL-10 (P = 0.004), IL-6 (P = 0.011) and TGF-β (P = 0.003). An up-regulation of IFN-γ during Plasmodium falciparum malaria and an up-regulation of IL-10 and TGF-β in soil borne helminth infections was demonstrated. We demonstrate that co-infections of Plasmodium falciparum and soil borne helminth lead to an up-regulation of IL-10 and IL-6 and a down-regulation of TGF-β. Trial registration No17/10-16",
+    "year": 2018,
+    "lang": "en",
+    "type": "article",
+    "venue": "Allergy Asthma and Clinical Immunology",
+    "topic": "Parasites and Host Interactions",
+    "field": "Immunology and Microbiology",
+    "ca_institutions": [],
+    "funders": "Mbarara University of Science and Technology"
+  },
+  {
+    "id": "W2102715455",
+    "title": "Hereditary kidney diseases: highlighting the importance of classical Mendelian phenotypes",
+    "abstract": "A Mendelian inheritance underlies a nonnegligible proportion of hereditary kidney diseases, suggesting that the encoded proteins are essential for maintenance of the renal function. The identification of genes involved in congenital anomalies of the kidney and in familial forms of nephrotic syndrome significantly increased our understanding of the renal development and kidney filtration barrier physiology. This review will focus on the classical phenotype and clinical heterogeneity observed in the monogenic forms of these disorders. In addition, the role of susceptibility genes in kidney diseases with a complex inheritance will also be discussed.",
+    "year": 2010,
+    "lang": "en",
+    "type": "review",
+    "venue": "Annals of the New York Academy of Sciences",
+    "topic": "Renal Diseases and Glomerulopathies",
+    "field": "Medicine",
+    "ca_institutions": ["Université de Montréal", "Centre Hospitalier Universitaire Sainte-Justine"],
+    "funders": []
+  },
+  {
+    "id": "W4281855491",
+    "title": "Immune parameters of HIV susceptibility in the female genital tract before and after penile-vaginal sex",
+    "abstract": "Background: In women, most HIV infections are acquired through penile-vaginal sex. Inflammation in the female genital tract (FGT) increases the risk of HIV acquisition and transmission, likely through recruitment of HIV target cells and disruption of epithelial barrier integrity. Although sex may have important immune and epithelial effects, the impact of receptive penile-vaginal sex on the immune correlates of HIV susceptibility in the female genital tract is not well described. Methods: = 8) penile-vaginal sex. Immune cells were characterized by flow cytometry, and immune factors including cytokines and soluble E-cadherin (sE-cad; a marker of epithelial disruption) were quantified by multiplex immunoassay. Co-primary endpoints were defined as levels of IP-10 and IL-1α, cytokines previously associated with increased HIV susceptibility. Results: Here we show that cervicovaginal levels of vaginal IP-10, sE-cad and several other cytokines increase rapidly after sex, regardless of condom use. The proportion of endocervical HIV target cells, including Th17 cells, activated T cells, and activated or mature dendritic cells (DCs) also increase, particularly after condomless sex. Although most of these immune changes resolve within 72 h, increases in activated cervical CD4 + T cells and Tcm persist beyond this time. Conclusions: Penile-vaginal sex induces multiple genital immune changes that may enhance HIV susceptibility during the 72 h post-sex window that is critical for virus acquisition. This has important implications for the mucosal immunopathogenesis of HIV transmission.",
+    "year": 2022,
+    "lang": "en",
+    "type": "article",
+    "venue": "Communications Medicine",
+    "topic": "Reproductive tract infections research",
+    "field": "Immunology and Microbiology",
+    "ca_institutions": ["University of Winnipeg", "Women's Health In Women's Hands", "Regent Park Community Health Centre", "Western University", "University of Toronto"],
+    "funders": ["Canadian Institutes of Health Research", "Canadian HIV Trials Network, Canadian Institutes of Health Research"]
+  },
+  {
+    "id": "W3177385739",
+    "title": "Differentiating amyloid beta spread in autosomal dominant and sporadic Alzheimer’s disease",
+    "abstract": "Abstract Amyloid-beta (Aβ) deposition is one of the hallmark pathologies in both sporadic Alzheimer’s disease (sAD) and autosomal dominant Alzheimer’s disease (ADAD), the latter of which is caused by mutations in genes involved in Aβ processing. Despite Aβ deposition being a centerpiece to both sAD and ADAD, some differences between these AD subtypes have been observed with respect to the spatial pattern of Aβ. Previous work has shown that the spatial pattern of Aβ in individuals spanning the sAD spectrum can be reproduced with high accuracy using an epidemic spreading model (ESM), which simulates the diffusion of Aβ across neuronal connections and is constrained by individual rates of Aβ production and clearance. However, it has not been investigated whether Aβ deposition in the rarer ADAD can be modeled in the same way, and if so, how congruent the spreading patterns of Aβ across sAD and ADAD are. We leverage the ESM as a data-driven approach to probe individual-level variation in the spreading patterns of Aβ across three different large-scale imaging datasets (2 SAD, 1 ADAD). We applied the ESM separately to the Alzheimer’s Disease Neuroimaging initiative (N=737), the Open Access Series of Imaging Studies (N=510), and the Dominantly Inherited Alzheimer’s Network (N=249), the latter two of which were processed using an identical pipeline. We assessed inter- and intra-individual model performance in each dataset separately, and further identified the most likely epicenter of Aβ spread for each individual. Using epicenters defined in previous work in sAD, the ESM provided moderate prediction of the regional pattern of Aβ deposition across all three datasets. We further find that, while the most likely epicenter for most Aβ-positive subjects overlaps with the default mode network, 13% of ADAD individuals were best characterized by a striatal origin of Aβ spread. These subjects were also distinguished by being younger than ADAD subjects with a DMN Aβ origin, despite having a similar estimated age of symptom onset. Together, our results suggest that most ADAD patients express Aβ spreading patters similar to those of sAD, but that there may be a subset of ADAD patients with a separate, striatal phenotype.",
+    "year": 2021,
+    "lang": "en",
+    "type": "preprint",
+    "venue": "bioRxiv (Cold Spring Harbor Laboratory)",
+    "topic": "Dementia and Cognitive Impairment Research",
+    "field": "Medicine",
+    "ca_institutions": ["Western University", "Douglas College", "McGill University", "Montreal Neurological Institute and Hospital"],
+    "funders": ["Fleni", "National Institute on Aging", "Deutsches Zentrum für Neurodegenerative Erkrankungen"]
+  },
+  {
+    "id": "W2105868231",
+    "title": "In-woods chipping: Possible evidence for allelochemical interaction of leachate generated from trembling aspen (<i>Populus tremuloides<\/i> Michx.) bark and wood waste",
+    "abstract": "A portable delimber-debarker-chipper, designed for in-woods chipping operations, was used to produce waste bark and wood residue from winter-harvested tree-length trembling aspen logs. The residue was then utilized to create leachate, which was subsequently used to treat white spruce, lodgepole pine, paper birch, aspen and Calamagrostis canadensis seedlings grown in sand-filled pots. Treatment with the leachate significantly decreased height growth and shoot and root dry weights of all species relative to the control treatment. Root: shoot ratios of all tree species except lodgepole pine were increased significantly by application of leachate. The root: shoot ratios of treated C. canadensis were significantly increased during one season, but significantly reduced in the following season. The data indicated that leachate from aspen bark and wood residue contain allelochemical properties that could affect the regenerative capacity of aspen cutblocks harvested for in-woods chipping operations. Key words: aspen, leachate, allelochemistry, Populus tremuloides, in-woods chipping",
+    "year": 2001,
+    "lang": "en",
+    "type": "article",
+    "venue": "The Forestry Chronicle",
+    "topic": "Seedling growth and survival studies",
+    "field": "Environmental Science",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2779343292",
+    "title": "Building a Magnetic Resonance Imaging Safety Culture from the Ground Up",
+    "abstract": "",
+    "year": 2017,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of medical imaging and radiation sciences",
+    "topic": "Radiation Dose and Imaging",
+    "field": "Medicine",
+    "ca_institutions": ["Sunnybrook Health Science Centre", "Health Sciences Centre"],
+    "funders": []
+  },
+  {
+    "id": "W3216006910",
+    "title": "Dr. Jun Kawakami",
+    "abstract": "One word frees us of all the weight and pain of life. That word is love. \" -SophoclesIt is with tremendous sadness we announce the passing of Dr. Jun Kawakami, our respected colleague and friend.Jun passed away on August 30, 2021, after a valiant battle against pancreatic cancer.He left this earthly world at home, in the embrace of his loving wife Julie and his two sons, Summit (15) and Merrit (13).He died the way he wanted, surrounded by his family and friends that he cherished so much.Jun completed medical school in 1998 at Queen's University.He remained at Queen's, where he completed his urology residency.Early in residency, it was evident that Jun was a naturally gifted surgeon, and it was no surprise that he pursued a fellowship in uro-oncology.Jun met Julie, the love of his life, in Kingston.Although Jun was well-known for his surgical and clinical acumen, his greatest passion was his family.After residency, Jun and Julie moved to San",
+    "year": 2021,
+    "lang": "en",
+    "type": "article",
+    "venue": "Canadian Urological Association Journal",
+    "topic": "Health and Medical Research Impacts",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W7028262356",
+    "title": "Entre les acquis de la formation et la pratique enseignante : que connaissent les enseignants à propos de leurs élèves ?",
+    "abstract": "Cette thèse de doctorat s’intéresse à ce que les enseignants du Québec connaissent de leurs élèves. Plus spécifiquement, ce travail se situe dans le champ de recherche sur les savoirs professionnels des enseignants et, plus largement, celui de la professionnalisation de l’enseignement. L’étude de la connaissance de l’élève, jusqu’ici peu explorée ou peu détaillée, nous permet d’aborder la façon dont les enseignants d’aujourd’hui adaptent et modifient leurs pratiques en fonction des élèves dans leurs classes. Pour ce faire, nous étudions la question de la connaissance de l’élève par les enseignants sous trois dimensions. D’abord, nous tentons de mieux comprendre la nature de ce type de connaissance. Selon Anderson et al. (2001), trois principales connaissances sont à l’œuvre dans le travail professionnel : des connaissances factuelles, des connaissances conceptuelles et des connaissances procédurales. Ainsi, en premier lieu, nous décrivons ces trois types de connaissances. Ensuite, nous interrogeons l’origine de la connaissance de l’élève. Plusieurs auteurs, notamment Shulman (1987 : 2004) dont les travaux sur le Teachers Knowledge Base for Teaching (base de connaissances) furent fondateurs, supportent l’idée que c’est l’expérience pratique qui en est la principale source, dans la mesure où c’est elle qui contribue le plus à l’apprentissage des enseignants. Or, considérant que la formation initiale à l’enseignement transmet également de nombreux savoirs lors de la formation initiale de quatre ans, nous tentons dans un deuxième temps de mieux comprendre d’où provient la connaissance de l’élève. Par la suite, nous nous intéressons à la manière dont est mobilisée la connaissance de l’élève dans les pratiques enseignantes. En effet, nous pensons que notre projet doctoral ne serait pas complet sans essayer de mieux cerner la mobilisation de cette connaissance dans les activités quotidiennes de l’enseignant avec ses élèves. En troisième lieu, nous décrivons les différentes actions de l’enseignant qui sont influencées ou modulées en fonction des connaissances qu’il possède à propos de ses élèves. À l’aide d’entrevues semi-dirigées (n=25) et de quatre groupes de discussion, ainsi que de l’analyse thématique de leurs transcriptions, nous proposons une vision d’ensemble de la connaissance de l’élève qu’ont les enseignants. Les personnes interrogées ont toutes entre 3 et 8 ans d’expérience en enseignement et travaillent principalement dans la grande région de Montréal. Ils sont enseignants au préscolaire-primaire, au secondaire, en éducation physique et à la santé, en adaptation scolaire et à la formation générale des adultes. Nos résultats montrent que les enseignants possèdent différentes connaissances sur leurs élèves, qu’elles varient selon la matière enseignée et le cycle d’enseignement, qu’ils apprennent sur eux principalement sur le terrain et qu’ils utilisent la connaissance de l’élève dans de nombreuses actions et décisions quotidiennement. Au fil de cette recherche doctorale, il est apparu qu’il n’est pas aisé de circonscrire ce type de connaissance et de bien saisir comment l’enseignant la prend en compte dans son enseignement. Cependant, nous pensons que notre étude mène à des éclaircissements importants dans la manière de concevoir les savoirs professionnels des enseignants, a de fortes implications pour la formation initiale à l’enseignement, tout en proposant une compréhension plus juste du travail enseignant avec les élèves.",
+    "year": 2020,
+    "lang": "fr",
+    "type": "other",
+    "venue": "Open MIND",
+    "topic": "European history and politics",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W6955013338",
+    "title": "Appel à communications : Expansions : traductions et internationalisation de la bande dessinée produite au Canada (Montréal)",
+    "abstract": "Expansions : traductions et internationalisation de la bande dessinée produite au Canada (Montréal) 22 et 23 mai 2024. Colloque à Montréal à l’occasion du Festival BD de Montréal. Date d'échéance : 20 décembre 2023. Texte de l'appel La création en bande dessinée au Canada, tout comme la lecture d’œuvres produites dans ce média, a augmenté depuis une trentaine d’années, entre autres avec la naissance de petites maisons d’édition publiant en de nouveaux formats, plus près de celui traditionnell...",
+    "year": 2023,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Industrias Culturais (Universidade de Coimbra)",
+    "topic": "Emotion and Mood Recognition",
+    "field": "Psychology",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W3115149189",
+    "title": "Virtual care in the pediatric emergency department: a new way of doing business?",
+    "abstract": "",
+    "year": 2020,
+    "lang": "en",
+    "type": "article",
+    "venue": "Canadian Journal of Emergency Medicine",
+    "topic": "Telemedicine and Telehealth Implementation",
+    "field": "Medicine",
+    "ca_institutions": ["Children's Hospital of Eastern Ontario", "University of Ottawa"],
+    "funders": []
+  },
+  {
+    "id": "W2017380165",
+    "title": "Polarization-sensitive optical phenomena in semiconducting and metallic nanowires",
+    "abstract": "An analysis is presented of optical absorption and emission in semiconducting, metallic, and mixed core-shell nanowires are considered theoretically. Due to image forces caused by the difference in dielectric constants between nanowires and their environment, absorption and emission coefficients are different for light polarized parallel or perpendicular to the nanowire axis. As a result, the intensity and spectra of absorption, luminescence, luminescence excitation, and photoconductivity in nanowires or arrays of parallel nanowires are strongly polarization-sensitive. In random nanowire arrays, the effect may result in a ``polarization memory'' where the polarization of the luminescence is determined by the polarization of the exciting light. In light-emitting core-shell nanowire structures, the described redistribution of ac electric field may result in an enhancement of the luminescence from the nanowire cores in the frequency region corresponding to the plasmon resonances of their metallic shells.",
+    "year": 2005,
+    "lang": "en",
+    "type": "article",
+    "venue": "Physical Review B",
+    "topic": "Nanowire Synthesis and Applications",
+    "field": "Engineering",
+    "ca_institutions": "University of Toronto",
+    "funders": "Natural Sciences and Engineering Research Council of Canada"
+  },
+  {
+    "id": "W6920940728",
+    "title": "Additional file 1 of PReoperative very low-Energy diets for obese PAtients undergoing non-bariatric surgery Randomized Evaluation (PREPARE): a protocol for a pilot randomized controlled trial",
+    "abstract": "Additional file 1. Very low energy diet instructions.",
+    "year": 2024,
+    "lang": "en",
+    "type": "article",
+    "venue": "Figshare",
+    "topic": "Bariatric Surgery and Outcomes",
+    "field": "Medicine",
+    "ca_institutions": ["Queen's University", "McMaster University"],
+    "funders": []
+  },
+  {
+    "id": "W1965599725",
+    "title": "The Dream and the Cross",
+    "abstract": "The Dream of the Rood is one of the earliest Christian poems in Old English and an example of the genre of dream poetry. While a complete text can be found in the 10th-century “Vercelli Book,” the poem is considerably older, and its oldest occurrence is carved (in runes) on the 7- to 8th-century Ruthwell Stone Cross. In this article, we present the work done in the framework of the “Visionary Cross” project, starting from the digitization of the Ruthwell Cross to the creation of a web-based digital edition of The Dream of the Rood , as it is carved on the Cross. The 3D data has been collected and processed with the explicit aim of creating a multimedia framework able to present the highly detailed digital model acquired with 3D scanning technology, together with the transcription and translation of the runes that can be found on its surface. The textual and spatial information are linked through a system of bidirectional links called Spots, which allow the users to navigate freely over the multimedia content, keeping the 3D and textual data synchronized. The present work discusses the different issues that arose during the work, from digitization and processing to the design of a tool for the integration of three-dimensional content in the context of the presentation on the web platform of heterogeneous multimedia data. We end with the difficulties involved in the creation of an XML encoding that could account for the necessities of the visualization system but remain within the scholarly encoding standards of the relevant disciplinary community.",
+    "year": 2015,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal on Computing and Cultural Heritage",
+    "topic": "Video Analysis and Summarization",
+    "field": "Computer Science",
+    "ca_institutions": "University of Lethbridge",
+    "funders": []
+  },
+  {
+    "id": "W4414283297",
+    "title": "“Keeping the Door Open”: The Lived Experiences of Developmental Pediatricians in Caring for Families",
+    "abstract": "OBJECTIVE: Within an evolving and increasingly complex pediatric context, little is known about how developmental pediatricians experience their interactions with families within nuanced clinical practices that demand flexibility and a tolerance for ambiguity. To address this gap, this study explored the perspectives and experiences of developmental pediatricians regarding their communications and interactions with children and families. METHOD: A qualitative exploratory design informed by phenomenology was used. Individual semi-structured interviews were conducted with 12 developmental pediatricians across Canada. Issues involving children's agency and their right to participate in shared decision-making were examined. RESULTS: Developmental pediatrics emerged as an inherently relational practice that involves building strong long-term relationships with caregivers through a strength-based, humble, and self-reflexive approach. \"Keeping the door open\" and \"planting the seed\" arose as metaphorical representations of developmental pediatricians' commitment to ensuring caregivers feel supported and understood. Moreover, challenges associated with involving children in decision-making processes, as well as managing caregivers' understandings and desires for their child's diagnosis were evident. CONCLUSION: The findings generated by this study elucidate the clinical approaches and communication styles of developmental pediatricians. Despite participants' strong family-centered approach to care, future clinical considerations should accentuate the promotion of children's autonomy and rights in developmental pediatrics.",
+    "year": 2025,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Developmental & Behavioral Pediatrics",
+    "topic": "Infant Development and Preterm Care",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": "Toronto Metropolitan University"
+  },
+  {
+    "id": "W1966427392",
+    "title": "L'exécution, la transmission, l'extinction, les modalités et le cautionnement : commentaires",
+    "abstract": "La partie de l'Avant-projet commentée ici comporte une véritable réforme du droit. Les rédacteurs y élaborent une théorie des obligations et donnent un nouveau visage au cautionnement. Ils apportent des changements majeurs aux modes d'évaluation des dommages-intérêts et privilégient l'exécution en nature. Ils modernisent les modes de paiement ainsi que le mécanisme des offres réelles et de la consignation. Quant aux modalités des obligations, l'Avant-projet codifie les obligations conjointes et facultatives. Il propose aussi des modifications substantielles au régime juridique de la solidarité mais ne modifie guère celui des obligations à terme et conditionnelles. Dans le cas du cautionnement, diverses dispositions confèrent à ce contrat un aspect plus moderne. La principale réforme consiste dans l'accroissement des droits de la caution. L'auteure s'interroge toutefois sur l'opportunité de compléter la réforme en assimilant la caution à un débiteur solidaire.",
+    "year": 2005,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Les Cahiers de droit",
+    "topic": "Social Sciences and Governance",
+    "field": "Social Sciences",
+    "ca_institutions": "Université Laval",
+    "funders": []
+  },
+  {
+    "id": "W2785785876",
+    "title": "Accelerating Harmonization in Digital Health",
+    "abstract": "Digital tools play an important role in supporting front-line health workers who deliver primary care. This paper explores the current state of efforts undertaken to move away from single-purpose applications of digital health towards integrated systems and solutions that align with national strategies. Through examples from health information systems, data and health worker training, this paper demonstrates how governments and stakeholders are working to integrate digital health services. We emphasize three factors as crucial for this integration: development and implementation of national digital health strategies; technical interoperability and collaborative approaches to ensure that digital health has an impact on the primary care level. Consolidation of technologies will enable an integrated, scaleable approach to the use of digital health to support health workers. PURPOSE: As this edition explores a paradigm shift towards harmonization in primary healthcare systems, this paper explores complementary efforts undertaken to move away from single-purpose applications of digital health towards integrated systems and solutions that align with national strategies. It describes a paradigm shift towards integrated and interoperable systems that respond to health workers' needs in training, data and health information; and calls for the consolidation and integration of digital health tools and approaches across health areas, functions and levels of the health system. It then considers the critical factors that must be in place to support this paradigm shift. This paper aims not only to describe steps taken to move from fractured pilots to effective systems, but to propose a new perspective focused on consolidation and collaboration guided by national digital health strategies.",
+    "year": 2017,
+    "lang": "en",
+    "type": "article",
+    "venue": "World health & population",
+    "topic": "Telemedicine and Telehealth Implementation",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4400946042",
+    "title": "An experimental study of the robustness of electrochemical impedance spectroscopy measurements within consecutive cycles",
+    "abstract": "Diffusion of lithium ions into the electrodes (relaxation effect) was shown to affect the electrochemical impedance spectroscopy (EIS) measurements hours after the load is removed. Previous research primarily examined the influence of rest time following individual charge or discharge cycles while the robustness of the measurements remained mostly unexplored. This study experimentally examined the effects of rest periods between successive cycles. For the first time to the authors’ knowledge, it demonstrated that the repeatability of EIS measurements can be significantly affected by rest periods in between cycles and the SOC level. Additionally, it was discovered that repeatable impedance measurements can be obtained after a very short relaxation period of 15 minutes, supporting the reduction of relaxation period. While additional investigations are required to understand some of the observations and their implications on onboard SOH estimation strategies, this study serves to experimentally demonstrate that the impedance dispersion between successive cycles can be significant and should not be overlooked.",
+    "year": 2024,
+    "lang": "en",
+    "type": "article",
+    "topic": "Analytical Chemistry and Sensors",
+    "field": "Chemical Engineering",
+    "ca_institutions": "McMaster University",
+    "funders": []
+  },
+  {
+    "id": "W2332308009",
+    "title": "Effects Of Preoperative Rehabilitation In Individuals Who Have Undergone Total Knee Arthroplasty: A Systematic Review",
+    "abstract": "Clinical practice typically includes treatment to improve pain, function, motion, and patient independence prior to total knee arthroplasty (TKA). However, it is unknown if this treatment improves outcomes following TKA. PURPOSE: To systematically review and synthesize the scientific literature in regards to how preoperative rehabilitation affects subjective and objective outcomes after TKA. METHODS: A computerized search was performed in February 2010. Criteria for inclusion required that studies (1) were written in English, (2) included patients undergoing TKA, (3) were randomized clinical trials, (4) included preoperative rehabilitation, and (5) reported 2-3 month postoperative point measures and measures of variability for specified outcomes. Outcomes of interest were the Pain, Stiffness, and Function subsections of the Western Ontario and McMaster Universities Osteoarthritis Index (WOMAC), knee flexion range of motion (ROM), and hospital length of stay (LOS). Included studies were reviewed separately by two investigators using the Physiotherapy Evidence Database (PEDro) Scale and a consensus was established for each. Hedge's g effect sizes [95% confidence intervals] were calculated to assess the magnitude of the treatment effect for each outcome, with separate meta-analyses performed as a summary of the treatment response for each outcome. RESULTS: Thirty-four studies were identified and seven met inclusion criteria. The average PEDro score was 5.6 out of 10 (range: 2 to 8). Meta-analysis revealed a weak effect (-0.1 [-0.3 to 0.2]) for preoperative rehabilitation on the Pain section of the WOMAC, a weak effect (-0.1 [-0.3 to 0.2]) for Stiffness, and a weak effect (0.1 [-0.2 to 0.3]) for Function. There was a weak effect (0.2[0.0 to 0.4]) for ROM and a weak effect (-0.2 [-0.4 to 0.0]) for LOS. While all effects were in favor of preoperative treatment, all CIs, except LOS, encompassed zero. CONCLUSION: For all outcomes except LOS, none were consistently favorable toward preoperative rehabilitation over the alternative for patients undergoing TKA. The clinical benefit of preoperative rehabilitation on patient outcomes remains unclear. Effects trended in favor of preoperative treatment, however the limited number of studies that met inclusion criteria likely contributes to weakness of effects.",
+    "year": 2011,
+    "lang": "en",
+    "type": "review",
+    "venue": "Medicine & Science in Sports & Exercise",
+    "topic": "Total Knee Arthroplasty Outcomes",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4382992435",
+    "title": "How Good are Privacy Guarantees? Platform Architecture and Violation of User Privacy",
+    "abstract": "",
+    "year": 2023,
+    "lang": "en",
+    "type": "article",
+    "venue": "SSRN Electronic Journal",
+    "topic": "Privacy, Security, and Data Protection",
+    "field": "Social Sciences",
+    "ca_institutions": "University of Toronto",
+    "funders": []
+  },
+  {
+    "id": "W3133980932",
+    "title": "District Census Handbook, Junagadh, Part XII-A & B, Series-25",
+    "abstract": "Name of the Headquarters of the District/Taluka their Rural-Urban status and distrance from district headquarters, Population of the district at each census from 1901 to 2001, Area, number of village/towns and population in district and taluka, Population of Urban Agglomerations, Towns, Villages with population of 5,000 and above at taluka/C.D block level as per 2001 census and amenities available, Statutory towns with population less than 5,000 as per 2001 census and amenities available, Houseless and Institutional population of talukas, rural and urban 2001",
+    "year": 2016,
+    "lang": "en",
+    "type": "article",
+    "venue": "Census Library, India",
+    "topic": "South Asian Studies and Conflicts",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2482883559",
+    "title": "Freedom, social control, and the problem-solving court movement",
+    "abstract": "Purpose – This chapter considers the consequences on liberty in relationship to the development of the international problem-solving court movement.Design/methodology/approach – The research, which relies principally on ethnographic fieldwork in six different common law countries (England, Ireland, Scotland, Australia, Canada, and the United States), explores the development of local problem-solving courts in each jurisdiction. These include drug courts, community courts, domestic violence courts, and mental health courts. The ethnographic fieldwork was supplemented with data from various other sources, including government reports, parliamentary debates, evaluations of individual court programs, publications issued by various advocacy groups, media accounts, public statements and articles by problem-solving court judges, and analyses of specialty courts in law reviews and other academic journals.Findings – The research reveal that the five countries outside of the United States demonstrate greater concern with protecting the dignity of the court, due process, and individual rights – or what the Australians refer to as open and natural justice.Originality/value – It is the first large-scale comparative study of problem-solving courts in the common law countries where the movement is most advanced.",
+    "year": 2010,
+    "lang": "en",
+    "type": "book-chapter",
+    "venue": "Sociology of crime, law and deviance",
+    "topic": "Legal Education and Practice Innovations",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2095995927",
+    "title": "Interactive exploration of movement data: A case study of geovisual analytics for fishing vessel analysis",
+    "abstract": "The analysis of large movement datasets is a challenging task, because of their size and spatial complexity. This paper presents an interactive geovisual analytics approach named Hybrid Spatio-Temporal Filtering that integrates filtering of multiple movement characteristics, geovisual representations of the data, and multiple coordinated views to enable analysts to focus on movement patterns that are of interest. In particular, we propose a novel technique that combines the fractal dimension and velocity of movement paths to filter out uninteresting records through an iterative signature-building process. In order to allow analysts to explore the data at different scales of the movement path length, fractal dimension estimation is performed using an adjustable moving window technique. These tools are provided in conjunction with a probability-based zonal incursion tool to visually represent when the movement nears areas of interest. The outcome is a geovisual analytics system that allows analysts to specify a hybrid filter consisting of the desired movement path complexity, the length of the paths to consider, and the velocity range that represents specific types of behaviors. This filtering of the data supports analysts in identifying movement paths that match their specified interests, resulting in a reduction in the amount of data shown to the analyst. The utility of the approach was validated through field trials, wherein fisheries enforcement officers analyzed and explored fishing vessel movement data using the prototype system. The participants responded positively to the features of the system and the support it provided for their data analysis activities. The combination of fractal dimension, velocity, and temporal filtering helped them to effectively identify subsets of data that conformed to particular behavioral patterns of interest.",
+    "year": 2012,
+    "lang": "en",
+    "type": "article",
+    "venue": "Information Visualization",
+    "topic": "Data Visualization and Analytics",
+    "field": "Computer Science",
+    "ca_institutions": "Memorial University of Newfoundland",
+    "funders": []
+  },
+  {
+    "id": "W3023719214",
+    "title": "Vasa Praevia",
+    "abstract": "",
+    "year": 2010,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Obstetrics and Gynaecology Canada",
+    "topic": "Historical and Archaeological Studies",
+    "field": "Arts and Humanities",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2161531628",
+    "title": "Does Generalization Occur Following Computer-Based Cognitive Retraining?—An Exploratory Study",
+    "abstract": "Computer-based cognitive retraining (CBCR) intervention has gained great popularity in recent years. This study aimed to investigate the occurrence of skill generalization to daily living task for individuals with acquired brain injury (ABI) after completion of eight modules of a commercially available CBCR program, the Parrot Software. The study investigated changes in individuals' global cognition as measured by the Montreal Cognitive Assessment, and changes in individuals' performance during a medication-box sorting task, a novel instrumental activity of daily living. The medication-box sorting task resembled real life medication management with daily prescribed and over-the-counter medications. Twelve individuals with ABI from a community-based program completed the study. Results indicated that CBCR intervention brought about improvement in global cognition, but the improvement did not appear in any particular cognitive domain. Additionally, the gains in global cognition failed to enhance performance in the medication-box sorting task. This exploratory study demonstrated that while CBCR may be a promising intervention for improving global cognition in individuals with ABI, additional intervention might be needed for generalization to occur to a novel daily task. Future studies should look for the ultimate therapeutic outcome from CBCR interventions or include interventions that could bridge the gap between CBCR intervention and performance improvement in daily living occupations.",
+    "year": 2015,
+    "lang": "en",
+    "type": "article",
+    "venue": "Occupational Therapy In Health Care",
+    "topic": "Dementia and Cognitive Impairment Research",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": "Dominican University of California"
+  },
+  {
+    "id": "W3132046277",
+    "title": "“This is what labels you”: Examining the structural context of how limited English proficiency and experiences with interpretation services interact to shape health and health access for im/migrant women in Metro Vancouver, British Columbia",
+    "abstract": "Considerable research has documented negative health outcomes of ‘language barriers’ for im/migrants in destination countries. There is a crucial need for research underpinned by structural and intersectional frameworks that center im/migrant women’s lived experiences to inform interventions that move beyond the individual-level towards systemic, equity-oriented change. This study analyzed qualitative data from focus groups (4, N=29) and individual interviews with im/migrant women (N=49) and providers (N=10) conducted from July 2018 – February 2020 in Metro Vancouver, British Columbia. Moving beyond conceptualizations of language as a ‘barrier’, narratives revealed how unmet communication needs for im/migrant women operated as a form of systemic discrimination. Responsibility for communication often rested on im/migrant women, relegating them to a second tier of care. Best practices for interpretation included a holistic approach that went beyond availability of language-concordant options towards im/migrant-sensitive models that accommodate converging effects of language, im/migration status, systemic racism, and gender.",
+    "year": 2020,
+    "lang": "en",
+    "type": "dissertation",
+    "venue": "Summit (Simon Fraser University)",
+    "topic": "Interpreting and Communication in Healthcare",
+    "field": "Health Professions",
+    "ca_institutions": [],
+    "funders": "Simon Fraser University"
+  },
+  {
+    "id": "W58530311",
+    "title": "A Half-Century of Productivity Growth and Structural Change in Canadian Agriculture: An Overview",
+    "abstract": "The primary agriculture sector in Canada experienced impressive productivity growth over the 1961-2007 period, outperforming by far productivity growth seen in the Canadian business sector as a whole. In the period in question, the agriculture sector also experienced profound structural changes, from the massive decline in the use of labour input due to mechanization, to the increased use of intermediate inputs (such as fertilizers and pesticides) in the production process. The objective of this article is to highlight some of the most important structural changes observed by Canadian agriculture over the past 50 years, and link them to the robust productivity growth in the sector",
+    "year": 2011,
+    "lang": "en",
+    "type": "article",
+    "venue": "RePEc: Research Papers in Economics",
+    "topic": "Economic Growth and Productivity",
+    "field": "Economics, Econometrics and Finance",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4317541938",
+    "title": "Monte carlo : une approche statistique de la simulation numérique et de l’analyse des transferts radiatifs",
+    "abstract": "National audience",
+    "year": 2017,
+    "lang": "fr",
+    "type": "preprint",
+    "venue": "HAL (Le Centre pour la Communication Scientifique Directe)",
+    "topic": "Radiative Heat Transfer Studies",
+    "field": "Engineering",
+    "ca_institutions": "Université de Sherbrooke",
+    "funders": []
+  }
+]

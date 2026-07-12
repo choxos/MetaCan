@@ -4,7 +4,7 @@ Every number below is produced by a script in `pilot/`, against the live OpenAle
 API, with the raw response archived under `pilot/raw/`. Re-derive them offline,
 with no network at all, using `make pilot-offline`.
 
-Computed: 2026-07-12T20:06:15Z
+Computed: 2026-07-12T21:30:56Z
 
 | # | Finding | Consequence for the design |
 |---|---|---|
@@ -30,7 +30,7 @@ Computed: 2026-07-12T20:06:15Z
 | 20 | **The abstract gap is structural, and no source in the chain reaches it.** The screen's largest measured bias is the abstract gap: 23.3% of the frame (1,003,117 works) has NO ABSTRACT, and finding 11 showed the screen finds HALF as much metaresearch there. Cascading PubMed, Europe PMC and Crossref recovers 37.8% of a 500-work sample, cutting title-only exposure to ~14.5% of the frame. But I BUILT THE CASCADE AROUND CROSSREF as the discipline-agnostic rescue, and it recovered 2 abstracts against PubMed's 180: publishers do not deposit them, so THAT RESCUE DOES NOT EXIST (D15). The gap is therefore not a metadata failure a better index fixes; it is STRUCTURAL. Recovery is 91.2% for reviews against 6.2% for book chapters, 38.8% English against 15.4% French. So the tempting shortcut, 'just screen the works that have abstracts', is a SELECTION ON A COVARIATE THAT PREDICTS THE OUTCOME which would delete 61.6% of book chapters against 22.1% of articles, AND the works it deletes are exactly the works no cascade can rescue. Defensible only as a DECLARED exclusion with a measured cost, and the audit keeps a sampling floor in it. | The screen's largest measured bias: 23.3% of the frame (1,003,117 works) has NO ABSTRACT, and finding 11 measured that the screen finds HALF as much metaresearch there. I built a PubMed/Europe PMC/Crossref cascade around Crossref as the DISCIPLINE-AGNOSTIC rescue, and wrote that reasoning into the script before running it. Crossref recovered TWO abstracts; PubMed recovered 180 (D15). Publishers do not deposit abstracts to Crossref, so THE RESCUE DOES NOT EXIST. The cascade still cuts title-only exposure from 23.3% to ~14.5%, but the finding is worse than the one I went looking for: the gap is STRUCTURAL, not a metadata failure a better index repairs. Recovery is 91.2% for reviews against 6.2% for book chapters and 0% for letters; 38.8% English against 15.4% French. The works with no abstract are disproportionately the works NO abstract service covers, and the residue is humanities-shaped, book-shaped and francophone-shaped: precisely what an inclusive map exists to include. Consequence: 'screen only works with abstracts' is a SELECTION ON A COVARIATE THAT PREDICTS THE OUTCOME (it deletes 61.6% of book chapters against 22.1% of articles), admissible only as a DECLARED exclusion with a measured cost, and the audit keeps a sampling floor in the excluded stratum. |
 | 21 | **The preprint coverage claim, measured instead of asserted.** The frame carries 156,086 preprints, and the tempting move was to assert that OpenAlex covers the preprint servers and skip the ingest. That is a COVERAGE CLAIM, and this project does not get to make one from inside the pipeline being claimed for: it is the topic route certifying its own recall (finding 12). Measured instead against the servers' OWN API, OpenAlex indexes 99.6% of the 705 bioRxiv and medRxiv preprints enumerated (3 missing). The claim survives measurement, so no separate preprint ingest is built. | The frame carries 156,086 preprints and the tempting move was to assert that OpenAlex covers the servers and skip the ingest. That is a COVERAGE CLAIM, and this project does not get to make one from inside the pipeline being claimed for: it is the topic route certifying its own recall. Measured instead against bioRxiv and medRxiv's OWN API, OpenAlex indexes 99.6% of the preprints the servers say they hold. The claim SURVIVES measurement, so no separate ingest is built, and it is allowed in the proposal only because it was checked. arXiv is NOT tested and that claim stays open. |
 | 22 | **The number that looked like a replication and was a coincidence.** The registry is the only REFERENCE STANDARD in this project not made of machine labels: ClinicalTrials.gov knows a Canadian trial happened independently of any pipeline, so it cannot be wrong in the pipeline's favour. Of 304 publications SPONSORS THEMSELVES reported as results of completed Canadian-located trials, the frame holds 160: a naive recall of 52.6%, which fell so close to the 44.5% THIS PROPOSAL OPENS WITH that it read as a replication. IT IS AN ARTIFACT, and running the disambiguation is the only thing that caught it: 137 of the 145 'misses' have NO CANADIAN AUTHOR (multi-site international trials with a Canadian SITE), and a frame of Canadian RESEARCH is CORRECT to exclude them. A trial with a Canadian site is not a publication with a Canadian author. Against the population the frame actually claims, recall is 95.2% (95% CI 90.8-97.9), and the real defect is 8 works OpenAlex holds WITH a Canadian author that the frame's own routes still missed. The frame is GOOD at this, the dramatic parallel was a coincidence between two different populations, and I had every incentive not to check. DEVIATIONS.md D16. | The only reference standard in this project NOT made of machine labels: ClinicalTrials.gov knows a Canadian trial happened independently of any pipeline, so it cannot be wrong in the pipeline's favour. The first number out of it was 52.6% frame recall, which fell so close to the 44.5% THIS PROPOSAL OPENS WITH that it read as a replication of my own prior finding on Canadian data. IT WAS A COINCIDENCE BETWEEN TWO DIFFERENT POPULATIONS. 137 of the 145 'misses' have NO CANADIAN AUTHOR: multi-site international trials with a Canadian SITE, which a frame of Canadian RESEARCH is CORRECT to exclude. A trial with a Canadian site is not a publication with a Canadian author. True recall against the population the frame actually claims is 95.2% (95% CI 90.8-97.9), and the real defect is 8 route-gap works. Every incentive pointed away from running the disambiguation that caught this, which is the condition under which researchers do not check, and it is the condition this project exists to argue is unsafe. DEVIATIONS.md D16. |
-| 23 | **The field's boundary is a region three models each cut differently.** Three frontier models (Opus 4.8, GPT-5.6 high, Grok 4.5) screened the same 1,000 works from the REAL 4.3M frame, on the rubric's FULL eight-field payload, with randomized manifest-logged chunks and harness-written labels: every defect D1, D2, D11 and finding 16 identified, repaired. Design-weighted base rates span 1.89% to 3.54% (1.9x). But the sets are the finding, as finding 16 predicted: of the 51 works ANY model called metaresearch, only 19 (37%) were called metaresearch by ALL THREE, and 24 (47%) rest on a single model's opinion. THE FIELD'S BOUNDARY IS NOT A LINE THE MODELS SHARE; IT IS A REGION THEY EACH CUT DIFFERENTLY. GPT-5.6 also violated the locked output schema on 18 of 1,000 records, writing genre values into the tier field, which the manifest validator caught. The deliverable is not the base rate: it is the disagreement dossier, the 51 works that mark the empirical boundary of the field and against which the inclusion criteria must actually be written. | The run that repairs every harness defect this project found, and then delivers the thing the competition actually asks for. Opus 4.8, GPT-5.6 (high) and Grok 4.5 screened the same 1,000 works, drawn from the REAL 4.3M frame with known selection probabilities, on the rubric's FULL eight-field payload (repairs D1), with chunks randomized and manifest-logged before any model ran (repairs finding 16's confound), labels written by the HARNESS and reconciled against the manifest (repairs D2 and D11). Design-weighted base rates span 1.89% to 3.54%. But finding 16 predicted the real result and it holds: RATE AGREEMENT IS NOT SET AGREEMENT. Of the 51 works ANY model called metaresearch, only 19 (37%) were called metaresearch by ALL THREE, and 24 (47%) rest on a SINGLE model's opinion. Jaccard overlap between any two models is about half. THE FIELD'S BOUNDARY IS NOT A LINE THE MODELS SHARE; IT IS A REGION THEY EACH CUT DIFFERENTLY, and the size of that region is the honest uncertainty. GPT-5.6 also violated the locked output schema on 18 of 1,000 records, writing GENRE values into the TIER field, which the manifest validator caught and which the re-run did not reproduce: the violation is not deterministic. Consequence: the deliverable is NOT a base rate. It is the disagreement dossier, the 51 works that mark the empirical boundary, and the tier-confusion table that names which rubric distinctions three frontier models cannot apply consistently. A distinction three frontier models cannot apply consistently is not a distinction; it is a wish, and the criteria must be rewritten against those seams. The largest seam is OUT-vs-T2: the adjacent traditions (STS, LIS) the inclusiveness criterion exists to protect. |
+| 23 | **The field's boundary is a region three models each cut differently.** Three frontier models (Opus 4.8, GPT-5.6 high, Grok 4.5) screened the same 1,000 works from the REAL 4.3M frame, on the rubric's FULL eight-field payload, with randomized manifest-logged chunks and harness-written labels: every defect D1, D2, D11 and finding 16 identified, repaired. Design-weighted base rates span 2.09% to 3.45% (1.6x). But the sets are the finding, as finding 16 predicted: of the 94 works ANY model called metaresearch, only 35 (37%) were called metaresearch by ALL THREE, and 43 (46%) rest on a single model's opinion. THE FIELD'S BOUNDARY IS NOT A LINE THE MODELS SHARE; IT IS A REGION THEY EACH CUT DIFFERENTLY. GPT-5.6 also violated the locked output schema on 18 of 1,000 records, writing genre values into the tier field, which the manifest validator caught. The deliverable is not the base rate: it is the disagreement dossier, the 94 works that mark the empirical boundary of the field and against which the inclusion criteria must actually be written. | The run that repairs every harness defect this project found, and then delivers the thing the competition actually asks for. Opus 4.8, GPT-5.6 (high) and Grok 4.5 screened the same 1,000 works, drawn from the REAL 4.3M frame with known selection probabilities, on the rubric's FULL eight-field payload (repairs D1), with chunks randomized and manifest-logged before any model ran (repairs finding 16's confound), labels written by the HARNESS and reconciled against the manifest (repairs D2 and D11). Design-weighted base rates span 1.89% to 3.54%. But finding 16 predicted the real result and it holds: RATE AGREEMENT IS NOT SET AGREEMENT. Of the 51 works ANY model called metaresearch, only 19 (37%) were called metaresearch by ALL THREE, and 24 (47%) rest on a SINGLE model's opinion. Jaccard overlap between any two models is about half. THE FIELD'S BOUNDARY IS NOT A LINE THE MODELS SHARE; IT IS A REGION THEY EACH CUT DIFFERENTLY, and the size of that region is the honest uncertainty. GPT-5.6 also violated the locked output schema on 18 of 1,000 records, writing GENRE values into the TIER field, which the manifest validator caught and which the re-run did not reproduce: the violation is not deterministic. Consequence: the deliverable is NOT a base rate. It is the disagreement dossier, the 51 works that mark the empirical boundary, and the tier-confusion table that names which rubric distinctions three frontier models cannot apply consistently. A distinction three frontier models cannot apply consistently is not a distinction; it is a wish, and the criteria must be rewritten against those seams. The largest seam is OUT-vs-T2: the adjacent traditions (STS, LIS) the inclusiveness criterion exists to protect. |
 
 ## Raw values
 
@@ -522,8 +522,8 @@ Computed: 2026-07-12T20:06:15Z
       "dissertation": 4.3
     },
     "pct_dropped_by_language": {
-      "en": 23.7,
-      "fr": 21.6
+      "fr": 21.6,
+      "en": 23.7
     },
     "abstracts_only_is_a_selection_on_the_outcome": true,
     "sampled": 500,
@@ -601,38 +601,54 @@ Computed: 2026-07-12T20:06:15Z
     "sample": "1,000 works, stratified with known selection probabilities, French oversampled",
     "models": "Claude Opus 4.8; GPT-5.6 (high effort); Grok 4.5 (medium effort)",
     "harness": "chunks randomized and manifest-logged before any model ran; the harness writes label files, never the model (repairs D11); every arm reconciled against the manifest (repairs D2)",
-    "n_labelled_by_all_three": 1000,
+    "n_labelled_by_all_three": 2000,
+    "tranche_homogeneity_p": 0.46,
+    "tranches_pool": true,
     "base_rate_weighted_pct": {
-      "opus": 3.54,
-      "gpt": 2.51,
-      "grok": 1.89
+      "opus": 3.45,
+      "gpt": 2.54,
+      "grok": 2.09
     },
-    "between_model_spread_x": 1.9,
-    "jaccard_opus_gpt": 52,
-    "jaccard_opus_grok": 47,
-    "jaccard_gpt_grok": 53,
-    "called_in_scope_by_any": 51,
-    "unanimous_in_scope": 19,
+    "between_model_spread_x": 1.6,
+    "jaccard_opus_gpt": 50,
+    "jaccard_opus_grok": 48,
+    "jaccard_gpt_grok": 55,
+    "n_about_research_at_all": {
+      "opus": 144,
+      "gpt": 120,
+      "grok": 112
+    },
+    "n_in_scope": {
+      "opus": 78,
+      "gpt": 54,
+      "grok": 48
+    },
+    "spread_about_research_x": 1.29,
+    "spread_in_scope_x": 1.62,
+    "variance_is_in_the_rubric_not_the_models": true,
+    "called_in_scope_by_any": 94,
+    "unanimous_in_scope": 35,
     "pct_unanimous_of_any": 37,
-    "in_scope_by_one_model_only": 24,
-    "pct_single_model_of_any": 47,
+    "in_scope_by_one_model_only": 43,
+    "pct_single_model_of_any": 46,
     "contested_by_stratum": {
-      "aff_core": 87,
-      "venue_new": 67,
-      "about_only": 50,
-      "french": 44,
-      "fund_new": 40
+      "aff_core": 72,
+      "about_only": 65,
+      "venue_new": 62,
+      "fund_new": 60,
+      "french": 43
     },
     "tier_disagreement_patterns": {
-      "OUT/T2": 15,
-      "T1": 11,
-      "OUT/T1": 10,
-      "T2": 7,
+      "OUT/T2": 30,
+      "T1": 22,
+      "OUT/T1": 18,
+      "T2": 12,
       "OUT/T1/T2": 3,
-      "T1/T3": 2,
+      "T1/T3": 3,
+      "OUT/T2/T3": 2,
+      "T2/T3": 2,
       "OUT/T1/T3": 1,
-      "T1/T2": 1,
-      "T2/T3": 1
+      "T1/T2": 1
     },
     "gpt_schema_violations_first_pass": 18,
     "gpt_violation_note": "GPT-5.6 (high) wrote GENRE values ('empirical', 'conceptual') into the TIER field on 18 of 1,000 records in its first pass, in 3 of 20 chunks. The validator caught it because the harness reconciles files against a manifest rather than trusting the model's report. Those chunks were RE-RUN, not repaired: coercing a model's output to the schema is fitting the instrument to the data.",

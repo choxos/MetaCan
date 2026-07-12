@@ -1,0 +1,810 @@
+# MétaCan screening rubric (v1.0)
+
+**Locked before screening. Version-controlled. Any change is a new version with a dated entry in `DEVIATIONS.md`.**
+
+Both machine screeners and both human coders work from this document and nothing else. The rubric is the
+instrument; if two coders disagree, the rubric is what they are adjudicated against.
+
+---
+
+## The unit
+
+One work (journal article, preprint, book chapter, report, dataset, or software), identified by its OpenAlex ID.
+You see: title, abstract, publication year, language, venue, OpenAlex topic and field, Canadian institutional
+affiliations, funders.
+
+## The question
+
+**Is the object of study *research itself*?**
+
+Metaresearch studies how research is done, reported, funded, evaluated, disseminated, or governed. The test is
+what the work is *about*, not what field it appears in and not what vocabulary it uses.
+
+A cardiology trial is not metaresearch. A study of *how cardiology trials report their outcomes* is.
+
+---
+
+## Tier
+
+Assign exactly one.
+
+### T1: Core metaresearch
+The primary object of study is research itself. Typical objects:
+
+- research **methods** and their properties (bias, reporting, statistical practice, study design)
+- **reproducibility**, replication, data and code sharing
+- **research integrity**: misconduct, retraction, questionable research practices, authorship
+- **peer review** and editorial process *as objects of study*
+- **research evaluation**, metrics, rankings, funding allocation
+- **scholarly communication**: publishing models, open access, preprints *as objects of study*
+- **bibliometrics and scientometrics** applied to a research literature
+- the **research workforce**: careers, equity, training, capacity
+- **evidence synthesis methodology** (not an individual systematic review's clinical answer, but work *about* how
+  syntheses are done)
+
+### T2: Adjacent
+Empirically or conceptually grounded work on science as a social system that is not framed as metaresearch but
+studies it:
+
+- **science and technology studies (STS)**: social studies of scientific knowledge, practice, controversy
+- **library and information science**: information behaviour of researchers, repositories, discovery
+- **research infrastructure** studies: platforms, data repositories, identifiers, standards
+- **history and philosophy of science** *when the object is contemporary research practice*
+- **research policy** analysis grounded in evidence
+
+T2 is where the field's diversity lives. Be generous here: a paper does not have to call itself metaresearch to
+be studying research.
+
+### T3: Contextual
+Relevant to the ecosystem, mapped and released, but **never pooled into the analytic corpus**:
+
+- editorials, commentaries, opinion pieces about research practice
+- policy documents and position statements
+- announcements of infrastructure, tools, or initiatives
+- news, obituaries, corrections, letters
+
+### OUT: Not metaresearch
+Everything else. Includes, and this is the most common error:
+
+- **A study that uses a method is not a study of the method.** A meta-analysis answering a clinical question is
+  OUT. A study of how meta-analyses handle heterogeneity is T1.
+- **Mentioning a metaresearch term is not studying it.** A lab paper reporting "assay reproducibility", a methods
+  section saying "peer reviewed", a licence note saying "open access": all OUT.
+- **Domain research that happens to be bibliometric in method** but whose object is the domain, not the research:
+  e.g. a bibliometric map of diabetes treatments, produced to summarise diabetes knowledge. Borderline; see below.
+
+---
+
+## The three errors that matter most
+
+These are where the pilot showed retrieval and screening break down. Read them twice.
+
+1. **Polysemy.** `reproducibility` in a biochemistry paper means the assay gives the same reading twice. In a
+   metaresearch paper it means the reproducibility crisis. Only the second is in scope. The same applies to
+   `validation`, `replication`, `bias`, `peer review`, `open access`. **Judge the sense, not the token.**
+
+2. **Method vs. object.** Using bibliometrics ≠ studying research. Ask: *if this paper is right, what do we now
+   know more about: a scientific question, or the practice of science?* If the former, OUT.
+
+3. **Absence of vocabulary is not absence of content.** An STS paper about laboratory practice, or an LIS paper
+   about how researchers find data, may use none of the field's keywords and still be squarely T2. **Do not
+   require the vocabulary.** This is the error that makes the field look smaller and more anglophone than it is.
+
+---
+
+## Canadian linkage
+
+Record which apply (this is metadata, not an inclusion test; the estimand is defined separately in
+`PROTOCOL.md`):
+
+- `CA_AFF`: at least one author affiliated with a Canadian institution
+- `CA_FUND`: funded by CIHR, NSERC, SSHRC, or CFI
+- `ABOUT_CA`: the Canadian research system is a substantive object of study (not a passing mention, not one
+  country among forty in a global comparison)
+
+## Genre
+
+`empirical` · `conceptual` · `editorial/commentary` · `policy` · `infrastructure/announcement` · `other`
+
+OpenAlex's `type` is unreliable and this field is commentary-heavy, so genre is coded, not inherited.
+
+## Language of the work
+
+As published. Do not infer from the venue.
+
+---
+
+## Confidence
+
+- `high`: the rubric decides this cleanly.
+- `medium`: the rubric decides, but a reasonable coder could differ.
+- `low`: genuinely on the boundary, or the abstract is missing/too thin to judge.
+
+**`low` is a legitimate answer and is not a failure.** Records coded `low` by either screener are routed to
+adjudication. A screener that never says `low` is not being careful; it is being confident.
+
+---
+
+## Worked examples
+
+| Title (abridged) | Tier | Why |
+|---|---|---|
+| "Data sharing practices in 500 randomised trials" | **T1** | The object is reporting practice. |
+| "Reproducibility of a Western blot protocol" | **OUT** | Assay reproducibility. Polysemy trap. |
+| "Trends in citation of retracted papers" | **T1** | Object is the literature's own behaviour. |
+| "Laboratory life in a Canadian genomics centre: an ethnography" | **T2** | STS. No metaresearch vocabulary; still studies research. |
+| "How do researchers discover datasets? A survey" | **T2** | LIS, information behaviour of researchers. |
+| "Effectiveness of statins: a network meta-analysis" | **OUT** | Uses a synthesis method to answer a clinical question. |
+| "How network meta-analyses handle inconsistency: a review of 200 reviews" | **T1** | Object is the method. |
+| "Announcing the Canadian Research Data Repository" | **T3** | Infrastructure announcement. Mapped, not pooled. |
+| "Open access mandates are failing early-career researchers" (editorial) | **T3** | Commentary about research practice. |
+| "Bibliometric analysis of diabetes research 2000–2020" | **T2** | Borderline. Bibliometric method, and the object *is* a research literature, so it studies research output. Code T2, `medium`. |
+| "Le libre accès dans les revues québécoises : état des lieux" | **T1** | Scholarly communication, object is publishing practice. French. |
+
+---
+
+## Instructions to the screener
+
+Read the title and abstract. Apply the rubric. Do not use outside knowledge of the authors or the journal's
+reputation. If the abstract is missing, judge on the title alone and set confidence to `low` unless the title is
+unambiguous.
+
+Return the schema in `protocol/screening-schema.json`. One object per work. No prose, no preamble.
+--------------------------------------------------------------------------------
+You are screening works for MetaCan, a map of Canadian metaresearch.
+
+Apply the rubric above to every record in the JSON array below. Return a JSON
+array with one object per work, conforming to protocol/screening-schema.json:
+
+  {"id": "W...", "tier": "T1|T2|T3|OUT", "genre": "...", "about_ca": true|false,
+   "confidence": "high|medium|low", "reason": "one sentence"}
+
+Rules:
+- Return the JSON array and NOTHING else. No prose, no preamble, no code fences.
+- Every input id must appear exactly once in the output.
+- Do not run commands, read files, or browse. Classify from the RECORDS alone.
+
+RECORDS:
+[
+  {
+    "id": "W4388485322",
+    "title": "Can political gridlock undermine checks and balances? A lab experiment",
+    "abstract": "",
+    "year": 2023,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Behavioral and Experimental Economics",
+    "topic": "Experimental Behavioral Economics Studies",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": ["McMaster University", "Agencia Nacional de Investigación e Innovación"]
+  },
+  {
+    "id": "W6968402026",
+    "title": "idekerlab/cellmaps_imagedownloader: New input arguments",
+    "abstract": "Added --protein_list and --cell_line flags that will fetch images from HPA for specific proteins and/or cell line. Bug fixes in fairscape registration.",
+    "year": 2024,
+    "lang": "en",
+    "type": "other",
+    "venue": "Zenodo (CERN European Organization for Nuclear Research)",
+    "ca_institutions": "Smiths Detection (Canada)",
+    "funders": []
+  },
+  {
+    "id": "W4416713375",
+    "title": "Suicide Risk Screening in Pediatric Primary Care: A Quality Improvement Collaborative Approach",
+    "abstract": "",
+    "year": 2025,
+    "lang": "en",
+    "type": "article",
+    "venue": "Academic Pediatrics",
+    "topic": "Suicide and Self-Harm Studies",
+    "field": "Psychology",
+    "ca_institutions": "Encana (Canada)",
+    "funders": ["National Institute of Mental Health", "North Carolina Department of Health and Human Services"]
+  },
+  {
+    "id": "W4230540066",
+    "title": "A systematic review of patient prioritization tools in non-emergency healthcare services",
+    "abstract": "Abstract Background. Patient prioritization is a strategy used to manage access to healthcare services. Patient prioritization tools (PPT) contribute to supporting the prioritization decision process, and to its transparency and fairness. Patient prioritization tools can take various forms and are highly dependent on the particular context of application. Consequently, the sets of criteria change from one context to another, especially when used in non-emergency settings. This paper systematically synthesizes and analyzes the published evidence concerning the development and challenges related to the validation and implementation of PPTs in non-emergency settings. Methods. We conducted a systematic mixed studies review. We searched evidence in five databases to select articles based on eligibility criteria, and information of included articles was extracted using an extraction grid. The methodological quality of the studies was assessed by using the Mixed Methods Appraisal Tool. The article selection process, data extraction, and quality appraisal were performed by at least two reviewers independently. Results. We included 48 studies listing 34 different patient prioritization tools. Most of them are designed for managing access to elective surgeries in hospital settings. Two thirds of the tools were investigated based on reliability or validity. Inconclusive results were found regarding the impact of PPTs on patient waiting times. Advantages associated with PPT use were found mostly in relationship to acceptability of the tools by clinicians and increased transparency and equity for patients. Conclusions. This review describes the development and validation processes of PPTs used in non-urgent healthcare settings. Despite the large number of PPTs studied, implementation into clinical practice seems to be an open challenge. Based on the findings of this review, recommendations are proposed to develop, validate, and implement such tools in clinical settings. Systematic review registration: PROSPERO CRD42018107205",
+    "year": 2020,
+    "lang": "en",
+    "type": "review",
+    "venue": "Research Square",
+    "topic": "Health Systems, Economic Evaluations, Quality of Life",
+    "field": "Economics, Econometrics and Finance",
+    "ca_institutions": ["Centre for Interdisciplinary Research in Rehabilitation", "HEC Montréal", "Université Laval"],
+    "funders": []
+  },
+  {
+    "id": "W7070461745",
+    "title": "Press Release (1958-11-21) Fall quarter enrollment",
+    "abstract": "quarter enrollment sh s that 43 r c.,,nt come from a.rea.soutsid the city",
+    "year": 2017,
+    "lang": "en",
+    "type": "other",
+    "venue": "University of Minnesota Digital Conservancy (University of Minnesota)",
+    "topic": "French Urban and Social Studies",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4391162215",
+    "title": "P661 Ustekinumab in Crohn’s disease: A three-year multicentre prospective study from Hungary - Assessing efficacy, drug sustainability, and safety",
+    "abstract": "Abstract Background While randomized controlled trials have shown ustekinumab (UST) as an effective therapeutic option for Crohn’s disease (CD), there is a lack of long-term observational data in real-world CD patient settings. This prospective study seeks to evaluate the clinical effectiveness, sustainability, and safety of UST in a nationwide multicentre cohort of CD patients over three years. The aim is to bridge the gap in our understanding of UST's real-world implications for long-term CD management. Methods CD patients undergoing ustekinumab (UST) treatment were consecutively enrolled at nine Hungarian Inflammatory Bowel Disease centers from January 2019 to May 2020. Over a three-year period, comprehensive data on patient demographics, disease characteristics, treatment history, clinical disease activity (measured by the Harvey Bradshaw Index (HBI)), biomarkers, and endoscopic activity (evaluated using the Simple Endoscopic Score for Crohn’s Disease (SES-CD)) were systematically collected. Results Involving 148 patients, the cohort comprised 48.9% with complex behavior of CD and 97.2% with previous anti-TNF exposure. Pre-induction remission rates were observed at 12.2% (HBI) and 5.1% (SES-CD). Clinical remission rates (HBI) at the end of the first, second, and third years were 52.2%, 55.6%, and 50.9%, respectively. Criteria for endoscopic remission were met in 14.3%, 27.5%, and 35.3% of subjects at the end of the first, second, and third years. Dose intensification was notable, with 84.0% of patients on an 8-weekly and 29.9% on a 4-weekly regimen by the end of year 3. Throughout the follow-up period, drug sustainability stood at 76.9%, and no serious adverse events were observed. Conclusion Our study confirms that ustekinumab is a sustainable, effective, and safe long-term treatment for Crohn's disease patients with a severe disease phenotype and a history of high anti-TNF failure, with the need for frequent dose adjustments.",
+    "year": 2024,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Crohn s and Colitis",
+    "topic": "Inflammatory Bowel Disease",
+    "field": "Biochemistry, Genetics and Molecular Biology",
+    "ca_institutions": "McGill University Health Centre",
+    "funders": []
+  },
+  {
+    "id": "W4409428638",
+    "title": "Longitudinal deformation-based morphometry pipeline to study neuroanatomical differences in structural MRI based on SyN unbiased templates",
+    "abstract": "Morphometric measures in humans derived from magnetic resonance imaging (MRI) have provided important insights into brain differences and changes associated with development and disease in vivo. Deformation-based morphometry (DBM) is a registration-based technique that has been shown to be useful in detecting local volume differences and longitudinal brain changes while not requiring a priori segmentation or tissue classification. Typically, DBM measures are derived from registration to common template brain space (one-level DBM). Here, we present a two-level DBM technique: first, the Jacobian determinants are calculated for each individual input MRI at the subject level to capture longitudinal individual brain changes; then, in a second step, an unbiased common group space is created, and the Jacobians co-registered to enable the comparison of individual morphological changes across subjects or groups. This two-level DBM is particularly suitable for capturing longitudinal intra-individual changes in vivo, as calculating the Jacobians within-subject space leads to superior accuracy. Using artificially induced volume differences, we demonstrate that this two-level DBM pipeline is 4.5x more sensitive in detecting longitudinal within-subject volume changes compared to a typical one-level DBM approach. It also captures the magnitude of the induced volume change much more accurately. Using 150 subjects from the OASIS-2 dataset, we demonstrate that the two-level DBM is superior in capturing cortical volume changes associated with cognitive decline across patients with dementia and cognitively healthy individuals. This pipeline provides researchers with a powerful tool to study longitudinal brain changes with superior accuracy and sensitivity. It is publicly available and has already been used successfully, proving its utility.",
+    "year": 2025,
+    "lang": "en",
+    "type": "article",
+    "venue": "Aperture Neuro",
+    "topic": "Advanced Neuroimaging Techniques and Applications",
+    "field": "Medicine",
+    "ca_institutions": ["McGill University", "Krembil Foundation", "Douglas Mental Health University Institute", "University of Toronto", "SickKids Foundation", "Hospital for Sick Children"],
+    "funders": ["Alliance de recherche numérique du Canada", "University of Toronto", "Innovation, Science and Economic Development Canada"]
+  },
+  {
+    "id": "W2018552856",
+    "title": "Synthesis, isolation and purification of C10–C13 polychloro-n-alkanes for use as standards in environmental analysis",
+    "abstract": "",
+    "year": 2000,
+    "lang": "en",
+    "type": "article",
+    "venue": "Chemosphere",
+    "topic": "Toxic Organic Pollutants Impact",
+    "field": "Environmental Science",
+    "ca_institutions": "Fisheries and Oceans Canada",
+    "funders": ["Natural Sciences and Engineering Research Council of Canada", "Government of Canada"]
+  },
+  {
+    "id": "W1481146015",
+    "title": "Améliorer les apprentissages en sciences en milieu francophone minoritaire : résultats de l’expérimentation d’un modèle pédagogique*",
+    "abstract": "Selon les postulats théoriques, les faibles résultats scolaires chez les populations linguistiques minoritaires s’expliqueraient par des facteurs socioculturels et économiques, on recommande donc une pédagogie qui composerait avec ces éléments. Dans le cadre de cette recherche, les auteurs ont créé et expérimenté un modèle pédagogique pour enseigner les sciences en milieu minoritaire tenant compte de ces facteurs. Lors d’une intervention de deux mois, des élèves de cinquième année ont étudié les marais salés à partir de ce modèle pédagogique. L’expression écrite et orale de leurs observations demeurait une priorité. Les résultats ont révélé une attitude positive envers l’approche, un apprentissage scientifique important et une progression lexicale aux niveaux oral et écrit.",
+    "year": 2010,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Revue des sciences de l éducation",
+    "topic": "Multilingual Education and Policy",
+    "field": "Social Sciences",
+    "ca_institutions": ["Université de Saint-Boniface", "Université de Moncton"],
+    "funders": []
+  },
+  {
+    "id": "W2095445167",
+    "title": "14-3-3 Proteins Regulate a Cell-Intrinsic Switch from Sonic Hedgehog-Mediated Commissural Axon Attraction to Repulsion after Midline Crossing",
+    "abstract": "",
+    "year": 2012,
+    "lang": "en",
+    "type": "article",
+    "venue": "Neuron",
+    "topic": "Axon Guidance and Neuronal Signaling",
+    "field": "Neuroscience",
+    "ca_institutions": ["McGill University", "Université de Montréal", "Montreal Clinical Research Institute", "Montreal Neurological Institute and Hospital"],
+    "funders": "Canadian Institutes of Health Research"
+  },
+  {
+    "id": "W2079518834",
+    "title": "Thermodynamics of mixtures with strongly negative deviations from Raoult's law. Part 3. Application of the DISQUAC model to mixtures of triethylamine with alkanols. Comparison with Dortmund UNIFAC and ERAS results",
+    "abstract": "Binary mixtures of triethylamine (TEA) and alkanols have been investigated in the framework of DISQUAC. The systems are built by three contacts: aliphatichydroxyl, aliphaticnitrogen, and hydroxylnitrogen. The corresponding interaction parameters are reported and discussed. The former are avalilable in the literature but were modified (particularly the third dispersive (DIS) and quasichemical (QUAC) interchange coefficients) for sec- and tert-alkanols + n-alkanes using recent data on excess heat capacities at constant pressure (C E P ) for systems of these alkanols with n-heptane. The interaction parameters for aliphatic-nitrogen contacts are purely dispersive. The structure dependence of the DIS and QUAC interchange coefficients of the hydroxyl-nitrogen contacts in 1-alkanols + TEA systems is similar to that found in other solutions previously investigated. The QUAC interchange coefficients remain constant from ethanol and are also valid for 2-alkanols and tert-butanol. Methanol behaves differently. A short discussion in terms of effective dipole moments is also included. DISQUAC represents well the thermodynamic properties examined: vapor-liquid equilibria (VLE), molar excess Gibbs energies (G E ) and molar excess enthalpies (H E ). DISQUAC provides better results than the Dortmund version of UNIFAC using the published geometrical and interaction parameters. ERAS parameters for 1-alkanols + TEA systems are also reported. Interactions between unlike molecules are stronger for solutions with methanol or ethanol. DISQUAC improves ERAS results on H E , while both models give similar results for G E . However, ERAS needs an specific parameter, with unknown temperature-dependence, to describe properly G E . The main advantage of ERAS is its ability to provide information on V E . Its main limitation is that can be only applied to those systems where association is expected. DISQUAC, a purely physical model, can be applied to any type of binary mixture, as it is followed from this and previous studies.Key words: theory, liquids, associated, thermodynamics, group contributions.",
+    "year": 2000,
+    "lang": "en",
+    "type": "article",
+    "venue": "Canadian Journal of Chemistry",
+    "topic": "Thermodynamic properties of mixtures",
+    "field": "Chemical Engineering",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W3175758186",
+    "title": "Can We Predict Bronchopulmonary Dysplasia Early in Life?",
+    "abstract": "",
+    "year": 2021,
+    "lang": "en",
+    "type": "letter",
+    "venue": "Neonatology",
+    "topic": "Neonatal Respiratory Health Research",
+    "field": "Medicine",
+    "ca_institutions": "McMaster University",
+    "funders": []
+  },
+  {
+    "id": "W2191286751",
+    "title": "Update on Recurrent Genetic Aberrations in Acute Myeloid Leukemia",
+    "abstract": "Recurrent chromosomal aberrations have long been recognized to influence prognosis in acute myeloid leukemia (AML), however, 50% of AML patients have a normal karyotype. The new millennium ushered in discoveries of gene mutations at the molecular level that predict outcome in patients with normal karyotype. Some recurrent mutations are already used in routine practice for AML risk stratification. With the development of high-throughput sequencing technologies, there has been a storm of new data, uncovering a complex genetic landscape in AML. In this review, we describe the significant progress in characterizing recurrent genetic abnormalities in AML in the last 5 years, focusing on prognostic significance and therapeutic implications.",
+    "year": 2015,
+    "lang": "en",
+    "type": "article",
+    "venue": "International Journal of Hematologic Oncology",
+    "topic": "Acute Myeloid Leukemia Research",
+    "field": "Medicine",
+    "ca_institutions": "University of Calgary",
+    "funders": []
+  },
+  {
+    "id": "W2142896078",
+    "title": "On the reactivity of indium(III) benzenechalcogenolates (chalcogen = sulfur and selenium) towards organyl halides for the synthesis of organyl phenyl chalcogenides",
+    "abstract": "The reactivity of indium(III) benzenechalcogenolates (chalcogen = sulfur, selenium) towards organyl halides (organyl = alkyl, allyl, benzyl, acyl) was examined. A practical one-pot method to prepare organyl phenyl chalcogenides from indium metal and diphenyl dichalcogenide was found. The coupling is fairly broad in scope and generally works better for organyl halides capable to produce stable carbocations.",
+    "year": 2009,
+    "lang": "en",
+    "type": "article",
+    "venue": "Canadian Journal of Chemistry",
+    "topic": "Sulfur-Based Synthesis Techniques",
+    "field": "Chemistry",
+    "ca_institutions": [],
+    "funders": "Conselho Nacional de Desenvolvimento Científico e Tecnológico"
+  },
+  {
+    "id": "W3168561868",
+    "title": "Exploring the limits of fiber-optic sensing in Cascadia: Borehole passive seismic monitoring using co-located DAS, low noise optical accelerometers, and geophones",
+    "abstract": "",
+    "year": 2020,
+    "lang": "en",
+    "type": "article",
+    "venue": "Publication Database GFZ (GFZ German Research Centre for Geosciences)",
+    "topic": "Seismic Waves and Analysis",
+    "field": "Earth and Planetary Sciences",
+    "ca_institutions": "Ocean Networks Canada Society",
+    "funders": []
+  },
+  {
+    "id": "W2493239850",
+    "title": "Michael Oakeshott: Life’s Adventure",
+    "abstract": "The political philosophy unfolded in On Human Conduct certainly lacks nothing for radicalism. The core of Michael Oakeshott’s theorizing is the idea that, as the mandate of the modern state expands, the possibility of living life as the self-sufficient adventure it is meant to be contracts. On Human Conduct is above all a reflection on the nature of the state. It can hardly be an accident that Hobbes and Hegel, two of the figures within the canonical theory tradition who most deeply engaged Oakeshott intellectually, were also utterly preoccupied with the project of theorizing the state. There is no question that Oakeshott wants a severe constraining of the scope of state activity, but this view of the state would not have the philosophical character that it does if it were not tied to views about what it is to live life.",
+    "year": 2014,
+    "lang": "en",
+    "type": "book-chapter",
+    "venue": "Political Philosophy",
+    "topic": "Australian History and Society",
+    "field": "Social Sciences",
+    "ca_institutions": "University of Toronto",
+    "funders": []
+  },
+  {
+    "id": "W2539127255",
+    "title": "Recombinant B-Domain Deleted Porcine Factor VIII (OBI-1) Safety and Efficacy in the Treatment of Acquired Hemophilia A: Interim Results.",
+    "abstract": "Abstract Abstract 2224 Introduction OBI-1 is an investigational B-domain deleted recombinant porcine factor VIII (FVIII) with low cross-reactivity to anti-human FVIII antibodies. Acquired hemophilia A (AHA) is caused by autoantibodies (inhibitors) against human FVIII. Patients are predominantly elderly and have co-morbidities. Current pharmacologic treatment of bleeds is guided by clinical assessment alone as there is no laboratory surrogate for efficacy. Importantly, OBI-1 efficacy can be monitored by FVIII levels in addition to clinical assessment. Methods Accur8 Auto-antibody trial (NCT01178294) is a prospective, open label, Phase 2/3 study. The primary objective is to evaluate efficacy of OBI-1 treatment for serious (life- or limb-threatening) bleeds in patients ≥18 years with AHA. FVIII levels are obtained before and within 10–20 min following initial OBI-1 dose (200U/kg) and at 2–3 h. Additional OBI-1 doses (≤400U/kg every 2–3 h) are administered to achieve target FVIII levels. The primary efficacy outcome is the control of bleeding 24 h after starting OBI-1. Results As of July, 2012, fifteen patients with severe bleeds were entered into the trial along with one individual treated under compassionate use and all had successful control of hemorrhage at 24 h and subsequent resolution of the bleed. Therapeutic FVIII activity levels were achieved and maintained with intermittent OBI-1 administration based on FVIII levels. Six serious adverse events were reported including four deaths after treatment was discontinued, all being unrelated to OBI-1 as determined by the investigators. Antibodies to OBI-1 developed in two subjects indicated with an * in the table below. However, both responded toOBI-1. Conclusions These interim results provide support for the safety and efficacy of OBI-1 in the treatment of serious bleeding episodes in AHA. Additional confirming data could establish OBI-1 as a useful treatment option for AHA. Disclosures: St. Louis: Inspiration Biopharmaceuticals Inc: Research Funding. Kruse-Jarres:Inspiration Biopharmaceiticals Inc: Research Funding. Greist:Inspiration Biopharmaceuticals Inc: Research Funding. Shapiro:Inspiration Biopharmaceuticals Inc: Research Funding. Smith:Inspiration Biopharmaceuticals Inc: Research Funding. Drebes:Inspiration Biopharmaceuticals Inc: Research Funding. Gomperts:Inspiration Biopharmaceuticals Inc: Consultancy.",
+    "year": 2012,
+    "lang": "en",
+    "type": "article",
+    "venue": "Blood",
+    "topic": "Hemophilia Treatment and Research",
+    "field": "Medicine",
+    "ca_institutions": "Hôpital Maisonneuve-Rosemont",
+    "funders": []
+  },
+  {
+    "id": "W6923597261",
+    "title": "British Columbia News",
+    "abstract": "",
+    "year": 2015,
+    "lang": "en",
+    "type": "article",
+    "venue": "Open Collections",
+    "topic": "Legal case studies and regulations",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2116879809",
+    "title": "Issues in the Linguistic Analysis of a Dead Language, with Particular Reference to Ancient Hebrew",
+    "abstract": "With the increasing maturation of the linguistic analysis of ancient Hebrew, it becomes increasingly important that we keep in mind the inherent challenges of analyzing no-longer-spoken languages, like ancient Hebrew. In this article I address a number of such issues in the hopes of provoking some fruitful discussion. First, I address the distinction between linguistic analysis and philological analysis. Then I address some of the major methodological and theoretical challenges facing those who bring modern linguistic theories to bear upon a ‘dead’ language such as ancient Hebrew, including the lack of native speakers, the limited corpus, and the relationship of ancient Hebrew to modern Israeli Hebrew.",
+    "year": 2009,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Hebrew Scriptures",
+    "topic": "Biblical Studies and Interpretation",
+    "field": "Arts and Humanities",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W141549053",
+    "title": "Overview of Canadian Provinces",
+    "abstract": "Rural Development and Canadian Provinces: Setting the Context &#13;\\n10 provinces and 3 territories (northern), Agriculture as key rural sector varies by province, and regions within provinces, Agriculture as source of employment declining, even where value of production maintained or increasing&#13;\\nForestry, fishing, mining mostly same trends",
+    "year": 2005,
+    "lang": "en",
+    "type": "article",
+    "venue": "Memorial University Research Repository (Memorial University)",
+    "topic": "Agriculture and Rural Development Research",
+    "field": "Agricultural and Biological Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2984666471",
+    "title": "Definitive demonstration by synthesis of genome annotation completeness",
+    "abstract": "We develop a method for completing the genetics of natural living systems by which the absence of expected future discoveries can be established. We demonstrate the method using bacteriophage øX174, the first DNA genome to be sequenced. Like many well-studied natural organisms, closely related genome sequences are available—23 Bullavirinae genomes related to øX174. Using bioinformatic tools, we first identified 315 potential open reading frames (ORFs) within the genome, including the 11 established essential genes and 82 highly conserved ORFs that have no known gene products or assigned functions. Using genome-scale design and synthesis, we made a mutant genome in which all 11 essential genes are simultaneously disrupted, leaving intact only the 82 conserved but cryptic ORFs. The resulting genome is not viable. Cell-free gene expression followed by mass spectrometry revealed only a single peptide expressed from both the cryptic ORF and wild-type genomes, suggesting a potential new gene. A second synthetic genome in which 71 conserved cryptic ORFs were simultaneously disrupted is viable but with ∼50% reduced fitness relative to the wild type. However, rather than finding any new genes, repeated evolutionary adaptation revealed a single point mutation that modulates expression of gene H, a known essential gene, and fully suppresses the fitness defect. Taken together, we conclude that the annotation of currently functional ORFs for the øX174 genome is formally complete. More broadly, we show that sequencing and bioinformatics followed by synthesis-enabled reverse genomics, proteomics, and evolutionary adaptation can definitely establish the sufficiency and completeness of natural genome annotations.",
+    "year": 2019,
+    "lang": "en",
+    "type": "article",
+    "venue": "Proceedings of the National Academy of Sciences",
+    "topic": "RNA and protein synthesis mechanisms",
+    "field": "Biochemistry, Genetics and Molecular Biology",
+    "ca_institutions": [],
+    "funders": ["National Human Genome Research Institute", "Macquarie University", "Natural Sciences and Engineering Research Council of Canada", "Government of Canada", "Agilent Technologies"]
+  },
+  {
+    "id": "W7001840469",
+    "title": "Les bourses d'etudes du millenaire au Nouveau-Brunswick : impact sur l'endettement et sur la perseverance / ecrit par Lori McElroy.",
+    "abstract": "Publ. aussi en anglais sous le titre: Millennium bursary in New Brunswick : impact on debt and persistence.",
+    "year": 2010,
+    "lang": "fr",
+    "type": "other",
+    "venue": "QSpace (Queen's University Library)",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4387207909",
+    "title": "Polymetastatic Recurrence-Free Survival in Patients with Repeat Oligometastases on the SABR-5 Trial",
+    "abstract": "",
+    "year": 2023,
+    "lang": "en",
+    "type": "article",
+    "venue": "International Journal of Radiation Oncology*Biology*Physics",
+    "topic": "Lung Cancer Diagnosis and Treatment",
+    "field": "Medicine",
+    "ca_institutions": ["Kelowna General Hospital", "Surrey Memorial Hospital", "Abbotsford Veterinary Clinic", "Positive Living North"],
+    "funders": []
+  },
+  {
+    "id": "W4205174581",
+    "title": "Servir la géographie d’ici et d’ailleurs",
+    "abstract": "",
+    "year": 2006,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Cahiers de géographie du Québec",
+    "topic": "Historical Geography and Geographical Thought",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W6894346560",
+    "title": "Postal Code Conversion File [Canada], August 2018, Census of Canada 2016",
+    "abstract": "&lt;p&gt;The Postal Code Conversion File (PCCF) is a digital file which provides a correspondence between the Canada Post Corporation (CPC) six-character postal code and Statistics Canada's standard geographic areas for which census data and other statistics are produced. Through the link between postal codes and standard geographic areas, the PCCF permits the integration of data from various sources. The Single Link Indicator provides one best link for every postal code, as there are multiple records for many postal codes.&lt;/p&gt; &lt;p&gt;To obtain the postal code conversion file or for questions, consult the &lt;a href=\"https://www.statcan.gc.ca/eng/dli/contact\" target=\"_blank\"&gt; DLI contact&lt;/a&gt; at your educational institution.&lt;/p&gt; &lt;p&gt;The geographic coordinates attached to each postal code on the PCCF are commonly used to map the distribution of data for spatial analysis (e.g., clients, activities). The location information is a powerful tool for planning, or research purposes.&lt;/p&gt; &lt;p&gt;The geographic coordinates, which represent the standard geostatistical areas linked to each postal code&lt;sup&gt;OM&lt;/sup&gt; on the PCCF, are commonly used to map the distribution of data for spatial analysis (e.g., clients, activities). The location information is a powerful tool for marketing, planning, or research purposes. In April 1983, the Statistical Registers and Geography Division released the first version of the PCCF, which linked postal codes&lt;sup&gt;OM&lt;/sup&gt; to 1981 Census geographic areas and included geographic coordinates. Since then, the file has been updated on a regular basis to reflect changes. For this release of the PCCF, the vast majority of the postal codes&lt;sup&gt;OM&lt;/sup&gt; are directly geocoded to 2016 Census geography while others are linked via various conversion processes. A quality indicator for the confidence of this linkage is available in the PCCF.&lt;p&gt; &lt;p&gt;Restricted File Access will be granted only to DLI and Odesi Subscribing Institutions.&lt;/p&gt;",
+    "year": 2018,
+    "lang": "en",
+    "type": "dataset",
+    "venue": "Borealis",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4382680797",
+    "title": "Multi-Level Modelling Strategies for Accurate Assessment of Masonry Arch Bridges",
+    "abstract": "This keynote lecture presents multi-level FE modelling strategies developed within the Computational Structural Mechanics group at Imperial College London for nonlinear simulation of masonry bridges.Most masonry bridges and viaducts were built more than a century ago and are still in use representing key components of roadway and railway infrastructure systems in different countries around the world.Material deterioration and increased traffic loading have led to the progressive development of damage and cracking in the brick/blockwork potentially leading to substandard performance.Accurate assessment is required to evaluate structural safety and guide the implementation of effective strengthening measures.It should be based on a realistic representation of the complex interaction among the different components including arch barrel, spandrel walls, backfill and piers in multi-span bridges.The developed 3D and 2D mesoscale and macroscale models for masonry bridges are based on different scales of representation to model material nonlinearity in masonry.Backfill materials are modelled by elasto-plastic continuum descriptions taking into account the inherent cohesive and frictional characteristics, while the physical interfaces between the different masonry parts and the backfill are represented by nonlinear interfaces allowing for separation and sliding.Detailed mesoscale models enable separate descriptions for masonry units and mortar joints providing a high-fidelity representation of the material response and the incorporation of existing damage and cracking.More efficient macroscale models guarantee a reduced computational cost.They still allow for the typical 3D response of masonry bridges but require detailed calibration of the model material parameters.Numerical examples comprising comparisons against the results from physical experiments on fullscale specimens and monitoring data on realistic bridges are presented for a critical appraisal of the developed multi-level modelling strategies for masonry arch bridges.",
+    "year": 2023,
+    "lang": "en",
+    "type": "article",
+    "venue": "Proceedings of the International Conference on Civil, Structural and Transportation Engineering",
+    "topic": "Structural Health Monitoring Techniques",
+    "field": "Engineering",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2154478539",
+    "title": "Halal Logistics PEST Analysis: The Malaysia Perspectives",
+    "abstract": "Halal logistics is a global business, and the objective of this study is to analyse the general environment of Halal logistics in Malaysia by using the PEST Analysis. This study is exploratory in nature and applies literature survey and the External Factors Evaluation (EFE) Matrix methodology. The results generated 20 factors that externally influencing the Malaysia Halal logistics scene. Plus, from the analysis, the opportunities and threats are also showcased. This study is the first attempt to analyse the external environment of Malaysia Halal logistics industry, and it is hoped that this study will be a platform or future reference for more academic and professional research in Halal industry.",
+    "year": 2014,
+    "lang": "en",
+    "type": "article",
+    "venue": "Asian Social Science",
+    "topic": "Halal products and consumer behavior",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W1852722224",
+    "title": "System to aid navigation: sideways movement detection",
+    "abstract": "After a long journey by car, due to fatigue, the positioning by the driver on the road leaves much to be desired. It is not uncommon to be too much to the right or left. The authors present the theory of a brightness and contrast detector, a device to aid navigation which warns the driver by means of a light and an audible signal. The proposed system is an assistant to the driver which keeps the driver awake when he is just about to fall asleep. The system detects if the vehicle's wheels go beyond a demarcatian line of the route with respect to the vehicle on the route, and start the wake up alarm. Due to an intelligent microcontroller module, the system the permits a filtering of false alarms when the driver signals for a significant change in the direction of the route.",
+    "year": 2002,
+    "lang": "en",
+    "type": "article",
+    "topic": "Sensor Technology and Measurement Systems",
+    "field": "Computer Science",
+    "ca_institutions": "Université du Québec à Trois-Rivières",
+    "funders": []
+  },
+  {
+    "id": "W176611749",
+    "title": "Tom Forrestall: Paintings, Drawings, Writings. Art Gallery of Nova Scotia, June 14 to November 2008Art Gallery of Nova Scotia, June 14 to November 2008",
+    "abstract": "",
+    "year": 2009,
+    "lang": "en",
+    "type": "article",
+    "venue": "Vie des arts",
+    "topic": "Cultural Industries and Urban Development",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4411142852",
+    "title": "Optimizing Gammatone Cepstral Coefficients for Gear Fault Detection",
+    "abstract": "Cepstral features, such as Gammatone Cepstral Coefficients (GTCC), have recently been applied in fault detection and diagnosis. However, GTCC was originally designed for speech feature extraction rather than fault detection, which limits its ability to effectively capture relevant features for fault identification. In this research, three key parameters of GTCC namely, the number of coefficients, maximum frequency, and minimum frequency are optimized using two metaheuristic algorithms: Fitness Dependent Optimizer (FDO) and Grey Wolf Optimization (GWO). These parameters are vital for enhancing the effectiveness of GTCC in extracting relevant features from the vibration signal for gear defect identification. Specifically, the maximum and minimum frequency values are critical for capturing the Gear Mesh Frequency (GMF), a common indicator of gear faults. Furthermore, optimizing the number of GTCC coefficients helps reduce model complexity. Experimental results demonstrate that optimizing GTCC parameters with GWO improves fault detection performance using an SVM classifier, achieving over 1% and 3% accuracy improvements on the PHM09 and DDS datasets, respectively.",
+    "year": 2025,
+    "lang": "en",
+    "type": "article",
+    "venue": "IEEE Access",
+    "topic": "Advanced machining processes and optimization",
+    "field": "Engineering",
+    "ca_institutions": "Artificial Intelligence in Medicine (Canada)",
+    "funders": []
+  },
+  {
+    "id": "W6920970920",
+    "title": "Additional file 1 of Development of a computer-based quantification method for immunohistochemically-stained tissues and its application to study mast cells in equine wound healing (proof of concept)",
+    "abstract": "Additional file 1. Detailed mast cell immunohistochemistry protocol. Full immunohistochemistry protocol for the mast cell identification in limb and body wounds of horses included in the study.",
+    "year": 2020,
+    "lang": "en",
+    "type": "article",
+    "venue": "Figshare",
+    "topic": "Mast cells and histamine",
+    "field": "Immunology and Microbiology",
+    "ca_institutions": "Université de Montréal",
+    "funders": []
+  },
+  {
+    "id": "W4220924938",
+    "title": "Local regulation of extracellular vesicle traffic by the synaptic endocytic machinery",
+    "abstract": "Neuronal extracellular vesicles (EVs) are locally released from presynaptic terminals, carrying cargoes critical for intercellular signaling and disease. EVs are derived from endosomes, but it is unknown how these cargoes are directed to the EV pathway rather than for conventional endolysosomal degradation. Here, we find that endocytic machinery plays an unexpected role in maintaining a release-competent pool of EV cargoes at synapses. Endocytic mutants, including nervous wreck (nwk), shibire/dynamin, and AP-2, unexpectedly exhibit local presynaptic depletion specifically of EV cargoes. Accordingly, nwk mutants phenocopy synaptic plasticity defects associated with loss of the EV cargo synaptotagmin-4 (Syt4) and suppress lethality upon overexpression of the EV cargo amyloid precursor protein (APP). These EV defects are genetically separable from canonical endocytic functions in synaptic vesicle recycling and synaptic growth. Endocytic machinery opposes the endosomal retromer complex to regulate EV cargo levels and acts upstream of synaptic cargo removal by retrograde axonal transport. Our data suggest a novel molecular mechanism that locally promotes cargo loading into synaptic EVs.",
+    "year": 2022,
+    "lang": "en",
+    "type": "article",
+    "venue": "The Journal of Cell Biology",
+    "topic": "Cellular transport and secretion",
+    "field": "Biochemistry, Genetics and Molecular Biology",
+    "ca_institutions": "University of Toronto",
+    "funders": ["National Institute of Neurological Disorders and Stroke", "National Institute of Mental Health", "Natural Sciences and Engineering Research Council of Canada", "National Institutes of Health"]
+  },
+  {
+    "id": "W2266165469",
+    "title": "Determinants of Health of People Living in the Community and Institutions",
+    "abstract": "Background and motivation: The identification of medical and non-medical factors that explain the heterogeneity in population health is an important topic in health policy. Previous determinants of health studies have mainly dealt with community samples. The few that have dealt with both community and institutionalized population are descriptive or focus of the risk of institutionalization. Results from our study will provide important evidence on the generalizability of the population health/determinants of health framework. Objectives: The primary objective is to test whether the same variables explain variations in health of people living in the community and in institutions. The secondary objective is to identify variables that have quantitatively important and statistically significant associations with health-related quality of life (HRQL) for those living in the community and institutions. Methodology: Data used for the analyses was 1996/97 National Population Health Survey household and institutions (combined) cross-sectional Microdata files. Target population was those aged 40 and over (sample size is approximately 37,000). A multiple linear regression model (overall Health Utilities Index Mark 3 (HUI3) scores as a dependent variable) with a dummy variable indicating living arrangement (community or institutions) was estimated to examine whether the same statistical equation holds for the community and the institutional data. Individual characteristics, socio-economic status, and health risk factors were included in the model as control variables. A Chow test was conducted for this purpose. In addition, the clinical importance and statistical significance of each coefficient were assessed. For HUI3, differences of 0.03 or more in overall scores are interpreted as quantitatively important. Sampling weights and Taylor linearization method were used to take account of the complex survey design such as unequal selection probabilities, stratification and clustering. SAS 9.0 and SUDAAN 9.0.1 were used for statistical analyses. Results: Chow test was significant (p Conclusions: Determinants of health equations importantly differ between community and institutional residents. Usual determinants of health factors such as age, education and financial status seem not to be major factors that explain the variations in health of residents in the institutions.",
+    "year": 2007,
+    "lang": "en",
+    "type": "article",
+    "venue": "SSRN Electronic Journal",
+    "topic": "Health disparities and outcomes",
+    "field": "Social Sciences",
+    "ca_institutions": "University of Alberta",
+    "funders": []
+  },
+  {
+    "id": "W4408242848",
+    "title": "Cross-Border Anxiety among Korean Border Commuters at the US–Mexico Border",
+    "abstract": "Based on ethnographic fieldwork on the Korean transborder community in the US–Mexico border region, this article examines Korean border commuters’ experiences of border inspections through the lens of cross-border anxiety. Interrogating cross-border anxiety offers insight into the ways in which border inspections require border crossers to surrender to the absolute power of the sovereign state, which can arbitrarily shift the framing of non-citizens from “desirable” to “threat.” By applying Mark B. Salter’s conceptualization of sovereign exceptionalism in borderlands, this article shows how discretionary border performance – border agents’ interactions with border crossers – not only adjudicates border crossers’ entry into the country but also has disciplinary effects on immigrants – both border crossers and those around them. This article extends the current discourse by paying attention to how Korean border crossers and their communities find ways to manage their cross-border anxiety in this context by presenting themselves as docile and obedient subjects or restricting their border-crossing mobility and/or employment opportunities. Furthermore, this article shows how immigrants construct counter-discourses that push back against the state’s framing of them as “undesirable.”",
+    "year": 2025,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Borderlands Studies",
+    "topic": "Psychosocial Factors Impacting Youth",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2100945580",
+    "title": "Assessment of the UV camera sulfur dioxide retrieval for point source plumes",
+    "abstract": "",
+    "year": 2009,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Volcanology and Geothermal Research",
+    "topic": "Wind and Air Flow Studies",
+    "field": "Environmental Science",
+    "ca_institutions": "Barrie Urology Group",
+    "funders": ["U.S. Geological Survey", "National Science Foundation"]
+  },
+  {
+    "id": "W2745753856",
+    "title": "Reduced Inferior and Orbital Frontal Thickness in Adolescent Bulimia Nervosa Persists Over Two-Year Follow-Up",
+    "abstract": "",
+    "year": 2017,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of the American Academy of Child & Adolescent Psychiatry",
+    "topic": "Eating Disorders and Behaviors",
+    "field": "Psychology",
+    "ca_institutions": "Columbia College",
+    "funders": "National Institute of Mental Health"
+  },
+  {
+    "id": "W2139227499",
+    "title": "Tim Cook, No place to Run: The Canadian Corps and Gas Warfare in the First World War",
+    "abstract": "",
+    "year": 2001,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of military and strategic studies",
+    "topic": "Vietnamese History and Culture Studies",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W3197654966",
+    "title": "Protected states in AdS <sub>3<\/sub> backgrounds from integrability",
+    "abstract": "Abstract We write down the algebraic Bethe ansatz for string theory on AdS 3 × S 3 × T 4 and AdS 3 × S 3 × K3 in its orbifold limits. We use it to determine the wave-functions of protected closed strings in these backgrounds and prove that their energies are protected to all orders in α ′. We further apply the ABA to find the wave functions of protected states of AdS 3 × S 3 × S 3 × S 1 and its Z 2 orbifold. Our findings match with protected spectrum calculations from supergravity, Sym N orbifolds and apply to the complete moduli space of these theories, excluding orbifold blow-up modes for which further analysis is necessary.",
+    "year": 2021,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Physics A Mathematical and Theoretical",
+    "topic": "Black Holes and Theoretical Physics",
+    "field": "Physics and Astronomy",
+    "ca_institutions": [],
+    "funders": ["Science and Technology Facilities Council", "Engineering and Physical Sciences Research Council", "Government of Canada"]
+  },
+  {
+    "id": "W4361188949",
+    "title": "Malignant Cerebellopontine Angle Peripheral Nerve Sheath Tumor with Divergent Mesenchymal (Cartilaginous) Differentiation Presenting with Catastrophic Hemorrhage: Case Report and Review",
+    "abstract": "Malignant peripheral nerve sheath tumors of the cerebellopontine angle are rare, especially even outside of the context of neurofibromatosis or malignant transformation of previously radiated vestibular schwannomas. This case report describes a case of a presumed vestibular schwannoma without previous radiation or history of neurofibromatosis presenting with progressive hearing loss, facial weakness, growth, and ultimately catastrophic hemorrhage requiring urgent surgery. Histopathology revealed an exceptionally rare malignant peripheral nerve sheath tumor with divergent mesenchymal (chondrosarcomatous) differentiation with few rigorously interrogated cases in the literature. In retrospect, facial weakness, growth, and early intratumoral hemorrhage were harbingers of atypical malignant pathology. We advocate for a heightened index of suspicion, shorter interval follow-up, and consideration of early surgery in such cases in hopes of preventing potentially catastrophic outcomes. Cite this article as: Lai C, Bajin D, Chen JM, Dickson BC, Keith J, Pirouzmand F. Malignant cerebellopontine angle peripheral nerve sheath tumor with divergent mesenchymal (cartilaginous) differentiation presenting with catastrophic hemorrhage: case report and review. J Int Adv Otol. 2023;19(2):155-158.",
+    "year": 2023,
+    "lang": "en",
+    "type": "article",
+    "venue": "The Journal of International Advanced Otology",
+    "topic": "Neurofibromatosis and Schwannoma Cases",
+    "field": "Medicine",
+    "ca_institutions": ["Health Sciences Centre", "University of Toronto", "Mount Sinai Hospital", "Sunnybrook Health Science Centre"],
+    "funders": []
+  },
+  {
+    "id": "W6958638884",
+    "title": "Additional file 6 of Stand carbon storage and net primary production in China’s subtropical secondary forests are predicted to increase by 2060",
+    "abstract": "Additional file 6. Descriptive statistics for the spatial heterogeneity of stand growth by forests in all selected permanent forest plots in Hunan Province in 2014. Including stand-structure variables: stem density (stems ha-1), stand age (year), diameter at breast height (DBH, cm), height (m), NPP (t ha-1 yr-1) and stand biomass (t ha-1).",
+    "year": 2022,
+    "lang": "en",
+    "type": "article",
+    "venue": "Figshare",
+    "topic": "Advances in Cucurbitaceae Research",
+    "field": "Biochemistry, Genetics and Molecular Biology",
+    "ca_institutions": "Université du Québec à Montréal",
+    "funders": []
+  },
+  {
+    "id": "W3000533481",
+    "title": "The Eucharist as a Hermeneutical Lens in the Preaching of Peter Chrysologus",
+    "abstract": "[Figure: see text] Peter Chrysologus, the bishop of Ravenna in the first half of the fifth century, tended to read the texts of the gospels through a eucharistic lens. Like other patristic writers, Peter viewed the same realities of faith operating in both the gospel accounts and in the liturgy of the Church. This article explores that relationship under three aspects evident in his homilies, especially in Sermons 33–36 about the woman with the twelve-year hemorrhage (Mark 5:21–43). Peter views the pericope under the three continuities of desperation, presence, and faith. Peter sees the Church’s faith, like the woman’s, as arising out of desperation or the hopelessness of finding a cure for its wounds. Yet, the same presence tapped by the woman who touched the hem of Jesus’s garment can be touched in the Eucharist because the same presence that was present in the first century is operating in the liturgy of the fifth century. What is not so evident is that Peter’s audience will exercise the same faith as this desperate woman. In his highest expectations, Peter hopes that his own congregation will touch the Eucharist and so be healed like the hemorrhaging woman. While Peter never formulated a doctrine of the Eucharist per se, his proclamation assumes a profound continuity between the life of Christ and the sacramental life of the Church.",
+    "year": 2019,
+    "lang": "en",
+    "type": "article",
+    "venue": "Toronto Journal of Theology",
+    "topic": "Biblical Studies and Interpretation",
+    "field": "Arts and Humanities",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W6992920289",
+    "title": "Nanodielectrics: A \"Universal\" Panacea for Solving All Electrical Insulation Problems?",
+    "abstract": "At times new paradigms are observed to emerge. One example of\\nthis concerns the introduction of the concept of “Nanodielectrics”\\nin 2001. It is often demeaned that with new concepts must come\\nnew ways of thinking, opened-minded consideration and unbounded\\nexploration. In this spirit, an activity of high-creative intensity\\nwas organized at Hydro-Québec’s research institute (IREQ)\\non October 31st, 2008. A very diversified crowd of international\\nscientists gathered at IREQ to exchange and reflect on the topic. An\\nopportunity to be seized to break the established precincts and, to\\nquestion and imagine the potentialities.\\nProvocative at times, the comments and views were only meant\\nto elicit the progress of our thinking. The present paper does not\\nsummarize the proceedings of the event that came to be known as\\nthe “Brainstorm at the institute”. This paper offers a broad and\\ndiverse view of the topic, with many remaining questions of importance\\nand feeded by recent progress and further reflection. Although\\nlong, the paper gives a vivid picture of the situation allowing\\ncriticism and stressing the many unanswered questions. Multidisciplinary\\nzest is obvious.\\nMost of the participants joined in this new adventure. The list of\\nauthors is given at the end with an indication of their respective\\ncontribution. In view of the great number of authors, no effort was\\nundertaken to reconcile the styles. The end product is a result of a\\nparticipatory effort, and every bit does not need to be guarantied\\nand accepted by all.\\nThe paper benefited particularly from the contributions of some\\nscientists stranger to the usual field, namely A. Vijh, L. Utracki and\\nH. Alamdari. Ashok Vijh joined us with his background in electrochemistry\\nand has enlightened us with analogies of other fields\\nconcepts and applications (Chapter II). Leszek Utracki, a polymer\\nscientist of many talents, has taught us by linking the polymeric\\ncontext of nanocomposites to the dielectric properties. He has produced\\nChapter III. This would have been a logical determining\\ncobblestone just after the introduction of the concept in 2001. This\\nsomewhat warranted a welcomed longer contribution.Finally, Houshang\\nAlamdari is back in the mist of academic research. He was\\nassociated with the nanodielectrics from the beginning. For this\\npaper, he introduced a non-electrotechnical application based on a\\nnanodielectric material (Chapter VIII, section B).",
+    "year": 2010,
+    "lang": "en",
+    "type": "article",
+    "venue": "Figshare",
+    "topic": "Power Transformer Diagnostics and Insulation",
+    "field": "Engineering",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W6901382958",
+    "title": "Most Recent Data (2002). Statistics Canada. CANSIM: Society and Community - Time Use | Country: Canada | Table: Health behaviour in school-aged children 2002, Canadian student response to question: How many times a week do you usually eat or drink these items? | Variable: 15 years, Other milk products, Less than once a week, Males | Units: %, 2002. Data-Planet™ Statistical Ready Reference by Conquest Systems, Inc. Dataset-ID: 075-001-191.",
+    "abstract": "Statistics Canada (2015). CANSIM: Society and Community - Time Use | Country: Canada | Table: Health behaviour in school-aged children 2002, Canadian student response to question: How many times a week do you usually eat or drink these items? | Variable: 15 years, Other milk products, Less than once a week, Males | Units: %, 2002. Data-Planet™ Statistical Ready Reference by Conquest Systems, Inc. [Data-file]. Dataset-ID: 075-001-191. Dataset: Provides data on how Canadians use their time, including participating in and allotting time to a variety of activities. Included are the contexts of these activities such as social context, location, and modes of transport. Time spent on paid and unpaid work, sleep, education, sports, child care, volunteering, meals, television viewing, leisure, and socializing is covered, along with time stress, time crunch, and the valuation of unpaid work. CANSIM is Statistics Canada's key socioeconomic database. The datasets included here provide statistics on the Canadian population, and the nation’s resources, economy, society, and culture. In addition to conducting a Census every five years, approximately 350 active surveys are conducted on virtually all aspects of Canadian life. Statistics are provided for the nation as a whole, provinces, and other subnational geographies where available. Category: Population and Income Source: Statistics Canada Established as Canada's central statistical office by the Statistics Act of 1985, Statistics Canada is required to \"collect, compile, analyse, abstract and publish statistical information relating to the commercial, industrial, financial, social, economic and general activities and conditions of the people of Canada.\" Its main objectives are to provide statistical information and analysis about Canada’s economic and social structure and to promote sound statistical standards and practices. http://www.statcan.gc.ca/ Subject: Leisure Activities, Time Utilization",
+    "year": 2015,
+    "lang": "en",
+    "type": "other",
+    "venue": "Data Planet",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W1967153691",
+    "title": "Roles, Authority and Involvement of the Management Accounting Function: A Multiple Case-study Perspective",
+    "abstract": "Recent techniques and shifts in the environment are often viewed as leading management accountants to adopt a business orientation. However, empirical evidence pointing to clear shifts in the role played by management accountants remains relatively scarce. From in-depth qualitative research based on 73 interviews in ten multinational companies, we identify four distinct styles of management accounting function: discrete, safeguarding, partner, and omnipotent. We show that each style can be associated with one main role: discrete control of managerial behaviour, socialisation of managers, facilitation of decision-making, and centralisation of power. From this in-depth analysis of management accountants' styles and roles we move on to discuss the authority they hold and the independence/involvement dilemma they face.",
+    "year": 2011,
+    "lang": "en",
+    "type": "article",
+    "venue": "European Accounting Review",
+    "topic": "Accounting and Organizational Management",
+    "field": "Business, Management and Accounting",
+    "ca_institutions": "HEC Montréal",
+    "funders": []
+  },
+  {
+    "id": "W3124759498",
+    "title": "Viability and stress state of bacteria associated with primary production or zooplankton-derived suspended particulate matter in summer along a transect in Baffin Bay (Arctic Ocean)",
+    "abstract": "",
+    "year": 2021,
+    "lang": "en",
+    "type": "article",
+    "venue": "The Science of The Total Environment",
+    "topic": "Arctic and Antarctic ice dynamics",
+    "field": "Earth and Planetary Sciences",
+    "ca_institutions": "Université Laval",
+    "funders": ["Institut Polaire Français Paul Emile Victor", "Centre National d’Etudes Spatiales", "Agence Nationale de la Recherche"]
+  },
+  {
+    "id": "W4417525534",
+    "title": "Narcissistic Abuse Cycle Deserves Clinical and Research Attention",
+    "abstract": "Lay sources contend that the narcissistic abuse cycle occurs in many relationships and inflicts serious psychological harm. However, the phenomenon has scant mention in academic literature. Researchers should refine its definition, boundaries, characteristics, and management. Clinicians should be vigilant about its presence and employ interventions proven effective in similar conditions.",
+    "year": 2025,
+    "lang": "en",
+    "type": "article",
+    "venue": "Indian Journal of Psychological Medicine",
+    "topic": "Personality Traits and Psychology",
+    "field": "Psychology",
+    "ca_institutions": "St. Thomas Hospital",
+    "funders": []
+  },
+  {
+    "id": "W4388205957",
+    "title": "Mamuapuat au bout de la route",
+    "abstract": "Si les relations entre Autochtones et Allochtones sont relativement bien documentées au plan politico-institutionnel, notamment de la gouvernance, des relations de « nation à nation », et des négociations d’ententes territoriales, il s’avère que les modalités de cette rencontre, telle qu’elle se déploie au quotidien, demeurent quant à elles peu connues et valorisées. Dans cet article, nous nous intéressons à la cohabitation interculturelle, sur la Côte-Nord, entre la communauté innue de Nutashkuan et le village de Natashquan. À partir d’une démarche partenariale et interculturelle, nous explorons la cohabitation sur les territoires du quotidien, afin de mieux comprendre les facteurs de rapprochement et de distance au sein des communautés ainsi que dans l’arrière-pays, le Nitassinan, territoire ancestral innu, partagés depuis plus de 165 ans avec les Macacains et les Macacaines, de descendance acadienne. Notre article aboutit à une réflexion sur l’expérience des individus et des communautés dites périphériques en mettant de l’avant le vivre-ensemble.",
+    "year": 2023,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Cahiers de géographie du Québec",
+    "topic": "Migration, Identity, and Health",
+    "field": "Social Sciences",
+    "ca_institutions": "Université du Québec à Montréal",
+    "funders": []
+  },
+  {
+    "id": "W7019504808",
+    "title": "High Throughput, Low Toxic Processing of Very Thin, High Efficiency CIGSSs Solar Cells (Year 3 Quarter 1)",
+    "abstract": "CIGSS Solar Cells, Year 3 Quarter 2",
+    "year": 2007,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of International Crisis and Risk Communication Research",
+    "topic": "Chalcogenide Semiconductor Thin Films",
+    "field": "Engineering",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2964172349",
+    "title": "DISTRIBUTIVE LATTICES OF TILTING MODULES AND SUPPORT τ-TILTING MODULES OVER PATH ALGEBRAS",
+    "abstract": "Abstract In this paper, we study the poset of basic tilting kQ -modules when Q is a Dynkin quiver, and the poset of basic support τ-tilting kQ -modules when Q is a connected acyclic quiver respectively. It is shown that the first poset is a distributive lattice if and only if Q is of types $\\mathbb{A}_{1}$ , $\\mathbb{A}_{2}$ or $\\mathbb{A}_{3}$ with a non-linear orientation and the second poset is a distributive lattice if and only if Q is of type $\\mathbb{A}_{1}$ .",
+    "year": 2016,
+    "lang": "en",
+    "type": "article",
+    "venue": "Glasgow Mathematical Journal",
+    "topic": "Algebraic structures and combinatorial models",
+    "field": "Mathematics",
+    "ca_institutions": "Université de Sherbrooke",
+    "funders": []
+  },
+  {
+    "id": "W4385543435",
+    "title": "Mindfulness-based Practices in Workers to Address Mental Health Conditions: A Systematic Review",
+    "abstract": "The effectiveness of mindfulness techniques in addressing address mental health conditions in workers is uncertain. However, it could represent a therapeutic tool for workers presenting with such conditions. Our objective was to assess the effects of mindfulness-based practices for workers diagnosed with mental health conditions. We conducted a systematic review of randomized controlled trials (RCT). Participants included were workers with a mental health condition. Interventions included any mindfulness technique, compared to any non-mindfulness interventions. Outcomes were scores on validated psychiatric rating scales. 4,407 records were screened; 202 were included for full-text analysis; 2 studies were included. The first study (Finnes et al, 2017) used Acceptance and Commitment Therapy (ACT) associated or not with Workplace Dialogue Intervention (WDI), compared to treatment as usual. At 9 months follow-up, for the ACT group, depression scores improved marginally (Standardized Mean Difference, SMD: -0.06, p=0.021), but anxiety scores were worse (SMD: 0.15, p=0.036). Changes in mental health outcomes were not statistically significant for the ACT+WDI group. In the second study (Grensman et al, 2018), no statistically significant change in mental health scales has been observed after completion of mindfulness-based cognitive therapy (MBCT) compared to Cognitive-Behavioral Therapy (CBT). Substantial heterogeneity precluded meta-analysis. This systematic review did not find evidence that mindfulness-based practices provide a durable and substantial improvement of mental health outcomes in workers diagnosed with mental health conditions.",
+    "year": 2023,
+    "lang": "en",
+    "type": "review",
+    "venue": "Safety and Health at Work",
+    "topic": "Mindfulness and Compassion Interventions",
+    "field": "Psychology",
+    "ca_institutions": ["College of Physicians and Surgeons of Ontario", "University of Alberta"],
+    "funders": ["Department of Psychiatry, Faculty of Medicine, University of British Columbia", "University of Alberta", "Faculty of Medicine and Dentistry, University of Alberta", "Workers' Compensation Board – Alberta", "Alberta Health Services"]
+  }
+]

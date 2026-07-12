@@ -1,0 +1,807 @@
+# MétaCan screening rubric (v1.0)
+
+**Locked before screening. Version-controlled. Any change is a new version with a dated entry in `DEVIATIONS.md`.**
+
+Both machine screeners and both human coders work from this document and nothing else. The rubric is the
+instrument; if two coders disagree, the rubric is what they are adjudicated against.
+
+---
+
+## The unit
+
+One work (journal article, preprint, book chapter, report, dataset, or software), identified by its OpenAlex ID.
+You see: title, abstract, publication year, language, venue, OpenAlex topic and field, Canadian institutional
+affiliations, funders.
+
+## The question
+
+**Is the object of study *research itself*?**
+
+Metaresearch studies how research is done, reported, funded, evaluated, disseminated, or governed. The test is
+what the work is *about*, not what field it appears in and not what vocabulary it uses.
+
+A cardiology trial is not metaresearch. A study of *how cardiology trials report their outcomes* is.
+
+---
+
+## Tier
+
+Assign exactly one.
+
+### T1: Core metaresearch
+The primary object of study is research itself. Typical objects:
+
+- research **methods** and their properties (bias, reporting, statistical practice, study design)
+- **reproducibility**, replication, data and code sharing
+- **research integrity**: misconduct, retraction, questionable research practices, authorship
+- **peer review** and editorial process *as objects of study*
+- **research evaluation**, metrics, rankings, funding allocation
+- **scholarly communication**: publishing models, open access, preprints *as objects of study*
+- **bibliometrics and scientometrics** applied to a research literature
+- the **research workforce**: careers, equity, training, capacity
+- **evidence synthesis methodology** (not an individual systematic review's clinical answer, but work *about* how
+  syntheses are done)
+
+### T2: Adjacent
+Empirically or conceptually grounded work on science as a social system that is not framed as metaresearch but
+studies it:
+
+- **science and technology studies (STS)**: social studies of scientific knowledge, practice, controversy
+- **library and information science**: information behaviour of researchers, repositories, discovery
+- **research infrastructure** studies: platforms, data repositories, identifiers, standards
+- **history and philosophy of science** *when the object is contemporary research practice*
+- **research policy** analysis grounded in evidence
+
+T2 is where the field's diversity lives. Be generous here: a paper does not have to call itself metaresearch to
+be studying research.
+
+### T3: Contextual
+Relevant to the ecosystem, mapped and released, but **never pooled into the analytic corpus**:
+
+- editorials, commentaries, opinion pieces about research practice
+- policy documents and position statements
+- announcements of infrastructure, tools, or initiatives
+- news, obituaries, corrections, letters
+
+### OUT: Not metaresearch
+Everything else. Includes, and this is the most common error:
+
+- **A study that uses a method is not a study of the method.** A meta-analysis answering a clinical question is
+  OUT. A study of how meta-analyses handle heterogeneity is T1.
+- **Mentioning a metaresearch term is not studying it.** A lab paper reporting "assay reproducibility", a methods
+  section saying "peer reviewed", a licence note saying "open access": all OUT.
+- **Domain research that happens to be bibliometric in method** but whose object is the domain, not the research:
+  e.g. a bibliometric map of diabetes treatments, produced to summarise diabetes knowledge. Borderline; see below.
+
+---
+
+## The three errors that matter most
+
+These are where the pilot showed retrieval and screening break down. Read them twice.
+
+1. **Polysemy.** `reproducibility` in a biochemistry paper means the assay gives the same reading twice. In a
+   metaresearch paper it means the reproducibility crisis. Only the second is in scope. The same applies to
+   `validation`, `replication`, `bias`, `peer review`, `open access`. **Judge the sense, not the token.**
+
+2. **Method vs. object.** Using bibliometrics ≠ studying research. Ask: *if this paper is right, what do we now
+   know more about: a scientific question, or the practice of science?* If the former, OUT.
+
+3. **Absence of vocabulary is not absence of content.** An STS paper about laboratory practice, or an LIS paper
+   about how researchers find data, may use none of the field's keywords and still be squarely T2. **Do not
+   require the vocabulary.** This is the error that makes the field look smaller and more anglophone than it is.
+
+---
+
+## Canadian linkage
+
+Record which apply (this is metadata, not an inclusion test; the estimand is defined separately in
+`PROTOCOL.md`):
+
+- `CA_AFF`: at least one author affiliated with a Canadian institution
+- `CA_FUND`: funded by CIHR, NSERC, SSHRC, or CFI
+- `ABOUT_CA`: the Canadian research system is a substantive object of study (not a passing mention, not one
+  country among forty in a global comparison)
+
+## Genre
+
+`empirical` · `conceptual` · `editorial/commentary` · `policy` · `infrastructure/announcement` · `other`
+
+OpenAlex's `type` is unreliable and this field is commentary-heavy, so genre is coded, not inherited.
+
+## Language of the work
+
+As published. Do not infer from the venue.
+
+---
+
+## Confidence
+
+- `high`: the rubric decides this cleanly.
+- `medium`: the rubric decides, but a reasonable coder could differ.
+- `low`: genuinely on the boundary, or the abstract is missing/too thin to judge.
+
+**`low` is a legitimate answer and is not a failure.** Records coded `low` by either screener are routed to
+adjudication. A screener that never says `low` is not being careful; it is being confident.
+
+---
+
+## Worked examples
+
+| Title (abridged) | Tier | Why |
+|---|---|---|
+| "Data sharing practices in 500 randomised trials" | **T1** | The object is reporting practice. |
+| "Reproducibility of a Western blot protocol" | **OUT** | Assay reproducibility. Polysemy trap. |
+| "Trends in citation of retracted papers" | **T1** | Object is the literature's own behaviour. |
+| "Laboratory life in a Canadian genomics centre: an ethnography" | **T2** | STS. No metaresearch vocabulary; still studies research. |
+| "How do researchers discover datasets? A survey" | **T2** | LIS, information behaviour of researchers. |
+| "Effectiveness of statins: a network meta-analysis" | **OUT** | Uses a synthesis method to answer a clinical question. |
+| "How network meta-analyses handle inconsistency: a review of 200 reviews" | **T1** | Object is the method. |
+| "Announcing the Canadian Research Data Repository" | **T3** | Infrastructure announcement. Mapped, not pooled. |
+| "Open access mandates are failing early-career researchers" (editorial) | **T3** | Commentary about research practice. |
+| "Bibliometric analysis of diabetes research 2000–2020" | **T2** | Borderline. Bibliometric method, and the object *is* a research literature, so it studies research output. Code T2, `medium`. |
+| "Le libre accès dans les revues québécoises : état des lieux" | **T1** | Scholarly communication, object is publishing practice. French. |
+
+---
+
+## Instructions to the screener
+
+Read the title and abstract. Apply the rubric. Do not use outside knowledge of the authors or the journal's
+reputation. If the abstract is missing, judge on the title alone and set confidence to `low` unless the title is
+unambiguous.
+
+Return the schema in `protocol/screening-schema.json`. One object per work. No prose, no preamble.
+--------------------------------------------------------------------------------
+You are screening works for MetaCan, a map of Canadian metaresearch.
+
+Apply the rubric above to every record in the JSON array below. Return a JSON
+array with one object per work, conforming to protocol/screening-schema.json:
+
+  {"id": "W...", "tier": "T1|T2|T3|OUT", "genre": "...", "about_ca": true|false,
+   "confidence": "high|medium|low", "reason": "one sentence"}
+
+Rules:
+- Return the JSON array and NOTHING else. No prose, no preamble, no code fences.
+- Every input id must appear exactly once in the output.
+- Do not run commands, read files, or browse. Classify from the RECORDS alone.
+
+RECORDS:
+[
+  {
+    "id": "W3031398259",
+    "title": "Sheila B. Robinson and Kimberly Firth Leonard. (2019). Designing Quality Survey Questions. Thousand Oaks, CA: SAGE.",
+    "abstract": "N/A",
+    "year": 2020,
+    "lang": "en",
+    "type": "article",
+    "venue": "Canadian Journal of Program Evaluation",
+    "topic": "Survey Methodology and Nonresponse",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W6939683730",
+    "title": "Additional file 2: of Discovery of variant infectious salmon anaemia virus (ISAV) of European genotype in British Columbia, Canada",
+    "abstract": "Fish tissue samples testing â non-negativeâ for infectious salmon anaemia virus (ISAV) from 2012-2013 1 . Table listing the ISAV segment 8 tests done in replicates, which were in some cases repeated. Values in this column represent how many replicates produced a C t value, or the averaged result of tests. (DOC 117 kb)",
+    "year": 2016,
+    "lang": "en",
+    "type": "article",
+    "venue": "Figshare",
+    "topic": "Mycorrhizal Fungi and Plant Interactions",
+    "field": "Agricultural and Biological Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2886997615",
+    "title": "Metabolic syndrome, depression and anhedonia among young adults",
+    "abstract": "",
+    "year": 2018,
+    "lang": "en",
+    "type": "article",
+    "venue": "Psychiatry Research",
+    "topic": "Cardiac Health and Mental Health",
+    "field": "Medicine",
+    "ca_institutions": "McMaster University",
+    "funders": ["Fundação de Amparo à Pesquisa do Estado do Rio Grande do Sul", "Conselho Nacional de Desenvolvimento Científico e Tecnológico", "Coordenação de Aperfeiçoamento de Pessoal de Nível Superior"]
+  },
+  {
+    "id": "W2121601768",
+    "title": "Historical trends of metal pollution recorded in the sediments of the Culiacan River Estuary, Northwestern Mexico",
+    "abstract": "",
+    "year": 2003,
+    "lang": "en",
+    "type": "article",
+    "venue": "Applied Geochemistry",
+    "topic": "Heavy metals in environment",
+    "field": "Environmental Science",
+    "ca_institutions": "Université du Québec à Montréal",
+    "funders": "Comisión Nacional para el Conocimiento y Uso de la Biodiversidad, Gobierno de México"
+  },
+  {
+    "id": "W4385774984",
+    "title": "Network and System Security",
+    "abstract": "",
+    "year": 2023,
+    "lang": "en",
+    "type": "book",
+    "venue": "Lecture notes in computer science",
+    "topic": "Network Security and Intrusion Detection",
+    "field": "Computer Science",
+    "ca_institutions": [],
+    "funders": ["Royal Holloway, University of London", "National Research Council Canada", "Fujian Normal University", "Universität Paderborn", "Wuhan University of Technology", "University of Aizu", "Norges Teknisk-Naturvitenskapelige Universitet", "Danmarks Tekniske Universitet", "Florida Atlantic University", "Politechnika Warszawska", "Jinan University", "University of Surrey", "University of Twente", "Universidad del Atlántico", "University of Aberdeen", "Cardiff University", "Universität Passau", "Universidad de Málaga", "Meiji University", "University of Fukui", "Wuhan University", "Bowling Green State University", "University of Oregon", "Shandong University", "Guangzhou University", "King Abdullah University of Science and Technology", "National Dong Hwa University", "Murdoch University", "University of Ottawa", "King's College London", "Advanced Digital Sciences Center"]
+  },
+  {
+    "id": "W2739383584",
+    "title": "Mapping the developmental trajectory of bipolar disorder: Importance of prerequisite groundwork",
+    "abstract": "",
+    "year": 2017,
+    "lang": "en",
+    "type": "editorial",
+    "venue": "Australian & New Zealand Journal of Psychiatry",
+    "topic": "Bipolar Disorder and Treatment",
+    "field": "Medicine",
+    "ca_institutions": ["Hotel Dieu Hospital", "Queen's University"],
+    "funders": []
+  },
+  {
+    "id": "W2029157761",
+    "title": "Isolation and characterization of 12 microsatellite loci from Golden‐winged Warblers (<i>Vermivora chrysoptera<\/i>) with broad cross‐taxon utility in emberizine songbirds",
+    "abstract": "Abstract We describe 12 microsatellite loci from the Golden‐winged Warbler ( Vermivora chrysoptera ), a bird species of conservation concern owing to competition and hybridization with the Blue‐winged Warbler ( V. pinus ). Directional mitochondral DNA introgression from V. pinus into V. chrysoptera has been reported within the hybrid zone. Frequent hybrid phenotypes suggest that nuclear introgression is also prevalent, although this has not been demonstrated conclusively with molecular markers. These microsatellites will foster explorations of the genetic interactions between these avian congeners, and amplification tests suggest that they have high cross‐species utility for closely allied bird genera and families.",
+    "year": 2004,
+    "lang": "en",
+    "type": "article",
+    "venue": "Molecular Ecology Notes",
+    "topic": "Genetic diversity and population structure",
+    "field": "Biochemistry, Genetics and Molecular Biology",
+    "ca_institutions": "Queen's University",
+    "funders": []
+  },
+  {
+    "id": "W2107359108",
+    "title": "Functional Requirement of Plant Farnesyltransferase during Development in Arabidopsis",
+    "abstract": "Arabidopsis era1 was identified as an abscisic acid-hypersensitive mutant caused by disruptions or deletions of the gene for the beta subunit (AtFTB) of farnesyltransferase (FTase). The heterodimeric enzyme catalyzes the covalent attachment of the 15-carbon farnesyl diphosphate to the C terminus of regulatory proteins and is essential for growth in yeast. The first disruption of FTB in a multicellular context revealed several developmental and growth regulatory processes that require the function of FTase. The lack of FTase activity in the Arabidopsis era1-2 FTB deletion mutant resulted in enlarged meristems and organs, supernumerary organs in floral whorls, arrested development of axillary meristems, late flowering, and homeotic transformations of flowers. Complementation of era1-2 with LeFTB, the tomato gene for the beta subunit of FTase, restored a normal phenotype and confirmed that the lesion is in AtFTB alone. The effect of this lesion on control of meristem size and on developmental processes suggests the involvement of regulatory proteins that require farnesylation for their function. At least three distinct processes that require the function of FTase were identified: regulation of cellular differentiation in the meristems, meristem maintenance, and regulation of flower development. Together, these results provide a basis for future studies on the involvement of FTase in specific developmental processes and for structure-function analysis of FTase in vivo.",
+    "year": 2000,
+    "lang": "en",
+    "type": "article",
+    "venue": "The Plant Cell",
+    "topic": "Plant Reproductive Biology",
+    "field": "Biochemistry, Genetics and Molecular Biology",
+    "ca_institutions": [],
+    "funders": ["Israel Science Foundation", "University of Toronto", "U.S. Department of Energy"]
+  },
+  {
+    "id": "W7104280428",
+    "title": "Distribution spatio-temporelle de l’incidence de la COVID-19 selon des déterminants socio-économiques et sociodémographiques",
+    "abstract": "Contexte : Des études ont identifié des disparités entre l’incidence de la COVID-19 et des facteurs socio-économiques et sociodémographiques, mais il y a seulement quelques études de cohorte basées sur des données de surveillance au Québec. Cette thèse visait à estimer l'incidence de la COVID-19 en fonction de caractéristiques socio-économiques et sociodémographiques selon les différentes vagues de la pandémie au Québec. Méthodes : Cette étude de cohorte populationnelle a été menée au Québec, du 25 février 2020 au 4 décembre 2021, en utilisant des données de surveillance provinciales. Des régressions binomiales négatives ont été utilisées pour estimer les taux d’incidence et les ratios de taux d’incidence (RTI). Des analyses écologiques ont été appliquées par vague, et des analyses au niveau individuel ont été stratifiées par vague et par milieu (rural, urbain). Résultats : Au cours des quatre premières vagues, 450 476 cas ont été recensés au Québec. À la première vague, les régions plus défavorisées en composition ethnoculturelle (RTI, 1,75; IC 95% [0,90; 3,37]) et plus favorisées en vulnérabilité situationnelle (RTI, 0,35; IC 95% [0,11; 1,09]; quintiles 4 et 5) présentaient une incidence de COVID-19 plus élevée. À partir de la deuxième vague, l’âge avancé (65 ans et plus) était un facteur de protection contre la COVID-19 (RTI, 0,42; IC 95% [0,31; 0,57]; urbain), tandis que les adolescents (15-24 ans) étaient à risque (RTI, 1,55; IC 95% [1,21; 2,00]; urbain). Durant les vagues 1 et 2, le statut de travailleur de la santé (TdeS) était un facteur de risque (RTI, 6,55; IC 95% [4,64; 9,25]; urbain vague 1), puis est devenu un facteur de protection (RTI, 0,54; IC 95% [0,41; 0,73]; urbain vague 4). Comparativement aux zones urbaines, un risque plus élevé a été identifié en milieu rural pour les TdeS et ceux ayant une vulnérabilité situationnelle défavorisée. Conclusion : Dans cette étude, deux niveaux d'analyse ont offert des informations complémentaires. Des disparités ont été observées entre les zones rurales et urbaines, notamment en ce qui concerne la profession et la vulnérabilité situationnelle.",
+    "year": 2024,
+    "lang": "fr",
+    "type": "dissertation",
+    "venue": "Open MIND",
+    "topic": "COVID-19 epidemiological studies",
+    "field": "Mathematics",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2892255479",
+    "title": "De la couverture illustrée du roman populaire",
+    "abstract": "1. La couverture d’un livre est cet objet rapporté, adjacent, accessoire, artificiel, apparemment futile, en tout cas secondaire, auquel nous avons été pourtant quelques-uns — Gérard Genette, Anne-Marie Thiesse, Daniel Couégnas, Philippe Hamon, Marc Lits, moi-même — à attacher de l’importance : un livre est « couvert », ce qui veut dire que sa matière se dérobe et aussi se camoufle, quoiqu’elle se manifeste. Tout le paradoxe est là. Ce que nous recevons à lire possède cette particularité de d...",
+    "year": 2018,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Belphégor",
+    "topic": "French Urban and Social Studies",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W1983690581",
+    "title": "Low Serum Testosterone and Estradiol Predict Mortality in Elderly Men",
+    "abstract": "CONTEXT: Age-related reduction of serum testosterone may contribute to the signs and symptoms of aging, but previous studies report conflicting evidence about testosterone levels and male mortality. No large prospective cohort study has determined a possible association between serum estradiol and mortality in men. OBJECTIVE: The main objective was to examine the association between serum testosterone and estradiol and all-cause mortality in elderly men. DESIGN, SETTING, AND PARTICIPANTS: We used specific gas chromatography-mass spectrometry to analyze serum sex steroids at baseline in older men who participated in the prospective population-based MrOS Sweden cohort (n = 3014; mean age, 75 yr; range, 69-80 yr). MAIN OUTCOME MEASURE: All-cause mortality by serum testosterone and estradiol levels. RESULTS: During a mean follow-up period of 4.5 yr, 383 deaths occurred. In multivariate hazards regression models, low levels (within quartile 1 vs. quartiles 2-4) of both testosterone [hazard ratio (HR), 1.65; 95% confidence interval (CI), 1.29-2.12] and estradiol (HR, 1.54; 95% CI, 1.22-1.95) associated with mortality. A model including both hormones showed that both low testosterone (HR, 1.46; 95% CI, 1.11-1.92) and estradiol (HR, 1.33; 95% CI, 1.02-1.73) predicted mortality. Risk of death nearly doubled (HR, 1.96; 95% CI, 1.46-2.62) in subjects with low levels of both testosterone and estradiol compared with subjects within quartiles 2-4 of both hormones. CONCLUSIONS: Elderly men with low serum testosterone and estradiol have increased risk of mortality, and subjects with low values of both testosterone and estradiol have the highest risk of mortality.",
+    "year": 2009,
+    "lang": "en",
+    "type": "article",
+    "venue": "The Journal of Clinical Endocrinology & Metabolism",
+    "topic": "Hormonal and reproductive studies",
+    "field": "Medicine",
+    "ca_institutions": "Université Laval",
+    "funders": []
+  },
+  {
+    "id": "W2936124243",
+    "title": "Aboriginal Heritage Archives: Resource and Research Opportunities",
+    "abstract": "Library and Archives Canada has compiled tremendous resources for aboriginal and First Nation’s heritage, which may be untapped in school and YA libraries.",
+    "year": 2018,
+    "lang": "en",
+    "type": "article",
+    "venue": "YA Hotline",
+    "topic": "Digital and Traditional Archives Management",
+    "field": "Arts and Humanities",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2607119157",
+    "title": "3-Cyanoallyl boronates are versatile building blocks in the synthesis of polysubstituted thiophenes",
+    "abstract": "The Knoevenagel condensation between α-MIDA boryl acetaldehyde and active methylene compounds enables synthesis of novel electron-poor allylboronates and facilitates access to synthetically challenging thiophene derivatives.",
+    "year": 2017,
+    "lang": "en",
+    "type": "article",
+    "venue": "Chemical Science",
+    "topic": "Organoboron and organosilicon chemistry",
+    "field": "Chemistry",
+    "ca_institutions": ["University of Toronto", "Toronto Public Health"],
+    "funders": "Natural Sciences and Engineering Research Council of Canada"
+  },
+  {
+    "id": "W6930746541",
+    "title": "Blazar jet emission from gradual magnetic dissipation",
+    "abstract": "Oral presentation at the 17th HelAS conference. Abstract: Blazar jets shower us with high energy electromagnetic radiation but their emission region, the “blazar zone”, is uncertain because of the inherent limitation of our head-on view of the jets. Emission models vary in both the acceleration mechanism powering the blazar zone and the latter’s extent and location. Here we have adopted a model of magnetic reconnection that drives continuous energy dissipation throughout the jet, gradually varying the jet plasma magnetization and its bulk Lorentz factor with distance from the central engine. We adapted it to a leptonic code that self-consistently calculates photon emission within spherical blobs (LeHaMoC). This was done by treating the jet as a series of segments which interact with each other through radiative transfer. The effects of that radiation spillage are calculated iteratively throughout the jet, accounting for relativistic effects arising from the relative motion of jet segments, until a steady state is reached. We find that this approach produces some distinct differences in the total spectral energy distribution when compared to simply calculating the emission from each constituent sphere of the jet on its own and then adding them up, and can thus be useful in further modeling of expansive emission regions.",
+    "year": 2025,
+    "lang": "en",
+    "type": "article",
+    "venue": "Zenodo (CERN European Organization for Nuclear Research)",
+    "topic": "T-cell and B-cell Immunology",
+    "field": "Immunology and Microbiology",
+    "ca_institutions": "University of Alberta",
+    "funders": []
+  },
+  {
+    "id": "W2063434028",
+    "title": "166. Role of ETS1 (avian erythroblastosis virus E26 oncogene homolog 1) and Rb (Retinoblastoma) proteins in thirteen-lined ground squirrels (Spermophilus tridecemlineatus) during hibernation",
+    "abstract": "",
+    "year": 2007,
+    "lang": "en",
+    "type": "article",
+    "venue": "Cryobiology",
+    "topic": "Bat Biology and Ecology Studies",
+    "field": "Agricultural and Biological Sciences",
+    "ca_institutions": "Carleton University",
+    "funders": []
+  },
+  {
+    "id": "W4396538521",
+    "title": "Fidéliser les familles à Montréal",
+    "abstract": "",
+    "year": 2015,
+    "lang": "fr",
+    "type": "book-chapter",
+    "venue": "Les Presses de l'Université de Montréal eBooks",
+    "topic": "Social Sciences and Governance",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2159645943",
+    "title": "Simulation of particle trajectories in tribo-powder coating",
+    "abstract": "The modeling of the tribo-powder coating process requires the solution of the electrostatic field problem and the equation for particle motion. Electric field distribution is a function of the space charge density, which is associated with the particle concentration. The particle movement results from the balance of electrical, inertial, air drag and gravitational forces. Therefore, both problems are mutually coupled. In this paper, an iterative algorithm is presented to simulate this problem; the electric field is determined by means of the finite element method, whereas the time-dependent explicit fourth order Runge-Kutta algorithm is used to predict the particle trajectories. Both problems are solved iteratively until a self-consistent solution is found. The results of simulation show the effects of different parameters which characterize the process such as the powder particle size, charge/mass ratio, distance to a coating object, powder outflow and assisted air velocity on the shape of the powder jet.",
+    "year": 2002,
+    "lang": "en",
+    "type": "article",
+    "topic": "Aerosol Filtration and Electrostatic Precipitation",
+    "field": "Engineering",
+    "ca_institutions": "Western University",
+    "funders": []
+  },
+  {
+    "id": "W2488796856",
+    "title": "Systeme technicien, mondialisation et democratie en Afrique",
+    "abstract": "Une bibliothÃ¨que numÃ©rique unique et originale dans le monde francophone en sciences sociales et humaines, dÃ©veloppÃ©e en collaboration avec l'UniversitÃ© du QuÃ©bec Ã Chicoutimi, fondÃ©e et dirigÃ©e par Jean-Marie Tremblay, bÃ©nÃ©vole, professeur de sociologie au dÃ©partement des sciences humaines du CÃ©gep de Chicoutimi.",
+    "year": 2005,
+    "lang": "fr",
+    "type": "book",
+    "venue": "Classiques des sciences sociales.",
+    "topic": "Agriculture and Rural Development Research",
+    "field": "Agricultural and Biological Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4400591758",
+    "title": "Transforming Artistic Practice: Collingwood, Adorno, and the Diseases of the Mind",
+    "abstract": "Abstract This paper addresses the views of R.G. Collingwood and Theodor Adorno on the role of amusement and art in what each of them saw as the crisis of contemporary Western civilization. We will begin by showing how the aesthetic theories of Collingwood and Adorno develop out of their shared concerns about the harmful effects of amusement and bad art on the consciousness of human beings. We will argue that a productive dialogue between these two figures clarifies that the value of art consists in its ability to remedy the corruption of the mental and emotional lives of human beings and in helping to fashion a different social and political order. As part of this, we will show how, despite appearances, Adorno’s aesthetic cognitivism and Collingwood’s expression theory of art agree with and complement one another in significant ways. In establishing this point, this work will leave us with an understanding of art that is more comprehensive and better equipped to address the crisis of contemporary Western society.",
+    "year": 2024,
+    "lang": "en",
+    "type": "article",
+    "venue": "Human Affairs",
+    "topic": "Philosophy, History, and Historiography",
+    "field": "Arts and Humanities",
+    "ca_institutions": "University of Prince Edward Island",
+    "funders": []
+  },
+  {
+    "id": "W6906012240",
+    "title": "Occurrence Download",
+    "abstract": "A dataset containing 15 species occurrences available in GBIF matching the query: { \"and\" : [ \"TaxonKey is Coccus longulus (Douglas, 1887)\", { \"or\" : [ \"Country is United States of America\", \"Country is Canada\", \"Continent is North America\" ] } ] } The dataset includes 15 records from 1 constituent datasets; see https://api.gbif.org/v1/occurrence/download/0127598-210914110416597/datasets/export for details. Data from some individual datasets included in this download may be licensed under less restrictive terms.",
+    "year": 2022,
+    "lang": "en",
+    "type": "dataset",
+    "venue": "Global Biodiversity Information Facility",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2910258346",
+    "title": "Implementing Our Microsurgical Breast Reconstruction Enhanced Recovery after Surgery Pathway: Consensus Obstacles and Recommendations",
+    "abstract": "Enhanced recovery after surgery pathways are well established in other surgical specialties but are relatively new in plastic surgery. These guidelines focus on improving patient care by incorporating evidence-based recommendations. Length of stay is shorter, and overall hospital costs are lower without compromising patient satisfaction. When care is standardized, ambiguity is removed and physician acceptance is improved. Yet, implementation can be challenging on an institutional level. The Johns Hopkins microsurgical breast reconstruction team identified areas of dogmatic dissonance during 3 focus groups to formalize an enhanced recovery pathway for microsurgical breast reconstruction. Six microsurgeons used nominal group technique to reach consensus. Four discussion points were identified: multidisciplinary buy-in, venous thromboembolism (VTE) chemophylaxis, early feeding, and dietary restrictions. Evidence-based recommendations and our enhanced recovery after surgery protocol are provided.",
+    "year": 2019,
+    "lang": "en",
+    "type": "article",
+    "venue": "Plastic & Reconstructive Surgery Global Open",
+    "topic": "Enhanced Recovery After Surgery",
+    "field": "Medicine",
+    "ca_institutions": "University of Calgary",
+    "funders": []
+  },
+  {
+    "id": "W6923605853",
+    "title": "Daily Building Record",
+    "abstract": "The Daily Building Record was published in Vancouver, and ran from January 1912 to October 1914. As the official publication for the Architectural Institute of B.C., the B.C. Builders Exchange, and the Building and Construction Industries Exchange of B.C., the Record primarily covered news related to building, contracting, engineering, real estate, and industrial finance. The Record was published by the Record Publishing Company, which subsequently published the paper under different titles, including the British Columbia Building Record and the British Columbia Record. The Record continues as the Journal of Commerce. ; Building, Contracting, Engineering, Irrigation and General Improvement News. Devoted to the interests of Architects, Contractors, Engineers, Material Dealers and others interested in the building trade of the N.W.",
+    "year": 2016,
+    "lang": "en",
+    "type": "article",
+    "venue": "Open Collections",
+    "topic": "Construction Engineering and Safety",
+    "field": "Engineering",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2803825341",
+    "title": "Climatic and anthropogenic impacts on the Ría de Vigo (NW Iberia) over the last two centuries: A high-resolution dinoflagellate cyst sedimentary record",
+    "abstract": "",
+    "year": 2018,
+    "lang": "en",
+    "type": "article",
+    "venue": "Palaeogeography Palaeoclimatology Palaeoecology",
+    "topic": "Geology and Paleoclimatology Research",
+    "field": "Earth and Planetary Sciences",
+    "ca_institutions": "University of Victoria",
+    "funders": ["European Regional Development Fund", "Xunta de Galicia", "Natural Sciences and Engineering Research Council of Canada", "Ministerio de Educación, Cultura y Deporte"]
+  },
+  {
+    "id": "W4388835558",
+    "title": "New appointment of the Hydrographer General of Canada and Director General of the Canadian Hydrographic Service",
+    "abstract": "Madam Manon Larocque was appointed as the new Hydrographer General of Canada and Director General of the Canadian Hydrographic Service (CHS) on 11 September 2023, replacing Dr Geneviève Béchard.",
+    "year": 2023,
+    "lang": "en",
+    "type": "article",
+    "venue": "The International Hydrographic Review",
+    "topic": "Arctic and Russian Policy Studies",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": ["Fisheries and Oceans Canada", "Canadian Space Agency", "Government of Canada", "Global Affairs Canada", "Australian Government"]
+  },
+  {
+    "id": "W3195481820",
+    "title": "Policy and Business Cycle Shocks: A Structural Factor Model Representation of the US Economy",
+    "abstract": "We use a dynamic factor model to provide a semi-structural representation for 101 quarterly US macroeconomic series. We find that (i) the US economy is well described by a number of structural shocks between two and five. Focusing on the four-shock specification, we identify, using sign restrictions, two policy shocks, monetary and fiscal, and two non-policy shocks, demand and supply. We obtain the following results. (ii) Both supply and demand shocks are important sources of fluctuations; supply prevails for GDP, while demand prevails for employment and inflation. (ii) Monetary and fiscal policy shocks have sizable effects on output and prices, with no evidence of crowding-out of private aggregate demand components; both monetary and fiscal authorities implement important systematic countercyclical policies reacting to demand shocks. (iii) Negative demand shocks have a large long-run positive effect on productivity, consistently with the Schumpeterian “cleansing” view of recessions.",
+    "year": 2021,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of risk and financial management",
+    "topic": "Monetary Policy and Economic Impact",
+    "field": "Economics, Econometrics and Finance",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2759598964",
+    "title": "On the domination number of digraphs.",
+    "abstract": "",
+    "year": 2017,
+    "lang": "en",
+    "type": "article",
+    "venue": "Ars Combinatoria",
+    "topic": "Advanced Graph Theory Research",
+    "field": "Computer Science",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2008386765",
+    "title": "Large volume injection for the direct analysis of ionophores and avermectins in surface water by liquid chromatography–electrospray ionization tandem mass spectrometry",
+    "abstract": "",
+    "year": 2008,
+    "lang": "en",
+    "type": "article",
+    "venue": "Analytica Chimica Acta",
+    "topic": "Pharmaceutical and Antibiotic Environmental Impacts",
+    "field": "Environmental Science",
+    "ca_institutions": "Agriculture Food and Rural Development",
+    "funders": []
+  },
+  {
+    "id": "W2087108427",
+    "title": "Law Enforcement and Firm Financing: Theory and Evidence",
+    "abstract": "This paper investigates the economic effects on firms ’ policies of differ-ences in law enforcement. We find that in judicial districts where trials are longer, bank financing is more costly and firms are smaller. However, we do not find any significant relation between law enforcement and firms ’ lever-age ratio. We rationalize our results within a two-region dynamic general equilibrium model with asymmetric information and collateralized credit contracts. We find that a stronger enforcement of creditors ’ rights not only improves credit conditions (partial equilibrium effect), but also fosters in-dividual capital accumulation (general equilibrium effect). In line with this theoretical prediction, we find a positive relation between individual savings and quality of legal enforcement.",
+    "year": 2010,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of the European Economic Association",
+    "topic": "Corporate Finance and Governance",
+    "field": "Business, Management and Accounting",
+    "ca_institutions": [],
+    "funders": ["Universiteit van Tilburg", "York University", "World Bank Group"]
+  },
+  {
+    "id": "W3126118961",
+    "title": "Should you bank on your network? Relational and positional embeddedness in the making of financial capital",
+    "abstract": "This study explores the mechanisms through which relational embeddedness affects the performance of banks in syndication networks formed in the Canadian investment banking industry. I argue that banks have a choice between building embedded network ties that are overlaid with social context and arm’s-length ties that facilitate individual competition. Contrary to the arguments advanced in previous studies, I propose that maintaining a mix of arm’s-length and embedded relationships represents a disadvantageous network strategy. Such strategy not only simultaneously exposes investment banks to competition from their peers, relying primarily upon embedded or arm’s-length ties, but also sends confusing signals about banks’ networking behavior. I also propose that the link between relational embeddedness and performance is moderated by banks’ positional embeddedness, reflected in their status, and find that banks of higher status extract greater benefits from maintaining embedded ties, as compared with banks of lower status.",
+    "year": 2005,
+    "lang": "en",
+    "type": "article",
+    "venue": "Strategic Organization",
+    "topic": "Business Strategy and Innovation",
+    "field": "Business, Management and Accounting",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2531839470",
+    "title": "Un roman « familial » où les occasions de crise prédominent. Lorraine M. M. Jeansonne, L’occasion rêvée… cette course de chevaux sur le lac Témiscamingue, Ottawa, Les Éditions David, 2001, 468 p.Lorraine M. M. Jeansonne, L’occasion rêvée… cette course de chevaux sur le lac Témiscamingue, Ottawa, Les Éditions David, 2001, 468 p.",
+    "abstract": "",
+    "year": 2002,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Liaison",
+    "topic": "French Urban and Social Studies",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2792600440",
+    "title": "On the Efficiency of Text Production in Vocabulary Learning: An Empirical Study on Iranian GFL-Learners",
+    "abstract": "The concept of text-oriented vocabulary exercises is based on Kühn’s (2000) three-step model of vocabulary teaching—receptive, reflective and productive vocabulary exercises—which focuses on working with texts. Since the production is in principle more exhausting than the reception—as can be seen from the Levels of Processing Effect—one can assume that it comes to a deeper processing in the text production and consequently exerts a positive influence on the retention performance of the learners. The main purpose of this paper is to conduct an empirical study on Iranian GFL-learners (Note 1) to demonstrate whether text production has a positive impact on the short-term, medium-term and long-term retention of the GFL-learners who have learned the new words in foreign language based on the concept of text-oriented vocabulary exercises or not. In addition, this study also has the secondary object of demonstrating the possibility of GFL-Learner’s sex as well as the age having any effect on the retention performance. The results have shown that the text production has a positive effect on the short-term and medium-term retention. It could also be shown that gender exerts an influence on the medium-term retention performance of female GFL-learners. In terms of age, the result was that text production has a positive impact on the retention performance of the 30 to 40-year-old GFL-learners, enabling them to better remember the textually learned words in the short, medium and long term.",
+    "year": 2018,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Education and Learning",
+    "topic": "Second Language Acquisition and Learning",
+    "field": "Psychology",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2767654258",
+    "title": "Cerebrospinal Fluid Biomarkers as Predictors of Shunt Response in Idiopathic Normal Pressure Hydrocephalus: A Systematic Review",
+    "abstract": "BACKGROUND: The widely accepted treatment for idiopathic normal-pressure hydrocephalus (iNPH) is a cerebrospinal fluid (CSF) diversion shunt procedure, to which approximately 80% of patients will respond. The purpose of this systematic review was to identify which CSF biomarkers have been investigated in predicting shunt responsiveness in iNPH patients, and to analyze the level of evidence for each. METHODS: To find all relevant articles, a comprehensive search of Medline, Embase, and PsycINFO was conducted. RESULTS: The literature search identified 344 unique citations, of which 13 studies satisfied the inclusion criteria and were analyzed in our review. These 13 studies reported on 37 unique biomarkers. CONCLUSIONS: The available studies suggest that there is evidence for the utility of CSF biomarkers in predicting shunt responsiveness in iNPH patients, though none have been shown to predict shunt response with both high sensitivity and specificity. We found that there is no available evidence for the use of Aβ38, Aβ40, Aβ43, APL1β25, APL1β27, APL1β28, sAPP, aAPPα, sAPPβ, TNF-α, MCP-1, sCD40L, sulfatide, MBP, L-PGDS, cystatin C, transthyretin, TGF-β2, or YKL-40 in predicting shunt response. There is minimal evidence for the use of TGF-β1, TBR-II, homocysteine, and interleukins (particularly IL-1β, IL-6, and IL-10). However, the available evidence suggests that these biomarkers warrant further investigation. Aβ42, tau, p-tau, NFL, and LRG have the greatest amount of evidence for their predictive value in determining shunt responsiveness in iNPH patients. Future research should be guided by, but not limited to, these biomarkers.",
+    "year": 2017,
+    "lang": "en",
+    "type": "review",
+    "venue": "Canadian Journal of Neurological Sciences / Journal Canadien des Sciences Neurologiques",
+    "topic": "Cerebrospinal fluid and hydrocephalus",
+    "field": "Neuroscience",
+    "ca_institutions": ["University of Northern British Columbia", "Island Health", "University of British Columbia"],
+    "funders": []
+  },
+  {
+    "id": "W6988124497",
+    "title": "The World Bank concludes that direct payments distort trade",
+    "abstract": "A recent World Bank 'Trade Note' has reviewed \\n the WTO approach to the disciplining of domestic agricultural-support \\n programmes and found that some countries have exploited loopholes \\n in order to meet their WTO obligations. It notes that 'domestic \\n subsidies to farmers have increased substantially since 1986-88, \\n but that there has been a switch of support towards the green box', \\n which is exempt from WTO disciplines. 'There is evidence that high \\n levels of direct payments to farmers for some programs in the green \\n box &amp;#133; [like those in the USA and the EU] do in fact distort \\n trade'. It concludes that the Uruguay Round Agricultural Agreement \\n 'has not reduced trade-distorting domestic-support measures in many \\n instances'\\n\\n\\n \\n\\nThe paper seeks to:\\n\\n\\n \\n\\n\\n \\n\\nreview the level, composition and trends \\n in domestic support; \\n\\n\\n \\n\\noutline the problems with current disciplines \\n on domestic support;\\n\\n\\n \\n\\nprovide a synopsis of issues confronting \\n negotiators and the options available for making more effective \\n disciplines on trade-distorting support.\\n\\n\\n \\n\\n\\n \\n\\nIt also notes that production-related subsidies \\n are notoriously inefficient in transferring income to farmers with \\n only around a quarter of support finding its way into farmers' pockets, \\n and then mainly larger rather than smaller farmers. According to \\n a recent study '7% of crop farmers in France received 77% of all \\n direct payments'. Significantly the paper notes that 'the objective \\n of decoupling subsidies is to increase farm income without distorting \\n current or future production', but it raises some serious questions \\n as to 'how effective the green box or so called 'decoupled' payments \\n have been in meeting this objective'. \\n\\n \\n\\nComment: \\n\\nThe inefficiencies of production support in transferring income \\n to farmers means that direct aid payment schemes represent a much \\n more efficient way of supporting farm incomes and hence sustaining \\n agricultural activities. From this perspective the question arises: \\n has the EU basically found through CAP reform a way of getting more \\n trade distortion per euro of agricultural support? Will the reforms \\n strengthen the export competitiveness of EU agricultural producers \\n and food processors at less expense to European tax payers? If this \\n is the main outcome, then the existing process of CAP reform would \\n appear to offer few benefits to ACP agriculture-based economies.",
+    "year": 2003,
+    "lang": "en",
+    "type": "other",
+    "venue": "CGSPace A Repository of Agricultural Research Outputs (Consultative Group for International Agricultural Research)",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4298381368",
+    "title": "Méthode systématique de prévision de bifurcations élastoplastiques pour différentes formulation en transformatons finies",
+    "abstract": "International audience",
+    "year": 2017,
+    "lang": "fr",
+    "type": "preprint",
+    "venue": "HAL (Le Centre pour la Communication Scientifique Directe)",
+    "topic": "Vibration and Dynamic Analysis",
+    "field": "Engineering",
+    "ca_institutions": "Safran Electronics (Canada)",
+    "funders": []
+  },
+  {
+    "id": "W2169574256",
+    "title": "Spatio-Temporal Analysis of Land Use/Cover Change of Lokoja - A Confluence Town",
+    "abstract": "Land use/land cover information is essential for a number of planning and management activities. The general patterns of land use/cover as they were recorded in remotely sensed data were discussed in this study. Multi-date satellite imageries (Landsat TM 1986, Landsat ETM+ 2001, Landsat ETM+ 2006 of 30m spatial resolution respectively and SPOT 5, 2007 of 10m spatial resolution) were obtained and used for the study. These images were enhanced, resampled, georeferenced and classified for the assessment of spatio-temporal pattern of land use/cover change in the study area. The study also utilized topographical map of the study area, derived from sheet number 247 of 1963, scale 1:50,000 to identify features, which were used as ground control point for image geo-referencing. ILWIS 3.2 Academic software was used to process the image data. The result of ground truthing was combined with visual image interpretation as training sites for supervised classification. Six different land uses/covers were identified and used to classify the image data. The results showed that the natural environments (vegetation, wetland resources, water bodies and mountainous terrain) were being threatened, as they reduced continually in the areal extent over time and space while the social environment (built up area) expanded tremendously. The study discovered that urbanization processes majorly responsible for land use/cover change in Lokoja. In conclusion, the study advanced our frontier of knowledge on land use/cover study by providing information on the status of natural and social environment in Lokoja, a confluence town, between 1986 and 2007 using remotely sensed images and Geographic Information Systems (GIS) technology.",
+    "year": 2012,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Geography and Geology",
+    "topic": "Land Use and Ecosystem Services",
+    "field": "Environmental Science",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W6939675220",
+    "title": "Supplementary material",
+    "abstract": "The relevant raw data relate with the study of \"Preservation of organic carbon associated with iron on continental shelves influenced by hydrodynamic processes\"",
+    "year": 2023,
+    "lang": "en",
+    "type": "dataset",
+    "venue": "Figshare",
+    "ca_institutions": "University of Manitoba",
+    "funders": []
+  },
+  {
+    "id": "W2516610861",
+    "title": "Business implications of the falling cost of electricity",
+    "abstract": "Sharp declines in cost per kilowatt-hour of electricity generated by wind turbines and solar panels have opened up major shifts in cost and supply of electricity. Using elasticity of price and income to analyze scenarios of much cheaper electricity reveals economic impacts well outside the range that has dominated the debate until now. The methods and computations give a wide span of impacts, and those methods led to unexpected and provocative implications",
+    "year": 2016,
+    "lang": "en",
+    "type": "article",
+    "venue": "Environmental Economics",
+    "topic": "Electric Power System Optimization",
+    "field": "Engineering",
+    "ca_institutions": "Independent Electricity System Operator",
+    "funders": []
+  },
+  {
+    "id": "W1600346892",
+    "title": "Impression, caricature: « L'exubérant forain. Barnum veut acheter le « scandale du Pacifique »»",
+    "abstract": "Caricature qui fait un lien entre le scandale du Pacifique et la venue au Canada du cirque Barnum en 1873. Les journaux publient de nombreuses preuves du scandale, ce qui finit par ressembler a un veritable « cirque mediatique ». Hyperlien pour afficher dans une nouvelle fenetre la fiche complete provenant du site du musee",
+    "year": 2007,
+    "lang": "fr",
+    "type": "article",
+    "topic": "Canadian Identity and History",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4398819832",
+    "title": "A__1__20170509_081856.wav",
+    "abstract": ":unav",
+    "year": 2019,
+    "lang": "fr",
+    "type": "dataset",
+    "venue": "Harvard Dataverse",
+    "ca_institutions": "University of Alberta",
+    "funders": []
+  },
+  {
+    "id": "W3083603722",
+    "title": "La milice canadienne pendant la guerre de Sept Ans",
+    "abstract": "La milice constitue le pilier principal de la défense du Canada. Grâce aux raids des miliciens, les colonies anglaises doivent disperser leurs forces, annihilant leur supériorité numérique. La guérilla s’avère efficace et constitue le seul obstacle valable aux renforts de troupes régulières britanniques qui s’accroissent. Elle dépend principalement du maintien des alliances avec les Amérindiens experts en petite guerre. Cependant, les négociations, menées notamment par William Johnson, neutralisent les systèmes d’alliances franco-indiennes. À ces succès diplomatiques s’ajoute la pression croissante des troupes anglaises et des colons anglo-américains. Dès lors, faute de renforts et de soutien matériel et logistique métropolitains, la Nouvelle-France se trouve condamnée.",
+    "year": 2014,
+    "lang": "fr",
+    "type": "book-chapter",
+    "venue": "Presses universitaires de Rennes eBooks",
+    "topic": "Canadian Identity and History",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4390718992",
+    "title": "Health &lt;i&gt;for&lt;/i&gt; All Policies",
+    "abstract": "Factors outside of healthcare services determine our health and this involves many different sectors. Health for All Policies changes the argument about inter-sectoral action, from one focusing on health and the health sector to one based on co-benefits – a 'Health for All Policies' approach. It uses the Sustainable Development Goals as the framework for identifying goals across sectors and summarizes evidence along two causal axes. One is the impact of improved health status on other SDGs, e.g. better educational and employment results. The other is the impact of health systems and policies on other sectors. The 'Health for All Policies' approach advocated in this book is thus a call to improve health to achieve goals beyond health and for the health sector itself to do better in understanding and directing its impact on the world beyond the healthcare it provides. This title is also available as Open Access on Cambridge Core.",
+    "year": 2024,
+    "lang": "en",
+    "type": "book",
+    "venue": "Cambridge University Press eBooks",
+    "topic": "Global Public Health Policies and Epidemiology",
+    "field": "Business, Management and Accounting",
+    "ca_institutions": [],
+    "funders": ["National Institutes of Health", "Universidade de São Paulo", "School of Public Health, University of Michigan", "Fundação Getulio Vargas", "London School of Economics and Political Science", "Medizinischen Hochschule Hannover", "Princeton University", "Centers for Disease Control and Prevention", "University of Michigan", "École nationale d'administration publique", "World Health Organization"]
+  },
+  {
+    "id": "W2050045774",
+    "title": "Voluntary feed intake and diet selection of Merino sheep divergently selected for genetic difference in resistance to Haemonchus contortus",
+    "abstract": "",
+    "year": 2011,
+    "lang": "en",
+    "type": "article",
+    "venue": "Veterinary Parasitology",
+    "topic": "Helminth infection and control",
+    "field": "Veterinary",
+    "ca_institutions": [],
+    "funders": "McMaster University"
+  },
+  {
+    "id": "W6981673196",
+    "title": "Étude sur les représentations et les pratiques pédagogiques en lien avec le développement de l’opération professionnelle \"utilisation\" chez les professeurs d’éducation spécialisée du collégial",
+    "abstract": "Cette recherche a été subventionnée par le ministère de l’Enseignement supérieur, de la Recherche, de la Science et de la Technologie dans le cadre du Programme de recherche et d’expérimentation pédagogiques (PREP) de l’Association des collèges privés du Québec (ACPQ).",
+    "year": 2020,
+    "lang": "fr",
+    "type": "other",
+    "venue": "Bibliothèque et Archives nationales du Québec (Québec government)",
+    "topic": "Policing Practices and Perceptions",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": "Harvard Business School"
+  },
+  {
+    "id": "W2043839920",
+    "title": "Web application testing: A systematic literature review",
+    "abstract": "",
+    "year": 2014,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Systems and Software",
+    "topic": "Software Testing and Debugging Techniques",
+    "field": "Computer Science",
+    "ca_institutions": "University of Calgary",
+    "funders": []
+  },
+  {
+    "id": "W4375859679",
+    "title": "Efficacité à long terme du setmélanotide chez des patients souffrant d’un syndrome de Bardet-Biedl",
+    "abstract": "",
+    "year": 2023,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Nutrition Clinique et Métabolisme",
+    "topic": "Genetic and Kidney Cyst Diseases",
+    "field": "Biochemistry, Genetics and Molecular Biology",
+    "ca_institutions": "University of Alberta",
+    "funders": []
+  },
+  {
+    "id": "W7093987189",
+    "title": "2000 Census County Block Map: Hunt County, Inset G01",
+    "abstract": "Inset map for Hunt County, Texas showing detail within a census block for which the U.S. Census Bureau collected data. The plotted map scale is 1:2,000.",
+    "year": 2000,
+    "lang": "en",
+    "type": "other",
+    "venue": "The Portal to Texas History (University of North Texas)",
+    "topic": "Water Quality and Resources Studies",
+    "field": "Environmental Science",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W3046279306",
+    "title": "A Clinical Educator Needs Assessment in Athletic Therapy",
+    "abstract": "Problem: Canadian athletic therapy (AT) education is embracing major pedagogical change in transitioning to competency-based education (CBE). The national certification process has recently undergone substantial, and somewhat controversial, changes. Furthermore, new entry-level competencies have been developed for teaching and assessment. A pivotal component of AT education consists of longitudinal placements in the clinic and field contexts of AT. Clinical educators are volunteers, and primarily Certified Athletic Therapists, typically lacking pedagogical experience. Moreover, there appear to be no standardized practices across institutions for supervisory development. There is an absence of published research related to Canadian AT clinical education. Furthermore, clinical educator needs assessments across health professions education have employed various methods. Therefore, this study used a novel mixed-methods approach to understand Canadian AT clinical educators’ needs entering CBE. Method of Study: Interviews (n = 14) and a subsequent survey (n = 123) involving Canadian AT clinical educators were employed within a preplanned exploratory sequential mixed design (Tashakkori et al., 2012). The initial qualitative analysis involved conceptually mapping the content of responses using directed content analysis. The corresponding findings informed survey design. Three data strands resulted from the subsequent analyses. First, the interview findings related to supervisory role were analyzed using phenomenography to discern the different ways of understanding the role. Second, the conceptual map was revisited to identify strengths and barriers to role fulfilment. Third, valued and necessary development topics were identified from the survey results. Finally, the interpretations of the three data strands were mixed, incorporating other relevant findings, to develop AT supervisory support recommendations for CBE. Conclusions: Four different AT clinical educator role conceptualizations were discovered that were hierarchically related, which reflected the extent of variation perceived among six aspects of AT supervision. These findings, combined with three valued and necessary pedagogical skill topics, represent a valuable starting point for AT supervisory development, for which there was high interest. The strengths and barriers informed 14 considerations related to clinical educators’ potential capacity. Lastly, the 13 supervisory support recommendations developed from the clinical educator findings may aid the Canadian AT program directors with transitioning to CBE.",
+    "year": 2020,
+    "lang": "en",
+    "type": "dissertation",
+    "venue": "PRISM (University of Calgary)",
+    "topic": "Nursing Roles and Practices",
+    "field": "Health Professions",
+    "ca_institutions": [],
+    "funders": ["Social Sciences and Humanities Research Council of Canada", "Mount Royal University", "Government of Alberta", "University of Calgary"]
+  },
+  {
+    "id": "W6885914680",
+    "title": "[Souvenir postcard menu from the White Pass &amp; Yukon Route]",
+    "abstract": "Fold-up souvenir postcard menu with four photographs: \"S.S. Tutshi at Carcross\"; \"Ben-My-Chree at head of West Taku Arm\"; \"Ben-My-Chree\"; \"Florence Range- en route to Taku Arm.",
+    "year": 2017,
+    "lang": "en",
+    "type": "other",
+    "venue": "cIRcle (University of British Columbia)",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2765399136",
+    "title": "Effect of aerobic exercise on hippocampal volume in humans: A systematic review and meta-analysis",
+    "abstract": "Hippocampal volume increase in response to aerobic exercise has been consistently observed in animal models. However, the evidence from human studies is equivocal. We undertook a systematic review to identify all controlled trials examining the effect of aerobic exercise on the hippocampal volumes in humans, and applied meta-analytic techniques to determine if aerobic exercise resulted in volumetric increases. We also sought to establish how volume changes differed in relation to unilateral measures of left/right hippocampal volume, and across the lifespan. A systematic search identified 4398 articles, of which 14 were eligible for inclusion in the primary analysis. A random-effects meta-analysis showed no significant effect of aerobic exercise on total hippocampal volume across the 737 participants. However, aerobic exercise had significant positive effects on left hippocampal volume in comparison to control conditions. Post-hoc analyses indicated effects were driven through exercise preventing the volumetric decreases which occur over time. These results provide meta-analytic evidence for exercise-induced volumetric retention in the left hippocampus. Aerobic exercise interventions may be useful for preventing age-related hippocampal deterioration and maintaining neuronal health.",
+    "year": 2017,
+    "lang": "en",
+    "type": "review",
+    "venue": "NeuroImage",
+    "topic": "Memory and Neural Mechanisms",
+    "field": "Neuroscience",
+    "ca_institutions": [],
+    "funders": ["National Institute for Health Research Biomedical Research Centre at Moorfields Eye Hospital NHS Foundation Trust and UCL Institute of Ophthalmology", "National Health and Medical Research Council", "Medical Research Council", "University of Illinois at Urbana-Champaign", "Vlaamse regering", "Mauritius Research Council", "Hospital for Sick Children", "Medical Engineering Centre, King’s College London", "Fonds Wetenschappelijk Onderzoek", "King's College London", "National Institute for Health and Care Research", "NIHR Biomedical Research Centre, Royal Marsden NHS Foundation Trust/Institute of Cancer Research", "South London and Maudsley NHS Foundation Trust", "Colorado State University"]
+  },
+  {
+    "id": "W1855007063",
+    "title": "Future Arctic Ocean primary productivity from CMIP5 simulations: Uncertain outcome, but consistent mechanisms",
+    "abstract": "Net Arctic Ocean primary production (PP) is expected to increase over this century, due to less perennial sea ice and more available light, but could decrease depending on changes in nitrate (NO 3 ) supply. Here Coupled Model Intercomparison Project Phase 5 simulations performed with 11 Earth System Models are analyzed in terms of PP, surface NO 3 , and sea ice coverage over 1900–2100. Whereas the mean model simulates reasonably well Arctic‐integrated PP (511 TgC/yr, 1998–2005) and projects a mild 58 TgC/yr increase by 2080–2099 for the strongest climate change scenario, models do not agree on the sign of future PP change. However, similar mechanisms operate in all models. The perennial ice loss‐driven increase in PP is in most models NO 3 ‐limited. The Arctic surface NO 3 is decreasing over the 21st century (−2.3 ± 1 mmol/m 3 ), associated with shoaling mixed layer and with decreasing NO 3 in the nearby North Atlantic and Pacific waters. However, the intermodel spread in the degree of NO 3 limitation is initially high, resulting from &gt;1000 year spin‐up simulations. This initial NO 3 spread, combined with the trend, causes a large variation in the timing of oligotrophy onset—which directly controls the sign of future PP change. Virtually all models agree in the open ocean zones on more spatially integrated PP and less PP per unit area. The source of model uncertainty is located in the sea ice zone, where a subtle balance between light and nutrient limitations determines the PP change. Hence, it is argued that reducing uncertainty on present Arctic NO 3 in the sea ice zone would render Arctic PP projections much more consistent.",
+    "year": 2013,
+    "lang": "en",
+    "type": "article",
+    "venue": "Global Biogeochemical Cycles",
+    "topic": "Arctic and Antarctic ice dynamics",
+    "field": "Earth and Planetary Sciences",
+    "ca_institutions": "Fisheries and Oceans Canada",
+    "funders": ["European Organization for the Exploitation of Meteorological Satellites", "Natural Environment Research Council", "Sight Research UK", "U.S. Department of Energy"]
+  }
+]

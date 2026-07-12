@@ -1,0 +1,817 @@
+# MétaCan screening rubric (v1.0)
+
+**Locked before screening. Version-controlled. Any change is a new version with a dated entry in `DEVIATIONS.md`.**
+
+Both machine screeners and both human coders work from this document and nothing else. The rubric is the
+instrument; if two coders disagree, the rubric is what they are adjudicated against.
+
+---
+
+## The unit
+
+One work (journal article, preprint, book chapter, report, dataset, or software), identified by its OpenAlex ID.
+You see: title, abstract, publication year, language, venue, OpenAlex topic and field, Canadian institutional
+affiliations, funders.
+
+## The question
+
+**Is the object of study *research itself*?**
+
+Metaresearch studies how research is done, reported, funded, evaluated, disseminated, or governed. The test is
+what the work is *about*, not what field it appears in and not what vocabulary it uses.
+
+A cardiology trial is not metaresearch. A study of *how cardiology trials report their outcomes* is.
+
+---
+
+## Tier
+
+Assign exactly one.
+
+### T1: Core metaresearch
+The primary object of study is research itself. Typical objects:
+
+- research **methods** and their properties (bias, reporting, statistical practice, study design)
+- **reproducibility**, replication, data and code sharing
+- **research integrity**: misconduct, retraction, questionable research practices, authorship
+- **peer review** and editorial process *as objects of study*
+- **research evaluation**, metrics, rankings, funding allocation
+- **scholarly communication**: publishing models, open access, preprints *as objects of study*
+- **bibliometrics and scientometrics** applied to a research literature
+- the **research workforce**: careers, equity, training, capacity
+- **evidence synthesis methodology** (not an individual systematic review's clinical answer, but work *about* how
+  syntheses are done)
+
+### T2: Adjacent
+Empirically or conceptually grounded work on science as a social system that is not framed as metaresearch but
+studies it:
+
+- **science and technology studies (STS)**: social studies of scientific knowledge, practice, controversy
+- **library and information science**: information behaviour of researchers, repositories, discovery
+- **research infrastructure** studies: platforms, data repositories, identifiers, standards
+- **history and philosophy of science** *when the object is contemporary research practice*
+- **research policy** analysis grounded in evidence
+
+T2 is where the field's diversity lives. Be generous here: a paper does not have to call itself metaresearch to
+be studying research.
+
+### T3: Contextual
+Relevant to the ecosystem, mapped and released, but **never pooled into the analytic corpus**:
+
+- editorials, commentaries, opinion pieces about research practice
+- policy documents and position statements
+- announcements of infrastructure, tools, or initiatives
+- news, obituaries, corrections, letters
+
+### OUT: Not metaresearch
+Everything else. Includes, and this is the most common error:
+
+- **A study that uses a method is not a study of the method.** A meta-analysis answering a clinical question is
+  OUT. A study of how meta-analyses handle heterogeneity is T1.
+- **Mentioning a metaresearch term is not studying it.** A lab paper reporting "assay reproducibility", a methods
+  section saying "peer reviewed", a licence note saying "open access": all OUT.
+- **Domain research that happens to be bibliometric in method** but whose object is the domain, not the research:
+  e.g. a bibliometric map of diabetes treatments, produced to summarise diabetes knowledge. Borderline; see below.
+
+---
+
+## The three errors that matter most
+
+These are where the pilot showed retrieval and screening break down. Read them twice.
+
+1. **Polysemy.** `reproducibility` in a biochemistry paper means the assay gives the same reading twice. In a
+   metaresearch paper it means the reproducibility crisis. Only the second is in scope. The same applies to
+   `validation`, `replication`, `bias`, `peer review`, `open access`. **Judge the sense, not the token.**
+
+2. **Method vs. object.** Using bibliometrics ≠ studying research. Ask: *if this paper is right, what do we now
+   know more about: a scientific question, or the practice of science?* If the former, OUT.
+
+3. **Absence of vocabulary is not absence of content.** An STS paper about laboratory practice, or an LIS paper
+   about how researchers find data, may use none of the field's keywords and still be squarely T2. **Do not
+   require the vocabulary.** This is the error that makes the field look smaller and more anglophone than it is.
+
+---
+
+## Canadian linkage
+
+Record which apply (this is metadata, not an inclusion test; the estimand is defined separately in
+`PROTOCOL.md`):
+
+- `CA_AFF`: at least one author affiliated with a Canadian institution
+- `CA_FUND`: funded by CIHR, NSERC, SSHRC, or CFI
+- `ABOUT_CA`: the Canadian research system is a substantive object of study (not a passing mention, not one
+  country among forty in a global comparison)
+
+## Genre
+
+`empirical` · `conceptual` · `editorial/commentary` · `policy` · `infrastructure/announcement` · `other`
+
+OpenAlex's `type` is unreliable and this field is commentary-heavy, so genre is coded, not inherited.
+
+## Language of the work
+
+As published. Do not infer from the venue.
+
+---
+
+## Confidence
+
+- `high`: the rubric decides this cleanly.
+- `medium`: the rubric decides, but a reasonable coder could differ.
+- `low`: genuinely on the boundary, or the abstract is missing/too thin to judge.
+
+**`low` is a legitimate answer and is not a failure.** Records coded `low` by either screener are routed to
+adjudication. A screener that never says `low` is not being careful; it is being confident.
+
+---
+
+## Worked examples
+
+| Title (abridged) | Tier | Why |
+|---|---|---|
+| "Data sharing practices in 500 randomised trials" | **T1** | The object is reporting practice. |
+| "Reproducibility of a Western blot protocol" | **OUT** | Assay reproducibility. Polysemy trap. |
+| "Trends in citation of retracted papers" | **T1** | Object is the literature's own behaviour. |
+| "Laboratory life in a Canadian genomics centre: an ethnography" | **T2** | STS. No metaresearch vocabulary; still studies research. |
+| "How do researchers discover datasets? A survey" | **T2** | LIS, information behaviour of researchers. |
+| "Effectiveness of statins: a network meta-analysis" | **OUT** | Uses a synthesis method to answer a clinical question. |
+| "How network meta-analyses handle inconsistency: a review of 200 reviews" | **T1** | Object is the method. |
+| "Announcing the Canadian Research Data Repository" | **T3** | Infrastructure announcement. Mapped, not pooled. |
+| "Open access mandates are failing early-career researchers" (editorial) | **T3** | Commentary about research practice. |
+| "Bibliometric analysis of diabetes research 2000–2020" | **T2** | Borderline. Bibliometric method, and the object *is* a research literature, so it studies research output. Code T2, `medium`. |
+| "Le libre accès dans les revues québécoises : état des lieux" | **T1** | Scholarly communication, object is publishing practice. French. |
+
+---
+
+## Instructions to the screener
+
+Read the title and abstract. Apply the rubric. Do not use outside knowledge of the authors or the journal's
+reputation. If the abstract is missing, judge on the title alone and set confidence to `low` unless the title is
+unambiguous.
+
+Return the schema in `protocol/screening-schema.json`. One object per work. No prose, no preamble.
+--------------------------------------------------------------------------------
+You are screening works for MetaCan, a map of Canadian metaresearch.
+
+Apply the rubric above to every record in the JSON array below. Return a JSON
+array with one object per work, conforming to protocol/screening-schema.json:
+
+  {"id": "W...", "tier": "T1|T2|T3|OUT", "genre": "...", "about_ca": true|false,
+   "confidence": "high|medium|low", "reason": "one sentence"}
+
+Rules:
+- Return the JSON array and NOTHING else. No prose, no preamble, no code fences.
+- Every input id must appear exactly once in the output.
+- Do not run commands, read files, or browse. Classify from the RECORDS alone.
+
+RECORDS:
+[
+  {
+    "id": "W4406470948",
+    "title": "10.1016/j.yort.2013.12.006",
+    "abstract": "",
+    "year": 2000,
+    "lang": "en",
+    "type": "article",
+    "venue": "Time to knit",
+    "topic": "Bone fractures and treatments",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4400473043",
+    "title": "Effectiveness and Acceptability of Cognitive Behavioral Therapy and Family Therapy for Gaming Disorder: Protocol for a Nonrandomized Intervention Study of a Novel Psychological Treatment",
+    "abstract": "BACKGROUND: Gaming disorder (GD) is a new official diagnosis in the International Classification of Diseases, 11th Revision, and with its recognition, the need to offer treatment for the condition has become apparent. More knowledge is needed about the type of treatment needed for this group of patients. OBJECTIVE: This study aims to evaluate the effectiveness and acceptability of a novel module-based psychological treatment for GD based on cognitive behavioral therapy and family therapy. METHODS: This study is a nonrandomized intervention study, with a pretest, posttest, and 3-month follow-up design. It will assess changes in GD symptoms, psychological distress, and gaming time, alongside treatment satisfaction, working alliance, and a qualitative exploration of patients' and relatives' experiences of the treatment. RESULTS: This study started in March 2022 and the recruitment is expected to close in August 2024. CONCLUSIONS: This study evaluates the effectiveness and acceptability of a psychological treatment for patients with problematic gaming behavior and GD. It is an effectiveness trial and will be conducted in routine care. This study will have high external validity and ensure that the results are relevant for a diverse clinical population with psychiatric comorbidity. TRIAL REGISTRATION: ClinicalTrials.gov NCT06018922; https://clinicaltrials.gov/study/NCT06018922. INTERNATIONAL REGISTERED REPORT IDENTIFIER (IRRID): DERR1-10.2196/56315.",
+    "year": 2024,
+    "lang": "en",
+    "type": "article",
+    "venue": "JMIR Research Protocols",
+    "topic": "Impact of Technology on Adolescents",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2107046370",
+    "title": "Du mythe au concept",
+    "abstract": "Cet article s’inscrit dans le cadre des récentes entreprises intellectuelles qui réfléchissent sur les nouveaux rapports entre l’Orient et l’Occident en examinant le vocabulaire de la mondialisation. Les essais de la sociologue marocaine Fatima Mernissi dessinent en creux les enjeux de ces rapports en posant le concept de barbarie dans le contexte de ce qu’on appelle aujourd’hui les « cultures de l’échange ». Le questionnement de la barbarie est lié à l’interrogation de la transmission du savoir par les experts masculins de la littérature religieuse islamique. L’historicité fait surgir le problème de la radicalité moderne des idéologies. Pour contrer les crispations et les dérapages qui découlent de la lecture univoque (la lecture intégriste), Mernissi propose une féminisation humaniste du savoir sur l’islam selon des procédés herméneutiques qui déconstruisent le savoir hérité. Si la barbarie est dans la transmission, la civilisation réside dans la démocratisation de la lecture du savoir.",
+    "year": 2011,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Protée",
+    "topic": "Multiculturalism, Politics, Migration, Gender",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2785229989",
+    "title": "Subjective measures of household resilience to climate variability and change: insights from a nationally representative survey of Tanzania",
+    "abstract": "Jones, L., E. Samman, and P. Vinck. 2018. Subjective measures of household resilience to climate variability and change: insights from a nationally representative survey of Tanzania. Ecology and Society 23(1):9. https://doi.org/10.5751/ES-09840-230109",
+    "year": 2018,
+    "lang": "en",
+    "type": "article",
+    "venue": "Ecology and Society",
+    "topic": "Agricultural risk and resilience",
+    "field": "Agricultural and Biological Sciences",
+    "ca_institutions": [],
+    "funders": ["Economic and Social Research Council", "Climate Extremes"]
+  },
+  {
+    "id": "W4404020678",
+    "title": "Prevalence of Alexithymia and Associated Factors Among Dental Students in Saudi Arabia: A Cross-Sectional Study",
+    "abstract": "Background: Mental health challenges among university students are pervasive, with alexithymia posing a particularly significant yet understudied challenge. This condition significantly affects an individual’s ability to cope with stress due to difficulties in recognizing, describing, and processing emotions. Objectives: This study aims to evaluate alexithymia prevalence and its associated factors among dental undergraduate students and interns enrolled at King Saud University in Riyadh, Saudi Arabia. Methods: Data were collected through a self-administered online survey that assessed alexithymia symptoms (using the Toronto Alexithymia Scale [TAS-20]), sociodemographic profiles, lifestyle-related factors, and health-related factors. The associations between participant factors and alexithymia were assessed using chi-square and multiple logistic regression analyses. Results: Of the 421 eligible participants, 369 completed the survey (87.6% response rate), revealing a significant prevalence of alexithymia (37.9%). Female gender (AOR = 1.7, p = 0.04), depression (AOR = 5.6, p &lt; 0.0001), chronic diseases (AOR = 3.5, p = 0.003), and childhood abuse (AOR = 2.2, p = 0.047) were independent factors significantly associated with alexithymia. Conclusions: These findings highlight the pressing need for mental health support within dental education. Early interventions targeting alexithymia could mitigate its adverse consequences, promoting better student well-being and academic success.",
+    "year": 2024,
+    "lang": "en",
+    "type": "article",
+    "venue": "Healthcare",
+    "topic": "Psychosomatic Disorders and Their Treatments",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2724115632",
+    "title": "Social evaluation of intentional, truly accidental, and negligently accidental helpers and harmers by 10-month-old infants",
+    "abstract": "",
+    "year": 2017,
+    "lang": "en",
+    "type": "article",
+    "venue": "Cognition",
+    "topic": "Psychology of Moral and Emotional Judgment",
+    "field": "Neuroscience",
+    "ca_institutions": "University of British Columbia",
+    "funders": "Natural Sciences and Engineering Research Council of Canada"
+  },
+  {
+    "id": "W2113428469",
+    "title": "Reply to the discussion by A.K. El-Sayed on “New <i>Canadian Highway Bridge Design Code<\/i> design provisions for fibre-reinforced structures”",
+    "abstract": "Reply to the discussion by A.K. El-Sayed on New Canadian Highway Bridge Design Code design provisions for fibre-reinforced structures",
+    "year": 2007,
+    "lang": "en",
+    "type": "article",
+    "venue": "Canadian Journal of Civil Engineering",
+    "topic": "Structural Behavior of Reinforced Concrete",
+    "field": "Engineering",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2127056538",
+    "title": "Mental health in hypertension: assessing symptoms of anxiety, depression and stress on anti-hypertensive medication adherence",
+    "abstract": "BACKGROUND: Patients with chronic conditions like hypertension may experience many negative emotions which increase their risk for the development of mental health disorders particularly anxiety and depression. For Ghanaian patients with hypertension, the interaction between hypertension and symptoms of anxiety, depression and stress remains largely unexplored. To fill this knowledge gap, the study sought to ascertain the prevalence and role of these negative emotions on anti-hypertensive medication adherence while taking into account patients' belief systems. METHODS: The hospital-based cross-sectional study involving 400 hypertensive patients was conducted in two tertiary hospitals in Ghana. Data were gathered on patient's socio-demographic characteristics, anxiety, depression and stress symptoms, spiritual beliefs, and medication adherence. RESULTS: Hypertensive patients experienced symptoms of anxiety (56%), stress (20%) and depression (4%). As a coping mechanism, a significant relation was observed between spiritual beliefs and anxiety (x (2) = 13.352, p = 0.010), depression (x (2) = 6.205, p = 0.045) and stress (x (2) = 14.833, p = 0.001). Stress among patients increased their likelihood of medication non-adherence [odds ratio (OR) = 2.42 (95% CI 1.06 - 5.5), p = 0.035]. CONCLUSION: The study has demonstrated the need for clinicians to pay attention to negative emotions and their role in medication non-adherence. The recommendation is that attention should be directed toward the use of spirituality as a possible mechanism by which negative emotions could be managed among hypertensive patients.",
+    "year": 2014,
+    "lang": "en",
+    "type": "article",
+    "venue": "International Journal of Mental Health Systems",
+    "topic": "Religion, Spirituality, and Psychology",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": ["African Population and Health Research Center", "University of Ghana", "International Development Research Centre"]
+  },
+  {
+    "id": "W7022383918",
+    "title": "Toledo, Ohio",
+    "abstract": "STREETS: Jefferson Ave. [801-825]; Michigan N. [2-158]; Monroe [800-829]; Ontario N. [1-149]; Washington [800-822]; SPECIALS: City of Toledo: Div'n of Health &amp; Municipal Hosp'l; Dickey M'f'g Co. Tents &amp; Awn'gs M'f'g; Hotel Stevens; Pythian Castle",
+    "year": 2009,
+    "lang": "en",
+    "type": "other",
+    "venue": "OhioLink ETD Center (Ohio Library and Information Network)",
+    "topic": "Homelessness and Social Issues",
+    "field": "Health Professions",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W7065939088",
+    "title": "Global wheat production declines",
+    "abstract": "The USDA Wheat Outlook for August 2003 contained revised projections for world wheat production, with projections down 11 million tonnes to 549 million tonnes. Some 5 million tonnes of this decline was accounted for by trends in the EU. The outlook points out that it is necessary to go back to 1995/96 to encounter lower average EU wheat yields. As a consequence EU-15 wheat exports in 2003/04 are expected to fall to 10.5 million tonnes, the lowest on record. This creates a situation where 'the EU faces sharply reduced grain supplies for animal feed because of reduced wheat and coarse grain production prospects'. This will create opportunities for increased exports of non-grain feed (cassava, oilseeds, corn gluten) for third country exporters. Argentina, Australia, Canada and the USA are expected to be the principal beneficiaries of this situation, although these opportunities will be limited by the increased use the EU will make of rye and rice stocks as a source of animal feed. The tight situation in the EU has led the European Commission to indefinitely suspend export subsidies on wheat so as to 'keep a lid on grain prices within the EU'. The tight situation is also leading to increased wheat prices on the world market.\\n\\n\\n\\nTwo additional short USDA reports on developments in the wheat sector highlight how weather conditions have adversely affected production in both EU and non-EU European countries. \\n\\n \\n\\nComment: \\n\\nThese higher EU prices could serve to stimulate EU wheat production in the long term if they rise above the level projected and on which direct-aid payments were calculated. Higher than expected prices commonly results in 'over compensation' of EU wheat farmers, leading to increased incentives to produce. Thus while these recent trends are likely to mean that the anticipated external market effects of CAP reform will not occur in the short term, in the longer term increased volumes of EU wheat exports to world markets can be expected once normal climatic conditions return.",
+    "year": 2003,
+    "lang": "en",
+    "type": "other",
+    "venue": "CGSPace A Repository of Agricultural Research Outputs (Consultative Group for International Agricultural Research)",
+    "topic": "Power Transformer Diagnostics and Insulation",
+    "field": "Engineering",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2006015338",
+    "title": "HIV, HCV, and drug use in men who have sex with men",
+    "abstract": "",
+    "year": 2013,
+    "lang": "en",
+    "type": "letter",
+    "venue": "The Lancet",
+    "topic": "HIV/AIDS Research and Interventions",
+    "field": "Medicine",
+    "ca_institutions": "Canadian AIDS Treatment Information Exchange",
+    "funders": []
+  },
+  {
+    "id": "W2964478143",
+    "title": "A New Asynchronous RTK Method to Mitigate Base Station Observation Outages",
+    "abstract": "Real-time kinematic (RTK) positioning is a satellite navigation technique that is widely used to enhance the precision of position data obtained from global navigation satellite systems (GNSS). This technique can reduce or eliminate significant correlation errors via the enhancement of the base station observation data. However, observations received by the base station are often interrupted, delayed, and/or discontinuous, and in the absence of base station observation data the corresponding positioning accuracy of a rover declines rapidly. With the strategies proposed till date, the positioning accuracy can only be maintained at the centimeter-level for a short span of time, no more than three min. To address this, a novel asynchronous RTK method (that addresses asynchronous errors) that can bridge significant gaps in the observations at the base station is proposed. First, satellite clock and orbital errors are eliminated using the products of the final precise ephemeris during post-processing or the ultra-rapid precise ephemeris during real-time processing. Then the tropospheric error is corrected using the Saastamoinen model and the asynchronous ionospheric delay is corrected using the carrier phase measurements from the rover receiver. Finally, a straightforward first-degree polynomial function is used to predict the residual asynchronous error. Experimental results demonstrate that the proposed approach can achieve centimeter-level accuracy for as long as 15 min during interruptions in both real-time and post-processing scenarios, and that the accuracy of the real-time scheme can be maintained for 15 min even when a large systematic error is projected in the U direction.",
+    "year": 2019,
+    "lang": "en",
+    "type": "article",
+    "venue": "Sensors",
+    "topic": "GNSS positioning and interference",
+    "field": "Engineering",
+    "ca_institutions": "University of Calgary",
+    "funders": ["National Key Research and Development Program of China", "National Natural Science Foundation of China"]
+  },
+  {
+    "id": "W2775903130",
+    "title": "Empowering Learners through Blended Learning.",
+    "abstract": "",
+    "year": 2018,
+    "lang": "en",
+    "type": "article",
+    "venue": "International journal on e-learning",
+    "topic": "Online and Blended Learning",
+    "field": "Social Sciences",
+    "ca_institutions": "York University",
+    "funders": []
+  },
+  {
+    "id": "W4220927966",
+    "title": "Automatic text searching for information retrieval",
+    "abstract": "The capabilities of automatic text search systems are reviewed and evaluation results are cited comparing the performance of automatic text searching systems with the effectiveness of manual controlled-term indexing methods. Some possibilities arethen examined for improving automatic text search systems, including the use of complex content identifiers instead of single words, and the introduction of user-system interaction. A likely scenario is given for the operations of future automatic text search systems.",
+    "year": 2022,
+    "lang": "en",
+    "type": "article",
+    "venue": "Proceedings of the Annual Conference of CAIS / Actes du congrès annuel de l ACSI",
+    "topic": "Semantic Web and Ontologies",
+    "field": "Computer Science",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4412998456",
+    "title": "Complications of percutaneously placed uncovered metallic biliary stents for malignant obstruction: a systematic review",
+    "abstract": "Background: The aim of this systematic review was to determine the patency and complications related to percutaneous metallic biliary stent placement for malignant biliary obstruction in the current literature. Methods: This review was performed using the Preferred Reporting Items of Systematic Reviews and Meta-Analyses guidelines. EMBASE and PubMed were queried yielding 891 articles, 18 of which were included in the final analysis. The Newcastle-Ottawa Quality Assessment Scale was used to appraise article quality. Patient demographics, technical success rate, and procedure outcomes were recorded. Complications were classified as \"major\" if they resulted in blood transfusion or additional invasive procedures or were reported as such in the literature. Complications that did not meet these criteria were classified as \"minor\". Results: A total of 1,453 patients (677 female; weighted age 66.8 years) underwent biliary stent placement. The weighted technical success rate was 97.7%. The incidence of stent occlusion was 13.5% with 6.6% of patients requiring further intervention to maintain patency. There were 277 (19.1%) complications, of which 87 were classified as major. The most common complications were pancreatitis (93, 6.4%), cholangitis (69, 4.8%), and bleeding (64, 4.4%). In cases of bleeding, 4.7% of patients needed a blood transfusion and 15.6% required a procedure to treat bleeding. There were 6 (0.4%) procedure-related deaths. Conclusion: In conclusion, percutaneous metallic stent placement for malignant biliary obstruction has a high technical success rate and relatively low rate of occlusion. Although nearly one in five procedures resulted in a complication, most cases were minor.",
+    "year": 2025,
+    "lang": "en",
+    "type": "review",
+    "venue": "Frontiers in Radiology",
+    "topic": "Gallbladder and Bile Duct Disorders",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2363249499",
+    "title": "Soy Foods Intake in Adolescence and the Risk of Breast Cancer:A Systematic Review",
+    "abstract": "Objective To assess the influence of soy foods intake in Adolescence on the female adult's breast cancer.Methods Literatures about the influence of soy foods intake in Adolescence on the female adult's breast cancer were retrieved in The Cochrane Library,MEDLINE,EMbase,CNKI,VIP,WanFang Data and CBM from the date of their establishment to August 2011,meanwhile,the references of included papers were also retrieved.The data were extracted according to the inclusion and exclusion criteria by two reviewers independently,the quality of the included studies was assessed according to the Cochrane Newcastle-Ottawa scale and GRAEDprofiler 3.2.2,and meta-analysis was conducted by using Stata 11.0.Results A total of 6 studies involving 6609 patients and 79538 controls were included.The results of meta-analyses showed that compared with the non-intake or low intake of soy foods in Adolescence,high soy foods intake in Adolescence was associated with lower risk of breast cancer(OR=0.816,95%CI 0.670 to 0.993);In the subgroup analysis,soy foods intake in Adolescence was more effective to prevent premenopausal(OR=0.661,95%CI 0.550 to 0.796) rather than post-menopausal(OR=0.782,95%CI 0.486 to 1.259) breast cancer;and the effects of soy foods intake in Adolescence were not significantly different between the eastern(OR=0.793,95%CI 0.569 to 1.105) and western(OR=0.837,95%CI 0.743 to 0.943) women.Conclusion Soy foods intake in Adolescence may be associated with a small reduction in the risk of adults' breast cancer,especially for the premenopausal women,though there is no difference between the eastern and western women.However,restricted by quantity and quality of the studies,this conclusion should be confirmed by more studies.",
+    "year": 2012,
+    "lang": "en",
+    "type": "article",
+    "venue": "Zhongguo xunzheng yixue zazhi",
+    "topic": "Phytoestrogen effects and research",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4388026220",
+    "title": "„All Captains of His Majesty”. The Quarter Army between 1589–1591",
+    "abstract": "The article discusses the strength and functioning of the quarter army (pol. wojsko kwarciane) between 1589–1591. At the time in question a large Tatar inva- sion was in progress, which resulted in the rapid enlargement of the entire Crown army. Huge tax increases were introduced due to the prospect of an offensive war against the Ottoman Empire. The rapidly expanding army did not receive its due pay, leading to the first army confederation (pol. konfederacja wojskowa) in his- tory of the Polish-Lithuanian Commonwealth. Consequently, there was a reduction of the quarter army.",
+    "year": 2023,
+    "lang": "en",
+    "type": "article",
+    "venue": "Przegląd Historyczno-Wojskowy",
+    "topic": "Historical and Cultural Studies of Poland",
+    "field": "Arts and Humanities",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4406394719",
+    "title": "10.1016/s0246-0378(19)30325-2",
+    "abstract": "",
+    "year": 2000,
+    "lang": "en",
+    "type": "article",
+    "venue": "Time to knit",
+    "topic": "Diabetes and associated disorders",
+    "field": "Biochemistry, Genetics and Molecular Biology",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2033928142",
+    "title": "The effect of impurities on spin-polarized Zeeman bound states in dilute magnetic semiconductor-superconductor hybrids",
+    "abstract": "We investigate the effect of single and multiple impurities on the Zeeman-localized, spin-polarized bound states in dilute magnetic semiconductor hybrid system. Such bound states appear whenever a dilute magnetic semiconductor showing giant Zeeman effect is exposed to an external magnetic field showing nanoscale inhomogeneity. We consider the specific example of a superconductor-dilute magnetic semiconductor hybrid, calculate the energy spectrum and the wave functions of the bound states in the presence of a single impurity, and monitor the evolution of the bound state as a function of the impurity strength and impurity location with respect to the center of the Zeeman trapping potential. Our results have important experimental implications as they predict robust spin textures even for ideal samples. We find that for all realistic impurity strengths the Zeeman bound state survives the presence of the impurity. We also investigate the effect of a large number of impurities and perform ensemble averages with respect to the impurity locations. We find that the spin-polarized Zeeman bound states are very robust, and they remain bound to the external field inhomogeneity throughout the experimentally relevant region of impurity concentration and scattering strength.",
+    "year": 2010,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Applied Physics",
+    "topic": "Physics of Superconductivity and Magnetism",
+    "field": "Physics and Astronomy",
+    "ca_institutions": "University of British Columbia",
+    "funders": []
+  },
+  {
+    "id": "W2153168932",
+    "title": "Recommendations for the predictive genetic test in Huntington's disease",
+    "abstract": "The 1994 predictive test guidelines for Huntington's disease (HD) were published by an ad hoc Committee comprising representatives from the World Federation of Neurology (WFN) and the International Huntington Association (IHA) 1, 2 shortly after the gene mutation for HD was identified. These guidelines have led the way in setting standards for predictive testing not only for HD, but also for other late onset neurodegenerative diseases such as familial frontotemporal dementia and spinocerebellar ataxias (SCA's). They were also a valuable foundation for good clinical practice for predictive testing for hereditary cancers and other late onset conditions. Having a clear set of recommendations has helped to clarify the predictive test process for both clinicians and family members. Undoubtedly the guidelines have succeeded in their original aims of setting minimum standards for predictive testing, protecting at risk individuals and providing a reference point to help with ethical and clinical dilemmas as they arose. Whilst it is essential after twenty years to review the guidelines in the context of the substantial evidence that has emerged in the intervening years, many of the recommendations remain valid today. The process of reviewing the guidelines was initiated by the European Huntington Disease Network (EHDN) 'Genetic Testing and Counselling' Working Group, formed during the EHDN congress in Dresden in 2007 by Prof Gerry Evers-Kiebooms. The aim of the working group (WG) was to look at communication in relation to genetic test information. Members of the WG include family members, genetic counsellors, psychologists, clinical geneticists, neurologists, and laboratory scientists from over 12 European countries. During the first WG workshop in Leuven (BE) in 2008, attention focused more on the predictive test guidelines. Whilst there was consensus that the guidelines were an excellent and valued resource, gaps were apparent in relation to new evidence and practices that had emerged since 1994. These included new technology such as preimplantation genetic diagnosis (PGD), increased scientific knowledge about HD (understanding of intermediate (IA) and reduced penetrance (RP) alleles, and prodromal signs), the debate surrounding the testing of minors, new opportunities to participate in research and data on individuals' experiences of testing such as post test discrimination. Subgroups were set up to review the current research evidence in relation to six sections of the original guidelines that corresponded to the identified gaps (2.1 Testing of minors; 2.8 Laboratory standard of accuracy; 4.0 Communication of information; 5.2 Information pertaining to the test 7.0 'Prenatal Diagnosis' renamed 'Reproductive options'; 9.0 Post test counselling). The sub-groups comprised WG members with a particular specialism and/or interest in the topic. Family members participated in each of the sub-groups and international participants outside Europe were invited to contribute their expertise on specific topics. Written proposals, debated in plenary discussions, included the rationale for changes and references used by the sub-group. The sub-group members subsequently corresponded by email and drafted updates and additions to the original guidelines. The proposed changes have undergone a lengthy consultation process both through the EHDN website (June–August 2010), where comments to the proposed changes could be posted, and globally through a review from a committee appointed jointly by IHA and WFN (Nov 2010–June 2011). A Town Hall session at the World Congress Meeting on HD in Melbourne in September 2011 provided a forum for the proposals to be presented to the wider HD community. This proved a valuable source of feedback and also drew on the knowledge and input of an expert panel of professionals and family members from countries including South America, Australia and Canada. Following the meeting in September 2011 Prof Raymund Roos, Chair of the WFNHD Research Group, invited a small editorial committee, drawn from the international community, to assist with the final edits. A proposal made at the 2011 World Congress Meeting on HD was for the guidelines to be reviewed every two years in conjunction with the World Congress meeting. Prospectively this will allow all members of the HD community to put forward points for consideration by a committee appointed on behalf of the Chairs of both the IHA and WFNHDRG. This will also ensure that clinical recommendations continue to evolve and reflect changes in our knowledge and practice. The document that follows is the next version of the 1994 predictive test guidelines for HD. It is important to emphasize that these are not intended as rigid rules but rather recommendations to guide and inform practice, based on current evidence and expertise. Finally it is hoped that these proposals will stimulate new discussion about predictive test counselling approaches and how best to serve the needs of individuals and families. New challenges continue to arise in predictive test counselling; for example, how to ensure equity of access to genetic counselling services and how to ensure a new generation of young people from HD families have their say in the way genetic counselling services are provided. REC 1 All persons who may wish to take the test should be given up to date, relevant information in order to make an informed voluntary decision. COM 1 The highest standards of counselling should be available in each country. It is recommended that informed consent for the test be documented with the signature of the person to be tested and the professional responsible for the counselling as a standard medical practice. REC 2 The decision to take the test is the sole choice of the person concerned. No requests from third parties, be they family or otherwise, should be considered. COM 2 The person must choose freely to be tested and not be coerced by family, friends, (potential) partners, physicians, insurance companies, employers, governments, etc. REC 2.1 It is recommended that the minimum age of testing be 18 years. Minors at risk requesting the test should have access to genetic counselling, support and information including discussion of all their options for dealing with being at risk. COM 2.1 REC 2.2 Each participant should be able to take the test independently of his/her financial situation. COM 2.2 Each national lay organization should use its influence with government departments, public and private health insurers, etc, to reach this goal. REC 2.3 Persons should not be discriminated against in any way as a result of genetic testing for Huntington's disease (see also REC 5.3.5). REC 2.4 Extreme care should be exercised when testing would provide information about another person who has not requested the test. COM 2.4 This will arise when an individual(s) at 25% risk request(s) testing with full knowledge that his/her parent does not want to know his/her status. Every effort should be made by the counsellors and the individuals concerned to come to a satisfactory solution of this conflict. REC 2.5 For participants with evidence of a serious psychiatric condition, it may be advisable that testing is delayed and support services put into place. REC 2.6 Testing for HD should not form part of a routine blood investigation without the specific permission of the subject. COM 2.6 Such a specific permission should in principle also be required for symptomatic persons. REC 2.7 Ownership of the test results remains with the person who requested the test. Legal ownership of the stored DNA remains with the person from whom the blood was taken. COM 2.7 The consent form should address this issue. Local legal opinions may be helpful. REC. 2.8 All laboratories are expected to comply with the Organization for Economic Co-operation and Development (OECD) Guidelines for Quality Assurance in Molecular Testing by providing and practicing genetic testing under a quality assurance framework, meet rigorous standards of accuracy, participating in external quality assessment (EQA) schemes and working towards certification and accreditation. COM 2.8 At-risk individuals, family members and the lay organizations can enquire about the quality standards of the laboratory, including, for example, its certification and accreditation status. The lay organizations can also assist persons who want to be or have been tested with their enquiries and concerns. REC 2.8.1 REC 2.9 The counsellors should be specifically trained in counselling methods and form part of a multidisciplinary team. COM 2.9 Such a multidisciplinary team should consist, for example, of a clinical geneticist, genetic counsellor or social worker, neurologist, psychiatrist or psychologist. REC 3 The participant should be encouraged to select a companion to accompany him/her throughout all the different stages: the pre-test, the taking of the test, the delivery of the results and the post-test stage. COM 3 This should be assessed on an individual basis and the presence of a companion may not be appropriate or required in all cases. REC 3.1 The counselling unit should plan with the participant a follow up protocol which provides support during the pre- and post-test stages, whether or not a person chooses to be accompanied by a companion. COM 3.1 Wherever possible, support should be available close to the person's community, and on a remote basis, by phone or telehealth where necessary. REC 4 Testing and counselling should be provided by genetic counselling units knowledgeable about molecular genetic issues in Huntington's disease. These centres should work in close collaboration with the lay organization(s) of the country. COM 4 Often the test will be conducted at a site different from the counselling centre. If no lay organization exists in the country, the centre should contact the IHA. REC 4.1 The laboratory performing the test should not communicate the final results to the counselling team until very close to the time the results are given to the participant. COM 4.1 The aim is to protect the participant from the possibility of counselling bias at any time (see also COM 5.2.6). REC 4.2 As a rule, members of the counselling team or the technical staff should not communicate any information concerning the test and its results to third parties without the explicit permission of the person tested. COM 4.2 Only in the most exceptional circumstances (e.g. prolonged coma or death) may information about the test result, if so requested, be provided to family members whose risk is affected by the result. REC 4.3 Neither the counselling centre nor the test laboratory should establish direct contact with a relative whose DNA may be needed for the purpose of the test without permission of the participant and of the relative. All precautions should be taken when approaching such a relative. REC 4.4 Care should be taken regarding access to clinical reports of the test results. COM 4.4 Consent of the participant should be sought before sending a letter to any physician involved in their care (e.g. family doctor, neurologist, or hospital physician). The possible benefits and drawbacks of sending the result to such physicians should be discussed. These benefits include: post-test support, future clinical care including identification and support around the onset of symptoms, and their symptomatic treatment. The risks include: potential discrimination in economic, social and medical domains, should their medical files be accessed by third parties. COM 5 'Essential information' means information which is absolutely vital to the whole test procedure. COM 5.1 This information should be both written and oral and be provided by the team responsible for the test service. REC 5.1.1 On Huntington's disease, including the wide range of its clinical manifestations, the social and psychological implications, the genetic aspects, reproductive options, availability of treatment, etc. COM 5.1.1 It must be pointed out that at this time no proven prevention, treatment that slows disease progression, or cure is available. REC 5.1.2 On the implications of non-paternity (and non-maternity). COM 5.1.2 Genetic testing may show, or suggest, that the putative parent is not the biological parent; this aspect should be drawn to the attention of the participant and discussed. With the presently available techniques of in vitro fertilization, etc., even occasional non-maternity may occur. REC 5.1.3 On lay organizations, including their documentation on HD, their addresses for help and social contacts, etc. COM 5.1.3 If no lay organization exists in the country, contacts can be made with the IHA or lay organization of a neighbouring country. REC 5.1.4 Psychosocial support and counselling must be available before the test procedure commences. COM 5.1.4 Lay organizations should be mentioned as an additional source of support and information. REC 5.2.1 How the test is done. REC 5.2.2 Possible need for DNA from an affected family member and the possible problems arising from this. COM 5.2.2 Asking an affected person, who may be unaware of or unwilling to acknowledge his/her symptoms, to contribute a blood sample may be an invasion of privacy. REC 5.2.3 The limitations of the test (error rate, uncertain predictive interpretation of some CAG repeat numbers, etc). REC 5.2.4 The counsellor must explain that, although the genetic mutation has been found, at the present time only limited useful information can be given about age at onset or about the kind of symptoms, their severity, or the rate of progression. COM 5.2.4 REC 5.2.5 Pre-test genetic counselling should mention all possible test outcomes, including intermediate and reduced penetrance results, which may be prone to repeat instability and may expand into higher repeat ranges upon transmission to future generations. However, there is insufficient information regarding the magnitude of the risk of expansion for future generations. COM 5.2.5 REC 5.2.6 The predictive test indicates whether someone has or has not inherited the gene mutation, but it does not make a clinical diagnosis of HD if the gene expansion is present. COM 5.2.6 Particular care should be taken with participants who are believed by the clinician to be showing early symptoms of HD; however, persons with evident but unacknowledged symptoms should not automatically be excluded from the test. Rather, they should be offered additional pre and post test support. REC 5.2.7 Pre-test counselling should also outline information on post-test counselling and options for future research participation and care. REC 5.3.1 For the person him/herself. COM 5.3.1 Most participants will adjust to their predictive test result. Some individuals may, however, experience difficulty coping with any of the possible results in the short or long term (including a result in the normal range). Additional counselling should be offered to those at risk of having difficulties with coping (e.g. individuals with a history of psychiatric illness). REC 5.3.2 For the spouse/partner and children. COM 5.3.2. If the participant is not accompanied by his/her spouse/partner during the counselling sessions, there should be particular discussion about the potential impact of the test result on the spouse/partner. It is possible that the genetic test result and/or family history will impact the participants' current or future family members' eligibility for insurance, employment, legal care of and access to children, and adoption. REC 5.3.3 For the affected parent and his/her spouse. COM 5.3.3 The feelings of the affected parent, who may well become aware of the results, must be taken into account. REC 5.3.4 For the other members of the participant's family. COM 5.3.4 Whatever information is obtained, it may influence the feelings of and the relationship with others, with a potential for discrimination in the family. This may include: disrupted patterns of behaviour and interaction, such as communication changes and feelings of altered sense of membership. REC 5.3.5 REC 5.4.1 Not to take the test for the time being. REC 5.4.2 To deposit DNA for research. REC 5.4.3 To deposit DNA for possible future use by family and self. REC 5.4.4 DNA deposited under 5.4 above would be made available to the donor's family members at their request after the death of the donor if it is essential to obtain an informative result. REC 5.4.5 In the case of DNA deposited under 5.4.2 and/or 5.4.3 above, the unit collecting the DNA must provide a written declaration that samples will not be used for purposes other than specified in the said declaration with the exception of the provisions of 5.4.4. REC 6.1 It is important to verify that the diagnosis of HD in the person's family is correct. REC 6.2 Neurological examinations (if possible) and psychological appraisal are considered important to establish a baseline evaluation of each person. This however is not a requirement for participation in predictive testing. COM 6.2 Refusal to undergo these and other additional examinations will not justify the withholding of the test from participants. REC 7.0.1 Preconception counselling should be available to couples where one partner is at risk of HD or is a carrier of the HD gene expansion. COM 7.0.1 The importance of preconception counselling is stressed, because of the timeframe in making a decision about testing during an ongoing pregnancy. Moreover, such preparation may help to decrease the simultaneous requests for presymptomatic and prenatal diagnosis; a very stressful situation due to the limited time available and the potential for consecutive adverse outcomes. REC 7.0.2 Preconception counselling should include discussion around the range of reproductive options available. These options may include proceeding with a pregnancy without testing, prenatal diagnosis (PND) preimplantation genetic diagnosis (PGD), donor insemination and adoption. REC 7.1.1 Couples should be made aware of all the options available to them in pregnancy, including the possibility of prenatal testing. COM 7.1.1 Careful pre-test counselling by an informed professional is necessary in order to ensure that the (future) pregnant woman and her partner are fully aware of the consequences of prenatal testing. All possible test outcomes (full expansion, reduced penetrance, intermediate and normal alleles) should be made clear to the couple. It is preferable for the counselling to take place in a specialized (prenatal or genetics) centre. REC 7.1.2 Direct prenatal testing for the HD mutation is usually only performed if the parent at risk has already been tested. For a possible exception see 7.1.6. REC 7.1.3 PND for an individual with a reduced penetrance allele of the HD gene is justified. REC 7.1.4 PND for an individual with an intermediate allele of the HD gene is justified. COM 7.1.4 There is insufficient information regarding the magnitude of the risk of CAG repeat expansion of intermediate alleles in the transmission to offspring. The risk of expansion into the full penetrance range is small, but may vary with the CAG size of the intermediate allele and the ethnicity of the individual. REC 7.1.5 Exclusion PND should be available as an option for couples where the parent does not want to know his/her genetic status. The and of this however, should be in during COM 7.1.5 The of PND is that it the possibility of a prenatal test where the parent does not wish to have a predictive test but where the is clear they not wish to have a at risk of HD. The is that the may up an pregnancy where the parent is not a mutation REC Direct prenatal testing of the where one of the is at risk but not to know his/her carrier should be considered where the requests this in pregnancy. COM The only of this is that, in the case of a normal result in the the parent at risk does not know his/her carrier his/her wish not to However, in the case of the gene mutation in the the carrier of the parent at risk will be The possibility of this adverse should be and the for such an before with this test REC The requesting prenatal testing must be informed that if they to the pregnancy whether the is a carrier of the gene expansion or there is no valid for performing the test. COM This is in with the not to test The regarding his/her future to whether or not to undergo a test is if pregnancy is in the case of an prenatal test result. The of the and their to freely on the taken on the basis of the prenatal test result should be and with there is a small, but not risk of to the procedure. REC It is not recommended to the pregnancy of a on the basis of an intermediate allele result. COM COM Genetic in with is a reproductive option for people at risk of on a genetic The different of for HD and the different where may be an option will be in the specific recommendations regarding for HD. REC. It is recommended to to an carrier of the HD gene expansion or more and his/her partner if there is access to this technology in the where genetic counselling is being provided. COM In is offered to people at risk of on a serious genetic The risk of expansion of an intermediate allele to a reduced or full allele is not but is with an intermediate allele requesting should be offered genetic REC. Exclusion should be available for couples at risk for with HD. COM The of is that it to the transmission of the HD mutation, at the time the person's wish not to The counselling should address the impact of the about his/her genetic upon the of the future REC. should be COM and ethical in practice it will be to the participant's wish not to the procedure where reproductive physicians would be both to more and to a the risk of having a with HD will be REC. Couples where one partner is already symptomatic should have access to counselling for Psychosocial counselling on the impact upon a of up with a parent with HD in and of the potential in the specific case is an important aspect of the procedure. COM symptomatic is not a an for attention should be given to the of the symptoms of HD upon the future The and coping of the partner are important in this A does to couples where one partner the of HD in being aware of the for future children. REC. REC exceptional circumstances there should be a minimum of one the of the pre-test information and the decision whether or not to take the test. The counsellor should that the pre-test information has been and should take the to be of this. However, contact will only be at the participant's COM Such an is necessary to the person time to the pre-test information in order to make an informed decision. During this from the test centre must be available. testing may an as it is important to testing as early as possible during the pregnancy. REC The result of the predictive test should be as as possible after of the test, on a upon in the the and the person. REC The in which results will be should be the counselling team and the person. REC The participant has the to at any time that the result not be given to REC The results of the test should be given by the counsellor to the person and his/her companion. In remote the result session may be by with a clinician to the participant No result should be given by or by The counsellor must have time to any with the person. REC All post-test provisions (see must be available from the time the test results are REC The and the form of the post-test counselling should be the team and the participant before the of the test, but the participant has the to the the and will vary from person to person, post-test counselling must be available at all REC The counsellor should have contact with the person the first after delivery of the results, of the test result. REC If there has been no contact one of the delivery of the test result, the counsellor should the follow REC It is essential that post-test counselling is made available of the person's financial situation. REC During post-test contact specific information on options, including (if participation in clinical research can be provided. The of prodromal of mutation and their (if could be discussed. COM REC information in should be during the pre-test REC The lay organization has an important to in the post-test The information and support that it can provide should be offered to the participant of whether or to that to the for additional EHDN members, The Testing Group, and the WG",
+    "year": 2012,
+    "lang": "en",
+    "type": "article",
+    "venue": "Clinical Genetics",
+    "topic": "Genetic Neurodegenerative Diseases",
+    "field": "Neuroscience",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2012442543",
+    "title": "Endothelin ET<sub>A<\/sub> receptor antagonist reverses naloxone-precipitated opioid withdrawal in mice",
+    "abstract": "Long-term use of opioids for pain management results in rapid development of tolerance and dependence leading to severe withdrawal symptoms. We have previously demonstrated that endothelin-A (ETA) receptor antagonists potentiate opioid analgesia and eliminate analgesic tolerance. This study was designed to investigate the involvement of central ET mechanisms in opioid withdrawal. The effect of intracerebroventricular administration of ETA receptor antagonist BQ123 on morphine and oxycodone withdrawal was determined in male Swiss Webster mice. Opioid tolerance was induced and withdrawal was precipitated by the opioid antagonist naloxone. Expression of ETA and ETB receptors, nerve growth factor (NGF), and vascular endothelial growth factor was determined in the brain using Western blotting. BQ123 pretreatment reversed hypothermia and weight loss during withdrawal. BQ123 also reduced wet shakes, rearing behavior, and jumping behavior. No changes in expression of vascular endothelial growth factor, ETA receptors, and ETB receptors were observed during withdrawal. NGF expression was unaffected in morphine withdrawal but significantly decreased during oxycodone withdrawal. A decrease in NGF expression in oxycodone- but not in morphine-treated mice could be due to mechanistic differences in oxycodone and morphine. It is concluded that ETA receptor antagonists attenuate opioid-induced withdrawal symptoms.",
+    "year": 2015,
+    "lang": "en",
+    "type": "article",
+    "venue": "Canadian Journal of Physiology and Pharmacology",
+    "topic": "Neuropeptides and Animal Physiology",
+    "field": "Neuroscience",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4283725784",
+    "title": "A contribution towards health",
+    "abstract": "What is health? The question is being asked 60 years after the proposal of the first definition.1-3 With the passing of such a long period of time when it seemed to have become accepted, with the usage, citations and attempts to adhere to it, and the theoretical speculation implemented and flourishing around it,4-6 there would now appear to be a change of course. Questions about the definition of health are being debated now by a scientific community comprising voices that are asking such a question anew.4, 5 And what exactly is it that at this very moment is causing us to consider such a change of course? An analysis of the literature produced in recent times shows the need to specify a way in which we will be able to speak of health in the face of a change in the overall epidemiology and the proof of the impossibility of a biological condition free of the risk of being affected by the disease.1, 6-10 One limit of health definition proposed in 19482, 7 concerns how verifiable the complete satisfaction of such a condition can actually be. Moreover, the 1948 definition implies that, in the presence of a diagnosis or even therapy, the physiological readaptation given by the allostatic system11, 12 or the capacity for self-management, are not considered. Finally, the definition does not allow for the possibility of detaching oneself from the clinical aspects.13 Thus, the reported issue with the 1948 definition lies in the description of health as if it were a state: the concept of health is conceived as hypostasis, that is reification.14 Recent commentaries above-cited underline that if health were actually a state, it would constitute a synonym for physical state and, firstly, there would be no need for an ad hoc definition which differs from the one that allows for the identification of a primary morphological and functional state pertinent to the organism. In the second place, analysis of the periphrasis ‘state of wellness’ reveals that it considers two distinct levels at the same time: one level concerning the empirical state (‘state’) and one level concerning the hypothetical theory about this state (what ‘well’ means). Therefore, the character of the state is attributed to a construct which is subjectively shared (wellness), thus making health as a state: it is an epistemological leap that makes the definition potentially unachievable.6, 15 As we are reminded by Canguilhem,11, 12 a good physical state or illness are body conditions: illness is identifiable at the moment in which there is a dysfunction with respect to the surrounding environment, and physical state can be defined within the description of the subjective functioning and parameters of an individual. But the physical state can neither be taken as standard nor as normal, since physical dimensions can be part of individuals' lives and since there are also remarkable competences for managing the pathological state of these dimensions. Therefore, not even in the hypothetical definition of health as a sole body condition, the above-cited health definition can be considered exhaustive since it would need to allow for the variability of physiological adaptation.12, 16 If health were a state, in the organism, there would be peculiar health parameters existing regardless of their identification. These empirical conditions would be present and would persist independently of the observers' being still unaware of it, as it happens when there is a cause determining a pathological state.16, 17 Since health cannot be identified with a state and it does not stand opposed to the state of illness,18 health takes shape according to the observer.19 Since it is not a dichotomic state (present/not present), health is currently considered as self-perceived and it is defined by the observers at the moment in which they are dealing with it and it is located on a continuum. Epistemological reflection here specifies: health perception is situated on a level of conceptual realism where the reality in question is generated by the knowledge categories utilized to describe it. This shift from the observed to the observer allowed to highlight previous limitations.13 Thus, how health is being generated becomes the key in any study undertaken here. Specifically, health is a construct, defined on the basis of language used; therefore, health is defined by the discursive modalities used to describe it.20, 21 When patients speak of health and describe it, health becomes reality, constructed by means given by language. So much so—as we are told in the most recent literature2—that if until recently someone described himself/herself as being ‘healthy’ only if he/she had no pathological state, now there is agreement on the fact that this diagnosed person can be defined ‘healthy’, although not in a state of integrity on the functional physiological level. He/she can be ‘healthy’ even if not meeting the terms of the definition of theoretical medical integrity from a ‘physical, psychological, and social’ viewpoint.1, 22 A further shift in the definition of health occurs as soon as it is identified as wellness. In this way, the construct of health is defined using another construct, wellness, to express it. Since it is a construct, it needs to be defined in order not to fall into the domain of common sense, too. In fact, there is a risk of both getting into a never-ending vicious circle (defining a construct through another construct and so forth). Furthermore, there is a risk of allowing any definition in ordinary language and thus making health no longer a scientific term, but rather a ‘debatable’ term: paradoxically as if everyone could give their own definition of ‘pathology’. Moreover, through this vagueness and imprecision, we are in danger of ‘harking back to a time of clinical impotence’, once epitomized by pain in the medical field,1, 6 with the result that the definition of ‘health’ becomes unworkable and can no longer have any practical application. On the basis of indications outlined in the Declaration of Alma Ata (1978), carrying out a study of what has taken place in the 35 years since it was made, Habersack and Luschin23 discovered that the definition, from which public policy on the subject of health emanates, can be seen to be disconnected from any possibility of attaining ‘health’. The authors also claim that health defined as ‘complete physical, mental, and social wellbeing’ is itself unpursuable to a large extent and leads to the creation of an economic and social division. The Declaration of Alma Ata was followed by the Ottawa Charter,24 which attempted to resolve the issue of the unworkability of the 1948 definition, specifying the roles (which are also political) involved in dealing with health. The ‘Human Fact Sheets’ and the United Nations Special Rapporteur's work on the Right to Health are operative attempts of application of these definitions.25, 26 Therefore, this subsequent step taken on an international level highlights the fact that health cannot be univocally defined and, the ‘highest level of health’, can be considered in a different manner, belonging to a specific context and depending on the criteria that are subjective, social, cultural, and, therefore, also historical. If decisive steps are not taken in this direction, the definitions of health ‘leave most of us unhealthy most of the time’27 and the following formation of public policy cannot be said to be effective.23, 27, 28 This is the state of the art of matter. In the face of this analysis, there is a need for a definition that is both rigorous and founded on an adequate epistemological basis.1 Since perceived health alludes to the system of a historical–social reality, built by social norms,5 there is no basis for distinguishing a normal from a pathological state and in light of this an abnormal opposed to normal state risks to be counterproductive in patient's health perception and self-evaluation. The relationship between physical state—the organic dimension—and health can be expressed in terms of the interaction between what is generated by the disease and what is generated by the competences of the person who may present a pathology,29, 30 meaning that health is narrated in ordinary language. A definition of ‘what health is’ cannot, therefore, be prior observation or be independent of the manner in which health is discussed. Indeed, health is defined at the moment when the different roles interact to deal with the theme or topic of health—health professionals, patients, and the community—using ordinary language to define the reality. Reflecting this intersubjectivity health can be conceptualized as a dialogic process.30 This makes it possible to take pragmatic action regarding health on a community level and not only in ideal terms, involving all the various roles in that particular context of interaction that have a share in the responsibility for health.31 Thus, the intervention to promote health can generate and trigger resources, activating those who receive the intervention and no longer remains inactive, and all of this can be achieved through a networking process through which the various roles converge around a single objective. Thus, health can be described as a configuration generated in the context of a dialogic process which foresees pathologies and/or implications of actions on the organic level as well as on the level of interaction in the community. There is not a normative ‘limit’ of a maximum attainable level of self-perceived health or a level completely divorced from health in which we cannot speak of health, indeed self-perceived health still continues to exist as a process. Recent literature has shown31 that, as far as pathology is concerned, it is not entirely possible to eliminate etiopathogenesis nor attain total eradication of pathogenic agents. Conversely, we can achieve patient care. Treating pathology constitutes a minimum level of promoting health where, in the continuum of health on a scale of varying degrees of health, the absolute extremes of certain/indisputable presence and total absence of health rules out and creates interactive, changeable processes. In this way, self-perceived health and physical condition cannot overlap; furthermore, the misleading interpretation of health as exclusively empirical perception is no more passable. Therefore, in the current state of the art, a nomothetic criterion is being applied to perceived health, whereas the criterion should be something else. If we consider the types of agents of a pathology (chemical, physical, genetic, viral/bacterial) and appreciate the fact that these, rooted in the very living environment of the anatomic-functional unit, can neither be avoided nor entirely eliminated but rather must be considered ever-present: a situation of the complete good medical state cannot be given. Where it is not possible to outline a complete good sanitary condition, the intervention process can be directed at responding to the maintenance of an allostatic equilibrium. In this regard, Windelband distinguished between an idiographic science in opposition to nomothetic science32-35: beyond this opposition since health is studied both by sciences with idiographic and nomothetic approaches, in the sphere of health the principle cannot be other than interactive. The interactive principle appears effective regardless of what is known of the event or agent. Thus, there can be health promotion even in the absence of certainty of the causative agent about the cause of that event and, therefore, predictability of the effects. Within a framework according to health, the minimum level is possible when there can be no cure for the pathology but only therapy. Indeed, even when the prognosis is very poor or there is no disease remission or the disease is terminal, patient's health can be always improved. Considering perceived health as a process, it entails the possibility of narrating. The person who has a pathological diagnosis is one of the narrating voices contributing to health narration in the community. In this theoretical and operative position, a disease is not a pervasive category for the role of the patient, it does not exhaust the meaning of health for that patient, and it does not hamper the possibility of being healthy. But exactly through diagnosis and the resultant implications, a peculiar health configuration with its own references and evaluation becomes possible. Thus, in the dialogic concept of health, the various players involved come together in a particular framework, which allows for a variability and constructive plasticity in terms of health, devoid of standardization (since standardization could change when conditions change, as Canguilhem stressed11, 12). In conclusion, health can be defined as a conceptual reality constructed through the language modalities used to speak of it and is located in a dimension in which processes have relevance, generating reality. Health is a reality but not an entity considered by the naturalist approach,32 since it is configured on the basis of the gnoseological categories used to know it, meaning ordinary language. In this way, telling about perceived health means considering physiological state (as the empirical level of health), but it does not entirely coincide with ascertaining the physical soundness: narrations about how individuals are feeling already implicitly involves an interaction with their own anatomical–functional unit and generates the possibility of ascertaining soundness. Namely, the possibility of telling about health (‘how you are feeling’) is intrinsically bound to the medical condition. Therefore, if the anatomical–functional unit is suffering from a pathology, the individual's narration will use and avail of some aspects and issues referring to the medical condition, medical treatments, and resultant effects. This means that health is generated and rests on the interaction which ordinary language makes possible. Thus, using ordinary language to tell how a patient is feeling involves interaction with the other who is listening—and not only with the cultural values and connotations of health.36, 37 The other is not the anatomical–functional unit, but the one who receives the narration of ‘how I am/how I feel’ and then renarrates the narration structured through specific modalities. If physical condition belongs to the individual anatomical–functional unit, health pertains to the interaction in the community: it does not belong to, nor it is found in, but rather is generated with interaction and is promoted toward interaction. As a process, health includes the language modalities through which individuals create reality; thus, its rules social norms and how it appears. The discourse about health is founded on the use of language and by virtue of sharing a discourse which identifies the need to repair a situation, to get rid of the cause of harm, and to proceed to do so. As seen in this contribution, since the good physical condition is proof of the absence of pathological agents, where it is not possible to verify the absence of pathological agents and therefore the cause is not certain or not manageable, the possibility of the description of health is preserved. Indeed, the configuration thus created lies in the definition of health and no longer in that of physical condition. Thus, physical condition is embraced within a discourse which we call health: the narration of health overwhelms physical state and it is not the contrary. Health is the key to managing the cause or managing its absence. Based on the fundamentals of language: when we speak of pathology's cause and this rests on a discourse which has ramifications in the community that uses ordinary language, this use of the language configures the possibility of thinking, organizing community, and managing the interventions. In this sense, we cannot remain on the level of the cause but must move on to the use of what we currently know about the cause, and this is an interactive level. Thus, prevention and cure constitute the first step in reaching health. In the following steps, management of the illness would not be carried out if discourse about health management did not exist. Therefore, in answering the question ‘what is health?’, to maintain a certain analytical rigour we find ourselves asking ‘how is health constructed?’. The foundation of health on a conceptual epistemological level and the rigour of the reasoning, in the awareness of hypothetical causalism and mechanicism referred to the organism, allows the scientific community to advance in terms of knowledge and produce further, subsequent questions. May the answers to these questions generate health in the rigorous management of interaction. Gian Piero Turchi and Eleonora Pinto made a substantial contribution to the conception of the work and wrote the first draft. Luisa Orrù and Antonio Iudici revised it critically. All authors listed contributed to manuscript revision, read, and approved the submitted version. Open access funding provided by BIBLIOSAN. The authors declare no conflict of interest. Data sharing is not applicable to this article as no data sets were generated or analysed during the current study.",
+    "year": 2022,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Evaluation in Clinical Practice",
+    "topic": "Mental Health and Psychiatry",
+    "field": "Arts and Humanities",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W1727867145",
+    "title": "Emergency medical services - poor response time in the rural Eastern Cape",
+    "abstract": "Emergency medical services (EMS) throughout South Africa are of unequal quality owing to historical population inequalities and under-resourced EMS in rural areas. There are no data regarding the quality of ambulance services in the rural Eastern Cape. The assessment of EMS is not easy, but an assessment tool has been established. We prospectively audited the response time to ambulance requests from a community health centre in the rural Eastern Cape.",
+    "year": 2010,
+    "lang": "en",
+    "type": "letter",
+    "venue": "South African Medical Journal",
+    "topic": "Emergency and Acute Care Studies",
+    "field": "Medicine",
+    "ca_institutions": "Health Care Foundation",
+    "funders": []
+  },
+  {
+    "id": "W2479326373",
+    "title": "Unconscious ties that bind – attending to complexes in the classroom: part 2",
+    "abstract": "ABSTRACT Continuing the argument from Part 1, regarding the cultural unconscious and cultural complexes, a case is made for the significance of attending to the unconscious in the classroom. Understanding of cultural and familial complexes and the way parental psychology gets replayed within schools aims to bring greater awareness to the psychology of group life. Here specific attention is given to the family unconscious, family complexes, family soul, and the ancestors – both personal and archetypal. A method borrowed from family constellation work and rooted in African traditions of healing is outlined. This method is offered in an effort to unlock unconscious familial patterns whereby the emergence of new images may not only contribute to healing but also might have long-term effects on learning. Transgenerational patterns shaped by traumatic experiences, life events, cultural and environmental factors affect students, and so their learning. Parallel findings in epigenetics are also considered to be able to better contribute in long-lasting ways to resolving conflict, as well as to understanding deeper issues affecting our relations within education.",
+    "year": 2016,
+    "lang": "en",
+    "type": "article",
+    "venue": "International Journal of Jungian Studies",
+    "topic": "Early Childhood Education and Development",
+    "field": "Social Sciences",
+    "ca_institutions": "University of Alberta",
+    "funders": []
+  },
+  {
+    "id": "W3133536575",
+    "title": "Mitogenome analyses elucidate the evolutionary relationships of a probable Eocene wet tropics relic in the xerophilic lizard genus Acanthodactylus",
+    "abstract": "Climate has a large impact on diversity and evolution of the world's biota. The Eocene-Oligocene transition from tropical climate to cooler, drier environments was accompanied by global species turnover. A large number of Old World lacertid lizard lineages have diversified after the Eocene-Oligocene boundary. One of the most speciose reptile genera in the arid Palearctic, Acanthodactylus, contains two sub-Saharan species with unresolved phylogenetic relationship and unknown climatic preferences. We here aim to understand how and when adaptation to arid conditions occurred in Acanthodactylus and when tropical habitats where entered. Using whole mitogenomes from fresh and archival DNA and published sequences we recovered a well-supported Acanthodactylus phylogeny and underpinned the timing of diversification with environmental niche analyses of the sub-Saharan species A. guineensis and A. boueti in comparison to all arid Acanthodactylus. We found that A. guineensis represents an old lineage that splits from a basal node in the Western clade, and A. boueti is a derived lineage and probably not its sister. Their long branches characterize them-and especially A. guineensis-as lineages that may have persisted for a long time without further diversification or have undergone multiple extinctions. Environmental niche models verified the occurrence of A. guineensis and A. boueti in hot humid environments different from the other 42 arid Acanthodactylus species. While A. guineensis probably remained in tropical habitat from periods prior to the Eocene-Oligocene boundary, A. boueti entered tropical environments independently at a later period. Our results provide an important baseline for studying adaptation and the transition from humid to arid environments in Lacertidae.",
+    "year": 2021,
+    "lang": "en",
+    "type": "article",
+    "venue": "Scientific Reports",
+    "topic": "Amphibian and Reptile Biology",
+    "field": "Environmental Science",
+    "ca_institutions": [],
+    "funders": ["Burke Museum, University of Washington", "Fundação de Amparo à Pesquisa do Estado de São Paulo", "Muséum National d'Histoire Naturelle", "Deutsche Forschungsgemeinschaft", "York University", "New York University Abu Dhabi"]
+  },
+  {
+    "id": "W4406284854",
+    "title": "Genomic characterization of Huntington’s disease genetic modifiers informs drug target tractability",
+    "abstract": "Abstract Huntington’s disease is caused by a CAG repeat in the HTT gene. Repeat length correlates inversely with the age of onset but only explains part of the observed clinical variability. Genome-wide association studies highlight DNA repair genes in modifying disease onset, but further research is required to identify causal genes and evaluate their tractability as drug targets. To address these gaps and learn important preclinical information, we analysed genome-wide association study data from a large Huntington’s disease age-of-onset study (n = 9064), prioritizing robust candidate Huntington’s disease modifier genes using bioinformatic approaches and analysing related information for these genes from large-scale human genetic repositories. We supplemented this information with other Huntington’s disease–related screens, including exome studies of Huntington’s disease onset and high-throughput assessments of mHTT toxicity. To confirm whether Huntington’s disease modifiers are shared across repeat expansion disorders, we also analysed age-of-onset genome-wide association study data from X-linked dystonia-parkinsonism caused by a (CCCTCT)n expansion. We also studied modifier-related associations with rare diseases to inform potential off-target therapeutic effects and conducted comprehensive phenome-wide studies to identify other traits linked to these genes. Finally, we evaluated the aggregated human genetic evidence and theoretical druggability of the prioritized Huntington’s disease modifier genes, including characteristics recently associated with clinical trial stoppage due to safety concerns (i.e. human genetic constraint, number of interacting partners and RNA tissue expression specificity). In total, we annotated and assessed nine robust candidate Huntington’s disease modifier genes. Notably, we detected a high correlation (R2 = 0.78) in top age-of-onset genome-wide association study hits across repeat expansion disorders, emphasizing cross-disorder relevance. Clinical genetic repositories analysis showed DNA repair genes, such as MLH1, PMS2 and MSH3, are associated with cancer phenotypes, suggesting potential limitations as drug targets. LIG1 and RRM2B were both associated with neurofibrillary tangles, which may provide a link to a potential role in mHTT aggregates, while MSH3 was associated with several cortical morphology-related traits relevant to Huntington’s disease. Finally, human genetic evidence and theoretical druggability analyses prioritized and ranked modifier genes, with PMS1 exhibiting the most favourable profile. Notably, HTT itself ranked poorly as a theoretical drug target, emphasizing the importance of exploring modifier-based alternative targets. In conclusion, our study highlights the importance of human genomic information to prioritize Huntington’s disease modifier genes as drug targets, providing a basis for future therapeutic development in Huntington’s disease and other repeat expansion disorders.",
+    "year": 2024,
+    "lang": "en",
+    "type": "article",
+    "venue": "Brain Communications",
+    "topic": "Genetic Neurodegenerative Diseases",
+    "field": "Neuroscience",
+    "ca_institutions": ["University of Manitoba", "Health Sciences Centre"],
+    "funders": ["Natural Sciences and Engineering Research Council of Canada", "Canadian Institutes of Health Research", "Canada Research Chairs", "University of Manitoba", "Research Manitoba", "Health Sciences Centre Foundation"]
+  },
+  {
+    "id": "W7075999672",
+    "title": "A pilot survey of carbapenem-resistant Escherichia coli and Klebsiella pneumoniae mediated by K pneumoniae serine carbapenemases in a regional referral hospital in British Columbia",
+    "abstract": "",
+    "year": 2011,
+    "lang": "en",
+    "type": "article",
+    "venue": "Europe PMC (PubMed Central)",
+    "topic": "Geochemistry and Geologic Mapping",
+    "field": "Computer Science",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W3162503818",
+    "title": "Grossesse, allaitement et vaccin contre le SRAS-CoV-2 : cadre éthique pour la prise de décision partagée",
+    "abstract": "POINTS CLÉS En décembre 2020, le Comité consultatif national de l’immunisation du Canada a déclaré que l’administration systématique du vaccin contre le coronavirus du syndrome respiratoire aigu sévère 2 (SRAS-CoV-2) aux personnes enceintes ou qui allaitent devrait être évitée jusqu",
+    "year": 2021,
+    "lang": "fr",
+    "type": "review",
+    "venue": "Canadian Medical Association Journal",
+    "topic": "COVID-19 Impact on Reproduction",
+    "field": "Medicine",
+    "ca_institutions": ["University of Toronto", "Sunnybrook Health Science Centre"],
+    "funders": []
+  },
+  {
+    "id": "W2144940020",
+    "title": "Relations intergénérationnelles et vieillissement : nouvelles questions",
+    "abstract": "Les âges et générations n’ont pas la même audience que les classes sociales ou les genres, lorsqu’il s’agit de réfléchir sur les rapports, les contributions des uns et des autres, les similitudes et les différences, les solidarités et les injustices. Au fil des ans, l’auteur a mis à l’épreuve plusieurs questions sur le sujet, qui furent grandement enrichies par la confrontation à des perspectives selon les âges. Cet article en donne quelques exemples. Il aborde des notions fondamentales dans les deux premières parties en se penchant sur la difficile distinction entre effets d’âge, de génération ou de période et en traitant, dans un deuxième temps, des apports différenciés selon les âges. Des voies de recherche et d’intervention centrales sont également examinées : d’abord, la création d’un groupe de réflexion intergénérationnel, à la fin des années 1990, qui a permis d’attirer l’attention sur des problèmes de déséquilibre entre les âges, jusque-là inaperçus ou insoupçonnés. Tout en évoquant la création de ce groupe, l’auteur donne l’exemple du débat sur les « clauses orphelins » au travail, extrêmement révélateur ; ensuite, la résistance des milieux de la recherche que rencontre toute discussion sur les iniquités entre les âges ; et enfin, la question de la transmission des savoirs entre groupes d’âge différents au travail, trop peu exploitée jusqu’à présent. L’étude souligne pour finir l’importance du rôle des générations futures, surtout en ce qui a trait à la gestion des ressources de la planète, et qui rappelle la profondeur temporelle des relations intergénérationnelles.",
+    "year": 2013,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Retraite et société",
+    "topic": "Aging, Elder Care, and Social Issues",
+    "field": "Health Professions",
+    "ca_institutions": "Université de Montréal",
+    "funders": []
+  },
+  {
+    "id": "W2095238181",
+    "title": "Some differences between Dirac's hole theory and quantum field theory",
+    "abstract": "Dirac's hole theory (HT) and quantum field theory (QFT) are generally considered equivalent. However, it was recently shown by several investigators that this is not necessarily the case because when the change in the vacuum energy was calculated for a time-independent perturbation, HT and QFT yielded different results. In this paper, we extend this discussion to include a time-dependent perturbation for which the exact solution to the Dirac equation is known. We show that for this case also, HT and QFT yield different results. In addition, we offer some discussion of the problem of anomalies in QFT. PACS Nos.: 03.65w, 11.10z",
+    "year": 2005,
+    "lang": "en",
+    "type": "article",
+    "venue": "Canadian Journal of Physics",
+    "topic": "Quantum Electrodynamics and Casimir Effect",
+    "field": "Physics and Astronomy",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4317762425",
+    "title": "Approches afrocentriques d’éradication du racisme anti-Noirs dans les soins de santé et de promotion de la santé des personnes noires au Canada",
+    "abstract": "[Voir la version anglaise de l’article ici : www.cmaj.ca/lookup/doi/10.1503/cmaj.220456][1] Points clés Le fardeau disproportionné du SRAS-CoV-2 sur les quartiers racisés et diversifiés sur le plan ethnoculturel[1][2],[2][3], combiné au mouvement Black Lives Matter et aux protestations",
+    "year": 2023,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Canadian Medical Association Journal",
+    "topic": "Cultural Competency in Health Care",
+    "field": "Social Sciences",
+    "ca_institutions": ["Algoma University", "Public Health Ontario", "University of Toronto"],
+    "funders": []
+  },
+  {
+    "id": "W4366452167",
+    "title": "Carl F. Brun. (2005). <i>A Practical Guide to Social Service Evaluation.<\/i> Chicago: Lyceum Books. 204 pages, plus preface, appendices, glossary, references, and index.",
+    "abstract": "",
+    "year": 2008,
+    "lang": "en",
+    "type": "article",
+    "venue": "Canadian Journal of Program Evaluation",
+    "topic": "Evaluation and Performance Assessment",
+    "field": "Decision Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2995323822",
+    "title": "Plan Canada - Volume 57, Number 3 (Fall 2017)",
+    "abstract": "Demographic challenges|Défis démographiques",
+    "year": 2017,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Scholarship@Western (Western University)",
+    "topic": "Education Systems and Policy",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4391319265",
+    "title": "Reviewer Acknowledgements for Journal of Sustainable Development, Vol. 17, No. 1",
+    "abstract": "Reviewer Acknowledgements for Journal of Sustainable Development, Vol. 17, No. 1, 2024",
+    "year": 2024,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Sustainable Development",
+    "topic": "Sustainable Building Design and Assessment",
+    "field": "Engineering",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2002718597",
+    "title": "Brokering Belonging: Chinese in Canada’s Exclusion Era, 1885–1945 by Lisa Rose Mar (review)",
+    "abstract": "Reviewed by: Brokering Belonging: Chinese in Canada’s Exclusion Era, 1885–1945 by Lisa Rose Mar Lawrence Lam Lisa Rose Mar. Brokering Belonging: Chinese in Canada’s Exclusion Era, 1885–1945. Toronto: University of Toronto Press, 2010. 230 pp. Notes. Bibliography. Index. $27.95 sc. The author has provided an engaging and insightful analysis of the pivotal roles of the Chinese brokers and how the process of brokerage has mitigated the adverse impact of Canada’s racial policies on this disenfranchised group during the exclusion era, 1885–1945. Drawing upon various sources of documents, especially the [End Page 162] underutilized Chinese language historical documents such as the Chinese language newspapers, the author shows how these Chinese brokers with their acquired Chinese and English capability, acting as leaders and intermediaries, operated, navigated, and negotiated with the Anglo constituencies. These interactions and transactions revealed that the politics of the Anglo and Chinese worlds were inextricably linked. The Chinese did not merely and passively react to the discriminatory policies and practices. Instead, in their responses to the largely anti-Chinese era, they took action to shape and re-shape their own immediate living milieu and the surrounding society. The examination of these brokers’ work shows that in spite of being defined and redefined by the Anglo hegemony as a uniquely Chinese race, marginalized and stigmatized inferior stock living in an ethnic ghetto, these brokers displayed ingenuity in responding actively to the “politically complex Anglo of prejudice” and reinserting “Chinese Canadians as part of a more integrated political history” (6). The author’s analysis has also raised questions about the depiction of the Chinese as sojourners which should have been indelibly linked to European hegemony in an Anglo settler society. Brokering Belonging is composed of five chapters. Chapter 1—Negotiating Protections—documents the rivalry of two influential Chinese brokers and how they help the Chinese immigrants to evade the head tax by forming alliances with Canada’s ruling political party. Chapter 2—Arguing Cases—demonstrates these brokers, while being barred from practicing law, acted as “Chinese legal interpreters” in cases contending the discriminatory laws and justice system and appealing to the Canadian and British Empire courts for reification. Chapter 3—Popularizing Politics—examines the emerging new generation of Chinese brokers (charismatic brokers who’re intellectuals, labor leaders and civil rights activists) and how they, in addition to challenging the power of the traditional merchant brokers and legal interpreters, organized a year-long protest against the public school segregation and joined forces with other anti-colonial protests against the British colonialism in China and India. While the activities and organized and co-coordinated protests of these new Chinese had provoked backlashes from some Chinese and Anglo business leaders and elites, they had, nonetheless, effectively brought ordinary people into brokerage politics. Chapter 4—Fixing Knowledge—provides a fascinating analysis of how these brokers managed to portray the Chinese as committed and dedicated to become settled and assimilated into the wider society. It reveals vividly how these new intellectual brokers attempted to reshape and reconstruct the discourse about the Chinese in Canada and the United States by taking an active role in the very first major academic survey of East Asian Immigrants’ opinion in 1924 conducted by Robert Park, Chicago School of Sociology, University of Chicago. These brokers organized in a community campaign to strategically place themselves as interviewees [End Page 163] for the study, and successfully convinced the researchers to see the Chinese, not as sojourners per se, but as “a patient and diligent model minority” (8) and as “tragic marginal men” (8). Chapter 5—Transforming Democracy—examines the brokers’ continuing negotiations and interactions with Anglos during the Second World War. With the unpopular war policies, contested issue of conscriptions, the brokers lobbied and mobilized Chinese Canadians to take part in the Canadian labor unions. By joining forces with other labor unions to protest tax regulations and to demand equal pay, and to boycott military services, the combined efforts have resulted in persuading the Canadian labor unions to combat racial discrimination, and with the political changes in China (the rise of political power of the Communist Party), a new era of Chinese Canadians—aliens to citizens...",
+    "year": 2012,
+    "lang": "en",
+    "type": "article",
+    "venue": "Canadian ethnic studies",
+    "topic": "Canadian Identity and History",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2607119422",
+    "title": "La valeur prédictive de la motivation en mathématiques des élèves de 3e secondaire sur leur classement en 4e secondaire",
+    "abstract": "Mémoire numérisé par la Direction des bibliothèques de l'Université de Montréal.",
+    "year": 2006,
+    "lang": "fr",
+    "type": "dissertation",
+    "venue": "Open MIND",
+    "topic": "Motivation and Self-Concept in Sports",
+    "field": "Psychology",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4220872047",
+    "title": "Correction: Assessing the Efficacy of an Individualized Psychological Flexibility Skills Training Intervention App for Medical Student Burnout and Well-being: Protocol for a Randomized Controlled Trial",
+    "abstract": "[This corrects the article DOI: .].",
+    "year": 2022,
+    "lang": "en",
+    "type": "erratum",
+    "venue": "JMIR Research Protocols",
+    "topic": "Healthcare professionals’ stress and burnout",
+    "field": "Health Professions",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W1998656325",
+    "title": "End reflections in a layered piezoelectric circular cylinder",
+    "abstract": "",
+    "year": 2005,
+    "lang": "en",
+    "type": "article",
+    "venue": "International Journal of Solids and Structures",
+    "topic": "Ultrasonics and Acoustic Wave Propagation",
+    "field": "Engineering",
+    "ca_institutions": ["University of Manitoba", "Lakehead University"],
+    "funders": []
+  },
+  {
+    "id": "W1972573044",
+    "title": "The Angry Customers: A Reflection on Apparel Retailers in Turkey",
+    "abstract": "While anger is the dominant affective reaction following service failure, little research focused on its potentially damaging effects. Different consumers can have different emotional reactions to the same event depending on their expectations and personality situations. The present study aims to discover the circumstances where consumers reveal an anger emotion toward the apparel retail stores. The study also investigates how this anger situation impacts consumers’ purchasing decisions and attitudes toward the apparel retail stores. Results revealed five major sources of anger that influence consumers in a negative manner both in terms of their attitude toward a particular retail store and their acts of purchases from the store.",
+    "year": 2015,
+    "lang": "en",
+    "type": "article",
+    "venue": "International Journal of Marketing Studies",
+    "topic": "Consumer Retail Behavior Studies",
+    "field": "Business, Management and Accounting",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4389675272",
+    "title": "Jackie Robinson Would Have Hated Jackie Robinson Day",
+    "abstract": "Jackie Robinson Would Have Hated Jackie Robinson Day Ron Rapoport (bio) I couldn't care less if someone is out there wearing 42 —Jackie Robinson, June, 1972, four months before he died1 Jackie Robinson is standing on the field at Dodger Stadium, near the stands on the third-base side of home plate. It is a soft June afternoon, and though he moves slowly and needs someone to guide him, he is chatting with a few people and seems to be enjoying himself. As I make my way over to him, the buzz of ballplayers gathered around the batting cage melds amiably with the activity of the organist up on the mezzanine playing show tunes and workers setting up microphones for the ceremonies at which his number will be retired. I have almost reached him—I am hoping to thank him again for the time he gave me a few days earlier— when suddenly a shout comes from the stands behind him. I look in the direction of the noise and see a middle-aged man standing in the third or fourth row holding a baseball. \"Mr. Robinson!\" he calls. \"Can I have your autograph?! Would you sign this, please?! Here! Catch!\" He lobs a baseball toward Robinson. It is a gentle underhand throw that travels no more than eight or ten feet. A ten-year-old can catch it easily. But Robinson, who is nearly blind, doesn't see it coming and it hits him in the forehead, hurting him. The man is aghast at what he has done. \"I'm so sorry, so sorry,\" he calls as Robinson is led away. This is my last view of him. I am relieved when I learn later that he has not been seriously injured. The attention that baseball pays to Robinson's integration of baseball in 1947 has become a growth industry in recent years. His uniform number, 42, has been retired throughout baseball—no other player has ever had that distinction—except on April 15, the anniversary of his first game with the Brooklyn Dodgers, when every player in the major leagues wears it on his jersey. [End Page 35] The seventy-fifth anniversary of Robinson's historic achievement occurred in 2022, and it was celebrated with all the spectacle of its recent predecessors and more. There were festivities at major league stadiums around the country. There were speeches by baseball dignitaries and a recitation of his accomplishments on and off the field. There was a salute to the college scholarships for minority youngsters that are coordinated by the Jackie Robinson Foundation, which is underwritten by the financial support of Major League Baseball, as was the construction of the Jackie Robinson Museum in New York, which opened to great fanfare in 2022. Baseball also used the occasion to promote itself as an important thread in the fabric of American history by noting, as it likes to do, that it was integrated before the nation's military and its schools. But as Robinson has become an officially revered symbol of baseball, one that allows the sport to comfortably align itself with the growing movement for Black empowerment, I have found myself being nagged by a deep disconnect. It centers around the fact that in all the tributes paid to the courage and tenacity Robinson displayed in breaking a barrier that had been impregnable ever since baseball was organized nearly half a century earlier, no mention is ever made of who constructed those barriers in the first place. In the years prior to Robinson's debut, baseball was cagey about its lack of Black players. Its bylaws didn't codify their exclusion in the manner of the Professional Golfers Association, whose rules contained a \"Caucasians Only\" clause as late at 1961. Kenesaw Mountain Landis, baseball's commissioner from 1920 until his death in 1944, would sometimes say there was nothing to prevent teams from signing Black players, but at no time during his lengthy iron-fisted rule did he ever any express support for integration or work to promote it.2 Baseball's team owners were similarly averse to expressing any on-the-record opposition to hiring Black players. Occasionally...",
+    "year": 2023,
+    "lang": "en",
+    "type": "article",
+    "venue": "Nine",
+    "topic": "American Sports and Literature",
+    "field": "Arts and Humanities",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W3192766806",
+    "title": "Compensatory Ethics",
+    "abstract": "",
+    "year": 2009,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Business Ethics",
+    "topic": "Psychology of Moral and Emotional Judgment",
+    "field": "Neuroscience",
+    "ca_institutions": "Kellogg's (Canada)",
+    "funders": []
+  },
+  {
+    "id": "W4385237853",
+    "title": "Time-frequency analyses of repetition suppression and change detection in children with neurofibromatosis type 1",
+    "abstract": "",
+    "year": 2023,
+    "lang": "en",
+    "type": "article",
+    "venue": "Brain Research",
+    "topic": "Neurofibromatosis and Schwannoma Cases",
+    "field": "Medicine",
+    "ca_institutions": ["Centre Hospitalier Universitaire Sainte-Justine", "Université de Montréal", "Cégep Marie-Victorin"],
+    "funders": []
+  },
+  {
+    "id": "W2938476848",
+    "title": "Washing the Bones",
+    "abstract": "",
+    "year": 2016,
+    "lang": "en",
+    "type": "article",
+    "venue": "Dalhousie review",
+    "topic": "Historical and Cultural Archaeology Studies",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W6959676966",
+    "title": "Correlation between the gas-phase metallicity and ionization parameter in extragalactic H ",
+    "abstract": "The variations of the metallicity and ionization parameter in H <ns0:sc>II<\/ns0:sc> regions are usually thought to be the dominant factors that produce the variations we see in the observed emission line spectra. There is an increasing amount of evidence that these two quantities are physically correlated, although the exact form of this correlation is debatable in the literature. Simulated emission line spectra from photoionized clouds provide important clues about the physical conditions of H <ns0:sc>II<\/ns0:sc> regions and are frequently used for deriving metallicities and ionization parameters. Through a systematic investigation on the assumptions and methodology used in applying photoionization models, we find that the derived correlation has a strong dependence on the choice of model parameters. On the one hand, models that give consistent predictions over multiple emission-line ratios yield a positive correlation between the metallicity and ionization parameter for the general population of H <ns0:sc>II<\/ns0:sc> regions or star-forming galaxies. On the other hand, models that are inconsistent with the data locus in high-dimensional line ratio space yield discrepant correlations when different subsets of line ratios are used in the derivation. The correlation between the metallicity and ionization parameter has a secondary dependence on the surface density of the star formation rate (SFR), with the higher SFR regions showing a higher ionization parameter but weaker correlations. The existence of the positive correlation contradicts the analytical wind-driven bubble model for H <ns0:sc>II<\/ns0:sc> regions. We explore assumptions in both dynamical models and photoionization models, and conclude that there is a potential bias associated with the geometry. However, this is still insufficient to explain the correlation. Mechanisms that suppress the dynamical influence of stellar winds in realistic H <ns0:sc>II<\/ns0:sc> regions might be the key to solving this puzzle, though more sophisticated combinations of dynamical models and photoionization models to test are required.",
+    "year": 2022,
+    "lang": "en",
+    "type": "article",
+    "venue": "Springer Link (Chiba Institute of Technology)",
+    "topic": "Plant pathogens and resistance mechanisms",
+    "field": "Agricultural and Biological Sciences",
+    "ca_institutions": [],
+    "funders": ["Lawrence Berkeley National Laboratory", "Smithsonian Astrophysical Observatory", "University of Colorado Boulder", "Instituto de Astrofísica de Canarias", "Office of Science", "Max-Planck-Institut für Astronomie", "University of Oxford", "York University", "Leibniz-Gemeinschaft", "University of Notre Dame", "Carnegie Mellon University", "Universidad Nacional Autónoma de México", "Alfred P. Sloan Foundation", "University of Washington", "Johns Hopkins University", "Carnegie Institution of Washington", "University of Utah", "Chinese University of Hong Kong", "Faculty of Science, Chinese University of Hong Kong", "Ohio State University", "National Science Foundation", "U.S. Department of Energy", "Smithsonian Institution", "Ministério da Ciência, Tecnologia e Inovação", "National Aeronautics and Space Administration", "Max-Planck-Institut für Astrophysik", "New Mexico State University", "University of Portsmouth", "Vanderbilt University", "Yale University"]
+  },
+  {
+    "id": "W3190036396",
+    "title": "The association between testosterone and unethical behaviours, and the moderating role of intrasexual competition",
+    "abstract": "Researchers have called for a greater use of neuroscientific methods to advance theories in ethical behaviour. Our research takes a neuroscientific approach to investigating unethical behaviour by examining the roles of testosterone and intrasexual competition. We propose that unethical behavioural intentions will be greater for high-testosterone individuals in response to highly intrasexually competitive situations as a means of enhancing status. In an experiment, we measure baseline testosterone and assign participants to an intrasexually competitive or control condition. We demonstrate that in men, but not in women, testosterone is positively associated with unethical behavioural intentions in response to an intrasexual competition prime. Furthermore, using textual analysis, we find that testosterone is positively associated with the usage of anger-related words in response to an intrasexual competition prime among men. In turn, anger-related words are positively associated with unethical behaviour, suggesting that anger may play a role in motivating high-testosterone men to behave unethically. Overall, our findings contribute to the literature by suggesting that testosterone and competition lead to greater unethical behaviour in men, and that anger plays a role in promoting unethical behaviour.",
+    "year": 2021,
+    "lang": "en",
+    "type": "article",
+    "venue": "British Journal of Psychology",
+    "topic": "Evolutionary Psychology and Human Behavior",
+    "field": "Psychology",
+    "ca_institutions": "HEC Montréal",
+    "funders": []
+  },
+  {
+    "id": "W2151420267",
+    "title": "La compétence temporelle des personnes en chômage (revue de la littérature)",
+    "abstract": "Work is part of our daily routine. But what happens when the classic definition of work is not part of one's lifestyle? This article first of all seeks to clarify certain notions concerning the psychological time frame of individuals and, secondly, to present the difficulties met by the unemployed when they attempt to put their temporal skills into effect. If work is able to fill our time so well, we can assume that its absence will create adjustment problems for the unemployed. Therefore, there is a basis for developing a plan with the likely objective of restoring the temporal skills of the unemployed. The author offers a number of alternatives concerning the subject.",
+    "year": 2006,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Santé mentale au Québec",
+    "topic": "Social Policies and Family",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4390046021",
+    "title": "The Role of Intuition in Expressing Support for Harsh Criminal Justice Policy",
+    "abstract": "",
+    "year": 2023,
+    "lang": "en",
+    "type": "article",
+    "venue": "International Criminology",
+    "topic": "Social and Intergroup Psychology",
+    "field": "Social Sciences",
+    "ca_institutions": ["McGill University", "International Centre for Comparative Criminology", "Institut National de la Recherche Scientifique"],
+    "funders": "Social Sciences and Humanities Research Council of Canada"
+  },
+  {
+    "id": "W2045911618",
+    "title": "The Atomic Structure of the HIV-1 gp41 Transmembrane Domain and Its Connection to the Immunogenic Membrane-proximal External Region",
+    "abstract": "The membrane-proximal external region (MPER) C-terminal segment and the transmembrane domain (TMD) of gp41 are involved in HIV-1 envelope glycoprotein-mediated fusion and modulation of immune responses during viral infection. However, the atomic structure of this functional region remains unsolved. Here, based on the high resolution NMR data obtained for peptides spanning the C-terminal segment of MPER and the TMD, we report two main findings: (i) the conformational variability of the TMD helix at a membrane-buried position; and (ii) the existence of an uninterrupted α-helix spanning MPER and the N-terminal region of the TMD. Thus, our structural data provide evidence for the bipartite organization of TMD predicted by previous molecular dynamics simulations and functional studies, but they do not support the breaking of the helix at Lys-683, as was suggested by some models to mark the initiation of the TMD anchor. Antibody binding energetics examined with isothermal titration calorimetry and humoral responses elicited in rabbits by peptide-based vaccines further support the relevance of a continuous MPER-TMD helix for immune recognition. We conclude that the transmembrane anchor of HIV-1 envelope is composed of two distinct subdomains: 1) an immunogenic helix at the N terminus also involved in promoting membrane fusion; and 2) an immunosuppressive helix at the C terminus, which might also contribute to the late stages of the fusion process. The unprecedented high resolution structural data reported here may guide future vaccine and inhibitor developments. Background: The structure of the HIV glycoprotein transmembrane anchor is unknown. Results: NMR spectroscopy reveals two helices connected by a flexible segment. The N-terminal helix constitutes a scaffold for neutralizing antibodies. Conclusion: The HIV transmembrane sequence combines two subdomains involved in fusion and immune response modulation during infection. Significance: These data may guide the rational design of vaccines and inhibitors.",
+    "year": 2015,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Biological Chemistry",
+    "topic": "HIV Research and Treatment",
+    "field": "Immunology and Microbiology",
+    "ca_institutions": [],
+    "funders": ["National Institute of Allergy and Infectious Diseases", "Canadian Institutes of Health Research", "National Institutes of Health"]
+  },
+  {
+    "id": "W2892477203",
+    "title": "Groundwater availability of the Williston Basin, United States and Canada",
+    "abstract": "First posted September 27, 2018 For additional information, contact: Director , Wyoming-Montana Water Science CenterU.S. Geological Survey3162 Bozeman AvenueHelena, Montana 59601 The Williston Basin of the Northern Great Plains is a sedimentary basin—a geologic bowl-like structure filled with layered sedimentary rocks dating as far back as the Paleozoic age. The basin, which is nationally important for the production of energy resources, spans Montana, North Dakota, and South Dakota in the United States, and Manitoba and Saskatchewan in Canada. The three uppermost principal aquifer systems are the glacial, lower Tertiary, and Upper Cretaceous aquifer systems. As deep as 3,000 feet (ft) at the center of the basin, these are the most accessible aquifer systems in the basin and are the primary sources of potable groundwater in much of this area. The glacial aquifer system consists of Quaternary-age unconsolidated till, silt, clay, outwash sand and gravel, and occasional cobbles and boulders. The lower Tertiary and Upper Cretaceous aquifer systems consist primarily of sandstone, siltstone, mudstone, shale, and coal.As energy demands have increased in the basin, horizontal drilling and hydraulic-fracturing have been used (especially since 2005) to develop previously inaccessible formations—namely, the Bakken and Three Forks Formations. The basin has yielded a large supply of domestic oil and natural gas since the 1950s, but the technologies required to extract those materials use large amounts of freshwater. The increasing freshwater demands of energy production in the Williston Basin, in addition to population growth, have led to a need for new tools to assess groundwater resources.",
+    "year": 2018,
+    "lang": "en",
+    "type": "article",
+    "venue": "USGS professional paper",
+    "topic": "Atmospheric and Environmental Gas Dynamics",
+    "field": "Environmental Science",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W6980403824",
+    "title": "Calculs exacts des paramÃ¨tres des principales thÃ©ories non linÃ©aires des vagues et proposition d'un outil simplifiÃ© de calculs",
+    "abstract": "",
+    "year": 2009,
+    "lang": "fr",
+    "type": "other",
+    "venue": "Library and Archives Canada (Government of Canada)",
+    "ca_institutions": [],
+    "funders": []
+  }
+]

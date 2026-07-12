@@ -1,0 +1,809 @@
+# MétaCan screening rubric (v1.0)
+
+**Locked before screening. Version-controlled. Any change is a new version with a dated entry in `DEVIATIONS.md`.**
+
+Both machine screeners and both human coders work from this document and nothing else. The rubric is the
+instrument; if two coders disagree, the rubric is what they are adjudicated against.
+
+---
+
+## The unit
+
+One work (journal article, preprint, book chapter, report, dataset, or software), identified by its OpenAlex ID.
+You see: title, abstract, publication year, language, venue, OpenAlex topic and field, Canadian institutional
+affiliations, funders.
+
+## The question
+
+**Is the object of study *research itself*?**
+
+Metaresearch studies how research is done, reported, funded, evaluated, disseminated, or governed. The test is
+what the work is *about*, not what field it appears in and not what vocabulary it uses.
+
+A cardiology trial is not metaresearch. A study of *how cardiology trials report their outcomes* is.
+
+---
+
+## Tier
+
+Assign exactly one.
+
+### T1: Core metaresearch
+The primary object of study is research itself. Typical objects:
+
+- research **methods** and their properties (bias, reporting, statistical practice, study design)
+- **reproducibility**, replication, data and code sharing
+- **research integrity**: misconduct, retraction, questionable research practices, authorship
+- **peer review** and editorial process *as objects of study*
+- **research evaluation**, metrics, rankings, funding allocation
+- **scholarly communication**: publishing models, open access, preprints *as objects of study*
+- **bibliometrics and scientometrics** applied to a research literature
+- the **research workforce**: careers, equity, training, capacity
+- **evidence synthesis methodology** (not an individual systematic review's clinical answer, but work *about* how
+  syntheses are done)
+
+### T2: Adjacent
+Empirically or conceptually grounded work on science as a social system that is not framed as metaresearch but
+studies it:
+
+- **science and technology studies (STS)**: social studies of scientific knowledge, practice, controversy
+- **library and information science**: information behaviour of researchers, repositories, discovery
+- **research infrastructure** studies: platforms, data repositories, identifiers, standards
+- **history and philosophy of science** *when the object is contemporary research practice*
+- **research policy** analysis grounded in evidence
+
+T2 is where the field's diversity lives. Be generous here: a paper does not have to call itself metaresearch to
+be studying research.
+
+### T3: Contextual
+Relevant to the ecosystem, mapped and released, but **never pooled into the analytic corpus**:
+
+- editorials, commentaries, opinion pieces about research practice
+- policy documents and position statements
+- announcements of infrastructure, tools, or initiatives
+- news, obituaries, corrections, letters
+
+### OUT: Not metaresearch
+Everything else. Includes, and this is the most common error:
+
+- **A study that uses a method is not a study of the method.** A meta-analysis answering a clinical question is
+  OUT. A study of how meta-analyses handle heterogeneity is T1.
+- **Mentioning a metaresearch term is not studying it.** A lab paper reporting "assay reproducibility", a methods
+  section saying "peer reviewed", a licence note saying "open access": all OUT.
+- **Domain research that happens to be bibliometric in method** but whose object is the domain, not the research:
+  e.g. a bibliometric map of diabetes treatments, produced to summarise diabetes knowledge. Borderline; see below.
+
+---
+
+## The three errors that matter most
+
+These are where the pilot showed retrieval and screening break down. Read them twice.
+
+1. **Polysemy.** `reproducibility` in a biochemistry paper means the assay gives the same reading twice. In a
+   metaresearch paper it means the reproducibility crisis. Only the second is in scope. The same applies to
+   `validation`, `replication`, `bias`, `peer review`, `open access`. **Judge the sense, not the token.**
+
+2. **Method vs. object.** Using bibliometrics ≠ studying research. Ask: *if this paper is right, what do we now
+   know more about: a scientific question, or the practice of science?* If the former, OUT.
+
+3. **Absence of vocabulary is not absence of content.** An STS paper about laboratory practice, or an LIS paper
+   about how researchers find data, may use none of the field's keywords and still be squarely T2. **Do not
+   require the vocabulary.** This is the error that makes the field look smaller and more anglophone than it is.
+
+---
+
+## Canadian linkage
+
+Record which apply (this is metadata, not an inclusion test; the estimand is defined separately in
+`PROTOCOL.md`):
+
+- `CA_AFF`: at least one author affiliated with a Canadian institution
+- `CA_FUND`: funded by CIHR, NSERC, SSHRC, or CFI
+- `ABOUT_CA`: the Canadian research system is a substantive object of study (not a passing mention, not one
+  country among forty in a global comparison)
+
+## Genre
+
+`empirical` · `conceptual` · `editorial/commentary` · `policy` · `infrastructure/announcement` · `other`
+
+OpenAlex's `type` is unreliable and this field is commentary-heavy, so genre is coded, not inherited.
+
+## Language of the work
+
+As published. Do not infer from the venue.
+
+---
+
+## Confidence
+
+- `high`: the rubric decides this cleanly.
+- `medium`: the rubric decides, but a reasonable coder could differ.
+- `low`: genuinely on the boundary, or the abstract is missing/too thin to judge.
+
+**`low` is a legitimate answer and is not a failure.** Records coded `low` by either screener are routed to
+adjudication. A screener that never says `low` is not being careful; it is being confident.
+
+---
+
+## Worked examples
+
+| Title (abridged) | Tier | Why |
+|---|---|---|
+| "Data sharing practices in 500 randomised trials" | **T1** | The object is reporting practice. |
+| "Reproducibility of a Western blot protocol" | **OUT** | Assay reproducibility. Polysemy trap. |
+| "Trends in citation of retracted papers" | **T1** | Object is the literature's own behaviour. |
+| "Laboratory life in a Canadian genomics centre: an ethnography" | **T2** | STS. No metaresearch vocabulary; still studies research. |
+| "How do researchers discover datasets? A survey" | **T2** | LIS, information behaviour of researchers. |
+| "Effectiveness of statins: a network meta-analysis" | **OUT** | Uses a synthesis method to answer a clinical question. |
+| "How network meta-analyses handle inconsistency: a review of 200 reviews" | **T1** | Object is the method. |
+| "Announcing the Canadian Research Data Repository" | **T3** | Infrastructure announcement. Mapped, not pooled. |
+| "Open access mandates are failing early-career researchers" (editorial) | **T3** | Commentary about research practice. |
+| "Bibliometric analysis of diabetes research 2000–2020" | **T2** | Borderline. Bibliometric method, and the object *is* a research literature, so it studies research output. Code T2, `medium`. |
+| "Le libre accès dans les revues québécoises : état des lieux" | **T1** | Scholarly communication, object is publishing practice. French. |
+
+---
+
+## Instructions to the screener
+
+Read the title and abstract. Apply the rubric. Do not use outside knowledge of the authors or the journal's
+reputation. If the abstract is missing, judge on the title alone and set confidence to `low` unless the title is
+unambiguous.
+
+Return the schema in `protocol/screening-schema.json`. One object per work. No prose, no preamble.
+--------------------------------------------------------------------------------
+You are screening works for MetaCan, a map of Canadian metaresearch.
+
+Apply the rubric above to every record in the JSON array below. Return a JSON
+array with one object per work, conforming to protocol/screening-schema.json:
+
+  {"id": "W...", "tier": "T1|T2|T3|OUT", "genre": "...", "about_ca": true|false,
+   "confidence": "high|medium|low", "reason": "one sentence"}
+
+Rules:
+- Return the JSON array and NOTHING else. No prose, no preamble, no code fences.
+- Every input id must appear exactly once in the output.
+- Do not run commands, read files, or browse. Classify from the RECORDS alone.
+
+RECORDS:
+[
+  {
+    "id": "W2009676817",
+    "title": "Determinants of Preferences for Genetic Counselling in Jewish Women",
+    "abstract": "",
+    "year": 2006,
+    "lang": "en",
+    "type": "article",
+    "venue": "Familial Cancer",
+    "topic": "BRCA gene mutations in cancer",
+    "field": "Biochemistry, Genetics and Molecular Biology",
+    "ca_institutions": "BC Cancer Agency",
+    "funders": ["National Cancer Institute", "National Medical Research Council", "National Health and Medical Research Council", "Cancer Australia"]
+  },
+  {
+    "id": "W1944529636",
+    "title": "Dietary Zinc Deficiency and Repletion Modulate Metallothionein Immunolocalization and Concentration in Small Intestine and Liver of Rats",
+    "abstract": "",
+    "year": 2001,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Nutrition",
+    "topic": "Trace Elements in Health",
+    "field": "Nursing",
+    "ca_institutions": "University of Manitoba",
+    "funders": []
+  },
+  {
+    "id": "W7029237261",
+    "title": "Invisible Barriers Gendered Problems in Canadian Law Faculties 1961 to 1994",
+    "abstract": "This dissertation examines the history of the entry of women into the Canadian legal academy, focusing on the period from 1961 to 1994. The 1960s marked the gradual appearance of women in law faculty positions, with the study concluding in 1994, the year following the publication of The Canadian Bar Association’s Touchstones for Change Report. Despite highlighting successes, this report only briefly delved into the experiences of women law professors and the discrimination against them that persisted beyond 1993. Despite an increase in female law students from the mid-1970s, women remained significantly underrepresented as faculty members, facing invisible barriers that hindered their progress. Titled “Invisible Barriers,” the study explores various facets of women’s experiences in the academy, including women’s educational backgrounds, course assignments, administrative practices, and their contributions to legal literature, particularly feminist legal theory. Examining all twenty-one Canadian law faculties in this time frame, the research unveils unique patterns within civil and common law institutions, with Québec law faculties leading the way in incorporating women into the long inscribed androcentric sphere of law faculties. The study delves into the numerical growth of women faculty, revealing intriguing statistics and experiences that challenge conventional expectations. It also investigates the political, cultural, and socio-economic conditions that influenced women’s experiences in the legal academy. The dissertation contextualizes the struggles of women in the legal academy within the broader history of Canadian legal education. It examines how women’s access to higher education has evolved, tracing the shift from segregated conditions in the nineteenth century to coeducation. The study highlights key figures who challenged societal norms, including the first women to earn degrees in law and their subsequent achievements. It provides a new way in which to interpret women’s participation in male-dominated spheres, emphasizing the importance of understanding the experiences of those who were marginalized and often overlooked. The dissertation offers a different perspective by examining the legal academy’s role instead of focusing solely on practicing lawyers or women in the judiciary. It provides a thorough analysis of the systemic barriers women encountered and of the gradual changes within the Canadian legal academy.",
+    "year": 2024,
+    "lang": "en",
+    "type": "other",
+    "venue": "York University Digital Library (York University)",
+    "ca_institutions": [],
+    "funders": ["Office of International Science and Engineering", "Mount Allison University", "Social Sciences and Humanities Research Council of Canada", "University of Alberta", "University of Toronto", "Strong", "Université du Québec à Montréal", "Queen's University", "McGill University"]
+  },
+  {
+    "id": "W4388844093",
+    "title": "The Environmental Impacts of Protected Area Policy",
+    "abstract": "",
+    "year": 2023,
+    "lang": "en",
+    "type": "article",
+    "venue": "SSRN Electronic Journal",
+    "topic": "Conservation, Biodiversity, and Resource Management",
+    "field": "Environmental Science",
+    "ca_institutions": "University of Toronto",
+    "funders": []
+  },
+  {
+    "id": "W4300710991",
+    "title": "Invasive Haemophilus influenzae disease in Manitoba in the post-vaccination era suggests a changing epidemiology.",
+    "abstract": "",
+    "year": 2006,
+    "lang": "en",
+    "type": "article",
+    "venue": "PubMed",
+    "topic": "Bacterial Infections and Vaccines",
+    "field": "Immunology and Microbiology",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W6940797169",
+    "title": "Emergence and seed production of woolly cupgrass (Eriochloa villosa) in legume forage crops",
+    "abstract": "Simard, M.-J., Nurse, R. E. and Darbyshire, S. J. 2015. Emergence and seed production of woolly cupgrass (Eriochloa villosa) in legume forage crops. Can. J. Plant Sci. 95: 539-548. Woolly cupgrass is an annual grass of East Asian origin now present in North America, particularly in the US corn belt. The species was found in Canada in 2000 (southern Quebec). New, mostly small, populations have been discovered every year since 2007 and the species became a nationally regulated and quarantined weed in 2011. In order to evaluate the potential use of perennial legumes to reduce established populations, the emergence pattern, density, biomass and seed production of a woolly cupgrass population were evaluated in plots either kept unmanaged (control), in chemical fallow (treated with sequential applications of glyphosate) or cropped with alfalfa or clover from 2009 to 2011. Every year, woolly cupgrass seedlings started to emerge early (Apr. 29 to May 05) and continued to emerge over a 26- to 85-d period. All unmanaged weekly cohorts produced seed. Woolly cupgrass in unmanaged control plots produced about 10 000 seeds m-2 in 2010 and 2011. In the chemical fallow, emergence counts decreased by about 2/3 each year. No woolly cupgrass seeds were collected during forage harvests except during a single late cut. However, despite the control of the initial spring cohort (using herbicide) and a standard cutting regime, seedbank inputs from woolly cupgrass increased every year in the forage plots. Therefore, the inclusion of perennial legumes into a rotation is unlikely to reduce the local abundance of woolly cupgrass.",
+    "year": 2015,
+    "lang": "en",
+    "type": "article",
+    "venue": "BioOne Complete (BioOne)",
+    "topic": "Mycorrhizal Fungi and Plant Interactions",
+    "field": "Agricultural and Biological Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W3041400917",
+    "title": "Monitoring of the evolution of H<sub>2<\/sub>O vapor in the stratosphere of Jupiter over an 18-yr period with the <i>Odin<\/i> space telescope",
+    "abstract": "Context. The comet Shoemaker-Levy 9 impacted Jupiter in July 1994, leaving its stratosphere with several new species, with water vapor (H 2 O) among them. Aims. With the aid of a photochemical model, H 2 O can be used as a dynamical tracer in the Jovian stratosphere. In this paper, we aim to constrain the vertical eddy diffusion ( K zz ) at levels where H 2 O is present. Methods. We monitored the H 2 O disk-averaged emission at 556.936 GHz with the space telescope between 2002 and 2019, covering nearly two decades. We analyzed the data with a combination of 1D photochemical and radiative transfer models to constrain the vertical eddy diffusion in the stratosphere of Jupiter. Results. Odin observations show us that the emission of H 2 O has an almost linear decrease of about 40% between 2002 and 2019. We can only reproduce our time series if we increase the magnitude of K zz in the pressure range where H 2 O diffuses downward from 2002 to 2019, that is, from ~0.2 mbar to ~5 mbar. However, this modified K zz is incompatible with hydrocarbon observations. We find that even if an allowance is made for the initially large abundances of H 2 O and CO at the impact latitudes, the photochemical conversion of H 2 O to CO 2 is not sufficient to explain the progressive decline of the H 2 O line emission, which is suggestive of additional loss mechanisms. Conclusions. The K zz we derived from the Odin observations of H 2 O can only be viewed as an upper limit in the ~0.2 mbar to ~5 mbar pressure range. The incompatibility between the interpretations made from H 2 O and hydrocarbon observations probably results from 1D modeling limitations. Meridional variability of H 2 O, most probably at auroral latitudes, would need to be assessed and compared with that of hydrocarbons to quantify the role of auroral chemistry in the temporal evolution of the H 2 O abundance since the SL9 impacts. Modeling the temporal evolution of SL9 species with a 2D model would naturally be the next step in this area of study.",
+    "year": 2020,
+    "lang": "en",
+    "type": "article",
+    "venue": "Astronomy and Astrophysics",
+    "topic": "Astro and Planetary Science",
+    "field": "Physics and Astronomy",
+    "ca_institutions": [],
+    "funders": ["Canadian Space Agency", "Centre National de la Recherche Scientifique", "Tekes", "Centre National d’Etudes Spatiales", "European Space Agency"]
+  },
+  {
+    "id": "W2112074917",
+    "title": "Feedforward symbol timing recovery technique using two samples per symbol",
+    "abstract": "In this paper, a new feedforward symbol timing recovery technique using timing estimation followed by interpolation is presented for digital receivers with two samples/symbol or higher sampling rate. A few timing estimation algorithms are proposed to estimate the timing offset accurately. The basic algorithm uses only the in-phase (I) or quadrature (Q) signal for timing detection, which applies to a BPSK communication system. It is shown that the basic algorithm, when applied in quadrature modulation systems where both I and Q signals are available, can be modified slightly to yield an improved estimation precision. The mean and variance of the resulting timing estimate are analyzed and simulated, supporting a satisfactory estimation performance. It is also shown that by applying a postprocessing scheme, such as the Kalman filter, the variance can be further reduced, resulting in a smoothed timing estimate. Some of the issues concerning the implementation of the proposed technique are also addressed.",
+    "year": 2005,
+    "lang": "en",
+    "type": "article",
+    "venue": "IEEE Transactions on Circuits and Systems I Fundamental Theory and Applications",
+    "topic": "Advancements in PLL and VCO Technologies",
+    "field": "Engineering",
+    "ca_institutions": "Concordia University",
+    "funders": []
+  },
+  {
+    "id": "W4319289630",
+    "title": "Morphology and reconstruction of the retiolitines: Silurian graptolites of the Paraplectograptus lineage (Graptolithina)",
+    "abstract": "The long ranging Silurian retiolitines belonging to the Paraplectograptus lineage (Spirograptus turriculatus to Cyrtograptus/lundgreni Biozone), represented by the genera Paraplectograptus Bouček &amp; Münch, 1952 and Pseudoplectograptus Obut &amp; Zaslavskaya, 1983 are described in detail based on well preserved, three-dimensional material from the Canadian Arctic and Poland. For the first time, reconstructions of their structure are attempted, and comparisons are made with the related genera, Stomatograptus Tullberg, 1883 and Retiolites Barrande, 1850. Ultrastructural details vary somewhat between the genera: the bandaging on the Paraplectograptus lineage and Pseudoplectograptus has a characteristic pustulose ornament, while that of Retiolites and Stomatograptus shows a surface of longitudinal striations. Prosicular preservation is generally incomplete, represented merely by the prosicular apex and prosicular rim. The thecal part of the Paraplectograptus and Pseudoplectograptus tubaria (rhabdosomes) possesses transverse rods, connecting rods, lateral apertural rods and lips. The ancora sleeve lists are variably developed but lack a dorsal/zigzag list, which is present in Stomatograptus and Retiolites. The Paraplectograptus lineage appears to mark an intermediate stage in the evolution of the retiolitines, from the early Silurian forms, with strong thecal and ancora sleeve frameworks (e.g. Retiolites, Stomatograptus), to late Silurian descendants with strong ancora sleeves, minimal thecal frameworks and pustular ornament, with no transverse rods.",
+    "year": 2023,
+    "lang": "en",
+    "type": "article",
+    "venue": "Comptes Rendus Palevol",
+    "topic": "Paleontology and Stratigraphy of Fossils",
+    "field": "Earth and Planetary Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2314987545",
+    "title": "Diphtheria toxin fused to human interleukin-3 is toxic to blasts from patients with myeloid leukemias",
+    "abstract": "",
+    "year": 2000,
+    "lang": "en",
+    "type": "article",
+    "venue": "Leukemia",
+    "topic": "Toxin Mechanisms and Immunotoxins",
+    "field": "Immunology and Microbiology",
+    "ca_institutions": "BC Cancer Agency",
+    "funders": "National Cancer Institute"
+  },
+  {
+    "id": "W4200151395",
+    "title": "Playing “guess who?”: when an episodic specificity induction increases trace distinctiveness and reduces memory errors during event reconstruction",
+    "abstract": "The constructive nature of memory implies a possible confusion between details of similar events. Memory interventions should thus target the reduction of memory errors. We postulate that a brief intervention called Episodic Specificity Induction (ESI) facilitates the sensorimotor simulation of event-related details by improving the distinctiveness of the event memory trace. As such, ESI should reduce memory errors only when event memory traces are strongly overlapping based on their sensorimotor features. Participants memorised videos showing characters performing an action on a given object. The characters were either visually very similar to each other or very distinct (low vs. high distinctiveness condition). Next, participants performed either an imagination version of the ESI or a control induction. Finally, a voice announced one of the actions seen and a character was then briefly displayed. The participants had to indicate whether the association was correct. For incorrect associations, in the low distinctiveness condition, false alarms were more likely than in the high distinctiveness condition and were reduced after the ESI. It suggests that facilitating the simulation of specific details through the ESI increased trace distinctiveness and reduced memory errors at the critical time of event reconstruction. Future clinical applications might be possible.",
+    "year": 2021,
+    "lang": "en",
+    "type": "article",
+    "venue": "Memory",
+    "topic": "Memory Processes and Influences",
+    "field": "Neuroscience",
+    "ca_institutions": ["Université de Montréal", "Institut Universitaire de Gériatrie de Montréal"],
+    "funders": []
+  },
+  {
+    "id": "W1982101727",
+    "title": "Stress-induced heat shock protein 27 expression and its role in dorsal root ganglion neuronal survival",
+    "abstract": "",
+    "year": 2005,
+    "lang": "en",
+    "type": "article",
+    "venue": "Brain Research",
+    "topic": "Heat shock proteins research",
+    "field": "Biochemistry, Genetics and Molecular Biology",
+    "ca_institutions": "Memorial University of Newfoundland",
+    "funders": "Natural Sciences and Engineering Research Council of Canada"
+  },
+  {
+    "id": "W4383426680",
+    "title": "Dominique Pradelle, Intuition et idéalités. Phénoménologie des objets mathématiques, Paris : Presses Universitaires de France, 2020, 552 pages",
+    "abstract": "Dominique Pradelle, Intuition et idéalités. Phénoménologie des objets mathématiques, Paris : Presses Universitaires de France, 2020, 552 pages. Un article de la revue Philosophiques (Volume 50, numéro 1, printemps 2023, p. 3-216) diffusée par la plateforme Érudit.",
+    "year": 2023,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Philosophiques",
+    "topic": "Psychoanalysis and Psychopathology Research",
+    "field": "Psychology",
+    "ca_institutions": "McMaster University",
+    "funders": []
+  },
+  {
+    "id": "W2590116164",
+    "title": "DTI measurements for Alzheimer’s classification",
+    "abstract": "Diffusion tensor imaging (DTI) is a promising imaging technique that provides insight into white matter microstructure integrity and it has greatly helped identifying white matter regions affected by Alzheimer's disease (AD) in its early stages. DTI can therefore be a valuable source of information when designing machine-learning strategies to discriminate between healthy control (HC) subjects, AD patients and subjects with mild cognitive impairment (MCI). Nonetheless, several studies have reported so far conflicting results, especially because of the adoption of biased feature selection strategies. In this paper we firstly analyzed DTI scans of 150 subjects from the Alzheimer's disease neuroimaging initiative (ADNI) database. We measured a significant effect of the feature selection bias on the classification performance (p-value < 0.01), leading to overoptimistic results (10% up to 30% relative increase in AUC). We observed that this effect is manifest regardless of the choice of diffusion index, specifically fractional anisotropy and mean diffusivity. Secondly, we performed a test on an independent mixed cohort consisting of 119 ADNI scans; thus, we evaluated the informative content provided by DTI measurements for AD classification. Classification performances and biological insight, concerning brain regions related to the disease, provided by cross-validation analysis were both confirmed on the independent test.",
+    "year": 2017,
+    "lang": "en",
+    "type": "article",
+    "venue": "Physics in Medicine and Biology",
+    "topic": "Advanced Neuroimaging Techniques and Applications",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": ["National Institute of Biomedical Imaging and Bioengineering", "Canadian Institutes of Health Research", "Engineering and Physical Sciences Research Council", "University of California, San Francisco", "National Institute on Aging", "Alzheimer's Disease Neuroimaging Initiative"]
+  },
+  {
+    "id": "W4391154213",
+    "title": "Robert Schwartzwald, C.R.A.Z.Y., Vancouver, Arsenal Pulp Press, 2015, 178 p.",
+    "abstract": "LAVERDIÈRELe livre sérieux portant sur un film unique est plus rare qu'autrefois.Appartenant, semble-t-il, à une époque disparue où la cinéphilie imprégnait la culture, cette mode du livre court mais exhaustif a fait un certain retour avec la collection anglophone Queer Film Classics d'un éditeur vancouvérois, Arsenal Pulp Press.Consacrée à des films d'intérêt particulier (cinéma gai, personnages queer, etc.) et dirigée par deux célèbres acteurs du champ critique et universitaire du film, Matthew Hays et Thomas Waugh (Université Concordia), cette collection, qui se destine à un public relativement restreint, compte une vingtaine de titres depuis sa fondation en 2009.Seul film francophone des Queer Film Classics, C.R.A.Z.Y. (Jean-Marc Vallée, 2005) y apparaît aussi comme le plus commercial, populaire et consensuel.La collection met plutôt l'accent sur des oeuvres controversées et, sauf exception, peu connues hors des publics gais.Elle privilégie des films de cinéastes réputés pour la qualité de leur production et, par ailleurs, pour leur identité sexuelle marginale (Pasolini, Almodovar, Visconti,",
+    "year": 2018,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Nouvelles vues Revue sur les pratiques les théories et l histoire du cinéma au Québec",
+    "topic": "Law, logistics, and international trade",
+    "field": "Business, Management and Accounting",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W6963962419",
+    "title": "sj-docx-4-cjk-10.1177_20543581241242550 – Supplemental material for Perceptions and Information-Seeking Behavior Regarding COVID-19 Vaccination Among Patients With Chronic Kidney Disease in 2023: A Cross-Sectional Survey",
+    "abstract": "Supplemental material, sj-docx-4-cjk-10.1177_20543581241242550 for Perceptions and Information-Seeking Behavior Regarding COVID-19 Vaccination Among Patients With Chronic Kidney Disease in 2023: A Cross-Sectional Survey by Omosomi Enilama, Cynthia MacDonald, Pearl Thompson, Umair Khan, Selina Allu, Mary Beaucage, Kevin Yau, Matthew J. Oliver, Michelle A. Hladunewich and Adeera Levin in Canadian Journal of Kidney Health and Disease",
+    "year": 2024,
+    "lang": "en",
+    "type": "article",
+    "venue": "Figshare",
+    "topic": "SARS-CoV-2 and COVID-19 Research",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4289704954",
+    "title": "Bores Observed During the Warm Season of 2015–2019 Over the Southern North China Plain",
+    "abstract": "Abstract This first multi‐year investigation focuses on bores over the southern North China Plain during the 2015–2019 warm seasons. Bore structure depended on location with undular bores tending to occur close to the coast and non‐undular bores to the west near elevated terrain. Bores were most likely to occur during June and July when convection is active. While bore frequency over the Southern Great Plains (SGP) of U.S. is linked to the region's nocturnal low‐level jet, the bores herein were sensitive to the synoptic regime with ∼80% occurring during 4‐to‐5‐day periods under three different synoptic regimes. The bores had shorter durations than their SGP counterparts and a far wider range in their direction of propagation. Overall, these findings find regional differences in bores' frequency, movement, and structure serving an impetus for future investigations of nocturnal mesoscale convective systems and bores over China and other locations worldwide.",
+    "year": 2022,
+    "lang": "en",
+    "type": "article",
+    "venue": "Geophysical Research Letters",
+    "topic": "Meteorological Phenomena and Simulations",
+    "field": "Earth and Planetary Sciences",
+    "ca_institutions": "Ministry of Education and Child Care",
+    "funders": ["National Natural Science Foundation of China", "State Key Laboratory of Severe Weather", "National Science Foundation"]
+  },
+  {
+    "id": "W6998992920",
+    "title": "BRS INTEGRA: nova forrageira para produção de palhada em ILPF: segunda semana.",
+    "abstract": "No Prosa rural dessa semana vamos falar da primeira cultivar de Braquiária ruzizienses desenvolvida no Brasil. Lançada há dois anos, a cultivar se chama BRS Integra, e ganhou esse nome porque a gramínea é usada em sistemas que integram lavoura, pecuária e florestas, os chamados ILPF. Comparada a cultivar tradicional, a BRS Integra apresenta maior produção de forragem na entressafra, aumentando a produtividade dos sistemas de Integração Lavaoura/Pecuária/Floresta.",
+    "year": 2024,
+    "lang": "pt",
+    "type": "other",
+    "venue": "infoteca-e (Brazilian Agricultural Research Corporation)",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W3023513633",
+    "title": "Return To Sporting Activity After Total Hip Arthroplasty - An Irish Experience",
+    "abstract": "ABSTRACT Objective Total hip arthroplasty (THA) is traditionally an operation of the elderly. In the past few decades we have seen younger patient cohorts undergoing THA and increased activity levels in elderly cohorts. Guidelines have not been developed on return to sporting activity after THA. At present return to sport is dictated by surgeon preference and advice. The aim of this paper is to assess attitudes and practices toward return to sport after THA in Irish surgeons performing a minimum of forty total hip replacements per annum. Design Web-based survey, level of evidence 5 Methods Current practices in the Irish orthopaedic community were assessed through a web-based survey. The questionnaire was issued via the Royal College of Surgeons Ireland to consultants involved with higher specialist training. Of 90 consultants surveyed, 35 responded. 8 respondents did not perform greater than forty THA operations per annum and thus were excluded from the later part of the survey. Results The majority of respondents (61.54%) would use an uncemented design for a patient planning on returning to sport. 26.92% would use a hybrid design. 3.85% would opt for a resurfacing arthroplasty. The majority of surgeons (73.08%) would use an uncemented femoral implant. 92.81% would use a ceramic on polyethylene bearing surface. 57.69% of surgeons would perform a posterolateral approach and 30.77% would opt for a anterolateral approach. All respondents would allow patients to return to low impact sports such as golf, swimming and walking following THA. Significantly more variance was seen across surgeons when considering a return to medium impact and high impact sports. Summary/Conclusion This survey has shown that there is still a lack of consensus on return to sport after THA. This survey of some of the most eminent arthroplasty surgeons practicing in Ireland will hopefully allow for consolidation of guidelines on return to sport after THA.",
+    "year": 2020,
+    "lang": "en",
+    "type": "preprint",
+    "venue": "medRxiv",
+    "topic": "Orthopaedic implants and arthroplasty",
+    "field": "Medicine",
+    "ca_institutions": "Trinity College",
+    "funders": []
+  },
+  {
+    "id": "W4416446672",
+    "title": "Investigating AhR as a mechanism of CD8+ T cell modulation by microbial-derived metabolites in PDAC 2802",
+    "abstract": "Abstract Description Pancreatic ductal adenocarcinoma (PDAC) has the lowest five-year-survival of common solid cancer types and responds poorly to immunotherapy despite an abundant intra-tumour immune infiltrate. The microbiota has been reported to impact tumour characteristics and survival, at least partially by limiting CD8+ T cell function. The microbiota can potentially influence immune function through metabolites, including indole production as a result of microbial tryptophan metabolization. The aryl hydrocarbon receptor (AhR) is a key cellular response pathway in the host-microbiota axis that may play an immunosuppressive role in CD8+ T cells. Since AhR can be activated by microbial-derived indoles, we tested the hypothesis that microbiota-produced indoles suppress intratumoural CD8+ T cell function via AhR activation, thus promoting disease progression. Using an orthotopic model of PDAC, we found that tumour burden was reduced in CD8-specific AhR knockout mice compared to the littermate controls. Further, murine PDAC tumours have a greater concentration of indole compounds compared to healthy pancreases. Moreover, exposure to these indole compounds activated AhR in CD8+ T cells, significantly suppressing their acquisition of an inflammatory phenotype. In summary, our data suggest that microbial-derived metabolites can suppress CD8+ T cell function in PDAC through activation of AhR Funding Sources NIH, CIHR, and TFRI Topic Categories Tumor Immunology: Cellular Responses and Tumor Microevironment (TIME)",
+    "year": 2025,
+    "lang": "en",
+    "type": "article",
+    "venue": "The Journal of Immunology",
+    "topic": "Toxic Organic Pollutants Impact",
+    "field": "Environmental Science",
+    "ca_institutions": "Princess Margaret Cancer Centre",
+    "funders": []
+  },
+  {
+    "id": "W3086093300",
+    "title": "PiBench online",
+    "abstract": "The emergence of persistent memory (PM), such as Intel Optane DC Persistent Memory Modules (DCPMM), opened up many opportunities for building high-performance indexes directly on PM. However, the many PM indexes proposed by prior work had their evaluation based on PM emulation using DRAM and therefore it was not clear how they would perform on real PM hardware. Moreover, they typically used ad hoc, in-house benchmarks and did not collect PM-specific hardware metrics that are key performance indicators and are instrumental for users and developers to understand the performance behavior of PM indexes. These issues call for a systematic, fair and reproducible approach for evaluating PM indexes. This demonstration highlights the principles and lessons learned from our recent evaluation of PM indexes on real DCPMM and showcases PiBench, a unified benchmarking framework that enables fair and reproducible evaluation of PM indexes. In addition to common metrics, PiBench uniquely integrates monitoring tools to collect PM-specific hardware counters, allowing in-depth performance analysis. Our demonstration is enabled by PiBench Online, a new interactive system built on top of PiBench. Using PiBench Online, users can upload their own index implementations, run preset or customized workloads, and analyze results interactively, all through an easy-to-use web interface. PiBench is open-source and PiBench Online is deployed at https://pibench.org. We hope PiBench Online can promote fair comparison and reproducibility in database and systems communities.",
+    "year": 2020,
+    "lang": "en",
+    "type": "article",
+    "venue": "Proceedings of the VLDB Endowment",
+    "topic": "Advanced Data Storage Technologies",
+    "field": "Computer Science",
+    "ca_institutions": "Simon Fraser University",
+    "funders": []
+  },
+  {
+    "id": "W3165464716",
+    "title": "Early prenatal use of a multivitamin diminishes the risk for inadequate vitamin D status in pregnant women: results from the Maternal-Infant Research on Environmental Chemicals (MIREC) cohort study",
+    "abstract": "",
+    "year": 2021,
+    "lang": "en",
+    "type": "article",
+    "venue": "American Journal of Clinical Nutrition",
+    "topic": "Vitamin D Research Studies",
+    "field": "Medicine",
+    "ca_institutions": ["Centre Hospitalier Universitaire de Sherbrooke", "Queen's University", "Simon Fraser University", "Health Canada", "University of Manitoba", "Dalhousie University", "Université de Montréal", "Université Laval"],
+    "funders": "Canadian Institutes of Health Research"
+  },
+  {
+    "id": "W2372120486",
+    "title": "Immersion Instruction and Its Application in Canada's Ethnic Languages Education",
+    "abstract": "Immersion instruction is an important tool to achieve multiculturalism and bilingualism in Canada.It was originally developed to solve the learning demand for Anglophone Children in Quebec,but was soon applied to other ethnic languages education. Study on immersion instruction and its application in Canada's ethnic languages education will bring more hints to China's ethnic languages education.",
+    "year": 2014,
+    "lang": "en",
+    "type": "article",
+    "venue": "Zhongyang Caizheng Jinrong Xueyuan xuebao",
+    "topic": "Higher Education and Teaching Methods",
+    "field": "Computer Science",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2060649180",
+    "title": "Gene expression during ovarian differentiation in parasitic and non-parasitic lampreys: Implications for fecundity and life history types",
+    "abstract": "",
+    "year": 2014,
+    "lang": "en",
+    "type": "article",
+    "venue": "General and Comparative Endocrinology",
+    "topic": "Genetic and Clinical Aspects of Sex Determination and Chromosomal Abnormalities",
+    "field": "Biochemistry, Genetics and Molecular Biology",
+    "ca_institutions": "University of Manitoba",
+    "funders": ["Natural Sciences and Engineering Research Council of Canada", "University of Manitoba"]
+  },
+  {
+    "id": "W7131858423",
+    "title": "Baseline AHR expression shapes immune response to pharmacological modulation in PBMCs from pancreatic cancer patients",
+    "abstract": "Art. no. 1655258",
+    "year": 2025,
+    "lang": "en",
+    "type": "article",
+    "venue": "Lithuanian University of Health Sciences",
+    "topic": "Aldose Reductase and Taurine",
+    "field": "Biochemistry, Genetics and Molecular Biology",
+    "ca_institutions": "University of Toronto",
+    "funders": "Lietuvos Sveikatos Mokslų Universitetas"
+  },
+  {
+    "id": "W7115000040",
+    "title": "Evaluation of peptidomimetic inhibitors",
+    "abstract": "Abstract Scientific research in drug discovery relies on robust, versatile, and well-established methodologies. One effective strategy for targeting disease-relevant proteins, such as E3 ligases, involves rational drug design using degron peptides as starting points for compound development. Here, we present a comprehensive set of complementary assays for the evaluation of degron-based binders, enabling their integration into an efficient drug discovery pipeline. We introduce screening strategies such as Differential Scanning Fluorimetry (DSF) and Fluorescence Polarization (FP), alongside both solution-based and immobilization-based biophysical techniques, including Isothermal Titration Calorimetry (ITC) and Surface Plasmon Resonance (SPR) for reliable affinity determination. To assess intracellular interactions with full-length target proteins, we also employ Nano Bioluminescence Resonance Energy Transfer (NanoBRET). Together, these methods establish a robust framework for the discovery and characterization of degron-based peptidomimetic compounds.",
+    "year": 2025,
+    "lang": "en",
+    "type": "article",
+    "venue": "bioRxiv (Cold Spring Harbor Laboratory)",
+    "topic": "Click Chemistry and Applications",
+    "field": "Chemistry",
+    "ca_institutions": [],
+    "funders": "Structural Genomics Consortium"
+  },
+  {
+    "id": "W4416846456",
+    "title": "PROMOTING MENTAL HEALTH IN UNIVERSITY SETTINGS: A COMMUNITY-DRIVEN LIVING LAB APPROACH",
+    "abstract": "The COVID-19 pandemic has significantly impacted the mental health of university students and employees worldwide. In response to the increased prevalence of anxiety and depressive symptoms observed during this public health crisis, a Living Lab dedicated to promoting mental health within university settings was established in 2021. The main objectives of this Living Lab are to: (a) identify key mental health challenges within Quebec (Canada) university communities; (b) explore actions, initiatives, and resources that support community mental health; (c) implement new mental health promotion initiatives; and (d) evaluate their impact. This presentation, based on a Canadian case study, provides an overview of the Living Lab’s four years of activity, drawing on the results of three research projects conducted during this period. The first section, based on quantitative survey data collected from 2020 to 2022 (n=6000), identifies the main mental health challenges faced by Quebec university students and employees. The second section, grounded in a qualitative study (n=60), highlights the strengths and limitations of mental health support resources available in university environments. The third section focuses on a specific initiative, the ILUMIN Station, a wellness room implemented on our campus. Drawing on both quantitative and qualitative data collected from over 200 participants, this section explores the implementation process and assesses the initiative’s effectiveness. Building on the findings from these three studies, the presentation concludes with reflections and actionable recommendations for promoting mental health across university campuses. This document is a poster.",
+    "year": 2025,
+    "lang": "en",
+    "type": "article",
+    "venue": "ICERI proceedings",
+    "topic": "Healthcare professionals’ stress and burnout",
+    "field": "Health Professions",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W6920784504",
+    "title": "Additional file 9 of The minimal important difference of patient-reported outcome measures related to female urinary incontinence: a systematic review",
+    "abstract": "Supplementary Material 9.",
+    "year": 2024,
+    "lang": "en",
+    "type": "article",
+    "venue": "Figshare",
+    "topic": "Pelvic floor disorders treatments",
+    "field": "Medicine",
+    "ca_institutions": "University of Alberta",
+    "funders": []
+  },
+  {
+    "id": "W3175114282",
+    "title": "Encounters with Non-Human Intelligence in Mexico, the Origin of Consciousness & the Quantum Consciousness Model: The Sol Collazo Case (Part I)",
+    "abstract": "Recently, several people in Mexico have revealed their encounters with non-human intelligent beings. Many times, these encounters have the purpose of revealing information related to spirituality, consciousness and cosmology. The quantum consciousness paradigm explains that our consciousness is immortal, non-local and can work independently of the physical brain and supports a multidimensional view of the human mind.  The article aims at presenting a model revealed to non-human intelligence contactee, Sol Collazo, that supports the existence of a quantum field that is responsible for the generation of the reality that we perceive. The same model also reveals the different energies that make consciousness and how they interact with this quantum field. The article also presents the experiences of the author including a contact with the Pleiadians that are benevolent beings that serve humanity in our evolution process.",
+    "year": 2021,
+    "lang": "en",
+    "type": "article",
+    "venue": "Scientific GOD Journal",
+    "topic": "Paranormal Experiences and Beliefs",
+    "field": "Psychology",
+    "ca_institutions": "Concordia University",
+    "funders": []
+  },
+  {
+    "id": "W2233480636",
+    "title": "A Complete Parametric Study of Pull-In Voltage by Nonlinear Differential Equation",
+    "abstract": "Micro-cantilever beams are interested structures in MEMS because of their fabrication is very easy and its versatility. The importance of micro-cantilevers beam in MEMS has driven various investigations like static and dynamic performances under different loading such as potential fields. In this research the non-linear differential equation which models dynamics of a micro-cantilever beams vibration subjected to electrostatic field has been studied. The model which has one degree of freedom is used to calculate the pull-in voltage. This model adopted based on different method of calculating stiffness of micro-cantilever beam. The nonlinear ordinary differential equation which used to model the dynamics of the cantilever subjected to electric field close to snap on is highly stiff. Investigation on solving of nonlinear stiff ordinary equation showed that only Lsode algorithm yield to correct solution to the problem. Lsode is equipped with a robust adaptive time step selection mechanism that enables solutions to very stiff problems, as the one under discussion. The best match in the resonant frequency for equivalent stiffness based on four different models was considered. The stiffness model suitable for the best match in deflection is proved to be different from the model that yields. Pull-in voltage under electric field was studied. Pull-in voltage has been investigated from the analytical and numerical perspective. A complete parametric study of structural damping effect on large deflection of micro-cantilever beam was studied was done numerically in this work. Different kind of impulse voltages were considered and effect of them on pulling voltage numerically was studied. A cumbersome mathematical method, Lie symmetry, was used to drive a closed from of time response to step voltage for undamped system and pull in voltage of such system was calculated. Finally, a closed form driven from the nonlinear ODE for calculating pulling voltage was presented.",
+    "year": 2014,
+    "lang": "en",
+    "type": "article",
+    "topic": "Advanced MEMS and NEMS Technologies",
+    "field": "Engineering",
+    "ca_institutions": "Concordia University",
+    "funders": []
+  },
+  {
+    "id": "W2055989021",
+    "title": "Applying metaphors from physics to career/life issues",
+    "abstract": "This article is based on a plenary address given at the 9th Annual Alberta Regional Consultation for Career Development (“Building Tomorrow Today”) in Edmonton, Alberta, Canada. The objective of the Consultation is to encourage the development of better links among practitioners and to provide a forum for the discussion of issues involved in community‐based employment services. In this article, the author summarizes and applies some of the major concepts in his latest book, The Physics of Living .",
+    "year": 2003,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Employment Counseling",
+    "topic": "Optimism, Hope, and Well-being",
+    "field": "Psychology",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2617379699",
+    "title": "Determination of Sulfite in Food by Liquid Chromatography Tandem Mass Spectrometry: Collaborative Study",
+    "abstract": "Sulfites are added to a wide range of food and beverage products to prevent browning or oxidation. Although most of the population do not experience side effects from consuming sulfites, a small subset has been shown to experience an \"allergic-like\" response. For this reason, the U.S. Food and Drug Administration requires that sulfites be labeled on all products that contain more than 10 mg/kg (parts per million) sulfur dioxide. The current regulatory method, optimized Monier-Williams (OMW) Official Method 990.28, has been successful in quantifying sulfites in most matrixes, but is time-consuming and has a method detection limit at the regulatory-labeling threshold. Recently, an LC-tandem MS (MS/MS) method was published that was applicable to a wide range of sulfite-containing matrixes. This method converts free and reversibly bound sulfite to the formaldehyde adduct hydroxymethylsulfonate, which could then be separated from matrix constituents using a hydrophilic interaction LC analytical column and subsequently be detected with tandem MS (MS/MS). In this study, multilaboratory validation was conducted with 11 laboratories in the United States and Canada. Four matrixes were spiked at varying concentrations and three additional commercially sulfited matrixes were included. An abbreviated comparison study between the LC-MS/MS and OMW methods was conducted for select samples. Average recoveries for all matrixes ranged from 86 to 114% with RSDr and RSDR values of 4.5-17.5 and 8.6-22.5%, respectively. Further comparisons will be necessary to draw comparisons between the two methods. This method proved to be a faster and more sensitive way to determine sulfites in food and beverages, showing promise for the continuing improvement of enforcement of sulfite labeling requirements to protect individuals who have sulfite sensitivity.",
+    "year": 2017,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of AOAC International",
+    "topic": "Sulfur Compounds in Biology",
+    "field": "Biochemistry, Genetics and Molecular Biology",
+    "ca_institutions": [],
+    "funders": "U.S. Food and Drug Administration"
+  },
+  {
+    "id": "W4391275755",
+    "title": "Sexual cannibalism as a female resistance trait: a new hypothesis",
+    "abstract": "Female spiders and praying mantises are renowned for their cannibalism of male partners before, during, or after mating. While several hypotheses have been proposed to explain species-specific examples of sexual cannibalism, much variation remains unexplained, including why the timing of cannibalism varies across taxa. Here, I outline how sexually cannibalistic behavior could evolve via sexually antagonistic selection as a type of behavioral resistance to male-imposed mating costs, and how such a generalizable interpretation provides a framework for understanding the evolution of both sexual cannibalism in females and anti-cannibalistic traits in males. I discuss how differences between mating systems that physiologically constrain males to mate only once (monogyny) or twice (bigyny) and systems where the sexes can potentially mate multiply (polygyny and polyandry) are likely to influence how sexual conflict shapes cannibalistic behavior. I review key examples from the literature that suggest how sexually cannibalistic behavior might function as a female resistance trait and provide comprehensive predictions for testing this hypothesis empirically.",
+    "year": 2024,
+    "lang": "en",
+    "type": "article",
+    "venue": "Evolution",
+    "topic": "Animal Behavior and Reproduction",
+    "field": "Agricultural and Biological Sciences",
+    "ca_institutions": [],
+    "funders": "Alexander Family Foundation"
+  },
+  {
+    "id": "W2116538325",
+    "title": "Establishing business integrity and value congruence &amp;ndash; a comparative investigation of ethical information practices among New Zealand banks",
+    "abstract": "Banks would benefit from demonstrating the highest levels of business integrity in ethical information handling. A website is a form of communication that symbolically represents its parent organisation. Content analysis of banking websites is proposed as a valid way of assessing institutional values. The 12 principles of the New Zealand Privacy Act (1993) articulate national values for information handling and privacy protection and, therefore, provide a coding template for a content analysis of banking websites. New Zealand banking websites were found to demonstrate a basic level of understanding and commitment to the privacy of customer information. While all seven banks had a privacy statement, none demonstrated a pervasive commitment to meet all the requirements of the New Zealand Privacy Act. The concept of using legislated privacy principles as a basis for assessing national information handling values and business integrity could assist banks in providing the integrity assurances that customers seek, thereby enhancing their competitive advantage.",
+    "year": 2010,
+    "lang": "en",
+    "type": "article",
+    "venue": "International Journal of Liability and Scientific Enquiry",
+    "topic": "Privacy, Security, and Data Protection",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": "Polytechnique Montréal"
+  },
+  {
+    "id": "W2964849557",
+    "title": "Optimizing presentation of expected treatment outcomes",
+    "abstract": "",
+    "year": 2019,
+    "lang": "en",
+    "type": "letter",
+    "venue": "Journal of the American Academy of Dermatology",
+    "topic": "Pharmaceutical industry and healthcare",
+    "field": "Pharmacology, Toxicology and Pharmaceutics",
+    "ca_institutions": [],
+    "funders": ["Janssen Biotech", "LEO Pharma Research Foundation", "LEO Pharma", "Merz Pharmaceuticals", "Sun Pharma", "Mylan", "Regeneron Pharmaceuticals", "Donovan Family Foundation", "AbbVie", "Novartis", "Celgene", "Janssen Research and Development", "Galderma", "Almirall", "K&F Baxter Family Foundation", "National Psoriasis Foundation", "Pfizer", "Baxter International", "Directorate for Computer and Information Science and Engineering", "Sanofi", "Astellas Pharma US", "Valeant Pharmaceuticals International", "Eli Lilly and Company", "Merck Company Foundation", "Boehringer Ingelheim", "Merz Therapeutics"]
+  },
+  {
+    "id": "W2058852084",
+    "title": "Echolocation behavior of harbor porpoises Phocoena phocoena around chemically enhanced gill nets",
+    "abstract": "The echolocation behavior of harbor porpoises Phocoena phocoena around gillnets was monitored to test their response to chemically (BaSO 4 ) enhanced gill nets, designed to be more acoustically reflective than commercial nets. Field trials were conducted between 22 July and 31 August 2000 in the Bay of Fundy, Canada. Echolocation clicks were continuously monitored with Porpoise Echolocation Detectors (PODs). Commercial and experimental (chemically enhanced) gill nets were set for groundfish in water depths from 100 to 130 m. Echolocation occurrence (the proportion of 10 s intervals during which clicks were detected) and echolocation rate (the number of clicks h -1 ) were measured. The PODs varied in their detection ability, so comparisons between commercial and enhanced nets were made with individual PODs. Neither echolocation rate nor occurrence differed with net type for any POD. Significantly more echolocation was detected during the day than at night. Echolocation rate and echolocation occurrence varied with depth and location, possibly reflecting concomitant variation in the relative abundance of porpoises and/or their prey. We conclude that porpoises do not respond to the acoustic reflectivity of the modified nets. Rather, the effectiveness of these nets is apparently due to other factors, such as their physical properties, particularly their stiffness.",
+    "year": 2004,
+    "lang": "en",
+    "type": "article",
+    "venue": "Marine Ecology Progress Series",
+    "topic": "Robotic Locomotion and Control",
+    "field": "Engineering",
+    "ca_institutions": [],
+    "funders": "World Wildlife Fund"
+  },
+  {
+    "id": "W2898804222",
+    "title": "The Effect of Transformational Leadership on Entrepreneurial Orientation: The Mediating Role of Organizational Learning Capability",
+    "abstract": "This study aims to investigate the effect of transformational leadership on entrepreneurial orientation in Jordanian commercial banks, and whether organizational learning capability mediates the effect of transformational leadership on entrepreneurial orientation. Adopting a quantitative research design, data were collected by means of a questionnaire-based survey of employees in Jordanian commercial banks. Based on 330 usable responses, the results revealed the significant effect of transformational leadership and two of its dimensions (inspirational motivation and intellectual stimulation) on entrepreneurial orientation. Two other dimensions (idealized influence and individualized consideration) did not contribute to entrepreneurial orientation. Additionally, the results showed that transformational leadership has a significant effect on organizational learning capability, and that organizational learning capability in turn affects entrepreneurial orientation. The findings confirm that organizational learning capability fully mediates the effect of transformational leadership on entrepreneurial orientation. A number of recommendations are advanced, the most important of which is that banks should improve and develop managers&amp;rsquo; transformational attributes by training them on how to deal with employees in order to increase their entrepreneurial orientation. Banks should also consider improving their learning capability, as this plays a significant role in enhancing and supporting the effect of transformational leadership attributes on entrepreneurial orientation.",
+    "year": 2018,
+    "lang": "en",
+    "type": "article",
+    "venue": "Modern Applied Science",
+    "topic": "Organizational and Employee Performance",
+    "field": "Computer Science",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W1996427714",
+    "title": "The Use of Administrative Databases to Assess Oral Health Care",
+    "abstract": "OBJECTIVE: We examined the potential for research using administrative databases containing dentists' claims to identify both the type of health services research questions addressed and the strength of the evidence that is achieved in such studies. METHODS: We searched Medline (1966 to March, 2003), retrieved additional reports from personal files, reviewed the literature cited in the relevant articles and conducted electronic searches on investigators' surnames. Information from relevant articles was abstracted into tables and the strength of the evidence for each was classified. RESULTS: Thirty-eight studies met our inclusion criteria. Researchers have used administrative databases of dental records to examine provider practices, the longevity or consequences of dental interventions, the prevalence of dental conditions, and patient factors that determined care, and to establish quality assurance criteria or standards of care. The strongest designs were prospective or case-control (Level II-2). CONCLUSION: Studies analyzing administrative databases have the advantage of size and economy but are subject to several threats to their validity and are seldom population-based. The strongest designs occurred with investigation of the longevity or consequences of care. Several studies demonstrated the benefit of linking the service data to patient or provider characteristics. The study of dentists' claims data appears under exploited, especially in the area of identifying and recommending changes in dental health care policies.",
+    "year": 2005,
+    "lang": "en",
+    "type": "review",
+    "venue": "Journal of Public Health Dentistry",
+    "topic": "Medical Coding and Health Information",
+    "field": "Health Professions",
+    "ca_institutions": "University of Toronto",
+    "funders": []
+  },
+  {
+    "id": "W2947860003",
+    "title": "Feed the Soil, Not the Plant: Case Studies in the Sustainability of Ontario's Regional Orchestras",
+    "abstract": "Although Western Art Music (WAM) may not (yet!) be classified as a music-culture “at risk,” many of Ontario’s professional regional orchestras operate under increasingly unstable and difficult conditions. Using the theories of Jeff Todd Titon — whose evolving scholarship on the sustainability of musical cultures explores sustainability through a relational epistemology with the science of ecology — I examine the institutional health of two organizations within the WAM landscape of Ontario: The Niagara Symphony Orchestra and the ensemble previously known as Orchestra London.",
+    "year": 2018,
+    "lang": "en",
+    "type": "article",
+    "venue": "MUSICultures",
+    "topic": "Music Technology and Sound Studies",
+    "field": "Computer Science",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2138363765",
+    "title": "Expression of a New Operon from <i>Bacillus subtilis<\/i> , <i>ykzB-ykoL<\/i> , under the Control of the TnrA and PhoP-PhoR Global Regulators",
+    "abstract": "The ykzB and ykoL genes encode two peptides, of 51 and 60 amino acids, the functions of which are unknown. The ykzB and tnrA genes are contiguous and transcribed divergently. Expression of ykzB and ykoL is induced by glutamate and is under the control of the TnrA global regulator of nitrogen utilization. TnrA regulated its own synthesis in glutamate minimal medium. Two DNA sequences (TnrAB1 and TnrAB2) homologous to the TnrA binding site are present in the region between tnrA and ykzB. Deletion mapping indicated that the TnrAB2 binding site was involved in activation of the ykzB promoter. In addition, transcription of tnrA depends on the presence of the TnrAB1 binding site. The ykzB and ykoL genes are probably in the same transcriptional unit. A single promoter involved in transcription in the presence of glutamate was mapped by primer extension. ykoL expression was induced by phosphate limitation and depended on the PhoP-PhoR two-component regulatory system. Its promoter was mapped to the region between ykoL and ykzB. Four boxes similar to the PhoP binding site are present upstream from the ykoL promoter. These boxes are probably recognized by PhoP approximately P during the activation of transcription in phosphate limitation conditions.",
+    "year": 2000,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Bacteriology",
+    "topic": "Bacterial Genetics and Biotechnology",
+    "field": "Biochemistry, Genetics and Molecular Biology",
+    "ca_institutions": [],
+    "funders": ["Centre National de la Recherche Scientifique", "European Commission", "Institut national de la recherche scientifique"]
+  },
+  {
+    "id": "W2919164265",
+    "title": "La nécessité d’un leadership inclusif et l’influence canadienne",
+    "abstract": "",
+    "year": 2019,
+    "lang": "fr",
+    "type": "book-chapter",
+    "venue": "MQUP eBooks",
+    "topic": "Social Sciences and Governance",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W6920849680",
+    "title": "Additional file 4 of DNA barcoding detects contamination and substitution in North American herbal products",
+    "abstract": "Authors’ original file for figure 2",
+    "year": 2022,
+    "lang": "en",
+    "type": "article",
+    "venue": "Figshare",
+    "topic": "Traditional Chinese Medicine Analysis",
+    "field": "Medicine",
+    "ca_institutions": "University of Guelph",
+    "funders": []
+  },
+  {
+    "id": "W4411946080",
+    "title": "Competing under Information Heterogeneity: Evidence from Auto Insurance",
+    "abstract": "Abstract This article studies competition under information heterogeneity in selection markets and examines the impact of public information regulations aimed at reducing information asymmetries between competing firms. We develop a novel model and introduce new empirical strategies to analyse imperfect competition in markets where firms have heterogeneous information about consumers, vary in cost structures, and offer differentiated products. Using data from the Italian auto insurance market, we find substantial differences in the precision of risk ratings across insurers, and those with less accurate risk-rating algorithms tend to have more efficient cost structures. We assess the equilibrium effects of giving firms equal access to aggregated risk information from a centralized bureau. This policy significantly reduces prices by increasing competition, leading to a 15.7% boost in consumer surplus, almost reaching the efficiency benchmark where firms have full knowledge of consumers’ true risk. Aggregating information through the bureau favours low-risk consumers and reduces average costs by 12 euros per contract through more efficient insurer–insuree matching.",
+    "year": 2025,
+    "lang": "en",
+    "type": "article",
+    "venue": "The Review of Economic Studies",
+    "topic": "Insurance and Financial Risk Management",
+    "field": "Economics, Econometrics and Finance",
+    "ca_institutions": "University of Toronto",
+    "funders": []
+  },
+  {
+    "id": "W6904561822",
+    "title": "Crowd gathered to see giant tuna hanging on Tuna Wharf at Wedgeport, Nova Scotia",
+    "abstract": "",
+    "year": 2002,
+    "lang": "en",
+    "type": "other",
+    "venue": "Open Collections",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W7043588727",
+    "title": "Some Canadian Villages About 1760",
+    "abstract": "",
+    "year": 2017,
+    "lang": "en",
+    "type": "article",
+    "venue": "Project Muse (Johns Hopkins University)",
+    "topic": "Canadian Identity and History",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4407150452",
+    "title": "zol and fai: large-scale targeted detection and evolutionary investigation of gene clusters",
+    "abstract": "Many universally and conditionally important genes are genomically aggregated within clusters. Here, we introduce fai and zol, which together enable large-scale comparative analysis of different types of gene clusters and mobile-genetic elements, such as biosynthetic gene clusters (BGCs) or viruses. Fundamentally, they overcome a current bottleneck to reliably perform comprehensive orthology inference at large scale across broad taxonomic contexts and thousands of genomes. First, fai allows the identification of orthologous instances of a query gene cluster of interest amongst a database of target genomes. Subsequently, zol enables reliable, context-specific inference of ortholog groups for individual protein-encoding genes across gene cluster instances. In addition, zol performs functional annotation and computes a variety of evolutionary statistics for each inferred ortholog group. Importantly, in comparison to tools for visual exploration of homologous relationships between gene clusters, zol can scale to handle thousands of gene cluster instances and produce detailed reports that are easy to digest. To showcase fai and zol, we apply them for: (i) longitudinal tracking of a virus in metagenomes, (ii) performing population genetic investigations of BGCs for a fungal species, and (iii) uncovering evolutionary trends for a virulence-associated gene cluster across thousands of genomes from a diverse bacterial genus.",
+    "year": 2025,
+    "lang": "en",
+    "type": "article",
+    "venue": "Nucleic Acids Research",
+    "topic": "Genomics and Phylogenetic Studies",
+    "field": "Biochemistry, Genetics and Molecular Biology",
+    "ca_institutions": "McMaster University",
+    "funders": ["National Institute of Allergy and Infectious Diseases", "National Institutes of Health", "National Institute of General Medical Sciences", "Broad Institute"]
+  },
+  {
+    "id": "W2086664023",
+    "title": "Gas chromatography—High resolution selected‐ion mass spectrometric identification of trace 21∶0 and 20∶2 fatty acids eluting with conjugated linoleic acid isomers",
+    "abstract": "High-resolution selected-ion recording (SIR) of the exact molecular ion mass was used to confirm unambiguously the presence of conjugated linoleic acid (CLA) derivatives in biological matrices and standard mixtures and to differentiate non-CLA derivatives from CLA derivatives in the CLA region of the gas chromatogram. The success of this method was based on the selectivity of the SIR technique and its sensitivity, which was comparable to that of flame-ionization detection. A minor fatty acid methyl ester (FAME) was identified as methyl heneicosanoate (21:0), and six isomers of 20:2 FAME were found to elute in the CLA region. Isomerization of a standard CLA mixture resulted in a non-CLA flame-ionization response eluting in the CLA region of the gas chromatogram. It is therefore recommended that the identification of minor CLA isomers in natural products or biological matrices should include their direct confirmation by mass spectrometry.",
+    "year": 2000,
+    "lang": "en",
+    "type": "article",
+    "venue": "Lipids",
+    "topic": "Fatty Acid Research and Health",
+    "field": "Nursing",
+    "ca_institutions": "Agriculture and Agri-Food Canada",
+    "funders": []
+  },
+  {
+    "id": "W6911829833",
+    "title": "Split Decisions: Explicit Contexts for Substructural Languages (artifact)",
+    "abstract": "This artifact contains the Beluga mechanization accompanying the paper “Split Decisions: Explicit Contexts for Substructural Languages”, accepted to appear at the 14th ACM SIGPLAN International Conference on Certified Programs and Proofs (CPP '25). The artifact contains the following files: carve.tar: An archive of all source files related to mechanization, along with documentation cpp-carve.ova: A Virtual Machine image with all dependencies required to run the mechanization, including the code itself To run the mechanization directly, download and extract carve.tar. This will create a folder named carve; from there, the file carve/README.md contains detailed instructions for installing the proof assistant Beluga and running the mechanization. To run the Virtual Machine set-up, download the .ova file and import as necessary. We recommend using VirtualBox; one can import the Virtual Machine directly from the cpp-carve.ova file by following instructions at this link. Adjust the CPU/RAM allocation as needed; a configuration of 4 cores with 4 GB of RAM should suffice. If using other Virtual Machine software, you may need to extract the .ova file to obtain an .ovf file and follow the appropriate instructions. The Virtual Machine instance is a Ubuntu Server with an SSH server, containing all relevant dependencies and carve pre-installed. The username and password are both cpp25. After successfully launching and logging in (via terminal or SSH), run the following: cd carvebeluga run_all.cfg",
+    "year": 2024,
+    "lang": "en",
+    "type": "other",
+    "venue": "Zenodo (CERN European Organization for Nuclear Research)",
+    "ca_institutions": "McGill University",
+    "funders": []
+  },
+  {
+    "id": "W7065187948",
+    "title": "DÃ©veloppement de la version quÃ©bÃ©coise francophone du Childrenâs Communication Checklist â 2 (&lt;i&gt;CCC-2&lt;/i&gt;). Traduction, adaptation et Ã©quivalence conceptuelle: Development of a Quebec French version of the Childrenâs Communication Checklist â 2 (&lt;i&gt;CCC-2&lt;/i&gt;). Translation, adaptation and conceptual equivalence",
+    "abstract": "Une Ã©valuation orthophonique complÃ¨te doit tenir compte de chacune des composantes du langage, soit les aspects de forme (morphologie, syntaxe, phonologie), de contenu (sÃ©mantique et lexique) et dâutilisation (pragmatique). Les aspects de forme et de contenu sont relativement bien couverts par les diffÃ©rents outils dâÃ©valuation disponibles pour la population franco-quÃ©bÃ©coise, contrairement aux habiletÃ©s dâutilisation. Pourtant, lâÃ©valuation de la composante pragmatique du langage peut sâavÃ©rer dÃ©terminante pour lâÃ©tablissement dâun diagnostic et le choix des interventions chez un jeune, en orthophonie comme en pÃ©dopsychiatrie. En effet, lâÃ©valuation des habiletÃ©s pragmatiques peut contribuer au diagnostic diffÃ©rentiel entre les troubles du langage (TL) et dâautres troubles dÃ©veloppementaux, notamment les troubles envahissants du dÃ©veloppement (TED). La prÃ©sente Ã©tude a Ã©tÃ© rÃ©alisÃ©e en rÃ©action au manque dâoutils validÃ©s pour Ã©valuer la pragmatique chez les jeunes franco-quÃ©bÃ©cois. Il sâagit dâune Ã©tude de validation en franco-quÃ©bÃ©cois du Children Communication Checklist ((&lt;i&gt;CCC-2&lt;/i&gt;, Bishop, 2006), un outil rÃ©putÃ© dâÃ©valuation de la pragmatique donât les qualitÃ©s mÃ©trologiques ont Ã©tÃ© dÃ©montrÃ©es. Dans un premier temps, le (&lt;i&gt;CCC-2&lt;/i&gt; a Ã©tÃ© traduit et adaptÃ© en franÃ§ais quÃ©bÃ©cois suivant une mÃ©thodologie rigoureuse, conforme aux recommandations de la Commission internationale pour lâadaptation des tests. La mÃ©thodologie employÃ©e a permis la rÃ©alisation dâune traduction-adaptation du (&lt;i&gt;CCC-2&lt;/i&gt; en franco-quÃ©bÃ©cois qui est Ã©quivalente linguistiquement et culturellement Ã la version source de lâinstrument. Par la suite, diverses analyses qualitatives ont Ã©tÃ© rÃ©alisÃ©es afin de sâassurer que les paramÃ¨tres mesurÃ©s par lâoutil soient Ã©quivalents dans les populations amÃ©ricaine (population source) et franco-quÃ©bÃ©coise (population cible). Ã cette fin, trois ouvrages rÃ©putÃ©s au QuÃ©bec libellant les caractÃ©ristiques du phÃ©nomÃ¨ne Ã©tudiÃ© ont Ã©tÃ© utilisÃ©s comme cadre rÃ©fÃ©rentiel, afin de sâassurer que les items du test concordaient avec la conceptualisation quÃ©bÃ©coise du construit. Ces analyses ont dÃ©montrÃ© lâÃ©quivalence conceptuelle des versions amÃ©ricaine et francoquÃ©bÃ©coise du (&lt;i&gt;CCC-2&lt;i&gt;. Cette Ã©tude a donc permis la crÃ©ation de la version franco-quÃ©bÃ©coise du (&lt;/i&gt;CCC-2&lt;/i&gt; et la dÃ©monstration de lâÃ©quivalence linguistique, culturelle et conceptuelle par rapport Ã la version source.",
+    "year": 2012,
+    "lang": "fr",
+    "type": "other",
+    "venue": "reroDoc Digital Library",
+    "topic": "Magnetic confinement fusion research",
+    "field": "Physics and Astronomy",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4413500679",
+    "title": "The Super Bowl — what we love but mostly hate about it",
+    "abstract": "",
+    "year": 2023,
+    "lang": "en",
+    "type": "article",
+    "topic": "Traumatic Brain Injury Research",
+    "field": "Medicine",
+    "ca_institutions": "University of Toronto",
+    "funders": []
+  }
+]

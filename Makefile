@@ -38,16 +38,23 @@ deps:
 # An artifact that cannot un-say something is an artifact that will eventually
 # publish something it has already retracted. So: delete, then rebuild. A finding
 # exists if and only if a script in this repo computes it. See DEVIATIONS.md D11.
-pilot:
+pilot: lint
 	@rm -f pilot/results/findings.json
 	@for s in $(PILOTS); do echo "── $$s"; Rscript $$s || exit 1; echo; done
 	@$(MAKE) --no-print-directory findings
 
 # The reviewer's entry point: no network, no key, same numbers.
-pilot-offline:
+pilot-offline: lint
 	@rm -f pilot/results/findings.json
 	@for s in $(PILOTS); do echo "── $$s"; Rscript $$s --offline || exit 1; echo; done
 	@$(MAKE) --no-print-directory findings
+
+# The dplyr self-masking bug (DEVIATIONS.md D4, D19) published "3100%" as a base
+# rate, and I have now written it THREE times, twice in scripts that carry a
+# comment swearing never to write it again. It does not stick as a habit. It
+# sticks as a rule that RUNS, so it runs before every pilot.
+lint:
+	@Rscript pilot/check_self_masking.R
 
 # The site renders its own COPY of findings.json (app/src/data/). Copying it here,
 # in the same target that renders FINDINGS.md, is what keeps the two from
@@ -57,7 +64,9 @@ pilot-offline:
 # same defense.
 findings:
 	@Rscript pilot/render_findings.R
-	@cp pilot/results/findings.json app/src/data/findings.json
+	@for d in app/src/data site/src/data; do \
+		if [ -d "$$d" ]; then cp pilot/results/findings.json "$$d/findings.json"; echo "synced $$d/findings.json"; fi; \
+	done
 
 harvest-status:
 	@Rscript R/harvest_progress.R

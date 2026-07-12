@@ -108,22 +108,48 @@ metaresearch. Field membership then becomes a **classification** question over a
 **retrieval** question over the literature. That is what makes "what did we miss?" answerable at all, and it is
 what produced the base rate (§2, finding 9) that replaces the failed coverage estimator.
 
-**Sources.**
+**F IS NO LONGER A HYPOTHESIS. IT IS BUILT.** All 482 partitions of the pinned snapshot were streamed and filtered:
+**F holds 4,299,418 works**, each appearing exactly once (finding 23). For most of this project's life F was
+"about 3.5M", an **extrapolation from a single partition** that sat hardcoded in six scripts; **the estimate was 18%
+low**, and every cost, audit-power and field-size figure computed against it has moved. `R/frame_size.R` now reads
+the size from the artifact the harvest writes, so no script can hardcode it again.
+
+**Sources that CONTRIBUTE RECORDS to F.**
 - A **pinned OpenAlex snapshot** (release stamped; not the live API, which is metered and mutable. See finding 8:
-  1,000 credits per ~11h window, and 8.2 days per pass to enumerate the frame. A study behind a meter that resets
-  every eleven hours cannot be re-run by a reviewer).
+  1,000 credits per ~11h window, and 8.2 days per pass. A study behind a meter that resets every eleven hours cannot
+  be re-run by a reviewer).
 - A **pinned Érudit OAI-PMH harvest** (`https://oai.erudit.org/oai/`, 379 sets; harvest date stamped).
+
+**Sources that DO NOT contribute records, and must not.** Retraction Watch, ClinicalTrials.gov, and the CIHR project
+database are used, and **none of them admits a work to F**. A retracted cardiology paper is retracted *cardiology*; a
+trial registration is not a publication; a grant is not a work. Admitting them would let an interesting signal
+masquerade as the estimand, which is the error this protocol exists to prevent. They enter as:
+- **Record attributes.** Retraction Watch supplies the post-publication state (finding 17): OpenAlex's `is_retracted`
+  is a *boolean over a four-value space* (retraction, expression of concern, correction, reinstatement), so it
+  expresses one and silently reports the rest as false. RW is joined by DOI and its state and reasons ship with F.
+- **Reference standards.** ClinicalTrials.gov knows a Canadian trial happened *independently of any pipeline*, so it
+  cannot be wrong in the pipeline's favour. It is the only reference standard here **not made of machine labels**
+  (finding 21), and §6.1 uses it for known-item recall alongside the venue set.
+- **Enrichment.** PubMed / Europe PMC / Crossref supply abstracts OpenAlex lacks (finding 19). **Preprints are
+  already in F** and need no ingest: measured against bioRxiv and medRxiv's own API, OpenAlex indexes 99.6% of what
+  the servers hold (finding 20).
 
 **Window.** Publication years 2000–2025 inclusive.
 
-**Membership.** A record enters F if it carries **any identifiable Canadian signal**: CA-AFF · CA-FUND · Canada
-named in title or abstract (EN/FR) · published in a Canadian venue · authored by a person with a known Canadian
-affiliation at any time · is an Érudit record. Roughly 3.5M works by affiliation alone.
+**Membership.** A record enters F if it carries **any identifiable Canadian signal**: CA-AFF · CA-FUND · Canada named
+in title, abstract or keywords (EN/FR) · published in a Canadian venue · is an Érudit record. Every record stores
+**which routes admitted it**. **1,565,226 works (36.4% of F) carry no Canadian affiliation at all**: an
+affiliation-only frame would hold 2,734,192 works and would never see them. That is the empirical case for the union
+of routes, and for provenance on every record.
 
-**Limitation, stated up front.** A work whose Canadian link is invisible to the metadata (no affiliation string,
-no funder, no textual mention) cannot enter *any* Canadian frame, by any method. That is a hard boundary of the
-data, not of this design. Likewise, scholarship indexed by neither OpenAlex nor Érudit is **not** estimated here,
-and no claim about it will be made.
+**Limitations, stated up front.**
+- A work whose Canadian link is invisible to the metadata (no affiliation, no funder, no textual mention, no Canadian
+  venue) cannot enter *any* Canadian frame, by any method. That is a hard boundary of the data, not of this design.
+- Scholarship indexed by neither OpenAlex nor Érudit is **not estimated** here, and no claim about it will be made.
+- **Both clauses of the primary estimand rest on sparse metadata.** 64% of the metaresearch topic space carries no
+  raw affiliation string (finding 2), and **71.2% of F carries no funder metadata at all** (finding 18). CA-FUND
+  cannot admit a work whose funder OpenAlex never recorded; that is a hard ceiling on the route, and it is why the
+  audit must sample the works **no route reached**.
 
 ## 5. Screening (retrieval is demoted to provenance)
 

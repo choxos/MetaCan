@@ -413,3 +413,129 @@ Three things are worth recording, and the third is the reason this entry is long
    and defensible-sounding. That is exactly the condition under which a researcher does not check, and it is the
    condition this entire project exists to argue is unsafe. I have now demonstrated it on myself, which is worth
    more to the proposal than the fake 52.6% ever was.
+
+---
+
+## D17. The screening payload was unreadable by the agents that had to read it, and five of them said so.
+
+**Date found:** 2026-07-12, reported independently by five screening agents, before submission.
+
+`pilot/make_frame_sample.R` wrote each 50-work chunk as **minified JSON: a single line of ~29,000 tokens**. The Read
+tool caps a call at 25,000 tokens and pages by *line*, so no offset could return it. The payload the agents were
+instructed to classify **could not be reached with the tools they were permitted to use.**
+
+All five Opus agents hit it, all five worked around it by shelling out to a pager, and **all five reported the
+deviation unprompted**, each noting they had used a tool the instructions did not authorise and explaining exactly
+why. None of them silently gave up, and none of them quietly labelled records they had not seen.
+
+Two things follow, and the second is the uncomfortable one.
+
+1. **It is a harness bug, and it is fixed.** Chunks are now pretty-printed. A payload an agent cannot read within its
+   tool constraints is a defect in the instrument, not in the agent.
+2. **Had they not reported it, I would have been comparing three models on a task whose input was reachable only by
+   side channel** — and I would never have known, because the labels would have looked fine. The only reason this is
+   in the record is that the agents volunteered it. The harness could not see it: the validator checks that labels
+   reconcile against the manifest, and they did. **A completeness check cannot detect a payload nobody could read.**
+
+**The 2,000-work sample therefore contains one difference between its halves:** works 1–1,000 were sent as minified
+JSON, works 1,001–2,000 as pretty-printed JSON. The *content* is byte-identical after parsing; only whitespace
+differs. That is almost certainly immaterial, and "almost certainly" is not a standard this project accepts, so
+`pilot/22_three_model_screen.R` **tests whether the halves differ before pooling them** and reports the test rather
+than assuming the answer.
+
+---
+
+## D18. GPT-5.6 broke the locked output contract twice, and the second time it edited a primary key.
+
+**Date found:** 2026-07-12 (both events), by the manifest validator, before submission.
+
+### Event 1: genre values in the `tier` field
+
+In its first pass over the 1,000-work sample, GPT-5.6 (high reasoning effort) wrote **genre values into the `tier`
+field** on **18 of 1,000 records**, in 3 of 20 chunks: `tier: "empirical"`, `tier: "conceptual"`,
+`tier: "editorial/commentary"`, `tier: "other"`. The `tier` field has exactly four legal values (T1, T2, T3, OUT) and
+the prompt states them.
+
+The three chunks were **re-run, not repaired** — coercing a model's malformed output to the schema invents a judgment
+the model did not make — and **the re-run came back clean**, so the violation is **not deterministic**.
+
+### Event 2 (the serious one): it silently rewrote a work's ID
+
+On the second tranche, chunk 26 came back with an id set that did not match the input:
+
+| | |
+|---|---|
+| sent to the model | `W295956950` |
+| returned by the model | `W2959569508` |
+
+**GPT appended a digit to a primary key.** `W295956950` is a real, valid OpenAlex id (a Canadian lobster research
+centre, which another screener labelled independently). The model appears to have judged the id malformed — most
+OpenAlex ids are longer — and *fixed* it. Chunk 34 simultaneously carried another genre-in-tier violation.
+
+**This is the most dangerous failure mode observed in the project**, and it is worth being precise about why.
+
+A wrong *label* is visible: it sits in the tier column, it can be audited, and a human adjudicator will see it. A
+wrong *identifier* is invisible. The record would have failed its join silently, dropped out of the analysis without
+an error, and **shrunk the denominator by one** — which is exactly DEVIATIONS.md D2 (465 records silently lost), and
+exactly D11 (an agent reporting files it never wrote). It is the same failure in a third costume: **the harness
+believing what the model said about the data instead of checking it.**
+
+Nothing about the label was wrong. Everything about the *record* was.
+
+### What follows
+
+1. **The validator caught it only because it checks the id SET, not just the count.** A completeness check that
+   counted 50 in / 50 out would have passed this chunk. `pilot/validate_frame1k_labels.R` uses `setequal()`, and that
+   choice is the only reason this entry exists rather than a silent -1 in a denominator.
+2. **Never let a model round-trip an identifier it can "improve".** The full screen must join labels back to the
+   input by *position within a manifest*, and must treat any id the model returns as *evidence about the model*, not
+   as a key.
+3. **Frontier models violate locked output contracts at a measurable rate** (~1.8% of records in one pass, twice
+   across two tranches, non-deterministically). A screening pipeline that *assumes* schema compliance is assuming
+   something empirically false. Validate; do not trust.
+
+The violation rate is reported in finding 22 rather than hidden: it is a property of screening at scale, and the full
+study must budget for re-runs.
+
+---
+
+## D19. I wrote the "3100%" bug a third time, in a script whose comments warn about it.
+
+**Date found:** 2026-07-12, in my own output, before submission.
+
+`pilot/22_three_model_screen.R` printed a table with a percentage column reading **5100** and **4300**.
+
+The cause is D4's, exactly:
+
+```r
+summarise(n = n(), any_in = sum(any_in), pct = round(100 * mean(any_in), 2))
+#                  ^^^^^^^^^^^^^^^^^^^^ replaces the logical column with a scalar
+#                                        so mean() returns the count, and pct = 100 x count
+```
+
+dplyr evaluates the expressions **sequentially**. Naming a `summarise()` output after its input replaces the column
+mid-statement, and every later reference gets the scalar.
+
+**This is the third time.** The first published "3100%, 2900%, 1500%" as base rates (D4). The second was a throwaway
+query the same afternoon, minutes after I had written a comment in the fixed script swearing off it. This third one
+is in a script that *quotes that comment*.
+
+I am no longer treating this as a mistake. **It is a property of me**, and of the API, and the only thing that has
+ever stopped it is a check that runs.
+
+### The rule that runs
+
+`pilot/check_self_masking.R`, wired into `make pilot` and `make pilot-offline` as a `lint` prerequisite: **the name on
+the left of `=` inside `summarise()`/`mutate()` may not appear inside an aggregate on the right of that same `=`.**
+Verified two ways: clean on the current tree (43 R files), and it **fails the build** when the bug is deliberately
+re-introduced.
+
+One detail worth recording, because it is the reason the guard is trustworthy. **The first version of the check
+flagged two hits, and both were the warning comments** in the scripts that already knew about the bug. A guard that
+cannot tell code from a comment *about* code is not a guard; it is a false-alarm generator that trains you to ignore
+it. It strips strings and comments before matching.
+
+**The affected number never left the script.** The 5100% was a diagnostic printed to the console during a run, not a
+recorded finding; `findings.json` carries the tranche p-value, not the malformed percentage. But it would have
+reached a reader if the table had been the thing I quoted, and the only reason it did not is that I happened to look
+at the console. That is not a control.

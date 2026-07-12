@@ -1,0 +1,810 @@
+# MétaCan screening rubric (v1.0)
+
+**Locked before screening. Version-controlled. Any change is a new version with a dated entry in `DEVIATIONS.md`.**
+
+Both machine screeners and both human coders work from this document and nothing else. The rubric is the
+instrument; if two coders disagree, the rubric is what they are adjudicated against.
+
+---
+
+## The unit
+
+One work (journal article, preprint, book chapter, report, dataset, or software), identified by its OpenAlex ID.
+You see: title, abstract, publication year, language, venue, OpenAlex topic and field, Canadian institutional
+affiliations, funders.
+
+## The question
+
+**Is the object of study *research itself*?**
+
+Metaresearch studies how research is done, reported, funded, evaluated, disseminated, or governed. The test is
+what the work is *about*, not what field it appears in and not what vocabulary it uses.
+
+A cardiology trial is not metaresearch. A study of *how cardiology trials report their outcomes* is.
+
+---
+
+## Tier
+
+Assign exactly one.
+
+### T1: Core metaresearch
+The primary object of study is research itself. Typical objects:
+
+- research **methods** and their properties (bias, reporting, statistical practice, study design)
+- **reproducibility**, replication, data and code sharing
+- **research integrity**: misconduct, retraction, questionable research practices, authorship
+- **peer review** and editorial process *as objects of study*
+- **research evaluation**, metrics, rankings, funding allocation
+- **scholarly communication**: publishing models, open access, preprints *as objects of study*
+- **bibliometrics and scientometrics** applied to a research literature
+- the **research workforce**: careers, equity, training, capacity
+- **evidence synthesis methodology** (not an individual systematic review's clinical answer, but work *about* how
+  syntheses are done)
+
+### T2: Adjacent
+Empirically or conceptually grounded work on science as a social system that is not framed as metaresearch but
+studies it:
+
+- **science and technology studies (STS)**: social studies of scientific knowledge, practice, controversy
+- **library and information science**: information behaviour of researchers, repositories, discovery
+- **research infrastructure** studies: platforms, data repositories, identifiers, standards
+- **history and philosophy of science** *when the object is contemporary research practice*
+- **research policy** analysis grounded in evidence
+
+T2 is where the field's diversity lives. Be generous here: a paper does not have to call itself metaresearch to
+be studying research.
+
+### T3: Contextual
+Relevant to the ecosystem, mapped and released, but **never pooled into the analytic corpus**:
+
+- editorials, commentaries, opinion pieces about research practice
+- policy documents and position statements
+- announcements of infrastructure, tools, or initiatives
+- news, obituaries, corrections, letters
+
+### OUT: Not metaresearch
+Everything else. Includes, and this is the most common error:
+
+- **A study that uses a method is not a study of the method.** A meta-analysis answering a clinical question is
+  OUT. A study of how meta-analyses handle heterogeneity is T1.
+- **Mentioning a metaresearch term is not studying it.** A lab paper reporting "assay reproducibility", a methods
+  section saying "peer reviewed", a licence note saying "open access": all OUT.
+- **Domain research that happens to be bibliometric in method** but whose object is the domain, not the research:
+  e.g. a bibliometric map of diabetes treatments, produced to summarise diabetes knowledge. Borderline; see below.
+
+---
+
+## The three errors that matter most
+
+These are where the pilot showed retrieval and screening break down. Read them twice.
+
+1. **Polysemy.** `reproducibility` in a biochemistry paper means the assay gives the same reading twice. In a
+   metaresearch paper it means the reproducibility crisis. Only the second is in scope. The same applies to
+   `validation`, `replication`, `bias`, `peer review`, `open access`. **Judge the sense, not the token.**
+
+2. **Method vs. object.** Using bibliometrics ≠ studying research. Ask: *if this paper is right, what do we now
+   know more about: a scientific question, or the practice of science?* If the former, OUT.
+
+3. **Absence of vocabulary is not absence of content.** An STS paper about laboratory practice, or an LIS paper
+   about how researchers find data, may use none of the field's keywords and still be squarely T2. **Do not
+   require the vocabulary.** This is the error that makes the field look smaller and more anglophone than it is.
+
+---
+
+## Canadian linkage
+
+Record which apply (this is metadata, not an inclusion test; the estimand is defined separately in
+`PROTOCOL.md`):
+
+- `CA_AFF`: at least one author affiliated with a Canadian institution
+- `CA_FUND`: funded by CIHR, NSERC, SSHRC, or CFI
+- `ABOUT_CA`: the Canadian research system is a substantive object of study (not a passing mention, not one
+  country among forty in a global comparison)
+
+## Genre
+
+`empirical` · `conceptual` · `editorial/commentary` · `policy` · `infrastructure/announcement` · `other`
+
+OpenAlex's `type` is unreliable and this field is commentary-heavy, so genre is coded, not inherited.
+
+## Language of the work
+
+As published. Do not infer from the venue.
+
+---
+
+## Confidence
+
+- `high`: the rubric decides this cleanly.
+- `medium`: the rubric decides, but a reasonable coder could differ.
+- `low`: genuinely on the boundary, or the abstract is missing/too thin to judge.
+
+**`low` is a legitimate answer and is not a failure.** Records coded `low` by either screener are routed to
+adjudication. A screener that never says `low` is not being careful; it is being confident.
+
+---
+
+## Worked examples
+
+| Title (abridged) | Tier | Why |
+|---|---|---|
+| "Data sharing practices in 500 randomised trials" | **T1** | The object is reporting practice. |
+| "Reproducibility of a Western blot protocol" | **OUT** | Assay reproducibility. Polysemy trap. |
+| "Trends in citation of retracted papers" | **T1** | Object is the literature's own behaviour. |
+| "Laboratory life in a Canadian genomics centre: an ethnography" | **T2** | STS. No metaresearch vocabulary; still studies research. |
+| "How do researchers discover datasets? A survey" | **T2** | LIS, information behaviour of researchers. |
+| "Effectiveness of statins: a network meta-analysis" | **OUT** | Uses a synthesis method to answer a clinical question. |
+| "How network meta-analyses handle inconsistency: a review of 200 reviews" | **T1** | Object is the method. |
+| "Announcing the Canadian Research Data Repository" | **T3** | Infrastructure announcement. Mapped, not pooled. |
+| "Open access mandates are failing early-career researchers" (editorial) | **T3** | Commentary about research practice. |
+| "Bibliometric analysis of diabetes research 2000–2020" | **T2** | Borderline. Bibliometric method, and the object *is* a research literature, so it studies research output. Code T2, `medium`. |
+| "Le libre accès dans les revues québécoises : état des lieux" | **T1** | Scholarly communication, object is publishing practice. French. |
+
+---
+
+## Instructions to the screener
+
+Read the title and abstract. Apply the rubric. Do not use outside knowledge of the authors or the journal's
+reputation. If the abstract is missing, judge on the title alone and set confidence to `low` unless the title is
+unambiguous.
+
+Return the schema in `protocol/screening-schema.json`. One object per work. No prose, no preamble.
+--------------------------------------------------------------------------------
+You are screening works for MetaCan, a map of Canadian metaresearch.
+
+Apply the rubric above to every record in the JSON array below. Return a JSON
+array with one object per work, conforming to protocol/screening-schema.json:
+
+  {"id": "W...", "tier": "T1|T2|T3|OUT", "genre": "...", "about_ca": true|false,
+   "confidence": "high|medium|low", "reason": "one sentence"}
+
+Rules:
+- Return the JSON array and NOTHING else. No prose, no preamble, no code fences.
+- Every input id must appear exactly once in the output.
+- Do not run commands, read files, or browse. Classify from the RECORDS alone.
+
+RECORDS:
+[
+  {
+    "id": "W7115034298",
+    "title": "v-al-ency: Two sources of causation in the Wolof causative-benefactive syncretism",
+    "abstract": "Ce travail fournit une explication du phénomène répandu de « syncrétismes causatif-applicatif » sur le plan translinguistique (p. ex. Jerro, 2017; Franco, 2019). Le wolof (atlantique; Niger-Congo) présente un syncrétisme morphologique entre causatifs et bénéfactifs. Dans les deux cas, le suffixe verbal -al est utilisé : (i) une interprétation causative se produit lorsqu’il est ajouté à des propositions sans argument externe (p. ex. les inaccusatifs) et (ii) une interprétation bénéfactive se produit lorsqu’il est ajouté à des propositions contenant un argument externe (p. ex. les transitifs). Je propose qu’il s’agisse de morphèmes homophones distincts instanciant des têtes différentes avec une structure événementielle similaire : vP et Appl. J’analyse les deux têtes comme encodant une relation causale entre deux événements via une structure événementielle causative-résultative. Alors que dans les constructions bénéfactives, l’événement bénéfactif est placé sous un opérateur modal, dans les constructions causatives, c’est l’événement verbal qui est placé sous cet opérateur. Ces constructions diffèrent également en ce qui concerne la base modale sous laquelle l’événement résultant s’inscrit - déterminée par le type de sujet contenu dans la proposition (causeur ou agent)",
+    "year": 2025,
+    "lang": "en",
+    "type": "dissertation",
+    "venue": "eScholarship@McGill (McGill)",
+    "topic": "Islamic Studies and History",
+    "field": "Social Sciences",
+    "ca_institutions": "McGill University",
+    "funders": "McGill University"
+  },
+  {
+    "id": "W1999893542",
+    "title": "Knowledge-Guided Robust MRI Brain Extraction for Diverse Large-Scale Neuroimaging Studies on Humans and Non-Human Primates",
+    "abstract": "Accurate and robust brain extraction is a critical step in most neuroimaging analysis pipelines. In particular, for the large-scale multi-site neuroimaging studies involving a significant number of subjects with diverse age and diagnostic groups, accurate and robust extraction of the brain automatically and consistently is highly desirable. In this paper, we introduce population-specific probability maps to guide the brain extraction of diverse subject groups, including both healthy and diseased adult human populations, both developing and aging human populations, as well as non-human primates. Specifically, the proposed method combines an atlas-based approach, for coarse skull-stripping, with a deformable-surface-based approach that is guided by local intensity information and population-specific prior information learned from a set of real brain images for more localized refinement. Comprehensive quantitative evaluations were performed on the diverse large-scale populations of ADNI dataset with over 800 subjects (55 ∼ 90 years of age, multi-site, various diagnosis groups), OASIS dataset with over 400 subjects (18 ∼ 96 years of age, wide age range, various diagnosis groups), and NIH pediatrics dataset with 150 subjects (5 ∼ 18 years of age, multi-site, wide age range as a complementary age group to the adult dataset). The results demonstrate that our method consistently yields the best overall results across almost the entire human life span, with only a single set of parameters. To demonstrate its capability to work on non-human primates, the proposed method is further evaluated using a rhesus macaque dataset with 20 subjects. Quantitative comparisons with popularly used state-of-the-art methods, including BET, Two-pass BET, BET-B, BSE, HWA, ROBEX and AFNI, demonstrate that the proposed method performs favorably with superior performance on all testing datasets, indicating its robustness and effectiveness.",
+    "year": 2014,
+    "lang": "en",
+    "type": "article",
+    "venue": "PLoS ONE",
+    "topic": "Medical Image Segmentation Techniques",
+    "field": "Computer Science",
+    "ca_institutions": [],
+    "funders": ["National Institute of Mental Health", "National Institute on Aging", "University of California, San Diego", "University of North Carolina at Chapel Hill", "National Institute of Biomedical Imaging and Bioengineering", "Canadian Institutes of Health Research", "University of California, Los Angeles", "National Institutes of Health", "Servier", "National Natural Science Foundation of China", "Eisai", "Genentech", "IXICO", "Northern California Institute for Research and Education", "Pfizer", "Biogen", "BioClinica", "National Center for Research Resources", "F. Hoffmann-La Roche", "National Research Foundation", "Medpace", "Novartis Pharmaceuticals Corporation", "Eli Lilly and Company", "Bristol-Myers Squibb", "Dana Foundation", "Synarc", "Alzheimer's Disease Neuroimaging Initiative", "Meso Scale Diagnostics", "Hill's Pet Nutrition", "Alzheimer's Association", "Foundation for the National Institutes of Health"]
+  },
+  {
+    "id": "W3046556377",
+    "title": "A Co-word Analysis of the Applications of Machine Learning in China",
+    "abstract": "With the rapid development of technology, the influence of artificial intelligence on various industries is increasing. As one of the realization methods of artificial intelligence, machine learning has also received more and more attention and has been applied in many fields. This article was screened on CNKI, and obtained 4057 documents on machine learning applications from January 1, 2015 to December 31, 2019. Through co-word analysis of the keywords of the documents and further Based on statistical analysis, we have obtained 7 themes that are mainly used in machine learning at the moment, and explained these 7 themes.",
+    "year": 2020,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Artificial Intelligence Practice",
+    "topic": "Anomaly Detection Techniques and Applications",
+    "field": "Computer Science",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4406504694",
+    "title": "10.1016/s0967-0653(97)89357-x",
+    "abstract": "",
+    "year": 2000,
+    "lang": "en",
+    "type": "article",
+    "venue": "Time to knit",
+    "topic": "Geological Studies and Exploration",
+    "field": "Earth and Planetary Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W3086434542",
+    "title": "P-CRITICAL: a reservoir autoregulation plasticity rule for neuromorphic hardware",
+    "abstract": "Abstract Backpropagation algorithms on recurrent artificial neural networks require an unfolding of accumulated states over time. These states must be kept in memory for an undefined period of time which is task-dependent and costly for edge devices. This paper uses the reservoir computing paradigm where an untrained recurrent pool of neurons is used as a preprocessor for temporally structured inputs and with a limited number of training data samples. These so-called reservoirs usually require either extensive fine-tuning or neuroplasticity. We propose a new local and unsupervised plasticity rule named P-CRITICAL designed for automatic reservoir tuning that translates well to physical and digital neuromorphic processors. The spiking neuronal architecture implementation is simulated on the Loihi research chip from Intel and on a conventional CPU. Comparisons on state-of-the-art machine learning datasets are given. Improved performance on visual and auditory tasks are observed. There is no need to a priori tune the reservoir when switching between tasks, making this approach suitable for physical implementations. Furthermore, such plastic behaviour of the reservoir is a key to end-to-end energy-efficient neuromorphic-based machine learning on edge devices.",
+    "year": 2022,
+    "lang": "en",
+    "type": "article",
+    "venue": "Neuromorphic Computing and Engineering",
+    "topic": "Neural Networks and Reservoir Computing",
+    "field": "Computer Science",
+    "ca_institutions": ["Institut interdisciplinaire d'innovation technologique", "Université de Sherbrooke"],
+    "funders": ["Fonds de recherche du Québec – Nature et technologies", "Université de Sherbrooke", "Natural Sciences and Engineering Research Council of Canada", "Hydro-Québec", "Compute Canada", "Agence Nationale de la Recherche"]
+  },
+  {
+    "id": "W7067029287",
+    "title": "Le Québec vu par Jean-Claude Labrecque (1938-2019)",
+    "abstract": "",
+    "year": 2019,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Érudit (Université de Montréal)",
+    "topic": "Diverse Scientific and Economic Studies",
+    "field": "Economics, Econometrics and Finance",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4410715777",
+    "title": "CLINICAL AND HISTOLOGICAL PREDICTORS OF RENAL FUNCTION LOSS IN LUPUS NEPHRITIS: RESULTS FROM THE ACCELERATING MEDICINES PARTNERSHIP IN RA/SLE NETWORK",
+    "abstract": "O040 / #227 Topic: AS15 - Lupus Nephritis-Clinical ABSTRACT CONCURRENT SESSION 06: LUPUS NEPHRITIS – CLINICAL OUTCOMES, PREDICTION AND THERAPY 23-05-2025 1:40 PM - 2:40 PM Background/Purpose Kidney survival is the ultimate outcome in lupus nephritis (LN), but predictors remain inadequately studied due to the need for long-term follow-up. This study aimed to identify clinical and histological predictors of kidney survival in LN. Methods The Accelerating Medicines Partnership (AMP) enrolled patients undergoing a clinically indicated (UPCR &gt;0.5) kidney biopsy with resultant histology class II, III, IV, and/or V lupus nephritis (LN). Clinical and demographic features were collected from the time of diagnostic biopsy. Response was defined at 1 year for patients with baseline UPCR &gt;1. Histological features were centrally scored. Kidney function loss was defined as a sustained 40% decline in estimated glomerular filtration rate (eGFR) or progression to end-stage kidney disease (ESKD). A Cox proportional hazard model was employed to identify predictors. Results We included 172 patients with a median follow-up time of 4.6 years (range 0.5-7.8), of whom 153 (89%) had &gt;3 years follow-up. Clinical and demographic features are summarized in Table 1. A third of patients (56/172) developed eGFR loss with a median time to event of 2.6 years (range 0.13-7.1). Predictors of eGFR loss at time of biopsy included lower eGFR (especially eGFR &lt;30 ml/min, HR 5.4), repeat biopsy status (HR 2.5), and NIH Chronicity Index (histological damage, HR 1.3 per unit) (Table 1). Sex, race, age, BMI, proteinuria, ISN class, NIH Activity Index, C3, C4, and anti-dsDNA were not associated with eGFR loss. Among histological features, an NIH Chronicity Index &gt;2 (HR 2), glomerulosclerosis (HR 1.9), interstitial fibrosis (HR 2), tubular atrophy (HR 1.9), and interstitial inflammation (HR 2-but p=0.06), but not fibrous crescents or any of the NIH Activity Index glomerular features, were associated with eGFR loss (Table 1). Lack of clinical response at 3, 6, or 12 months was associated with future eGFR loss (Figure 1). Partial response at 12 months had higher risk of eGFR loss compared to complete response (HR 10.7), but lower than no response (HR 19). Reductions of UPCR &gt;25% at 3 and &gt;50% at 6 months were protective (HR 0.44-but p=0.11 and 0.3, respectively). Four patients with UPCR &lt;0.5 at 1 year developed eGFR loss (1.8/100 person-years). Table 1. Association of baseline clinical, demographic, and histological features with GFR loss. Figure 1. Association of longitudinal clinical features with GFR loss Conclusions Low baseline eGFR and histological damage, but not activity or ISN class, predicted eGFR loss. Improvement of UPCR was associated with lower risk of eGFR loss, though eGFR loss still occurred in patients in clinical remission (UPCR &lt;0.5) at 1 year. Acknowledgments: This work was funded by the Plank Family Foundation and the Jerome L. Greene Foundation. The Hopkins Lupus Cohort is supported by NIH R01-DK-134625. Additionally, this research was supported by the Accelerating Medicines Partnership® Rheumatoid Arthritis and Systemic Lupus Erythematosus (AMP® RA/SLE) Network, a public-private partnership involving AbbVie Inc., Arthritis Foundation, Bristol Myers Squibb Company, Foundation for the National Institutes of Health, GlaxoSmithKline, Janssen Research and Development, LLC, Lupus Foundation of America, Lupus Research Alliance, Merck &amp; Co., Inc. Sharp &amp; Dohme Corp., National Institute of Allergy and Infectious Diseases, National Institute of Arthritis and Musculoskeletal and Skin Diseases, Pfizer Inc., Rheumatology Research Foundation, Sanofi, and Takeda Pharmaceuticals International, Inc. The AMP Network aims to develop new methods for identifying and validating promising biological targets for diagnostics and drug development. Funding was provided through grants from the National Institutes of Health (UH2-AR067676, UH2-AR067677, UH2-AR067679, UH2-AR067681, UH2-AR067685, UH2-AR067688, UH2-AR067689, UH2-AR067690, UH2-AR067691, UH2-AR067694, and UM2-AR067678).",
+    "year": 2025,
+    "lang": "en",
+    "type": "article",
+    "venue": "The Journal of Rheumatology",
+    "topic": "Systemic Lupus Erythematosus Research",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W6912664825",
+    "title": "ADNLPModels.jl",
+    "abstract": "Automatic Differentiation models implementing the NLPModels API",
+    "year": 2023,
+    "lang": "en",
+    "type": "other",
+    "venue": "Zenodo (CERN European Organization for Nuclear Research)",
+    "ca_institutions": "Polytechnique Montréal",
+    "funders": []
+  },
+  {
+    "id": "W2773629397",
+    "title": "Support for research towards understanding the population health vulnerabilities to vector-borne diseases: increasing resilience under climate change conditions in Africa",
+    "abstract": "BACKGROUND: Diseases transmitted to humans by vectors account for 17% of all infectious diseases and remain significant public health problems. Through the years, great strides have been taken towards combatting vector-borne diseases (VBDs), most notably through large scale and coordinated control programmes, which have contributed to the decline of the global mortality attributed to VBDs. However, with environmental changes, including climate change, the impact on VBDs is anticipated to be significant, in terms of VBD-related hazards, vulnerabilities and exposure. While there is growing awareness on the vulnerability of the African continent to VBDs in the context of climate change, there is still a paucity of research being undertaken in this area, and impeding the formulation of evidence-based health policy change. MAIN BODY: One way in which the gap in knowledge and evidence can be filled is for donor institutions to support research in this area. The collaboration between the WHO Special Programme for Research and Training in Tropical Diseases (TDR) and the International Centre for Research and Development (IDRC) builds on more than 10 years of partnership in research capacity-building in the field of tropical diseases. From this partnership was born yet another research initiative on VBDs and the impact of climate change in the Sahel and sub-Saharan Africa. This paper lists the projects supported under this research initiative and provides a brief on some of the policy and good practice recommendations emerging from the ongoing implementation of the research projects. CONCLUSION: Data generated from the research initiative are expected to be uptaken by stakeholders (including communities, policy makers, public health practitioners and other relevant partners) to contribute to a better understanding of the impacts of social, environmental and climate change on VBDs(i.e. the nature of the hazard, vulnerabilities, exposure), and improve the ability of African countries to adapt to and reduce the effects of these changes in ways that benefit their most vulnerable populations.",
+    "year": 2017,
+    "lang": "en",
+    "type": "letter",
+    "venue": "Infectious Diseases of Poverty",
+    "topic": "Climate Change and Health Impacts",
+    "field": "Environmental Science",
+    "ca_institutions": [],
+    "funders": ["International Development Research Centre", "UNICEF", "Climate Extremes", "World Health Organization"]
+  },
+  {
+    "id": "W4379514488",
+    "title": "Tuning the rare-earth UiO-66 metal–organic framework platform for white light emission",
+    "abstract": "A trimetallic rare-earth cluster-based metal–organic framework is synthesized that emits red, green and blue emission simultaneously.",
+    "year": 2023,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Materials Chemistry C",
+    "topic": "Lanthanide and Transition Metal Complexes",
+    "field": "Materials Science",
+    "ca_institutions": ["Concordia University", "Fonds de Recherche du Québec – Nature et Technologies"],
+    "funders": "Natural Sciences and Engineering Research Council of Canada"
+  },
+  {
+    "id": "W7084582964",
+    "title": "Trends in household income and expenditure, and the pace of credit activity in Georgia",
+    "abstract": "Georgia's financial system remains stable and continues to support economic lending. As of April 2025, the banking sector maintains healthy levels of capital and liquidity. Compared to the previous year, the pace of credit activity has gradually normalized, and in April 2025, the annual growth of loans—excluding the exchange rate effect—stood at 15.5%. This growth was largely driven by an increase in business loans. According to data from the first quarter of 2025, the loan-to-GDP ratio remains below the long-term trend. On one hand, strong economic growth recorded in the first quarter and, on the other, the normalization of credit activity have led to a widening of the negative gap between loans and GDP. The committee estimates that, given the current dynamics of credit activity and the gradual normalization of economic growth, this negative gap will close in 2025. Accordingly, at this stage, there is no need to adjust the cyclical component of the countercyclical capital buffer. Commercial banks continue the phased accumulation of the neutral component of the countercyclical capital buffer. In January–May 2025, the volume of new loans issued by commercial banks (24 billion GEL) increased by 7% compared to the same period of the previous year (January–May 2024 – 22.4 billion GEL). For comparison, loan growth in the first five months of 2024 was 18.5%, in 2023 – 17.4%, and in 2022 – 12%. In summary: the growth rate of new loans issued by commercial banks in January–May 2025 has significantly slowed down.",
+    "year": 2025,
+    "lang": "en",
+    "type": "article",
+    "venue": "InterConf",
+    "topic": "Tea Polyphenols and Effects",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2982127033",
+    "title": "The Great Canadian Lawyer: A Manifesto, eh?",
+    "abstract": "What makes a great Canadian lawyer? Who do you think epitomizes the great Canad an lawyer? What are the essential qualities and characteristics of such a lawyer? The answers to these questions probably depend on who you are, and what experiences you have had with lawyers and the legal system. Have you ever been taken to court? In a criminal matter? In a civil matter? Do you know any lawyers or judges personally? Are you a lawyer? Are you a judge? Have you ever hired a lawyer? The answers also probably depend on what exposure you have had to depictions of lawyers in the news, books, television, and movies. Not surprisingly, as so many people will have had so many different kinds of experiences with lawyers and the legal system (as well as exposure to conflicting perspectives on what makes for a great lawyer through the news media, books, television, and movies), there are a wide variety of opinions about what it takes to be a great Canadian lawyer.",
+    "year": 2012,
+    "lang": "en",
+    "type": "article",
+    "venue": "eYLS (Yale Law School)",
+    "topic": "Legal Education and Practice Innovations",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W7048546789",
+    "title": "Let us not drift: Indigenous justice in an age of reconciliation",
+    "abstract": "At the turn of the 21st century, truth commissions arose as a new possibility to address the violence and trauma of removing Indigenous children from their families and nations in what is now known as North America. The creation of two truth and reconciliation commissions in Canada and Maine marked an important step in addressing Indigenous demands for justice and the end of harm, alongside Indigenous calls for truth-telling. Holding Indigenous conceptions of justice at its core, this dissertation offers a comparative tracing of the work of the Truth and Reconciliation Commission of Canada (2009-2015) and the Maine Wabanaki-State Child Welfare Truth and Reconciliation Commission (2013-2015) as they investigated state practices of removing Indigenous children from their homes and nations. More specifically, this dissertation examines the ways these truth commissions have intersected with Indigenous stories and how Indigenous stories can inform how we understand the work of truth and reconciliation commissions as they move to provide a form of justice for our communities. Within both commission processes, stories of Indigenous experiences in residential schools and the child welfare system were drawn from the perceived margins of settler colonial society in an effort to move towards truth, healing, reconciliation and justice. Despite this attempted inclusion of stories of Indigenous life experiences, I argue that deeply listening to Indigenous stories ¬¬in their various forms—life/ experiential stories, and traditional stories—illuminates the ways that the practice of reconciliation has become disconnected from Indigenous understandings of justice. As such, I argue that listening to Indigenous stories, not just hearing the words but instead taking them to heart, engaging with them and allowing them to guide us, moves toward more informed understandings of what justice looks like for Indigenous communities.",
+    "year": 2021,
+    "lang": "en",
+    "type": "dissertation",
+    "venue": "UVic’s Research and Learning Repository (University of Victoria)",
+    "topic": "Photocathodes and Microchannel Plates",
+    "field": "Engineering",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2270406509",
+    "title": "Jason LUCKERHOFF et François GUILLEMETTE (dir.) (2014), « Approches inductives en communication sociale ». Approches inductives, 1(1)",
+    "abstract": "Le premier numero de la toute nouvelle revue Approches inductives est compose de neuf articles rediges par differents chercheurs en communication. Venant du Quebec, de la Colombie-Britannique et de la France, ces derniers soumettent des reflexions theoriques et methodologiques relatives aux approches inductives dans le champ de la communication sociale. Signee par les directeurs, l’introduction permet au lecteur d’apprehender les liens etroits qui unissent les approches inductives telles que ...",
+    "year": 2015,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Communication. Information médias théories pratiques",
+    "topic": "Education, sociology, and vocational training",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W7071823255",
+    "title": "Tunnel from Nazi-era found in Lithuania",
+    "abstract": "In a Lithuanian forest, an international research team has pinpointed the location of a legendary tunnel that Jewish prisoners secretly dug out with spoons to try to escape their Nazi captors during World War II. A legendary tunnel that Jewish prisoners secretly dug out with spoons to try to escape their Nazi captors during World War II has been found in a Lithuanian forest.The tunnel's located in the forest known today as Paneriai (pah-neh-ray) outside of the Lithuanian capital of Vilnius......it's where some 100-thousand people, including 70-thousand Jews, were killed and thrown into pits during Nazi occupation.A team of archaeologists, geophysicists and Jewish historians from Israel, the U.S., Canada and Lithuania didn't want to disturb any human remains as they looked for the tunnell...So they used scanning technology called electrical resistivity tomography - the same kind used in mineral and oil exploration - to map out the path of the 34-meter -long tunnel.The tunnel's entrance was discovered in 2004.The Jewish State Museum in Vilnius then called on a research team to find the rest of it.Their quest is the subject of a forthcoming documentary by the science series NOVA, premiering next year.For the AP, I'm MR from the Rivet World Desk.",
+    "year": 2016,
+    "lang": "en",
+    "type": "other",
+    "venue": "Internet Archive (Internet Archive)",
+    "topic": "Historical Studies of British Isles",
+    "field": "Arts and Humanities",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2605393004",
+    "title": "L’échelle analgésique de l’OMS convient-elle toujours?",
+    "abstract": "La douleur demeure, partout dans le monde, l’une des principales raisons de consulter un medecin. De nombreuses organisations et associations scientifiques se sont efforcees de trouver des solutions a ce probleme et de faciliter le traitement de la douleur. En 1986, l’Organisation mondiale",
+    "year": 2010,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Canadian Family Physician",
+    "topic": "Musculoskeletal pain and rehabilitation",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4387251852",
+    "title": "Vers une reconstitution de la mobilité des Acadiennes à l’époque de l’industrialisation : l’émigration familiale et l’exode rural vus à travers l’analyse longitudinale",
+    "abstract": "Cette analyse de type longitudinale expérimentale vise à retrouver les Acadiennes de la paroisse civile de Dundas, au sud-est du Nouveau-Brunswick dans la région de Kent, et à identifier leurs déplacements tout au long de leur vie afin de mieux comprendre les migrations effectuées par les femmes à l’époque de l’industrialisation. Une reconstitution des parcours de vie de quatre échantillons d’Acadiennes entre 1871 et 1921 est effectuée à partir d’une variété de sources historiques incluant des actes de mariage, des registres de baptême ainsi que les recensements canadiens et américains. Les résultats témoignent de l’ampleur de l’émigration aux États-Unis, mais également de la mobilité locale, régionale et interprovinciale. L’importance du réseau familial était primordiale. D’ailleurs, une proportion considérable des femmes sont restées sédentaires toute leur vie et il y a également une mobilité de retour à la campagne. Cette analyse préliminaire témoigne du potentiel d’utiliser les archives pour analyser la mobilité des femmes avant le mariage, dans le contexte d’une émigration familiale, et aussi après le décès de leurs conjoints. En fin de compte, une analyse approfondie des expériences des Acadiennes apporte beaucoup de nuances à notre compréhension des tendances migratoires et de la notion d’exode rural en Acadie du Nouveau-Brunswick à cette époque.",
+    "year": 2023,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Port Acadie Revue interdisciplinaire en études acadiennes",
+    "topic": "Canadian Identity and History",
+    "field": "Social Sciences",
+    "ca_institutions": ["Fédération des Maisons D'Hébergement pour Femmes", "Francophone University Association"],
+    "funders": []
+  },
+  {
+    "id": "W1990608281",
+    "title": "Evaluation of the Anti-inflammatory Potential of Chinese Botanicals",
+    "abstract": "A Phase 2 clinical trial with Black Cohosh and Red Clover was conceived in 2000 within our UIC/NIH Center for Botanical Dietary Supplement Research on Womens Health. Prior to implementing the trial, a Phase 1 study was required and approval from FDA that an IND application was not required since the end point being measured was reduction in hot flashes in menopausal women. Menopause, for purposes of FDA is not considered a disease. The study was delayed for more than a year in order to prepare a botanically authenticated and chemically and biologically standardized extract. It was ascertained that the biological endpoint for purposes of the study would be interaction with certain serotonin receptors, in vitro. The study preparations had to be formulated and were subjected to accelerated stability studies. During the recruitment of suitable subjects the results of the WHI (Womens Health Initiative) caused difficulty in the ability to recruit suitable women since the study had four arms, i.e. Black Cohosh, Red Clover, Placebo and Prempro and many women were reluctant to enter the trial if there was a possibility that there would be taking Prempro. Because of this, only 88 subjects were recruited of the 128 initially planned. However, the study was powered sufficiently if the dropout rate was less than 15 %. In the final analysis, Red Clover was shown to positively affect cognition but neither test preparation reduced hot flashes. A discussion of these results will be presented.",
+    "year": 2009,
+    "lang": "en",
+    "type": "article",
+    "venue": "Planta Medica",
+    "topic": "Medicinal Plant Pharmacodynamics Research",
+    "field": "Pharmacology, Toxicology and Pharmaceutics",
+    "ca_institutions": [],
+    "funders": ["National Institute on Drug Abuse", "Agricultural Research Service", "University of British Columbia", "University of Illinois at Urbana-Champaign", "Chinese Academy of Sciences", "Kurukshetra University", "University of Illinois at Chicago", "National Oceanic and Atmospheric Administration", "U.S. Food and Drug Administration", "National Science Foundation of Sri Lanka", "University of Colombo", "U.S. Department of Agriculture", "Western Carolina University", "International Science Council", "National Center for Complementary and Alternative Medicine", "China Academy of Traditional Chinese Medicine", "National Institutes of Health", "National Center for Research Resources", "National Institute of Allergy and Infectious Diseases", "Türkiye Bilimsel ve Teknolojik Araştırma Kurumu", "Hong Kong Polytechnic University", "National Science Foundation", "Deutsche Krebshilfe", "National Natural Science Foundation of China", "Tata Trusts", "University Grants Commission", "Wake Forest University"]
+  },
+  {
+    "id": "W7058368160",
+    "title": "Norton tech 360 support number 1-855-990-5999 Canada, Norton 360 Phone Number, Norton 360 customer service Phone number",
+    "abstract": "Norton tech 360 support number 1-855-990-5999 Canada, Norton 360 Phone Number, Norton 360 customer service Phone number USA Norton number @1-855-990-5999 Norton technical support Norton antivirus number Norton antivirus support number 1-855-990-5999 Norton antivirus tech support number Norton number Norton technical support Norton antivirus number Norton antivirus support number Norton antivirus tech support number Norton antivirus technical support 1-855-990-5999 number Norton antivirus technical support phone number Norton antivirus customer service number Norton internet security technical support Norton technical support phone number Norton tech support phone number Norton customer support phone number Norton antivirus support phone number Norton support phone Norton tech support Norton customer support Norton phone support Norton support number1-855-990-5999 Norton antivirus customer support phone number Norton antivirus tech support phone number contact Norton support Norton phone number tech support Norton support ticket Norton customer support number Norton tech support number Norton technical support number Norton support center Norton telephone support call Norton support Norton antivirus support support Norton Norton billing support support Norton antivirus Norton online support Norton contact support Norton antivirus customer support number support for Norton Norton phone number Norton customer service phone number Norton contact phone number Norton antivirus phone number Norton antivirus customer service phone number phone number for Norton customer service Norton1-855-990-5999 software phone number phone number for Norton Norton customer service telephone number Norton helpline phone number Norton contact number Norton customer service number Norton customer service phone number us Norton customer service phone number usa Norton telephone number Norton phone number usa Norton antivirus contact number Norton contact number usa Norton antivirus helpline number Norton helpline number Norton customer number Norton contact telephone number contact number for Norton Norton software contact number Norton toll free number Norton telephone number uk Norton registration number Norton toll free number usa Norton customer service Norton software customer service contact Norton customer service Norton customer service phone Norton antivirus customer service Norton service Norton antivirus technical support Norton antivirus customer support Norton technical support reviews telephone Norton antivirus Norton tech support phone number Norton antivirus tech support phone number Norton antivirus customer service Norton technical support phone number Norton antivirus free antivirus support Norton customer service billing Norton customer service email address Norton customer service reviews contact Norton customer service Norton tech support number usa Norton antivirus support number Norton antivirus contact number Norton customer service phone number Norton technical support usa Norton technical support number Norton tech support phone Norton tech support number Norton customer service telephone number Norton antivirus customer support number Norton antivirus phone number Norton antivirus online support Norton customer service number Norton tech support center Norton customer service Norton software customer service Norton customer care number usa Norton customer number Norton customer support number Norton customer care number Norton customer care toll free number Norton tech support Norton technical support Norton antivirus support Norton antivirus tech support Norton support center Norton.com customer service Norton antivirus customer care number Norton customer care Norton phone number phone number for Norton customer service Norton phone support Norton phone number tech support Norton support phone number contact Norton by phone Norton contact phone number Norton helpline phone number Norton antivirus phone Norton antivirus for phone Norton contact number Norton contact support contact Norton antivirus Norton contact number usa Norton toll free number Norton telephone number Norton toll free number usa Norton antivirus support services technical support for antivirus Norton Norton customer service phone number usa Norton antivirus customer care number usa Norton customer care number Norton customer care center Norton customer support Norton customer support phone Norton customer help Norton customer &amp;amp; technical support Norton customer portal Norton customer care phone number usa Norton customer care email Norton helpline Norton tech support contact Norton customer care toll free Norton antivirus customer service number Norton antivirus protection Norton antivirus customer service number Norton software customer service number Norton hotline customer service phone number Norton customer service phone number us how to contact Norton by email Norton free phone support Norton antivirus technical support number Norton antivirus technical support help desk phone number Norton technical support number toll free number Norton antivirus customer support phone number Norton antivirus customer service phone number phone number for Norton antivirus customer service contact Norton antivirus customer service phone number Norton security support phone number Norton internet security support phone number phone number for Norton security Norton internet security phone number in usa Norton antivirus contact phone number in usa Norton security contact phone number Norton antivirus help desk phone number in usa Norton antivirus tech support phone number free in usa Norton antivirus support phone number Norton antivirus phone number support for technical issue in usa phone number for Norton antivirus technical support Norton antivirus customer service telephone number Norton antivirus toll free customer care number Norton internet security help phone number Norton technical support telephone number Norton support telephone number Norton antivirus technical support phone number Norton phone number customer service Norton customer support phone number Norton security phone number customer service Norton antivirus help desk support phone number free in usa Norton technical support number free in usa Norton technical support cutomer phone number Norton internet security technical support Norton antivirus customer service billing Norton antivirus customer service email address Norton antivirus customer service live chat Norton antivirus phone number customer service us Norton antivirus phone number support Norton antivirus telephone number Norton antivirus customer support usa phone number Norton antivirus technical support customer service Norton antivirus customer care phone number Norton antivirus toll free number in usa phone number for Norton antivirus Norton antivirus phone support number phone number for Norton antivirus support Norton antivirus phone support Norton antivirus technical support Norton antivirus customer support Norton antivirus customer service phone number us phone number Norton antivirus customer service Norton antivirus phone number customer service customer service number for Norton antivirus Norton antivirus customer service phone Norton tech support phone number us Norton antivirus tech support number phone number for Norton tech support Norton internet security customer service phone number Norton customer service phone numbers Norton security customer service phone number Norton phone number customer support phone number for Norton customer support Norton internet security customer service Norton internet security phone number customer service Norton customer services email Norton customer support email address Norton internet security contact phone number Norton internet security phone number Norton phone numbers customer support Norton phone support number Norton support contact number Norton support email address Norton tech support phone number free Norton technologies phone number Norton telephone support number Norton support telephone number usa Norton antivirus plus tech support Norton technical support phone number usa phone number for Norton technical support Norton technical support number usa Norton support phone number usa Norton help phone number Norton help desk phone number Norton phone number usa Norton contact phone number usa customer service Norton phone number what is the phone number for Norton customer service Norton gold support phone number Norton phone number support Norton security phone number Norton customer service number usa Norton usa phone number Norton support number usa Norton antivirus customer care Norton customer care tchnical support Norton customer care number usa toll free Norton customer care usa Norton usa customer care for tech support phone number forNorton customer service phone number forNorton customer support phone number forNorton technical support Norton antivirus helpline number phone number forNorton tech support Norton antivirus toll free number telephone number forNorton technical support Norton antivirus help phone number Norton phone number technical support Norton antivirus phone number usa Norton antivirus support telephone number contact Norton antivirus tech support usa Norton customer service phone Norton customer service usa Norton usa customer service Norton lab usa customer service Norton labs usa customer serviceNorton usa customer care number for Norton antivirus Norton antivirus phone number in usa Antivirus Tech Support Norton Antivirus Tech Support/***phone number Norton customer care ! number Norton ! number Norton ! number usa Norton customer care ! Norton technical support number ! number phone number for Norton antivirus customer service contact Norton antivirus customer service phone number phone number for Norton security Norton /++Helpline desk/**phone number free in usa phone number for Norton antivirus technical support",
+    "year": 2016,
+    "lang": "en",
+    "type": "other",
+    "venue": "OSF Preprints (OSF Preprints)",
+    "topic": "Magnetic confinement fusion research",
+    "field": "Physics and Astronomy",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2886309153",
+    "title": "Cholecystokinin Switches the Plasticity of GABA Synapses in the Dorsomedial Hypothalamus via Astrocytic ATP Release",
+    "abstract": "Whether synapses in appetite-regulatory brain regions undergo long-term changes in strength in response to satiety peptides is poorly understood. Here we show that following bursts of afferent activity, the neuromodulator and satiety peptide cholecystokinin (CCK) shifts the plasticity of GABA synapses in the dorsomedial nucleus of the hypothalamus of male Sprague Dawley rats from long-term depression to long-term potentiation (LTP). This LTP requires the activation of both type 2 CCK receptors and group 5 metabotropic glutamate receptors, resulting in a rise in astrocytic intracellular calcium and subsequent ATP release. ATP then acts on presynaptic P2X receptors to trigger a prolonged increase in GABA release. Our observations demonstrate a novel form of CCK-mediated plasticity that requires astrocytic ATP release, and could serve as a mechanism for appetite regulation. SIGNIFICANCE STATEMENT Satiety peptides, like cholecystokinin, play an important role in the central regulation of appetite, but their effect on synaptic plasticity is not well understood. The current data provide novel evidence that cholecystokinin shifts the plasticity from long-term depression to long-term potentiation at GABA synapses in the rat dorsomedial nucleus of the hypothalamus. We also demonstrate that this plasticity requires the concerted action of cholecystokinin and glutamate on astrocytes, triggering the release of the gliotransmitter ATP, which subsequently increases GABA release from neighboring inhibitory terminals. This research reveals a novel neuropeptide-induced switch in the direction of synaptic plasticity that requires astrocytes, and could represent a new mechanism by which cholecystokinin regulates appetite.",
+    "year": 2018,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Neuroscience",
+    "topic": "Regulation of Appetite and Obesity",
+    "field": "Neuroscience",
+    "ca_institutions": ["University of Calgary", "Hotchkiss Brain Institute", "Mount Allison University"],
+    "funders": ["Canadian Institutes of Health Research", "Alberta Innovates", "Alberta Innovates - Health Solutions"]
+  },
+  {
+    "id": "W2312756791",
+    "title": ": <i>The Poetics of Masculinity in Early Modern Italy and Spain<\/i>",
+    "abstract": "Gerry P. Milligan and Jane C. Tylus, eds. The Poetics of Masculinity in Early Modern Italy and Spain. Essays and Studies 22. Toronto: Centre for Reformation and Renaissance Studies, 2010. 398 pp. + 8 color pls. index. illus. bibl. $37. ISBN: 978–0–77272–059–7. - Volume 64 Issue 3",
+    "year": 2011,
+    "lang": "en",
+    "type": "article",
+    "venue": "Renaissance Quarterly",
+    "topic": "Early Modern Women Writers",
+    "field": "Arts and Humanities",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W3175392988",
+    "title": "NUDT15-mediated hydrolysis limits the efficacy of anti-HCMV drug ganciclovir",
+    "abstract": "Ganciclovir (GCV) is the first-line therapy against human cytomegalovirus (HCMV), a widespread infection that is particularly dangerous for immunodeficient individuals. Closely resembling deoxyguanosine triphosphate, the tri-phosphorylated metabolite of GCV (GCV-TP) is preferentially incorporated by the viral DNA polymerase, thereby terminating chain extension and, eventually, viral replication. However, the treatment outcome of GCV varies greatly among individuals, therefore warranting better understanding of its metabolism. Here we show that NUDT15, a Nudix hydrolase known to metabolize thiopurine triphosphates, can similarly hydrolyze GCV-TP through biochemical studies and co-crystallization of the NUDT15/GCV-TP complex. More critically, GCV efficacy was potentiated in HCMV-infected cells following NUDT15 depletion by RNAi or inhibition by an in-house-developed, nanomolar NUDT15 inhibitor, TH8321, suggesting that pharmacological targeting of NUDT15 is a possible avenue to improve existing anti-HCMV regimens. Collectively, the data further implicate NUDT15 as a broad-spectrum metabolic regulator of nucleoside analog therapeutics, such as thiopurines and GCV.",
+    "year": 2021,
+    "lang": "en",
+    "type": "article",
+    "venue": "Cell chemical biology",
+    "topic": "Cytomegalovirus and herpesvirus research",
+    "field": "Medicine",
+    "ca_institutions": "University of British Columbia",
+    "funders": ["Barncancerfonden", "Alfred Österlunds Stiftelse", "Science for Life Laboratory", "Vetenskapsrådet", "Kungliga Tekniska Högskolan", "Knut och Alice Wallenbergs Stiftelse", "Stiftelsen Felix Mindus Bidrag till Leukemiforskningen", "Svenska Sällskapet för Medicinsk Forskning", "Crafoordska Stiftelsen", "H2020 European Research Council", "Cancerfonden", "European Research Council", "Torsten Söderbergs Stiftelse", "Michael Smith Health Research BC", "Pain Relief Foundation", "European Federation of Pharmaceutical Industries and Associations", "McGill University", "Karolinska Institutet"]
+  },
+  {
+    "id": "W4403238055",
+    "title": "Expanding the eligibility criteria for drugs in Canada’s time-limited health technology assessment and temporary drug access processes will further accelerate access to new medicines",
+    "abstract": "Canada’s Drug Agency (CDA-AMC) and the pan-Canadian Pharmaceutical Alliance (pCPA) have introduced new processes to balance timely patient access with decision-making for drugs showing early promise with high evidence uncertainties. In September 2023, CDA-AMC launched a time-limited reimbursement recommendation (TLR) category aimed at providing earlier access to new treatments for severe, rare, or debilitating illnesses. Concurrently, pCPA developed principles for a Temporary Access Process (pTAP) to guide negotiations for drugs following the TLR pathway. Drug eligibility for TLR and pTAP includes having a Notice of Compliance with Conditions (NOC/c) from Health Canada and a phase III clinical trial completion within three years.As of mid-2024, one drug, epcoritamab for diffuse large B-cell lymphoma, has successfully navigated this new pathway, which significantly accelerated time to listing. Despite this progress, current eligibility criteria may limit the broader impact of TLR and pTAP, as few drugs qualify. Future refinements could include broader eligibility criteria, such as NOC/c expansion to allow for other drug files, incorporating greater flexibility into the Phase III clinical trial requirements, and accepting real-world evidence (RWE) as a supplement to clinical trial data.Overall, the TLR and pTAP pathway represents a significant advancement in Canada’s approach to health technology assessments and drug reimbursement, promising timelier access to innovative treatments. Continued evaluation and adaptation of these processes will be crucial in ensuring their use, and their impact on timely patient access, with the expansion of drug eligibility criteria a logical next iteration.",
+    "year": 2024,
+    "lang": "en",
+    "type": "editorial",
+    "venue": "Journal of Pharmacy & Pharmaceutical Sciences",
+    "topic": "Pharmaceutical Economics and Policy",
+    "field": "Economics, Econometrics and Finance",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W3213806098",
+    "title": "Author response: Intergenerational adaptations to stress are evolutionarily conserved, stress-specific, and have deleterious trade-offs",
+    "abstract": "",
+    "year": 2021,
+    "lang": "en",
+    "type": "peer-review",
+    "topic": "Genetics, Aging, and Longevity in Model Organisms",
+    "field": "Biochemistry, Genetics and Molecular Biology",
+    "ca_institutions": "University of Toronto",
+    "funders": []
+  },
+  {
+    "id": "W7131215317",
+    "title": "WPA household census for 2324 STOCKWELL ST, Los Angeles County",
+    "abstract": "The Works Progress Administration Los Angeles Household Census Cards collection dates from 1939. The physical cards which number nearly half a million items are owned by the USC Libraries. More than a quarter of the collection has been digitized.The household survey cards (or \"dwelling schedules\"), one for each street address in greater Los Angeles, document a wide variety of information ranging from the type of dwelling, the value of the property, the monthly rent or mortgage, to whether or not there were flush toilets. While these cards form the bulk of the collection, other digitized documents include \"block face cards\" and \"block lists\" -- documenting the census process.",
+    "year": 2021,
+    "lang": "en",
+    "type": "dataset",
+    "venue": "University of Southern California Digital Library",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2096196402",
+    "title": "Ecological determinism increases with organism size",
+    "abstract": "After much debate, there is an emerging consensus that the composition of many ecological communities is determined both by species traits, as proposed by niche theory, as well as by chance events. A critical question for ecology is, therefore, which attributes of species predict the dominance of deterministic or stochastic processes. We outline two hypotheses by which organism size could determine which processes structure ecological communities, and we test these hypotheses by comparing the community structure in bromeliad phytotelmata of three groups of organisms (bacteria, zooplankton, and macroinvertebrates) that encompass a 10 000-fold gradient in body size, but live in the same habitat. Bacteria had no habitat associations, as would be expected from trait-neutral stochastic processes, but still showed exclusion among species pairs, as would be expected from niche-based processes. Macroinvertebrates had strong habitat and species associations, indicating niche-based processes. Zooplankton, with body size between bacteria and macroinvertebrates, showed intermediate habitat associations. We concluded that a key niche process, habitat filtering, strengthened with organism size, possibly because larger organisms are both less plastic in their fundamental niches and more able to be selective in dispersal. These results suggest that the relative importance of deterministic and stochastic processes may be predictable from organism size.",
+    "year": 2012,
+    "lang": "en",
+    "type": "article",
+    "venue": "Ecology",
+    "topic": "Plant and animal studies",
+    "field": "Agricultural and Biological Sciences",
+    "ca_institutions": "University of British Columbia",
+    "funders": []
+  },
+  {
+    "id": "W4388439702",
+    "title": "Faits d’actualité",
+    "abstract": "",
+    "year": 2023,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Assurances et gestion des risques",
+    "topic": "Social Sciences and Governance",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2899428639",
+    "title": "Renal reactivity: acid‐base compensation during incremental ascent to high altitude",
+    "abstract": "Key points Ascent to high altitude imposes an acid‐base challenge in which renal compensation is integral for maintaining pH homeostasis, facilitating acclimatization and helping prevent mountain sicknesses. The time‐course and extent of plasticity of this important renal response during incremental ascent to altitude is unclear. We created a novel index that accurately quantifies renal acid‐base compensation, which may have laboratory, fieldwork and clinical applications. Using this index, we found that renal compensation increased and plateaued after 5 days of incremental altitude exposure, suggesting plasticity in renal acid‐base compensation mechanisms. The time‐course and extent of plasticity in renal responsiveness may predict severity of altitude illness or acclimatization at higher or more prolonged stays at altitude. Abstract Ascent to high altitude, and the associated hypoxic ventilatory response, imposes an acid‐base challenge, namely chronic hypocapnia and respiratory alkalosis. The kidneys impart a relative compensatory metabolic acidosis through the elimination of bicarbonate (HCO 3 − ) in urine. The time‐course and extent of plasticity of the renal response during incremental ascent is unclear. We developed an index of renal reactivity (RR), indexing the relative change in arterial bicarbonate concentration ([HCO 3 − ] a ) (i.e. renal response) against the relative change in arterial pressure of CO 2 ( ) (i.e. renal stimulus) during incremental ascent to altitude ( ). We aimed to assess whether: (i) RR magnitude was inversely correlated with relative changes in arterial pH (ΔpH a ) with ascent and (ii) RR increased over time and altitude exposure (i.e. plasticity). During ascent to 5160 m over 10 days in the Nepal Himalaya, arterial blood was drawn from the radial artery for measurement of blood gas/acid‐base variables in lowlanders at 1045/1400 m and after 1 night of sleep at 3440 m (day 3), 3820 m (day 5), 4240 m (day 7) and 5160 m (day 10) during ascent. At 3820 m and higher, RR significantly increased and plateaued compared to 3440 m ( P &lt; 0.04), suggesting plasticity in renal acid‐base compensations. At all altitudes, we observed a strong negative correlation ( r ≤ −0.71; P &lt; 0.001) between RR and ΔpH a from baseline. Renal compensation plateaued after 5 days of altitude exposure, despite subsequent exposure to higher altitudes. The time‐course, extent of plasticity and plateau in renal responsiveness may predict severity of altitude illness or acclimatization at higher or more prolonged stays at altitude.",
+    "year": 2018,
+    "lang": "en",
+    "type": "article",
+    "venue": "The Journal of Physiology",
+    "topic": "High Altitude and Hypoxia",
+    "field": "Biochemistry, Genetics and Molecular Biology",
+    "ca_institutions": ["University of Alberta", "Red Deer Regional Hospital", "Mount Royal University"],
+    "funders": ["Natural Sciences and Engineering Research Council of Canada", "Government of Canada"]
+  },
+  {
+    "id": "W2963257323",
+    "title": "Reasons Are Given for the Current Wildcat Strikes in Vietnam: The Blue-Collar Workers' Perspective",
+    "abstract": "Despite the vast research by researchers on Vietnam's wildcat strike, little is known of the perspective of the Southern Focal Economic Zone. The overall reason that emerges from the literature included: (1) raising wages for workers; (2) contributing to social security for workers; (3) and paying a seniority allowance. The aim of the present research is to figure out the reasons for the current wildcat strikes among Vietnamese blue-collar workers. A group of 936 Vietnamese blue-collar workers (387 males and 549 females) from four Southern Vietnam cities participated in the survey. They completed the Reasons are given for Wildcat Strikes questionnaire. The descriptive results showed that the highest mean among those reasons is ‘‘Labor regulations at the company are too strict’’. The result of this research emphasizes the impact of each reason by investigating nonoffice workers’ perspective so as to predict which the potential reasons are for future strikes in Southern Vietnam.",
+    "year": 2019,
+    "lang": "en",
+    "type": "article",
+    "venue": "International Journal of Financial Research",
+    "topic": "Labor Movements and Unions",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2101975832",
+    "title": "Stopping Power of Electrons and Positrons for C, Al, Cu, Ag, Au, Pb, Fe, U, Ge, Si and Mo",
+    "abstract": "In this paper we present an empirical relation for total stopping power keV in terms of total energy (kineticenergy + rest mass energy) for electrons and positrons from 20 keV to 50000 and have been fitted by a twoparameter approximation. These parameters depend upon the atomic number (Z) of the absorber and areapplicable in absorbers of atomic number from Z=1 to 92. A fairly good agreement has been found between oursimplified values for total stopping power of electrons and positrons for Carbon, Aluminum, Copper, Silver,Gold, Lead, Iron, Uranium, Germanium, Silicon and Molybdenum and that of Berger and Seltzer calculatedvalues.",
+    "year": 2010,
+    "lang": "en",
+    "type": "article",
+    "venue": "Applied Physics Research",
+    "topic": "Electron and X-Ray Spectroscopy Techniques",
+    "field": "Materials Science",
+    "ca_institutions": [],
+    "funders": "University Grants Commission"
+  },
+  {
+    "id": "W4285796970",
+    "title": "A brain precursor atlas reveals the acquisition of developmental-like states in adult cerebral tumours",
+    "abstract": "Human cerebral cancers are known to contain cell types resembling the varying stages of neural development. However, the basis of this association remains unclear. Here, we map the development of mouse cerebrum across the developmental time-course, from embryonic day 12.5 to postnatal day 365, performing single-cell transcriptomics on >100,000 cells. By comparing this reference atlas to single-cell data from >100 glial tumours of the adult and paediatric human cerebrum, we find that tumour cells have an expression signature that overlaps with temporally restricted, embryonic radial glial precursors (RGPs) and their immediate sublineages. Further, we demonstrate that prenatal transformation of RGPs in a genetic mouse model gives rise to adult cerebral tumours that show an embryonic/juvenile RGP identity. Together, these findings implicate the acquisition of embryonic-like states in the genesis of adult glioma, providing insight into the origins of human glioma, and identifying specific developmental cell types for therapeutic targeting.",
+    "year": 2022,
+    "lang": "en",
+    "type": "article",
+    "venue": "Nature Communications",
+    "topic": "Glioma Diagnosis and Treatment",
+    "field": "Medicine",
+    "ca_institutions": ["Princess Margaret Cancer Centre", "University of Toronto", "University Health Network", "SickKids Foundation", "Hospital for Sick Children", "Ontario Institute for Cancer Research"],
+    "funders": ["Medical Research Council", "Stand Up To Cancer", "Entertainment Industry Foundation", "University of Toronto", "Canadian Institutes of Health Research", "Royal Society", "Government of Canada", "Wellcome Trust", "Ontario Institute for Cancer Research", "Hospital for Sick Children", "Sick Kids Foundation", "Genome Canada", "Government of Ontario", "American Association for Cancer Research"]
+  },
+  {
+    "id": "W4385827592",
+    "title": "Abstract Awards for the 2023 Congress of Neurological Surgeons Annual Meeting",
+    "abstract": "CNS Resident Award What Are We Transfusing? A Prospective Trial Evaluating the Quality of Intraoperatively Salvaged Red Blood Cells in Spinal Deformity Surgery David B. Kurland, Daniel Alexander Alber, Darryl Lau Duke Samson Award Glymphatic System Impairment Associated with Neurocognitive Dysfunction and Alzheimer's Biomarkers in Moyamoya Disease Chaofan Zeng, Yuanren Zhai, Peicong Ge, Dong Zhang, Jizong Zhao Galbraith Award Safety and Efficacy of Endovascular Versus Microsurgical Treatment of Unruptured Wide-Necked Middle Cerebral Artery Aneurysms: A Propensity-Matched Analysis of the Neurovascular Quality Initiative-Quality Outcomes Database (NVQI-QOD) Varun Padmanaban, Junjia Zhu, Shouhao Zhou, Sameer Ansari, Jay Howington, Daniel Sahlein, Juan Tejada, D. Andrew Wilkinson, Scott Douglas Simon, Kevin M. Cockroft, Ephraim W. Church CNS Foundation DEI Abstract Awards Bridging the Literacy Gap for Surgical Consents: An AI-Human Expert Collaborative Approach Rohaid Ali, Ian Connolly, Oliver Tang, Fatima Mirza, Benjamin Johnston, Hael Abdulrazeq, Paul Galamaga, Tiffany Libby, Neel Sodha, Michael Groff, Ziya Gokaslan, Albert Telfeian, John Shin, Wael Asaad, James Zou, Curtis Doberstein Regional Variability in the Management of Aneurysmal Subarachnoid Hemorrhage for Black Patients: An Analysis of Treatment Patterns, Outcomes, and End-of-Life Care Jean-Luc Kabangu, Adip Bhargav, Lane Fry, Ahmad Masri, Cody Heskett, Momodou Bah, Jeremy Peterson, Koji Ebersole, Sonia Eden, Paul Camarata Racial and Gender Disparities in Traumatic Brain Injury Clinical Trial Enrollment Momodou Bah, Anant Naik, Umaru Barrie, Rajiv Dharnipragada, Sonia Eden, Samuel Cramer, Paul Arnold Julius Goodman Resident Award Interspinous Process Device Utilization and Reimbursement Vary by Provider Specialty and Care Setting Jung Ho Gong, Kelly Jiang, Tej D. Azad Samuel Hassenbusch Young Neurosurgeon Award Impact of COVID-19 on Neurosurgical Utilization and Reimbursement Michael Stephen Rallo, Anil Nanda, Richard P. Menger Best Abstract in Medical Education & Training GPT-4 Artificial Intelligence Model Outperforms ChatGPT, Medical Students, and Neurosurgery Residents on Neurosurgery Written Board-like Questions Gage Guerra, Hayden Hofmann, Sina Sobhani, Grady Hofmann, David Gomez, Daniel Soroudi, Benjamin Hopkins, Jonathan Dallas, Dhiraj J. Pangal, Stephanie Cheok, Vincent Nguyen, William J. Mack, Gabriel Zada Best Data Science Award Deep Learning-Based Image-to-Image Translation to Identify Macrophage Infiltration in High-Grade Glioma Using Label-Free Stimulated Raman Histology Daniel Alexander Alber, Karl Lee Sangwon, Andrew Smith, Emily Lock, Misha Movah-Ezazi, Todd Charles Hollon, Eric Karl Oermann, Daniel A. Orringer Natus Resident/Fellow Award for Neurocritical Care Repetitive Traumatic Brain Injuries Are Associated With Poorer Outcomes At 1-Year and 3-7 Years After Index Injury John K. Yue, Leila Etemad, Jason Barber, Gabriela Satris, Patrick Belton, Debbie Madhok, Sabah Hamidi, Joye Tracey, Esther Yuh, Pratik Mukherjee, Michael C. Huang, Phiroz E. Tarapore, Ava Puccio, David O. Okonkwo, Geoffrey T. Manley, Nancy Temkin, Anthony DiGiorgio Natus Resident/Fellow Award for Traumatic Brain Injury (Neurotrauma and Critical Care) Outcome Related Thresholds of Near Infrared Spectroscopy Based Cerebrovascular Reactivity Metrics in Moderate/Severe TBI: A Canadian High Resolution-TBI (CAHR-TBI) Cohort Study Alwyn Titus Gomez, Jeanette Tas, Marcel Aries, Donald Griesdale, Logan Froese, Eric Thelin, Rahul Raj, Clare Naomi Gallagher, Francis Bernard, Andreas H. Kramer, Frederick Zeiler Ronald R. Tasker Young Investigator Award (Section on Pain) Contribution of Sensory Neuron-Associated Macrophages to Neuropathic Pain via Up-Regulation of Calcium Channel in C Fiber Sensory Neurons in Dorsal Root Ganglion: An Animal Model Study Keonhee Kim, Eunyee Jung, Seungsoo Chung, Dong Ah Shin Section on Pediatric Neurosurgery Best Basic Science Abstract Award Neuroimaging Analysis of Bilateral Thalamic Delivery for Gene Therapy Rrita Daci, Mohammed Shazeeb, Brittany Owusu-Adjei Thomson, Constance Jennifer Mietus, Behroze Vachha, Richard P. Moser, Heather Gray-Edwards, Miguel Sena-Esteves, Terrence Flotte, Oguz Cataltepe Section on Pediatric Neurosurgery Best Clinical Research Abstract Award Initial Experience with Sonodynamic Therapy Using Low-intensity Focused Ultrasound and ALA for Pediatric Patients with Diffuse Intrinsic Pontine Glioma Nirali Patel, Kelsi M Chesney, Jean-Paul Bryant, Kristen Stabingas, Roger Packer, Lindsay Kilburn, Adriana Fonseca Sheridan, Robert F. Keating, Hasan R. Syed Best Peripheral Nerve Abstract Initial Clinical Safety and Feasibility from the RESET RA study of a Novel Implantable Neuroimmune Modulation Device for the Treatment of Rheumatoid Arthritis Daniel L. Peterson, Mark Daniel Van Poppel, Warren Boling, Perry Santos, Jason Schwalb, Howard Eisenberg, Ashesh Mehta, Heather Spader, James Botros, Frank D. Vrionis, Andrew Ko, P. David Adelson, Bradley Lega, Peter Konrad, Bill Calle, Richard D. Bucholz, Robert Mark Richardson Stereotactic and Functional Neurosurgery Resident Basic Science Award Responsive Neurostimulation Targeting the Centromedian Nucleus of the Thalamus Improves Seizure Control in Idiopathic Generalized Epilepsy and Select Multifocal Disease Pranav Nanda, Ashley Walton, Nathaniel Sisterson, Robert Mark Richardson Stereotactic and Functional Neurosurgery Resident Clinical Award Human Focal Seizures Induce Wavelike States in Bursts of Neuronal Activity Joshua M. Diamond, Sara Inati, Kareem A. Zaghloul Stereotactic and Functional Neurosurgery Young Neurosurgeon Basic Science Award Spinal Cord Stimulator Promotes Neuroplasticity in Patients with Severe Spinal Cord Injury Matheus Moreli Porceban, Leonidas Gomes Angelin, Angelica Castilho Alonso, Cristina Prota, Cristante, Christiane Pereira Cavalcante de Abreu, Lucia Helena Storer Ribeiro, Jennifer Grace Barros Santos, Juliana Cristina de Souza, Maria Eugenia Mayr de Biase, Bunpot Sitthinamsuwan, Nasir Majeed, Edelvan Gabana, Ricardo Jose Rodriguez Ferreira, Raphael Martus Marcon, Julia Maria D'Andrea Greve, Alexandre Fogaça Cristante, Guilherme Alves Lepski Stereotactic and Functional Neurosurgery Young Neurosurgeon Clinical Award Encoding Brain Dynamics: Neuropsychological Test Scores as Predictors of iEEG Spectral Features in Epilepsy Tariq Hattab, Jordan Krieg, Sarah Kawtharani, Seth Koenig, Eric Waldron, Alexander Herman, David P. Darrow Joint Section Tumor Neuro-Oncology Trainee Award DWI and ADC Changes in Patients with Glioblastoma IDH-Wild Type Following Surgical Tumor Resection Pavel Pichardo Rojas, Josh Bandopadhay, Luis C. Nunez, Yoshua Esquenazi, Antonio Gabriel Dono Ostorga, Andres Rodriguez, Nitin Tandon, Roy Riascos American Brain Tumor Association (ABTA) Young Investigator Award Clear Cell Meningioma Tumorigenesis is Characterized by Expression of Human Endogenous Retroviruses Danielle DeBacker Dang, Tara Doucet-O'Hare, Jared S. Rosenblum, Sofie Mohlin, Ashish H. Shah, Winson Ho, Alex Vortmeyer, Dorian McGavern, John D. Heiss, Zhengping Zhuang BrainLab Neurosurgery Award The Role of Surgical Management for Prolactinoma in the Era of Dopaminergic Agonists: An International Multicenter Report Matt Findlay, Mohammadmadhi Sabahi, Mohammed Azab, Richard Drexler, Roman Rotermund, Franz Ricklefs, Jörg Flitsch, Timothy Smith, John Kilgallon, John Kilgallon, Jurgen Honegger, Isabella Nasi-Kordhishti, Paul Gardner, Zachary Charles Gersey, Hussein Abdallah, John Jane, Ulrich Knappe, Nesrin Uksul, Henry Schroder, Marton Eordogh, Marco Losa, Pietro Mortini, Rudiger Gerlach, Apio Claudio Antunes, William T. Couldwell, Karol P. Budohoski, Robert Rennert, Michael Karsy Columbia Softball Skull Base Surgery Award Skull Base Surgery Award Integrated Clinical Genomic Analysis Reveals Xenobiotic Metabolic Genes are Downregulated in Meningiomas of Current Smokers A. Basit Khan, Rajan Patel, Malcolm F. McDonald, Eric Goethe, Collin English, Ron Gadot, Arya Shetty, Arif Harmanci, Akdes Harmanci, Tiemo Klisch, Akash J. Patel Elekta Tumor Section Award Impact of Navigated Intraoperative Ultrasound on Brain Shift and Gross Tumor Resection Timothy West, Mercy Mazurek, Shahaan S. Razak, Zsombor Gal, Nicole Perez, Akeive Burrows, Bryan D. Choi, Brian V. Nahed Gladiator Award—2023 The Impact of Tumor Mutational Status on Protoporphyrin IX Accumulation in Tumor-Associated Macrophages in Glioblastoma Patients Emily Lock, Daniel Alexander Alber, Andrew Smith, Karl Lee Sangwon, Misha Movah-Ezazi, Todd Charles Hollon, Eric Karl Oermann, Daniel A. Orringer Integra Foundation Award Intraoperative Functional Re-mapping Unveils Evolving Patterns of Cortical Plasticity Sam Ng, Pablo Andres Valdes, Sylvie Moritz-Gasser, Anne-Laure Lemaitre, Hugues Duffau, Guillaume Herbet James Rutka Pediatric Tumors Award Spatial Transcriptomic Profiling of T Cell Exhaustion Markers in Atypical Teratoid/Rhabdoid Tumor Subtypes Brandon Lucke-Wold Journal of Neuro-Oncology Award RNA Polymerase II Meningioma Mutations Activate Forebrain Neurodevelopmental Pathways Victoria Elizabeth Clark, Briana Prager, Susana Wilson-Hawken, Richard Young Leica Proficient Surgical Tumor Award Supra-maximal Extent of Resection is Associated with Improved Progression-free Survival in Patients with IDH Wild-type Glioblastoma Once Negative TERT Promoter Molecular Margins are Achieved William Smith, Elie Massaad, Joseph Bradley, Eric Esposito, William T. Curry, Frederick George Barker, Bob S. Carter, Brian V. Nahed, Daniel P. Cahill, Ganesh Shankar Lunsford and Leksell Radiosurgery Award Elucidating the Immune Landscape of Radiation Necrosis Through Single Cell Analysis of Recurrent Brain Lesions in Patients After Stereotactic Radio Surgery Stephanie Robert, Emre Kiziltug, Benjamin Lu, Anna Arnal-Estape, Don Nguyen, Veronica Chiang Mizuho Minimally Invasive Brain Tumor Surgery Award Laser Interstitial Thermal Therapy for Primary and Recurrent Meningioma: A Prospective and Retrospective Multi-Institutional Study Sangami Pugazenthi, William Leidig, Veronica Chiang, Analiz Rodriguez, Sujit S. Prabhu, Aden Pepe Haskell-Mendoza, Peter Edward Fecci, Dimitris G. Placantonakis, Steven R. Abram, Bradley Lega, Albert H. Kim Rosenblum—Mahaley Clinical Research Award Exceptional Responders to Base Excision Repair (BER) Inhibition for Recurrent Glioblastoma Display Enrichment for DNA Damage Response Pathways: RNA Sequencing Analysis from a Multicenter Trial Ahmad Ozair, Jan Drappatz, Xiaobu Ye, Michael Berens, Sen Peng, Sanhita Rath, Harshil Dhruv, Tobias Walbert, Matthias Holdhoff, Glenn Lesser, Timothy F. Cloughesy, Andrew Sloan, Marta Couce, David Peereboom, Burt Nabors, Patrick Wen, Lisa R. Rogers, Stuart Grossman, Manmeet Ahluwalia Stryker Tumor Award Towards Nose-to-Brain Inhibition of NFκB: Activity of a Novel p65 Inhibitor in Glioblastoma and Feasibility of Intranasal Delivery with a Near-Infrared Fluorescent HMC-Chitosan Nanoparticle Miguel Eduardo Tusa Lavieri, BS, BA, Michelot Michel, Sarah Mohyeddinipour, Liron Israel, Hongqiang Wang, Ken Miyaguchi, Subashni Rajiv, Avradip Chatterjee, Junji Watanabe, Ramachandran Murali, John Yu Stachestrong Award Multi-omic Screening of Invasive GBM Cells in Engineered Biomaterials and Patient Biopsies Reveals Targetable Transsulfuration Pathway Alterations Nikita Choudhary, Joseph Garcia, Erin Akins, Saket Jain, Kayla Wolf, Jason Zhang, Meeki Lad, Poojan Shukla, Sabraj Gill, Luis Carette, Allison Zheng, Sanjay Kumar, Manish Kumar Aghi Southeastern Brain Tumor Foundation (SBTF) Award Microglia-Mediated Survival Outcomes in Preoperative Radiation for Glioblastoma: Insights from a Preclinical Model Andrea Otamendi-Lopez, Beatriz Irene Fernandez Gil, Carla Vazquez-Ramos, BS, Yesesri Cherukuri, Steven Herchko, Mark E. Jentoft, Melissa Murray, Yan Asmann, Daniel Trifiletti, Rachel Sarabia-Estrada, Alfredo Quinones-Hinojosa KLS Martin Tumor Award Differential Gene Expression Underlying Glioma Related Epilepsy Armin Mortazavi, Edwin Nieblas-Bedolla, Anas Khan, Ryan Carney, Kory Johnson, Kareem A. Zaghloul Globus Spine Oncology Award Spinal Meningioma: An Institutional Case Series with Preliminary Results of Molecular Profiling Khizar Rehan Nandoliya, Mark W. Youngblood, Rahul Chaliparambil, Jean-Paul Wolinsky Zeiss Brain Tumor Award Intraoperative Confocal Laser Endomicroscopy During 5-ALA Guided Glioma Surgery: Significant Considerations for Resection at the Tumor Margins Irakliy Abramov, Yuan Xu, Giancarlo Mignucci-Jiménez, Joelle Nicole Hartke, Evgenii Belykh, Randall Porter, Nader Sanai, Kris A. Smith, Jennifer Eschbacher, Mark C. Preul Sherry Apple Resident Travel Scholarship (WINS) RNA Polymerase II Meningioma Mutations Activate Forebrain Neurodevelopmental Pathways Victoria Elizabeth Clark, Briana Prager, Susana Wilson-Hawken, Richard Young",
+    "year": 2023,
+    "lang": "en",
+    "type": "article",
+    "venue": "Neurosurgery",
+    "topic": "Intracranial Aneurysms: Treatment and Complications",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W7107994637",
+    "title": "Kaska Lessons 101 and 102 : Being Sick Part 2 : Instructional Materials",
+    "abstract": "Instructor resources for Lessons 101 and 102: Being Sick Part 2 from the Kaska Language Website. Elements include a guide and the Language Lesson. The Kaska Language Website, which features over 150 Kaska language lessons, was developed in part by the Liard Aboriginal Women's Society with financial support from the Department of Canadian Heritage.",
+    "year": 2025,
+    "lang": "kkz",
+    "type": "article",
+    "venue": "cIRcle (University of British Columbia)",
+    "topic": "Indigenous Health, Education, and Rights",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W3029342063",
+    "title": "ALMA twenty-six arcmin2 survey of GOODS-S at one millimeter (ASAGAO): Millimeter properties of stellar mass selected galaxies",
+    "abstract": "Abstract We make use of the ALMA twenty-Six Arcmin2 survey of GOODS-S At One-millimeter (ASAGAO), deep 1.2 mm continuum observations of a 26-arcmin2 region in the Great Observatories Origins Deep Survey-South (GOODS-S) obtained with Atacama Large Millimeter/sub-millimeter Array (ALMA), to probe dust-enshrouded star formation in K-band selected (i.e., stellar mass selected) galaxies, which are drawn from the FourStar Galaxy Evolution Survey (ZFOURGE) catalog. Based on the ASAGAO combined map, which was created by combining ASAGAO and ALMA archival data in the GOODS-South field, we find that 24 ZFOURGE sources have 1.2 mm counterparts with a signal-to-noise ratio &amp;gt;4.5 (1σ ≃ 30–70 μJy beam−1 at 1.2 mm). Their median redshift is estimated to be $z$median = 2.38 ± 0.14. They generally follow the tight relationship of the stellar mass versus star formation rate (i.e., the main sequence of star-forming galaxies). ALMA-detected ZFOURGE sources exhibit systematically larger infrared (IR) excess (IRX ≡ LIR/LUV) compared to ZFOURGE galaxies without ALMA detections even though they have similar redshifts, stellar masses, and star formation rates. This implies the consensus stellar-mass versus IRX relation, which is known to be tight among rest-frame-ultraviolet-selected galaxies, cannot fully predict the ALMA detectability of stellar-mass-selected galaxies. We find that ALMA-detected ZFOURGE sources are the main contributors to the cosmic IR star formation rate density at $z$ = 2–3.",
+    "year": 2020,
+    "lang": "en",
+    "type": "article",
+    "venue": "Publications of the Astronomical Society of Japan",
+    "topic": "Galaxies: Formation, Evolution, Phenomena",
+    "field": "Physics and Astronomy",
+    "ca_institutions": [],
+    "funders": ["National Institutes of Natural Sciences", "Japan Society for the Promotion of Science", "Science and Technology Facilities Council", "National Astronomical Observatory of Japan", "Alberta Livestock and Meat Agency", "National Science Council", "National Radio Astronomy Observatory", "National Natural Science Foundation of China", "National Sleep Foundation", "Korea Astronomy and Space Science Institute", "National Science Foundation"]
+  },
+  {
+    "id": "W1993041384",
+    "title": "GABA<sub>A<\/sub>receptors mediate the opposing roles of dopamine and the tegmental pedunculopontine nucleus in the motivational effects of ethanol",
+    "abstract": "Recent work has demonstrated that changes in ventral tegmental area (VTA) GABA(A) receptor ion conductance properties are responsible for switching morphine's positive reinforcing properties from a dopamine-independent to a dopamine-dependent pathway when an animal transitions from a non-deprived (minimal drug exposure) to a dependent (chronic drug exposure) and withdrawn state. Here we show that a double dissociation of ethanol's positive reinforcing properties is exactly opposite to that seen with morphine. In C57BL/6 mice, ethanol-conditioned place preferences were blocked in dopamine D2 receptor knockout non-deprived mice, but not by a lesion of the tegmental pedunculopontine nucleus (TPP). On the other hand, TPP lesions, but not a D2 receptor mutation, blocked ethanol-conditioned place preferences in ethanol-dependent and withdrawn mice. The opposite effects of ethanol and opiates can be explained by their proposed actions through a common VTA GABA(A) receptor switching mechanism.",
+    "year": 2009,
+    "lang": "en",
+    "type": "article",
+    "venue": "European Journal of Neuroscience",
+    "topic": "Neurotransmitter Receptor Influence on Behavior",
+    "field": "Neuroscience",
+    "ca_institutions": ["Hospital for Sick Children", "University of Toronto"],
+    "funders": ["Natural Sciences and Engineering Research Council of Canada", "Canadian Institutes of Health Research"]
+  },
+  {
+    "id": "W2803880880",
+    "title": "Making Lung Cancer Clinical Trials More Inclusive: Recommendations for Expanding Eligibility Criteria",
+    "abstract": "",
+    "year": 2018,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Thoracic Oncology",
+    "topic": "Lung Cancer Treatments and Mutations",
+    "field": "Medicine",
+    "ca_institutions": "University of Ottawa",
+    "funders": []
+  },
+  {
+    "id": "W2130730771",
+    "title": "Optimizing Clinical Benefits of Bisphosphonates in Cancer Patients with Bone Metastases",
+    "abstract": "Bisphosphonates are important treatments for bone metastases. Considerations for optimizing the clinical benefits of bisphosphonates include efficacy, compliance, and safety. Several bisphosphonates are approved for clinical use; however, few have demonstrated broad efficacy in the oncology setting and been compared directly in clinical trials. Among patients with bone metastases from breast cancer, the efficacy of approved bisphosphonates was evaluated in a Cochrane review, showing a reduction in the risk of skeletal-related events (SREs) ranging from 8% to 41% compared with placebo. Between-trial comparisons are confounded by inconsistencies in trial design, SRE definition, and endpoint selection. Zoledronic acid has demonstrated clinical benefits beyond those of pamidronate in a head-to-head trial that included patients with breast cancer or multiple myeloma. Compliance and adherence also have effects on treatment efficacy. In a comparison study, the adherence rates with oral bisphosphonates were found to be significantly lower compared with those of intravenous bisphosphonates. The safety profiles of oral and intravenous bisphosphonates differ. Oral bisphosphonates are associated with gastrointestinal side effects, whereas intravenous bisphosphonates have dose- and infusion rate-dependent effects on renal function. Osteonecrosis of the jaw is an uncommon but serious event in patients receiving monthly intravenous bisphosphonates or denosumab. The incidence of this event can be reduced with careful oral hygiene. A positive benefit-risk ratio for bisphosphonates has been established, and ongoing clinical trials will determine whether individualized therapy is possible.",
+    "year": 2010,
+    "lang": "en",
+    "type": "article",
+    "venue": "The Oncologist",
+    "topic": "Bone health and treatments",
+    "field": "Medicine",
+    "ca_institutions": ["Centre Hospitalier de l’Université de Montréal", "Hôpital Notre-Dame"],
+    "funders": ["Novartis Pharmaceuticals Corporation", "Amgen"]
+  },
+  {
+    "id": "W339873244",
+    "title": "Number Eleven Theatre's the Prague Visitor: A Journey into a Canadian Company's Creative Process",
+    "abstract": "In Eugenio Barba's The Secret Art of the Performer, Fernandino Taviani asks the following question: Do those who make a performance think of it as a machine or as a plant? (259). In the case of result-oriented approaches, Taviani notes that the performance is considered to be a machine that works properly only if it corresponds exactly to the original plan and if each part functions correctly and at the right time (259). He then contrasts this machine-like performance with one that unfolds as would a growing plant, and remarks that the processes which form a plant are not merely the assembling of its vital parts, so that the final form a plant takes never corresponds to a plan, it is the result-imaginable but unforeseeable-of an organic process (259). In the case of Barba's particular approach, Taviani concludes that the problem, then, is the process of work, not the planning of the way it will end (261). Given that the Canadian company Number Eleven Theatre belongs to what may be termed the North American Barba diaspora, it is precisely the question of creative process that I will address in this case study of the making of The Prague Visitor, a production that premiered in Toronto on 13 March 2003. The main characteristic of Number Eleven Theatre is the company's commitment to the process-oriented conception of performance described by Taviani. Consequently, it would be pointless to treat The Prague Visitor as a machine and to strive to establish how its various parts function together to create meaning. Indeed, the spectator's freedom to view this piece through the prism of a multifarious network of personal associations is so pivotal to the company's approach that there are necessarily as many interpretations of The Prague Visitor as there are audience members at any given performance. Furthermore, given the collaborative nature of the work process that led to the creation of this piece, it is important when analyzing it to go beyond the level of possible interpretations and to investigate the complex ways in which the process informs the performance. In contrast with more conventional ways of creating theatre, the actors and the director that participate in this process may be considered co-authors: on the one hand, the actors work on the creation of a precise physical score based on personal research, while on the other hand, the director organizes, edits, and orchestrates these actions into an overall structure that constitutes the montage. Co-authorship also includes the audience to the extent that it actively participates in the construction of signification. Although Number Eleven Theatre is a relatively new company, its conception of performance will be familiar to those audiences in Canada, the United States, and Europe who have seen productions by Primus Theatre, Theatre Labyrinth (recently renamed Wishhounds: see TF #23), the North American Cultural Laboratory, and the New World Performance Laboratory. What these Canadian and American groups all have in common is their emphasis on a type of physical and vocal training inherited from Barba's and Grotowski's respective investigations of the actor's process. These companies are mostly concerned with producing actor-based experimental pieces that do not rely on the director's interpretation of a specific dramatic text. Members of the Grotowski and Barba diasporas choose to make a long-term commitment to the work, as they often put it, that is to say, a commitment to a specific approach to training, rehearsal, and performance. Working within the same group year after year is necessarily very different from pursuing an acting career in commercial theatre or the entertainment industry at large. The most demanding and challenging aspect of process-oriented work may be its collaborative dimension yet, when successful, such artistic collaboration can be immensely rewarding for all participants, as the routes taken by each lead to unexpected outcomes within an imaginary world echoing multiple voices and, in the case of The Prague Visitor, multiple languages, since English, Hebrew, German, and Czech make up the textual montage. …",
+    "year": 2004,
+    "lang": "en",
+    "type": "article",
+    "venue": "TheatreForum",
+    "topic": "Historical and Modern Theater Studies",
+    "field": "Psychology",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2486417361",
+    "title": "3-manifolds and surgery on links",
+    "abstract": "",
+    "year": 2003,
+    "lang": "en",
+    "type": "book-chapter",
+    "venue": "American Mathematical Society eBooks",
+    "topic": "Mathematics and Applications",
+    "field": "Mathematics",
+    "ca_institutions": "University of British Columbia",
+    "funders": []
+  },
+  {
+    "id": "W2012061263",
+    "title": "Games, computers, and artificial intelligence",
+    "abstract": "",
+    "year": 2002,
+    "lang": "en",
+    "type": "article",
+    "venue": "Artificial Intelligence",
+    "topic": "Artificial Intelligence in Games",
+    "field": "Computer Science",
+    "ca_institutions": "University of Alberta",
+    "funders": ["Natural Sciences and Engineering Research Council of Canada", "Vedecká Grantová Agentúra MŠVVaŠ SR a SAV"]
+  },
+  {
+    "id": "W7048593323",
+    "title": "Neural Transition Metric in fMRI: Categorization and Application",
+    "abstract": "Recent advances in technology allow us to examine brain network dynamics in fMRI on a large-scale. Our lab has recently developed a data-driven method, the neural transition metric (Tseng &amp; Poppenk, 2020), which allows us to identify transitions in individuals’ mental states. My project employed the neural transition metric to 1. investigate the distinction between the externally and internally driven transitions (i.e., transitions induced by task stimuli vs resulted from internal mind-wandering), and 2. examine cognitive dynamics between the novel and repeated viewings of naturalistic movie stimuli. I found that there was no difference in brain correlates for the internally and externally driven transitions, whereas the event related transitions were associated with distinct profile of brain activations compared to the others. Moreover, through comparing the properties of neural transitions between the novel and repeated viewing, I found that movie stimuli are less effective at aligning viewers’ cognition in repeated viewing. This suggests that with repeated viewing, participants’ thoughts became more idiosyncratic and more internally driven. Additionally, degree of conformities (i.e., the alignment of transitions timing between the individual and the group) in the novel and repeated viewings were correlated with volumes of the anterior/posterior hippocampus (a/pHPC) and amygdala, such that individuals with bigger aHPC and amygdala displayed higher conformity in the novel run, whereas individuals with bigger pHPC have lower conformity in the repeated run. This collectively demonstrated that our neural transition metric could have a broader application in experiments involving naturalistic stimuli by offering unique insights into our cognitive dynamics.",
+    "year": 2020,
+    "lang": "en",
+    "type": "dissertation",
+    "venue": "QSpace (Queen's University Library)",
+    "topic": "Photocathodes and Microchannel Plates",
+    "field": "Engineering",
+    "ca_institutions": "Queen's University",
+    "funders": []
+  },
+  {
+    "id": "W6960764019",
+    "title": "Lyle Creelman with Joan Bentley during visit in North Vancouver",
+    "abstract": "",
+    "year": 2006,
+    "lang": "en",
+    "type": "other",
+    "venue": "cIRcle (University of British Columbia)",
+    "topic": "Genetic diversity and population structure",
+    "field": "Biochemistry, Genetics and Molecular Biology",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4246382618",
+    "title": "Book reviews",
+    "abstract": "",
+    "year": 2003,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Canadian Journal of Anesthesia/Journal canadien d anesthésie",
+    "ca_institutions": "Health PEI",
+    "funders": []
+  },
+  {
+    "id": "W2905001800",
+    "title": "Steatohepatitic Variant of Hepatocellular Carcinoma: A Focused Review",
+    "abstract": "The incidence of hepatocellular carcinoma (HCC) has steadily increased over the past three decades and currently ranks as the fifth most common cancer worldwide. Likewise, non-alcoholic fatty liver disease (NAFLD), a known risk factor for the development of HCC, has emerged as the most common liver disease in Western countries. The underlying pathogenesis of NAFLD-related HCC remains unclear. The steatohepatitic variant of HCC (SH-HCC) typically presents in patients with metabolic risk factors and either cirrhotic or non-cirrhotic NAFLD and shares many of the histological features found in non-alcoholic steatohepatitis (NASH). Given their similar morphological features, distinguishing SH-HCC from background fatty liver can be a diagnostic challenge. Immunohistochemical studies to characterize and assist in the diagnosis are relatively limited. Whether the steatotic phenotype of SH-HCC results from the tumor's adaptive response to an environment rich in fatty acids or from an independent pathogenic pathway remains to be seen. This review aims to summarize what is currently known regarding the pathogenesis and clinicopathological features of SH-HCC.",
+    "year": 2018,
+    "lang": "en",
+    "type": "review",
+    "venue": "Gastroenterology Research",
+    "topic": "Liver Disease Diagnosis and Treatment",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W6958509848",
+    "title": "Additional file 2 of Patshitinikutau Natukunisha Tshishennuat Uitshuau (a place for Elders to spend their last days in life): a qualitative study about Innu perspectives on end-of-life care",
+    "abstract": "Supplementary Material 2",
+    "year": 2024,
+    "lang": "en",
+    "type": "article",
+    "venue": "Figshare",
+    "topic": "Grief, Bereavement, and Mental Health",
+    "field": "Psychology",
+    "ca_institutions": "Memorial University of Newfoundland",
+    "funders": []
+  },
+  {
+    "id": "W2055891521",
+    "title": "Qualitative research to identify racialist discourse: towards equity in nursing curricula",
+    "abstract": "",
+    "year": 2000,
+    "lang": "en",
+    "type": "article",
+    "venue": "International Journal of Nursing Studies",
+    "topic": "Critical Race Theory in Education",
+    "field": "Social Sciences",
+    "ca_institutions": ["University of Toronto", "Centre for Global Health Research"],
+    "funders": []
+  },
+  {
+    "id": "W2024328561",
+    "title": "Well‐being in a deeply religious society in the shadows of war: Results of a household survey of Kuwaitis.",
+    "abstract": "The present study was designed to determine the current level and distribution of well-being among Kuwaiti citizens who have lived either in the middle or in the shadows of war since Kuwait was invaded by Iraq in August 1990. A measure of Kuwaiti well-being, the Kuwaiti Raha Scale, was developed and utilized as the primary indicator in the first National Household Survey (NHS) of well-being in Kuwait. The findings presented are part of an international program of research focusing on national trauma and mental health for which the Kuwaiti NHS was developed. From a population of 935,922 (2004), 830 households were randomly drawn, from which 487 were approached and 416 successfully recruited and surveyed. In contrast to prevailing views in the literature, level of well-being (Raha) was not associated with either educational attainment or wealth. Rather, the results indicate that well-being is more associated with health and religion. Implications of these findings for a new theory of well-being in a deeply religious society are offered along with suggestions for a program of research. The policy implications of the NHS are also discussed.",
+    "year": 2010,
+    "lang": "en",
+    "type": "article",
+    "venue": "American Journal of Orthopsychiatry",
+    "topic": "Health disparities and outcomes",
+    "field": "Social Sciences",
+    "ca_institutions": "University of Windsor",
+    "funders": "Kuwait Foundation for the Advancement of Sciences"
+  },
+  {
+    "id": "W7024527677",
+    "title": "Retombées de l'industrie des croisières au Québec analyse",
+    "abstract": "",
+    "year": 2005,
+    "lang": "fr",
+    "type": "other",
+    "venue": "SDEIR (University of Quebec at Chicoutimi)",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W1982748228",
+    "title": "The Ethically Dubious Practice of Thwarting the Redemption of the Condemned",
+    "abstract": "\"The Ethically Dubious Practice of Thwarting the Redemption of the Condemned.\" The American Journal of Bioethics, 11(10), pp. 9–10",
+    "year": 2011,
+    "lang": "en",
+    "type": "letter",
+    "venue": "The American Journal of Bioethics",
+    "topic": "Torture, Ethics, and Law",
+    "field": "Social Sciences",
+    "ca_institutions": "Dalhousie University",
+    "funders": []
+  },
+  {
+    "id": "W6964429333",
+    "title": "Ten Blocks From the White House, 1988",
+    "abstract": "\"Ten Blocks From the White House: Anatomy of the Washington Riots of 1968\", Ben W. Gilbert and the staff of the Washington Post, a book that analyzes the Washington, D.C. riots of 1968, 1988. PART OF SERIES: In its investigation, the Webster Commission aligned the policies and procedures of the LAPD with those adopted by several other agencies and governmental bodies. The series contains a variety of materials collected by the Commission for this purpose. Included are reports about present and future issues facing the City of Los Angeles; analyses of riots which shook Washington, D.C. in 1968; annual reports issued by the Royal Canadian Mounted Police; emergency plans; housing data; newspaper and journal articles; criminal justice statistics; and summaries and after-action reports which assessed law enforcement's response to the 1992 riots.",
+    "year": 2021,
+    "lang": "en",
+    "type": "dataset",
+    "venue": "University of Southern California Digital Library",
+    "topic": "Forest Ecology and Biodiversity Studies",
+    "field": "Agricultural and Biological Sciences",
+    "ca_institutions": [],
+    "funders": []
+  }
+]
