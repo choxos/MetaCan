@@ -77,10 +77,17 @@ pilot-offline: lint
 # arithmetic nobody ran, including me. It was found by an adversarial model adding up
 # five weights in a summary table I had handed it. It runs on every build now.
 # See DEVIATIONS.md D22 and finding 26.
+#
+# check_quotes.R is the newest of these, and the story of how it got into this list
+# is the reason the list exists. It was written, it passed, it caught a real
+# corruption in the rubric, and then it sat here UNWIRED: `make lint` did not run
+# it, while the proposal said `make lint` ran it. A guard nothing invokes is a
+# comment. THAT IS D25, THE THIRD TIME. See DEVIATIONS.md D31.
 lint:
 	@Rscript pilot/check_self_masking.R
 	@Rscript pilot/check_instrument.R
 	@Rscript pilot/check_strata_partition.R
+	@Rscript pilot/check_quotes.R
 
 # The site renders its own COPY of findings.json (app/src/data/). Copying it here,
 # in the same target that renders FINDINGS.md, is what keeps the two from

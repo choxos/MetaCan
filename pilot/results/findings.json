@@ -52,6 +52,36 @@
     },
     "computed_at_utc": "2026-07-13T11:55:17Z"
   },
+  "active_learning": {
+    "headline": "THE BATCH-OF-100 LOOP WORKS, AND THE 20 RANDOM ANCHORS IN IT DO NOT. Against a random-batch control at identical budget, active acquisition (50 max-teacher-disagreement + 30 max-uncertainty + 20 random) takes held-out AP from 0.0143 to 0.1391 while the control reaches 0.0502: 2.8x, winning 18 of 20 rounds, with held-out positive-set churn falling to 0.1111. At a ~1% base rate a random batch of 100 holds one positive, and the control curve is what that buys. BUT the anchors, which were supposed to keep an unbiased evaluation stream alive, hold 3 positives after 400 draws: prevalence 0.0057 with a 95% interval 0.01594 wide, WIDER THAN THE QUANTITY ITSELF. They are demoted to drift sentinels. THE LOOP LEARNS; THE PREREGISTERED HUMAN AUDIT MEASURES. And AP here is agreement with the majority TEACHER, so the whole curve is imitation, not accuracy. The first version of this script said the loop DEGRADED, because it measured AP on the shrinking pool the algorithm was itself editing; the churn sat at exactly 1.000 for twenty rounds, which is a constant, not a measurement (D33).",
+    "values": {
+      "batch": {
+        "batch_size": 100,
+        "max_disagreement": 50,
+        "max_uncertainty": 30,
+        "random_anchor": 20
+      },
+      "rounds": 20,
+      "ap_active_start": 0.0143,
+      "ap_active_end": 0.1391,
+      "ap_random_start": 0.0238,
+      "ap_random_end": 0.0502,
+      "active_over_random_x": 2.8,
+      "active_beats_random_in_rounds": 18,
+      "holdout_churn_final": 0.1111,
+      "pi_directive_vindicated": true,
+      "what_ap_measures_here": "Agreement with the MAJORITY TEACHER, not accuracy. A rising curve is better imitation of three LLMs that overlap each other at Jaccard ~0.5. No amount of imitation crosses that gap, and the audit is the only instrument that can.",
+      "anchors_n": 400,
+      "anchors_positives": 3,
+      "anchors_prevalence": 0.0057,
+      "anchors_ci_width": 0.01594,
+      "anchors_are_a_usable_evaluation_stream": false,
+      "anchors_demoted_to": "drift sentinels, rescored under the frozen final model, never used to pick a batch",
+      "simulation_caveat": "Every query reveals a label that already exists: 16,800 labels over 5,600 works. This is in-sample recycling. It demonstrates the loop's MECHANICS and cannot show that the loop matures on 4.3M unlabelled works, nor validate the v3.1 instrument, under which no screening has run.",
+      "superseded_result": "The first version of this experiment measured AP and churn on the POOL of unrevealed works. Active learning REMOVES contested works from the pool by construction, so the pool gets easier every round and the evaluation target moves under the metric. It reported AP FALLING from 0.019 to 0.011 with churn pinned at exactly 1.000 for twenty straight rounds, and the conclusion was going to be 'the loop degrades'. The constant churn is what gave it away. A metric computed on a set the algorithm is actively editing is not a metric. See DEVIATIONS.md D33."
+    },
+    "computed_at_utc": "2026-07-13T13:17:42Z"
+  },
   "adjudication": {
     "headline": "AN INDEPENDENT BLINDED JUDGE SAYS THE RUBRIC IS SILENT ON 89% OF THE WORKS THE MODELS FOUGHT OVER. Fable 5, which is not one of the three screened arms, adjudicated all 179 contested works seeing three screener opinions as A/B/C in random order with no model names, so it was asked which reading of the RUBRIC is right rather than which model to trust. It shows no arm preference (spread 1.16x, chi-square p = 0.493), so it is not a fourth vote for one of the screeners, and it overruled ALL THREE on 6 works. Its verdict on the instrument: the rubric is SILENT on 159 of 179 contested works, and only 17 splits are a screener misapplying a rule that actually exists. THE FIELD'S BOUNDARY IS BEING SET BY THE SCREENER, NOT BY THE INSTRUMENT. The seams that cost the most agreement are methods_dev_vs_study (39 works), lis_sts_asymmetry (26), and history_of_science (19). This is what converts adjudication from a tiebreak into a measurement: not 179 answers, but a frequency-weighted census of which sentences the rubric is missing and exactly how many works each one costs. The judge's TIERS are used for nothing and produce no estimate: a model cannot certify a model, and that argument applies to the judge too.",
     "values": {
@@ -397,6 +427,56 @@
       "estimator_void": true
     },
     "computed_at_utc": "2026-07-13T11:54:44Z"
+  },
+  "classifier": {
+    "headline": "THE CLASSIFIER MAY NOT LABEL, AND THE NUMBERS SAY WHY. Design-weighted, out-of-fold, venue-grouped: the teacher heads reach AP 0.17 to 0.135 at AUC ~0.8, with a 4.68x top-decile lift that is real and is lift toward MACHINE labels. THE ESTIMAND MOVES THE SCORE 2.7x (unanimous 0.0783, majority 0.1364, any 0.2093), so there is no 'the' target and choosing one silently settles the question the audit exists to answer. AND THE UNANIMOUS CORE IS THE HARDEST TO LEARN, not the easiest: if the boundary were a shared line with noise around it, the agreed core would be the separable part, and it is not. The between-head spread predicts where the teachers split at 3.74x the base rate: real, weak, and reported as an efficiency gain rather than a map. Finally, the abstract is worth MORE THAN ANY MODELLING CHOICE (+0.1145 AP, 84% relative), and the frame cannot serve it: works.csv stores has_abstract, a boolean, and no text. The DEPLOYABLE model is the WORSE one, the build now FAILS if a model is trained on a field inference cannot supply, and the gap is a priced budget decision rather than an assumption.",
+    "values": {
+      "evaluation": "out-of-fold, venue-grouped, vectorizer fitted on train folds only, DESIGN-WEIGHTED",
+      "why_design_weighted": "The 5,600 works are a stratified sample: French carries weight 311, aff_core 1,119. An unweighted AP is an AP over a population that does not exist. Both are reported; the gap is a fact about the design.",
+      "ap_design_weighted_by_teacher": {
+        "opus": 0.17,
+        "gpt": 0.135,
+        "grok": 0.1417
+      },
+      "ap_design_weighted_by_consensus_rule": {
+        "unanimous": 0.0783,
+        "majority": 0.1364,
+        "any": 0.2093
+      },
+      "estimand_moves_performance_x": 2.7,
+      "unanimous_core_is_hardest_to_learn": true,
+      "top_decile_lift": {
+        "opus": 4.68,
+        "gpt": 3.93,
+        "grok": 5.28
+      },
+      "ap_by_language_opus": {
+        "en": 0.1757,
+        "fr": 0.181
+      },
+      "ap_by_language_gpt": {
+        "en": 0.1425,
+        "fr": 0.089
+      },
+      "french_is_model_dependent": "GPT's boundary is markedly less learnable in French (AP 0.089 vs 0.1425 in English) while Opus's is not ( 0.181 vs 0.1757 ). 'Character n-grams do the French work' was an assertion; measured per language, it is true for one teacher and false for another.",
+      "predicting_teacher_disagreement": {
+        "n_contested": 89,
+        "base_rate": 0.0159,
+        "average_precision": 0.0594,
+        "lift_over_base": 3.74,
+        "verdict": "Real but weak. It buys an efficiency gain for the audit's disagreement stratum. It is NOT a trustworthy standalone map of the contested region, and shared teacher bias is invisible to it: if all three are wrong the same way the spread is zero and the work looks settled."
+      },
+      "payload_skew": {
+        "ap_frame_parity": 0.1364,
+        "ap_with_abstract": 0.2509,
+        "abstract_is_worth_ap": 0.1145,
+        "why_the_deployable_model_is_the_worse_one": "data/db/works.csv stores has_abstract, a boolean, and no abstract text. A model trained with abstracts scores a payload the 4.3M works do not have. Reporting the abstract model's number as the classifier's performance would be reporting a metric for a model that cannot run. The difference is what re-extracting abstracts from the snapshot would buy, and it is a budget decision with a number attached rather than an assumption."
+      },
+      "ships_a_category_label": false,
+      "why_no_label": "Distilled from our own metaresearch labels, a student reproduced its own teacher's positive set at Jaccard 0.17 (finding 25). Two independent adversarial reviews reached the same verdict from different directions: per-teacher heads are useful for ALLOCATING HUMAN EFFORT and cosmetic as a solution to the contested boundary. Scores ship. Labels do not.",
+      "what_the_classifier_is_actually_for": "Not cost. Finding 13 says the LLM can read every work in the frame for $1,261, so there was never anything to avoid, and a proposal that budgeted the full screen while justifying a cheap substitute for it was describing two studies (D32). It is for: a calibrated score the audit stratifies on; rubric revisions testable in minutes instead of one $1,261 pass each; a frame-wide estimate of where the three teachers would split, which three full passes would cost 3x and ~25 days; and learnability as evidence about the boundary."
+    },
+    "computed_at_utc": "2026-07-13T13:12:02Z"
   },
   "distillation_ceiling": {
     "headline": "A CLASSIFIER TRAINED ON LLM LABELS CANNOT EVEN REPRODUCE ITS OWN TEACHER, LET ALONE ADJUDICATE THREE. Students distilled from each model match their own teacher at Jaccard 0.17, while the three teachers match EACH OTHER at 0.5 to 0.56: the classifier is a worse approximation of Opus than Grok is. Distilling from Opus also moves you AWAY from Grok (-0.35), so distillation does not bridge the models' disagreement, it degrades away from all of them. THE SELF-TRAINING LOOP THEN REFUTED MY OWN PREDICTION. I argued at length that it would shrink the positive class toward the confident anglophone core; run on 20,000 works the models never saw, it did not: positive rate drift +0.00 points, French share drift +0.00 points, because class weighting prevents the collapse, exactly as the adversarial review warned before the run ('a serious risk, NOT A THEOREM'). What the loop DID do is reach a fixed point immediately and recycle its own labels (224 -> 424 training positives, then nothing): it CONVERGED WITHOUT LEARNING, and a fixed point looks identical from the inside whether its labels are right or wrong. What the classifier IS worth is the stratifier: 48.2% of the in-scope works sit in its top decile against a blind baseline of 10%, a 4.8x lift in in-scope works found per unit of human coding effort, and design-weighted estimates stay unbiased however noisy it is. THE MACHINE DECIDES WHERE THE HUMANS LOOK. IT NEVER SUPPLIES A LABEL.",

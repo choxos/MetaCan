@@ -983,3 +983,89 @@ The same review also caught that my working notes had the judging criteria in th
 ### The repair
 
 `pilot/13_screening_cost.R` now states what the award buys in the call's words, prices the screen at the **locked v3.1 instrument** ($1,279, not the v1-instrument $1,110 the old page quoted), and the proposal says plainly: compute is **self-funded**; the coder is paid from the award **only if the organizers confirm eligibility**, otherwise from in-kind support through the recruitment networks; the no-coder fallback is prespecified either way. The cost finding no longer contains a `left_for_human_coder_usd` field, because the subtraction it performed assumed an eligibility nobody had checked.
+
+## D31. I wrote a guard, it worked, and nothing ran it. The proposal said `make lint` ran it.
+
+**Date:** 2026-07-13. **Found by GPT-5.6 in the final pre-submission review, reading the Makefile against the page.**
+
+### What happened
+
+D29's repair was `pilot/check_quotes.R`: a guard that fails the build if any quotation the rubric marks verbatim is not a substring of its cited PDF. I wrote it. It caught a real corruption. I tested it both ways with a planted error. I committed it. **I never added it to the `lint` target.**
+
+Meanwhile the proposal said, in §2: *"`make lint` fails if the strata do not partition the frame, the codebook contradicts its schema, or a quotation drifts from its source."* The third clause was false. `make lint` ran three guards and none of them was this one. **A reader could have run the exact command the page named and it would have passed a rubric with a corrupted quotation in it.**
+
+### Why this one is the worst of the three
+
+**This is D25 for the third time**, and D25 is itself the guard-against-silent-contradictions failing silently. The pattern is now unmistakable, and it is not about quotes or schemas or strata:
+
+> **Writing a rule is not enforcing a rule. Only a check that RUNS, in the thing that SHIPS, enforces a rule.**
+
+D25 v1: the guard was hardcoded to the wrong rubric version. D25 v2: my patch to fix that silently matched nothing. D31: the guard was correct, aimed correctly, and *not invoked*. Each time the artifact reported success. Each time I had written the words that described the protection, and each time the words were the only thing that existed.
+
+### The repair
+
+`check_quotes.R` is in `lint`. The proposal now names D31 in the same sentence that claims the guard, because a project whose thesis is that unchecked claims rot should not make an unchecked claim about its checks.
+
+## D32. The proposal described two different studies, and I did not notice because each was true.
+
+**Date:** 2026-07-13. **Found by GPT-5.6: "Either 4.3M works receive LLM labels or only 10,000 do."**
+
+### What happened
+
+Two sentences, both correct, describing incompatible designs:
+
+- **"The LLM labels ~10,000 works; a classifier trains on those; inference over 4.3M is cheap."** This is the annotation design the PI proposed, on the premise that LLM-labelling 4.3M works is infeasible on cost and time.
+- **"$1,261 every work at full rubric."** This is finding 13, my own cost measurement: the full v3.1 rubric over **all 4,299,418 works** costs **$1,261**.
+
+**The second sentence refutes the first sentence's premise, and both were on the page.** The LLM screen over the whole frame is *affordable*. The classifier was never needed as a cost workaround. I had measured that myself, in D7, and then wrote a proposal that budgeted for the full screen in one paragraph and justified a cheap substitute for it in the next.
+
+### What the classifier is actually for, now that the premise is gone
+
+It survives, but for reasons that have nothing to do with cost, and the proposal now says which:
+
+1. **The audit needs a continuous calibrated score.** LLM tier labels are discrete and uncalibrated; the score-strata need P(category) in [0,1]. Nothing else supplies it.
+2. **Rubric revisions cost a pass.** Each full-frame LLM screen is $1,261 and days of wall-clock. The classifier re-scores 4.3M in minutes, so a rubric change can be *tested* before a pass is *spent*.
+3. **Frame-wide disagreement mapping.** Running three teachers over 4.3M costs 3x and ~25 days. Per-teacher heads predict **where the three would disagree** across the whole frame from a 5,600-work sample. The contested region is this project's central object, and this is the only affordable way to see it at frame scale.
+4. **Learnability is itself evidence about the boundary.** The distillation ceiling (Jaccard 0.17 against its own teacher) was exactly such a finding.
+
+None of these lets it emit a category label, and it does not.
+
+### The lesson, which is not about classifiers
+
+**Two true sentences can describe two different studies.** Every number on the page was checked by `check_proposal_numbers.R`, and the check passed, because the check verifies that each number is *derivable*, not that the numbers describe *one coherent design*. A build guard can catch a false number. It cannot catch a false architecture. That still takes a reader, and the reader was a model I asked to attack the page.
+
+## D33. I measured a metric on a set the algorithm was editing, and it told me the opposite of the truth.
+
+**Date:** 2026-07-13. **Caught by a constant that should have been a variable.**
+
+### What happened
+
+The active-learning loop's first run reported that the loop **degrades**: held-out average precision falling from 0.019 at round 1 to 0.011 at round 20, after revealing 2,000 labels. I had the write-up half-formed in my head, and it was a good story: *uncertainty sampling feeds the model a diet of contested works, the boundary is definitionally contested, so the training set becomes progressively more adversarial and less representative, and the loop eats itself.* It fit this project's central thesis perfectly. **That is exactly why I should have distrusted it.**
+
+Then I looked at the churn column: **1.000, twenty times in a row.** A quantity that never moves is not a measurement.
+
+**The metric was computed on the POOL, the set of not-yet-revealed works.** Active learning *removes the contested works from the pool by construction*. So every round the pool got easier, smaller, and differently composed, and I was comparing the model against a target that the model itself was editing. The "degradation" was the denominator moving.
+
+### The corrected result, which says the opposite
+
+A fixed holdout, drawn once, never queried, invisible to every acquisition decision. Plus a **random-batch control at identical budget**, which the first version did not have at all, and without which a curve means nothing:
+
+| | round 1 | round 20 |
+|---|---|---|
+| active (50 disagreement + 30 uncertainty + 20 random) | AP 0.014 | **AP 0.139** |
+| random batches, same budget | AP 0.024 | AP 0.050 |
+
+**Active learning wins 18 of 20 rounds and ends at 2.8x the control.** Held-out positive-set churn falls from 1.00 to 0.11. The PI's directive (batches of 100, iterate until it matures) is **vindicated as an acquisition policy**, and the loop demonstrably *does* mature in the only sense the word can honestly carry here: the model's opinion about the *same* works stops moving.
+
+### The lesson, and it is not "add a holdout"
+
+I have now written, in this project, three variants of the same error, and this is the fourth:
+
+- **D4/D19:** a `summarise()` output named after its input, silently masking it.
+- **D22:** a stratified design where `sum(N_h) != N`, so 12.9% of the frame had zero selection probability, and every stratum still returned exactly the *n* it asked for.
+- **D32:** two true sentences describing two different studies.
+- **D33:** a metric measured against a moving denominator.
+
+**Every one of them produced output that looked correct.** And this one had the additional property that its wrong answer *confirmed my thesis*. The zero-probability hole made the sample tidier. The literature corroboration made the evidence feel stronger. Now a bug produced a result that flattered the project's central claim, and I was three paragraphs into believing it.
+
+**The errors that survive are the ones that flatter you.** That sentence is in this file five times now. It keeps earning its place.

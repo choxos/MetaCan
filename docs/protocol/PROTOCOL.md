@@ -190,6 +190,79 @@ output is shown to the human coders.
 
 The core of the study, and the thing the field usually skips.
 
+## 5.5 The classifier: what it may do, what it may not, and what it is actually for
+
+**It was proposed as a way to avoid LLM-labelling 4.3M works, and that premise is false.**
+Finding 13 measured the cost: the full v3.1 rubric over **every work in the frame is $1,261**.
+There was never anything to avoid, and a proposal that budgeted the full screen in one
+paragraph while justifying a cheap substitute for it in the next was describing two studies
+(D32). The screen reads every work. The classifier is a **different instrument**, and it is
+preregistered here as one.
+
+**What it may not do: emit a category label.** Not thresholded, not "provisional", not for the
+confident core. Distilled from our own metaresearch labels, a student reproduced **its own
+teacher's positive set at Jaccard 0.17** (finding 25). Two independent adversarial reviews
+reached the same verdict by different routes: per-teacher heads are useful for **allocating
+human effort** and **cosmetic as a solution to the contested boundary**. Scores ship; labels
+do not.
+
+**What it is for, each measured rather than asserted (finding 30):**
+
+1. **A calibrated score for the audit to stratify on.** Top-decile lift 3.9x to 5.3x. Tier
+   labels are discrete and uncalibrated; the score-strata need a continuous quantity.
+2. **Rubric revisions testable in minutes** instead of one $1,261 pass each.
+3. **A frame-wide estimate of where the three teachers would split**, from 5,600 labels rather
+   than three full passes (3x cost, ~25 days). It works and **it is weak: 3.74x the base
+   rate**, reported as an efficiency gain for the disagreement stratum, never as a map to
+   trust on its own. Shared teacher bias is invisible to it: if all three are wrong the same
+   way, the spread is zero and the work looks settled.
+4. **Learnability as evidence about the boundary**, which produced the finding below.
+
+**Three results that constrain everything downstream.**
+
+- **The estimand moves measured performance 2.7x** (design-weighted AP: unanimous 0.078,
+  majority 0.136, any 0.209). There is no "the" target. Every consensus rule is a **named
+  sensitivity analysis**, and training on one silently settles the question the audit exists
+  to answer.
+- **The unanimous core is the HARDEST to learn, not the easiest.** If the boundary were a
+  line the models share with noise around it, the agreed core would be the separable part.
+  It is not.
+- **The abstract is worth more than any modelling choice** (+0.115 AP, 84% relative), and the
+  frame cannot serve it: the works table stores `has_abstract`, a boolean, and no text. The
+  **deployable model is the worse one**, `ml/features.py` **FAILS the build** if a model is
+  trained on a field inference cannot supply, and the gap is now a priced budget decision
+  rather than an assumption.
+
+**Active learning (finding 31).** Batches of 100 = 50 max-teacher-disagreement + 30
+max-uncertainty + 20 random. Against a **random-batch control at identical budget**, active
+acquisition takes held-out AP from 0.014 to **0.139** where the control reaches 0.050: **2.8x,
+winning 18 of 20 rounds**, with held-out churn falling to 0.11. **The 20 random anchors are
+NOT an evaluation stream**: after 400 draws they hold **three** positives, and the 95% interval
+on prevalence is **wider than the prevalence**. They are demoted to **drift sentinels**, never
+used to select a batch. **The loop learns; the audit measures.** AP throughout is agreement
+with the majority *teacher*, so the entire curve is **imitation, not accuracy**, and the
+simulation runs on labels that already exist: it shows the loop's mechanics and **cannot** show
+that it matures on 4.3M unlabelled works.
+
+**Study design, the one annotation with an external reference standard.** MEDLINE publication
+types are assigned by NLM independently of this project, so a design label can be **wrong in a
+way the pipeline cannot hide**. Three constraints, all prespecified:
+
+- **The reference subset is defined by NLM's record-level `IndexingMethod`, not by a year.**
+  Full human indexing ended as universal practice around 2011 and automation completed in
+  2022; the eras overlap for a decade, so no date cutoff separates them. Absent = human (the
+  reference); `Curated` = automated-then-reviewed; `Automated` = machine. The latter two
+  measure **agreement with another machine** and are never pooled into the gate.
+- **Publication types are overlapping binary attributes, not an exhaustive mutually-exclusive
+  ontology.** A work can be both Systematic Review and Meta-Analysis. Six **independent binary
+  heads**, never a softmax that forces a choice the standard itself does not make.
+- **Class-specific calendar eligibility, because a type that did not exist cannot be a
+  negative.** *Observational Study* enters the vocabulary in **2014**, *Systematic Review* in
+  **2019**. A 2008 cohort study carries no Observational Study tag because the tag did not
+  exist. Records outside a class's window are **not data** for that class, in either direction.
+- **The gate is on the lower 95% confidence bound**, not the point estimate, with a minimum
+  eligible sample; a class that fails ships as a **score, marked unvalidated**.
+
 ### 6.0 The design this replaces, and why it could not work
 
 An earlier version of this protocol said: partition F into screened-in and screened-out, draw a probability sample

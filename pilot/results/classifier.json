@@ -1,0 +1,444 @@
+{
+ "frame_parity": {
+  "strict": {
+   "heads": {
+    "opus": {
+     "name": "opus",
+     "n_pos": 110,
+     "ap_unweighted": 0.1432,
+     "ap_design_weighted": 0.17,
+     "auc_design_weighted": 0.7996,
+     "ap_by_language": {
+      "en": 0.1757,
+      "fr": 0.181
+     },
+     "ap_by_abstract": {
+      "with_abstract": 0.1388,
+      "title_only": 0.2848
+     },
+     "lift_top_decile": 4.68
+    },
+    "gpt": {
+     "name": "gpt",
+     "n_pos": 112,
+     "ap_unweighted": 0.1132,
+     "ap_design_weighted": 0.135,
+     "auc_design_weighted": 0.7594,
+     "ap_by_language": {
+      "en": 0.1425,
+      "fr": 0.089
+     },
+     "ap_by_abstract": {
+      "with_abstract": 0.1206,
+      "title_only": 0.217
+     },
+     "lift_top_decile": 3.93
+    },
+    "grok": {
+     "name": "grok",
+     "n_pos": 91,
+     "ap_unweighted": 0.1172,
+     "ap_design_weighted": 0.1417,
+     "auc_design_weighted": 0.8132,
+     "ap_by_language": {
+      "en": 0.1478,
+      "fr": 0.1318
+     },
+     "ap_by_abstract": {
+      "with_abstract": 0.1558,
+      "title_only": 0.101
+     },
+     "lift_top_decile": 5.28
+    },
+    "consensus_unanimous": {
+     "name": "consensus_unanimous",
+     "n_pos": 65,
+     "ap_unweighted": 0.0641,
+     "ap_design_weighted": 0.0783,
+     "auc_design_weighted": 0.7547,
+     "ap_by_language": {
+      "en": 0.0831,
+      "fr": 0.0989
+     },
+     "ap_by_abstract": {
+      "with_abstract": 0.0808,
+      "title_only": 0.088
+     },
+     "lift_top_decile": 3.66
+    },
+    "consensus_majority": {
+     "name": "consensus_majority",
+     "n_pos": 94,
+     "ap_unweighted": 0.1067,
+     "ap_design_weighted": 0.1364,
+     "auc_design_weighted": 0.7909,
+     "ap_by_language": {
+      "en": 0.1442,
+      "fr": 0.1327
+     },
+     "ap_by_abstract": {
+      "with_abstract": 0.1115,
+      "title_only": 0.2938
+     },
+     "lift_top_decile": 4.99
+    },
+    "consensus_any": {
+     "name": "consensus_any",
+     "n_pos": 154,
+     "ap_unweighted": 0.1874,
+     "ap_design_weighted": 0.2093,
+     "auc_design_weighted": 0.7967,
+     "ap_by_language": {
+      "en": 0.2155,
+      "fr": 0.208
+     },
+     "ap_by_abstract": {
+      "with_abstract": 0.1887,
+      "title_only": 0.2933
+     },
+     "lift_top_decile": 4.59
+    }
+   },
+   "predicting_teacher_disagreement": {
+    "n_contested": 89,
+    "base_rate": 0.0159,
+    "average_precision": 0.0594,
+    "lift_over_base": 3.74,
+    "what_this_is": "Can the between-head spread, computed from a 5,600-work sample, tell us WHERE the three teachers would disagree? If yes, the contested region of the whole 4.3M frame is mappable without running three LLMs over it (3x cost, ~25 days). This is the classifier's single strongest justification and it is measured, not assumed.",
+    "what_this_is_not": "Evidence that the spread tracks DEFINITIONAL contestedness. It tracks where these three models split under this rubric. Shared teacher bias is invisible to it: if all three are wrong the same way, the spread is zero and the work looks settled."
+   }
+  },
+  "broad": {
+   "heads": {
+    "opus": {
+     "name": "opus",
+     "n_pos": 224,
+     "ap_unweighted": 0.1906,
+     "ap_design_weighted": 0.1894,
+     "auc_design_weighted": 0.8035,
+     "ap_by_language": {
+      "en": 0.1899,
+      "fr": 0.2986
+     },
+     "ap_by_abstract": {
+      "with_abstract": 0.1876,
+      "title_only": 0.2287
+     },
+     "lift_top_decile": 4.55
+    },
+    "gpt": {
+     "name": "gpt",
+     "n_pos": 163,
+     "ap_unweighted": 0.1667,
+     "ap_design_weighted": 0.1784,
+     "auc_design_weighted": 0.7625,
+     "ap_by_language": {
+      "en": 0.1891,
+      "fr": 0.1777
+     },
+     "ap_by_abstract": {
+      "with_abstract": 0.1794,
+      "title_only": 0.1988
+     },
+     "lift_top_decile": 3.97
+    },
+    "grok": {
+     "name": "grok",
+     "n_pos": 148,
+     "ap_unweighted": 0.1752,
+     "ap_design_weighted": 0.1752,
+     "auc_design_weighted": 0.7862,
+     "ap_by_language": {
+      "en": 0.1748,
+      "fr": 0.3559
+     },
+     "ap_by_abstract": {
+      "with_abstract": 0.1885,
+      "title_only": 0.1311
+     },
+     "lift_top_decile": 4.41
+    },
+    "consensus_unanimous": {
+     "name": "consensus_unanimous",
+     "n_pos": 104,
+     "ap_unweighted": 0.137,
+     "ap_design_weighted": 0.1339,
+     "auc_design_weighted": 0.7902,
+     "ap_by_language": {
+      "en": 0.1353,
+      "fr": 0.2737
+     },
+     "ap_by_abstract": {
+      "with_abstract": 0.1335,
+      "title_only": 0.1579
+     },
+     "lift_top_decile": 4.36
+    },
+    "consensus_majority": {
+     "name": "consensus_majority",
+     "n_pos": 157,
+     "ap_unweighted": 0.1771,
+     "ap_design_weighted": 0.1899,
+     "auc_design_weighted": 0.7864,
+     "ap_by_language": {
+      "en": 0.1973,
+      "fr": 0.2755
+     },
+     "ap_by_abstract": {
+      "with_abstract": 0.1931,
+      "title_only": 0.1943
+     },
+     "lift_top_decile": 4.58
+    },
+    "consensus_any": {
+     "name": "consensus_any",
+     "n_pos": 274,
+     "ap_unweighted": 0.2332,
+     "ap_design_weighted": 0.229,
+     "auc_design_weighted": 0.7889,
+     "ap_by_language": {
+      "en": 0.2318,
+      "fr": 0.3328
+     },
+     "ap_by_abstract": {
+      "with_abstract": 0.2295,
+      "title_only": 0.2415
+     },
+     "lift_top_decile": 4.27
+    }
+   },
+   "predicting_teacher_disagreement": {
+    "n_contested": 170,
+    "base_rate": 0.0304,
+    "average_precision": 0.0921,
+    "lift_over_base": 3.03,
+    "what_this_is": "Can the between-head spread, computed from a 5,600-work sample, tell us WHERE the three teachers would disagree? If yes, the contested region of the whole 4.3M frame is mappable without running three LLMs over it (3x cost, ~25 days). This is the classifier's single strongest justification and it is measured, not assumed.",
+    "what_this_is_not": "Evidence that the spread tracks DEFINITIONAL contestedness. It tracks where these three models split under this rubric. Shared teacher bias is invisible to it: if all three are wrong the same way, the spread is zero and the work looks settled."
+   }
+  }
+ },
+ "with_abstract_NOT_DEPLOYABLE": {
+  "strict": {
+   "heads": {
+    "opus": {
+     "name": "opus",
+     "n_pos": 110,
+     "ap_unweighted": 0.2154,
+     "ap_design_weighted": 0.2586,
+     "auc_design_weighted": 0.8845,
+     "ap_by_language": {
+      "en": 0.2694,
+      "fr": 0.172
+     },
+     "ap_by_abstract": {
+      "with_abstract": 0.2661,
+      "title_only": 0.2315
+     },
+     "lift_top_decile": 6.4
+    },
+    "gpt": {
+     "name": "gpt",
+     "n_pos": 112,
+     "ap_unweighted": 0.1738,
+     "ap_design_weighted": 0.1944,
+     "auc_design_weighted": 0.8626,
+     "ap_by_language": {
+      "en": 0.2016,
+      "fr": 0.1415
+     },
+     "ap_by_abstract": {
+      "with_abstract": 0.1984,
+      "title_only": 0.2344
+     },
+     "lift_top_decile": 5.64
+    },
+    "grok": {
+     "name": "grok",
+     "n_pos": 91,
+     "ap_unweighted": 0.1994,
+     "ap_design_weighted": 0.236,
+     "auc_design_weighted": 0.9095,
+     "ap_by_language": {
+      "en": 0.2377,
+      "fr": 0.2174
+     },
+     "ap_by_abstract": {
+      "with_abstract": 0.2559,
+      "title_only": 0.1951
+     },
+     "lift_top_decile": 7.3
+    },
+    "consensus_unanimous": {
+     "name": "consensus_unanimous",
+     "n_pos": 65,
+     "ap_unweighted": 0.1637,
+     "ap_design_weighted": 0.1966,
+     "auc_design_weighted": 0.8989,
+     "ap_by_language": {
+      "en": 0.2086,
+      "fr": 0.1479
+     },
+     "ap_by_abstract": {
+      "with_abstract": 0.2159,
+      "title_only": 0.184
+     },
+     "lift_top_decile": 6.89
+    },
+    "consensus_majority": {
+     "name": "consensus_majority",
+     "n_pos": 94,
+     "ap_unweighted": 0.2089,
+     "ap_design_weighted": 0.2509,
+     "auc_design_weighted": 0.9007,
+     "ap_by_language": {
+      "en": 0.2601,
+      "fr": 0.1419
+     },
+     "ap_by_abstract": {
+      "with_abstract": 0.2568,
+      "title_only": 0.2459
+     },
+     "lift_top_decile": 6.93
+    },
+    "consensus_any": {
+     "name": "consensus_any",
+     "n_pos": 154,
+     "ap_unweighted": 0.2268,
+     "ap_design_weighted": 0.2587,
+     "auc_design_weighted": 0.8686,
+     "ap_by_language": {
+      "en": 0.2658,
+      "fr": 0.2617
+     },
+     "ap_by_abstract": {
+      "with_abstract": 0.2644,
+      "title_only": 0.2593
+     },
+     "lift_top_decile": 5.7
+    }
+   },
+   "predicting_teacher_disagreement": {
+    "n_contested": 89,
+    "base_rate": 0.0159,
+    "average_precision": 0.0766,
+    "lift_over_base": 4.82,
+    "what_this_is": "Can the between-head spread, computed from a 5,600-work sample, tell us WHERE the three teachers would disagree? If yes, the contested region of the whole 4.3M frame is mappable without running three LLMs over it (3x cost, ~25 days). This is the classifier's single strongest justification and it is measured, not assumed.",
+    "what_this_is_not": "Evidence that the spread tracks DEFINITIONAL contestedness. It tracks where these three models split under this rubric. Shared teacher bias is invisible to it: if all three are wrong the same way, the spread is zero and the work looks settled."
+   }
+  },
+  "broad": {
+   "heads": {
+    "opus": {
+     "name": "opus",
+     "n_pos": 224,
+     "ap_unweighted": 0.3095,
+     "ap_design_weighted": 0.3005,
+     "auc_design_weighted": 0.8652,
+     "ap_by_language": {
+      "en": 0.3042,
+      "fr": 0.4194
+     },
+     "ap_by_abstract": {
+      "with_abstract": 0.3234,
+      "title_only": 0.2038
+     },
+     "lift_top_decile": 6.02
+    },
+    "gpt": {
+     "name": "gpt",
+     "n_pos": 163,
+     "ap_unweighted": 0.2434,
+     "ap_design_weighted": 0.2419,
+     "auc_design_weighted": 0.8543,
+     "ap_by_language": {
+      "en": 0.2529,
+      "fr": 0.2331
+     },
+     "ap_by_abstract": {
+      "with_abstract": 0.2537,
+      "title_only": 0.2194
+     },
+     "lift_top_decile": 6.04
+    },
+    "grok": {
+     "name": "grok",
+     "n_pos": 148,
+     "ap_unweighted": 0.2293,
+     "ap_design_weighted": 0.2308,
+     "auc_design_weighted": 0.866,
+     "ap_by_language": {
+      "en": 0.2328,
+      "fr": 0.3292
+     },
+     "ap_by_abstract": {
+      "with_abstract": 0.2476,
+      "title_only": 0.1375
+     },
+     "lift_top_decile": 6.0
+    },
+    "consensus_unanimous": {
+     "name": "consensus_unanimous",
+     "n_pos": 104,
+     "ap_unweighted": 0.217,
+     "ap_design_weighted": 0.2255,
+     "auc_design_weighted": 0.8893,
+     "ap_by_language": {
+      "en": 0.2354,
+      "fr": 0.2863
+     },
+     "ap_by_abstract": {
+      "with_abstract": 0.2364,
+      "title_only": 0.2223
+     },
+     "lift_top_decile": 7.57
+    },
+    "consensus_majority": {
+     "name": "consensus_majority",
+     "n_pos": 157,
+     "ap_unweighted": 0.2659,
+     "ap_design_weighted": 0.2665,
+     "auc_design_weighted": 0.8831,
+     "ap_by_language": {
+      "en": 0.2775,
+      "fr": 0.3409
+     },
+     "ap_by_abstract": {
+      "with_abstract": 0.2811,
+      "title_only": 0.1941
+     },
+     "lift_top_decile": 6.17
+    },
+    "consensus_any": {
+     "name": "consensus_any",
+     "n_pos": 274,
+     "ap_unweighted": 0.3226,
+     "ap_design_weighted": 0.311,
+     "auc_design_weighted": 0.846,
+     "ap_by_language": {
+      "en": 0.3153,
+      "fr": 0.4205
+     },
+     "ap_by_abstract": {
+      "with_abstract": 0.3335,
+      "title_only": 0.2187
+     },
+     "lift_top_decile": 5.67
+    }
+   },
+   "predicting_teacher_disagreement": {
+    "n_contested": 170,
+    "base_rate": 0.0304,
+    "average_precision": 0.1127,
+    "lift_over_base": 3.71,
+    "what_this_is": "Can the between-head spread, computed from a 5,600-work sample, tell us WHERE the three teachers would disagree? If yes, the contested region of the whole 4.3M frame is mappable without running three LLMs over it (3x cost, ~25 days). This is the classifier's single strongest justification and it is measured, not assumed.",
+    "what_this_is_not": "Evidence that the spread tracks DEFINITIONAL contestedness. It tracks where these three models split under this rubric. Shared teacher bias is invisible to it: if all three are wrong the same way, the spread is zero and the work looks settled."
+   }
+  }
+ },
+ "payload_skew": {
+  "ap_frame_parity": 0.1364,
+  "ap_with_abstract": 0.2509,
+  "abstract_is_worth_ap": 0.1145,
+  "why_the_deployable_model_is_the_worse_one": "data/db/works.csv stores has_abstract, a boolean, and no abstract text. A model trained with abstracts scores a payload the 4.3M works do not have. Reporting the abstract model's number as the classifier's performance would be reporting a metric for a model that cannot run. The difference is what re-extracting abstracts from the snapshot would buy, and it is a budget decision with a number attached rather than an assumption."
+ }
+}
