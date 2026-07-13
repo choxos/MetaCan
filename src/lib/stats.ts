@@ -1,0 +1,372 @@
+import { unstable_cache } from 'next/cache'
+import { prisma } from '@/lib/db'
+
+/**
+ * Aggregations over the frame, shared by /analytics and /api/v1/stats/*.
+ *
+ * Same contract as `searchWorks()` in query.ts, for the same reason: the page and
+ * the API must answer the SAME question. Two implementations of one aggregate is
+ * a bug that hides for a year, and on a project whose thesis is that prose must
+ * not drift from the code, it would be self-refuting.
+ *
+ * Every function here is a GROUP BY over 4.3M rows, so every one is wrapped in a
+ * one-hour cache. The frame is a PINNED SNAPSHOT: it does not change between
+ * deploys, so a stale aggregate is not a risk, and re-scanning four million rows
+ * per page view would be.
+ */
+
+const HOUR = 3600
+
+/** Postgres returns COUNT(*) as bigint, which arrives as a JS BigInt. */
+function toN(v: unknown): number {
+  return typeof v === 'bigint' ? Number(v) : typeof v === 'number' ? v : 0
+}
+
+export interface Summary {
+  works: number
+  no_aff: number
+  no_abstract: number
+  retracted_openalex: number
+  screened: number
+  retraction_notices: number
+  routes: { aff: number; fund: number; venue: number; about: number }
+  screen_consensus: { n_in_0: number; n_in_1: number; n_in_2: number; n_in_3: number }
+  snapshot: string
+}
+
+export const getSummary = unstable_cache(
+  async (): Promise<Summary> => {
+    // One pass over the table for the six frame-wide counts. Six separate
+    // count()s would be six sequential scans of 4.3M rows.
+    const [row] = await prisma.$queryRaw<
+      Array<Record<string, bigint>>
+    >`SELECT
+        COUNT(*)                                        AS works,
+        COUNT(*) FILTER (WHERE NOT route_ca_aff)        AS no_aff,
+        COUNT(*) FILTER (WHERE NOT has_abstract)        AS no_abstract,
+        COUNT(*) FILTER (WHERE is_retracted)            AS retracted_openalex,
+        COUNT(*) FILTER (WHERE route_ca_aff)            AS aff,
+        COUNT(*) FILTER (WHERE route_ca_fund)           AS fund,
+        COUNT(*) FILTER (WHERE route_ca_venue)          AS venue,
+        COUNT(*) FILTER (WHERE route_about_ca)          AS about
+      FROM works`
+
+    const [scr] = await prisma.$queryRaw<
+      Array<Record<string, bigint>>
+    >`SELECT
+        COUNT(*)                          AS screened,
+        COUNT(*) FILTER (WHERE n_in = 0)  AS n0,
+        COUNT(*) FILTER (WHERE n_in = 1)  AS n1,
+        COUNT(*) FILTER (WHERE n_in = 2)  AS n2,
+        COUNT(*) FILTER (WHERE n_in = 3)  AS n3
+      FROM screened`
+
+    const notices = await prisma.retraction.count()
+
+    return {
+      works: toN(row?.works),
+      no_aff: toN(row?.no_aff),
+      no_abstract: toN(row?.no_abstract),
+      retracted_openalex: toN(row?.retracted_openalex),
+      screened: toN(scr?.screened),
+      retraction_notices: notices,
+      routes: {
+        aff: toN(row?.aff),
+        fund: toN(row?.fund),
+        venue: toN(row?.venue),
+        about: toN(row?.about),
+      },
+      screen_consensus: {
+        n_in_0: toN(scr?.n0),
+        n_in_1: toN(scr?.n1),
+        n_in_2: toN(scr?.n2),
+        n_in_3: toN(scr?.n3),
+      },
+      snapshot: 'OpenAlex, pinned release, all 482 partitions',
+    }
+  },
+  ['mc:summary'],
+  { revalidate: HOUR, tags: ['stats'] },
+)
+
+export interface YearPoint {
+  year: number
+  works: number
+  no_aff: number
+  no_abstract: number
+}
+
+export const getByYear = unstable_cache(
+  async (): Promise<YearPoint[]> => {
+    const rows = await prisma.$queryRaw<Array<Record<string, bigint | number | null>>>`
+      SELECT year,
+             COUNT(*)                                 AS works,
+             COUNT(*) FILTER (WHERE NOT route_ca_aff) AS no_aff,
+             COUNT(*) FILTER (WHERE NOT has_abstract) AS no_abstract
+      FROM works
+      WHERE year IS NOT NULL AND year BETWEEN 1800 AND 2100
+      GROUP BY year
+      ORDER BY year`
+    return rows.map((r) => ({
+      year: toN(r.year),
+      works: toN(r.works),
+      no_aff: toN(r.no_aff),
+      no_abstract: toN(r.no_abstract),
+    }))
+  },
+  ['mc:by-year'],
+  { revalidate: HOUR, tags: ['stats'] },
+)
+
+export interface RoutePoint {
+  route: string
+  label: string
+  works: number
+}
+
+/**
+ * The four routes are NOT mutually exclusive; a work can be admitted by several.
+ * So this returns both the marginal count per route and the exact route-combination
+ * breakdown, because the overlap IS the finding: report only the marginals and the
+ * columns sum to more than the frame, which looks like an error and hides the point.
+ */
+export interface RouteStats {
+  marginals: RoutePoint[]
+  /** Exact combinations, e.g. "aff+fund". Sums to the frame exactly. */
+  combinations: Array<{ combo: string; n_routes: number; works: number }>
+  no_aff: number
+  total: number
+}
+
+export const getByRoute = unstable_cache(
+  async (): Promise<RouteStats> => {
+    const [m] = await prisma.$queryRaw<Array<Record<string, bigint>>>`
+      SELECT COUNT(*)                                 AS total,
+             COUNT(*) FILTER (WHERE route_ca_aff)     AS aff,
+             COUNT(*) FILTER (WHERE route_ca_fund)    AS fund,
+             COUNT(*) FILTER (WHERE route_ca_venue)   AS venue,
+             COUNT(*) FILTER (WHERE route_about_ca)   AS about,
+             COUNT(*) FILTER (WHERE NOT route_ca_aff) AS no_aff
+      FROM works`
+
+    const combos = await prisma.$queryRaw<Array<Record<string, unknown>>>`
+      SELECT route_ca_aff, route_ca_fund, route_ca_venue, route_about_ca, COUNT(*) AS works
+      FROM works
+      GROUP BY 1, 2, 3, 4
+      ORDER BY works DESC`
+
+    const combinations = combos.map((c) => {
+      const parts: string[] = []
+      if (c.route_ca_aff) parts.push('aff')
+      if (c.route_ca_fund) parts.push('fund')
+      if (c.route_ca_venue) parts.push('venue')
+      if (c.route_about_ca) parts.push('about')
+      return {
+        combo: parts.length ? parts.join('+') : 'none',
+        n_routes: parts.length,
+        works: toN(c.works),
+      }
+    })
+
+    return {
+      marginals: [
+        { route: 'aff', label: 'Canadian affiliation', works: toN(m?.aff) },
+        { route: 'fund', label: 'Canadian funder', works: toN(m?.fund) },
+        { route: 'venue', label: 'Canadian venue', works: toN(m?.venue) },
+        { route: 'about', label: 'About Canada', works: toN(m?.about) },
+      ],
+      combinations,
+      no_aff: toN(m?.no_aff),
+      total: toN(m?.total),
+    }
+  },
+  ['mc:by-route'],
+  { revalidate: HOUR, tags: ['stats'] },
+)
+
+export interface FieldPoint {
+  field: string
+  works: number
+  no_abstract: number
+}
+
+export const getByField = unstable_cache(
+  async (): Promise<FieldPoint[]> => {
+    const rows = await prisma.$queryRaw<Array<Record<string, unknown>>>`
+      SELECT COALESCE(NULLIF(field, ''), 'Unclassified') AS field,
+             COUNT(*)                                    AS works,
+             COUNT(*) FILTER (WHERE NOT has_abstract)    AS no_abstract
+      FROM works
+      GROUP BY 1
+      ORDER BY works DESC`
+    return rows.map((r) => ({
+      field: String(r.field ?? 'Unclassified'),
+      works: toN(r.works),
+      no_abstract: toN(r.no_abstract),
+    }))
+  },
+  ['mc:by-field'],
+  { revalidate: HOUR, tags: ['stats'] },
+)
+
+export interface LangPoint {
+  lang: string
+  works: number
+  no_abstract: number
+}
+
+export const getByLanguage = unstable_cache(
+  async (): Promise<LangPoint[]> => {
+    const rows = await prisma.$queryRaw<Array<Record<string, unknown>>>`
+      SELECT COALESCE(NULLIF(lang, ''), 'unknown')     AS lang,
+             COUNT(*)                                  AS works,
+             COUNT(*) FILTER (WHERE NOT has_abstract)  AS no_abstract
+      FROM works
+      GROUP BY 1
+      ORDER BY works DESC
+      LIMIT 15`
+    return rows.map((r) => ({
+      lang: String(r.lang ?? 'unknown'),
+      works: toN(r.works),
+      no_abstract: toN(r.no_abstract),
+    }))
+  },
+  ['mc:by-lang'],
+  { revalidate: HOUR, tags: ['stats'] },
+)
+
+/**
+ * The abstract gap by type. This is finding `abstract_cascade`'s structural claim
+ * made visible: the gap is not uniform noise a better index would fix, it is
+ * concentrated in types that never carry an abstract at all.
+ */
+export interface TypePoint {
+  type: string
+  works: number
+  no_abstract: number
+  pct_no_abstract: number
+}
+
+export const getAbstractGapByType = unstable_cache(
+  async (): Promise<TypePoint[]> => {
+    const rows = await prisma.$queryRaw<Array<Record<string, unknown>>>`
+      SELECT COALESCE(NULLIF(type, ''), 'unknown')    AS type,
+             COUNT(*)                                 AS works,
+             COUNT(*) FILTER (WHERE NOT has_abstract) AS no_abstract
+      FROM works
+      GROUP BY 1
+      HAVING COUNT(*) >= 1000
+      ORDER BY works DESC
+      LIMIT 14`
+    return rows.map((r) => {
+      const works = toN(r.works)
+      const no_abstract = toN(r.no_abstract)
+      return {
+        type: String(r.type ?? 'unknown'),
+        works,
+        no_abstract,
+        pct_no_abstract: works ? Number(((no_abstract / works) * 100).toFixed(1)) : 0,
+      }
+    })
+  },
+  ['mc:abstract-gap'],
+  { revalidate: HOUR, tags: ['stats'] },
+)
+
+export interface VenuePoint {
+  venue: string
+  works: number
+}
+
+export const getTopVenues = unstable_cache(
+  async (): Promise<VenuePoint[]> => {
+    const rows = await prisma.$queryRaw<Array<Record<string, unknown>>>`
+      SELECT venue, COUNT(*) AS works
+      FROM works
+      WHERE venue IS NOT NULL AND venue <> ''
+      GROUP BY venue
+      ORDER BY works DESC
+      LIMIT 20`
+    return rows.map((r) => ({ venue: String(r.venue), works: toN(r.works) }))
+  },
+  ['mc:top-venues'],
+  { revalidate: HOUR, tags: ['stats'] },
+)
+
+/**
+ * Funders are stored as a semicolon-separated string (as harvested), so the top-N
+ * needs a split. Done in SQL rather than by pulling 4.3M rows into node.
+ */
+export const getTopFunders = unstable_cache(
+  async (): Promise<Array<{ funder: string; works: number }>> => {
+    const rows = await prisma.$queryRaw<Array<Record<string, unknown>>>`
+      SELECT TRIM(f) AS funder, COUNT(*) AS works
+      FROM works, LATERAL unnest(string_to_array(funders, ';')) AS f
+      WHERE funders IS NOT NULL AND funders <> '' AND TRIM(f) <> ''
+      GROUP BY 1
+      ORDER BY works DESC
+      LIMIT 20`
+    return rows.map((r) => ({ funder: String(r.funder), works: toN(r.works) }))
+  },
+  ['mc:top-funders'],
+  { revalidate: HOUR, tags: ['stats'] },
+)
+
+/**
+ * The retraction state breakdown: FOUR states, not a boolean.
+ *
+ * `openalex_flagged = false` means OpenAlex missed it entirely. That column is the
+ * point of the table: a boolean over a four-value state space can express
+ * "retracted" and reports the other three as `false`, which reads as "fine".
+ */
+export interface RetractionState {
+  nature: string
+  works: number
+  openalex_flagged: number
+  openalex_missed: number
+}
+
+export const getRetractionStates = unstable_cache(
+  async (): Promise<RetractionState[]> => {
+    const rows = await prisma.$queryRaw<Array<Record<string, unknown>>>`
+      SELECT COALESCE(NULLIF(nature, ''), 'Unspecified')  AS nature,
+             COUNT(*)                                     AS works,
+             COUNT(*) FILTER (WHERE openalex_flagged)     AS flagged,
+             COUNT(*) FILTER (WHERE NOT openalex_flagged) AS missed
+      FROM retractions
+      GROUP BY 1
+      ORDER BY works DESC`
+    return rows.map((r) => ({
+      nature: String(r.nature ?? 'Unspecified'),
+      works: toN(r.works),
+      openalex_flagged: toN(r.flagged),
+      openalex_missed: toN(r.missed),
+    }))
+  },
+  ['mc:retraction-states'],
+  { revalidate: HOUR, tags: ['stats'] },
+)
+
+/** Distinct filter values for the browse UI. Small, and cached for a day. */
+export const getFacets = unstable_cache(
+  async (): Promise<{ langs: string[]; types: string[]; fields: string[] }> => {
+    const [langs, types, fields] = await Promise.all([
+      prisma.$queryRaw<Array<{ v: string }>>`
+        SELECT lang AS v FROM works WHERE lang IS NOT NULL AND lang <> ''
+        GROUP BY lang ORDER BY COUNT(*) DESC LIMIT 25`,
+      prisma.$queryRaw<Array<{ v: string }>>`
+        SELECT type AS v FROM works WHERE type IS NOT NULL AND type <> ''
+        GROUP BY type ORDER BY COUNT(*) DESC LIMIT 25`,
+      prisma.$queryRaw<Array<{ v: string }>>`
+        SELECT field AS v FROM works WHERE field IS NOT NULL AND field <> ''
+        GROUP BY field ORDER BY COUNT(*) DESC LIMIT 30`,
+    ])
+    return {
+      langs: langs.map((r) => r.v),
+      types: types.map((r) => r.v),
+      fields: fields.map((r) => r.v),
+    }
+  },
+  ['mc:facets'],
+  { revalidate: 86_400, tags: ['stats'] },
+)
