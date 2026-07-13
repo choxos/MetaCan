@@ -2,6 +2,8 @@
 
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useCallback, useState, useEffect } from 'react'
+import { getDict } from '@/lib/i18n'
+import { localePath, type Lang } from '@/lib/lang'
 
 /**
  * The browse filters.
@@ -13,7 +15,9 @@ import { useCallback, useState, useEffect } from 'react'
  *
  * State lives in the URL, so every view is a shareable, citable link. That is a
  * requirement, not a nicety: a claim about the frame has to be checkable by
- * someone who was not there when it was made.
+ * someone who was not there when it was made. The filter VALUES (?route=aff,
+ * ?lang=fr) are the API's vocabulary and identical in both languages; only the
+ * labels around them switch.
  */
 
 export interface Facets {
@@ -22,37 +26,40 @@ export interface Facets {
   fields: string[]
 }
 
-const ROUTES = [
-  { v: '', label: 'Any route' },
-  { v: 'aff', label: 'Canadian affiliation' },
-  { v: 'fund', label: 'Canadian funder' },
-  { v: 'venue', label: 'Canadian venue' },
-  { v: 'about', label: 'About Canada' },
-  { v: 'no_aff', label: 'NO affiliation (invisible to the usual frame)' },
-] as const
-
-const SORTS = [
-  { v: 'cited', label: 'Most cited' },
-  { v: 'year_desc', label: 'Newest' },
-  { v: 'year_asc', label: 'Oldest' },
-] as const
-
-const CONSENSUS = [
-  { v: '', label: 'Any' },
-  { v: '3', label: '3/3 — all three models' },
-  { v: '2', label: '2/3 — contested' },
-  { v: '1', label: '1/3 — one model only' },
-  { v: '0', label: '0/3 — all three said out' },
-] as const
-
-export function Filters({ facets }: { facets: Facets }) {
+export function Filters({ facets, lang }: { facets: Facets; lang: Lang }) {
   const router = useRouter()
   const sp = useSearchParams()
+  const t = getDict(lang)
+
+  const ROUTES = [
+    { v: '', label: t.filters.anyRoute },
+    { v: 'aff', label: t.filters.routeAff },
+    { v: 'fund', label: t.filters.routeFund },
+    { v: 'venue', label: t.filters.routeVenue },
+    { v: 'about', label: t.filters.routeAbout },
+    { v: 'no_aff', label: t.filters.routeNoAff },
+  ] as const
+
+  const SORTS = [
+    { v: 'cited', label: t.filters.sortCited },
+    { v: 'year_desc', label: t.filters.sortNewest },
+    { v: 'year_asc', label: t.filters.sortOldest },
+  ] as const
+
+  const CONSENSUS = [
+    { v: '', label: t.filters.consensusAny },
+    { v: '3', label: t.filters.consensus3 },
+    { v: '2', label: t.filters.consensus2 },
+    { v: '1', label: t.filters.consensus1 },
+    { v: '0', label: t.filters.consensus0 },
+  ] as const
 
   // The text box is controlled locally so typing does not fire a query per
   // keystroke against a four-million-row table; it commits on submit.
   const [q, setQ] = useState(sp.get('q') ?? '')
   useEffect(() => setQ(sp.get('q') ?? ''), [sp])
+
+  const worksPath = localePath(lang, '/works')
 
   const push = useCallback(
     (over: Record<string, string | undefined>) => {
@@ -63,9 +70,9 @@ export function Filters({ facets }: { facets: Facets }) {
       }
       // Any filter change invalidates the current page offset.
       p.delete('page')
-      router.push(`/works?${p.toString()}`)
+      router.push(`${worksPath}?${p.toString()}`)
     },
-    [router, sp],
+    [router, sp, worksPath],
   )
 
   const val = (k: string) => sp.get(k) ?? ''
@@ -83,8 +90,8 @@ export function Filters({ facets }: { facets: Facets }) {
         <input
           value={q}
           onChange={(e) => setQ(e.target.value)}
-          placeholder="Search titles — full-text over 4,299,418 works"
-          aria-label="Search titles"
+          placeholder={t.filters.searchPlaceholder}
+          aria-label={t.filters.searchAria}
           className="flex-1 rounded-md border px-3 py-2 text-sm"
           style={{ background: 'var(--surface-2)', color: 'var(--ink)' }}
         />
@@ -93,12 +100,12 @@ export function Filters({ facets }: { facets: Facets }) {
           className="rounded-md px-4 py-2 text-sm font-medium text-white"
           style={{ background: 'var(--mc)' }}
         >
-          Search
+          {t.filters.searchButton}
         </button>
       </form>
 
       <div className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-        <Select label="Route" value={val('route')} onChange={(v) => push({ route: v })}>
+        <Select label={t.filters.route} value={val('route')} onChange={(v) => push({ route: v })}>
           {ROUTES.map((r) => (
             <option key={r.v} value={r.v}>
               {r.label}
@@ -106,8 +113,8 @@ export function Filters({ facets }: { facets: Facets }) {
           ))}
         </Select>
 
-        <Select label="Field" value={val('field')} onChange={(v) => push({ field: v })}>
-          <option value="">Any field</option>
+        <Select label={t.filters.field} value={val('field')} onChange={(v) => push({ field: v })}>
+          <option value="">{t.filters.anyField}</option>
           {facets.fields.map((f) => (
             <option key={f} value={f}>
               {f}
@@ -115,17 +122,17 @@ export function Filters({ facets }: { facets: Facets }) {
           ))}
         </Select>
 
-        <Select label="Type" value={val('type')} onChange={(v) => push({ type: v })}>
-          <option value="">Any type</option>
-          {facets.types.map((t) => (
-            <option key={t} value={t}>
-              {t}
+        <Select label={t.filters.type} value={val('type')} onChange={(v) => push({ type: v })}>
+          <option value="">{t.filters.anyType}</option>
+          {facets.types.map((x) => (
+            <option key={x} value={x}>
+              {x}
             </option>
           ))}
         </Select>
 
-        <Select label="Language" value={val('lang')} onChange={(v) => push({ lang: v })}>
-          <option value="">Any language</option>
+        <Select label={t.filters.language} value={val('lang')} onChange={(v) => push({ lang: v })}>
+          <option value="">{t.filters.anyLanguage}</option>
           {facets.langs.map((l) => (
             <option key={l} value={l}>
               {l}
@@ -134,31 +141,31 @@ export function Filters({ facets }: { facets: Facets }) {
         </Select>
 
         <div>
-          <Label>Year range</Label>
+          <Label>{t.filters.yearRange}</Label>
           <div className="flex items-center gap-2">
             <input
               type="number"
-              placeholder="from"
+              placeholder={t.filters.from}
               defaultValue={val('year_from')}
               onBlur={(e) => push({ year_from: e.target.value || undefined })}
-              aria-label="Year from"
+              aria-label={t.filters.yearFrom}
               className="tabular w-full rounded-md border px-2 py-1.5 text-sm"
               style={{ background: 'var(--surface-2)', color: 'var(--ink)' }}
             />
             <span style={{ color: 'var(--ink-5)' }}>–</span>
             <input
               type="number"
-              placeholder="to"
+              placeholder={t.filters.to}
               defaultValue={val('year_to')}
               onBlur={(e) => push({ year_to: e.target.value || undefined })}
-              aria-label="Year to"
+              aria-label={t.filters.yearTo}
               className="tabular w-full rounded-md border px-2 py-1.5 text-sm"
               style={{ background: 'var(--surface-2)', color: 'var(--ink)' }}
             />
           </div>
         </div>
 
-        <Select label="Screen consensus" value={val('n_in')} onChange={(v) => push({ n_in: v })}>
+        <Select label={t.filters.consensus} value={val('n_in')} onChange={(v) => push({ n_in: v })}>
           {CONSENSUS.map((c) => (
             <option key={c.v} value={c.v}>
               {c.label}
@@ -166,7 +173,7 @@ export function Filters({ facets }: { facets: Facets }) {
           ))}
         </Select>
 
-        <Select label="Sort" value={val('sort') || 'cited'} onChange={(v) => push({ sort: v })}>
+        <Select label={t.filters.sort} value={val('sort') || 'cited'} onChange={(v) => push({ sort: v })}>
           {SORTS.map((s) => (
             <option key={s.v} value={s.v}>
               {s.label}
@@ -175,17 +182,17 @@ export function Filters({ facets }: { facets: Facets }) {
         </Select>
 
         <div>
-          <Label>Flags</Label>
+          <Label>{t.filters.flags}</Label>
           <div className="flex items-center gap-4 pt-1.5">
             <Check
               checked={val('retracted') === '1'}
               onChange={(c) => push({ retracted: c ? '1' : undefined })}
-              label="Retracted"
+              label={t.filters.retracted}
             />
             <Check
               checked={val('no_abstract') === '1'}
               onChange={(c) => push({ no_abstract: c ? '1' : undefined })}
-              label="No abstract"
+              label={t.filters.noAbstract}
             />
           </div>
         </div>
@@ -193,11 +200,9 @@ export function Filters({ facets }: { facets: Facets }) {
 
       {active > 0 && (
         <div className="mt-3 flex items-center gap-3 border-t pt-3 text-xs" style={{ color: 'var(--ink-4)' }}>
-          <span>
-            {active} filter{active === 1 ? '' : 's'} active
-          </span>
-          <button onClick={() => router.push('/works')} className="link" style={{ color: 'var(--mc)' }}>
-            clear all
+          <span>{t.filters.active(active)}</span>
+          <button onClick={() => router.push(worksPath)} className="link" style={{ color: 'var(--mc)' }}>
+            {t.filters.clearAll}
           </button>
         </div>
       )}

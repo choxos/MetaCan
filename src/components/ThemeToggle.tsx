@@ -3,7 +3,7 @@ import { useTheme } from 'next-themes'
 import { Moon, Sun } from 'lucide-react'
 import { useEffect, useState } from 'react'
 
-export function ThemeToggle() {
+export function ThemeToggle({ label }: { label: string }) {
   const { resolvedTheme, setTheme } = useTheme()
   // The server does not know the user's theme, so rendering the icon before
   // mount produces a hydration mismatch. Render the box, not the glyph.
@@ -12,7 +12,7 @@ export function ThemeToggle() {
 
   return (
     <button
-      aria-label="Toggle theme"
+      aria-label={label}
       onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
       className="rounded-md border p-2"
       style={{ background: 'var(--surface-2)' }}

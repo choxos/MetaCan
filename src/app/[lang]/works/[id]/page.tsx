@@ -1,36 +1,31 @@
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { getWork, fetchAbstract } from '@/lib/query'
+import { getDict, type Dictionary } from '@/lib/i18n'
+import { formatInt, isLang, langAlternates, type Lang } from '@/lib/lang'
+import { localePath } from '@/lib/lang'
 
 export const dynamic = 'force-dynamic'
 
-export async function generateMetadata({ params }: { params: { id: string } }) {
+export async function generateMetadata({ params }: { params: { lang: string; id: string } }) {
+  const lang: Lang = isLang(params.lang) ? params.lang : 'en'
   const w = await getWork(params.id)
-  return { title: w?.title?.slice(0, 60) ?? 'Work not found' }
+  return {
+    title: w?.title?.slice(0, 60) ?? getDict(lang).meta.workNotFound,
+    alternates: langAlternates(lang, `/works/${params.id}`),
+  }
 }
 
-const ROUTES = [
-  {
-    key: 'routeCaAff',
-    name: 'Canadian affiliation',
-    why: 'An author listed a Canadian institution. This is the only route the usual frame has.',
-  },
-  {
-    key: 'routeCaFund',
-    name: 'Canadian funder',
-    why: 'A Canadian agency funded it. The work may carry no Canadian affiliation at all.',
-  },
-  {
-    key: 'routeCaVenue',
-    name: 'Canadian venue',
-    why: 'It was published in a Canadian venue.',
-  },
-  {
-    key: 'routeAboutCa',
-    name: 'About Canada',
-    why: 'Its subject is Canada, wherever its authors sit.',
-  },
-] as const
+const ROUTE_KEYS = ['routeCaAff', 'routeCaFund', 'routeCaVenue', 'routeAboutCa'] as const
+
+function routeDefs(t: Dictionary) {
+  return [
+    { key: 'routeCaAff', name: t.workDetail.routeAffName, why: t.workDetail.routeAffWhy },
+    { key: 'routeCaFund', name: t.workDetail.routeFundName, why: t.workDetail.routeFundWhy },
+    { key: 'routeCaVenue', name: t.workDetail.routeVenueName, why: t.workDetail.routeVenueWhy },
+    { key: 'routeAboutCa', name: t.workDetail.routeAboutName, why: t.workDetail.routeAboutWhy },
+  ] as Array<{ key: (typeof ROUTE_KEYS)[number]; name: string; why: string }>
+}
 
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (
@@ -45,6 +40,7 @@ function Field({ label, children }: { label: string; children: React.ReactNode }
 
 /** One model's verdict. The reason is the point: a tier without a reason is not evidence. */
 function ModelCard({
+  t,
   model,
   tier,
   genre,
@@ -52,6 +48,7 @@ function ModelCard({
   confidence,
   reason,
 }: {
+  t: Dictionary
   model: string
   tier: string | null
   genre: string | null
@@ -64,7 +61,7 @@ function ModelCard({
   // a work all three call T3 has n_in = 0.
   const isIn = tier === 'T1' || tier === 'T2'
   const color = isIn ? 'var(--in-scope)' : tier === 'T3' ? 'var(--contested)' : 'var(--out)'
-  const label = tier === 'T3' ? 'T3 · adjacent, not in scope' : tier || 'OUT'
+  const label = tier === 'T3' ? t.workDetail.tierAdjacent : tier || 'OUT'
   return (
     <div className="card p-4">
       <div className="flex items-center justify-between gap-2">
@@ -74,9 +71,13 @@ function ModelCard({
         </span>
       </div>
       <div className="mt-2 space-y-1 text-xs" style={{ color: 'var(--ink-4)' }}>
-        {genre && <div>genre: {genre}</div>}
-        <div>about Canada: {aboutCa === null ? '—' : aboutCa ? 'yes' : 'no'}</div>
-        <div>confidence: {confidence ?? '—'}</div>
+        {genre && <div>{t.workDetail.genre(genre)}</div>}
+        <div>
+          {t.workDetail.aboutCanada}: {aboutCa === null ? '—' : aboutCa ? t.common.yes : t.common.no}
+        </div>
+        <div>
+          {t.workDetail.confidence}: {confidence ?? '—'}
+        </div>
       </div>
       {reason && (
         <p className="mt-3 border-t pt-3 text-sm leading-relaxed" style={{ color: 'var(--ink-3)' }}>
@@ -87,7 +88,11 @@ function ModelCard({
   )
 }
 
-export default async function WorkDetail({ params }: { params: { id: string } }) {
+export default async function WorkDetail({ params }: { params: { lang: string; id: string } }) {
+  const lang: Lang = isLang(params.lang) ? params.lang : 'en'
+  const t = getDict(lang)
+  const p = (path: string) => localePath(lang, path)
+
   const w = await getWork(params.id)
   if (!w) notFound()
 
@@ -99,7 +104,7 @@ export default async function WorkDetail({ params }: { params: { id: string } })
   const s = w.screened
   const r = w.retraction
 
-  const admitted = ROUTES.filter((route) => w[route.key])
+  const admitted = routeDefs(t).filter((route) => w[route.key])
   const chips = (arr: string) =>
     arr
       .split(';')
@@ -109,19 +114,19 @@ export default async function WorkDetail({ params }: { params: { id: string } })
   return (
     <div className="space-y-8">
       <div>
-        <Link href="/works" className="link text-sm">
-          ← all works
+        <Link href={p('/works')} className="link text-sm">
+          {t.workDetail.back}
         </Link>
-        <h1 className="mt-2 font-serif text-3xl leading-tight">{w.title || '[no title]'}</h1>
+        <h1 className="mt-2 font-serif text-3xl leading-tight">{w.title || t.common.noTitle}</h1>
         <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm" style={{ color: 'var(--ink-4)' }}>
           <span className="tabular">{w.year ?? '—'}</span>
           {w.type && <span>· {w.type}</span>}
           {w.lang && <span>· {w.lang}</span>}
-          <span className="tabular">· {w.citedBy.toLocaleString('en-CA')} citations</span>
+          <span className="tabular">· {t.workDetail.citations(formatInt(lang, w.citedBy))}</span>
           <span>
             ·{' '}
             <a className="link" href={`https://openalex.org/${w.id}`} target="_blank" rel="noreferrer">
-              {w.id} on OpenAlex
+              {t.workDetail.onOpenAlex(w.id)}
             </a>
           </span>
           {w.doi && (
@@ -138,15 +143,18 @@ export default async function WorkDetail({ params }: { params: { id: string } })
       {/* THE ROUTES. This is the point of the project, so it goes first, above the
           bibliographic record, and it says why each route admitted the work. */}
       <section className="card p-6">
-        <h2 className="font-serif text-xl">Why is this work in the frame?</h2>
+        <h2 className="font-serif text-xl">{t.workDetail.whyTitle}</h2>
         <p className="mt-1 text-sm" style={{ color: 'var(--ink-4)' }}>
-          A frame that forgets how it found something cannot be audited. These are the routes that admitted this work.
+          {t.workDetail.whySub}
         </p>
 
         <div className="mt-4 space-y-2">
           {admitted.map((route) => (
             <div key={route.key} className="flex gap-3 rounded-md p-3" style={{ background: 'var(--surface-2)' }}>
-              <span className="chip shrink-0" style={{ borderColor: 'var(--mc)', color: 'var(--mc)', background: 'transparent' }}>
+              <span
+                className="chip shrink-0"
+                style={{ borderColor: 'var(--mc)', color: 'var(--mc)', background: 'transparent' }}
+              >
                 {route.name}
               </span>
               <span className="text-sm" style={{ color: 'var(--ink-3)' }}>
@@ -161,9 +169,7 @@ export default async function WorkDetail({ params }: { params: { id: string } })
             className="mt-4 rounded-md border p-3 text-sm leading-relaxed"
             style={{ borderColor: 'var(--mc-accent)', color: 'var(--ink-2)' }}
           >
-            <strong style={{ color: 'var(--mc-accent)' }}>No Canadian affiliation.</strong> An affiliation-only frame
-            — the usual design — would never have seen this work. It is one of the works that make the case for
-            inverting the frame.
+            {t.workDetail.noAffCallout}
           </p>
         )}
       </section>
@@ -171,33 +177,28 @@ export default async function WorkDetail({ params }: { params: { id: string } })
       {/* Retraction: the four-state record, not the boolean. */}
       {(r || w.isRetracted) && (
         <section className="card p-6" style={{ borderColor: 'var(--retraction)' }}>
-          <h2 className="font-serif text-xl">Post-publication record</h2>
+          <h2 className="font-serif text-xl">{t.workDetail.postPubTitle}</h2>
           {r ? (
             <>
               <dl className="mt-3">
-                <Field label="Nature">{r.nature}</Field>
-                <Field label="Reason">{r.reason}</Field>
-                <Field label="Date">{r.retractionDate}</Field>
-                <Field label="Flagged by OpenAlex?">
+                <Field label={t.workDetail.nature}>{r.nature}</Field>
+                <Field label={t.workDetail.reason}>{r.reason}</Field>
+                <Field label={t.workDetail.date}>{r.retractionDate}</Field>
+                <Field label={t.workDetail.flagged}>
                   {r.openalexFlagged ? (
-                    'Yes'
+                    t.workDetail.flaggedYes
                   ) : (
-                    <span style={{ color: 'var(--retraction)' }}>
-                      No — Retraction Watch records this, and OpenAlex does not flag it.
-                    </span>
+                    <span style={{ color: 'var(--retraction)' }}>{t.workDetail.flaggedNo}</span>
                   )}
                 </Field>
               </dl>
               <p className="mt-3 text-sm leading-relaxed" style={{ color: 'var(--ink-4)' }}>
-                Source: Retraction Watch, joined by DOI. OpenAlex records retraction as{' '}
-                <code className="font-mono text-xs">is_retracted</code>, a boolean over a state space with at least
-                four values, so it cannot express an expression of concern, a correction or a reinstatement — it
-                reports them as <code className="font-mono text-xs">false</code>, which reads as &ldquo;fine&rdquo;.
+                {t.workDetail.rwSource}
               </p>
             </>
           ) : (
             <p className="mt-2 text-sm" style={{ color: 'var(--ink-3)' }}>
-              OpenAlex flags this work as retracted, but it carries no matching Retraction Watch record in this frame.
+              {t.workDetail.openalexOnly}
             </p>
           )}
         </section>
@@ -207,44 +208,33 @@ export default async function WorkDetail({ params }: { params: { id: string } })
       {s && (
         <section>
           <div className="mb-3 flex flex-wrap items-baseline justify-between gap-2">
-            <h2 className="font-serif text-xl">The three-model screen</h2>
-            <Link href="/screen" className="link text-sm">
-              all 1,000 screened works →
+            <h2 className="font-serif text-xl">{t.workDetail.screenTitle}</h2>
+            <Link href={p('/screen')} className="link text-sm">
+              {t.workDetail.screenAll}
             </Link>
           </div>
 
           <div
             className="card mb-3 p-4"
-            style={{ borderColor: s.nIn === 3 ? 'var(--in-scope)' : s.nIn && s.nIn > 0 ? 'var(--contested)' : 'var(--border)' }}
+            style={{
+              borderColor: s.nIn === 3 ? 'var(--in-scope)' : s.nIn && s.nIn > 0 ? 'var(--contested)' : 'var(--border)',
+            }}
           >
             <p className="text-sm leading-relaxed" style={{ color: 'var(--ink-2)' }}>
-              {s.nIn === 3 ? (
-                <>
-                  <strong style={{ color: 'var(--in-scope)' }}>All three models</strong> called this metaresearch. It
-                  is in the settled core of the field.
-                </>
-              ) : s.nIn === 0 ? (
-                <>
-                  <strong style={{ color: 'var(--out)' }}>All three models</strong> called this out of scope.
-                </>
-              ) : (
-                <>
-                  <strong style={{ color: 'var(--contested)' }}>
-                    {s.nIn} of 3 models called this metaresearch.
-                  </strong>{' '}
-                  This work is <em>contested</em>: it sits on the field&apos;s empirical boundary, and whether it
-                  counts depends on which model you asked. It is one of the 51 works in the disagreement dossier.
-                </>
-              )}
+              {s.nIn === 3
+                ? t.workDetail.consensus3
+                : s.nIn === 0
+                  ? t.workDetail.consensus0
+                  : t.workDetail.consensusN(s.nIn ?? 0)}
             </p>
             <div className="mt-2 text-xs" style={{ color: 'var(--ink-4)' }}>
-              stratum: {s.stratum ?? '—'} · design weight: {s.weight?.toFixed(2) ?? '—'} (the sample is stratified;
-              any rate computed without the weight is wrong)
+              {t.workDetail.stratumLine(s.stratum ?? '—', s.weight?.toFixed(2) ?? '—')}
             </div>
           </div>
 
           <div className="grid gap-3 md:grid-cols-3">
             <ModelCard
+              t={t}
               model="Claude Opus 4.8"
               tier={s.opusTier}
               genre={s.opusGenre}
@@ -253,6 +243,7 @@ export default async function WorkDetail({ params }: { params: { id: string } })
               reason={s.opusReason}
             />
             <ModelCard
+              t={t}
               model="GPT-5.6 (high)"
               tier={s.gptTier}
               genre={s.gptGenre}
@@ -261,6 +252,7 @@ export default async function WorkDetail({ params }: { params: { id: string } })
               reason={s.gptReason}
             />
             <ModelCard
+              t={t}
               model="Grok 4.5"
               tier={s.grokTier}
               genre={s.grokGenre}
@@ -273,34 +265,30 @@ export default async function WorkDetail({ params }: { params: { id: string } })
       )}
 
       <section className="card p-6">
-        <h2 className="font-serif text-xl">Abstract</h2>
+        <h2 className="font-serif text-xl">{t.workDetail.abstractTitle}</h2>
         {abstract ? (
           <>
             <p className="mt-3 leading-relaxed" style={{ color: 'var(--ink-2)' }}>
               {abstract}
             </p>
             <p className="mt-3 text-xs" style={{ color: 'var(--ink-5)' }}>
-              {s?.abstract
-                ? 'Stored with the screening record, where it is evidence for the labels above.'
-                : 'Fetched live from OpenAlex and de-inverted. Abstracts are not stored in this database: the inverted indexes are 8.6 GB of the frame’s 9.3 GB of text, and the host has 13 GB free.'}
+              {s?.abstract ? t.workDetail.abstractStored : t.workDetail.abstractFetched}
             </p>
           </>
         ) : (
           <p className="mt-3 text-sm leading-relaxed" style={{ color: 'var(--ink-4)' }}>
-            {w.hasAbstract
-              ? 'OpenAlex records an abstract for this work, but it could not be fetched just now.'
-              : 'No abstract. This is not a gap in this database — OpenAlex has none either. 23.3% of the frame is in this state, and the screen finds HALF as much metaresearch here, so the absence is a measured bias rather than a missing field.'}
+            {w.hasAbstract ? t.workDetail.abstractUnavailable : t.workDetail.abstractNone}
           </p>
         )}
       </section>
 
       <section className="card p-6">
-        <h2 className="font-serif text-xl">The record</h2>
+        <h2 className="font-serif text-xl">{t.workDetail.recordTitle}</h2>
         <dl className="mt-2">
-          <Field label="Venue">{w.venue}</Field>
-          <Field label="Topic">{w.topic}</Field>
-          <Field label="Field">{w.field}</Field>
-          <Field label="Canadian institutions">
+          <Field label={t.workDetail.venue}>{w.venue}</Field>
+          <Field label={t.workDetail.topic}>{w.topic}</Field>
+          <Field label={t.workDetail.field}>{w.field}</Field>
+          <Field label={t.workDetail.institutions}>
             {w.caInstitutions ? (
               <span className="flex flex-wrap gap-1">
                 {chips(w.caInstitutions).map((i, k) => (
@@ -311,7 +299,7 @@ export default async function WorkDetail({ params }: { params: { id: string } })
               </span>
             ) : null}
           </Field>
-          <Field label="Funders">
+          <Field label={t.workDetail.funders}>
             {w.funders ? (
               <span className="flex flex-wrap gap-1">
                 {chips(w.funders).map((i, k) => (
@@ -322,7 +310,7 @@ export default async function WorkDetail({ params }: { params: { id: string } })
               </span>
             ) : null}
           </Field>
-          <Field label="Keywords">
+          <Field label={t.workDetail.keywords}>
             {w.keywords ? (
               <span className="flex flex-wrap gap-1">
                 {chips(w.keywords).map((i, k) => (
@@ -333,8 +321,8 @@ export default async function WorkDetail({ params }: { params: { id: string } })
               </span>
             ) : null}
           </Field>
-          <Field label="Has abstract in OpenAlex">{w.hasAbstract ? 'yes' : 'no'}</Field>
-          <Field label="API">
+          <Field label={t.workDetail.hasAbstract}>{w.hasAbstract ? t.common.yes : t.common.no}</Field>
+          <Field label={t.workDetail.api}>
             <a className="link font-mono text-xs" href={`/api/v1/works/${w.id}`}>
               /api/v1/works/{w.id}
             </a>
