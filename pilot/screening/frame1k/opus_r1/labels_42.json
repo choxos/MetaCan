@@ -1,0 +1,402 @@
+[
+  {
+    "id": "W2353925907",
+    "tier": "OUT",
+    "genre": "empirical",
+    "about_ca": false,
+    "confidence": "high",
+    "reason": "Clinical epidemiology of traffic injury patients; the object is injury, not research."
+  },
+  {
+    "id": "W3036287039",
+    "tier": "OUT",
+    "genre": "empirical",
+    "about_ca": false,
+    "confidence": "high",
+    "reason": "Paleontological notes on fossils; no abstract but the title is unambiguously domain science."
+  },
+  {
+    "id": "W2992179804",
+    "tier": "OUT",
+    "genre": "empirical",
+    "about_ca": false,
+    "confidence": "high",
+    "reason": "Ethnography of protected-area governance on Lanzarote; object is environmental policy, not research."
+  },
+  {
+    "id": "W3196558450",
+    "tier": "T1",
+    "genre": "methods",
+    "about_ca": false,
+    "confidence": "low",
+    "reason": "Studies the properties of a robust multivariate estimator: T1 'research methods and their properties' read literally, though a coder could call pure mathematical statistics OUT."
+  },
+  {
+    "id": "W4383313674",
+    "tier": "OUT",
+    "genre": "empirical",
+    "about_ca": false,
+    "confidence": "high",
+    "reason": "Microplastics and oyster physiology; domain science."
+  },
+  {
+    "id": "W2124969939",
+    "tier": "OUT",
+    "genre": "empirical",
+    "about_ca": false,
+    "confidence": "high",
+    "reason": "Epidemiology of spirituality and suicidal behavior; object is a clinical question."
+  },
+  {
+    "id": "W3039273394",
+    "tier": "OUT",
+    "genre": "empirical",
+    "about_ca": false,
+    "confidence": "high",
+    "reason": "Registry study of gynecomastia incidence; clinical epidemiology."
+  },
+  {
+    "id": "W4231693825",
+    "tier": "T3",
+    "genre": "editorial",
+    "about_ca": false,
+    "confidence": "low",
+    "reason": "Journal reviewer-acknowledgement front matter: an artifact of the editorial process rather than a study of it, so contextual at best."
+  },
+  {
+    "id": "W607505555",
+    "tier": "OUT",
+    "genre": "other",
+    "about_ca": false,
+    "confidence": "high",
+    "reason": "Machine learning textbook; the object is algorithms, not research practice."
+  },
+  {
+    "id": "W4385518960",
+    "tier": "OUT",
+    "genre": "other",
+    "about_ca": false,
+    "confidence": "high",
+    "reason": "Legal-historical theory of class struggle; not about research."
+  },
+  {
+    "id": "W4300696358",
+    "tier": "OUT",
+    "genre": "empirical",
+    "about_ca": false,
+    "confidence": "high",
+    "reason": "Survey of interprofessional working relations in a psychiatric hospital; object is clinical teamwork, not research."
+  },
+  {
+    "id": "W4206056726",
+    "tier": "OUT",
+    "genre": "review",
+    "about_ca": false,
+    "confidence": "high",
+    "reason": "Clinical review of postpartum hemorrhage."
+  },
+  {
+    "id": "W6884627219",
+    "tier": "OUT",
+    "genre": "other",
+    "about_ca": false,
+    "confidence": "high",
+    "reason": "Literary criticism of Lispector and Santos-Febres; no abstract but the title is unambiguous."
+  },
+  {
+    "id": "W4389782484",
+    "tier": "OUT",
+    "genre": "empirical",
+    "about_ca": false,
+    "confidence": "high",
+    "reason": "Corporate finance study of ESG performance; not about research."
+  },
+  {
+    "id": "W2093801487",
+    "tier": "OUT",
+    "genre": "empirical",
+    "about_ca": false,
+    "confidence": "high",
+    "reason": "Cytogenetics of rodent populations; domain science."
+  },
+  {
+    "id": "W4394853657",
+    "tier": "OUT",
+    "genre": "empirical",
+    "about_ca": false,
+    "confidence": "high",
+    "reason": "Qualitative health services study of rheumatology access; object is care delivery, not research."
+  },
+  {
+    "id": "W2015551314",
+    "tier": "OUT",
+    "genre": "empirical",
+    "about_ca": false,
+    "confidence": "high",
+    "reason": "Medicinal chemistry of CK2 inhibitors; title unambiguous despite missing abstract."
+  },
+  {
+    "id": "W2145885111",
+    "tier": "OUT",
+    "genre": "review",
+    "about_ca": false,
+    "confidence": "high",
+    "reason": "Tutorial on routing algorithms in ad hoc networks; the object is a technology, not research practice."
+  },
+  {
+    "id": "W1988092555",
+    "tier": "OUT",
+    "genre": "methods",
+    "about_ca": false,
+    "confidence": "medium",
+    "reason": "Development of an NMR pulse sequence: a domain-specific measurement technique, not a general research method under study."
+  },
+  {
+    "id": "W3162834726",
+    "tier": "OUT",
+    "genre": "other",
+    "about_ca": false,
+    "confidence": "high",
+    "reason": "Historical study of Acadian refugees; not about research."
+  },
+  {
+    "id": "W2175161454",
+    "tier": "T1",
+    "genre": "methods",
+    "about_ca": false,
+    "confidence": "low",
+    "reason": "Object is how to estimate and validate fisheries models, i.e. an estimation method's properties rather than a stock answer; statistical methodology/metaresearch boundary."
+  },
+  {
+    "id": "W2031720269",
+    "tier": "OUT",
+    "genre": "review",
+    "about_ca": false,
+    "confidence": "high",
+    "reason": "Environmental chemistry review of biochar sorption."
+  },
+  {
+    "id": "W4413301132",
+    "tier": "OUT",
+    "genre": "commentary",
+    "about_ca": false,
+    "confidence": "medium",
+    "reason": "Scientific reply letter about Martian crust; a letter whose object is a domain question, not research practice."
+  },
+  {
+    "id": "W6963515593",
+    "tier": "OUT",
+    "genre": "dataset",
+    "about_ca": false,
+    "confidence": "high",
+    "reason": "Statistics Canada survey table on students' post-secondary intentions; social statistics, not research about research."
+  },
+  {
+    "id": "W3216053749",
+    "tier": "OUT",
+    "genre": "empirical",
+    "about_ca": false,
+    "confidence": "high",
+    "reason": "Clinical treatment response in NMOSD."
+  },
+  {
+    "id": "W2771527454",
+    "tier": "T2",
+    "genre": "empirical",
+    "about_ca": false,
+    "confidence": "low",
+    "reason": "Studies how students perceive social science and social scientists: a social study of the image of science, which the generous T2/STS reading admits."
+  },
+  {
+    "id": "W6981722997",
+    "tier": "OUT",
+    "genre": "empirical",
+    "about_ca": false,
+    "confidence": "high",
+    "reason": "Forest carbon and harvest modeling; domain science."
+  },
+  {
+    "id": "W6980032904",
+    "tier": "OUT",
+    "genre": "other",
+    "about_ca": false,
+    "confidence": "high",
+    "reason": "Political history of the Ecuadorian indigenous movement; not about research."
+  },
+  {
+    "id": "W4409793601",
+    "tier": "OUT",
+    "genre": "empirical",
+    "about_ca": false,
+    "confidence": "high",
+    "reason": "AI monitoring system for elderly wellbeing; applied engineering."
+  },
+  {
+    "id": "W2944516963",
+    "tier": "OUT",
+    "genre": "empirical",
+    "about_ca": false,
+    "confidence": "high",
+    "reason": "Stream ecology experiment on ecosystem engineering."
+  },
+  {
+    "id": "W2195207056",
+    "tier": "OUT",
+    "genre": "empirical",
+    "about_ca": false,
+    "confidence": "high",
+    "reason": "Sociology of artists' social mobility; not about research."
+  },
+  {
+    "id": "W1987117465",
+    "tier": "OUT",
+    "genre": "commentary",
+    "about_ca": false,
+    "confidence": "medium",
+    "reason": "Book review whose object is EU employment policy, not research practice."
+  },
+  {
+    "id": "W2114668588",
+    "tier": "OUT",
+    "genre": "empirical",
+    "about_ca": false,
+    "confidence": "high",
+    "reason": "Paleoclimate model-data comparison; the object is climate, not the model as a research practice."
+  },
+  {
+    "id": "W4415053651",
+    "tier": "OUT",
+    "genre": "methods",
+    "about_ca": false,
+    "confidence": "medium",
+    "reason": "Deep learning segmentation framework for thyroid nodules; a domain tool, not a study of research method."
+  },
+  {
+    "id": "W7027119678",
+    "tier": "OUT",
+    "genre": "commentary",
+    "about_ca": false,
+    "confidence": "low",
+    "reason": "Position paper calling for emotion modeling in interactive storytelling: an agenda-setting commentary internal to an AI research area, not commentary about research practice."
+  },
+  {
+    "id": "W4383067315",
+    "tier": "OUT",
+    "genre": "empirical",
+    "about_ca": false,
+    "confidence": "high",
+    "reason": "Earth-system modeling of the remaining carbon budget; domain science."
+  },
+  {
+    "id": "W4251036510",
+    "tier": "T1",
+    "genre": "methods",
+    "about_ca": false,
+    "confidence": "low",
+    "reason": "The stated contribution is a design critique of Wizard-of-Oz experimental methodology generalizable to other HRI experiments, i.e. the object is study design; boundary with a domain HRI experiment."
+  },
+  {
+    "id": "W4283209327",
+    "tier": "OUT",
+    "genre": "empirical",
+    "about_ca": false,
+    "confidence": "high",
+    "reason": "Cadaveric biomechanics of suture techniques; clinical question."
+  },
+  {
+    "id": "W2942573567",
+    "tier": "OUT",
+    "genre": "empirical",
+    "about_ca": false,
+    "confidence": "high",
+    "reason": "Canadian foreign direct investment in Mexico; economics, and Canada here is not the research system."
+  },
+  {
+    "id": "W4385732895",
+    "tier": "OUT",
+    "genre": "empirical",
+    "about_ca": false,
+    "confidence": "high",
+    "reason": "Corporate finance study of leverage and firm valuation."
+  },
+  {
+    "id": "W4400614489",
+    "tier": "OUT",
+    "genre": "other",
+    "about_ca": false,
+    "confidence": "high",
+    "reason": "Surgical technique visual guide; clinical."
+  },
+  {
+    "id": "W4387781475",
+    "tier": "OUT",
+    "genre": "empirical",
+    "about_ca": false,
+    "confidence": "high",
+    "reason": "Muscle metabolism mechanism study; domain science."
+  },
+  {
+    "id": "W2400895528",
+    "tier": "OUT",
+    "genre": "empirical",
+    "about_ca": false,
+    "confidence": "high",
+    "reason": "Cognitive psychology of numerical skills."
+  },
+  {
+    "id": "W7029540841",
+    "tier": "OUT",
+    "genre": "other",
+    "about_ca": false,
+    "confidence": "high",
+    "reason": "Film synopsis; not research."
+  },
+  {
+    "id": "W2169623960",
+    "tier": "OUT",
+    "genre": "review",
+    "about_ca": false,
+    "confidence": "high",
+    "reason": "Pharmaceutical review of lipid nanoparticle drug delivery."
+  },
+  {
+    "id": "W7130505423",
+    "tier": "OUT",
+    "genre": "commentary",
+    "about_ca": false,
+    "confidence": "medium",
+    "reason": "Book review in literary studies; the object is postcolonial literature, not research."
+  },
+  {
+    "id": "W4402230670",
+    "tier": "OUT",
+    "genre": "review",
+    "about_ca": false,
+    "confidence": "high",
+    "reason": "Network meta-analysis answering a clinical question about influenza vaccines; uses a synthesis method rather than studying it."
+  },
+  {
+    "id": "W4223956061",
+    "tier": "OUT",
+    "genre": "empirical",
+    "about_ca": false,
+    "confidence": "high",
+    "reason": "Clinical study of nutrition, frailty and cognition."
+  },
+  {
+    "id": "W4387533276",
+    "tier": "OUT",
+    "genre": "editorial",
+    "about_ca": false,
+    "confidence": "high",
+    "reason": "Editorial about media coverage of a violent attack; not about research practice."
+  },
+  {
+    "id": "W2964381428",
+    "tier": "OUT",
+    "genre": "empirical",
+    "about_ca": false,
+    "confidence": "high",
+    "reason": "Urban planning study of participatory landscape approaches; not about research."
+  }
+]

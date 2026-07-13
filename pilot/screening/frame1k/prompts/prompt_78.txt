@@ -1,0 +1,811 @@
+# MétaCan screening rubric (v1.0)
+
+**Locked before screening. Version-controlled. Any change is a new version with a dated entry in `DEVIATIONS.md`.**
+
+Both machine screeners and both human coders work from this document and nothing else. The rubric is the
+instrument; if two coders disagree, the rubric is what they are adjudicated against.
+
+---
+
+## The unit
+
+One work (journal article, preprint, book chapter, report, dataset, or software), identified by its OpenAlex ID.
+You see: title, abstract, publication year, language, venue, OpenAlex topic and field, Canadian institutional
+affiliations, funders.
+
+## The question
+
+**Is the object of study *research itself*?**
+
+Metaresearch studies how research is done, reported, funded, evaluated, disseminated, or governed. The test is
+what the work is *about*, not what field it appears in and not what vocabulary it uses.
+
+A cardiology trial is not metaresearch. A study of *how cardiology trials report their outcomes* is.
+
+---
+
+## Tier
+
+Assign exactly one.
+
+### T1: Core metaresearch
+The primary object of study is research itself. Typical objects:
+
+- research **methods** and their properties (bias, reporting, statistical practice, study design)
+- **reproducibility**, replication, data and code sharing
+- **research integrity**: misconduct, retraction, questionable research practices, authorship
+- **peer review** and editorial process *as objects of study*
+- **research evaluation**, metrics, rankings, funding allocation
+- **scholarly communication**: publishing models, open access, preprints *as objects of study*
+- **bibliometrics and scientometrics** applied to a research literature
+- the **research workforce**: careers, equity, training, capacity
+- **evidence synthesis methodology** (not an individual systematic review's clinical answer, but work *about* how
+  syntheses are done)
+
+### T2: Adjacent
+Empirically or conceptually grounded work on science as a social system that is not framed as metaresearch but
+studies it:
+
+- **science and technology studies (STS)**: social studies of scientific knowledge, practice, controversy
+- **library and information science**: information behaviour of researchers, repositories, discovery
+- **research infrastructure** studies: platforms, data repositories, identifiers, standards
+- **history and philosophy of science** *when the object is contemporary research practice*
+- **research policy** analysis grounded in evidence
+
+T2 is where the field's diversity lives. Be generous here: a paper does not have to call itself metaresearch to
+be studying research.
+
+### T3: Contextual
+Relevant to the ecosystem, mapped and released, but **never pooled into the analytic corpus**:
+
+- editorials, commentaries, opinion pieces about research practice
+- policy documents and position statements
+- announcements of infrastructure, tools, or initiatives
+- news, obituaries, corrections, letters
+
+### OUT: Not metaresearch
+Everything else. Includes, and this is the most common error:
+
+- **A study that uses a method is not a study of the method.** A meta-analysis answering a clinical question is
+  OUT. A study of how meta-analyses handle heterogeneity is T1.
+- **Mentioning a metaresearch term is not studying it.** A lab paper reporting "assay reproducibility", a methods
+  section saying "peer reviewed", a licence note saying "open access": all OUT.
+- **Domain research that happens to be bibliometric in method** but whose object is the domain, not the research:
+  e.g. a bibliometric map of diabetes treatments, produced to summarise diabetes knowledge. Borderline; see below.
+
+---
+
+## The three errors that matter most
+
+These are where the pilot showed retrieval and screening break down. Read them twice.
+
+1. **Polysemy.** `reproducibility` in a biochemistry paper means the assay gives the same reading twice. In a
+   metaresearch paper it means the reproducibility crisis. Only the second is in scope. The same applies to
+   `validation`, `replication`, `bias`, `peer review`, `open access`. **Judge the sense, not the token.**
+
+2. **Method vs. object.** Using bibliometrics ≠ studying research. Ask: *if this paper is right, what do we now
+   know more about: a scientific question, or the practice of science?* If the former, OUT.
+
+3. **Absence of vocabulary is not absence of content.** An STS paper about laboratory practice, or an LIS paper
+   about how researchers find data, may use none of the field's keywords and still be squarely T2. **Do not
+   require the vocabulary.** This is the error that makes the field look smaller and more anglophone than it is.
+
+---
+
+## Canadian linkage
+
+Record which apply (this is metadata, not an inclusion test; the estimand is defined separately in
+`PROTOCOL.md`):
+
+- `CA_AFF`: at least one author affiliated with a Canadian institution
+- `CA_FUND`: funded by CIHR, NSERC, SSHRC, or CFI
+- `ABOUT_CA`: the Canadian research system is a substantive object of study (not a passing mention, not one
+  country among forty in a global comparison)
+
+## Genre
+
+`empirical` · `conceptual` · `editorial/commentary` · `policy` · `infrastructure/announcement` · `other`
+
+OpenAlex's `type` is unreliable and this field is commentary-heavy, so genre is coded, not inherited.
+
+## Language of the work
+
+As published. Do not infer from the venue.
+
+---
+
+## Confidence
+
+- `high`: the rubric decides this cleanly.
+- `medium`: the rubric decides, but a reasonable coder could differ.
+- `low`: genuinely on the boundary, or the abstract is missing/too thin to judge.
+
+**`low` is a legitimate answer and is not a failure.** Records coded `low` by either screener are routed to
+adjudication. A screener that never says `low` is not being careful; it is being confident.
+
+---
+
+## Worked examples
+
+| Title (abridged) | Tier | Why |
+|---|---|---|
+| "Data sharing practices in 500 randomised trials" | **T1** | The object is reporting practice. |
+| "Reproducibility of a Western blot protocol" | **OUT** | Assay reproducibility. Polysemy trap. |
+| "Trends in citation of retracted papers" | **T1** | Object is the literature's own behaviour. |
+| "Laboratory life in a Canadian genomics centre: an ethnography" | **T2** | STS. No metaresearch vocabulary; still studies research. |
+| "How do researchers discover datasets? A survey" | **T2** | LIS, information behaviour of researchers. |
+| "Effectiveness of statins: a network meta-analysis" | **OUT** | Uses a synthesis method to answer a clinical question. |
+| "How network meta-analyses handle inconsistency: a review of 200 reviews" | **T1** | Object is the method. |
+| "Announcing the Canadian Research Data Repository" | **T3** | Infrastructure announcement. Mapped, not pooled. |
+| "Open access mandates are failing early-career researchers" (editorial) | **T3** | Commentary about research practice. |
+| "Bibliometric analysis of diabetes research 2000–2020" | **T2** | Borderline. Bibliometric method, and the object *is* a research literature, so it studies research output. Code T2, `medium`. |
+| "Le libre accès dans les revues québécoises : état des lieux" | **T1** | Scholarly communication, object is publishing practice. French. |
+
+---
+
+## Instructions to the screener
+
+Read the title and abstract. Apply the rubric. Do not use outside knowledge of the authors or the journal's
+reputation. If the abstract is missing, judge on the title alone and set confidence to `low` unless the title is
+unambiguous.
+
+Return the schema in `protocol/screening-schema.json`. One object per work. No prose, no preamble.
+--------------------------------------------------------------------------------
+You are screening works for MetaCan, a map of Canadian metaresearch.
+
+Apply the rubric above to every record in the JSON array below. Return a JSON
+array with one object per work, conforming to protocol/screening-schema.json:
+
+  {"id": "W...", "tier": "T1|T2|T3|OUT", "genre": "...", "about_ca": true|false,
+   "confidence": "high|medium|low", "reason": "one sentence"}
+
+Rules:
+- Return the JSON array and NOTHING else. No prose, no preamble, no code fences.
+- Every input id must appear exactly once in the output.
+- Do not run commands, read files, or browse. Classify from the RECORDS alone.
+
+RECORDS:
+[
+  {
+    "id": "W4234035687",
+    "title": "The Method of Contour Integration",
+    "abstract": "",
+    "year": 2001,
+    "lang": "en",
+    "type": "book-chapter",
+    "venue": "Graduate texts in mathematics",
+    "topic": "Advanced Numerical Analysis Techniques",
+    "field": "Engineering",
+    "ca_institutions": "Queen's University",
+    "funders": []
+  },
+  {
+    "id": "W4297232891",
+    "title": "Black holes and galactic density cusps",
+    "abstract": "Aims. In this paper we study density cusps that may contain central black holes. The actual co-eval self-similar growth would not distinguish between the central object and the surroundings. Methods. To study the environment of a growing black hole we seek descriptions of steady \"cusps\" that may contain a black hole and that retain at least a memory of self-similarity. We refer to the environment in brief as the \"bulge\" and on smaller scales, the \"halo\". Results. We find simple descriptions of the simulations of collisionless matter by comparing predicted densities, velocity dispersions and distribution functions with the simulations. In some cases central point masses may be included by iteration. We emphasize that the co-eval self-similar growth allows an explanation of the black hole bulge mass correlation between approximately similar collisionless systems. Conclusions. We have derived our results from first principles assuming adiabatic self-similarity and either self-similar virialisation or normal steady virialisation. We conclude that distribution functions that retain a memory of self-similar evolution provide an understanding of collisionless systems. The implied energy relaxation of the collisionless matter is due to the time dependence. Phase mixing relaxation may be enhanced by clump-clump interactions.",
+    "year": 2010,
+    "lang": "en",
+    "type": "article",
+    "venue": "Astronomy and Astrophysics",
+    "topic": "Galaxies: Formation, Evolution, Phenomena",
+    "field": "Physics and Astronomy",
+    "ca_institutions": ["Ontario Tech University", "Queen's University"],
+    "funders": "Universidad Autónoma de Madrid"
+  },
+  {
+    "id": "W2054209498",
+    "title": "Development of chloroplast‐specific microsatellite markers for molecular characterization of alloplasmic lines and phylogenetic analysis in wheat",
+    "abstract": "Abstract Wheat ( Triticum aestivum L.) is strictly a self‐pollinated crop, where hybrid breeding requires well‐characterized cytoplasmic male sterile ( CMS ) lines. The CMS has mostly been developed by substituting nuclear genome of wheat into the cytoplasm from wild relatives. Molecular characterization of 90 genotypes including 82 CMS lines originating from five different species, namely Aegilops speltoides , Ae. kotschyi, Ae. variabili s, Triticum araraticum and T. timopheevii , and eight popular varieties was carried out. Consequently, a set of 25 microsatellite markers specific to chloroplast (cp SSR s) were designed and successfully validated for specificity of amplification. A total of 15 cp SSR s (60%) were found polymorphic, of which three cp SSR s (Ta CM 7, Ta CM 8 and Ta CM 11) in genic region and twelve cp SSR s were located in intergenic region. Phylogenetic analysis of genotypes using cp SSR s revealed two major groups well in accordance with respective origin. A set of cp SSR s and phylogeny of CMS belonging to different origins developed, which will be helpful for the improvement in CMS system in wheat. The genic cp SSR s can be used for the allele mining and evolutionary studies.",
+    "year": 2013,
+    "lang": "en",
+    "type": "article",
+    "venue": "Plant Breeding",
+    "topic": "Wheat and Barley Genetics and Pathology",
+    "field": "Agricultural and Biological Sciences",
+    "ca_institutions": "Université Laval",
+    "funders": []
+  },
+  {
+    "id": "W4410513505",
+    "title": "Quality of life and supportive care needs in prostate cancer: the impact of treatment received and care service utilization among Māori and non-Māori patients in New Zealand",
+    "abstract": "BACKGROUND: Prostate cancer treatment can lead to significant long-term side effects that impact patients' quality of life and supportive care needs (SCN). This study explores the associations between quality of life (QoL) and SCN among prostate cancer survivors, with a focus on the impact of treatment received, care service utilization, and the differences between Māori and non-Māori patients. METHODS: Random stratified sampling data were collected from 1075 prostate cancer survivors who were diagnosed within the past 5 years. Hierarchical regression analyses examined the associations between QoL domains and SCN, adjusting for demographic, clinical, and treatment-related factors. LASSO (Least Absolute Shrinkage and Selection Operator) was used to select variables to test the interaction effects of different treatments. RESULTS: Significant disparities were found between Māori and non-Māori patients in physical and mental health scores, care service utilization, and overall SCN. Māori men had lower scores in these areas. Most QoL domains were negatively associated with more SCN, particularly mental health and hormonal issues. Androgen deprivation therapy (ADT) exacerbates some negative effects of poor mental health and hormonal issues for non-Māori, while the use of care services and radical prostatectomy (RP) was associated with mitigating SCN for Māori patients. CONCLUSION: This study highlights the complex interplay between QoL, SCN, and treatment modalities among prostate cancer survivors in New Zealand. The findings underscore the need for culturally tailored supportive care services to address the unique needs of Māori patients.",
+    "year": 2025,
+    "lang": "en",
+    "type": "article",
+    "venue": "Supportive Care in Cancer",
+    "topic": "Cancer survivorship and care",
+    "field": "Medicine",
+    "ca_institutions": "University of Toronto",
+    "funders": ["Lottery Health Research", "University of Otago"]
+  },
+  {
+    "id": "W4390122090",
+    "title": "Research on optimization of flight crew scheduling considering pilot fatigue",
+    "abstract": "Safety is a top concern for the civil aviation industry, and the risk of safety accidents will increase due to pilot fatigue. To ensure the safety of civil aviation, this paper proposes a method to solve the crew scheduling problem considering pilot fatigue. In order to reflect individual differences and fatigue levels of pilots, an improved three-stage alertness calculation model is first proposed based on subjective and objective perspectives to represent pilots’ alertness levels and fatigue working duration quantitatively. Then, for the crew scheduling problem considering pilot fatigue, a mixed integer programming model is constructed to simultaneously achieve the optimization objectives of reducing the overall scheduling cost and crew fatigue working duration. Next, since the actual crew scheduling problem is large-scale, a solution algorithm based on a column generation framework is developed to improve the quality and efficiency of solving the large-scale crew scheduling problem. Furthermore, in the case study, we collected actual data from an airline company to validate the effectiveness of our proposed method. Finally, through multiple experimental comparisons and analyses, to balance the two optimization objectives mentioned above, it is more reasonable to handle pilot fatigue working duration with soft constraints. Sensitivity analysis reveals the variation rules of the crew cost and fatigue, providing some valuable managerial insights for the crew scheduling problem considering pilot fatigue.",
+    "year": 2023,
+    "lang": "en",
+    "type": "article",
+    "venue": "International Journal of Industrial Engineering Computations",
+    "topic": "Sleep and Work-Related Fatigue",
+    "field": "Psychology",
+    "ca_institutions": [],
+    "funders": "National Natural Science Foundation of China"
+  },
+  {
+    "id": "W2925252095",
+    "title": "A comparative study of Twitter utilization in disaster management between public and private organizations",
+    "abstract": "Twitter has become a commonly used platform by both public and private organizations to assist with the dissemination of information related to disaster management. This research makes use of a mixed‐method approach in determining the extent and manner in which Twitter is used to disseminate disaster management information by both public and private organizations. This research found that public organizations are bound by strict regulations resulting in a lower volume and smaller variety of disaster‐related information being disseminated. The nature of an organization and the processes of decision making therein are suggested to influence the ability of an organization to successfully use Twitter as an effective tool for disaster management. Organizations in Thailand currently underutilize Twitter for disaster management, as neither public nor private organizations use Twitter as a multidirectional communication disaster management tool.",
+    "year": 2019,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Public Affairs",
+    "topic": "Public Relations and Crisis Communication",
+    "field": "Social Sciences",
+    "ca_institutions": "Brock University",
+    "funders": "European Commission"
+  },
+  {
+    "id": "W6902092293",
+    "title": "Supplementary Material for: Cognitive outcome after acute spontaneous intracerebral hemorrhage: analysis of the iDEF randomized trial",
+    "abstract": "Introduction The impact of intracerebral hemorrhage (ICH) on cognition and the determinants of cognitive recovery early after ICH remain elusive. In this post-hoc analysis of the Intracerebral Hemorrhage Deferoxamine (iDEF) trial, we examined the trajectories of cognitive impairment and the determinants of early cognitive recovery after ICH. Methods We examined baseline factors associated with 90-day cognitive outcome and constructed generalized linear mixed models to examine the trajectory of cognitive function over time among iDEF participants. Cognition was measured by the Montreal Cognitive Assessment (MoCA) scores at days 7, 30 and 90. Results 291 were available for analysis under the trial’s modified intention-to-treat definition (38% female, mean age 60.3±12.0 years, median NIHSS 13, IQR 8-18). The median baseline ICH volume was12.9 IQR (6.4-26.0) ml; 59 (20%) of the ICH cases were lobar, 120 (41%) had intraventricular extension. There was an overall significant increase in total MOCA score with time (p&lt;0.0001). Total MOCA score increased by an estimated 3.9 points (95% CI 3.1, 4.7) between the Day 7 and Day 30 assessments and by an additional 2.9 points (95% CI 2.2, 3.6) between the Day 30 and Day 90 assessments. Despite the overall improvement, 134 of 205 (65%) patients with patients with available 90-day MoCA score remained cognitively impaired with a score &lt;26 at 90 days. Older age, higher NIHSS score, baseline ICH volume, intraventricular hemorrhage and perihematoma edema had an adjusted negative impact on cognitive recovery. Conclusions Although ICH survivors exhibit significant improvement of cognitive status over the first 3 months, cognitive performance remains impaired in the majority of patients. Among factors independently associated with worse cognitive recovery, higher baseline ICH, intraventricular blood and perihematomal edema volumes, are potential therapeutic targets that merit further exploration.",
+    "year": 2024,
+    "lang": "en",
+    "type": "dataset",
+    "venue": "Figshare",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4221103062",
+    "title": "Introduction : à l'école de l'engagement",
+    "abstract": "Ce dossier thématique de la revue Tréma est né d’une réflexion menée au sein d’un collectif composé de chercheur·se·s issu·e·s d’horizons différents qui souhaitent collectivement interroger la notion d’« engagement » chez la jeunesse actuelle, dans un contexte scolaire et au-delà. Ce collectif est le fruit d’une rencontre autour de cette question centrale de l’engagement des jeunes. En juillet 2020 a été organisé un panel lors du DIDACTIFEN : « La formation aux enjeux politiques et sociaux da...",
+    "year": 2021,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Tréma",
+    "topic": "Education, sociology, and vocational training",
+    "field": "Social Sciences",
+    "ca_institutions": "Université du Québec en Outaouais",
+    "funders": []
+  },
+  {
+    "id": "W6904823124",
+    "title": "[Envelope addressed to Quene Yip]",
+    "abstract": "Envelope for Vancouver's Golden Jubilee addressed to Mr. Quene Yip from the Mayor's office.",
+    "year": 2017,
+    "lang": "en",
+    "type": "article",
+    "venue": "Open Collections",
+    "topic": "Canadian Identity and History",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2801261091",
+    "title": "<scp>P<\/scp>arkin deficiency modulates <scp>NLRP<\/scp>3 inflammasome activation by attenuating an <scp>A<\/scp>20‐dependent negative feedback loop",
+    "abstract": "Abstract Neuroinflammation and mitochondrial dysfunction, key mechanisms in the pathogenesis of Parkinson's disease (PD), are usually explored independently. Loss‐of‐function mutations of PARK2 and PARK6 , encoding the E3 ubiquitin protein ligase Parkin and the mitochondrial serine/threonine kinase PINK1, account for a large proportion of cases of autosomal recessive early‐onset PD. PINK1 and Parkin regulate mitochondrial quality control and have been linked to the modulation of innate immunity pathways. We report here an exacerbation of NLRP3 inflammasome activation by specific inducers in microglia and bone marrow‐derived macrophages from Park2 −/− and Pink1 −/− mice. The caspase 1‐dependent release of IL‐1β and IL‐18 was, therefore, enhanced in Park2 −/− and Pink1 −/− cells. This defect was confirmed in blood‐derived macrophages from patients with PARK2 mutations and was reversed by MCC950, which specifically inhibits NLRP3 inflammasome complex formation. Enhanced NLRP3 signaling in Parkin‐deficient cells was accompanied by a lack of induction of A20, a well‐known negative regulator of the NF‐κB pathway recently shown to attenuate NLRP3 inflammasome activity. We also found an inverse correlation between A20 abundance and IL‐1β release, in human macrophages challenged with NLRP3 inflammasome inducers. Overall, our observations suggest that the A20/NLRP3‐inflammasome axis participates in the pathogenesis of PARK2 ‐linked PD, paving the way for the exploration of its potential as a biomarker and treatment target.",
+    "year": 2018,
+    "lang": "en",
+    "type": "article",
+    "venue": "Glia",
+    "topic": "Inflammasome and immune disorders",
+    "field": "Biochemistry, Genetics and Molecular Biology",
+    "ca_institutions": "Centre For Cold Ocean Resources Engineering",
+    "funders": ["Seventh Framework Programme", "Agence Nationale de la Recherche", "European Commission", "Institut National de la Santé et de la Recherche Médicale", "European Federation of Pharmaceutical Industries and Associations", "Fondation de France", "Michael J. Fox Foundation for Parkinson's Research"]
+  },
+  {
+    "id": "W7001747557",
+    "title": "Les grands axes de la pédagogie dite nature selon une didactique organique",
+    "abstract": "PÉDAGOGIE NATURE – ÉDUCATION PAR LA NATURE Cette capsule vidéo de 15 minutes présente les grands axes d’une pédagogie ancrée dans la relation vécue avec la nature / le territoire à proximité de l’école. On parle d’une pédagogie dite nature selon une didactique organique. Cette capsule a été réalisée dans le cadre d’un projet financé par le ministère de l’Éducation du Québec.",
+    "year": 2024,
+    "lang": "fr",
+    "type": "other",
+    "venue": "Archipelago (University of Quebec in Montreal)",
+    "topic": "French Urban and Social Studies",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2049826059",
+    "title": "Teaching &amp; Learning Guide for: Men Who Weep and Wail: Masculinity and Emotion in Sidney's <i>New Arcadia<\/i>",
+    "abstract": "Author's Introduction In this Teaching and Learning Guide I include my essay ‘Men Who Weep and Wail: Masculinity and Emotion in Sidney's New Arcadia ’ in a Sixteenth‐Century Major Writers course on Sidney, Spenser, Marlowe, and Shakespeare aimed at upper‐level undergraduates and graduate students. This course examines poetry and prose by these writers in roughly chronological order and offers a selection of primary and secondary readings that situates these texts in their literary and historical context and in relation to recent critical works on emotion and masculinity, subjects that have generated considerable critical interest over the past decade. Studies of emotion, which the early moderns described as bodily passions, have become popular in literary studies, cultural history, philosophy, and anthropology among other disciplines. The growing interest of literary critics in the issue of masculinity complements the sustained critical interest in femininity and feminism in gender studies. The broadening of the field of gender studies to include men's as well as women's studies challenges the misleading association of men with the mind and women with the body and avoids perpetuating the illusion that men are the ungendered sex. Recently, literary critics have explored the topic of masculinity extensively with respect to Shakespeare's plays but less so in relation to poetry and prose by his contemporaries. In my essay on emotionally expressive men in Sidney's New Arcadia I demonstrate when, where, how, and to what extent male expressions of desire, grief, anger, melancholy, and pity function as sources of strength rather than weakness. This essay thereby reveals that stoicism and self‐restraint are not always masculine qualities and that emotional demonstrativeness and hysteria are not necessarily feminine or debilitating traits in early modern texts. Author Recommends: General Early Modern Criticism: Early Modern English Poetry: A Critical Companion , eds. Patrick Cheney, Andrew Hadfield, and Garrett A. Sullivan (Oxford: Oxford University Press, 2006) provides twenty‐eight original essays that examine major poems by Spenser, Sidney, Wroth, Marlowe, and Shakespeare among other sixteenth‐ and seventeenth‐century writers in relation to topics ranging from literary genres, modes, and Petrarchism to the body, sexuality, and homoeroticism. Secondary Works on Emotion: The interdisciplinary collection Reading the Early Modern Passions: Essays in the Cultural History of Emotion, ed. Gail Kern Paster, Katherine Rowe, and Mary Floyd‐Wilson (Philadelphia: University of Pennsylvania Press, 2004) focuses on the meanings and representations of emotion in Renaissance literature, music, and art. In Bodies and Selves in Early Modern England: Physiology and Inwardness in Spenser, Shakespeare, Herbert, and Milton (Cambridge: Cambridge University Press, 2000) Michael Schoenfeldt explores the close link between psychological inwardness and corporeal processes in English Renaissance literature that resulted from the early modern medical paradigm of the passions as governed by the bodily humors. In The Gendering of Melancholia: Feminism, Psychoanalysis, and the Symbolics of Loss in Renaissance Literature (Ithaca, NY: Cornell University Press, 1992) Juliana Schiesari argues that melancholia often functions as a sign of elite exceptionality in men but that women's grief is often a figure for the illness of depression and is thereby disparaged. In ‘ The Countess of Pembroke's Arcadia and Its (Com)Passionate Women Readers’, Gender and Authorship in the Sidney Circle (Madison, WI: University of Wisconsin Press, 1990) Mary Ellen Lamb demonstrates that Sir Philip Sidney presents passion, which is often associated with feminine displays of affect, as a positive trait that motivates heroic constancy for both sexes in the New Arcadia . Secondary Works on Masculinity: Shakespeare and Masculinity (Oxford: Oxford University Press, 2000) by Bruce Smith provides a vital, exemplary introduction to the study of masculinity and early modern theories of the bodily humors and gender. In Anxious Masculinity in Early Modern Europe (Cambridge: Cambridge University Press, 1996) Mark Breitenberg examines the dialectic of anxiety and desire for masculine subjects in works by Shakespeare, Bacon, Burton, and women writers. In ‘Early Modern Masculinities and The Faerie Queene ’, English Literary Renaissance 35.2 (2005): 210–47 Lisa Celovksy addresses the gap in gender and feminist approaches to Spenser studies by examining what it means to be a man in his epic romance. General Reference: The Spenser Encylopedia , eds. A. C. Hamilton et al. (Toronto: University of Toronto Press, 1990) is an indispensable reference tool offering over 700 entries on Spenser's life, works, and literary influences. Online Materials: See the portraits of Queen Elizabeth I and the Armada Portrait in particular in relation to her ‘Speech to the Troops at Tilbury’ at http://www.biocrawler.com/encyclopedia/Elizabeth_I_of_England . The Sidney Homepage at http://www.english.cam.ac.uk/sidney provides links to The Sidney Journal , the Sidney‐Spenser Discussion List, and on‐line resources on Sidney's texts, biographies, and bibliographies of literary criticism on his works. See the Sir Philip Sidney World Bibliography at http://bibs.slu.edu/sidney/index.html for annotated bibliographies about Sidney's life and work. The Edmund Spenser Homepage at http://www.english.cam.ac.uk/spenser/main.htm offers a biography and bibliography about Spenser as well as useful links to Spenser journals, discussion lists, and other Renaissance authors, journals, research libraries, and archives. See the Edmund Spenser World Bibliography at http://bibs.slu.edu/spenser/index.html for bibliographies, abstracts, and book reviews from Spenser Studies and The Spenser Review . See the Images of St. George Throughout the Ages: Western Art in relation to Redcrosse's battle with the dragon in Book I of <jats:itali",
+    "year": 2008,
+    "lang": "en",
+    "type": "article",
+    "venue": "Literature Compass",
+    "topic": "Literature: history, themes, analysis",
+    "field": "Arts and Humanities",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2154753732",
+    "title": "Two-fold pricing to guarantee individual profits and maximum social welfare in multi-hop wireless access networks",
+    "abstract": "In a multi-hop wireless access network, where each node is an independent self-interested commercial entity, pricing is helpful not only to encourage collaboration but also to utilize the network resources efficiently. In this paper, we propose a market-based model with two-fold pricing (TFP) for wireless access networks. In our model, the relay-pricing is used to encourage nodes to forward packets for other nodes. Each node receives a payment for the relay service that it provides. We also consider interference-pricing to leverage optimal resource allocation. Together, the relay and interference prices incorporate both cooperative and competitive interactions among the nodes. We prove that TFP guarantees positive profit for each individual wireless node for a wide range of pricing functions. The profit increases as the node forwards more packets. Thus, the cooperative nodes are well rewarded. We then determine the relay and interference pricing functions such that the network social welfare and the aggregate network utility are maximized. Simulation results show that, compared to two recently proposed single-fold pricing models, where only the relay or only the interference prices are considered, our proposed TFP scheme significantly increases the total network profit as well as the aggregate network throughput. TFP also leads to more fair revenue sharing among the wireless relay nodes.",
+    "year": 2009,
+    "lang": "en",
+    "type": "article",
+    "venue": "IEEE Transactions on Wireless Communications",
+    "topic": "Cooperative Communication and Network Coding",
+    "field": "Computer Science",
+    "ca_institutions": "University of British Columbia",
+    "funders": []
+  },
+  {
+    "id": "W2460642928",
+    "title": "<i>ERG11<\/i> mutations and upregulation in clinical itraconazole-resistant isolates of <i>Candida krusei<\/i>",
+    "abstract": "To better understand the association between the ERG11 gene and drug resistance in Candida krusei, C. krusei strains were isolated from patients from January 2010 to May 2013. Susceptibility to 5-fluorocytosine (5-FC), amphotericin B (AMB), voriconazole (VRC), fluconazole (FLC), and itraconazole (ITR) were tested by broth microdilution method. Mutations were detected using PCR amplification and gene sequencing. Expression levels of ERG11 were measured by real-time PCR and compared by a 2-tailed Student's t test between ITR-susceptible strains and ITR-resistant strains. In total, 15 C. krusei strains were obtained, of which 20.00%, 53.33%, and 40.00% were resistant to 5-FC, FLC, and ITR, respectively, whereas all isolates were susceptible to AMB and VRC. Three synonymous codon substitutions were found in ERG11, including T939C, T642C, and A756T. However, T939C was found in both resistant and susceptible C. krusei strains. The expression level of ERG11 was significantly higher in resistant C. krusei strains (1.34 ± 0.08) than in susceptible C. krusei strains (0.94 ± 0.14) (t = 3.74, p < 0.05). Our study demonstrates that point mutations (T642C and A756T) accompanied with the overexpression of ERG11 might be involved in the molecular mechanisms of drug resistance in C. krusei.",
+    "year": 2016,
+    "lang": "en",
+    "type": "article",
+    "venue": "Canadian Journal of Microbiology",
+    "topic": "Antifungal resistance and susceptibility",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W7117318897",
+    "title": "Stearoyl‐CoA desaturase inhibition leads to fatty acids normalization and improves dendritic spine density in the hippocampus of 5xFAD mouse model",
+    "abstract": "BACKGROUND: Alterations in brain lipids are a central feature of Alzheimer's disease (AD), nevertheless therapeutic strategies targeting brain lipid metabolism are still lacking. Our lab recently reported that a pharmacological inhibitor of the fatty acid enzyme, stearoyl-CoA desaturase (SCD), led to recovery of hippocampal synapses with associated improvements in learning and memory in the slow-progressing 3xTg-AD mouse model. Here, we used the 5xFAD rapidly progressing AD model to further delve into lipid metabolism disruptions in AD, and into the effect of the SCD inhibitor (SCDi) on fatty acid (FA) alterations and synapse loss. METHOD: Hippocampi from 5xFAD and non-carrier control mice were collected at 5 and 8 months old (MO) for FA profiling by gas chromatography-flame ion detection (GC-FID) and for IHC for b-amyloid, GFAP (astrocytes) and Iba-1 (microglia). SCDi or vehicle was infused via intracerebroventricular osmotic pumps for 28 days in 5 MO 5xFAD and NC mice, and their hippocampi were processed for GC-FID and Golgi staining for dendritic spine quantification. RESULT: FA alterations were apparent in female hippocampus at 5 MO (together with plaque pathology and gliosis) and worsened by the age at 8 MO, while males first showed FA alterations at 8MO (Figure 1). The C16:1/C16:0 desaturation index, parameter associated to SCD enzymatic activity, showed a significant increase in 5xFAD mice at 8 MO, but starting at 5MO in females. Treating 5xFAD females' mice with SCDi improved dendritic spine density and normalized FA levels (Figures 2 and 3). CONCLUSION: These data demonstrate that SCD inhibitor treatment in a second AD mouse model, the more aggressive 5xFAD model, has beneficial effects on FA alterations and hippocampal dendritic spines. These findings add to accumulating data supporting SCD inhibition as a promising novel therapeutic target for AD.",
+    "year": 2025,
+    "lang": "en",
+    "type": "article",
+    "venue": "Alzheimer s & Dementia",
+    "topic": "Fatty Acid Research and Health",
+    "field": "Nursing",
+    "ca_institutions": ["Health and Social Services Centre University Institute of Geriatrics of Sherbrooke", "Q & T Research", "Centre Hospitalier Universitaire de Sherbrooke", "Université de Montréal", "Université de Sherbrooke"],
+    "funders": []
+  },
+  {
+    "id": "W4251652261",
+    "title": "Development of Preheating and Power Inverting Systems for Lithium-Ion Batteries",
+    "abstract": "A novel short-circuit self-heating (SCSH) control system was developed in this thesis to achieve the preheating of lithium-ion (Li-ion) batteries operated in extremely cold weather (< -30C). The proposed system relies on the internal resistance of batteries and the short circuit current to heat up batteries using Joule heating. Experiments show that the SCSH control system can heat up the commercial Panasonic 18650 Li-ion batteries from -30C to 0C in 43 seconds, with less than 5 percent of the battery capacity consumed. The proposed heating system outperformed both external convective air heating and alternating current (AC) heating, in terms of heating time and energy consumption. Furthermore, a DC to AC battery power inverter was developed to implement the AC heating and to make the battery pack available for household appliances. This inverter employs a microcontroller using the direct pulse width modulation (DPWM) technique. The inverter achieves power output at various frequencies through programming, without changing the design of the circuit board. The optimal frequency ratio can be obtained theoretically, validated through MATLAB simulation, and was further examined through experimentation. The selected frequency ratio enables the DPWM signals to stimulate the designed inverter to produce high quality sinusoidal voltage.",
+    "year": 2017,
+    "lang": "en",
+    "type": "dissertation",
+    "topic": "Advanced Battery Technologies Research",
+    "field": "Engineering",
+    "ca_institutions": "Carleton University",
+    "funders": []
+  },
+  {
+    "id": "W6923323160",
+    "title": "The British Columbia Mining Journal",
+    "abstract": "",
+    "year": 2024,
+    "lang": "en",
+    "type": "article",
+    "venue": "Open Collections",
+    "topic": "Railway Systems and Materials Science",
+    "field": "Engineering",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4403725695",
+    "title": "S1143 End Ostomy in Crohn's Disease: Insights From the Cleveland Clinic Inflammatory Bowel Disease Ostomy Research Registry",
+    "abstract": "Introduction: Inflammatory Bowel Disease (IBD), including ulcerative colitis (UC) and Crohn's disease (CD), often requires surgical intervention. Permanent end ostomy (EO) is needed in 8% of UC and over 10% of CD patients, significantly impacting quality of life and clinical management. Previous studies on IBD patients with EO have been limited by small sample sizes, heterogeneous data, and short follow-up. This study aims to provide detailed descriptive data on CD patients who underwent EO from the Cleveland Clinic IBD Ostomy Research Registry. Methods: This is a retrospective single institution study using the first ever comprehensive registry comprising IBD patients with EO created at age 18 or older with at least 6 months of follow up after EO. Data was collected on various demographic, clinical, and surgical variables and analysis was made using R Studio. Results: 125 patients (77 CD, 48 UC) were included. In the CD cohort, 75 (97.4%) patients had an end- ileostomy, while 2 (2.6%) had an end-colostomy. The mean time from ostomy surgery to the last follow- up was 8.23 (±10.7). The mean age at diagnosis was 28.4 (±16.9) years, and the mean age at ostomy surgery was 41.4 (±15.5) years. The median time from diagnosis to surgery was 13.0 (±10.5) years. Patients were predominantly female (59.7%) and white (90.9%). A family history of IBD was reported by 28 (36.4%) patients. Half of the patients (50%) were never smokers. Regarding disease characteristics, 39 (54.2%) patients had a history of prior bowel surgery, with an average of 2.90 (±1.75) surgeries per patient. The pattern of disease was predominantly ileocolonic in 43 (55.8%) patients and penetrating in 46 (59.7%) patients. Extra-intestinal manifestations were present in 40.3% of patients, most commonly peripheral arthritis (20.8%). Pre-ostomy medication use was reported by 75 (97.4%) patients, with infliximab and azathioprine/6-mercaptopurine use each reported in 41 (53.2%) patients. Fifty (64.9%) patients reported a history of pre-ostomy oral corticosteroid use. Conclusion: Preliminary analysis of the ongoing Cleveland Clinic IBD Ostomy Research Registry offers valuable insights that could inform future clinical practice and research. This study provides a detailed demographic and clinical profile of CD patients with history of EO, highlighting the significant disease burden and surgical history in this population (see Table 1). Table 1. - Demographic and clinical characteristics of Crohn’s disease patients in the Cleveland Clinic Inflammatory Bowel Disease Ostomy Research Registry Variable Population Characteristics Patients (n=77, percent) Age (years) Age at diagnosis 28.4 (±16.9) Age at ostomy surgery 41.4 (±15.5) Time from diagnosis to surgery 13.0 (±10.5) Time from ostomy surgery to last follow-up 8.23 (±10.7) Sex Female 46 (59.7%) Male 31 (40.3%) Race/Ethnicity white 70 (90.9%) Black or African American 2 (2.6%) Hispanic or Latino 1 (1.3%) American Indian or Alaska Native 1 (1.3%) Multiracial/Multicultural 3 (3.9%) Family History of IBD Family History of CD 19 (24.7%) Family History of UC 9 (11.7%) Tobacco History Never 38 (50.0%) Former (quit >2 weeks) 28 (36.8%) Active 10 (13.2%) Weight Body Mass Index (BMI) 27.0 (±7.11) Disease Location and Behavior History of Perianal Involvement 55 (72.4%) History of Prior Bowel Surgery 39 (54.2%) Number of Bowel Surgeries 2.90 (±1.75) Extra-Intestinal Manifestations History of Extra-Intestinal Manifestations 31 (40.3%) Peripheral arthritis (arthritis of extremities) 16 (20.8%) Axial arthritis (arthritis of spine) 5 (6.49%) Uveitis 3 (3.90%) Pyoderma gangrenosum 5 (6.49%) Erythema Nodosum 6 (7.79%) Primary Sclerosing Cholangitis 1 (1.30%) Medications Pre-ostomy Medications 75 (97.4%) Montreal Classification Terminal ileum (L1) 5 (6.49%) Colon only (L2) 30 (39.0%) Ileocolonic (L3) 43 (55.8%) Upper GI (L4) 3 (3.90%) CD Location Jejunum/proximal ileum 8 (10.4%) Terminal ileum 44 (57.1%) Colon 71 (92.2%) Rectum 43 (55.8%) CD Behavior Inflammatory 32 (41.6%) Stricturing 28 (36.4%) Penetrating 46 (59.7%)",
+    "year": 2024,
+    "lang": "en",
+    "type": "article",
+    "venue": "The American Journal of Gastroenterology",
+    "topic": "Stoma care and complications",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W3173586783",
+    "title": "Selected Abstracts Submitted to the Third International Symposium on Hereditary Breast and Ovarian Cancer",
+    "abstract": "Background: Germline mutation screening of BRCA1 and BRCA2 genes is performed in suspected familial breast cancer cases, but a causative mutation is found in only 30% of patients. The development of additional methods to identify good candidates for BRCA1 and BRCA2 analysis would therefore increase the efficacy of diagnostic mutation screening. With this in mind, we developed a study to determine molecular signatures of BRCA1—or BRCA2—mutated breast cancers. Materials and Methods: Array-cgh (comparative genomic hybridization) and transcriptomic analysis were performed on a series of 103 familial breast cancers. The series included 7 breast cancers with a BRCA1 mutation and 5 breast cancers with a BRCA2 mutation. The remaining 91 cases were obtained from 73 families selected on the basis of at least 3 affected first-degree relatives or at least 2 affected first-degree relatives with breast cancer at an average age of 45 years. Array-cgh analyses were performed on a 4407 BAC-array (CIT-V8) manufactured by IntegraGen. Transcriptomic analyses were performed using an Affymetrix Human Genome U133 Plus 2.0 chip. Results: Using supervised clustering analyses we identified two transcriptomic signatures: one for BRCA1-mutated breast cancers consisting of 600 probe sets and another for BRCA2-mutated breast cancers also consisting of 600 probes sets. We also defined cgh-array signatures, based on the presence of specific genomic rearrangements, one for BRCA1-mutated breast cancers and one for BRCA2-mutated breast cancers. Conclusions: This study identified molecular signatures of breast cancers with BRCA1 or BRCA2 germline mutations. Genes present in these signatures could be exploited to find new markers for such breast cancers. We also identified specific genomic rearrangements in these breast cancers, which could be screened for in a diagnostic setting using fluorescence in situ hybridization, thus improving patient selection for BRCA1 and BRCA2 molecular genetic analysis.",
+    "year": 2009,
+    "lang": "en",
+    "type": "article",
+    "venue": "Current Oncology",
+    "topic": "BRCA gene mutations in cancer",
+    "field": "Biochemistry, Genetics and Molecular Biology",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2032912948",
+    "title": "La sexuation de la science : une question purement imaginaire?",
+    "abstract": "Dans ce texte, on confronte quelques-uns des principaux courants d’analyse sociologique concernant le système scientifique en tant qu’il est transmetteur ou producteur de mécanismes particuliers de discrimination. La question de la présence minoritaire des femmes est évaluée à partir des analyses dites « classiques » en sociologie de la science que sont l’école américaine et la théorie de Bourdieu. Ces lectures sont confrontées à l’apport épistémologique que permet la psychanalyse. La question d’une inscription sociale symbolique différenciée selon le sexe des acteurs fait émerger le corps comme vecteur d’une différance qui exprime un ordre imaginaire de la filiation et de la généalogie dont la science aurait représenté dans la culture occidentale une des expressions les plus fondamentales.",
+    "year": 2011,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Cahiers de recherche sociologique",
+    "topic": "Education, sociology, and vocational training",
+    "field": "Social Sciences",
+    "ca_institutions": "Université du Québec à Montréal",
+    "funders": []
+  },
+  {
+    "id": "W6950014426",
+    "title": "Litophyton myrmidonensis Van 2020, sp. nov.",
+    "abstract": "Litophyton myrmidonensis sp. nov. (Figs. 12b, 13c, 16-17) Material examined. Holotype NTM C994, 1978, coll. D. Schubot; paratypes: NTM C3951, Queensland, Great Barrier Reef, Myrmidon reef, depth 1-5 m, 7 January 1981, coll. Z. Dinesen; NTM C4393, Queensland, Great Barrier Reef, Myrmidon reef, depth 10-15 m, 3 February 1981, coll. Z. Dinesen; other material: NTM C2247, Queensland, Briggs-Sudbury reef, March 1978, coll. P. Alderslade. Description. The holotype NTM C994 is 16 cm high and 15.5 cm wide, the stalk is 4 cm high (Fig. 12b). The base of the stalk has a flap of tissue, probably encrusting the substrate when the colony was alive. The polyps are up to 0.8 mm wide and 0.45 mm high, grouped in oblong to spherical catkins. Polyps. With irregular arrangement of sclerites in eight points (Fig. 13c). Abaxial and lateral point sclerites are spindles with simple tubercles and spiny distal part, largest present abaxially, up to 0.40 mm long, towards the adaxial points they become smaller (Fig. 16a). Tentacles with curved scales up to 0.10 mm long (Fig. 16b). Adaxial side of the polyp stalk with straight rods up to 0.20 mm long (Fig. 16 c-d). A couple of these rods have a rough surface texture. Supporting bundle composed of one or two spindles up to 2 mm long, with simple tubercles, and a smooth or spiny tip projecting for a maximum distance of 0.40 mm (Fig. 16e). Surface layer top stalk. Spindles and unilaterally spinose spindles, up to 0.80 mm long, with simple and complex tubercles (Fig. 16 f-g). The unilaterally spinose sclerites have long spines. Surface layer base stalk. Capstans, derivatives of capstans, spindles, and unilaterally spinose spindles, with simple and complex tubercles (Figs. 16 h-i, 17a-b). The spindles are up to 0.80 mm long. The unilaterally spinose sclerites have long spines. In the flap unilaterally spinose sclerites are lacking (Fig. 17 c-d). Interior stalk. Spindles with pointed ends, up to 2.00 mm long (Fig. 17 e-f), with simple and complex tubercles (Fig. 17g). Etymology. Named after the paratype locality. Distribution. Great Barrier Reef: Myrmidon reef, Briggs-Sudbury reef. Remarks. This is the only Litophyton species with projecting supporting bundle with spindles with a smooth tip and polyp stalks with long rods. With some doubts NTM C2247 is included in this species as it shows some supporting bundle spindles with smooth, projecting tip and long rods in the polyp stalk, but its interior stalk spindles differ, being only 0.85 mm long. The unilaterally spinose sclerites with very long spines are very distinctive but are in group I also present in L. dipensis sp. nov., L. elfordensis sp. nov., and L. graafae sp. nov. The differences between these species are discussed with L. dipensis.",
+    "year": 2020,
+    "lang": "en",
+    "type": "article",
+    "venue": "Zenodo (CERN European Organization for Nuclear Research)",
+    "topic": "Coral and Marine Ecosystems Studies",
+    "field": "Environmental Science",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4386494984",
+    "title": "A Hybrid MSL/SIW-Based Feeding Network for Broadband mm-Wave Antenna Array",
+    "abstract": "A Broadband series-fed linearly polarized antenna Array is presented for millimeter-wave applications. Three-dimensional hybrid MSL/SIW T-Juctions with a wide range of coupling ratios and unequal amplitude are used to build the power network with equal power distribution. For validation, four linearly polarized (LP) tapered slot antenna element arranged serially in vertical position to the feeding networks. The elements are flared in opposite directions to achieve equal phase at adjacent elements. Simulated results show that the impedance bandwidth of about 53% over the entire 23-39.7 GHz range and a maximum gain of 18.2 dBi.",
+    "year": 2023,
+    "lang": "en",
+    "type": "article",
+    "topic": "Microwave Engineering and Waveguides",
+    "field": "Engineering",
+    "ca_institutions": "Institut National de la Recherche Scientifique",
+    "funders": []
+  },
+  {
+    "id": "W2007712551",
+    "title": "Learning about gravity: segmental assessment of upright control as infants develop independent sitting",
+    "abstract": "The question of how infants attain upright sitting is at the core of understanding the development of most functional abilities. Our simple, practical method of securing the hips and different trunk segments while evaluating the infant's ability to vertically align and stabilize the trunk in space contributes a useful method and new insights into the development of upright control. Previous studies have considered the trunk to develop as a single segment. The goal of the present study was to examine how postural control changes across multiple trunk segments during typical development (TD) of sitting balance. For this purpose, electromyography (EMG) and kinematic data were collected at four levels of trunk support (axillae, midribs, waist, hips), in a longitudinal study of eight TD infants (3-9 mo of age). We found that developmental changes in stability were specific to the region of the trunk being investigated, changes in antagonistic muscle activity differed for the anterior-posterior versus the medial-lateral axis, and the relationship between muscle activation and movement changed from erratic attempts to gain upright position to anticipatory graded responses as infants developed upright control through a four-stage behavioral process. This information can be used by researchers to further refine hypotheses regarding this developmental process and by clinicians who wish to develop and test more specific treatment programs for children with postural dysfunction.",
+    "year": 2012,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Neurophysiology",
+    "topic": "Infant Development and Preterm Care",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": ["Eunice Kennedy Shriver National Institute of Child Health and Human Development", "National Institute of Neurological Disorders and Stroke", "National Institutes of Health", "McGill University"]
+  },
+  {
+    "id": "W2543932101",
+    "title": "Toten Miyazaki and Sakuzo Yoshino: Thoughts on Asian Solidarity and Universalism in Pre-war Japan",
+    "abstract": "This study focuses on the theory of Asian solidarity of another genealogy that did not support the fascist regime and World War II to understand more accurately the discussion on thoughts of Asian solidarity in the 21st century. These include the thoughts of Miyazaki Toten and Yoshino Sakuzo and are characterized by the following: (1) they involved universalism and Christianity, (2) they were critical to Japan leader theory (3) and they argued for universalism as a way to build Asia.",
+    "year": 2016,
+    "lang": "en",
+    "type": "article",
+    "venue": "Asian Culture and History",
+    "topic": "Japanese History and Culture",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W3104936069",
+    "title": "Experimental and Numerical Study of a Latent Heat Thermal Energy Storage System Enhanced with Fins",
+    "abstract": "The lack of a dispatchable energy supply makes transitioning from fossil fuels to green energy alternatives such as solar and wind energy extremely difficult. One solution to remedy this problem is the introduction of a latent heat thermal energy storage (LHTES) unit into an energy system to continue to provide energy long after the original source is gone. LHTES units utilize phase change materials (PCM) as storage media that melt and solidify in the presence of thermal energy. LHTES units using only pure PCMs take a long time to charge and discharge due to PCM low thermal conductivity, making their application in energy systems more difficult. The introduction of thermal conductivity enhancement techniques such as fins, nanoparticles and metallic foam decreases charging and discharging time and increases the thermal efficiency of LHTES units The current study numerically and experimentally analyses a LHTES unit containing Rubitherm RT55 as the PCM and enhanced with fins. Different configurations of metallic fins were examined to maximize the heat transfer to the PCM. These configurations were compared to the operation of the LHTES unit without any enhancement. Both the charging and the discharging cycles of the LHTES unit were studied. The experimental results were compared to numerical simulations completed by ANSYS Fluent 17.0 commercial CFD package. Finding an optimal configuration of a LHTES unit containing PCM and fins allows such units to be integrated with an alternative energy system making the alternative energy more reliable and comparable to their fossil fuel counterpart. The PCM in this study is stored in a cylindrical container which was of 30.48 cm tall with an inner diameter of 19.05 cm, with a copper pipe that transports the heat transfer fluid at the center of the container. The system is initialized from room temperature (22 ) and is charged with water at 70 . Firstly, the numerical data was compared to the experimental to provide verification for the model. The comparison indicated that the numerical predictions were in good agreement with the experimental data. Two configurations of 10 annular fins and 20 annular fins attached to the central pipe were analysed numerically. These two cases were compared to a benchmark case using no fins. The no-fin case using 70 HTF took approximately 48 hours to charge. This benchmark was then compared to the finned cases. The 10-fin case took roughly 15 hours to charge, while the 20-fin case took 12 hours and 40 minutes to fully charge. The resulting percent decreases in charging times were 68.9% and 73.7%, respectively. When evaluating the discharging cycle of the heat exchanger, it was found that the case utilizing no fins took about 42.5 hours to completely discharge. The 10-fin case took 11 hours and 20 minutes, a 73.2% decrease in total charging time. The 20-fin case had the fastest discharge cycle, which was 8 hours and 50 minutes, a 79.1% decrease when compared to the no-fin case. A case can be made that gains in efficiency when using the 20-fin case are offset by the manufacturing cost and difficulty when creating and assembling the fin geometry.",
+    "year": 2020,
+    "lang": "en",
+    "type": "article",
+    "venue": "Proceedings of the ... International Conference on Fluid Flow, Heat and Mass Transfer",
+    "topic": "Phase Change Materials Research",
+    "field": "Engineering",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W1685527554",
+    "title": "Hidden Markov model using Dirichlet process for de-identification",
+    "abstract": "For the 2014 i2b2/UTHealth de-identification challenge, we introduced a new non-parametric Bayesian hidden Markov model using a Dirichlet process (HMM-DP). The model intends to reduce task-specific feature engineering and to generalize well to new data. In the challenge we developed a variational method to learn the model and an efficient approximation algorithm for prediction. To accommodate out-of-vocabulary words, we designed a number of feature functions to model such words. The results show the model is capable of understanding local context cues to make correct predictions without manual feature engineering and performs as accurately as state-of-the-art conditional random field models in a number of categories. To incorporate long-range and cross-document context cues, we developed a skip-chain conditional random field model to align the results produced by HMM-DP, which further improved the performance.",
+    "year": 2015,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Biomedical Informatics",
+    "topic": "Bayesian Methods and Mixture Models",
+    "field": "Computer Science",
+    "ca_institutions": "Memorial University of Newfoundland",
+    "funders": "U.S. National Library of Medicine"
+  },
+  {
+    "id": "W2160167924",
+    "title": "Work Area Measurements as Predictors of Personal Exposure to Endotoxin and Cotton Dust in the Cotton Textile Industry",
+    "abstract": "OBJECTIVES: To determine if work area measurements of endotoxin and/or cotton dust obtained from the vertical elutriator (VE) can be used to predict levels of personal endotoxin exposure as measured by the Institute of Occupational Medicine (IOM) inhalable dust sampler in the cotton textile industry. METHODS: Fifty-six work area cotton dust samples were collected from 14 areas and 82 personal cotton dust samples were collected from 41 workers in three textile mills (Mills A, B and C) in Shanghai, China. Cotton dust concentrations were determined gravimetrically from sample filters, of which endotoxin concentrations were determined using a kinetic chromogenic modification of the limulus amoebocyte lysate assay. Linear regression models were used to determine the association between log IOM personal endotoxin concentration and log VE area endotoxin concentration. RESULTS: Median cotton dust and endotoxin concentrations measured from VE area samples in the three mills were 0.36 mg m(-3) and 1280.76 endotoxin units per cubic meter (EU m(-3)), respectively, compared to 1.74 mg m(-3) and 2226.83 EU m(-3) from IOM personal samples. Excluding samples from weaving processes, we observed linear associations between VE area measures of endotoxin and IOM personal endotoxin concentrations; VE area concentration of endotoxin explained 83 and 89% of the total variation in IOM personal endotoxin concentration for Mills A and B, respectively (Mill A: R2 = 0.83, P < 0.0001; Mill B: R2 = 0.89, P < 0.0001). Although area measures of cotton dust was also a significant predictor of person endotoxin, the model explained less of the variance in personal endotoxin measurements. CONCLUSIONS: Specific to the conditions of the textile mills investigated in this study, work area measurements of endotoxin, but not cotton dust, may be reasonable proxies for personal levels, at least for rank-ordering exposures.",
+    "year": 2007,
+    "lang": "en",
+    "type": "article",
+    "venue": "The Annals of Occupational Hygiene",
+    "topic": "Indoor Air Quality and Microbial Exposure",
+    "field": "Environmental Science",
+    "ca_institutions": [],
+    "funders": ["National Institute of Environmental Health Sciences", "National Institute for Occupational Safety and Health", "U.S. Public Health Service", "University of British Columbia"]
+  },
+  {
+    "id": "W6994411268",
+    "title": "Please Welcome",
+    "abstract": "Claudia Lozano-Guzman, MD, has joined the Division of Acute Surgery. Dr. Lozano- Guzman received a Harvard Medical School and McGill University International Latin American Scholarship for clinical rotations during her senior year of medical school at Universidad El Bosque in Bogota, Columbia. She completed the General Surgery Residency Program at Beth Israel Medical Center and a Fellowship in Surgical Critical Care at Thomas Jefferson University Hospital (TJUH). She sees patients at three Trauma Centers staffed by Jefferson acute care surgeons: TJUH, Lankanau Hospital and Paoli Hospital. Wilbur Bowne, MD, has joined the Division of General Surgery. Dr. Bowne completed his residency at the Mount Sinai School of Medicine, a Surgical Oncology Fellowship at Memorial Sloan-Kettering Cancer Center and a Laparoscopic/Minimally Invasive Fellowship at the State University of New York, Health Science Center of Brooklyn. As a surgical oncology specialist, he will be building a hyperthermic intraperitoneal chemotherapy (HIPEC) program at Jefferson. He sees patients at Thomas Jefferson University Hospital. Konstadinos A. Plestis, MD, has joined the Division of Cardiac Surgery. A native of Greece, he completed medical school at Aristotelian University of Thessaloniki. Dr. Plestis completed the General Surgery Residency Program at Brooklyn Hospital Center and the Vascular Surgery Residency at Baylor College of Medicine. He then completed a Cardiothoracic Surgery Fellowship at Montefiore Medical Center and is triple board certified in Surgery, Vascular Surgery and Thoracic and Cardiac Surgery. Dr. Plestis is internationally known for his work on complex aortic surgery. He currently sees patients at Jefferson-Abington and is the Director of Jefferson Aorta Surgery.",
+    "year": 2020,
+    "lang": "en",
+    "type": "other",
+    "venue": "The Medicine Forum",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2434533707",
+    "title": "The use of bisphosphonates in men with hormone-refractory prostate cancer: a systematic review of randomized trials.",
+    "abstract": "PURPOSE: A systematic review of randomized controlled trials (RCTs) was performed to assess the benefits of bisphosphonate therapy in men with hormone-refractory prostate cancer (HRPC). METHODS: The literature was searched to identify RCTs or meta-analyses comparing treatment with bisphosphonates to placebo or no treatment. RESULTS: Ten trials that studied clodronate (five trials, 404 patients), pamidronate (two trials, 350 patients), alendronate (one trial, 49 patients), etidronate (one trial, 51 patients), and zoledronic acid (one trial, 643 patients) in men with HRPC and bone metastases met the eligibility criteria. Pain response was the most frequently reported primary outcome (eight trials). Only the smallest trial demonstrated a statistically significant improvement in pain, but other non-statistically significant trends and subgroup analyses showing improvement in pain were observed in six clodronate and pamidronate trials. Three trials reported skeletal-related events (SREs). A trial studying zoledronic acid reported a statistically and clinically significant reduction in the number of patients having at least one SRE; however, there were higher rates of some adverse effects, and quality of life was not improved. CONCLUSION: Zoledronic acid appears to reduce the number of patients having at least one SRE in men with bone metastases from HRPC that are causing minimal or no pain. This benefit should be weighed against the associated toxicities, and the neutral effect on quality of life. Bisphosphonates may reduce bone pain in men with HRPC, but the evidence is less robust. Further investigations to identify the role of bisphosphonates alone and in combination with other therapies proven effective for men with HRPC are warranted.",
+    "year": 2006,
+    "lang": "en",
+    "type": "review",
+    "venue": "PubMed",
+    "topic": "Bone health and treatments",
+    "field": "Medicine",
+    "ca_institutions": "Sunnybrook Health Science Centre",
+    "funders": []
+  },
+  {
+    "id": "W2948008988",
+    "title": "Forecasting Market Index Volatility Using Ross-Recovered Distributions",
+    "abstract": "",
+    "year": 2018,
+    "lang": "en",
+    "type": "article",
+    "venue": "SSRN Electronic Journal",
+    "topic": "Stochastic processes and financial applications",
+    "field": "Economics, Econometrics and Finance",
+    "ca_institutions": ["Bishop's University", "Université Laval"],
+    "funders": []
+  },
+  {
+    "id": "W7053346309",
+    "title": "Ãvaluation d'une nouvelle mÃ©thode d'inoculation pour estimer la rÃ©sistance du soya (Glycine max (L.) Merrill) Ã  la pourriture Ã  sclÃ©rotes (Sclerotinia sclerotiorum (Lib.) de Bary)",
+    "abstract": "",
+    "year": 2006,
+    "lang": "fr",
+    "type": "other",
+    "venue": "Library and Archives Canada (Government of Canada)",
+    "topic": "Mass Spectrometry Techniques and Applications",
+    "field": "Chemistry",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2724298860",
+    "title": "Effects of multiaged silvicultural systems on reserve tree growth 19 years after establishment across multiple species in the Acadian forest in Maine, USA",
+    "abstract": "This study investigated the growth response of mature, isolated reserve trees (n = 528) in two multiaged silvicultural systems in the Acadian Forest Ecosystem Research Project (AFERP). Absolute and percent increases in basal area increment (BAI; cm 2 ·year −1 ) were assessed for the five predominant reserve tree species in AFERP: Acer rubrum L., Picea rubens Sarg., Pinus strobus L., Thuja occidentalis L., and Tsuga canadensis (L.) Carrière. Absolute growth was significantly greater in the large-gap treatment (23.7 ± 1.1 cm 2 ·year −1 ; mean ± SE) than in the small-gap treatment (16.3 ± 0.9 cm 2 ·year −1 ). Percent growth increase was greater in the small-gap treatment (187.6% ± 15.8%) than in the large-gap treatment (143.4% ± 19.3%), and both treatments had greater percent increases than the unharvested control (9.6% ± 5.2%). Species differed in their response to treatment. Pinus strobus had the greatest absolute increase (large-gap, 52.5 cm 2 ·year −1 ), while Tsuga canadensis (large-gap, 270% ± 71.6%) and Acer rubrum (small-gap, 262% ± 42.4%) had the greatest percent increases. Growth responses typically diminished with increasing tree size and pretreatment growth rate; however, reserve trees showed greater growth responses than their paired analogues in the control across all initial tree sizes and prior growth rates. The results suggest that these silivicultural systems accelerate the development of large trees.",
+    "year": 2017,
+    "lang": "en",
+    "type": "article",
+    "venue": "Canadian Journal of Forest Research",
+    "topic": "Forest ecology and management",
+    "field": "Environmental Science",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2606909087",
+    "title": "Nietzsche : généalogie, culture, parole",
+    "abstract": "Mémoire numérisé par la Direction des bibliothèques de l'Université de Montréal.",
+    "year": 2005,
+    "lang": "fr",
+    "type": "dissertation",
+    "venue": "Open MIND",
+    "topic": "Nietzsche, Schopenhauer, and Hegel",
+    "field": "Arts and Humanities",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4406480540",
+    "title": "10.1016/0967-0653(95)94372-w",
+    "abstract": "",
+    "year": 2000,
+    "lang": "en",
+    "type": "article",
+    "venue": "Time to knit",
+    "topic": "earthquake and tectonic studies",
+    "field": "Earth and Planetary Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W3037925455",
+    "title": "Emerging Precision Oncology Applications of Liquid Biopsy using Circulating Tumour DNA and Methylome Profiling",
+    "abstract": "",
+    "year": 2020,
+    "lang": "en",
+    "type": "article",
+    "venue": "Clinical Oncology",
+    "topic": "Cancer Genomics and Diagnostics",
+    "field": "Biochemistry, Genetics and Molecular Biology",
+    "ca_institutions": ["Princess Margaret Cancer Centre", "University Health Network", "University of Toronto", "Ontario Institute for Cancer Research"],
+    "funders": ["Princess Margaret Cancer Foundation", "Canadian Cancer Society Research Institute", "Canadian Institutes of Health Research", "Cancer Research Society", "Bristol-Myers Squibb", "Conquer Cancer Foundation"]
+  },
+  {
+    "id": "W2552041352",
+    "title": "Assessing the English Translation of BFSU’s New Motto",
+    "abstract": "&lt;p&gt;The motto is a potent marketing tool in today’s globalized site of higher education. Beijing Foreign Studies University (BFSU) adopted a new motto in 2011 to reflect its new self-branding as a cosmopolitan scholar-doer. Its English translation has since then triggered much discussion about quality assessment. The current study critically surveys the existing literature on translation quality assessment (TQA), in an effort to identify an appropriate framework to assess the translation of Chinese university mottos. House’s model (2015) is found the most appropriate and applied to the official translation of the BFSU motto, after being adjusted in two important aspects. One, in regard to the rise of English as a language of global communication, it is proposed that more broad-based English norms than those of English as a native language be established for the purpose of adjudicating cultural filtering. Two, the use of corpus-based contrastive pragmatics is expanded to gauge the justifiability of overt as well as covert mismatches. While the errors identified by such a modified model are better intersubjectively verifiable, it remains to see how social research can be incorporated into the system to assess the degrees different errors may impact on the perceived quality of a translation.&lt;/p&gt;",
+    "year": 2016,
+    "lang": "en",
+    "type": "article",
+    "venue": "International Journal of English Linguistics",
+    "topic": "Translation Studies and Practices",
+    "field": "Arts and Humanities",
+    "ca_institutions": [],
+    "funders": "Beijing Foreign Studies University"
+  },
+  {
+    "id": "W3161228155",
+    "title": "Fresh Insights on the Kinematics of M49's Globular Cluster System with MMT/Hectospec Spectroscopy",
+    "abstract": "Abstract We present the first results of an MMT/Hectospec campaign to measure the kinematics of globular clusters (GCs) around M49—the brightest galaxy in the Virgo galaxy cluster, which dominates the Virgo B subcluster. The data include kinematic tracers beyond 95 kpc (∼5.2 effective radii) for M49 for the first time, enabling us to achieve three key insights reported here. First, beyond ∼20′–30′ (∼100–150 kpc), the GC kinematics sampled along the minor photometric axis of M49 become increasingly hotter, indicating a transition from GCs related to M49 to those representing the Virgo B intra-cluster medium. Second, there is an anomaly in the line-of-sight radial velocity dispersion ( σ r ,los ) profile in an annulus ∼10–15′ (∼50–90 kpc) from M49 in which the kinematics cool by Δ σ r ,los ≈ 150 km s −1 relative to those in- or outward. The kinematic fingerprint of a previous accretion event is hinted at in projected phase-space, and we isolate GCs that both give rise to this feature, and are spatially co-located with two prominent stellar shells in the halo of M49. Third, we find a subsample of GCs with velocities representative of the dwarf galaxy VCC 1249 that is currently interacting with M49. The spatial distribution of these GCs closely resembles the morphology of VCC 1249's isophotes, indicating that several of these GCs are likely in the act of being stripped from the dwarf during its passage through M49's halo. Taken together, these results point toward the opportunity of witnessing ongoing giant halo assembly in the depths of a cluster environment.",
+    "year": 2021,
+    "lang": "en",
+    "type": "article",
+    "venue": "The Astrophysical Journal",
+    "topic": "Galaxies: Formation, Evolution, Phenomena",
+    "field": "Physics and Astronomy",
+    "ca_institutions": ["University of Toronto", "Herzberg Institute of Astrophysics"],
+    "funders": []
+  },
+  {
+    "id": "W4283693384",
+    "title": "Curious case of GW200129: Interplay between spin-precession inference and data-quality issues",
+    "abstract": "Measurement of spin-precession in black hole binary mergers observed with gravitational waves is an exciting milestone as it relates to both general relativistic dynamics and astrophysical binary formation scenarios. In this study, we revisit the evidence for spin-precession in GW200129 and localize its origin to data in LIGO Livingston in the 20--50 Hz frequency range where the signal amplitude is lower than expected from a nonprecessing binary given all the other data. These data are subject to known data quality issues as a glitch was subtracted from the detector's strain data. The lack of evidence for spin-precession in LIGO Hanford leads to a noticeable inconsistency between the inferred binary mass ratio and precessing spin in the two LIGO detectors, something not expected from solely different Gaussian noise realizations. We revisit the LIGO Livingston glitch mitigation and show that the difference between a spin-precessing and a nonprecessing interpretation for GW200129 is smaller than the statistical and systematic uncertainty of the glitch subtraction, finding that the support for spin-precession depends sensitively on the glitch modeling. We also investigate the signal-to-noise ratio $\\ensuremath{\\sim}7$ trigger in the less sensitive Virgo detector. Though not influencing the spin-precession studies, the Virgo trigger is grossly inconsistent with the ones in LIGO Hanford and LIGO Livingston as it points to a much heavier system. We interpret the Virgo data in the context of further data quality issues. While our results do not disprove the presence of spin-precession in GW200129, we argue that any such inference is contingent upon the statistical and systematic uncertainty of the glitch mitigation. Our study highlights the role of data quality investigations when inferring subtle effects such as spin-precession for short signals such as the ones produced by high-mass systems.",
+    "year": 2022,
+    "lang": "en",
+    "type": "preprint",
+    "venue": "Physical review. D/Physical review. D.",
+    "topic": "Pulsars and Gravitational Waves Research",
+    "field": "Physics and Astronomy",
+    "ca_institutions": [],
+    "funders": ["Instituto Nazionale di Fisica Nucleare", "Alliance de recherche numérique du Canada", "Centre National de la Recherche Scientifique", "Swinburne University of Technology", "Australian Government", "Simon Fraser University", "National Science Foundation"]
+  },
+  {
+    "id": "W2731484330",
+    "title": "Missing Persons and Social Exclusion",
+    "abstract": "People who go missing are often perceived to have done so voluntarily, and yet, many missing persons in Canada are Aboriginal, visible minorities, homeless, and are fleeing from violence, abuse, and neglect. Integrating the concept of social exclusion and an intersectional perspective with a sample of 724 missing persons cases drawn from one Canadian police service, this dissertation examines the systemic issues underlying peoples’ disappearances. This dissertation also explores the role of social and economic disadvantage in the risk of a long term disappearance. A combination of univariate (descriptions), bivariate (cross-tabulations), and multivariate (logistic regression) analyses identify correlates and causes of going missing and correlates and causes of long term disappearances. &#13;\\nThe concept of social exclusion explains how structural processes prevent particular groups and individuals from gaining access to valued social relationships and economic opportunities in a particular society, resulting in considerable hardship and disadvantage. This dissertation argues that people who are marginalized and excluded have few resources to rely on to cope with stress and strain and may resort to going missing if confronted with adversity. Groups who are overrepresented among missing persons compared to the general population are identified by cross-tabulations and chi-square tests. Multivariate analysis (partial tables and logistic regression) is used to control for possible sources of spuriousness, in order to have more confidence in imputing causal relationships between membership in disadvantaged groups and going missing. &#13;\\nMoreover, if disadvantaged groups go missing, they further sever ties with families, the labour market, and other mainstream institutions. As a result of extreme disadvantage, they may find it difficult to (re)connect with conventional social relationships and mainstream society. For example, youth who are escaping violence and abuse at home often end up on the streets and sever ties with schools, families, and other conventional support networks and become engaged in street culture. As a result of extreme disadvantage these young people are at risk of a long term disappearance. In other words, social exclusion is expected to be a risk and causal factor in long term disappearances. Groups who are overrepresented among long term disappearances compared to short term disappearances are identified by cross-tabulations and chi-square tests. Logistic regression analysis is used to draw conclusions about causal factors in long term disappearances. &#13;\\nThis research finds that excluded groups such as disadvantaged youth, Aboriginal people, women and other visible minorities, victims of violence, and youth in care are at disproportionate risk of going missing. Consistent with an intersectional perspective, this dissertation shows that certain groups who are multiply marginalized such as Aboriginal women and young women face an especially high risk of going missing. Aboriginal identity, labour force status, and homelessness are also implicated as causal factors in peoples’ disappearances. Moreover, this research finds that social exclusion is a risk and causal factor in long term disappearances as Aboriginal people, homeless people, minorities and other excluded groups face a high risk of a long term disappearance. Linking missing persons with the concept of social exclusion highlights the role of structural issues in peoples’ disappearances and refutes the common misperception that going missing is a choice. In terms of policy, the findings from this research indicate that prevention and intervention depend on targeting poverty, discrimination, gender inequality, violence, and other structural issues associated with social exclusion.",
+    "year": 2013,
+    "lang": "en",
+    "type": "dissertation",
+    "venue": "UWSpace (University of Waterloo)",
+    "topic": "Grief, Bereavement, and Mental Health",
+    "field": "Psychology",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2171461786",
+    "title": "Rapid Restoration of Normal Endothelial Functions in Genetically Hyperlipidemic Mice by a Synthetic Mediator of Reverse Lipid Transport",
+    "abstract": "Endothelial dysfunction is a major pathophysiological consequence of hypercholesterolemia and other conditions. We examined whether a synthetic mediator of lipid transport from peripheral tissues to the liver (ie, the \"reverse\" pathway) could restore normal endothelial function in vivo. Using assays of macrovascular and microvascular function, we found that genetically hypercholesterolemic apolipoprotein E knockout mice exhibited key endothelial impairments. Treatment of the mice for 1 week with daily intravenous bolus injections of large \"empty\" phospholipid vesicles, which accelerate the reverse pathway in vivo, restored endothelium-dependent relaxation, leukocyte adherence, and endothelial expression of vascular cell adhesion molecule-1 to normal or nearly normal levels. These changes occurred despite the long-standing hyperlipidemia of the animals and the persistence of high serum concentrations of cholesterol-rich atherogenic lipoproteins during the treatment. Our results indicate that dysfunctional macrovascular and microvascular endothelium in apolipoprotein E knockout mice can recover relatively quickly in vivo and that accelerated reverse lipid transport may be a useful therapy.",
+    "year": 2000,
+    "lang": "en",
+    "type": "article",
+    "venue": "Arteriosclerosis Thrombosis and Vascular Biology",
+    "topic": "Peroxisome Proliferator-Activated Receptors",
+    "field": "Biochemistry, Genetics and Molecular Biology",
+    "ca_institutions": [],
+    "funders": ["National Institutes of Health", "Heart and Stroke Foundation of British Columbia and Yukon", "Genentech", "Heart and Stroke Foundation of Canada", "National Institute of General Medical Sciences", "American Heart Association"]
+  },
+  {
+    "id": "W6888798687",
+    "title": "Svenskt frasnät 2.0 (SweFN)",
+    "abstract": "The file swefn-2.0.json contains the frames and the manually annotated semantic content, in a JSON format. The file swefn-2.0.tsv contains the same thing in a tab-separated table. Long lines have been separated for legibility; replace \\n\\t with \\t for a strict table. The Karp version has not been updated to 2.0 as of Oct 2024. I. IDENTIFYING INFORMATION Title* Swedish FrameNet v2.0 Subtitle Swedish FrameNet for describing and documenting Swedish lexical entries, containing sentences annotated manually with semantic information. Created by* Dana Dannélls (dana.dannells@svenska.gu.se), Niklas Zechner, Maria Toporowska Gronostaj, Karin Friberg Heppin, and others. Publisher(s)* Språkbanken Text (sb-info@svenska.gu.se) Link(s) / permanent identifier(s)* https://spraakbanken.gu.se/resurser/swefn-2-0 License(s)* CC BY 4.0 Abstract* Swedish FrameNet (SweFN) is a multi-layered lexical, grammatical and semantic computational resource based on the theory of frame semantics. The resource was created within the Swedish FrameNet++ project. It has been developed in line with Berkeley FrameNet 1.5 (SweFN version 1.0), but has been updated and aligned with BFN 1.7. The resource contains 1,329 Frames, ~39,000 Lexical Unit linked to Saldo and ~9,000 semantically annotated sentences. Funded by* The Swedish Research Council (grant no. 2010–06013) and several other contributing projects Cite as [1], [2] Related datasets SweFN has links to several lexical resources at Språkbanken Text: Dalin, Loan Word Typology list, Parole+, Saldo, Simple+, Swesaurus. II. USAGE Key applications Information retrieval, Machine translation, Natural language generation, Question answering, Semantic role labeling, Text classification, Textual entailment, Word sense disambiguation. Intended task(s)/usage(s) Train and evaluate machine learning models, develop semantic role labeling systems. Recommended evaluation measures Precision, Recall, F-score Dataset function(s) Training, testing, development Recommended split(s) 10-fold cross-validation. III. DATA Primary data* Text Language* Swedish Dataset in numbers* 1,329 Frames, ~39,000 Lexical Units and ~9,000 semantically and syntactically annotated sentences. Nature of the content* Similarly to the Berkeley FrameNet, the Swedish FrameNet is build around semantic frames for describing and documenting Swedish lexical entries. It contains frame elements (FE) and lexical units (LU). A semantic frame represents factual information about concepts and situations in our world through frame elements. LU are words or multiword expressions defined as a pairing of a word with a sense. Format* The file contains 17 data fields: 1. Frame, 2. Definition, 3. Core elements, 4. Peripheral elements, 5. SweCxn ID, 6. Semantic type, 7. Example sentences, 8. Compound patterns, 9. Compound examples, 10. Lexical units (LUs), 11. Suggestions for LUs, 12. Regular polysemy, 13. Domain, 14. Inheritance, 15. Created by, 16. Created date 17. Comment Data source(s)* Sentences in SweFN have been extracted from the Web and from corpus examples. They have been annotated with manually with semantic information. Lexical units have been linked to Saldo v2.3 using Karp editing interface. Data collection method(s)* Sentences and lexical units have been extracted manually and semi-automatically. Frames in SweFN have been developed by taking two approaches: extension and merging. Data selection and filtering* Data preprocessing* The majority of sentences have been annotated through Karp's editing interface. Some sentences may have been shortened. Each of the data files has been preprocessed seperatly, one in Karp v5 and one in Sparv v4.1. Data labeling* Annotator characteristics Approximately 10 annotators have been involved in the semantic annotation work. Some had background in linguistics, some in computational linguistics and a few in lexicography. All annotators had at least undergraduate degree. IV. ETHICS AND CAVEATS Ethical considerations Things to watch out for All frames are linked to Berkely FrameNet v1.7. V. ABOUT DOCUMENTATION Data last updated* 2024-10-14, v2.0 Which changes have been made, compared to the previous version* Replacement of frame element names, and additions of frame elements that were missing. Access to previous versions https://spraakbanken.gu.se/resurser/swefn This document created* 2024-10-14, Niklas Zechner This document last updated* 2024-10-24, Dana Dannélls Where to look for further details [1], [2] Documentation template version* v2.0 VI. OTHER Related projects See complete list of contributing projects. References [1] Dana Dannélls, Lars Borin, Markus Forsberg, Karin Friberg Heppin, Maria Toporowska Gronostaj (2021): Swedish FrameNet. The Swedish FrameNet++. In Harmonization, integration, method development and practical language technology applications, pages 37--66, John Benjamins: Amsterdam, Philadelphia. ISBN 978 90 272 5848 9. [2] Dana Dannélls, Lars Borin, Karin Friberg Heppin (2021): The Swedish FrameNet++ Harmonization, integration, method development and practical language technology applications. John Benjamins: Amsterdam, Philadelphia. ISBN 978 90 272 5848 9. [3] Dana Dannélls, Karin Friberg Heppin, Anna Ehrlemark (2014): Using language technology resources and tools to construct Swedish FrameNet. In Proceedings of the Workshop on Lexical and Grammatical Resources for Language Processing, pages 8--17, Dublin: ACL. [4] Karin Friberg Heppin, Miriam R.L. Petruck (2014): Encoding of Compounds in Swedish FrameNet. In Proceedings of the 10th Workshop on Multiword Expressions (MWE 2014) Workshop at EACL 2014 (Gothenburg, Sweden). Association for Computational Linguistics, pages 67--71, Gothenburg: ACL. [5] Friberg Heppin, Karin & Maria Toporowska Gronostaj (2014). Exploiting FrameNet for Swedish: Mismatch? Constructions and Frames 6(1): 52–72. [6] Karin Friberg Heppin (2013): Search using semantic FrameNet frames as variables. In Proceedings of Sixth Workshop on Exploiting Semantic Annotations in Information Retrieval (ESAIR 2013), held at CIKM 2013 in San Francisco, pages 25--28. [7] Kaarlo Voionmaa, Karin Friberg Heppin (2013): Use of support verbs in FrameNet annotations. In Electronic lexicography in the 21st century: thinking outside the paper. Proceedings of the eLex 2013 conference, Tallinn, Estonia. [8] Richard Johansson, Karin Friberg Heppin, Dimitrios Kokkinakis (2012): Semantic Role Labeling with the Swedish FrameNet. In Proceedings of the Eighth International Conference on Language Resources and Evaluation (LREC'12); Istanbul, Turkey, pages 3697--3700. [9] Dana Dannélls, Lars Borin (2012): Toward language independent methodology for generating artwork descriptions – Exploring FrameNet information. In EACL 2012 workshop on Language Technology for Cultural Heritage, Social Sciences, and Humanities (LaTeCH), pages 18–23. Avignon: ACL. [10] Karin Friberg Heppin, Kaarlo Voionmaa (2012): Practical aspects of transferring the English Berkeley FrameNet to other languages. In Proceedings of SLTC 2012, 28–29. Lund: Lund University. [11] Dimitrios Kokkinakis (2012): Initial Experiments of Medication Event Extraction Using Frame Semantics. In Scandinavian Conference on Health Informatics (SHI), volym Linköping Electronic Conference Proceedings, pages 41--47. Linköping: LiUEP. [12] Richard Johansson (2012): Non-atomic Classification to Improve a Semantic Role Labeler for a Low-resource Language. In Proceedings of the First Joint Conference on Lexical and Computational Semantics (*SEM), Montréal, Canada, pages 95--99. [13] Lyngfelt, Benjamin, Lars Borin, Markus Forsberg, Julia Prentice, Rudolf Rydstedt, Emma Sköldberg & Sofia Tingsell. 2012. Adding a constructicon to the Swedish resource network of Språkbanken. In Proceedings of KONVENS 2012 (LexSem 2012 workshop), 452–461. Vienna: ÖGAI. [14] Lars Borin, Markus Forsberg, Richard Johansson, Kristiina Muhonen, Tanja Purtonen, Kaarlo Voionmaa (2012): Transferring Frames: Utilization of Linked Lexical Resources. In Proceedings of the Workshop on Inducing Linguistic Structure Submission (WILS), pages 8--15. Montrèal: ACL. [15] Dimitrios Kokkinakis, Maria Toporowska Gronostaj (2010): Linking SweFN++ with Medical Resources, towards a MedFrameNet for Swedish. In Proceedings of Louhi at NAACL-HLT 2010, pages 68–71. Los Angeles: ACL. [16] Dana Dannélls (2010): Applying semantic frame theory to automate natural language templates generation from ontology statements. In Proceedings of INLG 2010, 179–184. Dublin: ACL. [17] Lars Borin, Dana Dannélls, Markus Forsberg, Maria Toporowska Gronostaj, Dimitrios Kokkinakis (2009): Thinking Green: Toward Swedish FrameNet++. Presentation at the FrameNet Masterclass and Workshop in connection with TLT 2009. Milan.",
+    "year": 2024,
+    "lang": "en",
+    "type": "dataset",
+    "venue": "Språkbanken Text",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W1560953817",
+    "title": "Entangled Discursivity: Women's Social Relations in a Collaborative Filmmaking Process",
+    "abstract": "This paper raises questions about collaboration and difference as spheres of struggle. Focussing on a filmmaking collaboration of two women, I investigate difference as a matter of gendered and racialized discursive practices that shape how relations are sustained and constrained. I work with a feminist poststructuralist approach to analyze interviews with the filmmakers and to discuss the discursive repertoires that the women engage. Linking discourses of family, locality, and labour, I argue that this entanglement shapes the social relations of the filmmakers.Significances and DirectionsFor many years in Toronto, I have produced feminist work as a writer, choreographer, and performer in theatre, performance art, video, and film. Much of this work was jointly conceived and developed with other women. My recollections of numerous collaborative projects are framed in pleasures and difficulties, upsets and exhilarations. I recall a great deal of time spent on ideas and on practicalities of production with little energy available for addressing the complex social relations of cultural production. There was so much struggle and so little attention to the hows and whys of struggle and to conflict in practices. And this was often where I would long to go. To ask: How are we doing this? What is at stake for you/me/us in our practices? Why/how are we struggling? What does collaborative artwork mean to you? How are social differences operative in what feels possible and impossible in our work together?Following from these urgencies, I decided to engage in a research project to investigate collaborative cultural production across difference and the ways in which contradictory, uncertain, and disputatious social relations are negotiated. In this article, I draw from the larger research project focussing on collaborations in film and theatre to discuss one particular collaboration of two women filmmakers, Shelley Niro and Anna Gronau. Difference is investigated as a matter of gendered and racialized discursive practices that organize advantages and disadvantages for differently positioned subjects.My focus on conflictual social relations is produced within the context of emphases on conflicts in feminism and on practising conflicts in feminism in a number of edited collections.(1) These works address conflicts in theory and politics, critical response, alliance-building, affiliations, and women's relations across differences. What is missing for me, however, in these texts, are the gritty and messy details of how conflict is lived, worked, resisted, embraced, and negotiated in specific relations of power and in particular arrangements at particular times. Such details are significant since we are at a socio-historic moment when contestations about what and who constitute we and about the limits of homogenizing discourses for transformative theories/politics are particularly keen.Where theories of collaboration are particularly central is in the literature about collaborative approaches to qualitative inquiry. Such approaches include critical action research, participatory research, feminist collaborative research, activist research and empowerment and emancipatory research.(2) Discourses of collaboration in such research approaches most often emphasize the unity in community, notions of giving voice and empowerment, a normalization of harmony, and regulative ideals of collaborative interaction.(3) My reading of this body of literature compelled me to interrogate understandings of, and desires for, harmony as the goal and outcome of collaboration.Literature about artwork tends to emphasize the study of representation, reception and consumption, art histories, art biographies, description of methods, and various intersections with cultural theory. Eager to find work that examines everyday processes and practices in collaborative art production and which troubles harmony and heterogeneity in discourses of collaboration, I discovered Linda Griffiths and Maria Campbell's The Book of Jessica: A Theatrical Transformation (1989). …",
+    "year": 2002,
+    "lang": "en",
+    "type": "article",
+    "venue": "Resources for feminist research",
+    "topic": "Theatre and Performance Studies",
+    "field": "Arts and Humanities",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2054204499",
+    "title": "Effect of Genotype and Periodic Pruning on Storage Root Yield and Yield Components of Some Cassava Genotypes Under Rain-Fed Conditions In Ghana",
+    "abstract": "Cassava (Manihot esculenta Crantz) is cultivated primarily for its starchy roots which provide a staple for millions of people in the tropics. The foliage contains high levels of protein which can be harvested for human and animal feed. Twenty five cassava genotypes were arranged in a randomized complete block design with three replications to investigate their tolerance to periodic pruning with respect to effect on root yield and yield components. The cassava plants were periodically pruned starting from three months after planting and at three months intervals until root harvest at 12 months after planting. Storage root yields ranged between 8.3 – 26.2 t/ha and 28.9–85.5 t/ha for the pruned plants and the control respectively. The pruned plants produced average root yield of 14.7 t/ha compared with 51.5 t/ha from the control. Though periodic pruning resulted in significant reduction in all components measured, genetic variations were observed in the level of reduction. Observed root yield reduction ranged between 40–80%. Five genotypes; 96/1642, Afisiafi, Esambankye, Agbelifia and Bankyehemaa, recorded storage root yield reduction of less than 50% of their respective controls. Starch content and mean storage root weight were also significantly reduced by periodic pruning. The significant genetic variations in the reduction of these traits indicated different levels of tolerance which can be exploited in further studies to identify ideal cassava genotypes for dual purpose utilization for foliage and root production.",
+    "year": 2015,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Plant Studies",
+    "topic": "Cassava research and cyanide",
+    "field": "Agricultural and Biological Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W3006437174",
+    "title": "Les installations agricoles dans le haut-Vicdessos : une analyse par le prisme du bien vivre - Programme INSTAGRI",
+    "abstract": "National audience",
+    "year": 2020,
+    "lang": "fr",
+    "type": "preprint",
+    "venue": "HAL (Le Centre pour la Communication Scientifique Directe)",
+    "topic": "Agriculture and Rural Development Research",
+    "field": "Agricultural and Biological Sciences",
+    "ca_institutions": "Université du Québec en Outaouais",
+    "funders": []
+  },
+  {
+    "id": "W1778915173",
+    "title": "The biodiversity–ecosystem service relationship in urban areas: a quantitative review",
+    "abstract": "By 2050, up to 75% of people globally will live in cities. Despite the potential ramifications of this urbanization for ecosystem services (ES), and the importance of locally produced ES for the health and wellbeing of urban residents, syntheses addressing the underlying ecology of ES provision rarely include urban areas. Here, I conduct a quantitative review of urban ES studies in the ecological literature, synthesizing trends across the discipline. I also quantify the extent to which this work considers the organisms and ecosystem components responsible for ES provision using two approaches: assessment of biodiversity–ES relationships, and an adaptation of the service provider concept. The majority of urban ES studies were conducted in western, developed countries, and typically assessed a single service in a single city – largely ignoring ES synergies and tradeoffs, and cross‐city comparisons. While several different ES are studied in urban ecosystems, the field is dominated by weather and climate‐related regulating services, with assessments of cultural services particularly lacking. Most studies described a habitat type as the service provider; however, studies that considered the biodiversity–ES relationship were more likely to identify a specific functional group, community, or population as the key provider of an ES. The biodiversity–ES relationship itself was most frequently characterized as dependent on the composition of species, functional traits, or structures, rather than correlated with the magnitude of any specific biodiversity metric. While the study of ES in urban ecosystems is increasing, there exists considerable room for further research. Future studies would benefit by expanding the number and categories of ES assessed within and across cities, as well as broadening the geographical scope of urban ES research. Biodiversity–ES assessments in urban ecosystems would also benefit from an expansion of the biodiversity types considered, particularly regarding non‐species based approaches, and consideration of non‐native and invasive species. Synthesis Urban ecosystem services (ES) affect the health and wellbeing of over 3.5 billion people who live in cities. However, syntheses addressing ES provision rarely include urban areas. I conducted the first quantitative review focused explicitly on the ecology of urban ES, including the role of biodiversity in service provision. I found that studies typically measure only a single service in one city, precluding assessment of ES synergies, tradeoffs, and cross‐city comparisons. I also found that while most studies attribute ES provision to a habitat or land‐use type, studies that consider biodiversity‐ES relationships are more likely to recognize a specific functional group, community, or population as the key provider of an ES.",
+    "year": 2015,
+    "lang": "en",
+    "type": "review",
+    "venue": "Oikos",
+    "topic": "Urban Green Space and Health",
+    "field": "Environmental Science",
+    "ca_institutions": [],
+    "funders": ["Natural Sciences and Engineering Research Council of Canada", "National Science Foundation"]
+  },
+  {
+    "id": "W1965748901",
+    "title": "Gravitational Contribution to the Observed Redshift",
+    "abstract": "",
+    "year": 2003,
+    "lang": "en",
+    "type": "article",
+    "venue": "Physics Essays",
+    "topic": "Geophysics and Gravity Measurements",
+    "field": "Earth and Planetary Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W3189917904",
+    "title": "α-Synuclein Regulates Peripheral Insulin Secretion and Glucose Transport",
+    "abstract": "AIM: Population based studies indicate a positive association between type 2 diabetes (T2D) and Parkinson's disease (PD) where there is an increased risk of developing PD in patients with T2D. PD is characterized by the abnormal accumulation of intraneuronal aggregated α-synuclein (α-syn) in Lewy bodies, which negatively impact neuronal viability. α-syn is also expressed in both pancreatic islets and skeletal muscle, key players in glucose regulation. Therefore, we examined the functional role of α-syn in these tissues. METHODS: myotubes. RESULTS: Mice genetically ablated for α-syn became glucose intolerant and insulin resistant with hyperinsulinemia and reduced glucose-stimulated insulin secretion (GSIS). Mice overexpressing human α-syn are more insulin senstive and glucose tolerant compared to controls with increased GSIS. Injection of purified α-syn monomers also led to improved glucose tolerance and insulin sensitivity with hightened GSIS. α-syn monomer treatments increased surface GLUT4 levels in myotubes but without any significant change in Akt phosphorylation. The increase in cell surface GLUT4 was largely due to a large reduction in GLUT4 endocytosis, however, with a compensatory reduction in GLUT4 exocytosis. CONCLUSION: Cumulatively, this data suggests that α-syn modulates both pancreatic beta cell function and glucose transport in peripheral tissues, thereby playing a pivitol role in the maintenance of normal glucose homeostasis.",
+    "year": 2021,
+    "lang": "en",
+    "type": "article",
+    "venue": "Frontiers in Aging Neuroscience",
+    "topic": "Parkinson's Disease Mechanisms and Treatments",
+    "field": "Medicine",
+    "ca_institutions": ["Occupational Cancer Research Centre", "University of Toronto"],
+    "funders": ["Canadian Institutes of Health Research", "Alzheimer's Society"]
+  },
+  {
+    "id": "W4406221354",
+    "title": "Immunogenicity of Type IV Pilin Proteins from Clostridium perfringens in Chickens",
+    "abstract": "Clostridium perfringens, the causative agent of necrotic enteritis in chickens, is controlled by in-feed antibiotics. With increasing pressure to reduce antimicrobial use, the development of alternative preventive tools is needed. Type IV pili proteins have been shown to be immunogenic in many Gram-positive bacteria. The aims of this study were to evaluate the immunogenic potential of pilins (PilA1, PilA2 and PilA3) from C. perfringens in chickens and to verify their ability to protect against necrotic enteritis. Chickens were immunized twice with 50 µg of recombinant proteins and adjuvant, resulting in a good and specific serum antibody response. Next, one-day-old chicks were injected three times with the same vaccines, and then infected with C. perfringens. Mean OD450 values ten times higher than the controls were obtained for IgY (p &lt; 0.05) and a significantly lower cecal count of C. perfringens was observed in the birds injected with PilA3. However, no reduction in the severity of intestinal lesions was observed. All three pilin proteins were shown to be highly immunogenic in the chickens. Although immunization with the pilins did not protect the birds against necrotic enteritis in this study, it was interesting to observe that vaccination with the recombinant PilA3 protein reduced C. perfringens cecal colonization.",
+    "year": 2025,
+    "lang": "en",
+    "type": "article",
+    "venue": "Microorganisms",
+    "topic": "Clostridium difficile and Clostridium perfringens research",
+    "field": "Medicine",
+    "ca_institutions": "Université de Montréal",
+    "funders": ["Natural Sciences and Engineering Research Council of Canada", "Mitacs", "Canadian Poultry Research Council"]
+  },
+  {
+    "id": "W2606532563",
+    "title": "Nitrous Oxide Utility in Labor and Birth",
+    "abstract": "The use of nitrous oxide (N2O) for labor and birth has very recently emerged as a viable modality in the United States, despite a long history of use in Canada and Europe. Usually associated with dental procedures, there are significant differences between dental and parturition utility, efficacy, and staff exposure. In addition to using it for pain relief and anxiolysis, those centers utilizing it have noted it to be multipurpose and useful for such situations as: external cephalic version, manual removal of placenta, intravenous starts, during placement of urinary catheters and intracervical Foley bulbs. Nitrous oxide has proven to be especially helpful for repair of lacerations under local anesthesia and is a multiuse modality that should be available to women in all birth settings. This article explores the history of N2O use, provides a comparison of obstetrical use to use in the dental industry, examines the contraindications to, and implications for usage, and discusses logistical points of consideration for clinicians working with women using N2O for labor and birth.",
+    "year": 2017,
+    "lang": "en",
+    "type": "review",
+    "venue": "The Journal of Perinatal & Neonatal Nursing",
+    "topic": "Maternal and Perinatal Health Interventions",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4406520568",
+    "title": "10.1016/s0765-2046(98)80206-2",
+    "abstract": "",
+    "year": 2000,
+    "lang": "en",
+    "type": "article",
+    "venue": "Time to knit",
+    "topic": "Antiplatelet Therapy and Cardiovascular Diseases",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": []
+  }
+]

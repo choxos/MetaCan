@@ -1,0 +1,811 @@
+# MétaCan screening rubric (v1.0)
+
+**Locked before screening. Version-controlled. Any change is a new version with a dated entry in `DEVIATIONS.md`.**
+
+Both machine screeners and both human coders work from this document and nothing else. The rubric is the
+instrument; if two coders disagree, the rubric is what they are adjudicated against.
+
+---
+
+## The unit
+
+One work (journal article, preprint, book chapter, report, dataset, or software), identified by its OpenAlex ID.
+You see: title, abstract, publication year, language, venue, OpenAlex topic and field, Canadian institutional
+affiliations, funders.
+
+## The question
+
+**Is the object of study *research itself*?**
+
+Metaresearch studies how research is done, reported, funded, evaluated, disseminated, or governed. The test is
+what the work is *about*, not what field it appears in and not what vocabulary it uses.
+
+A cardiology trial is not metaresearch. A study of *how cardiology trials report their outcomes* is.
+
+---
+
+## Tier
+
+Assign exactly one.
+
+### T1: Core metaresearch
+The primary object of study is research itself. Typical objects:
+
+- research **methods** and their properties (bias, reporting, statistical practice, study design)
+- **reproducibility**, replication, data and code sharing
+- **research integrity**: misconduct, retraction, questionable research practices, authorship
+- **peer review** and editorial process *as objects of study*
+- **research evaluation**, metrics, rankings, funding allocation
+- **scholarly communication**: publishing models, open access, preprints *as objects of study*
+- **bibliometrics and scientometrics** applied to a research literature
+- the **research workforce**: careers, equity, training, capacity
+- **evidence synthesis methodology** (not an individual systematic review's clinical answer, but work *about* how
+  syntheses are done)
+
+### T2: Adjacent
+Empirically or conceptually grounded work on science as a social system that is not framed as metaresearch but
+studies it:
+
+- **science and technology studies (STS)**: social studies of scientific knowledge, practice, controversy
+- **library and information science**: information behaviour of researchers, repositories, discovery
+- **research infrastructure** studies: platforms, data repositories, identifiers, standards
+- **history and philosophy of science** *when the object is contemporary research practice*
+- **research policy** analysis grounded in evidence
+
+T2 is where the field's diversity lives. Be generous here: a paper does not have to call itself metaresearch to
+be studying research.
+
+### T3: Contextual
+Relevant to the ecosystem, mapped and released, but **never pooled into the analytic corpus**:
+
+- editorials, commentaries, opinion pieces about research practice
+- policy documents and position statements
+- announcements of infrastructure, tools, or initiatives
+- news, obituaries, corrections, letters
+
+### OUT: Not metaresearch
+Everything else. Includes, and this is the most common error:
+
+- **A study that uses a method is not a study of the method.** A meta-analysis answering a clinical question is
+  OUT. A study of how meta-analyses handle heterogeneity is T1.
+- **Mentioning a metaresearch term is not studying it.** A lab paper reporting "assay reproducibility", a methods
+  section saying "peer reviewed", a licence note saying "open access": all OUT.
+- **Domain research that happens to be bibliometric in method** but whose object is the domain, not the research:
+  e.g. a bibliometric map of diabetes treatments, produced to summarise diabetes knowledge. Borderline; see below.
+
+---
+
+## The three errors that matter most
+
+These are where the pilot showed retrieval and screening break down. Read them twice.
+
+1. **Polysemy.** `reproducibility` in a biochemistry paper means the assay gives the same reading twice. In a
+   metaresearch paper it means the reproducibility crisis. Only the second is in scope. The same applies to
+   `validation`, `replication`, `bias`, `peer review`, `open access`. **Judge the sense, not the token.**
+
+2. **Method vs. object.** Using bibliometrics ≠ studying research. Ask: *if this paper is right, what do we now
+   know more about: a scientific question, or the practice of science?* If the former, OUT.
+
+3. **Absence of vocabulary is not absence of content.** An STS paper about laboratory practice, or an LIS paper
+   about how researchers find data, may use none of the field's keywords and still be squarely T2. **Do not
+   require the vocabulary.** This is the error that makes the field look smaller and more anglophone than it is.
+
+---
+
+## Canadian linkage
+
+Record which apply (this is metadata, not an inclusion test; the estimand is defined separately in
+`PROTOCOL.md`):
+
+- `CA_AFF`: at least one author affiliated with a Canadian institution
+- `CA_FUND`: funded by CIHR, NSERC, SSHRC, or CFI
+- `ABOUT_CA`: the Canadian research system is a substantive object of study (not a passing mention, not one
+  country among forty in a global comparison)
+
+## Genre
+
+`empirical` · `conceptual` · `editorial/commentary` · `policy` · `infrastructure/announcement` · `other`
+
+OpenAlex's `type` is unreliable and this field is commentary-heavy, so genre is coded, not inherited.
+
+## Language of the work
+
+As published. Do not infer from the venue.
+
+---
+
+## Confidence
+
+- `high`: the rubric decides this cleanly.
+- `medium`: the rubric decides, but a reasonable coder could differ.
+- `low`: genuinely on the boundary, or the abstract is missing/too thin to judge.
+
+**`low` is a legitimate answer and is not a failure.** Records coded `low` by either screener are routed to
+adjudication. A screener that never says `low` is not being careful; it is being confident.
+
+---
+
+## Worked examples
+
+| Title (abridged) | Tier | Why |
+|---|---|---|
+| "Data sharing practices in 500 randomised trials" | **T1** | The object is reporting practice. |
+| "Reproducibility of a Western blot protocol" | **OUT** | Assay reproducibility. Polysemy trap. |
+| "Trends in citation of retracted papers" | **T1** | Object is the literature's own behaviour. |
+| "Laboratory life in a Canadian genomics centre: an ethnography" | **T2** | STS. No metaresearch vocabulary; still studies research. |
+| "How do researchers discover datasets? A survey" | **T2** | LIS, information behaviour of researchers. |
+| "Effectiveness of statins: a network meta-analysis" | **OUT** | Uses a synthesis method to answer a clinical question. |
+| "How network meta-analyses handle inconsistency: a review of 200 reviews" | **T1** | Object is the method. |
+| "Announcing the Canadian Research Data Repository" | **T3** | Infrastructure announcement. Mapped, not pooled. |
+| "Open access mandates are failing early-career researchers" (editorial) | **T3** | Commentary about research practice. |
+| "Bibliometric analysis of diabetes research 2000–2020" | **T2** | Borderline. Bibliometric method, and the object *is* a research literature, so it studies research output. Code T2, `medium`. |
+| "Le libre accès dans les revues québécoises : état des lieux" | **T1** | Scholarly communication, object is publishing practice. French. |
+
+---
+
+## Instructions to the screener
+
+Read the title and abstract. Apply the rubric. Do not use outside knowledge of the authors or the journal's
+reputation. If the abstract is missing, judge on the title alone and set confidence to `low` unless the title is
+unambiguous.
+
+Return the schema in `protocol/screening-schema.json`. One object per work. No prose, no preamble.
+--------------------------------------------------------------------------------
+You are screening works for MetaCan, a map of Canadian metaresearch.
+
+Apply the rubric above to every record in the JSON array below. Return a JSON
+array with one object per work, conforming to protocol/screening-schema.json:
+
+  {"id": "W...", "tier": "T1|T2|T3|OUT", "genre": "...", "about_ca": true|false,
+   "confidence": "high|medium|low", "reason": "one sentence"}
+
+Rules:
+- Return the JSON array and NOTHING else. No prose, no preamble, no code fences.
+- Every input id must appear exactly once in the output.
+- Do not run commands, read files, or browse. Classify from the RECORDS alone.
+
+RECORDS:
+[
+  {
+    "id": "W1977841744",
+    "title": "Ergodic theorems and perturbations of contraction semigroups",
+    "abstract": "We provide sufficient conditions for sums of two unbounded operators on a Banach space to be (pre-)generators of contraction semigroups. Necessary conditions and applications to positive emigroups on Banach lattices are also presented.",
+    "year": 2009,
+    "lang": "en",
+    "type": "article",
+    "venue": "Studia Mathematica",
+    "topic": "Advanced Banach Space Theory",
+    "field": "Mathematics",
+    "ca_institutions": [],
+    "funders": ["Natural Sciences and Engineering Research Council of Canada", "Ministerstwo Edukacji i Nauki", "Mitacs", "McGill University"]
+  },
+  {
+    "id": "W1993436422",
+    "title": "Epstein-Barr Nuclear Antigen 1 Contributes to Nasopharyngeal Carcinoma through Disruption of PML Nuclear Bodies",
+    "abstract": "Latent Epstein-Barr virus (EBV) infection is strongly associated with several cancers, including nasopharyngeal carcinoma (NPC), a tumor that is endemic in several parts of the world. We have investigated the molecular basis for how EBV latent infection promotes the development of NPC. We show that the viral EBNA1 protein, previously known to be required to maintain the EBV episomes, also causes the disruption of the cellular PML (promyelocytic leukemia) nuclear bodies (or ND10s). This disruption occurs both in the context of a native latent infection and when exogenously expressed in EBV-negative NPC cells and involves loss of the PML proteins. We also show that EBNA1 is partially localized to PML nuclear bodies in NPC cells and interacts with a specific PML isoform. PML disruption by EBNA1 requires binding to the cellular ubiquitin specific protease, USP7 or HAUSP, but is independent of p53. We further observed that p53 activation, DNA repair and apoptosis, all of which depend on PML nuclear bodies, were impaired by EBNA1 expression and that cells expressing EBNA1 were more likely to survive after induction of DNA damage. The results point to an important role for EBNA1 in the development of NPC, in which EBNA1-mediated disruption of PML nuclear bodies promotes the survival of cells with DNA damage.",
+    "year": 2008,
+    "lang": "en",
+    "type": "article",
+    "venue": "PLoS Pathogens",
+    "topic": "Viral-associated cancers and disorders",
+    "field": "Medicine",
+    "ca_institutions": "University of Toronto",
+    "funders": "National Cancer Institute"
+  },
+  {
+    "id": "W2038663674",
+    "title": "EVOLUTION OF LEAF FORM IN MARSILEACEOUS FERNS: EVIDENCE FOR HETEROCHRONY",
+    "abstract": "Using an explicit phylogenetic framework, ontogenetic patterns of leaf form are compared among the three genera of marsileaceous ferns (Marsilea, Regnellidium, and Pilularia) with the outgroup Asplenium to address the hypothesis that heterochrony played a role in their evolution. We performed a Fourier analysis on a developmental sequence of leaves from individuals of these genera. Principal components analysis of the harmonic coefficients was used to characterize the ontogenetic trajectories of leaf form in a smaller dimensional space. Results of this study suggest that the \"evolutionary juvenilization\" observed in these leaf sequences is best described using a mixed model of heterochrony (accelerated growth rate and early termination at a simplified leaf form). The later stages of the ancestral, more complex, ontogenetic pattern were lost in Marsileaceae, giving rise to the simplified adult leaves of Marsilea, Regnellidium, and Pilularia. Life-history traits such as ephemeral and uncertain habitats, high reproductive rates, and accelerated maturation, which are typical for marsileaceous ferns, suggest that they may be \"r strategists.\" The evidence for heterochrony presented here illustrates that it has resulted in profound ecological and morphological consequences for the entire life history of Marsileaceae.",
+    "year": 2008,
+    "lang": "en",
+    "type": "article",
+    "venue": "Evolution",
+    "topic": "Plant Diversity and Evolution",
+    "field": "Agricultural and Biological Sciences",
+    "ca_institutions": [],
+    "funders": ["Division of Environmental Biology", "Natural Sciences and Engineering Research Council of Canada", "National Science Foundation"]
+  },
+  {
+    "id": "W3089017776",
+    "title": "Automatic Generation of Electrical Plan Documents from Architectural Data",
+    "abstract": "This paper explores a novel application of document generation: the automatic creation of residential electrical plans from architectural data. Electrical plan documents, crucial to all residential construction and renovation projects, are currently generated manually by electrical designers who must adhere to the local electrical code and follow industry best practices. The designers decide the type and location of all household electrical devices and outlets based on the architectural floor plans. This is a tedious, highly repetitive, and time-consuming task. We propose a procedural approach to automate the generation of residential electrical plans via a stack-based finite state machine model that mimics the electrical designer's thought process. The system receives 2D architectural data (e.g. wall location) as input and yields a customized electrical plan as output. Experimental results on a variety of architectural layouts of bathrooms, bedrooms, and kitchens are very promising and demonstrate the approach's functionality and usefulness. This paper paves the way for new algorithmic tools facilitating the design cycle of building projects.",
+    "year": 2020,
+    "lang": "en",
+    "type": "article",
+    "topic": "Handwritten Text Recognition Techniques",
+    "field": "Computer Science",
+    "ca_institutions": "University of Victoria",
+    "funders": "Natural Sciences and Engineering Research Council of Canada"
+  },
+  {
+    "id": "W17386636",
+    "title": "Changes in the Feeding Regimen for Chicken Under Welfare-bestowed Environment",
+    "abstract": "A focused microwave digestion system was used to heat a mini-column of sample of crushed rock (hematite) during its successive leaching by repeated 250-microL injections of water, HNO(3) 1%, 10% and 30% (v/v). The mini-column was connected to the nebulizer of an inductively coupled plasma mass spectrometry instrument, which allowed a continuous monitoring of the progressive release of elements by a given leaching reagent. Quantitation of the accessible fraction of Mg, V, Cr, Mn, Co, Ni, Cu, Zn, Mo, Sb and Pb was done by calibration using 250-microL injections of standard solutions prepared in the leaching reagent matrices. Total digestion of the sample residue was also done to verify mass balance. With the exception of Mg, V and Co, where the same total amount was released with or without microwave heating, an increased release resulted from focused microwave heating, by up to an order of magnitude. Furthermore, mass balance was verified for more elements using microwave heating, presumably because of a lower relative proportion of spectroscopic interference as a result of an increased release of analytes. Using microwave energy in general resulted in the dissolution of additional phases, as evidenced by significantly different (208)Pb/(206)Pb ratios as well as the increased release of elements with milder reagents. In fact, in the case of Pb, leaching with 30% HNO(3) was no longer necessary as all the Pb was released in the first three leaching reagents. Microwave heating could therefore be used advantageously in on-line leaching for exploration geochemistry and environmental monitoring.",
+    "year": 2010,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Animal Environmental Science",
+    "topic": "Animal Nutrition and Physiology",
+    "field": "Agricultural and Biological Sciences",
+    "ca_institutions": [],
+    "funders": "Natural Sciences and Engineering Research Council of Canada"
+  },
+  {
+    "id": "W1950010039",
+    "title": "N‐loss isotope effects in the Peru oxygen minimum zone studied using a mesoscale eddy as a natural tracer experiment",
+    "abstract": "Abstract Mesoscale eddies in Oxygen Minimum Zones (OMZs) have been identified as important fixed nitrogen (N) loss hotspots that may significantly impact both the global rate of N‐loss as well as the ocean's N isotope budget. They also represent “natural tracer experiments” with intensified biogeochemical signals that can be exploited to understand the large‐scale processes that control N‐loss and associated isotope effects ( ε ; the ‰ deviation from 1 in the ratio of reaction rate constants for the light versus heavy isotopologues). We observed large ranges in the concentrations and N and O isotopic compositions of nitrate (NO 3 − ), nitrite (NO 2 − ), and biogenic N 2 associated with an anticyclonic mode‐water eddy in the Peru OMZ during two cruises in November and December 2012. In the eddy's center where NO 3 − was nearly exhausted, we measured the highest δ 15 N values for both NO 3 − and NO 2 − (up to ~70‰ and 50‰) ever reported for an OMZ. Correspondingly, N deficit and biogenic N 2 ‐N concentrations were also the highest near the eddy's center (up to ~40 µmol L −1 ). δ 15 N‐N 2 also varied with biogenic N 2 production, following kinetic isotopic fractionation during NO 2 − reduction to N 2 and, for the first time, provided an independent assessment of N isotope fractionation during OMZ N‐loss. We found apparent variable ε for NO 3 − reduction (up to ~30‰ in the presence of NO 2 − ). However, the overall ε for N‐loss was calculated to be only ~13–14‰ (as compared to canonical values of ~20–30‰) assuming a closed system and only slightly higher assuming an open system (16–19‰). Our results were similar whether calculated from the disappearance of DIN (NO 3 − + NO 2 − ) or from the appearance of N 2 and changes in isotopic composition. Further, we calculated the separate ε values for NO 3 − reduction to NO 2 − and NO 2 − reduction to N 2 of ~16–21‰ and ~12‰, respectively, when the effect of NO 2 − oxidation could be removed. These results, together with the relationship between N and O of NO 3 − isotopes and the difference in δ 15 N between NO 3 − and NO 2 − , confirm a role for NO 2 − oxidation in increasing the apparent ε associated with NO 3 − reduction. The lower ε for N‐loss calculated in this study could help reconcile the current imbalance in the global N budget if representative of global OMZ N‐loss.",
+    "year": 2015,
+    "lang": "en",
+    "type": "article",
+    "venue": "Global Biogeochemical Cycles",
+    "topic": "Marine and coastal ecosystems",
+    "field": "Earth and Planetary Sciences",
+    "ca_institutions": [],
+    "funders": ["Natural Sciences and Engineering Research Council of Canada", "Deutsche Forschungsgemeinschaft", "National Science Foundation"]
+  },
+  {
+    "id": "W1986313335",
+    "title": "E2f2 induces cone photoreceptor apoptosis independent of E2f1 and E2f3",
+    "abstract": "",
+    "year": 2013,
+    "lang": "en",
+    "type": "article",
+    "venue": "Cell Death and Differentiation",
+    "topic": "Ocular Oncology and Treatments",
+    "field": "Medicine",
+    "ca_institutions": ["Lunenfeld-Tanenbaum Research Institute", "Mount Sinai Hospital", "Toronto Rehabilitation Institute", "University of Toronto", "University Health Network"],
+    "funders": ["Canadian Institutes of Health Research", "Foundation Fighting Blindness"]
+  },
+  {
+    "id": "W4237442277",
+    "title": "Discourse Studies",
+    "abstract": "Discourse analysis is now widely used in a variety of theoretical and disciplinary traditions. This entry provides a cursory overview of the field of discourse studies, paying particular attention to how language, as expressed in talk and text, is linked to national identity. The binary relationship of “us” and “them” is central to the formation of the nation. Racialized groups within the nation are often targets of racist discourses, which position them as threats to the nation. These discourses gain momentum and are legitimized through elite discourses communicated through the mass media. The self–other dynamic that is key to national identity is transposed to a domestic discourse that positions others (subordinated racialized minorities) either as not fitting into the nation or as deserving only conditional acceptance.",
+    "year": 2015,
+    "lang": "en",
+    "type": "other",
+    "venue": "The Wiley Blackwell Encyclopedia of Race, Ethnicity, and Nationalism",
+    "topic": "Discourse Analysis in Language Studies",
+    "field": "Arts and Humanities",
+    "ca_institutions": "Concordia University",
+    "funders": []
+  },
+  {
+    "id": "W2322113485",
+    "title": "NP024 Emergency Avoidance Visit Evaluation Project: Royal Columbian Hospital Heart Failure Program",
+    "abstract": "",
+    "year": 2012,
+    "lang": "en",
+    "type": "article",
+    "venue": "Canadian Journal of Cardiology",
+    "topic": "Emergency and Acute Care Studies",
+    "field": "Medicine",
+    "ca_institutions": "Fraser Health",
+    "funders": []
+  },
+  {
+    "id": "W1969699427",
+    "title": "Revisiting distinctions between ranching and pastoralism: A matter of interspecies relations between livestock, people, and predators",
+    "abstract": "North American ranching did not evolve as a solution to the ecological contradictions of pastoralism. This has been the conventional view from an institutional perspective, but from a perspective of interspecies relations, the reverse is more plausible. Rather than invest in careful husbandry, early colonists released livestock to fend for themselves and henceforth partook in the eradication of predators. This estrangement of livestock from the domestic sphere and the persecution of predators have lasted beyond the open range era and persist on private ranches. Range science tailored its prescriptions to the free-roaming livestock practices of ranching. But stocking rate guidelines are not sufficient to prevent the degradation of rangelands. Trophic cascade ecology has since demonstrated that the sound distribution of grazing activities takes place on a landscape of fear where nonlethal predation effects prevent the overutilization of key sites. In order to replicate these effects without undue losses, now that predators are protected, ranchers are compelled to reformulate their interspecies relations of estrangement and persecution. Technologies are a poor substitute for human presence, and ranchers are faced with adopting pastoralist practices of herding in order to improve rangelands and maintain surveillance to prevent predation. Thus by turning to pastoralist interspecies relations and practices, ranching might resolve its ecological contradictions.",
+    "year": 2014,
+    "lang": "en",
+    "type": "article",
+    "venue": "Critique of Anthropology",
+    "topic": "Rangeland Management and Livestock Ecology",
+    "field": "Environmental Science",
+    "ca_institutions": "McGill University",
+    "funders": []
+  },
+  {
+    "id": "W7032999450",
+    "title": "Ottawa doit suspendre l’entente avec les États-Unis, estiment les défenseurs de réfugiés",
+    "abstract": "",
+    "year": 2017,
+    "lang": "fr",
+    "type": "article",
+    "topic": "Diverse Scientific and Economic Studies",
+    "field": "Economics, Econometrics and Finance",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W75455361",
+    "title": "Louisse Jacques. \"Les recours hypothécaires\".",
+    "abstract": "",
+    "year": 2004,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Les Cahiers de droit",
+    "topic": "French Urban and Social Studies",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W6888970311",
+    "title": "Nanaimo Free Press [Wednesday, December 6, 1899]",
+    "abstract": "",
+    "year": 2019,
+    "lang": "en",
+    "type": "other",
+    "venue": "VIUSpace (Vancouver Island University Library)",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2133494659",
+    "title": "Transcriptome-Wide Detection of Differentially Expressed Coding and Non-Coding Transcripts and Their Clinical Significance in Prostate Cancer",
+    "abstract": "Prostate cancer is a clinically and biologically heterogeneous disease. Deregulation of splice variants has been shown to contribute significantly to this complexity. High-throughput technologies such as oligonucleotide microarrays allow for the detection of transcripts that play a role in disease progression in a transcriptome-wide level. In this study, we use a publicly available dataset of normal adjacent, primary tumor, and metastatic prostate cancer samples (GSE21034) to detect differentially expressed coding and non-coding transcripts between these disease states. To achieve this, we focus on transcript-specific probe selection regions, that is, those probe sets that correspond unambiguously to a single transcript. Based on this, we are able to pinpoint at the transcript-specific level transcripts that are differentially expressed throughout prostate cancer progression. We confirm previously reported cases and find novel transcripts for which no prior implication in prostate cancer progression has been made. Furthermore, we show that transcript-specific differential expression has unique prognostic potential and provides a clinically significant source of biomarker signatures for prostate cancer risk stratification. The results presented here serve as a catalog of differentially expressed transcript-specific markers throughout prostate cancer progression that can be used as basis for further development and translation into the clinic.",
+    "year": 2012,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Oncology",
+    "topic": "Prostate Cancer Treatment and Research",
+    "field": "Medicine",
+    "ca_institutions": "Genome British Columbia",
+    "funders": []
+  },
+  {
+    "id": "W3162665729",
+    "title": "Driving Behavior Analysis Guidelines for Intelligent Transportation Systems",
+    "abstract": "The advent of in-vehicle networking systems as well as state-of-the-art sensors and communication technologies have facilitated the collection of large volume and almost real-time data on vehicles and drivers, thus opening up future possibilities. Processing and analyzing this data provides unprecedented opportunities to offer remarkable insights and solutions for driving behavior analysis (DBA). Characterizing driving behavior plays a key role in a variety of research areas such as traffic safety, the development of automated vehicles, energy and fuel management, risk assessment, and driver identification and profiling. Advances in DBA-based driver inattention or drunk driver detection can help reduce fatal car crashes, and understanding the driving style (e.g. eco-friendly or aggressive) of drivers can contribute to fuel management and risk assessment of the drivers. These facts have led to a growing interest in addressing DBA challenges. This paper aims to present the state-of-the-art methodologies for DBA and provide a clear roadmap about the main current and future trends in DBA. To this end, we propose categorizing the current research on driving behavior based on the types of data employed for the analysis, the ultimate goals of the analysis, and the techniques based on which the driving data are modeled. We provide an overview of different data resources and available datasets for DBA. Moreover, we discuss the application of DBA along with the key research challenges in this field and potential future directions.",
+    "year": 2021,
+    "lang": "en",
+    "type": "article",
+    "venue": "IEEE Transactions on Intelligent Transportation Systems",
+    "topic": "Autonomous Vehicle Technology and Safety",
+    "field": "Engineering",
+    "ca_institutions": "University of Ottawa",
+    "funders": ["Natural Sciences and Engineering Research Council of Canada", "Canada Research Chairs"]
+  },
+  {
+    "id": "W4324056277",
+    "title": "Changements observés au Canada dans la consommation de cannabis à des fins médicales pendant la pandémie de COVID-19",
+    "abstract": "<sec> <title>Introduction<\/title> La pandémie de COVID-19 a eu des effets négatifs généralisés sur la santé, notamment une perte de sécurité matérielle et une exacerbation des maladies mentales chez les populations à risque. Bien que l’on ait observé une augmentation des cas d’usage non médical de certaines substances, dont le cannabis, dans des échantillons de la population canadienne, aucune étude n’a porté sur les changements dans la consommation de cannabis à des fins médicales au Canada pendant la pandémie de COVID. <\/sec> <sec> <title>Méthodologie<\/title> Les données ont été tirées de l’Enquête canadienne sur le cannabis de 2021, une enquête en ligne réalisée en mai 2021 auprès de personnes autorisées à utiliser du cannabis à des fins médicales et qui ont été recrutées par le biais de l’un des deux producteurs de cannabis à usage médical autorisés au Canada. Nous avons eu recours à des tests de McNemar pour comparer la fréquence de consommation de cannabis à des fins médicales au cours des trois mois ayant précédé la pandémie et la fréquence de consommation de cannabis à des fins médicales pendant la pandémie. Nous avons exploré les corrélats d’une augmentation de fréquence de consommation de cannabis depuis le début de la pandémie dans des modèles logistiques à deux variables et à variables multiples. <\/sec> <sec> <title>Résultats<\/title> Au total, 2 697 répondants (49,1 % de femmes) ont répondu à l’enquête. La consommation quotidienne de cannabis à des fins médicales a augmenté légèrement, mais de façon statistiquement significative, entre la période prépandémique (83,2 %) et la période pandémique (90,3 % au moment de l’enquête; p &lt; 0,001). Les facteurs associés de manière statistiquement significative à l’augmentation de la fréquence de consommation de cannabis à des fins médicales sont notamment le genre féminin, un âge plus jeune, une perte d’emploi liée à la pandémie, la consommation de cannabis principalement pour la gestion de sa santé mentale, l’usage de médicaments sur ordonnance et la consommation de cannabis à des fins non médicales (p &lt; 0,05). <\/sec> <sec> <title>Conclusion<\/title> Depuis le début de la pandémie de COVID-19, il y a eu une tendance légèrement à la hausse de la fréquence de consommation de cannabis à des fins médicales. Comme on ignore quels sont les effets à court et à long terme de la consommation de cannabis sur la détresse mentale en lien avec une pandémie, les cliniciens dont des patients utilisent du cannabis à des fins médicales devraient être à l’affût d’éventuels changements d’habitudes de consommation durant la pandémie. <\/sec>",
+    "year": 2023,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Promotion de la santé et prévention des maladies chroniques au Canada",
+    "topic": "Cannabis and Cannabinoid Research",
+    "field": "Medicine",
+    "ca_institutions": "University of Victoria",
+    "funders": []
+  },
+  {
+    "id": "W4401725862",
+    "title": "Linkages between environmental sustainability, disaggregated emission, renewable energy, and energy efficiency: An evidence from BRI countries",
+    "abstract": "This paper examines the long-term and short-run causative relationship among environmental sustainability, energy efficiency, renewable energy and carbon emissions from all over sources (coal, oil and fossil fuels) and sector wise division (heat and power, transportation, residential, manufacturing and other sectors. The empirical evidence presented in this study is derived from a balanced panel dataset spanning the annual periods from 2000 to 2021. The dataset specifically focuses on a selection of BRI Countries. The Kao test demonstrates the presence of cointegration across variables such as carbon dioxide emissions, environmental suitability, energy efficiency and renewable energy. The Panel Pooled Mean Group-Autoregressive Distributed Lag (PMG-ARDL) model indicates a statistically significant positive association between the environmental sustainability and disaggregated CO2 emissions over a long-term period. The study found a positive relationship between disaggregated CO2 emissions and environmental sustainability and energy efficiency, with renewable energy sources reducing emissions. It suggests a need for a structural transition from an energy-intensive economy to a decarbonized one, with sectors like heat and power positively impacting sustainability. Implementing measures to reduce emissions is crucial for tackling climate change.",
+    "year": 2024,
+    "lang": "en",
+    "type": "article",
+    "venue": "PLoS ONE",
+    "topic": "Energy, Environment, Economic Growth",
+    "field": "Economics, Econometrics and Finance",
+    "ca_institutions": "SAIT Polytechnic",
+    "funders": []
+  },
+  {
+    "id": "W6901838094",
+    "title": "Comparing Household and Individual Measures of Access through a Food Environment Lens: What Household Food Opportunities Are Missed When Measuring Access to Food Retail at the Individual Level?",
+    "abstract": "Geographers and public health researchers have long been interested in social, spatial, and economic factors that drive access and exposure to food retail. A growing body of evidence draws on mobility data to capture locations accessed by individuals beyond the home address. Given that food-related activities are shared by household members and often gendered, taking an individual-level approach might limit researchers’ ability to accurately describe access to food retail. Using data that includes Global Positioning System trajectories of forty-six adults from twenty-one households in Toronto, this study compares access to food retailers at the individual and household levels and evaluates measurement issues that arise when relying on one household member. Spatial and spatiotemporal measures of access were derived from individual and total household activity spaces. Differences in access were tested for men and women and moderating effects of neighborhood, shopping responsibility, car access, and employment status were investigated. Supermarket density was greater for women when compared with men in the household, as well as their total household measure. Additionally, within-household differences in counts of supermarkets were moderated by neighborhood. Future research should consider the role of place and the contributions of household members when measuring access to food at the individual level.",
+    "year": 2021,
+    "lang": "en",
+    "type": "article",
+    "venue": "Figshare",
+    "topic": "Urban and Freight Transport Logistics",
+    "field": "Engineering",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4406655250",
+    "title": "10.1016/b978-0-444-90336-5.50015-9",
+    "abstract": "",
+    "year": 2000,
+    "lang": "en",
+    "type": "book-chapter",
+    "venue": "Time to knit",
+    "topic": "Cardiac Ischemia and Reperfusion",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W3108616333",
+    "title": "Trail of Footprints: A History of Indigenous Maps from Viceregal Mexico",
+    "abstract": "\"Trail of Footprints: A History of Indigenous Maps from Viceregal Mexico.\" Terrae Incognitae, 52(3), pp. 316–317",
+    "year": 2020,
+    "lang": "en",
+    "type": "article",
+    "venue": "Terrae Incognitae",
+    "topic": "History of Science and Medicine",
+    "field": "Arts and Humanities",
+    "ca_institutions": "Mount Allison University",
+    "funders": []
+  },
+  {
+    "id": "W6950591250",
+    "title": "Fichier de conversion des codes postaux [Canada], janvier 2003, Recensement de la population 2001",
+    "abstract": "&lt;p&gt;Le Fichier de conversion des codes postaux (FCCP) est un fichier numérique qui permet d’établir un lien entre les codes postaux à six caractères fournit par la Société canadienne des postes (SCP) et les unités géographiques normalisées de Statistique Canada pour lesquelles les données du recensement et d’autres statistiques sont produites. Les liens entre les codes postaux et les unités géographiques normalisées font du FCCP un outil permettant d’intégrer des données de diverses sources. &lt;/p&gt; &lt;p&gt;Pour obtenir le fichier de conversion des codes postaux ou pour des questions, consultez &lt;a href=\"https://www.statcan.gc.ca/fra/idd/contact\" target=\"_blank\"&gt;la personne-ressource IDD&lt;/a&gt; de votre établissement d'enseignement. &lt;/p&gt; &lt;p&gt;Les coordonnées géographiques attribuées à chaque code postal dans le FCCP sont généralement utilisées pour cartographier la distribution des données aux fins d’analyse spatiale (p. ex., les clients, les activités). Les renseignements sur la localisation s’avèrent un outil puissant aux fins de planification ou de recherche.&lt;/p&gt; &lt;p&gt;C’est en avril 1983 que la Division de la géographie a diffusé une première version du Fichier de conversion des codes postaux qui établissait un lien entre les codes postaux et les unités géographiques du recensement et comprenait des coordonnées géographiques. Depuis, le fichier a été actualisé de façon régulière afin de refléter les changements liés aux codes postaux fournis par la Société canadienne des postes. Chaque cinq ans, les appariements de codes postaux dans le Fichier de conversion des codes postaux sont adaptés afin de correspondre aux unités géographiques du recensement le plus récent. Le premier Fichier de conversion des codes postaux établissait un lien aux unités géographiques du recensement de 1981. Depuis, le Fichier de conversion des codes postaux a connu quatre “conversions”, à la suite des recensements de 1986, de 1991, de 1996 et de 2001. On a utilisé un système automatisé révisé pour effectuer la conversion de 1996 à 2001. Les codes postaux du recensement de 2001 déclarés par les répondants ont servi à la validation des liens du Fichier de conversion des codes postaux.&lt;/p&gt;",
+    "year": 2003,
+    "lang": "fr",
+    "type": "dataset",
+    "venue": "Borealis",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2236150584",
+    "title": "An evaluation of learning styles, learning issues and learning problems of Confucian heritage culture students studying hospitality and tourism management in Australia",
+    "abstract": "The education of international students is becoming increasingly important to the financial wellbeing of western universities in the major English speaking destination countries of Australia, New Zealand, Canada, the United Kingdom and the United States of America. The purpose of this research is to examine the learning style preferences and learning problems of Chinese and other Confucian heritage culture (CHC) students who undertake degree level education in hospitality management and/or hospitality and tourism management at university in Australia.  CHC students have been embarking on western education since the early 1800s and currently form the majority of the international student cohort studying at tertiary level in Australia. Additionally, the demand for western education by such students is forecast to increase. There have been a variety of studies undertaken that focus on the learning experiences, problems and issues of these students studying in western institutions. However, no such studies have been undertaken that focus on the learning style preferences and learning issues and problems of CHC students who are undertaking hospitality management and/or hospitality and tourism management at tertiary level in Australia. Consequently, this study concentrates on tertiary level hospitality management and/or hospitality and tourism management students and identifies their preferred learning style. Based on their preferred learning style, this study also examines learning issues and problems experienced by this group of students and makes recommendations regarding how CHC students' learning experiences in western universities can be made more successful. Thus the problem researched in this thesis is:  How can the learning experience of international Confucian heritage culture students who study hospitality management and/or hospitality and tourism management at tertiary level in Australia be improved?  This study gathered both quantitative and qualitative data from CHC students studying hospitality management and/or hospitality and tourism management at a selection of universities and other higher education institutions throughout Australia. CHC students' learning style preferences were identified by the use of the Learning Styles Questionnaire (Honey and Mumford, 1986) which was based on Kolb's (1984) Experiential Learning Theory. This questionnaire was administered to 514 international students, 260 of whom were identified as being of Confucian heritage culture. It was found that these students displayed a preference for a reflector learning style. Essentially, this means that these students prefer to take a more passive approach to learning and appreciate the opportunity to reflect on what has been learned. This finding was in direct contrast to the other international students who completed the Learning Styles Questionnaire who tended to display a more activist learning style preference.  Based on the Learning Styles Questionnaire results, four focus group interview sessions were conducted with CHC students studying hospitality management and/or hospitality and tourism management at one of the participating institutions. These focus groups were designed to complement the findings of the questionnaire and, based on students' preferred learning style, clearly identify learning issues and problems.  This study found that this group of CHC students had to make a significant adjustment to their approach to learning when coming to a western university. Specifically, it was found that students experience problems and issues with the requirement to more fully understand material being taught; the expected classroom behaviour; the different and unusual methods of assessment; the role of the lecturer; and the ubiquitous nature of group work and presentations. This study found that this group of CHC students experienced confusion and stress, particularly at the start of their program, and had to work extremely hard in order to successfully complete courses. It was found that this group of students were very versatile regarding their approach to study and were able to differ their study approaches to take into account the various course requirements.   The major contributions of this research are identified in Chapter 6. The results of this research have significant implications for higher education institutions in Australia who are keen to attract increasing numbers of international students onto their programs. The successful completion of a degree by a CHC student is but one measure of success and based on this study a variety of teaching and learning recommendations that higher education institutions might adopt are suggested in order to ensure that this group of students more fully benefit from their overall learning experience.",
+    "year": 2004,
+    "lang": "en",
+    "type": "dissertation",
+    "venue": "The University of Queensland",
+    "topic": "Learning Styles and Cognitive Differences",
+    "field": "Psychology",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W1518176930",
+    "title": "Notes sur l’information culturelle et sur les industries culturelles dans une optique proprement économique",
+    "abstract": "Il s’agit, dans un premier temps, de caractériser et de situer la notion d’industrie culturelle dans le domaine plus vaste du message culturel, lui-même un sous-ensemble du champ encore plus vaste de l’information dans le secteur tertiaire de l’économie. Nous insistons ensuite sur l’opportunité d’une politique des industries culturelles qui puisse s’intégrer dans le cadre d’une politique globale et cohérente pour le Québec, face aux énormes pouvoirs culturels que détiennent les multinationales de la culture. Or, force est de constater que les données officielles de la comptabilité nationale sont peu ou pas du tout adaptées à ce champ d’activité qui, au surplus, subit une profonde mutation, imputable à la révolution technologique en cours, notamment dans le domaine de la micro-informatique.",
+    "year": 2009,
+    "lang": "fr",
+    "type": "article",
+    "venue": "L Actualité économique",
+    "topic": "Cultural Industries and Urban Development",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2366849134",
+    "title": "Le camp de détention de Spirit Lake en Abitibi (1915-1917) : d’une transformation du paysage à la colonisation du territoire",
+    "abstract": "L’entrée en guerre du Canada, aux côtés des alliés britanniques, en août 1914, soulève rapidement la question des ressortissants de nationalité ennemie vivant au pays. Vingt-quatre camps de détention sont alors érigés à travers le Canada pour incarcérer prisonniers et suspects. S’élevant près de la ville d’Amos en Abitibi, le camp de Spirit Lake ouvre en janvier 1915 et devient l’un des plus importants, avec plus de 1 200 prisonniers et près de 150 femmes et enfants. Une intervention archéologique sur ce camp a été réalisée dans le cadre d’un projet de mise en valeur. Elle a permis d’en évaluer le potentiel patrimonial, de mieux comprendre l’organisation spatiale de ce vaste complexe carcéral et d’appréhender son rôle dans la transformation du paysage.",
+    "year": 2016,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Les Nouvelles de l archéologie",
+    "topic": "Historical and Cultural Archaeology Studies",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4243398431",
+    "title": "Abstracts/Résumés",
+    "abstract": "",
+    "year": 2010,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Contemporary Accounting Research",
+    "topic": "Corporate Taxation and Avoidance",
+    "field": "Business, Management and Accounting",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4310102492",
+    "title": "nuPRISM: Microfluidic Genome-Wide Phenotypic Screening Platform for Cellular Nuclei",
+    "abstract": "-mutated colorectal cancer. nuPRISM expands our ability to capture aberrant nuclear morphological and functional traits associated with distinctive signal transduction and subcellular localization-driven functional processes with substantial resolution and high throughput.",
+    "year": 2022,
+    "lang": "en",
+    "type": "article",
+    "venue": "ACS Central Science",
+    "topic": "CRISPR and Genetic Engineering",
+    "field": "Biochemistry, Genetics and Molecular Biology",
+    "ca_institutions": "University of Toronto",
+    "funders": []
+  },
+  {
+    "id": "W2031380784",
+    "title": "Interpretation of thermal dependence of magnetic aftereffect for magnetic nanocomposite with slow decay rates",
+    "abstract": "A new experimental characterization is presented of time-, field-, and temperature-dependent dynamic effects in magnetization of a nanocomposite which displays slow decay. Field and temperature variations of irreversible susceptibility, χ irr , decay coefficient, S, fluctuation field, hf , and activation volume, V, have been calculated for the nanocomposite sample (Co80Ni20) using a recently developed modified Preisach–Arrhenius (MPA) model. The sample is composed of non-interacting nanoparticles having negligible reversible magnetization. Non-Arrhenius behavior is observed in both the maximum decay coefficient, S max, and the fluctuation field, hf , as a function of temperature T. The peak of both temperature curves are identical and occur at a critical temperature Tk of ∼50 K, which agrees with our experimental results. Based on the effect of a temperature-dependent chemical potential on energy barrier, hf is studied for T < Tk and T ≥ Tk , respectively. A more complete MPA model that can predict the magnetization as function of time, field and temperature for a magnetic material with slow decay rates is proposed. This model uses a multi-variable analytical formula, , which incorporates the characteristic parameters.",
+    "year": 2012,
+    "lang": "en",
+    "type": "article",
+    "venue": "International Journal of Smart and Nano Materials",
+    "topic": "Magnetic properties of thin films",
+    "field": "Physics and Astronomy",
+    "ca_institutions": [],
+    "funders": ["National Institute of Standards and Technology", "Canadian Institute of Steel Construction", "George Washington University", "National Science Foundation"]
+  },
+  {
+    "id": "W2001748337",
+    "title": "A note to ‘Enterprise risk management: a DEA VaR approach in vendor selection’: a response to Wei and Wang and model extension",
+    "abstract": "Abstract Enterprise risk management (ERM) has become an important topic in today's more complex, interrelated global business environment, replete with threats from natural, political, economic and technical sources. Wu and Olson (Citation2010) [Wu, D.S. and Olson, D., 2010. Enterprise risk management: a DEA VaR approach in vendor selection. International Journal of Production Research 48 (16), 4919–4932] present a state-of-the-art overview of Enterprise risk management and discuss the possibility of constructing a value at risk measure at the data envelopment analysis (DEA) framework. Wei and Wang [Wei, G.W. and Wang, J.M., 2011. Value-at-risk and data envelopment analysis: comments on Wu and Olson (Citation2010). International Journal of Production Research, 49 (23), 7189–7193] contend errors in the article. Wei and Wang suggest a model based on Li [Li, S.X., 1998. Stochastic models and variable returns to scales in data envelopment analysis. European Journal of Operational Research, 104, 532–548]. We show that the suggested model in Wei and Wang (Citation2011) does not solve the problem completely. We provide alternative approaches to conduct performance evaluation with good discriminating power. Keywords: risk managementperformance analysis Notes Also at School of Science and Engineering, Reykjavik University, Menntavegur 1, Nauthólsvík, 101 Reykjavik, Iceland. Additional informationNotes on contributorsDesheng Dash Wu Also at School of Science and Engineering, Reykjavik University, Menntavegur 1, Nauthólsvík, 101 Reykjavik, Iceland.",
+    "year": 2011,
+    "lang": "en",
+    "type": "article",
+    "venue": "International Journal of Production Research",
+    "topic": "Efficiency Analysis Using DEA",
+    "field": "Decision Sciences",
+    "ca_institutions": "University of Toronto",
+    "funders": []
+  },
+  {
+    "id": "W4312683226",
+    "title": "EBM and the Medical Librarian: Registration Open",
+    "abstract": "Registration is now open for the Spring 2008 online course EBM and the Medical Librarian. The course will run from January 14 – March 9, 2008.&#x0D; &#x0D; This course is an introduction to evidence-based medicine (EBM) for medical librarians and the role of the librarian to support its practice. Participants will learn to identify the parts of a well built clinical question, to recognize the validity criteria for research studies, and to identify roles that librarians can undertake in providing EBM training and support. The course utilizes course material, independent readings, reviews, and practice exercises. It is offered as an eight week distance education MLA CE course through the University of North Carolina's School of Information and Library Science. The distance education version of this course will be held January 14 to March 7, 2008. The course uses the Blackboard course management system. It is approved for 10 MLA CE units.&#x0D; &#x0D; The cost of the course is $400 (USD) and payment must be received with the registration form. There are only 4 seats left in the Spring class. Those unable to secure a seat can be added to the waitlist for the next session scheduled for Fall 2008. If you want to reserve your seat while processing payment, please email Stephanie Peterson at peterssb@email.unc.edu with your intentions.&#x0D; &#x0D; Additional course information and the registration form are available at: http://sils.unc.edu/programs/continuing_ed/ebm.html.&#x0D; &#x0D; If you have any questions about the course, please contact one of the course instructors: Connie Schardt (mschar005@mc.duke.edu) or Angela Myatt (myattae@ucmail.uc.edu).",
+    "year": 2007,
+    "lang": "en",
+    "type": "article",
+    "venue": "Evidence Based Library and Information Practice",
+    "topic": "Health Sciences Research and Education",
+    "field": "Health Professions",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2810354483",
+    "title": "Device representatives in hospitals: are commercial imperatives driving clinical decision-making?",
+    "abstract": "Despite concerns about the relationships between health professionals and the medical device industry, the issue has received relatively little attention. Prevalence data are lacking; however, qualitative and survey research suggest device industry representatives, who are commonly present in clinical settings, play a key role in these relationships. Representatives, who are technical product specialists and not necessarily medically trained, may attend surgeries on a daily basis and be available to health professionals 24 hours a day, 7 days a week, to provide advice. However, device representatives have a dual role: functioning as commissioned sales representatives at the same time as providing advice on approaches to treatment. This duality raises the concern that clinical decision-making may be unduly influenced by commercial imperatives. In this paper, we identify three key ethical concerns raised by the relationship between device representatives and health professionals: (1) impacts on healthcare costs, (2) the outsourcing of expertise and (3) issues of accountability and informed consent. These ethical concerns can be addressed in part through clarifying the boundary between the support and sales aspects of the roles of device representatives and developing clear guidelines for device representatives providing support in clinical spaces. We suggest several policy options including hospital provision of expert support, formalising clinician conduct to eschew receipt of meals and payments from industry and establishing device registries.",
+    "year": 2018,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Medical Ethics",
+    "topic": "Pharmaceutical industry and healthcare",
+    "field": "Pharmacology, Toxicology and Pharmaceutics",
+    "ca_institutions": [],
+    "funders": "Canadian Institutes of Health Research"
+  },
+  {
+    "id": "W2028288124",
+    "title": "Posttraining increases in REM sleep intensity implicate REM sleep in memory processing and provide a biological marker of learning potential",
+    "abstract": "Posttraining rapid eye movement (REM) sleep has been reported to be important for efficient memory consolidation. The present results demonstrate increases in the intensity of REM sleep during the night of sleep following cognitive procedural/implicit task acquisition. These REM increases manifest as increases in total number of rapid eye movements (REMs) and REM densities, whereas the actual time spent in REM sleep did not change. Further, the participants with the higher intelligence (IQ) scores showed superior task acquisition scores as well as larger posttraining increases in number of REMs and REM density. No other sleep state changes were observed. None of the pretraining baseline measures of REM sleep were correlated with either measured IQ or task performance. Posttraining increases in REM sleep intensity implicate REM sleep mechanisms in further off-line memory processing, and provide a biological marker of learning potential.",
+    "year": 2004,
+    "lang": "en",
+    "type": "article",
+    "venue": "Learning & Memory",
+    "topic": "Sleep and Wakefulness Research",
+    "field": "Neuroscience",
+    "ca_institutions": "Trent University",
+    "funders": ["Natural Sciences and Engineering Research Council of Canada", "Canadian Institutes of Health Research"]
+  },
+  {
+    "id": "W2740248300",
+    "title": "The empirical-phenomenological research framework: Reflecting on its use",
+    "abstract": "Background and objective: Descriptive phenomenology when used within the tradition of Husserl offers the qualitative researcher a unique perspective into the lived experience of the phenomena in question. Methods of data analysis are often seen as the theoretical framework for which these studies are then focused. However, what is not realised is that the data analysis tool is merely that a tool for which to delineate the individual narratives. What is often missing is a research framework for which to structure the actual study. Therefore, the aim of this paper is to offer a reflective account of how the empirical-phenomenological framework shaped and informed a descriptive phenomenological study looking at the lived experience of male nursing students as they journey though the under-graduate nursing programme.Methods: A reflective narrative was used to examine and explore how the empirical-phenomenological framework can be used to support method construction within a descriptive phenomenological study.Results and conclusions: The empirical-phenomenological research framework aims to provide a practical method for understanding and valuing the range and depth of descriptive phenomenology, in particular the lived experience. Used in combination with specific phenomenological data analysis models the empirical-phenomenological framework is structured to support the qualitative research process.",
+    "year": 2017,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Nursing Education and Practice",
+    "topic": "Patient Dignity and Privacy",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2329874989",
+    "title": "Incidental Nonuterine High-grade Serous Carcinomas Arise in the Fallopian Tube in Most Cases",
+    "abstract": "Most nonuterine high-grade serous carcinomas (HGSCs) in women with hereditary breast and ovarian cancer syndrome, due to germline BRCA1/2 mutation, arise in the fimbria of the fallopian tube. However, the site of origin of sporadic HGSC, which is usually widely disseminated at presentation, is not well established. We sought to characterize cases of HGSC discovered incidentally in patients not known to be at high risk, in order to determine the site distribution and possible origin of sporadic HGSC. Incidental microscopic, non-mass-forming cases of serous tubal intraepithelial carcinoma or HGSC in salpingo-oophorectomy specimens in which the tubes and ovaries had been extensively examined were identified. No patients were known or suspected BRCA1/2 mutation carriers. Twenty-one cases were identified (mean age: 57 y). Surgery was for benign disease (n=15), uterine endometrioid adenocarcinoma or atypical hyperplasia (n=3), bladder carcinoma (n=1), or ovarian serous borderline tumor (n=2). In 16 of 21 cases, the lesion was confined to the fallopian tube (unilateral in 14 cases, bilateral in 2). There was serous tubal intraepithelial carcinoma in all cases and invasive HGSC into the underlying lamina propria in 8 of these 16 cases; the invasive focus measured 1.3 cm or less in every case. In the remaining 5 cases, there was fallopian tube mucosal and ovarian involvement; in 2 of these cases, there was also microscopic peritoneal involvement. Sporadic cases of nonuterine HGSC arise in the fallopian tube fimbria in a large majority of cases, providing further evidence for the tubal origin of these neoplasms.",
+    "year": 2014,
+    "lang": "en",
+    "type": "article",
+    "venue": "The American Journal of Surgical Pathology",
+    "topic": "Ovarian cancer diagnosis and treatment",
+    "field": "Medicine",
+    "ca_institutions": ["University of Alberta", "University of Calgary", "Calgary Laboratory Services", "Vancouver General Hospital", "Royal Jubilee Hospital", "University of British Columbia"],
+    "funders": []
+  },
+  {
+    "id": "W4248394707",
+    "title": "Patterns of Hyperglycemia in Patients With Type 2 Diabetes Mellitus With or Without Hypertension, Requiring Emergency Care and Hospitalization",
+    "abstract": "Background: Hyperglycemia is treatable and preventative cause of both microvascular and macrovascular complications in persons with type 2 diabetes mellitus (T2DM). Hyperglycemia is unequivocally associated with poor outcomes especially in hospitalized patients. The aim of this study therefore is to measure the occurrence of hyperglycemic events particularly in patients with T2DM requiring acute care and subsequent hospitalization with or without hypertension and describe the epidemiological features. Methods: An incident case study design was used, i.e. adult patients (greater-than or equal to 18 years) with hyperglycemia presenting to the accident and emergency department (AED) of a tertiary teaching hospital from 2011 to 2013 were recruited for the study. Results: Overall, 350 participants satisfied the criteria for entry into the study. All 350 patients were available for analysis. The pattern of hyperglycemia was predominantly among women, younger rather than older adults, and was a significant association with duration of diabetes and also a significant temporal association. Conclusions: The patterns shown in the research indicated that hyperglycemia is a concern particularly for the over 40 years old East Indian cohort of the population and as a result programs and initiatives should be directed to this group in order to make a meaningful impact as we seek to reduce the burdens associated with this condition. J Endocrinol Metab. 2015;5(5):291-298 doi: http://dx.doi.org/10.14740/jem313w",
+    "year": 2015,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Endocrinology and Metabolism",
+    "topic": "Diabetes Management and Research",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4323519197",
+    "title": "Any Port(ico) in a Storm. Field Notes on an Adult Amateur Synagogue Choir during the Pandemic",
+    "abstract": "This set of field notes relates the experiences of an adult amateur synagogue choir during the two years of the covid -19 pandemic. The director’s observations comprise the notes and reflections on the meaning of music in the lives of the choir members, the challenges faced by the ensemble to continue rehearsing despite the shutdown, and the different ways that those challenges were met.",
+    "year": 2023,
+    "lang": "en",
+    "type": "article",
+    "venue": "Revue musicale OICRM",
+    "topic": "COVID-19 and Mental Health",
+    "field": "Psychology",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2056144607",
+    "title": "Calibration of the osmotic technique of controlling suction with respect to temperature using a miniature tensiometer",
+    "abstract": "The osmotic technique was calibrated at various temperatures (20–40 °C) using a high-capacity tensiometer. The effect of temperature on the calibration curve of the high-capacity tensiometer in the positive range has been found to be insignificant, i.e., about 0.03%/°C. The measurement at ambient temperature shows that the suction value is not significantly dependent either on the molar mass of polyethylene glycol (PEG) or on the molecular weight cutoff (MWCO) of the semipermeable cellulose membrane. On the other hand, the matric suction measured in the present work by tensiometer was lower than the total suction found in the literature measured by psychrometer. This shows that the so-called membrane effects must be characterized by not only the crossing of PEG molecules but also other complex phenomena. The calibration at controlled temperatures showed a slight suction decrease of 1%/°C. One possible explanation for this decrease is that increasing the temperature decreases the viscosity of PEG solutions, possibly accelerating the crossing of PEG molecules. It is also possible that increasing the temperature changes the physicochemical properties of the PEG solutions, resulting in a suction decrease.",
+    "year": 2010,
+    "lang": "en",
+    "type": "article",
+    "venue": "Canadian Geotechnical Journal",
+    "topic": "Nanopore and Nanochannel Transport Studies",
+    "field": "Engineering",
+    "ca_institutions": [],
+    "funders": "National Natural Science Foundation of China"
+  },
+  {
+    "id": "W7029422977",
+    "title": "Kansas Farmer Continuing Mail &amp; Breeze, v. 70, no. 14 (July 9, 1932)",
+    "abstract": "Published as: Kansas Farmer, Vol. 1, no. 1 (May 1, 1863)-v. 57, no. 49 (Dec. 6, 1919); Kansas Farmer and Mail &amp; Breeze, Vol. 57, no. 50 (Dec 13, 1919)-v. 64, no. 9 (Feb 27, 1926); Kansas Farmer, Mail &amp; Breeze, Vol. 64, no. 10 (Mar. 6, 1926)-v. 70, no. 1 (Jan. 9, 1932); Kansas Farmer Continuing Mail &amp; Breeze, Vol. 70, no. 2 (Jan. 23, 1932)-v. 76, no. 8 (Apr. 22, 1939); Kansas Farmer, Mail &amp; Breeze, Vol. 76, no. 9 (May 6, 1939)-v. 77, no. 20 (Oct. 5, 1940); Kansas Farmer Continuing Mail &amp; Breeze, Vol. 77, no. 21 (Oct. 19, 1940)-v. 91, no. 3 (Feb. 6, 1954).",
+    "year": 2016,
+    "lang": "en",
+    "type": "article",
+    "venue": "K-State Research Exchange (Kansas State University)",
+    "topic": "Particle physics theoretical and experimental studies",
+    "field": "Physics and Astronomy",
+    "ca_institutions": [],
+    "funders": "McGill University"
+  },
+  {
+    "id": "W2029695201",
+    "title": "Proteomic Analysis of the Effects of Aged Garlic Extract and Its FruArg Component on Lipopolysaccharide-Induced Neuroinflammatory Response in Microglial Cells",
+    "abstract": "Aged garlic extract (AGE) is widely used as a dietary supplement, and is claimed to promote human health through anti-oxidant/anti-inflammatory activities with hypolipidemic, antiplatelet and neuroprotective effects. Prior studies of AGE have mainly focused on its organosulfur compounds, with little attention paid to its carbohydrate derivatives, such as N-α-(1-deoxy-D-fructos-1-yl)-L-arginine (FruArg). The goal of this study is to investigate actions of AGE and FruArg on antioxidative and neuroinflammatory responses in lipopolysaccharide (LPS)-activated murine BV-2 microglial cells using a proteomic approach. Our data show that both AGE and FruArg can significantly inhibit LPS-induced nitric oxide (NO) production in BV-2 cells. Quantitative proteomic analysis by combining two dimensional differential in-gel electrophoresis (2D-DIGE) with mass spectrometry revealed that expressions of 26 proteins were significantly altered upon LPS exposure, while levels of 20 and 21 proteins exhibited significant changes in response to AGE and FruArg treatments, respectively, in LPS-stimulated BV-2 cells. Notably, approximate 78% of the proteins responding to AGE and FruArg treatments are in common, suggesting that FruArg is a major active component of AGE. MULTICOM-PDCN and Ingenuity Pathway Analyses indicate that the proteins differentially affected by treatment with AGE and FruArg are involved in inflammatory responses and the Nrf2-mediated oxidative stress response. Collectively, these results suggest that AGE and FruArg attenuate neuroinflammatory responses and promote resilience in LPS-activated BV-2 cells by suppressing NO production and by regulating expression of multiple protein targets associated with oxidative stress.",
+    "year": 2014,
+    "lang": "en",
+    "type": "article",
+    "venue": "PLoS ONE",
+    "topic": "Garlic and Onion Studies",
+    "field": "Agricultural and Biological Sciences",
+    "ca_institutions": "British Columbia Institute of Technology",
+    "funders": ["National Center for Complementary and Integrative Health", "National Center for Complementary and Alternative Medicine", "National Cancer Institute", "University of Missouri", "National Institute of Environmental Health Sciences", "Office of Dietary Supplements"]
+  },
+  {
+    "id": "W4282832205",
+    "title": "Asymmetric effects of global uncertainty: the socioeconomic and environmental vulnerability of developing countries",
+    "abstract": "Purpose This study aims to investigate the influences of global uncertainty indicators volatility on the domestic socioeconomic and environmental vulnerability in a sample of 54 developing countries. Design/methodology/approach The two-step system generalized method of moments estimator is recruited to deal with autoregression and endogeneity matter in our dynamic panel data. Seven different global uncertainty indicators (US trade uncertainty; world trade uncertainty; economic policy uncertainty; world commodities and oil prices; the geopolitical risk index and the world uncertainty index) have been mobilized and compared for their empirical impact on the economic (growth and GDP), social (the misery index and income inequality) and environmental (CO 2 emissions) vulnerabilities of nations. Findings Our empirical estimations suggest that the socioeconomic and environmental vulnerability cannot be solved through the same pattern: all decrease of a particular aspect will necessarily have a cost and an opposite influence on at least one of the other aspects of the nations' vulnerability. Originality/value The originality of this article is to combine these three dimensions of vulnerability in the same investigation. To our knowledge, our research is one of the few providing a joint analysis of the influence of global uncertainty on the economic and socioenvironmental countries' vulnerabilities – given the fact social, economic and environmental aspects are at the heart of the UN sustainable goals, our study can be seen as an investigation of the nations' capabilities to work proactively on meaningful sustainable goals in an increasingly uncertain world.",
+    "year": 2022,
+    "lang": "en",
+    "type": "article",
+    "venue": "Fulbright Review of Economics and Policy",
+    "topic": "Market Dynamics and Volatility",
+    "field": "Economics, Econometrics and Finance",
+    "ca_institutions": "University of the Fraser Valley",
+    "funders": []
+  },
+  {
+    "id": "W2093121833",
+    "title": "Aldolase B Knockdown Prevents High Glucose-Induced Methylglyoxal Overproduction and Cellular Dysfunction in Endothelial Cells",
+    "abstract": "We used cultured endothelial cells as a model to examine whether up-regulation of aldolase B and enhanced methylglyoxal (MG) formation play an important role in high glucose-induced overproduction of advanced glycosylation endproducts (AGEs), oxidative stress and cellular dysfunction. High glucose (25 mM) incubation up-regulated mRNA levels of aldose reductase (an enzyme converting glucose to fructose) and aldolase B (a key enzyme that catalyzes MG formation from fructose) and enhanced MG formation in human umbilical vein endothelial cells (HUVECs) and HUVEC-derived EA. hy926 cells. High glucose-increased MG production in EA. hy926 cells was completely prevented by siRNA knockdown of aldolase B, but unaffected by siRNA knockdown of aldolase A, an enzyme responsible for MG formation during glycolysis. In addition, inhibition of cytochrome P450 2E1 or semicarbazide-sensitive amine oxidase which produces MG during the metabolism of lipid and proteins, respectively, did not alter MG production. Both high glucose (25 mM) and MG (30, 100 µM) increased the formation of N(ε)-carboxyethyl-lysine (CEL, a MG-induced AGE), oxidative stress (determined by the generation of oxidized DCF, H(2)O(2), protein carbonyls and 8-oxo-dG), O-GlcNAc modification (product of the hexosamine pathway), membrane protein kinase C activity and nuclear translocation of NF-κB in EA. hy926 cells. However, the above metabolic and signaling alterations induced by high glucose were completely prevented by knockdown of aldolase B and partially by application of aminoguanidine (a MG scavenger) or alagebrium (an AGEs breaker). In conclusion, efficient inhibition of aldolase B can prevent high glucose-induced overproduction of MG and related cellular dysfunction in endothelial cells.",
+    "year": 2012,
+    "lang": "en",
+    "type": "article",
+    "venue": "PLoS ONE",
+    "topic": "Advanced Glycation End Products research",
+    "field": "Biochemistry, Genetics and Molecular Biology",
+    "ca_institutions": ["Thunder Bay Regional Research Institute", "Lakehead University", "University of Saskatchewan"],
+    "funders": ["Canadian Institutes of Health Research", "University of Saskatchewan", "Heart and Stroke Foundation of Canada"]
+  },
+  {
+    "id": "W6885044580",
+    "title": "Roadmap for Climate Action on Campus [Plan d'action climatique 2023-2028 de l'Université de Moncton]",
+    "abstract": "",
+    "year": 2023,
+    "lang": "fr",
+    "type": "article",
+    "topic": "Science and Climate Studies",
+    "field": "Environmental Science",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2408325049",
+    "title": "The effect of acidic pH and presence of metals as parameters in establishing a sulfidogenic process in anaerobic reactor",
+    "abstract": "The successful use of anaerobic reactors for bioremediation of acid mine drainage has been shown in systems with neutral pH. However, the choice of an efficient and suitable process for such wastewater must consider the capability of operating at acidic pH and in the presence of metals. This work studies the performance of an anaerobic batch reactor, under conditions of varying initial pH for its efficiencies in sulfate removal and metal precipitation from synthetic acid mine drainage. The chemical oxygen demand/sulfate (COD/SO4(2-)) ratio used was 1.00, with ethanol chosen as the only energy and carbon source. The initial pH of the synthetic drainage was progressively set from 7.0 to 4.0 to make it as close as possible to that of real acid mine drainage. Metals were also added starting with iron, zinc, and finally copper. The effectiveness of sulfate and COD removal from the synthetic acid mine drainage increased as the initial pH was reduced. The sulfate removal increased from 38.5 ± 3.7% to 52.2 ± 3%, while the removal of organic matter started at 91.7 ± 2.4% and ended at 99 ± 1%. These results indicate that the sulfate reducing bacteria (SRB) community adapted to lower pH values. The metal removal observed was 88 ± 7% for iron, 98.0 ± 0.5% for zinc and 99 ± 1% for copper. At this stage, an increase in the sulfate removal was observed, which reaches up to 82.2 ± 5.8%. The kinetic parameters for sulfate removal were 0.22 ± 0.04 h(-1) with Fe, 0.26 ± 0.04 h(-1) with Fe and Zn and 0.44 ± 0.04 h(-1) with Fe, Zn, and Cu.",
+    "year": 2016,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Environmental Science and Health Part A",
+    "topic": "Mine drainage and remediation techniques",
+    "field": "Environmental Science",
+    "ca_institutions": "University of British Columbia",
+    "funders": []
+  },
+  {
+    "id": "W3108405318",
+    "title": "The Radio Luminosity-risetime Function of Core-collapse Supernovae",
+    "abstract": "Abstract We assemble a large set of 2–10 GHz radio flux density measurements and upper limits of 294 different supernovae (SNe), from the literature and our own and archival data. Only 31% of SNe were detected. We characterize the SN radio lightcurves near the peak using a two-parameter model, with t pk being the time to rise to a peak and L pk the spectral luminosity at that peak. Over all SNe in our sample at D &lt; 100 Mpc, we find that t pk = 10 1.7±0.9 days and that L pk = 10 25.5±1.6 erg s −1 Hz −1 , and therefore that generally 50% of SNe will have L pk &lt; 10 25.5 erg s −1 Hz −1 . These L pk values are ∼30 times lower than those for only detected SNe. Types Ib/c and II (excluding IIn’s) have similar mean values of L pk but the former have a wider range, whereas Type IIn SNe have ∼10 times higher values with L pk = 10 26.5±1.1 erg s −1 Hz −1 . As for t pk , Type Ib/c have t pk of only 10 1.1±0.5 days while Type II have t pk = 10 1.6±1.0 and Type IIn the longest timescales with t pk = 10 3.1±0.7 days. We also estimate the distribution of progenitor mass-loss rates, , and find that the mean and standard deviation of are −5.4 ± 1.2 (assuming v wind = 1000 km s −1 ) for Type Ib/c SNe, and −6.9 ± 1.4 (assuming v wind = 10 km s −1 ) for Type II SNe excluding Type IIn.",
+    "year": 2021,
+    "lang": "en",
+    "type": "article",
+    "venue": "The Astrophysical Journal",
+    "topic": "Gamma-ray bursts and supernovae",
+    "field": "Physics and Astronomy",
+    "ca_institutions": "York University",
+    "funders": []
+  },
+  {
+    "id": "W7078326570",
+    "title": "Influence of hydroxide-silicate composition and electrolyte temperature on microstructure and infrared emissivity of MAO coatings on Al 6061",
+    "abstract": "",
+    "year": 2025,
+    "lang": "en",
+    "type": "article",
+    "venue": "Materials Chemistry and Physics",
+    "topic": "Geochemistry and Geologic Mapping",
+    "field": "Computer Science",
+    "ca_institutions": [],
+    "funders": ["Department of Mechanical Engineering, University of Alberta", "Chung Hua University"]
+  },
+  {
+    "id": "W4243730185",
+    "title": "10.1037/e576402010-001",
+    "abstract": "This DOI is not currently attached to any metadata records. DOIs can’t actually ever be deleted (they’re persistent), but sometimes our members create DOIs in error. We do have a process to approximate deletion which we follow only in rare cases where the DOI has been genuinely created in error, and most crucially, if the DOI has never been published anywhere online or in print and never otherwise distributed to or communicated with anyone (authors, readers, reviewers, etc.",
+    "year": 2000,
+    "lang": "en",
+    "type": "article",
+    "venue": "Time to knit",
+    "topic": "Hermeneutics and Narrative Identity",
+    "field": "Arts and Humanities",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2767289697",
+    "title": "Decentralised training for medical students: a scoping review",
+    "abstract": "BACKGROUND: Increasingly, medical students are trained at sites away from the tertiary academic health centre. A growing body of literature identifies the benefits of decentralised clinical training for students, the health services and the community. A scoping review was done to identify approaches to decentralised training, how these have been implemented and what the outcomes of these approaches have been in an effort to provide a knowledge base towards developing a model for decentralised training for undergraduate medical students in lower and middle-income countries (LMICs). METHODS: Using a comprehensive search strategy, the following databases were searched, namely EBSCO Host, ERIC, HRH Global Resources, Index Medicus, MEDLINE and WHO Repository, generating 3383 references. The review team identified 288 key additional records from other sources. Using prespecified eligibility criteria, the publications were screened through several rounds. Variables for the data-charting process were developed, and the data were entered into a custom-made online Smartsheet database. The data were analysed qualitatively and quantitatively. RESULTS: One hundred and five articles were included. Terminology most commonly used to describe decentralised training included 'rural', 'community based' and 'longitudinal rural'. The publications largely originated from Australia, the United States of America (USA), Canada and South Africa. Fifty-five percent described decentralised training rotations for periods of more than six months. Thematic analysis of the literature on practice in decentralised medical training identified four themes, each with a number of subthemes. These themes were student learning, the training environment, the role of the community, and leadership and governance. CONCLUSIONS: Evident from our findings are the multiplicity and interconnectedness of factors that characterise approaches to decentralised training. The student experience is nested within a particular context that is framed by the leadership and governance that direct it, and the site and the community in which the training is happening. Each decentralised site is seen to have its own dynamic that may foreground certain elements, responding differently to enabling student learning and influencing the student experience. The insights that have been established through this review have relevance in informing the further expansion of decentralised clinical training, including in LMIC contexts.",
+    "year": 2017,
+    "lang": "en",
+    "type": "review",
+    "venue": "BMC Medical Education",
+    "topic": "Global Health Workforce Issues",
+    "field": "Health Professions",
+    "ca_institutions": [],
+    "funders": ["Centers for Disease Control and Prevention", "Universiteit Stellenbosch", "U.S. President’s Emergency Plan for AIDS Relief"]
+  },
+  {
+    "id": "W1983061810",
+    "title": "Testicular Responsiveness to hCG of the Ovine Fetus in the Last Third of Gestation",
+    "abstract": "The in vivo and in vitro testicular responsiveness to hCG of hemicastrated lamb fetuses 95-99, 110-118 and 130-141 days of gestational age was studied. Basal plasma testosterone (T) levels were similar at all ages (less than 0.25 ng/ml), while the mean testicular concentrations of dehydroepiandrosterone sulfate (DHA-S), 17 alpha-hydroxyprogesterone (17-OHP) and T were higher in 95- to 99-day-fold fetuses. Plasma T levels and the concentration of T, DHA-S, 17-OHP, androstenedione (A) and cyclic adenosine 3'5'-monophosphate (cAMP) were increased by hCG in the hemicastrated animal at all ages. cAMP and T production by enriched preparations of dispersed interstitial cells from control testes was increased by hCG in all groups. In fetuses pretreated with hCG in vivo the addition of hCG in vitro failed to modify cAMP and T production. 100 micrograms of LHRH to a 130-day-old fetus increased plasma LH and T levels. From these experiments, it is suggested that the low plasma LH and T levels found throughout the last trimester of fetal life reflect a relative lack of endogenous LHRH synthesis and/or release, rather than reduced testicular steroidogenic capacity.",
+    "year": 2008,
+    "lang": "en",
+    "type": "article",
+    "venue": "Hormone Research",
+    "topic": "Sperm and Testicular Function",
+    "field": "Medicine",
+    "ca_institutions": "Centre Hospitalier Universitaire Sainte-Justine",
+    "funders": []
+  },
+  {
+    "id": "W2725845685",
+    "title": "The effect of Nigella Sativa syrup on the relief of cyclic mastalgia: A triple-blind randomized clinical trial",
+    "abstract": "Background & Aim: Mastalgia is one of the most common complaints of women and its cyclic type constitutes two-thirds of the cases. This study aimed to determine the effect of Nigella Sativa syrup on cyclic mastalgia. Methods & Materials: This study is a triple-blind randomized clinical trial (IRCT201104304785N3). The study samples included 65 women with cyclic mastalgia referred to the Breast Cancer Research Center (BCRC), Academic Center for Education, Culture and Research (ACECR) in Tehran in 2014-2015. The samples were randomly divided into two groups: intervention group (Nigella Sativa=36) and placebo group (oral paraffin=36). The pain was measured by the VAS and McGill Short Form questionnaire two months before and three months after the intervention. Data were analyzed using statistical tests on the SPSS software version 18. Results: The results of the VAS and McGill pain score changes showed a significant difference between the two groups. Considering that the interaction between time and group was significant, the two groups were compared at each stage using independent t-test and the Bonferroni correction test. Thus, there was no significant difference between the two groups of Nigella Sativa and placebo on the basis of the McGill instrument but a significant difference was observed between the two groups on the basis of the VAS (P=0.002). Conclusion: According to the results, Nigella Sativa reduces pain more than placebo. Therefore, it can be used along with other medications for the treatment of mastalgia.",
+    "year": 2017,
+    "lang": "en",
+    "type": "article",
+    "venue": "DOAJ (DOAJ: Directory of Open Access Journals)",
+    "topic": "Breast Lesions and Carcinomas",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4386772905",
+    "title": "Gendering grassrootscapes: The sociospatial relations of lower working-class women dwelling in the socialist Workers’ New Villages in post-reform Shanghai",
+    "abstract": "Women of the lower working-class in Shanghai are seemingly invisible in Chinese urban scholarship. Drawing on fieldwork conducted between 2017 and 2021 in Shanghai, this article sheds light on the social lives of lower working-class women dwelling in the Workers’ New Villages in the wake of rapid urbanization. Mounting a threefold conceptual exploration of grassroots urbanism, genderscapes, and guanxi (social connectivity), the article develops and coins the term grassrootscapes to explicate grassroots women’s sociospatial relations with housing units, the community, and the city. Probing these multi-layered horizons to trace women’s life trajectories and gendered experiences, the article discerns how sociospatial dynamics of grassrootscapes are produced under a socialist system, in which women’s day-to-day suffering is a by-product of market reforms. Socialist workers’ housing is employed as a case study to show how the conceptualization of grassrootscapes can be a useful tool to examine the social transformation brought about by the drastic changes in urban policies in globalizing cities.",
+    "year": 2023,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Urban Affairs",
+    "topic": "China's Socioeconomic Reforms and Governance",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": "Social Sciences and Humanities Research Council of Canada"
+  },
+  {
+    "id": "W2111021721",
+    "title": "Millimeter Wave Reconfigurable Antenna Based on Active Printed Array and Inhomogeneous Lens",
+    "abstract": "This paper deals with radiation pattern reconfigurable antenna in millimetre wave range. An active printed antenna array is designed in 24 GHz band and feed an inhomogeneous lens (Half Maxwell Fish Eye) to obtain reconfigurable patterns and in particular sectorial and directive cases. In the first part, the authors describe a four patches multilayer active array which allows achieving radiation pattern control by associating a commutator to each element and by changing the fed patches number. In a second part, this array feed an inhomogeneous lens to shape radiation pattern.",
+    "year": 2008,
+    "lang": "en",
+    "type": "preprint",
+    "topic": "Microwave Engineering and Waveguides",
+    "field": "Engineering",
+    "ca_institutions": "Royal Military College of Canada",
+    "funders": []
+  }
+]

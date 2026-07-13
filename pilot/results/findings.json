@@ -355,6 +355,29 @@
     },
     "computed_at_utc": "2026-07-12T21:31:17Z"
   },
+  "instrument_contradicts_itself": {
+    "headline": "THE LOCKED INSTRUMENT CONTRADICTS ITSELF, AND NOTHING CAUGHT IT. The rubric and the output schema name TWO DIFFERENT controlled vocabularies for the same field, `genre`, overlapping on 2 values (empirical and other); 4 terms exist only in the rubric and 7 only in the schema. Every screener was handed both and told to obey both, and each invented its own reconciliation: GPT-5.6 and Grok followed the rubric and are therefore 27.2% and 22% ILLEGAL against the schema, while Opus drew from both lists at once and emitted 13 distinct values. The validator checked `tier` and never checked `genre`, so 9,250 labels passed every check that ran. It was found by an agent mentioning it in one clause of a report about something else. Nothing crashed; the variable simply meant a different thing in each arm, and the variance would have been attributed to the models. The labels are NOT repaired, because harmonising the arms after seeing them would destroy the only evidence that they diverged; the genre field is reported as unusable and the fix belongs in the instrument, at a version boundary.",
+    "values": {
+      "field": "genre",
+      "rubric_vocabulary": ["empirical", "conceptual", "editorial/commentary", "policy", "infrastructure/announcement", "other"],
+      "schema_vocabulary": ["empirical", "review", "methods", "commentary", "editorial", "protocol", "dataset", "software", "other"],
+      "shared_values": ["empirical", "other"],
+      "n_shared": 2,
+      "only_in_rubric": ["conceptual", "editorial/commentary", "policy", "infrastructure/announcement"],
+      "only_in_schema": ["review", "methods", "commentary", "editorial", "protocol", "dataset", "software"],
+      "arms": ["opus", "gpt", "grok"],
+      "n_labels": [4750, 2450, 2050],
+      "n_distinct_values_by_arm": [13, 6, 6],
+      "pct_legal_against_schema": [89.2, 72.8, 78],
+      "pct_legal_against_rubric": [87.3, 100, 100],
+      "validator_checked_tier": true,
+      "validator_checked_genre": false,
+      "labels_repaired": false,
+      "found_by": "An Opus screening agent mentioned it in one clause of a report about something else, while working chunks it had been given for an unrelated reason. It was not looking for this, no check was watching for it, and it had already survived 6,000 labels across three models.",
+      "caveat": "The genre variable from this screen is reported as UNUSABLE and is used for nothing. It is not remapped to a common vocabulary: the three arms resolved the contradiction differently, and harmonising them after the fact would destroy the only evidence that they did."
+    },
+    "computed_at_utc": "2026-07-13T00:27:15Z"
+  },
   "label_limits": {
     "headline": "Two limits on the machine labels, found by attacking the fixes. (A) The topic route's recall is 12% against screener A and 7% against screener B: finding 14's instrument (ii) scores filters against MACHINE labels, so it measures agreement with a machine, not accuracy, and finding 10 already showed that swings by a factor of two. The conclusion strengthens (the second screener thinks the route is WORSE) but 12% is not truth. (B) The pilot holds exactly 1 French in-scope work, so seeing 20 French positives needs ~1,620 coded French records against an audit budget of 1,000. FRENCH SENSITIVITY IS NOT ESTIMABLE IN AN OPENALEX-ONLY FRAME. That is an argument for the Erudit harvest, not against the French claim, but the pilot did not run that harvest, so the power is stated as a condition rather than a promise.",
     "values": {

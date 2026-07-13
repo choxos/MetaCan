@@ -1,0 +1,28 @@
+{
+  "_comment": [
+    "Defects in the LOCKED v1 instrument that are known, recorded, and deliberately NOT fixed in place.",
+    "",
+    "A locked instrument cannot be edited after the data are seen; that is what 'locked' means, and",
+    "editing it would make every number produced under it unattributable to any document. So a defect",
+    "found after the lock has exactly two honest destinations: this file, and the next version.",
+    "",
+    "check_instrument.R fails the build on ANY instrument self-contradiction that is not listed here.",
+    "An entry here is not an excuse. It is a debt, with the finding that measured it and the version",
+    "that pays it off. When rubric v2 is locked, the entry is DELETED and the check enforces silently."
+  ],
+  "defects": [
+    {
+      "id": "genre-vocabulary-split",
+      "field": "genre",
+      "found": "2026-07-12",
+      "found_by": "an Opus screening agent, in one clause of a report about something else; independently repeated by a second agent",
+      "summary": "protocol/rubric.md and protocol/screening-schema.json name two different controlled vocabularies for `genre`. They overlap on 2 values out of 11. Every screener was handed both and told to obey both.",
+      "consequence": "The genre field of the v1 screen is UNUSABLE. It is reported (finding 24) and used for nothing downstream. It is NOT remapped: harmonising the arms after seeing how they diverged would destroy the only evidence that they did.",
+      "why_not_fixed_in_place": "v1 is the instrument 5,000 works were screened against. Editing it now would silently re-describe work already done under the old text.",
+      "tier_unaffected": true,
+      "deviation": "D20",
+      "finding": "instrument_contradicts_itself",
+      "paid_off_in": "rubric v2, seam 11: one vocabulary, in one place, machine-checked against the schema before any model runs"
+    }
+  ]
+}

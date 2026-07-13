@@ -1,0 +1,900 @@
+Reading additional input from stdin...
+OpenAI Codex v0.144.0
+--------
+workdir: /Users/choxos/Documents/GitHub/CaRN-data-challenge
+model: gpt-5.6-luna
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: high
+reasoning summaries: none
+session id: 019f58d7-66d0-7501-8a6e-340ef061eda2
+--------
+user
+# MétaCan screening rubric (v1.0)
+
+**Locked before screening. Version-controlled. Any change is a new version with a dated entry in `DEVIATIONS.md`.**
+
+Both machine screeners and both human coders work from this document and nothing else. The rubric is the
+instrument; if two coders disagree, the rubric is what they are adjudicated against.
+
+---
+
+## The unit
+
+One work (journal article, preprint, book chapter, report, dataset, or software), identified by its OpenAlex ID.
+You see: title, abstract, publication year, language, venue, OpenAlex topic and field, Canadian institutional
+affiliations, funders.
+
+## The question
+
+**Is the object of study *research itself*?**
+
+Metaresearch studies how research is done, reported, funded, evaluated, disseminated, or governed. The test is
+what the work is *about*, not what field it appears in and not what vocabulary it uses.
+
+A cardiology trial is not metaresearch. A study of *how cardiology trials report their outcomes* is.
+
+---
+
+## Tier
+
+Assign exactly one.
+
+### T1: Core metaresearch
+The primary object of study is research itself. Typical objects:
+
+- research **methods** and their properties (bias, reporting, statistical practice, study design)
+- **reproducibility**, replication, data and code sharing
+- **research integrity**: misconduct, retraction, questionable research practices, authorship
+- **peer review** and editorial process *as objects of study*
+- **research evaluation**, metrics, rankings, funding allocation
+- **scholarly communication**: publishing models, open access, preprints *as objects of study*
+- **bibliometrics and scientometrics** applied to a research literature
+- the **research workforce**: careers, equity, training, capacity
+- **evidence synthesis methodology** (not an individual systematic review's clinical answer, but work *about* how
+  syntheses are done)
+
+### T2: Adjacent
+Empirically or conceptually grounded work on science as a social system that is not framed as metaresearch but
+studies it:
+
+- **science and technology studies (STS)**: social studies of scientific knowledge, practice, controversy
+- **library and information science**: information behaviour of researchers, repositories, discovery
+- **research infrastructure** studies: platforms, data repositories, identifiers, standards
+- **history and philosophy of science** *when the object is contemporary research practice*
+- **research policy** analysis grounded in evidence
+
+T2 is where the field's diversity lives. Be generous here: a paper does not have to call itself metaresearch to
+be studying research.
+
+### T3: Contextual
+Relevant to the ecosystem, mapped and released, but **never pooled into the analytic corpus**:
+
+- editorials, commentaries, opinion pieces about research practice
+- policy documents and position statements
+- announcements of infrastructure, tools, or initiatives
+- news, obituaries, corrections, letters
+
+### OUT: Not metaresearch
+Everything else. Includes, and this is the most common error:
+
+- **A study that uses a method is not a study of the method.** A meta-analysis answering a clinical question is
+  OUT. A study of how meta-analyses handle heterogeneity is T1.
+- **Mentioning a metaresearch term is not studying it.** A lab paper reporting "assay reproducibility", a methods
+  section saying "peer reviewed", a licence note saying "open access": all OUT.
+- **Domain research that happens to be bibliometric in method** but whose object is the domain, not the research:
+  e.g. a bibliometric map of diabetes treatments, produced to summarise diabetes knowledge. Borderline; see below.
+
+---
+
+## The three errors that matter most
+
+These are where the pilot showed retrieval and screening break down. Read them twice.
+
+1. **Polysemy.** `reproducibility` in a biochemistry paper means the assay gives the same reading twice. In a
+   metaresearch paper it means the reproducibility crisis. Only the second is in scope. The same applies to
+   `validation`, `replication`, `bias`, `peer review`, `open access`. **Judge the sense, not the token.**
+
+2. **Method vs. object.** Using bibliometrics ≠ studying research. Ask: *if this paper is right, what do we now
+   know more about: a scientific question, or the practice of science?* If the former, OUT.
+
+3. **Absence of vocabulary is not absence of content.** An STS paper about laboratory practice, or an LIS paper
+   about how researchers find data, may use none of the field's keywords and still be squarely T2. **Do not
+   require the vocabulary.** This is the error that makes the field look smaller and more anglophone than it is.
+
+---
+
+## Canadian linkage
+
+Record which apply (this is metadata, not an inclusion test; the estimand is defined separately in
+`PROTOCOL.md`):
+
+- `CA_AFF`: at least one author affiliated with a Canadian institution
+- `CA_FUND`: funded by CIHR, NSERC, SSHRC, or CFI
+- `ABOUT_CA`: the Canadian research system is a substantive object of study (not a passing mention, not one
+  country among forty in a global comparison)
+
+## Genre
+
+`empirical` · `conceptual` · `editorial/commentary` · `policy` · `infrastructure/announcement` · `other`
+
+OpenAlex's `type` is unreliable and this field is commentary-heavy, so genre is coded, not inherited.
+
+## Language of the work
+
+As published. Do not infer from the venue.
+
+---
+
+## Confidence
+
+- `high`: the rubric decides this cleanly.
+- `medium`: the rubric decides, but a reasonable coder could differ.
+- `low`: genuinely on the boundary, or the abstract is missing/too thin to judge.
+
+**`low` is a legitimate answer and is not a failure.** Records coded `low` by either screener are routed to
+adjudication. A screener that never says `low` is not being careful; it is being confident.
+
+---
+
+## Worked examples
+
+| Title (abridged) | Tier | Why |
+|---|---|---|
+| "Data sharing practices in 500 randomised trials" | **T1** | The object is reporting practice. |
+| "Reproducibility of a Western blot protocol" | **OUT** | Assay reproducibility. Polysemy trap. |
+| "Trends in citation of retracted papers" | **T1** | Object is the literature's own behaviour. |
+| "Laboratory life in a Canadian genomics centre: an ethnography" | **T2** | STS. No metaresearch vocabulary; still studies research. |
+| "How do researchers discover datasets? A survey" | **T2** | LIS, information behaviour of researchers. |
+| "Effectiveness of statins: a network meta-analysis" | **OUT** | Uses a synthesis method to answer a clinical question. |
+| "How network meta-analyses handle inconsistency: a review of 200 reviews" | **T1** | Object is the method. |
+| "Announcing the Canadian Research Data Repository" | **T3** | Infrastructure announcement. Mapped, not pooled. |
+| "Open access mandates are failing early-career researchers" (editorial) | **T3** | Commentary about research practice. |
+| "Bibliometric analysis of diabetes research 2000–2020" | **T2** | Borderline. Bibliometric method, and the object *is* a research literature, so it studies research output. Code T2, `medium`. |
+| "Le libre accès dans les revues québécoises : état des lieux" | **T1** | Scholarly communication, object is publishing practice. French. |
+
+---
+
+## Instructions to the screener
+
+Read the title and abstract. Apply the rubric. Do not use outside knowledge of the authors or the journal's
+reputation. If the abstract is missing, judge on the title alone and set confidence to `low` unless the title is
+unambiguous.
+
+Return the schema in `protocol/screening-schema.json`. One object per work. No prose, no preamble.
+--------------------------------------------------------------------------------
+You are screening works for MetaCan, a map of Canadian metaresearch.
+
+Apply the rubric above to every record in the JSON array below. Return a JSON
+array with one object per work, conforming to protocol/screening-schema.json:
+
+  {"id": "W...", "tier": "T1|T2|T3|OUT", "genre": "...", "about_ca": true|false,
+   "confidence": "high|medium|low", "reason": "one sentence"}
+
+Rules:
+- Return the JSON array and NOTHING else. No prose, no preamble, no code fences.
+- Every input id must appear exactly once in the output.
+- Do not run commands, read files, or browse. Classify from the RECORDS alone.
+
+RECORDS:
+[
+  {
+    "id": "W7038791195",
+    "title": "Intelligence artificielle et droit d’auteur : le dilemme canadien",
+    "abstract": "En 2016, un « nouveau Rembrandt » a été créé par intelligence artificielle dans le cadre du projet The Next Rembrandt. Grâce à la méthode d’apprentissage profond, un ordinateur a en effet permis la réalisation d’un tableau qui, selon les experts, aurait pu être créé par le maître hollandais. Ainsi, une création artistique a été conçue avec un programme d’intelligence artificielle, « en collaboration » avec des humains. Depuis, de nouvelles créations algorithmiques ont vu le jour, en minimisant chaque fois davantage l’empreinte créatrice humaine. Mais comment le droit d’auteur canadien encadre-t-il ou, le cas échéant, pourrait-il encadrer ce type de créations ? Voici la question générale à laquelle notre projet de recherche souhaite répondre.&#13;\\nEn dépit des récentes avancées technologiques et d’un certain abus de langage, l’intelligence artificielle n’est pas (encore) entièrement autonome (Chapitre liminaire). Il en résulte qu’un humain crée les dessous de l’œuvre, c’est-à-dire les règles dans le cadre duquel les créations sont produites. À l’heure actuelle, les créations « artificielles » sont donc issues d’un processus où l’algorithme agit comme simple outil. Partant, les principes classiques de droit d’auteur doivent s’appliquer à ces créations assistées par intelligence artificielle (Chapitre premier). En l’espèce, les critères d’originalité et d’autorat constituent les principaux obstacles à la protection de (certaines) créations algorithmiques. En outre, le processus collaboratif de création ne permet pas d’identifier systématiquement des co-auteurs faisant preuve « de talent et de jugement » (Chapitre deux). Dans ce contexte singulier, des juristes étrangers ont proposé des « solutions », afin de protéger les créations produites « artificiellement » par leurs régimes de droit d’auteur respectifs (Chapitre trois). La réception des propositions étrangères en sol canadien n’est toutefois pas souhaitable, car elle risque de fragiliser la cohérence interne de la Loi, ainsi que les fondements du régime. Dès lors, ces solutions ne permettent pas de résoudre la « problématique » des créations algorithmiques. Quelle devrait donc être la réponse canadienne ? Il s’agit de la question à laquelle nous répondons au Chapitre quatre.&#13;\\nAfin de respecter l’intégrité du régime de droit d’auteur canadien, nous concluons que seules les créations répondant aux critères de la législation canadienne sur le droit d’auteur doivent être protégées. Les productions ne parvenant pas à respecter l’une ou l’autre des conditions de protection tomberaient, pour leur part, dans le domaine public. En dépit de ce constat, nous croyons que la constitution d’un régime sui generis, propre aux créations algorithmiques, pourrait être appropriée. Il appartiendra cependant au gouvernement canadien de décider si l’édification d’un tel régime est pertinente. Pour ce faire, il sera nécessaire d’obtenir des données probantes de la part des différentes parties prenantes. Il s’agit-là du dilemme auquel le Canada fait face.",
+    "year": 2023,
+    "lang": "fr",
+    "type": "dissertation",
+    "venue": "Papyrus : Institutional Repository (Université de Montréal)",
+    "topic": "Hemoglobinopathies and Related Disorders",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W3087211185",
+    "title": "Concomitant rotator cuff repair and instability surgery provide good patient-reported functional outcomes in patients aged 40 years or older with shoulder dislocation",
+    "abstract": "Background Recurrent anterior shoulder dislocation in patients aged ≥ 40 years is not as rare as once thought. The mechanism of instability in this patient population is different—more likely to be attributed to rotator cuff pathology—compared with that in younger individuals. With an increasingly aging active population, surgical management has a rising role in preventing morbidity associated with recurrent instability. Our purpose was to evaluate outcomes of anterior shoulder instability repair (ie, Bankart or bony Bankart repair) with and without rotator cuff repair (RCR) in patients aged ≥ 40 years. Methods We conducted a retrospective chart review of all patients aged ≥ 40 years who underwent surgical repair for anterior shoulder instability from 2008-2016. Patients were categorized into 4 cohorts: Bankart repair only, bony Bankart repair only, Bankart repair with concomitant RCR, and bony Bankart repair with concomitant RCR. Demographic and history-of-instability data were collected. Clinical and functional outcomes assessed included the Single Assessment Numeric Evaluation score, American Shoulder and Elbow Surgeons score, Penn Shoulder Score, visual analog scale score for pain, Western Ontario Shoulder Instability Index score, and patient satisfaction score. Results A total of 146 patients were included in this study, with 103 patients (71%) having ≥2-year outcome scores. Outcome scores were not significantly different among groups. For patients who underwent Bankart repair only, bony Bankart repair only, Bankart repair with RCR, and bony Bankart repair with RCR, the Single Assessment Numeric Evaluation scores were 80.8 ± 19.7, 90.0 ± 10.7, 79.3 ± 29.4, and 87.2 ± 10.6, respectively ( P = .284); American Shoulder and Elbow Surgeons scores, 83.8 ± 19.7, 92.4 ± 17.4, 82.5 ± 25.6, and 85.6 ± 12.7, respectively ( P = .114); Penn Shoulder Scores for function, 84.5 ± 17.9, 90.9 ± 15.3, 83.6 ± 25.1, and 95.7 ± 13.0, respectively ( P = .286); and Western Ontario Shoulder Instability Index scores, 481.0 ± 519.5, 292.1 ± 414.3, 548.9 ± 690.5, and 320.6 ± 258.7, respectively ( P = .713). Age at the time of surgery significantly differed between cohorts ( P < .001). No patients had recurrence of instability during the study period. Conclusion Similar functional outcomes can be achieved in the surgical management of anterior instability in patients aged ≥ 40 years. Rotator cuff tears should be suspected and repaired in patients with anterior instability, especially those aged ≥ 50 years.",
+    "year": 2020,
+    "lang": "en",
+    "type": "article",
+    "venue": "JSES International",
+    "topic": "Shoulder Injury and Treatment",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2030486575",
+    "title": "Physical Activity and Asthma: A Systematic Review and Meta-Analysis",
+    "abstract": "INTRODUCTION: This review aims to give an overview of available published evidence concerning the association between physical activity and asthma in children, adolescents and adults. METHODS: We included all original articles in which both physical activity and asthma were assessed in case-control, cross-sectional or longitudinal (cohort) studies. Excluded were studies concerning physical fitness, studies in athletes, therapeutic or rehabilitation intervention studies such as physical training or exercise in asthma patients. Methodological quality of the included articles was assessed according to the Newcastle-Ottawa Scale (NOS). RESULTS: A literature search was performed until June 2011 and resulted in 6,951 publications derived from PubMed and 1,978 publications from EMBASE. In total, 39 studies met the inclusion criteria: 5 longitudinal studies (total number of subjects n = 85,117) with physical activity at baseline as exposure, and asthma incidence as outcome. Thirty-four cross-sectional studies (n = 661,222) were included. Pooling of the longitudinal studies showed that subjects with higher physical activity levels had lower incidence of asthma (odds ratio 0.88 (95% CI: 0.77-1.01)). When restricting pooling to the 4 prospective studies with moderate to good study quality (defined as NOS≥5) the pooled odds ratio only changed slightly (0.87 (95% CI: 0.77-0.99)). In the cross-sectional studies, due to large clinical variability and heterogeneity, further statistical analysis was not possible. CONCLUSIONS: The available evidence indicates that physical activity is a possible protective factor against asthma development. The heterogeneity suggests that possible relevant effects remain hidden in critical age periods, sex differences, or extremes of levels of physical activity (e.g. sedentary). Future longitudinal studies should address these issues.",
+    "year": 2012,
+    "lang": "en",
+    "type": "review",
+    "venue": "PLoS ONE",
+    "topic": "Asthma and respiratory diseases",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W6992491376",
+    "title": "Les femmes en génie : le chaînon manquant de l'économie du savoir au Canada = Women in engineering : the missing link in the Canadian knowledge economy /",
+    "abstract": "",
+    "year": 2015,
+    "lang": "fr",
+    "type": "other",
+    "venue": "Bibliothèque et Archives nationales du Québec (Québec government)",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W7071220145",
+    "title": "Robin Waterfield, Khalil Gibran, Un prophète et son temps, Saint-Laurent (Québec) : Fides, 2000",
+    "abstract": "Gabus Susan. Robin Waterfield, Khalil Gibran, Un prophète et son temps, Saint-Laurent (Québec) : Fides, 2000. In: Études théologiques et religieuses, Tome 76, 2001/4. pp. 636-637.",
+    "year": 2001,
+    "lang": "fr",
+    "type": "other",
+    "venue": "Persée (Ministère de lEnseignement supérieur et de la Recherche)",
+    "topic": "Biblical Studies and Interpretation",
+    "field": "Arts and Humanities",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2020633839",
+    "title": "Information, motivation, and behavioral skills for early pre-ART engagement in HIV care among patients entering clinical care in KwaZulu-Natal, South Africa",
+    "abstract": "Little is known regarding factors implicated in early engagement and retention in HIV care among individuals not yet eligible for antiretroviral therapy (pre-ART) in sub-Saharan Africa. Identifying such factors is critical for supporting retention in pre-ART clinical care to ensure timely ART initiation and optimize long-term health outcomes. We assessed patients' pre-ART HIV care-related information, motivation, and behavioral skills among newly diagnosed ART-ineligible patients, initiating care in KwaZulu-Natal, South Africa. The survey was interviewer-administered to eligible patients, who were aged 18 years or older, newly entering care (diagnosed within the last six-months), and ineligible for ART (CD4 count > 200 cells/mm(3)) in one of four primary care clinical sites. Self-reported information, motivation, and behavioral skills specific to retention in pre-ART HIV-care were characterized by categorizing responses into those reflecting potential strengths and those reflective of potential deficits. Information, motivation, and behavioral skills deficits sufficiently prevalent in the overall sample (i.e.,≥30% prevalent) were identified as areas in need of specific attention through intervention efforts adapted to the clinic level. Gender-based differences were also evaluated. A total of 288 patients (75% female) completed structured interviews. Across the sample, eight information, eight motivation, and eight behavioral skills deficit areas were identified as sufficiently prevalent to warrant specific targeted attention. Gender differences did not emerge. The deficits in pre-ART HIV care-related information, motivation, and behavioral skills that were identified suggest that efforts to improve accurate information on immune function and HIV disease are needed, as is accurate information regarding HIV treatment and transmission risk prior to ART initiation. Additional efforts to facilitate the development of social support, including positive interactions with clinic staff and decreasing community-level stigma and to decrease structural and resource-depleting demands of HIV care may be particularly valuable to facilitate retention in pre-ART HIV care.",
+    "year": 2013,
+    "lang": "en",
+    "type": "article",
+    "venue": "AIDS Care",
+    "topic": "HIV/AIDS Research and Interventions",
+    "field": "Medicine",
+    "ca_institutions": ["Western University", "Centre for Addiction and Mental Health", "University of Toronto"],
+    "funders": ["National Institute of Mental Health", "U.S. President’s Emergency Plan for AIDS Relief"]
+  },
+  {
+    "id": "W2126486918",
+    "title": "Guidelines for the conduct of clinical trials for spinal cord injury as developed by the ICCP panel: clinical trial design",
+    "abstract": "",
+    "year": 2006,
+    "lang": "en",
+    "type": "review",
+    "venue": "Spinal Cord",
+    "topic": "Spinal Cord Injury Research",
+    "field": "Medicine",
+    "ca_institutions": ["University of Toronto", "International Collaboration On Repair Discoveries", "Vancouver Coastal Health Research Institute", "University of British Columbia"],
+    "funders": ["Eunice Kennedy Shriver National Institute of Child Health and Human Development", "National Institutes of Health", "SpinalCure Australia", "International Collaboration on Repair Discoveries", "Ministry of Education, India", "Paralyzed Veterans of America", "Christopher and Dana Reeve Foundation"]
+  },
+  {
+    "id": "W2769895972",
+    "title": "Genotype-Specific Minimal Residual Disease Interpretation Improves Stratification in Pediatric Acute Lymphoblastic Leukemia",
+    "abstract": "Purpose Minimal residual disease (MRD) and genetic abnormalities are important risk factors for outcome in acute lymphoblastic leukemia. Current risk algorithms dichotomize MRD data and do not assimilate genetics when assigning MRD risk, which reduces predictive accuracy. The aim of our study was to exploit the full power of MRD by examining it as a continuous variable and to integrate it with genetics. Patients and Methods We used a population-based cohort of 3,113 patients who were treated in UKALL2003, with a median follow-up of 7 years. MRD was evaluated by polymerase chain reaction analysis of Ig/TCR gene rearrangements, and patients were assigned to a genetic subtype on the basis of immunophenotype, cytogenetics, and fluorescence in situ hybridization. To examine response kinetics at the end of induction, we log-transformed the absolute MRD value and examined its distribution across subgroups. Results MRD was log normally distributed at the end of induction. MRD distributions of patients with distinct genetic subtypes were different ( P < .001). Patients with good-risk cytogenetics demonstrated the fastest disease clearance, whereas patients with high-risk genetics and T-cell acute lymphoblastic leukemia responded more slowly. The risk of relapse was correlated with MRD kinetics, and each log reduction in disease level reduced the risk by 20% (hazard ratio, 0.80; 95% CI, 0.77 to 0.83; P < .001). Although the risk of relapse was directly proportional to the MRD level within each genetic risk group, absolute relapse rate that was associated with a specific MRD value or category varied significantly by genetic subtype. Integration of genetic subtype-specific MRD values allowed more refined risk group stratification. Conclusion A single threshold for assigning patients to an MRD risk group does not reflect the response kinetics of the different genetic subtypes. Future risk algorithms should integrate genetics with MRD to accurately identify patients with the lowest and highest risk of relapse.",
+    "year": 2017,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Clinical Oncology",
+    "topic": "Acute Lymphoblastic Leukemia research",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": ["Hospital for Sick Children", "Blood Cancer UK", "CHILDREN with CANCER UK", "Cancer Research UK", "Jazz Pharmaceuticals"]
+  },
+  {
+    "id": "W4394727479",
+    "title": "Gestes professionnels de l'enseignant.e en contexte de jeu symbolique à la maternelle (MS/GS)",
+    "abstract": "International audience",
+    "year": 2023,
+    "lang": "fr",
+    "type": "article",
+    "venue": "HAL (Le Centre pour la Communication Scientifique Directe)",
+    "topic": "Education, sociology, and vocational training",
+    "field": "Social Sciences",
+    "ca_institutions": "Université du Québec à Trois-Rivières",
+    "funders": []
+  },
+  {
+    "id": "W3144053723",
+    "title": "The Association of Unfairness with Mental and Physical Health in a Multiethnic Sample of Adults: Cross-sectional Study",
+    "abstract": "BACKGROUND: Two psychosocial constructs that have shown consistent associations with negative health outcomes are discrimination and perceived unfairness. OBJECTIVE: The current analyses report the effects of discrimination and unfairness on medical, psychological, and behavioral outcomes from a recent cross-sectional survey conducted in a multiethnic sample of adults in Michigan. METHODS: A cross-section survey was collected using multiple approaches: community settings, telephone-listed sample, and online panel. Unfairness was assessed with a single-item previously used in the Whitehall study, and everyday discrimination was assessed with the Williams 9-item scale. Outcomes included mental health symptoms, past-month cigarette use, past-month alcohol use, past-month marijuana use, lifetime pain medication use, and self-reported medical history. RESULTS: A total of 2238 usable surveys were collected. In bivariate analyses, higher unfairness values were significantly associated with lower educational attainment, lower age, lower household income, and being unmarried. The highest unfairness values were observed for African American and multiracial respondents followed by Middle Eastern or North African participants. Unfairness was significantly related to worse mental health functioning, net adjustment for sociodemographic variables, and everyday discrimination. Unfairness was also related to self-reported history of depression and high blood pressure although, after including everyday discrimination in the model, only the association with depression remained significant. Unfairness was significantly related to 30-day marijuana use, 30-day cigarette use, and lifetime opiate use. CONCLUSIONS: Our findings of a generally harmful effect of perceived unfairness on health are consistent with prior studies. Perceived unfairness may be one of the psychological pathways through which discrimination negatively impacts health. Future studies examining the relationships we observed using longitudinal data and including more objective measures of behavior and health status are needed to confirm and extend our findings.",
+    "year": 2021,
+    "lang": "en",
+    "type": "article",
+    "venue": "JMIR Public Health and Surveillance",
+    "topic": "Racial and Ethnic Identity Research",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": "National Cancer Institute"
+  },
+  {
+    "id": "W4406725186",
+    "title": "Internalizing and externalizing symptoms in individuals with neurofibromatosis type 1: a systematic review and meta-analysis",
+    "abstract": "BACKGROUND: Individuals with neurofibromatosis type 1 (NF1) frequently report psychosocial problems, among which internalizing and externalizing symptoms are the most poorly understood due to limited research and inconsistent evidence. This hinders the overall attendance of their psychosocial needs and has a major impact on their quality of life. Thus, this systematic review and meta-analysis was conducted to synthesize existing findings on the degree to which individuals with NF1 experience internalizing and externalizing symptoms, compared with the unaffected population, and explore moderators of the group disparities. METHODS: Scopus, PsycINFO, Web of Science, PubMed, and ProQuest were searched from inception to March 26th, 2024, which identified 59 eligible studies (N of NF1 = 3182, mean ages 2.38 to 46.4 years). Hedges' g was calculated for differences in internalizing and externalizing symptoms between the NF1 group and the unaffected controls. Study effect sizes were pooled using robust variance estimation and random-effects models. Moderators of group differences were tested using meta-regression. RESULTS: Random-effects meta-analyses indicated that compared with unaffected controls, individuals with NF1 showed more severe depressive (k = 21; g = 0.43; 95% CI [0.21, 0.65]), anxiety (k = 24; g = 0.27; 95% CI [0.01, 0.54]), somatic (k = 27; g = 0.56; 95% CI [0.30, 0.83]), total internalizing (k = 75; g = 0.50; 95% CI [0.33, 0.67]), aggression (k = 33; g = 0.33; 95% CI [0.08, 0.58]), delinquency, (k = 37; g = 0.43; 95% CI [0.26, 0.60]), and total externalizing symptoms (k = 47; g = 0.24; 95% CI [0.13, 0.35]). Studies that included more participants with NF1 who had ADHD or a lower verbal IQ reported greater group disparities in total internalizing symptoms or aggression. CONCLUSIONS: Findings highlight the importance of promptly recognizing internalizing and externalizing symptoms in individuals with NF1 for timely interventions. Future research should identify predictors of internalizing and externalizing symptoms within the NF1 population to inform our knowledge and intervention development. Other implications for future research were also discussed. SYSTEMATIC REVIEW REGISTRATION: The study protocol of this meta-analysis was registered at PROSPERO (CRD42023478258).",
+    "year": 2025,
+    "lang": "en",
+    "type": "review",
+    "venue": "Systematic Reviews",
+    "topic": "Neurofibromatosis and Schwannoma Cases",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": ["Killam Trusts", "Congressionally Directed Medical Research Programs", "Florida State University", "U.S. Department of Defense"]
+  },
+  {
+    "id": "W2955865427",
+    "title": "Lesion Studies in Contemporary Neuroscience",
+    "abstract": "",
+    "year": 2019,
+    "lang": "en",
+    "type": "review",
+    "venue": "Trends in Cognitive Sciences",
+    "topic": "Memory and Neural Mechanisms",
+    "field": "Neuroscience",
+    "ca_institutions": ["McGill University", "Montreal Neurological Institute and Hospital"],
+    "funders": ["National Institute of Mental Health", "Natural Sciences and Engineering Research Council of Canada", "Canadian Institutes of Health Research", "National Institutes of Health", "Canada First Research Excellence Fund"]
+  },
+  {
+    "id": "W2190184171",
+    "title": "A Relational View of Individual Participation in Online Communities of Practice: An Integrative Literature Review",
+    "abstract": "This paper reviews prior research on individual participation in online communities of practice (CoPs). It examines how the concept of CoP has been applied in IS and what theories have been applied to explain knowledge sharing behaviours in online CoPs. To integrate findings in prior empirical IS studies, the paper drew on literature on relationship marketing to re-conceptualize participation in a CoP as a contractual relationship between a member and the online community. A conceptual framework was developed to revisit prior empirical findings in relation to key antecedents and outcomes of individuals’ knowledge sharing in online CoPs. It suggests that the strength of a member-community relationship can evolve through different intermediate processes. There is a need to examine how an online member-community relationship can be formed, developed and sustained by different relational mediators and how individual, CoPs and contextual factors may jointly affect individuals’ participation in online CoPs over time.",
+    "year": 2015,
+    "lang": "en",
+    "type": "article",
+    "venue": "International Conference on Information Systems",
+    "topic": "Knowledge Management and Sharing",
+    "field": "Social Sciences",
+    "ca_institutions": "Queen's University",
+    "funders": []
+  },
+  {
+    "id": "W6998646999",
+    "title": "Analyse de la profession, conducteur d'installation d'épuration des eaux (add. &amp;amp; distr. d'eau) : contexte québécois, opérateur d'usine de traitement d'eau potable /",
+    "abstract": "",
+    "year": 2015,
+    "lang": "fr",
+    "type": "other",
+    "venue": "Bibliothèque et Archives nationales du Québec (Québec government)",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4394106342",
+    "title": "A histidine-kinase <i>cheA<\/i> gene of <i>Pseudomonas pseudoalcaligens<\/i> KF707 not only has a key role in chemotaxis but also affects biofilm formation and cell metabolism",
+    "abstract": "A histidine-kinase <i>cheA<\/i> gene in <i>Pseudomonas pseudoalcaligenes<\/i> KF707 plays a central role in the regulation of metabolic responses as well as in chemotaxis. Non-chemotactic mutants harboring insertions into the <i>cheA<\/i> gene were screened for their ability to form biofilms in the Calgary biofilm device. Notably, ≥95% decrease in the number of cells attached to the polystyrene surface was observed in <i>cheA<\/i> mutants compared to the KF707 wild-type biofilm phenotype. The ability to form mature biofilms was restored to wild-type levels, providing functional copies of the KF707 <i>cheA<\/i> gene to the mutants. In addition, phenotype micro-arrays and proteomic analyses revealed that several basic metabolic activities and a few periplasmic binding proteins of <i>cheA<\/i> mutant cells differed compared to those of wild-type cells. These results are interpreted as evidence of a strong integration between chemotactic and metabolic pathways in the process of biofilm development by <i>P. pseudoalcaligenes<\/i> KF707.",
+    "year": 2011,
+    "lang": "en",
+    "type": "dataset",
+    "venue": "Figshare",
+    "topic": "Bacterial biofilms and quorum sensing",
+    "field": "Biochemistry, Genetics and Molecular Biology",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W1484985634",
+    "title": "Erectile Dysfunction (ED) is a Shared Sexual Concern of Couples I: Couple Conceptions of ED",
+    "abstract": "INTRODUCTION: Erectile dysfunction (ED) may be regarded as a shared sexual concern with a significant negative impact on both patients and their partners. AIM: The current research sought to explore the degree of concordance or divergence of couple members' perceptions of the specific functional impairments characterizing the man's ED, and the concordance or discordance of their attitudes, beliefs and experiences about the male partner's erectile difficulty. METHODS: Questionnaires were sent to partners of men who participated in the Men's Attitudes to Life Events and Sexuality (MALES) 2004 study, who consented to their partner's involvement. A modified version of the questionnaire used in the MALES study was employed, adapted to reflect the female partner's perspective. Questionnaire responses were analyzed in relation to responses provided by male study participants. MAIN OUTCOME MEASURE: A 65-item questionnaire assessing women's perceptions, beliefs, and attitudes regarding aspects of ED. RESULTS: High levels of concordance between couple members were observed across almost all items. Women's perceptions of both the specific functional impairments characterizing their partner's ED and the frequency of the partner's erection difficulty were strongly associated with assessments the men themselves had made. Significant associations were also observed between couple members' responses relating to their beliefs about the causes of ED, effects of ED on the relationship, communication about ED, finding a solution to ED, and attitudes toward medication. A number of specific male-female discordant perceptions and attitudes were also identified. CONCLUSIONS: Findings of this study demonstrate a high degree of concordance in couple members' perceptions of the male partner's ED, and in their attitudes and beliefs about ED. Specific instances of discordance between couple members may contribute to treatment avoidance or couple conflict.",
+    "year": 2009,
+    "lang": "en",
+    "type": "article",
+    "venue": "The Journal of Sexual Medicine",
+    "topic": "Sexual function and dysfunction studies",
+    "field": "Medicine",
+    "ca_institutions": "Western University",
+    "funders": "Bayer HealthCare"
+  },
+  {
+    "id": "W4415704462",
+    "title": "Integrated care in COPD",
+    "abstract": "",
+    "year": 2025,
+    "lang": "en",
+    "type": "article",
+    "venue": "La Presse Médicale",
+    "topic": "Chronic Obstructive Pulmonary Disease (COPD) Research",
+    "field": "Medicine",
+    "ca_institutions": ["McGill University", "McGill University Health Centre"],
+    "funders": []
+  },
+  {
+    "id": "W4386695555",
+    "title": "Ap-prendre le rôle d’accompagnateur : une dynamique expérientielle et identitaire entre deux temps",
+    "abstract": "Cet article adopte une perspective interactionniste pour réfléchir aux temps, court et long, de l’appropriation du rôle d’accompagnateur en formation à l’enseignement ; un rôle qui « se prend » et « s’apprend » au fil de l’expérience vécue. Les notions d’expérience et d’identité professionnelle ont servi de balises à la recherche menée. Les données qualitatives collectées par entretiens biographiques, menés auprès de 16 accompagnateurs en enseignement professionnel du Québec, ont été soumises à une démarche d’analyse structurale. Les résultats portent sur la dimension temporelle de la dynamique expérientielle et identitaire des accompagnateurs. Un constat se dégage quant à la pertinence d’offrir de la formation en accompagnement en deux temps : le plus court pour répondre aux enjeux liés à la mise en action comme accompagnateur et le plus long visant à forger des référents, sous la forme de savoirs professionnels et d’une identité d’accompagnateur, adaptés au contexte d’exercice spécifique dans lequel se déroule l’accompagnement.",
+    "year": 2023,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Éduquer",
+    "topic": "Education, sociology, and vocational training",
+    "field": "Social Sciences",
+    "ca_institutions": ["Université du Québec à Rimouski", "Université de Sherbrooke"],
+    "funders": []
+  },
+  {
+    "id": "W6991112624",
+    "title": "Fashion Center Outletin brändin rakentaminen sosiaalisessa mediassa",
+    "abstract": "Tämän opinnäytteen tarkoitus on selvittää, kuinka muotibrändi rakentuu toimeksiantajaa, Fashion Center Outletia vastaavissa yrityksissä, ja millainen rooli sosiaalisella medialla tässä on. Toimeksiantajana on Fashion Center Outlet (FCO), jonka toiminnan ja tavoitteiden kautta valittuja case-yrityksiä tarkastellaan.&#13;\\n&#13;\\nOpinnäytetyö on rakenteeltaan kaksi osainen: ensin perehdytään teoriaosuuteen, jonka jälkeen syvennytään vertailuanalyysin keinoin case-asetelmaan, ja Fashion Center Outletiin. Toimeksiantajan lisäksi tarkasteltavana on kolme erilaista muotialan yritystä, jotka sopivat kohderyhmiltään, arvoiltaan, tavoitteiltaan ja brändilupauksiltaan Outletin tulevaisuuden tiennäyttäjäksi. Jokaisen yrityksen on avattu nämä edellä mainitut seikat, sekä markkinointikanavat että Facebookin ja Instagramin tarkempi data. Lopuksi kappale 6 tarjoaa kehitysehdotuksia ja jatkotoimenpidesuunnitelman, perustuen edeltäneeseen analyysiin.&#13;\\n&#13;\\nTeoriaosuuden ja vertailuanalyysin perusteella sosiaalinen media on vakuuttava työkalu yrityksen brändin rakentamiselle, sillä se mahdollistaa muun muassa vuorovaikutuksen kuluttajien kanssa, mikä ei ole ennen sosiaalista mediaa edes mahdollista markkinoinnin maailmassa. Onnistunut vuorovaikutus lisää sitoutuneisuutta, ja yritykset pystyvät näin erottautumaan kilpailijoistaan ja luomaan tunnistettavan brändin.",
+    "year": 2021,
+    "lang": "fi",
+    "type": "other",
+    "venue": "Theseus (Ammattikorkeakoulujen)",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4406784319",
+    "title": "Design of Multi-Mode Morphing Wings Based on Multi-Stable Beam-Type Metastructures",
+    "abstract": "",
+    "year": 2025,
+    "lang": "en",
+    "type": "book-chapter",
+    "venue": "Lecture notes in computer science",
+    "topic": "Aeroelasticity and Vibration Control",
+    "field": "Engineering",
+    "ca_institutions": "University of Toronto",
+    "funders": []
+  },
+  {
+    "id": "W3027052319",
+    "title": "Advocating for Drug Policy Reform. Below the Radar podcast",
+    "abstract": "On this episode of Below the Radar, our host Am Johal is joined by Scott Bernstein, the Director of Policy at Canadian Drug Policy Coalition, a project based at the Faculty of Health Sciences at SFU. He has also done work with Pivot Legal Society in Vancouver and internationally with Open Society Foundations in New York. Together, Am and Scott talk about his work involving harm reduction, decriminalization and drug regulation policies, and discuss potential regulation models with studies such as NAOMI and SALOME.",
+    "year": 2020,
+    "lang": "en",
+    "type": "article",
+    "venue": "Summit (Simon Fraser University)",
+    "topic": "Substance Abuse Treatment and Outcomes",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2001124042",
+    "title": "HLA-DR, DQ Class II DNA Typing in Pediatric Panuveitis and Tubulointerstitial Nephritis and Uveitis",
+    "abstract": "",
+    "year": 2013,
+    "lang": "en",
+    "type": "article",
+    "venue": "American Journal of Ophthalmology",
+    "topic": "Nephrotoxicity and Medicinal Plants",
+    "field": "Medicine",
+    "ca_institutions": "Toronto Western Hospital",
+    "funders": "National Eye Institute"
+  },
+  {
+    "id": "W1486336166",
+    "title": "Une pratique féminine ?",
+    "abstract": "Aujourd’hui, on associe volontiers la création d’une littérature intime aux femmes, alors que, pourtant, le volume de journaux de femmes publiés est bien en-deçà de celui des hommes. Par ailleurs, si de plus en plus de journaux écrits à diverses périodes trouvent aujourd’hui des lieux de diffusion, nous donnant enfin accès aux pratiques des femmes, certaines périodes, comme celle de l’entre-deux-guerres, demeurent encore dans l’ombre. Le présent article se penche d’abord sur deux textes « mineurs » de la période, soit les journaux de Marie-Claire Tremblay et de Léonise Valois, parus en extraits dans des biographies consacrées à leur auteure. Porter un premier regard sur ces deux textes de femmes publiés (et donc en quelque sorte sanctionnés ) et les mettre en rapport avec d’autres journaux, particulièrement ceux de Simone Routier, peut fournir quelques pistes à une réflexion plus large sur l’évolution de la pratique diaristique féminine au Québec. Certes, ces rares journaux ont des visées différentes, mais ils offrent en contrepartie un regard complémentaire sur la pratique telle qu’on l’envisageait à l’époque, tant du point de vue personnel que sur le plan institutionnel.",
+    "year": 2014,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Voix et Images",
+    "topic": "Historical Studies and Socio-cultural Analysis",
+    "field": "Arts and Humanities",
+    "ca_institutions": "Université du Québec à Montréal",
+    "funders": []
+  },
+  {
+    "id": "W4200530461",
+    "title": "Targeting the nurse practitioner workforce: Influences and barriers in choosing rural practice",
+    "abstract": "Background and objective: Recruitment and retention of primary care providers are projected to worsen in rural regions. Nurse practitioners (NPs) are a crucial solution to the shortage of primary care providers in rural America. Little research exists regarding factors influencing new NPs’ decisions to practice in rural settings, as well as practice readiness. The purpose of this study is to explore factors influencing new NPs’ decision to practice in rural settings.Methods: A survey of family nurse practitioner (FNP) graduates in a rural state was conducted. The survey measured rural background, current practice environment, the impact of rural clinical experiences on readiness to practice, and perceptions of rural NP practice.Results: The data collected over five years (N = 42) indicated several factors that influenced an NP’s decision to choose a position in a rural or underserved setting. A wide scope of practice, rural roots, a desirable job offer, and strong relationships were influential when choosing rural practice.Conclusions: Most respondents (69%) were not practicing in rural or underserved areas. Among those who were, the ability to practice to the full scope of education and autonomy were the most important factors. However, respondents were also apprehensive and intimidated with the broad skill set required in rural care. Implications: This study provides insight into factors and barriers for new graduate NPs in choosing a rural practice setting as well as possible solutions to the rural workforce shortage.",
+    "year": 2021,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Nursing Education and Practice",
+    "topic": "Nursing Roles and Practices",
+    "field": "Health Professions",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4281898199",
+    "title": "Qualitative analysis of facilitators and barriers to centre- and home-based exercise training in breast cancer patients - a Swiss tertiary centre experience",
+    "abstract": "BACKGROUND: Exercise is an effective therapy for breast cancer patients to reduce fatigue and to improve health-related quality of life and physical function. Yet breast cancer patients often do not meet the recommended physical activity guidelines. To better understand why recommendations are not met and to improve long-term physical activity maintenance, this study aimed at identifying facilitators and barriers of breast cancer survivors to supervised, centre-based exercise within a cardio-oncological rehabilitation programme and to unsupervised, home-based exercise both during and after the completion of the programme, as well as strategies used to manage these barriers. METHODS: Breast cancer patients who had previously completed a structured centre-based exercise programme at a Swiss tertiary centre were recruited by mailed invitation letter. Semi-structured telephone interviews were conducted with consenting patients and subsequent thematic analysis was performed to identify common themes. RESULTS: Of the 37 eligible breast cancer patients, 19 patients (51%, mean age 48.9 ± 9.7 years) responded to our invitation. Baseline characteristics did not differ from the total eligible population. General facilitators for exercise were anticipated and experienced benefits on physical and mental health and enjoyment of exercise. Facilitators specific for supervised centre-based exercise were social support, accountability and the provision of structured exercise by the programme. Centre-based exercise barriers included physical, psychological and environmental barriers, whereby psychological barriers were reported predominantly in the context of home-based exercise. Strategies to manage these barriers were diverse and included the adaptation of training circumstances, behaviour change strategies and strategies to deal with side effects. CONCLUSIONS: This first study on facilitators of and barriers to exercise in breast cancer patients in Switzerland identified more barriers, particularly psychological barriers, for unsupervised home-based exercise than for supervised centre-based exercise. These findings support the importance of providing structured supervised exercise programmes for breast cancer patients and suggest that a special focus should be directed at the transition from supervised to self-organized exercise in order to enhance and maintain long-term exercise participation.",
+    "year": 2022,
+    "lang": "en",
+    "type": "article",
+    "venue": "Swiss Medical Weekly",
+    "topic": "Cancer survivorship and care",
+    "field": "Medicine",
+    "ca_institutions": "University of British Columbia",
+    "funders": []
+  },
+  {
+    "id": "W4242884592",
+    "title": "Solid-Phase Dynamic Extraction (SPDE)",
+    "abstract": "Approaches for analytical-scale extraction are developing rapidly as new strategies are implemented to improve sample throughput, to minimize material use in laboratory methods, and to develop on-site capabilities. In this contribution, definitions and recommendations for symbols for the terms used in analytical extraction are presented. Exhaustive, microextraction, elevated temperature, microwave- and ultrasound-assisted, parallel batch, flow through systems, and membrane extraction approaches are discussed. An associated tutorial titled “Extraction” provides a detailed introduction to the topic.",
+    "year": 2017,
+    "lang": "en",
+    "type": "dataset",
+    "venue": "IUPAC Standards Online",
+    "topic": "NMR spectroscopy and applications",
+    "field": "Physics and Astronomy",
+    "ca_institutions": ["University of Waterloo", "National Research Council Canada"],
+    "funders": []
+  },
+  {
+    "id": "W2951170589",
+    "title": "Effects of Calcium, Magnesium, and Potassium Concentrations on Ventricular Repolarization in Unselected Individuals",
+    "abstract": "",
+    "year": 2019,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of the American College of Cardiology",
+    "topic": "Cardiac electrophysiology and arrhythmias",
+    "field": "Medicine",
+    "ca_institutions": "Centre for Global Health Research",
+    "funders": ["Medical Research Council", "National Institutes of Health", "Fundação de Amparo à Pesquisa do Estado de Minas Gerais", "AXA Research Fund", "Conselho Nacional de Desenvolvimento Científico e Tecnológico", "Amgen", "ZonMw", "Nederlandse Organisatie voor Wetenschappelijk Onderzoek", "British Heart Foundation", "National Institute of General Medical Sciences", "National Institute for Health and Care Research", "Government of the United Kingdom", "Ironwood Pharmaceuticals, Incorporated", "European Commission", "Pfizer"]
+  },
+  {
+    "id": "W2078598345",
+    "title": "Monique CUBELLS (1934‑2011)",
+    "abstract": "C’est avec une profonde tristesse que nous avons appris son décès tant sa personnalité a marqué un moment de l’Université française et, singulièrement, celle de l’Université de Provence ou d’Aix-Marseille. Monique Cubells appartenait à cette génération d’enseignants-chercheurs qui, après l’agrégation d’Histoire, devait conduire ses recherches dans le cadre d’une thèse d’État tout en enseignant dans le secondaire. C’est, donc, tardivement que cette brillante et précoce normalienne (promotion 1...",
+    "year": 2011,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Annales historiques de la Révolution française",
+    "topic": "North African History and Literature",
+    "field": "Arts and Humanities",
+    "ca_institutions": "Institut d'Histoire de l'Amérique Française",
+    "funders": []
+  },
+  {
+    "id": "W4236012250",
+    "title": "Presentation",
+    "abstract": "In its broadest sense, politics is \"the ability of a society (a political com mu nity) to ask questions, to formulate short-lived responses, and to invent a series of unsatisfactory connections to bind toge ther its diverse segments\" (Houle and Thriault, 2001, p. 66; our trans.). Binding together different political ideas is, of course, about power strug gles, which are at the heart of politics, but it also relates to medi ation, a concept fruitful in both political science In translation studies more particularly, the mediation of diverse cultural or ideo logical perspectives has been approached from various angles. For instance, Basil Hatim and Ian Mason, in their classic The Translator as Communicator, have used mediation from a discursive and textual point of view, where translators \"intervene in the transfer process, feeding their own knowledge and beliefs into the processing of text\" (1997, p. 147). For them, the translation of ideologies becomes a matter of me di ation, in greater or lesser degrees. Other translation scholars have used the concept of mediation from a broader and more global position, such as Maria Tymoczko, who posits that translators are among \"the chief meditators between cultures\" (2009, p. 184). In any case, the role of translation and the role of translators is never neutral, and the relation between translation and politics is multifaceted and of great interest to professionals, scholars, politicians, and the general public.",
+    "year": 2019,
+    "lang": "fr",
+    "type": "article",
+    "venue": "TTR traduction terminologie rédaction",
+    "topic": "Middle East and Rwanda Conflicts",
+    "field": "Social Sciences",
+    "ca_institutions": ["Université de Montréal", "York University"],
+    "funders": []
+  },
+  {
+    "id": "W1481548424",
+    "title": "Epidemics and Resistance in Colonial Sierra Leone during the First World War",
+    "abstract": "(2011). Epidemics and Resistance in Colonial Sierra Leone during the First World War. Canadian Journal of African Studies / Revue canadienne des études africaines: Vol. 45, Special issue dedicated to Myron Echenberg / Numéro special dédié a Myron Echenberg, pp. 415-439.",
+    "year": 2011,
+    "lang": "en",
+    "type": "article",
+    "venue": "Canadian Journal of African Studies / Revue canadienne des études africaines",
+    "topic": "Historical Economic and Social Studies",
+    "field": "Economics, Econometrics and Finance",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W7082147875",
+    "title": "Occurrence Download",
+    "abstract": "A dataset containing 0 species occurrences available in GBIF matching the query: { \"and\" : [ \"TaxonKey is Consolida regalis\", \"Country is Canada\", \"HasCoordinate is true\" ] } The dataset includes 0 records from 0 constituent datasets; see https://api.gbif.org/v1/occurrence/download/0016391-250914085247600/datasets/export for details.",
+    "year": 2025,
+    "lang": "en",
+    "type": "dataset",
+    "venue": "Global Biodiversity Information Facility",
+    "topic": "Geochemistry and Geologic Mapping",
+    "field": "Computer Science",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2052088669",
+    "title": "GPU-based point radiation for interactive volume sculpting and segmentation",
+    "abstract": "",
+    "year": 2008,
+    "lang": "en",
+    "type": "article",
+    "venue": "The Visual Computer",
+    "topic": "Computer Graphics and Visualization Techniques",
+    "field": "Computer Science",
+    "ca_institutions": "University of Calgary",
+    "funders": []
+  },
+  {
+    "id": "W2559249142",
+    "title": "Three‐Dimensional Magnetic Resonance Imaging Quantification of Glenoid Bone Loss Is Equivalent to 3‐Dimensional Computed Tomography Quantification: Cadaveric Study",
+    "abstract": "PURPOSE: To assess the ability of 3-dimensional (3D) magnetic resonance imaging (MRI, 1.5 and 3 tesla [T]) to quantify glenoid bone loss in a cadaveric model compared with the current gold standard, 3D computed tomography (CT). METHODS: Six cadaveric shoulders were used to create a bone loss model, leaving the surrounding soft tissues intact. The anteroposterior (AP) dimension of the glenoid was measured at the glenoid equator and after soft tissue layer closure the specimen underwent scanning (CT, 1.5-T MRI, and 3-T MRI) with the following methods (0%, 10%, and 25% defect by area). Raw axial data from the scans were segmented using manual mask manipulation for bone and reconstructed using Mimics software to obtain a 3D en face glenoid view. Using calibrated Digital Imaging and Communications in Medicine images, the diameter of the glenoid at the equator and the area of the glenoid defect was measured on all imaging modalities. RESULTS: In specimens with 10% or 25% defects, no difference was detected between imaging modalities when comparing the measured defect size (10% defect P = .27, 25% defect P = .73). All 3 modalities demonstrated a strong correlation with the actual defect size (CT, ρ = .97; 1.5-T MRI, ρ = .93; 3-T MRI, ρ = .92, P < .0001). When looking at the absolute difference between the actual and measured defect area, no significance was noted between imaging modalities (10% defect P = .34, 25% defect P = .47). The error of 3-T 3D MRI increased with increasing defect size (P = .02). CONCLUSIONS: Both 1.5- and 3-T-based 3D MRI reconstructions of glenoid bone loss correlate with measurements from 3D CT scan data and actual defect size in a cadaveric model. Regardless of imaging modality, the error in bone loss measurement tends to increase with increased defect size. Use of 3D MRI in the setting of shoulder instability could obviate the need for CT scans. CLINICAL RELEVANCE: The goal of our work was to develop a reproducible method of determining glenoid bone loss from 3D MRI data and hence eliminate the need for CT scans in this setting. This will lead to decreased cost of care as well as decreased radiation exposure to patients. The long-term goal is a fully automated system that is as approachable for clinicians as current 3D CT technology.",
+    "year": 2016,
+    "lang": "en",
+    "type": "article",
+    "venue": "Arthroscopy The Journal of Arthroscopic and Related Surgery",
+    "topic": "Shoulder Injury and Treatment",
+    "field": "Medicine",
+    "ca_institutions": ["University of Saskatchewan", "Royal University Hospital"],
+    "funders": []
+  },
+  {
+    "id": "W3097019706",
+    "title": "PALEOZOIC ACCRETION AND TRANSLATION OF TERRANES IN THE NORTHERN APPALACHIANS, ARCTIC AND CORDILLERA",
+    "abstract": "",
+    "year": 2020,
+    "lang": "en",
+    "type": "article",
+    "venue": "Abstracts with programs - Geological Society of America",
+    "topic": "Linguistics and language evolution",
+    "field": "Arts and Humanities",
+    "ca_institutions": "Natural Resources Canada",
+    "funders": []
+  },
+  {
+    "id": "W4375935525",
+    "title": "Harmonic behavior analyses of a non linear quarter car model",
+    "abstract": "",
+    "year": 2023,
+    "lang": "en",
+    "type": "article",
+    "venue": "AIP conference proceedings",
+    "topic": "Vibration Control and Rheological Fluids",
+    "field": "Engineering",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W7028811053",
+    "title": "Help+Call 1-888-527-3401.Apple Icloud 24/7 support phone Number ...",
+    "abstract": "Help+Call 1-888-527-3401.Apple Icloud 24/7 support phone Number ..+++++++1 888 527 3401 Gmail Helpline Phone Number USA Gmail Toll Free Number Gmail security USA@-1 888 527 3401 Gmail customer service phone number, Gmail customer service phone number Gmail +?™+1 888 527 3401 Gmail Tech Support Phone number, Gmail customer support phone number Gmail customer care phone number Gmail USA((((= 1 888 527 3401 ))))) Gmail tech Support Phone Number, Gmail Technical Support Phone Number, Gmail Customer Support phone Number Gmail help desk number, Gmail telephone number Gmail Support Phone Number 1 888 527 3401 USA, Gmail Support Phone Number, Gmail Technical Support Phone Number, Gmail Customer Support Number?? Gmail Support Phone Number 1 888 527 3401 USA, Gmail Support Phone Number, Gmail Technical Support Phone Number, Gmail Customer Support Number?? Gmail phone number #$#1 888 527 3401##$ Gmail phone number Gmail security phone number Gmail phone number #$#1 888 527 3401##$ Gmail support phone number Gmail symantec phone number Gmail phone number customer service #$#1 888 527 3401##$ Gmail customer service phone number Gmail tech support phone number Gmail technical support phone number Gmail phone numbers Gmail help phone number Gmail support phone number #$#1 888 527 3401##$ Gmail phone support Gmail contact phone number Gmail internet security phone number Gmail support phone number Gmail phone Gmail 888 phone number phone number for Gmail phone numbers Gmail customer service phone number Gmail customer support phone number find a phone number Gmail uk phone number usa phone number phone number for Gmail tech support phone number Gmail phone support free phone numbers phone number Gmail phone number get human find phone number phone number for Gmail security us phone number phone number usa #$#1 888 527 3401##$ Gmail contact phone number Gmail phone number for support Gmail contact number phone number for Gmail usa phone numbers phone number search us phone numbers find phone numbers Gmail helpline phone number business phone numbers residential phone numbers irs phone number phone number directory free phone number Gmail number Gmail whose phone number is this Gmail Gmail account Gmail find a phone number free Gmail internet security Gmail support number Gmail security Gmail phone number billing symantec Gmail removal tool Gmail support Gmail support phone number usa Gmail renewal phone number #$#1 888 527 3401##$symantec phone number Gmail utilities Gmail download Gmail virus phone number my Gmail account Gmail download Gmail customer service Gmail Gmail account login Gmail sign in Gmail australia phone number Gmail canada phone number Gmail symantec Gmail Gmail s#$#1 888 527 3401##$ Gmail login tech support phone number download Gmail information phone number Gmail my account symantec support printerget phone number Gmail virus Gmail support Gmail sales phone number Gmail by symantec phone number my Gmail Gmail internet security download Gmail trial Gmail virus protection Gmail technical support phone number Gmail customer service phone number Gmail telephone number Gmail security suite Gmail contact Gmail trial Gmail phone support number Gmail technical support phone number symantec Gmail Gmail help Gmail products Gmail online Gmail internet phone numbers search Gmail free trial Gmail tech support Gmail phone numberuk Gmail security download contact Gmail Gmail renewal phone numbers usa Gmail by symantec Gmail update Gmail internet security customer service phone number #$#1 888 527 3401##$my Gmail account login Gmail phone support number download Gmail Gmail product key home phone numbers Gmail customer support phone number Gmail s Gmail product key Gmail power eraser nortan Gmail ghost printerprotection reinstall Gmail Gmail canada Gmail updates contact Gmail Gmail price nortan printersymantec customer support phone number how to install Gmail Gmail site Gmail an contact Gmail support download Gmail Gmail reviews Gmail 2010 Gmail protection phone number for Gmail by symantec Gmail 5.0 phone numbers in us get a phone number for free symantec tech support Gmail support number Gmail helpdesk #$#1 888 527 3401##$ Gmail sales Gmail technical support number Gmail customer service phone Gmail phone Gmail internet security help Gmail live update not working Gmail toll free number Gmail customer support telephone number Gmail canada contact phone number Gmail Gmail login to my account Gmail security help Gmail technical support number Gmail customer care Gmail help desk phone number contact Gmail by phone Gmail tech support number Gmail tech support Gmail customer service Gmail printersoftware #$#1 888 527 3401##$ Gmail printerprotection search for phone numbers Gmail activation what is Gmail Gmail full Gmail support phone Gmail contact us Gmail renewal code Gmail free symantec technical support phone number Gmail security customer service phone number Gmail usa Gmail security support tech support number support install Gmail phone number for Gmail support live chat phone numbers Gmail customer service phone number usa phone number in us Gmail customer service number us Gmail telephone number how to get phone numbers free phone number for Gmail billing symantec help vanity toll free numbers Gmail phone support notron quick heal Gmail toll free number #$#1 888 527 3401##$ Gmail download manager Gmail identity safe download Gmail Gmail install Gmail internet security 2011 Gmail printerphone number phone number for Gmail customer service Gmail customer phone number Gmail customer support phone number canada symantec removal tool Gmail safe search Gmail price Gmail toolbar Gmail av Gmail coupon Gmail nz phone number Gmail 800 number Gmail downloads Gmail free trial Gmail internet security 2012 Gmail cancellation phone number Gmail updates phone book phone numbers in usa telephone number Gmail helpline number phone directory contact Gmail by phone Gmail subscription Gmail ghost download Gmail com support phone number Gmail contact Gmail contact number technical support phone number Gmail phone Gmail free Gmail support phone number us Gmail removal tool phone number for Gmail customer service Gmail update Gmail number Gmail phone number canada Gmail phone support canada Gmail spyware toll free numbers Gmail store Gmail online family find free phone numbers Gmail account Gmail gratis Gmail account Gmail contact phone number Gmail system works Gmail internet security support phone number symantec #$#1 888 527 3401##$ Gmail Gmail utilities 15 contact Gmail Gmail s Gmail renewal Gmail support phone number usa Gmail customer service phone number billing Gmail internet security support usa number Gmail review Gmail annual renewal free Gmail Gmail Gmail renewal Gmail online trend how to contact Gmail by phone Gmail anitvirus norotn support Gmail Gmail security contact number us numbers Gmail phone support number Gmail support website Gmail technical support phone numbers of Gmail v5 phone number Gmail customer service Gmail customer support phone number vanity numbers phone number service Gmail phone Gmail key install Gmail symantec support phone number Gmail phone number customer support Gmail website check Gmail free download norto Gmail customer service number norten Gmail update free Gmail Gmail software Gmail ghost 15 Gmail backup Gmail phone number support Gmail phone number tech support Gmail billing phone number Gmail uk Gmail technical support mcfee Gmail firewall Gmail internet security product key Gmail Gmail live update Gmail customer service Gmail customer service phone number usa buy Gmail get a phone number Gmail tech support number virus protection #$#1 888 527 3401##$ Gmail customer support phone number for Gmail support Gmail support Gmail protection Gmail review Gmail website download Gmail internet security Gmail account sign in Gmail Gmail uninstaller free Gmail Gmail Gmail phone number support northon Gmail helpline Gmail login how to get phone numbers Gmail Gmail trial Gmail number Gmail log in Gmail free phone numbers free Gmail disk doctor Gmail systemworks Gmail download internet security Gmail virus removal Gmail account phone number Gmail live chat buy Gmail Gmail internet security login Gmail search Gmail software phone number printersoftware Gmail tech support phone number free Gmail Gmail mobile Gmail free Gmail software Gmail free Gmail phone number customer service Gmail online backup Gmail internet security 2010 Gmail ghost 15.0 symantec tech support phone number Gmail 800 find contact number Gmail siteadvisor #$#1 888 527 3401##$ Gmail telephone number Gmail account login business phone numbers free Gmail deals Gmail symantec support phone number Gmail my account login symantec technical support Gmail support number Gmail symantec support number Gmail for phone phone number of usa phone number for business Gmail 1 800 number phone number for Gmail internet security Gmail hotline Gmail internet security contact phone number symantec #$#1 888 527 3401##$ Gmail phone number for Gmail tech support Gmail customer support phone number usa Gmail support symantec contact Gmail security symantec customer service phone number Gmail 2011 Gmail customer service phone number uk Gmail contact number how to remove Gmail Gmail customer service phone numbers Gmail 2011 Gmail help Gmail customer care phone number Gmail online support helpline phone number 1 800 phone numbers Gmail sonar Gmail security phone support Gmail security contact Gmail contact Gmail customer service phone number information phone numbers Gmail sign in Gmail price Gmail customer service telephone number www Gmail com #$#1 888 527 3401##$ support phone numbers antiviry Gmail help desk phone number Gmail subscription renewal Gmail help desk 1 800 number what is Gmail Gmail internet security contact number nortan free Gmail Gmail customer service number Gmail pc checkup how to contact Gmail by phone Gmail security contact phone number pho",
+    "year": 2016,
+    "lang": "en",
+    "type": "other",
+    "venue": "OSF Preprints (OSF Preprints)",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W7084115810",
+    "title": "Additional file 1 of Increased skin autofluorescence predicts future cancer development",
+    "abstract": "Supplementary Material 1.",
+    "year": 2025,
+    "lang": "en",
+    "type": "article",
+    "venue": "Figshare",
+    "topic": "Bat Biology and Ecology Studies",
+    "field": "Agricultural and Biological Sciences",
+    "ca_institutions": ["SickKids Foundation", "Hospital for Sick Children", "University of Toronto"],
+    "funders": []
+  },
+  {
+    "id": "W2104881646",
+    "title": "Developing core outcome sets for clinical trials: issues to consider",
+    "abstract": "The selection of appropriate outcomes or domains is crucial when designing clinical trials in order to compare directly the effects of different interventions in ways that minimize bias. If the findings are to influence policy and practice then the chosen outcomes need to be relevant and important to key stakeholders including patients and the public, health care professionals and others making decisions about health care. There is a growing recognition that insufficient attention has been paid to the outcomes measured in clinical trials. These issues could be addressed through the development and use of an agreed standardized collection of outcomes, known as a core outcome set, which should be measured and reported, as a minimum, in all trials for a specific clinical area. Accumulating work in this area has identified the need for general guidance on the development of core outcome sets. Key issues to consider in the development of a core outcome set include its scope, the stakeholder groups to involve, choice of consensus method and the achievement of a consensus.",
+    "year": 2012,
+    "lang": "en",
+    "type": "article",
+    "venue": "Trials",
+    "topic": "Delphi Technique in Research",
+    "field": "Social Sciences",
+    "ca_institutions": ["Institute of Population and Public Health", "University of Ottawa"],
+    "funders": "Medical Research Council"
+  },
+  {
+    "id": "W7015957698",
+    "title": "UR Pride Newsletter March 2012",
+    "abstract": "3 p.",
+    "year": 2012,
+    "lang": "en",
+    "type": "other",
+    "venue": "oURspace (University of Regina)",
+    "ca_institutions": [],
+    "funders": "University of Regina"
+  },
+  {
+    "id": "W2125344629",
+    "title": "Seasonal variation of sedimentation in the Changjiang Estuary mud area",
+    "abstract": "",
+    "year": 2003,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Geographical Sciences",
+    "topic": "Marine and coastal ecosystems",
+    "field": "Earth and Planetary Sciences",
+    "ca_institutions": [],
+    "funders": "Egg Farmers of Canada"
+  },
+  {
+    "id": "W7042240122",
+    "title": "Online schooling as a predictor of loneliness: a cross cultural perspective",
+    "abstract": "Loneliness has been both theorised with regards to its onset and development and studied with respect to its prevalence among undergraduate students and its effects on cognition and physiology by social scientists both generally and specifically to young adults. Research has studied the prevalence of loneliness and multiple specific effects at an undergraduate level e.g. how loneliness effects each gender. However, the extensive body of literature involves undergraduate students who experience in-person classes. With the mass introduction of online teaching as a response to the covid-19 pandemic, this study aimed to fill the gap in the literature by providing a cross cultural perspective between two countries (Ireland and Canada) as to whether a relationship exists between loneliness and hours spent proportionately both in-person and online. Additionally, type of residence was factored in allowing for a greater and novel understanding as to how that predicts loneliness. Participants (N = 157) were recruited both through social media using voluntary response sampling and through recruitment websites using simple random sampling. Participants shared relevant demographic information and completed the UCLA Loneliness Scale. Results of a multiple linear regression found that in-person hours, online-hours, and the relationship between online hours and in-person was not a significant predictor of loneliness. This study indicates that other factors, such as age and country, are better predictors for loneliness occurring rather than the number of hours spent either with in-person or online schooling. The result of this study allows for a greater perspective into what the possible factors that predict loneliness.",
+    "year": 2022,
+    "lang": "en",
+    "type": "other",
+    "venue": "NORMA",
+    "topic": "Health disparities and outcomes",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2044380807",
+    "title": "J.K. Tina Basi. 2009. <i>Women, Identity and India’s Call Centre Industry<\/i> . Abingdon, UK; USA &amp; Canada: Routledge. 210 pp. $150 (HB). ISBN 978-0-415-48228-8; ebk, ISBN 978-0-203-88379-2",
+    "abstract": "",
+    "year": 2010,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of South Asian Development",
+    "topic": "Gender, Feminism, and Media",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2126455699",
+    "title": "Technology comparisons in wireless local loop",
+    "abstract": "Economic factors and emerging technologies are the two main forces that are making WLL solutions a reality. WLL uses wireless technology coupled with line interfaces and other circuitry to complete the \"last mile\" between the customer's premises and the PSTN. In this survey paper, current WLL technologies are introduced. WLL is broadly categorized into two classes: narrowband and broadband. The fact that WLL is competing with other fixed access technologies is emphasized and the comparison with other competing technologies is shown. Capacity and functionality of different technologies employed in WLL systems are briefly compared. DECT, PACS, and PHS are compared in greater detail through quantitative evaluations. In the broadband area, the planning for terrestrial and satellite-based broadband networks used to supply WLL in urban environments is compared.",
+    "year": 2002,
+    "lang": "en",
+    "type": "article",
+    "topic": "Power Line Communications and Noise",
+    "field": "Engineering",
+    "ca_institutions": "Innovation, Science and Economic Development Canada",
+    "funders": []
+  },
+  {
+    "id": "W2140700983",
+    "title": "Theory of Linear Games with Constraints and Its Application to Power Control of Optical Networks",
+    "abstract": "In this paper, we introduce a class of linear non- cooperative games with linearly coupled constraints. It bears striking connections with classical linear systems theory and finds itself pervasively used in network engineering applications. In the second part of the paper, we will illustrate this type of games by an application from OSNR-based power control in optical networks, where we can view the slack variables as fictitious players. This powerful interpretation allows us to bridge over the theory and the issue of implementation in engineering.",
+    "year": 2008,
+    "lang": "en",
+    "type": "article",
+    "topic": "Advanced Optical Network Technologies",
+    "field": "Engineering",
+    "ca_institutions": "University of Toronto",
+    "funders": []
+  },
+  {
+    "id": "W2795902123",
+    "title": "Proust, traducteur de Ruskin. De la traduction de Ruskin à la création d’À la recherche du temps perdu",
+    "abstract": "La rédaction de Contre Sainte-Beuve et d’ À la recherche du temps perdu de Marcel Proust a été précédée par la traduction de The Bible of Amiens (1884) et de Sesame and Lilies (1865) de John Ruskin. L’examen de ces deux traductions montre que le traducteur s’en est inspiré pour échafauder le socle esthétique de son oeuvre à venir. En effet, la traduction des essais ruskiniens fait partie intégrante du processus d’apprentissage et de maturation qui devance et prépare la rédaction définitive de À la recherche du temps perdu . Cette traduction a consisté en une activité de transfert des contenus esthétiques de l’oeuvre de l’esthète anglais à la sienne propre. Nous essaierons dans cet article de montrer que le cadre esthétique d’ À la recherche du temps perdu provient directement, avec quelques modifications que nécessite toute transformation créatrice, de sa confrontation avec les livres de Ruskin.",
+    "year": 2018,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Meta Journal des traducteurs",
+    "topic": "Historical Art and Culture Studies",
+    "field": "Arts and Humanities",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4233101217",
+    "title": "Avant-propos",
+    "abstract": "Introduction du dossier \"Pour une autre configuration théâtrale : Renouveau ? Résurrection ? Naissance ?\"&#x0D; Pour une autre configuration théâtrale : Renouveau ? Résurrection ? Naissance ?&#x0D; Antoine Vitez déclarait en 1991 que l’on pouvait/devait « faire théâtre de tout ». Aujourd’hui on en vient à se questionner sur la nature même du théâtre et de celle de ce « tout » mentionné par Vitez. En ce siècle, on assiste à des spectacles, des performances, des installations, des expériences qui sont autant de formes diverses qu’il existe de matériaux les constituant. Ce chantier de recherche nous permet de nous re-poser des questions sur les fondements du théâtre, si l’on peut encore le nommer ainsi, sur ses stratégies et ses objectifs. Ce dossier de Voix plurielles consacré aux nouvelles voix/es du théâtre aimerait poser soit sous forme de réflexions, soit sous forme de témoignages, les différents éléments qui constituent les dispositifs qui, d’une manière ou d’une autre, interpellent autrement la théâtralité, la scène, le hors-scène et la réception. Cet autrement est-il une reconfiguration de la dramaticité ? Une récupération des formes expérimentales anciennes (performances, body art) par le biais des nouvelles technologies contribuant à la notion de médiaturgie ? Un nouvel objet né d’une adaptation aux nouvelles donnes sociales et technologiques ?&#x0D;",
+    "year": 2020,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Voix Plurielles",
+    "topic": "Cultural Insights and Digital Impacts",
+    "field": "Computer Science",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4398593211",
+    "title": "Stage 2 - Daily Diary 6 - Qualtrics questionnaire word version.docx",
+    "abstract": "",
+    "year": 2018,
+    "lang": "en",
+    "type": "dataset",
+    "venue": "Harvard Dataverse",
+    "topic": "Occupational Therapy Practice and Research",
+    "field": "Health Professions",
+    "ca_institutions": "University of Toronto",
+    "funders": []
+  },
+  {
+    "id": "W4400295496",
+    "title": "Variation diatopique dans la terminologie juridique. Analyse des néologismes juridiques dans FranceTerme, dans le Grand dictionnaire terminologique, dans TERMIUM Plus® et TERMDAT",
+    "abstract": "L’article traite de la variation diatopique de la terminologie juridique française. Il s’appuie sur les 93 néologismes juridiques contenus dans FranceTerme, la banque de données terminologique officielle française gérée par le ministère de la Culture, en les comparant à leurs équivalents présents dans le Grand dictionnaire terminologique, la banque de données officielle du Québec, qui a été créée par l’Office québécois de la langue française, dans TERMIUM Plus®, la banque de données du gouvernement canadien, et dans TERMDAT, la banque de données de la Chancellerie fédérale suisse. L’analyse a révélé une variation terminologique importante. Une minorité négligeable de termes ne manifeste aucune variation à travers les quatre sources. Les correspondances entre les termes présents dans les banques de données respectives ne sont que très partielles. Dans la majorité écrasante des termes, une variation est attestée et l’article en illustre les différents types à partir d’exemples concrets. On distingue surtout les équivalents qui ne diffèrent que formellement (les variantes syntaxiques, morphologiques et orthographiques, l’alternation des formes pleines et des sigles) et les équivalents qui manifestent des différences plus profondes (les termes vernaculaires et les emprunts à l’anglais, les termes descriptifs et les termes grécolatins, les termes contenant des mots indigènes synonymes remplaçant le terme entier ou l’un de ses éléments, les termes métaphoriques et les termes non métaphoriques, etc.).",
+    "year": 2024,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Studies About Languages",
+    "topic": "linguistics and terminology studies",
+    "field": "Arts and Humanities",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W182630847",
+    "title": "Endogenous levels of abscisic acid and gibberellins in leaf protoplasts competent for plant regeneration in Betulaplatyphylla and Populus alba",
+    "abstract": "",
+    "year": 2002,
+    "lang": "en",
+    "type": "article",
+    "venue": "Plant Growth Regulation",
+    "topic": "Plant tissue culture and regeneration",
+    "field": "Biochemistry, Genetics and Molecular Biology",
+    "ca_institutions": [],
+    "funders": "University of Calgary"
+  },
+  {
+    "id": "W2127217027",
+    "title": "Incremental contribution of reported previous head injury to the prediction of diagnosis and cognitive functioning in older adults",
+    "abstract": "BACKGROUND: Severe brain injuries may be a risk factor for the development of dementia in later life. Less severe incidents with relatively short or even no loss of consciousness may not carry the same prognosis. OBJECTIVES: This study used data from the first two waves of the Canadian Study of Health and Ageing (CSHA-1 and CSHA-2) to investigate two questions. (1) Does a history of head injury improve the prediction of the diagnosis of dementia? This analysis was based on the 921 elderly individuals who underwent a clinical assessment in CSHA-2 and, 5 years earlier, had reported whether or not they had had a head injury. (2) Does adding information about a history of head injury improve the prediction of neuropsychological test scores? This second analysis included 585 elderly people who underwent neuropsychological assessment in both waves and who also reported whether or not they had had a history of mild or moderate-to-severe head injury. RESULTS: RESULTS showed that the inclusion of head injury information did not improve the prediction of diagnostic outcome of dementia. Age and overall cognitive status were associated with most neuropsychological test scores, more so than the more limited influence of chronic health problems, which was associated with about half of the neuropsychological measures.",
+    "year": 2011,
+    "lang": "en",
+    "type": "article",
+    "venue": "Brain Injury",
+    "topic": "Traumatic Brain Injury Research",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": "Canadian Institutes of Health Research"
+  }
+]
+warning: loading hooks from both /Users/choxos/.codex/hooks.json and /Users/choxos/.codex/config.toml; prefer a single representation for this layer
+2026-07-13T00:19:06.959412Z ERROR rmcp::transport::worker: worker quit with fatal: Transport channel closed, when Auth(AuthorizationRequired)
+warning: Skill descriptions were shortened to fit the 2% skills context budget. Codex can still see every skill, but some descriptions are shorter. Disable unused skills or plugins to leave more room for the rest.
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart Failed
+hook: SessionStart Completed
+hook: SessionStart Completed
+hook: SessionStart Completed
+hook: SessionStart Completed
+hook: SessionStart Failed
+hook: UserPromptSubmit
+hook: UserPromptSubmit
+hook: UserPromptSubmit Failed
+hook: UserPromptSubmit Failed
+codex
+[
+  {"id":"W7038791195","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"The work analyzes Canadian copyright law for AI-generated art, not research practice or the research system."},
+  {"id":"W3087211185","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study evaluates surgical outcomes for shoulder dislocation rather than studying how research is conducted."},
+  {"id":"W2030486575","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"This meta-analysis answers a clinical question about physical activity and asthma rather than studying evidence-synthesis methods."},
+  {"id":"W6992491376","tier":"OUT","genre":"other","about_ca":false,"confidence":"low","reason":"The title suggests a report about women in engineering and the Canadian knowledge economy, but does not establish that research itself is the object."},
+  {"id":"W7071220145","tier":"OUT","genre":"editorial/commentary","about_ca":false,"confidence":"high","reason":"This is a book review about Khalil Gibran and his biography, not research practice."},
+  {"id":"W2020633839","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study examines patient information, motivation, and behavioral skills in HIV care, not research itself."},
+  {"id":"W2126486918","tier":"T1","genre":"conceptual","about_ca":false,"confidence":"high","reason":"The title directly identifies clinical-trial design and conduct as the object, making research methodology central."},
+  {"id":"W2769895972","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study develops leukemia risk stratification using clinical and genetic data rather than studying research practice."},
+  {"id":"W4394727479","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"low","reason":"The title concerns teachers' professional practices in symbolic play, and the thin abstract does not indicate a research-system object."},
+  {"id":"W3144053723","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study examines perceived unfairness and health outcomes, not the conduct or evaluation of research."},
+  {"id":"W4406725186","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"This meta-analysis synthesizes clinical findings about NF1 symptoms rather than studying synthesis methodology."},
+  {"id":"W2955865427","tier":"T1","genre":"conceptual","about_ca":false,"confidence":"low","reason":"The title suggests a review of lesion studies as a research approach, but the missing abstract leaves the object insufficiently clear."},
+  {"id":"W2190184171","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"The review studies participation and knowledge sharing in online communities of practice, not research communities or research practice."},
+  {"id":"W6998646999","tier":"OUT","genre":"other","about_ca":false,"confidence":"low","reason":"The title indicates an occupational analysis of water-treatment work in Quebec, not research itself."},
+  {"id":"W4394106342","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study investigates a bacterial gene's effects on chemotaxis, biofilms, and metabolism rather than research practice."},
+  {"id":"W1484985634","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The article studies epidemics and resistance in colonial Sierra Leone, not the research system."},
+  {"id":"W4415704462","tier":"OUT","genre":"other","about_ca":false,"confidence":"low","reason":"The title concerns clinical COPD care, and the missing abstract provides no indication that research itself is studied."},
+  {"id":"W4386695555","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study examines professional identity and training among educational mentors, not research practice."},
+  {"id":"W6991112624","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The thesis analyzes fashion-brand building through social media, not research itself."},
+  {"id":"W4406784319","tier":"OUT","genre":"other","about_ca":false,"confidence":"low","reason":"The title indicates an engineering design chapter, and the missing abstract does not suggest a research-system object."},
+  {"id":"W3027052319","tier":"OUT","genre":"editorial/commentary","about_ca":false,"confidence":"high","reason":"The podcast discusses drug-policy advocacy and regulation, not research practice or governance."},
+  {"id":"W2001124042","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"low","reason":"The title indicates a clinical genetic-typing study, but the missing abstract limits confidence that research itself is not the object."},
+  {"id":"W1486336166","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The article studies women's diary-writing practices and literary history, not scholarly research practice."},
+  {"id":"W4200530461","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study examines factors influencing nurse practitioners' rural career choices, not the research workforce."},
+  {"id":"W4281898199","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study examines exercise barriers among breast cancer patients rather than research practice."},
+  {"id":"W4242884592","tier":"T1","genre":"conceptual","about_ca":false,"confidence":"high","reason":"The contribution standardizes and explains analytical extraction approaches, making a research method itself the object."},
+  {"id":"W2951170589","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"low","reason":"The title indicates a clinical cardiac electrophysiology study, but the missing abstract limits confidence."},
+  {"id":"W2078598345","tier":"OUT","genre":"editorial/commentary","about_ca":false,"confidence":"high","reason":"This is an obituary for a historian and does not study research practice."},
+  {"id":"W4236012250","tier":"OUT","genre":"editorial/commentary","about_ca":false,"confidence":"high","reason":"The presentation discusses translation, politics, and mediation rather than research itself."},
+  {"id":"W1481548424","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"low","reason":"The title concerns colonial history in Sierra Leone, and the abstract contains insufficient detail to suggest a research-system object."},
+  {"id":"W7082147875","tier":"OUT","genre":"infrastructure/announcement","about_ca":false,"confidence":"high","reason":"This is a biodiversity occurrence-download dataset about plant records, not research practice."},
+  {"id":"W2052088669","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"low","reason":"The title indicates a computer-graphics technique, and the missing abstract does not suggest metaresearch."},
+  {"id":"W2559249142","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study compares imaging methods for measuring shoulder bone loss, not research methodology as a social or evaluative object."},
+  {"id":"W3097019706","tier":"OUT","genre":"other","about_ca":false,"confidence":"low","reason":"The title indicates a geology conference contribution, while the missing abstract provides no evidence of a research-system focus."},
+  {"id":"W4375935525","tier":"OUT","genre":"other","about_ca":false,"confidence":"low","reason":"The title indicates an engineering model analysis, and the missing abstract does not suggest that research itself is studied."},
+  {"id":"W7028811053","tier":"OUT","genre":"other","about_ca":false,"confidence":"high","reason":"The record is spam-like technical-support content and is not research about research."},
+  {"id":"W7084115810","tier":"OUT","genre":"infrastructure/announcement","about_ca":false,"confidence":"high","reason":"This is supplementary material for a cancer study, not a study of research practice."},
+  {"id":"W2104881646","tier":"T1","genre":"conceptual","about_ca":false,"confidence":"high","reason":"The paper addresses how clinical-trial outcomes should be selected and standardized, making trial methodology the object."},
+  {"id":"W7015957698","tier":"OUT","genre":"other","about_ca":false,"confidence":"high","reason":"A university pride newsletter is not a study of research itself."},
+  {"id":"W2125344629","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"low","reason":"The title indicates a sedimentation study in a river estuary, and the missing abstract gives no reason to classify it as metaresearch."},
+  {"id":"W7042240122","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study examines online schooling and loneliness among students, not research practice."},
+  {"id":"W2044380807","tier":"OUT","genre":"editorial/commentary","about_ca":false,"confidence":"high","reason":"This is a book review about identity and India's call-center industry, not research itself."},
+  {"id":"W2126455699","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"The survey compares wireless local-loop technologies, making telecommunications technology rather than research the object."},
+  {"id":"W2140700983","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"The paper develops game theory and applies it to optical-network power control, not research practice."},
+  {"id":"W2795902123","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"The article analyzes Proust's literary translation and creative development, not scholarly research."},
+  {"id":"W4233101217","tier":"OUT","genre":"editorial/commentary","about_ca":false,"confidence":"high","reason":"This foreword discusses contemporary theatre and performance, not research practice."},
+  {"id":"W4398593211","tier":"OUT","genre":"other","about_ca":false,"confidence":"low","reason":"The record is a questionnaire file with no abstract indicating that research itself is the object."},
+  {"id":"W4400295496","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The article studies geographic variation in legal terminology databases, not research practice or infrastructure."},
+  {"id":"W182630847","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"low","reason":"The title indicates a plant biology experiment, and the missing abstract provides no evidence of metaresearch."},
+  {"id":"W2127217027","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study evaluates whether prior head injury predicts dementia and cognition, not how research is conducted."}
+]
+hook: Stop
+hook: Stop
+hook: Stop
+hook: Stop Completed
+hook: Stop Completed
+hook: Stop Failed
+tokens used
+39,164

@@ -1,0 +1,804 @@
+# MétaCan screening rubric (v1.0)
+
+**Locked before screening. Version-controlled. Any change is a new version with a dated entry in `DEVIATIONS.md`.**
+
+Both machine screeners and both human coders work from this document and nothing else. The rubric is the
+instrument; if two coders disagree, the rubric is what they are adjudicated against.
+
+---
+
+## The unit
+
+One work (journal article, preprint, book chapter, report, dataset, or software), identified by its OpenAlex ID.
+You see: title, abstract, publication year, language, venue, OpenAlex topic and field, Canadian institutional
+affiliations, funders.
+
+## The question
+
+**Is the object of study *research itself*?**
+
+Metaresearch studies how research is done, reported, funded, evaluated, disseminated, or governed. The test is
+what the work is *about*, not what field it appears in and not what vocabulary it uses.
+
+A cardiology trial is not metaresearch. A study of *how cardiology trials report their outcomes* is.
+
+---
+
+## Tier
+
+Assign exactly one.
+
+### T1: Core metaresearch
+The primary object of study is research itself. Typical objects:
+
+- research **methods** and their properties (bias, reporting, statistical practice, study design)
+- **reproducibility**, replication, data and code sharing
+- **research integrity**: misconduct, retraction, questionable research practices, authorship
+- **peer review** and editorial process *as objects of study*
+- **research evaluation**, metrics, rankings, funding allocation
+- **scholarly communication**: publishing models, open access, preprints *as objects of study*
+- **bibliometrics and scientometrics** applied to a research literature
+- the **research workforce**: careers, equity, training, capacity
+- **evidence synthesis methodology** (not an individual systematic review's clinical answer, but work *about* how
+  syntheses are done)
+
+### T2: Adjacent
+Empirically or conceptually grounded work on science as a social system that is not framed as metaresearch but
+studies it:
+
+- **science and technology studies (STS)**: social studies of scientific knowledge, practice, controversy
+- **library and information science**: information behaviour of researchers, repositories, discovery
+- **research infrastructure** studies: platforms, data repositories, identifiers, standards
+- **history and philosophy of science** *when the object is contemporary research practice*
+- **research policy** analysis grounded in evidence
+
+T2 is where the field's diversity lives. Be generous here: a paper does not have to call itself metaresearch to
+be studying research.
+
+### T3: Contextual
+Relevant to the ecosystem, mapped and released, but **never pooled into the analytic corpus**:
+
+- editorials, commentaries, opinion pieces about research practice
+- policy documents and position statements
+- announcements of infrastructure, tools, or initiatives
+- news, obituaries, corrections, letters
+
+### OUT: Not metaresearch
+Everything else. Includes, and this is the most common error:
+
+- **A study that uses a method is not a study of the method.** A meta-analysis answering a clinical question is
+  OUT. A study of how meta-analyses handle heterogeneity is T1.
+- **Mentioning a metaresearch term is not studying it.** A lab paper reporting "assay reproducibility", a methods
+  section saying "peer reviewed", a licence note saying "open access": all OUT.
+- **Domain research that happens to be bibliometric in method** but whose object is the domain, not the research:
+  e.g. a bibliometric map of diabetes treatments, produced to summarise diabetes knowledge. Borderline; see below.
+
+---
+
+## The three errors that matter most
+
+These are where the pilot showed retrieval and screening break down. Read them twice.
+
+1. **Polysemy.** `reproducibility` in a biochemistry paper means the assay gives the same reading twice. In a
+   metaresearch paper it means the reproducibility crisis. Only the second is in scope. The same applies to
+   `validation`, `replication`, `bias`, `peer review`, `open access`. **Judge the sense, not the token.**
+
+2. **Method vs. object.** Using bibliometrics ≠ studying research. Ask: *if this paper is right, what do we now
+   know more about: a scientific question, or the practice of science?* If the former, OUT.
+
+3. **Absence of vocabulary is not absence of content.** An STS paper about laboratory practice, or an LIS paper
+   about how researchers find data, may use none of the field's keywords and still be squarely T2. **Do not
+   require the vocabulary.** This is the error that makes the field look smaller and more anglophone than it is.
+
+---
+
+## Canadian linkage
+
+Record which apply (this is metadata, not an inclusion test; the estimand is defined separately in
+`PROTOCOL.md`):
+
+- `CA_AFF`: at least one author affiliated with a Canadian institution
+- `CA_FUND`: funded by CIHR, NSERC, SSHRC, or CFI
+- `ABOUT_CA`: the Canadian research system is a substantive object of study (not a passing mention, not one
+  country among forty in a global comparison)
+
+## Genre
+
+`empirical` · `conceptual` · `editorial/commentary` · `policy` · `infrastructure/announcement` · `other`
+
+OpenAlex's `type` is unreliable and this field is commentary-heavy, so genre is coded, not inherited.
+
+## Language of the work
+
+As published. Do not infer from the venue.
+
+---
+
+## Confidence
+
+- `high`: the rubric decides this cleanly.
+- `medium`: the rubric decides, but a reasonable coder could differ.
+- `low`: genuinely on the boundary, or the abstract is missing/too thin to judge.
+
+**`low` is a legitimate answer and is not a failure.** Records coded `low` by either screener are routed to
+adjudication. A screener that never says `low` is not being careful; it is being confident.
+
+---
+
+## Worked examples
+
+| Title (abridged) | Tier | Why |
+|---|---|---|
+| "Data sharing practices in 500 randomised trials" | **T1** | The object is reporting practice. |
+| "Reproducibility of a Western blot protocol" | **OUT** | Assay reproducibility. Polysemy trap. |
+| "Trends in citation of retracted papers" | **T1** | Object is the literature's own behaviour. |
+| "Laboratory life in a Canadian genomics centre: an ethnography" | **T2** | STS. No metaresearch vocabulary; still studies research. |
+| "How do researchers discover datasets? A survey" | **T2** | LIS, information behaviour of researchers. |
+| "Effectiveness of statins: a network meta-analysis" | **OUT** | Uses a synthesis method to answer a clinical question. |
+| "How network meta-analyses handle inconsistency: a review of 200 reviews" | **T1** | Object is the method. |
+| "Announcing the Canadian Research Data Repository" | **T3** | Infrastructure announcement. Mapped, not pooled. |
+| "Open access mandates are failing early-career researchers" (editorial) | **T3** | Commentary about research practice. |
+| "Bibliometric analysis of diabetes research 2000–2020" | **T2** | Borderline. Bibliometric method, and the object *is* a research literature, so it studies research output. Code T2, `medium`. |
+| "Le libre accès dans les revues québécoises : état des lieux" | **T1** | Scholarly communication, object is publishing practice. French. |
+
+---
+
+## Instructions to the screener
+
+Read the title and abstract. Apply the rubric. Do not use outside knowledge of the authors or the journal's
+reputation. If the abstract is missing, judge on the title alone and set confidence to `low` unless the title is
+unambiguous.
+
+Return the schema in `protocol/screening-schema.json`. One object per work. No prose, no preamble.
+--------------------------------------------------------------------------------
+You are screening works for MetaCan, a map of Canadian metaresearch.
+
+Apply the rubric above to every record in the JSON array below. Return a JSON
+array with one object per work, conforming to protocol/screening-schema.json:
+
+  {"id": "W...", "tier": "T1|T2|T3|OUT", "genre": "...", "about_ca": true|false,
+   "confidence": "high|medium|low", "reason": "one sentence"}
+
+Rules:
+- Return the JSON array and NOTHING else. No prose, no preamble, no code fences.
+- Every input id must appear exactly once in the output.
+- Do not run commands, read files, or browse. Classify from the RECORDS alone.
+
+RECORDS:
+[
+  {
+    "id": "W2397458166",
+    "title": "Seventy years of forest growth and community dynamics in an undisturbed northern hardwood forest",
+    "abstract": "Long-term forest inventories provide a unique opportunity to quantify changes in forest structure and evaluate how changes compare with current stand development models. An examination of a 70 year record at the Bartlett Experimental Forest, New Hampshire, indicated that although species abundances have primarily changed as expected under natural succession, some unexpected results were also detected. This included a significant decline in sugar maple (Acer saccharum Marsh.) abundance driven by reduced regeneration and increases in red spruce (Picea rubens Sarg.) at the expense of sympatric balsam fir (Abies balsamea (L.) Mill.) and hardwoods at upper elevations. In contrast with accepted stand development models, biomass continues to accrue on these mid- to late-successional forests. Importantly, biomass accumulated at even greater rates in recent decades compared with historical norms. These results support evidence that the anthropogenic influences of a changing climate and the legacy of acid deposition may be altering stand dynamics in northeastern forests.",
+    "year": 2016,
+    "lang": "en",
+    "type": "article",
+    "venue": "Canadian Journal of Forest Research",
+    "topic": "Tree-ring climate responses",
+    "field": "Earth and Planetary Sciences",
+    "ca_institutions": [],
+    "funders": ["Northern Research Station", "U.S. Forest Service", "U.S. Department of Agriculture"]
+  },
+  {
+    "id": "W2082981201",
+    "title": "Hydrogen sulfide as a potent cardiovascular protective agent",
+    "abstract": "",
+    "year": 2014,
+    "lang": "en",
+    "type": "review",
+    "venue": "Clinica Chimica Acta",
+    "topic": "Sulfur Compounds in Biology",
+    "field": "Biochemistry, Genetics and Molecular Biology",
+    "ca_institutions": ["Libin Cardiovascular Institute of Alberta", "University of Saskatchewan", "University of Calgary"],
+    "funders": "National Natural Science Foundation of China"
+  },
+  {
+    "id": "W4387357130",
+    "title": "The GRAS protein OsDLA involves in brassinosteroid signalling and positively regulates blast resistance by forming a module with GSK2 and OsWRKY53 in rice",
+    "abstract": "Brassinosteroids (BRs) play a crucial role in shaping the architecture of rice (Oryza sativa) plants. However, the regulatory mechanism of BR signalling in rice immunity remains largely unexplored. Here we identify a rice mutant dla, which exhibits decreased leaf angles and is insensitive to 24-epiBL (a highly active synthetic BR), resembling the BR-deficient phenotype. The dla mutation caused by a T-DNA insertion in the OsDLA gene leads to downregulation of the causative gene. The OsDLA knockout plants display reduced leaf angles and less sensitivity to 24-epiBL. In addition, both dla mutant and OsDLA knockout plants are more susceptible to rice blast compared to the wild type. OsDLA is a GRAS transcription factor and interacts with the BR signalling core negative regulator, GSK2. GSK2 phosphorylates OsDLA for degradation via the 26S proteasome. The GSK2 RNAi line exhibits enhanced rice blast resistance, while the overexpression lines thereof show susceptibility to rice blast. Furthermore, we show that OsDLA interacts with and stabilizes the WRKY transcription factor OsWRKY53, which has been demonstrated to positively regulate BR signalling and blast resistance. OsWRKY53 directly binds the promoter of PBZ1 and activates its expression, and this activation can be enhanced by OsDLA. Together, our findings unravel a novel mechanism whereby the GSK2-OsDLA-OsWRKY53 module coordinates blast resistance and plant architecture via BR signalling in rice.",
+    "year": 2023,
+    "lang": "en",
+    "type": "article",
+    "venue": "Plant Biotechnology Journal",
+    "topic": "Plant Molecular Biology Research",
+    "field": "Agricultural and Biological Sciences",
+    "ca_institutions": [],
+    "funders": ["Institute of Genetics and Developmental Biology, Chinese Academy of Sciences", "Northeast Institute of Geography and Agroecology, Chinese Academy of Sciences", "China Agricultural University", "Chinese Academy of Agricultural Sciences", "Chinese Academy of Sciences", "Institute of Genetics", "National Natural Science Foundation of China"]
+  },
+  {
+    "id": "W4403596067",
+    "title": "Model-predictive kinetic control with data-driven models on EAST",
+    "abstract": "Abstract In this work, model-predictive control (MPC) was combined for the first time with singular perturbation theory, and an original plasma kinetic control method based on extremely simple data-driven models and a two-time-scale MPC algorithm has been developed. A comprehensive review is presented in this paper. Slow and fast semi-empirical models are identified from data, by considering the fast kinetic plasma dynamics as a singular perturbation of a quasi-static equilibrium, which itself is governed, on the slow time scale, by the flux diffusion equation. This control technique takes advantage of the large ratio between the time scales involved in magnetic and kinetic plasma transport. It is applied here to the simultaneous control of the safety factor profile, q (𝑥), and of several kinetic variables, such as the poloidal beta parameter, β p , and the internal inductance parameter, l i , on the EAST tokamak. In the experiments, the available control actuators were lower hybrid current drive (LHCD) and co-current neutral beam injection (NBI) from different sources. Ion cyclotron resonant heating (ICRH) and electron cyclotron resonant heating (ECRH) are used as additional actuators in control simulations. In the controller design, an observer provides, in real time, an estimate of the system states and of the mismatch between measured and predicted outputs, which ensures robustness to model errors and offset-free control. Based on the observer information, the controller predicts the behavior of the system over a given time horizon and computes the optimal actuation by solving a quadratic programming optimization problem that takes the actuator constraints into account. A number of control applications are described in the paper, either in nonlinear simulations with EAST-like parameters or in real experiments on EAST. The simulations were performed with a fast plasma simulator (METIS) using either two control actuators (LHCD and ICRH) in a low density scenario, or up to four actuators at higher density: LHCD, ECRH, and two NBI systems driven in a on/off pulse-width-modulation (PWM) mode, with different injection angles. The control models are identified with the prediction-error method, using datasets obtained from open loop simulations in which the actuators are modulated with pseudo-random binary sequences. The simulations with two actuators show that various q (𝑥) profiles and β p waveforms can be tracked without offset, within times that are consistent with the resistive and thermal diffusion time scales, respectively. In simulations with four actuators, simultaneous tracking of time-dependent targets is shown for q (𝑥) at two normalized radii, 𝑥 = 0 and 𝑥 = 0.4, and for β p . Due to the inherent mismatch between the optimal NBI power request and the delivered PWM power, the kinetic controller performs with reduced accuracy compared with simulations that do not use the NBI/PWM actuators. The first experimental tests using this new control algorithm were performed on EAST when the only available actuator was the LHCD system at 4.6 GHz. The algorithm was thus used in its simplest single-input-single-output version to track time-dependent targets for the central safety factor, q 0 , or for β p . In the closed loop control experiments, the q 0 targets were tracked in about one second, consistently with the plasma resistive time constant. Excellent tracking of a piecewise linear β p target waveform was also achieved. When the NBI system became controllable in real time by the EAST plasma control system, new experiments were dedicated to multiple-input-multiple-output MPC control with three actuators: LHCD and two NBI actuators using the PWM algorithm. Given that the minimum time allowed between NBI on/off switching was 0.1 s, i.e. larger than the characteristic time of the fast plasma dynamics, a reduced version of the MPC controller based only on the slow model was used. Various controller configurations were tested during a single experimental session, with up to three controlled variables chosen among q 0 = q ( 𝑥 = 0), q 1 = q ( 𝑥 = 0.5), β p and l i . The main difficulty encountered during this session was the unavailability of the full baseline ICRH and ECRH powers that were used in the reference scenario, and from which the plasma model was identified. This often led to the saturation of one or several actuators, which prevented some targets selected in advance from being accessible. Nevertheless, in cases that were free from actuator saturation, q 0 and q 1 targets were successfully reached, in a time that is consistent with the resistive diffusion time of the model and with small oscillations that are characteristic of the PWM operation of the neutral beams. During the simultaneous control of q 0 and β p , the ICRH power was too low and, in addition, the plasma density was much larger than the reference one. The q 0 targets were not accessible in this high-density/low-power case, but β p control was successful. Finally, the simultaneous control of q 0 and l i was satisfactory and, during the simultaneous control of, q 0 , β p and l i , the tracking of β p and l i was satisfactory but q 0 was too large due to the lack of ICRH power and to NBI saturation. In conclusion, the extensive nonlinear simulations described in this paper have demonstrated the relevance of combining MPC, data-driven models and singular perturbation methods for plasma kinetic control. This technique was also assessed experimentally on EAST, although some tests were perturbed by undesired parameter changes with respect to the reference scenario.",
+    "year": 2024,
+    "lang": "en",
+    "type": "article",
+    "venue": "Nuclear Fusion",
+    "topic": "Nuclear reactor physics and engineering",
+    "field": "Engineering",
+    "ca_institutions": [],
+    "funders": ["Euratom Research and Training Programme", "China Scholarship Council", "European Commission", "EUROfusion"]
+  },
+  {
+    "id": "W6902694626",
+    "title": "Sequre: a high-performance framework for secure multiparty computation enables biomedical data sharing",
+    "abstract": "Abstract Secure multiparty computation (MPC) is a cryptographic tool that allows computation on top of sensitive biomedical data without revealing private information to the involved entities. Here, we introduce Sequre, an easy-to-use, high-performance framework for developing performant MPC applications. Sequre offers a set of automatic compile-time optimizations that significantly improve the performance of MPC applications and incorporates the syntax of Python programming language to facilitate rapid application development. We demonstrate its usability and performance on various bioinformatics tasks showing up to 3–4 times increased speed over the existing pipelines with 7-fold reductions in codebase sizes.",
+    "year": 2024,
+    "lang": "en",
+    "type": "other",
+    "venue": "Figshare",
+    "ca_institutions": "University of Victoria",
+    "funders": []
+  },
+  {
+    "id": "W4399504543",
+    "title": "Abstract IA006: Synthetic lethalities for SWI/SNF mutant cancers",
+    "abstract": "Abstract Genes that encode subunits of SWI/SNF (BAF) chromatin remodeling complexes are mutated in over 20% of cancers. These include recurrent mutations of ARID1A (BAF250a) in ovarian, endometrioid, bladder, stomach, colorectal and pancreatic cancers and neuroblastoma; of the SMARCA4 (BRG1) subunit in medulloblastomas and non-small cell lung cancers; of the PBRM1 subunit in renal carcinomas; of the ARID2 subunit in hepatocellular, lung, and pancreas carcinomas as well as melanomas; of the BRD7 subunit in breast cancers. The SWI/SNF complex includes both core and lineage-specific subunits and utilizes the energy of ATP to modulate chromatin structure and regulate transcription. My laboratory began studying the SWI/SNF complex when SMARCB1 (INI1/SNF5/BAF47) became the first SWI/SNF subunit linked to tumor suppression when it was found to be biallelically inactivated in nearly all cases of a highly aggressive type of pediatric cancer called malignant rhabdoid tumor (MRT). Despite the extremely aggressive and lethal nature of MRT we have shown that these cancers are diploid and have remarkably simple genomes. We leverage this model tumor to identify how SWI/SNF complexes function, to determine how mutation of SWI/SNF subunits drive cancer and other diseases, and to identify therapeutic vulnerabilities that result from SWI/SNF mutations. We have leverage the Cancer Dependency Map, and the Pediatric Cancer Dependencies Accelerator, to systematically identify robust and impactful synthethic lethalities resulting from SWI/SNF mutations. These mechanisms and insights will be presented. Citation Format: Charles W.M. Roberts. Synthetic lethalities for SWI/SNF mutant cancers [abstract]. In: Proceedings of the AACR Special Conference in Cancer Research: Expanding and Translating Cancer Synthetic Vulnerabilities; 2024 Jun 10-13; Montreal, Quebec, Canada. Philadelphia (PA): AACR; Mol Cancer Ther 2024;23(6 Suppl):Abstract nr IA006.",
+    "year": 2024,
+    "lang": "en",
+    "type": "article",
+    "venue": "Molecular Cancer Therapeutics",
+    "topic": "Chromatin Remodeling and Cancer",
+    "field": "Biochemistry, Genetics and Molecular Biology",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W3133970769",
+    "title": "Introduction of Mobile Health Tools to Support COVID-19 Training and Surveillance in Ogun State Nigeria",
+    "abstract": "Mobile health (mhealth) tools delivered through wireless technology are emerging as effective strategies for delivering quality training, ensuring rapid clinical decision making, and monitoring implementation of simple and effective interventions in under-resourced settings. We share our early experience of developing and deploying the InStrat COVID-19 health worker training application (App) in Ogun State, Western Nigeria where the country's first COVID-19 case was reported. This App was designed to directly provide frontline health workers with accurate and up-to-date information about COVID-19; enable them to quickly identify, screen and manage COVID-19 suspects; provide guidance on specimen collection techniques and safety measures to observe within wards and quarantine centers dealing with COVID-19. The App was deployed in 271 primary health care facilities in Ogun state and a total of 311 health workers were trained to use it. Of the 123 health workers who completed knowledge pre- and post-tests, their average test score improved from 47.5 (±9.4) to 73.1(±10.0) %, P &amp;lt; 0.0001 after using the tutorial. Rapid adoption and uptake were driven largely by public-private sector involvement as well as certification of health workers with reported satisfaction levels of over 95% among those who completed pre- and post-test surveys. Challenges encountered included a lack of universal availability of android phones for frontline health workers, lack of internet access in remote areas and a need to incentivize the workers. The timely deployment of this App targeting primary health care workers, mostly in hard-to-reach areas, obviated the need for conventional didactic training with potential of savings in training costs and time and could be applied to similar contexts.",
+    "year": 2021,
+    "lang": "en",
+    "type": "article",
+    "venue": "Frontiers in Sustainable Cities",
+    "topic": "COVID-19 Digital Contact Tracing",
+    "field": "Computer Science",
+    "ca_institutions": ["University of Ottawa", "Global Affairs Canada"],
+    "funders": []
+  },
+  {
+    "id": "W4411958489",
+    "title": "Extreme cloud collisions in nearby barred galaxies",
+    "abstract": "ABSTRACT The inner regions of the Milky Way are known to contain an enigmatic population of prominent molecular clouds characterized by extremely broad lines. The physical origin of these ‘extended velocity features’ (EVFs) is still debated, although a connection with the ‘dust lanes’ of the Galactic bar has been hypothesized. In this paper, we search for analogous features in the dust lanes of nearby barred galaxies using the PHANGS–ALMA CO(2-1) survey. We aim to confirm existence of EVFs in other galaxies and to take advantage of the external perspective to gain insight into their origin. We study a sample of 29 barred galaxies and find that 34 per cent contain one or more EVFs, while the remaining lack obvious signs of EVFs. Upon analysing the physical properties of the EVFs, we find they possess large virial parameters, ranging from few hundreds to several thousand, indicating that they are strongly out-of-equilibrium. The most likely explanation for their origin is extreme cloud–cloud collisions with relative velocities in excess of 100 km s−1 in highly non-circular flow driven by the bar. This interpretation is consistent with previous high-resolution observations in Milky Way. Further corroboration of this interpretation comes from the inspection of high-sensitivity infrared observations from the PHANGS–JWST Treasury Survey that reveals streams of gas that appear to be hitting the dust lanes at locations where EVFs are found. We argue that EVFs are the clearest examples of cloud–cloud collisions available in literature and represent a unique opportunity to study cloud collisions and their impact on star formation.",
+    "year": 2025,
+    "lang": "en",
+    "type": "article",
+    "venue": "Monthly Notices of the Royal Astronomical Society",
+    "topic": "Galaxies: Formation, Evolution, Phenomena",
+    "field": "Physics and Astronomy",
+    "ca_institutions": [],
+    "funders": ["H2020 European Research Council", "Agencia Estatal de Investigación", "Ministerium für Wissenschaft, Forschung und Kunst Baden-Württemberg", "Science and Technology Facilities Council", "HORIZON EUROPE Framework Programme", "H2020 Marie Skłodowska-Curie Actions", "Fondazione Cariplo", "Liverpool John Moores University", "Ministerio de Ciencia e Innovación", "Alberta Livestock and Meat Agency", "European Regional Development Fund", "UK Research and Innovation", "Deutsche Forschungsgemeinschaft", "Leverhulme Trust"]
+  },
+  {
+    "id": "W7005958473",
+    "title": "Role of histone methylation in the regulation of tumour suppressor networks",
+    "abstract": "Richard, Stephane (Supervisor)",
+    "year": 2016,
+    "lang": "en",
+    "type": "dissertation",
+    "venue": "eScholarship@McGill (McGill)",
+    "topic": "Lepidoptera: Biology and Taxonomy",
+    "field": "Biochemistry, Genetics and Molecular Biology",
+    "ca_institutions": [],
+    "funders": ["National Cancer Institute", "Canadian Institutes of Health Research", "Terry Fox Foundation"]
+  },
+  {
+    "id": "W4313120262",
+    "title": "Approximate efficiency in set-valued optimization with variable order",
+    "abstract": "We consider constrained set-valued optimization problems with variable order in view of two main purposes: one is to deduce conditions for stability of minima of such problems at the perturbations of the objective map and the set of constraints, and the second is to study some possibilities of recovering optimization problems with fixed order. We apply our results in order to obtain optimality conditions for such problems. The main tools we use are four types of cone enlargements.",
+    "year": 2022,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Nonlinear and Variational Analysis",
+    "topic": "Optimization and Variational Analysis",
+    "field": "Computer Science",
+    "ca_institutions": [],
+    "funders": ["Unitatea Executiva pentru Finantarea Invatamantului Superior, a Cercetarii, Dezvoltarii si Inovarii", "Ministerul Cercetării, Inovării şi Digitalizării"]
+  },
+  {
+    "id": "W2745230818",
+    "title": "Dance keeps us young: Older adults who participate in dance class do not differ from young adults in timing",
+    "abstract": "Aging is associated with vast neuromuscular and sensorimotor changes that may manifest in motor performance deficits (i.e., slowness and an increased variability in movement). The current study used a newly developed Hand Selection Complexity Task (HSCT) to compare timing and accuracy in older adults (OAs: n = 12, Mage = 77.2, 11F) from a retirement home (R-OAs: n = 6, Mage = 79.3, 5F) and dance class (D-OAs: n = 6, Mage = 75.0, 6F) to young adults (YAs: n = 20, Mage = 22.65, 12F) from the university community. HSCT gradients were displayed on a table in front of the participant in ipsilateral and contralateral space. Starting with hands at the midline, participants performed 10 reciprocal tapping movements between two targets as fast and accurately as possible. The gradient in contralateral space was completed first, where participants were free to select whichever hand felt most comfortable. Three conditions enabled manipulation of: (1) target amplitude, (2) target width, and (3) both target amplitude and width simultaneously. Within each condition, six levels of difficulty, determined using Fitts' Law, were randomly presented. Timing and accuracy were recorded. A main effect of age revealed that OAs took significantly longer to complete the task; however no differences in the number of errors emerged. Interestingly, when separated into two groups based on recruitment location, D-OAs did not differ from YAs; however, R-OAs were significantly slower than both YAs and D-OAs. Previous work has demonstrated that physical activity can help prevent cognitive decline. The current study provides preliminary evidence to extend the benefits of physical activity, such as dance, to preserve motor functioning.Acknowledgments: The authors would like to acknowledge the Natural Sciences and Engineering Research Council (PJB) for funding.",
+    "year": 2015,
+    "lang": "en",
+    "type": "article",
+    "topic": "Children's Physical and Motor Development",
+    "field": "Psychology",
+    "ca_institutions": "Wilfrid Laurier University",
+    "funders": []
+  },
+  {
+    "id": "W4308657212",
+    "title": "Pelouse du Tramway : le micro-trèfle fait ses preuves",
+    "abstract": "National audience",
+    "year": 2022,
+    "lang": "fr",
+    "type": "preprint",
+    "venue": "HAL (Le Centre pour la Communication Scientifique Directe)",
+    "topic": "Nail Diseases and Treatments",
+    "field": "Medicine",
+    "ca_institutions": "World Federation of Science Journalists",
+    "funders": []
+  },
+  {
+    "id": "W4388988056",
+    "title": "London (and Canada), 1919-25: Professionalism and its Discontents",
+    "abstract": "",
+    "year": 2003,
+    "lang": "en",
+    "type": "book-chapter",
+    "venue": "University of Calgary Press eBooks",
+    "topic": "Canadian Identity and History",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4398219177",
+    "title": "Differences in IDO1+ dendritic cells and soluble CTLA-4 are associated with differential clinical responses to methotrexate treatment in rheumatoid arthritis",
+    "abstract": "Objective Antigen-presenting dendritic cells (DCs) and monocytes play an essential role in rheumatoid arthritis (RA) pathogenesis, however, their tolerogenic potential remains unclear. Herein, the tolerogenic profiles of DCs are characterized in treatment-naïve RA patients to determine their role to inflammatory arthritis management. Methods Thirty-six treatment-naïve RA patients were enrolled, of which 62% were non-responders to methotrexate (MTX) monotherapy based on disease activity score (DAS) after 6-months of therapy. DC and monocyte subset frequencies, activation (CD40, CD86, CD209 expression), and tolerogenic profile (intracellular indoleamine-2,3-dioxygenase [IDO1] and cytotoxic T lymphocyte antigen 4 [CTLA-4] expression) were examined in the baseline peripheral blood by multicolor flow-cytometry. Soluble CTLA-4 (sCTLA-4) levels in plasma were measured. Results DC subsets were decreased in RA compared to healthy controls (HC), and the frequency of conventional DCs (cDC) inversely correlated with inflammatory markers and improvement in disease activity. CD141 + cDC1s were the major IDO1-expressing cells. IDO1 + cDC1s were reduced in RA patients compared to HC. The baseline frequency of IDO1 + cDC1s inversely correlated with improvement in disease activity. CTLA-4 expression in CD1c + cDC2s and monocytes was lower in RA patients compared to HC. Moreover, MTX-responders had a significantly lower frequency of IDO1 + cDC1 cells and higher level of sCTLA-4 in the plasma compared to MTX non-responders. There was a strong predictive association of low IDO1 + cDC1 cells, low sCTLA-4 and non-response to MTX. Conclusions Our findings reveal altered DC and monocytes immunophenotypes that are associated with RA pathology and treatment response. The frequencies of tolerogenic IDO1 + cDC1s and the low level of sCTLA-4 are strongly associated with MTX non-responsiveness and therapeutic outcome. These results suggest that investigation of the association IDO1 + cDC1 and sCTLA-4 with response to treatment may be more generalizable to other autoimmune diseases.",
+    "year": 2024,
+    "lang": "en",
+    "type": "article",
+    "venue": "Frontiers in Immunology",
+    "topic": "Tryptophan and brain disorders",
+    "field": "Neuroscience",
+    "ca_institutions": ["Queen Elizabeth II Health Sciences Centre", "Izaak Walton Killam Health Centre", "Dalhousie University"],
+    "funders": ["IWK Health Centre", "Canadian Institutes of Health Research", "Dalhousie University", "Nova Scotia Health Research Foundation"]
+  },
+  {
+    "id": "W6942368659",
+    "title": "The Ladysmith Daily Ledger",
+    "abstract": "The Ladysmith Daily Ledger was published in Ladysmith, in the Cowichan Valley region of Vancouver Island, and ran from July 1903 to December 1906. Ladysmith developed as a residential area for the employees of a large coal mine, and, in 1904, it had a population of approximately 4000. The Ledger was published by the Ladysmith Publishing Company, which also issued the paper under two variant titles: the Daily Ledger (April to July, 1905) and the Ladysmith Ledger (September to December, 1906).",
+    "year": 2017,
+    "lang": "en",
+    "type": "article",
+    "venue": "Open Collections",
+    "topic": "Mycorrhizal Fungi and Plant Interactions",
+    "field": "Agricultural and Biological Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W6902145086",
+    "title": "DUPLUM Male genitalia of Trichosteresis glabra, ventral view (NCSU_53513)",
+    "abstract": "Specimen data: NCSU_53513: CANADA: QC: Cloridorme, 49°11.216'N, 64°51.275'W, 26.vii.2008, fallow field, Goulet &amp; Boudreault, sweeping, #19",
+    "year": 2012,
+    "lang": "en",
+    "type": "other",
+    "venue": "Figshare",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4306404439",
+    "title": "Criterion validity of ActiGraph monitoring devices for step counting and distance measurement in adults and older adults: a systematic review",
+    "abstract": "BACKGROUND: Wearable activity monitors such as ActiGraph monitoring devices are widely used, especially in research settings. Various research studies have assessed the criterion validity of ActiGraph devices for step counting and distance estimation in adults and older adults. Although several studies have used the ActiGraph devices as a reference system for activity monitoring, there is no summarized evidence of the psychometric properties. The main objective of this systematic review was to summarize evidence related to the criterion validity of ActiGraph monitoring devices for step counting and distance estimation in adults and/or older adults. METHODS: Literature searches were conducted in six databases (Medline (OVID), Embase, IEEExplore, CINAHL, Engineering Village and Web of Science). Two reviewers independently conducted selection, a quality analysis of articles (using COSMIN and MacDermid's grids) and data extraction. RESULTS: This review included 21 studies involving 637 participants (age 30.3 ± 7.5 years (for adults) and 82.7 ± 3.3 years (for older adults)). Five ActiGraph devices (7164, GT1M, wGTX +, GT3X +/wGT3X + and wGT3X - BT) were used to collect data at the hip, wrist and ankle to assess various walking and running speeds (ranging from 0.2 m/s to 4.44 m/s) over durations of 2 min to 3 days (13 h 30 mins per day) for step counting and distance estimation. The ActiGraph GT3X +/wGT3X + and wGT3X - BT had better criterion validity than the ActiGraph 7164, wGTX + and GT1M according to walking and running speeds for step counting. Validity of ActiGraph wGT3X + was good for distance estimation. CONCLUSION: The ActiGraph wGT3X - BT and GT3X +/wGT3X + have good criterion validity for step counting, under certain conditions related to walking speeds, positioning and data processing.",
+    "year": 2022,
+    "lang": "en",
+    "type": "review",
+    "venue": "Journal of NeuroEngineering and Rehabilitation",
+    "topic": "Context-Aware Activity Recognition Systems",
+    "field": "Computer Science",
+    "ca_institutions": ["Centres Intégré Universitaires de Santé et de Services Sociaux", "Université du Québec à Chicoutimi", "Centre intégré universitaire de santé et de services sociaux de la Capitale-Nationale", "Université Laval", "Centre for Interdisciplinary Research in Rehabilitation"],
+    "funders": "Centre for Interdisciplinary Research in Rehabilitation"
+  },
+  {
+    "id": "W1990938095",
+    "title": "ON FINANCE AS A THEORY OF TFP, CROSS‐INDUSTRY PRODUCTIVITY DIFFERENCES, AND ECONOMIC RENTS*",
+    "abstract": "We develop a theory of capital‐market imperfections to study how the ability to enforce contracts affects resource allocation across entrepreneurs of different productivities, and across industries with different needs for external financing. The theory implies that countries with a poor ability to enforce contracts are characterized by the use of inefficient technologies, low aggregate TFP, large differences in labor productivity across industries, and large employment shares in industries with low productivity. These implications are supported by the empirical evidence. The theory also suggests that entrepreneurs have a vested interest in maintaining a status quo with low enforcement.",
+    "year": 2008,
+    "lang": "en",
+    "type": "article",
+    "venue": "International Economic Review",
+    "topic": "Corporate Finance and Governance",
+    "field": "Business, Management and Accounting",
+    "ca_institutions": "University of Toronto",
+    "funders": []
+  },
+  {
+    "id": "W4291585574",
+    "title": "Mécanismes de défense du rosier miniature contre les acariens et les pucerons : méthodes de lutte biologique",
+    "abstract": "",
+    "year": 2005,
+    "lang": "fr",
+    "type": "preprint",
+    "venue": "HAL (Le Centre pour la Communication Scientifique Directe)",
+    "topic": "Agriculture and Rural Development Research",
+    "field": "Agricultural and Biological Sciences",
+    "ca_institutions": "Ministère des Transports",
+    "funders": []
+  },
+  {
+    "id": "W4398293277",
+    "title": "FCC2003.215.ran",
+    "abstract": ":unav",
+    "year": 2020,
+    "lang": "en",
+    "type": "dataset",
+    "venue": "Harvard Dataverse",
+    "topic": "Cardiovascular Health and Disease Prevention",
+    "field": "Medicine",
+    "ca_institutions": "Natural Resources Canada",
+    "funders": []
+  },
+  {
+    "id": "W2293825699",
+    "title": "The Effectiveness of Dawson-Guare Program on the Executive Functions of Pre-School Students with Neurological Learning Disability",
+    "abstract": "&lt;p&gt;The present study aimed to examine the effectiveness of the Dawson-Guare Program on executive functions in children with Neuropsychological/Developmental Learning Disability (NDLD). The Wechsler Preschool and Primary Scale Intelligence (WPPSI) and Behavior Rating Inventory for Executive Function-Preschool (BREIEF-P) were chosen for the purposes of this study and 40 children of the total number of 700, exhibited executive functions difficulties indicating a probable NDLD. The 40 students diagnosed with NDLD were equally separated into two groups. The intervention group attend a 15-week Dawson-Guare program while students of the control group followed the regular preschool schedule. All participants were tested prior to the start and after the end of the 15-week period. The results indicated that after a 15-week Dawson-Guare program, the intervention group improved all of dimensions of executive functions that examined. In conclusion, Dawson-Guare program training can be an effective intervention for improving executive functions for children with NDLD.&lt;/p&gt;",
+    "year": 2016,
+    "lang": "en",
+    "type": "article",
+    "venue": "Review of European Studies",
+    "topic": "Infant Development and Preterm Care",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W7024188497",
+    "title": "Ripley County Census Tract &amp; Voting District Maps",
+    "abstract": "Ripley County maps from the 2000 census, including block outline maps, tract outline maps, and voting precinct outline maps.",
+    "year": 2010,
+    "lang": "en",
+    "type": "other",
+    "venue": "MOspace Institutional Repository (University of Missouri)",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W3095527410",
+    "title": "Recent Advances in the Synthesis of Acyl Fluorides",
+    "abstract": "Abstract Acyl fluorides are valuable intermediates in organic synthesis. They are increasingly employed in peptide synthesis, in challenging esterification and amidation reactions or in transition-metal-catalyzed transformations. This review summarizes recent advances in their preparation. 1 Introduction 2 Nucleophilic Fluorination 2.1 α-Fluoroamine Reagents 2.2 Sulfur-Based Reagents 2.3 Metal Catalysts 2.4 Phosphorus-Based Reagents 2.5 N,N′-Dicyclohexylcarbodiimide/HF·Pyridine 2.6 Uranium Hexafluoride 2.7 Bromine Trifluoride 3 Radical Fluorination 4 Conclusion",
+    "year": 2020,
+    "lang": "en",
+    "type": "article",
+    "venue": "Synthesis",
+    "topic": "Fluorine in Organic Chemistry",
+    "field": "Pharmacology, Toxicology and Pharmaceutics",
+    "ca_institutions": [],
+    "funders": ["Natural Sciences and Engineering Research Council of Canada", "Université Laval"]
+  },
+  {
+    "id": "W2946857586",
+    "title": "41 Lessons learned during the practice of a no-conflict of-interest panel-of-three adjudication process in the RSV program",
+    "abstract": "RSV prophylaxis with palivizumab is restricted to evidence-based indications in infants at relatively higher hospital admission risk. The RSV Program’s criteria follow CPS and AAP guidelines, but adjudication is needed in conditions of questionable efficacy or in infants who have a moderate risk of contracting RSV. In 2015–16, a blinded simple-majority Panel-of-Three adjudication (PoTA) process was implemented where adjudicators are from different specialities (e.g. neonatology, Peds ID, etc.) and are neither caregivers nor have funding that can be traced to the manufacturer/vendor for conflict of interest (COI) and bias avoidance. To review adjudications across 3 RSV seasons (2015–2018) and determine the benefits and challenges associated with the PoTA structure. All cases of PoTAs were reviewed and categorized based on age of infant, season, and diagnosis. Seasonal admissions with RSV & LRTI were ascertained provincially using 7 RSV-related acute respiratory infection ICD-10 codes, and cross-checked using the Program’s palivizumab database. The reliability of agreement within PoTAs during each season was measured with average pairwise percent agreement (APPA) and Fleiss kappa. In the 2015–16, 2016–17, and 2018-18 seasons, 67/467 applications (14.2%), 64/416 (15.4%), and 64/452 (13.9%) were adjudicated, with overall approval rates of 51%, 42% and 33% respectively. There was a trend towards lower approval rates from 2015–16 (range: 42–60%) to 2017–18 (25–38%), with a median approval turnaround time of 3 days. Infants with “exceptional conditions” (e.g. progressive neuromuscular and central nervous system disorders) comprised the largest category of applicants undergoing PoTA, followed by infants with significant pulmonary disabilities. Infants with immunodeficiencies were consistently approved in >80% of cases. In 2015–16, 2016–17 and 2017–18, the APPA and Fleiss kappa were found to be 78.1% and 0.57, 76.0% and 0.51 (moderate agreements) and 83.3% and 0.63 (moderate-to-substantial agreement). Unanimous decisions were reached in 46%, 47%, and 48% of cases amongst 3 adjudicators, for each season, respectively. Hospitalization rates were 20/82 (5 RSV+) in approved, and 3/113 (2 RSV+) in non-approved cases over 3 seasons. We describe an adjudication process that balances transparency and independence of adjudicators from one another. Timely decisions were reached in most cases, and the rates of hospitalized infants in the non-approved category remained small. The PoTA reached agreement in the adjudication decision in most cases and the low hospitalization rates in non-approved infants suggest that the decision process is both safe and efficient.",
+    "year": 2019,
+    "lang": "en",
+    "type": "article",
+    "venue": "Paediatrics & Child Health",
+    "topic": "Child and Adolescent Health",
+    "field": "Health Professions",
+    "ca_institutions": ["BC Children's Hospital", "Children's & Women's Health Centre of British Columbia", "University of British Columbia"],
+    "funders": []
+  },
+  {
+    "id": "W7115040870",
+    "title": "Chasing Canadian dreams through learning French: A narrative study on new Chinese immigrants’ transnational and learning experiences in Montreal",
+    "abstract": "This research examines the French learning experience of Chinese new immigrants who landed and lived in Quebec within 5 years. Limited research focused on the lived experience of Chinese immigrants and their French learning paths, although they were the second largest group of immigrants in Quebec from 2019 to 2023. Due to the unique history and official language requirement of Quebec, the Ministère de l’Immigration, de la Francisation et de l’Intégration (MIFI) funded new immigrants to learn French to accelerate their integration in Quebec. However, this monolingual teaching courses did not fully prepare them to fulfill their language and employment aspirations. Thus, the research question arises as to (1) how the government-funded francization program shapes and supports new Chinese immigrants’ realization of their Canadian dreams; and (2) how the Chinese new immigrants agentically makes sense of their new life in Quebec and actively pursues their aspirations through attending the MIFI programs? Informed by the theoretical frameworks of transnationalism, assimilationism, and cultural citizenship, the study employs narrative inquiry as its methodology to explore the lived and learning experience of new Chinese immigrants. The author recruited 5 participants to investigate their life history as they traveled between Canada and China, pursued initial Canadian dreams and aspirations, learned in MIFI, and formulated their evolving identities. From the transcription of semi-structured interviews in the summer of 2024, I argue that three aspects should be taken into consideration to help new immigrants reach their aspirations: the one-size-fit-all monolingual teaching method doesn’t consider the diverse background of students, the sexual harassment happened in schools lacks the monitor and reporting systems, the barriers in employment such as professionalism and social network could be addressed in courses and activities.The study helps to bridge the research gap in the Chinese community in Quebec after the Covid-19 pandemic. It furthers the understanding of their French learning paths and lived experience under Bill 96. During the writing process, the study records timely social changes in immigrant policy and the special phenomenon of Chinese peidu mothers’ dilemma (who accompany their children to study abroad while their partners are working back in China), which have influenced participants’ future plans and provided further research directions in this ethnic community",
+    "year": 2025,
+    "lang": "en",
+    "type": "dissertation",
+    "venue": "eScholarship@McGill (McGill)",
+    "topic": "Multilingual Education and Policy",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": "Social Sciences and Humanities Research Council of Canada"
+  },
+  {
+    "id": "W7071407836",
+    "title": "Search for low-scale gravity signatures in multi-jet final states with the ATLAS detector at root s=8 TeV",
+    "abstract": "",
+    "year": 2015,
+    "lang": "en",
+    "type": "article",
+    "venue": "Oxford University Research Archive (ORA) (University of Oxford)",
+    "topic": "QR Code Applications and Technologies",
+    "field": "Computer Science",
+    "ca_institutions": [],
+    "funders": ["Fundação para a Ciência e a Tecnologia", "Institut National de Physique Nucléaire et de Physique des Particules", "Agencia Nacional de Promoción Científica y Tecnológica", "Science and Technology Facilities Council", "Natural Sciences and Engineering Research Council of Canada", "H. Lundbeck A/S", "Centre National pour la Recherche Scientifique et Technique", "Georgian National Science Foundation", "National Research Center \"Kurchatov Institute\"", "Centre National de la Recherche Scientifique", "Max-Planck-Gesellschaft", "Israel Science Foundation", "Israeli Centers for Research Excellence", "Joint Institute for Nuclear Research", "Lundbeckfonden", "Bundesministerium für Wissenschaft, Forschung und Wirtschaft", "Leverhulme Trust", "General Secretariat for Research and Technology", "Ministry of Education, Culture, Sports, Science and Technology", "Nederlandse Organisatie voor Wetenschappelijk Onderzoek", "Austrian Science Fund", "Bundesministerium für Bildung und Forschung", "National Science Council", "Japan Society for the Promotion of Science", "Conselho Nacional de Desenvolvimento Científico e Tecnológico", "U.S. Department of Energy", "National Natural Science Foundation of China", "Fundação de Amparo à Pesquisa do Estado de São Paulo", "Javna Agencija za Raziskovalno Dejavnost RS", "Schweizerischer Nationalfonds zur Förderung der Wissenschaftlichen Forschung", "Ministerstwo Edukacji i Nauki", "CERN", "Departamento Administrativo de Ciencia, Tecnología e Innovación (COLCIENCIAS)", "Deutsche Forschungsgemeinschaft", "European Commission", "Comisión Nacional de Investigación Científica y Tecnológica", "Danmarks Grundforskningsfond", "Alexander von Humboldt-Stiftung", "Services Fédéraux des Affaires Scientifiques, Techniques et Culturelles", "Department of Science and Technology, Ministry of Science and Technology, India", "Türkiye Atom Enerjisi Kurumu", "National Science Foundation"]
+  },
+  {
+    "id": "W6948017142",
+    "title": "RemoteControl7 user's manual: software for implementing remote control systems",
+    "abstract": "This manual describes the software program “RemoteControl7”, which is a major component used to implement remote control systems. RemoteControl7 is a software application program running on a Personal Computer (PC) that implements an ergonomic operator console. It provides both a zigzag and a course keeping autopilot that features optional Kalman filtering. RemoteControl7 accepts operator commands from a joystick (or joysticks), mouse or keyboard, encapsulates each command in a digital packet, and transmits the packet via serial communications port to the model to be articulated. The PC's serial communications port is normally connected to an off-the-shelf radio telemetry device such as a Bluetooth spread spectrum modem. The model, or other device to be controlled, is normally interfaced by embedding a remote command unit onboard the model, that receives and interprets the command signal. The remote command unit is a PIC microprocessor based device that is fabricated at IOT.",
+    "year": 2009,
+    "lang": "en",
+    "type": "other",
+    "venue": "NPARC",
+    "topic": "Coagulation, Bradykinin, Polyphosphates, and Angioedema",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W1907664318",
+    "title": "Policy entrepreneurs and structural influence in integrated community case management policymaking in Burkina Faso",
+    "abstract": "Policy entrepreneurs are individuals who attempt to influence the policy process and its outcomes through their opportunistic or incremental actions. Their success in the policy-making process has been associated with the convergence of four factors: behavioural traits; institutional factors; network position and political capital. Policy entrepreneurs have received little study in low- and middle-income country policy research despite observations of individualized decision-making, informal institutions and the unequal distribution and exercise of power in policymaking. This article aims to identify whether policy entrepreneurs were present in the policy process around integrated community case management (iCCM) in Burkina Faso, whether they were successful in achieving policy change, and whether success or failure can be explained using existing policy entrepreneur frameworks from high-income polities. This mixed methods policy study collected data from in-depth qualitative interviews and social network surveys of actors involved in iCCM policymaking [known locally as C-integrated management of childhood illness (IMCI)]; data were analysed based on the framework categories. Interview data pointed to one key individual who played a significant role in the inclusion of pneumonia treatment into the country's iCCM policy, an issue that had been a point of contention between government policy elites and development partners. Social network data confirmed that this actor was strategically located in the policy network to be able to reach the most other actors and to be able to control the flow of information. Although some development partner actors were as strategically located, none had the same level of authority or trust as was imbued by being a member of the government civil service. The entrepreneur's mid-level rank in the health ministry may have encouraged him/her to invest political capital and take risks that would not have been feasible or attractive to a more senior actor. This study highlights the convergence of factors needed to be an entrepreneur, as well as the role of development partner actors in creating a facilitating environment.",
+    "year": 2015,
+    "lang": "en",
+    "type": "article",
+    "venue": "Health Policy and Planning",
+    "topic": "Social Sciences and Governance",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": "Canadian Institutes of Health Research"
+  },
+  {
+    "id": "W4318245339",
+    "title": "Training curriculum in minimally invasive emergency digestive surgery: 2022 WSES position paper",
+    "abstract": "BACKGROUND: Minimally invasive surgery (MIS), including laparoscopic and robotic approaches, is widely adopted in elective digestive surgery, but selectively used for surgical emergencies. The present position paper summarizes the available evidence concerning the learning curve to achieve proficiency in emergency MIS and provides five expert opinion statements, which may form the basis for developing standardized curricula and training programs in emergency MIS. METHODS: This position paper was conducted according to the World Society of Emergency Surgery methodology. A steering committee and an international expert panel were involved in the critical appraisal of the literature and the development of the consensus statements. RESULTS: Thirteen studies regarding the learning curve in emergency MIS were selected. All but one study considered laparoscopic appendectomy. Only one study reported on emergency robotic surgery. In most of the studies, proficiency was achieved after an average of 30 procedures (range: 20-107) depending on the initial surgeon's experience. High heterogeneity was noted in the way the learning curve was assessed. The experts claim that further studies investigating learning curve processes in emergency MIS are needed. The emergency surgeon curriculum should include a progressive and adequate training based on simulation, supervised clinical practice (proctoring), and surgical fellowships. The results should be evaluated by adopting a credentialing system to ensure quality standards. Surgical proficiency should be maintained with a minimum caseload and constantly evaluated. Moreover, the training process should involve the entire surgical team to facilitate the surgeon's proficiency. CONCLUSIONS: Limited evidence exists concerning the learning process in laparoscopic and robotic emergency surgery. The proposed statements should be seen as a preliminary guide for the surgical community while stressing the need for further research.",
+    "year": 2023,
+    "lang": "en",
+    "type": "review",
+    "venue": "World Journal of Emergency Surgery",
+    "topic": "Surgical Simulation and Training",
+    "field": "Medicine",
+    "ca_institutions": "Foothills Medical Centre",
+    "funders": ["Radboud Universitair Medisch Centrum", "Radboud Universiteit"]
+  },
+  {
+    "id": "W4410082984",
+    "title": "Discussion of “Modeling High Pan Evaporation Losses Using Support Vector Machine, Gaussian Processes, and Regression Tree Models”",
+    "abstract": "Tree Models\" by Abdullah A. Alsumaiei.",
+    "year": 2025,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Hydrologic Engineering",
+    "topic": "Plant Water Relations and Carbon Dynamics",
+    "field": "Environmental Science",
+    "ca_institutions": ["University of Ottawa", "Université Laval"],
+    "funders": []
+  },
+  {
+    "id": "W7047317631",
+    "title": "Exploring Attachment, Trauma, and Cannabis Use in Psychotic Disorders: A Qualitative Study of Patient and Family Perspectives",
+    "abstract": "​Background: Psychotic disorders are debilitating mental illnesses that affect individuals in physical, emotional, psychological, and social ways. Both biological and environmental factors are thought to play a role in illness occurrence and severity. Previous studies suggest that insecure attachment, trauma, and cannabis use are major environmental factors contributing to the severity of psychotic illness. Despite the known vulnerabilities created by these risks, little is known about the understanding that patients and families have with respect to these risks. It remains unclear how the interplay of these risks unfolds, creates pathways of vulnerability, and whether these pathways are recognized and addressed by patients and their families. While many researchers and clinicians are aware of these problems, it seems that not all patients are, indicating a disconnect in knowledge translation between patients and healthcare providers. Research also highlights the critical role that family members play in recovery for those with psychotic disorders, making their perspectives an important tool to consider in clinical treatment. Although resources for patients and family members currently exist, recovery remains challenging, prompting the emergence of specialized clinics focused solely on psychotic disorders, such as the Early Psychosis Intervention Program (EPIP) in Saskatoon, SK. Therefore, the primary aim of this study is to qualitatively examine the understanding that patients and family members have regarding these risks in relation to their illness, and to explore the role of the EPIP clinic in their recovery. ​Method: Patients and family members were recruited from the EPIP clinic at Royal University Hospital or from the Schizophrenia Society of Saskatchewan. Semi-structured qualitative interviews were conducted with patients experiencing first-episode psychosis (17) and their family members (9). Interviews were recorded, transcribed, coded, and analyzed using thematic analysis based on Braun and Clarke’s six-phase framework. An inductive, reflexive, constructivist approach was utilized in the analysis. ​Results: Five major themes were generated 1) Cannabis use: From early appeal to lasting harm; 2) Shifts in relationships mirror shifts in recovery; 3) When it comes to risk factors for psychosis, more is always more; 4) Clear as mud: Patients’ and families’ understanding of things that matter; and 5) The rocky road to recovery: From initial confusion to final healing. ​The final themes reflect mixed levels of understanding regarding the risks from both patients and family members. The study suggests that those who are more aware of the risks and implement changes to address them— such as quitting cannabis, developing stable and trustworthy relationships, and adopting a trauma-informed approach — seem to recover better than those who do not. Overall, the current study reflects that the literature might not always accurately translate into the lives of those affected, highlighting a need for clinical steps to address this gap in knowledge translation. Furthermore, the unanimous success of the EPIP clinic is clearly evident in all the patients and family members interviewed.",
+    "year": 2024,
+    "lang": "en",
+    "type": "article",
+    "venue": "University Library (University of Saskatchewan)",
+    "topic": "Superconducting and THz Device Technology",
+    "field": "Physics and Astronomy",
+    "ca_institutions": [],
+    "funders": "University of Saskatchewan"
+  },
+  {
+    "id": "W2030887995",
+    "title": "Chronique d’une mort…",
+    "abstract": "L’auteure utilise la forme littéraire de la fable pour rendre compte de sa vision de l’impact, sur le travail clinique, des changements survenus dans l’organisation gouvernementale des soins de santé mentale en France.",
+    "year": 2006,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Filigrane Écoutes psychothérapiques",
+    "topic": "Health, Medicine and Society",
+    "field": "Health Professions",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W1824011531",
+    "title": "The Unequal Right to Age Equality: Towards a Dignified Lives Approach to Age Discrimination",
+    "abstract": "This paper critically examines prevailing egalitarian theories (which assess inequality between two individuals on the basis of their lifetime experience). The paper proposes an alternative theoretical framework: the Dignified Lives Approach. This theoretical framework, which rests on deontological foundations, considers all human beings as of equal moral worth, and advocates treating each individual with equal concern and respect at any given time. The paper articulates five essential principles of equality founded in the notion of equal concern and respect: the principle of individual assessment, the principle of equal influence, the principle of sufficiency, the principle of social inclusion, and the principle of autonomy. Focusing on senior workers, the paper reveals that age discrimination may be as unjust as other forms of discrimination. It therefore articulates a strong, moral case for eradicating age discrimination which is well supported by recent judicial developments.",
+    "year": 2013,
+    "lang": "en",
+    "type": "article",
+    "venue": "SSRN Electronic Journal",
+    "topic": "Political Philosophy and Ethics",
+    "field": "Social Sciences",
+    "ca_institutions": "Toronto Metropolitan University",
+    "funders": []
+  },
+  {
+    "id": "W2915086660",
+    "title": "Early Theatre Essay Prizes 2009",
+    "abstract": "",
+    "year": 2009,
+    "lang": "en",
+    "type": "article",
+    "venue": "Early Theatre",
+    "topic": "Theatre and Performance Studies",
+    "field": "Arts and Humanities",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4220852314",
+    "title": "Two‐year follow‐up of infant and maternal outcomes after planned early delivery or expectant management for late preterm pre‐eclampsia ( <scp>PHOENIX<\/scp> ): A randomised controlled trial",
+    "abstract": "OBJECTIVE: We evaluated the best time to initiate delivery in late preterm pre-eclampsia in order to optimise long-term infant and maternal outcomes. DESIGN: Parallel-group, non-masked, randomised controlled trial. SETTING: Forty-six maternity units in the UK. POPULATION: weeks of gestation, without severe disease, were randomised to planned delivery or expectant management. MAIN OUTCOME MEASURES: Infant neurodevelopmental outcome at 2 years of age, using the Parent Report of Children's Abilities - Revised (PARCA-R) composite score. RESULTS: Between 29 September 2014 and 10 December 2018, 901 women were enrolled in the trial, with 450 women allocated to planned delivery and 451 women allocated to expectant management. At the 2-year follow-up, the intention-to-treat analysis population included 276 women (290 infants) allocated to planned delivery and 251 women (256 infants) allocated to expectant management. The mean composite standardised PARCA-R scores were 89.5 (SD 18.2) in the planned delivery group and 91.9 (SD 18.4) in the expectant management group, with an adjusted mean difference of -2.4 points (95% CI -5.4 to 0.5 points). CONCLUSIONS: In infants of women with late preterm pre-eclampsia, the average neurodevelopmental assessment at 2 years lies within the normal range, regardless of whether planned delivery or expectant management was pursued. With the lower than anticipated follow-up rate there was limited power to demonstrate that these scores did not differ, but the small between-group difference in PARCA-R scores is unlikely to be clinically important.",
+    "year": 2022,
+    "lang": "en",
+    "type": "article",
+    "venue": "BJOG An International Journal of Obstetrics & Gynaecology",
+    "topic": "Preterm Birth and Chorioamnionitis",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": ["Oxford University Hospitals NHS Foundation Trust", "Dalhousie University", "University of Oxford", "Health Technology Assessment Programme", "Imperial College London", "University of Bristol", "National Institute for Health and Care Research", "University Hospital Southampton NHS Foundation Trust"]
+  },
+  {
+    "id": "W4407034356",
+    "title": "L' offre territoriale, un levier d’attractivité des investissements : vers une revue systématique de la littérature",
+    "abstract": "L’attractivité d’investissements demeure une préoccupation majeure pour les décideurs et les acteurs économiques, car elle influence les dimensions économiques, sociales et environnementales d’un territoire. L’offre territoriale constitue le pilier fondamental de cette attractivité. Cependant, dans un contexte marqué par l’apparition de nouveaux enjeux territoriaux, l’offre territoriale doit être repensée. La question de savoir comment tous les acteurs territoriaux peuvent collaborer pour coconstruire une offre territoriale diversifiée et intégrée reste un enjeu complexe et peu exploré. Cette recherche vise à combler cette lacune en proposant un recadrage théorique et un modèle conceptuel pour mieux comprendre les mécanismes de cocréation de l’offre territoriale et son impact sur l’attractivité d’investissements. En s’appuyant sur une revue de littérature systématique, cette étude apporte une clarification du concept et fait avancer la discussion autour de cette composante fondamentale du marketing territorial. Elle fournit aussi des orientations sur les principales variables de l’offre territoriale.",
+    "year": 2025,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Revue Organisations & territoires",
+    "topic": "Business Strategy and Innovation",
+    "field": "Business, Management and Accounting",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W7073551110",
+    "title": "Effects of the COVID-19 pandemic on the restaurant industry: Comparisons between immigrants and US-born workers",
+    "abstract": "The COVID-19 pandemic reduced employment in the U.S., across many industries. The restaurant industry was particularly hard hit, losing 2.5 million jobs in 2020 alone. Now in the recovery from the pandemic, the restaurant industry is experiencing an unprecedented shortage of workers, forcing many restaurants to raise their offered wages, reduce their hours of service, or close altogether. How have workers been affected by these demand shocks? Understanding the demand for restaurant workers during the pandemic and the recovery has important policy implications because restaurant workers make up the third largest occupation group and have the lowest wages of any occupation group. Foreign-born workers in particular are overrepresented in restaurants and in the back-of-house jobs that are lower paying and more dangerous. Using results from our nationally-representative survey of restaurant owners and hiring managers and our analysis of Community Population Survey data, we found that foreign-born workers fared worse than native-born workers as the restaurant industry shed jobs during the height of the pandemic. Our findings are consistent with previous studies suggesting that foreign-born workers are more vulnerable to negative business cycles than their native-born counterparts. But during the various stages of the recovery, when the restaurant industry experienced worker shortages, we also found that there was very little shifting toward foreign-born workers. These results are at odds with previous studies suggesting that foreign-born workers would be more attractive in these circumstances because they are more adaptable to changing labor demands (including dangerous working conditions like a pandemic) and do not have access to social safety net benefits like unemployment compensation. Part of the explanation for this surprising result may be found in recent, more restrictive immigration policies that have decreased the pool of available foreign-born workers.",
+    "year": 2023,
+    "lang": "en",
+    "type": "other",
+    "venue": "RePEc: Research Papers in Economics",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W6926460824",
+    "title": "MassIVE MSV000088567 - Proteomic shifts reflecting oxidative stress and reduced capacity for protein synthesis, and alterations to mitochondrial membranes in Neurospora crassa lacking VDAC",
+    "abstract": "",
+    "year": 2021,
+    "lang": "en",
+    "type": "dataset",
+    "venue": "UC San Diego",
+    "topic": "Microbial Natural Products and Biosynthesis",
+    "field": "Medicine",
+    "ca_institutions": "University of Manitoba",
+    "funders": []
+  },
+  {
+    "id": "W3197409673",
+    "title": "Recent advances in sulfur tetrafluoride chemistry: syntheses, structures, and applications",
+    "abstract": "-related compounds including its cationic and anionic derivatives and adducts with Lewis bases are concisely reviewed. Their uses in fundamental and applied inorganic chemistries are also described.",
+    "year": 2021,
+    "lang": "en",
+    "type": "review",
+    "venue": "Dalton Transactions",
+    "topic": "Inorganic Fluorides and Related Compounds",
+    "field": "Chemistry",
+    "ca_institutions": "University of Lethbridge",
+    "funders": ["Japan Society for the Promotion of Science", "Natural Sciences and Engineering Research Council of Canada"]
+  },
+  {
+    "id": "W2763593142",
+    "title": "Hi Reddit, I'm Warren Chan of the University of Toronto. Ask me anything about applying nanotechnology to treating cancer and infectious diseases. AMA!",
+    "abstract": "ACS AMA Hello Reddit! My name is Warren Chan, and I am currently Distinguished Professor of Biomedical Engineering at The University of Toronto. I also serve as Associate Editor of ACS Nano. I am very much looking forward to my first time participating in Reddit. I obtained my B.S. from University of Illinois in 1996 and a PhD from Indiana University in 2001, both in Chemistry. Then I did my post-doctoral work at the University of California-San Diego in Biomedical Engineering and I joined the faculty at the University of Toronto in 2002 at the Institute of Biomaterials and Biomedical Engineering. I am interested in developing nanotechnology for diagnosing and treating cancer and infectious diseases. As a chemist, I learned how to make and design nanomaterials and as I started my independent career, I wanted to focus on applying these materials to the medical field. My interest can span two domains: (a) outside of the body, I am interested in developing handheld nanotechnology devices that can identify biomarkers and link them to diseases. These devices can also measure these biomarkers with a single drop of blood. (b) inside the body, I am interested in figuring out how to deliver nanoparticles to the diseased site. I think the biggest challenge of using nanotechnology is to be able to deliver enough of the medical agent to the site of action. I work with engineers, chemists, biologists, and clinicians to solve these problems. I would like forward to our discussion. Ask me anything about bionanotechnology! I’ll be back at 11am EDT (8am PDT, 3pm UTC) to start answering your questions. It has been awesome chatting with everybody on nanotechnology! I am signing off! Have an awesome day!",
+    "year": 2017,
+    "lang": "en",
+    "type": "dataset",
+    "venue": "The Winnower",
+    "topic": "Biotechnology and Related Fields",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W3024165102",
+    "title": "[Histological evaluations on periapical tissues after irradiation by erbium-doped yttrium aluminum garnet laser in Labradors dogs].",
+    "abstract": "PURPOSE: To investigate the thermal effects on periapical tissues of Labrador dogs after intra-canal irradiation by erbium-doped yttrium aluminum garnet (Er:YAG) laser at different powers based on the antibacterial experiment of Enterococcus faecalis and Escherichia coli in root canals with an isthmus, to assess the histological changes, and to prove the safety for clinical applications. METHODS: Two hundred root canals of 10 healthy adult Labradors dogs were selected and divided into 5 groups. Excepted one as control group, root canals in other 4 groups were irradiated by Er:YAG laser with 1.5, 2.0, 2.5, 3.0 W for 30 s. Ten Labradors dogs were sacrificed at 0 (immediately after irradiation), 2 days, 2 weeks, 1 and 2 months. After preparation of pathological specimen, histological changes after laser irradiation in periapical tissues were evaluated and scores of inflammation were graded. Statistical analysis was performed using SPSS 13.0 software package. RESULTS: No significant difference was observed at the apical area between 1.5, 2.0, 2.5 W and control groups at most periods (P>0.05), whereas significant difference was observed between 3.0 W and other groups for all periods (P<0.05). CONCLUSIONS: These results suggest that if proper output powers (2.0-2.5 W) of laser irradiation are chosen, disinfection in root canals can be finished successfully and thermal effects on the periapical tissues can be minimized.",
+    "year": 2016,
+    "lang": "en",
+    "type": "article",
+    "venue": "PubMed",
+    "topic": "Endodontics and Root Canal Treatments",
+    "field": "Dentistry",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4391837877",
+    "title": "Buruma, Ian. Spinoza: Freedom’s Messiah. New Haven CT: Yale University Press, 2024.",
+    "abstract": "Book Review",
+    "year": 2024,
+    "lang": "en",
+    "type": "article",
+    "venue": "Women in Judaism A Multidisciplinary e-Journal",
+    "topic": "Seventeenth-Century Political and Philosophical Thought",
+    "field": "Arts and Humanities",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2174185509",
+    "title": "Anatomy of the lumbosacral spinal cord in rabbits",
+    "abstract": "This study provides an accurate, anatomical description of the rabbit's lumbosacral spinal cord. Following humane euthanasia, 64 rabbits were radiographed and dissected. The number of thoracic (T) and lumbar (L) vertebrae was 12T/7L in 43.8%, 13T/6L in 32.8%, and 13T/7L in 23.4% in the 64 rabbits studied. The 13th ribs were rudimentary, asymmetric, or both in 15 animals. The spinal cord terminated within the second sacral vertebra (S2) in 79.3%, within the first sacral vertebra (S1) in 19.0%, and within the third sacral vertebra (S3) in 1.7% of the sample. Spinal nerve contributions to the femoral, obturator, sciatic, and pudendal nerves were determined. Formulas to predict the termination of the cord relative to the vertebral column were established. Age, weight, sex, and method of preparation did not show a significant correlation with the length of the spinal cord.",
+    "year": 2001,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of the American Animal Hospital Association",
+    "topic": "Rabbits: Nutrition, Reproduction, Health",
+    "field": "Agricultural and Biological Sciences",
+    "ca_institutions": "University of Guelph",
+    "funders": []
+  },
+  {
+    "id": "W173903016",
+    "title": "La cultura en el marco de la enseñanza del español como lengua segunda, ¿una situación problemática?",
+    "abstract": "Este movimiento de sociedad se refleja evidentemente en las escuelas secundarias de Quebec. En efecto, el Ministerio de Educacion en Quebec, en su Programme de formation de l’ecole quebecoise, ha asumido la mision de propiciar la construction d’une vision du monde para los alumnos. Esta onda favorece primeramente la ensenanza del ingles pero incide tambien en el auge de la ensenanza del espanol.",
+    "year": 2006,
+    "lang": "es",
+    "type": "article",
+    "venue": "Dialnet (Universidad de la Rioja)",
+    "topic": "French Language Learning Methods",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2065058459",
+    "title": "Does SIRT1 determine exercise-induced skeletal muscle mitochondrial biogenesis: differences between in vitro and in vivo experiments?",
+    "abstract": "",
+    "year": 2011,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Applied Physiology",
+    "topic": "Sirtuins and Resveratrol in Medicine",
+    "field": "Medicine",
+    "ca_institutions": ["University of Guelph", "Okanagan University College", "University of British Columbia, Okanagan Campus", "University of British Columbia", "Queen's University"],
+    "funders": []
+  },
+  {
+    "id": "W7020588864",
+    "title": "Les défis à relever pour renforcer les soins primaires: Les articles Besrour : une série sur l’état de la médecine familiale au Canada et au Brésil",
+    "abstract": "",
+    "year": 2018,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Europe PMC (PubMed Central)",
+    "topic": "Primary Care and Health Outcomes",
+    "field": "Health Professions",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4379877471",
+    "title": "In Memoriam",
+    "abstract": "",
+    "year": 2023,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Archéologiques",
+    "ca_institutions": "Université Laval",
+    "funders": []
+  },
+  {
+    "id": "W7131297463",
+    "title": "WPA household census for 1326 MORROW PL, Los Angeles County",
+    "abstract": "The Works Progress Administration Los Angeles Household Census Cards collection dates from 1939. The physical cards which number nearly half a million items are owned by the USC Libraries. More than a quarter of the collection has been digitized.The household survey cards (or \"dwelling schedules\"), one for each street address in greater Los Angeles, document a wide variety of information ranging from the type of dwelling, the value of the property, the monthly rent or mortgage, to whether or not there were flush toilets. While these cards form the bulk of the collection, other digitized documents include \"block face cards\" and \"block lists\" -- documenting the census process.",
+    "year": 2021,
+    "lang": "en",
+    "type": "dataset",
+    "venue": "University of Southern California Digital Library",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4319602691",
+    "title": "Conceptualizing the potential of entrepreneurship to shape urban sustainability transformations",
+    "abstract": "Entrepreneurship has emerged as a key element for experimentation and niche innovation in sustainability transitions. Yet, its contributions beyond this initial stage and the multi-pronged role that entrepreneurs can play in transformation processes remain elusive. In response, we conceptualize and empirically illustrate how entrepreneurs can contribute to innovations within firms and to city-wide processes of change. With insights from small- and medium-sized enterprises in European and North American cities, we develop a framework encompassing eight intervention types through which entrepreneurs shape urban sustainability transformations. We propose avenues for future research to better understand the distributed role of entrepreneurship and how it can contribute to shaping and accelerating change toward sustainability across integrated levels of urban transformations.",
+    "year": 2023,
+    "lang": "en",
+    "type": "article",
+    "venue": "Urban Transformations",
+    "topic": "Environmental Sustainability in Business",
+    "field": "Business, Management and Accounting",
+    "ca_institutions": ["University of Waterloo", "McGill University"],
+    "funders": "Social Sciences and Humanities Research Council of Canada"
+  },
+  {
+    "id": "W6921278481",
+    "title": "Differences in the superspreading potentials of COVID-19 across contact settings",
+    "abstract": "Abstract Background Superspreading events (SSEs) played a critical role in fueling the COVID-19 outbreaks. Although it is well-known that COVID-19 epidemics exhibited substantial superspreading potential, little is known about the risk of observing SSEs in different contact settings. In this study, we aimed to assess the potential of superspreading in different contact settings in Japan. Method Transmission cluster data from Japan was collected between January and July 2020. Infector-infectee transmission pairs were constructed based on the contact tracing history. We fitted the data to negative binomial models to estimate the effective reproduction number (R) and dispersion parameter (k). Other epidemiological issues relating to the superspreading potential were also calculated. Results The overall estimated R and k are 0.561 (95% CrI: 0.496, 0.640) and 0.221 (95% CrI: 0.186, 0.262), respectively. The transmission in community, healthcare facilities and school manifest relatively higher superspreading potentials, compared to other contact settings. We inferred that 13.14% (95% CrI: 11.55%, 14.87%) of the most infectious cases generated 80% of the total transmission events. The probabilities of observing superspreading events for entire population and community, household, health care facilities, school, workplace contact settings are 1.75% (95% CrI: 1.57%, 1.99%), 0.49% (95% CrI: 0.22%, 1.18%), 0.07% (95% CrI: 0.06%, 0.08%), 0.67% (95% CrI: 0.31%, 1.21%), 0.33% (95% CrI: 0.13%, 0.94%), 0.32% (95% CrI: 0.21%, 0.60%), respectively. Conclusion The different potentials of superspreading in contact settings highlighted the need to continuously monitoring the transmissibility accompanied with the dispersion parameter, to timely identify high risk settings favoring the occurrence of SSEs.",
+    "year": 2023,
+    "lang": "en",
+    "type": "other",
+    "venue": "Figshare",
+    "ca_institutions": "University of Toronto",
+    "funders": []
+  }
+]

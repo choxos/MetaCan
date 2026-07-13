@@ -1,0 +1,898 @@
+Reading additional input from stdin...
+OpenAI Codex v0.144.0
+--------
+workdir: /Users/choxos/Documents/GitHub/CaRN-data-challenge
+model: gpt-5.6-luna
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: high
+reasoning summaries: none
+session id: 019f58dc-d0e7-7441-b8aa-c1bfeacde073
+--------
+user
+# MétaCan screening rubric (v1.0)
+
+**Locked before screening. Version-controlled. Any change is a new version with a dated entry in `DEVIATIONS.md`.**
+
+Both machine screeners and both human coders work from this document and nothing else. The rubric is the
+instrument; if two coders disagree, the rubric is what they are adjudicated against.
+
+---
+
+## The unit
+
+One work (journal article, preprint, book chapter, report, dataset, or software), identified by its OpenAlex ID.
+You see: title, abstract, publication year, language, venue, OpenAlex topic and field, Canadian institutional
+affiliations, funders.
+
+## The question
+
+**Is the object of study *research itself*?**
+
+Metaresearch studies how research is done, reported, funded, evaluated, disseminated, or governed. The test is
+what the work is *about*, not what field it appears in and not what vocabulary it uses.
+
+A cardiology trial is not metaresearch. A study of *how cardiology trials report their outcomes* is.
+
+---
+
+## Tier
+
+Assign exactly one.
+
+### T1: Core metaresearch
+The primary object of study is research itself. Typical objects:
+
+- research **methods** and their properties (bias, reporting, statistical practice, study design)
+- **reproducibility**, replication, data and code sharing
+- **research integrity**: misconduct, retraction, questionable research practices, authorship
+- **peer review** and editorial process *as objects of study*
+- **research evaluation**, metrics, rankings, funding allocation
+- **scholarly communication**: publishing models, open access, preprints *as objects of study*
+- **bibliometrics and scientometrics** applied to a research literature
+- the **research workforce**: careers, equity, training, capacity
+- **evidence synthesis methodology** (not an individual systematic review's clinical answer, but work *about* how
+  syntheses are done)
+
+### T2: Adjacent
+Empirically or conceptually grounded work on science as a social system that is not framed as metaresearch but
+studies it:
+
+- **science and technology studies (STS)**: social studies of scientific knowledge, practice, controversy
+- **library and information science**: information behaviour of researchers, repositories, discovery
+- **research infrastructure** studies: platforms, data repositories, identifiers, standards
+- **history and philosophy of science** *when the object is contemporary research practice*
+- **research policy** analysis grounded in evidence
+
+T2 is where the field's diversity lives. Be generous here: a paper does not have to call itself metaresearch to
+be studying research.
+
+### T3: Contextual
+Relevant to the ecosystem, mapped and released, but **never pooled into the analytic corpus**:
+
+- editorials, commentaries, opinion pieces about research practice
+- policy documents and position statements
+- announcements of infrastructure, tools, or initiatives
+- news, obituaries, corrections, letters
+
+### OUT: Not metaresearch
+Everything else. Includes, and this is the most common error:
+
+- **A study that uses a method is not a study of the method.** A meta-analysis answering a clinical question is
+  OUT. A study of how meta-analyses handle heterogeneity is T1.
+- **Mentioning a metaresearch term is not studying it.** A lab paper reporting "assay reproducibility", a methods
+  section saying "peer reviewed", a licence note saying "open access": all OUT.
+- **Domain research that happens to be bibliometric in method** but whose object is the domain, not the research:
+  e.g. a bibliometric map of diabetes treatments, produced to summarise diabetes knowledge. Borderline; see below.
+
+---
+
+## The three errors that matter most
+
+These are where the pilot showed retrieval and screening break down. Read them twice.
+
+1. **Polysemy.** `reproducibility` in a biochemistry paper means the assay gives the same reading twice. In a
+   metaresearch paper it means the reproducibility crisis. Only the second is in scope. The same applies to
+   `validation`, `replication`, `bias`, `peer review`, `open access`. **Judge the sense, not the token.**
+
+2. **Method vs. object.** Using bibliometrics ≠ studying research. Ask: *if this paper is right, what do we now
+   know more about: a scientific question, or the practice of science?* If the former, OUT.
+
+3. **Absence of vocabulary is not absence of content.** An STS paper about laboratory practice, or an LIS paper
+   about how researchers find data, may use none of the field's keywords and still be squarely T2. **Do not
+   require the vocabulary.** This is the error that makes the field look smaller and more anglophone than it is.
+
+---
+
+## Canadian linkage
+
+Record which apply (this is metadata, not an inclusion test; the estimand is defined separately in
+`PROTOCOL.md`):
+
+- `CA_AFF`: at least one author affiliated with a Canadian institution
+- `CA_FUND`: funded by CIHR, NSERC, SSHRC, or CFI
+- `ABOUT_CA`: the Canadian research system is a substantive object of study (not a passing mention, not one
+  country among forty in a global comparison)
+
+## Genre
+
+`empirical` · `conceptual` · `editorial/commentary` · `policy` · `infrastructure/announcement` · `other`
+
+OpenAlex's `type` is unreliable and this field is commentary-heavy, so genre is coded, not inherited.
+
+## Language of the work
+
+As published. Do not infer from the venue.
+
+---
+
+## Confidence
+
+- `high`: the rubric decides this cleanly.
+- `medium`: the rubric decides, but a reasonable coder could differ.
+- `low`: genuinely on the boundary, or the abstract is missing/too thin to judge.
+
+**`low` is a legitimate answer and is not a failure.** Records coded `low` by either screener are routed to
+adjudication. A screener that never says `low` is not being careful; it is being confident.
+
+---
+
+## Worked examples
+
+| Title (abridged) | Tier | Why |
+|---|---|---|
+| "Data sharing practices in 500 randomised trials" | **T1** | The object is reporting practice. |
+| "Reproducibility of a Western blot protocol" | **OUT** | Assay reproducibility. Polysemy trap. |
+| "Trends in citation of retracted papers" | **T1** | Object is the literature's own behaviour. |
+| "Laboratory life in a Canadian genomics centre: an ethnography" | **T2** | STS. No metaresearch vocabulary; still studies research. |
+| "How do researchers discover datasets? A survey" | **T2** | LIS, information behaviour of researchers. |
+| "Effectiveness of statins: a network meta-analysis" | **OUT** | Uses a synthesis method to answer a clinical question. |
+| "How network meta-analyses handle inconsistency: a review of 200 reviews" | **T1** | Object is the method. |
+| "Announcing the Canadian Research Data Repository" | **T3** | Infrastructure announcement. Mapped, not pooled. |
+| "Open access mandates are failing early-career researchers" (editorial) | **T3** | Commentary about research practice. |
+| "Bibliometric analysis of diabetes research 2000–2020" | **T2** | Borderline. Bibliometric method, and the object *is* a research literature, so it studies research output. Code T2, `medium`. |
+| "Le libre accès dans les revues québécoises : état des lieux" | **T1** | Scholarly communication, object is publishing practice. French. |
+
+---
+
+## Instructions to the screener
+
+Read the title and abstract. Apply the rubric. Do not use outside knowledge of the authors or the journal's
+reputation. If the abstract is missing, judge on the title alone and set confidence to `low` unless the title is
+unambiguous.
+
+Return the schema in `protocol/screening-schema.json`. One object per work. No prose, no preamble.
+--------------------------------------------------------------------------------
+You are screening works for MetaCan, a map of Canadian metaresearch.
+
+Apply the rubric above to every record in the JSON array below. Return a JSON
+array with one object per work, conforming to protocol/screening-schema.json:
+
+  {"id": "W...", "tier": "T1|T2|T3|OUT", "genre": "...", "about_ca": true|false,
+   "confidence": "high|medium|low", "reason": "one sentence"}
+
+Rules:
+- Return the JSON array and NOTHING else. No prose, no preamble, no code fences.
+- Every input id must appear exactly once in the output.
+- Do not run commands, read files, or browse. Classify from the RECORDS alone.
+
+RECORDS:
+[
+  {
+    "id": "W2019704406",
+    "title": "Dignité et indignité de l’hébergement institutionnel",
+    "abstract": "Après avoir intégré le droit positif des États, la dignité humaine occupe désormais une place centrale dans les débats éthiques touchant la santé et le corps. Elle se pose avec plus d’intensité encore lorsqu’il est question des personnes âgées en perte d’autonomie vivant en hébergement de longue durée. Bien qu’elle soit présente dans de nombreux textes de lois et codes de déontologie, la notion de dignité ne fait cependant pas consensus. Le sens qui lui est attribué n’est jamais entièrement donné et définitif : il dépend du contexte dans lequel l’enjeu de dignité est posé. À partir de contributions théoriques et empiriques, les auteurs tentent ici de cerner le sens que l’on donne à la dignité dans les milieux d’hébergement pour personnes âgées.",
+    "year": 2008,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Éthique Publique",
+    "topic": "Health, Medicine and Society",
+    "field": "Health Professions",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4399191202",
+    "title": "Résilience, résistance et alliance",
+    "abstract": "En tant que minorités, les communautés francophones canadiennes sont tout particulièrement façonnées par des dynamiques de « résilience », de « résistance » et d’« alliance », auxquelles s’ajoute l’« inclusion ». L’intérêt de penser la francophonie différemment, à partir de ces concepts, est de rendre explicite le fait que la résilience et la continuité peuvent prendre plusieurs formes. La rencontre des milieux universitaire, communautaire et gouvernemental a permis de faire ressortir de multiples stratégies inhérentes à la francophonie et mises en évidence par ces concepts. Les stratégies varient selon les acteurs et selon les milieux : la continuité ne prend pas le même sens dans les milieux de minorité forte comme le Nouveau-Brunswick et l’Ontario que dans ceux de minorité faible, comme la Colombie-Britannique et les Territoires du Nord-Ouest. La position d’observation et le discours apportent aussi un éclairage différent : l’action communautaire oblige à l’engagement, à l’application, alors que l’analyse universitaire tend à l’objectivation, à la théorisation. Cet ensemble de concepts peut, à terme, expliciter les formes et les stratégies d’action collective et contribuer à les diversifier.",
+    "year": 2017,
+    "lang": "fr",
+    "type": "book",
+    "topic": "French Urban and Social Studies",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W222347077",
+    "title": "The Search for High-Resolution NMR Methods for Membrane Peptide Structure",
+    "abstract": "",
+    "year": 2003,
+    "lang": "en",
+    "type": "book-chapter",
+    "topic": "Advanced NMR Techniques and Applications",
+    "field": "Chemistry",
+    "ca_institutions": "University of Guelph",
+    "funders": []
+  },
+  {
+    "id": "W2223022058",
+    "title": "Psychological pathways from social integration to health: An examination of different demographic groups in Canada",
+    "abstract": "",
+    "year": 2016,
+    "lang": "en",
+    "type": "article",
+    "venue": "Social Science & Medicine",
+    "topic": "Migration, Health and Trauma",
+    "field": "Psychology",
+    "ca_institutions": [],
+    "funders": ["Social Sciences and Humanities Research Council of Canada", "McMaster University"]
+  },
+  {
+    "id": "W3116324960",
+    "title": "An optimal Islamic investment decision in two-region economy: The case of Indonesia and Malaysia",
+    "abstract": "In this work, the possibility of cross-border activities between two regions in the framework of the investment contract is viewed as optimal allocation problems. The problems of determining the optimal proportion of funds to be invested in liquidity and technology are analyzed in two different environments. In the first case, we consider a two-region and two-technology economy in which both regions possess the same productive technology or project, but a different stream of return. While in the second case, we examine an economy where two regions (i.e., Indonesia and Malaysia) hold different Islamic productive projects with identical returns. Allocation models are formulated in terms of investors’ expected utility maximization problem under budget constraints with respect to regional and sectoral shocks. It is revealed that optimal parameters for liquidity ratio, technological investment profile, and bank repayment are analytically characterized by the return of a more productive project and the proportion of impatient and patient investors in the region. Even though both cases employ different assumptions, they provide the same expressions of optimal parameters. The model suggests that cross-border Islamic investment activities between two regions might be realized, provided both regions hold productive projects with an identical stream of return. This paper also shows that by increasing the lower return of the project approaching the higher return, a room for inter-region investment can be created. An analytical framework of an investment contract in terms of optimal allocation model is provided.",
+    "year": 2021,
+    "lang": "en",
+    "type": "article",
+    "venue": "Decision Science Letters",
+    "topic": "Islamic Finance and Banking Studies",
+    "field": "Business, Management and Accounting",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2045182024",
+    "title": "Land use impacts on freshwater regulation, erosion regulation, and water purification: a spatial approach for a global scale level",
+    "abstract": "",
+    "year": 2013,
+    "lang": "en",
+    "type": "article",
+    "venue": "The International Journal of Life Cycle Assessment",
+    "topic": "Environmental Impact and Sustainability",
+    "field": "Environmental Science",
+    "ca_institutions": "Polytechnique Montréal",
+    "funders": []
+  },
+  {
+    "id": "W3041822183",
+    "title": "Isabelle Chanteloube, La scène d’énonciation de Jean-Jacques Rousseau. Etude des dispositifs énonciatifs dans les «incipit» des œuvres de Rousseau",
+    "abstract": "Après tant d’ouvrages consacrés aux paradoxes et à l’éloquence de Rousseau, si loin des modes de communication de son époque, en voilà un qui s’appuie sur le concept pragmatique de «scène d’énonciation»; l’Auteur souligne d’abord l’homogénéité de l’œuvre du Genevois sur le plan linguistique, car il a une prédilection pour le discours (en tant qu’opposé au récit selon la distinction d’Emile Benveniste). Evidente apparaît aussi la valeur performative, selon la formule d’Austin: «dire c’est fair...",
+    "year": 2008,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Studi Francesi",
+    "topic": "Linguistics and Discourse Analysis",
+    "field": "Arts and Humanities",
+    "ca_institutions": "Centre Intégré de Santé et de Services Sociaux des Laurentides",
+    "funders": []
+  },
+  {
+    "id": "W2952119492",
+    "title": "A systematic review on incidental findings in cone beam computed tomography (CBCT) scans",
+    "abstract": "OBJECTIVES: Cone beam CT's use (CBCT) in dentistry is increasing. Incidental findings (IFs: discoveries unrelated to the original purpose of the scan), are frequently found as a result of a large field of view. The aim of the systematic review is to analyze present literature on IFs using CBCT. METHODS AND MATERIALS: The authors searched online databases of studies and assessed the prevalence of IFs among patients undergoing head and neck CBCT scans. STROBE criteria was used to evaluate the quality of the studies. RESULTS: The original search retrieved 509 abstracts of which only 10 articles met the inclusion criteria. The sample size varied between 90 and 1000 participants. The frequency of IFs of the selected articles were 24.6-94.3%. The most common non-threatening IFs were found in the airway, such as mucous retention cyst (55.1%) and sinusitis (41.7%). Other non-threatening IFs were soft tissue calcifications such as calcified stylohyloid ligament (26.7%), calcified pineal gland (19.2%), and tonsillolith (14.3%). Threatening IFs were rare findings (1.4%). Three articles reported incidental carotid artery calcifications with a prevalence of 5.7-11.6%. Pathological findings were not common between the articles, but still relevant (2.6%). The studies had a risk of bias varying from moderate to low. CONCLUSIONS: There is a high frequency of IFs, yet not all of them require immediate medical attention. The low prevalence of threatening IFs emphasizes that CBCT should not be considered a substitution for conventional radiographs, but when used, the scans should be evaluated by a maxillofacial radiologist.",
+    "year": 2019,
+    "lang": "en",
+    "type": "review",
+    "venue": "Dentomaxillofacial Radiology",
+    "topic": "Dental Radiography and Imaging",
+    "field": "Dentistry",
+    "ca_institutions": [],
+    "funders": "York University"
+  },
+  {
+    "id": "W2192017507",
+    "title": "“Right to Request Flexible Working” : une mesure de conciliation travail-famille pour les parents et les travailleuses proches-aidantes ?",
+    "abstract": "Les initiatives récentes en matière de conciliation travail-famille pour les proches-aidants montrent un fort intérêt pour une mesure d'origine britannique: le \"Right to request flexible working arrangements\", que l'on pourrait traduire comme suit: \"droit de demander un aménagement flexible du temps de travail\". On a vu ce droit apparaître en avril 2003 à travers l’Employment Act 2002 qui a donné aux parents, notamment aux parents d’enfants handicapés, et en fait surtout des femmes, la possibilité d’engager des procédures pour obtenir un aménagement flexible du temps de travail. À partir de 2007, ce droit a été étendu aux travailleurs ayant à s’occuper d’un adulte dépendant, toujours plus souvent des femmes que des hommes. On constate que ce modèle tend à s'exporter, de plus en plus d'États songent à se l'approprier et on le voit déjà figurer dans certaines législations, notamment australiennes et néo-zélandaises. On peut citer comme témoin du succès de ce \"Right to request\" les récentes mesures adoptées par la ville de San Francisco, qui déclare explicitement s'inspirer de ces pays pionniers pour la création d'une nouvelle loi garantissant aux employés proches-aidants des horaires de travail flexibles et prévisibles. Dans ce contexte, la question sous-jacente de notre communication consiste à se demander si l'instauration d'un \"Right to request\" serait pertinente pour les travailleuses proches aidantes au Québec et, le cas échéant, sous quelle forme celui-ci devrait être élaboré.",
+    "year": 2015,
+    "lang": "fr",
+    "type": "article",
+    "venue": "R-libre (Université Téluq)",
+    "topic": "Social Policies and Family",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W3217712568",
+    "title": "307.2: Bioprinted Immune-protective Islet-containing Tissues Successfully Regulate Blood Glucose in Rodent Models of Type 1 Diabetes",
+    "abstract": "Introduction: Type 1 diabetes (T1D) is a disease characterized by elevated blood glucose due to insufficient insulin release from pancreatic β-cells. Transplantation of cadaveric islets demonstrates that cell therapy can fully reverse hyperglycemia. However, limited cell supply, immune rejection of implanted allogeneic cells, and cell survival represent major challenges. Cell encapsulation has great potential to overcome these challenges by blocking immune cell access to the grafts while allowing nutrient exchange and secreted products from the implanted cells to be delivered to the body. In this study, we use a unique microfluidic bioprinting technology to precisely control the placement of cells and biomaterials within 3D tissues with micro-architectures optimized for cellular fitness and immune protection. Methods: Living tissues consisting of fibres with a cell-containing core and immune-protective alginate-based shell were generated using Aspect Biosystems’ RX1 bioprinter technology. Core-shell fibres with reaggregated primary human pancreatic islets or embryonic stem cell-derived β-cells were tested in vitro using viability and functional (glucose-stimulated insulin secretion, GSIS) assays. Bioprinted tissues were then implanted into the IP space or omentum of streptozotocin (STZ)-induced diabetic mice and rats, respectively. Glucose homeostasis, body weight, and human C-peptide secretion were monitored for up to 3 months following implantion. Retrieved grafts were fixed and analyzed by histology (H&E, Masson’s trichrome stain) and immunohistochemistry (α-SMA, CD45) to quantify fibrotic encapsulation and immune cell infiltration. Results: Bioprinted tissues supported viability and dynamic insulin secretion of cells in vitro up to 28 days. When transplanted into immunodeficient and immunocompetent diabetic rodents, bioprinted tissues containing reaggregated human islets successfully regulated blood glucose for up to 3 months (Figure 1), although normoglycemia was only sustained in a subset of immunocompetent animals and associated with variable fibrosis. Post-retrieval viability stain, assessment of GSIS, and histology revealed high viability and functionality of implanted cells, and the absence of leukocyte infiltration through the shell. Discussion: This is the first study showing a fully 3D bioprinted tissue composed of a core/shell fibre can successfully deliver a therapeutic dose of xenogeneic cells into a diabetic animal (Figure 2). The unique features of the microfluidic technology were leveraged to bioprint an implantable and retrievable tissue patch that merges the benefits of a single fibre (cell fitness, access to nutrients, immune-protection, perm-selectivity) with those provided by a 3D structure (retrievability, ease of implant, structural integrity). The promising results obtained in rodent studies warrant further investigation to minimize fibrosis and explore the scaling-up of bioprinted tissues in large animal models of T1D.NRC-IRAP. NSERC. Stem Cell Network. Genome BC.",
+    "year": 2021,
+    "lang": "en",
+    "type": "article",
+    "venue": "Transplantation",
+    "topic": "Pancreatic function and diabetes",
+    "field": "Medicine",
+    "ca_institutions": "University of British Columbia",
+    "funders": []
+  },
+  {
+    "id": "W6958327224",
+    "title": "Supplementary Material for: Psoriasis and Dry Eye Disease: A Systematic Review and Meta-Analysis",
+    "abstract": "<b><i>Background:<\/i><\/b> Psoriasis is a chronic inflammatory skin disease with potential systemic involvement. Some evidence suggests an increased risk of dry eye in patients with psoriasis. However, the relationship between these two conditions remains unclear. The aim of our study is to investigate the association between psoriasis and dry eye disease. <b><i>Methods:<\/i><\/b> This meta-analysis was registered in PROSPERO (CRD42020199445) and adhered to MOOSE checklist and PRISMA guidance for all processes. PubMed, Embase, Web of Science, and Cochrane databases were searched for studies examining the association between psoriasis and dry eye disease from inception to December 13, 2020. The primary outcome was the prevalence of dry eye disease in patients with psoriasis relative to controls. The secondary outcomes were the Schirmer I test score, tear film breakup time (TBUT), and ocular surface disease index (OSDI). The risk of bias of the selected studies was assessed using the Newcastle-Ottawa Scale. <b><i>Results:<\/i><\/b> The meta-analysis showed a significant association between dry eye disease and psoriasis (OR, 8.49; 95% CI, 3.34–21.58). Moreover, patients with psoriasis had a significantly lower Schirmer I test score (MD, −2.80; 95% CI, −4.07 to −1.52), shorter TBUT (MD, −4.12; 95% CI, −5.22 to −3.02), and higher OSDI (MD, 20.15; 95% CI, 6.24–34.05; <i>p<\/i> &lt; 0.01), compared to controls. <b><i>Conclusions:<\/i><\/b> The current evidence supports an association between dry eye disease and psoriasis. These results suggest ophthalmologic assessment for the early recognition and management of dry eye in patients with psoriasis.",
+    "year": 2022,
+    "lang": "en",
+    "type": "dataset",
+    "venue": "Figshare",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4412438154",
+    "title": "Blue light and time of day of exercise impacts inflammatory markers in yearling Quarter Horses",
+    "abstract": "",
+    "year": 2025,
+    "lang": "en",
+    "type": "article",
+    "venue": "Animal - science proceedings",
+    "topic": "Circadian rhythm and melatonin",
+    "field": "Neuroscience",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W848746237",
+    "title": "Femmes, joual et figure du traducteur: version polonaise d’Albertine, en cinq temps de Michel Tremblay",
+    "abstract": "Women, joual and the figure of a translator: a Polish versi on of Albertine, in Five Times by Michel TremblayThe aim of the present article is to present the problem of translating into Polish the joual,which is one of the important elements of the oeuvre of the Quebecois playwright Michel Tremblay. Using the play Albertine, in five times and its Polish translation by Jacek Mulczyk-Skarzynski, the present authors demonstrate both the specific nature of the original text and the characteristic features of the joual as well as the strategies applied by the translator. Albertine, in five times is a unique combination of the world of female characters and joual, inextricably connected with them, which means that such an important element of the text should be rendered in a translation with particular care. In the analysed corpus, the translator acquits himself well on the whole, although the technique he chose compensation, mainly on the lexical level brutalises the target language text. Of significance is the translator’s young age, which is also revealed in the lexical items he chose. Thus the translation itself shows the translator’s influence on the final text.",
+    "year": 2012,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Romanica Wratislaviensia",
+    "topic": "Translation Studies and Practices",
+    "field": "Arts and Humanities",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W7164929460",
+    "title": "Democracy in Occupied Japan: The U.s. Occupation and Japanese Politics and Society",
+    "abstract": "",
+    "year": 2007,
+    "lang": "en",
+    "type": "article",
+    "venue": "Pacific Affairs",
+    "topic": "Japanese History and Culture",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W3176012781",
+    "title": "Thermodynamic quantities in the high-temperature limit in the GUP framework",
+    "abstract": "We study the values of thermodynamic quantities of physical systems at high temperatures in the framework of the generalized uncertainty principle (GUP). First, we obtain the semi-classical partition function, internal energy, and heat capacity for physical systems in a general case of deformed algebra. We show that at the high-temperature limit the heat capacity vanishes and the internal energy is maximized. We calculate this temperature for the ultra-relativistic system in approximate form. Finally, the maximum temperature and maximum energy for the ultra-relativistic system are obtained in the framework of two different GUPs.",
+    "year": 2021,
+    "lang": "en",
+    "type": "article",
+    "venue": "Canadian Journal of Physics",
+    "topic": "Noncommutative and Quantum Gravity Theories",
+    "field": "Physics and Astronomy",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W6942520216",
+    "title": "Alberni Advocate",
+    "abstract": "Published at Alberni, British Columbia in the interests of Vancouver Island in general and the Alberni District in particular.",
+    "year": 2011,
+    "lang": "en",
+    "type": "article",
+    "venue": "Open Collections",
+    "topic": "Mycorrhizal Fungi and Plant Interactions",
+    "field": "Agricultural and Biological Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W7037153015",
+    "title": "Doon Heritage Village CPR Engine # 894, Kitchener Canada",
+    "abstract": "A walk around the 1911 CPR D10g class 4-6-0 steam locomotive, built by the Canadian Pacific Railway in Montreal, and on outdoor display at the Ken Seiling Waterloo Region Museum’s Doon Heritage Village . A 10 wheel, 4-6-0 configuration design, #894 was gifted to Kitchener in 1964. These open-cab, hand-fired coal burners had six 1.6 metre (63 inch) drive wheels. Each cost about $16,200 in 1910. The tender carried 11 tonnes of coal, 22,730 litres of water, and weighed 159 tonnes with the engine. Five hundred two of the reliable D10 series were constructed for CPR’s network from 1905 to 1913, making it CPR’s most widespread locomotive.",
+    "year": 2019,
+    "lang": "en",
+    "type": "other",
+    "venue": "Bulletin of Miscellaneous Information (Royal Gardens Kew)",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2793812700",
+    "title": "Self-Management Support and eHealth When Managing Changes in Behavior and Mood of a Relative With Dementia: An Asynchronous Online Focus Group Study of Family Caregivers' Needs",
+    "abstract": "The current article discusses how and by whom family caregivers want to be supported in self-management when managing changes in behavior and mood of relatives with dementia and whether family caregivers consider eHealth a useful tool for self-management support. Four asynchronous online focus groups were held with 32 family caregivers of individuals with dementia. Transcripts of the online focus groups were analyzed using qualitative thematic analysis. Family caregivers need support from professionals or peers in the form of (a) information about dementia and its symptoms, (b) tips and advice on managing changes in behavior and mood, (c) opportunities to discuss experiences and feelings, and (d) appreciation and acknowledgement of caregiving. The opinions of family caregivers about self-management support through eHealth were also reported. Findings suggest a personal approach is essential to self-management support for family caregivers managing changes in behavior and mood of relatives with dementia. In addition, self-management support can be provided to some extent through eHealth, but this medium cannot replace personal contacts entirely. [Res Gerontol Nurs. 2018; 11(3):151-159.].",
+    "year": 2018,
+    "lang": "en",
+    "type": "article",
+    "venue": "Research in Gerontological Nursing",
+    "topic": "Chronic Disease Management Strategies",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": ["ZonMw", "Alzheimer Society"]
+  },
+  {
+    "id": "W97667711",
+    "title": "Growth of Saccharomyces cerevisiae in a chemostat under high glucose conditions",
+    "abstract": "",
+    "year": 2003,
+    "lang": "en",
+    "type": "article",
+    "venue": "Biotechnology Letters",
+    "topic": "Microbial Metabolic Engineering and Bioproduction",
+    "field": "Biochemistry, Genetics and Molecular Biology",
+    "ca_institutions": "University of Saskatchewan",
+    "funders": "University of Saskatchewan"
+  },
+  {
+    "id": "W4214583997",
+    "title": "Cas de syphilis à Ottawa : une épidémie en évolution",
+    "abstract": "Contexte : L’incidence de la syphilis infectieuse au Canada a diminué au cours des dernières décennies. Cependant, on observe une augmentation du nombre de nouveaux cas depuis 2001 à Ottawa. L’épidémie locale touche principalement des hommes gais, bisexuels et autres hommes ayant des relations sexuelles avec des hommes (gbHARSAH), mais ces dernières années, elle s’est étendue à des populations hétérosexuelles. La propagation a coïncidé avec une augmentation du nombre de femmes enceintes ayant obtenu un résultat positif au test de dépistage de la syphilis lors du dépistage prénatal. Cette étude vise à comprendre l’évolution de l’épidémiologie des cas de syphilis infectieuse diagnostiqués à Ottawa afin de renforcer la gestion des soins primaires et l’intervention en santé publique. Méthodes : Des données de surveillance du ministère de la Santé de l’Ontario ont été utilisées pour décrire l’évolution de l’épidémiologie de la syphilis infectieuse dans la région d’Ottawa de 2010 à 2019, notamment un examen complet des dossiers des cas de 2015 à 2019. Résultats : Le nombre de cas de syphilis infectieuse à Ottawa est passé de 50 cas en 2010 à 171 cas en 2019. Ces taux étaient toujours élevés chez les hommes et sont passés de 10,9/100 000 habitants en 2010 à 30,9/100 000 habitants en 2019. En comparaison, les taux chez les femmes sont passés de 0,4/100 000 habitantes en 2010 à 3,2/100 000 habitantes en 2019, avec des augmentations correspondantes pendant le dépistage prénatal (aucun cas de syphilis congénitale à ce jour). Conclusion : La surveillance continue joue un rôle crucial alors que l’épidémie de syphilis continue d’évoluer à Ottawa. Les ressources en santé publique doivent répondre aux besoins des populations déjà touchées, en plus d’être suffisamment souples pour réagir aux changements de tendances et appuyer les cliniciens qui fournissent des soins aux populations touchées par l’épidémie.",
+    "year": 2022,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Relevé des maladies transmissibles au Canada",
+    "topic": "Syphilis Diagnosis and Treatment",
+    "field": "Medicine",
+    "ca_institutions": ["Ottawa Hospital", "University of Ottawa"],
+    "funders": []
+  },
+  {
+    "id": "W4404524026",
+    "title": "A Portable Photocollector for the Field Collection of Insects in Biodiversity Assessment",
+    "abstract": "Arthropod biodiversity research usually requires large sample collections. The efficient handling of these samples has always been a critical bottleneck. Sweep netting along transects is an effective and commonly used approach to sample diverse insects. However, sweep netting requires the time-consuming task of sorting insects from the large amounts of debris and foliage that end up in the sweep net along with the insects. To address this, we introduce a robust, portable, and inexpensive photocollector device with an LED light source to extract insects from sweep net samples in a standardized way. Timed field trials tested the photocollector's efficiency in extracting live insect samples from debris, focusing on Hymenoptera and Diptera. We found that 73% (±13%) of undamaged specimens moved toward the collection bottle within the first hour and 79% (±13%) after four hours. Of the insects failing to move after four hours, most (81%) were damaged and likely unable to move. Accounting only for undamaged specimens, 83% (±11%) moved after 1 h and 90% (±11%) moved after 4 h. We found significant differences in when families of Hymenoptera and Diptera moved. We suggest that the photocollector can be a useful tool in standardized biodiversity assessments.",
+    "year": 2024,
+    "lang": "en",
+    "type": "article",
+    "venue": "Insects",
+    "topic": "Species Distribution and Climate Change",
+    "field": "Environmental Science",
+    "ca_institutions": ["Carleton University", "University of Saskatchewan", "University of Guelph", "Canadian Wildlife Federation", "Agriculture and Agri-Food Canada"],
+    "funders": []
+  },
+  {
+    "id": "W3146465799",
+    "title": "Automated reconstruction of parent austenite phase based on the optimum orientation relationship",
+    "abstract": "Characterization of the austenite phase at high temperatures is important for understanding the microstructural evolution during steel processing. The austenite phase structure can be reconstructed from the room-temperature microstructure employing the crystallographic orientation relationship between the parent and product phases. The actual orientation relationships in steels are often calculated on the basis of well known relations ( e.g. Kurdjumov–Sachs), which may differ from the experimentally observed orientation relationships. This work introduces a new approach to improve the current state of the art in prior phase reconstruction. The proposed approach consists of two new algorithms that are sequentially applied on an electron backscatter diffraction (EBSD) measured data set of the product phase microstructure: (i) an automated identification of the optimum orientation relationship using the observed misorientation distribution of the entire EBSD scan and (ii) reconstruction of the parent phase microstructure using a random walk clustering technique. The latter identifies groups of closely related grains according to their angular deviation from the proposed orientation relationship. The results were validated by near in situ experimental observations of phase transformation in an Fe–Ni alloy whereby the experimentally measured parent phase structure could be compared point by point with the reconstructed counterpart.",
+    "year": 2021,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Applied Crystallography",
+    "topic": "Microstructure and Mechanical Properties of Steels",
+    "field": "Engineering",
+    "ca_institutions": ["Natural Resources Canada", "University of New Brunswick"],
+    "funders": []
+  },
+  {
+    "id": "W1512761216",
+    "title": "Interindividual variability and its implications for locomotor adaptation following peripheral nerve and/or spinal cord injury",
+    "abstract": "",
+    "year": 2011,
+    "lang": "en",
+    "type": "review",
+    "venue": "Progress in brain research",
+    "topic": "Spinal Cord Injury Research",
+    "field": "Medicine",
+    "ca_institutions": "Université de Sherbrooke",
+    "funders": "Canadian Institutes of Health Research"
+  },
+  {
+    "id": "W2102573339",
+    "title": "First- and second-order information in natural images: a filter-based approach to image statistics",
+    "abstract": "Previous analyses of natural image statistics have dealt mainly with their Fourier power spectra. Here we explore image statistics by examining responses to biologically motivated filters that are spatially localized and respond to first-order (luminance-defined) and second-order (contrast- or texture-defined) characteristics. We compare the distribution of natural image responses across filter parameters for first- and second-order information. We find that second-order information in natural scenes shows the same self-similarity previously described for first-order information but has substantially less orientational anisotropy. The magnitudes of the two kinds of information, as well as their mutual unsigned correlation, are much stronger for particular combinations of filter parameters in natural images but not in unstructured fractal images having the same power spectra.",
+    "year": 2004,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of the Optical Society of America A",
+    "topic": "Visual perception and processing mechanisms",
+    "field": "Neuroscience",
+    "ca_institutions": "McGill University",
+    "funders": ["Canadian Institutes of Health Research", "Royal Society"]
+  },
+  {
+    "id": "W1977245803",
+    "title": "Morphology and ultrastructure of a protistan pathogen in the haemolymph of shrimp (<i>Pandalus<\/i>spp.) in the northeastern Pacific Ocean",
+    "abstract": "A eukaryotic parasite of uncertain taxonomic affiliation, with superficial similarity to parasitic dinoflagellates (large plasmodia and numerous trophonts) but a different mechanism of nuclear division and a lack of organelles characteristic of parasitic dinoflagellates, is described from spot prawns (Pandalus platyceros). Up to 20% of the spot prawns examined from Malaspina Strait, British Columbia, were infected. Infections in the majority of the prawns were cryptic (asymptomatic) but of sufficient duration to affect secondary sexual characteristics and castrate the host. Cryptic infections consisted of plasmodia containing numerous nuclei. The plasmodia were observed in the haemal sinuses of all tissues. In mature plasmodia the nuclei stopped dividing and showed a peripheral chromatin ring, an internal chromatin web, and up to three tiny nucleoli. Mature plasmodia divided into numerous uninucleate trophonts, resulting in symptoms of lethargy, orange discoloration, and milky haemolymph caused by a plethora of either spherical or discoid trophonts. Symptomatic infections of the prawns fished with traps rarely exceeded 2%. In 3 of the 156 symptomatic prawns examined, about 30% of the trophonts were in the process of binary fission. During mitosis the nuclear membrane was persistent, but openings (about 0.8 µm in width) at either pole accommodated emergent spindle-pole bodies to which the few chromosomes were attached by microtubules. Attempts to transmit the infection between prawns in the laboratory were unsuccessful.",
+    "year": 2002,
+    "lang": "en",
+    "type": "article",
+    "venue": "Canadian Journal of Zoology",
+    "topic": "Parasite Biology and Host Interactions",
+    "field": "Environmental Science",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W7018762969",
+    "title": "Emma and Carl Johnson, Chennai, India 1968",
+    "abstract": "\"Emma and Carl E. Johnson in front of Bungalow at Mt. Zion\" Emma and Carl Johnson stand in front of a bungalow at the Mount Zion Bible School in Chennai, India. The Johnsons went to India in 1966, after retirement from farming, to be Canadian missionaries from Churches of Christ.",
+    "year": 2015,
+    "lang": "en",
+    "type": "other",
+    "venue": "Digital Commons - ACU (Abilene Christian University)",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W7005290357",
+    "title": "Port[VIDEA]Film \"Kövér ember (2020)\" Teljes Magyar Online~Ingyenes Letöltés jux",
+    "abstract": "Kövér ember Teljes Filmek Online Magyarul Kövér ember Online magyar HD. Filmek Kövér ember online Magyar indavideo Kövér ember Online teljes film magyarul. # # =========================== # Mozi Kövér ember [2020]: Teljes_Filmek ⇨ A StreamiNG filmek nézésének egyik módja !!! ⇨ filmeket nézhet meg egyetlen kattintással; NÉZD MOZI ONLINE =&amp;gt;&amp;gt; http://nufilm.live/movie/602211/mozi-kover-ember-teljes-filmek-magyarul-osf.html ⇨ Élvezze a nézést! Film online kész! # # =========================== # AMERIKAI EGYESÜLT ÁLLAMOK, EGYESÜLT KIRÁLYSÁG Premier (HU) : 2020-11-13 | Fórum Hungary Action, Komödie, Fantasy RENDEZŐ : Rough House Pictures, Fortitude International, Zed Filmworks, Sprockefeller Pictures, Mammoth Entertainment, Ingenious Media, RBL Studios, Windy Hill Pictures ÍRÓ : Canada, United Kingdom, United States of America ZENE : SZEREPLŐK : A Mikulásnak szembe kell néznie egy bérgyilkossal, akiket egy csalódott gyermek küldött a nyakára. TAGS. Kövér ember ingyen letöltés, Kövér ember netmozi, Kövér ember, Kövér ember magyar premier, Kövér ember film online, Kövér ember teljes film, Kövér ember teljes film videa, Kövér ember indavideo, Kövér ember magyarul online, Kövér ember teljes film magyarul indavideo, Kövér ember online videa, Kövér ember online filmnézés, Kövér ember online teljes film, Kövér ember elozetes | Kövér ember port | Kövér ember online magyarul | Kövér ember teljes film | Kövér ember mozicsillag | Kövér ember megjelenés | Kövér ember bemutató | Kövér ember film online | Kövér ember indavideo | Kövér ember magyar elozetes | Kövér ember online film | Kövér ember online filmek | Kövér ember online magyar | Kövér ember szereplok | Kövér ember online film online filmnézés | Kövér ember teljes film online | Kövér ember teljes film magyarul | Kövér ember youtube | Kövér ember teljes film online magyar szinkronnal Watch Free Movies and TV Shows Online You’re in the right place if you’re into love with watching movies. Movies and TV serials are a fun area where people love to spend their leisure time. Making a visit to the cinema or movie theatre sometimes seems like a waste f time and money. In such a scenario, streaming movies online is left as an option as it helps you not only save time and money but also make things convenient. Imagine life when you get to watch movies at your fingertips and for free. Watch a movie, drama or a serial. All of it at your comfort. Along with that, complete information about TV shows is present on the site. That information is based on IMDB rating, director, release date, duration, synopsis of the episode, and cast. In short, it is regarded as one of the best websites to watch TV shows as well as movies from different origins. Film is a work of art in the form of a series of live images that are rotated to produce an illusion of moving images that are presented as a form of entertainment. The illusion of a series of images produces continuous motion in the form of video. The film is often referred to as a movie or moving picture. Film is a modern and popular art form created for business and entertainment purposes. Film making has now become a popular industry throughout the world, where feature films are always awaited by cinemas. Films are made in two main ways. The first is through shooting and recording techniques through film cameras. This method is done by photographing images or objects. The second uses traditional animation techniques. This method is done through computer graphic animation or CGI techniques. Both can also be combined with other techniques and visual effects. Filming usually takes a relatively long time. It also requires a job desk each, starting from the director, producer, editor, wardrobe, visual effects and others. Definition and Definition of Film / Movie While the players who play a role in the film are referred to as actors (men) or actresses (women). There is also the term extras that are used as supporting characters with few roles in the film. This is different from the main actors who have bigger and more roles. Being an actor and an actress must be demanded to have good acting talent, which is in accordance with the theme of the film he is starring in. In certain scenes, the actor’s role can be replaced by a stuntman or a stuntman. The existence of a stuntman is important to replace the actors doing scenes that are difficult and extreme, which are usually found in action action films. Films can also be used to convey certain messages from the filmmaker. Some industries also use film to convey and represent their symbols and culture. Filmmaking is also a form of expression, thoughts, ideas, concepts, feelings and moods of a human being visualized in film. The film itself is mostly a fiction, although some are based on fact true stories or based on a true story. There are also documentaries with original and real pictures, or biographical films that tell the story of a character. There are many other popular genre films, ranging from action films, horror films, comedy films, romantic films, fantasy films, thriller films, drama films, science fiction films, crime films, documentaries and others. That’s a little information about the definition of film or movie. The information was quoted from various sources and references. Hope it can be useful. ❍❍❍ TV Streaming ❍❍❍ first television shows were experimental, sporadic broadcasts viewable only within a very short range from broadcast tower starting in 1930s. Televised events such as 1936 Summer Olympics in Germany, 19340 coronation of King George VI in UK, David Sarnoff’s famous introduction at 1939 New York World’s Fair in US spurred a growth in medium, but World War II put a halt to development until after war. 19440 World Streaming inspired many Americans to buy their first television set then in 1948, popular radio show Texaco Star Theater made move became first weekly televised variety show, earning host Milton Berle name “Mr Television” demonstrating that medium was a stable, modern form of entertainment which could attract advertisers. first national live television broadcast in US took place on September 4, 1951 when President Harry Truman’s speech at Japanese Peace Treaty Conference in San Francisco was transmitted over AT&amp;amp;T’s transcontinental cable microwave radio relay system to broadcast stations in local markets. first national color broadcast ( 1954 Tournament of Roses Parade) in US occurred on January 1, 1954. During following ten years most network broadcasts, nearly all local programming, continued to be in black — white. A color transition was announced for fall of 1965, during which over half of all network prime-time programming would be broadcast in color. first all-color prime-time season came just one year later. In 19402, last holdout among daytime network shows converted to color, resulting in first completely all-color network season. ❍❍❍ Formats Genres ❍❍❍ See also: List of genres § Streaming television formats genres Television shows are more varied than most other forms of media due to wide variety of formats genres that can be presented. A show may be fictional (as in comedies dramas), or non-fictional (as in documentary, news, reality television). It may be topical (as in case of a local newscast some made-for-television Streamings), or historical (as in case of many documentaries fictional Streaming). They could be primarily instructional or educational, or entertaining as is case in situation comedy game shows.[citation needed] A drama program usually features a set of actors playing characters in a historical or contemporary setting. program follows their lives adventures. Before 1980s, shows (except for soap opera-type serials) typically remained static without story arcs, main characters premise changed little.[citation needed] If some change happened to characters’ lives during episode, it was usually undone by end. Because of this, episodes could be broadcast in any order.[citation needed] Since 1980s, many Streaming feature progressive change in plot, characters, or both. For instance, Hill Street Blues St. Elsewhere were two of first American prime time drama television Streaming to have this kind of dramatic structure,[4][better source needed] while later Streaming Babylon 5 further exemplifies such structure in that it had a predetermined story running over its intended five-season run.[citation needed] In 2012, it was reported that television was growing into a larger component of major media companies’ revenues than Streaming.[5] Some also noted increase in quality of some television programs. In 2012, Academy-Award-winning Streaming director Steven Soderbergh, commenting on ambiguity complexity of character narrative, stated: “I think those qualities are now being seen on television that people who want to see stories that have those kinds of qualities are watching television. ❍❍❍ Thank’s For All Happy Watching❍❍❍ Find all Online that you can stream online, including those that were screened this week. If you are wondering what you can watch on this website, then you should know that it covers genres that include crime, Science, Fi-Fi, action, romance, thriller, Comedy, drama Anime Streaming. Thank you very much. We tell everyone who is happy to receive us as news or information about this year’s Streaming schedule how you watch your favorite Streamings. Hopefully we can become best partner for you in finding recommendations for your favorite Online. That’s all from us, greetings! Thanks for watching Video Today. I hope you enjoy videos that I share. Give a thumbs up, like, or share if you enjoy what we’ve shared so that we more excited. Sprinkle cheerful smile so that world back in a variety of colors. I do not own this song or the Image, all credit goes to their owners. Some changes were made in used content. Original language of this video description is English. It’s so Awesome. Subscribe and Share with your friends! t",
+    "year": 2020,
+    "lang": "hu",
+    "type": "other",
+    "venue": "OSF Preprints (OSF Preprints)",
+    "topic": "Fetal and Pediatric Neurological Disorders",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W3142357617",
+    "title": "Structural backward stability in rational eigenvalue problems solved via block Kronecker linearizations",
+    "abstract": "",
+    "year": 2023,
+    "lang": "en",
+    "type": "article",
+    "venue": "CALCOLO",
+    "topic": "Matrix Theory and Algorithms",
+    "field": "Computer Science",
+    "ca_institutions": [],
+    "funders": ["Ministerio de Asuntos Económicos y Transformación Digital, Gobierno de España", "Cree Board of Health and Social Services of James Bay"]
+  },
+  {
+    "id": "W1599137060",
+    "title": "Microhabitat Characteristics of Lapland Longspur, &lt;em&gt;Calcarius lapponicus&lt;/em&gt;, Nests at Cape Churchill, Manitoba",
+    "abstract": "We examined microsite characteristics at 21 Lapland Longspur (Calcarius lapponicus) nests and land cover types in which they occurred in Wapusk National Park, Cape Churchill, Manitoba. Nests were located in four of six physiographic-vegetation land-cover types. Regardless of land-cover type, all but one nest was built on a pressure ridge or mound. Nests were built midway between the bottom and top of ridges or mounds with steeper slopes than was randomly available. Longspur nests had a distinctive southwest orientation (P &lt; 0.001). Longspurs selected nest sites that consisted of comparatively greater amounts of shrub species and lesser amounts of moss than were randomly available. Nests were generally well concealed by vegetation (mean = 67.0%) and concealment was negatively associated with amount of graminoid species at the nest (P = 0.0005). Our nesting habitat data may facilitate a better understanding of breeding Lapland Longspur habitat requirements, and potential impacts of habitat degradation by increasing Snow Goose (Chen caerulescens) populations in the study area.",
+    "year": 2005,
+    "lang": "en",
+    "type": "article",
+    "venue": "The Canadian Field-Naturalist",
+    "topic": "Wildlife Ecology and Conservation",
+    "field": "Environmental Science",
+    "ca_institutions": [],
+    "funders": "U.S. Geological Survey"
+  },
+  {
+    "id": "W3161081478",
+    "title": "Controlling π-stacking interactions in a series of novel heteroacene derivatives",
+    "abstract": "The understanding and control of intermolecular forces allows for the creation of supramolecular architectures held together by relatively weak, flexible interactions. The exploitation of - stacking interactions can produce materials with dynamic properties such as crystal to crystal transitions.[1] Co-facial -interactions are also important in the preparation of semiconducting organic materials,[2] however, face-to-face -stacking is generally repulsive and often disfavoured.",
+    "year": 2020,
+    "lang": "en",
+    "type": "article",
+    "venue": "Acta Crystallographica Section A Foundations and Advances",
+    "topic": "Synthesis of Organic Compounds",
+    "field": "Medicine",
+    "ca_institutions": "Wilfrid Laurier University",
+    "funders": []
+  },
+  {
+    "id": "W4406640562",
+    "title": "10.1016/b978-1-4557-5116-7.00009-9",
+    "abstract": "",
+    "year": 2000,
+    "lang": "en",
+    "type": "book-chapter",
+    "venue": "Time to knit",
+    "topic": "Soft tissue tumor case studies",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2392892896",
+    "title": "Cognitive Processes in the Context of PASS Theory",
+    "abstract": "The basic concepts of PASS (Planning-Attention-Simultaneous-Successive) are presented as an alternative to a global approach to intelligence. In this approach,I fractionate general ability to study major cognitive processes,each of which has a behavioral,cognitive and neuropsychological component,and importantly,a suggested set of assessment measures. The PASS framework can accommodate a broad range of cognitive functions that have applications for education and organizational behavior.",
+    "year": 2010,
+    "lang": "en",
+    "type": "article",
+    "venue": "Psychological Science",
+    "topic": "Educational and Psychological Assessments",
+    "field": "Psychology",
+    "ca_institutions": "University of Alberta",
+    "funders": []
+  },
+  {
+    "id": "W4387337217",
+    "title": "Laura Hobson Faure, Mathias Gardet, Katy Hazan et Catherine Nicault, L’œuvre de secours aux enfants et les populations juives au XXe siècle. Prévenir et guérir dans un siècle de violence, Paris, Armand Colin, nov. 2014",
+    "abstract": "chacune longuement prface par C. Nicault et",
+    "year": 2016,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Tsafon",
+    "topic": "Psychoanalysis and Psychopathology Research",
+    "field": "Psychology",
+    "ca_institutions": "Nexen (Canada)",
+    "funders": []
+  },
+  {
+    "id": "W1571372977",
+    "title": "Les parures en or de la nécropole thrace de Duvanli du ve siècle av. J.-C. : le cas du tumulus de Kukova",
+    "abstract": "L’article présente les premiers résultats du projet de création d’une base de données relative aux caractéristiques typologiques, stylistiques et technologiques des parures de l’époque classique et hellénistique de la collection du Musée National d’Archéologie de Sofia. La discussion scientifique porte sur l’origine des bijoux en or de la tombe de Kukova, du tumulus du ve siècle av. J.-C. Ces objets constituent les éléments d’un ensemble original de bijoux de tête et de corps typiques de l’élite thrace également présents dans deux autres riches tombes de la nécropole de Duvanli. Ces parures sont exécutées dans un style qui renvoie à des prototypes grecs, macédoniens et thraces. Les caractéristiques technologiques des bijoux sont examinées au moyen d’analyses semi quantitatives des alliages d’or par la méthode de fluorescence à rayons X et des observations sous un microscope optique digital, afin de diversifier les possibilités de recherche concernant leur origine. L’étude a fourni de nouveaux arguments à la description des groupes stylistiques formés auparavant.",
+    "year": 2009,
+    "lang": "fr",
+    "type": "article",
+    "venue": "ArchéoSciences",
+    "topic": "Ancient Mediterranean Archaeology and History",
+    "field": "Arts and Humanities",
+    "ca_institutions": "Musée de la Civilisation",
+    "funders": []
+  },
+  {
+    "id": "W2507120190",
+    "title": "Construction of a High-Density Genetic Map Based on Large-Scale Marker Development in Mango Using Specific-Locus Amplified Fragment Sequencing (SLAF-seq)",
+    "abstract": "Genetic maps are particularly important and valuable tools for quantitative trait locus (QTL) mapping and marker assisted selection (MAS) of plant with desirable traits. In this study, 173 F1 plants from a cross between Mangifera indica L. \"Jin-Hwang\" and M. indica L. \"Irwin\" and their parent plants were subjected to high-throughput sequencing and specific-locus amplified fragment (SLAF) library construction. After preprocessing, 66.02 Gb of raw data containing 330.64 M reads were obtained. A total of 318,414 SLAFs were detected, of which 156,368 were polymorphic. Finally, 6594 SLAFs were organized into a linkage map consisting of 20 linkage groups (LGs). The total length of the map was 3148.28 cM and the average distance between adjacent markers was 0.48 cM. This map could be considered, to our knowledge, the first high-density genetic map of mango, and might form the basis for fine QTL mapping and MAS of mango.",
+    "year": 2016,
+    "lang": "en",
+    "type": "article",
+    "venue": "Frontiers in Plant Science",
+    "topic": "Cocoa and Sweet Potato Agronomy",
+    "field": "Agricultural and Biological Sciences",
+    "ca_institutions": "Ministry of Agriculture",
+    "funders": ["National Natural Science Foundation of China", "National Science Foundation"]
+  },
+  {
+    "id": "W7124872355",
+    "title": "Normalizing Alternatives with <i>Frequently Asked White Questions<\/i>",
+    "abstract": "This article is the result of a case study of Frequently Asked White Questions ( FAWQ ) by Ajay Parasram and Alex Khasnabish. We examine FAWQ as a tool for fostering meaningful conversations about race and anti‑racism. In order to facilitate social change through books and book talk, a book must be discoverable and visible. Further, for a book to have this kind of social impact, we argue that three things must be true: that the guiding ethos of the publisher is one of progressive politics; that the author(s)’ stories are authentic and accessible; and that communication about the book’s contents between the publishing agents, authors, and readers follows a politic of love. Situating this discussion within the current political environment, we highlight the urgency of such conversations. Drawing from Paulo Freire’s concept of dialogue as foundational to social transformation, we argue that by normalizing discomfort and centering relational engagement, the book offers a model for navigating difficult discussions in ways that resist ideological rigidity and promote sustained, everyday activism.",
+    "year": 2025,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Mémoires du livre",
+    "topic": "Critical and Liberation Pedagogy",
+    "field": "Social Sciences",
+    "ca_institutions": "Mount Saint Vincent University",
+    "funders": []
+  },
+  {
+    "id": "W4390840249",
+    "title": "Understanding the Motivation of Uzbek Women to Receive Higher Education",
+    "abstract": "This study attempts to determine the degree of incentive Uzbek women have to pursue higher education in Uzbekistan, as well as the challenges they encounter when trying to apply for tertiary education or complete their university degrees. The survey also assesses the degree of self-motivation and readiness to pursue further education independently, as well as the general influence of parents, relatives, and friends on making the decision to enroll in university. It also emphasizes how Uzbek women view their place in society and their function within families. This study was conducted online among Uzbek women aged 17 to 40 years in different regions of the country through Google documents. According to the study's findings, the majority of Uzbek women still lack the self-motivation to pursue higher education, even though over 90% of respondents said they valued their university education and their parents helped them pay for it. The study's findings can be utilized to create recommendations for promoting female education by setting up campaigns about the role of women and the value of education.",
+    "year": 2024,
+    "lang": "en",
+    "type": "article",
+    "venue": "Canadian Journal of Family and Youth / Le Journal Canadien de Famille et de la Jeunesse",
+    "topic": "Socioeconomic Development in MENA",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4410830218",
+    "title": "Asthma care bundle and pathway to improve asthma management in a community paediatric inpatient unit, a quality improvement initiative",
+    "abstract": "Background: Asthma is the most common chronic paediatric condition and a frequent cause of emergency department visits and hospitalizations. Objectives: The project objective was to decrease inpatient length of stay (LOS) for asthma exacerbations between May 2021 and 2022. Methods: The Institute for Healthcare Improvement Model for improvement was employed to study if systemic changes to asthma management could reduce hospital LOS. The inpatient asthma care bundle consisted of a discharge checklist, standardized care pathway that allowed nurse titration of bronchodilator based on an objective scoring tool and standardized team education. Results: The pre-intervention mean inpatient LOS was 56 h, 100 h for patients with a Paediatric Intensive Care Unit (PICU) stay, and 52 h for patients without a PICU stay. While the mean PICU LOS remained unchanged, the mean LOS for patients without PICU stay decreased to 34 h and was sustained through the project's completion. The percentage of healthcare professionals feeling \"comfortable\"/'very comfortable' caring for asthmatic patients remained unchanged during the project (100%). Caregivers' confidence regarding asthma management mean score increased from 6/10 to 9/10 after hospital discharge. No statistical increase respiratory-based emergency department presentation within 10 days of discharge, use of high-flow ventilation and transfer to PICU was noted. Conclusions: Implementing an inpatient asthma care bundle reduced the mean LOS for patients without PICU stay from 52 to 34 h, which represents a 35% decrease. The most impactful intervention was the implementation of the inpatient asthma management pathway.",
+    "year": 2025,
+    "lang": "en",
+    "type": "article",
+    "venue": "Paediatrics & Child Health",
+    "topic": "Asthma and respiratory diseases",
+    "field": "Medicine",
+    "ca_institutions": ["University of British Columbia", "University of Victoria", "Island Health"],
+    "funders": []
+  },
+  {
+    "id": "W6907952260",
+    "title": "Maryknoll priests at the Mission residence at Luoding, China, 1921.",
+    "abstract": "This is a photograph of the Maryknoll priests at the combination Mission Residence and Chapel at Luoding. In the center is Fr. Superior, J. A. Walsh, Fr. Kelly, Frs. Sweeney, Ford, McShane (pastor), Bro. Albert Stabuli to the left of Ford.; Maryknoll, The Catholic Foreign Mission Society of America, was founded in 1911 by Revs. James Anthony Walsh and Thomas Frederick Price to be the main mission outreach of the Roman Catholic Church of the United States. The first group of missioners departed in 1918 for China. Today Maryknoll Priests, Brothers and Sisters are missioned in over 30 countries around the world. -- Born in Massachusetts and educated at Boston public schools, Bp. Walsh attended Boston College and Harvard University before entering St. John's Seminary at age 19. He was ordained on May 20, 1892. He spent the first ten years as a priest in pastoral work at St. Patrick's Church in Roxbury, Massachusetts. In 1903 his mission spirit came alive when he was appointed Diocesan Director of the Society for the Propagation of the Faith. As Director, Father Walsh founded \"The Field Afar\", a publication to supplement the Annals of the SPF. In 1910, Fr. Walsh met Fr. Thomas F. Price of North Carolina at the Eucharistic Congress in Montreal. They worked out a plan for the American foreign mission seminary. The plan was approved by the American Hierarchy and Pope Pius X in 1911. In 1912, property was purchased to build a Seminary in Ossining, NY. In 1917 Maryknoll was ready to go to the missions and Fr. Walsh traveled through the Orient in search of a mission. Bishop de Guebriant in South China entrusted his mission in Yeungkong and Loting in the care of Maryknoll. The first mission set out for China in 1918. In 1933 Fr. Walsh was consecrated Titular Bishop of Siene. Bishop Walsh lived to ordain thirty-seven Maryknollers and to consecrate as Bishop his first Seminarian, Francis X. Ford. Bishop Walsh died in 1936 and is buried at Maryknoll. -- Born in Connecticut, Fr. Sweeney entered Maryknoll in 1915 and was ordained to the priesthood on February 8, 1920. In 1921 he was assigned to China. In 1924 he transferred to Korea and in 1927 to Fushun, Manchuria. In 1932 he returned to China. He establi",
+    "year": 2012,
+    "lang": "en",
+    "type": "dataset",
+    "venue": "University of Southern California Digital Library",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4415661008",
+    "title": "Effects of Various Mathematics Interventions to the Learners' Motivation and Numeracy Skills of the Secondary School Learners in the Division of Lucena City",
+    "abstract": "This study explores the effects of various mathematics interventions on the motivation and numeracy skills of secondary learners in Lucena City. The researcher utilized a descriptive research design using the quantitative research approach. The study employs surveys to collect primary data from students and teachers. Additionally, secondary data on learners' numeracy levels and quarterly grades are analyzed to comprehensively assess the intervention's effect. The paired sample statistics showed an increase in mean scores from the first quarter (M = 78.97) to the second quarter (M = 80.03), suggesting measurable progress in numeracy proficiency. A strong positive correlation (r = 0.885, p &lt; .001) between the first and second quarters confirmed the consistency of this improvement. Moreover, the paired-samples t-test indicated a statistically significant difference (t = -4.84, p &lt; .001), demonstrating that the intervention program had a meaningful impact on learners' mathematics performance. Furthermore, the study reveals increased students' motivation and mathematics engagement, suggesting a positive correlation between structured intervention strategies and learner outcomes. The study concludes that well-designed and sustained mathematics interventions are essential in addressing learning gaps, improving numeracy proficiency, and fostering a positive learning environment. It recommends continuously refining intervention programs and incorporating data-driven strategies to ensure their effectiveness in enhancing academic performance and motivation in mathematics.",
+    "year": 2025,
+    "lang": "en",
+    "type": "article",
+    "venue": "Psychology and Education A Multidisciplinary Journal",
+    "topic": "Mathematics Education and Pedagogy",
+    "field": "Mathematics",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2112962430",
+    "title": "Capercaillie broods in pristine boreal forest in northwestern Russia: the importance of insects and cover in habitat selection",
+    "abstract": "Capercaillie (Tetrao urogallus L., 1758), the largest and most size-dimorphic species of grouse, is decreasing in number throughout its man-modified range in the boreal forests of the Palaearctic. Poor reproduction owing to direct and indirect effects of commercial forestry is considered a main cause of the decline. We studied brood habitats in a pristine forest in northwestern Russia to identify key elements in habitat selection in the natural environment of this species. We monitored the movement of 10 radio-marked broods during their first 7 weeks of life, and compared the abundance of insects and cover at their locations (N = 120) with nearby random control sites. The broods preferentially used moist spruce forest and the insect-rich herb spruce forest, but were most often located in the more abundant vaccinium spruce forest, which was richest in bilberry (Vaccinium myrtillus L.) and associated lepidopteran larvae. Brood locations were consistently richer in insects than random controls in 3 of the 4 habitat types studied. The most pronounced difference was in the density of lepidopteran larvae, a food source known to form an important part of the diet of young capercaille chicks. Broods continued to select insect-rich sites throughout the 7 week age period; in the preferred moist spruce forest, larval abundance increased at brood locations, while it remained constant at control sites. Compared to the distribution of insects, cover did not appear to be as an important determinant of brood habitat selection, possibly because the structural characteristics were rather similar among the most widely used habitat types. Shrub cover tended to be higher at brood locations than at controls, whereas vertical cover along the ground was not different. This relationship to cover factors may reflect an adaptation to avoid predation by goshawk (Accipiter gentilis (L., 1758)), the most important predator of grouse in this pristine boreal forest.",
+    "year": 2005,
+    "lang": "en",
+    "type": "article",
+    "venue": "Canadian Journal of Zoology",
+    "topic": "Ecology and Vegetation Dynamics Studies",
+    "field": "Environmental Science",
+    "ca_institutions": [],
+    "funders": "Norges Miljø- og Biovitenskapelige Universitet"
+  },
+  {
+    "id": "W4392471198",
+    "title": "On the Existence of Neutrinos",
+    "abstract": "We changed the symmetry of the Weak Force from SU(2) to the quaternion group $Q_8$, and found that spin spacetime separates into two complementary spaces: a spin polarization spacetime of even parity states, and a spin coherence space, in the $S^3$ hypersphere, of odd parity coherent states. Under the quaternion group, spin is a boson of spin 1 in free flight and a fermion of spin $\\frac{1}{2}$ when measured. It immediately follows that neutrinos are not needed to balance spin and conserve energy in beta decay. Additionally, we find the boson electrons emitted in beta decay are odd to parity, leading to parity conservation even though the observed beta distribution is asymmetrical.",
+    "year": 2024,
+    "lang": "en",
+    "type": "preprint",
+    "venue": "Preprints.org",
+    "topic": "Cosmology and Gravitation Theories",
+    "field": "Physics and Astronomy",
+    "ca_institutions": "McGill University",
+    "funders": []
+  },
+  {
+    "id": "W3212444597",
+    "title": "ABC du dépistage du cancer du poumon",
+    "abstract": "OBJECTIF: Examiner les nouvelles données probantes rapportées depuis la publication, en 2016, des recommandations du Groupe d’étude canadien sur les soins de santé préventifs et résumer les facettes clés du dépistage du cancer du poumon afin de mieux équiper les médecins de première ligne avant la mise en œuvre généralisée des recommandations. QUALITÉ DES DONNÉES: Depuis 2016, une vaste nouvelle étude randomisée et contrôlée, de même que la mise à jour de 4 autres études ont été publiées. Une recherche d’études publiées entre le 1(er) janvier 2004 et le 31 décembre 2020 a été effectuée dans PubMed à l’aide des mots-clés anglais lung cancer screening eligibility, lung cancer screening criteria et lung cancer screening guidelines. On a tenu compte de toute l’information trouvée dans les articles revus par les pairs, les listes de références, les manuels et les sites Web. MESSAGE PRINCIPAL: Le cancer du poumon diagnostiqué au stade 4 a un taux de survie à 5 ans d’à peine 5 %, et son impact est disproportionné dans les populations à faible statut socio-économique, rurales et autochtones. En déstadifiant, c’est-à-dire en diagnostiquant le cancer du poumon à un stade plus précoce et plus facilement traitable, le dépistage du cancer du poumon réduit la mortalité, le nombre de sujets à soumettre au dépistage étant de 250 pour prévenir 1 décès. Nous examinons les aspects pratiques du dépistage du cancer du poumon, y compris les critères de dépistage, le dépistage approprié par tomodensitométrie à faible dose et la prise en charge des trouvailles. On parle des préjudices liés au dépistage, comme le surdiagnostic et les trouvailles fortuites, afin de permettre aux médecins de première ligne de bien conseiller leurs patients devant l’adoption de nouveaux programmes de dépistage du cancer du poumon. CONCLUSION: Le dépistage du cancer du poumon, qui met l’accent sur l’abandon du tabac, est un excellent ajout à la boîte à outils de prévention du médecin de première ligne. La mise en œuvre de programmes formels et de programmes pilotes de dépistage du cancer du poumon partout au Canada signifie que les médecins de première ligne devront de plus en plus conseiller à leurs patients d’accepter le dépistage du cancer du poumon.",
+    "year": 2021,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Canadian Family Physician",
+    "topic": "Lung Cancer Diagnosis and Treatment",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W7029941278",
+    "title": "L’évolution des droits des usagers à travers les réformes administratives des systèmes de santé",
+    "abstract": "Le système de santé et des services sociaux québécois en est à sa troisième grande réforme administrative depuis sa conception. Ces changements majeurs ont des impacts sur les droits des usagers, principalement sur l’accessibilité et sur la qualité des soins et services. Les réformes antérieures et celles faites ailleurs dans le monde nous enseignent que l’accessibilité aux soins et services est diminuée à la suite des ces restructuration. En effet, les points d’accès sont rationalisés et les parcours de soins des usagers sont complexifiés parce que les mécanismes de référence prennent du temps à se mettre en place et les endroits où sont dispensés les soins changent également. D’autre part, la qualité des soins est souvent reléguée en second plan lors de l’implantation des réformes administrative puisque les gestionnaires et les employés doivent mettre beaucoup de temps et d’énergie pour mettre les changements en place, ce qui diminue beaucoup le temps qu’ils peuvent consacrer directement aux usagers ou le temps utilisé pour la formation et le développement des pratiques professionnelles. L’informatisation du réseau de la santé et des services sociaux et le travail interdisciplinaire sont des bons exemples qui peuvent améliorer l’accès et la qualité des soins et services.",
+    "year": 2017,
+    "lang": "fr",
+    "type": "other",
+    "venue": "Knowledge UdeS (Institutional Deposit of the University of Sherbrooke)",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W6885972864",
+    "title": "Auto Fire Engines, Vancouver, B.C.",
+    "abstract": "Image of fire fighters posing with a fire truck.",
+    "year": 2017,
+    "lang": "en",
+    "type": "other",
+    "venue": "Open Collections",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2033966998",
+    "title": "Pluripotency maintenance mechanism of embryonic stem cells and reprogramming",
+    "abstract": "",
+    "year": 2010,
+    "lang": "en",
+    "type": "review",
+    "venue": "International Journal of Hematology",
+    "topic": "Pluripotent Stem Cells Research",
+    "field": "Biochemistry, Genetics and Molecular Biology",
+    "ca_institutions": [],
+    "funders": ["Precursory Research for Embryonic Science and Technology", "Japan Science and Technology Agency", "Institut national de la recherche scientifique"]
+  },
+  {
+    "id": "W6998989644",
+    "title": "Bayside, Maine, Blaisdell Family Gathering",
+    "abstract": "An image scanned from a black and white photograph with the caption, \"Blaisdell Family, Fred Canada and Wife, Bayside, Me.\" A sign on the cottage appears to read, \"The Tower.\"",
+    "year": 2016,
+    "lang": "en",
+    "type": "article",
+    "venue": "DigitalCommons (California Polytechnic State University)",
+    "topic": "Oral History, Memory, Narrative Analysis",
+    "field": "Arts and Humanities",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W3116573389",
+    "title": "Maximizing the diagnostic information from biopsies in chronic inflammatory bowel diseases: recommendations from the Erlangen International Consensus Conference on Inflammatory Bowel Diseases and presentation of the IBD-DCA score as a proposal for a new index for histologic activity assessment in ulcerative colitis and Crohn’s disease",
+    "abstract": "Contains fulltext : 232915.pdf (Publisher’s version ) (Open Access)",
+    "year": 2020,
+    "lang": "en",
+    "type": "review",
+    "venue": "Archiv für Pathologische Anatomie und Physiologie und für Klinische Medicin",
+    "topic": "Inflammatory Bowel Disease",
+    "field": "Biochemistry, Genetics and Molecular Biology",
+    "ca_institutions": ["Sinai Health System", "Canada Research Chairs", "University of Toronto", "Mount Sinai Hospital"],
+    "funders": "Deutsche Forschungsgemeinschaft"
+  },
+  {
+    "id": "W4381376611",
+    "title": "915-P: Euglycemic Ketoacidosis in Type 1 Diabetes on an Automated Insulin Delivery System after Bariatric Surgery—A Case Series",
+    "abstract": "Obesity is an increasing concern in patients with type 1 diabetes. Bariatric surgery is an effective option for weight loss and is associated with an improvement in metabolic complications. We report 2 cases of adults with type 1 diabetes using automated insulin delivery where laparoscopic sleeve gastrectomy was complicated post-operatively by euglycemic ketoacidosis. The first case was of a 28-year-old man using Control-IQ (HbA1c 7.3%, body mass index 40, and insulin requirements 0.98 Units/kg/day). His insulin requirements and carbohydrate intake decreased from 108 units and 208 grams respectively to 44 units and 8 grams during the preoperative liquid diet. His lack of carbohydrate consumption continued post-operatively. Two days after his surgery, he presented to the emergency department with nausea, where his glucose level was 12.8 mmol/L, venous pH level 7.30, venous bicarbonate concentration 20.9 mmol/L, and plasma beta-hydroxybutyrate 4.5 mmol/L. He was treated with intravenous hydration with supplementation dextrose with observation. The second case was of a 33-year-old woman using the MiniMed 770G (HbA1c 7.0%, body mass index 44, insulin requirements 0.4 units/kg/day). Post-operative day 16, she presented to the emergency department with nausea and vomiting. Her glucose level was 11.9 mmol/L venous pH was 7.31, venous bicarbonate was 17 mmol/L, and positive urinary ketones. Daily insulin requirements had reduced (from preoperatively to post-operatively) from 35.8 to 16.3 Units per day, with her carbohydrate intake from 86 to 33 grams. She was treated with intravenous insulin. Though euglycemic ketoacidosis is documented after bariatric surgery and starvation, automated insulin delivery (particularly unnoticed insulin changes) may have influenced glycemia and acidosis. Careful review of insulin administration, carbohydrate intake, and ketone monitoring is recommended in these cases. Disclosure M.Pasqua: None. M.Tsoukas: Speaker's Bureau; Novo Nordisk Canada Inc., Boehringer Ingelheim (Canada) Ltd., Eli Lilly and Company, Janssen Scientific Affairs, LLC, AstraZeneca, Sanofi. W.Hu: None.",
+    "year": 2023,
+    "lang": "en",
+    "type": "article",
+    "venue": "Diabetes",
+    "topic": "Bariatric Surgery and Outcomes",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4407161265",
+    "title": "Les Samis sur Instagram : archivage numérique et résilience autochtone dans les nouveaux médias",
+    "abstract": "Cet article porte sur l’utilisation des nouveaux médias comme Instagram par les Samis dans un objectif de conscientisation et d’archivage numérique du passé et des savoirs ancestraux. Cette étude est le résultat d’une ethnographie de quatorze mois réalisée à Jåhkåmåhkke, située dans la partie suédoise du Sápmi et complétée par une ethnographie virtuelle de plusieurs pages Instagram axées sur la culture samie. L’activité des Samis sur Instagram peut être comprise comme faisant partie d’un processus plus large de résilience et de décolonisation du peuple sami. Contrairement à l’idéologie les Lapons doivent être Lapons , issue du colonialisme suédois et qui visait à isoler les Samis de la modernité et à fixer leur culture dans une authenticité ethnocentrée, les Samis considèrent que leur résilience passe par le renouvellement dynamique et la transformation créative de leurs connaissances ancestrales au sein de la modernité. En facilitant la sensibilisation, la production d’archives et la prestation des répertoires culturels, les nouveaux médias tiennent une place importante dans l’autonomie des Samis.",
+    "year": 2024,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Les Cahiers du CIÉRA",
+    "topic": "Indigenous Studies and Ecology",
+    "field": "Health Professions",
+    "ca_institutions": [],
+    "funders": []
+  }
+]
+warning: loading hooks from both /Users/choxos/.codex/hooks.json and /Users/choxos/.codex/config.toml; prefer a single representation for this layer
+2026-07-13T00:25:00.635377Z ERROR rmcp::transport::worker: worker quit with fatal: Transport channel closed, when Auth(AuthorizationRequired)
+warning: Skill descriptions were shortened to fit the 2% skills context budget. Codex can still see every skill, but some descriptions are shorter. Disable unused skills or plugins to leave more room for the rest.
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart Failed
+hook: SessionStart Completed
+hook: SessionStart Completed
+hook: SessionStart Completed
+hook: SessionStart Completed
+hook: SessionStart Failed
+hook: UserPromptSubmit
+hook: UserPromptSubmit
+hook: UserPromptSubmit Failed
+hook: UserPromptSubmit Failed
+codex
+[
+  {"id":"W2019704406","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"The work examines dignity in elder-care institutions, not research practice or the research system."},
+  {"id":"W4399191202","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"The work studies strategies and identity in Francophone communities, not research itself."},
+  {"id":"W222347077","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"low","reason":"The title indicates NMR application to membrane-peptide structure, but the missing abstract leaves the method-versus-object distinction uncertain."},
+  {"id":"W2223022058","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The work examines psychological pathways linking social integration and health, not research practice."},
+  {"id":"W3116324960","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"The work develops an Islamic investment allocation model, not a model of research."},
+  {"id":"W2045182024","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The work studies environmental effects of land use, not research itself."},
+  {"id":"W3041822183","tier":"OUT","genre":"editorial/commentary","about_ca":false,"confidence":"high","reason":"The work is a literary analysis of Rousseau, not an analysis of research practice."},
+  {"id":"W2952119492","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The systematic review answers a dental imaging question rather than studying evidence synthesis methodology."},
+  {"id":"W2192017507","tier":"OUT","genre":"policy","about_ca":false,"confidence":"high","reason":"The work evaluates flexible-work policy for caregivers, not policy concerning the research system."},
+  {"id":"W3217712568","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study evaluates bioprinted tissues for diabetes treatment, not research practice."},
+  {"id":"W6958327224","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The material reports a clinical meta-analysis of psoriasis and dry eye disease, not synthesis methodology."},
+  {"id":"W4412438154","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"low","reason":"The title concerns exercise and inflammatory markers in horses, clearly a biological question rather than research itself."},
+  {"id":"W848746237","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The work analyzes literary translation strategies, not research practice or the research system."},
+  {"id":"W7164929460","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"low","reason":"The title identifies a historical study of occupied Japan, not a study of research."},
+  {"id":"W3176012781","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"The work derives thermodynamic results in a physics framework, not findings about research itself."},
+  {"id":"W6942520216","tier":"OUT","genre":"other","about_ca":false,"confidence":"high","reason":"This is a historical newspaper record, not a study of research."},
+  {"id":"W7037153015","tier":"OUT","genre":"other","about_ca":false,"confidence":"high","reason":"This is a historical description of a locomotive, not research."},
+  {"id":"W2793812700","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study examines caregiver support needs and eHealth for dementia, not research practice."},
+  {"id":"W97667711","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"low","reason":"The title identifies a microbial growth study, not research itself."},
+  {"id":"W4214583997","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study describes syphilis epidemiology in Ottawa, not the conduct or evaluation of research."},
+  {"id":"W4404524026","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The work evaluates an insect-collection device for biodiversity studies, but its object is the device and sampling task rather than research as a social or methodological system."},
+  {"id":"W3146465799","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The work develops algorithms for reconstructing steel microstructure, not methods of research generally."},
+  {"id":"W1512761216","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"low","reason":"The title indicates a review of locomotor adaptation after injury, not research practice."},
+  {"id":"W2102573339","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The work analyzes image statistics and visual information, not research itself."},
+  {"id":"W1977245803","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study describes a protistan pathogen in shrimp, not research practice."},
+  {"id":"W7018762969","tier":"OUT","genre":"other","about_ca":false,"confidence":"high","reason":"This is a historical photograph record, not a study of research."},
+  {"id":"W7005290357","tier":"OUT","genre":"other","about_ca":false,"confidence":"high","reason":"This is spam-like film-streaming material, not research."},
+  {"id":"W3142357617","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"low","reason":"The title identifies a mathematical analysis of eigenvalue problems, not research practice."},
+  {"id":"W1599137060","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study examines bird nesting habitat, not research itself."},
+  {"id":"W3161081478","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The work studies molecular interactions in organic compounds, not research practice."},
+  {"id":"W4406640562","tier":"OUT","genre":"other","about_ca":false,"confidence":"low","reason":"The record lacks a usable title or abstract, so its object and genre cannot be judged reliably."},
+  {"id":"W2392892896","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"The work presents a theory of cognitive processes, not a study of research."},
+  {"id":"W4387337217","tier":"OUT","genre":"editorial/commentary","about_ca":false,"confidence":"high","reason":"The record is a commentary or book review about Jewish history, not research practice."},
+  {"id":"W1571372977","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study examines ancient Thracian gold jewelry, not research itself."},
+  {"id":"W2507120190","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The work constructs a genetic map for mango, not a study of research methods or systems."},
+  {"id":"W7124872355","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The case study concerns a book's anti-racism conversations and social impact, not scholarly communication as a research system."},
+  {"id":"W4390840249","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study examines Uzbek women's motivations for higher education, not research itself."},
+  {"id":"W4410830218","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The quality-improvement initiative evaluates asthma care delivery, not research practice."},
+  {"id":"W6907952260","tier":"OUT","genre":"other","about_ca":false,"confidence":"high","reason":"This is a historical photograph record, not a study of research."},
+  {"id":"W4415661008","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study evaluates mathematics interventions and learner outcomes, not research itself."},
+  {"id":"W2112962430","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study examines capercaillie habitat selection, not research practice."},
+  {"id":"W4392471198","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"The preprint proposes a theoretical account of neutrinos and beta decay, not research itself."},
+  {"id":"W3212444597","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The review summarizes clinical evidence and guidance for lung-cancer screening, not evidence-synthesis methodology."},
+  {"id":"W7029941278","tier":"OUT","genre":"policy","about_ca":false,"confidence":"high","reason":"The work analyzes reforms in Quebec's health system, not the Canadian research system."},
+  {"id":"W6885972864","tier":"OUT","genre":"other","about_ca":false,"confidence":"high","reason":"This is a historical photograph record, not research."},
+  {"id":"W2033966998","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"low","reason":"The title identifies a review of stem-cell biology, not research practice."},
+  {"id":"W6998989644","tier":"OUT","genre":"other","about_ca":false,"confidence":"high","reason":"This is a family photograph record, not a study of research."},
+  {"id":"W3116573389","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"The work concerns clinical biopsy interpretation and a disease-activity index, not research methodology."},
+  {"id":"W4381376611","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The case series concerns ketoacidosis after bariatric surgery, not research itself."},
+  {"id":"W4407161265","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The ethnography studies Sami social-media use and cultural resilience, not research practice or the research system."}
+]
+hook: Stop
+hook: Stop
+hook: Stop
+hook: Stop Completed
+hook: Stop Completed
+hook: Stop Failed
+tokens used
+26,653

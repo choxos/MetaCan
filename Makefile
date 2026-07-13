@@ -1,4 +1,4 @@
-.PHONY: pilot pilot-offline findings proposal deps clean help harvest-status
+.PHONY: pilot pilot-offline findings proposal protocol deps clean help harvest-status lint
 
 # Every numbered finding, 01 through 13. The old glob was `pilot/0*.R`, which
 # silently stopped at 09: findings 10-13 (agreement, the abstract bias, the topic
@@ -16,6 +16,7 @@ help:
 	@echo "make pilot-offline  re-derive every number from the archived responses, no network"
 	@echo "make findings       render pilot/results/FINDINGS.md"
 	@echo "make proposal       render the 2-page PDF (FAILS if it spills to 3 pages)"
+	@echo "make protocol       render the preregistration PDF (protocol + both rubrics, one file)"
 	@echo "make harvest-status progress of the OpenAlex frame harvest, in bytes (partitions lie)"
 
 deps:
@@ -53,8 +54,17 @@ pilot-offline: lint
 # rate, and I have now written it THREE times, twice in scripts that carry a
 # comment swearing never to write it again. It does not stick as a habit. It
 # sticks as a rule that RUNS, so it runs before every pilot.
+#
+# check_instrument.R is the second rule, and it exists because the rubric and the
+# output schema named TWO DIFFERENT controlled vocabularies for `genre`, and 6,000
+# labels went through three models without a single error being raised. The
+# validator checked `tier` and had never been asked to look at `genre`. Nothing
+# crashed; the field simply meant a different thing in each arm, and the variance
+# would have been read as model disagreement, which is the quantity this project
+# exists to measure. A CODEBOOK IS CODE. IT GETS A TEST. See DEVIATIONS.md D20.
 lint:
 	@Rscript pilot/check_self_masking.R
+	@Rscript pilot/check_instrument.R
 
 # The site renders its own COPY of findings.json (app/src/data/). Copying it here,
 # in the same target that renders FINDINGS.md, is what keeps the two from
@@ -92,5 +102,65 @@ proposal/metacan-proposal.pdf: proposal/metacan-proposal.md proposal/tighten.tex
 		echo "OK: proposal is $$pages page(s), $$words words."; \
 	fi
 
+# The preregistration is the OPPOSITE document from the 2-pager: no page limit, and
+# one job, which is to be registered BEFORE the data are seen.
+#
+# It ships as ONE self-contained PDF, and the reason is the whole point of the
+# appendix structure. A protocol that says "coded against protocol/rubric.md" and
+# links out to it is a protocol whose coding manual can be edited afterwards with
+# nothing in the registered artifact to contradict it. So the rubric the pilot
+# actually ran under (v1, LOCKED) travels inside the PDF as Appendix A, and the
+# revision the screeners' disagreement argues for (v2, PROPOSED, NOT APPLIED)
+# travels as Appendix B, clearly marked as not yet in force. After registration,
+# "which rubric was this screened under" is answerable from the PDF alone.
+#
+# Headings are not demoted; each appendix keeps its own H1, retitled in place, so
+# the section numbering inside the rubric survives the bundle intact.
+PROTOCOL_PARTS := protocol/PROTOCOL.md protocol/rubric.md protocol/rubric-v2-proposal.md
+
+protocol: protocol/PROTOCOL.pdf
+
+protocol/PROTOCOL.pdf: $(PROTOCOL_PARTS) protocol/protocol.tex
+	@mkdir -p build
+	@cp protocol/PROTOCOL.md build/protocol_bundle.md
+	@printf '\n\\newpage\n\n' >> build/protocol_bundle.md
+	@sed '1s|^# .*|# Appendix A. Screening rubric v1.0: LOCKED, and the instrument the pilot ran under|' \
+		protocol/rubric.md >> build/protocol_bundle.md
+	@printf '\n\\newpage\n\n' >> build/protocol_bundle.md
+	@sed '1s|^# .*|# Appendix B. Rubric v2: PROPOSED, NOT APPLIED, and not in force for any number in this document|' \
+		protocol/rubric-v2-proposal.md >> build/protocol_bundle.md
+	@pandoc build/protocol_bundle.md -o $@ \
+		--pdf-engine=xelatex \
+		--toc --toc-depth=2 \
+		-V geometry:margin=2.2cm \
+		-V fontsize=11pt \
+		-V mainfont="Helvetica Neue" \
+		-V monofont="Menlo" \
+		-V colorlinks=true -V linkcolor=black -V urlcolor=black \
+		-H protocol/protocol.tex 2> build/protocol.log; \
+	pandoc_status=$$?; cat build/protocol.log; test $$pandoc_status -eq 0
+# A DROPPED GLYPH IS A CHANGED RULE, SO IT FAILS THE BUILD.
+#
+# xelatex WARNS on a character the font cannot set and then renders the page
+# without it. The first build of this document did exactly that: Helvetica Neue has
+# no U+2192, and every rubric rule written as "X -> OUT" came out as "X  OUT". The
+# appendix whose one job is to say what maps to what was quietly printing rules with
+# the mapping deleted, and the build said OK.
+#
+# protocol.tex now maps the arrows. But the next unmapped glyph someone types into
+# the rubric would fail the same way, silently, and the PDF is the artifact that gets
+# REGISTERED. So the warning is promoted to an error: if xelatex could not set a
+# character, there is no PDF worth registering.
+	@if grep -q "Missing character" build/protocol.log; then \
+		echo ""; \
+		echo "FAIL: xelatex could not set these characters, and dropped them from the PDF:"; \
+		grep -o "There is no .\+ (U+[0-9A-F]*)" build/protocol.log | sort -u | sed 's/^/  /'; \
+		echo ""; \
+		echo "A dropped glyph in a coding manual is a changed instruction. Map it in protocol/protocol.tex."; \
+		rm -f $@; exit 1; \
+	fi
+	@echo "OK: protocol is $$(pdfinfo $@ | awk '/^Pages:/ {print $$2}') pages, $$(wc -w < build/protocol_bundle.md) words, no dropped glyphs."
+
 clean:
-	rm -f proposal/metacan-proposal.pdf
+	rm -f proposal/metacan-proposal.pdf protocol/PROTOCOL.pdf
+	rm -rf build

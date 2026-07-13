@@ -1,0 +1,905 @@
+Reading additional input from stdin...
+OpenAI Codex v0.144.0
+--------
+workdir: /Users/choxos/Documents/GitHub/CaRN-data-challenge
+model: gpt-5.6-luna
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: high
+reasoning summaries: none
+session id: 019f58e7-ac8b-78e0-a547-8f0c05aabfef
+--------
+user
+# MétaCan screening rubric (v1.0)
+
+**Locked before screening. Version-controlled. Any change is a new version with a dated entry in `DEVIATIONS.md`.**
+
+Both machine screeners and both human coders work from this document and nothing else. The rubric is the
+instrument; if two coders disagree, the rubric is what they are adjudicated against.
+
+---
+
+## The unit
+
+One work (journal article, preprint, book chapter, report, dataset, or software), identified by its OpenAlex ID.
+You see: title, abstract, publication year, language, venue, OpenAlex topic and field, Canadian institutional
+affiliations, funders.
+
+## The question
+
+**Is the object of study *research itself*?**
+
+Metaresearch studies how research is done, reported, funded, evaluated, disseminated, or governed. The test is
+what the work is *about*, not what field it appears in and not what vocabulary it uses.
+
+A cardiology trial is not metaresearch. A study of *how cardiology trials report their outcomes* is.
+
+---
+
+## Tier
+
+Assign exactly one.
+
+### T1: Core metaresearch
+The primary object of study is research itself. Typical objects:
+
+- research **methods** and their properties (bias, reporting, statistical practice, study design)
+- **reproducibility**, replication, data and code sharing
+- **research integrity**: misconduct, retraction, questionable research practices, authorship
+- **peer review** and editorial process *as objects of study*
+- **research evaluation**, metrics, rankings, funding allocation
+- **scholarly communication**: publishing models, open access, preprints *as objects of study*
+- **bibliometrics and scientometrics** applied to a research literature
+- the **research workforce**: careers, equity, training, capacity
+- **evidence synthesis methodology** (not an individual systematic review's clinical answer, but work *about* how
+  syntheses are done)
+
+### T2: Adjacent
+Empirically or conceptually grounded work on science as a social system that is not framed as metaresearch but
+studies it:
+
+- **science and technology studies (STS)**: social studies of scientific knowledge, practice, controversy
+- **library and information science**: information behaviour of researchers, repositories, discovery
+- **research infrastructure** studies: platforms, data repositories, identifiers, standards
+- **history and philosophy of science** *when the object is contemporary research practice*
+- **research policy** analysis grounded in evidence
+
+T2 is where the field's diversity lives. Be generous here: a paper does not have to call itself metaresearch to
+be studying research.
+
+### T3: Contextual
+Relevant to the ecosystem, mapped and released, but **never pooled into the analytic corpus**:
+
+- editorials, commentaries, opinion pieces about research practice
+- policy documents and position statements
+- announcements of infrastructure, tools, or initiatives
+- news, obituaries, corrections, letters
+
+### OUT: Not metaresearch
+Everything else. Includes, and this is the most common error:
+
+- **A study that uses a method is not a study of the method.** A meta-analysis answering a clinical question is
+  OUT. A study of how meta-analyses handle heterogeneity is T1.
+- **Mentioning a metaresearch term is not studying it.** A lab paper reporting "assay reproducibility", a methods
+  section saying "peer reviewed", a licence note saying "open access": all OUT.
+- **Domain research that happens to be bibliometric in method** but whose object is the domain, not the research:
+  e.g. a bibliometric map of diabetes treatments, produced to summarise diabetes knowledge. Borderline; see below.
+
+---
+
+## The three errors that matter most
+
+These are where the pilot showed retrieval and screening break down. Read them twice.
+
+1. **Polysemy.** `reproducibility` in a biochemistry paper means the assay gives the same reading twice. In a
+   metaresearch paper it means the reproducibility crisis. Only the second is in scope. The same applies to
+   `validation`, `replication`, `bias`, `peer review`, `open access`. **Judge the sense, not the token.**
+
+2. **Method vs. object.** Using bibliometrics ≠ studying research. Ask: *if this paper is right, what do we now
+   know more about: a scientific question, or the practice of science?* If the former, OUT.
+
+3. **Absence of vocabulary is not absence of content.** An STS paper about laboratory practice, or an LIS paper
+   about how researchers find data, may use none of the field's keywords and still be squarely T2. **Do not
+   require the vocabulary.** This is the error that makes the field look smaller and more anglophone than it is.
+
+---
+
+## Canadian linkage
+
+Record which apply (this is metadata, not an inclusion test; the estimand is defined separately in
+`PROTOCOL.md`):
+
+- `CA_AFF`: at least one author affiliated with a Canadian institution
+- `CA_FUND`: funded by CIHR, NSERC, SSHRC, or CFI
+- `ABOUT_CA`: the Canadian research system is a substantive object of study (not a passing mention, not one
+  country among forty in a global comparison)
+
+## Genre
+
+`empirical` · `conceptual` · `editorial/commentary` · `policy` · `infrastructure/announcement` · `other`
+
+OpenAlex's `type` is unreliable and this field is commentary-heavy, so genre is coded, not inherited.
+
+## Language of the work
+
+As published. Do not infer from the venue.
+
+---
+
+## Confidence
+
+- `high`: the rubric decides this cleanly.
+- `medium`: the rubric decides, but a reasonable coder could differ.
+- `low`: genuinely on the boundary, or the abstract is missing/too thin to judge.
+
+**`low` is a legitimate answer and is not a failure.** Records coded `low` by either screener are routed to
+adjudication. A screener that never says `low` is not being careful; it is being confident.
+
+---
+
+## Worked examples
+
+| Title (abridged) | Tier | Why |
+|---|---|---|
+| "Data sharing practices in 500 randomised trials" | **T1** | The object is reporting practice. |
+| "Reproducibility of a Western blot protocol" | **OUT** | Assay reproducibility. Polysemy trap. |
+| "Trends in citation of retracted papers" | **T1** | Object is the literature's own behaviour. |
+| "Laboratory life in a Canadian genomics centre: an ethnography" | **T2** | STS. No metaresearch vocabulary; still studies research. |
+| "How do researchers discover datasets? A survey" | **T2** | LIS, information behaviour of researchers. |
+| "Effectiveness of statins: a network meta-analysis" | **OUT** | Uses a synthesis method to answer a clinical question. |
+| "How network meta-analyses handle inconsistency: a review of 200 reviews" | **T1** | Object is the method. |
+| "Announcing the Canadian Research Data Repository" | **T3** | Infrastructure announcement. Mapped, not pooled. |
+| "Open access mandates are failing early-career researchers" (editorial) | **T3** | Commentary about research practice. |
+| "Bibliometric analysis of diabetes research 2000–2020" | **T2** | Borderline. Bibliometric method, and the object *is* a research literature, so it studies research output. Code T2, `medium`. |
+| "Le libre accès dans les revues québécoises : état des lieux" | **T1** | Scholarly communication, object is publishing practice. French. |
+
+---
+
+## Instructions to the screener
+
+Read the title and abstract. Apply the rubric. Do not use outside knowledge of the authors or the journal's
+reputation. If the abstract is missing, judge on the title alone and set confidence to `low` unless the title is
+unambiguous.
+
+Return the schema in `protocol/screening-schema.json`. One object per work. No prose, no preamble.
+--------------------------------------------------------------------------------
+You are screening works for MetaCan, a map of Canadian metaresearch.
+
+Apply the rubric above to every record in the JSON array below. Return a JSON
+array with one object per work, conforming to protocol/screening-schema.json:
+
+  {"id": "W...", "tier": "T1|T2|T3|OUT", "genre": "...", "about_ca": true|false,
+   "confidence": "high|medium|low", "reason": "one sentence"}
+
+Rules:
+- Return the JSON array and NOTHING else. No prose, no preamble, no code fences.
+- Every input id must appear exactly once in the output.
+- Do not run commands, read files, or browse. Classify from the RECORDS alone.
+
+RECORDS:
+[
+  {
+    "id": "W2057128308",
+    "title": "Ovarian reserve after uterine artery embolization for leiomyomata",
+    "abstract": "",
+    "year": 2002,
+    "lang": "en",
+    "type": "letter",
+    "venue": "Fertility and Sterility",
+    "topic": "Uterine Myomas and Treatments",
+    "field": "Medicine",
+    "ca_institutions": "McGill University",
+    "funders": []
+  },
+  {
+    "id": "W4394344544",
+    "title": "Patterns of human activity in green spaces managed by Conservation Halton using anonymized locations of smart devices",
+    "abstract": "We used anonymized locations of smart devices to determine how people used green spaces for properties managed by Conservation Halton. The smart device data was acquired from Mapbox Movement (https://www.mapbox.com/movement-data). Conservation Halton is a regional non-profit responsible for managing green spaces center around Halton Region in Ontario, Canada. The data was acquired for June, July, and August of 2020. This data is to complement a paper soon to be published in PLoS Computational Biology",
+    "year": 2022,
+    "lang": "en",
+    "type": "dataset",
+    "venue": "Figshare",
+    "topic": "Impact of Light on Environment and Health",
+    "field": "Environmental Science",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W3037592907",
+    "title": "Multispecies integrated population model reveals bottom-up dynamics in a seabird predator-prey system",
+    "abstract": "Abstract Assessing the effects of climate and interspecific relationships on communities is challenging because of the complex interplay between species population dynamics, their interactions, and the need to integrate information across several biological levels (individuals – populations – communities). Usually used to quantify species interactions, integrated population models (IPMs) have recently been extended to communities. These models allow fitting multispecies matrix models to data from multiple sources while simultaneously accounting for various sources of uncertainty in each data source. We used multispecies IPMs accommodating climate conditions to quantify the relative contribution of climate vs. interspecific interactions on demographic parameters, such as survival and breeding success, in the dynamics of a predator-prey system. We considered a stage-structured predator–prey system combining 22 years of capture–recapture data and population counts of two seabirds, the Brown Skua ( Catharacta lönnbergi ) and its main prey the Blue Petrel ( Halobaena caerulea ) both breeding on the Kerguelen Islands in the Southern Ocean. Our results showed that climate and predator-prey interactions drive the demography of skuas and petrels in different ways. The breeding success of skuas appeared to be largely driven by the number of petrels and to a lesser extent by intraspecific density-dependence. In contrast, there was no evidence of predation effects on the demographic parameters of petrels, which were affected by oceanographic factors (chlorophyll a and sea surface temperature anomalies). We conclude that bottom-up mechanisms are the main drivers of this skua-petrel system. We discuss the mechanisms by which climate variability and predator-prey relationships may affect the demographic parameters of these seabirds. Taking into account both species interactions and environmental covariates in the same analysis improved our understanding of species dynamics.",
+    "year": 2020,
+    "lang": "en",
+    "type": "preprint",
+    "venue": "bioRxiv (Cold Spring Harbor Laboratory)",
+    "topic": "Avian ecology and behavior",
+    "field": "Environmental Science",
+    "ca_institutions": "Simon Fraser University",
+    "funders": ["Terres Australes et Antarctiques Françaises", "Institut écologie et environnement", "Institut Polaire Français Paul Emile Victor", "Centre National de la Recherche Scientifique", "Agence Nationale de la Recherche"]
+  },
+  {
+    "id": "W2770666488",
+    "title": "Commentary: Creating Hybrid After-School Enrichment Activities",
+    "abstract": "In this commentary we propose a collaborative strategy for the creation of informal learning activities in after-school settings that are also shared sites of learning, research, and development. We briefly trace the history of a research program—\"UCLinks\"—whose defining feature is a form of collaboration between institutions of higher learning and local community institutions responsible for youth in the afterschool hours. These collaborations thrive only to the degree that \"mutual appropriation\" can be negotiated between partners, and it is within mutual appropriation that new possibilities for creative cross-generational and cross-cultural informal learning activities are materialized.",
+    "year": 2012,
+    "lang": "en",
+    "type": "article",
+    "venue": "LEARNing Landscapes",
+    "topic": "Youth Development and Social Support",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4411230266",
+    "title": "Maintaining Resilience and Well-Being in the Era of Climate Change: Protocol of an Acceptability and Feasibility Pilot of the Bee Well Program for Treating Eco-Anxiety in Rural Children Exposed to Natural Hazards",
+    "abstract": "BACKGROUND: The effects of climate change on mental health are becoming widely recognized. Mental health can be impacted through direct and indirect exposure to natural hazards, as well as through the overarching awareness of climate change and the resultant environmental decline-the latter is termed eco-anxiety. Exposure to natural hazards also increases eco-anxiety, further compounding mental health impacts. Young people are especially vulnerable to the mental health impacts of climate change and have higher rates of eco-anxiety than other age groups. Those in rural areas are also more likely to be impacted by natural hazards, further underscoring the need to support this population. To date, there remains scant evidence regarding how to support young people with eco-anxiety, and few interventions, especially for children, have been evaluated. There is a need for further research to inform treatment for young people for climate change-related distress. OBJECTIVE: This study pilots a novel group-based mental health and resilience intervention in relation to eco-anxiety. Specifically, this project aims to explore the acceptability, feasibility, and clinical utility of a group-based eco-anxiety intervention. METHODS: The project is an exploratory pilot assessing the acceptability, feasibility, and clinical utility of a group-based intervention using a pre-post design with a single group. A minimum sample of 12 children aged 10-14 years located in a rural area and with exposure to at least one natural hazard will be enrolled in this study. In order to assess clinical utility, changes from preintervention to postintervention in distress, resilience, and climate emotions will be assessed. To do so, children will complete measures of psychological distress (subjective units of distress, Depression Anxiety Stress Scale-21-youth version), climate emotions, and resilience (Resilience Scale for Children-10) before and after the intervention. Acceptability will be assessed post intervention through a series of Likert scale and open-ended questions. Feasibility will be assessed through enrollment and the proportion of participants completing the full intervention. Eligible children will take part in a novel 5-module group-based intervention designed to build resilience, promote nature connectedness, build social support, and foster meaning-focused coping. RESULTS: This study has received ethics board approval by the University of New England's Human Research Ethics Committee (HE23-080). This study will be conducted from late 2024 to 2025. As of March 2025, 28 children have been enrolled in the study. CONCLUSIONS: Rural children and young people are an especially vulnerable population for the mental health impacts of climate change. To date, the evidence base for interventions for treating eco-anxiety remains sparse, especially for young people and children who typically have higher rates of eco-anxiety than older age groups. This study will provide preliminary evidence of a group-based treatment for children and adolescents experiencing eco-anxiety that can inform practitioners. TRIAL REGISTRATION: Australia and New Zealand Clinical Trials Registry ACTRN12624001287527; https://www.anzctr.org.au/Trial/Registration/TrialReview.aspx?id=388545. INTERNATIONAL REGISTERED REPORT IDENTIFIER (IRRID): PRR1-10.2196/69005.",
+    "year": 2025,
+    "lang": "en",
+    "type": "article",
+    "venue": "JMIR Research Protocols",
+    "topic": "Climate Change Communication and Perception",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W7061528971",
+    "title": "Soutenir l'autodétermination des personnes présentant une déficience intellectuelle : contribution de la théorie de l'autodétermination",
+    "abstract": "Depuis les années 1980, le développement de l’autodétermination des personnes présentant une déficience intellectuelle (DI) est devenu une priorité dans les interventions qui leur sont offertes. Les agents de socialisation (p.ex., éducateurs, travailleurs sociaux, enseignants, parents, etc.) ont un rôle crucial dans sa promotion de par le soutien qu’ils leur offrent et les apprentissages qu’ils tentent de favoriser chez elles. La façon de communiquer et le type de relation que les agents de socialisation établissent avec la personne présentant une DI ont une influence certaine dans son développement. Pourtant, peu d’études ont jusqu’à ce jour évalué quelles sont les manières optimales de communiquer et d’interagir des agents socialisation pouvant faciliter l’autodétermination des personnes présentant une DI. Ancrée dans la théorie de l’autodétermination (TAD), cette thèse s’intéresse à évaluer, les effets d’un type de soutien spécifique, le soutien à l’autonomie (ou à l’autodétermination; SA, une manière de communiquer et d’être en relation qui satisfait le besoin d’autodétermination), sur la satisfaction du besoin d’autodétermination et la présence de bénéfices comportementaux, motivationnels et affectifs chez les personnes présentant une déficience intellectuelle légère (DIL) dans un contexte d’apprentissage. Deux articles seront présentés dans cette thèse. Le concept d’autodétermination comprend une large littérature et revêt de multiples définitions. Le premier article, de nature théorique, permettra de mieux le comprendre et de l’éclaircir à la lumière de la théorie fonctionnelle de l’autodétermination (TfAD) et de la théorie de l’autodétermination (TAD). Les études portant sur les interventions de promotion de l’autodétermination de la TAD et de la TfAD seront présentées. Dans un deuxième temps, la TAD et la TfAD seront comparées et contrastées l’une avec l’autre ce qui permettra de démontrer leurs différences, leurs similarités et leurs complémentarités tant au niveau théorique que de l’intervention. Enfin, il est proposé que le SA étudié par la TAD puisse constituer une intervention prometteuse, en plus des interventions proposées par la TfAD, afin de favoriser le développement de l’autodétermination et engendrer des bénéfices comportementaux, motivationnels et affectifs chez cette population. La deuxième étude visera à évaluer cette proposition. Par le biais d’une étude expérimentale, il sera évalué si le SA peut satisfaire le besoin d’autonomie/autodétermination des personnes présentant une DIL et peut faciliter l’intériorisation de la valeur d’une tâche, l’engagement et la diminution de l’anxiété lorsqu’ils réalisent une tâche de résolution de problème, une activité d’apprentissage qui est à la fois importante et fastidieuse. Ainsi, l’étude permettra de comparer les effets d’une tâche réalisée avec ou sans SA (condition expérimentale et témoin respectivement). Les participants (N = 51) présentaient tous une DIL et ont été recrutés dans un centre de réadaptation de la région de Montréal, au Québec (Canada). Les résultats démontrent que comparativement à la condition témoin, le SA amène chez les participants une satisfaction plus élevée du besoin d’autodétermination, un plus grand niveau d’engagement, une plus grande diminution de leur anxiété lors de l’activité et facilite l’intériorisation de la valeur de la tâche. La signification et l’interprétation de ces résultats, de même que leurs implications potentielles pour la recherche et les interventions offertes à ces personnes sont finalement discutées.",
+    "year": 2016,
+    "lang": "fr",
+    "type": "other",
+    "venue": "Open MIND",
+    "topic": "Magnetic confinement fusion research",
+    "field": "Physics and Astronomy",
+    "ca_institutions": [],
+    "funders": "Université de Montréal"
+  },
+  {
+    "id": "W1468300197",
+    "title": "Towards Optimisation of the Multifocal Visually Evoked Response by using Graduated Checkerboard Stimulus Patterns",
+    "abstract": "",
+    "year": 2003,
+    "lang": "en",
+    "type": "article",
+    "venue": "Investigative Ophthalmology & Visual Science",
+    "topic": "Image Processing Techniques and Applications",
+    "field": "Engineering",
+    "ca_institutions": "Queen's University",
+    "funders": []
+  },
+  {
+    "id": "W4406242645",
+    "title": "Rebiopsy Enhances Survival with Afatinib vs. Osimertinib in EGFR Exon 19 Deletion Non-Small Cell Lung Cancer: A Multicenter Study in Taiwan",
+    "abstract": "BACKGROUND: Afatinib and Osimertinib are first-line treatments for EGFR-mutated advanced non-small cell lung cancer (NSCLC), but their comparative efficacies and the patient groups that benefit the most remain unclear. This multicenter retrospective study evaluated the efficacy of first-line Afatinib and Osimertinib in NSCLC patients with EGFR 19del and no brain metastases at diagnosis. METHODS: The primary endpoints were time on treatment (ToT) and overall survival (OS). Survival analyses were performed for three groups: Afatinib followed by Osimertinib, Afatinib followed by other therapies, and Osimertinib (alone or followed by other therapies). Rebiopsy practices, including T790M mutation detection, were also analyzed in patients with disease progression on Afatinib. RESULTS: = 0.473). Osimertinib demonstrated advantages, with fewer brain metastases upon progression and fewer adverse effects. In the Afatinib group, 64% of patients with disease progression underwent rebiopsy, with 39% testing positive for T790M mutation and subsequently receiving Osimertinib. Rebiopsy was most frequently performed on the lung parenchyma using non-surgical methods. CONCLUSIONS: In this real-world study, Osimertinib achieved a significantly longer ToT compared to Afatinib in NSCLC patients with EGFR 19del and no brain metastases. The sequential use of Afatinib followed by Osimertinib showed a trend toward improved OS, highlighting the importance of rebiopsy for identifying T790M mutations to guide subsequent therapy.",
+    "year": 2025,
+    "lang": "en",
+    "type": "article",
+    "venue": "Current Oncology",
+    "topic": "Lung Cancer Treatments and Mutations",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": ["National Taiwan University", "National Taiwan University Hospital Yunlin Branch", "National Taiwan University Hospital"]
+  },
+  {
+    "id": "W2002767416",
+    "title": "Computational fluid dynamic modeling of two passive samplers",
+    "abstract": "",
+    "year": 2006,
+    "lang": "en",
+    "type": "article",
+    "venue": "Environmental Pollution",
+    "topic": "Toxic Organic Pollutants Impact",
+    "field": "Environmental Science",
+    "ca_institutions": [],
+    "funders": "Commission for Environmental Cooperation"
+  },
+  {
+    "id": "W3208376055",
+    "title": "Contributions of Nature-Based Solutions to Reduce Peoples’ Vulnerabilities to Climate Change across the Rural Global South",
+    "abstract": "Nature-based solutions (NbS) &amp;mdash;i.e. working with and enhancing nature to address societal challenges&amp;mdash; feature with increasing prominence in responses to climate change, including in the adaptation plans of the most vulnerable nations. Although evidence for the effectiveness of NbS for adaptation is growing, there is less evidence on whether and how NbS reduce vulnerability to climate change in the Global South, despite this region being home to most of the world&amp;rsquo;s most climate-vulnerable people. To address this, we analysed the vulnerability-reduction outcomes of 85 nature-based interventions in rural areas across the Global South, and factors mediating their effectiveness, based on a systematic map of peer-reviewed studies encompassing a wide diversity of ecosystems, climate impacts, intervention types and institutions. We applied an analytical framework based on social-ecological systems and climate change vulnerability, coding studies with respect to six pathways of vulnerability reduction: social and ecological exposure, sensitivity, and adaptive capacity. We find widespread effectiveness of NbS in the dataset with 95% providing positive outcomes for climate change adaptation. Overall, nature-based interventions reduced vulnerability primarily by lowering ecosystem sensitivity to climate impacts (73% of interventions), followed by reducing social sensitivity (43%), reducing ecological exposure (37%), and/or increasing social adaptive capacity (34%), ecological adaptive capacity (18%) and reducing social exposure (12%). With an analysis of mediating factors, we show that vulnerability-reduction effectiveness was affected as much by social and political factors as by technical considerations. Indeed configurations of existing and introduced formal and informal institutions appear central to the efficacy and distributive effects of the studied interventions. We conclude that attention to the distinct pathways through which vulnerability is reduced can help maximise the benefits of NbS and that to be successful, careful consideration is required on their applicability to particular circumstances as well as their social dimensions.",
+    "year": 2021,
+    "lang": "en",
+    "type": "preprint",
+    "venue": "Preprints.org",
+    "topic": "Climate Change, Adaptation, Migration",
+    "field": "Social Sciences",
+    "ca_institutions": "Université du Québec à Montréal",
+    "funders": []
+  },
+  {
+    "id": "W2164508363",
+    "title": "Prevention and Treatment of Contrast-Induced Nephropathy",
+    "abstract": "",
+    "year": 2006,
+    "lang": "en",
+    "type": "review",
+    "venue": "Techniques in vascular and interventional radiology",
+    "topic": "Acute Kidney Injury Research",
+    "field": "Medicine",
+    "ca_institutions": "University of Alberta",
+    "funders": []
+  },
+  {
+    "id": "W2173670877",
+    "title": "A Survey on the Use of Causal Discourse Markers among Chinese English Majors",
+    "abstract": "Chinese English Majors mainly write argumentative compositions which itself is a kind of causal relations. Thereby, causal discourse markers, as one of the Discourse Markers can be employed in their argumentations to tighten the coherence and logical relations. Based on the results of other scholars’ previous research, this thesis applies questionnaires to investigate the reasons of using causal discourse markers in English majors’ oral and written English. According to the analysis of questionnaires, the reasons that caused English majors using of causal discourse markers are as follows: 1) lack of stylistic awareness; 2) intentionally avoiding making mistakes; 3) time factor (timed); 4) negative L1 transfer; 5) teachers’ influence. The results generated from the data analysis and discussions have also provided some pedagogical implications.",
+    "year": 2015,
+    "lang": "en",
+    "type": "article",
+    "venue": "International Journal of English Linguistics",
+    "topic": "Discourse Analysis in Language Studies",
+    "field": "Arts and Humanities",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2075044986",
+    "title": "Inflammation and insulin/IGF-1 resistance as the possible link between obesity and neurodegeneration",
+    "abstract": "",
+    "year": 2014,
+    "lang": "en",
+    "type": "review",
+    "venue": "Journal of Neuroimmunology",
+    "topic": "Adipokines, Inflammation, and Metabolic Diseases",
+    "field": "Medicine",
+    "ca_institutions": ["University of British Columbia, Okanagan Campus", "University of British Columbia"],
+    "funders": "Natural Sciences and Engineering Research Council of Canada"
+  },
+  {
+    "id": "W1987997758",
+    "title": "Technology to enhance physical rehabilitation of critically ill patients",
+    "abstract": "BACKGROUND: Neuromuscular complications after critical illness are common and can be severe and persistent. To ameliorate complications, there is growing interest in starting physical medicine and rehabilitation therapy immediately after physiologic stabilization. The introduction of physical medicine and rehabilitation-related technology into the intensive care unit may help facilitate delivery of this therapy. DISCUSSION: Neuromuscular electrical stimulation therapy creates passive contraction of muscles through low-voltage electrical impulses delivered through skin electrodes placed over target muscles. Although neuromuscular electrical stimulation has not been studied in patients with acute critical illness, published guidelines based on available evidence suggest that neuromuscular electrical stimulation may be considered in intensive care unit patients who are at high risk of developing muscle weakness. Bedside cycle ergometry can provide range of motion and muscle strength training for intensive care unit patients who are either sedated or awake, and may help preserve muscle architecture and improve strength and function. Finally, custom-designed technological aids to assist with ambulating mechanically ventilated patients may reduce the human resource requirements and improve the safety and effectiveness of early mobilization in the intensive care unit. CONCLUSION: Physical medicine and rehabilitation-related technologies may play an important role in preventing and treating intensive care unit-acquired neuromuscular complications. Future studies are needed to evaluate their efficacy in intensive care unit patients.",
+    "year": 2009,
+    "lang": "en",
+    "type": "review",
+    "venue": "Critical Care Medicine",
+    "topic": "Intensive Care Unit Cognitive Disorders",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": "Canadian Institutes of Health Research"
+  },
+  {
+    "id": "W6923549395",
+    "title": "Rapport sur les missions du diocese de Quebec, et autres qui en ont ci-devant fait partie. Avril, 1857. No. 12 ; avec approbation des superieurs",
+    "abstract": "\"Title varies. Nos.1 and 4. 1842, entitled Notice sur les missions du diocese de Quebec. They contain numerous reports on the work of the Catholic Church in the Oregon. Continued by the Association's Annales de la Propagation de la Foi pour la province de Quebec combining the reports of the dioceses of Québec and Montreal.\"-- Strathern, G. M., &amp; Edwards, M. H. (1970). Navigations, traffiques &amp; discoveries, 1774-1848: A guide to publications relating to the area now British Columbia. Victoria, BC: University of Victoria, p. 30.",
+    "year": 2018,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Open Collections",
+    "topic": "Canadian Identity and History",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W3132228168",
+    "title": "Advanced signal processing techniques to improve the detection of defects in pressure vessels by acoustic emission testing",
+    "abstract": "",
+    "year": 2020,
+    "lang": "en",
+    "type": "article",
+    "venue": "Espace ÉTS (ETS)",
+    "topic": "Engineering Diagnostics and Reliability",
+    "field": "Engineering",
+    "ca_institutions": [],
+    "funders": "Natural Sciences and Engineering Research Council of Canada"
+  },
+  {
+    "id": "W4235862764",
+    "title": "10.1037/e473962008-001",
+    "abstract": "This DOI is not currently attached to any metadata records. DOIs can’t actually ever be deleted (they’re persistent), but sometimes our members create DOIs in error. We do have a process to approximate deletion which we follow only in rare cases where the DOI has been genuinely created in error, and most crucially, if the DOI has never been published anywhere online or in print and never otherwise distributed to or communicated with anyone (authors, readers, reviewers, etc.",
+    "year": 2000,
+    "lang": "en",
+    "type": "article",
+    "venue": "Time to knit",
+    "topic": "Hermeneutics and Narrative Identity",
+    "field": "Arts and Humanities",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2300554136",
+    "title": "L’art subversionné",
+    "abstract": "",
+    "year": 2015,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Liberté",
+    "topic": "Contemporary art, education, critique",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2588445179",
+    "title": "Bleeding Scores for the Diagnosis of von Willebrand Disease",
+    "abstract": "Obtaining a personal history of bleeding is a critical component to the diagnosis of von Willebrand disease (VWD). The collection of this information can be challenging for physicians, however, as the reporting and interpretation of bleeding symptoms is subjective. The need for more precise quantification of bleeding symptoms was recognized and the Vicenza Bleeding Questionnaire was developed in 2005. This questionnaire collects data regarding the presence and severity of bleeding symptoms and generates a bleeding score by summing the severity of all symptoms reported by a patient. Several subsequent bleeding assessment tools (BATs) have been developed based from this original questionnaire and there has been a surge in the use of BATs in various clinical settings for the diagnosis and evaluation of VWD. This review will discuss the evolution of BATs over the past decade, as well as their use and validation in various settings for the diagnosis and evaluation of VWD. Additionally, we will discuss the clinical utility of BATs, the limitations of these tools, and future directions.",
+    "year": 2017,
+    "lang": "en",
+    "type": "review",
+    "venue": "Seminars in Thrombosis and Hemostasis",
+    "topic": "Platelet Disorders and Treatments",
+    "field": "Medicine",
+    "ca_institutions": "Queen's University",
+    "funders": []
+  },
+  {
+    "id": "W4391109610",
+    "title": "Globe Rupture Secondary to a Spontaneous Suprachoroidal Hemorrhage in a Blind Glaucomatous Eye: A Case Report",
+    "abstract": "Purpose: To report a rare case of globe rupture following a spontaneous expulsive suprachoroidal hemorrhage without a predisposing event. Methods: Case report. Results: A 40-year-old man presented with a 3-week history of episodic eye pain, likely associated with uncontrolled glaucoma, and a spontaneous clot exuding from his right eye without a predisposing event. Notably, the patient had a remote past ocular history of posttraumatic glaucoma and untreated retinal detachment from childhood. He underwent uncomplicated evisceration of the right eye with polymethyl methacrylate implantation. Conclusions: Spontaneous expulsive suprachoroidal hemorrhage without a predisposing event is an exceedingly rare phenomenon, with only six previously reported cases. It is possible that eyes with a history of trauma, possibly diseased eyewalls, and eyes with high intraocular pressure may be the most susceptible to spontaneous suprachoroidal hemorrhage and consequent globe rupture.",
+    "year": 2023,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Current Ophthalmology",
+    "topic": "Traumatic Ocular and Foreign Body Injuries",
+    "field": "Medicine",
+    "ca_institutions": "McMaster University",
+    "funders": []
+  },
+  {
+    "id": "W3213963001",
+    "title": "Long-term outcomes of Type 1 Retinopathy of Prematurity (ROP) after Treatment with Bevacizumab",
+    "abstract": "",
+    "year": 2020,
+    "lang": "en",
+    "type": "article",
+    "venue": "Investigative Ophthalmology & Visual Science",
+    "topic": "Retinopathy of Prematurity Studies",
+    "field": "Medicine",
+    "ca_institutions": ["University of Toronto", "Hospital for Sick Children"],
+    "funders": []
+  },
+  {
+    "id": "W2800879685",
+    "title": "A framework for identifying treatment‐covariate interactions in individual participant data network meta‐analysis",
+    "abstract": "BACKGROUND: Stratified medicine seeks to identify patients most likely to respond to treatment. Individual participant data (IPD) network meta-analysis (NMA) models have greater power than individual trials to identify treatment-covariate interactions (TCIs). Treatment-covariate interactions contain \"within\" and \"across\" trial interactions, where the across-trial interaction is more susceptible to confounding and ecological bias. METHODS: We considered a network of IPD from 37 trials (5922 patients) for cervical cancer (2394 events), where previous research identified disease stage as a potential interaction covariate. We compare 2 models for NMA with TCIs: (1) 2 effects separating within- and across-trial interactions and (2) a single effect combining within- and across-trial interactions. We argue for a visual assessment of consistency of within- and across-trial interactions and consider more detailed aspects of interaction modelling, eg, common vs trial-specific effects of the covariate. This leads us to propose a practical framework for IPD NMA with TCIs. RESULTS: Following our framework, we found no evidence in the cervical cancer network for a treatment-stage interaction on the basis of the within-trial interaction. The NMA provided additional power for an across-trial interaction over and above the pairwise evidence. Following our proposed framework, we found that the within- and across-trial interactions should not be combined. CONCLUSION: Across-trial interactions are susceptible to confounding and ecological bias. It is important to separate the sources of evidence to check their consistency and identify which sources of evidence are driving the conclusion. Our framework provides practical guidance for researchers, reducing the risk of unduly optimistic interpretation of TCIs.",
+    "year": 2018,
+    "lang": "en",
+    "type": "article",
+    "venue": "Research Synthesis Methods",
+    "topic": "Mental Health Research Topics",
+    "field": "Psychology",
+    "ca_institutions": [],
+    "funders": ["Medical Research Council", "Universidad de Buenos Aires", "Chang Gung Medical Foundation", "University of Alberta", "Sanjay Gandhi Postgraduate Institute of Medical Sciences", "Universitair Medisch Centrum Groningen", "Chiang Mai University", "Rijksuniversiteit Groningen", "Yale University"]
+  },
+  {
+    "id": "W6999514870",
+    "title": "Data Center Cooling: From Inception to New Technologies",
+    "abstract": "",
+    "year": 2024,
+    "lang": "en",
+    "type": "other",
+    "venue": "COMPASS",
+    "topic": "Heat Transfer and Optimization",
+    "field": "Engineering",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4386643192",
+    "title": "Impact of SARS-Cov-2 on Clinical Trial Unit Workforce in the United Kingdom: An Observational Study",
+    "abstract": "The overall objective of this mixed-method digital-based observational study was to determine the mental health impact among CTU staff working during the COVID-19 pandemic. The Qualtrics Core XM platform was used to deploy the questionnaire where a quantitative analysis was conducted. The qualitative part of the study used the Microsoft Teams digital application to complete the interviews. Various validated mental health assessments were administered: Vancouver Index of Acculturation (VIA), Hospital Anxiety and Depression Scale (HADS), Insomnia Severity Index (ISI), Pandemic Stress Index (PSI), Burnout Assessment Tool-12 (BAT-12), General Self Efficacy Scale (GSE) and The Everyday Discrimination Scale (EDS). A total of 485 participants took part, of which 73.4% were female and 70.1% of the sample were white British. A high prevalence of anxiety, exhaustion and depression were identified across all participants. A significant mental health impact was identified among the CTU workforce where wellbeing was compromised during the course of the COVID-19 pandemic.",
+    "year": 2023,
+    "lang": "en",
+    "type": "preprint",
+    "venue": "Preprints.org",
+    "topic": "COVID-19 and Mental Health",
+    "field": "Psychology",
+    "ca_institutions": [],
+    "funders": ["Department of Health and Social Care", "Novo Nordisk", "National Institute for Health and Care Research", "Queen Mary University of London"]
+  },
+  {
+    "id": "W4246691629",
+    "title": "CQY volume 237 Cover and Front matter",
+    "abstract": "An abstract is not available for this content so a preview has been provided. As you have access to this content, a full PDF is available via the ‘Save PDF’ action button.",
+    "year": 2019,
+    "lang": "en",
+    "type": "article",
+    "venue": "The China Quarterly",
+    "topic": "Diverse Scientific and Economic Studies",
+    "field": "Economics, Econometrics and Finance",
+    "ca_institutions": [],
+    "funders": ["Harvard Graduate School of Education", "Universität Duisburg-Essen", "University of Toronto", "University of California, Los Angeles", "University of Minnesota", "Beijing Normal University", "Johns Hopkins University", "George Washington University", "Aarhus Universitet", "San Diego State University", "University of Pennsylvania", "University of Washington", "Massachusetts Institute of Technology", "Yale University"]
+  },
+  {
+    "id": "W2806906455",
+    "title": "That’s classified! Inventing a new patent taxonomy",
+    "abstract": "Abstract Innovation researchers currently make use of various patent classification schemas, which are hard to replicate. Using machine learning techniques, we construct a transparent, replicable and adaptable patent taxonomy, and a new automated methodology for classifying patents. We contrast our new schema with existing ones using a long-run historical patent dataset. We find quantitative analyses of patent characteristics are sensitive to the choice of classification; our interpretation of regression coefficients is schema dependent. We suggest much of the innovation literature should be carefully interpreted in light of our findings.",
+    "year": 2020,
+    "lang": "en",
+    "type": "article",
+    "venue": "Industrial and Corporate Change",
+    "topic": "Intellectual Property and Patents",
+    "field": "Business, Management and Accounting",
+    "ca_institutions": [],
+    "funders": ["Queen's University", "Queen's University Belfast"]
+  },
+  {
+    "id": "W4390336307",
+    "title": "10.3917/dm.104.0140",
+    "abstract": "",
+    "year": 2000,
+    "lang": "en",
+    "type": "article",
+    "venue": "Time to knit",
+    "topic": "Consumer Behavior in Brand Consumption and Identification",
+    "field": "Business, Management and Accounting",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W6998774020",
+    "title": "Asian Canadian Writing Beyond Autoethnography",
+    "abstract": "",
+    "year": 2012,
+    "lang": "en",
+    "type": "article",
+    "venue": "Project Muse (Johns Hopkins University)",
+    "topic": "Asian American and Pacific Histories",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W1995462252",
+    "title": "Economic Evaluation of a 100% Whey-Based Partially Hydrolyzed Formula for the Prevention of Atopic Dermatitis Among Swiss Children: Preliminary Results",
+    "abstract": "",
+    "year": 2011,
+    "lang": "en",
+    "type": "article",
+    "venue": "Pediatric Research",
+    "topic": "Infant Health and Development",
+    "field": "Health Professions",
+    "ca_institutions": "PharmIdeas (Canada)",
+    "funders": []
+  },
+  {
+    "id": "W2141444993",
+    "title": "The Herschel★ PEP/HerMES luminosity function – I. Probing the evolution of PACS selected Galaxies to z ≃ 4",
+    "abstract": "Understanding the origin and growth of the galaxies we ob-&#13;\\nserve today is one of the main problems of current cosmol-&#13;\\nogy. The luminosity function (LF) provides one of the fun-&#13;\\ndamental tools to probe the distribution of galaxies over&#13;\\ncosmological time, since it allows us to assess the statisti-&#13;\\ncal nature of galaxy formation and evolution. When com-&#13;\\nputed at di erent redshifts, the LF constitutes the most di-&#13;\\nrect method for exploring the evolution of a galaxy popula-&#13;\\ntion, describing the relative number of sources of di erent&#13;\\nluminosities counted in representative volumes of the Uni-&#13;\\nverse. The LF computed for di erent samples of galaxies&#13;\\ncan provide a crucial comparison between the distribution&#13;\\nof di erent galaxy types, i.e. galaxies at di erent redshifts,&#13;\\nin di erent enviroments or selected at di erent wavelengths.",
+    "year": 2013,
+    "lang": "en",
+    "type": "article",
+    "venue": "Monthly Notices of the Royal Astronomical Society",
+    "topic": "Galaxies: Formation, Evolution, Phenomena",
+    "field": "Physics and Astronomy",
+    "ca_institutions": ["University of British Columbia", "University of Lethbridge"],
+    "funders": "Science and Technology Facilities Council"
+  },
+  {
+    "id": "W2596211639",
+    "title": "Rare complication of needleless mini-sling procedure: Case report",
+    "abstract": "The mini-sling procedure is a widely used, minimally invasive treatment for stress urinary incontinence. While bladder perforation and stone formation over the mesh is not an expected complication of the mini-sling procedure, in this case, we report on the management of bladder calculi formed over the mesh, which was passed through the bladder while applying the mini-sling procedure, and was eventually removed using holmium laser. Performing cystoscopy in patients with irritative and obstructive symptoms after the sling procedure will help confirm bladder perforation, and an endoscopic approach using holmium laser is an effective treatment.",
+    "year": 2017,
+    "lang": "en",
+    "type": "article",
+    "venue": "Canadian Urological Association Journal",
+    "topic": "Pelvic floor disorders treatments",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2017268493",
+    "title": "E-074 Emergency Carotid Artery Stenting in Acute Ischemic Stroke",
+    "abstract": "Introduction/purpose Recanalization of occluded arteries is crucial for good functional outcome of acute stroke patients with large vessel occlusion. Endovascular treatment, particularly mechanical thrombectomy, plays an increasing role to achieve rapid recanalization. However, some patients with acute large vessel occlusion have additional extracranial cervical carotid artery occlusion or severe stenosis. Although these patients might undergo carotid stenting to achieve recanalization of intracranial occlusions, such stenting causes challenges in subsequent clinical management. The purpose of this study was to evaluate the safety and efficacy of endovascular recanalization treatment with emergency carotid artery stenting for acute stroke patients. Materials and methods We analyzed clinical and angiographic data of patients who underwent emergency cervical internal carotid artery (ICA) stenting in the setting of acute endovascular recanalization treatment in our institution between May 2005 and December 2012. Reperfusion was assessed according to the modified Thrombolysis in Cerebral Infarction (mTICI) score. Clinical outcome was evaluated at discharge and at 3 months after treatment by modified Rankin Scale (mRS). Results 23 patients were included in this cohort. The mean age was 63.3 years. The median NIHSS score on admission was 20 (range, 3–25). The median Alberta Stroke Program Early CT Score on diffusion-weighted imaging (ASPECTS-DWI) on admission was 7 (range, 2–10). 17 patients (73.9%) had ICA occlusion at the origin. 19 patients (82.6%) had intracranial tandem vessel occlusions. All patients successfully underwent carotid artery stenting and 15 patients (65.2%) underwent additional mechanical thrombectomy for intracranial vessels. After the procedure, 9 patients (39.1%) were mTICI grade &gt;IIb. Haemorrhagic transformation with parenchymal hematoma occurred in 9 patients (39.1%) and 2 (8.7%) was symptomatic. At discharge and at 3-months follow-up, 6 patients (26.1%) had a favorable outcome (mRS0–2). The multiple logistic model yielded age (P = 0.018) and initial ASPECTS-DWI (P = 0.029) independently associated with a favorable outcome and additionally mechanical thrombectomy (P = 0.003) was associated with haemorrhagic transformation with parenchymal hematoma. Conclusion Endovascular recanalization treatment with emergency carotid artery stenting is technically feasible. Further refinement of patient selection may reduce postprocedural hemorrhaghic transformation and optimise resultant clinical outcomes. Disclosures N. Ohara: None. S. Tateshima: None. J. Sayre: None. G. Duckwiler: None. R. Jahan: None. N. Gonzalez: None. P. Vespa: None. L. Ali: None. J. Saver: None. D. Liebeskind: None.",
+    "year": 2014,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of NeuroInterventional Surgery",
+    "topic": "Acute Ischemic Stroke Management",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2759724522",
+    "title": "Buying in: Residence and Citizenship by Investment",
+    "abstract": "involving a non-qualified percentage of a company's shares are taxed at a rate of 26%).",
+    "year": 2017,
+    "lang": "en",
+    "type": "article",
+    "venue": "Saint Louis University law journal",
+    "topic": "Migration and Labor Dynamics",
+    "field": "Social Sciences",
+    "ca_institutions": "McGill University",
+    "funders": []
+  },
+  {
+    "id": "W6992365297",
+    "title": "L'engagement scolaire des enfants hyperactifs et inattentifs : effets modÃ©rateurs des relations sociales",
+    "abstract": "Les Ã©lÃ¨ves qui ont un bon engagement scolaire prÃ©sentent gÃ©nÃ©ralement une bonne adaptation Ã lâÃ©cole. Cependant, pour les enfants hyperactifs et inattentifs, cette adaptation est souvent altÃ©rÃ©e. Les enfants qui entretiennent de bonnes relations sociales ont tendance Ã prÃ©senter un meilleur engagement comportemental, affectif et cognitif. La prÃ©sente Ã©tude vise Ã dÃ©terminer si la prosocialitÃ© envers les pairs et les relations chaleureuses avec les enseignants protÃ¨gent les enfants hyperactifs-inattentifs dâun possible dÃ©sengagement scolaire. Les donnÃ©es ont Ã©tÃ© recueillies auprÃ¨s de 513 Ã©lÃ¨ves du primaire et leurs enseignants au cours de deux annÃ©es scolaires successives. Les rÃ©sultats montrent que ces enfants bÃ©nÃ©ficient des relations positives avec les pairs et les enseignants. En particulier, lâengagement comportemental de ces Ã©lÃ¨ves demeure plus Ã©levÃ© comparativement Ã ceux qui nâentretiennent pas de relations positives. Pour les enfants trÃ¨s hyperactifs-inattentifs, la relation chaleureuse modÃ¨re le lien entre hyperactivitÃ©-inattention et engagement affectif. LâhyperactivitÃ©- inattention ne prÃ©dit pas de diminution dâengagement affectif et cognitif. Les implications pour la recherche et la pratique sont discutÃ©es.",
+    "year": 2014,
+    "lang": "fr",
+    "type": "other",
+    "venue": "Library and Archives Canada (Government of Canada)",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2108441801",
+    "title": "The brain weights body‐based cues higher than vision when estimating walked distances",
+    "abstract": "Optic flow is the stream of retinal information generated when an observer's body, head or eyes move relative to their environment, and it plays a defining role in many influential theories of active perception. Traditionally, studies of optic flow have used artificially generated flow in the absence of the body-based cues typically coincident with self-motion (e.g. proprioceptive, efference copy, and vestibular). While optic flow alone can be used to judge the direction, speed and magnitude of self-motion, little is known about the precise extent to which it is used during natural locomotor behaviours such as walking. In this study, walked distances were estimated in an open outdoor environment. This study employed two novel complementary techniques to dissociate the contributions of optic flow from body-based cues when estimating distance travelled in a flat, open, outdoor environment void of distinct proximal visual landmarks. First, lenses were used to magnify or minify the visual environment. Second, two walked distances were presented in succession and were either the same or different in magnitude; vision was either present or absent in each. A computational model was developed based on the results of both experiments. Highly convergent cue-weighting values were observed, indicating that the brain consistently weighted body-based cues about twice as high as optic flow, the combination of the two cues being additive. The current experiments represent some of the first to isolate and quantify the contributions of optic flow during natural human locomotor behaviour.",
+    "year": 2010,
+    "lang": "en",
+    "type": "article",
+    "venue": "European Journal of Neuroscience",
+    "topic": "Visual perception and processing mechanisms",
+    "field": "Neuroscience",
+    "ca_institutions": ["McMaster University", "Toronto Rehabilitation Institute", "York University"],
+    "funders": "Natural Sciences and Engineering Research Council of Canada"
+  },
+  {
+    "id": "W7131299462",
+    "title": "WPA household census for 2227 BLISS ST, Los Angeles County",
+    "abstract": "The Works Progress Administration Los Angeles Household Census Cards collection dates from 1939. The physical cards which number nearly half a million items are owned by the USC Libraries. More than a quarter of the collection has been digitized.The household survey cards (or \"dwelling schedules\"), one for each street address in greater Los Angeles, document a wide variety of information ranging from the type of dwelling, the value of the property, the monthly rent or mortgage, to whether or not there were flush toilets. While these cards form the bulk of the collection, other digitized documents include \"block face cards\" and \"block lists\" -- documenting the census process.",
+    "year": 2021,
+    "lang": "en",
+    "type": "dataset",
+    "venue": "University of Southern California Digital Library",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4403449571",
+    "title": "F72. COMPLEMENT COMPONENT 4 HAS A SEX- AND ETHNICITY-DEPENDENT ASSOCIATION WITH TREATMENT-RESISTANT SCHIZOPHRENIA AND NUMBER OF HOSPITALIZATIONS, BUT NOT ALCOHOL ABUSE",
+    "abstract": "",
+    "year": 2024,
+    "lang": "en",
+    "type": "article",
+    "venue": "European Neuropsychopharmacology",
+    "topic": "Diabetes and associated disorders",
+    "field": "Biochemistry, Genetics and Molecular Biology",
+    "ca_institutions": "University of Toronto",
+    "funders": []
+  },
+  {
+    "id": "W6904512881",
+    "title": "Heatmap showing the hierarchal clustering of resistance to 14 antimicrobials in &lt;i&gt;E&lt;/i&gt;. &lt;i&gt;coli&lt;/i&gt; isolated from Canadian turkey flocks between 2016 and 2021.",
+    "abstract": "&lt;p&gt;X-axes represent the antimicrobial classes: amoxicillin (AMC), ampicillin (AMP), azithromycin (AZM), chloramphenicol (CHL), ciprofloxacin (CIP), ceftriaxone (CRO), cefoxitin (FOX), gentamicin (GEN), meropenem (MEM), nalidixic acid (NAL), sulfisoxazole (SSS), streptomycin (STR), trimethoprim-sulfamethoxazole (SXT), tetracyclines (TET). Y-axes represent the &lt;i&gt;E&lt;/i&gt;. &lt;i&gt;coli&lt;/i&gt; isolates included in this study. The blue color depicts susceptibility, and the red color illustrates resistant patterns.&lt;/p&gt;",
+    "year": 2023,
+    "lang": "en",
+    "type": "other",
+    "venue": "Figshare",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2962967071",
+    "title": "Network medicine-travelling with the insulin receptor: Encounter of the second type",
+    "abstract": "Important progress has been made in understanding many aspects of insulin action in the last 10 years. Attention will be focused here on the physical protein interaction network of the internalized insulin receptor (IR) and its relationships with the genetic architecture of type 2 diabetes mellitus (T2D). The IR recognizes signals from the outside (circulating insulin) and engages the insulin signaling response. Within seconds, the IR is also involved in insulin internalization and its subsequent degradation in endosomes (physiological clearance of insulin). A T2D disease module sharing functional similarities with insulin secretion in pancreatic islets was recently identified in the close neighborhood of the internalized IR in liver. This module brought a new light on the apparent functional heterogeneity of numerous genes at risk to T2D by linking them to a few noncanonical layers of signaling feedback loops. These findings should be translated into a better understanding of the primary mechanisms of the disease and consequently a more precise sub-classification of T2D, ultimately leading to precision medicine and the development of new therapeutical drugs.",
+    "year": 2019,
+    "lang": "en",
+    "type": "review",
+    "venue": "EClinicalMedicine",
+    "topic": "Pancreatic function and diabetes",
+    "field": "Medicine",
+    "ca_institutions": "Université Laval",
+    "funders": ["Natural Sciences and Engineering Research Council of Canada", "Fondation du Barreau du Québec", "Fondation CHU de Québec", "Université Laval"]
+  },
+  {
+    "id": "W4414946863",
+    "title": "Glucose‐lowering effects of physical activity in type 1 diabetes: A causal modelling and matched‐pair analysis approach",
+    "abstract": "AIMS: To evaluate the acute glucose-lowering effect of bouts of physical activity (PA) for hyperglycaemia in individuals with type 1 diabetes, using a within-subject matched-pairs causal design to approximate the control condition of no activity. METHODS: Data comprised 1546 PA bouts of 10-30 min from 482 participants in the T1DEXI and T1DEXIP cohorts where glucose was >10 mmol/L. Each PA bout was matched [starting glucose, glucose rate of change, insulin on board (IOB) and glucose variability (CV)] to a matched non-PA period within the same individual using a weighted k-nearest neighbours algorithm (SMD <0.01). PRIMARY OUTCOME: Change in glucose from PA onset to 20 min post-activity. SECONDARY OUTCOMES: Predictors of glucose response and rate of hypoglycaemia incidence. RESULTS: PA [median 23 min: IQR (20, 30)] led to a mean glucose change of -2.2 mmol/L (p < 0.001), compared with 0.3 mmol/L (p < 0.001) during matched non-PA periods (mean difference: -1.9 mmol/L (p < 0.0001)). No significant differences by age, activity type or intensity were observed. The strongest predictors of PA-induced glucose change were (in order) glucose rate of change, starting glucose, CV, duration and IOB. A heatmap using starting glucose and glucose rate of change was developed to guide real-time decision-making. PA-induced hypoglycaemia risk was very low (<2%). CONCLUSION/INTERPRETATION: Using PA to lower high glucose levels is an effective and safe strategy, and when guided by CGM, it can become a personalised tool for type 1 diabetes education.",
+    "year": 2025,
+    "lang": "en",
+    "type": "article",
+    "venue": "Diabetic Medicine",
+    "topic": "Diabetes Management and Research",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": ["York University", "Verily Life Sciences", "Dexcom", "Leona M. and Harry B. Helmsley Charitable Trust"]
+  },
+  {
+    "id": "W1973787172",
+    "title": "The Canadian state and the empowerment of the Francophone minority communities regarding their economic development",
+    "abstract": "This article deals with the collective efforts of the Francophone minority communities (FMCs), that is, Francophones outside the province of Quebec, to ensure their economic development. After a brief historical overview of the economic development forms taken by the FMCs, we will more closely analyze its current form, focusing on the partnership tendency between these FMCs and the state. The FMCs did not rely on the state before the 1970s for their development, since networks of Francophone associations took charge of their overall development. When the Official Languages Act came into effect in 1969, the situation changed in favor of an increasing development of a partnership between the government and the FMCs, assisted by funding. In this article, we present the form taken by this partnership in the economic sector, focusing on the first program set up by the Canadian state to specifically encourage the economic development of Francophone minorities: the Réseau de développement économique et d'employabilité (RDÉE). The RDÉE gave FMCs access to the first economic development government instrument aimed specifically at them. The RDÉE looks to adopt a partnership approach and encourage empowerment among FMCs. The analysis shows some of the partnership issues involved in the real implication of the empowerment by these communities for their own development, the sometimes difficult link between the governance structures and the FMCs' networks, as well as the legitimacy of the governance structures implemented within the RDÉE.",
+    "year": 2007,
+    "lang": "en",
+    "type": "article",
+    "venue": "International Journal of the Sociology of Language",
+    "topic": "Canadian Identity and History",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2171108389",
+    "title": "Experimental and numerical study on determination of indirect (splitting) tensile strength of rocks under various load apparatus",
+    "abstract": "The indirect tensile strengths (ITSs) of more than 200 disc specimens for 19 different rock and rock-like materials were determined by considering the concept of fracture toughness under different loading conditions. Steel loading arcs with various contact angles and flat platens were used in experiments to investigate whether they can be used as alternatives for the standard Brazilian jaw. Many of the disc specimens tested under the standard jaw did not fail with ideal tensile cracking at the centre, whereas simple splitting cracks were obtained along the vertical diameter of most of the discs tested under the flat platens. However, flat platens caused cracks to initiate in the compressive zone just under the loading points. This is an important outcome for criticizing the validity of the test because tensile failure is expected to occur along the vertical diameter of the disc. Friction conditions between the disc and jaw have important roles in the failing load. Moreover, fracture toughness is an additional parameter for investigating the ITSs of rock materials. According to the experimental results, fracture toughness values were found to increase with an increase in contact angle. In addition to the experimental study, finite element analyses were performed on several types of rock discs under various loading conditions. As a result, a comparison between all loading conditions was made to determine the best ITSs of the rocks. Both experimental and numerical analyses concluded that deciding the best loading type depends on the rock type. Therefore, the standard jaw is not recommended to use for determination of the ITS values of all rock types.",
+    "year": 2015,
+    "lang": "en",
+    "type": "article",
+    "venue": "Canadian Geotechnical Journal",
+    "topic": "Rock Mechanics and Modeling",
+    "field": "Engineering",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W6999638281",
+    "title": "Dental health and dental care utilization among&#13;\\nchildbearing age Asian women immigrants in Canada",
+    "abstract": "This study examines the dentistry care utilization, self-reported dental health status, and&#13;\\noral health issues of Asian immigrants and Asian women immigrants of childbearing age,&#13;\\nusing the combined Canadian Community Health Survey from 2012-2014 and 2011-2014&#13;\\ndata. Reports show that amongst Asian immigrants and Asian women immigrants of&#13;\\nchildbearing age, there are significantly lower frequency of dental care utilization&#13;\\ncompared to non-immigrant counterparts. Furthermore, the difference in dentist visiting&#13;\\nbehavior between native-born Canadians and Asian immigrants mitigated with increase in&#13;\\nlength of residence in Canada. Socioeconomic status, lifestyle factors, dental health and&#13;\\ndental insurance coverage cannot fully explain the behavioral differences in visiting the&#13;\\ndentist between Asian immigrants and Asian women immigrants of childbearing age&#13;\\ncompared to the native-born citizens. For both Asian immigrants and Asian women&#13;\\nimmigrants of childbearing age, the primary reason for not visiting the dentist in the last&#13;\\nthree years is that the “Respondent did not think necessary.” This response is much&#13;\\ndifferent than reasons for not visiting the dentist provided by other groups which such as&#13;\\nthe “cost” and “haven’t gotten around to it.” Asian immigrants, as well as Asian women of&#13;\\nchildbearing age, had a significantly greater risk of tooth extracted due to tooth decay than&#13;\\nother ethnicities. Asian immigrants also had a higher prevalence of having fair or poor selfreported&#13;\\ndental health than Canadian born residences. Surprisingly, the prevalence of&#13;\\ndental health problems for Asian immigrants is like that of a native-born Canadians, with&#13;\\nAsian women immigrants of childbearing age showing the least prevalence of dental&#13;\\nsymptoms among the three population groups. Our results suggest that oral health beliefs&#13;\\nin the lack of necessity in dental services exist among recent Asian immigrants and Asian&#13;\\nwomen immigrants of childbearing age, with their oral health gradually changing over time&#13;\\nthroughout their stay in Canada. Early symptoms of dental problems that lead to decay may&#13;\\nmost likely result from the lack of visits to the dentist in Asian immigrants. Finally, the&#13;\\nstudy findings do not appear to support the ‘Healthy Immigrant Effect’ for dental health&#13;\\nand teeth issues.",
+    "year": 2022,
+    "lang": "en",
+    "type": "dissertation",
+    "venue": "Memorial University Research Repository (Memorial University)",
+    "topic": "Dental Health and Care Utilization",
+    "field": "Dentistry",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2094594373",
+    "title": "Beyond Nature, Shy of Grace",
+    "abstract": "Abstract: Eugene Rogers's Sexuality and the Christian Body offers a theological argument in favour of the churches’ acceptance of same‐sex marriage. There are four strands to this: an attempt to align homosexuals with groups of people whose status as naturally morally deficient (gentiles, slaves, women) is challenged within scripture; a deployment of the ethical strategies of Thomas Aquinas and Karl Barth to reach different conclusions to those they themselves reached; a theology of marriage that contains room for homosexual marriage; and a suggestion that at the least his arguments should be sufficient to demonstrate that this is not an issue that demands schism. This article argues that on each of these four points his arguments are deficient.",
+    "year": 2003,
+    "lang": "en",
+    "type": "article",
+    "venue": "International Journal of Systematic Theology",
+    "topic": "American Constitutional Law and Politics",
+    "field": "Social Sciences",
+    "ca_institutions": "McGill University",
+    "funders": []
+  },
+  {
+    "id": "W4214510566",
+    "title": "Motorized Two-Wheeled Vehicle Emissions in India",
+    "abstract": "Motor vehicle activity is growing rapidly in Indian cities, as in other Asian cities, with serious impacts, including deteriorating urban air quality. Motorized two-wheeled (M2W) vehicles, which provide affordable mobility to millions, form the bulk of the motor vehicle fleet and contribute significantly to transport emissions. Vehicle and fuel technologies are important and have been vastly improved since the 1990s. However, on the basis of an in-depth survey of vehicle users and an analysis of emerging trends in consumer preferences, policies, and industry plans, this paper demonstrates various important ways in which user preferences and choices relating to vehicle purchase, operation, and maintenance, interacting with institutional and technological factors, contribute to emissions and affect policy implementation, particularly with reference to M2W vehicles in India. The paper highlights the importance of considering the interaction of these factors, and how users and other actors are affected by and respond to policies, in more effectively addressing emissions from M2W vehicles and other vehicles, especially given in-use realities and constraints.",
+    "year": 2006,
+    "lang": "en",
+    "type": "article",
+    "venue": "Transportation Research Record Journal of the Transportation Research Board",
+    "topic": "Vehicle emissions and performance",
+    "field": "Engineering",
+    "ca_institutions": "McGill University",
+    "funders": "McGill University"
+  },
+  {
+    "id": "W7064642785",
+    "title": "Ceux qui regardent font le paysage : les Inuit d’Umiujaq et le parc national Tursujuq (Nunavik)",
+    "abstract": "Le tourisme fabrique des vitrines attractives. Celle du Nunavik est constituée d’un chapelet de villages et de vastes parcs nationaux en cours de création, avec des archétypes paysagers brandis par les guides touristiques et les portails Internet. À travers l’exemple du projet du parc national Tursujuq, sur la côte est de la baie d’Hudson, nous montrerons l’envers du décor du point de vue des habitants autochtones riverains. Terrains, concours photographique et atelier de dessin pour enfants dans la communauté d’Umiujaq attestent en effet de représentations paysagères autres. Cette approche participante pourrait s’avérer un outil aux projets de parcs ou autres aménagements de ces territoires en pleine mutation, tout autant qu’elle a accru la sensibilisation des habitants à l’environnement par la beauté de leurs paysages.",
+    "year": 2013,
+    "lang": "fr",
+    "type": "article",
+    "venue": "DOAJ (DOAJ: Directory of Open Access Journals)",
+    "topic": "Astrophysical Phenomena and Observations",
+    "field": "Physics and Astronomy",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4403202748",
+    "title": "Innovative electromagnetic vibration energy harvester with free-rotating mass for passive resonant frequency tuning",
+    "abstract": "Vibration energy harvesters (VEHs) can be used to power wireless electronic devices by converting mechanical energy into electrical energy. However, these harvesters are generally resonant structures with narrow bandwidth, posing challenges with respect to the operating frequency range. This paper presents a novel electromagnetic VEH with a structure that passively tunes its resonant frequency. The proposed design is primarily composed of a flat spring and a freely rotating mass. The design was simulated and tested experimentally. Tests showed that the mass can rotate towards the resonant position, dynamically changing the resonant frequency of the structure, to match the vibration frequency. The VEH demonstrated a resonant frequency range of 10 Hz, from 60 to 70 Hz, and when compared to the same structure with a fixed mass, it showed a 90 % improvement in bandwidth, from 12 to 22 Hz. These results show that passive resonant frequency tuning can significantly improve the operating frequency range of VEHs for practical use. The normalized power density of the VEH was 1.64 kgs/m 3 in vibrations of 60 Hz and 1 g, demonstrating that it is capable of powering wireless electronics. • First passive tuning of resonant frequency in an electromagnetic vibration harvester with a free-rotating mass. • A passive resonant frequency range of 10 Hz is demonstrated. • The bandwidth is improved by 300 %, from 5 Hz to 20 Hz, when compared to a fixed mass. • A normalized power density of 1.64 kgs/m 3 is demonstrated in 60 Hz and 1 g vibrations.",
+    "year": 2024,
+    "lang": "en",
+    "type": "article",
+    "venue": "Applied Energy",
+    "topic": "Innovative Energy Harvesting Technologies",
+    "field": "Engineering",
+    "ca_institutions": "Queen's University",
+    "funders": "Natural Sciences and Engineering Research Council of Canada"
+  },
+  {
+    "id": "W2093553413",
+    "title": "Les transformations d'une chanson folklorique : du Moine Tremblant au Rapide-Blanc",
+    "abstract": "L’enquête ethnographique et folklorique a été 1' une des premières aussi bien que 1'une des plus consciencieuses et des plus systématiques manifestations de la recherche scientifique sur notre milieu. Les formes spontanées de la vie populaire traditionnelle : coutumes, dictons, légendes, contes, chansons, ont été l'objet de répertoires, d'inventaires, de monographies originales dont 1'ensemble constitue un trésor documentaire d'une richesse trop peu connue. L’initiative et le mérite de ces travaux reviennent en très grande partie, depuis vingt ans, à l'Institut de Folklore et aux Archives de Folklore de l'Université Laval et à leur directeur, M. Luc Lacourcière. Dans l'étude qui suit, M. Lacourcière récapitule les avatars' d’une chanson populaire qui a connu récemment une étonnante faveur publique. Sa patiente analyse folklorique décèle, par le recours à l'histoire et à la sémantique, la mystérieuse richesse des apports humains successifs dans 1' élaboration d'un phénomène social apparemment aussi banal qu’une simple chanson.",
+    "year": 2005,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Recherches sociographiques",
+    "topic": "Cultural Identity and Heritage",
+    "field": "Arts and Humanities",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2919341588",
+    "title": "Les expériences de victimisation des jeunes à travers le prisme de l’intersectionnalité",
+    "abstract": "Le racisme, l’hétérosexisme et le cissexisme sont des formes d’oppression qui exposent les jeunes racisés, les jeunes de la diversité sexuelle et les jeunes trans ou en questionnement de leur identité de genre à de la violence. Nous inspirant de la théorie de l’intersectionnalité, nous avons exploré les expériences de victimisation vécues par les jeunes sur une période de 12 mois en fonction de ces formes d’oppression. L’échantillon analysé est composé de 2 276 personnes âgées de 14 à 23 ans recrutées à travers le Québec. Les résultats ont révélé que les personnes non hétérosexuelles, trans ou en questionnement étaient plus susceptibles de rapporter de la victimisation sur les sept indicateurs mesurés, et ce, d’autant plus si elles étaient racisées. Ces résultats révèlent la vulnérabilité de ces jeunes et illustrent la pertinence d’une approche intersectionnelle pour mieux appréhender leurs expériences de victimisation.",
+    "year": 2019,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Service social",
+    "topic": "LGBTQ Health, Identity, and Policy",
+    "field": "Psychology",
+    "ca_institutions": "Université du Québec à Montréal",
+    "funders": []
+  },
+  {
+    "id": "W2330432664",
+    "title": "So What If It's Not a Gamble?: Post-Westphalian Politics in Macau",
+    "abstract": "good deal of ink has been spilled over the rise of a post-Westphalian politics, one less fettered by norms and practices centred on the state as the supreme power within its boundaries and the only international actors of consequence.2 A significant increase in the cross-border activities of non-central governments (NCGs) is an important element of the emergent post-Westphalian world. The literature on NCGs as cross-border actors has mainly centred on Western democracies, where the constituent governments of federal states and of European Union member states are assumed to be leading the way.3 The cross-border activities of Asian and authoritarian NCGs have not figured significantly. Yet, the governments of the Hong Kong and Macau Special Administrative Regions (SARs) currently have more external affairs autonomy than most NCGs elsewhere. By 1999, they had, respectively, the third and seventh highest number of memberships in inter-governmental organizations (IGOs) among the world's non-sovereign governments.4 They stand out because the ten other non-sovereign territories with the highest membership rates were either states-in-waiting (Palestine), de facto associated states (Cook Islands, Niue,",
+    "year": 2001,
+    "lang": "en",
+    "type": "article",
+    "venue": "Pacific Affairs",
+    "topic": "Hong Kong and Taiwan Politics",
+    "field": "Social Sciences",
+    "ca_institutions": "York University",
+    "funders": []
+  }
+]
+warning: loading hooks from both /Users/choxos/.codex/hooks.json and /Users/choxos/.codex/config.toml; prefer a single representation for this layer
+2026-07-13T00:36:55.819733Z ERROR rmcp::transport::worker: worker quit with fatal: Transport channel closed, when Auth(AuthorizationRequired)
+warning: Skill descriptions were shortened to fit the 2% skills context budget. Codex can still see every skill, but some descriptions are shorter. Disable unused skills or plugins to leave more room for the rest.
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart Failed
+hook: SessionStart Completed
+hook: SessionStart Completed
+hook: SessionStart Completed
+hook: SessionStart Completed
+hook: SessionStart Failed
+hook: UserPromptSubmit
+hook: UserPromptSubmit
+hook: UserPromptSubmit Failed
+hook: UserPromptSubmit Failcodex
+[
+  {"id":"W2057128308","tier":"OUT","genre":"other","about_ca":false,"confidence":"high","reason":"This letter concerns ovarian reserve after a clinical procedure, not research practice."},
+  {"id":"W4394344544","tier":"OUT","genre":"other","about_ca":false,"confidence":"high","reason":"This dataset describes human activity in green spaces rather than research itself."},
+  {"id":"W3037592907","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"This ecological study investigates seabird population dynamics, not research practice."},
+  {"id":"W2770666488","tier":"OUT","genre":"editorial/commentary","about_ca":false,"confidence":"high","reason":"This commentary proposes after-school learning activities rather than studying research practice."},
+  {"id":"W4411230266","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"This protocol evaluates a clinical intervention for eco-anxiety, not research itself."},
+  {"id":"W7061528971","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"This thesis studies autonomy support for people with intellectual disabilities, not research practice."},
+  {"id":"W1468300197","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"This work develops an ophthalmic stimulus technique rather than studying research methods."},
+  {"id":"W4406242645","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"This clinical study compares lung-cancer treatments and rebiopsy outcomes."},
+  {"id":"W2002767416","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"This study models environmental sampling devices rather than research practice."},
+  {"id":"W3208376055","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"This systematic map evaluates nature-based climate interventions, not how research is conducted."},
+  {"id":"W2164508363","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"This review addresses prevention and treatment of contrast-induced nephropathy, not evidence-synthesis methodology."},
+  {"id":"W2173670877","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"This survey studies language use among English majors rather than research practice."},
+  {"id":"W2075044986","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"This review concerns biological links between obesity and neurodegeneration, not research itself."},
+  {"id":"W1987997758","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"This review discusses rehabilitation technologies for critically ill patients rather than research practice."},
+  {"id":"W6923549395","tier":"OUT","genre":"other","about_ca":false,"confidence":"high","reason":"This historical diocesan report is not about the conduct or governance of research."},
+  {"id":"W3132228168","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"This engineering thesis develops defect-detection techniques for pressure vessels, not research methods."},
+  {"id":"W4235862764","tier":"T3","genre":"infrastructure/announcement","about_ca":false,"confidence":"low","reason":"The record appears malformed but its abstract concerns DOI metadata and deletion procedures as infrastructure context."},
+  {"id":"W2300554136","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"low","reason":"The title indicates an art-related work, with no abstract suggesting an object related to research."},
+  {"id":"W2588445179","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"This review evaluates clinical bleeding-assessment tools for diagnosing von Willebrand disease, not research practice."},
+  {"id":"W4391109610","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"This case report concerns a rare ophthalmic complication rather than research itself."},
+  {"id":"W3213963001","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"This study reports clinical outcomes after treatment for retinopathy of prematurity."},
+  {"id":"W2800879685","tier":"T1","genre":"empirical","about_ca":false,"confidence":"high","reason":"This work studies and proposes a framework for modeling treatment-covariate interactions in network meta-analysis."},
+  {"id":"W6999514870","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"This work reviews data-center cooling technologies rather than research practice."},
+  {"id":"W4386643192","tier":"T1","genre":"empirical","about_ca":false,"confidence":"high","reason":"This study examines the well-being of clinical trial unit research staff, a research-workforce object."},
+  {"id":"W4246691629","tier":"OUT","genre":"other","about_ca":false,"confidence":"high","reason":"This is journal cover and front matter without an object concerning research practice."},
+  {"id":"W2806906455","tier":"T1","genre":"empirical","about_ca":false,"confidence":"high","reason":"This work studies how patent-classification choices affect the validity and replicability of innovation research."},
+  {"id":"W4390336307","tier":"OUT","genre":"other","about_ca":false,"confidence":"low","reason":"The record contains only a DOI-like title and no abstract indicating a research-related object."},
+  {"id":"W6998774020","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"This article concerns Asian Canadian literary writing rather than research itself."},
+  {"id":"W1995462252","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"This economic evaluation concerns infant formula and atopic dermatitis prevention, not research practice."},
+  {"id":"W2141444993","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"This astronomy study investigates galaxy evolution rather than the conduct of research."},
+  {"id":"W2596211639","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"This case report addresses a surgical complication and its treatment."},
+  {"id":"W2017268493","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"This clinical study evaluates emergency carotid stenting for acute stroke."},
+  {"id":"W2759724522","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"This law article concerns residence and citizenship by investment, not research practice."},
+  {"id":"W6992365297","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"This study examines school engagement and social relationships among children with attention difficulties."},
+  {"id":"W2108441801","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"This neuroscience experiment studies distance perception and sensory cue weighting."},
+  {"id":"W7131299462","tier":"OUT","genre":"other","about_ca":false,"confidence":"high","reason":"This dataset documents historical household census records rather than research practice."},
+  {"id":"W4403449571","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"This abstract reports a clinical association involving schizophrenia and hospitalizations."},
+  {"id":"W6904512881","tier":"OUT","genre":"other","about_ca":false,"confidence":"high","reason":"This figure documents antimicrobial resistance patterns in Canadian turkey flocks, not research itself."},
+  {"id":"W2962967071","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"This review concerns insulin signaling and type 2 diabetes biology rather than research practice."},
+  {"id":"W4414946863","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"This study applies causal modeling to estimate physical activity effects on glucose, rather than studying that method."},
+  {"id":"W1973787172","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"This article studies economic development partnerships involving Francophone communities, not the Canadian research system."},
+  {"id":"W2171108389","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"This engineering study evaluates rock tensile-strength testing procedures as objects of material measurement, not research practice."},
+  {"id":"W6999638281","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"This study examines dental health and care use among Asian immigrants in Canada."},
+  {"id":"W2094594373","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"This theological critique concerns arguments about same-sex marriage rather than research itself."},
+  {"id":"W4214510566","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"This study investigates vehicle emissions and policy implementation in India."},
+  {"id":"W7064642785","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"This participatory study examines Indigenous landscape representations and park development."},
+  {"id":"W4403202748","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"This engineering study develops and tests a vibration energy harvester."},
+  {"id":"W2093553413","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"This folkloric analysis studies the transformations of a song, not research practice."},
+  {"id":"W2919341588","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"This study examines youth victimization through an intersectionality lens."},
+  {"id":"W2330432664","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"This political analysis concerns post-Westphalian governance in Macau rather than research itself."}
+]
+hook: Stop
+hook: Stop
+hook: Stop
+hook: Stop Completed
+hook: Stop Completed
+hook: Stop Failed
+tokens used
+24,085

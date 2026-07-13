@@ -1,0 +1,813 @@
+# MétaCan screening rubric (v1.0)
+
+**Locked before screening. Version-controlled. Any change is a new version with a dated entry in `DEVIATIONS.md`.**
+
+Both machine screeners and both human coders work from this document and nothing else. The rubric is the
+instrument; if two coders disagree, the rubric is what they are adjudicated against.
+
+---
+
+## The unit
+
+One work (journal article, preprint, book chapter, report, dataset, or software), identified by its OpenAlex ID.
+You see: title, abstract, publication year, language, venue, OpenAlex topic and field, Canadian institutional
+affiliations, funders.
+
+## The question
+
+**Is the object of study *research itself*?**
+
+Metaresearch studies how research is done, reported, funded, evaluated, disseminated, or governed. The test is
+what the work is *about*, not what field it appears in and not what vocabulary it uses.
+
+A cardiology trial is not metaresearch. A study of *how cardiology trials report their outcomes* is.
+
+---
+
+## Tier
+
+Assign exactly one.
+
+### T1: Core metaresearch
+The primary object of study is research itself. Typical objects:
+
+- research **methods** and their properties (bias, reporting, statistical practice, study design)
+- **reproducibility**, replication, data and code sharing
+- **research integrity**: misconduct, retraction, questionable research practices, authorship
+- **peer review** and editorial process *as objects of study*
+- **research evaluation**, metrics, rankings, funding allocation
+- **scholarly communication**: publishing models, open access, preprints *as objects of study*
+- **bibliometrics and scientometrics** applied to a research literature
+- the **research workforce**: careers, equity, training, capacity
+- **evidence synthesis methodology** (not an individual systematic review's clinical answer, but work *about* how
+  syntheses are done)
+
+### T2: Adjacent
+Empirically or conceptually grounded work on science as a social system that is not framed as metaresearch but
+studies it:
+
+- **science and technology studies (STS)**: social studies of scientific knowledge, practice, controversy
+- **library and information science**: information behaviour of researchers, repositories, discovery
+- **research infrastructure** studies: platforms, data repositories, identifiers, standards
+- **history and philosophy of science** *when the object is contemporary research practice*
+- **research policy** analysis grounded in evidence
+
+T2 is where the field's diversity lives. Be generous here: a paper does not have to call itself metaresearch to
+be studying research.
+
+### T3: Contextual
+Relevant to the ecosystem, mapped and released, but **never pooled into the analytic corpus**:
+
+- editorials, commentaries, opinion pieces about research practice
+- policy documents and position statements
+- announcements of infrastructure, tools, or initiatives
+- news, obituaries, corrections, letters
+
+### OUT: Not metaresearch
+Everything else. Includes, and this is the most common error:
+
+- **A study that uses a method is not a study of the method.** A meta-analysis answering a clinical question is
+  OUT. A study of how meta-analyses handle heterogeneity is T1.
+- **Mentioning a metaresearch term is not studying it.** A lab paper reporting "assay reproducibility", a methods
+  section saying "peer reviewed", a licence note saying "open access": all OUT.
+- **Domain research that happens to be bibliometric in method** but whose object is the domain, not the research:
+  e.g. a bibliometric map of diabetes treatments, produced to summarise diabetes knowledge. Borderline; see below.
+
+---
+
+## The three errors that matter most
+
+These are where the pilot showed retrieval and screening break down. Read them twice.
+
+1. **Polysemy.** `reproducibility` in a biochemistry paper means the assay gives the same reading twice. In a
+   metaresearch paper it means the reproducibility crisis. Only the second is in scope. The same applies to
+   `validation`, `replication`, `bias`, `peer review`, `open access`. **Judge the sense, not the token.**
+
+2. **Method vs. object.** Using bibliometrics ≠ studying research. Ask: *if this paper is right, what do we now
+   know more about: a scientific question, or the practice of science?* If the former, OUT.
+
+3. **Absence of vocabulary is not absence of content.** An STS paper about laboratory practice, or an LIS paper
+   about how researchers find data, may use none of the field's keywords and still be squarely T2. **Do not
+   require the vocabulary.** This is the error that makes the field look smaller and more anglophone than it is.
+
+---
+
+## Canadian linkage
+
+Record which apply (this is metadata, not an inclusion test; the estimand is defined separately in
+`PROTOCOL.md`):
+
+- `CA_AFF`: at least one author affiliated with a Canadian institution
+- `CA_FUND`: funded by CIHR, NSERC, SSHRC, or CFI
+- `ABOUT_CA`: the Canadian research system is a substantive object of study (not a passing mention, not one
+  country among forty in a global comparison)
+
+## Genre
+
+`empirical` · `conceptual` · `editorial/commentary` · `policy` · `infrastructure/announcement` · `other`
+
+OpenAlex's `type` is unreliable and this field is commentary-heavy, so genre is coded, not inherited.
+
+## Language of the work
+
+As published. Do not infer from the venue.
+
+---
+
+## Confidence
+
+- `high`: the rubric decides this cleanly.
+- `medium`: the rubric decides, but a reasonable coder could differ.
+- `low`: genuinely on the boundary, or the abstract is missing/too thin to judge.
+
+**`low` is a legitimate answer and is not a failure.** Records coded `low` by either screener are routed to
+adjudication. A screener that never says `low` is not being careful; it is being confident.
+
+---
+
+## Worked examples
+
+| Title (abridged) | Tier | Why |
+|---|---|---|
+| "Data sharing practices in 500 randomised trials" | **T1** | The object is reporting practice. |
+| "Reproducibility of a Western blot protocol" | **OUT** | Assay reproducibility. Polysemy trap. |
+| "Trends in citation of retracted papers" | **T1** | Object is the literature's own behaviour. |
+| "Laboratory life in a Canadian genomics centre: an ethnography" | **T2** | STS. No metaresearch vocabulary; still studies research. |
+| "How do researchers discover datasets? A survey" | **T2** | LIS, information behaviour of researchers. |
+| "Effectiveness of statins: a network meta-analysis" | **OUT** | Uses a synthesis method to answer a clinical question. |
+| "How network meta-analyses handle inconsistency: a review of 200 reviews" | **T1** | Object is the method. |
+| "Announcing the Canadian Research Data Repository" | **T3** | Infrastructure announcement. Mapped, not pooled. |
+| "Open access mandates are failing early-career researchers" (editorial) | **T3** | Commentary about research practice. |
+| "Bibliometric analysis of diabetes research 2000–2020" | **T2** | Borderline. Bibliometric method, and the object *is* a research literature, so it studies research output. Code T2, `medium`. |
+| "Le libre accès dans les revues québécoises : état des lieux" | **T1** | Scholarly communication, object is publishing practice. French. |
+
+---
+
+## Instructions to the screener
+
+Read the title and abstract. Apply the rubric. Do not use outside knowledge of the authors or the journal's
+reputation. If the abstract is missing, judge on the title alone and set confidence to `low` unless the title is
+unambiguous.
+
+Return the schema in `protocol/screening-schema.json`. One object per work. No prose, no preamble.
+--------------------------------------------------------------------------------
+You are screening works for MetaCan, a map of Canadian metaresearch.
+
+Apply the rubric above to every record in the JSON array below. Return a JSON
+array with one object per work, conforming to protocol/screening-schema.json:
+
+  {"id": "W...", "tier": "T1|T2|T3|OUT", "genre": "...", "about_ca": true|false,
+   "confidence": "high|medium|low", "reason": "one sentence"}
+
+Rules:
+- Return the JSON array and NOTHING else. No prose, no preamble, no code fences.
+- Every input id must appear exactly once in the output.
+- Do not run commands, read files, or browse. Classify from the RECORDS alone.
+
+RECORDS:
+[
+  {
+    "id": "W3020914750",
+    "title": "Difficulties and Challenges in an Employment Supervision Program for Paroled Prisoners",
+    "abstract": "The integration of paroled prisoners in employment is presented in the theoretical and research-based literature as one of the principal means of achieving successful re-entry by the prisoners into the community. The literature deals extensively with the correlation between integration and perseverance in employment and risk indices, the most pronounced of which is a return to crime. According to the Theory of Desistance from Crime, it is not enough for criminal activity to cease; a complex process must set in motion to bring about a change in perceptions and behaviour in all walks of life, especially regarding employment. A key program being implemented by Israel's Prisoner Rehabilitation Authority is one involving an employment guidance and supervision program for paroled prisoners. The program emphasizes employment in all its facets – placement, support during the period of employment and supervision during parole – alongside psychological treatment and rehabilitation in the community. Operating the program are employment supervisors and psychotherapists. In order to understand how the program is managed and perceived by its operators, in-depth interviews were conducted with seven psychotherapists and employment counsellors in the framework of the present qualitative-interpretive research. The article describes the perceptions of the personnel responsible for running the program during the period 2018-2020. The findings of the research highlight the difficulties and limitations the prisoners face, harmony and dissonance in the encounter between supervisors and psychotherapists, the dilemma over protection of society vs. assistance to the prisoners, employment characteristics as indicative of the rehabilitation process, and the merits of the program. The article also discusses the contribution of employment supervision to successful reintegration of paroled prisoners in normative employment and society.",
+    "year": 2020,
+    "lang": "en",
+    "type": "article",
+    "venue": "International Journal of Criminology and Sociology",
+    "topic": "Criminal Justice and Corrections Analysis",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4229010564",
+    "title": "Academic Literacies in a South African Writing Centre: Student Perspectives on Established Practices",
+    "abstract": "Through a case study conducted in 2014 and 2015 at the University of X in South Africa, the researchers collected focus group and survey data to develop a better understanding of the kinds of students who use the university’s Writing Centre and their perceptions of the support they receive. The research question at the core of their study asks whether a South African writing centre’s academic literacies practices and philosophy should be adapted or changed to better serve today’s students. The results of the study demonstrate that the vast majority of students who visit the writing centre speak English as an additional language and believe they need more writing support with a focus on lower order concerns than that currently offered through the academic literacies approach at the university. The researchers concluded that the South African undergraduate students at the University of X need differentiated forms of writing support that go beyond the orthodoxies of the current academic literacies approach embraced by the University’s writing centres. The researchers urge writing centres to acknowledge the need to develop interventions and models of support that target English as an Additional Language (EAL) students without adopting a deficit-perspective and without abandoning the long-term project of challenging the privileged status of the English language within the institution.",
+    "year": 2022,
+    "lang": "en",
+    "type": "article",
+    "venue": "Discourse and Writing/Rédactologie",
+    "topic": "Second Language Learning and Teaching",
+    "field": "Arts and Humanities",
+    "ca_institutions": "University of Toronto",
+    "funders": []
+  },
+  {
+    "id": "W4403227191",
+    "title": "TAILORING FETAL ECHOCARDIOGRAPHY INDICATIONS TO THE LIMITED RESOURCES IN SASKATCHEWAN",
+    "abstract": "",
+    "year": 2024,
+    "lang": "en",
+    "type": "article",
+    "venue": "Canadian Journal of Cardiology",
+    "topic": "Congenital Heart Disease Studies",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4403159842",
+    "title": "Light-Ray Wave Functions and Integrability",
+    "abstract": "Using integrability, we construct (to leading order in perturbation theory) the explicit form of twist-three light-ray operators in planar $\\mathcal{N}=4$ SYM. This construction allows us to directly compute analytically continued CFT data at complex spin. We derive analytically the \"magic'' decoupling zeroes previously observed numerically. Using the Baxter equation, we also show that certain Regge trajectories merge together into a single unifying Riemann surface. Perhaps more surprisingly, we find that this unification of Regge trajectories is not unique. If we organize twist-three operators differently into what we call \"cousin trajectories'' we find infinitely more possible continuations. We speculate about which of these remarkable features of twist-three operators might generalize to other operators, other regimes and other theories.",
+    "year": 2024,
+    "lang": "en",
+    "type": "preprint",
+    "venue": "arXiv (Cornell University)",
+    "topic": "Optical and Acousto-Optic Technologies",
+    "field": "Physics and Astronomy",
+    "ca_institutions": [],
+    "funders": ["Kavli Institute for Theoretical Physics, University of California, Santa Barbara", "Natural Sciences and Engineering Research Council of Canada", "Office of Science", "Institut Périmètre de physique théorique", "ICTP South American Institute for Fundamental Research", "Abdus Salam International Centre for Theoretical Physics", "National Science Foundation", "Government of Canada", "High Energy Physics", "Fundação de Amparo à Pesquisa do Estado de São Paulo", "U.S. Department of Energy"]
+  },
+  {
+    "id": "W3208010024",
+    "title": "Les effets d’une approche littératiée sur la communication orale en classe de mathématiques de 7e/8e année dans un programme d’immersion française",
+    "abstract": "Résumé Cet article traite des principaux résultats d’une étude ayant comme objectif de mesurer les effets d’une approche littératiée sur les habiletés de communication orale en langue seconde lors d’un cours de mathématique dans une classe de 7e/8e année dans un programme d’immersion française précoce au Manitoba, Canada. Certains tests paramétriques ont démontré un effet positif sur la structure syntaxique à l’oral, ce qui suggère que l’approche littératiée peut jouer un rôle clé dans la facilitation du raisonnement mathématique en contexte immersif. Abstract This article reports the primary results of a study exploring the effects of a literacy-based approach on oral accuracy in second language during a Grade 7/8 mathematics class in a French Immersion program in Manitoba, Canada. Some of the parametric tests showed a positive effect on sentence structure in oral communication, which suggests that a literacy-based approach can play a key role in the facilitation of mathematical reasoning in an immersion setting.",
+    "year": 2021,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Language and Literacy",
+    "topic": "French Language Learning Methods",
+    "field": "Social Sciences",
+    "ca_institutions": ["University of Ottawa", "Université de Saint-Boniface"],
+    "funders": []
+  },
+  {
+    "id": "W6939986283",
+    "title": "IL-27 shapes the immune properties of human astrocytes and their impact on encountered human T lymphocytes",
+    "abstract": "Abstract Background Interleukin-27 (IL-27) can trigger both pro- and anti-inflammatory responses. This cytokine is elevated in the central nervous system (CNS) of multiple sclerosis (MS) patients, but how it influences neuroinflammatory processes remains unclear. As astrocytes express the receptor for IL-27, we sought to determine how these glial cells respond to this cytokine and whether such exposure alters their interactions with infiltrating activated T lymphocytes. To determine whether inflammation shapes the impact of IL-27, we compared the effects of this cytokine in non-inflamed and inflamed conditions induced by an IL-1β exposure. Main body Transcriptomic analysis of IL-27-exposed human astrocytes showed an upregulation of multiple immune genes. Human astrocytes increased the secretion of chemokines (CXCL9, CXCL10, and CXCL11) and the surface expression of proteins (PD-L1, HLA-E, and ICAM-1) following IL-27 exposure. To assess whether exposure of astrocytes to IL-27 influences the profile of activated T lymphocytes infiltrating the CNS, we used an astrocyte/T lymphocyte co-culture model. Activated human CD4+ or CD8+ T lymphocytes were co-cultured with astrocytes that have been either untreated or pre-exposed to IL‑27 or IL-1β. After 24 h, we analyzed T lymphocytes by flow cytometry for transcription factors and immune molecules. The contact with IL-27-exposed astrocytes increased the percentages of T-bet, Eomes, CD95, IL-18Rα, ICAM-1, and PD-L1 expressing CD4+ and CD8+ T lymphocytes and reduced the proportion of CXCR3-positive CD8+ T lymphocytes. Human CD8+ T lymphocytes co-cultured with human IL-27-treated astrocytes exhibited higher motility than when in contact with untreated astrocytes. These results suggested a preponderance of kinapse-like over synapse-like interactions between CD8+ T lymphocytes and IL-27-treated astrocytes. Finally, CD8+ T lymphocytes from MS patients showed higher motility in contact with IL-27-exposed astrocytes compared to healthy donors’ cells. Conclusion Our results establish that IL-27 alters the immune functions of human astrocytes and shapes the profile and motility of encountered T lymphocytes, especially CD8+ T lymphocytes from MS patients.",
+    "year": 2022,
+    "lang": "en",
+    "type": "other",
+    "venue": "Figshare",
+    "topic": "Mycorrhizal Fungi and Plant Interactions",
+    "field": "Agricultural and Biological Sciences",
+    "ca_institutions": ["Université de Montréal", "Centre Intégré Universitaire de Santé et de Services Sociaux du Centre-Sud-de-l'Île-de-Montréal", "Centre Hospitalier de l’Université de Montréal"],
+    "funders": []
+  },
+  {
+    "id": "W4364858723",
+    "title": "Genèse d’un projet de construction de maisons à l’énergie solaire au collège Manitou",
+    "abstract": "Genèse d’un projet de construction de maisons à l’énergie solaire au collège Manitou : un prototype novateur ?. Un article de la revue Revue d’études autochtones (Femmes autochtones : pour un retour à l’équilibre) diffusée par la plateforme Érudit.",
+    "year": 2021,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Revue d’études autochtones",
+    "topic": "French Urban and Social Studies",
+    "field": "Social Sciences",
+    "ca_institutions": "Université du Québec à Montréal",
+    "funders": []
+  },
+  {
+    "id": "W2160308834",
+    "title": "Kleine-Levin syndrome: a unique cause of fatigue in an athlete",
+    "abstract": "Kleine-Levin syndrome (KLS) is a rare disorder characterised, most notably, by periodic episodes of hypersomnolence and hyperphagia. Associated features of the disorder include a lack of concentration, mood changes, and anxiety. Laboratory tests may show slight changes in the electroencephalogram. However, clinical presentation and laboratory tests are normal during asymptomatic intervals. KLS most often presents in adolescent males, with complete recovery by the 3rd to 4th decade of life. Possible precipitating factors include excessive workload, febrile illness, and respiratory infections. Presented is a classical case of KLS in an adolescent male athlete. The patient's history, complete laboratory results, and symptoms are discussed. Possible treatments for this disorder are also mentioned, along with diagnostic criteria.",
+    "year": 2005,
+    "lang": "en",
+    "type": "article",
+    "venue": "British Journal of Sports Medicine",
+    "topic": "Sleep and Wakefulness Research",
+    "field": "Neuroscience",
+    "ca_institutions": "University of British Columbia",
+    "funders": []
+  },
+  {
+    "id": "W6991062535",
+    "title": "EXPLORING THE CHALLENGES FACED BY AN INDIGENOUS WOMAN, WHILE STRUGGLING TO SELF-IDENTIFY – AN AUTOETHNOGRAPHY",
+    "abstract": "This autoethnography examines the connection between Indigenous educational leaders and Non-Indigenous educational leaders through my lens and experiences as a young Indigenous girl growing into a woman who battles with self-identity and structure of a school system that is quickly declining. Born on Treaty 6 Territory, which is now apart of what is known as Canada, a Cree woman from, the Mistawasis Nehiyawak Nation will describe the journey of an upbringing on an Indian reservation. Discouraged to practice the language and culture my reserve identified with, would later have a predominate affect on the life and career as an adult. I will utilize the existing literature from (Johnstone, 2021) that delves into a brief history of the failure of schools in Indigenous communities, and how it connects to reconciliation today, with clear interference affects from outside assistance. This autoethnography represents a highly personalized account of the difficulties, interpretations, and reflections of a woman’s battle to ensure strong Indigenous representation within high level educational positions. Using myself as the subject and the research in the context of struggles from growing up on a reservation and the conflict between colonization and indigenous identity are the impetus for this self-study. Utilizing the self paper from EADM 864, (Johnstone, 2022), that states the journey for indigenous people towards self-determination for indigenous education in Canada remains a primary challenge for the policymakers, Indigenous organizations, and the government. The purpose is to explore the affects and barriers within the professional experiences or opportunities an Indigenous woman faces today, while attempting to advance in the education leadership sector. An expedition that is characterized by an awakening, indigenizing, reclaiming, belonging and rediscovery of self. The autoethnography will allow the world to witness the trials and tribulations of growing up Indigenous, the mentors who shaped my future, and the constant barriers a woman faces while attempting to break into in a work world predominantly male dominated, even to this day. This examination illustrates experiences of leadership and their perspectives regarding how leadership skills or abilities are defined and measured in the context of Indigenous school organizations. Leaders in the school systems are judged on their actions and every aspect of their life beyond their role. The Cree woman leader reveals insights into the role of leaders, followers, context, and culture, after surviving an era of self-determination and understanding.",
+    "year": 2024,
+    "lang": "en",
+    "type": "article",
+    "venue": "University Library (University of Saskatchewan)",
+    "topic": "Indigenous Health, Education, and Rights",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2607282417",
+    "title": "Incident Dialysis Access in Patients With End-Stage Kidney Disease: What Needs to Be Improved",
+    "abstract": "",
+    "year": 2017,
+    "lang": "en",
+    "type": "review",
+    "venue": "Seminars in Nephrology",
+    "topic": "Central Venous Catheters and Hemodialysis",
+    "field": "Health Professions",
+    "ca_institutions": ["University Health Network", "Western University", "University of Toronto", "London Health Sciences Centre"],
+    "funders": []
+  },
+  {
+    "id": "W2905149712",
+    "title": "Effect of Concentration on the Dissolution of One-Dimensional Polymer Crystals: A TEM and NMR Study",
+    "abstract": "We report a study of the dissolution of core-crystalline polyferrocenyldimethylsilane-block-polyisoprene (PFS53-b-PI637, where the subscripts are the degrees of polymerization of the two blocks) micelle fragments in decane for different concentrations (ranging from 0.01 to 6 mg mL–1) by a combination of transmission electron microscopy (TEM) and high-temperature 1H NMR. We used self-seeding experiments at different temperatures as an efficient, although indirect, way to evaluate the dissolution of these micelles fragments. We annealed micelle fragment solutions at five different temperatures (50, 60, 65, 70, and 75 °C) for 30 min and cooled them to room temperature to regrow the micelles. The amount of micelle fragments that dissolved at the annealing temperature was then evaluated by comparing the length of the regrown micelles with that of the starting micelle fragments. We show that seed crystallites are less prone to dissolution as their concentration increases. In addition, by combining results of self-seeding experiments and 1H NMR measurements at 75 °C, we evaluated the percentage of unimer released upon the partial dissolution of seed fragments at 75 °C and established that the mechanism of seed fragment dissolution is also concentration dependent: at low concentrations, they dissolve in a cooperative process, whereas at high concentrations, they dissolve partially from both ends.",
+    "year": 2018,
+    "lang": "en",
+    "type": "article",
+    "venue": "Macromolecules",
+    "topic": "Advanced Polymer Synthesis and Characterization",
+    "field": "Chemistry",
+    "ca_institutions": "University of Toronto",
+    "funders": "Natural Sciences and Engineering Research Council of Canada"
+  },
+  {
+    "id": "W4411657518",
+    "title": "10.51847/B37lTgt",
+    "abstract": "",
+    "year": 2000,
+    "lang": "en",
+    "type": "article",
+    "venue": "Time to knit",
+    "topic": "Water Quality Monitoring Technologies",
+    "field": "Environmental Science",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2134906701",
+    "title": "Global Dual Sourcing: Tailored Base-Surge Allocation to Near- and Offshore Production",
+    "abstract": "When designing a sourcing strategy in practice, a key task is to determine the average order rates placed to each source because that affects cost and supplier management. We consider a firm that has access to a responsive nearshore source (e.g., Mexico) and a low-cost offshore source (e.g., China). The firm must determine an inventory sourcing policy to satisfy random demand over time. Unfortunately, the optimal policy is too complex to allow a direct answer to our key question. Therefore, we analyze a tailored base-surge (TBS) sourcing policy that is simple, used in practice, and captures the classic trade-off between cost and responsiveness. The TBS policy combines push and pull controls by replenishing at a constant rate from the offshore source and producing at the nearshore plant only when inventory is below a target. The constant base allocation allows the offshore facility to focus on cost efficiency, whereas the nearshore facility's quick response capability is utilized only dynamically to guarantee high service. The research goals are to (i) determine the allocation of random demand into base and surge capacity, (ii) estimate corresponding working capital requirements, and (iii) identify and value the key drivers of dual sourcing. We present performance bounds on the optimal cost and prove that economic optimization brings the system into heavy traffic. We analyze the sourcing policy that is asymptotically optimal for high-volume systems and present a simple “square-root” formula that is insightful to answer our questions and sufficiently accurate for practice, as is demonstrated with a validation study.",
+    "year": 2009,
+    "lang": "en",
+    "type": "article",
+    "venue": "Management Science",
+    "topic": "Supply Chain and Inventory Management",
+    "field": "Business, Management and Accounting",
+    "ca_institutions": "Kellogg's (Canada)",
+    "funders": []
+  },
+  {
+    "id": "W6941925239",
+    "title": "The Western Call",
+    "abstract": "Published in the Interests of Greater Vancouver and the Western People.",
+    "year": 2012,
+    "lang": "en",
+    "type": "article",
+    "venue": "Open Collections",
+    "topic": "Mycorrhizal Fungi and Plant Interactions",
+    "field": "Agricultural and Biological Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2151403133",
+    "title": "Investigating the effect of CRM factors on consumer perception: Evidence from banking industry",
+    "abstract": "Consumer perception plays essential role for market development. Consumer perception can be defined as a marketing concept, which includes a customer's impression, awareness and/or consciousness about a firm or its offerings. This paper investigates the effect of customer relationship management factors on consumer perception in Iranian banking industry. The study designs a questionnaire in Likert scale and distributes it among 300 randomly selected managers who worked for Bank Saderat Iran. Cronbach alpha has been calculated as 0.788, which is well above the minimum acceptable level. Using principal component analysis, the study has determined that six factors influences the most on consumer perception; namely: Customer oriented,",
+    "year": 2015,
+    "lang": "en",
+    "type": "article",
+    "venue": "Uncertain Supply Chain Management",
+    "topic": "Customer Service Quality and Loyalty",
+    "field": "Business, Management and Accounting",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2586441381",
+    "title": "Prenatal melamine exposure impairs spatial cognition and hippocampal synaptic plasticity by presynaptic and postsynaptic inhibition of glutamatergic transmission in adolescent offspring",
+    "abstract": "",
+    "year": 2017,
+    "lang": "en",
+    "type": "article",
+    "venue": "Toxicology Letters",
+    "topic": "Melamine detection and toxicity",
+    "field": "Agricultural and Biological Sciences",
+    "ca_institutions": "University of Saskatchewan",
+    "funders": []
+  },
+  {
+    "id": "W2000443461",
+    "title": "Single Point Incremental Forming and the Forming Criteria for AA3003",
+    "abstract": "",
+    "year": 2006,
+    "lang": "en",
+    "type": "article",
+    "venue": "CIRP Annals",
+    "topic": "Metal Forming Simulation Techniques",
+    "field": "Engineering",
+    "ca_institutions": "Queen's University",
+    "funders": ["Natural Sciences and Engineering Research Council of Canada", "Atsumi International Scholarship Foundation", "U.S. Department of Energy"]
+  },
+  {
+    "id": "W2950526081",
+    "title": "Does Abatacept Increase Postoperative Adverse Events in Rheumatoid Arthritis Compared with Conventional Synthetic Disease-modifying Drugs?",
+    "abstract": "OBJECTIVE: To investigate whether abatacept (ABA) causes more adverse events (AE) than conventional synthetic disease-modifying antirheumatic drugs (csDMARD) after orthopedic surgery in patients with rheumatoid arthritis (RA). METHODS: A retrospective multicenter nested case-control study was performed in 18 institutions. Patients receiving ABA (ABA group) were matched individually with patients receiving csDMARD and/or steroids (control group). Postoperative AE included surgical site infection, delayed wound healing, deep vein thrombosis or pulmonary embolism, flare, and death. The incidence rates of the AE in both groups were compared with the Mantel-Haenszel test. Risk factors for AE were analyzed by logistic regression model. RESULTS: A total of 3358 cases were collected. After inclusion and exclusion, 2651 patients were selected for matching, and 194 patients in 97 pairs were chosen for subsequent comparative analyses between the ABA and control groups. No between-group differences were detected in the incidence rates of each AE or in the incidence rates of total AE (control vs ABA: 15.5% vs 20.7% in total, 5.2% vs 3.1% in death). CONCLUSION: Compared with csDMARD and/or steroids without ABA, adding ABA to the treatment does not appear to increase the incidence rates of postoperative AE in patients with RA undergoing orthopedic surgery. Large cohort studies should be performed to add evidence for the perioperative safety profile of ABA.",
+    "year": 2019,
+    "lang": "en",
+    "type": "article",
+    "venue": "The Journal of Rheumatology",
+    "topic": "Rheumatoid Arthritis Research and Therapies",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4399833484",
+    "title": "Le bébé en services éducatifs",
+    "abstract": "Depuis la parution du livre Le bébé en garderie, il y a eu au Québec plusieurs changements dans les milieux de garde. Nous avons donc actualisé en partie l’ouvrage afin de tenir compte de la nouvelle réglementation tout en respectant la philosophie à l’origine de ce livre : vivre en harmonie avec les bébés, respecter leur rythme et leurs besoins. Le bébé en services éducatifs nous fait prendre conscience que les éducatrices qui ont la responsabilité de très jeunes enfants quand leurs parents travaillent doivent faire preuve d’un grand professionnalisme. Elles se doivent d’acquérir et de posséder des attitudes et des principes, de même que des savoir-faire et des connaissances psychologiques et éducatives, propres aux enfants de moins de 30 mois. Cet ouvrage permet de cerner ces compétences particulières et, en cela, il s’adresse d’abord aux éducatrices en formation ; il saura certes intéresser également les parents ainsi que toutes celles et ceux qui ont charge d’enfants et qui croient que les petits méritent le respect et l’attention adaptés à leur stade de développement. L’édition originale de ce livre s’est vu accorder, en 1992, le Prix de la Ministre (Ministère de l’Éducation, Gouvernement du Québec).",
+    "year": 2008,
+    "lang": "fr",
+    "type": "book",
+    "venue": "Presses de l'Université du Québec eBooks",
+    "topic": "Psychoanalysis and Psychopathology Research",
+    "field": "Psychology",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2808950187",
+    "title": "A Strength Pareto Evolutionary Algorithm for Optimizing System-On-Chip Test Schedules",
+    "abstract": "System-on-chip (SOC) has become a mainstream design practice that integrates intellectual property cores on a single chip. The SOC test scheduling problem maximizes the simultaneous test of all cores by determining the order in which various cores are tested. The problem is tightly coupled with the test access mechanism (TAM) bandwidth and wrapper design. This paper presents a strength Pareto evolutionary algorithm for the SOC test scheduling problem with the objective of minimizing the power-constrained test application time, wrapper design and TAM assignment in flat and hierarchical core-based systems. We demonstrate the effectiveness of the method using the ITC’02 benchmarks.",
+    "year": 2018,
+    "lang": "en",
+    "type": "article",
+    "venue": "International Journal of Computational Intelligence and Applications",
+    "topic": "VLSI and Analog Circuit Testing",
+    "field": "Computer Science",
+    "ca_institutions": "Polytechnique Montréal",
+    "funders": []
+  },
+  {
+    "id": "W4387429048",
+    "title": "Coastal archaeological site visibility problems and underwater prospects in the Northern Lake Superior Basin",
+    "abstract": "Abstract The early to middle Holocene was marked by considerable variability in lake levels in the Lake Superior Basin due to a combination of meltwater runoff, isostatic adjustment, shifting glacial margins, and climate change. These processes likely had a large impact on the preservation and visibility of coastal archaeological sites dating from the Early Period (Paleoindian) to the Middle Period (Shield Archaic). Of particular interest is the brief interval after 9300 cal. B.P. when ancestral Lake Superior dropped to its lowest level (Houghton) and human populations may have made incursions deeper into the basin. Elsewhere in the Upper Great Lakes, this period is associated with offshore archaeological sites submerged by rising water levels later in the Holocene. New geological data from the Thunder Bay, ON, region yield exceptional insight into the paleohydrology of the Houghton phase and, hence, the underwater archaeological prospects of this low water phase in the northern Lake Superior Basin. These data indicate that the lake reached its lowest level by at least ~9100 cal. B.P. but was highly unstable, at least initially, due to a combination of climate and meltwater runoff. Early underwater sites may be confined to two short, hydrologically closed, lowstands between ~9100 and 8700 cal. B.P. and would have been impacted by at least one lake transgression. Such sites, however, may still hold better potential for organic preservation and the visibility of large cultural features compared to their terrestrial counterparts. Coastal sites occupied when the lake was hydrologically closed may be especially well‐preserved due to rapid inundation before the gradual, and generally erosional, Nipissing transgression occurred.",
+    "year": 2023,
+    "lang": "en",
+    "type": "article",
+    "venue": "Geoarchaeology",
+    "topic": "Geology and Paleoclimatology Research",
+    "field": "Earth and Planetary Sciences",
+    "ca_institutions": "Lakehead University",
+    "funders": "Social Sciences and Humanities Research Council of Canada"
+  },
+  {
+    "id": "W2088192874",
+    "title": "The continuing challenge of surgical access",
+    "abstract": "In this issue of CJS , Wright and colleagues[1][1] describe a refreshing strategy to develop standardized, comprehensive access targets for timely surgical care. This provides a timely opportunity to reflect on access to surgical care in Canada. Over a decade has elapsed since priorities for waiting",
+    "year": 2011,
+    "lang": "en",
+    "type": "letter",
+    "venue": "Canadian Journal of Surgery",
+    "topic": "Healthcare Operations and Scheduling Optimization",
+    "field": "Health Professions",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2122394503",
+    "title": "Function of basal ganglia in bridging cognitive and motor modules to perform an action",
+    "abstract": "The basal ganglia (BG) are thought to be involved in the integration of multiple sources of information, and their dysfunction can lead to disorders such as Parkinson's disease (PD). PD patients show motor and cognitive dysfunction with specific impairments in the internal generation of motor actions and executive deficits, respectively. The role of the BG, then, would be to integrate information from several sources in order to make a decision on a resulting action adequate for the required task. Reanalyzing the data set from our previous study (Martinu et al., 2012), we investigated this hypothesis by applying a graph theory method to a series of fMRI data during the performance of self-initiated (SI) finger movement tasks obtained in healthy volunteers (HV) and early stage PD patients. Dorsally, connectivity strength between the medial prefrontal areas (mPFC) and cortical regions including the primary motor area (M1), the extrastriate visual cortex, and the associative cortex, was reduced in the PD patients. The connectivity strengths were positively correlated to activity in the striatum in both groups. Ventrally, all connectivity between the striatum, the thalamus, and the extrastriate visual cortex decreased in strength in the PD, as did the connectivity between the striatum and the ventrolateral PFC (VLPFC). Individual response time (RT) was negatively correlated to connectivity strength between the dorsolateral PFC (DLPFC) and the striatum and positively correlated to connectivity between the VLPFC and the striatum in the HV. These results indicate that the BG, with the mPFC and thalamus, are involved in integrating multiple sources of information from areas such as DLPFC, and VLPFC, connecting to M1, thereby determining a network that leads to the adequate decision and performance of the resulting action.",
+    "year": 2014,
+    "lang": "en",
+    "type": "article",
+    "venue": "Frontiers in Neuroscience",
+    "topic": "Functional Brain Connectivity Studies",
+    "field": "Neuroscience",
+    "ca_institutions": ["Institut Universitaire de Gériatrie de Montréal", "Université de Montréal"],
+    "funders": ["Canadian Institutes of Health Research", "Parkinson Society Canada"]
+  },
+  {
+    "id": "W2002062638",
+    "title": "A Model of β -Cell Mass, Insulin, and Glucose Kinetics: Pathways to Diabetes",
+    "abstract": "",
+    "year": 2000,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Theoretical Biology",
+    "topic": "Pancreatic function and diabetes",
+    "field": "Medicine",
+    "ca_institutions": ["University of British Columbia", "University of Alberta", "Simon Fraser University"],
+    "funders": []
+  },
+  {
+    "id": "W4401256309",
+    "title": "Triplet dynamics reveal loss pathways in multi-resonance thermally activated delayed fluorescence emitters",
+    "abstract": ", using transient absorption spectroscopy to spectrally resolve the triplet population(s). We identify multiple triplet populations with distinct spectral contributions, and resolve the dynamics between them. Unlike conventional donor-acceptor TADF materials that have previously been studied, we find these triplet states are not formed in equilibrium, instead exhibiting a slow evolution from a high-energy triplet to a low-energy triplet. Delayed fluorescence predominantly reflects the lifetime of the high-energy triplet state, indicating that the formation of the low-energy triplet is a loss pathway for TADF. We also find that greater amounts of the low-energy triplet are formed in a higher dielectric environment, which leads to less delayed fluorescence. These triplet dynamics have significant implications for TADF in devices, as depending on the identity of the triplet formed by electrical excitation, there will either be a significant barrier to TADF, or a competing nonradiative decay pathway.",
+    "year": 2024,
+    "lang": "en",
+    "type": "article",
+    "venue": "Chemical Science",
+    "topic": "Organic Light-Emitting Diodes Research",
+    "field": "Engineering",
+    "ca_institutions": "University of British Columbia",
+    "funders": ["Centre of Excellence in Exciton Science", "Natural Sciences and Engineering Research Council of Canada", "Australian Research Council", "Alliance de recherche numérique du Canada", "Killam Trusts"]
+  },
+  {
+    "id": "W4280604825",
+    "title": "A Risk Score to Detect Subclinical Rheumatoid Arthritis–Associated Interstitial Lung Disease",
+    "abstract": "OBJECTIVE: Patients at high risk of rheumatoid arthritis-associated interstitial lung disease (RA-ILD) would benefit from being identified before the onset of respiratory symptoms; this can be done by screening patients with the use of chest high-resolution computed tomography (HRCT). Our objective was to develop and validate a risk score for patients who have subclinical RA-ILD. METHODS: Our study included a discovery population and a replication population from 2 prospective RA cohorts (ESPOIR and TRANSLATE2, respectively) without pulmonary symptoms who had received chest HRCT scans. All patients were genotyped for MUC5B rs35705950. After multiple logistic regression, a risk score based on independent risk factors for subclinical RA-ILD was developed in the discovery population and tested for validation in the replication population. RESULTS: The discovery population included 163 patients with RA, and the replication population included 89 patients with RA. The prevalence of subclinical RA-ILD was 19.0% and 16.9%, respectively. In the discovery population, independent risk factors for subclinical RA-ILD were presence of the MUC5B rs35705950 T allele (odds ratio [OR] 3.74 [95% confidence interval (95% CI) 1.37, 10.39]), male sex (OR 3.93 [95% CI 1.40, 11.39]), older age at RA onset (for each year, OR 1.10 [95% CI 1.04, 1.16]), and increased mean Disease Activity Score in 28 joints using the erythrocyte sedimentation rate (for each unit, OR 2.03 [95% CI 1.24, 3.42]). We developed and validated a derived risk score with receiver operating characteristic areas under the curve of 0.82 (95% CI 0.70-0.94) for the discovery population and 0.78 (95% CI 0.65-0.92) for the replication population. Excluding MUC5B rs35705950 from the model provided a lower goodness of fit (likelihood ratio test, P = 0.01). CONCLUSION: We developed and validated a risk score that could help identify patients at high risk of subclinical RA-ILD. Our findings support an important contribution of MUC5B rs35705950 to subclinical RA-ILD risk.",
+    "year": 2022,
+    "lang": "en",
+    "type": "article",
+    "venue": "Arthritis & Rheumatology",
+    "topic": "Interstitial Lung Diseases and Idiopathic Pulmonary Fibrosis",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": ["National Institute of Arthritis and Musculoskeletal and Skin Diseases", "Bristol-Myers Squibb Canada", "National Institutes of Health", "Lilly Deutschland", "Institut National de la Santé et de la Recherche Médicale", "AbbVie", "Galapagos Conservancy", "Harvard University", "Merck KGaA", "Fresenius Biotech", "Pfizer", "Bristol-Myers Squibb", "Eli Lilly and Company"]
+  },
+  {
+    "id": "W3209749168",
+    "title": "20 Years of Optometry at Waterloo - A Celebration",
+    "abstract": "",
+    "year": 2021,
+    "lang": "en",
+    "type": "article",
+    "venue": "Canadian journal of optometry/CJO. Canadian journal of optometry",
+    "topic": "Ophthalmology and Visual Health Research",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W6968593453",
+    "title": "FIGURES 19–23 in Description of the immature stages of the endangered Japanese endemic Oreodytes kanoi (Kamiya, 1938) (Coleoptera: Dytiscidae: Hydroporinae) and comparison with the known larvae of Oreodytes Seidlitz, 1887",
+    "abstract": "FIGURES 19–23. Oreodytes kanoi (Kamiya, 1938), instar III: (19) head capsule, dorsal aspect (colour pattern not represented); (20–21) prothoracic leg, (20) anterior aspect; (21) posterior aspect; (22) last abdominal segment, dorsal aspect; (23), urogomphus, dorsal aspect. Scale bars = 0.5 mm.",
+    "year": 2020,
+    "lang": "en",
+    "type": "other",
+    "venue": "Zenodo (CERN European Organization for Nuclear Research)",
+    "ca_institutions": "Laurentian University",
+    "funders": []
+  },
+  {
+    "id": "W3149802801",
+    "title": "Intracranial haemorrhage with bolus thrombolytic agents",
+    "abstract": "",
+    "year": 2000,
+    "lang": "en",
+    "type": "letter",
+    "venue": "The Lancet",
+    "topic": "Acute Ischemic Stroke Management",
+    "field": "Medicine",
+    "ca_institutions": "University of Alberta",
+    "funders": []
+  },
+  {
+    "id": "W1568368558",
+    "title": "Using Iterative Methods to Compute Vibrational Spectra",
+    "abstract": "Abstract In this article, some modern methods for computing vibrational energies of polyatomic molecules are reviewed. The emphasis is on iterative methods with which a spectrum is obtained by evaluating matrix–vector products. To use such methods one does not need to compute or store Hamiltonian matrix elements. If each basis function is a product of functions of a single coordinate, matrix–vector products can be computed by doing sequentailly sums associated with indices of the individual coordinates. The corresponding algorithm is simple and useful, but, with current computers, it cannot be applied to compute the spectrum of a six‐atom molecule. For molecules with six or more atoms (and often for molecules with five atoms), it is necessary to use basis set contraction. A contraction method is presented that has been used for methane and CH 5 + .",
+    "year": 2011,
+    "lang": "en",
+    "type": "other",
+    "topic": "Advanced Chemical Physics Studies",
+    "field": "Physics and Astronomy",
+    "ca_institutions": "Queen's University",
+    "funders": []
+  },
+  {
+    "id": "W3216171996",
+    "title": "Effects of Vertical Spatial Overlap on Phytoplankton Diversity under Experimentally Altered Lake Stratification Regimes",
+    "abstract": "In phytoplankton communities, competitive exclusion might occur when functionally similar species are impeded from regulating their positions along light and nutrient gradients to reduce niche overlap. Greater spatial overlap (SO) between species due to water column mixing could thus promote competitive exclusion, reducing community taxonomic diversity. However, greater SO could also promote coexistence of functionally different taxa. Using data from a whole-lake experiment, we investigated the effects of SO and other relevant environmental factors on phytoplankton diversity across the water columns of lake basins with different thermocline manipulations. We estimated SO using an in situ fluorometer, and overall community diversity microscopically. Using structured equation models, we estimated directional relationships between phytoplankton diversity, SO, the lake physical structure and the zooplankton community. No significant effect of SO on phytoplankton taxonomic diversity was observed, but higher SO was associated with greater functional diversity. Change in lake physical structure and in the zooplankton community also affected diversity, with a negative response to increased top-down interactions. Overall, despite the fact that the alteration of water column stratification structure and top-down interactions were stronger drivers of phytoplankton diversity in our system, some effect of spatial overlap on the outcome of inferred competitive interactions were observable.",
+    "year": 2021,
+    "lang": "en",
+    "type": "article",
+    "venue": "Microorganisms",
+    "topic": "Aquatic Ecosystems and Phytoplankton Dynamics",
+    "field": "Environmental Science",
+    "ca_institutions": "Université du Québec à Montréal",
+    "funders": []
+  },
+  {
+    "id": "W4238064851",
+    "title": "RETIRED: Managing Menopause Chapter 5 Urogenital Health",
+    "abstract": "",
+    "year": 2014,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Obstetrics and Gynaecology Canada",
+    "topic": "Sex and Gender in Healthcare",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W1964493139",
+    "title": "Very late restenosis of a sirolimus-eluting stent after left main coronary artery stenting",
+    "abstract": "",
+    "year": 2007,
+    "lang": "en",
+    "type": "article",
+    "venue": "Canadian Journal of Cardiology",
+    "topic": "Coronary Interventions and Diagnostics",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2742954006",
+    "title": "Building concepts one episode at a time: The hippocampus and concept formation",
+    "abstract": "",
+    "year": 2017,
+    "lang": "en",
+    "type": "review",
+    "venue": "Neuroscience Letters",
+    "topic": "Memory and Neural Mechanisms",
+    "field": "Neuroscience",
+    "ca_institutions": "University of Toronto",
+    "funders": ["Eunice Kennedy Shriver National Institute of Child Health and Human Development", "Wellcome", "National Institute of Mental Health", "National Institute of Child Health and Human Development", "Leverhulme Trust", "Alan Turing Institute", "Wellcome Trust"]
+  },
+  {
+    "id": "W4319786205",
+    "title": "Goncharov in the twenty-first century",
+    "abstract": "This volume is a great addition to Goncharov studies: well conceived, well structured, disciplined, and often original in its reassessments. The editors, Ingrid Kleespies and Lyudmila Parts, are to...",
+    "year": 2023,
+    "lang": "en",
+    "type": "article",
+    "venue": "Canadian Slavonic Papers",
+    "topic": "Medical and Biological Sciences",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W3029132722",
+    "title": "Language task-based functional connectivity in patients with post-stroke expressive aphasia: a preliminary fMRI study",
+    "abstract": "Objective To evaluate the functional connectivity through verbal association tasks in patients with post-stroke expressive aphasia,and to explore variation and neural mechanism of functional connectivity on language task-related brain region after expressive aphasia.Methods Ten patients with expressive aphasia after cerebral infarction [all males,aged 43 to 77,mean age (56.7±8.6) years old] and 10 normal volunteers (all males,age 46 to 74,average age 56.2±9.0) underwent data collection with functional magnetic resonance imaging (fMRI) during verbal association task.SPM2,AFNI and Matlab softwares were applied in pre-processing and statistical analysis of the data.Based on the activation results of the normal group,the active region of left posterior inferior frontal gyms was selected as the seed region of functional connectivity with a central Montreal Neurological Institute (MNI) coordinate of -51,9,21,and analyzed along with time series of other voxels within whole brain.Intra-and inter-group analyses were performed with single sample and two sample t-tests.The statistical threshold was voxel ＞ 30.P ＜ 0.001 (uncorrected) was considered as significant.Results Brain regions showed positive correlation with the seed region in control group,which mainly included the left inferior frontal gyms,left middle frontal gyms,insula,left precuneus,inferior parietal lobule,left middle temporal gyms,left basal ganglia,left thalamus,right inferior frontal gyms,right middle frontal gyms,right insula,right inferior temporal gyms,right superior temporal gyms,supplemental motor areas (SMA) and right inferior parietal lobule.Brain regions showed positive correlation with the seed point in patient group,which mainly included the posterior part of the left inferior frontal gyms,left insula,left posterior central gyms and left inferior parietal lobule.The brain regions with greater correlation to seed point in control group compared to patient group included right middle temporal gyms,right superior temporal gyms and right inferior frontal gyms.The brain regions with greater correlation to seed point in patient group compared to control group included left insula and left inferior frontal gyms.Conclusion Losing functional connectivity between the posterior part of the left inferior frontal gyrus and the regions in the right hemisphere is a neural mechanism for development of motor aphasia.The left perisylvian regions are significant for maintaining language function at the early phase of aphasia.\r\n\r\nKey words: \r\nBrain infarction;  Aphasia, broca;  Magnetic resonance imaging;  Verbal association;  Functional connectivity",
+    "year": 2014,
+    "lang": "en",
+    "type": "article",
+    "venue": "Chin J Biomed Eng",
+    "topic": "Functional Brain Connectivity Studies",
+    "field": "Neuroscience",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4318615979",
+    "title": "How Arsenic Contamination Influences Downslope Wetland Plant and Microbial Community Structure and Function",
+    "abstract": "",
+    "year": 2023,
+    "lang": "en",
+    "type": "article",
+    "venue": "SSRN Electronic Journal",
+    "topic": "Constructed Wetlands for Wastewater Treatment",
+    "field": "Environmental Science",
+    "ca_institutions": ["University of Ottawa", "Lakehead University", "Laurentian University", "Trent University", "University of Guelph"],
+    "funders": []
+  },
+  {
+    "id": "W2573922509",
+    "title": "Regional Innovation Systems of the Creation of Niagara IceWine Cluster in Canada",
+    "abstract": "",
+    "year": 2009,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of the Economic Geographical Society of Korea",
+    "topic": "Innovation and Knowledge Management",
+    "field": "Business, Management and Accounting",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4390454926",
+    "title": "Importance of Vegetation for Identifying Wetlands in the Lower Mainland Fraser Valley region of British Columbia, Canada using Prevalence Index, Hydrophytic Cover Index, and Dominance Ratio",
+    "abstract": "The Lower Mainland Fraser Valley (LMFV) in British Columbia (BC), Canada is a complex and high stakes environment for wetland identification (Figure 1). High precipitation, subdued topography, and complex site history combine to present formidable challenges to wetland identification and management. Over the last 100+ years, the LMFV has undergone intense and rapid changes. Originally the land was a natural assortment of bogs, swamps and upland forests, which was then cleared for agriculture, and now is undergoing accelerating urban development. Land use competition is intense. Stakes are high: identification of wetlands can make or break development deals. Wetlands are protected in BC by the Water Sustainability Act, and administration is usually through municipal governments and bylaws. Jurisdictional wetlands are identified and mapped as part of a development permitting process.",
+    "year": 2022,
+    "lang": "en",
+    "type": "article",
+    "venue": "Wetland Science and Practice",
+    "topic": "Peatlands and Wetlands Ecology",
+    "field": "Environmental Science",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2059909671",
+    "title": "Effectiveness of a brief integrative multiple substance use intervention among young men with and without booster sessions",
+    "abstract": "",
+    "year": 2012,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Substance Abuse Treatment",
+    "topic": "Substance Abuse Treatment and Outcomes",
+    "field": "Medicine",
+    "ca_institutions": "Centre for Addiction and Mental Health",
+    "funders": "Bundesamt für Gesundheit"
+  },
+  {
+    "id": "W2087105456",
+    "title": "A fast track to zero nuclear weapons: The middle powers initiative and the new agenda coalition",
+    "abstract": "The Middle Powers Initiative is a network of international citizen organizations working to encourage the nuclear weapon states and their influential allies to move rapidly to eliminate nuclear weapons via practical steps including a Nuclear Weapons Convention. The New Agenda Coalition is a group of middle-ranking nations whose governments have also called for the early elimination of nuclear weapons via similar steps. The work of MPI and NAC at the United Nations and elsewhere is described, and their impact on NATO nuclear weapons policy discussed.",
+    "year": 2000,
+    "lang": "en",
+    "type": "article",
+    "venue": "Medicine Conflict & Survival",
+    "topic": "Nuclear Issues and Defense",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": ["Western Alliance Health Research", "International Atomic Energy Agency", "Government of Canada"]
+  },
+  {
+    "id": "W4389731441",
+    "title": "960: OPIOID AND SEDATIVE WEANING AND WITHDRAWAL IN MECHANICALLY VENTILATED ADULTS: AN ALERT-ICU SUBSTUDY",
+    "abstract": "Introduction: Iatrogenic withdrawal syndrome (IWS) occurs with prolonged use and high doses of opioids and sedatives, and weaning through gradual dose reductions may minimize the risk of IWS. This study examined opioid and sedative weaning and IWS policies/protocols in critically ill adults receiving invasive mechanical ventilation (MV). We hypothesized that opioid and sedative weaning and IWS policies/protocols are underutilized in this population. Methods: This was a post-hoc analysis of an international, observational, point prevalence study on a single date between June 1 and September 30, 2021. Enrollment criteria were ICU patients 18 years or older on invasive MV who received parenteral opioids or sedatives in the past 24 hours. The primary outcome was the proportion of patients who had parenteral opioids and/or sedatives weaned by an institutional policy/protocol. Parametric and nonparametric statistical analyses were performed using IBM SPSS Statistics version 28.0.0 (Armonk, New York) according to the level of measurement, data distribution, and assumptions. The a priori alpha was 5%. Results: There were 2402 patients screened for enrollment at 87 hospitals in 229 ICUs from 11 countries, of which 1066 were enrolled. Most patients (50%) were from the US, with a mean age of 55 (SD ± 16) years. Females accounted for 38%, 50% were admitted for respiratory disease, and 37% tested PCR positive for COVID-19. The median ICU stay was 7 (IQR, 3-16) days, and 40% of patients developed ARDS. The median duration of MV was 4.6 (IQR, 1.4-11.5) days. Opioids were administered to 938 (88%), sedatives to 932 (87%), and their combination to 804 (75%) patients. Among enrolled patients, 35% were admitted to 90 ICUs with a weaning protocol, while 6% were admitted to 23 ICUs with a withdrawal protocol. By the day of data collection, 39% of patients used a weaning protocol for analgesia-sedation, while 12% used a withdrawal protocol in ICUs with such protocols. Conclusions: Opioid and sedative weaning and IWS policies/protocols are underutilized in the ICU, as only a small proportion of patients had one implemented by the data collection day. About one-third of patients were admitted to an ICU with a weaning protocol, and about 1 in 17 to an ICU with a withdrawal protocol.",
+    "year": 2023,
+    "lang": "en",
+    "type": "article",
+    "venue": "Critical Care Medicine",
+    "topic": "Intensive Care Unit Cognitive Disorders",
+    "field": "Medicine",
+    "ca_institutions": ["McGill University", "Université de Montréal", "University of Toronto"],
+    "funders": []
+  },
+  {
+    "id": "W3041788517",
+    "title": "P125 Role of Cooperative Extension in Obesity Prevention Efforts: Program Implementation, Effectiveness, and Implications",
+    "abstract": "",
+    "year": 2020,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Nutrition Education and Behavior",
+    "topic": "Obesity, Physical Activity, Diet",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W7006604205",
+    "title": "UNGULATES SEARCH FOR THE IDEAL HOME: HOW PREDATION AND FORAGE DIFFERENTIALLY AFFECT MALES AND FEMALES IN A PARTIALLY MIGRATORY POPULATION",
+    "abstract": "Migration is a strategy used across taxa to access resources in temporally heterogenous landscapes. Migratory species can attain higher abundances because access to higher quality resources, and/or reduction in predation risk. However, most migratory species occur in partially migratory populations, a mix of migratory and non-migratory, resident individuals. I first investigate the potential mechanisms maintaining partial migration in a partially migratory elk (Cervus canadensis) population. I test whether the theory of Ideal Free Distribution (IFD) can explain the coexistence of different migratory tactics in a partially migratory population. IFD predicts that individuals exhibit density-dependent vital rates and should select different migratory tactics to maximize individual fitness, resulting in equal fitness () between tactics. We found density dependent pregnancy and adult female survival for residents, providing a fitness incentive to switch tactics. Despite differences in vital rates between tactics, mean λ (fitness) was equal, as predicted by IFD, because individual females switched tactics toward those of higher fitness. Next, I tested the Reproductive Strategy Hypothesis (RSH) for sexual segregation in the context of partial migration. I compared males and females for differences in their use and selection for forage and predation risk across spatiotemporal scales. I found support for the RSH as males adopted the migratory tactic with the highest forage quality and used higher quality forage than females. In summer, females avoided the primary predator of neonate calves further supporting the RSH, but potentially at the expense of increased exposure to wolf predation risk. Antler growth and development was driven by age and forage quality, and because migration increased forage quality, migration likely benefits male reproductive success, also supporting the RSH. Finally, I investigated the effect of age, forage, predation and harvest on male elk survival. Male elk survival was largely a function of age, as human harvest was the primary cause of mortality and antler-point-restrictions resulted in low survival for male elk over 4 years of age (S=0.42). My work demonstrates ecological drivers of population dynamics of partially migratory ungulates that has global relevance given recent declines in migratory large ungulate populations and migratory routes.",
+    "year": 2021,
+    "lang": "en",
+    "type": "dissertation",
+    "venue": "The Mathematics Enthusiast",
+    "topic": "Diverse Scientific and Economic Studies",
+    "field": "Economics, Econometrics and Finance",
+    "ca_institutions": [],
+    "funders": ["Natural Sciences and Engineering Research Council of Canada", "University of Alberta", "Parks Canada", "Rocky Mountain Elk Foundation", "University of Montana", "Montana State University", "Alberta Environment and Parks", "Safari Club International Foundation", "National Aeronautics and Space Administration", "Alberta Conservation Association", "Massachusetts Department of Fish and Game", "Idaho Department of Fish and Game", "National Science Foundation"]
+  },
+  {
+    "id": "W2048616996",
+    "title": "Spot-application of fungicide for wild blueberry using an automated prototype variable rate sprayer",
+    "abstract": "",
+    "year": 2013,
+    "lang": "en",
+    "type": "article",
+    "venue": "Precision Agriculture",
+    "topic": "Plant Pathogens and Fungal Diseases",
+    "field": "Biochemistry, Genetics and Molecular Biology",
+    "ca_institutions": "Dalhousie University",
+    "funders": "Department of Agriculture, Nova Scotia"
+  },
+  {
+    "id": "W6957909737",
+    "title": "Trend 2000 - 2011. Statistics Canada. CANSIM: Business Performance and Ownership - Business Cycles | Country: Canada | Table: Financial and taxation statistics for enterprises, by North American Industry Classification System (NAICS) | Variable: Net taxable income, Administrative and support, waste management and remediation services (x 1,000,000) | Units: , 2000-2011. Data-Planet™ Statistical Ready Reference by Conquest Systems, Inc. Dataset-ID: 075-001-018.",
+    "abstract": "Statistics Canada (2015). CANSIM: Business Performance and Ownership - Business Cycles | Country: Canada | Table: Financial and taxation statistics for enterprises, by North American Industry Classification System (NAICS) | Variable: Net taxable income, Administrative and support, waste management and remediation services (x 1,000,000) | Units: , 2000-2011. Data-Planet™ Statistical Ready Reference by Conquest Systems, Inc. [Data-file]. Dataset-ID: 075-001-018. Dataset: Provides statistics on changes in business activity over time as the Canadian economy undergoes cycles of growth and contraction. CANSIM is Statistics Canada's key socioeconomic database. The datasets included here provide statistics on the Canadian population, and the nation’s resources, economy, society, and culture. In addition to conducting a Census every five years, approximately 350 active surveys are conducted on virtually all aspects of Canadian life. Statistics are provided for the nation as a whole, provinces, and other subnational geographies where available. Category: Industry, Business, and Commerce Source: Statistics Canada Established as Canada's central statistical office by the Statistics Act of 1985, Statistics Canada is required to \"collect, compile, analyse, abstract and publish statistical information relating to the commercial, industrial, financial, social, economic and general activities and conditions of the people of Canada.\" Its main objectives are to provide statistical information and analysis about Canada’s economic and social structure and to promote sound statistical standards and practices. http://www.statcan.gc.ca/ Subject: Businesses, Economic Cycles, Economic Conditions",
+    "year": 2015,
+    "lang": "en",
+    "type": "other",
+    "venue": "Data Planet",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W3184470869",
+    "title": "Weighted scoring elections: is Borda best?",
+    "abstract": "",
+    "year": 2021,
+    "lang": "en",
+    "type": "article",
+    "venue": "Social Choice and Welfare",
+    "topic": "Game Theory and Voting Systems",
+    "field": "Economics, Econometrics and Finance",
+    "ca_institutions": ["Institut National de la Recherche Scientifique", "Wilfrid Laurier University"],
+    "funders": "Natural Sciences and Engineering Research Council of Canada"
+  },
+  {
+    "id": "W4224862663",
+    "title": "Comment on esurf-2022-5",
+    "abstract": "Step-pool systems are common bedforms in mountain streams and have been utilized in river restoration projects around the world. Step-pool units exhibit highly non-uniform hydraulic characteristics which have been reported to closely interact with the morphological evolution and stability of step-pool features. However, detailed information of the three-dimensional hydraulics for step-pool morphology has been scarce due to the difficulty of measurement. To fill in this knowledge gap, we established a hybrid model based on the technologies of Structure from Motion (SfM) and computational fluid dynamics (CFD). The model used 3D reconstructions of bed surfaces with an artificial step-pool unit built by natural stones at six flow rates as inputs for CFD simulations. The hybrid model succeeded in providing high-resolution visualization of 3D flow structures for the step-pool unit. The results illustrate the segmentation of flow regimes below the step, i.e., the integral jump at the water surface, streaky wake vortexes near the bed, and high-speed jets in between. The highly non-uniform distribution of turbulence energy in the pool has been revealed and two energy dissipaters with comparable capacity are found to co-exist in the pool. Pool scour development under flow increase leads to the expansion of the jump and wake vortexes but this increase stops for the jump at high flows close to the critical condition for step-pool failure. The micro-bedforms as grain clusters developed on the negative slope affect the local hydraulics significantly but this influence is suppressed at pool bottom. The drag forces on the step stones increase with discharge before the highest flow is used while the lift force has a larger magnitude and wider varying range. Our results highlight the feasibility and great potential of the hybrid model approach combining physical and numerical modeling in investigating the complex flow characteristics of step-pool morphology.",
+    "year": 2022,
+    "lang": "en",
+    "type": "peer-review",
+    "topic": "Hydrology and Sediment Transport Processes",
+    "field": "Environmental Science",
+    "ca_institutions": "University of British Columbia",
+    "funders": "Tsinghua University"
+  },
+  {
+    "id": "W1922556079",
+    "title": "A Survey on Arc Fault Detection and Wire Fault Location for Aircraft Wiring Systems",
+    "abstract": "&lt;div class=\"htmlview paragraph\"&gt;This paper provides an overview of recent developments in the area of arc fault detection (AFD) and wire fault location for aircraft wiring systems. Arc faults have been identified as one of the greatest threats to human lives and properties, and the likely cause of several aircraft disasters. With the introduction of high voltage transmission in aircraft to reduce the wiring weight and to meet the increasing power demands, the probability of initiating and sustaining continuous arcs in modern aircraft have been increased. However, arc faults are hard to detect and wiring problems are difficult to locate in aircraft, due to their complex profiles, high impedance property, and pressure sensitive characteristic, etc. The difficulty in resolving this problem is also due to the fact that false alarms cannot be tolerated but missing alarms can be fatal, and arc faults are normally intermittent as a result of the in-flight vibration.&lt;/div&gt; &lt;div class=\"htmlview paragraph\"&gt;For arc fault detection, a great number of methods have been proposed, which can be categorized into mechanical and electrical methods; in general, features can be extracted from time domain, frequency domain, or time-frequency domain; and algorithms have been developed based on adaptive techniques, Kalman filter, fractal theory, neural networks, fuzzy logic reasoning, and expert systems to enhance arc fault detection. Regarding wire fault location, numerous techniques have been developed and practiced, including visual inspection, impedance measurement, pulse arrested spark discharge diagnostics, high voltage test, inert gas method, and various kinds of reflectometry. Each of these techniques is effective to a certain extent, but all of them come with drawbacks as well.&lt;/div&gt; &lt;div class=\"htmlview paragraph\"&gt;This paper is intended to provide a constructive summary of the present arc fault detection and wire fault location techniques, together with discussions on the current and future research and development opportunities and challenges in this field.&lt;/div&gt;",
+    "year": 2008,
+    "lang": "en",
+    "type": "article",
+    "venue": "SAE International Journal of Aerospace",
+    "topic": "Electrical Fault Detection and Protection",
+    "field": "Engineering",
+    "ca_institutions": "Toronto Metropolitan University",
+    "funders": []
+  },
+  {
+    "id": "W6923610754",
+    "title": "Annual 1931-1932 Provincial Normal School Vancouver, B. C.",
+    "abstract": "",
+    "year": 2018,
+    "lang": "en",
+    "type": "article",
+    "venue": "Open Collections",
+    "topic": "Canadian Identity and History",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  }
+]

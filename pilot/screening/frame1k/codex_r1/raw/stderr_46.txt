@@ -1,0 +1,908 @@
+Reading additional input from stdin...
+OpenAI Codex v0.144.0
+--------
+workdir: /Users/choxos/Documents/GitHub/CaRN-data-challenge
+model: gpt-5.6-luna
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: high
+reasoning summaries: none
+session id: 019f58d9-2cc4-7900-b210-d06767cf25b8
+--------
+user
+# MétaCan screening rubric (v1.0)
+
+**Locked before screening. Version-controlled. Any change is a new version with a dated entry in `DEVIATIONS.md`.**
+
+Both machine screeners and both human coders work from this document and nothing else. The rubric is the
+instrument; if two coders disagree, the rubric is what they are adjudicated against.
+
+---
+
+## The unit
+
+One work (journal article, preprint, book chapter, report, dataset, or software), identified by its OpenAlex ID.
+You see: title, abstract, publication year, language, venue, OpenAlex topic and field, Canadian institutional
+affiliations, funders.
+
+## The question
+
+**Is the object of study *research itself*?**
+
+Metaresearch studies how research is done, reported, funded, evaluated, disseminated, or governed. The test is
+what the work is *about*, not what field it appears in and not what vocabulary it uses.
+
+A cardiology trial is not metaresearch. A study of *how cardiology trials report their outcomes* is.
+
+---
+
+## Tier
+
+Assign exactly one.
+
+### T1: Core metaresearch
+The primary object of study is research itself. Typical objects:
+
+- research **methods** and their properties (bias, reporting, statistical practice, study design)
+- **reproducibility**, replication, data and code sharing
+- **research integrity**: misconduct, retraction, questionable research practices, authorship
+- **peer review** and editorial process *as objects of study*
+- **research evaluation**, metrics, rankings, funding allocation
+- **scholarly communication**: publishing models, open access, preprints *as objects of study*
+- **bibliometrics and scientometrics** applied to a research literature
+- the **research workforce**: careers, equity, training, capacity
+- **evidence synthesis methodology** (not an individual systematic review's clinical answer, but work *about* how
+  syntheses are done)
+
+### T2: Adjacent
+Empirically or conceptually grounded work on science as a social system that is not framed as metaresearch but
+studies it:
+
+- **science and technology studies (STS)**: social studies of scientific knowledge, practice, controversy
+- **library and information science**: information behaviour of researchers, repositories, discovery
+- **research infrastructure** studies: platforms, data repositories, identifiers, standards
+- **history and philosophy of science** *when the object is contemporary research practice*
+- **research policy** analysis grounded in evidence
+
+T2 is where the field's diversity lives. Be generous here: a paper does not have to call itself metaresearch to
+be studying research.
+
+### T3: Contextual
+Relevant to the ecosystem, mapped and released, but **never pooled into the analytic corpus**:
+
+- editorials, commentaries, opinion pieces about research practice
+- policy documents and position statements
+- announcements of infrastructure, tools, or initiatives
+- news, obituaries, corrections, letters
+
+### OUT: Not metaresearch
+Everything else. Includes, and this is the most common error:
+
+- **A study that uses a method is not a study of the method.** A meta-analysis answering a clinical question is
+  OUT. A study of how meta-analyses handle heterogeneity is T1.
+- **Mentioning a metaresearch term is not studying it.** A lab paper reporting "assay reproducibility", a methods
+  section saying "peer reviewed", a licence note saying "open access": all OUT.
+- **Domain research that happens to be bibliometric in method** but whose object is the domain, not the research:
+  e.g. a bibliometric map of diabetes treatments, produced to summarise diabetes knowledge. Borderline; see below.
+
+---
+
+## The three errors that matter most
+
+These are where the pilot showed retrieval and screening break down. Read them twice.
+
+1. **Polysemy.** `reproducibility` in a biochemistry paper means the assay gives the same reading twice. In a
+   metaresearch paper it means the reproducibility crisis. Only the second is in scope. The same applies to
+   `validation`, `replication`, `bias`, `peer review`, `open access`. **Judge the sense, not the token.**
+
+2. **Method vs. object.** Using bibliometrics ≠ studying research. Ask: *if this paper is right, what do we now
+   know more about: a scientific question, or the practice of science?* If the former, OUT.
+
+3. **Absence of vocabulary is not absence of content.** An STS paper about laboratory practice, or an LIS paper
+   about how researchers find data, may use none of the field's keywords and still be squarely T2. **Do not
+   require the vocabulary.** This is the error that makes the field look smaller and more anglophone than it is.
+
+---
+
+## Canadian linkage
+
+Record which apply (this is metadata, not an inclusion test; the estimand is defined separately in
+`PROTOCOL.md`):
+
+- `CA_AFF`: at least one author affiliated with a Canadian institution
+- `CA_FUND`: funded by CIHR, NSERC, SSHRC, or CFI
+- `ABOUT_CA`: the Canadian research system is a substantive object of study (not a passing mention, not one
+  country among forty in a global comparison)
+
+## Genre
+
+`empirical` · `conceptual` · `editorial/commentary` · `policy` · `infrastructure/announcement` · `other`
+
+OpenAlex's `type` is unreliable and this field is commentary-heavy, so genre is coded, not inherited.
+
+## Language of the work
+
+As published. Do not infer from the venue.
+
+---
+
+## Confidence
+
+- `high`: the rubric decides this cleanly.
+- `medium`: the rubric decides, but a reasonable coder could differ.
+- `low`: genuinely on the boundary, or the abstract is missing/too thin to judge.
+
+**`low` is a legitimate answer and is not a failure.** Records coded `low` by either screener are routed to
+adjudication. A screener that never says `low` is not being careful; it is being confident.
+
+---
+
+## Worked examples
+
+| Title (abridged) | Tier | Why |
+|---|---|---|
+| "Data sharing practices in 500 randomised trials" | **T1** | The object is reporting practice. |
+| "Reproducibility of a Western blot protocol" | **OUT** | Assay reproducibility. Polysemy trap. |
+| "Trends in citation of retracted papers" | **T1** | Object is the literature's own behaviour. |
+| "Laboratory life in a Canadian genomics centre: an ethnography" | **T2** | STS. No metaresearch vocabulary; still studies research. |
+| "How do researchers discover datasets? A survey" | **T2** | LIS, information behaviour of researchers. |
+| "Effectiveness of statins: a network meta-analysis" | **OUT** | Uses a synthesis method to answer a clinical question. |
+| "How network meta-analyses handle inconsistency: a review of 200 reviews" | **T1** | Object is the method. |
+| "Announcing the Canadian Research Data Repository" | **T3** | Infrastructure announcement. Mapped, not pooled. |
+| "Open access mandates are failing early-career researchers" (editorial) | **T3** | Commentary about research practice. |
+| "Bibliometric analysis of diabetes research 2000–2020" | **T2** | Borderline. Bibliometric method, and the object *is* a research literature, so it studies research output. Code T2, `medium`. |
+| "Le libre accès dans les revues québécoises : état des lieux" | **T1** | Scholarly communication, object is publishing practice. French. |
+
+---
+
+## Instructions to the screener
+
+Read the title and abstract. Apply the rubric. Do not use outside knowledge of the authors or the journal's
+reputation. If the abstract is missing, judge on the title alone and set confidence to `low` unless the title is
+unambiguous.
+
+Return the schema in `protocol/screening-schema.json`. One object per work. No prose, no preamble.
+--------------------------------------------------------------------------------
+You are screening works for MetaCan, a map of Canadian metaresearch.
+
+Apply the rubric above to every record in the JSON array below. Return a JSON
+array with one object per work, conforming to protocol/screening-schema.json:
+
+  {"id": "W...", "tier": "T1|T2|T3|OUT", "genre": "...", "about_ca": true|false,
+   "confidence": "high|medium|low", "reason": "one sentence"}
+
+Rules:
+- Return the JSON array and NOTHING else. No prose, no preamble, no code fences.
+- Every input id must appear exactly once in the output.
+- Do not run commands, read files, or browse. Classify from the RECORDS alone.
+
+RECORDS:
+[
+  {
+    "id": "W2527502148",
+    "title": "Direct Dark Matter Detection with the DAMIC Experiment at SNOLAB",
+    "abstract": "There is strong cosmological and astrophysical evidence for the existence of non-baryonic, cold dark matter as a major constituent of the Universe. Its nature, so far elusive, constitutes one of the most fundamental questions in science. The existence of weakly-interacting massive particles (WIMPs) is a compelling explanation for dark matter, and a large experimental effort is ongoing to detect the rare interactions of WIMPs with dedicated detectors located underground to minimize backgrounds. DAMIC (Dark Matter in CCDs) is a novel experiment with unique sensitivity to dark matter particles of masses below 10 GeV/c$^2$. It employs the bulk silicon of scientific-grade charge-coupled devices (CCDs) as the target for coherent WIMP-nucleus elastic scattering; the CCD is then used to detect the ionization produced by the recoiling nucleus. These devices, which are widely used for light imaging in astronomical telescopes and for X-ray detection in a variety of applications, are used in DAMIC for the first time as dark matter detectors. DAMIC CCDs are fabricated from n-type, high-resistivity silicon wafers, and are fully depleted ({\\it i.e.} fully sensitive) over a record thickness of 675~$\\mu$m. With 16 million pixels per CCD arranged over an area of 6 cm $\\times$ 6 cm, these detectors provide a uniquely detailed spatial reconstruction of the energy deposited by a particle interaction. Also, the extremely low noise of the CCD readout results in an unprecedentedly low energy threshold to ionization of a few tens of eV. DAMIC was installed at SNOLAB - a laboratory located 2 km underground in a mine in Sudbury, Canada - at the end of 2012, and is now completing the R\\&D phase required for the construction of a 100~g detector, DAMIC100. The work presented in this thesis covers the progress of the DAMIC experiment during its R\\&D phase. A significant contribution has been the development of data analysis and simulations tools, and their use in the characterization of DAMIC CCDs, including the measurement of charge diffusion and the response to electron-induced ionization. A major contribution of this thesis is the measurement of radioactive contaminants potentially present in the apparatus. Photons, $\\alpha$ and $\\beta$ particles - {\\it e.g.} from isotopes of the uranium and thorium chains - can produce interactions in the CCD ultimately limiting the sensitivity of the experiment to dark matter searches. In addition to a careful screening of all materials located close to the CCDs, we have performed measurements of radioactive contaminants in the CCD itself. For this purpose we have exploited the unique spatial resolution of the detector, which allows for accurate identification of $\\alpha$ and $\\beta$ particles. Uranium and thorium contamination in the CCD bulk was measured through $\\alpha$ spectroscopy, with an upper limit on the \\ura\\ (\\thor\\ ) decay rate of 5 (15) kg$^{-1}$ d$^{-1}$ at 95\\% CL. We also searched for pairs of spatially correlated electron tracks separated in time by up to tens of days, as expected from \\sitwo\\ $-$\\ptwo\\ or \\pbten\\ $-$ \\biten\\ sequences of $\\beta$ decays. $^{32}$Si is a cosmogenic isotope which may be present in any silicon detector and constitute an irreducible background. The decay rate of \\sitwo\\ was found to be 80$^{+110}_{-65}$ kg$^{-1}$ d$^{-1}$ (95\\% CI). An upper limit of $\\sim$ 35 kg$^{-1}$ d$^{-1}$ on the \\pbten\\ decay rate was obtained independently by $\\alpha$ spectroscopy and the $\\beta$ decay sequence search. These levels of radioactive contamination are sufficiently low for the successful operation of the forthcoming DAMIC100. Another major result presented in this thesis is the measurement of the nuclear ionization efficiency in silicon, namely the ratio of the energy released in ionization by a recoiling nucleus to the nucleus kinetic energy. Since only a fraction of the kinetic energy is released in the form of ionization, the experimental determination of the nuclear ionization efficiency is required for any consistent interpretation of a search for dark matter particles. We have performed a measurement of the nuclear ionization efficiency by detecting nuclear recoils induced in a DAMIC CCD by a fairly monochromatic beam of neutrons from a $^{124}$Sb-Be source. This is the first measurement in the literature for kinetic energies of the recoiling silicon nucleus below 3~keV. A notable result is that the measured nuclear ionization efficiency is consistently lower than the prediction of the Lindhard theory in silicon, which is used as a reference in the field.",
+    "year": 2015,
+    "lang": "en",
+    "type": "article",
+    "venue": "Knowledge@UChicago (University of Chicago)",
+    "topic": "Dark Matter and Cosmic Phenomena",
+    "field": "Physics and Astronomy",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W3112397639",
+    "title": "CTNI-29. CODEL: PHASE III TRIAL OF RT ALONE, RT PLUS TMZ, OR TMZ ALONE FOR NEWLY-DIAGNOSED, 1p/19q CODELETED ANAPLASTIC OLIGODENDROGLIOMA. ANALYSIS FROM THE INITIAL STUDY DESIGN. (NCCTG N0577, ALLIANCE)",
+    "abstract": "Abstract BACKGROUND The original 3-arm CODEL design included a radiotherapy (RT)-alone control arm, an RT plus temozolomide (TMZ) arm, and an exploratory TMZ-alone arm. We report the analysis involving patients treated per the initial design. METHODS Adults (18+ years) with newly-diagnosed 1p/19q codeleted WHO grade III oligodendroglioma were randomized to RT (5940 cGy) alone (Arm A); RT with concomitant and adjuvant TMZ (Arm B); or TMZ alone (Arm C). Primary endpoint was OS, Arm A vs. B. Secondary comparisons were performed for OS and PFS, comparing pooled RT arms with the TMZ-alone arm. RESULTS 36 patients were randomized equally to the three arms. At median follow-up of 7.5 years, 83.3% (10/12) TMZ-alone patients had progressed, versus 37.5% (9/24) patients on the RT arms. PFS was shorter in TMZ-alone patients compared to RT-treated patients (HR=3.12; 95% CI: 1.26, 7.69; p=0.014). Death from disease progression occurred in 3/12 (25%) of TMZ-alone patients and 4/24 (16.7%) of RT-treated patients. OS did not statistically differ between arms, although this comparison was underpowered. After adjustment for IDH status (mutated vs. wildtype) in a Cox regression model, with IDH status and RT treatment status as co-variables (Arm C vs pooled A and B), PFS remained shorter for patients not receiving RT (HR= 3.33; 95% CI: 1.31, 8.45; p=0.011), and OS differences remained non-significant ((HR = 2.78; 95% CI 0.58, 13.22, p=0.20). Grade 3+ adverse events occurred in 25%, 42% and 33% patients (Arms A, B and C, respectively). Neurocognitive assessments, comparing baseline and 3 month timepoints, showed no significant differences between arms. CONCLUSIONS TMZ-alone treated patients experienced significantly shorter PFS than patients treated on the pooled RT arms, which remained significant when adjusting for IDH status. CODEL has been redesigned to compare the efficacy and toxicity of RT+PCV versus RT+TMZ. Clinicaltrials.gov Identifier: NCT00887146. Support: U10CA180821, U10CA180882, https://acknowledgments.alliancefound.org.",
+    "year": 2020,
+    "lang": "en",
+    "type": "article",
+    "venue": "Neuro-Oncology",
+    "topic": "Glioma Diagnosis and Treatment",
+    "field": "Medicine",
+    "ca_institutions": ["Institute of Cancer Research", "University of Calgary"],
+    "funders": []
+  },
+  {
+    "id": "W7134430541",
+    "title": "CRS issue brief",
+    "abstract": "This report includes information regarding Iranian current developments and U.S. policy. Iran's strategic buildup, Iranian foreign policy and terrorism involvement, and human rights concerns are among topics discussed in this report.",
+    "year": 2002,
+    "lang": "en",
+    "type": "report",
+    "venue": "University of North Texas Digital Library (University of North Texas)",
+    "ca_institutions": "Global Affairs Canada",
+    "funders": []
+  },
+  {
+    "id": "W1917592187",
+    "title": "Anticipations professionnelles de soi et développement des compétences à s’orienter : les défis de la reconversion chez les diplômés du doctorat",
+    "abstract": "L’un des enjeux majeurs du conseil en orientation est d’amener le consultant à développer de nouvelles manières d’interpréter son parcours afin de construire des anticipations de soi relatives à une orientation qui donne du sens à sa vie. Ce défi sera examiné dans cet article à travers deux études empiriques fondées sur le modèle théorique de la « construction de soi ». Conduites dans le cadre de dispositifs d’aide à l’employabilité des diplômés du doctorat, ces études explorent les freins liés aux anticipations construites pendant le doctorat et le rôle que pourrait jouer le conseil en orientation dans la reconstruction et la mise en perspectives de ces anticipations.",
+    "year": 2015,
+    "lang": "fr",
+    "type": "article",
+    "venue": "L’Orientation scolaire et professionnelle",
+    "topic": "Education, sociology, and vocational training",
+    "field": "Social Sciences",
+    "ca_institutions": "Université Laval",
+    "funders": []
+  },
+  {
+    "id": "W2995603563",
+    "title": "Antibiotics: two fifths of US outpatient prescriptions may be inappropriate, study finds",
+    "abstract": "As many as two in five antibiotic prescriptions (43%) provided in outpatient settings in the US could be inappropriate, a study published by The BMJ has found.1\n\nResearchers from Oregon, USA, looked at prescriptions in ambulatory settings such as primary care and found that a quarter (25%) were deemed to be inappropriate, while a further 18% did not have an indication.\n\nHowever, primary care providers (general practice, paediatrics, and internal medicine) performed the best, giving a considerably lower percentage of antibiotic prescriptions without a documented indication (12%) than other specialists such as gynaecologists and urologists, who commonly prescribed antibiotics (24%), as well as those in all other specialties (29%).\n\nThe research team …",
+    "year": 2019,
+    "lang": "en",
+    "type": "article",
+    "venue": "BMJ",
+    "topic": "Antibiotic Use and Resistance",
+    "field": "Immunology and Microbiology",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2498794084",
+    "title": "Classroom Management, Facilities Design and Safety",
+    "abstract": "Classroom and facilities management require more than a series of techniques. Management and safety require a philosophy. Veteran teachers who “make it look easy“ have not perfected the techniques of management inasmuch as they have integrated certain techniques into a system and philosophy of C&amp;I, assessment, discipline, facilities design, and safety. We can think of our combination of techniques and philosophies as flexible superstructure that complements our somewhat inflexible infrastructure of architectural units, devices, software, tools, and machines. The greatest amount of anxiety for new teachers tends to be over classroom management, and specifically the way that individual students are disciplined for incivilities. Rather than confronting incivilities, effective management and safety depends on preventive infrastructure and systems that are in place. This point cannot be stressed enough. Students will test new and veteran teachers alike. Veteran teachers may have the benefit of experience in dealing with incivilities such as bullying, but they rely on their infrastructure and systems of prevention rather than their reactive techniques. They know how to deal with individual incivilities but prefer preventive measures by setting a tone for acceptable classroom behavior. We will explore a range of techniques, including humor, for dealing with classroom behavior.",
+    "year": 2007,
+    "lang": "en",
+    "type": "book-chapter",
+    "venue": "IGI Global eBooks",
+    "topic": "Educational Environments and Student Outcomes",
+    "field": "Social Sciences",
+    "ca_institutions": "University of British Columbia",
+    "funders": []
+  },
+  {
+    "id": "W1975562724",
+    "title": "Dynamic Process Modelling using a PCA‐based Output Integrated Recurrent Neural Network",
+    "abstract": "Abstract A new methodology for modelling of dynamic process systems, the output integrated recurrent neural network (OIRNN), is presented in this paper. OIRNN can be regarded as a modified Jordan recurrent neural network, in which the past values for certain steps of the output variables are integrated with the input variables, and the original input variables are pre‐processed using principal component analysis (PCA) for the purpose of dimension reduction. The main advantage of the PCA‐based OIRNN is that the input dimension is reduced, so that the network can be used to model the dynamic behavior of multiple input multiple output (MIMO) systems effectively. The new method is illustrated with reference to the Tennessee‐Eastman process and compared with principal component regression and feedforward neural networks.",
+    "year": 2002,
+    "lang": "en",
+    "type": "article",
+    "venue": "The Canadian Journal of Chemical Engineering",
+    "topic": "Fault Detection and Control Systems",
+    "field": "Engineering",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2884877336",
+    "title": "Positive Life Experiences Following a Dementia Diagnosis",
+    "abstract": "Background: Given the stigma and fear associated with Alzheimer’s disease (AD), combined with the progressive nature of the disease, the diagnosis of AD or mild cognitive impairment (MCI) is often very difficult; yet, there may still be ways to experience some positive outcomes following diagnosis. We aim to assess the psychological impact of a diagnosis of MCI or early dementia on positive well-being. Methods: Individuals with a diagnosis of MCI or AD were mailed surveys with the Silver-Lining Questionnaire. Results: Completed surveys were returned from 38 individuals and were analyzed in relation to demographic and cognitive data. All respondents reported at least one positive response to diagnosis, with just over a quarter reporting positive responses to at least half of the items. Positivity was not significantly related to any of the demographic or cognitive variables examined. Conclusions: These results suggest the importance of diagnostic disclosure and the need for additional research to better understand how to maximize the likelihood of a positive responses and support healthy behaviors and future care planning.",
+    "year": 2018,
+    "lang": "en",
+    "type": "article",
+    "venue": "OBM Geriatrics",
+    "topic": "Dementia and Cognitive Impairment Research",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W6977093182",
+    "title": "Cost-effectiveness of ranibizumab in the treatment of visual impairment due to diabetic macular edema",
+    "abstract": "<b>Objective<\/b> Ranibizumab, an anti-vascular endothelial growth factor designed for ocular use, has been deemed cost-effective in multiple indications by several Health Technology Assessment bodies. This study assessed the cost-effectiveness of ranibizumab monotherapy or combination therapy (ranibizumab plus laser photocoagulation) compared with laser monotherapy for the treatment of visual impairment due to diabetic macular edema (DME). <b>Methods<\/b> A Markov model was developed in which patients moved between health states defined by best-corrected visual acuity (BCVA) intervals and an absorbing ‘death’ state. The population of interest was patients with DME due to type 1 or type 2 diabetes mellitus. Baseline characteristics were based on those of participants in the RESTORE study. Main outputs were costs (in 2013 CA$) and health outcomes (in quality-adjusted life-years [QALYs]) and the incremental cost-effectiveness ratio (ICER) was calculated. This cost-utility analysis was conducted from healthcare system and societal perspectives in Quebec. <b>Results<\/b> From a healthcare system perspective, the ICERs for ranibizumab monotherapy and combination therapy vs laser monotherapy were CA$24 494 and CA$36 414 per QALY gained, respectively. The incremental costs per year without legal blindness for ranibizumab monotherapy and combination therapy vs laser monotherapy were CA$15 822 and CA$20 616, respectively. Based on the generally accepted Canadian ICER threshold of CA$50 000 per QALY gained, ranibizumab monotherapy and combination therapy were found to be cost-effective compared with laser monotherapy. From a societal perspective, ranibizumab monotherapy and combination therapy provided greater benefits at lower costs than laser monotherapy (ranibizumab therapy dominated laser therapy). <b>Conclusions<\/b> Ranibizumab monotherapy and combination therapy resulted in increased quality-adjusted survival and time without legal blindness and lower costs from a societal perspective compared with laser monotherapy.",
+    "year": 2016,
+    "lang": "en",
+    "type": "article",
+    "venue": "Figshare",
+    "topic": "Civil and Structural Engineering Research",
+    "field": "Engineering",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W6961559160",
+    "title": "Nanaimo Courier",
+    "abstract": "",
+    "year": 2015,
+    "lang": "en",
+    "type": "article",
+    "venue": "Open Collections",
+    "topic": "Genetic Mapping and Diversity in Plants and Animals",
+    "field": "Biochemistry, Genetics and Molecular Biology",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W7045616187",
+    "title": "Bangladeshi Literature in English: critical essays and interviews",
+    "abstract": "This pioneering book brings together several critical essays on Bangladeshi writers in the English language, both at home and abroad, and interviews with a prominent poet and a novelist. The past years have seen various attempts to conceptualize and debate the tradition of Bangladeshi literature in English. English has been in Bengal, which included the geographical territory that constitutes present-day Bangladesh, since the arrival of Ralph Fitch in 1583, and although Bengalis started experimenting creatively in the language in the late eighteenth and early nineteenth centuries, the tradition suffered significant setbacks in Bangladesh and remained in semi-muzzled state for various political and cultural reasons discussed in the book, before and after independence. However, the tradition has seen a surge since the 1990s, and several writers have emerged on home soil and in places where Bangladeshis have settled, including Australia, Canada, Sweden, the UK, and the USA. The book provides an overview of this tradition and investigates the various thematic and stylistic issues in the works of the selected writers, suggesting the vibrancy and versatility of this evolving national and postcolonial literary stream. The book will be of interest to researchers, academics, and scholars in the field of Bangladeshi writing in English, Southeast Asian literature, Asian literature, diaspora, and literary studies.",
+    "year": 2024,
+    "lang": "en",
+    "type": "article",
+    "venue": "The International Islamic University Malaysia Repository (The International Islamic University Malaysia)",
+    "topic": "Bangladesh Politics, Society, and Development",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2887413122",
+    "title": "Optimal Solutions to Infinite-Player Stochastic Teams and Mean-Field Teams",
+    "abstract": "We study stochastic static teams with countably infinite number of decision makers (DMs), with the goal of obtaining (globally) optimal policies under a decentralized information structure. We present sufficient conditions to connect the concepts of team optimality and person-byperson optimality for static teams with countably infinite number of DMs. We show that under uniform integrability and uniform convergence conditions, an optimal policy for static teams with countably infinite number of DMs can be established as the limit of sequences of optimal policies for static teams with N DMs as N → ∞. Under the presence of a symmetry condition, we relax the conditions and this leads to optimal results for a large class of mean-field optimal team problems where the existing results have been limited to person-by-person optimality and not global optimality (under strict decentralization). In particular, we establish the optimality of symmetric (i.e., identical) policies for such problems. As a further condition, this optimality result leads to an existence result for mean-field teams. We consider a number of illustrative examples where the theory is applied to setups with either infinitely many DMs or an infinite-horizon stochastic control problem reduced to a static team.",
+    "year": 2020,
+    "lang": "en",
+    "type": "preprint",
+    "venue": "IEEE Transactions on Automatic Control",
+    "topic": "Economic theories and models",
+    "field": "Economics, Econometrics and Finance",
+    "ca_institutions": "Queen's University",
+    "funders": ["Natural Sciences and Engineering Research Council of Canada", "Centers for Disease Control and Prevention"]
+  },
+  {
+    "id": "W4387710731",
+    "title": "Moving cholera vaccines ahead of the epidemic curve",
+    "abstract": "",
+    "year": 2023,
+    "lang": "en",
+    "type": "article",
+    "venue": "The Lancet",
+    "topic": "Vibrio bacteria research studies",
+    "field": "Biochemistry, Genetics and Molecular Biology",
+    "ca_institutions": ["Université Laval", "Institut National de Santé Publique du Québec"],
+    "funders": []
+  },
+  {
+    "id": "W4307748176",
+    "title": "Remimazolam for Sedation During Upper Gastrointestinal Endoscopy in an Adolescent",
+    "abstract": "Remimazolam is a short-acting benzodiazepine that has recently received approval from the US Food and Drug Administration (FDA) for procedural sedation in adults. Similar to other benzodiazepines such as midazolam, remimazolam has sedative, anxiolytic, and amnestic properties. Rapid metabolism by plasma esterases results in a half-life of 5 - 10 min and a limited context sensitive half-life. Preliminary data from adult studies have demonstrated favorable hemodynamic stability, no pain on injection, and limited impact on ventilatory function. To date, its use as the primary agent for procedural sedation in pediatric-aged patients has been limited, as previous published reports of its use have detailed its administration as an adjunct to general anesthesia. We report anecdotal experience with the use of remimazolam for procedural sedation during an upper gastrointestinal endoscopy in a 15-year-old adolescent with multiple drug and food allergies. The role of remimazolam in procedural sedation is discussed, previous reports of its use in pediatric-aged patients are reviewed, and dosing algorithms are presented.",
+    "year": 2022,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Medical Cases",
+    "topic": "Anesthesia and Sedative Agents",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2975582433",
+    "title": "Non-Malleable Codes against Active Physical Layer Adversary",
+    "abstract": "Non-malleable codes are randomized codes that protect coded messages against modification by functions in a tampering function class. These codes are motivated by providing tamper resilience in applications where a cryptographic secret is stored in a tamperable storage device and the protection goal is to ensure that the adversary cannot benefit from their physical tampering with the device. In this paper we consider nonmalleable codes for protection of secure communication against active physical layer adversaries. We define a class of functions that closely model tampering of communication by adversaries who can eavesdrop on a constant fraction of the transmitted codeword, and use this information to select a vector of tampering functions that will be applied to a second constant fraction of codeword components (possibly overlapping with the first set). We derive rate bounds for non-malleable codes for this function class and give a modular construction that adapts and provides new analysis for an existing construction in the new setting. We discuss our results and directions for future work.",
+    "year": 2019,
+    "lang": "en",
+    "type": "article",
+    "topic": "Wireless Communication Security Techniques",
+    "field": "Engineering",
+    "ca_institutions": "University of Calgary",
+    "funders": []
+  },
+  {
+    "id": "W2036516395",
+    "title": "Modeling of Ocean Thermal Energy Conversion (OTEC) Plant in Reunion Island",
+    "abstract": "Renewable Energy has a crucial interest for a remote area like Reunion Island. The supply of electricity based on renewable energy has many advantages but the major drawback is the production of electricity which varies highly according to the availability of the resource (wind, solar, wave, etc...). This causes a real problem for non interconnected electrical grid where intermittent renewable energies should be limited to a maximum of 30%. The ocean Thermal Energy Conversion (OTEC) provides an alternative of electricity production from the available energy of the oceans present all the time. By using surface hot water and deep cold water from the ocean, it is possible to operate a thermodynamics cycle, which will then generate electricity. In this article, in the first part a literary and technological review is carried out in two areas: electricity production and cooling of buildings with deep water. This study establishes a knowledge base on thermodynamic cycles consistent with the OTEC and on dimensional and functional parameters associated with this technology. Steady state simulations are presented to understand the operation of the system. Steady state models will evaluate the potential of the OTEC in distributing base electricity. These simulations will help evaluating the potential for new thermodynamic cycles such as the Kalina cycle. With these tools, a sensitivity study will evaluate the influence of different parameters on the cycle.",
+    "year": 2010,
+    "lang": "en",
+    "type": "article",
+    "venue": "ASME 2010 4th International Conference on Energy Sustainability, Volume 1",
+    "topic": "Thermodynamic and Exergetic Analyses of Power and Cooling Systems",
+    "field": "Engineering",
+    "ca_institutions": [],
+    "funders": "Polytechnique Montréal"
+  },
+  {
+    "id": "W1900294710",
+    "title": "Central GLP-1 receptor activation improves cholesterol metabolism partially independent of its effect on food intake",
+    "abstract": "Glucagon-like peptide-1 (GLP-1) receptor agonists modulate lipid metabolism, apart from controlling glucose homeostasis. We investigated the role of central GLP-1 receptor (GLP-1R) agonism in regulation of hepatic lipid metabolism in cholesterol-fed hamsters. Cholesterol-fed hamsters were treated by intracerebroventricular (i.c.v.) route with exendin-4, as acute or repeated dose regimen and compared with hamsters pair-fed to the exendin-treated hamsters and with hamsters co-treated with GLP-1 antagonist exendin-9. Effect of acute treatment was observed on food intake, tyloxapol-induced hypertriglyceridemia, and corn oil induced post prandial lipemia. Plasma and hepatic lipids and changes in the expression of hepatic genes involved in lipid metabolism were assessed after chronic administration. Acute, as well as repeated dose, treatment of exendin-4 showed significant changes in hepatic lipids, circulating fatty acids, triglycerides, LDL, and cholesterol. Expression of SREBP-1c was reduced while that of LDLR and CYP7A1 was increased after the repeated dose treatment, and there was no change in HMG CoA reductase. These changes were blocked by co-treatment of exendin-9, and not replicated by pair feeding to the significant extent. Central GLP-1 receptor activation showed profound effects on peripheral lipid metabolism, which were partially independent of its effect on food intake.",
+    "year": 2015,
+    "lang": "en",
+    "type": "article",
+    "venue": "Canadian Journal of Physiology and Pharmacology",
+    "topic": "Diabetes Treatment and Management",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2370728384",
+    "title": "Does breastfeeding duration decrease child obesity? An instrumental variables analysis",
+    "abstract": "BACKGROUND: Many studies have documented that breastfeeding is associated with a significant reduction in child obesity risk. However, a persistent problem in this literature is that unobservable confounders may drive the correlations between breastfeeding behaviors and child weight outcomes. OBJECTIVE: This study examines the effect of breastfeeding practices on child weight outcomes at age 2. METHODS: This study relied on population-based data for all births in Oregon in 2009 followed for two years. We used instrumental variables methods to exploit variations in breastfeeding by mothers immediately after delivery and the degree to which hospitals encouraged mothers to breastfeed in order to isolate the effect of breastfeeding practices on child weight outcomes. RESULTS: We found that for every extra week that the child was breastfed, the likelihood of the child being obese at age 2 declined by 0.82% [95% CI -1.8% to 0.1%]. Likewise, for every extra week that the child was exclusively breastfed, the likelihood of being obese declined by 0.66% [95% CI -1.4 to 0.06%]. While the magnitudes of effects were modest and marginally significant, the results were robust in a variety of specifications. CONCLUSION: The results suggest that hospital practices that support breastfeeding may influence childhood weight outcomes.",
+    "year": 2016,
+    "lang": "en",
+    "type": "article",
+    "venue": "Pediatric Obesity",
+    "topic": "Breastfeeding Practices and Influences",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": ["National Center for Advancing Translational Sciences", "National Center for Chronic Disease Prevention and Health Promotion", "Women and Children's Health Research Institute", "National Heart, Lung, and Blood Institute", "Foundation for the National Institutes of Health"]
+  },
+  {
+    "id": "W4412070438",
+    "title": "La prise en charge des nouveau-nés à risque de syndrome d’abstinence néonatale et de syndrome de sevrage néonatal aux opioïdes : mises à jour et pratiques exemplaires émergentes",
+    "abstract": "la plus jour.",
+    "year": 2025,
+    "lang": "fr",
+    "type": "review",
+    "venue": "Paediatrics & Child Health",
+    "topic": "Prenatal Substance Exposure Effects",
+    "field": "Medicine",
+    "ca_institutions": "Canadian Paediatric Society",
+    "funders": []
+  },
+  {
+    "id": "W2154181035",
+    "title": "AVANZA EN EL MUNDO LA LUCHA ANTIIMPERIALISTA",
+    "abstract": "LA LUCHA ANTIIMPERIALISTA AVANZA EN EL MUNDO, ASEGURO JAMES PETRAS, PRESTIGIADO ESPECIALISTA EN ECONOMIA POLITICA. AL DICTAR UNA CONFERENCIA MAGISTRAL EN EL CENTRO DE INVESTIGACIONES INTERDISCIPLINARIAS EN CIENCIAS Y HUMANIDADES (CEIICH), EL autor DE DIVERSOS ESTUDIOS SOCIALES SOBRE AMERICA LATINA ACLARO, SIN EMBARGO, QUE HOY NO HAY MOVIMIENTO UNIVERSAL, PUES LA TENDENCIA ES EL SURGIMIENTO DE ORGANIZACIONES ORIENTADAS A LUCHAR POR UN TEMA ESPECIFICO. EN LA CONFERENCIA POLITICA ANTIIMPERIALISTA (LA FORMACION DE CLASE Y LA ACCION SOCIOPOLITICA), QUE PRESENTO EN LA TORRE II DE HUMANIDADES, CONSIDERO QUE DEBE RESOLVERSE COMO DINAMIZAR LA ORGANIZACION PARTICULAR HACIA UN MOVIMIENTO SOSTENIDO QUE BUSQUE COMBATIR LAS HEGEMONIAS. ELLO DEPENDER  DE LA IDEOLOGIA, LOS PROGRAMAS Y LOS LIDERES INVOLUCRADOS EN LA LUCHA. SOBRE LOS MOVIMIENTOS EN ESTADOS UNIDOS, EXPRESO QUE ELLOS SON M S DEBILES QUE EN CUALQUIER OTRA NACION DEL MUNDO, PORQUE SOLO SURGEN CUANDO MUEREN SOLDADOS ESTADUNIDENSES, SE PROLONGAN LOS CONFLICTOS O HAY UNA DERROTA EVIDENTE. SOBRE LA SITUACION RECIENTE DE IRAK, EL PROFESOR DE LA UNIVERSIDAD DE ST. MARY'S, HALIFAX, NUEVA ESCOCIA, CANAD , ACLARO QUE FUIMOS ESPECTADORES DE UNA SEUDOGUERRA EN EL PERIODO DE INVASION Y OCUPACION, PRODUCTO DE LOS MEDIOS DE COMUNICACION, QUE PRESENTARON IM GENES DE BOMBAS, EXPLOSIONES Y PRISIONEROS. POR OTRA LADO, PETRAS SE REFIRIO AL EFECTO DE LAS PRIVATIZACIONES EN AMERICA LATINA, LAS CUALES HAN OCASIONADO DESPIDOS MASIVOS, PERDIDA DE SEGURIDAD EN EL TRABAJO, ASI COMO AUMENTO DE TARIFAS DE LOS SERVICIOS Y LA PROLETARIZACION DE LOS EMPLEADOS PUBLICOS. FRENTE A ELLO, LA OPOSICION AL IMPERIALISMO SE MANTIENE PRINCIPALMENTE ENTRE LOS CAMPESINOS Y LOS SECTORES AGRARIOS, LOS DESOCUPADOS, LOS AUTOEMPLEADOS, LOS TRABAJADORES DEL SECTOR PUBLICO Y LOS DEL RAMO ELECTRICO, MENCIONO. FINALMENTE, EL EXPERTO ACLARO QUE NO ES CORRECTO AFIRMAR QUE LOS PUEBLOS HAN PADECIDO 500 ANOS DE DOMINACION CONTINUA, PUES HAN EXISTIDO MOVIMIENTOS DE LIBERACION EN DIVERSAS ETAPAS DE LA HISTORIA, ESPECIALMENTE EN LA EPOCA CONTEMPOR NEA, COMO LOS DE CUBA, ARGENTINA Y BOLIVIA.",
+    "year": 2003,
+    "lang": "es",
+    "type": "article",
+    "venue": "Gaceta UNAM (2000-2009)",
+    "topic": "Public Policy and Governance",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2794961250",
+    "title": "Mobile Technology and Academic Libraries: Innovative Services for Research and Learning. Robin Canuel and Chad Crichton, eds., for the Association of College and Research Libraries. Chicago: American Library Association. 2017. 284p. $68.00.",
+    "abstract": "Providing content, collections, and services to mobile users is increasingly important in contemporary libraries. In Mobile Technology and Academic Libraries: Innovative Services for Research and Learning , Robin Canuel and Chad Crichton curate a collection of practical case studies of libraries adapting technologies, piloting new initiatives, and building new tools to meet the needs of mobile users. This volume is oriented toward academic libraries but is diverse within this constraint. Canuel is the Head of the Humanities and Social Sciences Library at McGill University, and Crichton is a Liaison Librarian at the University of Toronto Scarborough. Both have presented and published on the use of mobile technologies in libraries. The case studies come from academic institutions, but the selection features libraries of different types, including research libraries, archives, law libraries, and health sciences libraries. The volume also includes examples from functional units across the library, including public services, collections, web services, and instruction.",
+    "year": 2018,
+    "lang": "en",
+    "type": "article",
+    "venue": "College & Research Libraries",
+    "topic": "Web and Library Services",
+    "field": "Computer Science",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4405330436",
+    "title": "Wilder Penfield and Herbert Jasper: Epilepsy and the Functional Anatomy of the Human Brain",
+    "abstract": "An abstract is not available for this content so a preview has been provided. Please use the Get access link above for information on how to access this content.",
+    "year": 2024,
+    "lang": "en",
+    "type": "article",
+    "venue": "Canadian Journal of Neurological Sciences / Journal Canadien des Sciences Neurologiques",
+    "topic": "Diet and metabolism studies",
+    "field": "Medicine",
+    "ca_institutions": ["University of Saskatchewan", "Western University"],
+    "funders": []
+  },
+  {
+    "id": "W1568848413",
+    "title": "Simoni-Aurembou, Marie-Rose (éd.) (2000): Français du Canada - Français de France: Actes du cinquième colloque international de Bellême du 5 au 7 juin 1997. Tübingen: Niemeyer, 329 pages. (série Canadiana romanica nº 13)",
+    "abstract": "",
+    "year": 2004,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Estudis romànics",
+    "topic": "Canadian Identity and History",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W7140723305",
+    "title": "Michael Rembis. <i>Writing Mad Lives in the Age of the Asylum<\/i>",
+    "abstract": "",
+    "year": 2025,
+    "lang": "en",
+    "type": "article",
+    "venue": "The American Historical Review",
+    "topic": "Diverse Historical and Scientific Studies",
+    "field": "Arts and Humanities",
+    "ca_institutions": "University of Ottawa",
+    "funders": []
+  },
+  {
+    "id": "W4389233418",
+    "title": "Harnessing TCR/CAR Antagonism to Enhance Immunotherapeutic Precision",
+    "abstract": "Chimeric Antigen Receptor (CAR) T cell immunotherapy represents a conceptual breakthrough in the treatment of hematological malignancies. However, the rarity of cell surface protein targets specific to cancerous but not vital tissue has hindered its broad application to solid tumor treatment. While new logic-gated CAR designs have shown reduced toxicity against healthy tissues, the generalizability of such approaches across tumors remains unclear. Here, we harness a universal characteristic of endogenous T cell receptors (TCRs), their ability to discriminate between self and non-self ligands through inhibition of response against self (weak) antigens, to develop a broadly applicable method of enhancing immunotherapeutic precision. We hypothesized that this discriminatory mechanism, known as antagonism, would apply across receptors, allowing for a transfer of specificityfrom TCRs onto CARs. We therefore systematically mapped out the responses of CAR T cells to joint TCR and CAR stimulations. We transduced ovalbumin-specific TCR T cells with mouse CD19 CAR to produce T cells expressing both TCR and CAR and evaluated the response of TCR/CAR T cells using in vivo and in vitro leukemia models ( Figure 1A). We discovered that strong TCR antigen enhanced CAR T killing of CD19 + leukemia, while weak TCR antigen antagonized CAR T responses as assessed in vivo cytotoxicity and in vitro multiplexed dynamic profiling ( Figure 1B). We developed a mathematical model based on cross-receptor inhibitory coupling that accurately predicted the extent of TCR/CAR antagonism across a wide range of immunological settings. This model was validated in a CD19 + B16 mouse melanoma model showing that TCR/CAR antagonism decreased the infiltration of a tumor-reactive T cell cluster (cluster 1), while TCR/CAR agonism enhanced infiltration of this cluster1 ( Figure 1C). We then applied our quantitative knowledge of TCR/CAR crosstalk to design an Antagonism-Enforced Braking System (AEBS) for CAR T cell therapy. This was assessed in a model system using a CAR targeting the tyrosine-protein kinase erbB-2 (HER2), expressed on a subset of patients with both B-ALL and AML together with a hedgehog acyltransferase (HHAT) specific TCR, which responds strongly to mutated peptides presented on tumor cells and weakly to wild-type peptides presented on healthy tissue. Consistent with our discovery of the TCR/CAR antagonism, TCR signals against healthy cells expressing wild-type HHAT peptide antigen antagonized HER2 CAR T cell responses, minimizing on-target/off-tumor cytotoxicity against healthy cells. Notably though, AEBS-CAR T cells exhibited high anti-tumor cytotoxicity against tumor cells expressing HER2 and mutated HHAT peptides ( Figure 1D). AEBS CAR T cells sharpen the discriminatory power of synthetic anti-tumor lymphocytes, laying the groundwork for future studies to engineer complex logic into cells with minimal numbers of receptors ( Figure 1E). Our work highlights a novel mechanism by which TCRs can enforce CAR T cell specificity, with practical implications for the rational design of future anti-leukemia immunotherapies.",
+    "year": 2023,
+    "lang": "en",
+    "type": "article",
+    "venue": "Blood",
+    "topic": "CAR-T cell therapy research",
+    "field": "Medicine",
+    "ca_institutions": "Université de Montréal",
+    "funders": []
+  },
+  {
+    "id": "W2063290722",
+    "title": "Simultaneous approximation and interpolation of increasing functions by increasing entire functions",
+    "abstract": "",
+    "year": 2008,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Mathematical Analysis and Applications",
+    "topic": "Advanced Topology and Set Theory",
+    "field": "Mathematics",
+    "ca_institutions": "University of Prince Edward Island",
+    "funders": []
+  },
+  {
+    "id": "W1988590005",
+    "title": "Older Adult Mistreatment Risk Screening: Contribution to the validation of a Screening Tool in a Domestic Setting",
+    "abstract": "ABSTRACTThe hidden nature of older adult mistreatment renders its detection in the domestic setting particularly challenging. A validated screening instrument that can provide a systematic assessment of risk factors can facilitate this detection. One such instrument, the \"expanded Indicators of Abuse\" tool, has been previously validated in the Hebrew language in a hospital setting. The present study has contributed to the validation of the \"e-IOA\" in an English-speaking community setting in Ontario, Canada. It consisted of two phases: (a) a content validity review and adaptation of the instrument by experts throughout Ontario, and (b) an inter-rater reliability assessment by home visiting nurses. The adaptation, the \"Mistreatment of Older Adult Risk Factors\" tool, offers a comprehensive tool for screening in the home setting. This instrument is significant to professional practice as practitioners working with older adults will be better equipped to assess for risk of mistreatment.",
+    "year": 2012,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Canadian Journal on Aging / La Revue canadienne du vieillissement",
+    "topic": "Elder Abuse and Neglect",
+    "field": "Social Sciences",
+    "ca_institutions": "Laurentian University",
+    "funders": []
+  },
+  {
+    "id": "W2946234641",
+    "title": "Nintedanib in combination with pemetrexed and cisplatin for chemotherapy-naive patients with advanced malignant pleural mesothelioma (LUME-Meso): a double-blind, randomised, placebo-controlled phase 3 trial",
+    "abstract": "",
+    "year": 2019,
+    "lang": "en",
+    "type": "article",
+    "venue": "The Lancet Respiratory Medicine",
+    "topic": "Occupational and environmental lung diseases",
+    "field": "Medicine",
+    "ca_institutions": "Boehringer Ingelheim (Canada)",
+    "funders": ["National Institute for Health and Care Research", "NIHR Biomedical Research Centre, Royal Marsden NHS Foundation Trust/Institute of Cancer Research"]
+  },
+  {
+    "id": "W6982034070",
+    "title": "The German Red Cross(es) and Humanitarianism in Divided Germany, 1945-1965",
+    "abstract": "This dissertation studies the history of the German Red Cross of the German Democratic Republic and the German Red Cross of the Federal Republic of Germany. The dissertation begins with Germany’s defeat and capitulation in the Second World War into the occupation period, situating the pre-1945 German Red Cross in the chaos of the war’s end and its dissolution and ban by the Allied Powers. It investigates the aid work of new regional Red Cross societies in the Western occupation zones and the political debate about the Red Cross’s place in a socialist East Germany. The dissertation also analyzes the new national Red Crosses’ formation in 1952 and their domestic activities. These are two parallel histories of states with many similarities, while existing separately from one another and with differing ideological visions for the future. The German Red Crosses remained linked by their pasts and the circumstances of the present. This reality is reflected in their efforts to join the International Red Cross from 1952 to 1956, and in their collaboration to reunify families separated by the inter-German border. The dissertation argues that the histories of the German Red Crosses and humanitarianism contributes to our understanding of the fundamental predicaments faced by divided Germany in the early-Cold War. The Red Crosses shaped the responses to the challenges facing the region, whether they be the immediate suffering and long-lasting aftereffects wrought by total war, new anxieties about a nuclear future, or the need for modern disaster response and public health infrastructures. And humanitarianism was never purely altruistic. It was a useful political tool for East and West Germany and their peoples, who sought stability and peace and the successful completion of their ideological projects: creating socialism in the East and a liberal capitalist order in the West.",
+    "year": 2024,
+    "lang": "en",
+    "type": "dissertation",
+    "venue": "MacSphere (McMaster University)",
+    "topic": "Policing Practices and Perceptions",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": ["Social Sciences and Humanities Research Council of Canada", "Freie Universität Berlin", "Deutscher Akademischer Austauschdienst", "German Historical Institute", "Central European History Society", "McMaster University"]
+  },
+  {
+    "id": "W1972019175",
+    "title": "The expectations hypothesis, term premia, and the Canadian term structure of interest rates",
+    "abstract": "In this paper monthly data are used over the period 1960:7 to 1995:12 to examine the determinants of term premia implicit in the Canadian T‐bill term structure of interest rates. In sharp contrast to U.S. evidence, the conditional variances of Canadian macroeconomic variables are found to be insignificant predictors of term premia in the Canadian T‐bill term structure. The conditional variances of U.S. macroeconomic variables, however, are found to be important determinants of Canadian term premia. JEL Classification: E43, G1 L'hypothese des anticipations, les primes de temps et la structure temporelle des taux d'intérêt canadiens. Ce mémoire utilise des données mensuelles de juillet 1960 à décembre 1995 pour examiner les déterminants des primes de temps implicites dans la structure des taux d'intérêt pour les bons du trésor canadiens. Contrairement à ce que l'on trouve aux Etats‐Unis, il semble que les variances conditionnelles des variables macroéconomiques canadiennes ne sont pas des prédicteurs utiles de ces primes. Cependant, il appert que les variances conditonnelles des variables macroéconomiques des Etats‐Unis sont des déterminants importants de ces primes.",
+    "year": 2000,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Canadian Journal of Economics/Revue canadienne d économique",
+    "topic": "Monetary Policy and Economic Impact",
+    "field": "Economics, Econometrics and Finance",
+    "ca_institutions": ["The Scarborough Hospital", "University of Toronto"],
+    "funders": []
+  },
+  {
+    "id": "W2399827239",
+    "title": "TIM DEAN, STEVEN RUSZCZYCKY, and DAVID SQUIRES, eds., Porn Archives",
+    "abstract": "This important multidisciplinary work is a vital addition to the field of porn studies.It contains contributions from scholars in a wide range of academic disciplines, including art history, ethnic studies, literature, and film and media.Its scope is quite broad and extends well beyond the traditional boundaries of archives, libraries, and museums.The essays are arranged in six separate sections.The first, \"Pedagogical Archives,\" examines the structures in place for the creation of porn knowledge (universities and academia, archives, libraries, and museums), which enable the critical reception and discussion of porn.As its name implies, the section \"Historical Archives\" focuses on specific textual documents and key moments in the history of porn.The third section, \"Image Archives,\" contains essays dealing specifically with porn in the form of photographs, visual arts, and film.The final three sections are thematic in scope.The fourth, \"Rough Archives,\" looks at porn that contains depictions of imagined or real non-consensual sex.The fifth, \"Transnational Archives,\" discusses porn from within other geographical borders (in this case, Puerto Rico and Brazil), as well as records that cross the boundaries of what traditionally qualifies as porn (specifically war porn, in which the theatre may be Iraq and Afghanistan, among other locations).The last section, \"Archives of Excess,\" examines porn that falls",
+    "year": 2016,
+    "lang": "en",
+    "type": "article",
+    "venue": "Archivaria (Association of Canadian Archivists)",
+    "topic": "Sexuality, Behavior, and Technology",
+    "field": "Psychology",
+    "ca_institutions": "Library and Archives Canada",
+    "funders": []
+  },
+  {
+    "id": "W6907804916",
+    "title": "sj-pdf-1-cjk-10.1177_20543581211033496 – Supplemental material for Expanding the Deceased Donor Pool in Manitoba Using Hepatitis C-Viremic Donors: Program Report",
+    "abstract": "Supplemental material, sj-pdf-1-cjk-10.1177_20543581211033496 for Expanding the Deceased Donor Pool in Manitoba Using Hepatitis C-Viremic Donors: Program Report by Susan Cuvelier, Paul Van Caeseele, Matthew Kadatz, Kathryn Peterson, Siyao Sun, Nancy Dodd, Kim Werestiuk, Joshua Koulack, Peter Nickerson and Julie Ho in Canadian Journal of Kidney Health and Disease",
+    "year": 2021,
+    "lang": "en",
+    "type": "article",
+    "venue": "Sage Journals Data",
+    "topic": "Blood donation and transfusion practices",
+    "field": "Business, Management and Accounting",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2106876320",
+    "title": "Power analysis attacks and algorithmic approaches to their countermeasures for Koblitz curve cryptosystems",
+    "abstract": "Because of their shorter key sizes, cryptosystems based on elliptic curves are being increasingly used in practical applications. A special class of elliptic curves, namely, Koblitz curves, offers an additional, but crucial advantage of considerably reduced processing time. Power analysis attacks are applied to cryptosystems that use scalar multiplication on Koblitz curves. Both the simple and the differential power analysis attacks are considered and a number of countermeasures are suggested. While the proposed countermeasures against the simple power analysis attacks rely on making the power consumption for the elliptic curve scalar multiplication independent of the secret key, those for the differential power analysis attacks depend on randomizing the secret key prior to each execution of the scalar multiplication. These countermeasures are computationally efficient and suitable for hardware implementation.",
+    "year": 2001,
+    "lang": "en",
+    "type": "article",
+    "venue": "IEEE Transactions on Computers",
+    "topic": "Cryptography and Residue Arithmetic",
+    "field": "Computer Science",
+    "ca_institutions": "University of Waterloo",
+    "funders": []
+  },
+  {
+    "id": "W2134315188",
+    "title": "A Diabetes Outcome Progression Trial (ADOPT)",
+    "abstract": "OBJECTIVE: Therapies with metformin, sulfonylureas, or insulin improve glycemic control in the short term but do not prevent progressive islet beta-cell failure or long-term deterioration in glycemia. Our goal was to evaluate, in patients recently diagnosed with type 2 diabetes (<3 years), the long-term efficacy of monotherapy with rosiglitazone on glycemic control and on the progression of pathophysiological abnormalities associated with type 2 diabetes as compared with metformin or glyburide monotherapy. RESEARCH DESIGN AND METHODS: A Diabetes Outcome Progression Trial (ADOPT) is a randomized, double-blind, parallel-group study consisting of a screening visit, a 4-week placebo run-in, a 4-year treatment period, and an observational follow-up of approximately 3,600 drug-naïve patients with type 2 diabetes diagnosed within the previous 3 years. After run-in, patients will be randomized to rosiglitazone, glyburide, or metformin titrated to the maximum effective daily doses (8 mg rosiglitazone, 15 mg glyburide, or 2 g metformin). The primary outcome is time to monotherapy failure, defined as the time following titration to the maximal effective or tolerated dose when fasting plasma glucose exceeds 180 mg/dl (10 mmol/l). Secondary outcomes include measures of islet beta-cell function, insulin sensitivity, dyslipidemia, changes in urinary albumin excretion, plasminogen activator inhibitor-1 antigen, fibrinogen, and C-reactive protein. Safety and tolerability will also be evaluated. Patient-reported outcomes and resource utilization data will be collected and analyzed. CONCLUSIONS: ADOPT will provide data on the effect of mechanistically differing treatment options on metabolic control, beta-cell function, and markers of macrovascular disease risk in type 2 diabetes.",
+    "year": 2002,
+    "lang": "en",
+    "type": "article",
+    "venue": "Diabetes Care",
+    "topic": "Diabetes Treatment and Management",
+    "field": "Medicine",
+    "ca_institutions": ["Lunenfeld-Tanenbaum Research Institute", "Mount Sinai Hospital"],
+    "funders": []
+  },
+  {
+    "id": "W3123787275",
+    "title": "Cities and growth: human capital location choice: accounting for amenities and thick labour markets",
+    "abstract": "A growing literature has found a positive association between human capital and long-run employment growth across cities. These studies have increased interest in understanding the location choices of university degree-holders, a group often used as a proxy measure of human capital. Based on data from the 2001 Canadian Census of Population, this paper investigates determinants of the location choices of degree- and non-degree-holders. With a multinomial logit model, it tests a series of hypotheses about the differential effects of thick labor markets and amenities on the location choice of these groups across metropolitan and non-metropolitan areas in Canada.",
+    "year": 2012,
+    "lang": "en",
+    "type": "preprint",
+    "venue": "RePEc: Research Papers in Economics",
+    "topic": "Regional Economics and Spatial Analysis",
+    "field": "Economics, Econometrics and Finance",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2800926350",
+    "title": "Muances de l’écoute. À propos de L’homme sans passé d’Aki Kaurismaki",
+    "abstract": "Au début de L’homme sans passé (Kaurismaki 2002), il est un plan « musicalisé » qui peut occasionner un étrange effet qu’on dira de monumentalisation . Afin de qualifier l’effet au plus juste, je proposerai d’abord un balisage systématique de différentes fonctions que la musique endosse régulièrement dans ce film « musical » – nommément des fonctions épique (au sens brechtien), pathétique et éthique (aux sens aristotéliciens). J’en viendrai enfin à la description de cette singulière « muance » dans mon écoute, occasionnée par ce plan monté à la toute fin d’une scène d’agression qui voit un pauvre homme, soudeur de métier, laissé pour mort. Une musique symphonique qui jusqu’ici émanait d’une petite radio portative acquiert soudainement l’ampleur d’une musique de fosse alors que l’image nous montre la lamentable dépouille négligemment recouverte de sa valise et de son masque. Donnée à entendre à pleine puissance la symphonie, alors, interfère avec l’image pour en constituer l’équivoque figurative.",
+    "year": 2018,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Revue musicale OICRM",
+    "topic": "Contemporary art, education, critique",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W27258786",
+    "title": "Propuestas sobre medidas de seguridad postpenales en España",
+    "abstract": "Receptor interacting protein kinase 1 (RIPK1) participates in several cell signaling complexes that promote cell activation and cell death. Stimulation of RIPK1 in the absence of caspase signaling induces regulated necrosis (necroptosis), which promotes an inflammatory response. Understanding of the mechanisms through which RIPK1 promotes inflammation has been unclear. Herein we have evaluated the impact of a K45A mutation of RIPK1 on necroptosis of macrophages and the activation of inflammatory response. We show that K45A mutation of RIPK1 results in attenuated necroptosis of macrophages in response to stimulation with LPS, TNFα and IFNβ in the absence of caspase signaling. Impairment in necroptosis correlated with poor phosphorylation of RIPK1, RIPK3 and reduced trimerization of MLKL. Furthermore, K45A mutation of RIPK1 resulted in poor STAT1 phosphorylation (at S727) and expression of RANTES and MIP-1α following TNF-R engagement in the absence of caspase activation. Our results further indicate that in the absence of stimulation by pathogen-associated molecular patterns (PAMPs), cellular inhibitors of apoptotic proteins (cIAPs) prevent the K45-dependent auto-phosphorylation of RIPK1, leading to resistance against necroptosis. Finally, RIPK1(K45A) mice displayed attenuated inflammatory response in vivo as they were significantly resistant against endotoxin shock, but highly susceptible against a challenge with Salmonella typhimurium. This correlated with reduced expression of IL-1β and ROS, and poor processing of caspase 8 by RIPK1(K45A) macrophages. Overall, these results indicate that K45 mediated kinase activity of RIPK1 is not only important for necroptosis but it also has a key role in promoting cytokine signaling and host response to inflammatory stimuli.",
+    "year": 2008,
+    "lang": "en",
+    "type": "article",
+    "venue": "Cuadernos de pensamiento político FAES",
+    "topic": "Autopsy Techniques and Outcomes",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": "Canadian Institutes of Health Research"
+  },
+  {
+    "id": "W38642219",
+    "title": "Exposure to Ultrafine Particles in Urban Centres",
+    "abstract": "",
+    "year": 2010,
+    "lang": "en",
+    "type": "book-chapter",
+    "venue": "Environmental science and engineering",
+    "topic": "Air Quality and Health Impacts",
+    "field": "Environmental Science",
+    "ca_institutions": ["Occupational Cancer Research Centre", "University of Toronto"],
+    "funders": []
+  },
+  {
+    "id": "W2599980617",
+    "title": "The relationships among energy consumption, economic output and energy intensity of countries at different stage of development",
+    "abstract": "",
+    "year": 2017,
+    "lang": "en",
+    "type": "article",
+    "venue": "Renewable and Sustainable Energy Reviews",
+    "topic": "Energy, Environment, Economic Growth",
+    "field": "Economics, Econometrics and Finance",
+    "ca_institutions": [],
+    "funders": ["Gambling Research Exchange Ontario", "Sichuan University"]
+  },
+  {
+    "id": "W4296780664",
+    "title": "GNN-SubNet: disease subnetwork detection with explainable graph neural networks",
+    "abstract": "MOTIVATION: The tremendous success of graphical neural networks (GNNs) already had a major impact on systems biology research. For example, GNNs are currently being used for drug target recognition in protein-drug interaction networks, as well as for cancer gene discovery and more. Important aspects whose practical relevance is often underestimated are comprehensibility, interpretability and explainability. RESULTS: In this work, we present a novel graph-based deep learning framework for disease subnetwork detection via explainable GNNs. Each patient is represented by the topology of a protein-protein interaction (PPI) network, and the nodes are enriched with multi-omics features from gene expression and DNA methylation. In addition, we propose a modification of the GNNexplainer that provides model-wide explanations for improved disease subnetwork detection. AVAILABILITY AND IMPLEMENTATION: The proposed methods and tools are implemented in the GNN-SubNet Python package, which we have made available on our GitHub for the international research community (https://github.com/pievos101/GNN-SubNet). SUPPLEMENTARY INFORMATION: Supplementary data are available at Bioinformatics online.",
+    "year": 2022,
+    "lang": "en",
+    "type": "article",
+    "venue": "Bioinformatics",
+    "topic": "Bioinformatics and Genomic Networks",
+    "field": "Biochemistry, Genetics and Molecular Biology",
+    "ca_institutions": "University of Alberta",
+    "funders": ["Austrian Science Fund", "European Commission"]
+  },
+  {
+    "id": "W4207003672",
+    "title": "Geometric Properties of a Certain Class of Mittag–Leffler-Type Functions",
+    "abstract": "The main objective of this paper is to establish some sufficient conditions so that a class of normalized Mittag–Leffler-type functions satisfies several geometric properties such as starlikeness, convexity, close-to-convexity, and uniform convexity inside the unit disk. Moreover, pre-starlikeness and k-uniform convexity are discussed for these functions. Some sufficient conditions are also derived so that these functions belong to the Hardy spaces Hp and H∞. Furthermore, the inclusion properties of some modified Mittag–Leffler-type functions are discussed. The various results, which are established in this paper, are presumably new, and their importance is illustrated by several interesting consequences and examples. Some potential directions for analogous further research on the subject of the present investigation are indicated in the concluding section.",
+    "year": 2022,
+    "lang": "en",
+    "type": "article",
+    "venue": "Fractal and Fractional",
+    "topic": "Analytic and geometric function theory",
+    "field": "Mathematics",
+    "ca_institutions": "University of Victoria",
+    "funders": []
+  },
+  {
+    "id": "W1597324702",
+    "title": "An Archival Revolution: W. Kaye Lamb and the Transformation of the Archival Profession",
+    "abstract": "qui fut le quatrime Archiviste fdral du Canada de 1948 1969 ainsi que le premier Bibliothcaire national et un historien prolifique, a dchan une rvolution archivistique au pays.Rejetant plusieurs des ides d'Hilary Jenkinson et la plupart des approches de ses prdcesseurs, Lamb tait conscient d'tablir au Canada une nouvelle profession pour les archivistes et une nouvelle vision des archives.Cette modernisation a eu trois principales directions : mettre l'accent sur les archives totales en renforant l'valuation (et la destruction) systmatique et exhaustive des documents, s'attaquer aux documents d'archives du gouvernement et y tablir la gestion des documents et, enfin, tendre de faon significative les services aux chercheurs et le programme public.Tous ces projets taient soutenus par le dsir de Lamb de garder le pass au got du jour afin de satisfaire les besoins culturels pressants du pays et de soutenir la cration aprs la guerre d'un tat moderne efficace.La vision des archives inspire par Lamb -et les ides qui sont sous-jacentes -forment la toile de fond de l'intense dbat dans les trois dernires dcennies sur la nature de la profession d'archiviste et ses fonctions.Mieux comprendre les ides de Lamb permet donc de jeter la lumire sur le prsent de notre profession et ses directions futures ainsi que de clbrer un des ses gants historiques.Cet article est fond sur les crits et les documents personnels de W. Kaye Lamb, entre autres sur un mmoire non-publi sur sa carrire historique auquel l'auteur a pu acder pour la premire fois.",
+    "year": 2006,
+    "lang": "en",
+    "type": "article",
+    "venue": "Archivaria (Association of Canadian Archivists)",
+    "topic": "Digital and Traditional Archives Management",
+    "field": "Arts and Humanities",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W7130600055",
+    "title": "Learning in Good Relations: Navigating Indigenous Art Education with Care and Accountability",
+    "abstract": "This manuscript shares my experiences as an Indigenous educator walking the path of bringing Indigenous art practices into school settings, sometimes from my own Heiltsuk community and sometimes in collaboration with others. Living and working on Coast Salish territory, I reflect on what it means to share stories, artistic practices, and land-based teachings that are not always my own. Through projects such as spindle whorl design, Métis finger weaving, and natural yarn dyeing, I explore how these experiences have become invitations to learn alongside Knowledge Holders and community members rather than teaching in isolation. This work is not about becoming an expert. It is about holding responsibility for creating space, crediting sources, and fostering conditions where students and educators can enter the work in a good way. I offer this manuscript as a reflection for others, especially those who are unsure of where to begin, to show how art can serve as a site of relationship, respect, and resurgence.",
+    "year": 2025,
+    "lang": "en",
+    "type": "article",
+    "venue": "The Canadian art teacher.",
+    "topic": "Art Education and Development",
+    "field": "Arts and Humanities",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W1020812587",
+    "title": "Ekphrasis in Bousoño: \"duro jarro\", jarro que dura",
+    "abstract": "",
+    "year": 2003,
+    "lang": "es",
+    "type": "article",
+    "venue": "Revista Canadiense de Estudios Hispánicos",
+    "topic": "Medieval Iberian Studies",
+    "field": "Arts and Humanities",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2142856396",
+    "title": "Peut-on se fier aux délinquants pour estimer leurs gains criminels ?1",
+    "abstract": "Toute étude quantitative qui requiert d’un échantillon de délinquants de procéder à un inventaire individuel et détaillé de leurs activités délinquantes et des revenus criminels qu’ils en retirent suscite, à juste titre d’ailleurs, un certain scepticisme. Dans cet article nous procédons à un bilan des objections et des problèmes associés à de telles enquêtes ainsi que des stratégies de validation utilisées dans la littérature pour détecter les erreurs de mesure, leur amplitude et leur direction. En utilisant un échantillon de délinquants adultes incarcérés dans les pénitenciers fédéraux au Québec, nous évaluons la portée des problèmes de validité des déclarations de revenus criminels, le degré de convergence de leurs déclarations lorsqu’on fait varier la nature des questions posées et les raisons particulières des différences observées. Nos résultats montrent que les facteurs les plus décisifs dépendent de la complexité cognitive des tâches demandées aux répondants plutôt que des caractéristiques individuelles ou des effets de contexte de l’entretien.",
+    "year": 2005,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Criminologie",
+    "topic": "Crime Patterns and Interventions",
+    "field": "Social Sciences",
+    "ca_institutions": "Université de Montréal",
+    "funders": []
+  },
+  {
+    "id": "W4394888136",
+    "title": "Le traité de Nerchinsk et l’intégration internationale de la Chine des Qing aux XVII<sup>e<\/sup>-XVIII<sup>e<\/sup> siècles",
+    "abstract": "",
+    "year": 2022,
+    "lang": "fr",
+    "type": "book-chapter",
+    "topic": "Chinese history and philosophy",
+    "field": "Social Sciences",
+    "ca_institutions": "Université du Québec à Trois-Rivières",
+    "funders": []
+  },
+  {
+    "id": "W4308196115",
+    "title": "Anemia in patients with hidradenitis suppurativa",
+    "abstract": "Abstract IMPORTANCE Hidradenitis suppurativa (HS) is associated with a number of physical and psychological comorbidities. Studies have suggested an association between HS and anemia; however, this association is not widely understood and may result in delayed diagnosis and treatment and possible increase in morbidity and mortality. OBJECTIVE To systematically review and perform a metanalysis regarding the association between HS and anemia, and to characterize the subtypes of anemia associated with HS. DATA SOURCES A search of the EMBASE, Medline, Web of Science Core Collection, and Cochrane Central Register of Controlled Trials databases from the time of database inception to September 25, 2022, yielded 313 unique articles. STUDY SELECTION All observational studies and randomized controlled trials published in English that examined the odds ratio (OR) of anemia in patients with HS were screened by 2 independent reviewers. Case reports were excluded. Among 313 unique articles, 7 were deemed eligible. DATA EXTRACTION AND SYNTHESIS The Preferred Reporting Items for Systematic Reviews and Meta-Analyses (PRISMA) guidelines facilitated data extraction. The Newcastle-Ottawa Scale (NOS) was used to analyze risk of bias of included studies. In addition to OR and 95% confidence intervals, relevant data on patient demographics and anemia subtypes were also extracted. MAIN OUTCOMES AND MEASURES The primary outcome was the OR of anemia in HS patients. This study also attempted to characterize anemia subtypes associated with HS. RESULTS In total, 2 case-control and 5 cross-sectional studies featured a total of 11,693 patients. Among the studies, 4 of 7 demonstrated a statistically significant positive association between anemia and HS (ORs, 2.20 [1.42 to 3.41], 2.33 [1.99 to 2.73], 1.87 [1.02 to 3.44], and 1.50 [1.43 to 1.57]), with macrocytic and microcytic subtypes being most common. After adjusting for publication bias, meta-analysis with random effects revealed HS to be associated with increased odds of anemia compared to non-HS groups (OR 1.59 [1.19, 2.11]) CONCLUSIONS AND RELEVANCE There is a statistically significant positive association between HS and anemia, particularly for the aforementioned subtypes. Patients with HS should be screened for anemia. In case of lower hemoglobin concentration, the anemia of HS patients should be subdivided according to mean corpuscular volume of the red blood cells and further investigated depending on subtype.",
+    "year": 2022,
+    "lang": "en",
+    "type": "preprint",
+    "venue": "Research Square",
+    "topic": "Hidradenitis Suppurativa and Treatments",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2390524166",
+    "title": "Tracking perioperative mortality and maternal mortality: challenges and opportunities",
+    "abstract": "Access to surgery remains inequitable worldwide, with 5 billion people lacking safe and affordable surgical and anaesthesia care when needed.1Meara JG Leather AJ Hagander L et al.Global Surgery 2030: evidence and solutions for achieving health, welfare, and economic development.Lancet. 2015; 386: 569-624Summary Full Text Full Text PDF PubMed Scopus (1818) Google Scholar The Lancet Commission on Global Surgery was convened in 2013 to assess the state of surgery around the world, provide recommendations for improving access, and propose indicators for assessing national surgical systems. A key safety indicator is the perioperative mortality rate (POMR). This is defined by the Commission as the number of all-cause deaths before discharge in patients who have undergone a procedure in an operating theatre, divided by the total number of procedures, and presented as a percentage.1Meara JG Leather AJ Hagander L et al.Global Surgery 2030: evidence and solutions for achieving health, welfare, and economic development.Lancet. 2015; 386: 569-624Summary Full Text Full Text PDF PubMed Scopus (1818) Google Scholar While the surgical literature is replete with mortality data at a health facility level, the collection of nationally representative data is more challenging and is less frequently reported.2Ng-Kamstra JS Greenberg SLM Kotagal M et al.Use and definitions of perioperative mortality rates in low-income and middle-income countries: a systematic review.Lancet. 2015; 385: S29Summary Full Text Full Text PDF PubMed Google Scholar However, recent work has shown that many countries already collect national data on deaths after surgery, including several middle-income countries.3Lancet Commission on Global SurgeryData for the sustainable development of surgical systems: a global collaboration.http://www.lancetglobalsurgery.org/#!indicators/o217zGoogle Scholar Whereas POMR is just emerging, the maternal mortality ratio (MMR) is an established population health indicator. Both are ratio indicators with numerators and denominators that are commonly recorded, making them seemingly straightforward to monitor. Yet MMR has faced numerous challenges through its evolution, creating a cautionary tale and revealing what is needed for POMR to succeed. In particular, problems with MMR have included underreported and misclassified maternal deaths, unreliable civil registration systems, use of different data sources in various settings over time, and changes in definition of maternal mortality.4Graham WJ Ahmed S Stanton C Abou-Zahr C Campbell OM Measuring maternal mortality: an overview of opportunities and options for developing countries.BMC Med. 2008; 6: 12Crossref PubMed Scopus (76) Google Scholar, 5Ronsmans C Graham WJ Lancet Maternal Survival Series steering groupMaternal mortality: who, when, where, and why.Lancet. 2006; 368: 1189-1200Summary Full Text Full Text PDF PubMed Scopus (1205) Google Scholar Broadly, the challenges in measuring MMR have been categorised as the definitional challenge and the challenge of finding deaths.6Graham WJ Foster LB Davidson L Hauke E Campbell OM Measuring progress in reducing maternal mortality.Best Pract Res Clin Obstet Gynaecol. 2008; 22: 425-445Summary Full Text Full Text PDF PubMed Scopus (25) Google Scholar Variable data availability and reporting errors have made medical cause and time of death difficult to establish, especially in regions where most deaths occur outside of hospital due to women's lack of access to care. Methodological concerns have resulted in at least 18 empirical measurement tools to use depending on country and facility context.6Graham WJ Foster LB Davidson L Hauke E Campbell OM Measuring progress in reducing maternal mortality.Best Pract Res Clin Obstet Gynaecol. 2008; 22: 425-445Summary Full Text Full Text PDF PubMed Scopus (25) Google Scholar Despite the challenges, since the Safe Motherhood Initiative was launched almost 30 years ago, international institutions such as the World Bank and WHO, and independent groups such as the Institute for Health Metrics and Evaluation, have developed, published, and continually refined estimates of maternal mortality. Indirect and sampled methods of estimation for MMR such as verbal autopsy studies, the sisterhood method, and the reproductive age mortality survey (RAMOS) as well as systematic analyses of vital registration data undertaken by the Global Burden of Disease study have all contributed to improvements in our understanding of maternal mortality.4Graham WJ Ahmed S Stanton C Abou-Zahr C Campbell OM Measuring maternal mortality: an overview of opportunities and options for developing countries.BMC Med. 2008; 6: 12Crossref PubMed Scopus (76) Google Scholar, 7Kassebaum NJ Bertozzi-Villa A Coggeshall MS et al.Global, regional, and national levels and causes of maternal mortality during 1990-2013: a systematic analysis for the Global Burden of Disease Study 2013.Lancet. 2014; 384: 980-1004Summary Full Text Full Text PDF PubMed Scopus (966) Google Scholar Maternal death reporting has evolved into an essential country-level indicator, providing critical evidence for policy formulation, priority setting, monitoring and evaluation, and accountability.7Kassebaum NJ Bertozzi-Villa A Coggeshall MS et al.Global, regional, and national levels and causes of maternal mortality during 1990-2013: a systematic analysis for the Global Burden of Disease Study 2013.Lancet. 2014; 384: 980-1004Summary Full Text Full Text PDF PubMed Scopus (966) Google Scholar, 8Langer A Meleis A Knaul FM et al.Women and Health: the key for sustainable development.Lancet. 2015; 386: 1165-1210Summary Full Text Full Text PDF PubMed Scopus (218) Google Scholar Policymakers using POMR can draw on lessons from the MMR. First, POMR requires a clear and standard definition that is feasible to measure.9Watters DA Hollands MJ Gruen RL et al.Perioperative mortality rate (POMR): a global indicator of access to safe surgery and anaesthesia.World J Surg. 2014; 39: 856-864Crossref Scopus (110) Google Scholar In-hospital deaths are more feasible to count than the often-used definition of deaths within 30 days following a procedure, as post-discharge records may not be available.9Watters DA Hollands MJ Gruen RL et al.Perioperative mortality rate (POMR): a global indicator of access to safe surgery and anaesthesia.World J Surg. 2014; 39: 856-864Crossref Scopus (110) Google Scholar Yet POMR faces a unique definitional challenge: the types of procedures present in the denominator will vary with context, and thus for robust comparative analysis, a clear accounting of the types of procedures performed must be made. Second, reliable and accessible data sources must be identified and harnessed. Research has shown that low-cost, locally developed, facility-based databases in low-income and middle-income countries can provide accurate death statistics.10Ariyaratnam R Palmqvist CL Hider P et al.Toward a standard approach to measurement and reporting of perioperative mortality rate as a global indicator for surgery.Surgery. 2015; 158: 17-26Summary Full Text Full Text PDF PubMed Scopus (45) Google Scholar The denominator of POMR is purely clinical (surgical procedure) rather than natural (pregnancy) and so facility-based records are sufficient for its calculation. For both POMR and MMR, institutional resistance to provide accurate but potentially self-damaging information may be a significant challenge; governments and regulatory bodies must be clear that they intend to use POMR to identify problems and allocate resources accordingly rather than for castigating the conscientious surgeons and institutions who care for the sickest patients with the highest POMR. It is important for all countries to have a common baseline for data: this is the POMR definition supported by the Commission and others.9Watters DA Hollands MJ Gruen RL et al.Perioperative mortality rate (POMR): a global indicator of access to safe surgery and anaesthesia.World J Surg. 2014; 39: 856-864Crossref Scopus (110) Google Scholar, 11Weiser TG Makary MA Haynes AB et al.Standardised metrics for global surgical surveillance.Lancet. 2009; 374: 1113-1117Summary Full Text Full Text PDF PubMed Scopus (102) Google Scholar However, beyond the collection of this datum, the evidence does not yet exist on how countries can further evaluate trends in mortality and use this information to improve surgical safety. As with MMR, case studies may be used to illustrate successful approaches towards data collection and outcome improvement.12Quinn JW M-SK Greenberg SLM Riesel J Meara JG SQUAD in Uganda: Surgical Quality Assurance DatabaseLancet Commission on Global Surgery Teaching Cases. Babson College, Boston2015http://www.globalsurgery.info/wp-content/uploads/2015/08/LCoGS-Teaching-Case-2.pdfGoogle Scholar Countries can propose feasible data collection systems to evaluate surgical deaths. The WHO and other UN organisations, academic institutions, and other technical partners can in turn provide guidelines and methodological support for governments wishing to engage in such analysis. In the early stages, aggregate POMR may be used to provide crude information on system performance in facilities where case mix information is not provided. Over time, a standardised approach to reporting and risk stratification can be adopted to allow for comparison of outcomes between countries and regions over time. With surgery gaining acceptance as an essential and cost-effective public health measure across all levels of economic development, there is increasing interest in interventions to improve surgical outcomes. Without a clear strategy for measuring nationally representative perioperative mortality rates, governments cannot assess how investments in health systems affect the safety of surgical care provided. Learning from history in related fields can help ease the growing pains of POMR as a new health indicator. We declare no competing interests.",
+    "year": 2016,
+    "lang": "en",
+    "type": "article",
+    "venue": "The Lancet Global Health",
+    "topic": "Global Health and Surgery",
+    "field": "Medicine",
+    "ca_institutions": "University of Toronto",
+    "funders": []
+  },
+  {
+    "id": "W3093459804",
+    "title": "A Fully-Coupled, Thermo-Hydro-Mechanical Modelling Logic for a GPU-Accelerated, Finite-Discrete Element Method Code",
+    "abstract": "",
+    "year": 2020,
+    "lang": "en",
+    "type": "article",
+    "venue": "54th U.S. Rock Mechanics/Geomechanics Symposium",
+    "topic": "Fluid Dynamics Simulations and Interactions",
+    "field": "Engineering",
+    "ca_institutions": "Geomechanica (Canada)",
+    "funders": []
+  },
+  {
+    "id": "W2031124885",
+    "title": "\"Now Inhale the Gas\": Interactive Readership in Two Victorian Boys' Periodicals, 1855–1870",
+    "abstract": "This article examines two mid-Victorian periodicals for boys that defined a teenage market a century before the modern concept of the teenager emerged, and considers the relationship between their editors and readers. Distancing his journal from the concerns with “female accomplishments” common to contemporary family magazines of the time, Samuel Beeton set out in his pioneering The Boy’s Own Magazine (1855-1874) to cater for the interests and emotional needs of middle-class boys, and, through competitions and correspondence columns, to interrelate with his audience. Beeton’s periodical is compared with The Boys’ Journal (1863-1871), which pursued these objectives with a different class of reader, featuring robust adventure yarns and popular science.",
+    "year": 2009,
+    "lang": "en",
+    "type": "article",
+    "venue": "Victorian periodicals review",
+    "topic": "Themes in Literature Analysis",
+    "field": "Arts and Humanities",
+    "ca_institutions": [],
+    "funders": []
+  }
+]
+warning: loading hooks from both /Users/choxos/.codex/hooks.json and /Users/choxos/.codex/config.toml; prefer a single representation for this layer
+2026-07-13T00:21:03.617901Z ERROR rmcp::transport::worker: worker quit with fatal: Transport channel closed, when Auth(AuthorizationRequired)
+warning: Skill descriptions were shortened to fit the 2% skills context budget. Codex can still see every skill, but some descriptions are shorter. Disable unused skills or plugins to leave more room for the rest.
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart Failed
+hook: SessionStart Completed
+hook: SessionStart Completed
+hook: SessionStart Failed
+hook: SessionStart Completed
+hook: SessionStart Failed
+hook: UserPromptSubmit
+hook: UserPromptSubmit
+hook: UserPromptSubmit Failed
+hook: UserPromptSubmit Failed
+codex
+[
+  {"id":"W2527502148","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"This experimental dark matter study investigates a physics question rather than research practice."},
+  {"id":"W3112397639","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"This randomized clinical trial evaluates glioma treatments rather than studying how research is conducted."},
+  {"id":"W7134430541","tier":"OUT","genre":"policy","about_ca":false,"confidence":"high","reason":"This policy brief concerns Iranian developments and U.S. policy, not research itself."},
+  {"id":"W1917592187","tier":"T1","genre":"empirical","about_ca":false,"confidence":"high","reason":"This empirical study examines career transitions and employability among doctoral graduates, a research-workforce object."},
+  {"id":"W2995603563","tier":"OUT","genre":"editorial/commentary","about_ca":false,"confidence":"high","reason":"This news item reports findings about antibiotic prescribing, not research practice."},
+  {"id":"W2498794084","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"This chapter discusses classroom management and safety rather than research itself."},
+  {"id":"W1975562724","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"This paper develops a modeling method for industrial processes rather than studying research methods."},
+  {"id":"W2884877336","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"This study develops mathematical results for stochastic teams, not knowledge about research practice."},
+  {"id":"W6977093182","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"This cost-effectiveness analysis addresses diabetic macular edema treatment rather than research itself."},
+  {"id":"W6961559160","tier":"OUT","genre":"other","about_ca":false,"confidence":"low","reason":"The title identifies a publication record but provides insufficient evidence of any research-related object."},
+  {"id":"W7045616187","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"This book analyzes Bangladeshi literature and its themes, not research practice."},
+  {"id":"W2887413122","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"This theoretical paper studies infinite-player stochastic teams rather than research itself."},
+  {"id":"W4387710731","tier":"OUT","genre":"editorial/commentary","about_ca":false,"confidence":"low","reason":"The title concerns advancing cholera vaccination during epidemics, not research practice, but the abstract is missing."},
+  {"id":"W4307748176","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"This case report concerns procedural sedation in an adolescent rather than research itself."},
+  {"id":"W2975582433","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"This paper develops cryptographic codes for secure communication rather than studying research practice."},
+  {"id":"W2036516395","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"This modeling study evaluates ocean thermal energy systems rather than research itself."},
+  {"id":"W1900294710","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"This experiment investigates GLP-1 effects on lipid metabolism, not research practice."},
+  {"id":"W2370728384","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"This instrumental-variables study estimates breastfeeding effects on child obesity rather than studying research itself."},
+  {"id":"W4412070438","tier":"OUT","genre":"other","about_ca":false,"confidence":"low","reason":"This clinical update concerns neonatal opioid withdrawal care, not research practice, and the abstract is too thin for confident genre coding."},
+  {"id":"W2154181035","tier":"OUT","genre":"editorial/commentary","about_ca":false,"confidence":"high","reason":"This news-style political commentary discusses anti-imperialism and international politics, not research itself."},
+  {"id":"W2794961250","tier":"T3","genre":"editorial/commentary","about_ca":false,"confidence":"medium","reason":"This book review provides contextual commentary on academic-library services as research infrastructure."},
+  {"id":"W4405330436","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"low","reason":"The title indicates a historical account of neurologists and epilepsy rather than research practice, but the abstract is unavailable."},
+  {"id":"W1568848413","tier":"OUT","genre":"editorial/commentary","about_ca":false,"confidence":"low","reason":"This record appears to review a linguistics conference volume rather than study research itself, but the abstract is missing."},
+  {"id":"W7140723305","tier":"OUT","genre":"editorial/commentary","about_ca":false,"confidence":"low","reason":"This record appears to be a book review about asylum history rather than research practice, but the abstract is missing."},
+  {"id":"W4389233418","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"This experimental immunotherapy study investigates CAR-T cell biology rather than research itself."},
+  {"id":"W2063290722","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"This mathematical paper studies approximation by entire functions rather than research practice."},
+  {"id":"W1988590005","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"This study validates a clinical mistreatment screening tool rather than studying research methods themselves."},
+  {"id":"W2946234641","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"This randomized phase 3 trial evaluates mesothelioma treatment rather than research practice."},
+  {"id":"W6982034070","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"This dissertation studies the history and politics of the German Red Cross, not research itself."},
+  {"id":"W1972019175","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"This paper analyzes Canadian interest-rate dynamics, not the Canadian research system."},
+  {"id":"W2399827239","tier":"OUT","genre":"editorial/commentary","about_ca":false,"confidence":"high","reason":"This book review discusses pornography archives and scholarship, but does not study research practice itself."},
+  {"id":"W6907804916","tier":"OUT","genre":"other","about_ca":false,"confidence":"high","reason":"This supplemental material belongs to a clinical transplant program report and does not study research itself."},
+  {"id":"W2106876320","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"This cryptography paper develops countermeasures to power-analysis attacks rather than studying research practice."},
+  {"id":"W2134315188","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"This trial evaluates diabetes therapies and outcomes rather than research itself."},
+  {"id":"W3123787275","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"This paper studies human-capital location choices in Canadian cities, not the Canadian research system."},
+  {"id":"W2800926350","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"This article analyzes music and cinematic form in a film rather than research practice."},
+  {"id":"W27258786","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The abstract describes a biological study of RIPK1 signaling and inflammation, not research itself."},
+  {"id":"W38642219","tier":"OUT","genre":"other","about_ca":false,"confidence":"low","reason":"The title concerns exposure to ultrafine particles rather than research practice, but the abstract is missing."},
+  {"id":"W2599980617","tier":"OUT","genre":"other","about_ca":false,"confidence":"low","reason":"The title concerns energy and economic relationships rather than research itself, but the abstract is missing."},
+  {"id":"W4296780664","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"This paper develops a computational tool for disease-subnetwork detection rather than studying research methods."},
+  {"id":"W4207003672","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"This mathematical paper studies properties of Mittag-Leffler-type functions rather than research practice."},
+  {"id":"W1597324702","tier":"T2","genre":"conceptual","about_ca":true,"confidence":"high","reason":"This historical study examines the transformation of Canada's archival profession and its services to researchers, an adjacent research-infrastructure object."},
+  {"id":"W7130600055","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"This reflective manuscript concerns Indigenous art education and community relationships, not research itself."},
+  {"id":"W1020812587","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"low","reason":"The title indicates literary analysis rather than research practice, but the abstract is unavailable."},
+  {"id":"W2142856396","tier":"T1","genre":"empirical","about_ca":false,"confidence":"high","reason":"This study examines validity, measurement error, and validation strategies in criminological self-report research."},
+  {"id":"W4394888136","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"This chapter studies Qing Chinese diplomatic history rather than research itself."},
+  {"id":"W4308196115","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"This meta-analysis answers a clinical question about anemia and hidradenitis suppurativa rather than studying evidence synthesis methods."},
+  {"id":"W2390524166","tier":"OUT","genre":"editorial/commentary","about_ca":false,"confidence":"high","reason":"This commentary addresses measurement of surgical and maternal mortality indicators in health systems, not research practice itself."},
+  {"id":"W3093459804","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"low","reason":"The title indicates engineering software and modeling development rather than research practice, but the abstract is missing."},
+  {"id":"W2031124885","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"This article studies readership and editorial relationships in Victorian periodicals rather than research itself."}
+]
+hook: Stop
+hook: Stop
+hook: Stop
+hook: Stop Completed
+hook: Stop Completed
+hook: Stop Failed
+tokens used
+28,281

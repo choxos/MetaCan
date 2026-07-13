@@ -498,6 +498,67 @@ interface FindingsFile {
     }
     computed_at_utc: string
   }
+  /**
+   * Finding 16: the noise inside one model is at least the size of the
+   * difference between models.
+   *
+   * The same 1,290 double-screened works, screened a third time by the cheap
+   * model finding 13 budgets the entire full-frame screen on. The rates look
+   * fine (Haiku 1.27% against Sonnet's 1.06%, 98.1% agreement) and the SETS do
+   * not: the in-scope works overlap 16% by Jaccard unweighted, 10% design-
+   * weighted, and of Sonnet's 58 positives Haiku agrees on 12. Rate agreement
+   * is not set agreement, and the budget quietly assumed it was.
+   *
+   * Then the part nobody was looking for: agents of ONE model, on ONE rubric,
+   * with ONE prompt, disagree by more than chance, and it survives conditioning
+   * on stratum (CMH p = 0.0056; a second arm replicates at 0.015), with the
+   * agents' ordering FLIPPING between arms. The first draft's 13.2x weighted
+   * spread was a leverage artifact on five high-weight events and is demoted
+   * (DEVIATIONS.md D13); the raw spreads (3.1x, 5.2x) still meet or exceed the
+   * 2.2x between models. The pilot's own 40-agent fan-out cannot rule the same
+   * thing out: p = 0.113 with ~2 expected events per chunk is low power, not
+   * agreement.
+   */
+  agent_variance: {
+    headline: string
+    values: {
+      n_works: number
+      base_rate_sonnet_pct: number
+      base_rate_gpt_pct: number
+      base_rate_haiku_pct: number
+      /** The reassuring number, and the reason the Jaccard travels beside it. */
+      agreement_haiku_sonnet_pct: number
+      jaccard_sonnet_gpt_pct: number
+      jaccard_sonnet_haiku_pct: number
+      jaccard_gpt_haiku_pct: number
+      /** Design-weighted versions. Worse, which is why both are recorded. */
+      wjaccard_sonnet_gpt_pct: number
+      wjaccard_sonnet_haiku_pct: number
+      wjaccard_gpt_haiku_pct: number
+      sonnet_positives: number
+      haiku_agrees_on: number
+      agent_rates_raw_pct: Record<string, number>
+      /** The confound the first draft asserted away (D13). */
+      stratum_mix_differs_by_agent_p: number
+      arm1_cmh_p: number
+      arm1_permutation_p: number
+      arm1_raw_spread_x: number
+      arm2_cmh_p: number
+      arm2_permutation_p: number
+      arm2_raw_spread_x: number
+      agent_order_replicates: boolean
+      /** Recorded, demoted: rests on five high-weight events in one agent. */
+      spread_weighted_x_leverage_sensitive: number
+      between_model_spread_x: number
+      within_at_least_matches_between: boolean
+      pilot_chunks: number
+      pilot_agents_finding_zero: number
+      pilot_between_agent_p: number
+      pilot_underpowered_not_homogeneous: boolean
+      caveat: string
+    }
+    computed_at_utc: string
+  }
 }
 
 // Structural check against the committed artefact. A schema change breaks the
@@ -580,6 +641,12 @@ export type StatKey =
   // not either number, it is the distance between them.
   | 'recallScreenerA'
   | 'recallScreenerB'
+  // Finding 16. The spread between models rides beside the spread within one,
+  // because the card exists to show which is bigger; and the 98.1% agreement
+  // rides beside the 16% set overlap, because the first is how the second hides.
+  | 'betweenModels'
+  | 'agreementHaikuSonnet'
+  | 'jaccardSonnetHaiku'
 
 export interface Stat {
   key: StatKey
@@ -757,6 +824,7 @@ const rc = raw.topic_route_recall.values
 const sc = raw.screening_cost.values
 const ap = raw.audit_power.values
 const ll = raw.label_limits.values
+const av = raw.agent_variance.values
 
 /**
  * A 95% interval the pilot states as a two-element array.
@@ -1292,6 +1360,56 @@ const CARDS: Record<FindingId, Finding> = {
     bar: bar(ll.audit_budget_records, ll.french_records_needed_for_20_positives),
     values: flatten(ll),
     caveat: ll.caveat,
+  },
+  agent_variance: {
+    // The finding that reorders the others, and the last thing the pilot did.
+    //
+    // Finding 13 budgets the entire full-frame screen on a cheap model, and
+    // nobody had tested whether that model can do the rubric. This card is the
+    // test. The reassuring numbers are real: Haiku's base rate lands near
+    // Sonnet's, and they agree on 98.1% of the frame. And the sets those numbers
+    // summarise barely intersect: 16% Jaccard overlap (10% design-weighted, and
+    // the weighted version is the worse one on purpose), twelve of Sonnet's 58
+    // positives. Two screeners can agree on a rate while finding different
+    // fields, because at a 1% base rate the settled rejects buy 98% agreement
+    // for free. Rate agreement is not set agreement. The budget assumed it was.
+    //
+    // The hero is the worse discovery, stated at the strength the data supports
+    // and no more. Agents of the SAME model, on the SAME rubric, with the SAME
+    // prompt, disagree by more than chance, and the test that shows it is the
+    // stratum-ADJUSTED one (Mantel-Haenszel p = 0.0056; an independent second
+    // arm replicates at 0.015; the agents' ordering flips between arms). The
+    // first draft led with a 13.2x design-weighted spread; external adversarial
+    // review showed the underlying test was confounded by stratum mix and the
+    // 13.2x rests on five high-weight events in one agent (DEVIATIONS.md D13),
+    // so the hero is the RAW within-arm spread, which still exceeds the 2.2x
+    // between models that finding 10 calls the honest uncertainty. The pilot's
+    // own 40-agent fan-out cannot rule the same thing out: five chunks found
+    // zero metaresearch, and its p = 0.113 is low power (about two expected
+    // events per chunk), not evidence of agreement; reading it as agreement is
+    // the error D4 retracted, not made twice.
+    //
+    // A third arm was run and is NOT here: one agent reported, per chunk and in
+    // detail, six label files it never wrote (DEVIATIONS.md D11). A number that
+    // cannot be trusted is not a number, so that arm's payload effect is not
+    // reported anywhere on this site.
+    //
+    // The bar is the sentence that survives every caveat: of the 58 works one
+    // screener called metaresearch, the cheap screener confirms twelve.
+    id: 'agent_variance',
+    n: 16,
+    script: 'pilot/16_agent_variance.R',
+    headline: raw.agent_variance.headline,
+    computedAt: raw.agent_variance.computed_at_utc,
+    hero: { kind: 'times', value: av.arm1_raw_spread_x },
+    stats: [
+      { key: 'betweenModels', hero: { kind: 'times', value: av.between_model_spread_x } },
+      { key: 'agreementHaikuSonnet', hero: { kind: 'pct', value: av.agreement_haiku_sonnet_pct } },
+      { key: 'jaccardSonnetHaiku', hero: { kind: 'pct', value: av.jaccard_sonnet_haiku_pct } },
+    ],
+    bar: bar(av.haiku_agrees_on, av.sonnet_positives),
+    values: flatten(av),
+    caveat: av.caveat,
   },
 }
 

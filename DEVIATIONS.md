@@ -539,3 +539,74 @@ it. It strips strings and comments before matching.
 recorded finding; `findings.json` carries the tranche p-value, not the malformed percentage. But it would have
 reached a reader if the table had been the thing I quoted, and the only reason it did not is that I happened to look
 at the console. That is not a control.
+
+---
+
+## D20. The locked instrument specifies two different vocabularies for the same field, and nothing caught it for 6,000 labels.
+
+**Date found:** 2026-07-12, by a screening agent, in one clause of a report about something else.
+
+An Opus screening agent, working chunks it had been given for an unrelated reason, ended its report with a
+parenthetical: *"the rubric's genre vocabulary and `screening-schema.json`'s genre enum disagree; the schema has no
+`conceptual`, `policy`, or `infrastructure/announcement` value, so I mapped conceptual/theoretical work to `other`.
+That is a defect in the locked instrument, not a screening choice."*
+
+It was right. A second agent, independently, reported the same thing.
+
+| document | the `genre` values it names |
+|---|---|
+| `protocol/rubric.md` (what screeners are told to apply) | `empirical` `conceptual` `editorial/commentary` `policy` `infrastructure/announcement` `other` |
+| `protocol/screening-schema.json` (what output must conform to) | `empirical` `review` `methods` `commentary` `editorial` `protocol` `dataset` `software` `other` |
+
+**They overlap on two values out of eleven.** Four rubric terms do not exist in the schema; seven schema terms do not
+exist in the rubric. Every screener in every arm was handed both documents and told to obey both.
+
+### What each model did with an instrument that contradicted itself
+
+Each one silently invented its own reconciliation, and **they did not invent the same one**:
+
+- **GPT-5.6** and **Grok 4.5** followed the *rubric*: 100% legal against it, and therefore **27.2%** and **22.0%** of
+  their labels are **illegal against the schema they were told to conform to**.
+- **Opus** followed *both at once*, drawing from either list depending on the record, emitting **13 distinct values**.
+
+### Why it survived
+
+`validate_frame1k_labels.R` reconciles the id set against the manifest and checks that `tier` is one of T1/T2/T3/OUT.
+**It never checked `genre`.** So the field was free to be anything, and it was.
+
+Nothing crashed. No file was malformed. Every arm passed every check that ran. The variable simply **meant a different
+thing in each arm**, and the variance it produced would have been read as *model disagreement*, which is the exact
+quantity this project exists to measure. An instrument that contradicts itself does not announce itself. It produces
+variance and lets you blame the models.
+
+### What is done, and what is deliberately not done
+
+The genre labels from this screen are **reported as unusable** and are used for nothing downstream (finding 24).
+
+**They are not remapped.** Coercing three arms into a common vocabulary after seeing how they diverged would destroy
+the only evidence that they diverged, and it would be a researcher degree of freedom exercised on the data whose
+disagreement is the result. The tier analysis is unaffected: `tier` was validated from the start.
+
+The fix belongs in the **instrument**, at a version boundary (rubric v2, seam 11), and the general fix is the one this
+project keeps arriving at: **a locked instrument must be machine-checked against its own schema before any model
+runs.** A codebook is code. It gets a test.
+
+---
+
+## D21. Ten parallel agents shared one scratchpad, and overwrote each other's helper scripts.
+
+**Date found:** 2026-07-12, reported unprompted by a screening agent.
+
+The ten Opus screening agents each write a small helper script to turn a chunk into label JSON. They all run in the
+same session and therefore share one scratchpad directory. At least one agent's helper was **overwritten mid-run by
+another agent's file of the same name**; the agent noticed, moved its working files into a private subdirectory, and
+said so.
+
+**No label file was corrupted**, and the manifest validator would have caught it if one had been: every arm reconciles
+by set equality on the ids. But it is luck that the collision hit a helper and not an output, and the collision was
+invisible to every check in the pipeline.
+
+**Consequence.** Parallel agents that write anything must be given **disjoint working directories by construction**,
+not by convention. The label files themselves are already safe because they are named after the chunk, which is unique
+by design. The lesson is the one D11 already stated and this is a second instance of: *an agent cannot corrupt a file
+it was never allowed to write*, and the harness, not the agent, should be the thing that guarantees it.

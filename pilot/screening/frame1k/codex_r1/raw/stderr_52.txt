@@ -1,0 +1,898 @@
+Reading additional input from stdin...
+OpenAI Codex v0.144.0
+--------
+workdir: /Users/choxos/Documents/GitHub/CaRN-data-challenge
+model: gpt-5.6-luna
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: high
+reasoning summaries: none
+session id: 019f58e4-77f2-7200-8059-9d7b8ae8c450
+--------
+user
+# MétaCan screening rubric (v1.0)
+
+**Locked before screening. Version-controlled. Any change is a new version with a dated entry in `DEVIATIONS.md`.**
+
+Both machine screeners and both human coders work from this document and nothing else. The rubric is the
+instrument; if two coders disagree, the rubric is what they are adjudicated against.
+
+---
+
+## The unit
+
+One work (journal article, preprint, book chapter, report, dataset, or software), identified by its OpenAlex ID.
+You see: title, abstract, publication year, language, venue, OpenAlex topic and field, Canadian institutional
+affiliations, funders.
+
+## The question
+
+**Is the object of study *research itself*?**
+
+Metaresearch studies how research is done, reported, funded, evaluated, disseminated, or governed. The test is
+what the work is *about*, not what field it appears in and not what vocabulary it uses.
+
+A cardiology trial is not metaresearch. A study of *how cardiology trials report their outcomes* is.
+
+---
+
+## Tier
+
+Assign exactly one.
+
+### T1: Core metaresearch
+The primary object of study is research itself. Typical objects:
+
+- research **methods** and their properties (bias, reporting, statistical practice, study design)
+- **reproducibility**, replication, data and code sharing
+- **research integrity**: misconduct, retraction, questionable research practices, authorship
+- **peer review** and editorial process *as objects of study*
+- **research evaluation**, metrics, rankings, funding allocation
+- **scholarly communication**: publishing models, open access, preprints *as objects of study*
+- **bibliometrics and scientometrics** applied to a research literature
+- the **research workforce**: careers, equity, training, capacity
+- **evidence synthesis methodology** (not an individual systematic review's clinical answer, but work *about* how
+  syntheses are done)
+
+### T2: Adjacent
+Empirically or conceptually grounded work on science as a social system that is not framed as metaresearch but
+studies it:
+
+- **science and technology studies (STS)**: social studies of scientific knowledge, practice, controversy
+- **library and information science**: information behaviour of researchers, repositories, discovery
+- **research infrastructure** studies: platforms, data repositories, identifiers, standards
+- **history and philosophy of science** *when the object is contemporary research practice*
+- **research policy** analysis grounded in evidence
+
+T2 is where the field's diversity lives. Be generous here: a paper does not have to call itself metaresearch to
+be studying research.
+
+### T3: Contextual
+Relevant to the ecosystem, mapped and released, but **never pooled into the analytic corpus**:
+
+- editorials, commentaries, opinion pieces about research practice
+- policy documents and position statements
+- announcements of infrastructure, tools, or initiatives
+- news, obituaries, corrections, letters
+
+### OUT: Not metaresearch
+Everything else. Includes, and this is the most common error:
+
+- **A study that uses a method is not a study of the method.** A meta-analysis answering a clinical question is
+  OUT. A study of how meta-analyses handle heterogeneity is T1.
+- **Mentioning a metaresearch term is not studying it.** A lab paper reporting "assay reproducibility", a methods
+  section saying "peer reviewed", a licence note saying "open access": all OUT.
+- **Domain research that happens to be bibliometric in method** but whose object is the domain, not the research:
+  e.g. a bibliometric map of diabetes treatments, produced to summarise diabetes knowledge. Borderline; see below.
+
+---
+
+## The three errors that matter most
+
+These are where the pilot showed retrieval and screening break down. Read them twice.
+
+1. **Polysemy.** `reproducibility` in a biochemistry paper means the assay gives the same reading twice. In a
+   metaresearch paper it means the reproducibility crisis. Only the second is in scope. The same applies to
+   `validation`, `replication`, `bias`, `peer review`, `open access`. **Judge the sense, not the token.**
+
+2. **Method vs. object.** Using bibliometrics ≠ studying research. Ask: *if this paper is right, what do we now
+   know more about: a scientific question, or the practice of science?* If the former, OUT.
+
+3. **Absence of vocabulary is not absence of content.** An STS paper about laboratory practice, or an LIS paper
+   about how researchers find data, may use none of the field's keywords and still be squarely T2. **Do not
+   require the vocabulary.** This is the error that makes the field look smaller and more anglophone than it is.
+
+---
+
+## Canadian linkage
+
+Record which apply (this is metadata, not an inclusion test; the estimand is defined separately in
+`PROTOCOL.md`):
+
+- `CA_AFF`: at least one author affiliated with a Canadian institution
+- `CA_FUND`: funded by CIHR, NSERC, SSHRC, or CFI
+- `ABOUT_CA`: the Canadian research system is a substantive object of study (not a passing mention, not one
+  country among forty in a global comparison)
+
+## Genre
+
+`empirical` · `conceptual` · `editorial/commentary` · `policy` · `infrastructure/announcement` · `other`
+
+OpenAlex's `type` is unreliable and this field is commentary-heavy, so genre is coded, not inherited.
+
+## Language of the work
+
+As published. Do not infer from the venue.
+
+---
+
+## Confidence
+
+- `high`: the rubric decides this cleanly.
+- `medium`: the rubric decides, but a reasonable coder could differ.
+- `low`: genuinely on the boundary, or the abstract is missing/too thin to judge.
+
+**`low` is a legitimate answer and is not a failure.** Records coded `low` by either screener are routed to
+adjudication. A screener that never says `low` is not being careful; it is being confident.
+
+---
+
+## Worked examples
+
+| Title (abridged) | Tier | Why |
+|---|---|---|
+| "Data sharing practices in 500 randomised trials" | **T1** | The object is reporting practice. |
+| "Reproducibility of a Western blot protocol" | **OUT** | Assay reproducibility. Polysemy trap. |
+| "Trends in citation of retracted papers" | **T1** | Object is the literature's own behaviour. |
+| "Laboratory life in a Canadian genomics centre: an ethnography" | **T2** | STS. No metaresearch vocabulary; still studies research. |
+| "How do researchers discover datasets? A survey" | **T2** | LIS, information behaviour of researchers. |
+| "Effectiveness of statins: a network meta-analysis" | **OUT** | Uses a synthesis method to answer a clinical question. |
+| "How network meta-analyses handle inconsistency: a review of 200 reviews" | **T1** | Object is the method. |
+| "Announcing the Canadian Research Data Repository" | **T3** | Infrastructure announcement. Mapped, not pooled. |
+| "Open access mandates are failing early-career researchers" (editorial) | **T3** | Commentary about research practice. |
+| "Bibliometric analysis of diabetes research 2000–2020" | **T2** | Borderline. Bibliometric method, and the object *is* a research literature, so it studies research output. Code T2, `medium`. |
+| "Le libre accès dans les revues québécoises : état des lieux" | **T1** | Scholarly communication, object is publishing practice. French. |
+
+---
+
+## Instructions to the screener
+
+Read the title and abstract. Apply the rubric. Do not use outside knowledge of the authors or the journal's
+reputation. If the abstract is missing, judge on the title alone and set confidence to `low` unless the title is
+unambiguous.
+
+Return the schema in `protocol/screening-schema.json`. One object per work. No prose, no preamble.
+--------------------------------------------------------------------------------
+You are screening works for MetaCan, a map of Canadian metaresearch.
+
+Apply the rubric above to every record in the JSON array below. Return a JSON
+array with one object per work, conforming to protocol/screening-schema.json:
+
+  {"id": "W...", "tier": "T1|T2|T3|OUT", "genre": "...", "about_ca": true|false,
+   "confidence": "high|medium|low", "reason": "one sentence"}
+
+Rules:
+- Return the JSON array and NOTHING else. No prose, no preamble, no code fences.
+- Every input id must appear exactly once in the output.
+- Do not run commands, read files, or browse. Classify from the RECORDS alone.
+
+RECORDS:
+[
+  {
+    "id": "W6921036373",
+    "title": "Additional file 4 of I tweet, therefore I am: a systematic review on social media use and disorders of the social brain",
+    "abstract": "Supplementary Material 4.",
+    "year": 2025,
+    "lang": "en",
+    "type": "article",
+    "venue": "Figshare",
+    "topic": "Impact of Technology on Adolescents",
+    "field": "Social Sciences",
+    "ca_institutions": "Simon Fraser University",
+    "funders": []
+  },
+  {
+    "id": "W6902714784",
+    "title": "Trends in prevalence of unmet need for family planning in India: patterns of change across 36 States and Union Territories, 1993–2021",
+    "abstract": "Abstract Background Eliminating unmet need for family planning by 2030 is a global priority for ensuring healthy lives and promoting well-being for all at all ages. We estimate the sub-national trends in prevalence of unmet need for family planning over 30 years in India and study differences based on socio-economic and demographic factors. Methods We used data from five National Family Health Surveys (NFHS) conducted between 1993 to 2021 for the 36 states/Union Territories (UTs) of India. The study population included women of ages 15–49 years who were married or in a union at the time of the survey. The outcome was unmet need for family planning which captures the prevalence of fecund and sexually active women not using contraception, who want to delay or limit childbearing. We calculated the standardized absolute change to estimate the change in prevalence on an annual basis across all states/UTs. We examined the patterning of prevalence of across demographic and socioeconomic characteristics and estimated the headcount of women with unmet need in 2021. Results The prevalence of unmet need in India decreased from 20·6% (95% CI: 20·1– 21·2%) in 1993, to 9·4% (95% CI: 9·3–9·6%) in 2021. Median unmet need prevalence across states/UTs decreased from 17·80% in 1993 to 8·95% in 2021. The north-eastern states of Meghalaya (26·9%, 95% CI: 25·3–28·6%) and Mizoram (18·9%, 95% CI: 17·2–20·6%), followed by the northern states of Bihar (13·6%, 95% CI: 13·1–14·1%) and Uttar Pradesh (12·9%, 95% CI: 12·5–13·2%), had the highest unmet need prevalence in 2021. As of 2021, the estimated number of women with an unmet need for family planning was 24,194,428. Uttar Pradesh, Bihar, Maharashtra, and West Bengal accounted for half of this headcount. Women of ages 15–19 and those belonging the poorest wealth quintile had a relatively high prevalence of unmet need in 2021. Conclusions The existing initiatives under the National Family Planning Programme should be strengthened, and new policies should be developed with a focus on states/UTs with high prevalence, to ensure unmet need for family planning is eliminated by 2030.",
+    "year": 2024,
+    "lang": "en",
+    "type": "other",
+    "venue": "Figshare",
+    "ca_institutions": "University of Toronto",
+    "funders": []
+  },
+  {
+    "id": "W4241077486",
+    "title": "10.1146/annurev.eg.31.092506.100003",
+    "abstract": "This DOI is not currently attached to any metadata records. DOIs can’t actually ever be deleted (they’re persistent), but sometimes our members create DOIs in error. We do have a process to approximate deletion which we follow only in rare cases where the DOI has been genuinely created in error, and most crucially, if the DOI has never been published anywhere online or in print and never otherwise distributed to or communicated with anyone (authors, readers, reviewers, etc.",
+    "year": 2000,
+    "lang": "en",
+    "type": "article",
+    "venue": "Time to knit",
+    "topic": "Hermeneutics and Narrative Identity",
+    "field": "Arts and Humanities",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2889012164",
+    "title": "Clonotypic Heterogeneity In Cutaneous T-Cell Lymphoma Revealed By Comprehensive Whole Exome/Transcriptome Sequencing",
+    "abstract": "Abstract Mycosis fungoides (MF), the most common type of cutaneous T-cell lymphoma, is believed to represent a clonal expansion of a transformed skin resident memory T-cell. T-cell receptor (TCR) clonality (i.e. identical sequences of rearranged TCRα, β and γ), the key premise of this hypothesis, has been difficult to document conclusively because malignant cells are not readily distinguishable from the tumor infiltrating, reactive lymphocytes, which contribute to the TCR clonotypic repertoire of MF. Here we have successfully adopted the technique of targeted whole exome and whole transcriptome sequencing (WES/WTS) to identify the repertoire of rearranged TCR genes in tumor enriched samples from patients with MF. Although most of the investigated biopsies of MF had the expected monoclonal rearrangements of TCRγ of the frequency corresponding to the frequency of tumor cells, in half of the samples we detected multiple (up to seven) TCRα and -β clonotypes by WES and WTS. Our findings are compatible with the model in which the initial malignant transformation in MF does not occur in mature, memory T-cells but rather at the level of T-lymphocyte progenitor after TCRγ rearrangement but before TCRβ or TCRα rearrangements. The WES/WTS method is potentially applicable to other types of T-cell lymphomas and enables comprehensive characterization of the TCR repertoire and mutational landscape in these malignancies.",
+    "year": 2018,
+    "lang": "en",
+    "type": "preprint",
+    "venue": "bioRxiv (Cold Spring Harbor Laboratory)",
+    "topic": "Cutaneous lymphoproliferative disorders research",
+    "field": "Medicine",
+    "ca_institutions": "University of Alberta",
+    "funders": ["Bispebjerg Hospital", "University of Alberta", "Canadian Dermatology Foundation"]
+  },
+  {
+    "id": "W2604224834",
+    "title": "Allergenicity and cross-reactivity of coconut oil derivatives",
+    "abstract": "",
+    "year": 2006,
+    "lang": "en",
+    "type": "article",
+    "venue": "Dermatitis",
+    "topic": "Advanced Chemical Sensor Technologies",
+    "field": "Engineering",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W6892641962",
+    "title": "SEO Services In Toronto - Eunorial Consulting",
+    "abstract": "&amp;lt;p&amp;gt;Drive conversions and increase visibility in Toronto with Eunorial's specialized SEO services. Our Google Ads campaigns are meticulously crafted to target &amp;lt;strong&amp;gt;&amp;lt;a href=\"https://www.eunorialconsulting.ca/seo-services\"&amp;gt;SEO Services In Toronto&amp;lt;/a&amp;gt;&amp;lt;/strong&amp;gt;, ensuring maximum ROI and visibility for your business. By leveraging the power of Google Ads and focusing on local SEO strategies, we help you reach your target audience effectively in Toronto, driving qualified leads and boosting your online presence. Partner with us to stay ahead of the competition and achieve meaningful results with our tailored Google Ads and SEO solutions in Toronto.&amp;lt;/p&amp;gt;",
+    "year": 2024,
+    "lang": "en",
+    "type": "other",
+    "venue": "Zenodo (CERN European Organization for Nuclear Research)",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W1974308863",
+    "title": "TFPI1 Mediates Resistance to Doxorubicin in Breast Cancer Cells by Inducing a Hypoxic-Like Response",
+    "abstract": "Thrombin and hypoxia are important players in breast cancer progression. Breast cancers often develop drug resistance, but mechanisms linking thrombin and hypoxia to drug resistance remain unresolved. Our studies using Doxorubicin (DOX) resistant MCF7 breast cancer cells reveals a mechanism linking DOX exposure with hypoxic induction of DOX resistance. Global expression changes between parental and DOX resistant MCF7 cells were examined. Westerns, Northerns and immunocytochemistry were used to validate drug resistance and differentially expressed genes. A cluster of genes involved in the anticoagulation pathway, with Tissue Factor Pathway Inhibitor 1 (TFPI1) the top hit, was identified. Plasmids overexpressing TFPI1 were utilized, and 1% O2 was used to test the effects of hypoxia on drug resistance. Lastly, microarray datasets from patients with drug resistant breast tumors were interrogated for TFPI1 expression levels. TFPI1 protein levels were found elevated in 3 additional DOX resistant cells lines, from humans and rats, indicating evolutionarily conservation of the effect. Elevated TFPI1 in DOX resistant cells was active, as thrombin protein levels were coincidentally low. We observed elevated HIF1α protein in DOX resistant cells, and in cells with forced expression of TFPI1, suggesting TFPI1 induces HIF1α. TFPI1 also induced c-MYC, c-SRC, and HDAC2 protein, as well as DOX resistance in parental cells. Growth of cells in 1% O2 induced elevated HIF1α, BCRP and MDR-1 protein, and these cells were resistant to DOX. Our in vitro results were consistent with in vivo patient datasets, as tumors harboring increased BCRP and MDR-1 expression also had increased TFPI1 expression. Our observations are clinically relevant indicating that DOX treatment induces an anticoagulation cascade, leading to inhibition of thrombin and the expression of HIF1α. This in turn activates a pathway leading to drug resistance.",
+    "year": 2014,
+    "lang": "en",
+    "type": "article",
+    "venue": "PLoS ONE",
+    "topic": "Cancer, Hypoxia, and Metabolism",
+    "field": "Biochemistry, Genetics and Molecular Biology",
+    "ca_institutions": "University of Saskatchewan",
+    "funders": ["Natural Sciences and Engineering Research Council of Canada", "Universitetet i Oslo"]
+  },
+  {
+    "id": "W2056558582",
+    "title": "Assessment and management of breakthrough pain in cancer patients: Current approaches and emerging research",
+    "abstract": "",
+    "year": 2008,
+    "lang": "en",
+    "type": "review",
+    "venue": "Current Pain and Headache Reports",
+    "topic": "Pain Management and Opioid Use",
+    "field": "Medicine",
+    "ca_institutions": ["Alberta Cancer Foundation", "University of Calgary"],
+    "funders": []
+  },
+  {
+    "id": "W4224228189",
+    "title": "A critical saturated state-based constitutive model for volumetric behavior of compacted bentonite",
+    "abstract": "In recent years, more and more unique volumetric behaviors, including the nonlinear compression and unloading curves in the e-lnp plane, and different types of swelling and shrinkage curves obtained from suction-controlled swelling and shrinkage tests, etc., which are significantly different from those of nonexpansive clays, have been reported on compacted bentonite. More importantly, limitations were encountered when describing the unique behavior with existing constitutive models for unsaturated expansive soils. In this study, a new concept of critical saturation state (CSS) was proposed for compacted bentonite, in which, as the saturated state was reached, the matric suction still remained nonzero in the soil. Incorporated with this concept, a constitutive model was proposed. In this model, the CSS curve was defined in the suction-isotropic stress plane, delimiting the unsaturated zone. To validate the model, the volume change tests conducted on compacted GMZ bentonite under different stress paths were simulated. Good agreement confirmed that the proposed model could well describe the volume change behavior, including the swelling on hydration, shrinkage during drying, nonlinear compression, and unloading behavior.",
+    "year": 2022,
+    "lang": "en",
+    "type": "preprint",
+    "venue": "Canadian Geotechnical Journal",
+    "topic": "Soil and Unsaturated Flow",
+    "field": "Engineering",
+    "ca_institutions": [],
+    "funders": "National Natural Science Foundation of China"
+  },
+  {
+    "id": "W6902473023",
+    "title": "Coronavirus disease (COVID-19) pandemic: an overview of systematic reviews",
+    "abstract": "Abstract Background Navigating the rapidly growing body of scientific literature on the SARS-CoV-2 pandemic is challenging, and ongoing critical appraisal of this output is essential. We aimed to summarize and critically appraise systematic reviews of coronavirus disease (COVID-19) in humans that were available at the beginning of the pandemic. Methods Nine databases (Medline, EMBASE, Cochrane Library, CINAHL, Web of Sciences, PDQ-Evidence, WHO’s Global Research, LILACS, and Epistemonikos) were searched from December 1, 2019, to March 24, 2020. Systematic reviews analyzing primary studies of COVID-19 were included. Two authors independently undertook screening, selection, extraction (data on clinical symptoms, prevalence, pharmacological and non-pharmacological interventions, diagnostic test assessment, laboratory, and radiological findings), and quality assessment (AMSTAR 2). A meta-analysis was performed of the prevalence of clinical outcomes. Results Eighteen systematic reviews were included; one was empty (did not identify any relevant study). Using AMSTAR 2, confidence in the results of all 18 reviews was rated as “critically low”. Identified symptoms of COVID-19 were (range values of point estimates): fever (82–95%), cough with or without sputum (58–72%), dyspnea (26–59%), myalgia or muscle fatigue (29–51%), sore throat (10–13%), headache (8–12%) and gastrointestinal complaints (5–9%). Severe symptoms were more common in men. Elevated C-reactive protein and lactate dehydrogenase, and slightly elevated aspartate and alanine aminotransferase, were commonly described. Thrombocytopenia and elevated levels of procalcitonin and cardiac troponin I were associated with severe disease. A frequent finding on chest imaging was uni- or bilateral multilobar ground-glass opacity. A single review investigated the impact of medication (chloroquine) but found no verifiable clinical data. All-cause mortality ranged from 0.3 to 13.9%. Conclusions In this overview of systematic reviews, we analyzed evidence from the first 18 systematic reviews that were published after the emergence of COVID-19. However, confidence in the results of all reviews was “critically low”. Thus, systematic reviews that were published early on in the pandemic were of questionable usefulness. Even during public health emergencies, studies and systematic reviews should adhere to established methodological standards.",
+    "year": 2021,
+    "lang": "en",
+    "type": "other",
+    "venue": "NOVA (University of Newcastle Australia)",
+    "ca_institutions": ["York University", "Yorkville University"],
+    "funders": []
+  },
+  {
+    "id": "W4310004431",
+    "title": "[[TV-Soccer]] Watch Croatia vs Canada Live Online 27 November 2022",
+    "abstract": "Croatia vs Canada live: World Cup score, highlights, result from 2022 Group F match\\n\\n \\n\\nWatch Tv►►Croatia vs Canada Live\\n\\n\\nWatch Tv►►Croatia vs Canada Live\\n\\n\\nCroatia vs Canada live: World Cup score, highlights, result from 2022 Group F match\\nThree massive points are at stake when Croatia and Canada meet in a FIFA World Cup Group F match, as both nations seek a victory that would put them in a strong position to advance to the Round of 16 as one of the top two finishers in the group.\\n\\nThe Canadian team earned praise around the globe after playing Belgium off the park in their first World Cup match since 1986. However, they lost 1-0 and will be desperate to get something from the Croatia match, with Morocco waiting on the final matchday next Thursday.\\n\\nWorld Cup 2018 finalists Croatia are, on paper, the stronger side, with several players who ply their trade at Europe's top clubs. However, they looked average in their opener against Morocco, which finished 0-0.\\n\\nThey'll have some extra motivation when they face Canada on Sunday courtesy of a comment from Les Rouges coach John Herdman, which Croatia didn't take that well.\\n\\nHerdman told a Canadian national TV audience that his message to his team after the Belgium loss was to go out and \"eff Croatia\" in the next game.\\n\\nA Croatian tabloid newspaper caught wind and published a cover with a doctored image of a naked Herdman, crudely asking whether he and Canada had the guts to show it on the field. The Toronto Sun answered in kind on his behalf, and Croatia's manager demanded respect.\\n\\nThe back-and-forth has only served to raise the flame under a match that shouldn't take too long to boil over.\\nCroatia vs. Canada World Cup time, live stream, TV channel, lineups, odds for FIFA Qatar 2022 match\\n\\nCroatia got off to a sluggish start in Qatar but will aim to go up a gear against Canada in their second match of the 2022 World Cup.\\n\\nLuka Modric and Co. were held to a goalless draw by Morocco, making this match a must-win ahead of their showdown with Group F heavyweights Belgium.\\nThis was already set to be a barnburner based on the fact that both teams are desperate for three points. Add in that Canada coach John Herdman stated on national TV that he told his team they've got to go out and \"eff Croatia\" and there could be a higher-than-usual level of animosity in this match.\\n\\nThe upstart Canadians lost a heartbreaker against Belgium after playing the favorites off the park for much of the contest, prompting the emotional outburst by Herdman. Although Belgium survived the Canadian scare, World Cup 2018 finalists Croatia could be an upset candidate given how lacklustre they looked in their scoreless draw against Morocco.",
+    "year": 2022,
+    "lang": "en",
+    "type": "article",
+    "venue": "Zenodo (CERN European Organization for Nuclear Research)",
+    "topic": "Political Developments and Conflicts",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W1513053121",
+    "title": "The Oslerian impulse",
+    "abstract": "Osler's “A way of life” and other addresses with commentary and annotations Shigeaki Hinohara and Hisae Niki, editors Durham & London: Duke University Press; 2001 378 pp. US$29.95 ISBN 0-82232-682-5\n\n\n\n![Figure][1] \n\nFigure. \n\n\n\n\n\n![Figure][1] \n\nFigure. Photo by: Brodel Archives,",
+    "year": 2002,
+    "lang": "en",
+    "type": "article",
+    "venue": "PubMed Central",
+    "topic": "Data Analysis and Archiving",
+    "field": "Social Sciences",
+    "ca_institutions": "Dalhousie University",
+    "funders": []
+  },
+  {
+    "id": "W2969383861",
+    "title": "Student Evaluation of Teaching in Higher Education: Evidence from Hong Kong",
+    "abstract": "This paper examines empirically the determinants of student evaluation of teaching (SET). An empirical model was specified and estimated using the SET data collected in Hong Kong over six academic years. A key finding is that three different origins of students had a differentiated impact on teaching evaluation. In particular, students from mainland China appreciated and rated teaching favorably, and hence the more mainland talents in the class, the higher the class-average SET scores. However, local Hong Kong students valued teaching and learning effectiveness unfavorably. Exchange students from abroad also dropped the class-average SET scores, as well as class-average exam scores. The results suggest that raw SET scores should be used with care if classes are unbalanced with a large group of atypical students who work less but blame instructors for everything.",
+    "year": 2019,
+    "lang": "en",
+    "type": "article",
+    "venue": "International Journal of Higher Education",
+    "topic": "Evaluation of Teaching Practices",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4411570520",
+    "title": "Effects of Creatine and β-Alanine Co-Supplementation on Exercise Performance and Body Composition: A Systematic Review",
+    "abstract": "Background/Objectives: Creatine and β-alanine are two widely used dietary supplements known to enhance exercise performance and improve body composition; however, less is known regarding the synergistic effects of combining the two supplements. Methods: A systematic search was conducted across PubMed/MEDLINE, Scopus, and Web of Science databases for randomized controlled trials (RCTs) published up to March 2025. Eligible studies included adult participants receiving creatine and β-alanine together compared to creatine or β-alanine alone for at least four weeks and assessed measures of exercise performance and/or body composition. Study quality was assessed using the Cochrane Risk of Bias tool. Results: A total of 7 randomized controlled trials (n = 263 participants; 231 males and 32 females) met the inclusion criteria. Collectively, the combination of creatine and β-alanine supplementation enhanced high-intensity exercise performance, particularly anaerobic power and repeated-bout performance, compared to creatine or β-alanine alone. Co-ingestion of creatine and β-alanine supplementation did not increase measures of maximal strength compared to creatine alone. The effects of creatine and β-alanine supplementation on body composition were equivocal, with one study reporting greater lean mass gains and fat mass reductions compared to creatine and β-alanine supplementation individually, while another found no significant improvements. Additionally, no significant improvements in aerobic endurance capacity (VO2max, lactate threshold, or time to exhaustion) were observed from creatine and β-alanine supplementation co-ingestion. Conclusions: The combination of creatine and β-alanine supplementation may be effective for enhancing high-intensity exercise performance but has no greater effect on maximal strength, body composition, or measures of aerobic capacity compared to creatine or β-alanine alone.",
+    "year": 2025,
+    "lang": "en",
+    "type": "review",
+    "venue": "Nutrients",
+    "topic": "Biochemical effects in animals",
+    "field": "Medicine",
+    "ca_institutions": ["Brandon University", "University of Regina"],
+    "funders": []
+  },
+  {
+    "id": "W2062984057",
+    "title": "Petroleum Properties from Basin Modelling: Success Stories from Conventional and Unconventional Settings",
+    "abstract": "Summary The prediction of gas-oil ratios, phase state and petroleum quality ahead of drilling is a proven element of exploration in both conventional and unconventional petroleum systems. Here we show how our compositional kinetic approach (PhaseKinetics) has been successfully applied in the Jean d’Arc Basin offshore Canada, as well as in the Bakken Formation of the Williston Basin, USA. We demonstrate how cumulative and instantaneous fluid descriptions can be developed and applied in petroleum system modeling.",
+    "year": 2014,
+    "lang": "en",
+    "type": "article",
+    "venue": "Proceedings",
+    "topic": "Hydrocarbon exploration and reservoir analysis",
+    "field": "Engineering",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4200161460",
+    "title": "Arachnoid granulations may be protective against the development of shunt dependent chronic hydrocephalus after aneurysm subarachnoid hemorrhage",
+    "abstract": "Abstract Background and Purpose Chronic hydrocephalus may develop as a sequela of aneurysmal subarachnoid hemorrhage, requiring long-term cerebrospinal fluid shunting. Several clinical predictors of chronic hydrocephalus and shunt dependence have been proposed. However, no anatomical predictors have been identified. Materials and Methods A retrospective cohort study was performed including 61 patients with aneurysmal subarachnoid hemorrhage. Clinical characteristics were noted for each patient including presentation World Federation of Neurosurgical Societies grade, modified Fischer grade, aneurysm characteristics, requirement for acute and chronic cerebrospinal fluid diversion, and 3-month modified Rankin scale. CT images were evaluated to determine the Evans’ index and to enumerate the number of arachnoid granulations. Association between the clinical characteristics with ventriculoperitoneal shunt insertion and the 3-month modified Rankin scale were assessed. Results The initial Evans’ index was positively associated with mFisher grade and age, but not the number of arachnoid granulations. 16.4 % patients required insertion of a ventriculoperitoneal shunt. The number of arachnoid granulations were a significant negative predictor of ventriculoperitoneal shunt insertion [OR: 0.251 (95% CI:0.073-0.862; P=0.028)]. There was significant difference in the number of arachnoid granulations between those with and without ventriculoperitoneal shunt (p=0.002). No patient with greater than 4 arachnoid granulations required a ventriculoperitoneal shunt, irrespective of severity of initial grade. Conclusion Arachnoid granulations may be protective against the development of shunt dependent chronic hydrocephalus after aneurysmal subarachnoid hemorrhage. This is irrespective of presenting hemorrhage severity. This is a potentially novel radiologic biomarker and anatomic predictor of shunt dependence.",
+    "year": 2021,
+    "lang": "en",
+    "type": "preprint",
+    "venue": "medRxiv",
+    "topic": "Cerebrospinal fluid and hydrocephalus",
+    "field": "Neuroscience",
+    "ca_institutions": ["Health Sciences Centre", "University of Toronto", "Sunnybrook Health Science Centre"],
+    "funders": []
+  },
+  {
+    "id": "W2011953375",
+    "title": "Generation, Observation, and Free Radical Reactivity of Aliphatic Bisketenes:  The Solution to a Long-Standing Problem",
+    "abstract": "[reaction: see text] Bisketenes O=C=CH(CH(2))(n)()CH=C=O (1b,c,d, n = 4, 3, 6) and (E)-O=C=CHCH=CHCH=C=O (E-13) were generated in solution by dehydrochlorination of bis(acyl chlorides) and by photochemical Wolff rearrangements and identified by their characteristic IR signals. The bisketenes react with aminoxyl radicals to give tetraaddition products for 1b and conjugate 1,6-diaddition for E-13.",
+    "year": 2001,
+    "lang": "en",
+    "type": "article",
+    "venue": "Organic Letters",
+    "topic": "Oxidative Organic Chemistry Reactions",
+    "field": "Chemistry",
+    "ca_institutions": "University of Toronto",
+    "funders": []
+  },
+  {
+    "id": "W6885737538",
+    "title": "Characteristics of purposively selected integrated treatment programs in Ontario, 2016.",
+    "abstract": "&lt;p&gt;Characteristics of purposively selected integrated treatment programs in Ontario, 2016.&lt;/p&gt;",
+    "year": 2018,
+    "lang": "en",
+    "type": "dataset",
+    "venue": "Figshare",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W6965591249",
+    "title": "table_2.PDF",
+    "abstract": "Background&lt;p&gt;Streptococcus pyogenes or group A streptococcus (GAS) is an important human pathogen responsible for a broad range of infections, from uncomplicated to more severe and invasive diseases with high mortality and morbidity. Epidemiological surveillance has been crucial to detect changes in the geographical and temporal variation of the disease pattern; for this purpose the M protein gene (emm) gene typing is the most widely used genotyping method, with more than 200 emm types recognized. Molecular epidemiological data have been also used for the development of GAS M protein-based vaccines.&lt;/p&gt;Methods&lt;p&gt;The aim of this paper was to provide an updated scenario of the most prevalent GAS emm types responsible for invasive infections in developed countries as Europe and North America (US and Canada), from 1st January 2000 to 31st May 2017. The search, performed in PubMed by the combined use of the terms (“emm”) and (“invasive”) retrieved 264 articles, of which 38 articles (31 from Europe and 7 from North America) met the inclusion criteria and were selected for this study. Additional five papers cited in the European articles but not retrieved by the search were included.&lt;/p&gt;Results&lt;p&gt;emm1 represented the dominant type in both Europe and North America, replaced by other emm types in only few occasions. The seven major emm types identified (emm1, emm28, emm89, emm3, emm12, emm4, and emm6) accounted for approximately 50–70% of the total isolates; less common emm types accounted for the remaining 30–50% of the cases. Most of the common emm types are included in either one or both the 26-valent and 30-valent vaccines, though some well-represented emm types found in Europe are not.&lt;/p&gt;Conclusion&lt;p&gt;This study provided a picture of the prevalent emm types among invasive GAS (iGAS) in Europe and North America since the year 2000 onward. Continuous surveillance on the emm-type distribution among iGAS infections is strongly encouraged also to determine the potential coverage of the developing multivalent vaccines.&lt;/p&gt;",
+    "year": 2018,
+    "lang": "en",
+    "type": "dataset",
+    "venue": "Figshare",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W1977866715",
+    "title": "Énoncer la vérité en français : les villes de communes et la naissance de l’écrit juridique vernaculaire",
+    "abstract": "Posant l’hypothèse que, dans le choix d’une langue d’écriture par les autorités publiques aux XIIe et XIIIe siècles, la capacité de la langue vernaculaire française de dire la vérité au même titre que le latin fut un enjeu crucial, cet article montre le lien entre ce problème et le débat sur la vérité qui hanta la littérature française à la même époque.",
+    "year": 2015,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Corpus Eve",
+    "topic": "Linguistics and Discourse Analysis",
+    "field": "Arts and Humanities",
+    "ca_institutions": "Université de Montréal",
+    "funders": []
+  },
+  {
+    "id": "W2001536503",
+    "title": "A pilot study of the use of epidermal growth factor in pediatric short bowel syndrome",
+    "abstract": "",
+    "year": 2005,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Pediatric Surgery",
+    "topic": "Clinical Nutrition and Gastroenterology",
+    "field": "Nursing",
+    "ca_institutions": "University of Calgary",
+    "funders": "Hospital Research Foundation"
+  },
+  {
+    "id": "W2072848250",
+    "title": "Explicit equations for laminar flow of herschel–bulkley fluids",
+    "abstract": "Abstract There are three typical problems encountered in pipe flows: unknown friction factor, unknown flow rate, and unknown diameter problems. A major problem in determining the solution to these flow problems occurs due to the implicit nature of the Darcy–Weisbach friction factor. Though explicit equations for flow of Newtonian fluids and Power Law fluids are available, no such usable equations exist for Herschel–Bulkley fluids. In this paper, explicit equations have been given for flow of Herschel–Bulkley fluids in the laminar regime.",
+    "year": 2011,
+    "lang": "en",
+    "type": "article",
+    "venue": "The Canadian Journal of Chemical Engineering",
+    "topic": "Rheology and Fluid Dynamics Studies",
+    "field": "Chemical Engineering",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W1587360604",
+    "title": "Government Policies to Encourage University-Business Research Collaboration in Canada: Lessons from the US, the UK and Australia",
+    "abstract": "This report reviews findings from the research literature on motivations for, barriers to, and determinants of university-business (U-B) research collaboration. It examines how U-B research collaboration is measured and Canada‘s international ranking. It describes public policy measures for encouraging U-B research collaboration in Canada and three reference countries – the US, the UK and Australia. Drawing on the results of this work, the report provides recommendations on how Canadian governments can strengthen their role and effectiveness as advocates, enablers, funders and rule-makers for U-B research collaboration.",
+    "year": 2011,
+    "lang": "en",
+    "type": "preprint",
+    "venue": "RePEc: Research Papers in Economics",
+    "topic": "Entrepreneurship Studies and Influences",
+    "field": "Business, Management and Accounting",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2032175094",
+    "title": "Dynamic Performance Simulation of an Aeroderivative Gas Turbine Using the Matlab Simulink Environment",
+    "abstract": "In fossil fuel applications, such as air transportation and power generation systems, gas turbine is the prime mover which governs the aircraft’s propulsive and the plant’s thermal efficiency, respectively. Therefore, an accurate engine performance simulation has a significant impact on the operation and maintenance of gas turbines as far as reliability and availability considerations are concerned. Current trends in achieving stable engine operation, reliable fault diagnosis and prognosis requirements do motivate the development and implementation of real-time dynamic simulators for gas turbines that are sufficiently complex, highly nonlinear, have high fidelity and include fast response modules. This paper presents a gas turbine performance model for predicting the transient dynamic behavior of an aeroderivative engine that is suitable for both mechanical drive and power generation applications. The engine model has been developed in the Matlab/Simulink environment and combines both the inter-component volume and the constant mass flow methods. Dynamic equations of the mass momentum and the energy balance are incorporated into the steady state thermodynamic equations. This allows one to represent the engine model by a set of first order differential and algebraic equations. The developed Simulink model in an object oriented environment, can be easily adapted to any kind of gas turbine configuration. The model consists of a number of subsystems for representing the gas turbine’s components and the thermodynamic relationships among them. The components are represented by a set of suitable performance maps that are available from the open literature. The engine model has been validated with an established gas turbine performance simulation software. Time responses of the main variables that describe the gas turbine dynamic behavior are also included. The proposed gas turbine model with its dynamic simulation characteristics is a useful tool for development of real-time model-based diagnostics and prognostics technologies.",
+    "year": 2013,
+    "lang": "en",
+    "type": "article",
+    "topic": "Advanced Aircraft Design and Technologies",
+    "field": "Environmental Science",
+    "ca_institutions": "Concordia University",
+    "funders": ["Qatar National Research Fund", "Qatar Foundation"]
+  },
+  {
+    "id": "W99377882",
+    "title": "The \"Nonsensical\" Proverbs of Juan Manuel's \"Conde Lucanor\": Part IV, a Reassessment",
+    "abstract": "",
+    "year": 2001,
+    "lang": "es",
+    "type": "article",
+    "venue": "Revista Canadiense de Estudios Hispánicos",
+    "topic": "Medieval Iberian Studies",
+    "field": "Arts and Humanities",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W6939842052",
+    "title": "Enhancing the one health initiative by using whole genome sequencing to monitor antimicrobial resistance of animal pathogens: Vet-LIRN collaborative project with veterinary diagnostic laboratories in United States and Canada",
+    "abstract": "Abstract Background Antimicrobial resistance (AMR) of bacterial pathogens is an emerging public health threat. This threat extends to pets as it also compromises our ability to treat their infections. Surveillance programs in the United States have traditionally focused on collecting data from food animals, foods, and people. The Veterinary Laboratory Investigation and Response Network (Vet-LIRN), a national network of 45 veterinary diagnostic laboratories, tested the antimicrobial susceptibility of clinically relevant bacterial isolates from animals, with companion animal species represented for the first time in a monitoring program. During 2017, we systematically collected and tested 1968 isolates. To identify genetic determinants associated with AMR and the potential genetic relatedness of animal and human strains, whole genome sequencing (WGS) was performed on 192 isolates: 69â Salmonella enterica (all animal sources), 63 Escherichia coli (dogs), and 60â Staphylococcus pseudintermedius (dogs). Results We found that most Salmonella isolates (46/69, 67%) had no known resistance genes. Several isolates from both food and companion animals, however, showed genetic relatedness to isolates from humans. For pathogenic E. coli, no resistance genes were identified in 60% (38/63) of the isolates. Diverse resistance patterns were observed, and one of the isolates had predicted resistance to fluoroquinolones and cephalosporins, important antibiotics in human and veterinary medicine. For S. pseudintermedius, we observed a bimodal distribution of resistance genes, with some isolates having a diverse array of resistance mechanisms, including the mecA gene (19/60, 32%). Conclusion The findings from this study highlight the critical importance of veterinary diagnostic laboratory data as part of any national antimicrobial resistance surveillance program. The finding of some highly resistant bacteria from companion animals, and the observation of isolates related to those isolated from humans demonstrates the public health significance of incorporating companion animal data into surveillance systems. Vet-LIRN will continue to build the infrastructure to collect the data necessary to perform surveillance of resistant bacteria as part of fulfilling its mission to advance human and animal health. A One Health approach to AMR surveillance programs is crucial and must include data from humans, animals, and environmental sources to be effective.",
+    "year": 2019,
+    "lang": "en",
+    "type": "other",
+    "venue": "Figshare",
+    "topic": "Mycorrhizal Fungi and Plant Interactions",
+    "field": "Agricultural and Biological Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2978823510",
+    "title": "Widening of the genetic and clinical spectrum of Lamb–Shaffer syndrome, a neurodevelopmental disorder due to SOX5 haploinsufficiency",
+    "abstract": "",
+    "year": 2019,
+    "lang": "en",
+    "type": "article",
+    "venue": "Genetics in Medicine",
+    "topic": "Genetic Syndromes and Imprinting",
+    "field": "Biochemistry, Genetics and Molecular Biology",
+    "ca_institutions": ["Hospital for Sick Children", "McGill University", "SickKids Foundation", "Dalhousie University", "University of Toronto", "Montreal Children's Hospital", "Izaak Walton Killam Health Centre"],
+    "funders": ["National Institute of Arthritis and Musculoskeletal and Skin Diseases", "Center for Individualized Medicine, Mayo Clinic", "Institut National de la Santé et de la Recherche Médicale", "Assistance Publique - Hôpitaux de Paris", "National Institute for Health and Care Research", "Cleveland Clinic", "Wellcome Trust", "Assistance publique-Hôpitaux de Paris", "Agence Nationale de la Recherche"]
+  },
+  {
+    "id": "W4405537258",
+    "title": "Enhancing Thermal Stability and Electrochemical Performance of Lini0.6co0.2mn0.2o2 Cathode Through Bismaleimide-Cyanuric Acid-Based Polymer Coating for Safer Lithium-Ion Batteries",
+    "abstract": "",
+    "year": 2024,
+    "lang": "en",
+    "type": "preprint",
+    "venue": "SSRN Electronic Journal",
+    "topic": "Advancements in Battery Materials",
+    "field": "Engineering",
+    "ca_institutions": "University of Manitoba",
+    "funders": []
+  },
+  {
+    "id": "W2796307888",
+    "title": "A Fuel Sensitive Ignition Delay Model for Direct Injection Diesel Engine Operating under EGR Diluted Conditions",
+    "abstract": "&lt;div class=\"section abstract\"&gt;&lt;div class=\"htmlview paragraph\"&gt;This empirical work investigates the impacts of thermodynamic parameters, such as pressure and temperature, and fuel properties, such as fuel Cetane number and aromatic contents on ignition delay in diesel engines. Systematic tests are conducted on a single-cylinder research engine to evaluate the ignition delay changes due to the fuel property differences at low, medium and high engine loads under different EGR dilution ratios. The test fuels offer a range of Cetane numbers from 28 to 54.2 and aromatic contents volume ratios from 19.4% to 46.6%. The experimental results of ignition delays are used to derive an ignition delay model modified from Arrhenius’ expression. Following the same format of Arrhenius’ equation, the model incorporates the pressure and temperature effects, and further includes the impacts of intake oxygen concentration, fuel Cetane number and aromatic contents volume ratio on the ignition delay. The model is verified by results obtained under different engine loads and with different fuels. It is shown from the results that the inclusion of oxygen concentration improves the accuracy in predicting the ignition delays in the EGR diluted conditions. The inclusion of Cetane number and aromatic contents in the ignition delay model improves the adaptivity of the model, so that it can be used to predict the ignition delay of different fuels with improved accuracy.&lt;/div&gt;&lt;/div&gt;",
+    "year": 2018,
+    "lang": "en",
+    "type": "article",
+    "venue": "SAE technical papers on CD-ROM/SAE technical paper series",
+    "topic": "Advanced Combustion Engine Technologies",
+    "field": "Chemical Engineering",
+    "ca_institutions": "University of Windsor",
+    "funders": "Natural Sciences and Engineering Research Council of Canada"
+  },
+  {
+    "id": "W2157808852",
+    "title": "The Mosque as the First Political-Ideological Base in the Islamic Society",
+    "abstract": "<!-- /* Font Definitions */ @font-face {font-family:SimSun; panose-1:2 1 6 0 3 1 1 1 1 1; mso-font-alt:??; mso-font-charset:134; mso-generic-font-family:auto; mso-font-pitch:variable; mso-font-signature:3 680460288 22 0 262145 0;} @font-face {font-family:",
+    "year": 2011,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Politics and Law",
+    "topic": "Education and Islamic Studies",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W3206000130",
+    "title": "The HORSE framework: A reference architecture for cyber-physical systems in hybrid smart manufacturing",
+    "abstract": "In the Industry 4.0 era, manufacturers strive to remain competitive by using advanced technologies such as collaborative robots, automated guided vehicles, augmented reality support and smart devices. However, only if these technological advancements are integrated into their system context in a seamless way, they can deliver their full potential to a manufacturing organization. This integration requires a system architecture as a blueprint for positioning and interconnection of the technologies. For this purpose, the HORSE framework, resulting from the HORSE EU H2020 project, has been developed to act as a reference architecture of a cyber-physical system to integrate various Industry 4.0 technologies and support hybrid manufacturing processes, i.e., processes in which human and robotic workers collaborate. The architecture has been created using design science research, based on well-known software engineering frameworks, established manufacturing domain standards and practical industry requirements. The value of a reference architecture is mainly established by application in practice. For this purpose, this paper presents the application and evaluation of the HORSE framework in 10 manufacturing plants across Europe, each with its own characteristics. Through the physical deployment and demonstration, the framework proved its goal to be basis for the well-structured design of an operational smart manufacturing cyber-physical system that provides horizontal, cross-functional management of manufacturing processes and vertical control of heterogeneous technologies in work cells. We report on valuable insights on the difficulties to realize such systems in specific situations. The experiences form the basis for improved adoption, further improvement and extension of the framework. In sum, this paper shows how a reference architecture framework supports the structured application of Industry 4.0 technologies in manufacturing environments that so far have relied on more traditional digital technology.",
+    "year": 2021,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Manufacturing Systems",
+    "topic": "Digital Transformation in Industry",
+    "field": "Engineering",
+    "ca_institutions": [],
+    "funders": ["Horizon 2020", "Fonds de Recherche du Québec - Santé", "Horizon 2020 Framework Programme", "FP7 Coherent Development of Research Policies"]
+  },
+  {
+    "id": "W1547439061",
+    "title": "Rethinking the Book of Esther: Feminist Hermeneutics and Shechinah Theology in the Poetry of Amy Levy",
+    "abstract": "In this essay, Amy Levy’s biblical hermeneutic on Esther 9:22 is examined. Levy was an acculturated Anglo-Jewish woman triply marginalized by the upper-middle-class community of which her family belonged and that afforded women little intellectual space, the conservative Reform Judaism of the period, and as an obviously Jewish woman socializing in predominantly Christian circles. In the process of reengaging with the biblical texts, Levy, by her own figuring an exile in every sense, develops relational theological perspectives through imagery and themes resonant of Shechinah, the presence of God in exile since the destruction of the Temple. By doing so, Levy’s poetry visualizes the eschatological prospect of return and restoration to come; these proto-feminist hermeneutics also insert the symbols and language of divine presence into the Esther narrative, which conventionally makes no direct reference to the divine. This is important as Jewish feminist theology is generally considered to be a Second-Wave phenomenon. Moreover, the recovery of the sacral elements of the Levy corpus is vital to our awareness of previously marginalized, and even forgotten, Anglo-Jewish women writing theology in the late-Victorian period.",
+    "year": 2012,
+    "lang": "en",
+    "type": "article",
+    "venue": "Women in Judaism A Multidisciplinary e-Journal",
+    "topic": "Biblical Studies and Interpretation",
+    "field": "Arts and Humanities",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2523965477",
+    "title": "Variability in aboveground carbon driven by slope aspect and curvature in an eastern deciduous forest, USA",
+    "abstract": "In forested ecosystems, topography and tree species contribute to spatial variability in carbon (C) dynamics through differential rates of C uptake and storage; therefore, estimates of species-specific and spatial variability in C can strengthen ecosystem budgets. To produce such estimates, we deconstructed watershed-scale C and component pools (e.g., wood biomass, litter) and fluxes at a fine scale using a small mixed deciduous forest catchment to determine the variation due to topographic position and species. Factors affecting fluxes included aspect, slope curvature, tree species contributions, and litter production. Annual C uptake into wood varied across the catchment from 0 to 34 kg C·year −1 and was 20% greater on southern aspects than northern ones and 33% greater in swales than non-swale slopes. Of the more than 20 tree species found in the forest canopy of the catchment, highest C uptake in woody biomass was measured in Quercus rubra L. growing in swales, followed by Quercus prinus L. syn. growing on the southern aspect, with the lowest aboveground wood increment measured in Pinus at higher elevations on non-swale slopes. Quercus leaf litter moved from where it dropped into litter traps to where it settled on the forest floor, shifting the location of litter C inputs to the soil. Local variation in aboveground C rivals regional variation across regions and has the potential to introduce error when scaling C measures from points to landscapes.",
+    "year": 2016,
+    "lang": "en",
+    "type": "article",
+    "venue": "Canadian Journal of Forest Research",
+    "topic": "Forest ecology and management",
+    "field": "Environmental Science",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W1989463352",
+    "title": "The 1940s—a decade of consolidation",
+    "abstract": "S EG's second decade began with a clear signal that applied geophysics had evolved into a mature scientific discipline—the nearly simultaneous appearance of three text books by widely recognized experts (Exploration Geophysics by J.J. Jakowsky, Geophysical Exploration by C.A. Heiland, and Geophysical Prospecting for Oil by L.L. Nettleton). The page count of these three books was an indication of just how fast and how far geophysics had advanced in the 16 years since the first time that a geophysical survey had led to the discovery of commercial quantities of petroleum. Nettleton's book (perhaps because it was limited to oil exploration) was the runt of the litter at a mere 650 pages. Jakowsky's book was 786 pages and included a list of patents at the end of each chapter (interestingly, patents had already been granted in the USA, UK, Canada, France, and USSR). The book by Heiland, the leading geophysical educator of the time in the United States, was a gargantuan 1013 pages and that drew both praise and criticism in the review by E.A. Eckhardt which appeared in the January 1941 issue of Geophysics:",
+    "year": 2005,
+    "lang": "en",
+    "type": "article",
+    "venue": "The Leading Edge",
+    "topic": "Reservoir Engineering and Simulation Methods",
+    "field": "Engineering",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2611693583",
+    "title": "Energy ordering of unicyclic graphs",
+    "abstract": "",
+    "year": 2006,
+    "lang": "en",
+    "type": "article",
+    "venue": "HKBU Institutional Repository (Hong Kong Baptist University)",
+    "topic": "Graph theory and applications",
+    "field": "Mathematics",
+    "ca_institutions": "Toronto Metropolitan University",
+    "funders": []
+  },
+  {
+    "id": "W2919926150",
+    "title": "Prévention de l’adhésion aux gangs de rue : l’expérience des jeunes participants",
+    "abstract": "La présente étude s’intéresse à la prévention de l’adhésion des jeunes aux gangs de rues dans les quartiers de Saint Michel et LaSalle. Plus précisément, est effectuée l’évaluation qualitative d’un programme d’intervention implanté dans deux sites différents soit SORACOM (Saint-Michel) et LaSalle-Wrap (LaSalle). Le mémoire s’inscrit dans une évaluation plus large du programme, financée par le Ministère de la Sécurité Publique Canada (CNPC), qui a débuté en 2013 et qui devrait se terminer en 2018. L’approche sur laquelle est fondé le programme est inspirée d’autres expériences WrapAround canadiennes (Debicki, 2009). L’analyse du protocole d’évaluation préparé par Lafortune et ses collègues (2015a ; 2015b) a permis de cibler une de ses limites, à savoir que l’expérience du programme et ses effets perçus sur le niveau de risque des jeunes participants à adhérer à un gang de rue n’est pratiquement pas pris en considération. Afin de dépasser cette limite, notre objectif de recherche se formule comme suit : comprendre et documenter l’expérience de la participation aux programmes LaSalle- Wrap et SORACOM chez les jeunes garçons à risque moyen ou élevé d’adhésion à un gang de rue. L’analyse prévoit décrire la motivation des jeunes à participer au projet; recueillir leur perception du projet et du processus que leur participation implique; comprendre le ou les liens entre le choix du projet développé par les participants, les besoins susceptibles d’être comblés par l’adhésion à un gang de rue et l’évolution du niveau de risque d’adhésion; et documenter les impacts perçus par les jeunes suite à leur participation au projet, et ce dans différentes sphères de leurs vies. Pour y parvenir, une approche qualitative a été préconisée. Quinze entrevues semi- structurées ont été effectuées auprès de jeunes participants afin de recueillir leur perception de l’impact de la démarche sur leur motivation à adhérer à un gang. L’analyse des résultats a permis d’identifier les nombreuses différences que les jeunes perçoivent entre le contexte et l’approche préconisée par les projets en comparaison à d’autres types d’intervention. Celles-ci sont pour eux une source de motivation à persévérer, particulièrement la relation qu’ils développent avec leur facilitateur WrapAround. L’évolution du niveau de risque d’adhésion à un gang de rue au cours du processus s’explique par divers facteurs. Notamment, la prise en considération des besoins identifiés par le jeune lors de la planification WrapAround et le développement d’outils personnalisés qui lui permettent d’entamer un processus de changement et ainsi de diminuer les facteurs de risque qu’il présente en travaillant sur ses facteurs de protection et ceux de sa famille.",
+    "year": 2017,
+    "lang": "fr",
+    "type": "dissertation",
+    "venue": "Open MIND",
+    "topic": "Homelessness and Social Issues",
+    "field": "Health Professions",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2201852180",
+    "title": "An Elevated-Temperature Tension-Compression Test and Its Application to Mg AZ31B",
+    "abstract": "Many metals, particularly ones with HCP\ncrystal structures, undergo deformation by combinations of twinning\nand slip, the proportion of which depends on variables such as\ntemperature and strain rate. Typical techniques to reveal such\nmechanisms rely on metallography, x-ray diffraction, or electron\noptics. Simpler, faster, less expensive mechanical tests were\ndeveloped in the current work and applied to Mg AZ31B.\n An apparatus was designed, simulated,\noptimized, and constructed to enable the large-strain, continuous\ntension/compression testing of sheet materials at elevated\ntemperature. Thermal and mechanical FE analyses were used to locate\ncartridge heaters, thus enabling the attainment of temperatures up\nto 350°C within 15 minutes of start-up, and ensuring temperature\nuniformity throughout the gage length within 8°C. The low-cost\ndevice also makes isothermal testing possible at strain rates\nhigher than corresponding tests in air. Analysis\nwas carried out to predict the attainable compressive strains using\nnovel finite element (FE) modeling and a single parameter\ncharacteristic of the machine and fixtures. The limits of\ncompressive strain vary primarily with the material thickness and\nthe applied-side-force-to-material-strength ratio. Predictions for\na range of sheet alloys with measured buckling strains from -0.04\nto -0.17 agreed within a standard deviation of 0.025 (0.015\nexcluding one material that was not initially flat).\n In order to demonstrate the utility of the new\nmethod, several sheet materials were tested over a range of\ntemperatures. Some of the data obtained is the first of its kind.\nMagnesium AZ31B sheets were tested at temperatures up to 250°C with\nstrain rate of 0.001/s. The inflected stress-strain curve observed\nin compression at room temperature disappeared between 125°C and\n150°C, corresponding to the suppression of twinning, and suggesting\na simple method for identifying the deformation mechanism\ntransition temperature. The temperature-dependent behavior of\nselected advanced high strength steels (TWIP and DP) was revealed\nby preliminary tests at room temperature, 150°C and\n250°C. For Mg AZ31B alloy sheets, the curvature\nof compressive stress-strain plots over a fixed strain range was\nfound to be a consistent indicator of twinning magnitude,\nindependent of temperature and strain rate. The relationship\nbetween curvature and areal fraction of twins is presented.\nTransition temperatures determined based on stress-strain curvature\nwere consistent with ones determined by metallographic analysis and\nflow stresses, and depended on strain rate by the Zener-Hollomon\nparameter, a critical value for which was measured. The transition\ntemperature was found to depend significantly on grain size, a\nrelationship for which was established. Finally, it was shown that\nthe transition temperature can be determined consistently, and much\nfaster, using a single novel “Step-Temperature”\ntest.",
+    "year": 2011,
+    "lang": "en",
+    "type": "article",
+    "venue": "OhioLink ETD Center (Ohio Library and Information Network)",
+    "topic": "Magnesium Alloys: Properties and Applications",
+    "field": "Materials Science",
+    "ca_institutions": [],
+    "funders": ["National Research Foundation of Korea", "Sunchon National University", "National Research Foundation", "University of Windsor"]
+  },
+  {
+    "id": "W2018091286",
+    "title": "Associations between immune parameters, parasitism, and stress in breeding pied flycatcher (<i>Ficedula hypoleuca<\/i>) females",
+    "abstract": "There are two major interpretations of serum IgY concentration in wild birds. On the one hand, it has been considered an indication of susceptibility to stress and parasite infection. Therefore, immunoglobulin concentration is expected to change in response to variation in these factors owing to reproductive activities. On the other hand, it has been considered a measure of immune capacity. We measured the IgY level and the lymphocyte proportion at the beginning of incubation and at the end of the nestling period in female pied flycatchers, Ficedula hypoleuca (Pallas, 1764). We assessed the immune response to phytohaemagglutinin (PHA) at the latter stage. We found that the total IgY level remained constant throughout the season. Initially, it was positively associated with the PHA response, lymphocyte proportion, intensity of infection by Haemoproteus spp., and concentration of stress protein HSP70 in peripheral blood. These variables explained nearly 80% of the variation in IgY concentration. In the final phase, only the PHA response was correlated with the IgY level. We discuss the hypothetical mechanisms underlying these associations and the need to control for parasite infection and physiological stress in ecological studies including measurements of immunoglobulin concentration.",
+    "year": 2004,
+    "lang": "en",
+    "type": "article",
+    "venue": "Canadian Journal of Zoology",
+    "topic": "Bird parasitology and diseases",
+    "field": "Immunology and Microbiology",
+    "ca_institutions": [],
+    "funders": "Comunidad de Madrid"
+  },
+  {
+    "id": "W3203635626",
+    "title": "Design of sensors for monitoring the environment and ecosystems: from the definition of specifications to production",
+    "abstract": "International audience",
+    "year": 2021,
+    "lang": "en",
+    "type": "preprint",
+    "venue": "HAL (Le Centre pour la Communication Scientifique Directe)",
+    "topic": "Sensor Technology and Measurement Systems",
+    "field": "Computer Science",
+    "ca_institutions": ["Institut interdisciplinaire d'innovation technologique", "Université de Sherbrooke"],
+    "funders": []
+  },
+  {
+    "id": "W4317906834",
+    "title": "Vivre sa jeunesse en camion : une alternative à l’injonction d’autonomie ?",
+    "abstract": "La jeunesse est un âge de la vie composé d’étapes seuils contribuant à l’autonomisation sociale en général, et l’autonomie résidentielle en particulier. Cette dernière, au même titre que d’autres seuils, acte le passage symbolique à l’âge adulte. De ce point de vue, les jeunes nomades vivant en camion viennent remettre en question le rapport à l’habitat. Ils remettent aussi en question, par leur mode de vie, la manière avec laquelle les acteurs publics locaux perçoivent et gèrent la marginalité sociale et économique. En effet, la vie en camion fait partie du « mal logement », et les emplois saisonniers qu’ils occupent participent du stigmate de jeune déviant qui leur est assigné. Or ces derniers ne se considèrent pas toujours comme tels. Ils revendiquent même souvent une liberté de pouvoir vivre de façon autosuffisante, de sorte que cette revendication pose la question sociologique du mode de vie marginal comme processus d’autonomisation sociale. En s’appuyant sur des données empiriques issues d’une recherche doctorale portant sur les jeunes nomades saisonniers viticoles circulant dans les espaces ruraux du sud-ouest de la France, le présent article ouvre des pistes de réflexion sur ce qu’être jeune nomade veut dire. Il envisage un accompagnement adapté à un public dont le mode de vie provoque une asymétrie des représentations de l’autonomie entre les acteurs publics et les jeunes nomades. Pour cela, il s’appuie sur le concept de capabilités pour imaginer une intervention qui permettrait d’engager un processus de dé-stigmatisation de cette population.",
+    "year": 2022,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Éthique Publique",
+    "topic": "Social Policies and Family",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4400129119",
+    "title": "Le projet LIAM pour favoriser le développement du vocabulaire de l’élève ayant un trouble du langage oral durant l’été",
+    "abstract": "Pendant les vacances d’été, l’arrêt de l’enseignement de la lecture et de l’écriture entraine une baisse de l’apprentissage (Kim et Quinn, 2013). En effet, lire et écrire moins régulièrement pendant deux mois a un effet négatif sur le maintien des compétences et des apprentissages des élèves. Ce fait, observé par plusieurs enseignants, a été identifié comme étant la \" glissade de l’été \" (Royer, 2012). L’élève ayant un trouble développemental du langage (TDL) a des difficultés importantes sur le plan de l’expression et de la compréhension du langage (Leclercq et Leroy, 2012). Au niveau lexical, pour la plupart de ces élèves, ce trouble se manifeste par un vocabulaire limité et des difficultés à apprendre de nouveaux mots. Comme le vocabulaire joue un rôle déterminant dans la communication, la compréhension et la réussite scolaire (Ganske, 2023), il importe de favoriser son développement par des interventions spécifiques. Aussi, au cours de l’été 2023, nous avons réalisé une étude quasi expérimentale auprès de 13 élèves fréquentant une classe de langage. L’objectif général de cette recherche est d’analyser l’impact d’un programme d’intervention de lecture interactive d’histoires, dans différents contextes, sur le maintien des apprentissages en lecture et au niveau du vocabulaire, durant la période des vacances d’été. Deux contextes sont analysés : les activités à la maison avec le parent et les activités à la bibliothèque municipale avec une animatrice. Les résultats révèlent que les élèves ayant un TDL ont maintenu leurs capacités à lire des mots et ils ont amélioré leur vocabulaire. Les élèves ayant réalisé les activités avec leur parent durant l’été ont fait des progrès statistiquement significatifs. Ainsi, lire durant l’été avec l’élève ayant un TDL favorise le maintien des apprentissages, ce qui facilitera le retour en classe, en septembre.",
+    "year": 2024,
+    "lang": "fr",
+    "type": "article",
+    "venue": "SHS Web of Conferences",
+    "topic": "Reading and Literacy Development",
+    "field": "Psychology",
+    "ca_institutions": "Université du Québec à Montréal",
+    "funders": "Bibliothèque et Archives nationales du Québec"
+  },
+  {
+    "id": "W1531144480",
+    "title": "Les Meidosems d’Henri Michaux : émergences du dedans, résurgences orientales",
+    "abstract": "« L’Asie, maintenant loin, revient me submerger par moments, par longs moments », écrit Henri Michaux dans Émergences-Résurgences. Comme plusieurs oeuvres de ce peintre-poète féru d’Orient, le Portrait des Meidosems témoigne d’une indéniable fascination pour l’Asie. À la lumière de l’esthétique et des philosophies chinoises et indiennes, nous verrons comment ce singulier récit de voyage se révèle un compte rendu d’expériences où Michaux conjugue poésie, peinture et connaissance de soi.",
+    "year": 2002,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Tangence",
+    "topic": "Multiculturalism, Politics, Migration, Gender",
+    "field": "Social Sciences",
+    "ca_institutions": "Université du Québec à Trois-Rivières",
+    "funders": []
+  },
+  {
+    "id": "W2961168636",
+    "title": "A new legal science with an old aftertaste",
+    "abstract": "Opposing a good old liberal self to the degraded image of a coercive present is a recurrent argumentative tool in criminal law scholarship. In an important new book, Markus Dubber attempts to make use of a more complex dualistic framework to better achieve the same objective – namely, subjecting penal power to a normative analysis of legitimacy. He argues that criminal law scholars on both sides of the Atlantic have failed to acknowledge the fact that penal power is constantly shaped by two concurring modes of thought: law and police. Thus, subjecting penal power to a reconstruction of the way in which they find their way into institutional reality would offer a path forward for a legal scholarship truly committed to a legal ideal of legitimacy. This review essay focuses on criticizing this diagnosis. It contends that the image of legitimacy analysis offered by the model neglects many of the most pressing issues faced by modern criminal justice. Thus, despite the convincing criticism to which some forms of scholarship are subjected, the book ends up producing an image of legitimacy analysis that is strikingly similar to its departure point.",
+    "year": 2019,
+    "lang": "en",
+    "type": "article",
+    "venue": "University of Toronto Law Journal",
+    "topic": "Criminal Law and Evidence",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W3123608033",
+    "title": "The Relevance to Investors of Greenhouse Gas Emission Disclosures",
+    "abstract": "Abstract This study finds that investors price firms' greenhouse gas ( GHG ) emissions as a negative component of equity value, and this valuation discount does not differ between firms that voluntarily disclose to the Carbon Disclosure Project ( CDP ) and nondisclosing firms. We derive the GHG emissions for nondisclosers from an estimation model that incorporates firm characteristics and industry. The finding that investors view CDP amounts and estimates of emissions as equally value‐relevant suggests that equity values reflect GHG information from channels other than the CDP . An event study of investors' response to emission‐related information in firms' 8‐K filings further supports this finding. Economically, our results suggest that, for the median S&amp;P 500 firm, GHG emissions impose a market‐implied equity discount of $79 per ton, representing about one‐half of 1 percent of market capitalization.",
+    "year": 2017,
+    "lang": "en",
+    "type": "article",
+    "venue": "Contemporary Accounting Research",
+    "topic": "Corporate Social Responsibility Reporting",
+    "field": "Business, Management and Accounting",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W3122839058",
+    "title": "Tightening a Welfare System: The Effects of Benefit Denial on Future Welfare Receipt",
+    "abstract": "",
+    "year": 2002,
+    "lang": "en",
+    "type": "article",
+    "venue": "SSRN Electronic Journal",
+    "topic": "Fiscal Policy and Economic Growth",
+    "field": "Economics, Econometrics and Finance",
+    "ca_institutions": ["Government of British Columbia", "Government of Canada", "University of British Columbia"],
+    "funders": []
+  },
+  {
+    "id": "W804701262",
+    "title": "The Politics of Command: Lieutenant-General A.G.L. McNaughton and the Canadian Army, 1939-1943",
+    "abstract": "",
+    "year": 2012,
+    "lang": "en",
+    "type": "article",
+    "venue": "British Journal of Canadian Studies",
+    "topic": "Canadian Identity and History",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W6943487988",
+    "title": "A new species of Alopecosa (Araneae: Lycosidae) from Canada: a morphological description supported by DNA barcoding of 19 congeners",
+    "abstract": "This dataset contains the digitized treatments in Plazi based on the original journal article Blagoev, Gergin A., Dondale, Charles D. (2014): A new species of Alopecosa (Araneae: Lycosidae) from Canada: a morphological description supported by DNA barcoding of 19 congeners. Zootaxa 3894 (1): 152-160, DOI: http://dx.doi.org/10.11646/zootaxa.3894.1.12",
+    "year": 2014,
+    "lang": "en",
+    "type": "dataset",
+    "venue": "Global Biodiversity Information Facility",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4383682228",
+    "title": "Comment on egusphere-2023-1193",
+    "abstract": "<strong class=\"journal-contentHeaderColor\">Abstract.<\/strong> The formation of ice in clouds is an important process in mixed-phase clouds, and the radiative properties and dynamical developments of clouds strongly depend on their partitioning between liquid and ice phases. In this study, we investigate the sensitivities of the cloud phase to ice-nucleating particle (INP) concentration and thermodynamics. Experiments are conducted using the ICOsahedral Nonhydrostatic model (ICON) at the convection-permitting resolution of about 1.2 km on a domain covering significant parts of central Europe, and are compared to two different retrieval products based on SEVIRI measurements. We select a day with several isolated deep convective clouds, reaching a homogeneous freezing temperature at the cloud top. The simulated cloud liquid pixel number fractions are found to decrease with increasing INP concentration both within clouds and at the cloud top. The decrease in cloud liquid pixel number fraction is not monotonic but is stronger in high INP cases. Cloud-top glaciation temperatures shift toward warmer temperatures with increasing INP concentration by as much as 8 &deg;C. Moreover, the impact of INP concentration on cloud phase partitioning is more pronounced at the cloud top than within the cloud. Moreover, initial and lateral boundary temperature fields are perturbed with increasing and decreasing temperature increments from 0 to +/-3 K and +/-5 K between 3 and 12 km. Perturbing the initial thermodynamic state is also found to affect the cloud phase distribution systematically. However, the simulated cloud-top liquid number fraction, diagnosed using radiative transfer simulations as input to a satellite forward operator and two different satellite remote sensing retrieval algorithms, deviates from one of the satellite products regardless of perturbations in the INP concentration or the initial thermodynamic state for warmer sub-zero temperatures, while agreeing with the other retrieval scheme much better, in particular for the high INP and high convective available potential energy (CAPE) scenarios. Perturbing the initial thermodynamic state, which artificially increases the instability of the mid- and upper-troposphere, brings the simulated cloud-top liquid number fraction closer to the satellite observations, especially in the warmer mixed-phase temperature range.",
+    "year": 2023,
+    "lang": "en",
+    "type": "peer-review",
+    "topic": "Atmospheric aerosols and clouds",
+    "field": "Environmental Science",
+    "ca_institutions": "McGill University",
+    "funders": ["European Organization for the Exploitation of Meteorological Satellites", "European Commission", "Deutsches Klimarechenzentrum"]
+  },
+  {
+    "id": "W2327504555",
+    "title": "Reversible Splenial Lesion Following Rapid Withdrawal of Carbamazepine",
+    "abstract": "A 19-year-old man with paroxysmal kinesigenic dyskinesia (PKD) taking 200mg carbamazepine per day for six years was admitted to our hospital because of a medical certificate for soldiers. The dyskinesias were usually precipitated by sudden movements and these attacks occurred several times a day and had a brief duration (less than one minute). The drug was abruptly withdrawn seven days before the brain imaging and video-electroencephalography monitoring. Magnetic resonance imaging showed cytotoxic edema in the splenium, which were completely resolved three months later (Figure).",
+    "year": 2014,
+    "lang": "en",
+    "type": "article",
+    "venue": "Canadian Journal of Neurological Sciences / Journal Canadien des Sciences Neurologiques",
+    "topic": "Infectious Encephalopathies and Encephalitis",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4387053712",
+    "title": "Are the Reference Equations for Maximal Respiratory Pressure in Children Adequately Predicting Their Value?",
+    "abstract": "Background: This study aimed to investigate the agreement between the measured and estimated respiratory muscle strength in children and adolescents. We hypothesized that when using reference muscle strength equation consistent with the characteristics of the sample population, there would not be differences between the measured and predicted values. Methods: This was a cross-sectional study. One hundred seventy-nine participants were healthy volunteers between 6 and 18 years of age. Those who had lung disease in the previous 4 weeks, abnormalities in the pulmonary function test, chronic cardiopulmonary disease, prematurity or inadequacy when performing the tests were excluded. Maximal inspiratory and expiratory pressures (MIP and MEP) were assessed according to recommendations. The measured MIP and MEP values were compared to predicted values of the six most frequently cited prediction equations for children and adolescents. Results: Mean age was 12.3 +/- 3.7 years and 54% were male. The mean MIP was 87.5&#160;+/-&#160;27.1 cm H 2 O and MEP was 90.8&#160;+/-&#160;23.6 cm H 2 O. Three predicted MIP equations had similar results to the measured values (P &gt; 0.05). For MEP, only one equation had similar values (P = 0.12). Instead, there was weak to moderate agreement of all equations. At Bland-Altman plots, the mean bias was greater than 6 cm H 2 O for all equations, and the 95% confidence interval (CI) was about 30 cm H 2 O. Conclusion: There is significant variability between measured and predicted MIP and MEP values. Some equations showed similarity to measured values; however, the reliability was poor. Int J Clin Pediatr. 2023;12(2):37-44 doi: https://doi.org/10.14740/ijcp517",
+    "year": 2023,
+    "lang": "en",
+    "type": "article",
+    "venue": "International Journal of Clinical Pediatrics",
+    "topic": "Childhood Cancer Survivors' Quality of Life",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": []
+  }
+]
+warning: loading hooks from both /Users/choxos/.codex/hooks.json and /Users/choxos/.codex/config.toml; prefer a single representation for this layer
+2026-07-13T00:33:24.315324Z ERROR rmcp::transport::worker: worker quit with fatal: Transport channel closed, when Auth(AuthorizationRequired)
+warning: Skill descriptions were shortened to fit the 2% skills context budget. Codex can still see every skill, but some descriptions are shorter. Disable unused skills or plugins to leave more room for the rest.
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart Failed
+hook: SessionStart Completed
+hook: SessionStart Completed
+hook: SessionStart Completed
+hook: SessionStart Completed
+hook: SessionStart Failed
+hook: UserPromptSubmit
+hook: UserPromptSubmit
+hook: UserPromptSubmit Failed
+hook: UserPromptSubmit Failed
+codex
+[
+  {"id":"W6921036373","tier":"OUT","genre":"other","about_ca":false,"confidence":"high","reason":"This is supplementary material for a clinical systematic review, not a study of research itself."},
+  {"id":"W6902714784","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study examines family-planning prevalence and policy needs in India, not research practice."},
+  {"id":"W4241077486","tier":"OUT","genre":"other","about_ca":false,"confidence":"high","reason":"This record is a DOI metadata error notice rather than a study of research."},
+  {"id":"W2889012164","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study investigates lymphoma biology and sequencing findings, not research itself."},
+  {"id":"W2604224834","tier":"OUT","genre":"other","about_ca":false,"confidence":"high","reason":"The title concerns allergenicity of coconut oil derivatives, a scientific subject rather than research practice."},
+  {"id":"W6892641962","tier":"OUT","genre":"other","about_ca":false,"confidence":"high","reason":"This is promotional SEO content rather than research."},
+  {"id":"W1974308863","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study examines mechanisms of drug resistance in breast cancer cells, not research practice."},
+  {"id":"W2056558582","tier":"OUT","genre":"other","about_ca":false,"confidence":"high","reason":"This review concerns cancer pain management rather than how research is conducted or communicated."},
+  {"id":"W4224228189","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"The work develops a constitutive model for bentonite behavior, not a model of research practice."},
+  {"id":"W6902473023","tier":"T1","genre":"empirical","about_ca":false,"confidence":"high","reason":"It critically appraises systematic reviews and evaluates their methodological quality."},
+  {"id":"W4310004431","tier":"OUT","genre":"other","about_ca":false,"confidence":"high","reason":"This is sports news about a soccer match, not research."},
+  {"id":"W1513053121","tier":"OUT","genre":"editorial/commentary","about_ca":false,"confidence":"high","reason":"This is a book-related commentary about Osler, not a study of research practice."},
+  {"id":"W2969383861","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study evaluates teaching evaluations in higher education, not evaluation of research."},
+  {"id":"W4411570520","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"This systematic review answers a clinical exercise-supplement question rather than studying synthesis methodology."},
+  {"id":"W2062984057","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The work applies petroleum-system modeling to hydrocarbon exploration, not research itself."},
+  {"id":"W4200161460","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study investigates a clinical predictor of hydrocephalus, not research practice."},
+  {"id":"W2011953375","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The work reports chemical reactions involving bisketenes, not research methodology."},
+  {"id":"W6885737538","tier":"OUT","genre":"other","about_ca":false,"confidence":"high","reason":"This dataset describes treatment programs rather than studying research itself."},
+  {"id":"W6965591249","tier":"OUT","genre":"other","about_ca":false,"confidence":"high","reason":"The supplementary table concerns epidemiology and vaccine coverage of bacterial infections, not research practice."},
+  {"id":"W1977866715","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"The article analyzes medieval French legal and literary language, not contemporary research."},
+  {"id":"W2001536503","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The title clearly identifies a clinical intervention study, not a study of research."},
+  {"id":"W2072848250","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"The work derives equations for fluid flow, not methods for conducting or evaluating research."},
+  {"id":"W1587360604","tier":"T2","genre":"policy","about_ca":true,"confidence":"high","reason":"The report analyzes evidence and government policy concerning university-business research collaboration in Canada."},
+  {"id":"W2032175094","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study develops and validates a gas-turbine simulation model, not a model of research."},
+  {"id":"W99377882","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"The title identifies literary analysis of Spanish proverbs, not research practice."},
+  {"id":"W6939842052","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study concerns antimicrobial-resistance surveillance in animals, not the research system."},
+  {"id":"W2978823510","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The work describes a genetic syndrome and its clinical spectrum, not research practice."},
+  {"id":"W4405537258","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The title concerns battery-material performance and stability, not research itself."},
+  {"id":"W2796307888","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study develops an ignition-delay model for diesel engines, not a study of research methods."},
+  {"id":"W2157808852","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"The title concerns Islamic political history and society, not research practice."},
+  {"id":"W3206000130","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The work evaluates a manufacturing architecture for cyber-physical systems, not research infrastructure."},
+  {"id":"W1547439061","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"The essay analyzes biblical interpretation and Jewish feminist theology, not research itself."},
+  {"id":"W2523965477","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study examines carbon dynamics in a forest ecosystem, not research practice."},
+  {"id":"W1989463352","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"This historical account concerns the development of geophysics, not contemporary research practice."},
+  {"id":"W2611693583","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"The title identifies a graph-theory mathematics paper, not a study of research."},
+  {"id":"W2919926150","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The dissertation evaluates youth gang-prevention programs, not research itself."},
+  {"id":"W2201852180","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The work develops and applies a materials-testing apparatus, not a research-methods study."},
+  {"id":"W2018091286","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study examines immunity, parasitism, and stress in birds, not research practice."},
+  {"id":"W3203635626","tier":"OUT","genre":"other","about_ca":false,"confidence":"low","reason":"The available abstract is too thin, but the title indicates environmental sensor design rather than research itself."},
+  {"id":"W4317906834","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The article studies young nomads and social autonomy, not research practice."},
+  {"id":"W4400129119","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study evaluates a vocabulary intervention for children with language disorders, not research itself."},
+  {"id":"W1531144480","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"The article provides literary and philosophical analysis of Henri Michaux's work, not research practice."},
+  {"id":"W2961168636","tier":"OUT","genre":"editorial/commentary","about_ca":false,"confidence":"high","reason":"This review essay critiques a book in criminal-law scholarship but does not study research practice itself."},
+  {"id":"W3123608033","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study examines investor responses to corporate emissions disclosures, not scholarly communication."},
+  {"id":"W3122839058","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The title concerns welfare-policy effects, not research itself."},
+  {"id":"W804701262","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"The work is a historical study of Canadian military command, not research practice."},
+  {"id":"W6943487988","tier":"OUT","genre":"other","about_ca":false,"confidence":"high","reason":"This dataset contains taxonomic treatments of a spider species, not a study of research."},
+  {"id":"W4383682228","tier":"T3","genre":"editorial/commentary","about_ca":false,"confidence":"high","reason":"This is a comment or peer-review record connected to a scientific article and is contextual rather than analytic research."},
+  {"id":"W2327504555","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The work reports a clinical case involving carbamazepine withdrawal, not research practice."},
+  {"id":"W4387053712","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study evaluates clinical prediction equations for respiratory pressure, not research methodology itself."}
+]
+hook: Stop
+hook: Stop
+hook: Stop
+hook: Stop Completed
+hook: Stop Completed
+hook: Stop Failed
+tokens used
+6,079

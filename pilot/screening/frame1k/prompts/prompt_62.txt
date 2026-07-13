@@ -1,0 +1,812 @@
+# MétaCan screening rubric (v1.0)
+
+**Locked before screening. Version-controlled. Any change is a new version with a dated entry in `DEVIATIONS.md`.**
+
+Both machine screeners and both human coders work from this document and nothing else. The rubric is the
+instrument; if two coders disagree, the rubric is what they are adjudicated against.
+
+---
+
+## The unit
+
+One work (journal article, preprint, book chapter, report, dataset, or software), identified by its OpenAlex ID.
+You see: title, abstract, publication year, language, venue, OpenAlex topic and field, Canadian institutional
+affiliations, funders.
+
+## The question
+
+**Is the object of study *research itself*?**
+
+Metaresearch studies how research is done, reported, funded, evaluated, disseminated, or governed. The test is
+what the work is *about*, not what field it appears in and not what vocabulary it uses.
+
+A cardiology trial is not metaresearch. A study of *how cardiology trials report their outcomes* is.
+
+---
+
+## Tier
+
+Assign exactly one.
+
+### T1: Core metaresearch
+The primary object of study is research itself. Typical objects:
+
+- research **methods** and their properties (bias, reporting, statistical practice, study design)
+- **reproducibility**, replication, data and code sharing
+- **research integrity**: misconduct, retraction, questionable research practices, authorship
+- **peer review** and editorial process *as objects of study*
+- **research evaluation**, metrics, rankings, funding allocation
+- **scholarly communication**: publishing models, open access, preprints *as objects of study*
+- **bibliometrics and scientometrics** applied to a research literature
+- the **research workforce**: careers, equity, training, capacity
+- **evidence synthesis methodology** (not an individual systematic review's clinical answer, but work *about* how
+  syntheses are done)
+
+### T2: Adjacent
+Empirically or conceptually grounded work on science as a social system that is not framed as metaresearch but
+studies it:
+
+- **science and technology studies (STS)**: social studies of scientific knowledge, practice, controversy
+- **library and information science**: information behaviour of researchers, repositories, discovery
+- **research infrastructure** studies: platforms, data repositories, identifiers, standards
+- **history and philosophy of science** *when the object is contemporary research practice*
+- **research policy** analysis grounded in evidence
+
+T2 is where the field's diversity lives. Be generous here: a paper does not have to call itself metaresearch to
+be studying research.
+
+### T3: Contextual
+Relevant to the ecosystem, mapped and released, but **never pooled into the analytic corpus**:
+
+- editorials, commentaries, opinion pieces about research practice
+- policy documents and position statements
+- announcements of infrastructure, tools, or initiatives
+- news, obituaries, corrections, letters
+
+### OUT: Not metaresearch
+Everything else. Includes, and this is the most common error:
+
+- **A study that uses a method is not a study of the method.** A meta-analysis answering a clinical question is
+  OUT. A study of how meta-analyses handle heterogeneity is T1.
+- **Mentioning a metaresearch term is not studying it.** A lab paper reporting "assay reproducibility", a methods
+  section saying "peer reviewed", a licence note saying "open access": all OUT.
+- **Domain research that happens to be bibliometric in method** but whose object is the domain, not the research:
+  e.g. a bibliometric map of diabetes treatments, produced to summarise diabetes knowledge. Borderline; see below.
+
+---
+
+## The three errors that matter most
+
+These are where the pilot showed retrieval and screening break down. Read them twice.
+
+1. **Polysemy.** `reproducibility` in a biochemistry paper means the assay gives the same reading twice. In a
+   metaresearch paper it means the reproducibility crisis. Only the second is in scope. The same applies to
+   `validation`, `replication`, `bias`, `peer review`, `open access`. **Judge the sense, not the token.**
+
+2. **Method vs. object.** Using bibliometrics ≠ studying research. Ask: *if this paper is right, what do we now
+   know more about: a scientific question, or the practice of science?* If the former, OUT.
+
+3. **Absence of vocabulary is not absence of content.** An STS paper about laboratory practice, or an LIS paper
+   about how researchers find data, may use none of the field's keywords and still be squarely T2. **Do not
+   require the vocabulary.** This is the error that makes the field look smaller and more anglophone than it is.
+
+---
+
+## Canadian linkage
+
+Record which apply (this is metadata, not an inclusion test; the estimand is defined separately in
+`PROTOCOL.md`):
+
+- `CA_AFF`: at least one author affiliated with a Canadian institution
+- `CA_FUND`: funded by CIHR, NSERC, SSHRC, or CFI
+- `ABOUT_CA`: the Canadian research system is a substantive object of study (not a passing mention, not one
+  country among forty in a global comparison)
+
+## Genre
+
+`empirical` · `conceptual` · `editorial/commentary` · `policy` · `infrastructure/announcement` · `other`
+
+OpenAlex's `type` is unreliable and this field is commentary-heavy, so genre is coded, not inherited.
+
+## Language of the work
+
+As published. Do not infer from the venue.
+
+---
+
+## Confidence
+
+- `high`: the rubric decides this cleanly.
+- `medium`: the rubric decides, but a reasonable coder could differ.
+- `low`: genuinely on the boundary, or the abstract is missing/too thin to judge.
+
+**`low` is a legitimate answer and is not a failure.** Records coded `low` by either screener are routed to
+adjudication. A screener that never says `low` is not being careful; it is being confident.
+
+---
+
+## Worked examples
+
+| Title (abridged) | Tier | Why |
+|---|---|---|
+| "Data sharing practices in 500 randomised trials" | **T1** | The object is reporting practice. |
+| "Reproducibility of a Western blot protocol" | **OUT** | Assay reproducibility. Polysemy trap. |
+| "Trends in citation of retracted papers" | **T1** | Object is the literature's own behaviour. |
+| "Laboratory life in a Canadian genomics centre: an ethnography" | **T2** | STS. No metaresearch vocabulary; still studies research. |
+| "How do researchers discover datasets? A survey" | **T2** | LIS, information behaviour of researchers. |
+| "Effectiveness of statins: a network meta-analysis" | **OUT** | Uses a synthesis method to answer a clinical question. |
+| "How network meta-analyses handle inconsistency: a review of 200 reviews" | **T1** | Object is the method. |
+| "Announcing the Canadian Research Data Repository" | **T3** | Infrastructure announcement. Mapped, not pooled. |
+| "Open access mandates are failing early-career researchers" (editorial) | **T3** | Commentary about research practice. |
+| "Bibliometric analysis of diabetes research 2000–2020" | **T2** | Borderline. Bibliometric method, and the object *is* a research literature, so it studies research output. Code T2, `medium`. |
+| "Le libre accès dans les revues québécoises : état des lieux" | **T1** | Scholarly communication, object is publishing practice. French. |
+
+---
+
+## Instructions to the screener
+
+Read the title and abstract. Apply the rubric. Do not use outside knowledge of the authors or the journal's
+reputation. If the abstract is missing, judge on the title alone and set confidence to `low` unless the title is
+unambiguous.
+
+Return the schema in `protocol/screening-schema.json`. One object per work. No prose, no preamble.
+--------------------------------------------------------------------------------
+You are screening works for MetaCan, a map of Canadian metaresearch.
+
+Apply the rubric above to every record in the JSON array below. Return a JSON
+array with one object per work, conforming to protocol/screening-schema.json:
+
+  {"id": "W...", "tier": "T1|T2|T3|OUT", "genre": "...", "about_ca": true|false,
+   "confidence": "high|medium|low", "reason": "one sentence"}
+
+Rules:
+- Return the JSON array and NOTHING else. No prose, no preamble, no code fences.
+- Every input id must appear exactly once in the output.
+- Do not run commands, read files, or browse. Classify from the RECORDS alone.
+
+RECORDS:
+[
+  {
+    "id": "W4394689199",
+    "title": "Conserving Evolutionary Potential: Combining Landscape Genomics with Established Methods to Inform Plant Conservation",
+    "abstract": "Biodiversity conservation requires conserving evolutionary potential-the capacity for wild populations to adapt. Understanding genetic diversity and evolutionary dynamics is critical for informing conservation decisions that enhance adaptability and persistence under environmental change. We review how emerging landscape genomic methods provide plant conservation programs with insights into evolutionary dynamics, including local adaptation and its environmental drivers. Landscape genomic approaches that explore relationships between genomic variation and environments complement rather than replace established population genomic and common garden approaches for assessing adaptive phenotypic variation, population structure, gene flow, and demography. Collectively, these approaches inform conservation actions, including genetic rescue, maladaptation prediction, and assisted gene flow. The greatest on-the-ground impacts from such studies will be realized when conservation practitioners are actively engaged in research and monitoring. Understanding the evolutionary dynamics shaping the genetic diversity of wild plant populations will inform plant conservation decisions that enhance the adaptability and persistence of species in an uncertain future.",
+    "year": 2024,
+    "lang": "en",
+    "type": "review",
+    "venue": "Annual Review of Plant Biology",
+    "topic": "Plant and animal studies",
+    "field": "Agricultural and Biological Sciences",
+    "ca_institutions": "University of British Columbia",
+    "funders": []
+  },
+  {
+    "id": "W2044960255",
+    "title": "Utilisation of Telehome Monitoring in Patients over the Age of 75 with Complex Heart Failure; Does Age Make Any Difference?",
+    "abstract": "",
+    "year": 2011,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Cardiac Failure",
+    "topic": "Heart Failure Treatment and Management",
+    "field": "Medicine",
+    "ca_institutions": ["Ottawa Hospital", "Montreal Heart Institute", "University of Ottawa"],
+    "funders": []
+  },
+  {
+    "id": "W2619124902",
+    "title": "A Framework for Assessing the Suitability of Different Species as Companion Animals",
+    "abstract": "Abstract Municipal regulations and humane movement policies often restrict or discourage the use of ‘exotic’ species as companion animals. However, confusion arises because the term ‘exotic’ is used in various ways, and because classifying species as exotic or non-exotic does not satisfactorily distinguish suitable from unsuitable companion animals. Even among commonly kept species, some appear to be much more suitable than others. Instead, decisions about suitable companion animal species need to be based on a number of relevant issues. As ethical criteria, we considered that keeping a companion animal should not jeopardize - and ideally should enhance - its welfare, as well as that of its owner; and that keeping a companion animal should not incur any appreciable harm or risk of harm to the community or the environment. These criteria then served as the basis for identifying and organizing the various concerns that may arise over keeping a species for companionship. Concerns include how the animals are procured and transported, how well their needs can be met in captivity, whether the animal poses any danger to others, and whether the animal might cause environmental damage. These concerns were organized into a checklist of questions that form a basis for assigning species to five proposed categories reflecting their suitability as companion animals. This assessment framework could be used in creating policy or regulations, and to create educational and decision-making tools for pet retailers, animal adoption workers, and potential owners, to help prevent animals from being placed in unsuitable circumstances.",
+    "year": 2000,
+    "lang": "en",
+    "type": "article",
+    "venue": "Animal Welfare",
+    "topic": "Human-Animal Interaction Studies",
+    "field": "Biochemistry, Genetics and Molecular Biology",
+    "ca_institutions": "University of British Columbia",
+    "funders": []
+  },
+  {
+    "id": "W3215625297",
+    "title": "CFO facial beauty and bank loan contracting",
+    "abstract": "Abstract We examine whether the facial attractiveness of borrower firms' chief financial officers (CFOs) influences bank loan contracting terms. Using a machine learning‐based algorithm to measure facial attractiveness, we document that firms led by CFOs with greater facial attractiveness receive more favourable loan contracts from their banks. We further show that the relation between CFO facial attractiveness and bank loan contracting terms is significantly influenced by the characteristics of both the borrower and the lender. Collectively, our results suggest that loan contracting is not an entirely rational process, as the ‘beauty premium’ is at least partly driven by taste‐based discrimination.",
+    "year": 2023,
+    "lang": "en",
+    "type": "article",
+    "venue": "Accounting and Finance",
+    "topic": "Financial Markets and Investment Strategies",
+    "field": "Economics, Econometrics and Finance",
+    "ca_institutions": "Simon Fraser University",
+    "funders": "Social Sciences and Humanities Research Council of Canada"
+  },
+  {
+    "id": "W2056152011",
+    "title": "Novel electrophilic ipso acylation - detosylation reaction of pyrroles",
+    "abstract": "A pyrrole and two pyrroloindoles that are substituted with a p-toluenesulfonyl group undergo an ipso acylation – detosylation reaction with acid chlorides and aluminum chloride to afford the corresponding acyl-substituted pyrroles and pyrroloindoles.Key words: pyrrole, pyrroloindole, ipso acylation, detosylation, Friedel–Crafts reaction.",
+    "year": 2006,
+    "lang": "en",
+    "type": "article",
+    "venue": "Canadian Journal of Chemistry",
+    "topic": "Chemical Reaction Mechanisms",
+    "field": "Chemistry",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2498570875",
+    "title": "Meaning and creativity",
+    "abstract": "Often, philosophers, linguists, and cognitive scientists aiming to construct a theory of meaning for languages focus on how words are used by people to deal with the world. They might assume there is a regular way in which the word dolphin is used - that people regularly use dolphin to refer to or denote a class of aquatic beasts. And they might assume that there is a central, core use of words - using She has a pet dolphin to correctly describe some state of affairs, perhaps. If these assumptions were correct, dolphin might then be defined in terms of some regular function(s) it serves in a community of individuals who \"speak the same language,\" understood as \"use words in the same way\" (cp. Davidson 1967, Sellars 1974; contrast Chomsky 1996a, b, 2000a, Fodor 1998). These assumptions are built into technical terms: \"truth (or correctness) conditions,\" \"functional (or conceptual) role,\" etc. Because these attempts focus on communities, circumstances, things, and so on, I call them \"externalist\" approaches.",
+    "year": 2005,
+    "lang": "en",
+    "type": "book-chapter",
+    "venue": "Cambridge University Press eBooks",
+    "topic": "Language, Metaphor, and Cognition",
+    "field": "Psychology",
+    "ca_institutions": "McGill University",
+    "funders": []
+  },
+  {
+    "id": "W4406585769",
+    "title": "10.1016/s0967-0653(98)83464-9",
+    "abstract": "",
+    "year": 2000,
+    "lang": "en",
+    "type": "article",
+    "venue": "Time to knit",
+    "topic": "Archaeological and Geological Studies",
+    "field": "Arts and Humanities",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W6964003783",
+    "title": "Free and Reduced-fare Public Transit for Youth (Evidence Brief)",
+    "abstract": "This two page evidence brief summarizes the academic literature and media reports of free and fare-reduced public transit for youth. Motivations, Canadian initiatives, and assessment of programs are considered.",
+    "year": 2021,
+    "lang": "en",
+    "type": "article",
+    "venue": "VIUSpace (Vancouver Island University Library)",
+    "topic": "Urban Transport and Accessibility",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4244001285",
+    "title": "An Excerpt from \"Scoring the Body Through Kuna Aesthetic Principles: Indigenous Dramatic Arts in Theory, Process, and Practice\"",
+    "abstract": "If the body takes on the \"blueprint\" of a Kuna pictograph, can indigenous ways of knowing lead the body to \"unlearn the traumas of colonization and genocide locked in the body\"? Monique Mojica reflects on the healing potential of Kuna pictographs in her devising process.",
+    "year": 2011,
+    "lang": "en",
+    "type": "article",
+    "venue": "Canadian Theatre Review",
+    "topic": "Theatre and Performance Studies",
+    "field": "Arts and Humanities",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2340942692",
+    "title": "Improving the Methods of Email Classification through the Fuzzy Decision Tree",
+    "abstract": "The Internet has dramatically changed the relationship among people and their relationships with others. Email is the service, providing by the Internet today for its own users; this service has attracted most of the users' attention due to the low cost. Along with the numerous benefits of Email, one of the weaknesses of this service is the continuous enhanced of the received emails. The rapid expansion of this service among the Internet users has caused that some of the individuals to exploit it resulting in the spread of spam. In this paper, we introduce a new method to detect and classify the spam. We increased the precision of Email classification through FID3 decision tree and compared the results with two methods, SVM and Naive Bayesian, by F-Measure and precision criteria; and finally succeed to make an acceptable balance between the spam detection error instead of valid email and vice versa.",
+    "year": 2014,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of academic and applied studies",
+    "topic": "Spam and Phishing Detection",
+    "field": "Computer Science",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4395051391",
+    "title": "Letter to the Editor: Response to “Impact of Surgeon Case Volume on Outcomes after Reverse Total Shoulder Arthroplasty”",
+    "abstract": "Stratford, NJ None of the following authors or any immediate family member has received anything of value from or has stock or stock options held in a commercial company or institution related directly or indirectly to the subject of this article: Bickford, Chow, and Buch.",
+    "year": 2024,
+    "lang": "en",
+    "type": "letter",
+    "venue": "Journal of the American Academy of Orthopaedic Surgeons",
+    "topic": "Shoulder Injury and Treatment",
+    "field": "Medicine",
+    "ca_institutions": "Object Research Systems (Canada)",
+    "funders": []
+  },
+  {
+    "id": "W4211102700",
+    "title": "Modeling the Performance of a Metal-Organic Framework (MIL-101) for the Adsorption of Toluene in an Industrial Fluidized Bed Adsorber and Comparison to Other Adsorbent Materials",
+    "abstract": "",
+    "year": 2022,
+    "lang": "en",
+    "type": "article",
+    "venue": "SSRN Electronic Journal",
+    "topic": "Metal-Organic Frameworks: Synthesis and Applications",
+    "field": "Chemistry",
+    "ca_institutions": "University of Alberta",
+    "funders": []
+  },
+  {
+    "id": "W2620845443",
+    "title": "Investigating Martian and Venusian hyperspectral datasets",
+    "abstract": "International audience",
+    "year": 2010,
+    "lang": "en",
+    "type": "preprint",
+    "venue": "HAL (Le Centre pour la Communication Scientifique Directe)",
+    "topic": "Geochemistry and Geologic Mapping",
+    "field": "Computer Science",
+    "ca_institutions": ["Canadian Institute for Theoretical Astrophysics", "University of Toronto"],
+    "funders": []
+  },
+  {
+    "id": "W210592458",
+    "title": "Comment on CAS 98/200 AEK Athens and Slavia Prague V. UEFA",
+    "abstract": "",
+    "year": 2010,
+    "lang": "en",
+    "type": "article",
+    "venue": "The International Sports Law Journal",
+    "topic": "Doping in Sports",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4414166423",
+    "title": "Does uptake of post-harvest handling technologies lead to better household nutrition? Empirical evidence from a project-based intervention in Northern Uganda",
+    "abstract": "Adoption of improved agricultural technologies is important for increasing agricultural productivity, household income, food security, and reducing poverty. This paper assessed the impact of adopting improved post-harvest technologies and practices on the dietary diversity of smallholder agricultural households in northern Uganda. The study used cross-sectional survey data from 722 smallholder households across nine districts of northern Uganda. These were districts where a donor funded project, Project for the Restoration of Livelihoods in Northern Uganda was implemented. The focus was on post-harvest (harvesting, drying, and storage) technologies and practices promoted under this project. Data was analyzed using descriptive statistics, as well as, inferential statistics. In the case of inferential statistics, binary probit regression analysis was used to assess factors influencing adoption of each technology, while, propensity score matching technique was used to compare household dietary diversity (HDD) of adopters and non-adopters. Results showed that most farmers decided to harvest at the right maturity, while, the use of tarpaulins was the only adopted drying technology. Less than a quarter of farmers had adopted PICS bags, super gunny bags, and polypropylene bags, as storage facilities. Regression results showed that age, gender, and education level of the household head, household labor, size of land owned, land acreage under crop production, access to credit, use of ox-plough, and access to agricultural markets had significant impact on farmer’s decision to adopt the technologies. Average Treatment Effects on the Treated (ATT) for HDD were positive and significant when households knew how to assess maturity, and also used tarpaulin and PICS bags. These findings indicate that these technologies were associated with increased levels of HDD. On the other hand, ATT was negative and significant for households that harvested at the right time, at the right maturity, used super gunny, and used polypropylene bags for storage. Findings of the study support the existence of a strong relationship between dietary diversity and the adoption of post-harvest technologies and practices. These findings highlight the need for targeted extension services and technology promotion to improve food security through dietary diversity.",
+    "year": 2025,
+    "lang": "en",
+    "type": "article",
+    "venue": "BMC Agriculture",
+    "topic": "Energy and Environment Impacts",
+    "field": "Environmental Science",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4366767280",
+    "title": "Avi Mograbi, l’atelier politique : de l’ironie indignée à l’idiotie burlesque",
+    "abstract": "International audience",
+    "year": 2016,
+    "lang": "fr",
+    "type": "preprint",
+    "venue": "HAL (Le Centre pour la Communication Scientifique Directe)",
+    "topic": "Multiculturalism, Politics, Migration, Gender",
+    "field": "Social Sciences",
+    "ca_institutions": "Canadian Heritage",
+    "funders": []
+  },
+  {
+    "id": "W4409360441",
+    "title": "Computational study of the reactions of CH<sub>2<\/sub> with HCNO and HNCO",
+    "abstract": "We present a computational approach for screening reaction mechanisms with machine learning estimates of energy barriers. A comprehensive screening of thousands of reactions identified the CH 2 reactions with HCNO and HNCO as possible sources of relatively complex organic molecules in space. We report detailed reaction mechanisms, including transition state, intermediate, and product energies, calculated with density functional theory and coupled cluster theory. Singlet CH 2 , located 9 kcal/mol above the triplet ground state, reacts with HCNO or HNCO without a barrier, producing four products: CH 2 NCHO, N-methyleneformamide, the thermodynamically favored product; NHCHCHO, imine acetaldehyde; NHCHOCH; and (CH 2 OC)NH, oxiran-2-ylazanide. The lowest energy pathway for CH 2 + HCNO, involving a triplet-to-singlet crossing, has a barrier of 8 kcal/mol and leads to N-methyleneformamide, imine acetaldehyde, and NHCHOCH. The reaction of triplet CH 2 with HNCO has a lowest energy pathway with a barrier of 11 kcal/mol, yielding CH 2 (CO)NH.",
+    "year": 2025,
+    "lang": "en",
+    "type": "article",
+    "venue": "Canadian Journal of Chemistry",
+    "topic": "Atmospheric Ozone and Climate",
+    "field": "Earth and Planetary Sciences",
+    "ca_institutions": "York University",
+    "funders": []
+  },
+  {
+    "id": "W193143578",
+    "title": "Upper Gastrointestinal Bleeding Secondary to an Aberrant Right Subclavian Artery-Esophageal Fistula: A Case Report and Review of the Literature",
+    "abstract": "An aberrant right subclavian artery (ARSA) is a common aortic arch abnormality. A case of a 57-year-old man presenting with melena and hypotension secondary to an ARSA-esophageal fistula is reported. The current report is unique because it is the first reported case of ARSA-esophageal fistula associated with prior esophagectomy and gastric pull-up. A MedLine search was performed for ARSA-esophageal fistula cases, which were then compared with the present case. Because this patient had no vascular conduits, nasogastric or endotracheal tubes, the fistula likely occurred secondary to the previous surgery. This case is unusual because the patient survived the original hemorrhage associated with the ARSA-esophageal fistula. An ARSA-esophageal fistula is a rare, but potentially fatal cause of upper gastrointestinal bleeding. A high index of suspicion is needed to make the diagnosis. This condition should be considered in patients with risk factors combined with hemodynamically significant gastrointestinal bleeding.",
+    "year": 2007,
+    "lang": "en",
+    "type": "review",
+    "venue": "Canadian Journal of Gastroenterology",
+    "topic": "Infectious Aortic and Vascular Conditions",
+    "field": "Medicine",
+    "ca_institutions": ["Ottawa Hospital", "University of Ottawa"],
+    "funders": []
+  },
+  {
+    "id": "W4212847923",
+    "title": "Round-Trip Emergency Supply Distribution Model Based on Nonfixed Routes",
+    "abstract": "In the face of increasing natural or man-made disasters, rapid and effective emergency dispatch and organization are of great significance to ensure the life safety of people and reduce social losses. In view of the long duration, strong demand urgency, and relatively limited transportation capacity after catastrophic events, this paper proposes a round-trip emergency supply distribution model based on nonfixed routes. This model includes two main features: (1) round trip: emergency vehicles can travel back and forth to distribute supplies; (2) unfixed routes: distribution routes of the same emergency vehicle could be variable in different trips. In order to ensure the timeliness and fairness of the supply distribution scheme, the model objective function is set to minimize the total supplies’ waiting time at all demand points. According to model features, 4 constraints are set, including flow balance, capacity, vehicle scheduling, and time window. On this basis, a compound algorithm combining 2-opt and tabu search is designed to obtain the optimal plan of the model. To verify the effectiveness and superiority of the model and solution method, a case study based on the Sioux Falls network is carried out. Compared with the traditional method, the objective function is optimized by 11.92%. In fact, under the control of multiple constraint conditions, the model well fits the actual application scenarios, which can provide theoretical guidance and decision support for the distribution of relevant emergency supplies.",
+    "year": 2022,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Advanced Transportation",
+    "topic": "Evacuation and Crowd Dynamics",
+    "field": "Engineering",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2592157035",
+    "title": "Le cimetière intercommunal de la Fontaine Saint-Martin à Valenton, une réalisation oubliée de Robert Auzelle",
+    "abstract": "L’architecte français Robert Auzelle (1913-1983) est reconnu pour son travail d’urbaniste notamment mis en œuvre à partir des années 1950 dans le quartier de la Plaine à Clamart (Hauts-de-Seine). Il est également réputé comme spécialiste de l’architecture funéraire grâce à ses écrits et à la réalisation, à partir de 1946, du premier véritable cimetière paysager français du XXe siècle, toujours à Clamart. En revanche, ses autres nécropoles, telle celle de Valenton (Val-de-Marne) demeurent très peu connues. Dans cette ville du sud-est parisien, Auzelle déploie toutes ses idées pour réinventer le cimetière français, cimetière dans lequel il voudrait faire régner un esprit des lieux retrouvé, une harmonie propice au recueillement et à une forme de sacralité restaurée ; ce « cimetière paysager » proposerait la synthèse entre le « cimetière parc » américain, celui « forestier », de tradition germanique, et le « cimetière architectural » méditerranéen. L’architecte tente en outre d’y développer une approche renouvelée des sépultures elles-mêmes. Le projet, réalisé au début des années 1970, se conforme dans l’ensemble à ses dessins. Les interventions artistiques y occupent une place importante, Auzelle intégrant des sculptures monumentales commandées à des plasticiens qu’il choisit soigneusement – Pierre Székely (1923-2001) pour « Les ages de la vie » à l’entrée du cimetière et Pierre Sabatier (1925-2003) pour les paravents « l’arbre de vie » et « le cosmos » dans l’aire de cérémonie. Cependant, il échoue ici en grande partie dans sa volonté de renouveler l’art funéraire, ne réussissant pas à multiplier les tombes superposées en enfeus et à imposer – aux familles comme aux marbriers – ses dessins pour l’ensemble des sépultures. Aujourd’hui, le cimetière s’étend sur 32 hectares et dispose d’un crématorium (créé en 1986 dans l’étage semi-enterré du funérarium), d’espaces traditionnels d’inhumation (dont un israélite et un musulman), d’espaces paysagers d’inhumation, d’un ossuaire, d’un columbarium, d’enfeus et d’un site cinéraire (avec une rocaille de dispersion, des emplacements pour des cavurnes ou cavotins et un jardin des innocents). Malgré quelques modifications par rapport à son état d’origine, il demeure une œuvre d’Auzelle très préservée. Si certains carrés peuvent ressembler à un cimetière ordinaire, il suffit de s’en éloigner et de se diriger vers les espaces paysagers ou le columbarium pour mesurer tout l’intérêt du projet. Quarante ans après leur plantation, les parties boisées, bien entretenues, ont atteint leur maturité. Les bâtiments de service, ceux de la conservation et des commerces, l’aire de cérémonie n’ont subi aucune intervention irréversible. Ainsi, le cimetière intercommunal de Valenton n’attend plus qu’une meilleure reconnaissance, qui pourrait passer par une labellisation Patrimoine du XXe siècle, par exemple. Les vertus pédagogiques de cette distinction faciliteraient sans doute la compréhension des intentions d’Auzelle et aideraient à la gestion et à l’entretien de la nécropole. L’effet de dépouillement propice au recueillement que l’architecte rechercha est aujourd’hui effectivement critiqué par certains usagers, aspirant à des espaces moins sévères.",
+    "year": 2017,
+    "lang": "fr",
+    "type": "article",
+    "venue": "In Situ",
+    "topic": "Death, Funerary Practices, and Mourning",
+    "field": "Social Sciences",
+    "ca_institutions": "Canadian Heritage",
+    "funders": []
+  },
+  {
+    "id": "W2550781557",
+    "title": "Integrated process for the purification and immobilization of the envelope protein domain III of dengue virus type 2 expressed in Rachiplusia nu larvae and its potential application in a diagnostic assay",
+    "abstract": "",
+    "year": 2016,
+    "lang": "en",
+    "type": "article",
+    "venue": "Protein Expression and Purification",
+    "topic": "Mosquito-borne diseases and control",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": ["Secretaría de Ciencia y Técnica, Universidad de Buenos Aires", "Agriculture and Agri-Food Canada", "Universidad de Buenos Aires", "Consejo Nacional de Investigaciones Científicas y Técnicas"]
+  },
+  {
+    "id": "W2769902251",
+    "title": "Reading Croatian Latin through Lucretius",
+    "abstract": "To demonstrate and explore possibilities of large-scale searching in digital text collections of Latin literature, I query the Croatiae auctores Latini (CroALa) corpus, comprising a selection of Latin texts written by Croatian authors (or authors connected with Croatia) during the thousand years between 976 and 1984, for matches of clausulae from De rerum natura. A search for some 7,400 Lucretian clausulae over some 228,000 verses currently in CroALa results in 1,994 cases of at least one match, with 5,529 unique lines of Croatian Latin poetry matching the clausulae. A simple heuristic decision chain is used to concentrate on interesting matches; some of them are presented and interpreted as a brief introduction to Croatian Latin sub specie Lucretii.",
+    "year": 2017,
+    "lang": "en",
+    "type": "article",
+    "venue": "Mouseion Journal of the Classical Association of Canada",
+    "topic": "Linguistics and language evolution",
+    "field": "Arts and Humanities",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4408821158",
+    "title": "Advancing Harm Reduction in Emergency Nursing: Insights and Challenges",
+    "abstract": "",
+    "year": 2025,
+    "lang": "en",
+    "type": "article",
+    "venue": "Canadian Journal of Emergency Nursing",
+    "topic": "Criminal Justice and Corrections Analysis",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W1992213934",
+    "title": "Effect of Exopolysaccharides on Phage-Host Interactions in <i>Lactococcus lactis<\/i>",
+    "abstract": "In this study, we report that Lactococcus lactis strains producing exopolysaccharides (EPS) are sensitive to virulent phages. Eight distinct lytic phages (Q61 to Q68) specifically infecting Eps(+) strains were isolated in 47 buttermilk samples obtained from 13 North American factories. The eight phages were classified within the 936 species by the multiplex PCR method, indicating that these phages are not fundamentally distinct from those infecting Eps(-) L. lactis strains. The host range of these phages was determined with 19 Lactococcus strains, including 7 Eps(+) and 12 Eps(-) cultures. Three phages (Q62, Q63, and Q64) attacked only the Eps(+) strain SMQ-419, whereas the five other phages (Q61, Q65, Q66, Q67, and Q68) infected only the Eps(+) strain SMQ-420. The five other Eps(+) strains (H414, MLT2, MLT3, SMQ-461, and SMQ-575) as well as the 12 Eps(-) strains were insensitive to these phages. The monosaccharide composition of the polymer produced by the seven Eps(+) strains was determined. The EPS produced by strains MLT3, SMQ-419, and SMQ-575 contained glucose, galactose, and rhamnose. The EPS fabricated by H414 contained only galactose. The EPS made by MLT2, SMQ-420, and SMQ-461 contained glucose and galactose. These findings indicate that the sugar composition of the EPS has no effect on phage sensitivity. The plasmid encoding the eps operon was cured from the two phage-sensitive strains. The cured derivatives were still phage sensitive, which indicates that EPS are not necessary for phage infection. Phage adsorption assays showed that the production of EPS does not confer a significant phage resistance phenotype.",
+    "year": 2002,
+    "lang": "en",
+    "type": "article",
+    "venue": "Applied and Environmental Microbiology",
+    "topic": "Bacteriophages and microbial interactions",
+    "field": "Environmental Science",
+    "ca_institutions": ["Agriculture and Agri-Food Canada", "Université Laval"],
+    "funders": []
+  },
+  {
+    "id": "W4244649218",
+    "title": "Introduction",
+    "abstract": "",
+    "year": 2017,
+    "lang": "fr",
+    "type": "article",
+    "venue": "OLBI Journal",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2025972508",
+    "title": "Guillermo Verdecchia and the frontera in contemporary Canadian diasporic writing",
+    "abstract": "C ontemporary diasporic literary authors in Canada are today mostly seen as transcultural authors in the global cross-border English-speaking cultural collage space and in the Canadian multiethnic society. The socalled minority literature has in effect become part of the mainstream and no longer merely a veneer of the much coveted and publicly proclaimed, albeit not always practically effectual multiculturalism. Canadian diasporic writing thus has to be considered anew within the context of a new inter-American transborder integration, which has substantially changed the field of identity politics, the very concept of ethnicity and the need for its redefinition, as well as the various cultural/literary practices of a collective and individual dynamic identity construction. Canada has come a long way from the model of the Canadian cultural mosaic, a concept used to express the much sought unity through diversity, and it is today proud of its selfimage as a multicultural country. While some writers and critics are clearly supportive of the policy of multiculturalism, others again find it reached its limits in fostering some sort of self-imposed ghettoization and refer to",
+    "year": 2011,
+    "lang": "en",
+    "type": "article",
+    "venue": "Acta literaria",
+    "topic": "Latin American and Latino Studies",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2916745715",
+    "title": "Aspirations socioprofessionnelles et stratégies de développement de carrière chez les enseignements du secondaire au Cameroun",
+    "abstract": "Le prsent article s'intresse aux stratgies de dveloppement de carrire des enseignants du secondaire. Il explore leurs aspirations socioprofessionnelles en tenant compte de l'incertitude qui caractrise le systme ducatif au Cameroun. L' chantillon est constitu de 289 participants ayant rempli des chelles sept niveaux suivant le modle de Likert. Ils se montrent intresss par les nominations aux postes de responsabilit, le dtachement dans d'autres administrations, les affaires et la politique. Le renforcement des capacits et surtout l'implication au travail s'avrent des stratgies moins favorables au dveloppement de carrire, contrairement l' engagement en politique et au recours aux rseaux relationnels influents.",
+    "year": 2019,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Formation et profession",
+    "topic": "Education, sociology, and vocational training",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W3210399041",
+    "title": "Dataset for: Research data management in academic institutions: a scoping review",
+    "abstract": "<strong>Overview<\/strong> This dataset contains the raw data for the manuscript: <br> Perrier L, Blondal E, Ayala AP, Dearborn D, Kenny T, Lightfoot D, Reka R, Thuna M, Trimble L, MacDonald H. Research data management in academic institutions: A scoping review. PLOS One. 2017 May 23;12(5):e0178261. doi: 10.1371/journal.pone.0178261. Full-text available at: http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0178261 <strong>Data and Documentation Files<\/strong> Five files make up the dataset: Data Dictionary: RDMScopingReview_DataDictionary.pdf Data Abstraction Sheet: RDMScopingReview_StudyCharacteristics.csv Data Abstraction Sheet: RDMScopingReview_Setting.csv Data Abstraction Sheet: RDMScopingReview_DataCollectionTools.csv Data Abstraction Sheet: RDMScopingReview_Outcomes.csv Contact: Laure Perrier: orcid.org/0000-0001-9941-7129",
+    "year": 2017,
+    "lang": "en",
+    "type": "review",
+    "venue": "Figshare",
+    "topic": "Big Data and Business Intelligence",
+    "field": "Business, Management and Accounting",
+    "ca_institutions": ["St. Michael's Hospital", "Carleton University", "University of Toronto"],
+    "funders": []
+  },
+  {
+    "id": "W7044368799",
+    "title": "Writing the Self: The Autobiographical Subject as Language Construct. The Case of Lost in Translation. A Life in a New Language by Eva Hoffman",
+    "abstract": "This paper focuses on Lost in Translation: A Life in a New Language, a translingual memoir published in 1989 by Eva Hoffman (Ewa Wydra, at birth), a Polish writer who, aged thirteen, emigrated to Vancouver and then to the States, learnt English from scratch and finally became editor of the New York Review of Books as well as the most important contemporary Polish female writer in English. The translingual memoir is a fairly recent sub-genre in autobiographical writings which deals with immigrants’ recounting their progress from alienation towards integration into the host culture. This progress revolves around a process of language acquisition, or, as Hoffman’s memoir title signals, of translation by which the migrant gradually loses her mother tongue to acquire the language of her host country. Being a writer, and thus well aware of the fact that discourse is constitutive of, and determined by identity, Hoffman starts from the general assumption that “nothing fully exists until it is articulated” and moves on to explore the ways in which the close interrelation between “languaging” and the Self is re-defined and adapted to a post-modern bilingual context, in which individuals are more and more often divided between two cultures, languages and nations. Through a detailed functional linguistics analysis of the roles of the two “I”s in the memoir (the cognitive active “I” of the author, who knowingly presides over her writing, and the narrativized “I” as the passive object of the language she does not know but in which “[she has] been written”), this paper shows that acts of designation and translation construct a split subject and, at the same time, function as a bridge that connects the subject’s linguistic and social status. Thus, the analysis of Lost in Translation makes a significant contribution to the exploration of migrants’ identities through “translation” – intended, in one of its etymologies, as a tool to represent the identity of a split subject who has been “carried across” different countries, cultures and languages.",
+    "year": 2009,
+    "lang": "en",
+    "type": "article",
+    "venue": "Archivio istituzionale della ricerca (Alma Mater Studiorum Università di Bologna)",
+    "topic": "Magnetic confinement fusion research",
+    "field": "Physics and Astronomy",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4206327032",
+    "title": "Cultural and educational work of the Harvard Ukrainian Research Institute for preserving the national identity in the second half of the XX century (on materials of Ukrainian-language periodicals of the US diaspora)",
+    "abstract": "The article shows the activity of one of the leading Ukrainian scientific institutions in the diaspora, in particular the Harvard Ukrainian Research Institute, in the sphere of preserving the national identity. The main source base of the study was Ukrainian-language publications of the Ukrainian diaspora in the United States. The main directions of cultural and educational activity of this institution are described i.e. activity of Harvard Ukrainian Summer Institute, opening of three departments of Ukrainian studies in this prestigious university, scientific researches, publications presenting results of Ukrainian scientists and the ones about Ukraine, increase of library funds of Ukrainian, scientific conferences, book exhibitions, art exhibitions, cultural and entertainment events. The interaction of scientists from the USA and Canada in the field of Ukrainian studies, which resulted in the creation of the Standing Conference of Ukrainian Studies, is presented. The main topics of Harvard Ukrainian Studies in the study period are considered. The focus is on the first publications on the Holodomor, which were made at the Harvard Institute. The activities of the Harvard Ukrainian Research Institute are useful as it brings the light to the Ukrainian problem or segment of a particular topic from the Ukrainians’ point of view.",
+    "year": 2021,
+    "lang": "en",
+    "type": "article",
+    "venue": "Bulletin of Luhansk Taras Shevchenko National University",
+    "topic": "Military, Security, and Education Studies",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2277994881",
+    "title": "Modeling correlated frequencies with application in operational risk management",
+    "abstract": "ABSTRACT In this paper, we propose a copula-free approach for modeling correlated frequency distributions using an Erlang-based multivariate mixed Poisson distribution. We investigate some of the properties possessed by this class of distributions and derive a tailormade expectation-maximization algorithm for fitting purposes. The applicability of the proposed distribution is illustrated in an operational risk management context, where this class is used to model the operational loss frequencies and their complex dependence structure in a high-dimensional setting. Furthermore, by assuming that operational loss severities follow the mixture of Erlang distributions, our approach leads to a closed-form expression for the total aggregate loss distribution and its value-at-risk can be calculated easily by any numerical method. The efficiency and accuracy of the proposed approach are analyzed using a modified real operational loss data set.",
+    "year": 2015,
+    "lang": "en",
+    "type": "article",
+    "venue": "The Journal of Operational Risk",
+    "topic": "Financial Risk and Volatility Modeling",
+    "field": "Economics, Econometrics and Finance",
+    "ca_institutions": "University of Toronto",
+    "funders": []
+  },
+  {
+    "id": "W6888485597",
+    "title": "Download [ePub]] Mr. Notting Hill (Mister, #6) BY Louise Bay Free Download",
+    "abstract": "&amp;lt;p&amp;gt;Download Or Read Mr. Notting Hill (Mister, #6) by Louise Bay is an enthralling thriller that keeps readers on the edge of their seats from beginning to end. With its suspenseful plot, well-crafted characters, and expertly woven narrative, this novel has garnered immense popularity among fans of the genre. In this article, we will explore the captivating world of Mr. Notting Hill (Mister, #6), focusing on the intriguing storyline and the author's unique writing style. Furthermore, we will discuss the availability of the novel in PDF format for free download, making it accessible to a wider audience. So, if you're ready to dive into a thrilling literary adventure, let's delve into the depths of Mr. Notting Hill (Mister, #6) by Louise Bay.&amp;lt;/p&amp;gt;\\n&amp;lt;p&amp;gt;&amp;lt;br&amp;gt;&amp;lt;strong&amp;gt;&amp;gt;&amp;gt; Read Book Here Link &amp;gt;&amp;gt;&amp;gt;&amp;gt; &amp;lt;/strong&amp;gt;&amp;lt;a href=\"https://pdfworldnow.com/?book=B09NKXY9FM\" target=\"_blank\" rel=\"noopener noreferrer\"&amp;gt;&amp;lt;strong&amp;gt;Read Here&amp;lt;/strong&amp;gt;&amp;lt;/a&amp;gt;&amp;lt;/p&amp;gt;\\n&amp;lt;p&amp;gt;&amp;lt;strong&amp;gt;&amp;gt;&amp;gt; Download Book Here Link &amp;gt;&amp;gt;&amp;gt;&amp;gt; &amp;lt;/strong&amp;gt;&amp;lt;a href=\"https://pdfworldnow.com/?book=B09NKXY9FM\" target=\"_blank\" rel=\"noopener noreferrer\"&amp;gt;&amp;lt;strong&amp;gt;Download Here&amp;lt;/strong&amp;gt;&amp;lt;/a&amp;gt;&amp;lt;/p&amp;gt;\\n&amp;lt;p&amp;gt;&amp;nbsp;&amp;lt;/p&amp;gt;\\n&amp;lt;p&amp;gt;Mr. Notting Hill (Mister, #6) takes readers on a suspenseful journey through the dark underbelly of the criminal world. The story revolves around protagonist Lucas Davenport, a seasoned detective who finds himself entangled in a complex web of deceit, murder, and corruption. When a series of mysterious deaths occur in a small town, Davenport is called in to investigate. As he delves deeper into the case, he uncovers a sinister plot that threatens not only the lives of the townspeople but also his own.&amp;lt;/p&amp;gt;\\n&amp;lt;p&amp;gt;&amp;nbsp;&amp;lt;/p&amp;gt;\\n&amp;lt;p&amp;gt;Louise Bay masterfully constructs a plot filled with unexpected twists and turns, keeping readers guessing at every step. The author's ability to create tension and build suspense is commendable, as he skillfully maintains a high level of intrigue throughout the narrative. From the opening pages to the heart-stopping climax, Mr. Notting Hill (Mister, #6) delivers an adrenaline-pumping reading experience that will leave readers breathless.&amp;lt;/p&amp;gt;\\n&amp;lt;p&amp;gt;&amp;nbsp;&amp;lt;/p&amp;gt;\\n&amp;lt;p&amp;gt;One of the strengths of Mr. Notting Hill (Mister, #6) lies in its well-developed and multi-dimensional characters. Louise Bay brings his protagonists and antagonists to life with meticulous attention to detail, making them feel authentic and relatable.&amp;lt;/p&amp;gt;\\n&amp;lt;p&amp;gt;&amp;nbsp;&amp;lt;/p&amp;gt;\\n&amp;lt;p&amp;gt;Lucas Davenport, the lead character, is a flawed yet charismatic detective who carries the weight of the investigation on his shoulders. His determination, intelligence, and unorthodox methods make him a captivating protagonist. Supporting characters, such as fellow detectives, witnesses, and suspects, are equally well-drawn, each contributing to the intricate tapestry of the story.&amp;lt;/p&amp;gt;\\n&amp;lt;p&amp;gt;&amp;nbsp;&amp;lt;/p&amp;gt;\\n&amp;lt;p&amp;gt;Sandford's talent for character development extends beyond the main cast. Even minor characters possess distinct personalities that contribute to the overall richness of the narrative. This attention to detail enhances the reading experience, allowing readers to become fully immersed in the world of Mr. Notting Hill (Mister, #6).&amp;lt;/p&amp;gt;\\n&amp;lt;p&amp;gt;&amp;nbsp;&amp;lt;/p&amp;gt;\\n&amp;lt;p&amp;gt;Louise Bay's writing style is precise, evocative, and highly engaging. He effortlessly combines descriptive prose with fast-paced action, creating a vivid and immersive reading experience. Sandford's attention to detail is evident in his ability to paint a clear picture of the story's settings, whether it's a crime scene, a small town, or a bustling city.&amp;lt;/p&amp;gt;\\n&amp;lt;p&amp;gt;&amp;nbsp;&amp;lt;/p&amp;gt;\\n&amp;lt;p&amp;gt;The author's dialogue is sharp and realistic, helping to establish the distinct voices of the characters. The banter between characters adds depth and authenticity to their relationships, making them feel genuine and relatable.&amp;lt;/p&amp;gt;\\n&amp;lt;p&amp;gt;&amp;nbsp;&amp;lt;/p&amp;gt;\\n&amp;lt;p&amp;gt;Sandford's pacing is another significant strength in Mr. Notting Hill (Mister, #6). He expertly balances moments of high tension with quieter, introspective scenes, allowing readers to catch their breath and reflect on the unfolding events. This ebb and flow of intensity contribute to the overall suspense and make the novel difficult to put down.&amp;lt;/p&amp;gt;\\n&amp;lt;p&amp;gt;&amp;nbsp;&amp;lt;/p&amp;gt;\\n&amp;lt;p&amp;gt;Mr. Notting Hill (Mister, #6) by Louise Bay is a gripping thriller that captivates readers with its intricate plot, compelling characters, and masterful writing. The novel's availability in PDF format for free download ensures that it reaches a wider audience, allowing more readers to enjoy this enthralling tale of crime and corruption.&amp;lt;/p&amp;gt;\\n&amp;lt;p&amp;gt;&amp;nbsp;&amp;lt;/p&amp;gt;\\n&amp;lt;p&amp;gt;If you're a fan of suspenseful narratives filled with unpredictable twists, Mr. Notting Hill (Mister, #6) is a must-read. Louise Bay's ability to create tension, craft realistic characters, and maintain a compelling storyline will keep you engrossed until the very last page. So, grab a copy of Mr. Notting Hill (Mister, #6), buckle up, and get ready for a thrilling literary ride that will leave you craving for more.&amp;lt;/p&amp;gt;\\n&amp;lt;p&amp;gt;&amp;nbsp;&amp;lt;/p&amp;gt;",
+    "year": 2024,
+    "lang": "en",
+    "type": "other",
+    "venue": "Zenodo (CERN European Organization for Nuclear Research)",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4401877412",
+    "title": "Effect of Adding Stem Extension to a Short-Keeled Knee Implant on the Risk of Tibial Loosening: a Historical Cohort Study",
+    "abstract": "BACKGROUND: Short-keeled tibial implants may be at higher risk of aseptic loosening. Stem augmentation has been suggested to improve its fixation. We aimed to assess whether this technique could decrease the loosening rate of such tibial implants. METHODS: We retrospectively studied the knees receiving stemmed versus nonstemmed versions of a short-keeled prosthesis. A total of 932 patients undergoing total knee arthroplasty using a Persona prosthesis with >24-month follow-up (mean 53.7) were included, of whom 212 were at high risk of loosening due to osteoporosis or high body mass index (BMI). The rate of tibial aseptic loosening in high-risk patients and in the whole cohort was compared between those with and without stem extension. Multivariable analysis was conducted to identify the risk factors of loosening. RESULTS: In the whole cohort, in 203 knees (21.8%), a cemented short stem was used, versus 729 knees (78.2%) without. The tibial implant revision rates for loosening were 2.06% and 0.99% for nonstemmed and stemmed cases, respectively ( P = 0.551). When the cohort was categorized based on the loosening risk factors, the loosening risk was significantly higher in the high-risk than in the low-risk group, regardless of stem status (log-rank test = 8.1, hazard ratio = 2.17, 95% CI = 1.78, 2.57, P = 0.005). 212 patients were at high risk of loosening, due to high BMI or osteoporosis, among whom the risk of aseptic loosening was higher when a stem was not used (log-rank = 32.1, hazard ratio = 4.95, 95% CI = 4.05, 5.86, P < 0.001). In multivariate analysis, osteoporosis, BMI ≥35, and smoking were correlated with loosening. CONCLUSION: The failure rate was markedly lower in the stemmed group of the patients at elevated risk of aseptic loosening due to osteoporosis and/or high BMI. In the entire cohort, the risk of loosening in stemmed tibial implants was similar to the nonstemmed group. The findings support a protective role for the stem in patients at high risk of failure of the cemented tibial implant. LEVEL OF EVIDENCE: III therapeutic.",
+    "year": 2024,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of the American Academy of Orthopaedic Surgeons",
+    "topic": "Total Knee Arthroplasty Outcomes",
+    "field": "Medicine",
+    "ca_institutions": "University of Alberta",
+    "funders": []
+  },
+  {
+    "id": "W6940006517",
+    "title": "How to find a postdoc",
+    "abstract": "How to find a postdoc workshop Nicole Michel, Alex Bond, and Lori Bradford University of Saskatchewan, School of Environment and Sustainability 9 December, 2013",
+    "year": 2013,
+    "lang": "en",
+    "type": "other",
+    "venue": "Figshare",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4406864820",
+    "title": "Systematized literature review on the effectiveness of self-management programs for juvenile idiopathic arthritis",
+    "abstract": "Self-management skills are critical in chronic diseases such as juvenile idiopathic arthritis (JIA). We conducted a systematized review to synthesize the components and effectiveness of existing self-management programs (SMPs) for adolescents with JIA. Relevant literature was identified from four databases (PsychINFO, CINAHL, Medline (Ovid), and Embase) to February 2024. Inclusion criteria were original, full-text research articles published in the English language which described the components and effectiveness of SMPs conducted in adolescent populations with JIA. A total of 785 articles were reviewed, with 17 meeting the inclusion criteria. In addition to demographic characteristics, we extracted information on the intervention components (theoretical base, facilitator, delivery setting, intervention format, length and duration, activities, parental involvement), outcome scales, and effectiveness outcome measures (e.g., pain reduction, self-efficacy). The components and outcome measures varied between interventions and only four interventions used an RCT design. The majority of interventions consisted of multiple in-person sessions with fourteen of the seventeen studies reporting a sample size of 46 or fewer adolescents. Programs were delivered individually, and facilitated by a healthcare provider, study investigator, or trained coach. Most studies did not describe theoretical foundations. Ten studies demonstrated significant improvements in reported effectiveness measures. Many of the studies with significant findings reported poor intervention adherence and high attrition. A variety of SMPs exist for adolescents with JIA without clear indication of the essential components to yield improved outcomes. The results revealed the need for refining design, evaluation of SMPs, and innovation in in delivery mechanisms.",
+    "year": 2025,
+    "lang": "en",
+    "type": "article",
+    "venue": "Discover Health Systems",
+    "topic": "Autoimmune and Inflammatory Disorders Research",
+    "field": "Medicine",
+    "ca_institutions": ["Hospital for Sick Children", "Alberta Children's Hospital", "Alberta Bone and Joint Health Institute", "University of Calgary", "University of British Columbia"],
+    "funders": ["Alberta Children's Hospital Research Institute", "Arthritis Society"]
+  },
+  {
+    "id": "W1973226875",
+    "title": "National Survey of Hepatitis Testing and Vaccination Services Provided by Drug Services in England and Wales",
+    "abstract": "",
+    "year": 2000,
+    "lang": "en",
+    "type": "article",
+    "venue": "European Journal of Clinical Microbiology & Infectious Diseases",
+    "topic": "Hepatitis C virus research",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2992482642",
+    "title": "Better fibre digestion - a key aspect for improvement in dairy cows",
+    "abstract": "The volatility of milk prices, feed costs and profit margins makes feeding high-producing dairy cows on pasture or on a total mixed ration (TMR) very challenging for dairy farmers and nutritionists. Extracting the maximum nourishment from a diet is a prerequisite to achieving good feed efficiency and profitable milk production.",
+    "year": 2016,
+    "lang": "en",
+    "type": "article",
+    "venue": "Upea Uusimaa",
+    "topic": "Ruminant Nutrition and Digestive Physiology",
+    "field": "Agricultural and Biological Sciences",
+    "ca_institutions": "Cargill (Canada)",
+    "funders": []
+  },
+  {
+    "id": "W4414697608",
+    "title": "Lower Bound Estimates for Electrophysiological Power Dissipation in Human Gray Matter Using MEG",
+    "abstract": "Abstract The human brain is popularly described as remarkably energy efficient, with its metabolic power consumption estimated at approximately 20 watts (W). Biophysical models have partitioned this power budget across distinct cellular processes, but these theoretical estimates have yet to be empirically constrained using whole-brain electrophysiological data. Here, we used magnetoencephalography (MEG) source imaging of resting-state human brain activity to derive empirical lower-bound estimates of electrical power dissipation in cortical gray matter. We found that the total power dissipated by currents, primarily associated with post-synaptic potentials, ranges between 10 −9 and 10 −10 W, several orders of magnitude lower than prevailing metabolic estimates. Using finite element modeling (FEM), we observed that electrophysiological power dissipation is predominantly confined to gray matter. Additionally, spatial variations in MEG-derived power dissipation partially correlated with regional oxygen metabolism measured by PET, yet notable discrepancies emerged across large-scale functional brain networks. These results underscore a critical divergence between electrophysiological and metabolic indices of brain energy use, and highlight the need for more integrated biophysical models to bridge this gap and better characterize the physiological underpinnings of regional brain energetics. Key Points Using an Ohmic framework, we find that the total power dissipated by magnetoencephalography (MEG)-derived currents ranges from 10^-9 and 10^-10 W, several orders of magnitude lower than prevailing metabolic estimates. We validate our current and resistance estimation techniques using biophysical approaches. We correlate our metric of power dissipation against alternate modalities of brain metabolism across the cortex, including PET and gene-expression maps, underscoring a divergence between electrophysiology and energetics.",
+    "year": 2025,
+    "lang": "en",
+    "type": "preprint",
+    "venue": "bioRxiv (Cold Spring Harbor Laboratory)",
+    "topic": "Neural dynamics and brain function",
+    "field": "Neuroscience",
+    "ca_institutions": ["Université de Montréal", "Centre Hospitalier de l’Université de Montréal", "Montreal Neurological Institute and Hospital"],
+    "funders": ["Canadian Institutes of Health Research", "Natural Sciences and Engineering Research Council of Canada", "McGill University", "Cleveland Clinic"]
+  },
+  {
+    "id": "W2076450606",
+    "title": "Defining the context for a colloquium on nursing research and European R&amp;D funding opportunities",
+    "abstract": "",
+    "year": 2004,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Research in Nursing",
+    "topic": "Delphi Technique in Research",
+    "field": "Social Sciences",
+    "ca_institutions": "Royal Canadian Navy",
+    "funders": []
+  },
+  {
+    "id": "W7039091159",
+    "title": "La responsabilità penale delle persone giuridiche in Canada",
+    "abstract": "",
+    "year": 2015,
+    "lang": "it",
+    "type": "book-chapter",
+    "venue": "IRIS Research product catalog (Sapienza University of Rome)",
+    "topic": "Amphibian and Reptile Biology",
+    "field": "Environmental Science",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4399105542",
+    "title": "Cost-effectiveness of drug consumption rooms in France: a modelling study",
+    "abstract": "BACKGROUND: People who inject drugs (PWID) experience many health problems which result in a heavy economic and public health burden. To tackle this issue, France opened two drug consumption rooms (DCRs) in Paris and Strasbourg in 2016. This study assessed their long-term health benefits, costs and cost-effectiveness. METHODS: We developed a model to simulate two fictive cohorts for each city (n=2,997 in Paris and n=2,971 in Strasbourg) i) PWID attending a DCR over the period 2016-2026, ii) PWID attending no DCR. The model accounted for HIV and HCV infections, skin abscesses and related infective endocarditis, drug overdoses and emergency department visits. We estimated the number of health events and associated costs over 2016-2026, the lifetime number of quality-adjusted life-years (QALYs) and costs, and the incremental cost-effectiveness ratio (ICER). RESULTS: The numbers of abscesses and associated infective endocarditis, drug overdoses, and emergency department visits decreased significantly in PWID attending DCRs (-77%, -69%, and -65%, respectively) but the impact on HIV and HCV infections was modest (-11% and -6%, respectively). This resulted in savings of €6.6 (Paris) and €5.8 (Strasbourg) millions of medical costs. The ICER of DRCs was €30,600/QALY (Paris) and €9,200/QALY (Strasbourg). In scenario analysis where drug consumption spaces are implemented inside existing harm reduction structures, these ICERs decreased to €21,400/QALY and €2,500/QALY, respectively. CONCLUSIONS: Our findings show that DCRs are highly effective and efficient to prevent harms in PWID in France, and advocate extending this intervention to other cities by adding drug consumption spaces inside existing harm reduction centers.",
+    "year": 2024,
+    "lang": "en",
+    "type": "article",
+    "venue": "BMC Public Health",
+    "topic": "HIV, Drug Use, Sexual Risk",
+    "field": "Medicine",
+    "ca_institutions": ["British Columbia Centre on Substance Use", "Université de Sherbrooke"],
+    "funders": ["Institut pour la Recherche en Santé Publique", "Mission Interministérielle de Lutte Contre les Drogues et les Conduites Addictives", "Université de Lille"]
+  },
+  {
+    "id": "W1629801733",
+    "title": "Using Social Media While Waiting in Pain: A Clinical 12-Week Longitudinal Pilot Study",
+    "abstract": "BACKGROUND: Chronic pain places an enormous burden on health care systems. Multidisciplinary pain management services are well documented as an effective means to improve patient outcomes. However, waiting lists to access these services are long and outcomes deteriorate. Innovative solutions such as social media are gaining attention as a way to decrease this burden and improve outcomes. It is a challenge to design research that demonstrates whether social media are acceptable to patients and clinically effective. OBJECTIVE: The aim was to conduct a longitudinal pilot study to understand what aspects of research design are key to the success of running a larger-scale study of social media use in the clinical management of chronic pain. METHODS: A 12-week study examined social media use by patients on the waiting list for the Royal Melbourne Hospital Pain Management Service. Selected social media resources were suggested for use by patients waiting for an appointment at the clinic. Patients filled out measures for pain interference and pain self-efficacy before and after the study. Follow-up was conducted at monthly intervals via telephone semistructured interviews to discuss engagement and garner individual perceptions towards social media use. A social media-use instrument was also administered as part of the after-study questionnaire. RESULTS: Targeted recruitment refined 235 patient referrals to 138 (58.7%) suitable potential participants. Contact was made with 84 out of 138 (60.9%) patients. After a further exclusion of 54 out of 84 (64%) patients for various reasons, this left 30 out of 84 (36%) patients fitting the inclusion criteria and interested in study participation. A final study cohort of 17 out of 30 (57%) was obtained. Demographics of the 17 patients were mixed. Low back pain was the primary condition reported as leading to chronic pain. Semistructured interviews collected data from 16 out of 17 (94%) patients who started the trial, and at final follow-up 9 out of 17 (53%) patients completed questionnaires. Low specificity of the resources to one's condition and time poorness may have been barriers to engagement. CONCLUSIONS: Results suggest that with refinements, this study design can be implemented successfully when conducting a larger social media study. At present, comment cannot be made on what effect using social media can have on patients on hospital waiting lists, nor whether those who use social media while waiting in pain achieve better outcomes from eventual participation in a chronic pain program. Long-term follow-up should be included in future studies to answer this. Future research should focus on multicenter randomized controlled trials, involving patients in the intervention design for improved participation and outcomes and for evidence to be sound.",
+    "year": 2015,
+    "lang": "en",
+    "type": "article",
+    "venue": "JMIR Research Protocols",
+    "topic": "Social Media in Health Education",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": "University of Melbourne"
+  },
+  {
+    "id": "W3110916954",
+    "title": "Mortality analysis of persons with disabilities in Argentina by age, sex and duration of benefit, 2015–16",
+    "abstract": "Abstract This article describes the differential mortality of Argentina’s disability pension beneficiaries during the 2015–16 period, based on National Social Security Administration ( Administración Nacional de la Seguridad Social – ANSES) payment records. It compares data for those with an assessed disability with overall population data, as well as with available international data (from Canada, Chile, Mexico, and the United States of America). In addition to breaking down mortality rates for people with disabilities by age and sex, it also factors in duration of benefit, establishing an inverse correlation between benefit duration and mortality.",
+    "year": 2020,
+    "lang": "en",
+    "type": "article",
+    "venue": "International Social Security Review",
+    "topic": "Health disparities and outcomes",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2070370968",
+    "title": "Autonomie gouvernementale et justice pénale innue",
+    "abstract": "Introduction 809 1. La justice pnale innue avant l'arrive des Europens 810 2. La transformation de la justice innue 813 3. La solution de l'autonomie gouvernementale 817 Conclusion 820",
+    "year": 2002,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Revue générale de droit",
+    "topic": "Migration, Identity, and Health",
+    "field": "Social Sciences",
+    "ca_institutions": "University of Ottawa",
+    "funders": []
+  },
+  {
+    "id": "W2997046287",
+    "title": "&lt;p&gt;Medication Utilization Patterns 90 Days Before Initiation of Treatment with Repository Corticotropin Injection in Patients with Infantile Spasms&lt;/p&gt;",
+    "abstract": "INTRODUCTION: (vigabatrin). Given real-world variation in treatment of patients with IS, this study characterized treatment patterns with IS medications and determined all-cause health care resource utilization (HCRU) during the 90 days before initiating therapy with RCI in patients with IS. MATERIALS AND METHODS: Research Databases were used to identify commercially insured US patients <2 years of age at RCI initiation with an IS diagnosis, per label use, from 1/1/07 to 12/31/15; presence of an electroencephalogram following diagnosis was required to assure diagnosis. Diagnosis codes and dispensed IS treatments of interest (drug classes including corticosteroids, vigabatrin, and other antiepileptic drugs [AEDs] excluding vigabatrin) before RCI initiation were evaluated. RESULTS: The 5 most common diagnoses other than IS observed in the study cohort (n=422) were \"other convulsions,\" \"acute upper respiratory infection,\" \"esophageal reflux,\" \"epilepsy, unspecified,\" and \"abnormal involuntary muscle movements.\" Among the study cohort, 51.7% received RCI first; 38.9% received 1 drug class and 9.5% received >1 drug class before RCI initiation. Other AEDs were dispensed most often, either alone (31.3%) or with other drug classes (9.3%). Mean HCRU included 11.8 all-cause outpatient visits and 4.5 medications dispensed. Patients who received RCI or corticosteroids as their initial IS treatment had the lowest and second-lowest HCRU. CONCLUSION: In the 90 days before initiating RCI, patients with IS received multiple diagnoses and treatments, characterized by frequent HCRU. Use of RCI first (no prior IS medications) and AEDs first were associated with the lowest and highest HCRU, respectively, across all categories (all-cause outpatient visits, emergency department visits, hospital admissions, prescription medications).",
+    "year": 2020,
+    "lang": "en",
+    "type": "article",
+    "venue": "Pediatric Health Medicine and Therapeutics",
+    "topic": "Epilepsy research and treatment",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": ["Mallinckrodt Pharmaceuticals", "University of Washington"]
+  },
+  {
+    "id": "W2013308243",
+    "title": "GSK‐3: A key player in neurodegeneration and memory",
+    "abstract": "Abnormalities in molecular signalling have been implicated in neurodegeneration. It is emerging that glycogen synthase kinase-3 (GSK-3) is a key signalling molecule that induces neurodegeneration and deficits in memory formation related to Alzheimer's disease (AD). Early stages of AD are associated with deficits in memory formation before neuronal cell death is detectable. Recent studies in rodents have suggested that these impairments in memory formation might result from increased GSK-3 signalling, because enhanced GSK-3 activity impairs hippocampal memory formation. GSK-3 activity blocks synaptic long-term potentiation and induces long-term depression. Furthermore, increased GSK-3 signalling is likely to be a key contributor to the formation of the pathological hallmarks in AD, neurofibrillary tangles (NFTs) and amyloid plaques. Recent studies with mouse models have indicated that GSK-3, but not cyclin-dependent kinase 5, is critical for hyperphosphorylation of the cytoskeletal protein tau, which is the prerequisite for NFT formation in AD. Furthermore, increased GSK-3 signalling in AD mice causes abnormal processing of the amyloid precursor protein so that amyloid peptide production augments and neurotoxicity is induced. Taken together, the current evidences suggest that increased GSK-3 signalling may be responsible for the deficits in memory formation in early stages of AD and neurodegeneration in later stages of the disease.",
+    "year": 2009,
+    "lang": "en",
+    "type": "review",
+    "venue": "IUBMB Life",
+    "topic": "Alzheimer's disease research and treatments",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": ["Biotechnology and Biological Sciences Research Council", "Medical Research Council", "Alzheimer's Research Trust", "Alzheimer Society", "Wellcome Trust"]
+  },
+  {
+    "id": "W4414430961",
+    "title": "Cytomegalovirus Colitis in Inflammatory Bowel Disease The Eternal Debate: Foe or Innocent Bystander?",
+    "abstract": "Key Takeaways: • The prevalence of CMV infection among patients with IBD ranges from 2 to 29%, with a higher prevalence in those with UC compared to CD. • Immunohistochemistry and tissue PCR, or both, are the recommended tests for diagnosing active CMV colitis. • CMV may be an active pathogenic participant in cases with a high density of CMV and severe disease activity. Thus, we recommend testing for CMV colitis in patients with a severe inflammatory burden who are not responding to conventional IBD therapy. • Patients with low CMV viral burden can likely be treated with immunosuppression alone, while patients with high viral density or medically refractory disease should be treated with antiviral therapy.",
+    "year": 2025,
+    "lang": "en",
+    "type": "article",
+    "venue": "Canadian IBD Today",
+    "topic": "Cytomegalovirus and herpesvirus research",
+    "field": "Medicine",
+    "ca_institutions": ["University of Toronto", "University Health Network"],
+    "funders": []
+  },
+  {
+    "id": "W4253247820",
+    "title": "Stories Incarnate: Designing Embodied, Interactive Storytelling Experiences For Live Audiences",
+    "abstract": "Today’s audiences are no longer content to passively consume entertainment but are seeking interactive experiences where they have agency to participate more actively. While there has been substantial innovation in entertainment genres that utilize digital media, providing interactive experiences for live audiences remains an ongoing challenge. This project presents an informal evaluation of a proof-of-concept which seeks to engage a seated audience in an embodied, interactive storytelling experience during a live circus performance where the audience can experience agency and communion. Building off Beach Ball Games for Orchestra (Delapierre 2017), where the audience used a large beach ball to play a Pac-Man-style game on a screen at the front of a concert hall, we prototyped an interactive clown show where the audience’s ability to collaborate affected the ambient media, the performer, and, by extension, the outcome of the story.",
+    "year": 2021,
+    "lang": "en",
+    "type": "preprint",
+    "topic": "Digital Games and Media",
+    "field": "Social Sciences",
+    "ca_institutions": ["Toronto Metropolitan University", "McGill University", "Professional Engineers Ontario"],
+    "funders": []
+  },
+  {
+    "id": "W2602330300",
+    "title": "La construction de la confiance dans le commerce électronique interentreprises (e-business B2B) : les mécanismes d'autorégulation",
+    "abstract": "Mémoire numérisé par la Direction des bibliothèques de l'Université de Montréal.",
+    "year": 2007,
+    "lang": "fr",
+    "type": "dissertation",
+    "venue": "Open MIND",
+    "topic": "Business Strategy and Innovation",
+    "field": "Business, Management and Accounting",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W600868183",
+    "title": "Contribution to the study of Plasmodium falciparum resistance to atovaquone-proguanil",
+    "abstract": "Depuis 2000, l'atovaquone-proguanil (AP) est utilisée dans le traitement des accès simples à Plasmodium falciparum. Au cours de ce doctorat, la sensibilité in vitro à l'atovaquone de 477 isolats africains a été évalué à 1,79 +- 1,3nM. L'association s'est avérée efficace pour le traitement de 459 patients. Les échecs observés montrent que les échecs précoces (0,9%) sont liés à une malabsorption des principes actifs alors que les échecs tardifs (&lt;0,1%) sont liés, au moment de la rechute, à des parasites hautement résistants in vitro (CI50&gt;8000nM) présentant une mutation au niveau du gène du cytochrome b (Y268S ou Y268C), sans amplification associée de ce gène. L'analyse du génome mitochondrial des parasites isolés avant et après l'échec confirme le faible taux de polymorphisme de ce génome et révèle des origines multiples et indépendantes des parasites mutants. L'émergence de parasites résistants à l'AP est fréquente mais le risque actuel de sa dispersion est négligeable.",
+    "year": 2006,
+    "lang": "fr",
+    "type": "preprint",
+    "venue": "OpenGrey (Institut de l'Information Scientifique et Technique)",
+    "topic": "Malaria Research and Control",
+    "field": "Medicine",
+    "ca_institutions": "Ministère des Transports",
+    "funders": []
+  }
+]

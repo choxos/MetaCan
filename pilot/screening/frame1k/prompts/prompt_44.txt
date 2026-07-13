@@ -1,0 +1,811 @@
+# MétaCan screening rubric (v1.0)
+
+**Locked before screening. Version-controlled. Any change is a new version with a dated entry in `DEVIATIONS.md`.**
+
+Both machine screeners and both human coders work from this document and nothing else. The rubric is the
+instrument; if two coders disagree, the rubric is what they are adjudicated against.
+
+---
+
+## The unit
+
+One work (journal article, preprint, book chapter, report, dataset, or software), identified by its OpenAlex ID.
+You see: title, abstract, publication year, language, venue, OpenAlex topic and field, Canadian institutional
+affiliations, funders.
+
+## The question
+
+**Is the object of study *research itself*?**
+
+Metaresearch studies how research is done, reported, funded, evaluated, disseminated, or governed. The test is
+what the work is *about*, not what field it appears in and not what vocabulary it uses.
+
+A cardiology trial is not metaresearch. A study of *how cardiology trials report their outcomes* is.
+
+---
+
+## Tier
+
+Assign exactly one.
+
+### T1: Core metaresearch
+The primary object of study is research itself. Typical objects:
+
+- research **methods** and their properties (bias, reporting, statistical practice, study design)
+- **reproducibility**, replication, data and code sharing
+- **research integrity**: misconduct, retraction, questionable research practices, authorship
+- **peer review** and editorial process *as objects of study*
+- **research evaluation**, metrics, rankings, funding allocation
+- **scholarly communication**: publishing models, open access, preprints *as objects of study*
+- **bibliometrics and scientometrics** applied to a research literature
+- the **research workforce**: careers, equity, training, capacity
+- **evidence synthesis methodology** (not an individual systematic review's clinical answer, but work *about* how
+  syntheses are done)
+
+### T2: Adjacent
+Empirically or conceptually grounded work on science as a social system that is not framed as metaresearch but
+studies it:
+
+- **science and technology studies (STS)**: social studies of scientific knowledge, practice, controversy
+- **library and information science**: information behaviour of researchers, repositories, discovery
+- **research infrastructure** studies: platforms, data repositories, identifiers, standards
+- **history and philosophy of science** *when the object is contemporary research practice*
+- **research policy** analysis grounded in evidence
+
+T2 is where the field's diversity lives. Be generous here: a paper does not have to call itself metaresearch to
+be studying research.
+
+### T3: Contextual
+Relevant to the ecosystem, mapped and released, but **never pooled into the analytic corpus**:
+
+- editorials, commentaries, opinion pieces about research practice
+- policy documents and position statements
+- announcements of infrastructure, tools, or initiatives
+- news, obituaries, corrections, letters
+
+### OUT: Not metaresearch
+Everything else. Includes, and this is the most common error:
+
+- **A study that uses a method is not a study of the method.** A meta-analysis answering a clinical question is
+  OUT. A study of how meta-analyses handle heterogeneity is T1.
+- **Mentioning a metaresearch term is not studying it.** A lab paper reporting "assay reproducibility", a methods
+  section saying "peer reviewed", a licence note saying "open access": all OUT.
+- **Domain research that happens to be bibliometric in method** but whose object is the domain, not the research:
+  e.g. a bibliometric map of diabetes treatments, produced to summarise diabetes knowledge. Borderline; see below.
+
+---
+
+## The three errors that matter most
+
+These are where the pilot showed retrieval and screening break down. Read them twice.
+
+1. **Polysemy.** `reproducibility` in a biochemistry paper means the assay gives the same reading twice. In a
+   metaresearch paper it means the reproducibility crisis. Only the second is in scope. The same applies to
+   `validation`, `replication`, `bias`, `peer review`, `open access`. **Judge the sense, not the token.**
+
+2. **Method vs. object.** Using bibliometrics ≠ studying research. Ask: *if this paper is right, what do we now
+   know more about: a scientific question, or the practice of science?* If the former, OUT.
+
+3. **Absence of vocabulary is not absence of content.** An STS paper about laboratory practice, or an LIS paper
+   about how researchers find data, may use none of the field's keywords and still be squarely T2. **Do not
+   require the vocabulary.** This is the error that makes the field look smaller and more anglophone than it is.
+
+---
+
+## Canadian linkage
+
+Record which apply (this is metadata, not an inclusion test; the estimand is defined separately in
+`PROTOCOL.md`):
+
+- `CA_AFF`: at least one author affiliated with a Canadian institution
+- `CA_FUND`: funded by CIHR, NSERC, SSHRC, or CFI
+- `ABOUT_CA`: the Canadian research system is a substantive object of study (not a passing mention, not one
+  country among forty in a global comparison)
+
+## Genre
+
+`empirical` · `conceptual` · `editorial/commentary` · `policy` · `infrastructure/announcement` · `other`
+
+OpenAlex's `type` is unreliable and this field is commentary-heavy, so genre is coded, not inherited.
+
+## Language of the work
+
+As published. Do not infer from the venue.
+
+---
+
+## Confidence
+
+- `high`: the rubric decides this cleanly.
+- `medium`: the rubric decides, but a reasonable coder could differ.
+- `low`: genuinely on the boundary, or the abstract is missing/too thin to judge.
+
+**`low` is a legitimate answer and is not a failure.** Records coded `low` by either screener are routed to
+adjudication. A screener that never says `low` is not being careful; it is being confident.
+
+---
+
+## Worked examples
+
+| Title (abridged) | Tier | Why |
+|---|---|---|
+| "Data sharing practices in 500 randomised trials" | **T1** | The object is reporting practice. |
+| "Reproducibility of a Western blot protocol" | **OUT** | Assay reproducibility. Polysemy trap. |
+| "Trends in citation of retracted papers" | **T1** | Object is the literature's own behaviour. |
+| "Laboratory life in a Canadian genomics centre: an ethnography" | **T2** | STS. No metaresearch vocabulary; still studies research. |
+| "How do researchers discover datasets? A survey" | **T2** | LIS, information behaviour of researchers. |
+| "Effectiveness of statins: a network meta-analysis" | **OUT** | Uses a synthesis method to answer a clinical question. |
+| "How network meta-analyses handle inconsistency: a review of 200 reviews" | **T1** | Object is the method. |
+| "Announcing the Canadian Research Data Repository" | **T3** | Infrastructure announcement. Mapped, not pooled. |
+| "Open access mandates are failing early-career researchers" (editorial) | **T3** | Commentary about research practice. |
+| "Bibliometric analysis of diabetes research 2000–2020" | **T2** | Borderline. Bibliometric method, and the object *is* a research literature, so it studies research output. Code T2, `medium`. |
+| "Le libre accès dans les revues québécoises : état des lieux" | **T1** | Scholarly communication, object is publishing practice. French. |
+
+---
+
+## Instructions to the screener
+
+Read the title and abstract. Apply the rubric. Do not use outside knowledge of the authors or the journal's
+reputation. If the abstract is missing, judge on the title alone and set confidence to `low` unless the title is
+unambiguous.
+
+Return the schema in `protocol/screening-schema.json`. One object per work. No prose, no preamble.
+--------------------------------------------------------------------------------
+You are screening works for MetaCan, a map of Canadian metaresearch.
+
+Apply the rubric above to every record in the JSON array below. Return a JSON
+array with one object per work, conforming to protocol/screening-schema.json:
+
+  {"id": "W...", "tier": "T1|T2|T3|OUT", "genre": "...", "about_ca": true|false,
+   "confidence": "high|medium|low", "reason": "one sentence"}
+
+Rules:
+- Return the JSON array and NOTHING else. No prose, no preamble, no code fences.
+- Every input id must appear exactly once in the output.
+- Do not run commands, read files, or browse. Classify from the RECORDS alone.
+
+RECORDS:
+[
+  {
+    "id": "W2066787887",
+    "title": "Reliability evaluation algorithm for complex medium voltage electrical distribution networks based on the shortest path",
+    "abstract": "This paper presents a reliability evaluation algorithm for medium voltage radial electrical distribution networks (EDN). The algorithm is suitable for evaluating reasonably complex EDNs with multiple subfeeders. It applies a forward-search-method to identifying the section controlled by a breaker. By applying graph theory and considering the structural features of the EDNs, methods for searching for the shortest paths from any node to the energy source and between any two nodes are developed. Based on the definitions of feeder terminal node (FTN) and the shortest path from a failure element to FTNs, it is easy to identify a disconnected section, following which a classification of the nodes is obtained. The reliability indices of the buses, feeders and system are calculated, based on the nodal classification. The developed algorithm has been tested on a number of test systems and the results show the effectiveness and applicability of the approach.",
+    "year": 2003,
+    "lang": "en",
+    "type": "article",
+    "venue": "IEE Proceedings - Generation Transmission and Distribution",
+    "topic": "Power System Reliability and Maintenance",
+    "field": "Engineering",
+    "ca_institutions": "University of Saskatchewan",
+    "funders": "National Science Foundation"
+  },
+  {
+    "id": "W2024630350",
+    "title": "3-D Streaming Supplying Partner Protocols for Mobile Collaborative Exergaming for Health",
+    "abstract": "Childhood obesity is nowadays considered as one of the major health problems that many societies suffer from. The obesity epidemic leads to several life threatening conditions such as diabetes, heart disease, high blood pressure, and mental health problems like depression, anxiety and loneliness just to mention a few. Several approaches, including physical exercises, strict dietary, and exergames among others, have been adopted to address the obesity epidemic. Exergames are considered the innovative approach for fighting several health problem such as the obesity, where a combination of exercise and 3D gaming are proposed to incite kids to exercise as a team. Collaborative exergaming became even more popular given that it addresses the social side of the obesity epidemic, and it motivates kids to socialize with other kids. Traditional exergames are based on the client server approach where the server is responsible for streaming the 3D environment. However, this can lead to latency and server bottleneck if many clients participate in the exergame, which leads to the kids stopping exercising. Having an exergame application that does not suffer from networking problem such as delay, is very important given that it increases the exercise hours. In this work, we propose a new trend of mobile collaborative exergming applications that is based on the peer-to-peer (P2P) architecture, as well as two supplying partner selection protocols that aim at selecting the suitable source responsible for streaming the relevant 3D data. Our system, that we refer to as MOSAIC, is intended for mobile collaborative exergames that incite kids to move inside a large area, using thin mobile devices such as head mounted devices (HMD), have physical exercises, and collaborate with other kids which in consequence address several health problems such as the obesity epidemic on the physical and social plans. Our proposed mobile collaborative exergame aims at inciting the kids to exercise as a team for a longer time by improving the quality of the streaming and reducing the delay. This is accomplished by our proposed supplying partner selection protocols that provide a quick discovery of multiple supplying partners, by minimizing the time required the to acquire data. The performance evaluation we have obtained to evaluate our suite of protocols using a realistic set of exergame scenarios for obese kids is then presented and discussed.",
+    "year": 2012,
+    "lang": "en",
+    "type": "article",
+    "venue": "IEEE Transactions on Information Technology in Biomedicine",
+    "topic": "Multimedia Communication and Technology",
+    "field": "Social Sciences",
+    "ca_institutions": "University of Ottawa",
+    "funders": []
+  },
+  {
+    "id": "W605170280",
+    "title": "Light-driven synchrony of <i>Prochlorococcus<\/i> growth and mortality in the subtropical Pacific gyre",
+    "abstract": "Theoretical studies predict that competition for limited resources reduces biodiversity to the point of ecological instability, whereas strong predator/prey interactions enhance the number of coexisting species and limit fluctuations in abundances. In open ocean ecosystems, competition for low availability of essential nutrients results in relatively few abundant microbial species. The remarkable stability in overall cell abundance of the dominant photosynthetic cyanobacterium Prochlorococcus is assumed to reflect a simple food web structure strongly controlled by grazers and/or viruses. This hypothesized link between stability and ecological interactions, however, has been difficult to test with open ocean microbes because sampling methods commonly have poor temporal and spatial resolution. Here we use continuous techniques on two different winter-time cruises to show that Prochlorococcus cell production and mortality rates are tightly synchronized to the day/night cycle across the subtropical Pacific Ocean. In warmer waters, we observed harmonic oscillations in cell production and mortality rates, with a peak in mortality rate consistently occurring ∼6 h after the peak in cell production. Essentially no cell mortality was observed during daylight. Our results are best explained as a synchronized two-component trophic interaction with the per-capita rates of Prochlorococcus consumption driven either directly by the day/night cycle or indirectly by Prochlorococcus cell production. Light-driven synchrony of food web dynamics in which most of the newly produced Prochlorococcus cells are consumed each night likely enforces ecosystem stability across vast expanses of the open ocean.",
+    "year": 2015,
+    "lang": "en",
+    "type": "article",
+    "venue": "Proceedings of the National Academy of Sciences",
+    "topic": "Marine and coastal ecosystems",
+    "field": "Earth and Planetary Sciences",
+    "ca_institutions": "Canadian Institute for Advanced Research",
+    "funders": ["Gordon and Betty Moore Foundation", "David and Lucile Packard Foundation", "National Science Foundation"]
+  },
+  {
+    "id": "W6965560067",
+    "title": "Table 1_What is known about Indigenous women’s dissatisfaction of Birthing experiences in mainstream maternity hospitals in Australia, Aotearoa, Canada, US, Kalaallit Nunaat and Sápmi? A systematic scoping review.docx",
+    "abstract": "Introduction Understanding Indigenous women’s dissatisfaction with birthing experiences is vital for improving maternal healthcare. It highlights the need for compassionate, respectful care that meets women’s physical and emotional needs. Addressing these concerns can enhance patient satisfaction, reduce postpartum mental health issues and wellness, and ensure safer, more positive outcomes for mothers and babies. Objectives This scoping review aimed to identify what is known about Indigenous women’s dissatisfaction of birthing experiences in mainstream maternity hospitals. Inclusion criteria This review considered primary research studies that reported on reasons for dissatisfaction of birthing experiences, and strategies implemented to improve quality of clinical practice around women’s dissatisfaction of birthing experiences in mainstream maternity hospitals in Australia, Aotearoa, Canada, US, Kalaallit Nunaat and Sápmi. Findings A total of 22 manuscripts reporting 22 studies met the inclusion criteria and were included in the synthesis. Discussion There is a need for culturally safe trauma informed care, inclusive communication, active decision-making involvement and greater inclusion of Indigenous perspectives in maternity care, including the involvement of Indigenous birth support workers where appropriate and inclusion of Birthing on Country models of care. Conclusion This review reveals that the medicalisation and evacuation of Indigenous women for childbirth cause cultural, geographic, and social disconnection, despite infant safety benefits. It underscores the need for better cultural safety education, communication, and the inclusion of cultural practices in care, with support from Indigenous birth support workers being essential.",
+    "year": 2025,
+    "lang": "en",
+    "type": "dataset",
+    "venue": "Figshare",
+    "topic": "Tree-ring climate responses",
+    "field": "Earth and Planetary Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2018637969",
+    "title": "Preparation and motor potentials in chronic Tic and Tourette Syndromes",
+    "abstract": "",
+    "year": 2001,
+    "lang": "en",
+    "type": "article",
+    "venue": "Brain and Cognition",
+    "topic": "Obsessive-Compulsive Spectrum Disorders",
+    "field": "Psychology",
+    "ca_institutions": [],
+    "funders": "Canadian Institutes of Health Research"
+  },
+  {
+    "id": "W2076388498",
+    "title": "Processing and crystallisation of rapidly solidified Al <sub>2<\/sub> O <sub>3<\/sub> –Y <sub>2<\/sub> O <sub>3<\/sub> fibres",
+    "abstract": "Amorphous fibres of the Al2O3–Y2O3 system were prepared by a melt extraction technique, and subjected to crystallisation. The quality of the melt extracted fibres is controlled by the wheel edge and rotational speed, with both having a significant effect on fibre diameter and avoidance of irregularities and instabilities along the fibre length. Tensile strength in the glassy state varied from 0·6 to 1·0 GPa. Crystallisation activation energies calculated from scan-rate dependence of DTA peaks are 741 and 1374 kJ mol-1 for E1 (Al2O3–yttrium aluminium garnet (YAG) eutectic), 390 kJ mol-1 for YAG, and 438 kJ mol-1 for E2 (YAG–yttrium aluminium perovskite (YAP) eutectic) by the Kissinger method; and 698 and 1346 kJ mol-1 for E1, 352 kJ mol-1 for YAG, and 399 kJ mol-1 for E2 by the Augis–Bennett method.",
+    "year": 2000,
+    "lang": "en",
+    "type": "article",
+    "venue": "British Ceramic Transactions",
+    "topic": "Glass properties and applications",
+    "field": "Materials Science",
+    "ca_institutions": "McGill University",
+    "funders": []
+  },
+  {
+    "id": "W2048375737",
+    "title": "Poly(<i>N<\/i>‐Isopropylacrylamide)‐Based Microgels and Their Assemblies for Organic‐Molecule Removal from Water",
+    "abstract": "We review our recent efforts utilizing poly(N-isopropylacrylamide)-co-acrylic acid (pNIPAm-co-AAc) microgels and their assemblies for the removal of an azo-dye molecule, 4-(2-Hyrodxy-1-napthylazo) benzenesulfonic acid sodium salt (Orange II), from aqueous solutions. First, the ability of dispersed, single microgels to remove Orange II from aqueous solutions at room temperature is discussed. Uptake efficiency (i.e., the amount of Orange II removed from water) increased with AAc composition in the microgels, yielding a maximum uptake efficiency of 29.5% for pNIPAm microgels with 10% AAc. Assemblies of microgels (aggregates) were also investigated for their removal efficiency, which yielded a maximum uptake efficiency of 44.1% at room temperature. Removal efficiencies for the microgels and their aggregates were also monitored at elevated temperatures, and a maximum of 56.6% removal efficiency was achieved for unaggregated microgels, while aggregates were able to remove 73.1% Orange II. To further explore the impact of the microgel system's structure on function, we investigated the role microgel size in the aggregates plays on the uptake efficiency. Initial observations showed that the aggregates composed of microgels with large diameter yielded improved uptake efficiency over the aggregates composed of small diameter microgels. Langmuir sorption isotherms were fit to the data for the dye removal by the unaggregated and aggregated microgels, which showed good fits in all cases.",
+    "year": 2012,
+    "lang": "en",
+    "type": "review",
+    "venue": "ChemPhysChem",
+    "topic": "Hydrogels: synthesis, properties, applications",
+    "field": "Biochemistry, Genetics and Molecular Biology",
+    "ca_institutions": "University of Alberta",
+    "funders": []
+  },
+  {
+    "id": "W6921290267",
+    "title": "Gammarus oceanicus 3D NMDS",
+    "abstract": "Three dimentional plots of the non-metric multidimensional scaling of genetic distances between individuals within all populations of Gammarus oceanicus. ARC = Arctic Canada; BAL = Baltic Sea; BAR = Barents Sea; FAR = Faroe Islands; GRE = Greenland; HUB = Hudson Bay; ICE = Iceland; NOR = Norwegian Sea; NOS = North Sea; SVA = Svalbard Archipelago; WA = Western Atlantic; WHS = White Sea.",
+    "year": 2023,
+    "lang": "en",
+    "type": "other",
+    "venue": "Figshare",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4321788353",
+    "title": "Concerted phenotypic flexibility of avian erythrocyte size and number in response to dietary anthocyanin supplementation",
+    "abstract": "BACKGROUND: Endurance flight impose substantial oxidative costs on the avian oxygen delivery system. In particular, the accumulation of irreversible damage in red blood cells can reduce the capacity of blood to transport oxygen and limit aerobic performance. Many songbirds consume large amounts of anthocyanin-rich fruit, which is hypothesized to reduce oxidative costs, enhance post-flight regeneration, and enable greater aerobic capacity. While their antioxidant benefits appear most straightforward, the effects of anthocyanins on blood composition remain so far unknown. We fed thirty hand-raised European starlings (Sturnus vulgaris) two semisynthetic diets (with or without anthocyanin supplement) and manipulated the extent of flight activity in a wind tunnel (daily flying or non-flying for over two weeks) to test for their interactive effects on functionally important haematological variables. RESULTS: Supplemented birds had on average 15% more and 4% smaller red blood cells compared to non-supplemented individuals and these diet effects were independent of flight manipulation. Haemoglobin content was 7% higher in non-supplemented flying birds compared to non-flying birds, while similar haemoglobin content was observed among supplemented birds that were flown or not. Neither diet nor flight activity influenced haematocrit. CONCLUSION: The concerted adjustments suggest that supplementation generally improved antioxidant protection in blood, which could prevent the excess removal of cells from the bloodstream and may have several implications on the oxygen delivery system, including improved gas exchange and blood flow. The flexible haematological response to dietary anthocyanins may also suggest that free-ranging species preferentially consume anthocyanin-rich fruits for their natural blood doping, oxygen delivery-enhancement effects.",
+    "year": 2023,
+    "lang": "en",
+    "type": "article",
+    "venue": "Frontiers in Zoology",
+    "topic": "Animal Behavior and Reproduction",
+    "field": "Agricultural and Biological Sciences",
+    "ca_institutions": "University of British Columbia",
+    "funders": "National Science Foundation"
+  },
+  {
+    "id": "W4417238122",
+    "title": "Decolonial research practices from an indigenous psychology perspective: Critical contributions to knowledge.",
+    "abstract": "The indigenous psychology (IP) movement has challenged mainstream psychology, which is considered rooted in colonial legacies, and has advocated for locally informed and developed theories and practices. The article explores the nexus of IP and decolonial psychology, emphasizes the need to challenge Western-centric hegemony, and promotes a contextually rich, relational paradigm based on reflexivity. IP critiques the Euro-American methodologism and calls for broader epistemic and substantive perspectives and a more inclusive and equitable psychology based on ontological and cultural diversity. Illustrations from IP-informed research are presented as concrete knowledge outcomes. The theory of strong-ties and weak-ties rationalities, used in combination with Bourdieu's critical sociology, addresses the impact of modern economic hegemony and renders intelligible the ecological grief of an Indigenous People in Malaysia. The postcolonial debate concerning the Chinese concept of xin (heart) is elaborated to show that decolonization and IP are entangled. We conclude with concrete suggestions for decolonizing psychology. (PsycInfo Database Record (c) 2025 APA, all rights reserved).",
+    "year": 2025,
+    "lang": "en",
+    "type": "article",
+    "venue": "American Psychologist",
+    "topic": "Community Health and Development",
+    "field": "Health Professions",
+    "ca_institutions": ["Simon Fraser University", "York University"],
+    "funders": []
+  },
+  {
+    "id": "W3097851071",
+    "title": "Ethics of Digital Mental Health During COVID-19: Crisis and Opportunities",
+    "abstract": "Social distancing measures due to the COVID-19 pandemic have accelerated the adoption and implementation of digital mental health tools. Psychiatry and therapy sessions are being conducted via videoconferencing platforms, and the use of digital mental health tools for monitoring and treatment has grown. This rapid shift to telehealth during the pandemic has given added urgency to the ethical challenges presented by digital mental health tools. Regulatory standards have been relaxed to allow this shift to socially distanced mental health care. It is imperative to ensure that the implementation of digital mental health tools, especially in the context of this crisis, is guided by ethical principles and abides by professional codes of conduct. This paper examines key areas for an ethical path forward in this digital mental health revolution: privacy and data protection, safety and accountability, and access and fairness.",
+    "year": 2020,
+    "lang": "en",
+    "type": "article",
+    "venue": "JMIR Mental Health",
+    "topic": "Digital Mental Health Interventions",
+    "field": "Psychology",
+    "ca_institutions": "University of Ottawa",
+    "funders": "National Institute of Mental Health"
+  },
+  {
+    "id": "W4250773648",
+    "title": "Language learning",
+    "abstract": "06–451 Baquedano-López, Patricia (U California, Berkeley, USA; pbl@berkeley.edu ), Jorge L. Solís &amp; Shlomy Kattan, Adaptation: The language of classroom learning . Linguistics and Education (Elsevier) 16.1 (2005), 1–26. 06–452 Brooks, Patricia, J. (City U New York, USA; pbrooks@mail.csi.cuny.edu ), Vera Kempe &amp; Ariel Sionov, The role of learner and input variables in learning inflectional morphology . Applied Psycholinguistics (Cambridge University Press) 27.2 (2006), 185–209. 06–453 Clahsen, Harald &amp; Claudia Felser (U Essex, UK; harald@essex.ac.uk ), Grammatical processing in language learners . Applied Psycholinguistics (Cambridge University Press) 27.1 (2006), 3–42. 06–454 Cleland, Alexandra A. (U York, UK; a.cleland@psych.york.ac.uk ) &amp; Martin J. Pickering, Do writing and speaking employ the same syntactic representations? Journal of Memory and Language (Elsevier) 54.2 (2006), 185–198. 06–455 Devescovi, Antonella (U Rome, Italy; antonella.devescovi@uniroma1.it ), Maria Cristina Caselli, Daniela Marchione, Patrizio Pasqualetti, Judy Reilly &amp; Elisabeth Bates, A cross-linguistic study of the relationship between grammar and lexical development . Journal of Child Language (Cambridge University Press) 32.4 (2005), 759–786. 06–456 Fomin, Maxim &amp; Gregory Toner (U Ulster, UK; gj.toner@ulster.ac.uk ), Digitizing a dictionary of Medieval Irish: The eDIL Project . Literary and Linguistic Computing (Oxford University Press) 21.1 (2006), 83–90. 06–457 Geeslin, Kimberly L. (Indiana U, USA; kgeeslin@indiana.edu ) &amp; Pedro Guijarro-Fuentes, Second language acquisition of variable structures in Spanish by Portuguese speakers . Language Learning (Blackwell) 56.1 (2006), 53–107. 06–458 Gullberg, Marianne (Max Planck Institute for Psycholinguistics, the Netherlands; marianne.gullberg@mpi.nl ), Handling discourse: Gestures, reference tracking, and communication strategies in early L2 . Language Learning (Blackwell) 56.1 (2006), 155–196. 06–459 Hickmann, Maya (U René Descartes Paris 5, France) &amp; Henriette Hendriks, Static and dynamic location in French and in English . First Language (Sage) 26.1 (2006), 103–135. 06–460 Hohlfeld, Annette (U Complutense, Spain; ahohlfeld@isciii.es ), Accessing grammatical gender in German: The impact of gender-marking regularities . Applied Psycholinguistics (Cambridge University Press) 27.2 (2006), 127–142. 06–461 Howard, Martin (U College, Cork, Ireland; mhoward@french.ucc.ie ), Isabelle Lemée &amp; Vera Regan, The L2 acquisition of a phonological variable: The case of /l/deletion in French . Journal of French Language Studies (Cambridge University Press) 16.1 (2006), 1–24. 06–462 Huong, Le Pham Hoai (Hue U of Foreign Languages, Vietnam; quangandhuong@yahoo.com ), Learning vocabulary in group work in Vietnam . RELC Journal (Sage) 37.1 (2006), 105–121. 06–463 Jie, Li (Chinese U Hong Kong, China; lijie@cuhk.edu.hk ) &amp; Qin Xiaoqing, Language learning styles and learning strategies of tertiary-level English learners in China . RELC Journal (Sage) 37.1 (2006), 67–90. 06–464 Kiefer, Kate (Colorado State U, USA; Kate.Kiefer@colostate.edu ), Complexity, class dynamics, and distance learning . Computers and Composition (Elsevier) 23.1 (2006), 125–138. 06–465 Kondo-Brown, Kimi (U Hawaii at Manoa, USA; kondo@hawaii.edu ), How do English L1 learners of advanced Japanese infer unknown Kanji words in authentic texts? Language Learning (Blackwell) 56.1 (2006), 109–153. 06–466 Leonard, Lawrence B. (Purdue U, USA; xdxl@purdue.edu ), Anita M.-Y. Wong, Patricia Deevy, Stephanie F. Stokes &amp; Paul Fletcher, The production of passives by children with specific language impairment: Acquiring English or Cantonese . Applied Psycholinguistics (Cambridge University Press) 27.2 (2006), 267–299. 06–467 Leong, Che Kan (U Saskatchewan, Canada; leong@sask.usask.ca ), Kit Tai Hau, Pui Wan Cheng &amp; Li Hai Tan, Exploring two-wave reciprocal-structural relations among orthographic knowledge, phonological sensitivity, and reading and spelling of English words by Chinese students . Journal of Educational Psychology (American Psychological Association) 97.4 (2005), 591–600. 06–468 Macizo, Pedro &amp; M. Teresa Bajo (U Granada, Spain; mbajo@ugr.es ), Reading for repetition and reading for translation: Do they involve the same processes? Cognition (Elsevier) 99.1 (2006), 1–34. 06–469 Mackay, Ian R. &amp; James E. Fleger (U Alabama, USA; jeflege@uab.edu ) &amp; Satomi Imai, Evaluating the effects of chronological age and sentence duration on degree of perceived foreign accent . Applied Psycholinguistics (Cambridge University Press) 27.2 (2006), 157–183. 06–470 Pavlik Jr., Philip I. &amp; John R. Anderson (Carnegie Mellon U, USA), Practice and forgetting effects on vocabulary memory: An activationbased model of the spacing effect . Cognitive Science: A Multidisciplinary Journal (Lawrence Erlbaum) 29.4 (2005), 559–586. 06–471 Ram, Frost (Hebrew U, Israel; frost@mscc.huji.ac.il ), Tamar Kugler, Avital Deutsch &amp; Kenneth I. Foster, Orthographic structure versus morphological structure: Principles of lexical organization in a given language . Journal of Experimental Psychology: Learning, Memory, and Cognition (American Psychological Association) 31.6 (2005), 1293–1396. 06–472 Roberts, Theresa, A. (California State U, USA; robertst@csus.edu ), Articulation accuracy and vocabulary size contributions to phonemic awareness and word reading in English language learners . Journal of Educational Psychology (American Psychological Association) 97.4 (2005), 601–616. 06–473 Treiman, Rebecca (Washington U, USA; rtreiman@wustl.edu ), Brett Kessler &amp; Tatiana Cury Pollo, Learning about the letter name subset of the vocabulary: Evidence from US and Brazilian pre-schoolers . Applied Psycholinguistics (Cambridge University Press) 27.2 (2006), 211–227. 06–474 Vandergrift, Larry (U Ottawa, Canada; lvdgrift@uottawa.ca ), Second language listening: Listening ability or language proficiency? The Modern Language Journal (Blackwell) 90.1 (2006), 6–18.",
+    "year": 2006,
+    "lang": "en",
+    "type": "article",
+    "venue": "Language Teaching",
+    "topic": "Second Language Acquisition and Learning",
+    "field": "Psychology",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W273780489",
+    "title": "Recognition of potential morbidity after use of the radial artery as a conduit for coronary artery revascularization",
+    "abstract": "The use of the radial artery as an alternative vascular conduit for coronary bypass surgery has become increasingly popular. The plastic surgery experience with radial forearm flaps has shown that sacrifice of the radial artery is not always a benign maneuver. The potential morbidity after using this conduit donor site in terms of hand dysfunction or wound healing problems can be significant, and frequently must ultimately be addressed as part of the role of the reconstructive surgeon. Case examples of skin necrosis, subsequent forearm wound infection and hypertrophic scarring after radial artery harvest are presented to introduce this as a real concern and to allow a review of the entire spectrum of potential problems in this regard. Any selection process where the radial artery may be chosen as the coronary revascularization conduit must anticipate these known donor site complications.",
+    "year": 2003,
+    "lang": "en",
+    "type": "article",
+    "venue": "Canadian Journal of Plastic Surgery",
+    "topic": "Cardiac and Coronary Surgery Techniques",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W7114926167",
+    "title": "In-situ measurement of lengthening kinetics of Widmanstätten ferrite in low carbon steel",
+    "abstract": "This study presents an automated image analysis framework to quantify the lengthening kinetics of Widmanstätten ferrite (WF) during continuous cooling of Fe–0.12C–2Mn steel. In-situ microstructures were captured using a high-temperature tensile testing system with confocal laser scanning microscope (HiTTS-CLSM). The framework integrates the open-source Segment Anything Model (SAM) for grain segmentation with the DeepLSD line segment detector for WF plate identification, enabling systematic analysis of 94 plates across 155 image frames. Four types of nucleation sites were observed at the specimen surface for WF plates. Surface observations showed nucleation appearing most frequently in austenite grain interiors (33 %), followed by nucleation at tips of existing WF plates (25.5 %), austenite grain boundaries (23.5 %), and allotriomorphic ferrite/austenite interphase boundaries (18 %). The measured lengthening rates ranged from 3 to 68 μ m/s within 730–630 ∘ C, falling between the maximum rates predicted under para-equilibrium (PE) and negligible partition local equilibrium (NPLE) conditions from modified Zener–Hillert equations. Statistical analysis revealed no significant differences in average lengthening rates across nucleation sites. The results also highlight that lengthening rate measurements are highly sensitive to the analysis method. This training-free approach significantly expands the scale of quantitative analysis compared to traditional manual methods and is applicable to transformations that produce sufficient surface relief and plate spacing above the effective resolution of the acquired images.",
+    "year": 2025,
+    "lang": "en",
+    "type": "article",
+    "venue": "Materials Today Communications",
+    "topic": "Microstructure and Mechanical Properties of Steels",
+    "field": "Engineering",
+    "ca_institutions": "McMaster University",
+    "funders": ["Natural Sciences and Engineering Research Council of Canada", "Canada Foundation for Innovation"]
+  },
+  {
+    "id": "W6893594099",
+    "title": "Creating and Implementing an Ontology of Texts, Documents and Works in Complex Textual Traditions",
+    "abstract": "This article suggests an ontology of texts, documents and works of particular relevance to the editing of complex large textual traditions, such as those of the Greek New Testament (c. 5000 witnesses), Dante's Commedia (c. 800) and Chaucer's Canterbury Tales (88). The need for this ontology is reviewed through a brief history of the Canterbury Tales project's work over three decades, with references also to the Greek New Testament and Commedia editorial projects. The central definition of the ontology is that a text is an act of communication inscribed in a document. Further, both the document and the act of communication may be represented as independent and ordered hierarchies of content objects (hence, trees), with textual nodes appearing on both trees, in different orderings and structures across the two trees. The Textual Communities environment successfully implements parts of the ontology of texts, documents and works to enable data collection, management and publication according to the needs of its current users, demonstrating the considerable advantages of this model for textual processing. However, Textual Communities does not implement the whole of this model in terms of data validation, ingestion and processing. Full exploration and implementation of the model here offered are challenges for future scholars. Successful implementation, however, would have considerable benefits, both for scholars working with complex large traditions, and also for those working with smaller but highly complex document sets, such as authorial manuscripts.",
+    "year": 2021,
+    "lang": "en",
+    "type": "article",
+    "venue": "Zenodo (CERN European Organization for Nuclear Research)",
+    "topic": "Digital Humanities and Scholarship",
+    "field": "Arts and Humanities",
+    "ca_institutions": "University of Saskatchewan",
+    "funders": []
+  },
+  {
+    "id": "W2807789811",
+    "title": "The Natural History and Rehabilitative Outcomes of Hearing Loss in Congenital Cytomegalovirus: A Systematic Review",
+    "abstract": "OBJECTIVE: The purpose of this study was to examine the literature regarding the natural history and rehabilitative outcomes of sensorineural hearing loss from congenital cytomegalovirus infections. DATA SOURCES AND STUDY ELIGIBILITY CRITERIA: A systematic search was performed in PubMed, PsychINFO, CINAHL, and Web of Science to identify peer-reviewed research. Eligible studies were those containing original peer-reviewed research in English addressing either the natural history or rehabilitative outcomes of sensorineural hearing loss (SNHL) in congenital cytomegalovirus (cCMV). STUDY APPRAISAL AND SYNTHESIS METHODS: Two investigators independently reviewed all articles and extracted data. Bias was assessed using the Cochrane Collaboration's tool and the Newcastle-Ottawa Assessment Scale. RESULTS: Thirty-six articles were reviewed. Universal screening identifies 0.2 to 1% of newborns with cCMV infection. SNHL ranged from 8 to 32% of infants and was more prevalent in symptomatic versus asymptomatic cases. Nine to 68% of hearing loss occurs in a late or delayed fashion. In 7 to 71% of cases hearing loss is progressive. Cochlear implantation (CI) is a viable option for patients with cCMV associated hearing loss and leads to improvements in hearing and language. There is limited literature comparing rehabilitation outcomes in cCMV and non-cCMV CI recipients. CONCLUSION: Late onset and progressive hearing loss is seen in children who develop hearing loss from cCMV. Frequent audiologic follow-up is necessary considering the natural history of cCMV hearing loss. Universal screening should be pursued due to the number of asymptomatic children, at birth, who develop late onset/delayed hearing loss. CI is an effective means of improving speech and language in this population.",
+    "year": 2018,
+    "lang": "en",
+    "type": "review",
+    "venue": "Otology & Neurotology",
+    "topic": "Cytomegalovirus and herpesvirus research",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": "National Institute on Deafness and Other Communication Disorders"
+  },
+  {
+    "id": "W6976415348",
+    "title": "TREND: Quandl. Worldwide Stock Market Prices - Exchanges by Region: Stock Daily Close - Unadjusted Prices | Economic Regions/Exchanges: Toronto Stock Exchange | Stock Symbol: MBA, 05/26/2010 - 06/08/2020. Data Planet™ Statistical Datasets: A SAGE Publishing Resource Dataset-ID: 090-003-007",
+    "abstract": "Quandl. Worldwide Stock Market Prices - Exchanges by Region: Stock Daily Close - Unadjusted Prices | Economic Regions/Exchanges: Toronto Stock Exchange | Stock Symbol: MBA, 05/26/2010 - 06/08/2020. Data Planet™ Statistical Datasets: A SAGE Publishing Resource Dataset-ID: 090-003-007 Dataset: Reports closing stock price for companies listed on major global exchanges. Close refers to the price of the last transaction for a given stock at the end of the reference day. Unadjusted figures reflect the price/volume of a stock on that day, with the only adjustments being exchange corrections. This dataset provides historical prices for equities trading on global exchanges by world region. Stock daily open, close, high, and low prices, and volume are reported. Historical depth of the time series varies by exchange and equity. See the technical documentation for detail. Prices are displayed in the local currency of the exchange. Quandl disseminates the data on behalf of Exchange Data International (EDI). https://www.quandl.com/publishers/EDI Category: Banking, Finance, and Insurance Subject: Equities, Stock Markets, Stocks, Publicly Traded Companies, Stock Prices Source: Quandl Launched in 2013, Quandl disseminates provides core financial data from over 500 publishers. The company offers a global database of alternative, financial and public data, including information on capital markets, energy, shipping, health care, education, demography, economics, and society. The company was acquired by Nasdaq in 2018. https://quandl.com",
+    "year": 2020,
+    "lang": "en",
+    "type": "other",
+    "venue": "Data Planet",
+    "topic": "Education Methods and Technologies",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W7106003973",
+    "title": "Physiological mechanisms of survival in the invasive green shore crab",
+    "abstract": "The green crab (Carcinus maenas) is an extremely successful invasive species, thriving in marine environments around the world, and known for its high tolerance to environmental perturbations. The introduction of invasive green crab can have devastating impacts on ecosystems and native fisheries, increasing competition for habitat and resources, with green crab predating upon native organisms, and uprooting vital eel grass beds. Thus, to understand the environmental factors influencing invasive success, the physiological responses to dissolved organic nutrients, temperature, salinity, oxygen availability, and metal contamination were assessed in green crab from the Canadian Pacific estuaries and global capture sites. Recently, it was discovered that green crab could acquire dissolved nutrients across their gill epithelia from the surrounding environment. To evaluate any potential advantage of branchial nutrient acquisition, we compared the capacity for branchial amino acid transport of common crustaceans in Canadian Pacific waters via gill perfusion and whole-body exposure. Branchial active transport of L-leucine was exhibited in C. maenas, Metacarcinus gracilis, Metacarcinus magister, and Cancer productus across their gill epithelia, and is directly influenced by feeding status. This represents the first description of branchial amino acid transport in Canadian native arthropods, suggesting that branchial amino acid transport is a shared trait among arthropods, contrary to existing literature. The invasive success of global green crab populations is largely attributed to a wide tolerance to temperature in variable environments. Less is known about how environmental conditions such as oxygen availability, salinity, and metal contamination could alter the upper thermal limits, and whether the green crab has undergone physiological adaptations to adjust to new conditions across its invasive range. Here, we employ a multi-stressor approach to investigate the effects of oxygen availability, salinity, and metal contamination on the upper thermal limits of green crab invasive to the Canadian Pacific and Atlantic coastlines, and native to Sweden. Oxygen consumption and heart rate were measured during thermal ramping procedures under varying environmental conditions and used to predict temperatures resulting in cardiorespiratory adjustment and strain. Under control conditions, green crab from all capture regions exhibited an increase in oxygen consumption and heart rate from the 16 °C acclimation temperature to a peak around 34 °C followed by an abrupt decline and a subsequent collapse, marking upper thermal limits around 36 – 38 °C. Green crab from different regions also responded similarly to environmental oxygen, exhibiting consistent reductions in upper thermal limits (the point of metabolic collapse) in hypoxia and negligible improvements in hyperoxia. Acute exposure to sublethal copper concentrations caused a significant drop in respiratory breakpoints, with metabolic failure occurring between 36.5 – 36.8 °C, up to 2 °C sooner than breakpoints within control treatments. Here we suggest that acute copper exposure closely resembles the influence of hypoxia on thermal tolerance, with high copper accumulation within the gills and little accumulation within heart tissues. Finally, the Pacific green crab exhibited an upper thermal tolerance irrespective of environmental salinity, despite exposure to a full freshwater environment. Atlantic green crab exhibited cardiorespiratory failure at ~35 °C when salinity was reduced to 20% saltwater, which further decreased to ~32 °C during acute freshwater exposure. We suggest distinct differences in the upper thermal limits between green crab from two Canadian regions with respect to salinity, potentially indicating regional acclimation to exceedingly dilute environments on the Canadian Pacific coastline. Given the suggestion that green crab within the Canadian Pacific estuaries possess a particularly impressive tolerance to extremely dilute and freshwater environments, the survival and physiological responses to freshwater exposure were evaluated. With a measured freshwater LT50 of ~26 h, Pacific green crab exhibited a remarkably high tolerance to extremely dilute environments compared to historical values. Furthermore, Pacific green crab haemolymph osmolarity, branchial cAMP, oxygen consumption, haemolymph protein, and hemocyanin were unaffected within at least the first 6 h of freshwater exposure, indicating a lack of stress response. This could suggest an ability of Pacific green crab to increase their ecological range and access estuarine rivers to forage or avoid competitive interactions and predation. In combination, this thesis offers insights into the physiological response of green crab to a variety of environmental conditions that are expected to influence invasive population survival and range expansion, while drawing comparisons between global green crab at a regional level.",
+    "year": 2025,
+    "lang": "en",
+    "type": "dissertation",
+    "venue": "University of Alberta Library",
+    "topic": "Crustacean biology and ecology",
+    "field": "Environmental Science",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W3102478628",
+    "title": "Expression of the core promoter factors TATA box binding protein and TATA box binding protein‐related factor 2 in <i>Drosophila<\/i> germ cells and their distinct functions in germline development",
+    "abstract": "In Drosophila, the expression of germline genes is initiated in primordial germ cells (PGCs) and is known to be associated with germline establishment. However, the transcriptional regulation of germline genes remains elusive. Previously, we found that the BTB/POZ-Zn-finger protein, Mamo, is necessary for the expression of the germline gene, vasa, in PGCs. Moreover, truncated Mamo lacking the BTB/POZ domain (MamoAF) is a potent vasa activator. In this study, we investigated the genetic interaction between MamoAF and specific transcriptional regulators to gain insight into the transcriptional regulation of germline development. We identified a general transcription factor, TATA box binding protein (TBP)-associated factor 3 (TAF3/BIP2), and a member of the TBP-like proteins, TBP-related factor 2 (TRF2), as new genetic modifiers of MamoAF. In contrast to TRF2, TBP was found to show no genetic interaction with MamoAF, suggesting that Trf2 has a selective function. Therefore, we focused on Trf2 expression and investigated its function in germ cells. We found that Trf2 mRNA, rather than Tbp mRNA, was preferentially expressed in PGCs during embryogenesis. Depletion of TRF2 in PGCs resulted in decreased mRNA expression of vasa. RNA interference-mediated knockdown showed that, while Trf2 is required for maintenance of germ cells, Tbp is needed for their differentiation during oogenesis. Therefore, these results suggest that Trf2 and Tbp expression is differentially regulated in germ cells and that these factors have distinct functions in Drosophila germline development.",
+    "year": 2020,
+    "lang": "en",
+    "type": "article",
+    "venue": "Development Growth & Differentiation",
+    "topic": "Genomics and Chromatin Dynamics",
+    "field": "Biochemistry, Genetics and Molecular Biology",
+    "ca_institutions": [],
+    "funders": ["Institute of Genetics", "Japan Society for the Promotion of Science"]
+  },
+  {
+    "id": "W6926851798",
+    "title": "851822_App1_online_supp – Supplemental material for Pharmacist prescribing and care improves cardiovascular risk, but is it cost-effective? A cost-effectiveness analysis of the RxEACH study",
+    "abstract": "Supplemental material, 851822_App1_online_supp for Pharmacist prescribing and care improves cardiovascular risk, but is it cost-effective? A cost-effectiveness analysis of the RxEACH study by Yazid N. Al Hamarneh, Karissa Johnston, Carlo A. Marra and Ross T. Tsuyuki in Canadian Pharmacists Journal / Revue des Pharmaciens du Canada",
+    "year": 2019,
+    "lang": "en",
+    "type": "article",
+    "venue": "Sage Journals Data",
+    "topic": "Listeria monocytogenes in Food Safety",
+    "field": "Biochemistry, Genetics and Molecular Biology",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2504500777",
+    "title": "Optimizing Variational Quantum Algorithms Using Pontryagin’s Minimum Principle",
+    "abstract": "Variational quantum algorithms (VQAs) mix quantum machines with classical optimizers to solve complex computational problems. A new analysis reveals the optimal method for implementing a VQA, which could lead to improvements in future quantum computing techniques.",
+    "year": 2017,
+    "lang": "en",
+    "type": "article",
+    "venue": "Physical Review X",
+    "topic": "Quantum Computing Algorithms and Architecture",
+    "field": "Computer Science",
+    "ca_institutions": "University of British Columbia",
+    "funders": ["Natural Sciences and Engineering Research Council of Canada", "U.S. Department of Energy"]
+  },
+  {
+    "id": "W3123725742",
+    "title": "Prévention en médecine générale : approche néo-institutionnelle des systèmes de santé français et québécois",
+    "abstract": "The aim of this paper is to highlight the potential of the French and the Quebec health systems for prevention in general practice. We use a neo-institutional approach of health system, an approach that emphasizes the importance of institutions and health organizations to understand the provision of preventive medicine. The institutional weakness of the prevention in France, strengthened by organizational rules unsuited, lead the French system to be inappropriate to the development of preventive activities in general practice. The Quebec system seems more favourable since prevention is highly institutionalized. However, the potential of Quebec organizations varies.",
+    "year": 2009,
+    "lang": "fr",
+    "type": "preprint",
+    "venue": "RePEc: Research Papers in Economics",
+    "topic": "Healthcare Systems and Practices",
+    "field": "Health Professions",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2982115115",
+    "title": "1057. The Impact of Temporary Suspensions of an Antimicrobial Stewardship Audit and Feedback Program on Antimicrobial Utilization of General Internal Medicine Inpatients",
+    "abstract": "Abstract Background A goal of Antimicrobial Stewardship Programs (ASP) is to optimize antimicrobial use; many using audit and feedback (AAF). Although AAF decreases unnecessary target antimicrobial use, it is resource-intensive. As a result, temporary suspensions in AAF activity may occur from human resource limitations or other factors. We describe the impact of these temporary suspensions and intensity of care on antimicrobial utilization trends. Methods This retrospective study describes the initiation and temporary suspensions of AAF in the General Internal Medicine (GIM) unit at an urban teaching hospital. Data were collected over 65 months. During active-AAF, a dedicated ID trained clinical pharmacist and ID physician-reviewed antimicrobial use for all GIM patients and provided patient-specific advice to physicians. Antimicrobial use was measured by Defined Daily Doses (DDD) normalized per 1,000 patient-days. To assess the impact of temporary suspensions, data were compared in two ways: 1. All nonactive-AAF time-frames were compared with active AAF 2. Pre-ASP was compared with Post-ASP Initiation which includes suspension periods. To determine whether differences in trends were seen based on acuity level of the patients (identified at admission as benefiting from frequent monitoring), analyses were repeated after stratification of patients admitted to the Step-Up unit (GIM-SU) and the regular ward (GIM-W). Results Comparing nonactive AAF vs. active-AAF, significant changes (P &lt; 0.05) in mean normalized DDD were observed for total antimicrobials (-19%), antipseudomonals (-21%) fluoroquinolones (−41%) and first-generation β lactams (−30%). Pre ASP vs. Post ASP comparisons showed similar but less pronounced trends. Following stratification to GIM-SU and GIM-W, greater variation in significant changes to targeted antimicrobials between comparisons was observed. Different significant antimicrobial changes were seen in SU vs. W. Conclusion Our results show that the temporary suspension of ASP AAF impacts antimicrobial utilization trends. Greater sustained decreases in targeted antimicrobials utilization were associated with active AAF. Stratification by patient acuity lead to increased variation in the impact on target antimicrobials and increased the impact of suspension. Disclosures All authors: No reported disclosures.",
+    "year": 2019,
+    "lang": "en",
+    "type": "article",
+    "venue": "Open Forum Infectious Diseases",
+    "topic": "Antibiotic Use and Resistance",
+    "field": "Immunology and Microbiology",
+    "ca_institutions": ["St. Michael's Hospital", "University of Toronto"],
+    "funders": []
+  },
+  {
+    "id": "W2082940526",
+    "title": "Direct and indirect effects of UV radiation on benthic communities: epilithic food quality and invertebrate growth in four montane lakes",
+    "abstract": "The direct harmful effects of ultraviolet radiation (UVR) on benthic and planktonic organisms have been well studied in aquatic systems. Less clear, however, is how UVR might affect aquatic communities through its effects on trophic interactions. The focus of this study was twofold: first, to examine the direct effect of UVR on benthic invertebrates and epilithon, the rock‐dwelling matrix of algae, bacteria, viruses, fungi and detritus, and second, to examine the indirect effect of UVR‐mediated shifts in epilithic food quality on epilithic consumers. Food quality was assessed by measuring carbon to nutrient ratios and the concentration of polyunsaturated fatty acids (PUFA) in the epilithic matrix; the effect of its change on epilithic consumers was measured using a feeding experiment. The study was conducted in four montane lakes, where downwelling UVR can be intense. Of these lakes, the benthic community of only one was strongly affected by UVR. In this lake, exposure to UVR decreased epilithic accrual and invertebrate colonization, and, contrary to our expectations, increased food quality in the shallows through decreased carbon to phosphorus ratios and increased PUFA concentrations. In another of the four study lakes, the feeding experiment showed no significant difference in growth rates between invertebrates fed UVR‐exposed and UVR‐shielded epilithon, or invertebrates directly exposed to or shielded from UVR. This study demonstrates that although UVR can play an important role in structuring the trophic dynamics of benthic communities, its effects will not be constant across systems, or important in all environments.",
+    "year": 2003,
+    "lang": "en",
+    "type": "article",
+    "venue": "Oikos",
+    "topic": "Isotope Analysis in Ecology",
+    "field": "Environmental Science",
+    "ca_institutions": [],
+    "funders": "Alberta Conservation Association"
+  },
+  {
+    "id": "W2139272761",
+    "title": "The current refugial rainforests of Sundaland are unrepresentative of their biogeographic past and highly vulnerable to disturbance",
+    "abstract": "Understanding the historical dynamics of forest communities is a critical element for accurate prediction of their response to future change. Here, we examine evergreen rainforest distribution in the Sunda Shelf region at the last glacial maximum (LGM), using a spatially explicit model incorporating geographic, paleoclimatic, and geologic evidence. Results indicate that at the LGM, Sundaland rainforests covered a substantially larger area than currently present. Extrapolation of the model over the past million years demonstrates that the current \"island archipelago\" setting in Sundaland is extremely unusual given the majority of its history and the dramatic biogeographic transitions caused by global deglaciation were rapid and brief. Compared with dominant glacial conditions, lowland forests were probably reduced from approximately 1.3 to 0.8 x 10(6) km(2) while upland forests were probably reduced by half, from approximately 2.0 to 1.0 x 10(5) km(2). Coastal mangrove and swamp forests experienced the most dramatic change during deglaciations, going through a complete and major biogeographic relocation. The Sundaland forest dynamics of fragmentation and contraction and subsequent expansion, driven by glacial cycles, occur in the opposite phase as those in the northern hemisphere and equatorial Africa, indicating that Sundaland evergreen rainforest communities are currently in a refugial stage. Widespread human-mediated reduction and conversion of these forests in their refugial stage, when most species are passing through significant population bottlenecks, strongly emphasizes the urgency of conservation and management efforts. Further research into the natural process of fragmentation and contraction during deglaciation is necessary to understand the long-term effect of human activity on forest species.",
+    "year": 2009,
+    "lang": "en",
+    "type": "article",
+    "venue": "Proceedings of the National Academy of Sciences",
+    "topic": "Ecology and Vegetation Dynamics Studies",
+    "field": "Environmental Science",
+    "ca_institutions": "University of Alberta",
+    "funders": []
+  },
+  {
+    "id": "W4248177470",
+    "title": "Agrammatism",
+    "abstract": "",
+    "year": 2017,
+    "lang": "en",
+    "type": "book-chapter",
+    "topic": "Linguistics and Discourse Analysis",
+    "field": "Arts and Humanities",
+    "ca_institutions": "McMaster University",
+    "funders": []
+  },
+  {
+    "id": "W2050714109",
+    "title": "Prevalence and determinants of prehypertension among African Surinamese, Hindustani Surinamese, and White Dutch in Amsterdam, the Netherlands: the SUNSET study",
+    "abstract": "BACKGROUND: Evidence suggests that prehypertension is associated with increased risk of cardiovascular mortality. Little is known about ethnic differences in prehypertension in Europe. We aimed to assess these ethnic differences and to determine the factors associated with prehypertension in Amsterdam, the Netherlands. DESIGN: Cross-sectional study. METHODS: Prehypertension was defined as having a blood pressure 120-139/80-89 mmHg. RESULTS: The overall prevalence of prehypertension was 32.8% (men 37.9% and women 29.9%). The prevalence of prehypertension did not differ between the ethnic groups in men. African Surinamese and Hindustani Surinamese women, however, had a higher prevalence of prehypertension than White Dutch women. In multivariate logistic regression analysis, the odds ratios [95% confidence interval] for being prehypertensive were 2.25 (1.38-3.67; P<0.001) for African Surinamese and 2.06 (1.18-3.60; P<0.01) for Hindustani Surinamese women, compared with White Dutch women. BMI was strongly associated with prehypertension in both men and women. Total cholesterol was positively associated with prehypertension in women, whereas increased physical activity was negatively associated. The independent factors associated with prehypertension vary by ethnic group. In men, BMI was associated with prehypertension in the White Dutch, total cholesterol and low education in the African Surinamese, and fasting glucose in the Hindustani Surinamese. In women, total cholesterol was associated with prehypertension in the African Surinamese; the corresponding factor was the BMI in the Hindustani Surinamese. CONCLUSION: Prehypertension is common in minority women. As a large proportion of people with prehypertension progress to clinical hypertension, targeting these people early with lifestyle-modification interventions aimed at weight loss, increased physical activity, and healthy dietary habits can provide important long-term benefits. The results indicate that the primary foci of such lifestyle interventions should vary between ethnic groups.",
+    "year": 2007,
+    "lang": "en",
+    "type": "article",
+    "venue": "European Journal of Cardiovascular Prevention & Rehabilitation",
+    "topic": "Blood Pressure and Hypertension Studies",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": "AGE-WELL"
+  },
+  {
+    "id": "W2090383515",
+    "title": "Compensatory mechanisms to maintain blood pressure in paraplegic rats: Implication of central tachykinin NK-1 and NK-3 receptors?",
+    "abstract": "",
+    "year": 2010,
+    "lang": "en",
+    "type": "article",
+    "venue": "Neuropeptides",
+    "topic": "Spinal Cord Injury Research",
+    "field": "Medicine",
+    "ca_institutions": ["Université de Montréal", "Centre Hospitalier Universitaire Sainte-Justine"],
+    "funders": "University of New South Wales"
+  },
+  {
+    "id": "W4317493039",
+    "title": "Effects of molecular weight, stereo configuration of <scp>PLA<\/scp> , and processing on the dispersion of multiwalled carbon nanotubes and properties of corresponding nanocomposites",
+    "abstract": "Abstract Multiwalled carbon nanotubes (MWCNTs) were dispersed and distributed via a co‐rotating twin‐screw extruder (TSE) in high (h)‐ and low (l)‐molecular‐weight amorphous and semicrystalline polylactides (PLAs) (aPLA and scPLA, respectively). Effects of PLA molecular weight and D‐lactic acid equivalents content (D‐content), as well as processing parameters, were examined on the MWCNT dispersion quality in PLA. The effectiveness of the MWCNT dispersion in various PLA matrices was investigated using scanning electron microscopy (SEM) and small‐amplitude oscillatory and transient shear flow rheometry in the molten state. The results showed a better dispersion of MWCNTs in the low‐molecular‐weight PLA grades (aPLAl and scPLAl). In addition, better MWCNT dispersion was observed in aPLA grades when processed at a higher temperature of 190°C than at 150°C. At 150°C, while MWCNT bundles in aPLAl could be broken down, a good dispersion could not be achieved in aPLAh due to the lower molecular mobility at such a temperature. The electrical conductivity of the samples was also shown to increase as the MWCNT dispersion was improved. The existence of crystallites in scPLA‐based nanocomposites, however, disrupted the connectivity of the MWCNTs and decreased the final electrical conductivity. The lower molecular weight aPLAl prepared at 190°C showed the highest electrical conductivity (~10 −5 S/m) at a low loading of 0.5 wt.% MWCNTs.",
+    "year": 2023,
+    "lang": "en",
+    "type": "article",
+    "venue": "The Canadian Journal of Chemical Engineering",
+    "topic": "biodegradable polymer synthesis and properties",
+    "field": "Materials Science",
+    "ca_institutions": ["Zymeworks (Canada)", "Polytechnique Montréal"],
+    "funders": ["Science and Engineering Research Council", "Natural Sciences and Engineering Research Council of Canada"]
+  },
+  {
+    "id": "W2032172272",
+    "title": "The Catalytic Effects of Nonhydrocarbon Contaminants on Equilibrium Water Vapor Content for a Dry Gas at HP/HT Reservoir Conditions",
+    "abstract": "Abstract This paper presents new laboratory data quantifying the catalytic effects of two common nonhydrocarbon contaminants (i.e., CO2 and N2) on the liquid water vaporization process as well as the water vapor content for natural gases at high-pressure, high-temperature (HP/HT) reservoir conditions. We conducted laboratory studies to measure the isothermal, equilibrium water vapor content for seven dry gas mixtures at pressures from 500 to 20,000 psia and temperatures of 300°F and 400°F. Gas mixtures evaluated in our study contained up to 20 mol% of either CO2 or N2 each. Principle results of our laboratory study demonstrate the following phase behavior: temperature has a significant impact on the water vaporization process and the quantity of water vapor dissolved in a natural gas with no nonhydrocarbon contaminants. Increasing the temperature from 300°F to 400°F increases the equilibrium water vapor content by more than 70% above that for the gas at 300°F; the presence of CO2 in the gas phase also enhances the solubility of water vapor in a natural gas. Increasing the CO2 content from 5 mol% to 20 mol% increases the maximum water vapor content by 20% to 40%, respectively, above that measured for the same gas with no CO2 These increases were observed at both 300°F and 400°F; the presence of CO2 in the gas phase combined with higher temperatures further augments water vapor solubility in a natural gas. For example, the equilibrium water vapor content for the gas with 20 mol% CO2 at 400°F increased by 80% above that measured for the same gas at 300°F; the presence of N2 in the gas phase suppresses the water vaporization process and reduces the quantity of water vapor dissolved in the gas. At 300°F, 5 mol% N2 reduces the water vapor content from 10% to 20% of that for the same gas with no N2. Further increases in N2 content reduce the water vapor content below that for the same gas with no N2; the enhanced water vapor solubility at higher temperatures counters the suppressive effects of N2 in the gas phase. Increasing the N2 content at 400°F increases the maximum water vapor content from 5% (20 mol% N2) to 10% (5 mol% N2) above that measured for the same gas with no N2.",
+    "year": 2008,
+    "lang": "en",
+    "type": "article",
+    "topic": "Hydraulic Fracturing and Reservoir Analysis",
+    "field": "Engineering",
+    "ca_institutions": ["University of Calgary", "Apache (Canada)"],
+    "funders": []
+  },
+  {
+    "id": "W2799755107",
+    "title": "Acemetacin–phosphatidylcholine interactions are determined by the drug ionization state",
+    "abstract": "Gastrointestinal (GI) toxicity is a major drawback of the chronic use of nonsteroidal anti-inflammatory drugs (NSAIDs). The NSAIDs topical actions on the protective phospholipid layers of the GI mucosa seem to be a central toxicity mechanism of these pharmaceuticals. This work describes the interactions of acemetacin, a commercialized NSAID, with 1,2-dimyristoyl-sn-glycero-3-phosphocholine (DMPC) bilayers at pH 3.0, 5.0, and 7.4. This pH range was chosen to mimic the pH gradient found in the gastric mucosa, and to ultimately gain insights into the mechanisms underlying the acemetacin-induced gastric toxicity. Various experimental techniques were combined to characterize the partitioning of acemetacin in DMPC bilayers, and its effects on the phase transition behavior, as well as the structure and dynamics of DMPC bilayers. The acemetacin-DMPC interactions were clearly pH-dependent. The neutral (protonated) form of acemetacin had more affinity for the DMPC bilayer than the negatively charged form. Due to the higher affinity of neutral acemetacin, the drug effects on the phase transition and the structure and dynamics of the DMPC bilayer were more pronounced at lower pH values. In general, acemetacin decreased the temperature and the cooperativity of the lipid phase transition and induced changes in the packing and dynamics of the DMPC bilayer. These results support the hypothesis that acemetacin-induced gastric toxicity may be related to its effects on the protective phospholipid layers of the mucosal barrier.",
+    "year": 2018,
+    "lang": "en",
+    "type": "article",
+    "venue": "Physical Chemistry Chemical Physics",
+    "topic": "Lipid Membrane Structure and Behavior",
+    "field": "Biochemistry, Genetics and Molecular Biology",
+    "ca_institutions": "McMaster University",
+    "funders": ["Fundação para a Ciência e a Tecnologia", "Conselho Nacional de Desenvolvimento Científico e Tecnológico", "European Regional Development Fund", "Fundação de Amparo à Pesquisa do Estado de São Paulo"]
+  },
+  {
+    "id": "W4391836359",
+    "title": "Left ventricle segment-specific motion assessment for cardiac-gated radiosurgery",
+    "abstract": "Abstract Purpose. Cardiac radiosurgery is a non-invasive treatment modality for ventricular tachycardia, where a linear accelerator is used to irradiate the arrhythmogenic region within the heart. In this work, cardiac magnetic resonance (CMR) cine images were used to quantify left ventricle (LV) segment-specific motion during the cardiac cycle and to assess potential advantages of cardiac-gated radiosurgery. Methods. CMR breath-hold cine images and LV contour points were analyzed for 50 controls and 50 heart failure patients with reduced ejection fraction (HFrEF, EF &lt; 40%). Contour points were divided into anatomic segments according to the 17-segment model, and each segment was treated as a hypothetical treatment target. The optimum treatment window (one fifth of the cardiac cycle) was determined where segment centroid motion was minimal, then the maximum centroid displacement and treatment area were determined for the full cardiac cycle and for the treatment window. Mean centroid displacement and treatment area reductions with cardiac gating were determined for each of the 17 segments. Results. Full motion segment centroid displacements ranged between 6–14 mm (controls) and 4–11 mm (HFrEF). Full motion treatment areas ranged between 129–715 mm 2 (controls) and 149–766 mm 2 (HFrEF). With gating, centroid displacements were reduced to 1 mm (controls and HFrEF), while treatment areas were reduced to 62–349 mm 2 (controls) and 83–393 mm 2 (HFrEF). Relative treatment area reduction ranged between 38%–53% (controls) and 26%–48% (HFrEF). Conclusion. This data demonstrates that cardiac cycle motion is an important component of overall target motion and varies depending on the anatomic cardiac segment. Accounting for cardiac cycle motion, through cardiac gating, has the potential to significantly reduce treatment volumes for cardiac radiosurgery.",
+    "year": 2024,
+    "lang": "en",
+    "type": "article",
+    "venue": "Biomedical Physics & Engineering Express",
+    "topic": "Cardiac Arrhythmias and Treatments",
+    "field": "Medicine",
+    "ca_institutions": ["Surrey Memorial Hospital", "University of Alberta", "University of British Columbia", "BC Cancer Agency"],
+    "funders": []
+  },
+  {
+    "id": "W4413362107",
+    "title": "The Effect of Intense Chorus Waves on the Storm‐Time Outer Radiation Belt Relativistic Electron Dynamics",
+    "abstract": "Abstract We investigate the effects of intense chorus waves (wave power ) on relativistic electrons (E 0.5 MeV) in the heart of the outer radiation belt ( = 4–6) using superposed epoch analyses. Combining electron flux and electromagnetic wave measurements from 70 geomagnetic storms during the Van Allen Probes mission, we show the relationship between integrated chorus wave power (0.1–0.8 equatorial electron gyrofrequency) and changes in relativistic electron flux on two‐hour timescales. During the loss‐dominated storm main phase (Superposed Epoch −0.5 to 0 days), intense chorus waves mitigate the net loss of relativistic electrons. Conversely, in the early recovery phase (Superposed epoch 0–0.5 days), flux increases across a range of relativistic energies regardless of chorus wave power. The amount of electron flux at keV energies appears to have an influence on the consequences of chorus wave activity during geomagnetic storms.",
+    "year": 2025,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Geophysical Research Space Physics",
+    "topic": "Ionosphere and magnetosphere dynamics",
+    "field": "Physics and Astronomy",
+    "ca_institutions": "University of Alberta",
+    "funders": ["Science and Technology Facilities Council", "Natural Environment Research Council"]
+  },
+  {
+    "id": "W2062491099",
+    "title": "Observation of entanglement between a single trapped atom and a single photon",
+    "abstract": "",
+    "year": 2004,
+    "lang": "en",
+    "type": "article",
+    "venue": "Nature",
+    "topic": "Quantum Information and Cryptography",
+    "field": "Computer Science",
+    "ca_institutions": [],
+    "funders": ["Army Research Office", "Natural Sciences and Engineering Research Council of Canada", "National Security Agency", "National Science Foundation"]
+  },
+  {
+    "id": "W810416225",
+    "title": "Правовые механизмы обеспечения эффективности работы судебных органов Российской империи в законе от 7 ноября 1775 г. «Учреждения для управления губерний»",
+    "abstract": "The article is devoted to the description of written pleadings of judicature formed after entry into force the Law dated by 7 November 1775. This law is more known under the name provincial reform in 1775. The author investigates the problem of instruments and particulars of civil and criminal proceedings in Russian Empire courts. In his opinion justice in Russia in last quarter of XVIII century was acceptable in a good cause and the reform helped to try a case fast and uprightly or to take an appeal from an order of the court or from a final judgment.",
+    "year": 2008,
+    "lang": "ru",
+    "type": "article",
+    "venue": "Ленинградский юридический журнал",
+    "topic": "Legal and Regulatory Analysis",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W6921189893",
+    "title": "Additional file 6 of Maternal glycemia in pregnancy is longitudinally associated with blood DNAm variation at the FSD1L gene from birth to 5 years of age",
+    "abstract": "Additional file 6: Epigenome-wide association plot for maternal 2h-post-OGTT glucose levels; Figure of epigenome-wide association plot presenting CpG sites from the LMM associated with maternal 2h-post-OGTT glucose levels.",
+    "year": 2024,
+    "lang": "en",
+    "type": "article",
+    "venue": "Figshare",
+    "topic": "History of Computing Technologies",
+    "field": "Computer Science",
+    "ca_institutions": ["Centre de Santé et de Services Sociaux de Chicoutimi", "Centre Hospitalier Universitaire de Sherbrooke", "Université de Sherbrooke"],
+    "funders": []
+  },
+  {
+    "id": "W2788445572",
+    "title": "An Empirical Investigation of the Employee Work Passion Appraisal Model Using Self-Determination Theory",
+    "abstract": "The Problem Employee work passion theory offers an appraisal-based approach that explains how work passion is formulated in individuals. Self-determination theory postulates that the satisfaction of three basic psychological human needs (competence, relatedness, and autonomy) is essential for individuals to flourish and thrive at work. The role of basic psychological need satisfaction in the employee work passion appraisal process is yet to be examined. The Solution We investigated the relations between employees’ cognitive appraisals of their work environment characteristics (work cognitions), their basic psychological need satisfaction, and their work intentions. Our study provided empirical evidence showing that employees’ cognitive appraisals of work characteristics such as job autonomy, task variety, meaningful work, and performance expectations were positively related to basic psychological need satisfaction, which, in turn, positively impacted their work intentions, thus indicating the subjective experience of work passion. The Stakeholders Results suggest that organizational leaders, supervisors, and human resource development (HRD) practitioners could develop interventions that promote specific workplace characteristics and are aimed at contributing to the fulfillment of employees’ basic psychological needs. In so doing, employees and stakeholders could benefit from the individual and organizational outcomes that flow from employees experiencing greater work passion.",
+    "year": 2018,
+    "lang": "en",
+    "type": "article",
+    "venue": "Advances in Developing Human Resources",
+    "topic": "Motivation and Self-Concept in Sports",
+    "field": "Psychology",
+    "ca_institutions": "Université du Québec à Montréal",
+    "funders": []
+  },
+  {
+    "id": "W7019456295",
+    "title": "Gill morphology as an indicator of thermal adaptation and phenotypic&#13;\\nplasticity in Atlantic salmon (Salmo salar)",
+    "abstract": "Climate change is a growing problem facing freshwater ecosystems, as water conditions&#13;\\ncontinue to fluctuate with increasing intensity, and this is having major impacts on the&#13;\\nbiodiversity of these habitats. For many fish species, including Atlantic salmon (Salmo salar),&#13;\\nadaptations to this environmental variability will be critical to their long-term outlook. This study&#13;\\nexplores how Atlantic salmon may respond to climate change and whether there is evidence that&#13;\\nthey can adapt to warming water conditions. To accomplish this, I examined whether gill&#13;\\nmorphometrics are an indicator of thermal tolerance in Atlantic salmon. Two potential drivers of&#13;\\nthermal tolerance were assessed: thermal adaptation and phenotypic plasticity. Thermal&#13;\\nadaptation is driven by genetic responses to the environment, which may evolve over&#13;\\ngenerations, while phenotypic plasticity can occur over a much shorter period of time (i.e. within&#13;\\nan individual's life span). Using three geographically separate populations that span a thermal&#13;\\ngradient, Atlantic salmon gill metrics were compared and related to CTmax data to thereby assess&#13;\\nthermal adaptation. To assess phenotypic plasticity, gills from one population were compared&#13;\\nbefore and after exposure to prolonged warm temperatures. We found no significant evidence of&#13;\\nthermal adaptation in gill morphology between populations and no relationship between CTmax&#13;\\ntemperatures and gill morphology, as well as no evidence of any phenotypic plasticity occurring&#13;\\nover the course of our experimental temperature challenge. However, there were plenty of&#13;\\ninteresting trends in the data which will be discussed in depth later in this thesis. Overall, this&#13;\\nstudy serves to help predict both future population-level and individual-level responses to&#13;\\nclimate change in Atlantic salmon in Newfoundland.",
+    "year": 2023,
+    "lang": "en",
+    "type": "other",
+    "venue": "Memorial University Research Repository (Memorial University)",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4402513928",
+    "title": "bayesReact: Expression-coupled regulatory motif analysis detects microRNA activity in cancer and at the single cell level",
+    "abstract": "Motivation: Regulatory constraints are crucial in maintaining tissue and cell integrity, and play important roles during developmental processes and environmental responses. Yet many regulatory mechanisms remain unobserved at the single-cell level and statistical inference may, in some cases, help elucidate their condition-specific activity and perturbation during disease progression. Results: We introduce bayesReact (BAYESian modeling of Regular Expression ACTivity), a generative model of motif occurrence across experimentally ranked sequences to infer motif-based regulatory activities. The method is evaluated for microRNAs (miRNAs), which perform post-transcriptional regulation through target mRNA destabilization and translational repression. Inferred miRNA activities positively correlate with the observed miRNA expressions in primary tumors from The Cancer Genome Atlas (TCGA) and mouse stem cells. The top miRNA activity profiles are as informative for TCGA cancer-type cluster identification as the top miRNA or mRNA expression profiles. The activity captures tissue-specific miRNA patterns observed in the matched expression, e.g., the expression of miR-122-5p in the liver and miR-124-3p in low-grade gliomas (LGG). We observe a negative association between the activity of the two miRNAs and their target gene expressions, including between the miR-124-3p activity and the anti-neuronal REST expression in LGG. bayesReact outperforms the existing method, miReact, on sparse count data, and shows a higher correlation with the miRNA expression in single-cell data. The method recovers temporal activities of prominent miRNAs during murine stem cell differentiation, including miR-298-5p, miR-92-2-5p, and the large Sfmbt2 cluster (miR-297-669). The bayesReact model is probabilistic and quantifies the uncertainty of all provided estimates. It is unsupervised and permits screens of bulk or single-cell data to identify condition-specific regulatory motif candidates. It further improves miRNA activity inference in single-cell data. Availability and implementation: bayesReact is implemented as an R-package, uses a Hamiltonian Monte-Carlo sampler for posterior approximation, and is available at https://github.com/astamr/bayesReact.",
+    "year": 2024,
+    "lang": "en",
+    "type": "preprint",
+    "venue": "bioRxiv (Cold Spring Harbor Laboratory)",
+    "topic": "MicroRNA in disease regulation",
+    "field": "Biochemistry, Genetics and Molecular Biology",
+    "ca_institutions": "University of British Columbia",
+    "funders": []
+  },
+  {
+    "id": "W4407778259",
+    "title": "Factors associated with preeclampsia and the hypertensive disorders of pregnancy amongst Indigenous women of Canada, Australia, New Zealand, and the United States: A systematic review and meta-analysis",
+    "abstract": "PURPOSE OF THE REVIEW: Preeclampsia and the Hypertensive Disorders of Pregnancy (HDP) occur more frequently amongst Indigenous women and can have short- and long-term impacts on maternal and infant health and wellbeing. To understand factors associated with increased risk for Indigenous women a systematic review and meta-analysis was conducted. The PRISMA guidelines were adhered to, and the review protocol was registered on PROSPERO (Registration CRD42023381847). EndNote, Covidence and Excel were used to screen and extract data, with studies assessed using JBI critical appraisal tools. RECENT FINDINGS: Seven studies from Canada, Australia, and the United States (none from New Zealand) were included in this review. Meta-analysis showed women classified as overweight (OR 1.32, 95% CI: 1.09-1.60), obese (OR 1.88, 95% CI: 1.57-2.25), or having high mean BMI (MD 3.02 95% CI: 1.72-4.31), high mean systolic blood pressure (MD 15.19 95% CI: 12.83-17.541), or high mean diastolic blood pressure (MD 15.26 95% CI: 13.05-17.47), pre-pregnancy diabetes (OR 3.63, 95% CI: 1.66-17.94), or high microalbuminuria (OR 2.76, 95% CI: 1.40-5.43) were more likely to be diagnosed with preeclampsia. Smoking (OR 0.77, 95% CI: 0.58-1.03), alcohol consumption (OR 1.70, 95% CI: 0.76-3.81), and gestational diabetes (OR 1.74, 95% CI: 0.90-3.37) were not associated with preeclampsia. Understanding factors associated with increased preeclampsia/HDP risk amongst Indigenous women is important to minimising adverse perinatal events and future health complications. This review demonstrates current gaps in the evidence, specifically in relation to social, economic, and environmental factors.",
+    "year": 2025,
+    "lang": "en",
+    "type": "review",
+    "venue": "Current Hypertension Reports",
+    "topic": "Pregnancy and preeclampsia studies",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": "Flinders University"
+  },
+  {
+    "id": "W4241336269",
+    "title": "Introduction",
+    "abstract": "",
+    "year": 2016,
+    "lang": "en",
+    "type": "article",
+    "venue": "a/b Auto/Biography Studies",
+    "topic": "Latin American and Latino Studies",
+    "field": "Social Sciences",
+    "ca_institutions": "University of Alberta",
+    "funders": []
+  },
+  {
+    "id": "W2945258064",
+    "title": "Rapid mixing of colliding picoliter liquid droplets delivered through-space from piezoelectric-actuated pipettes characterized by time-resolved fluorescence monitoring",
+    "abstract": "Rapid mixing of aqueous solutions is a crucial first step to study the kinetics of fast biochemical reactions with high temporal resolution. Remarkable progress toward this goal has been made through the development of advanced stopped-flow mixing techniques resulting in reduced dead times, and thereby extending reaction monitoring capabilities to numerous biochemical systems. Concurrently, piezoelectric actuators for through-space liquid droplet sample delivery have also been applied in several experimental systems, providing discrete picoliter sample volume delivery and precision sample deposition onto a surface, free of confinement within microfluidic devices, tubing, or other physical constraints. Here, we characterize the inertial mixing kinetics of two aqueous droplets (130 pl) produced by piezoelectric-actuated pipettes, following droplet collision in free space and deposition on a surface in a proof of principle experiment. A time-resolved fluorescence system was developed to monitor the mixing and fluorescence quenching of 5-carboxytetramethylrhodamine (5-Tamra) and N-Bromosuccinimide, which we show to occur in less than 10 ms. In this respect, this methodology is unique in that it offers millisecond mixing capabilities for very small quantities of discrete sample volumes. Furthermore, the use of discrete droplets for sample delivery and mixing in free space provides potential advantages, including the elimination of the requirement for a physical construction as with microfluidic systems, and thereby makes possible and extends the experimental capabilities of many systems.",
+    "year": 2019,
+    "lang": "en",
+    "type": "article",
+    "venue": "Review of Scientific Instruments",
+    "topic": "Innovative Microfluidic and Catalytic Techniques Innovation",
+    "field": "Engineering",
+    "ca_institutions": ["University of Manitoba", "University of Toronto"],
+    "funders": "Max-Planck-Gesellschaft"
+  },
+  {
+    "id": "W2951131190",
+    "title": "Glycolytic enzymes localize to synapses under energy stress to support synaptic function",
+    "abstract": "Summary Changes in neuronal activity create local and transient changes in energy demands at synapses. Here we discover a metabolic compartment that forms in vivo near synapses to meet local energy demands and support synaptic function in Caenorhabditis elegans neurons. Under conditions of energy stress, glycolytic enzymes redistribute from a diffuse localization in the cytoplasm to a punctate localization adjacent to synapses. Glycolytic enzymes colocalize, suggesting the ad hoc formation of a glycolysis compartment, or a ‘glycolytic metabolon’, that can maintain local levels of ATP. Local formation of the glycolytic metabolon is dependent on presynaptic scaffolding proteins, and disruption of the glycolytic metabolon blocks the synaptic vesicle cycle, impairs synaptic recovery, and affects locomotion. Our studies indicate that energy demands in neurons are met locally through the assembly of a glycolytic metabolon to sustain synaptic function and behavior.",
+    "year": 2016,
+    "lang": "en",
+    "type": "preprint",
+    "venue": "bioRxiv (Cold Spring Harbor Laboratory)",
+    "topic": "Mitochondrial Function and Pathology",
+    "field": "Biochemistry, Genetics and Molecular Biology",
+    "ca_institutions": [],
+    "funders": ["Institute of Genetics", "National Institutes of Health", "National Science Foundation", "March of Dimes Foundation", "Tokyo Women's Medical University", "Alfred P. Sloan Foundation", "Howard Hughes Medical Institute"]
+  },
+  {
+    "id": "W3106433902",
+    "title": "Celebration day: 400th birthday of John Graunt, citizen scientist of London",
+    "abstract": "",
+    "year": 2020,
+    "lang": "en",
+    "type": "article",
+    "venue": "Environmental Health Review",
+    "topic": "Probability and Statistical Research",
+    "field": "Mathematics",
+    "ca_institutions": "University of Guelph",
+    "funders": []
+  },
+  {
+    "id": "W7001581988",
+    "title": "L'épaule : évaluation par un système de radiographie basse dose et évolution fonctionnelle en cas de rupture de la coiffe des rotateurs",
+    "abstract": "Introduction : Les travaux réalisés par Bascans ont permis de mieux comprendre la fonction des&#13;\\npatients atteints d’une rupture de la coiffe des rotateurs au moment du diagnostic à l’aide de&#13;\\nparamètres morphologiques osseux et musculaires intégrés dans un modèle de régression&#13;\\nlinéaire. Les paramètres osseux étudiés provenaient d’une méthode de reconstruction 3D de&#13;\\nl’épaule à partir d’images EOS. Jusqu’à présent, aucune étude ne s’est intéressée à prédire&#13;\\nl’évolution dans le temps des patients atteints d’une rupture de la coiffe des rotateurs à l’aide de&#13;\\nces paramètres ni à valider l’imagerie EOS pour l’évaluation de l’épaule.&#13;\\nObjectif : Nous souhaitons prédire l’évolution de la fonction de l’épaule des patients atteints&#13;\\nd’une rupture de la coiffe des rotateurs à partir de paramètres musculaires et de la morphologie&#13;\\nosseuse. Ensuite, nous souhaitons comparer l’imagerie EOS à la radiographie standard de l’épaule&#13;\\npour l’évaluation des patients à la clinique externe d’orthopédie.&#13;\\nMéthode : Dans un premier temps, 50 personnes ayant participé à une étude portant sur la&#13;\\nfonction de l’épaule en 2009 furent réévaluées. Leur fonction mesurée fut corrélée à leur fonction&#13;\\nprédite par le modèle de régression linéaire créé par Bascans. De nouveaux modèles ont ensuite&#13;\\nété créés afin de mieux comprendre l’évolution de la douleur, de la force et de la fonction de leur&#13;\\népaule telle que mesurées par le score de Constant et le QuickDash. Dans un deuxième temps, 47&#13;\\npatients nécessitant une radiographie standard de l’épaule dans le cadre de leur consultation à la&#13;\\nclinique externe d’orthopédie ont été recrutés. En plus de la radiographie standard, ils ont passé&#13;\\nun examen radiographique EOS antéro-postérieur de leur épaule. Un comité d’expert formé de&#13;\\ndeux orthopédistes et d’une radiologiste a créé un questionnaire d’évaluation des images grâce&#13;\\nà la méthode Delphi. Ces trois spécialistes ont ensuite analysé chaque image présentée dans un&#13;\\nordre aléatoire.&#13;\\nRésultats : La majorité des participants atteints d’une rupture de la coiffe des rotateurs ont été&#13;\\nopérés pendant le suivi. Nous ne pouvons donc pas prédire l’évolution naturelle de ces patients.&#13;\\nNous avons cependant produit des modèles de régression linéaire qui améliorent&#13;\\nconsidérablement notre compréhension des paramètres ayant un impact sur la fonction initiale. Notamment, nos modèles expliquent 66,8% de la variabilité du score de Constant et 71,8% de celle du QuickDash pour les femmes.&#13;\\nL’imagerie EOS antéro-postérieure de l’épaule permet d’obtenir des mesures de la distance sousacromiale&#13;\\net de l’espace acromio-claviculaire similaires à la radiographie standard, avec une&#13;\\ndifférence moyenne de 1,4 mm entre les modes d’imagerie, ce qui n’est pas cliniquement&#13;\\nsignificatif. L’imagerie EOS produit des images de qualité légèrement inférieure et pouvant&#13;\\nprésenter légèrement plus d’artéfacts de mouvement que la radiographie standard. Ces&#13;\\ndifférences sont cependant mineures et ne semblent pas avoir d’impact sur la capacité des&#13;\\nspécialistes à émettre avec confiance un diagnostic.&#13;\\nConclusions : Cette étude a permis de mieux comprendre les paramètres morphologiques ayant&#13;\\nun impact sur la fonction de l’épaule des patients. Elle a également révélé que les paramètres&#13;\\ncorrélant avec le niveau fonctionnel ne sont pas les mêmes en fonction du sexe. Nous avons&#13;\\ndémontré que les images EOS sont légèrement inférieures à la radiographie standard, mais&#13;\\ndemeurent un mode d’imagerie adéquat et valide. L’imagerie EOS pourrait donc être utilisée en&#13;\\nclinique externe d’orthopédie, ce qui diminuerait l’exposition aux radiations des patients et qui&#13;\\npermettrait d’intégrer plus facilement en clinique les connaissances développées à partir de la&#13;\\nreconstruction 3D de l’épaule.",
+    "year": 2022,
+    "lang": "fr",
+    "type": "dissertation",
+    "venue": "Papyrus : Institutional Repository (Université de Montréal)",
+    "topic": "Shoulder Injury and Treatment",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": "Natural Sciences and Engineering Research Council of Canada"
+  },
+  {
+    "id": "W4394536448",
+    "title": "Medical Science",
+    "abstract": "This dataset includes the STEM course outlines found in the study Agriculture-related courses in Canadian universities: how course outlines differ between social science and science faculties. The information from these course outlines was extracted, analyzed, and organized into themes.",
+    "year": 2023,
+    "lang": "en",
+    "type": "dataset",
+    "venue": "Figshare",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2148496143",
+    "title": "Monteiro's Storm‐petrel <i>Oceanodroma monteiroi<\/i>: a new species from the Azores",
+    "abstract": "The existence of two seasonally distinct breeding populations of Oceanodroma storm‐petrels in the Azores islands was first documented in 1996. The discovery of morphological differences between the populations led to the suggestion that they may represent cryptic sibling species. Recent mtDNA and microsatellite analysis from storm‐petrel populations has considerably advanced our understanding of their taxonomic relationships. Here we present new information on the timing of breeding and moult of the two Azores populations, the extent of exchange of individuals between seasons, and diet from feather isotopes. We conclude that the hot‐season Azores population should be considered a new species for which we propose the name Oceanodroma monteiroi , Monteiro's Storm‐petrel. The species is both genetically distinct and genetically isolated from the sympatric cool‐season population of Madeiran Storm‐petrel Oceanodroma castro , and from all other populations of Oceanodroma castro in the Atlantic and Pacific Oceans examined to date. Differences in the vocalizations permit species recognition, and the extent of primary feather wear and stage of moult aids separation of the two species in the Azores, which is especially valuable during August when both attend the breeding colonies in large numbers. Feather carbon and nitrogen isotopes reveal that the diet of Monteiro's Storm‐petrel differs from that of the sympatric Madeiran Storm‐petrel during both breeding and non‐breeding seasons, and unlike the Madeiran Storm‐petrel, Monteiro's Storm‐petrel appears to maintain the same foraging environment during the summer and winter months, though it shows a dietary shift to higher trophic levels during the non‐breeding season. Monteiro's Storm‐petrel is thought to be confined to the Azores archipelago, where it is currently known to nest on just two small neighbouring islets. The total population size was estimated at 250–300 pairs in 1999.",
+    "year": 2008,
+    "lang": "en",
+    "type": "article",
+    "venue": "Ibis",
+    "topic": "Isotope Analysis in Ecology",
+    "field": "Environmental Science",
+    "ca_institutions": "Queen's University",
+    "funders": []
+  },
+  {
+    "id": "W4385156447",
+    "title": "Droplet digital PCR as a tool to detect resistant isolates of Dirofilaria immitis",
+    "abstract": "Prevention of canine heartworm disease, caused by Dirofilaria immitis, relies on macrocyclic lactones for which drug resistance is now a concern. Although genetic polymorphisms have been associated with resistance in D. immitis populations, the mechanism is still not well understood. The lack of reliable in vitro assays to detect resistance is a limitation for confirming resistance. Ten single nucleotide polymorphisms (SNPs) were previously clinically validated in D. immitis resistant isolates, using the MiSeq platform. This technique although useful for research studies is expensive and does not facilitate rapid detection of these markers in small numbers of clinical samples. We developed a droplet digital PCR protocol for detecting SNPs correlating with ML resistance. Specific primers and hydrolysis probes encompassing the wildtype and mutant alleles were designed to amplify the SNP targets from genomic DNA of different D. immitis isolates. Allele frequencies were determined and the suitability of the ddPCR assay was assessed and compared with MiSeq data. The ddPCR assay accurately detected and quantified alternate nucleotides in two isolates of reference, the ML-susceptible Missouri (MO) and ML-resistant JYD-34, at the previously identified SNP positions. The presence of the SNPs was also determined in additional isolates with known or putative susceptible or resistant phenotypes. We observed SNP1 and SNP2 are more predictive markers and appear suitable for rapid detection and monitoring of drug resistance. Our results suggested that ddPCR could be employed to distinguish infection due to actual genetic resistance from infection with susceptible parasites and also for rapid detection of isolates not only with ML susceptible and resistant genotypes but also mixed genotypes that correspond to heterogeneous isolates containing a mixed population of ML susceptible and resistant parasites. DdPCR may be a useful tool for conducting surveys, or assessments of individual isolates, for genetic evidence of resistance or developing resistance.",
+    "year": 2023,
+    "lang": "en",
+    "type": "article",
+    "venue": "International Journal for Parasitology Drugs and Drug Resistance",
+    "topic": "Parasitic Diseases Research and Treatment",
+    "field": "Medicine",
+    "ca_institutions": "McGill University",
+    "funders": ["Natural Sciences and Engineering Research Council of Canada", "National Institutes of Health", "National Institute of Allergy and Infectious Diseases", "National Center for Veterinary Parasitology"]
+  },
+  {
+    "id": "W2611447540",
+    "title": "A Battle For Sanity: An Examination of the 1961 Withdrawal from the Ontario Hockey Association by the St. Michael’s Majors",
+    "abstract": "This article examines the 1961 withdrawal by St. Michael's College School's hockey team from the semi-professional Canadian junior hockey league, the Ontario Hockey Association. The long-playing schedule, the heavy burden of the physical labor, and the emphasis on athletics over academics were all factors that led to the high school's withdrawing of its team. St. Michael's College's experience was an early expression of concern about the exploitation of young athletes, concern that has now become increasingly shared publicly around the globe. The limited success of St. Michael's College's campaign for change lay in the difficulty of convincing society of this exploitation. The school's withdrawal highlights the entrenched problem of institutions treating young male athletes as commodities.",
+    "year": 2017,
+    "lang": "en",
+    "type": "article",
+    "venue": "Boyhood Studies",
+    "topic": "Sports, Gender, and Society",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2100208070",
+    "title": "Distinguishing Gouty Arthritis from Calcium Pyrophosphate Disease and Other Arthritides",
+    "abstract": "OBJECTIVE: Differentiating gout, calcium pyrophosphate deposition disease (CPPD), and non-crystal-related inflammatory arthropathies (non-CRA) is essential but often clinically impossible. The sonographic double contour (DC) sign may have good specificity for gout in highly specialized centers, but it can be challenging to use it to distinguish gout from cartilage hyperenhancements in CPPD. We evaluated the diagnostic value of the DC sign alone and in combination with Doppler signals and uric acid (UA) levels in patients with acute arthritis. METHODS: We retrospectively investigated 225 acutely inflamed joints and documented the presence of DC, Doppler hypervascularization, and serum UA (SUA) levels. All patients underwent synovial fluid (SF) analysis. Sensitivity, specificity, and positive predictive values were calculated, and correlation analyses and a binary regression model were used to investigate their diagnostic values. RESULTS: The sensitivity of DC sign for crystalline arthritides was 85% and specificity 80%. Its specificity for gout was 64%, for CPPD 52%. In contrast to non-CRA hypervascularization, degree 2 and 3 Doppler signals were highly associated with gout and less with CPPD (p < 0.01). The combination of DC sign with hypervascularization and elevated UA levels increased specificity for gout to more than 90% and resulted in a 7-fold increase of the likelihood of diagnosis of gout (p < 0.01), but with a loss of sensitivity (42%). CONCLUSION: The DC sign alone is suitable for predicting crystal-related arthropathies, but it cannot reliably distinguish gout from CPPD in everyday clinical routine. Combining hypervascularization and SUA levels increases the diagnostic value, leading us to propose a diagnostic algorithm.",
+    "year": 2014,
+    "lang": "en",
+    "type": "article",
+    "venue": "The Journal of Rheumatology",
+    "topic": "Gout, Hyperuricemia, Uric Acid",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": []
+  }
+]

@@ -1,0 +1,810 @@
+# MétaCan screening rubric (v1.0)
+
+**Locked before screening. Version-controlled. Any change is a new version with a dated entry in `DEVIATIONS.md`.**
+
+Both machine screeners and both human coders work from this document and nothing else. The rubric is the
+instrument; if two coders disagree, the rubric is what they are adjudicated against.
+
+---
+
+## The unit
+
+One work (journal article, preprint, book chapter, report, dataset, or software), identified by its OpenAlex ID.
+You see: title, abstract, publication year, language, venue, OpenAlex topic and field, Canadian institutional
+affiliations, funders.
+
+## The question
+
+**Is the object of study *research itself*?**
+
+Metaresearch studies how research is done, reported, funded, evaluated, disseminated, or governed. The test is
+what the work is *about*, not what field it appears in and not what vocabulary it uses.
+
+A cardiology trial is not metaresearch. A study of *how cardiology trials report their outcomes* is.
+
+---
+
+## Tier
+
+Assign exactly one.
+
+### T1: Core metaresearch
+The primary object of study is research itself. Typical objects:
+
+- research **methods** and their properties (bias, reporting, statistical practice, study design)
+- **reproducibility**, replication, data and code sharing
+- **research integrity**: misconduct, retraction, questionable research practices, authorship
+- **peer review** and editorial process *as objects of study*
+- **research evaluation**, metrics, rankings, funding allocation
+- **scholarly communication**: publishing models, open access, preprints *as objects of study*
+- **bibliometrics and scientometrics** applied to a research literature
+- the **research workforce**: careers, equity, training, capacity
+- **evidence synthesis methodology** (not an individual systematic review's clinical answer, but work *about* how
+  syntheses are done)
+
+### T2: Adjacent
+Empirically or conceptually grounded work on science as a social system that is not framed as metaresearch but
+studies it:
+
+- **science and technology studies (STS)**: social studies of scientific knowledge, practice, controversy
+- **library and information science**: information behaviour of researchers, repositories, discovery
+- **research infrastructure** studies: platforms, data repositories, identifiers, standards
+- **history and philosophy of science** *when the object is contemporary research practice*
+- **research policy** analysis grounded in evidence
+
+T2 is where the field's diversity lives. Be generous here: a paper does not have to call itself metaresearch to
+be studying research.
+
+### T3: Contextual
+Relevant to the ecosystem, mapped and released, but **never pooled into the analytic corpus**:
+
+- editorials, commentaries, opinion pieces about research practice
+- policy documents and position statements
+- announcements of infrastructure, tools, or initiatives
+- news, obituaries, corrections, letters
+
+### OUT: Not metaresearch
+Everything else. Includes, and this is the most common error:
+
+- **A study that uses a method is not a study of the method.** A meta-analysis answering a clinical question is
+  OUT. A study of how meta-analyses handle heterogeneity is T1.
+- **Mentioning a metaresearch term is not studying it.** A lab paper reporting "assay reproducibility", a methods
+  section saying "peer reviewed", a licence note saying "open access": all OUT.
+- **Domain research that happens to be bibliometric in method** but whose object is the domain, not the research:
+  e.g. a bibliometric map of diabetes treatments, produced to summarise diabetes knowledge. Borderline; see below.
+
+---
+
+## The three errors that matter most
+
+These are where the pilot showed retrieval and screening break down. Read them twice.
+
+1. **Polysemy.** `reproducibility` in a biochemistry paper means the assay gives the same reading twice. In a
+   metaresearch paper it means the reproducibility crisis. Only the second is in scope. The same applies to
+   `validation`, `replication`, `bias`, `peer review`, `open access`. **Judge the sense, not the token.**
+
+2. **Method vs. object.** Using bibliometrics ≠ studying research. Ask: *if this paper is right, what do we now
+   know more about: a scientific question, or the practice of science?* If the former, OUT.
+
+3. **Absence of vocabulary is not absence of content.** An STS paper about laboratory practice, or an LIS paper
+   about how researchers find data, may use none of the field's keywords and still be squarely T2. **Do not
+   require the vocabulary.** This is the error that makes the field look smaller and more anglophone than it is.
+
+---
+
+## Canadian linkage
+
+Record which apply (this is metadata, not an inclusion test; the estimand is defined separately in
+`PROTOCOL.md`):
+
+- `CA_AFF`: at least one author affiliated with a Canadian institution
+- `CA_FUND`: funded by CIHR, NSERC, SSHRC, or CFI
+- `ABOUT_CA`: the Canadian research system is a substantive object of study (not a passing mention, not one
+  country among forty in a global comparison)
+
+## Genre
+
+`empirical` · `conceptual` · `editorial/commentary` · `policy` · `infrastructure/announcement` · `other`
+
+OpenAlex's `type` is unreliable and this field is commentary-heavy, so genre is coded, not inherited.
+
+## Language of the work
+
+As published. Do not infer from the venue.
+
+---
+
+## Confidence
+
+- `high`: the rubric decides this cleanly.
+- `medium`: the rubric decides, but a reasonable coder could differ.
+- `low`: genuinely on the boundary, or the abstract is missing/too thin to judge.
+
+**`low` is a legitimate answer and is not a failure.** Records coded `low` by either screener are routed to
+adjudication. A screener that never says `low` is not being careful; it is being confident.
+
+---
+
+## Worked examples
+
+| Title (abridged) | Tier | Why |
+|---|---|---|
+| "Data sharing practices in 500 randomised trials" | **T1** | The object is reporting practice. |
+| "Reproducibility of a Western blot protocol" | **OUT** | Assay reproducibility. Polysemy trap. |
+| "Trends in citation of retracted papers" | **T1** | Object is the literature's own behaviour. |
+| "Laboratory life in a Canadian genomics centre: an ethnography" | **T2** | STS. No metaresearch vocabulary; still studies research. |
+| "How do researchers discover datasets? A survey" | **T2** | LIS, information behaviour of researchers. |
+| "Effectiveness of statins: a network meta-analysis" | **OUT** | Uses a synthesis method to answer a clinical question. |
+| "How network meta-analyses handle inconsistency: a review of 200 reviews" | **T1** | Object is the method. |
+| "Announcing the Canadian Research Data Repository" | **T3** | Infrastructure announcement. Mapped, not pooled. |
+| "Open access mandates are failing early-career researchers" (editorial) | **T3** | Commentary about research practice. |
+| "Bibliometric analysis of diabetes research 2000–2020" | **T2** | Borderline. Bibliometric method, and the object *is* a research literature, so it studies research output. Code T2, `medium`. |
+| "Le libre accès dans les revues québécoises : état des lieux" | **T1** | Scholarly communication, object is publishing practice. French. |
+
+---
+
+## Instructions to the screener
+
+Read the title and abstract. Apply the rubric. Do not use outside knowledge of the authors or the journal's
+reputation. If the abstract is missing, judge on the title alone and set confidence to `low` unless the title is
+unambiguous.
+
+Return the schema in `protocol/screening-schema.json`. One object per work. No prose, no preamble.
+--------------------------------------------------------------------------------
+You are screening works for MetaCan, a map of Canadian metaresearch.
+
+Apply the rubric above to every record in the JSON array below. Return a JSON
+array with one object per work, conforming to protocol/screening-schema.json:
+
+  {"id": "W...", "tier": "T1|T2|T3|OUT", "genre": "...", "about_ca": true|false,
+   "confidence": "high|medium|low", "reason": "one sentence"}
+
+Rules:
+- Return the JSON array and NOTHING else. No prose, no preamble, no code fences.
+- Every input id must appear exactly once in the output.
+- Do not run commands, read files, or browse. Classify from the RECORDS alone.
+
+RECORDS:
+[
+  {
+    "id": "W1805093872",
+    "title": "Democratic Utopias: The Argentine Transition to Democracy through Letters, 1983–1989",
+    "abstract": "On May 1, 1989, María, a high school teacher from Buenos Aires, wrote a letter to President Raúl Alfonsín as he began his final months in office. The country was in the midst of a hyperinflation crisis and elections were set for just two weeks away. Earlier in the day, María had heard the president's last address to the congress, and she felt compelled to write him. “My friend,” she began, as she recounted how she and her husband, an adjunct university instructor, had worked hard over two decades of marriage, weathering continuous financial difficulties and the sensation of “always having to start over.” María emphasized that she had no political affiliations that would cloud her judgment, lest the president think she was writing to ask for political favors.",
+    "year": 2015,
+    "lang": "en",
+    "type": "article",
+    "venue": "The Americas A Quarterly Review of Latin American History",
+    "topic": "Political and Social Dynamics in Chile and Latin America",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": ["York University", "American Council of Learned Societies"]
+  },
+  {
+    "id": "W6958951376",
+    "title": "MicroRNA miR-223 modulates NLRP3 and Keap1, mitigating lipopolysaccharide-induced inflammation and oxidative stress in bovine mammary epithelial cells and murine mammary glands",
+    "abstract": "Abstract Bovine mastitis, the most prevalent and costly disease in dairy cows worldwide, decreases milk quality and quantity, and increases cow culling. However, involvement of microRNAs (miRNAs) in mastitis is not well characterized. The objective was to determine the role of microRNA-223 (miR-223) in regulation of the nucleotide-binding oligomerization domain-like receptor containing pyrin domain 3 (NLRP3) inflammasome and kelch like ECH-associated protein 1 (Keap1)/nuclear factor erythroid 2-related factor 2 (Nrf2) oxidative stress pathway in mastitis models induced by lipopolysaccharide (LPS) treatment of immortalized bovine mammary epithelial cells (bMECs) and murine mammary glands. In bMECs cultured in vitro, LPS-induced inflammation downregulated bta-miR-223; the latter interacted directly with the 3’ untranslated region (3’ UTR) of NLRP3 and Keap1. Overexpression of bta-miR-223 in bMECs decreased LPS and Adenosine 5’-triphosphate (ATP)-induced NLRP3 and its mediation of caspase 1 and IL-1β, and inhibited LPS-induced Keap1 and Nrf2 mediated oxidative stress, whereas inhibition of bta-miR-223 had opposite effects. In an in vivo murine model of LPS-induced mastitis, increased miR-223 mitigated pathology in the murine mammary gland, whereas decreased miR-223 increased inflammatory changes and oxidative stress. In conclusion, bta-miR-223 mitigated inflammation and oxidative injury by downregulating the NLRP3 inflammasome and Keap1/Nrf2 signaling pathway. This study implicated bta-miR-223 in regulation of inflammatory responses, with potential as a novel target for treating bovine mastitis and other diseases.",
+    "year": 2023,
+    "lang": "en",
+    "type": "other",
+    "venue": "Figshare",
+    "topic": "Botanical Research and Chemistry",
+    "field": "Agricultural and Biological Sciences",
+    "ca_institutions": "University of Calgary",
+    "funders": []
+  },
+  {
+    "id": "W1988197195",
+    "title": "Averaging of Dispersion-Managed Solitons: Existence and Stability",
+    "abstract": "We consider existence and stability of dispersion-managed solitons in the two approximations of the periodic nonlinear Schrödinger (NLS) equation: (i) a dynamical system for a Gaussian pulse and (ii) an average integral NLS equation. We apply normal form transformations for finite-dimensional and infinite-dimensional Hamiltonian systems with periodic coefficients. First-order corrections to the leading-order averaged Hamiltonian are derived explicitly for both approximations. Bifurcations of soliton solutions and their stabilityare studied by analysis of critical points of the first-order averaged Hamiltonians. The validity of the averaging procedure is verified and the presence of ground states corresponding to dispersion-managed solitons in the averaged Hamiltonian is established.",
+    "year": 2003,
+    "lang": "en",
+    "type": "article",
+    "venue": "SIAM Journal on Applied Mathematics",
+    "topic": "Nonlinear Photonic Systems",
+    "field": "Physics and Astronomy",
+    "ca_institutions": "McMaster University",
+    "funders": []
+  },
+  {
+    "id": "W2897426052",
+    "title": "Theoretical and numerical results for an age-structured SIVS model with a general nonlinear incidence rate",
+    "abstract": "In this paper, we propose an SIVS epidemic model with continuous age structures in both infected and vaccinated classes and with a general nonlinear incidence. Firstly, we provide some basic properties of the system including the existence, uniqueness and positivity of solutions. Furthermore, we show that the solution semiflow is asymptotic smooth. Secondly, we calculate the basic reproduction number [Formula: see text] by employing the classical renewal process, which determines whether the disease persists or not. In the main part, we investigate the global stability of the equilibria by the approach of Lyanpunov functionals. Some numerical simulations are conducted to illustrate the theoretical results and to show the effect of the transmission rate and immunity waning rate on the disease prevalence.",
+    "year": 2018,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Biological Dynamics",
+    "topic": "Mathematical and Theoretical Epidemiology and Ecology Models",
+    "field": "Medicine",
+    "ca_institutions": "Wilfrid Laurier University",
+    "funders": ["Natural Sciences and Engineering Research Council of Canada", "Shanxi Scholarship Council of China", "National Natural Science Foundation of China"]
+  },
+  {
+    "id": "W2193302029",
+    "title": "The witness properties and the semantics of the Prolog cut",
+    "abstract": "The semantics of the Prolog ‘cut’ construct is explored in the context of some desirable properties of logic programming systems, referred to as the witness properties. The witness properties concern the operational consistency of responses to queries. A generalization of Prolog with negation as failure and cut is described, and shown not to have the witness properties. A restriction of the system is then described, which preserves the choice and first-solution behaviour of cut but allows the system to have the witness properties. The notion of cut in the restricted system is more restricted than the Prolog hard cut, but retains the useful first-solution behaviour of hard cut, not retained by other proposed cuts such as the ‘soft cut’. It is argued that the restricted system achieves a good compromise between the power and utility of the Prolog cut and the need for internal consistency in logic programming systems. The restricted system is given an abstract semantics, which depends on the witness properties; this semantics suggests that the restricted system has a deeper connection to logic than simply permitting some computations which are logical. Parts of this paper appeared previously in a different form in the Proceedings of the 1995 International Logic Programming Symposium (Andrews, 1995).",
+    "year": 2002,
+    "lang": "en",
+    "type": "article",
+    "venue": "Theory and Practice of Logic Programming",
+    "topic": "Logic, Reasoning, and Knowledge",
+    "field": "Computer Science",
+    "ca_institutions": "Western University",
+    "funders": []
+  },
+  {
+    "id": "W1990189085",
+    "title": "Child Work and Schooling: The Role of Household Asset Profiles and Poverty in Rural Ethiopia",
+    "abstract": "Child labour is commonly associated with poverty. This is consistent with the expectation that the supply of child labour will fall as incomes increase. However, the empirical evidence for this link is weak. We thus seek to extend the theoretical and empirical framework to better address demand determinants for child labour. We argue that this demand is household-specific given that in Ethiopia, as in most other developing countries, child labour is overwhelmingly performed for the child's own household in the absence of a smoothly functioning child labour market. A simple agricultural household model with a missing labour market shows that household asset portfolios and household composition are the principal determinants of child labour demand. Multinomial logit, mixed logit and simultaneous equation models are used to analyze child time use decisions in the context of rural Ethiopia while addressing issues of income endogeneity and the failure of the independence of irrelevant alternations hypothesis. Our results suggest that the demand for child labour plays a major role in child time-use decisions and that this demand varies substantially between households according to their asset profiles and household composition. In addition, by adequately addressing the demand side, we actually find support for a poverty--child labour link. These results imply that in pursuing asset accumulation-based poverty alleviation policies, attention should be paid to the possibility that this will encourage households to withdraw their children from school in order to take advantage of the increased returns. Copyright 2007 The author 2007. Published by Oxford University Press on behalf of the Centre for the Study of African Economies. All rights reserved. For permissions, please email: journals.permissions@oxfordjournals.org, Oxford University Press.",
+    "year": 2007,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of African Economies",
+    "topic": "Poverty, Education, and Child Welfare",
+    "field": "Social Sciences",
+    "ca_institutions": ["Center for Interuniversity Research and Analysis on Organizations", "HEC Montréal", "Université Laval"],
+    "funders": []
+  },
+  {
+    "id": "W1914048964",
+    "title": "The importance of good plumbing: reconsidering infrastructure in distributed systems",
+    "abstract": "Summary form only given. Our work to date has been in the design and development of a stream-centric model for communications which we have called the flow. A flow is a uniquely named, message-based, multicast communications stream. Flows are named by FlowIDs which represent a collection of resources used to provide a communications stream in the same manner that process IDs represent resources associated with a computational task. By providing distinct names for these multicast streams, services become decoupled from network endpoints. This single property provides sweeping benefits for mobility, fault tolerance, and resource location. In addition to naming, we have implemented three properties of flows which we feel are beneficial to distributed applications. We have finished an initial implementation of flows as a network middleware and have become convinced that they are an interesting and useful communications abstraction.",
+    "year": 2005,
+    "lang": "en",
+    "type": "article",
+    "topic": "Service-Oriented Architecture and Web Services",
+    "field": "Computer Science",
+    "ca_institutions": "University of British Columbia",
+    "funders": []
+  },
+  {
+    "id": "W4395109905",
+    "title": "PKA inhibition is a central step in D,L-methadone-induced ER Ca2+ release and subsequent apoptosis in acute lymphoblastic leukemia",
+    "abstract": "Acute lymphoblastic leukemia (ALL) is a hematologic cancer that mostly affects children. It accounts for over a quarter of ALL pediatric cancers, causing most of the cancer death among children. Previously, we demonstrated that D,L-methadone causes ALL cell apoptosis via μ-opioid receptor 1 (OPRM1)-triggered ER Ca 2+ release and decrease in Ca 2+ efflux, elevating [Ca 2+ ] i . However, the precise mechanism by which D,L-methadone induces ER Ca 2+ release remains to be defined. Here, we show that in ALL cells, D,L-methadone-induced ER Ca 2+ release is blocked by inhibition of G αi , but not G βϒ , indicating that the process is dependent on G αi . Activation of adenylyl cyclase (AC) with forskolin or treatment with 8-CPT-cAMP blocks D,L-methadone-induced ER Ca 2+ release, indicating that the latter results from G αi -dependent downregulation of AC and cAMP. The 14–22 amide (myr) PKA inhibitor alone elicits ER Ca 2+ release, and subsequent treatment with D,L-methadone does not cause additional ER Ca 2+ release, indicating that PKA inhibition is a key step in D,L-methadone-induced ER Ca 2+ release and can bypass the D,L-methadone-OPRM1-AC-cAMP step. This is consistent with the decrease in PKA-dependent (i) inhibitory PLCβ3 Ser1105 phosphorylation that leads to PLCβ3 activation and ER Ca 2+ release, and (ii) BAD Ser118 phosphorylation, which together ultimately result in caspase activation and apoptosis. Thus, our findings indicate that D,L-methadone-induced ER Ca 2+ release and subsequent apoptosis in ALL cells is mediated by G αi -dependent downregulation of the AC-cAMP-PKA-PLCβ3/BAD pathway. The fact that 14–22 amide (myr) alone effectively kills ALL cells suggests that PKA may be targeted for ALL therapy.",
+    "year": 2024,
+    "lang": "en",
+    "type": "article",
+    "venue": "Frontiers in Cell and Developmental Biology",
+    "topic": "Genetics and Neurodevelopmental Disorders",
+    "field": "Biochemistry, Genetics and Molecular Biology",
+    "ca_institutions": ["Alberta Children's Hospital", "University of Calgary"],
+    "funders": "Canadian Institutes of Health Research"
+  },
+  {
+    "id": "W2328616391",
+    "title": "Surface Passivation Using Silane for Epitaxial Growth of Graphene on SiC substrate",
+    "abstract": "We report surface pre-treatment technique for high quality graphene layer formation on SiC surface. It has been demonstrated that silicon passivation of SiC surface using silane flow and subsequent sacrificial oxidation can significantly improve surface condition of the graphene layer on SiC with much fewer carbon dumps and wrinkles, reduced electrical resistance, smoother surface roughness of ~ 2.7 Aå and larger domain size of ~380 Aå. Our results suggest that surface treatment before graphitization is the key to synthesize high quality epitaxial graphene layer.",
+    "year": 2009,
+    "lang": "en",
+    "type": "article",
+    "venue": "ECS Transactions",
+    "topic": "Graphene research and applications",
+    "field": "Materials Science",
+    "ca_institutions": "Kootenay Association for Science & Technology",
+    "funders": "Korea Science and Engineering Foundation"
+  },
+  {
+    "id": "W7009215766",
+    "title": "Duitsers blijven weg uit Venlo: 'Dit in 43 jaar niet meegemaakt'",
+    "abstract": "Description (Dutch): In grenssteden als Venlo hebben winkeliers en marktlieden veel last van het feit dat Duitse klanten, die normaal in groten getale in Nederland komen winkelen, massaal wegblijven vanwege de coronamaatregelen. Description (English): In border towns such as Venlo, shopkeepers and marketers are suffering from the fact that German customers, who normally come to shop in the Netherlands in large numbers, are staying away en masse due to the corona measures.",
+    "year": 2020,
+    "lang": "nl",
+    "type": "other",
+    "venue": "Bulletin of Miscellaneous Information (Royal Gardens Kew)",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W120778348",
+    "title": "Investigation of Geothermal Energy as a Heat Source for Oilsands Extraction in Northern Alberta",
+    "abstract": "HUNT WELL AT FORT McMURRAY (2400 m deep) GEOTHERMAL RESERVOIR SIMULATION THERMAL GRADIENT AND HEAT-FLOW MAPS J. A. Majorowicz1; M. J. Unsworth1; T Babadagli1; T. Chacko1; C. A. Currie1; A. Gray1; M. Grobe3; L. M. Heaman1; O. Heidbach2; E . Huenges2; I. Moeck2; O. Ritter2; B. J. Rostron1; D. Schmitt1; M. van der Baan1; S. Weides2 1. University of Alberta, Edmonton, AB, Canada. 2. GFZ German Research Centre For Geosciences, Potsdam, Germany. 3. Energy Resources Conservation Board/Alberta Geological Survey, Edmonton, AB, Canada. INVESTIGATION OF GEOTHERMAL ENERGY AS A HEAT SOURCE FOR OILSANDS EXTRACTION IN NORTHERN ALBERTA",
+    "year": 2010,
+    "lang": "en",
+    "type": "article",
+    "venue": "Publication Database GFZ (GFZ German Research Centre for Geosciences)",
+    "topic": "Hydrocarbon exploration and reservoir analysis",
+    "field": "Engineering",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4206030643",
+    "title": "Anxiety Disorders",
+    "abstract": "Abstract Anxiety disorders are psychiatric syndromes in which pathological anxiety is the dominant feature. The results of family studies and twin studies suggest a genetic contribution to these disorders, especially in the case of panic disorder. The molecular search for responsible genes has just begun.",
+    "year": 2006,
+    "lang": "en",
+    "type": "other",
+    "venue": "Encyclopedia of Life Sciences",
+    "topic": "Obsessive-Compulsive Spectrum Disorders",
+    "field": "Psychology",
+    "ca_institutions": "University of Toronto",
+    "funders": []
+  },
+  {
+    "id": "W1990979946",
+    "title": "Déjouer : imaginaires de la fiction romanesque dans Les failles de l’Amérique et L’acquittement",
+    "abstract": "Cet article s’intéresse à deux romans ( Les failles de l’Amérique de Bertrand Gervais et L’acquittement de Gaétan Soucy) qui cherchent à déjouer l’activité lecturale en mettant sur pied des univers fictionnels qui ne semblent se déployer que pour mieux se désagréger. Par l’analyse de ces étranges dispositifs, on veut montrer que ces pratiques littéraires, qui donnent de prime abord l’impression de refuser le jeu fictionnel, finissent en bout de ligne par le réaffirmer en proposant de la fiction romanesque une conception qui met l’accent sur un principe de prolifération des univers et des individus, hors de toute nécessité de cohérence. Ces romans font ainsi une règle normative du jeu fictionnel; cependant, ils posent le principe de prolifération comme règle constitutive. Si ces romans « déjouent », ce n’est donc pas sans enjeu.",
+    "year": 2011,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Intermédialités Histoire et théorie des arts des lettres et des techniques",
+    "topic": "Cultural Insights and Digital Impacts",
+    "field": "Computer Science",
+    "ca_institutions": "Université du Québec à Chicoutimi",
+    "funders": []
+  },
+  {
+    "id": "W4226334868",
+    "title": "The Immunisation against COVID-19 as a Global Public Good",
+    "abstract": "In 2020, COVID-19 emerged and spread rapidly across the globe. Soon thereafter, the World Health Assembly (WHA) proclaimed the immunisation against COVID-19 a Global Public Good in its Resolution WHA 73.1. What the concept of Global Public Good (GPG) entails, both generally, and, in particular with respect to international law, are far from settled. This article aims to further develop an understanding of this concept and to frame its meaning in the context of immunisation against COVID-19. It argues that while the concept originated in economics, it carries normative value and has implications for different areas of international law. The Resolution concretises a duty to cooperate in the context of immunisation. Furthermore, it requires us to think beyond state borders as well as beyond states’ responsibilities and market mechanisms. This article will explore the repercussions of the normative concept of Global Public Goods within the framework of human rights law, international security law, international economic law, and intellectual property rights. The reference to the concept of Global Public Goods provides an overarching framework in a matter that concerns the international community. Thus, it requires us to develop and provide for international instruments of concrete collective action.",
+    "year": 2022,
+    "lang": "en",
+    "type": "article",
+    "venue": "Zeitschrift für ausländisches öffentliches Recht und Völkerrecht / Heidelberg Journal of International Law",
+    "topic": "Public health and occupational medicine",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": ["Instytut Biologii Medycznej Polskiej Akademii Nauk", "National Institutes of Health", "Vector Institute", "Chinese Academy of Medical Sciences", "Moderna", "Indian Council of Medical Research", "University of Oxford", "AstraZeneca", "Pfizer"]
+  },
+  {
+    "id": "W601268857",
+    "title": "One Quarter of Humanity : Malthusian Mythology and Chinese Realities, James Z. Lee and Wang Feng, Harvard University Press, 1999, xii+248p",
+    "abstract": "",
+    "year": 2001,
+    "lang": "en",
+    "type": "article",
+    "venue": "人口学研究",
+    "topic": "Chinese history and philosophy",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4393244874",
+    "title": "HR directors in India: navigating institutional incoherence for HRM stability and change",
+    "abstract": "Purpose This paper aims to explore the strategic and evolving role of human resource management (HRM) directors within the context of underdeveloped institutional arrangements. The study focuses on India and conducts a comparative analysis of the roles of HRM directors in both multinational enterprises (MNEs) and domestic firms. Design/methodology/approach Survey-based data from the HRM directors of 252 enterprises were gathered for the comparative analysis, including both multinational and domestic enterprises. Findings HRM directors in MNEs lack the proficiency required to effectively fulfil their strategic role. In addition, there has been a notable shift in the responsibilities of HRM directors in MNEs, with increased emphasis on labour movements and trade union negotiations, as opposed to traditional human resource (HR) activities. This shift suggests that the role of HRM in MNEs operating in India has been influenced by local isomorphic forces, rather than following a “pendulum swing” between home and host country institutional pressures. The prevalence of informality in the Indian institutional arrangements may act as a strong counterforce to integrating the strategic agency of MNEs' home country HRM directors into the organizational structure. Despite facing resistance from the local institutional context, HRM directors in MNEs are responding with a pushback, prioritizing labour movements and trade union negotiations over core HRM activities. Research limitations/implications The study highlights the broader implications for theory and practice, shedding light on the challenges faced by HRM directors in navigating incoherent institutional arrangements. It emphasizes the need for a deeper understanding of local forces in shaping HRM practices within multinational settings. Originality/value We contribute to the comparative HRM literature by elaborating on power struggles that HRM directors face amid the dichotomies of formal power and authority that are encoded in the organizational structure versus culturally contingent power that can be accrued from engaging in informality. We also highlight their engagement in prolonged institutional mediation and change, which serves as a compensatory mechanism for the institutional shortfalls they encounter within the context of emerging markets.",
+    "year": 2024,
+    "lang": "en",
+    "type": "article",
+    "venue": "Employee Relations",
+    "topic": "Human Resource and Talent Management",
+    "field": "Business, Management and Accounting",
+    "ca_institutions": "University Canada West",
+    "funders": []
+  },
+  {
+    "id": "W7063814964",
+    "title": "Amount paid to Frederick Holmes by the Welland Railway Company",
+    "abstract": "Amount paid to Frederick Holmes by the Welland Railway Company for 26 days of service during&#13;\\nFebruary, March and April for excavations made at Port Dalhousie (1 page, handwritten). This is&#13;\\nsigned by S.D. Woodruff, Aug. 28, 1860.",
+    "year": 2016,
+    "lang": "en",
+    "type": "other",
+    "venue": "Brock University Digital Repository (Brock University)",
+    "topic": "Magnetic confinement fusion research",
+    "field": "Physics and Astronomy",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2929113895",
+    "title": "Evaluating the Effects of a Novel Neuromuscular Neck Training Device on Multiplanar Static and Dynamic Neck Strength: A Pilot Study",
+    "abstract": "Versteegh, TH, Dickey, JP, Emery, CA, Fischer, LK, MacDermid, JC, and Walton, DM. Evaluating the effects of a novel neuromuscular neck training device on multiplanar static and dynamic neck strength: A pilot study. J Strength Cond Res 34(3): 708-716, 2020-The neck serves an important function in damping the transference of acceleration forces between the head and the trunk, such as that occurring during contact sports or motor vehicle collisions. An inability to adequately dissipate forces has been proposed as a potential mechanism for clinical conditions such as whiplash or concussion, but current approaches to neck training may not be targeting the correct mechanisms. The purpose of this study was to explore the training effect of a novel neuromuscular strengthening protocol on dynamic and static neck strength. This was a quasiexperimental pilot study design with intervention (n = 8) and control (n = 10) groups. The intervention group was trained (twice/week, ∼10 minutes, for 7 weeks) on a training device that uses self-generated centripetal force to create a dynamic rotational resistance. This protocol is intended to target the ability of the neck muscles to perform coordinated multiplanar plyometric contractions. Both groups also continued with traditional neck strengthening that included training on a straight-plane, isotonic, 4-way neck machine. Performance on the training device showed improvement after routine practice within 1 week, as evidenced by a trend toward increased peak speed in revolutions per minute (RPM). After 7 weeks, peak RPM increased from 122.8 (95% confidence interval [CI], 91.3-154.4) to 252.3 (95% CI, 241.5-263.1). There was also a large positive effect size (Hedge's d, 0.68) in isometric composite (multiplane) neck strength favoring the intervention group over the control group (difference, 20 N; 95% CI, -8 to 48). The largest magnitude strength improvement in a single plane was in axial rotation and also favored the intervention group over the control group (Hedge's d, 1.24; difference, 46 N; 95% CI, 9-83). Future studies should explore whether the dynamic training presented here could help reduce the risk of sports concussion, whiplash, or other head-neck trauma.",
+    "year": 2019,
+    "lang": "en",
+    "type": "article",
+    "venue": "The Journal of Strength and Conditioning Research",
+    "topic": "Traumatic Brain Injury Research",
+    "field": "Medicine",
+    "ca_institutions": ["University of Calgary", "Western University"],
+    "funders": []
+  },
+  {
+    "id": "W2565700930",
+    "title": "The importance of healthcare managers’ organizational preconditions and support resources for their appraisal of planned change and its outcomes",
+    "abstract": "Background: Healthcare managers are expected to lead and manage planned organizational change intended to improve healthcare process quality. However, their complex working conditions offer limited decision control, and healthcare managers often feel ill prepared and inadequately supported to perform their duties. Healthcare managers have previously described their need for organizational support, but we lack knowledge of the preconditions and resources that help managers implement planned change.Methods: This prospective cohort study examined healthcare managers at three Swedish hospitals implementing lean production and two Swedish hospitals implementing their own improvement model. Questionnaire data from 2012, 2103, and 2014 were used in following up. We used t-tests and a linear mixed model design in analysing the data.Results: Healthcare managers who perceived strong support from managers, employees, colleagues, and the organization and managers with the longest managerial experience had the least negative appraisal of change. Managers who perceived strong support from employees, management, and the organizational structure perceived higher levels of healthcare process quality.Conclusions: Long managerial experience and strong support from managers, employees, and the organization are important formanagers’ appraisal of, work on, and successful implementation of planned change. Top management must therefore ensure that the healthcare managers have sufficient managerial experience and support before they delegate to them the responsibility to implement planned change.",
+    "year": 2016,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Hospital Administration",
+    "topic": "Occupational Health and Safety Research",
+    "field": "Health Professions",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W83605570",
+    "title": "Online games as a medium of cultural communication: An ethnographic study of socio-technical transformation",
+    "abstract": "This dissertation explores the place and meaning of online games in everyday life. In South Korea, online games are a prominent part of popular culture and this medium has come under public criticism for various societal ills, such as Internet addiction and a hopeless dependence upon online games. Humanistic accounts of Information-Communication Technology (ICT) usage are still a minority body of research. All too often, studies of engagement with technology reduce questions to their basic variables and social aspects are omitted in the name of science. Exactly how has it come to pass that online games have come to occupy such a prominent place in the media ecology in South Korea and yet not been replicated in other national contexts? The first chapter discusses addiction as it pertains to online games and suggest some scholarly support for the viewpoint that the rhetoric surrounding a biomedical interpretation of online game addiction may not be the most appropriate way to address problems that have been typically laid at the feet of online gaming (or any other new form of media). The second chapter transitions into discussing my rationale for approaching South Korea as a fieldsite, the ethnographic methodology employed, and how this examination of online games is a particularly illustrative case of the profound role played by culture, social structure, infrastructure, and policy in audience reception. The third chapter on the rise of Korean gaming delves into the foundational aspects of Korean social history and culture that I assert set the stage for the present new media scene in South Korea. The fourth chapter explores what games mean in the lives of Korean youth according to the ethnographic data I have been collecting during research stays in 2004, 2008/2009, and 2010, having analyzed the emergent practices involved in online game activity. The last chapter examines the Korean games industry and the role it has to play in the upward mobility of young Koreans. Overall, this dissertation examines the contextual factors of South Korea, in which a medium of communication can begin to be understood within the porous boundaries of its national circumstances and sociotechnical transformation.",
+    "year": 2012,
+    "lang": "en",
+    "type": "dissertation",
+    "venue": "Summit (Simon Fraser University)",
+    "topic": "Digital Games and Media",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": ["National Institute for International Education", "Bundesministerium für Wissenschaft und Forschung", "Foreign Affairs and International Trade Canada", "European Commission"]
+  },
+  {
+    "id": "W2944870478",
+    "title": "Rendre visible / Making Visible",
+    "abstract": "",
+    "year": 2018,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Ciel variable : art, photo, médias, culture",
+    "topic": "Posthumanist Ethics and Activism",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2969549385",
+    "title": "Changing incidence of reported viral hepatitis in China from 2004 to 2016: an observational study",
+    "abstract": "OBJECTIVE: China's national hepatitis burden is high. This study aims to provide a detailed national-level description of the reported incidence of viral hepatitis in China during 2004-2016. DESIGN: Observational study. SETTING: Data were obtained from China's National Notifiable Disease Reporting System, and changing trends were estimated by joinpoint regression analysis. PARTICIPANTS: In this system, 16 927 233 reported viral hepatitis cases occurring during 2004-2016 were identified. PRIMARY OUTCOME MEASURE: Incidence rates per 100 000 person-years and changing trends were calculated. RESULTS: There were 16 927 233 new cases of viral hepatitis reported in China from 2004 to 2016. Hepatitis B (HBV) (n=13 543 137, 80.00%) and hepatitis C (HCV) (n=1 844 882, 10.90%) accounted for >90% of the cases. The overall annual percent change (APC) in reported cases of viral hepatitis and HBV were 0.3%(95% CI -2.0 to 0.8, p=0.6) and -0.2% (95% CI -1.6 to 1.2, p=0.8), respectively, showing a stable trend. HBV rates were highest in the 20-29 year old age group and lowest in younger individuals, likely resulting from the universal HBV vaccination. The reported incidence of HCV and hepatitis E (HEV) showed increasing trends; the APCs were 14.5% (95% CI 13.1 to 15.9, p<0.05) and 4.7% (95% CI 2.8 to 6.7, p<0.05), respectively. The hepatitis A (HAV) reporting incidence decreased, and the APC was -13.1% (95% CI -15.1 to -11.0, p<0.05). There were marked differences in the reporting of hepatitis among provinces. CONCLUSIONS: HBV continues to constitute the majority of viral hepatitis cases in China. Over the entire study period, the HBV reporting incidence was stable, the HCV and HEV incidence increased and the HAV incidence decreased. There were significant interprovincial disparities in the burden of viral hepatitis, with higher rates in economically less-developed areas. Vaccination is important for viral hepatitis prevention and control.",
+    "year": 2019,
+    "lang": "en",
+    "type": "article",
+    "venue": "BMJ Open",
+    "topic": "Hepatitis B Virus Studies",
+    "field": "Medicine",
+    "ca_institutions": "University of Manitoba",
+    "funders": ["National Center for HIV/AIDS, Viral Hepatitis, STD, and TB Prevention", "Fundamental Research Funds for the Central Universities", "Centers for Disease Control and Prevention", "National Science and Technology Major Project", "Gilead Sciences"]
+  },
+  {
+    "id": "W6912325175",
+    "title": "English, French and Portuguese translation of SOPD survey",
+    "abstract": "3 language translation of SOPD survey used in Africa in 2020",
+    "year": 2021,
+    "lang": "en",
+    "type": "article",
+    "venue": "Zenodo (CERN European Organization for Nuclear Research)",
+    "topic": "COVID-19 Impact on Reproduction",
+    "field": "Medicine",
+    "ca_institutions": "Université Laval",
+    "funders": []
+  },
+  {
+    "id": "W2171637264",
+    "title": "Defusing Intrusion Capabilities by Collaborative Anomalous Trust",
+    "abstract": "From a computer security perspective, services provided by distributed information systems may be organized based on their security attributes goals and requirements; these processes and services are categorized as anonymous, registered, encrypted and trusted. In this research, we propose a solution for operational trust assurance problems where vulnerabilities reduction is implicitly observed. Collaborative anomalous trust management (CATM) is a methodology that may be utilized for the purpose of affirming trust between communications endpoints. In conjunction with trusted computing base, zero knowledge protocol, and layered trust, CATM is defined. CATM builds its trust credentials based on computing environment variables. Ideally this methodology is suited for service oriented architectures such as Web services where service providers and consumers interact at different levels of security requirements. This methodology is best optimized for use as a risk management utility. In this approach vulnerabilities are implicitly reduced, hence intrusion capabilities are defused.",
+    "year": 2008,
+    "lang": "en",
+    "type": "article",
+    "topic": "Access Control and Trust",
+    "field": "Social Sciences",
+    "ca_institutions": "Ontario Tech University",
+    "funders": []
+  },
+  {
+    "id": "W4399230904",
+    "title": "Shards of Memory",
+    "abstract": "<JATS1:p>As the last Holocaust survivors die, their testimonies make the transition from memory to history. In this compelling volume, Yehudi Lindeman, Director of the Living Testimonies Video Archive in Montreal, shares compelling stories of survival and triumph collected from years of interviews with those who lived through the most harrowing decade of the 20th century. Here are 25 tales of courage and loss, representing the experiences of women, men, and children who either survived the death camps or lived in hiding, and of their rescuers and redeemers.<\/JATS1:p> <JATS1:p>The testimonies included in this volume show glimpses of the big movements, the big picture of World War II—the fast German sweep into Poland; the bureaucratic German machine that marked and identified Jews across German-occupied Europe; the efficiently organized roundups of Europe's Jews; the gradual retreat of the Wehrmacht from east to west; the sudden attacks on Holland and France. The fate of the European Jews may be a collective one, but their attempt to survive the onslaught on their liberty and life is often best understood through the portrayal of individual struggles. By focusing on individual lives, the narratives collected here capture the flow of history in all its precise, subjective, human detail.<\/JATS1:p>",
+    "year": 2007,
+    "lang": "en",
+    "type": "book",
+    "venue": "Praeger eBooks",
+    "topic": "Memory, Trauma, and Commemoration",
+    "field": "Psychology",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2268836160",
+    "title": "What Do We Manage—And How Do We Assess It? Results of an Exploratory Study with Executives in Training and Other Content Development Disciplines",
+    "abstract": "",
+    "year": 2005,
+    "lang": "en",
+    "type": "article",
+    "venue": "EdMedia: World Conference on Educational Media and Technology",
+    "topic": "Competency Development and Evaluation",
+    "field": "Psychology",
+    "ca_institutions": "Concordia University",
+    "funders": []
+  },
+  {
+    "id": "W1589570958",
+    "title": "Exercise is Medicine—The Importance of Physical Activity, Exercise Training, Cardiorespiratory Fitness and Obesity in the Prevention and Treatment of Type 2 Diabetes",
+    "abstract": "Type 2 diabetes has reached epidemic proportions worldwide and is associated with increased risk of cardiovascular diseases and premature mortality. Diet and physical activity (PA)-based lifestyle interventions have been shown to prevent progression to type 2 diabetes in patients at high risk. Regular PA substantially reduces the risk of type 2 diabetes and a high level of PA is associated with a substantial reduction in type 2 diabetes risk. In addition, there is strong evidence suggesting a steep inverse relationship between both PA and cardiorespiratory fitness (CRF) and mortality in patients with type 2 diabetes. Of particular concern is the dramatic, steep increase in mortality among patients with low CRF. An important point is that obese individuals who are at least moderately fit have a lower mortality risk than those who are normal weight but unfit. A large body of evidence demonstrates that exercise improves glycaemic control in type 2 diabetes; the greatest improvements are achieved with combined aerobic and resistance training. A primary goal of public health strategies is to promote PA and move patients out of the least fit, highrisk cohort by increasing PA among the least active. Any plan to deal with the global epidemic of type 2 diabetes must give major attention to low PA and how this can be reversed in the general population.",
+    "year": 2014,
+    "lang": "en",
+    "type": "review",
+    "venue": "touchREVIEWS in Endocrinology",
+    "topic": "Physical Activity and Health",
+    "field": "Medicine",
+    "ca_institutions": "Children's Hospital Research Institute of Manitoba",
+    "funders": []
+  },
+  {
+    "id": "W3120854054",
+    "title": "Designing Better CSR Initiatives",
+    "abstract": "Are Corporate Social Responsibility (CSR) initiatives providing the societal good they promise? After decades of CSR research, it appears to occur only rarely. In this article, we suggest a new approach to CSR that can deliver on its promise. Drawing from the impact evaluation literature of development economics, public policy, and education, we argue that the CSR field should reconceive itself as a science of design in which researchers formulate CSR initiatives that seek to achieve specific social and environmental objectives. In accordance with this pursuit, we provide seven guidelines to enable CSR practitioners to improve the design of their initiatives.",
+    "year": 2020,
+    "lang": "en",
+    "type": "article",
+    "topic": "Corporate Social Responsibility Reporting",
+    "field": "Business, Management and Accounting",
+    "ca_institutions": "York University",
+    "funders": []
+  },
+  {
+    "id": "W4395458640",
+    "title": "Tricky Grounds",
+    "abstract": "Breaks the deafening silence of Indigenous women&rsquo;s voices in academic leadership positions. Since the 2015 release of the report on the Truth and Reconciliation Commission of Canada, new Indigenous policies have been enacted in universities and a variety of interconnecting Indigenous senior administrative roles have been created. Many of these newly created roles have been filled by Indigenous women. But what does it mean for Indigenous women to be recruited to Indigenize Western institutions that have not undergone introspective, structural change? &#160; Informed by her own experiences and the stories of other Indigenous women working in senior administrative roles in Canadian universities, Candace Brunette-Debassige explores the triple-binding position Indigenous women often find themselves trapped in when trying to implement reconciliation in institutions that remain colonial, Eurocentric, and male-dominated. The author considers too the gendered, emotional labour Indigenous women are tasked with when universities rush to Indigenize without the necessary preparatory work of decolonization. &#160; Drawing on an Indigenous feminist decolonial theoretical lens and positioning Indigenous story as theory, Brunette-Debassige illustrates how Indigenous women can and do preserve and enact their agency through resistance, and help lead deeper transformative changes in Canadian universities. Ultimately, her work provides a model for how reconciliation and Indigenization can be done at an institutional level. &#160;",
+    "year": 2023,
+    "lang": "en",
+    "type": "book",
+    "venue": "University of Regina Press eBooks",
+    "topic": "Indigenous Health, Education, and Rights",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W6986309033",
+    "title": "Parkinson Hastalarında Alt ve Üst Ekstremite Becerilerinin Çift Görev ile Değişiminin İncelenmesi",
+    "abstract": "This study planned with the aim of to compare dual task upper and lower extremity skills with single taskupper and lower extremity skills and to investigate the effect of the dual task on upper and lower extremity skills in Parkinson's disease patients with different stages of disease. 15 patients with Montreal Cognitive Assessment Scale (MoCA) score 21 or above, between 62-68 ages, in stage 1-2 (mild stage) according to the Modified Hoehn &amp;Yahr Scale and 15 patients with Montreal Cognitive Assessment Scale (MoCA) score 21 or above, between 64-72 ages in stage 2,5-3 (moderate stage) according to the Modified Hoehn &amp;Yahr Scale and 15 age matched healthy controls were included in the study. The demographic data of the patients were recorded and assessments were made while the patients were in the \"on\" period. Walking speed was assessed with 10-Meter Walk Test (10MWT), functional mobility skills was assessed with Timed Up and Go Test (TUG) and manual dexterity was assessed with Purdue Pegboard Test (PPT). These assessments were made during single task and dual task. Quality of life was assessed with Parkinson's Disease Questionnaire-8 (PDQ-8) for Parkinson's disease patients and with the Nottingham Health Profile (NHP) for the healthy control group. In this study, it was determined that the dual task has a negative effect on upper and lower extremity skills and this negative effect was observed earlier and was heavier in upper extremities than lower extremities (p&lt;0.05). It was also found that the quality of life of Parkinson's disease patients was affected from the early stages and was associated with dual tasks effect (10MWT; rho=0.492, p=0.006), TUG; rho=0.672, p&lt;0.001, PPT; rho=-0.682, p&lt;0.01). The effect of the dual task on the upper extremities that begins in the early stages of the disease, revealed the necessity of early initiation of the exercises intended to upper extremities in treatment programs and it was thought that this early initiation will increase the success of the treatment and also will increase the quality of life of the patients.",
+    "year": 2020,
+    "lang": "en",
+    "type": "dissertation",
+    "venue": "Hacettepe University Institutional Repository (hacettepe.edu.tr)",
+    "topic": "Parkinson's Disease and Spinal Disorders",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4211093970",
+    "title": "The Use of Technology Among Persons With Memory Concerns and Their Caregivers in the United States During the COVID-19 Pandemic: Qualitative Study",
+    "abstract": "BACKGROUND: Stay-at-home orders and other public health measures designed to mitigate the spread of COVID-19 have increased isolation among persons with memory concerns (PWMCs: individuals diagnosed with cognitive impairment or Alzheimer disease or related dementias). The pandemic has also exacerbated challenges for family members who care for PWMCs. Although technology has demonstrated the potential to improve the social connections and mental health of PWMCs and their family caregivers (CGs), previous research shows that older adults may be reluctant to adopt new technologies. OBJECTIVE: We aimed to understand why and how some PWMCs and their CGs altered their use of mainstream technology, such as smartphones and fitness trackers, and assistive technology to adapt to lifestyle changes (eg, increased isolation) during the COVID-19 pandemic. METHODS: Using data collected in 20 qualitative interviews from June to August 2020 with 20 PWMCs and family CG dyads, we assessed changes in and barriers to everyday technology use following the implementation of COVID-19 mitigation strategies in the United States. Zoom videoconferencing was utilized to conduct the interviews to protect the health of the participants who were primarily older adults. RESULTS: Using qualitative thematic analysis, we identified 3 themes that explained motivations for using technology during a pandemic: (1) maintaining social connections, (2) alleviating boredom, and (3) increasing CG respite. Results further revealed lingering barriers to PWMC and CG adoption of technologies, including: (1) PWMC dependence upon CGs, (2) low technological literacy, and (3) limitations of existing technology. CONCLUSIONS: This in-depth investigation suggests that technology can provide PWMCs with more independence and offer CGs relief from CG burden during periods of prolonged isolation.",
+    "year": 2022,
+    "lang": "en",
+    "type": "article",
+    "venue": "JMIR Aging",
+    "topic": "Cognitive Functions and Memory",
+    "field": "Psychology",
+    "ca_institutions": [],
+    "funders": "National Institute on Aging"
+  },
+  {
+    "id": "W2072473350",
+    "title": "Error Bounds for Online Predictions of Linear-Chain Conditional Random Fields: Application to Activity Recognition for Users of Rolling Walkers",
+    "abstract": "Linear-Chain Conditional Random Fields (L-CRFs) are a versatile class of models for the distribution of a sequence of hidden states (\"labels\") conditional on a sequence of observable variables. In general, the exact conditional marginal distributions of the labels can be computed only after the complete sequence of observations has been obtained, which forbids the prediction of labels in an online fashion. This paper considers approximations of the marginal distributions which only take into account past observations and a small number of observations in the future. Based on these approximations, labels can be predicted close to real-time. We establish rigorous bounds for the marginal distributions which can be used to assess the approximation error at runtime. We apply the results to an L-CRF which recognizes the activity of rolling walker users from a stream of sensor data. It turns out that if we allow for a prediction delay of half of a second, the online predictions achieve almost the same accuracy as the offline predictions based on the complete observation sequences.",
+    "year": 2011,
+    "lang": "en",
+    "type": "article",
+    "topic": "Topic Modeling",
+    "field": "Computer Science",
+    "ca_institutions": "University of Waterloo",
+    "funders": []
+  },
+  {
+    "id": "W4229443083",
+    "title": "The Efficacy of Pulsed Electromagnetic Fields on Pain, Stiffness, and Physical Function in Osteoarthritis: A Systematic Review and Meta-Analysis",
+    "abstract": "Background. Although there are many pharmacological interventions for adults with osteoarthritis (OA) who do not meet the indications for surgery, side effects and adverse effects cannot be ignored. Physical interventions are known for their effectiveness and safety, and pulsed electromagnetic fields (PEMFs) have already been applied to skeletal diseases such as osteoporosis. Objective. In this systematic review and meta-analysis, we aimed to assess the efficacy of PEMF on the major symptoms of patients with OA compared with efficacy of other interventions. Methods. Randomized controlled trials (RCTs) investigating OA patients treated with PEMF and with pain, stiffness, and physical function impairment since 2009 were included. The Visual Analog Scale (VAS) and Western Ontario McMaster Universities Osteoarthritis Index (WOMAC) scores were used for assessment. All extracted data were analyzed using RevMan V.5.3. Results. Eleven RCTs consisting of 614 patients were enrolled in this meta-analysis, of which 10 trials comprised knee OA and one comprised hand OA. Compared with the control groups, the PEMF treatment yielded a more favorable output. PEMF alleviated pain (standardized mean differences [SMD] = 0.71, 95% confidence interval [CI]: 0.08–1.34, p = 0.03), improved stiffness (SMD = 1.34, 95% CI: 0.45–2.23, <a:math xmlns:a=\"http://www.w3.org/1998/Math/MathML\" id=\"M1\"> <a:mi>p<\/a:mi> <a:mo>=<\/a:mo> <a:mn>0.003<\/a:mn> <\/a:math> ), and restored physical function (SMD = 1.52, 95% CI: 0.49–2.55, <c:math xmlns:c=\"http://www.w3.org/1998/Math/MathML\" id=\"M2\"> <c:mi>p<\/c:mi> <c:mo>=<\/c:mo> <c:mn>0.004<\/c:mn> <\/c:math> ). Conclusions. PEMF therapy ameliorates OA symptoms such as pain, stiffness, and physical function in patients compared to other conservative treatments. There is an urgent need to search for different types of OA in multiple locations.",
+    "year": 2022,
+    "lang": "en",
+    "type": "review",
+    "venue": "Pain Research and Management",
+    "topic": "Electromagnetic Fields and Biological Effects",
+    "field": "Biochemistry, Genetics and Molecular Biology",
+    "ca_institutions": [],
+    "funders": ["Hunan Provincial Innovation Foundation for Postgraduate", "National Natural Science Foundation of China"]
+  },
+  {
+    "id": "W2078791991",
+    "title": "Why teachers trust school leaders",
+    "abstract": "Purpose Trust among teachers in schools is significantly related to student achievement and trust in school leaders is an important influence on such trust. The purpose of this study is to identify leadership practices which teachers interpret as signs of trustworthiness on the part of their principals. Design/methodology/approach Evidence for the study was provided by post‐observation interviews with 24 randomly selected teachers in three “high trust” and three “low trust” schools selected from a much larger sample of schools included in a national study. Coding of interview data was guided by a framework of trust antecedents identified through a wide‐ranging review of empirical research. Findings Results demonstrated that teacher trust in principals is most influenced by leadership practices which teachers interpret as indicators of competence, consistency and reliability, openness, respect and integrity. Originality/value These results, generally consistent with previous research, specify, in much greater detail than has been reported to date, leadership trust‐building practices.",
+    "year": 2013,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Educational Administration",
+    "topic": "Parental Involvement in Education",
+    "field": "Social Sciences",
+    "ca_institutions": ["Institute for Christian Studies", "University of Toronto"],
+    "funders": []
+  },
+  {
+    "id": "W2049270537",
+    "title": "Auditors as modern pharmakoi: Legitimacy paradoxes and the production of economic order",
+    "abstract": "",
+    "year": 2009,
+    "lang": "en",
+    "type": "article",
+    "venue": "Critical Perspectives on Accounting",
+    "topic": "Weber, Simmel, Sociological Theory",
+    "field": "Social Sciences",
+    "ca_institutions": "Université Laval",
+    "funders": []
+  },
+  {
+    "id": "W2802940346",
+    "title": "Assessment of Pipeline Installation Using the Eliminator: a New Guided Boring Machine",
+    "abstract": "The Eliminator is a new guided boring machine developed to address the market need for Pilot Tube Microtunneling (PTMT) installations in non-displaceable soils. This study is part of a multi-phase research project sponsored by the Natural Sciences and Engineering Research Council of Canada (NSERC) and the City of Edmonton. The main objectives of this research is to investigate the productivity of the Eliminator, risks associated with this machine, and methods to predict the required jacking force for installation of pipes. To achieve these goals, firstly a broad literature review was conducted on PTMT and the Eliminator as well as similar technologies such as microtunneling and pipe jacking. The study then introduces the first pipeline installation project performed with the Eliminator and assesses the technology’s economic performance using the project’s productivity and risk measures. The jacking force of the project was also monitored for analysis using hydraulic pressure transducers. Five existing jacking force prediction models used for technologies similar to the Eliminator were analyzed and compared with each force measured in the field. Based on the comparison, appropriate methods for estimating the jacking force of Eliminator projects are suggested.",
+    "year": 2015,
+    "lang": "en",
+    "type": "article",
+    "venue": "University of Alberta Library",
+    "topic": "Non-Destructive Testing Techniques",
+    "field": "Engineering",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4223545689",
+    "title": "Tempered currents and Deligne cohomology of Shimura varieties, with an application to $\\mathrm{GSp}_6$",
+    "abstract": "We provide a new description of Deligne-Beilinson cohomology for any Shimura variety in terms of tempered currents. This is particularly useful for computations of regulators of motivic classes and hence to the study of Beilinson conjectures. As an application, we construct classes in the middle degree plus one motivic cohomology of Siegel sixfolds and we compute their image by Beilinson higher regulator in terms of Rankin-Selberg type automorphic integrals. Using results of Pollack and Shah, we relate the integrals to noncritical special values of the degree $8$ Spin $L$-functions, as predicted by Beilinson conjectures.",
+    "year": 2022,
+    "lang": "en",
+    "type": "preprint",
+    "venue": "arXiv (Cornell University)",
+    "topic": "Advanced Algebra and Geometry",
+    "field": "Mathematics",
+    "ca_institutions": [],
+    "funders": ["Natural Sciences and Engineering Research Council of Canada", "Agence Nationale de la Recherche", "Japan Society for the Promotion of Science", "European Commission", "Instituto de Ciencias Matemáticas"]
+  },
+  {
+    "id": "W1673415912",
+    "title": "Evaluation of low-cost materials for sorption of hydrophobic organic pollutants in stormwater",
+    "abstract": "",
+    "year": 2015,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Environmental Management",
+    "topic": "Microplastics and Plastic Pollution",
+    "field": "Environmental Science",
+    "ca_institutions": "University of British Columbia",
+    "funders": ["Stiftelsen Lars Hiertas Minne", "Carl Tryggers Stiftelse för Vetenskaplig Forskning", "Sweden-America Foundation"]
+  },
+  {
+    "id": "W7063055376",
+    "title": "Women and war: Opening Pandora's box - Intimate relationships in the shadow of traumatic experiences",
+    "abstract": "War and Post Traumatic Stress Disorder go, unfortunately, hand in hand. And war seems to be raging around us, no matter where we are on the Globe. Commonly, the scientific literature addresses the trauma suffered by those who directly experienced the war, meaning the soldiers. The literature has not, adequately, addressed the effects that war has on those who did not participate in it, but who live with those who did. The family members, mainly the spouses, who welcome the soldiers back to everyday life, and who consequently experience secondary trauma, related to the damaging effects that the war had on those who experienced it firsthand. The book brings a firsthand account of women [spouses and children] who met their traumatized husband when he returned from the battleground, and attempted to integrate into a society that does not understand what they went through, and thus is not supportive of them. Some chapters describe the experiences of such a woman, and how she either triumphed despite very difficult and unfavorable home conditions or, on the other hand, remained traumatized. Other chapters recount struggles to survive during and post- WWII, offering alternate perspectives whilst the overarching theme of pain and suffering is ubiquitous. Some chapters have an academic focus, examining critical issues pertaining to this book. Finally, chapters end with a commentary, by a clinical psychologist, of the women, their experiences, the effects on their lives, and what helped them triumph, or not.",
+    "year": 2017,
+    "lang": "en",
+    "type": "article",
+    "venue": "Bond University Research Portal (Bond University)",
+    "topic": "Magnetic confinement fusion research",
+    "field": "Physics and Astronomy",
+    "ca_institutions": "York University",
+    "funders": []
+  },
+  {
+    "id": "W2919621391",
+    "title": "Validation and in-field testing of a new on-site qPCR system for quantification of <i>Legionella pneumophila<\/i> according to ISO/TS 12869:2012 in HVAC cooling towers",
+    "abstract": "Legionella pneumophila, found in engineered water systems such as HVAC cooling towers, poses a significant public health risk. Culture, though routinely used to quantify L. pneumophila, has several disadvantages including long turnaround time, low sensitivity, and inter-laboratory variability. In this study, we validated the performance of an on-site quantitative polymerase chain reaction (qPCR) detection system for L. pneumophila in accordance with International Standards Organization Technical Specification 12869:2012. We evaluated specificity, limit of detection and quantification, and calibration curve linearity. Additionally, we evaluated whole system recovery and robustness using samples taken from taps and evaporative cooling towers. We then compared the system's performance against laboratory culture and laboratory qPCR across 53 cooling towers in a 12-week in-field study. We found that concordance between on-site qPCR and culture was both laboratory- and site/sample-dependent. Comparison of laboratory qPCR with on-site qPCR revealed that laboratory results were highly variable and showed little concordance. Some discordance may be explained by time delay between sample collection and testing ('shipping effect') which may lead to inaccurate reporting. Overall, our study highlights the value of on-site qPCR detection of L. pneumophila, demonstrates that laboratories are prone to misreporting results due to shipping effects, and reveals significant discordance between laboratory qPCR and culture.",
+    "year": 2019,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Water and Health",
+    "topic": "Legionella and Acanthamoeba research",
+    "field": "Biochemistry, Genetics and Molecular Biology",
+    "ca_institutions": "Spartan Bioscience (Canada)",
+    "funders": []
+  },
+  {
+    "id": "W4413512060",
+    "title": "They’re everywhere: New study finds polyester fibres throughout the Arctic Ocean",
+    "abstract": "",
+    "year": 2021,
+    "lang": "en",
+    "type": "article",
+    "topic": "Microplastics and Plastic Pollution",
+    "field": "Environmental Science",
+    "ca_institutions": "University of British Columbia",
+    "funders": []
+  },
+  {
+    "id": "W4403975967",
+    "title": "Unified framework for tableau models of Grothendieck Polynomials",
+    "abstract": "We give combinatorial proofs of two types of duality for Grothendieck polynomials by constructing a unified combinatorial\\\\ framework incorporating set-valued tableaux, multiset-valued tableaux, reverse plane partitions and valued-set tableaux. Importantly, our proofs extend to proofs of these dualities for the refined Grothendieck polynomials. The second of these dualities was formerly unknown for the refined case.",
+    "year": 2024,
+    "lang": "en",
+    "type": "article",
+    "venue": "Contributions to Discrete Mathematics",
+    "topic": "Polynomial and algebraic computation",
+    "field": "Computer Science",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2345655325",
+    "title": "Improving Nonlinear Optimization Algorithms for BMP Implementation in a Combined Sewer System",
+    "abstract": "Implementing best management practices (BMP) on watersheds could help mitigate the effects of urbanization and climate change on the hydrological cycle. Techniques such as retention ponds, rain gardens, infiltration trenches, and green roofs vary in technical performance, space requirements, and cost. The trade-offs between these present a challenge toward BMP selection and placement, therefore requiring optimization. Three optimization methods were applied for BMP implementation on a combined sewer: linear programming (LP); genetic algorithm (GA); and simulated annealing (SA). LP served as a reference point. The SA solution was only marginally better, 4.7% cheaper, whereas GA’s solution was 17.9% more expensive after computations froze at a local minimum; both methods required approximately 18 h of computational time. A second round of optimization used the solution from LP as a starting point. This modification significantly increased the performance of GA, providing a new solution that was 14% cheaper than LP, with reduced computational times for both GA and SA. SA’s solution, though still cheaper than that of LP, was 3.9% more expensive than the one previously obtained with SA.",
+    "year": 2016,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Water Resources Planning and Management",
+    "topic": "Urban Stormwater Management Solutions",
+    "field": "Environmental Science",
+    "ca_institutions": "Polytechnique Montréal",
+    "funders": []
+  },
+  {
+    "id": "W1500472808",
+    "title": "LE DROIT DES PARTICULIERS D’INVOQUER LES ACCORDS INTERNATIONAUX DE LA COMMUNAUTÉ EUROPÉENNE DEVANT LES COURS NATIONALES",
+    "abstract": "Le critère de l’effet direct des accords conclus par la Communauté européenne n’a pas encore été étudié de manière exhaustive par la jurisprudence de la Cour européenne de Justice. Certaines affaires sont trompeuses puisqu’elles mèneraient à croire que l’effet direct des ententes multilatérales peut être atteint en optimisant les mécanismes internationaux de résolution des conflits. Ceci n’est pas convaincant, en premier lieu, puisque dans le contexte des relations intergouvernementales, le contrôle de l’action des parties contractantes demeure élusif. Toute amélioration des procédures judiciaires, particulièrement en contexte multilatéral, est destinée à être marginalisée tant que l’on est confiné aux mécanismes intergouvernementaux de résolution des conflits. En second lieu, les implications de cela sur l’effet direct sont ténues. L’effet direct, ou le droit d’agir en justice des individus, n’est pas simplement une question légale abstraite ; il implique aussi des décisions de politique. Le désir d’application effective est mesuré avec d’autres objectifs tels que le maintien d’un certain niveau de démocratie et l’instrumentalisation des traités poursuivant des objectifs de politique interne et étrangère. L’examen de l’ancienne question de l’effet direct en combinant certains éléments de doctrine juridique et d’analyse de science politique offre un meilleur aperçu sur le critère de l’effet direct que la simple dépendance de la jurisprudence émergente.",
+    "year": 2020,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Revue québécoise de droit international",
+    "topic": "European and International Law Studies",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4393489563",
+    "title": "‘Vote the Assholes Out’: How Value Congruence Work Aligns Stakeholders for Corporate Activism",
+    "abstract": "Abstract Recent research has pointed to value congruence between a firm and its stakeholders as a key driver of corporate socio‐political activism. However, this ‘stakeholder alignment’ model of corporate activism does not adequately explain how firms foster value congruence with their stakeholders. Drawing from an inductive study of Patagonia, Inc., we develop a social‐symbolic work perspective of stakeholder alignment for corporate activism by introducing the concept of ‘value congruence work’. Our findings demonstrate how attractional value congruence work aims to draw in stakeholders with similar values to engage with the firm, and co‐evolutionary value congruence work facilitates different forms of learning to sustain alignment between a firm and its stakeholders. Our findings offer new insights for research on corporate socio‐political activism and values work in organizations.",
+    "year": 2024,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Management Studies",
+    "topic": "Management and Organizational Studies",
+    "field": "Business, Management and Accounting",
+    "ca_institutions": "University of Manitoba",
+    "funders": "Social Sciences and Humanities Research Council of Canada"
+  },
+  {
+    "id": "W4405080291",
+    "title": "Extremism, racism and riots: exploring the political, social and cultural determinants of poor mental health",
+    "abstract": "The UK has seen an outbreak of riots after the death of three children in a knife attack. Misinformation about the suspect's heritage and religion was spread by social media, which was then used to incite violence and racism resulting in damage to property, terror and injuries. We put forward arguments that this was an extremist act and draw on the literature on terrorism, extremism and identity to put forward a deeper analysis of how this happened and what can be done to prevent future riots. We bring an interdisciplinary perspective drawing on research from social, cultural, psychological and political perspectives.",
+    "year": 2024,
+    "lang": "en",
+    "type": "article",
+    "venue": "BJPsych Open",
+    "topic": "Migration, Health and Trauma",
+    "field": "Psychology",
+    "ca_institutions": "McGill University",
+    "funders": []
+  },
+  {
+    "id": "W4255420728",
+    "title": "Using mutation analysis for a model-clone detector comparison framework",
+    "abstract": "Model-clone detection is a relatively new area and there are a number of different approaches in the literature. As the area continues to mature, it becomes necessary to evaluate and compare these approaches and validate new ones that are introduced. We present a mutation-analysis based model-clone detection framework that attempts to automate and standardize the process of comparing multiple Simulink model-clone detection tools or variations of the same tool. By having such a framework, new research directions in the area of model-clone detection can be facilitated as the framework can be used to validate new techniques as they arise. We begin by presenting challenges unique to model-clone tool comparison including recall calculation, the nature of the clones, and the clone report representation. We propose our framework, which we believe addresses these challenges. This is followed by a presentation of the mutation operators that we plan to inject into our Simulink models that will introduce variations of all the different model clone types that can then be searched for by each respective model-clone detector.",
+    "year": 2013,
+    "lang": "en",
+    "type": "article",
+    "venue": "2013 35th International Conference on Software Engineering (ICSE)",
+    "topic": "Software Engineering Research",
+    "field": "Computer Science",
+    "ca_institutions": "Queen's University",
+    "funders": []
+  },
+  {
+    "id": "W2039623374",
+    "title": "An assessment of histone-modification antibody quality",
+    "abstract": "",
+    "year": 2010,
+    "lang": "en",
+    "type": "article",
+    "venue": "Nature Structural & Molecular Biology",
+    "topic": "CRISPR and Genetic Engineering",
+    "field": "Biochemistry, Genetics and Molecular Biology",
+    "ca_institutions": "Ontario Institute for Cancer Research",
+    "funders": ["National Institute of Environmental Health Sciences", "National Human Genome Research Institute", "National Institutes of Health", "Wellcome Trust"]
+  },
+  {
+    "id": "W7131236477",
+    "title": "WPA household census for 619 MCDONNELL AVE, Los Angeles County",
+    "abstract": "The Works Progress Administration Los Angeles Household Census Cards collection dates from 1939. The physical cards which number nearly half a million items are owned by the USC Libraries. More than a quarter of the collection has been digitized.The household survey cards (or \"dwelling schedules\"), one for each street address in greater Los Angeles, document a wide variety of information ranging from the type of dwelling, the value of the property, the monthly rent or mortgage, to whether or not there were flush toilets. While these cards form the bulk of the collection, other digitized documents include \"block face cards\" and \"block lists\" -- documenting the census process.",
+    "year": 2021,
+    "lang": "en",
+    "type": "dataset",
+    "venue": "University of Southern California Digital Library",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4391127510",
+    "title": "Extremal Regular Graphs of Given Chromatic Number",
+    "abstract": "We define an extremal ( r | χ ) -graph as an r -regular graph with chromatic number χ of minimum order. We show that the Turán graphs T a k , k , the antihole graphs and the graphs K k × K 2 are extremal in this sense. We also study extremal Cayley ( r | χ ) -graphs and we exhibit several ( r | χ ) -graph constructions arising from Turán graphs.",
+    "year": 2023,
+    "lang": "en",
+    "type": "article",
+    "venue": "Ars Combinatoria",
+    "topic": "Advanced Graph Theory Research",
+    "field": "Computer Science",
+    "ca_institutions": [],
+    "funders": []
+  }
+]

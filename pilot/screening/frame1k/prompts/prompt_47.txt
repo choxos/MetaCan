@@ -1,0 +1,816 @@
+# MétaCan screening rubric (v1.0)
+
+**Locked before screening. Version-controlled. Any change is a new version with a dated entry in `DEVIATIONS.md`.**
+
+Both machine screeners and both human coders work from this document and nothing else. The rubric is the
+instrument; if two coders disagree, the rubric is what they are adjudicated against.
+
+---
+
+## The unit
+
+One work (journal article, preprint, book chapter, report, dataset, or software), identified by its OpenAlex ID.
+You see: title, abstract, publication year, language, venue, OpenAlex topic and field, Canadian institutional
+affiliations, funders.
+
+## The question
+
+**Is the object of study *research itself*?**
+
+Metaresearch studies how research is done, reported, funded, evaluated, disseminated, or governed. The test is
+what the work is *about*, not what field it appears in and not what vocabulary it uses.
+
+A cardiology trial is not metaresearch. A study of *how cardiology trials report their outcomes* is.
+
+---
+
+## Tier
+
+Assign exactly one.
+
+### T1: Core metaresearch
+The primary object of study is research itself. Typical objects:
+
+- research **methods** and their properties (bias, reporting, statistical practice, study design)
+- **reproducibility**, replication, data and code sharing
+- **research integrity**: misconduct, retraction, questionable research practices, authorship
+- **peer review** and editorial process *as objects of study*
+- **research evaluation**, metrics, rankings, funding allocation
+- **scholarly communication**: publishing models, open access, preprints *as objects of study*
+- **bibliometrics and scientometrics** applied to a research literature
+- the **research workforce**: careers, equity, training, capacity
+- **evidence synthesis methodology** (not an individual systematic review's clinical answer, but work *about* how
+  syntheses are done)
+
+### T2: Adjacent
+Empirically or conceptually grounded work on science as a social system that is not framed as metaresearch but
+studies it:
+
+- **science and technology studies (STS)**: social studies of scientific knowledge, practice, controversy
+- **library and information science**: information behaviour of researchers, repositories, discovery
+- **research infrastructure** studies: platforms, data repositories, identifiers, standards
+- **history and philosophy of science** *when the object is contemporary research practice*
+- **research policy** analysis grounded in evidence
+
+T2 is where the field's diversity lives. Be generous here: a paper does not have to call itself metaresearch to
+be studying research.
+
+### T3: Contextual
+Relevant to the ecosystem, mapped and released, but **never pooled into the analytic corpus**:
+
+- editorials, commentaries, opinion pieces about research practice
+- policy documents and position statements
+- announcements of infrastructure, tools, or initiatives
+- news, obituaries, corrections, letters
+
+### OUT: Not metaresearch
+Everything else. Includes, and this is the most common error:
+
+- **A study that uses a method is not a study of the method.** A meta-analysis answering a clinical question is
+  OUT. A study of how meta-analyses handle heterogeneity is T1.
+- **Mentioning a metaresearch term is not studying it.** A lab paper reporting "assay reproducibility", a methods
+  section saying "peer reviewed", a licence note saying "open access": all OUT.
+- **Domain research that happens to be bibliometric in method** but whose object is the domain, not the research:
+  e.g. a bibliometric map of diabetes treatments, produced to summarise diabetes knowledge. Borderline; see below.
+
+---
+
+## The three errors that matter most
+
+These are where the pilot showed retrieval and screening break down. Read them twice.
+
+1. **Polysemy.** `reproducibility` in a biochemistry paper means the assay gives the same reading twice. In a
+   metaresearch paper it means the reproducibility crisis. Only the second is in scope. The same applies to
+   `validation`, `replication`, `bias`, `peer review`, `open access`. **Judge the sense, not the token.**
+
+2. **Method vs. object.** Using bibliometrics ≠ studying research. Ask: *if this paper is right, what do we now
+   know more about: a scientific question, or the practice of science?* If the former, OUT.
+
+3. **Absence of vocabulary is not absence of content.** An STS paper about laboratory practice, or an LIS paper
+   about how researchers find data, may use none of the field's keywords and still be squarely T2. **Do not
+   require the vocabulary.** This is the error that makes the field look smaller and more anglophone than it is.
+
+---
+
+## Canadian linkage
+
+Record which apply (this is metadata, not an inclusion test; the estimand is defined separately in
+`PROTOCOL.md`):
+
+- `CA_AFF`: at least one author affiliated with a Canadian institution
+- `CA_FUND`: funded by CIHR, NSERC, SSHRC, or CFI
+- `ABOUT_CA`: the Canadian research system is a substantive object of study (not a passing mention, not one
+  country among forty in a global comparison)
+
+## Genre
+
+`empirical` · `conceptual` · `editorial/commentary` · `policy` · `infrastructure/announcement` · `other`
+
+OpenAlex's `type` is unreliable and this field is commentary-heavy, so genre is coded, not inherited.
+
+## Language of the work
+
+As published. Do not infer from the venue.
+
+---
+
+## Confidence
+
+- `high`: the rubric decides this cleanly.
+- `medium`: the rubric decides, but a reasonable coder could differ.
+- `low`: genuinely on the boundary, or the abstract is missing/too thin to judge.
+
+**`low` is a legitimate answer and is not a failure.** Records coded `low` by either screener are routed to
+adjudication. A screener that never says `low` is not being careful; it is being confident.
+
+---
+
+## Worked examples
+
+| Title (abridged) | Tier | Why |
+|---|---|---|
+| "Data sharing practices in 500 randomised trials" | **T1** | The object is reporting practice. |
+| "Reproducibility of a Western blot protocol" | **OUT** | Assay reproducibility. Polysemy trap. |
+| "Trends in citation of retracted papers" | **T1** | Object is the literature's own behaviour. |
+| "Laboratory life in a Canadian genomics centre: an ethnography" | **T2** | STS. No metaresearch vocabulary; still studies research. |
+| "How do researchers discover datasets? A survey" | **T2** | LIS, information behaviour of researchers. |
+| "Effectiveness of statins: a network meta-analysis" | **OUT** | Uses a synthesis method to answer a clinical question. |
+| "How network meta-analyses handle inconsistency: a review of 200 reviews" | **T1** | Object is the method. |
+| "Announcing the Canadian Research Data Repository" | **T3** | Infrastructure announcement. Mapped, not pooled. |
+| "Open access mandates are failing early-career researchers" (editorial) | **T3** | Commentary about research practice. |
+| "Bibliometric analysis of diabetes research 2000–2020" | **T2** | Borderline. Bibliometric method, and the object *is* a research literature, so it studies research output. Code T2, `medium`. |
+| "Le libre accès dans les revues québécoises : état des lieux" | **T1** | Scholarly communication, object is publishing practice. French. |
+
+---
+
+## Instructions to the screener
+
+Read the title and abstract. Apply the rubric. Do not use outside knowledge of the authors or the journal's
+reputation. If the abstract is missing, judge on the title alone and set confidence to `low` unless the title is
+unambiguous.
+
+Return the schema in `protocol/screening-schema.json`. One object per work. No prose, no preamble.
+--------------------------------------------------------------------------------
+You are screening works for MetaCan, a map of Canadian metaresearch.
+
+Apply the rubric above to every record in the JSON array below. Return a JSON
+array with one object per work, conforming to protocol/screening-schema.json:
+
+  {"id": "W...", "tier": "T1|T2|T3|OUT", "genre": "...", "about_ca": true|false,
+   "confidence": "high|medium|low", "reason": "one sentence"}
+
+Rules:
+- Return the JSON array and NOTHING else. No prose, no preamble, no code fences.
+- Every input id must appear exactly once in the output.
+- Do not run commands, read files, or browse. Classify from the RECORDS alone.
+
+RECORDS:
+[
+  {
+    "id": "W4210479211",
+    "title": "Uptake and release of polyhexamethylene biguanide (PHMB) from hydrogel and silicone hydrogel contact lenses using a radiolabel methodology",
+    "abstract": "",
+    "year": 2022,
+    "lang": "en",
+    "type": "article",
+    "venue": "Contact Lens and Anterior Eye",
+    "topic": "Ocular Surface and Contact Lens",
+    "field": "Medicine",
+    "ca_institutions": "University of Waterloo",
+    "funders": "Natural Sciences and Engineering Research Council of Canada"
+  },
+  {
+    "id": "W4289774540",
+    "title": "A model of collaborative immigration advocacy to prevent policy-based trauma and harm.",
+    "abstract": "OBJECTIVE: Research suggests that antiimmigrant policies enacted in the United States, magnified during the 2016-2020 period, propagate widespread trauma across communities of immigrants (von Werthern et al., 2018). While these policies harm all groups of immigrants, structural conditions (e.g., lack of documentation status, race, ethnicity, country of origin, and other social and legal determinants) shape how they are experienced. To address the widespread traumatic harm inflicted by racist and xenophobic policies, a group of leaders from eight Divisions of the American Psychological Association (APA) and the National Latinx Psychological Association (NLPA) launched an Interdivisional Immigration Project (IIP). METHOD: The IIP served to develop a model for collaborative advocacy, bringing together mental health providers (i.e., psychologists, social workers), allied professionals, and immigration activists from community organizations across the country. This model was developed over the course of 1 year, coinciding with the global coronavirus disease 2019 (COVID-19) pandemic and the amplified movement for racial justice. RESULTS: This article describes the key components of the IIP collaborative advocacy model: (a) structuring leadership in a democratic and egalitarian manner, (b) centering and uplifting immigrant voices, (c) forming teams across five U.S. regions, (d) facilitating critical dialogues grounded in liberatory practices, (e) centering trauma and empowerment, and (f) developing advocacy strategies. The IIP collaborative advocacy model is informing advocacy to protect immigrants from harm. DISCUSSION: This model may be used as the basis for ongoing humane immigration policy activism that centers the voices of community activists, and that pushes psychologists and allied professionals to use their positionality to support community-based efforts. (PsycInfo Database Record (c) 2024 APA, all rights reserved).",
+    "year": 2022,
+    "lang": "en",
+    "type": "article",
+    "venue": "Psychological Trauma Theory Research Practice and Policy",
+    "topic": "Migration, Health and Trauma",
+    "field": "Psychology",
+    "ca_institutions": [],
+    "funders": "Newfoundland and Labrador Physiotherapy Association"
+  },
+  {
+    "id": "W2710132251",
+    "title": "Portail des Autochtones au Canada : Île-du-Prince-Édouard – Logement et Infrastructure",
+    "abstract": "Cette section contient des liens vers les programmes et services provinciaux de logement et d'infrastructures offerts par les gouvernements, les corporations et les associations autochtones nationales.",
+    "year": 2004,
+    "lang": "fr",
+    "type": "article",
+    "topic": "Social Sciences and Governance",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2051468622",
+    "title": "Current Evidence on Platelet P2Y12 Receptor Inhibitors: Is There Still a Role for Clopidogrel in 2015?",
+    "abstract": "",
+    "year": 2015,
+    "lang": "en",
+    "type": "review",
+    "venue": "Canadian Journal of Cardiology",
+    "topic": "Antiplatelet Therapy and Cardiovascular Diseases",
+    "field": "Medicine",
+    "ca_institutions": "University of Ottawa",
+    "funders": []
+  },
+  {
+    "id": "W1172686018",
+    "title": "Modélisation radiobiologique pour la planification des traitements en radiothérapie à partir de données d’imagerie spécifiques aux patients",
+    "abstract": "Un modèle de croissance et de réponse à la radiothérapie pour le glioblastome multiforme (GBM) basé le formalisme du modèle de prolifération-invasion (PI) et du modèle linéaire-quadratique a été développé et implémenté. La géométrie spécifique au patient est considérée en modélisant, d'une part, les voies d'invasion possibles des GBM avec l'imagerie du tenseur de diffusion (DTI) et, d'autre part, les barrières à la propagation à partir des images anatomiques disponibles. La distribution de dose réelle reçue par un patient donné est appliquée telle quelle dans les simulations, en respectant l'horaire de traitement. Les paramètres libres du modèle (taux de prolifération, coefficient de diffusion, paramètres radiobiologiques) sont choisis aléatoirement à partir de distributions de valeurs plausibles. Un total de 400 ensembles de valeurs pour les paramètres libres sont ainsi choisis pour tous les patients, et une simulation de la croissance et de la réponse au traitement est effectuée pour chaque patient et chaque ensemble de paramètres. Un critère de récidive est appliqué sur les résultats de chaque simulation pour identifier un lieu probable de récidive (SPR). La superposition de tous les SPR obtenus pour un patient donné permet de définir la probabilité d'occurrence (OP). Il est démontré qu'il existe des valeurs de OP élevées pour tous les patients, impliquant que les résultats du modèle PI ne sont pas très sensibles aux valeurs des paramètres utilisés. Il est également démontré comment le formalisme développé dans cet ouvrage pourrait permettre de définir un volume cible personnalisé pour les traitements de radiothérapie du GBM.",
+    "year": 2013,
+    "lang": "fr",
+    "type": "dissertation",
+    "venue": "Open MIND",
+    "topic": "Mathematical Biology Tumor Growth",
+    "field": "Mathematics",
+    "ca_institutions": [],
+    "funders": ["Natural Sciences and Engineering Research Council of Canada", "Université de Montréal", "Fonds Québécois de la Recherche sur la Nature et les Technologies"]
+  },
+  {
+    "id": "W824173217",
+    "title": "Authentic culture: the Inkameep plays as Canadian Indian folk drama",
+    "abstract": "During the early decades of the 20th century, a public and governmental concentration on authentic Canadian culture included the languages and cultural practices of Indigenous peoples. The position of Indigenous peoples as ‘original’ to the land was conflated as evidence that their cultures were authentic, and as such, uniquely ‘Canadian’. During the late 1930s and early 1940s, a small group of children from the Osoyoos Indian Band along with their Irish immigrant teacher produced a series of short dramatic plays based on traditional Okanagan stories. This thesis examines how the production, circulation, and consumption of these Okanagan-based plays by children came to be seen as a manifestation of early Canadian drama that was arguably a part of the foundation of an emerging national identity.",
+    "year": 2009,
+    "lang": "en",
+    "type": "dissertation",
+    "venue": "UVic’s Research and Learning Repository (University of Victoria)",
+    "topic": "Folklore, Mythology, and Literature Studies",
+    "field": "Arts and Humanities",
+    "ca_institutions": [],
+    "funders": "University of Alberta"
+  },
+  {
+    "id": "W2168132477",
+    "title": "Drosophila Genome-wide Obesity Screen Reveals Hedgehog as a Determinant of Brown versus White Adipose Cell Fate",
+    "abstract": "",
+    "year": 2010,
+    "lang": "en",
+    "type": "article",
+    "venue": "Cell",
+    "topic": "Neurobiology and Insect Physiology Research",
+    "field": "Neuroscience",
+    "ca_institutions": ["SickKids Foundation", "Princess Margaret Cancer Centre", "Hospital for Sick Children", "Ontario Institute for Cancer Research", "University of Toronto"],
+    "funders": ["Österreichischen Akademie der Wissenschaften", "Canadian Cancer Society Research Institute", "Canadian Institutes of Health Research", "Centre National de la Recherche Scientifique", "European Commission"]
+  },
+  {
+    "id": "W1819837947",
+    "title": "An Overview of Bioethanol Production From Algae",
+    "abstract": "OTHER 2,748.06 Table 1. Bioethanol production amounts of countries in 2013 (million liter) [2]",
+    "year": 2015,
+    "lang": "en",
+    "type": "book-chapter",
+    "venue": "InTech eBooks",
+    "topic": "Biofuel production and bioconversion",
+    "field": "Engineering",
+    "ca_institutions": "Research Canada",
+    "funders": []
+  },
+  {
+    "id": "W2073305912",
+    "title": "Dictionnaire multilingue de médecine — vers une dictionnairique d'apprentissage",
+    "abstract": "Le dictionnaire informatisé de médecine en cours d'élaboration a comme destinataires principaux les étudiants de médecine. Il s'agit d'un instrument d'acquisition et de décodage du sens. On détermine les besoins linguistiques à partir d'une analyse sémantique du discours médical, en cherchant les façons d'exprimer les différentes notions utilisées dans ce discours. Ce dictionnaire multilingue (portugais I anglais Ifrançais) rend compte des différents équivalents et conduit à une méthodologie des besoins des utilisateurs, i.e. T établissement de priorités lexicales, à travers la multiplication d'échanges d'informations internationales en sciences médicales.",
+    "year": 2002,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Meta Journal des traducteurs",
+    "topic": "Lexicography and Language Studies",
+    "field": "Arts and Humanities",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2159274996",
+    "title": "Floraison précoce et production de graines par des clones somatiques d’épinette noire (<i>Picea mariana<\/i>) : intégration potentielle dans le programme d’amélioration génétique et l’aménagement des vergers à graines",
+    "abstract": "Afin d’évaluer la possibilité d’intégrer des clones somatiques d’épinette noire ( Picea mariana (Mill.) Britton, Sterns &amp; Poggenb.) dans le programme d’amélioration génétique de cette espèce, nous avons vérifié la qualité de leur floraison précoce et leur capacité à produire des cônes et des graines de qualité. Des clones d’épinette noire produits par embryogénèse somatique ont fleuri dès l’âge de 4 ans. Sur les arbres âgés de 6 ans, des pollinisations supplémentaires ont été réalisées avec du pollen provenant d’un verger à graines de première génération. Les graines obtenues ont ensuite été caractérisées (dimensions, masse, germination en milieu artificiel), et des plants ont été produits en pépinière. Les résultats montrent que les clones somatiques d’épinette noire produisent des fleurs femelles normales, dont la durée de réceptivité et la position dans la cime sont comparables à celles des fleurs produites par des semenciers issus de semis cultivés dans des vergers à graines. Il en est de même pour les graines, qui présentent des caractéristiques tout à fait comparables à celles des graines produites dans des vergers à graines, ainsi que pour les plants issus de ces graines. Nos résultats montrent clairement qu’il est avantageux, aussi bien en terme de précocité de la floraison que de gains génétiques accrus, d’intégrer des clones somatiques d’élite dans un programme d’amélioration génétique et de les utiliser comme semenciers dans des vergers à graines et pour des croisements dirigés.",
+    "year": 2010,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Canadian Journal of Forest Research",
+    "topic": "Plant Reproductive Biology",
+    "field": "Biochemistry, Genetics and Molecular Biology",
+    "ca_institutions": "Ministère des Ressources naturelles et des Forêts (Québec)",
+    "funders": []
+  },
+  {
+    "id": "W2539770648",
+    "title": "The hydration structure of carbon monoxide by <i>ab initio<\/i> methods",
+    "abstract": "The solvation of carbon monoxide (CO) in liquid water is important for understanding its toxicological effects and biochemical roles. In this paper, we use ab initio molecular dynamics (AIMD) and CCSD(T)-F12 calculations to assess the accuracy of the Straub and Karplus molecular mechanical (MM) model for CO(aq). The CCSD(T)-F12 CO–H2O potential energy surfaces show that the most stable structure corresponds to water donating a hydrogen bond to the C center. The MM-calculated surface incorrectly predicts that the O atom is a stronger hydrogen bond acceptor than the C atom. The AIMD simulations indicate that CO is solvated like a hydrophobic solute, with very limited hydrogen bonding with water. The MM model tends to overestimate the degree of hydrogen bonding and overestimates the atomic radius of the C atom. The calculated Gibbs energy of hydration using the TIP3P water model is in good agreement with the experiment (9.3 kJ mol−1 expt. vs 10.7 kJ mol−1 calc.). The calculated diffusivity of CO (aq) in TIP3P-model water was 5.1×10−5 cm2/s calc., more than double the experimental value of 2.3×10−5 cm2/s. The hydration energy calculated using the TIP4P-FB water model is in poorer agreement with the experiment (ΔG = 6.8 kJ/mol) but the diffusivity is in better agreement (D=2.5±0.1×10−5 cm2/s).",
+    "year": 2017,
+    "lang": "en",
+    "type": "article",
+    "venue": "The Journal of Chemical Physics",
+    "topic": "Hemoglobin structure and function",
+    "field": "Biochemistry, Genetics and Molecular Biology",
+    "ca_institutions": "Memorial University of Newfoundland",
+    "funders": []
+  },
+  {
+    "id": "W2565308581",
+    "title": "Long‐term treatment outcomes in immature permanent teeth by revascularisation using <scp>MTA<\/scp> and <scp>GIC<\/scp> as canal‐sealing materials: a retrospective study",
+    "abstract": "BACKGROUND: Pulp revascularisation with MTA sealing has been accepted as an alternative treatment for non-vital immature permanent teeth. Successful revascularisation cases with GIC sealing were also reported, but lack of long-term researches. AIM: To evaluate long-term outcomes of revascularisation using MTA and GIC as canal-sealing materials in non-vital immature permanent teeth. DESIGN: Clinical and radiographic data of 60 non-vital immature permanent teeth treated with revascularisation (36.8 ± 12.4 months of follow-up) were reviewed. Of these, 28 teeth were sealed with MTA, and 32 with GIC. Tooth survival, success rate, and increases in root length and dentine wall thickness were evaluated. RESULTS: Teeth in MTA group showed a similar survival rate (96%) to GIC group (100%). The success rate in MTA group (93%) was greater than that in GIC group (59%). Eight of fourteen failed teeth due to recurrent apical disease (seven teeth in GIC group and one in MTA group) achieved complete root development. There was no statistically significant difference in root length or dentine wall thickness increase between the groups. CONCLUSIONS: Long-term outcome of revascularisation in non-vital immature permanent teeth sealed with GIC was not as good as that with MTA. Although more recurrent apical disease developed, results on root development were acceptable in GIC sealed cases.",
+    "year": 2017,
+    "lang": "en",
+    "type": "article",
+    "venue": "International Journal of Paediatric Dentistry",
+    "topic": "Endodontics and Root Canal Treatments",
+    "field": "Dentistry",
+    "ca_institutions": [],
+    "funders": ["National Institutes of Health", "Capital Health"]
+  },
+  {
+    "id": "W4225152649",
+    "title": "Impairment and Traumatization as Crucial Factors for Didactics and Pedagogy of Adolescent Refugees",
+    "abstract": "Discussions about the extent of integration of adolescent refugees as well as integrating displaced people &amp;lsquo;correctly&amp;rsquo; in the respective education system of the target country have long been held about. Since crisis caused by, for example, war or the Covid-19 pandemic increase the numbers of refugees all over the world, a high number of displaced people suffer from experienced traumas and might therefore be impaired in participating in curricular education. For this study, the observation of three adolescent refugees who attend different sports classes, thus being encompassed by variable social settings, has been at the center of attention for one semester. To ensure data variety, principals, PE teachers, refugee students, &amp;lsquo;regular&amp;rsquo; students have been interviewed, respectively. The analysis revealed that huge differences in terms of adaptation as well as impairment could be observed among the participating adolescent refugees. While one of the refugee students easily adapted among the observed manifestations (non-)verbal communication, social form, behavioral strategies and potentials of physical education, the other adolescent refugee displayed severe impairment in all of the manifestations mentioned above; hence, experienced traumata experienced before, during or after flight require newly arriving students being psychologically examined and monitored.&amp;nbsp; &amp;nbsp;",
+    "year": 2022,
+    "lang": "en",
+    "type": "article",
+    "venue": "Modern Applied Science",
+    "topic": "Education and experiences of immigrants and refugees",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4323543208",
+    "title": "A global comparative study of wealth-pain gradients: Investigating individual- and country-level associations",
+    "abstract": "Pain is a significant yet underappreciated dimension of population health. Its associations with individual- and country-level wealth are not well characterized using global data. We estimate both individual- and country-level wealth inequalities in pain in 51 countries by combining data from the World Health Organization's World Health Survey with country-level contextual data. Our research concentrates on three questions: 1) Are inequalities in pain by individual-level wealth observed in countries worldwide? 2) Does country-level wealth also relate to pain prevalence? 3) Can variations in pain reporting also be explained by country-level contextual factors, such as income inequality? Analytical steps include logistic regressions conducted for separate countries, and multilevel models with random wealth slopes and resultant predicted probabilities using a dataset that pools information across countries. Findings show individual-level wealth negatively predicts pain almost universally, but the association strength differs across countries. Country-level contextual factors do not explain away these associations. Pain is generally less prevalent in wealthier countries, but the exact nature of the association between country-level wealth and pain depends on the moderating influence of country-level income inequality, measured by the Gini index. The lower the income inequality, the more likely it is that poor countries experience the highest and rich countries the lowest prevalence of pain. In contrast, the higher the income inequality, the more nonlinear the association between country-level wealth and pain reporting such that the highest prevalence is seen in highly nonegalitarian middle-income countries. Our findings help to characterize the global distribution of pain and pain inequalities, and to identify national-level factors that shape pain inequalities.",
+    "year": 2023,
+    "lang": "en",
+    "type": "article",
+    "venue": "Dialogues in Health",
+    "topic": "Climate Change and Health Impacts",
+    "field": "Environmental Science",
+    "ca_institutions": "Western University",
+    "funders": ["National Institute on Aging", "National Institutes of Health", "Social Sciences and Humanities Research Council of Canada", "Canada Research Chairs", "Institut National de la Santé et de la Recherche Médicale"]
+  },
+  {
+    "id": "W2087124519",
+    "title": "Exact Fit of Simple Finite Mixture Models",
+    "abstract": "How to forecast next year’s portfolio-wide credit default rate based on last year’s default observations and the current score distribution? A classical approach to this problem consists of fitting a mixture of the conditional score distributions observed last year to the current score distribution. This is a special (simple) case of a finite mixture model where the mixture components are fixed and only the weights of the components are estimated. The optimum weights provide a forecast of next year’s portfolio-wide default rate. We point out that the maximum-likelihood (ML) approach to fitting the mixture distribution not only gives an optimum but even an exact fit if we allow the mixture components to vary but keep their density ratio fixed. From this observation we can conclude that the standard default rate forecast based on last year’s conditional default rates will always be located between last year’s portfolio-wide default rate and the ML forecast for next year. As an application example, cost quantification is then discussed. We also discuss how the mixture model based estimation methods can be used to forecast total loss. This involves the reinterpretation of an individual classification problem as a collective quantification problem.",
+    "year": 2014,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of risk and financial management",
+    "topic": "Credit Risk and Financial Regulations",
+    "field": "Economics, Econometrics and Finance",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W3094809803",
+    "title": "LA PILULE CONTRACEPTIVE CHEZ LES ÉTUDIANTES EN FRANCE ET AU QUÉBEC",
+    "abstract": "",
+    "year": 2011,
+    "lang": "fr",
+    "type": "book-chapter",
+    "venue": "Presses de l'Université du Québec eBooks",
+    "topic": "Education, sociology, and vocational training",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4238878866",
+    "title": "10.1037/e306382004-001",
+    "abstract": "This DOI is not currently attached to any metadata records. DOIs can’t actually ever be deleted (they’re persistent), but sometimes our members create DOIs in error. We do have a process to approximate deletion which we follow only in rare cases where the DOI has been genuinely created in error, and most crucially, if the DOI has never been published anywhere online or in print and never otherwise distributed to or communicated with anyone (authors, readers, reviewers, etc.",
+    "year": 2000,
+    "lang": "en",
+    "type": "article",
+    "venue": "Time to knit",
+    "topic": "Hermeneutics and Narrative Identity",
+    "field": "Arts and Humanities",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4404258311",
+    "title": "Realization of an Elusive U(III) Imido Complex",
+    "abstract": "Abstract Reduction of Cp*( Tripp TerN)UI with KC 8 generates (KCp*( Tripp TerN)UI) 2 , the first example of a trivalent uranium imido, a previously elusive species, which are commonly unstable. Experimental and computational results indicate that the K + coordination is responsible for this isolable U(III) monoimido complex.",
+    "year": 2024,
+    "lang": "en",
+    "type": "article",
+    "venue": "Chemistry - A European Journal",
+    "topic": "Radioactive element chemistry and processing",
+    "field": "Chemistry",
+    "ca_institutions": [],
+    "funders": ["American Chemical Society Petroleum Research Fund", "Directorate for Social, Behavioral and Economic Sciences", "Pacific Northwest National Laboratory", "Basic Energy Sciences", "Canadian Centre for Applied Research in Cancer Control", "University of Akron", "M.J. Murdock Charitable Trust", "Washington State University", "Battelle", "U.S. Department of Energy"]
+  },
+  {
+    "id": "W2011182146",
+    "title": "Dynamic subgraph connectivity with geometric applications",
+    "abstract": "(MATH) Inspired by dynamic connectivity applications in computational geometry, we consider a problem we call dynamic subgraph connectivity: design a data structure for an undirected graph $G=(V,E)$ and a subset of vertices $S\\on V$, to support insertions and deletions in~$S$ and connectivity queries (are two vertices connected\\@?) in the subgraph induced by~$S$. We develop the first sublinear, fully dynamic method for this problem for general sparse graphs, using an elegant combination of several simple ideas. Our method requires linear space, $\\OO (|E|^{4\\w/(3\\w+3)})=O(|E|^{0.94})$ amortized update time, and $\\OO(|E|^{1/3})$ query time, where $\\w$ is the matrix multiplication exponent and $\\OO$ hides polylogarithmic factors.",
+    "year": 2002,
+    "lang": "en",
+    "type": "article",
+    "topic": "Complexity and Algorithms in Graphs",
+    "field": "Computer Science",
+    "ca_institutions": "University of Waterloo",
+    "funders": []
+  },
+  {
+    "id": "W2908649330",
+    "title": "SiGe films and graded buffers grown by liquid phase epitaxy from different growth solution compositions",
+    "abstract": "",
+    "year": 2019,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Crystal Growth",
+    "topic": "Photonic and Optical Devices",
+    "field": "Engineering",
+    "ca_institutions": "McGill University",
+    "funders": ["Fonds de recherche du Québec – Nature et technologies", "Natural Sciences and Engineering Research Council of Canada", "China Scholarship Council"]
+  },
+  {
+    "id": "W3000763107",
+    "title": "Mass generation by fractional instantons in SU(<mml:math xmlns:mml=\"http://www.w3.org/1998/Math/MathML\"><mml:mi>n<\/mml:mi><\/mml:math>) chains",
+    "abstract": "Recently, Haldane's conjecture about SU(2) chains has been generalized to $\\mathrm{SU}(n)$ chains in the symmetric representations. For a rank-$p$ representation, a gapless phase is predicted when $p$ and $n$ are coprime; otherwise, a finite energy gap is present above the ground state. In this work we offer an intuitive explanation of this behavior based on fractional topological excitations, which are able to generate a mass gap except when $p$ and $n$ have no common divisor. This is a generalization of an older work in SU(2), which explains the generation of the Haldane gap in terms of merons in the O(3) nonlinear $\\ensuremath{\\sigma}$ model.",
+    "year": 2020,
+    "lang": "en",
+    "type": "article",
+    "venue": "Physical review. B./Physical review. B",
+    "topic": "Physics of Superconductivity and Magnetism",
+    "field": "Physics and Astronomy",
+    "ca_institutions": "University of British Columbia",
+    "funders": "Natural Sciences and Engineering Research Council of Canada"
+  },
+  {
+    "id": "W2121862563",
+    "title": "Nano-pharmaceutical Formulations for Targeted Drug Delivery against HER2 in Breast Cancer",
+    "abstract": "Nanotechnology has revolutionized fundamental opportunities for higher specific drug delivery with minimum side effects. Since its inception, the goal of nanotechnology has been to advance effective and reliable systems for precise anti-cancer therapy and diagnosis. To accomplish this goal, bio-conjugation strategies of therapeutic agents loaded nanoparticles with monoclonal antibodies or their analogues have demonstrated a targeted approach both in vitro and in vivo. In this review, we primarily focus on the specific recognition of HER2 receptors of HER2 overexpressed tumor cells, and evaluate anti-HER2 monoclonal antibody as an effective tool for active targeting. Currently, a variety of nanoparticle systems are under both preclinical and clinical trials for targeting to HER2 positive breast cancer. Different nanotechnology scaffolds including liposomes, dendrimers, micelles, polymeric and inorganic nanoparticles that have higher flexibility for macromolecular synthesis and versatile functionalizing properties have been reviewed in this study. Continuing advances in anti-HER2 functionalized nanoparticles have good potential to lead to the development of nano-therapy against HER2 positive breast cancer.",
+    "year": 2015,
+    "lang": "en",
+    "type": "review",
+    "venue": "Current Cancer Drug Targets",
+    "topic": "Nanoparticle-Based Drug Delivery",
+    "field": "Materials Science",
+    "ca_institutions": "Saskatchewan Health Authority",
+    "funders": []
+  },
+  {
+    "id": "W2770051348",
+    "title": "A cognitive model for multidigit number reading: Inferences from individuals with selective impairments",
+    "abstract": "",
+    "year": 2017,
+    "lang": "en",
+    "type": "article",
+    "venue": "Cortex",
+    "topic": "Cognitive and developmental aspects of mathematical skills",
+    "field": "Mathematics",
+    "ca_institutions": [],
+    "funders": ["Fondation Bettencourt Schueller", "Tel Aviv University", "Centre of Excellence in Cognition and its Disorders, Australian Research Council", "Azrieli Foundation", "Israel Science Foundation", "Human Frontier Science Program"]
+  },
+  {
+    "id": "W2790270819",
+    "title": "Convergent Evolution of Human-Isolated H7N9 Avian Influenza A Viruses",
+    "abstract": "Background: Avian influenza A virus H7N9 has caused 5 epidemic waves of human infections in China since 2013. Avian influenza A viruses may face strong selection to adapt to novel conditions when establishing themselves in humans. In this study, we sought to determine whether adaptive evolution had occurred in human-isolated H7N9 viruses. Methods: We evaluated all available genomes of H7N9 avian influenza A virus. Maximum likelihood trees were separately reconstructed for all 8 genes. Signals of positive selection and convergent evolution were then detected on branches that lead to changes in host tropism (from avian to human). Results: We found that 3 genes had significant signals of positive selection (all of them P < .05). In addition, we detected 34 sites having significant signals for parallel evolution in 8 genes (all of them P < .05), including 7 well-known sites (Q591K, E627K, and D701N in PB2 gene; R156K, V202A, and L244Q in HA; and R289K in NA) that play roles in crossing species barriers for avian influenza A viruses. Conclusion: Our study suggests that, during infection in humans, H7N9 viruses have undergone adaptive evolution to adapt to their new host environment and that the sites where parallel evolution occurred might play roles in crossing species barriers and respond to the new selection pressures arising from their new host environments.",
+    "year": 2018,
+    "lang": "en",
+    "type": "article",
+    "venue": "The Journal of Infectious Diseases",
+    "topic": "Influenza Virus Research Studies",
+    "field": "Medicine",
+    "ca_institutions": ["Diabetes Canada", "University of Toronto"],
+    "funders": []
+  },
+  {
+    "id": "W1585873828",
+    "title": "Effects of focused instruction of formulaic sequences on fluent expression in second language narratives: A case study",
+    "abstract": "Abstract While knowledge of what constitutes fluent speech has developed over the past several decades, it is still unclear how language teachers can facilitate its acquisition by second language learners. Fluency is generally accepted as being a function of temporal variables of speech such as rate of speaking and the number of words or syllables uttered between hesitations. A considerable amount of evidence exists that formulaic sequences, multi-word phenomena such as collocations, idioms, phrasal verbs and so on, play a role in the production of fluent speech. The present study is an investigation into the effects of focused instruction of formulaic sequences and fluency on the performance of a Japanese learner of English in spontaneous narratives in English. Results indicate a strong increase in fluency after six weeks of focused instruction, and a relationship between the instruction and the fluency and use of formulaic sequences in the learner speech samples.",
+    "year": 2009,
+    "lang": "en",
+    "type": "article",
+    "venue": "DOAJ (DOAJ: Directory of Open Access Journals)",
+    "topic": "Second Language Acquisition and Learning",
+    "field": "Psychology",
+    "ca_institutions": "Carleton University",
+    "funders": []
+  },
+  {
+    "id": "W4324137211",
+    "title": "Excerpts from the World Medical Literature",
+    "abstract": "",
+    "year": 2023,
+    "lang": "en",
+    "type": "letter",
+    "venue": "Journal of Obstetrics and Gynaecology Canada",
+    "topic": "Endometriosis Research and Treatment",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4320001167",
+    "title": "Magnetic resonance imaging in personalized medicine",
+    "abstract": "",
+    "year": 2023,
+    "lang": "en",
+    "type": "book-chapter",
+    "venue": "Metabolomics",
+    "topic": "Medical Imaging Techniques and Applications",
+    "field": "Medicine",
+    "ca_institutions": "McMaster University",
+    "funders": []
+  },
+  {
+    "id": "W4386665372",
+    "title": "Bio-bibliographie d’Yves Roberge",
+    "abstract": "Bio-bibliographie d’Yves Roberge. Un article de la revue Arborescences (Hommage à Yves Roberge : clitiques, éléments nuls, et autres problèmes de syntaxe et d’acquisition) diffusée par la plateforme Érudit.",
+    "year": 2020,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Arborescences Revue d études françaises",
+    "topic": "French Urban and Social Studies",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": "Social Sciences and Humanities Research Council of Canada"
+  },
+  {
+    "id": "W4402911779",
+    "title": "Mot de la rédaction",
+    "abstract": "",
+    "year": 2024,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Management international",
+    "topic": "Health, Medicine and Society",
+    "field": "Health Professions",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W768189996",
+    "title": "What Does a Woman Want? Io Sono l'amore/I Am Love and Cairo Time",
+    "abstract": "Up to now, each time I've written a piece for CineAction's TIFF section, I have chosen a film or films that I found particularly interesting and worth recommending to our readers. But this year it was different. For me, the festival produced few really outstanding films; the one that I responded to most, Marco Bellocchio's Vincere, was too complex in form for me to write about without a second viewing. So I have decided to write about 2 films that I found particularly irritating, and for similar reasons: an Italian film, Luca Guadagnino's lo sono l'amore/I am Love, and a Canadian one, Ruba Nadda's Cairo Time. Both films ask the same Freudian question What does a (middle-aged married) woman want? And answer it with the same response: an illicit affair with a younger man who makes them feel alive once again. The end results however do differ, although both follow the melodramatic conventions of post-WWII women's films. Io sono I'amore is set in Milan, and concerns a family whose wealth derives from the textile business. The protagonist is Emma Recchi, played by (an unlikely) Tilda Swinton (speaking fluent Italian), who is married to Tancredi, the son of the family's patriarch. While her relationship with her husband does not appear to be an unhappy one, over the course of the narrative, she falls passionately in love with the friend of her son, a young man half her age, who returns the passion. The transformation is initiated and encoded through the sharing of food. While Emma personally oversees the preparation of food for her household and has a reputation as a fine though amateur cook, Antonio is a professional chef whose culinary production sends her into an ecstatic swoon at the first tasting. In a rather strange sequence which has Emma stalking Antonio as he walks through the town of San Remo, the two meet up far away from Milan and she follows him to his place in the mountains where he is working on recipes for a restaurant that her son and he want to open. There, they fall into each other's arms and indulge in food and sex and nature. The narrative shifts into tragedy however when Emma's son realizes that his mother is sleeping with his friend, and the confrontation ends disastrously. By the film's end, Emma has chosen her future path, rejecting her previous life and opting for art and youth and love. [ILLUSTRATION OMITTED] In Cairo Time, the narrative revolves around Juliette/Patricia Clarkson, a Canadian who arrives in the Egyptian city in order to meet and spend some vacation time with her husband Mark, a United Nations official who has been doing humanitarian work in Gaza. However, he is delayed and instead arranges for a former colleague, Tareq/Alexander Siddiqi, a native Egyptian perhaps 10 years younger than her, to show her around the city. While the promotional material on the film's website claims The last thing anyone expects is that they will fall in love, any sentient being who has seen a few films in their time will know instantly that that is precisely what is going to occur. Slowly but inevitably Juliette is overwhelmed by the exotic locale, sights, customs and people, and the relationship between tourist and tour guide comes dangerously close to turning into lover and beloved, the only thing preventing that outcome at the film's end and ending the film, is the arrival of her husband, just in the nick of time. Io sono I'amore's Emma and Cairo Time's Juliette, are approximately the same age, (as are the two actresses playing them, Tilda Swinton [b. 1960] and Patricia Clarkson [b. 1959]) (1); each has grown children, a husband who loves them, and a predetermined role to play in their respective social circles. Neither is native to the country where the action takes place: Emma is of Russian origin although that is not made obvious by any actions or character traits, her past somewhat convoluted as to how she came to marry into a wealthy Milanese family. …",
+    "year": 2010,
+    "lang": "it",
+    "type": "article",
+    "venue": "Cineaction!",
+    "topic": "Italian Fascism and Post-war Society",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W1603048844",
+    "title": "Caregiver Reports of Patient-Initiated Violence in Psychosis",
+    "abstract": "OBJECTIVE: Aggressive behaviour in psychosis is not uncommon. Community provision for people with psychosis has left informal caregivers to take on a greater role in their care. However, few studies have explored links between patient-initiated violence in mental health caregiving relationships and caregiver functioning. Our study investigated caregiver reports of aggressive acts committed by their relative with psychosis and their links to caregiver appraisals of the caregiving relationship and caregiver outcomes. METHOD: Caregivers of patients with a recent relapse of psychosis, recruited to a psychological therapy trial, completed the audiotaped Camberwell Family Interview at baseline. This semi-structured interview includes questions on the quality of the relationship between caregiver and patient, and patient history of violence. Seventy-two transcripts of interviews were assessed for reports of patient-initiated violence. RESULTS: One-half of the caregiver sample (52.9%) reported an incident of patient-initiated violence during their interview; 62.2% of these involved violence toward themselves, and 24.3% toward property. Reports of patient violence were associated with caregiver ratings of hostility expressed toward patients, lower self-esteem, and emotion-focused coping. People caring on their own were more likely to report incidents of patient violence. Younger patients, males, and inpatients were more frequently identified as having a history of this kind of violence. CONCLUSIONS: Our findings suggested that caregiver reports of patient-initiated violence in psychosis are not uncommon. Mental health staff need to be aware of the risks of such violence for caregivers of people with psychosis, and consider appropriate procedures for minimizing it.",
+    "year": 2014,
+    "lang": "en",
+    "type": "article",
+    "venue": "The Canadian Journal of Psychiatry",
+    "topic": "Family Caregiving in Mental Illness",
+    "field": "Psychology",
+    "ca_institutions": [],
+    "funders": ["National Institute for Health and Care Research", "Wellcome Trust"]
+  },
+  {
+    "id": "W4237690140",
+    "title": "Convolutive Blind Sparse Source Separation with Application to EMG Decomposition",
+    "abstract": "Electromyogram (EMG) signal decomposition is a special case of convolutive blind source separation (CBSS) problem. Specific characteristics of EMG signals and their corresponding channel matrix leads us to proposing family of algorithms using multidomain sparsity of EMG signals and low rank structure of channel matrix.",
+    "year": 2016,
+    "lang": "en",
+    "type": "dissertation",
+    "topic": "Blind Source Separation Techniques",
+    "field": "Computer Science",
+    "ca_institutions": "Carleton University",
+    "funders": []
+  },
+  {
+    "id": "W2988268791",
+    "title": "Mae Among the Stars by R. Ahmed",
+    "abstract": "Ahmed, Roda. Mae Among the Stars. Illustrated by Stasia Burrington, Harper Collins, 2018.&#x0D; Mae Among the Stars is the perfect picture book for any young child (3-8) interested in space. It tells the real-life story of Mae Jemison, the first African American woman in space. This story urges children to explore even the most impossible dreams, or as Mae’s parents repeatedly encourage throughout: “If you can dream it, if you believe it and work hard for it, anything is possible.” The story revolves around the age-old question most of us are asked as children: What would you like to be when you grow up? Mae Jemison dreams about being an astronaut. Although her teacher tries to deter her from pursuing this dream, Mae refuses to give up. Thanks to her determination and parents’ reinforcement, she continues to work towards achieving her “impossible” dream of seeing Earth from space. Kids will find the last page of this book particularly interesting because it contains the bio of Mae Jemison and her accomplishments.&#x0D; The illustrations in this book elevate the story to an exceptional level. The rich colours and imaginative drawings bring each page to life. The illustrations are so vivid that one page in particular stands out from the rest because it is depicted in a muted blue, representing Mae’s gloomy response to her teacher’s disapproval of her dream of becoming an astronaut. Although the story tackles the deep-rooted issues of racial and gender stereotypes, the writing is simple enough for young readers to connect with Mae’s story while still inspiring them to reach for the stars. &#x0D; Recommended: 3 out of 4 starsReviewer: Bridget Harty&#x0D; Bridget Harty is a University of Alberta undergraduate student in the Elementary Education program. She enjoys spending time with family and friends and rereading the Harry Potter series any chance she gets.",
+    "year": 2019,
+    "lang": "en",
+    "type": "article",
+    "venue": "The Deakin Review of Children s Literature",
+    "topic": "Poverty, Education, and Child Welfare",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4390262371",
+    "title": "Associations and interactions of synaptic and inflammatory biomarkers in Alzheimer's disease",
+    "abstract": "",
+    "year": 2023,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of the Neurological Sciences",
+    "topic": "Alzheimer's disease research and treatments",
+    "field": "Medicine",
+    "ca_institutions": "McGill University",
+    "funders": "Weston Brain Institute"
+  },
+  {
+    "id": "W2163062456",
+    "title": "The Tragedy of Unpersuasive Power: The Convention on Biological Diversity as Exemplary",
+    "abstract": "The complement to “The Tragedy of the Commons” is “The Tragedy of Unpersuasive Power.” A class of problems exists for which technical solutions go unheeded. Logic and evidence do not prevail. Nevertheless, the fallacies and rhetoric do make sense in the light of human evolution as eusocial: groupthink is the consequence of group selection. Exemplary of the class of problems is “access to genetic resources [and] the fair and equitable sharing of benefits arising from the utilization of genetic resources,” (ABS) of the 1993 United Nations Convention on Biological Diversity (CBD). Capacious language in the 2010 Nagoya Protocol on ABS has immortalized contentious issues which could have been resolved through the economics of information, elaborated since 1992. The online discussion groups of the ABS Clearing House afford a natural experiment to test the tragedy. The solution is “delegated delegation” driven by a quest for legacy by the leadership.",
+    "year": 2013,
+    "lang": "en",
+    "type": "article",
+    "venue": "International Journal of Biology",
+    "topic": "Genetically Modified Organisms Research",
+    "field": "Agricultural and Biological Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W1983862412",
+    "title": "A New Method To Simultaneously Measure In-Situ Permeability and Porosity Under Reservoir Conditions: Implications for Characterization of Unconventional Gas Reservoirs",
+    "abstract": "Abstract Accurate estimation of gas-in-place is crucial for successful evaluation and exploitation of unconventional gas reservoirs, such as shale gas, coalbed methane, and tight gas. However, gas effective porosity, one of the most important parameter in estimating gas in-place, is commonly measured on crushed samples of cores or cuttings at ambient pressure although many studies have shown that the porosity and permeability of reservoirs rocks decrease with increasing effective stress, and thus the pore volume/porosity measured on crushed samples at ambient (zero stress) conditions will be larger than porosity measured under in-situ reservoir stress conditions. Normally the stress-dependence of porosity is simply accounted for by a correction factor based on the linear poro-elastic deformation, which is likely an over-simplification. In present study, we developed a new protocol for simultaneously measuring stress-dependent In-Situ Permeability and Porosity (ISPP) that provides a method for routine characterization of effective porosity and permeability under simulated reservoir conditions. Our new method can significantly reduce the uncertainties of porosity introduced by testing crushed samples under ambient conditions, testing time, and the need for good quality core samples that are usually unavailable. Preliminary test results indicate that the stress dependence of porosity (or pore compressibility) of fine grained reservoir rocks follows a unique trend of each tested sample, which cannot be simply adjusted from ambient porosity by a universal factor. Physical and numerical sample tests suggest that our ISPP method can obtain permeability similar to the normal pressure Pulse-Decay Permeability (PDP) technique if samples are homogeneous or transversely layered along their axes. Otherwise, our ISPP method likely tests the geometrical average permeability of longitudinally layered samples instead of the weighted arithmetical average permeability tested by the PDP method. Overall, our approach of simultaneously measuring effective porosity and permeability under reservoir conditions offers intrinsically consistent porosity-permeability data to characterize unconventional reservoirs. Our study also reveals that utilization of different methods to test samples in different orientations and different sizes is necessary to rigorously characterize the hierarchical permeability and porosity of heterogeneous and microporous unconventional reservoir rocks.",
+    "year": 2010,
+    "lang": "en",
+    "type": "article",
+    "venue": "Canadian Unconventional Resources and International Petroleum Conference",
+    "topic": "Coal Properties and Utilization",
+    "field": "Engineering",
+    "ca_institutions": "University of British Columbia",
+    "funders": "Institute of Population and Public Health"
+  },
+  {
+    "id": "W2161063277",
+    "title": "The relationship between efficacy and methodology in studies investigating EMDR treatment of PTSD",
+    "abstract": "The controlled treatment outcome studies that examined the efficacy of EMDR in the treatment of posttraumatic stress disorder have yielded a range of results, with the efficacy of EMDR varying across studies. The current study sought to determine if differences in outcome were related to methodological differences. The research was reviewed to identify methodological strengths, weaknesses, and empirical findings. The relationships between effect size and methodology ratings were examined, using the Gold Standard (GS) Scale (adapted from Foa & Meadows, 1997). Results indicated a significant relationship between scores on the GS Scale and effect size, with more rigorous studies according to the GS Scale reporting larger effect sizes. There was also a significant correlation between effect size and treatment fidelity. Additional methodological components not detected by the GS Scale were identified, and suggestions were made for a Revised GS Scale. We conclude by noting that methodological rigor removes noise and thereby decreases error measurement, allowing for the more accurate detection of true treatment effects in EMDR studies.",
+    "year": 2001,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Clinical Psychology",
+    "topic": "Posttraumatic Stress Disorder Research",
+    "field": "Psychology",
+    "ca_institutions": "Lakehead University",
+    "funders": []
+  },
+  {
+    "id": "W3135361124",
+    "title": "Optimizing multigrid reduction‐in‐time and Parareal coarse‐grid operators for linear advection",
+    "abstract": "Abstract Parallel‐in‐time methods, such as multigrid reduction‐in‐time (MGRIT) and Parareal, provide an attractive option for increasing concurrency when simulating time‐dependent partial differential equations (PDEs) in modern high‐performance computing environments. While these techniques have been very successful for parabolic equations, it has often been observed that their performance suffers dramatically when applied to advection‐dominated problems or purely hyperbolic PDEs using standard rediscretization approaches on coarse grids. In this paper, we apply MGRIT or Parareal to the constant‐coefficient linear advection equation, appealing to existing convergence theory to provide insight into the typically nonscalable or even divergent behavior of these solvers for this problem. To overcome these failings, we replace rediscretization on coarse grids with improved coarse‐grid operators that are computed by applying optimization techniques to approximately minimize error estimates from the convergence theory. One of our main findings is that, in order to obtain fast convergence as for parabolic problems, coarse‐grid operators should take into account the behavior of the hyperbolic problem by tracking the characteristic curves. Our approach is tested for schemes of various orders using explicit or implicit Runge–Kutta methods combined with upwind‐finite‐difference spatial discretizations. In all cases, we obtain scalable convergence in just a handful of iterations, with parallel tests also showing significant speed‐ups over sequential time‐stepping.",
+    "year": 2021,
+    "lang": "en",
+    "type": "article",
+    "venue": "Numerical Linear Algebra with Applications",
+    "topic": "Advanced Numerical Methods in Computational Mathematics",
+    "field": "Engineering",
+    "ca_institutions": ["Memorial University of Newfoundland", "University of Waterloo"],
+    "funders": ["Natural Sciences and Engineering Research Council of Canada", "Australian Research Council Centre of Excellence for Mathematical and Statistical Frontiers", "Australian Government", "Lawrence Livermore National Laboratory", "U.S. Department of Energy"]
+  },
+  {
+    "id": "W581260361",
+    "title": "North Sound Rail Operations Simulation 2011",
+    "abstract": "In early 2011 work began anew on a study of proposed regional rail service linking the North Puget Sound communities of Bellingham and Everett. The concept is to run self-propelled diesel multiple units on BNSF Railway mainline tracks. The new rail service would depart southbound in the early morning from Bellingham and link with Sounder commuter trains departing Everett for Seattle. The reverse would occur in the evening peak period. The concept has been studied since 2005. Fundamental to such a service is the provision of sufficient capacity on the BNSF tracks to ensure fluid operations for the new service and the lines’ current users: BNSF freight trains and the Amtrak Cascades sponsored by the Washington State Department of Transportation. An operations simulation to validate the required improvements was conducted with BNSF in 2007. However, since then train operating patterns have changed: more northbound BNSF coal and grain trains are using the line, and a second Cascade train has been extended from Bellingham to Vancouver, BC. In 2010 the Washington State Legislature passed a transportation budget which included funds for a review of the North Sound regional rail concept. WSDOT administered the analysis, which required an update of the earlier operations simulation. BNSF agreed to participate. The rail operations study was completed in May 2011. The findings: the existing and planned infrastructure on the line can handle the addition of a new regional rail service without triggering major impacts on other line users.",
+    "year": 2012,
+    "lang": "en",
+    "type": "article",
+    "venue": "Transportation Research Board 91st Annual MeetingTransportation Research Board",
+    "topic": "Transport and Economic Policies",
+    "field": "Business, Management and Accounting",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W7010746938",
+    "title": "Investigation of high Temperature Energy Storage in NOrwegian Quick clay",
+    "abstract": "175 land, inkludert Norge, har forpliktet seg til å begrense det globale utslippet av klimagasser til under 2 grader gjennom Parisavtalen. Bærekraftig utvikling er avgjørende for å oppnå dette målet. Geotermiske konstruksjoner, som for eksempel termisk energilagring, sørger for miljøvennlige løsninger for oppvarming og kjøling av bygninger, industribygg, idrettsanlegg og lignende. I Norge kan overskuddsvarmen som produseres om sommeren, utnyttes om vinteren. Det er viktig å forstå hvordan temperaturen påvirker sensitive leirer, som for eksempel kvikkleire, for å kunne bygge i nærheten av nullutslippsbygninger eller -nabolag. Forskningen gjort i dette studiet utforsker sammenhengen mellom temperatur og leire, og på denne måten kan bidra til utvikling innen geotermisk energilagring for en mer bærekraftig fremtid. \\n\\nVed hjelp av en modifisert ødometercelle med et oppvarmet kveilet kobberrør blir leiren tilført varme opptil 70℃. Resultatene gitt i studien indikerer variasjon i prekonsolideringstrykket, poretrykket, den endimensjonale modulusen og konsolideringskoeffisienten mellom leire varmet opp til 20℃ og leire varmet opp til 70℃. \\n\\nStudien undersøker hvordan effektene av termisk og mekanisk belastning påvirker oppførselen til leire. Resultatene fra oppvarmingsfasen indikerer at for de fleste leiretyper øker deformasjonen mens den effektive vertikale spenningen reduseres, bortsett fra ett forsøk hvor spenningen øker noe. Poretrykket varierer under oppvarming, noe som indikerer at tiltrekkende- og/eller frastøtende krefter er involvert i prosessen.\\n\\nStudien sammenligner også innflytelsen av temperatur på naturlig leire fra Canada og Sverige med norsk leire. Det observeres at prekonsolideringstrykket etter termisk og mekanisk belastning er høyere for norsk leire sammenlignet med kanadisk og svensk leire. Flytegrensen har ikke en konsekvent sammenheng med prekonsolideringsegenskaper. Poretrykket og ødometermodulusen viser varierende respons på temperatur, noe som indikerer endringer i leirens oppførsel og egenskaper. Konsolideringskoeffisienten forblir stabil ved romtemperatur, men varierer ved 70℃, noe som tyder på at konsolideringsoppførselen påvirkes av høy temperatur. Reduksjonen av sterkt bundet vann med økende temperatur kan føre til negativt poretrykk, og leirens plastisitet påvirker endringer i porøsiteten på grunn av temperaturendring.",
+    "year": 2023,
+    "lang": "no",
+    "type": "dissertation",
+    "venue": "Duo Research Archive (University of Oslo)",
+    "topic": "Educational Games and Gamification",
+    "field": "Psychology",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2233360577",
+    "title": "L’écho-endoscopie au Canada. État des lieux en 2004",
+    "abstract": "L’écho-endoscopie a longtemps été cantonnée au Canada à quelques centres universitaires. Parmi les explications, on peut avancer les difficultés à se former aux nouvelles techniques endoscopiques sur un continent peu équipé dans ce domaine, et l’absence de reconnaissance officielle rapide des nouvelles techniques. La mobilité des médecins nord-américains, plus importante qu’en Europe, peut aussi expliquer le fait que des centres s’équipent mais ne possèdent pas nécessairement un expert capable de faire fonctionner l’appareillage. Bien qu’encore en nombre limité, nous avons ici l’opportunité de faire le point sur la situation des centres d’écho-endoscopie au Canada. Avec l’aide des sociétés Pentax et Carson (représentant Olympus au Canada), il a été possible de recenser 16 centres équipés de matériel d’une de ces 2 marques. Un questionnaire standardisé, élaboré par les Clubs Français et Belges d’écho-endoscopie Digestive a été envoyé à tous les centres connus et 8 d’entre eux ont répondu à ce jour, soit en fournissant leurs chiffres d’activité réels soit en donnant une estimation sur la période du mois de septembre 2004. Cet article ne rapporte pas les résultats de l’ensemble du questionnaire dans la mesure où tous les items n’ont pas été renseignés. Si 16 centres sont actuellement connus au Canada pour posséder au moins un appareil, 11 seulement emploient au moins un endoscopiste clairement identifié, responsable de cette activité, les autres centres étant actuellement en attente d’un expert (démissionnaire ou bien en cours de formation). The use of EUS in Canada has long been confined to a few university centers. There are multiple possible explanations for this: among these, difficulties in training in new endoscopie techniques on a continent poorly equipped in EUS and the absence of an early validation of new techniques of investigation by official agencies. The greater mobility of North-American physicians, may also explain the fact that some centers are equipped but do not always have the required experts on site. Although still present in limited numbers, we have here the opportunity to give a progress report on the status of EUS centers in Canada. With the help of the companies Pentax and Carsen (Olympus representative in Canada), we were able to obtain information on 16 centers equipped with EUS probes from either of these 2 manufacturers. A standardized questionnaire, previously developed by the French and Belgian Digestive EUS clubs, was sent to all the known centers and 8 have answered to date, either by providing their real activity numbers or by giving an estimate over the period of September 2004. This article does not show the results of the entire questionnaire insofar as all the items have not been fully reported. If sixteen centers are currently known in Canada to have at least one instrument, only 11 employ at least one clearly identified endoscopist responsible for this activity, while the other centers are still awaiting one.",
+    "year": 2005,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Acta Endoscopica",
+    "topic": "Colorectal Cancer Screening and Detection",
+    "field": "Medicine",
+    "ca_institutions": "Montreal General Hospital",
+    "funders": []
+  },
+  {
+    "id": "W4244229916",
+    "title": "A Steady-State Model for Anomalous Co-Deposition of Co-Ni Alloys Accounting for Catalytic and Inhibiting Effects",
+    "abstract": "Abstract not Available.",
+    "year": 2011,
+    "lang": "en",
+    "type": "article",
+    "venue": "ECS Meeting Abstracts",
+    "topic": "nanoparticles nucleation surface interactions",
+    "field": "Earth and Planetary Sciences",
+    "ca_institutions": "University of Waterloo",
+    "funders": []
+  },
+  {
+    "id": "W3210223176",
+    "title": "Modelling multiwavelength emission of Ultra-luminous X-ray Sources accreting above the Eddington limit",
+    "abstract": "ABSTRACT We model the multiwavelength properties of binaries accreting at super-critical rates with the aim to better understand the observational properties of Ultra-luminous X-ray Sources (ULXs). We calculate an extended grid of binary systems which evolve through Roche Lobe Overflow and undergo case A mass transfer from massive donors (up to 25 ${\\rm M}_{\\odot } \\,$) on to massive black holes (BHs) (up to 100 ${\\rm M}_{\\odot } \\,$). Angular momentum loss with the ejection of mass through an outflow is incorporated. We apply our super-Eddington accretion model to these systems, computing their evolutionary tracks on the colour–magnitude diagram (CMD) for the Johnson and Hubble Space Telescope photometric systems. We found that the tracks occupy specific positions on the CMD depending on the evolutionary stage of the donor and of the binary. Moreover, their shapes are similar, regardless the BH mass. More massive BHs lead to more luminous tracks. We additionally compute their optical-through-X-ray spectral energy distribution considering the effects of a Comptonizing corona that surrounds the innermost regions of the disc. We apply our model to four ULXs: NGC 4559 X-7, NGC 5204 X-1, Holmberg II X-1, and NGC 5907 ULX-2. We found that accretion on to BHs with mass in the range of 35–55 ${\\rm M}_{\\odot }$ is consistent with to the observational properties of these sources. We finally explore and discuss the possibility to extend our model also to ULXs powered by accreting pulsars (PULXs).",
+    "year": 2021,
+    "lang": "en",
+    "type": "preprint",
+    "venue": "Monthly Notices of the Royal Astronomical Society",
+    "topic": "Astrophysical Phenomena and Observations",
+    "field": "Physics and Astronomy",
+    "ca_institutions": [],
+    "funders": ["Institut sur la Nutrition et les Aliments Fonctionnels", "Agenzia Spaziale Italiana", "Istituto Nazionale di Astrofisica", "American Sheep Industry Association"]
+  },
+  {
+    "id": "W4321225553",
+    "title": "Hybrid feature engineering of medical data via variational autoencoders with triplet loss: a COVID-19 prognosis study",
+    "abstract": "Medical machine learning frameworks have received much attention in recent years. The recent COVID-19 pandemic was also accompanied by a surge in proposed machine learning algorithms for tasks such as diagnosis and mortality prognosis. Machine learning frameworks can be helpful medical assistants by extracting data patterns that are otherwise hard to detect by humans. Efficient feature engineering and dimensionality reduction are major challenges in most medical machine learning frameworks. Autoencoders are novel unsupervised tools that can perform data-driven dimensionality reduction with minimum prior assumptions. This study, in a novel approach, investigated the predictive power of latent representations obtained from a hybrid autoencoder (HAE) framework combining variational autoencoder (VAE) characteristics with mean squared error (MSE) and triplet loss for forecasting COVID-19 patients with high mortality risk in a retrospective framework. Electronic laboratory and clinical data of 1474 patients were used in the study. Logistic regression with elastic net regularization (EN) and random forest (RF) models were used as final classifiers. Moreover, we also investigated the contribution of utilized features towards latent representations via mutual information analysis. HAE Latent representations model achieved decent performance with an area under ROC curve of 0.921 (±0.027) and 0.910 (±0.036) with EN and RF predictors, respectively, over the hold-out data in comparison with the raw (AUC EN: 0.913 (±0.022); RF: 0.903 (±0.020)) models. The study aims to provide an interpretable feature engineering framework for the medical environment with the potential to integrate imaging data for efficient feature engineering in rapid triage and other clinical predictive models.",
+    "year": 2023,
+    "lang": "en",
+    "type": "article",
+    "venue": "Scientific Reports",
+    "topic": "COVID-19 diagnosis using AI",
+    "field": "Medicine",
+    "ca_institutions": ["Western University", "McGill University"],
+    "funders": []
+  },
+  {
+    "id": "W1166835344",
+    "title": "First nations gambling policy in Canada",
+    "abstract": "In recent years, some First Nations across Canada have pursued increased gambling opportunities within their communities. The introduction of on-reserve gambling is seen as an important opportunity to help stimulate economic development, create jobs, and provide revenues to develop much needed infrastructure and social programs. In the long run, some argue that on-reserve gambling would allow First Nations communities to become less dependent on funding from the federal and provincial governments and, in so doing, increase their political and economic sovereignty. However, gambling is not always a economic panacea; the size and scope of the benefits are dependent on a number of factors including the level of market saturation, problem gambling impacts, and the ability to draw gamblers to reserves.",
+    "year": 2001,
+    "lang": "en",
+    "type": "article",
+    "venue": "Open MIND",
+    "topic": "Gambling Behavior and Treatments",
+    "field": "Psychology",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W1504497057",
+    "title": "Être Inuk au Québec, être Corse en France. Identités autochtones en contexte francophone",
+    "abstract": "Qu’y a-t-il de commun entre les Inuit du Nunavik (Arctique québécois) et les Corses? Peu de choses a priori, hormis leur statut de peuples autochtones (c’est-à-dire premiers arrivés sur leur terre ancestrale) possédant une langue et une culture spécifiques, intégrés à des États-nations à majorité francophone, le Québec et la France. La comparaison montre cependant que chacun de ces peuples se rattache à un territoire qui lui est propre et dont il aimerait contrôler le développement, et chacun possède aussi une forte conscience de ses particularismes culturels et linguistiques. La description de leurs situations respectives montre que le fait de constituer une minorité autochtone en milieu francophone lui-même minoritaire, comme c’est le cas au Québec, facilite peut-être la préservation des particularismes identitaires.",
+    "year": 2011,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Globe Revue internationale d’études québécoises",
+    "topic": "Canadian Identity and History",
+    "field": "Social Sciences",
+    "ca_institutions": "Université Laval",
+    "funders": []
+  },
+  {
+    "id": "W2624569783",
+    "title": "An initiative for testability and comparability of binaural models",
+    "abstract": "A framework aimed at improving the testability and comparability of binaural models will be presented. The framework consists of two key elements: (1) a repository of testing software that evaluates the models against published data and (2) a model repository. While the framework is also intended for physiological data, the planned initial contribution will be psychoacoustical data together with their psychoacoustical testing protocols, as well as existing binaural models from available auditory toolboxes. Researchers will be invited to provide their established as well as newly developed models in whatever programming language they prefer, given the models are compatibility with the proposed interface to the testing software. This entails that the models act as artificial observers, testable with exactly the same procedure as the human subjects. A simple communication protocol based on wav and txt-files is proposed because these are supported by every programming environment, and are able connect models and testing software of any programming language. Examples will illustrate the principle of testing models with unaltered signal processing stages on various seminal data sets such as tone detection in so-called double-delayed masking noise, or lateralization of ¾-period delayed noise and sounds with temporally asymmetric envelopes.",
+    "year": 2017,
+    "lang": "en",
+    "type": "article",
+    "venue": "The Journal of the Acoustical Society of America",
+    "topic": "Noise Effects and Management",
+    "field": "Health Professions",
+    "ca_institutions": "Western University",
+    "funders": []
+  },
+  {
+    "id": "W2199876201",
+    "title": "Low-temperature ratchet current",
+    "abstract": "In [3], the low temperature ratchet current in a multilevel system is considered. In this note, we give an explicit expression for it and find its numerical value as the number of states goes to infinity.",
+    "year": 2019,
+    "lang": "en",
+    "type": "article",
+    "venue": "Mathematics and Mechanics of Complex Systems",
+    "topic": "stochastic dynamics and bifurcation",
+    "field": "Physics and Astronomy",
+    "ca_institutions": [],
+    "funders": ["Otto von Guericke University Magdeburg", "College of Engineering, Michigan State University", "Université de Lyon", "Universität Duisburg-Essen", "Freie Universität Berlin", "University of North Carolina at Chapel Hill", "Universität zu Köln", "Università degli Studi di Pavia", "Akademie Věd České Republiky", "Indian National Science Academy", "Schweizerischer Nationalfonds zur Förderung der Wissenschaftlichen Forschung", "McGill University", "Universidad Rey Juan Carlos", "Louisiana State University", "University of Pittsburgh", "Vanderbilt University", "Michigan State University", "Wayne State University", "National Science Foundation"]
+  },
+  {
+    "id": "W2945477632",
+    "title": "A Note on the Demographics of UK Referendums on \"Staying or Leaving the European Union\"",
+    "abstract": "This article discusses the history of the United Kingdom as a member of the European Union. It looks at the demographics of the votes for 1975 and 2016 Referendums on the membership in the Union. I find that changing demographic trend – the aging of the UK population - is the reason for the “Leave the Union” majority vote in 2016 Referendum.",
+    "year": 2018,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Applied Business and Economics",
+    "topic": "European Union Policy and Governance",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4388496547",
+    "title": "Political Attitudes in Formative Years: Results from the RMC Student Political Attitudes and Behaviours Survey",
+    "abstract": "",
+    "year": 2023,
+    "lang": "en",
+    "type": "article",
+    "venue": "Canadian Military Journal",
+    "topic": "Multiculturalism, Politics, Migration, Gender",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  }
+]
