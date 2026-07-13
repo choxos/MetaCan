@@ -1,0 +1,115 @@
+// MetaCan. Introspected from deploy/schema.sql, which is the source of truth:
+// the tables are created by that file and loaded by COPY, because Prisma's
+// migration engine is not the right tool for a 4.3M-row bulk import.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+/// The frame: every Canadian work in the pinned OpenAlex snapshot (all 482
+/// partitions). No abstract column by design; the abstract inverted indexes are
+/// 8.6 GB of the frame's 9.3 GB of text, and the host has 13 GB free, so the
+/// detail page fetches an abstract live from OpenAlex. `hasAbstract` IS stored,
+/// because whether a work has one is itself a finding: 23.3% do not, and the
+/// screen finds half as much metaresearch there.
+model Work {
+  id           String   @id @db.VarChar(20)
+  /// TEXT, not VarChar(255): the longest DOI in the frame is 294 characters (a
+  /// malformed OpenAlex record, a PDF URL glued to a DOI prefix). See schema.sql.
+  doi          String?
+  title        String
+  year         Int?     @db.SmallInt
+  lang         String?  @db.VarChar(8)
+  type         String?  @db.VarChar(32)
+  venue        String?
+  topic        String?
+  field        String?
+  citedBy      Int      @default(0) @map("cited_by")
+  isRetracted  Boolean  @default(false) @map("is_retracted")
+  hasAbstract  Boolean  @default(false) @map("has_abstract")
+
+  /// PROVENANCE. Why is this work in the frame? A frame that forgets how it
+  /// found something cannot be audited, and that is the entire thesis.
+  routeCaAff   Boolean  @default(false) @map("route_ca_aff")
+  routeCaFund  Boolean  @default(false) @map("route_ca_fund")
+  routeCaVenue Boolean  @default(false) @map("route_ca_venue")
+  routeAboutCa Boolean  @default(false) @map("route_about_ca")
+
+  caInstitutions String? @map("ca_institutions")
+  funders        String?
+  keywords       String?
+
+  retraction Retraction?
+  screened   Screened?
+
+  @@map("works")
+}
+
+/// Retraction Watch's post-publication state (finding 17). Separate from
+/// `Work.isRetracted` ON PURPOSE: OpenAlex's flag is a boolean over a state
+/// space with at least four values, so it expresses "retracted" and silently
+/// reports expression-of-concern, correction and reinstatement as false, which
+/// reads as "fine". `openalexFlagged = false` means OpenAlex missed it.
+model Retraction {
+  workId          String  @id @map("work_id") @db.VarChar(20)
+  nature          String? @db.VarChar(64)
+  reason          String?
+  retractionDate  String? @map("retraction_date") @db.VarChar(32)
+  openalexFlagged Boolean @map("openalex_flagged")
+
+  work Work @relation(fields: [workId], references: [id], onDelete: Cascade)
+
+  @@map("retractions")
+}
+
+/// The three-model screen: 1,000 works drawn from the real frame with KNOWN
+/// selection probabilities, screened by Opus 4.8, GPT-5.6 (high) and Grok 4.5
+/// against one locked rubric on its full eight-field payload.
+///
+/// `nIn` (0..3) is the most honest column in this database. Of the works ANY
+/// model called metaresearch, only 37% were called metaresearch by all three.
+/// `weight` is the design weight; the sample is stratified, so any rate computed
+/// from it without the weight is wrong.
+model Screened {
+  id        String  @id @db.VarChar(20)
+  stratum   String? @db.VarChar(32)
+  stratumN  Int?    @map("stratum_n")
+  weight    Float?
+  title     String?
+  abstract  String?
+  year      Int?    @db.SmallInt
+  lang      String? @db.VarChar(8)
+  type      String? @db.VarChar(32)
+  venue     String?
+  topic     String?
+  field     String?
+
+  opusTier       String? @map("opus_tier") @db.VarChar(8)
+  opusGenre      String? @map("opus_genre") @db.VarChar(48)
+  opusAboutCa    Boolean? @map("opus_about_ca")
+  opusConfidence String? @map("opus_confidence") @db.VarChar(8)
+  opusReason     String? @map("opus_reason")
+
+  gptTier       String? @map("gpt_tier") @db.VarChar(8)
+  gptGenre      String? @map("gpt_genre") @db.VarChar(48)
+  gptAboutCa    Boolean? @map("gpt_about_ca")
+  gptConfidence String? @map("gpt_confidence") @db.VarChar(8)
+  gptReason     String? @map("gpt_reason")
+
+  grokTier       String? @map("grok_tier") @db.VarChar(8)
+  grokGenre      String? @map("grok_genre") @db.VarChar(48)
+  grokAboutCa    Boolean? @map("grok_about_ca")
+  grokConfidence String? @map("grok_confidence") @db.VarChar(8)
+  grokReason     String? @map("grok_reason")
+
+  nIn Int? @map("n_in") @db.SmallInt
+
+  work Work @relation(fields: [id], references: [id], onDelete: Cascade)
+
+  @@map("screened")
+}
