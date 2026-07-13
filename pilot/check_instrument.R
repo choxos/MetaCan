@@ -111,6 +111,25 @@ if (length(missing_conf)) {
   cli_alert_success("`confidence`: every value the schema allows is defined in the rubric ({paste(schema_conf, collapse=', ')})")
 }
 
+# --- domain: new in rubric v2.2, checked on the day it was created ---------------
+#
+# `genre` got two vocabularies and nobody noticed for 16,800 labels (D20). `tier` got
+# a value the schema could not express and the guard was looking at the wrong file
+# (D25). `domain` is checked from the moment it exists, because the lesson of both is
+# that a field is cheapest to police before anyone has screened against it.
+dom <- fromJSON(SCHEMA)$items$properties$domain$enum
+dom <- dom[!is.na(dom)]
+if (length(dom)) {
+  in_rubric <- vapply(dom, \(d) grepl(paste0("`", d, "`"), rubric_txt, fixed = TRUE), logical(1))
+  if (!all(in_rubric)) {
+    problems <- c(problems, paste0(
+      "the schema allows domain value(s) '", paste(dom[!in_rubric], collapse = ", "),
+      "' that the rubric never defines."))
+  } else {
+    cli_alert_success("`domain`: all {length(dom)} values the schema allows are defined in the rubric ({paste(dom, collapse=', ')})")
+  }
+}
+
 # --- confidence: the RULE, not just the enum ------------------------------------
 #
 # The enum matched all along. The RULE did not, and the rule is what a screener

@@ -60,6 +60,21 @@
         "type": "string",
         "maxLength": 200,
         "description": "Optional. One clause naming the rubric criterion that decided it. Required when confidence is `low` or tier is T2 (the contested boundary)."
+      },
+      "domain": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "enum": [
+          "methods",
+          "reporting",
+          "reproducibility",
+          "evaluation",
+          "incentives",
+          null
+        ],
+        "description": "Which of Ioannidis's five meta-research domains the work belongs to. QUOTED from rubric v2.2, which quotes Ioannidis JPA, PLoS Biol 2018;16(3):e2005468: \"Meta-research is the study of research itself: its methods, reporting, reproducibility, evaluation, and incentives.\" REQUIRED for T1 (the canonical corpus). null for T2/T3/OUT: T2 holds the adjacent traditions the call names by name (bibliometrics, STS, scholarly communication, open science), which are IN THE MAP but are not inside the canonical definition, and forcing them into one of the five would delete the traditions the inclusiveness criterion exists to protect."
       }
     }
   }

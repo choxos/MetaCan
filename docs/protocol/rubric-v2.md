@@ -1,10 +1,31 @@
-# MétaCan screening rubric (v2.1)
+# MétaCan screening rubric (v2.2)
 
 **Status: LOCKED, 2026-07-13. Supersedes v1.0 for all screening from this date.**
 
 > **v2.0 → v2.1, same day, recorded rather than quietly patched.** v2.0 mandated `insufficient_payload` as "a flag distinct from OUT" while `screening-schema.json`'s tier enum was `[T1, T2, T3, OUT]`: **v2.0 demanded a value its own output contract could not express.** That is exactly the defect v2 was written to fix (D20), committed by the document that fixes it, and the build guard aimed at that defect did not catch it because it was hardcoded to read v1's file. A screening agent found it, in a footnote, while doing something else. The schema now carries the value; the guard now reads the current rubric and checks both directions. See `DEVIATIONS.md` D25. **The 179-work re-screen ran under v2.0**, so its three `insufficient_payload` records were coded `OUT` with the flag in the reason string; that is stated rather than silently corrected.
 
 **v1.0 is not deleted and is not corrected.** It remains in `docs/protocol/rubric.md`, byte for byte, because 5,600 works were screened against it and every number in the pilot is attributable to that text. A rubric edited after the data are seen is a rubric that can no longer say what any past number means. See `DEVIATIONS.md` D25.
+
+---
+
+## Where this definition comes from, and why that matters
+
+**v2.2 anchors the definition to the field's own published one, and cites it.** Through v2.1 the definition of metaresearch in this document was **mine**: six verbs I chose. That is an uncomfortable place to stand for a project whose central finding is that *the definition was underspecified*, and a reviewer had no way to check the instrument against anything except my judgment.
+
+> **Meta-research is the study of research itself: its methods, reporting, reproducibility, evaluation, and incentives.**
+>
+> Ioannidis JPA. *Meta-research: Why research on research matters.* PLoS Biol. 2018;16(3):e2005468. doi:10.1371/journal.pbio.2005468
+> See also Ioannidis JP, Fanelli D, Dunne DD, Goodman SN. *Meta-research: Evaluation and improvement of research methods and practices.* PLoS Biol. 2015;13(10):e1002264.
+
+Those **five domains** are now the spine of T1, and every work coded T1 also carries a `domain`. The definition is external, citable, and not the applicant's invention.
+
+### Why the five domains are NOT the whole map, and why narrowing to them would be a mistake
+
+Ioannidis's definition is a **metascience** definition. The call for proposals **explicitly welcomes** other traditions by name: *bibliometrics and scientometrics*, *science and technology studies (STS)*, *scholarly communication research*, *open science and open scholarship research*. An STS scholar does not describe their work as "meta-research" in Ioannidis's sense; STS has its own lineage, its own journals, and its own account of what studying science means.
+
+So adopting the five domains **alone** would delete precisely the traditions the challenge's inclusiveness criterion exists to protect. That is not a hypothetical risk: **OUT-vs-T2 is the single largest tier confusion in our data at every sample size**, and it is exactly this seam.
+
+**Therefore: the five domains are the T1 spine. T2 remains the adjacent traditions, named as the call names them.** A work can be squarely within the field's canonical definition (T1, with a domain) or squarely within a tradition the call asks us to include (T2, without one). Both are in the map. Only the first is in the canonical corpus.
 
 ---
 
@@ -92,7 +113,17 @@ Assign exactly one. **The object decides the tier. Genre never does.** (This sin
 
 ### T1: Core metaresearch
 
-The primary object of study is research itself.
+The primary object of study is research itself, in one of **Ioannidis's five domains**. Record which, in `domain`.
+
+| `domain` | what it covers |
+|---|---|
+| **`methods`** | how research is designed, conducted and analyzed; bias; statistical practice; analytic-choice sensitivity; evidence-synthesis methodology |
+| **`reporting`** | how research is written up and disseminated; reporting standards; scholarly communication; open access and preprints *as objects of study* |
+| **`reproducibility`** | replication; data and code sharing; transparency; reproducibility of published findings |
+| **`evaluation`** | peer review and editorial process; research assessment; metrics, rankings, indicators |
+| **`incentives`** | funding allocation; the research workforce (careers, equity, training, capacity); reward structures; research integrity, misconduct and questionable research practices; research ethics and governance |
+
+The bullets below are the operational form of those five, and each names its domain.
 
 - **research methods as practiced**: bias, reporting, statistical practice, study design, analytic-choice sensitivity — **subject to RULE 1**
 - **reproducibility**, replication, data and code sharing

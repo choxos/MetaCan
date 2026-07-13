@@ -809,3 +809,39 @@ Every one of them **produced output that looked correct**. None of them threw. T
 ### What is NOT done
 
 **The 179-work v2 re-screen ran under v2.0**, with the contradiction present. The screening agent hit it, could not emit the value, and encoded the three affected records as `OUT` with `insufficient_payload` at the head of the reason string so they would be recoverable. Those labels are **not** retroactively rewritten, and finding 29's numbers are the numbers that run produced. Saying so is cheaper than a re-run and more honest than a silent patch.
+
+---
+
+## D26. For twenty-nine findings, the definition of metaresearch was mine, and I never said so.
+
+**Date found:** 2026-07-13, by Ahmad, who asked whether the project could "have a category for detecting Canadian-related meta-research based on the definitions from" Ioannidis, *Meta-research: Why research on research matters* (PLoS Biol 2018;16:e2005468).
+
+The question exposed something nobody had noticed, including me. **The rubric cited nobody.** Its definition of metaresearch,
+
+> "how research is done, reported, funded, evaluated, disseminated, or governed"
+
+is **six verbs I chose**. Not a citation, not a standard, not the field's own account of itself. My invention, presented in a locked instrument, against which 16,800 machine labels were produced and 29 findings computed.
+
+That is an uncomfortable place for this project in particular to have been standing. Its central finding is that **the definition was underspecified and every screener was privately inventing the missing sentence**. It never occurred to me to ask who had written the sentences that *were* there.
+
+**A reviewer had no way to check the instrument against anything except my judgment.** That is the failure. Everything else in this repository is built so that a claim can be checked against something external: the frame against a pinned snapshot, the strata against an arithmetic identity, the numbers against the pilot, the boundary against a blinded judge. The definition at the root of all of it was checkable against nothing.
+
+### The fix, and the trap in the fix
+
+**Rubric v2.2** anchors T1 to Ioannidis's five domains, with the citation:
+
+> *methods · reporting · reproducibility · evaluation · incentives*
+
+Every T1 record now carries a `domain`. The definition is external and citable, and `check_instrument.R` enforces the rubric and the schema agreeing about it **from the day the field was created**, which is the D20 and D25 lesson applied *before* anyone screens against it rather than after 16,800 labels.
+
+**But adopting Ioannidis alone would have been a worse error than the one it fixes.** His is a *metascience* definition. The call for proposals **names other traditions explicitly**: bibliometrics and scientometrics, science and technology studies, scholarly communication research, open science research. An STS scholar does not describe their work as "meta-research" in Ioannidis's sense.
+
+Narrowing the map to the five domains would therefore have **deleted exactly the traditions the challenge's inclusiveness criterion exists to protect** — and **OUT-vs-T2 is already the largest tier confusion in our data at every sample size.** It is the same seam, one level up: an authoritative definition is still someone's definition, and adopting it uncritically is how a map loses the communities at its edge.
+
+So: **the five domains are T1's spine. T2 keeps the traditions the call names.** Both are in the map; only T1 is pooled into the canonical corpus. The rubric now says which authority governs which tier, and why, instead of quietly being me.
+
+### What I take from this
+
+Every guard in this repo was built to catch a claim that could not be checked. The **root definition** was not checkable, for the entire life of the project, and no guard could have caught that because a guard can only check a document against another document. **It took a human asking "where does this come from?"**
+
+That is the argument for the human audit, arriving from an unexpected direction and pointed at me.

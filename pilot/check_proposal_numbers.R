@@ -27,6 +27,12 @@ FINDINGS <- "pilot/results/findings.json"
 # Numbers that are legitimately NOT pilot outputs. Each needs a reason; an
 # unexplained entry here is just the original bug with extra steps.
 ALLOWED <- c(
+  # The definition of metaresearch is now the FIELD'S, not the applicant's, and a
+  # citation is the whole point: a reviewer checks the instrument against a published
+  # paper rather than against my judgment. These two are that citation.
+  "2018"    = "citation year: Ioannidis JPA, PLoS Biol 2018;16(3):e2005468 (the definition T1 is anchored to)",
+  "2005468" = "article number of that citation",
+  "16"      = "volume of that citation",
   "44.5"  = "prior work: linkage sensitivity (nihrtrials)",
   "94.3"  = "prior work: linkage PPV (nihrtrials)",
   "2000"  = "frame start year / audit codings (2,000)",
