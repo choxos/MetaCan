@@ -35,6 +35,8 @@ sys.path.insert(0, ".")
 from ml import features, labels as L
 
 FRAME_CSV = "data/db/works.csv"
+FRAME_PARQUET = "data/db/works.parquet"
+PARTS_DIR = "data/db/scores_parts"
 OUT_PARQUET = "data/db/frame_scores.parquet"
 CHUNK = 250_000
 
@@ -54,8 +56,6 @@ def fit_final_heads():
 
 def main(limit=None, force_baseline=False):
     # THE GATE. The frame pass is earned by the loop (ml/loop.py), not scheduled.
-    # Scoring 4.3M works with an immature model is exactly the waste the staged plan
-    # exists to avoid, and an explicit baseline pass must SAY it is one.
     gate = {}
     if os.path.exists("pilot/results/maturity.json"):
         gate = json.load(open("pilot/results/maturity.json"))
@@ -67,76 +67,70 @@ def main(limit=None, force_baseline=False):
         )
     model_version = "mature" if gate.get("passed") else "v0-immature-baseline"
 
-    vec, heads = fit_final_heads()
+    # CHECKPOINTED, because the environment kills long processes. The first frame pass
+    # died at 9% to a quadratic scan; the second, streaming, died at ~40 CPU-minutes to a
+    # task kill and lost every row, because the rows lived in an in-memory table. Now:
+    # one chunk = one parquet part on disk, a resume skips existing parts, and a kill
+    # costs at most one chunk. The heads are deterministic across resumes (fixed CV seed,
+    # liblinear), so parts scored by different invocations are the same model.
     con = duckdb.connect()
+    if not os.path.exists(FRAME_PARQUET):
+        print("converting works.csv -> works.parquet (one-time)...", flush=True)
+        con.execute(f"""COPY (SELECT id, title, venue, topic, field, lang, type, year
+                        FROM read_csv_auto('{FRAME_CSV}', sample_size=1000))
+                        TO '{FRAME_PARQUET}' (FORMAT PARQUET)""")
+    n_total = con.execute(f"SELECT count(*) FROM '{FRAME_PARQUET}'").fetchone()[0]
+    target = min(limit or n_total, n_total)
+    n_parts = (target + CHUNK - 1) // CHUNK
+    os.makedirs(PARTS_DIR, exist_ok=True)
+    print(f"frame: {n_total:,} works; {n_parts} parts of {CHUNK:,}", flush=True)
 
-    n_total = con.execute(f"SELECT count(*) FROM read_csv_auto('{FRAME_CSV}', sample_size=1000)").fetchone()[0]
-    print(f"frame: {n_total:,} works")
+    vec, heads = fit_final_heads()
+    cols = ["id", "title", "venue", "topic", "field", "lang", "type", "year"]
 
-    con.execute("DROP TABLE IF EXISTS scores")
-    con.execute("""
-        CREATE TABLE scores (
-            id VARCHAR,
-            score_opus DOUBLE, score_gpt DOUBLE, score_grok DOUBLE,
-            score_spread DOUBLE,
-            validation_status VARCHAR
-        )
-    """)
-
-    done = 0
-    target = limit or n_total
-    # ONE streaming pass. The first version re-ran the query with LIMIT/OFFSET per chunk,
-    # which re-parses the 2GB CSV from the top every time: quadratic, hours of redundant
-    # IO, found because the job was still at 9% after half an hour.
-    cur = con.execute(f"""
-        SELECT id, title, venue, topic, field, lang, type, year
-        FROM read_csv_auto('{FRAME_CSV}', sample_size=1000)
-        {f'LIMIT {target}' if limit else ''}
-    """)
-    while done < target:
-        rows = cur.fetchmany(min(CHUNK, target - done))
+    for part in range(n_parts):
+        out = os.path.join(PARTS_DIR, f"part_{part:04d}.parquet")
+        if os.path.exists(out):
+            continue
+        rows = con.execute(
+            f"SELECT {', '.join(cols)} FROM '{FRAME_PARQUET}' ORDER BY id LIMIT {CHUNK} OFFSET {part * CHUNK}"
+        ).fetchall()
         if not rows:
             break
-        cols = ["id", "title", "venue", "topic", "field", "lang", "type", "year"]
         recs = [dict(zip(cols, r)) for r in rows]
         texts = [features.render(r, features.PAYLOAD_FRAME_PARITY) for r in recs]
         X = vec.transform(texts)
-
-        S = np.vstack([heads[a].predict_proba(X)[:, 1] for a in L.ARMS])
+        S = np.vstack([heads[a].predict_proba(X)[:, 1] for a in heads])
         spread = S.max(axis=0) - S.min(axis=0)
+        import pyarrow as pa, pyarrow.parquet as pq
+        names = list(heads)
+        tbl = pa.table({
+            "id": [r["id"] for r in recs],
+            **{f"score_{n}": S[i].tolist() for i, n in enumerate(names)},
+            "score_spread": spread.tolist(),
+            "validation_status": [f"score_only:{model_version}"] * len(recs),
+        })
+        pq.write_table(tbl, out)
+        print(f"  part {part + 1}/{n_parts} written ({(part + 1) * CHUNK:,} works)", flush=True)
 
-        payload = [
-            (recs[i]["id"], float(S[0, i]), float(S[1, i]), float(S[2, i]), float(spread[i]), f"score_only:{model_version}")
-            for i in range(len(recs))
-        ]
-        con.executemany("INSERT INTO scores VALUES (?, ?, ?, ?, ?, ?)", payload)
-        done += len(rows)
-        print(f"  scored {done:,} / {target:,}", flush=True)
-
-    con.execute(f"COPY scores TO '{OUT_PARQUET}' (FORMAT PARQUET)")
-    summary = con.execute("""
-        SELECT count(*) n,
-               avg(score_spread) mean_spread,
-               quantile_cont(score_spread, 0.99) p99_spread,
-               count(*) FILTER (WHERE score_spread > 0.5) n_high_disagreement
-        FROM scores
-    """).fetchone()
+    # merge + summary
+    con.execute(f"CREATE OR REPLACE VIEW scores AS SELECT * FROM '{PARTS_DIR}/part_*.parquet'")
+    con.execute(f"COPY (SELECT * FROM scores) TO '{OUT_PARQUET}' (FORMAT PARQUET)")
+    s = con.execute("""SELECT count(*), avg(score_spread), quantile_cont(score_spread, 0.99),
+                       count(*) FILTER (WHERE score_spread > 0.5) FROM scores""").fetchone()
     out = {
-        "n_scored": summary[0],
-        "mean_teacher_spread": round(summary[1], 4),
-        "p99_teacher_spread": round(summary[2], 4),
-        "n_works_where_teachers_would_split": summary[3],
-        "validation_status_of_every_category_score": "score_only",
+        "n_scored": s[0],
+        "model_version": model_version,
+        "teacher_heads": list(heads),
+        "mean_teacher_spread": round(s[1], 4),
+        "p99_teacher_spread": round(s[2], 4),
+        "n_works_where_teachers_would_split": s[3],
+        "validation_status_of_every_category_score": f"score_only:{model_version}",
         "no_category_label_ships": True,
-        "note": (
-            "The spread column is the deliverable the LLMs cannot afford to produce: running three "
-            "teachers over the whole frame costs 3x a single pass and ~25 days. This estimates WHERE they "
-            "would disagree, over all of it, from 5,600 labelled works."
-        ),
     }
     with open("pilot/results/frame_scores.json", "w") as f:
         json.dump(out, f, indent=1)
-    print(json.dumps(out, indent=1))
+    print(json.dumps(out, indent=1), flush=True)
 
 
 if __name__ == "__main__":
