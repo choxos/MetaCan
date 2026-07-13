@@ -1,0 +1,577 @@
+Reading additional input from stdin...
+OpenAI Codex v0.144.0
+--------
+workdir: /Users/choxos/Documents/GitHub/CaRN-data-challenge
+model: gpt-5.6-luna
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: medium
+reasoning summaries: none
+session id: 019f5bd5-997e-7062-9783-83aed2f36500
+--------
+user
+You are screening scholarly works for the MetaCan project. Apply the rubric below to EVERY record and output ONE JSON array with ONE object per record, conforming EXACTLY to the JSON schema below. Output ONLY the JSON array, no prose before or after it.
+
+# THE RUBRIC (v3.1, locked)
+
+# MétaCan screening rubric (v3.1)
+
+**Status: LOCKED, 2026-07-13.** Supersedes v2.2. No screening ran under v3.0, which lived for hours: an adversarial review found that its Murad quotation inserted the word "treatment" into a sentence this document calls verbatim (D29). v3.1 corrects that quotation from the PDF, fixes the Kataoka page range, aligns the funder clause with the protocol, corrects two glosses against their sources, and adds the study-design vocabulary that v3.0 demanded but never listed. Since D29, `pilot/check_quotes.R` fails the build if any quotation marked verbatim is not a substring of its cited PDF.
+
+**No number produced so far was made under v3.** The pilot ran under v1.0; the 179-work re-screen under v2.0. Both instruments are kept byte for byte, so every figure stays attributable to the text that produced it. v3 is the instrument the **full screen** runs under, and the **v2-to-v3 difference is reported as a finding**.
+
+---
+
+## What changed, and why it is not cosmetic
+
+v1 and v2 had a tier hierarchy: **T1 core / T2 adjacent / T3 contextual**. That structure had a defect at its root, and the data found it before I did.
+
+> **"Adjacent" is defined by negation.** It means *not-T1*. A category whose only content is "near the important one" cannot be applied consistently, and **OUT-vs-adjacent was the largest tier confusion at every sample size we measured.** The models were not failing. **The category was empty.**
+
+It was also a value judgment I had no standing to make. Calling science and technology studies "adjacent" says STS is peripheral to metascience. **STS is a field with its own founding literature, its own journals, and its own account of what studying science means.**
+
+**v3 deletes the hierarchy.** Every tradition is a **category with its own positive definition, taken from its own literature, quoted verbatim from a source in `docs/reference/definitions/`.** There is no residual bucket. A record may carry **more than one** category, because the traditions genuinely overlap and forcing a single label is what created the problem.
+
+**Nothing here is cited from memory.** Every quotation below was read from the PDF named beside it. In a project whose worst deviation (D26) was that its own definition of metaresearch was mine and uncited for its entire life, a recalled citation would be the single worst thing this document could contain.
+
+---
+
+## The definitional problem is the field's, not this project's, and the field says so in print
+
+- **Puljak L, Lovric Makaric Z, Buljan I, Pieper D.** *What is a meta-epidemiological study? Analysis of published literature indicated heterogeneous study designs and definitions.* J Comp Eff Res. 2020. doi:10.2217/cer-2019-0201
+  > Analysed **175 information sources**. *"Definitions of meta-epidemiological studies varied and some studies used the term meta-epidemiological study to describe methodological research-on-research studies."* Conclusion: *"Research community would benefit from consensus about definition of meta-epidemiological study."*
+
+- **Kataoka Y, et al.** J Clin Epidemiol. 2023;154:219-220.
+  > A **published dispute** with Puljak, opening by naming *"the currently confusing nomenclatures around 'meta-epidemiology' and related terms such as 'meta-research' and 'research-on-research'."*
+
+- **Stevens ER, Laynor G.** *Recognizing the value of meta-research and making it easier to find.* J Med Libr Assoc. 2023;111(4). doi:10.5195/jmla.2023.1758
+  > *"The breadth of meta-research presents a significant challenge for identifying published meta-research studies,"* and it notes **the lack of a MeSH heading** for meta-research.
+
+**Those are claims about humans.** The pilot's numbers are claims about **models disagreeing under one rubric**. They are consistent, they are not the same estimand, and **only the human audit closes the gap** (`DEVIATIONS.md` D27).
+
+---
+
+## The categories
+
+A work may carry **more than one**. **Categories are not ranked and none is primary: the released landscape is the union of the defined categories, with every overlap reported.** The call's primary estimand is reported over `metaresearch` because that is the field the call names; that is a **reporting choice, not a rank**, and each of the other traditions gets the same per-category estimate.
+
+### 1. `metaresearch`
+
+> **"Meta-research is an evolving scientific discipline that aims to evaluate and improve research practices. It includes thematic areas of methods, reporting, reproducibility, evaluation, and incentives (how to do, report, verify, correct, and reward science)."**
+>
+> Ioannidis JPA, Fanelli D, Dunne DD, Goodman SN. *Meta-research: Evaluation and Improvement of Research Methods and Practices.* PLoS Biol. 2015;13(10):e1002264.
+> See also Ioannidis JPA. PLoS Biol. 2018;16(3):e2005468; METRICS, Stanford: <https://metrics.stanford.edu/research>
+
+Every `metaresearch` record carries a **`domain`**, taken verbatim from those five thematic areas and glossed by Ioannidis's own parenthetical:
+
+| `domain` | Ioannidis's gloss | operationally |
+|---|---|---|
+| `methods` | *how to **do** science* | design, conduct, analysis, bias, statistical practice, evidence-synthesis methodology; Ioannidis's own description of this area ends *"research integrity and ethics"* |
+| `reporting` | *how to **report** science* | reporting standards and completeness |
+| `reproducibility` | *how to **verify** science* | replication, data and code sharing, transparency |
+| `evaluation` | *how to **correct** science* | peer review and editorial process, research assessment, metrics |
+| `incentives` | *how to **reward** science* | funding allocation, careers and the research workforce, reward structures |
+
+**RULE 1 stands** (carried from v2; it resolved the largest single seam): *a work is `metaresearch` on methods only if its object is methods **as used, reported or performed by researchers**. Developing, deriving, validating or teaching a technique for a domain is OUT, however generic the technique.* **An instance of a research practice is not a study of it.**
+
+### 2. `metaepidemiology` — **CONTESTED IN PRINT. Both definitions are coded.**
+
+There is **no consensus definition** (Puljak 2020, above). **This rubric does not invent one.** It codes **both published definitions** and **flags where they disagree**, because the dispute is live, it is between named researchers in peer-reviewed journals, and hiding it inside a single label would destroy the only evidence of it.
+
+- **`metaepi_narrow`** — Murad MH, Wang Z. *Guidelines for reporting meta-epidemiological methodology research.* Evid Based Med. 2017;22(4):139-142. doi:10.1136/ebmed-2017-110713
+  > *"Meta-epidemiological studies adopt a systematic review or meta-analysis approach to examine the impact of certain characteristics of clinical studies on the observed effect and provide empirical evidence for hypothesised associations."*
+  >
+  > *(v3.0 quoted this sentence as 'the observed **treatment** effect'. The word is not in the paper; it narrowed Murad's definition while claiming his authority for the narrowing, and it survived a LOCK. D29.)*
+
+- **`metaepi_broad`** — Kataoka Y, et al. J Clin Epidemiol. 2023;154:219-220. *(Not 219-221: page 221 is Puljak's reply, which is the other side of the dispute.)*
+  > *"The greatest common defining concept of 'meta-epidemiological studies' would be **any studies in which the unit of analysis is a study, not a patient**."*
+
+**Where the two differ, the record is flagged, and the size of that class is reported as a finding.** A published dispute is a boundary to be *measured*, not settled by fiat.
+
+### 3. `bibliometrics` (scientometrics)
+
+> **"Scientometrics is the study of the quantitative aspects of the process of science as a communication system. It is centrally, but not only, concerned with the analysis of citations in the academic literature."**
+>
+> Mingers J, Leydesdorff L. *A Review of Theory and Practice in Scientometrics.* Eur J Oper Res. 2015. doi:10.1016/j.ejor.2015.04.002
+> Founding work: Price DJ de Solla. *Networks of Scientific Papers.* Science. 1965;149(3683):510-515.
+
+**Boundary with `metaresearch`, and it resolves v1's self-contradiction** (v1's T1 bullet and its own worked example gave opposite answers): a study that **characterises a literature** by quantitative means is `bibliometrics`. A study that uses bibliometric means to **make a claim about research practice** (citation distortion, reporting trends, citation of retracted work) is **also `metaresearch`**, and carries both. **v3 does not force the choice; that forcing was the bug.**
+
+### 4. `sts` (science and technology studies)
+
+> **"co-production is shorthand for the proposition that the ways in which we know and represent the world (both nature and society) are inseparable from the ways in which we choose to live in it."**
+> **"The idiom of co-production ... represents a major synthesis of scholarship in science and technology studies (S&TS)."**
+>
+> Jasanoff S (ed.). *States of Knowledge: The Co-Production of Science and the Social Order.* Routledge, 2004.
+
+> **"We study science in action and not ready made science or technology; to do so, we either arrive before the facts and machines are blackboxed or we follow the controversies that reopen them."**
+>
+> Latour B. *Science in Action: How to Follow Scientists and Engineers through Society.* Harvard University Press.
+
+**Operational test:** the work studies **science or technology as social practice**: how knowledge and social order are produced together, how facts are made rather than found, how controversies open and close. **The object must be science, research, or technoscientific knowledge**, at any period. *(v1 restricted history and philosophy of science to "contemporary research practice", an unexamined adverb that silently excluded the entire history of Canadian science. It is deleted.)*
+
+### 5. `scholarly_communication`
+
+> **"Scholarly communication is a rich and complex sociotechnical system formed over a period of centuries."**
+> **"...used here in the broader sense to include the formal and informal activities associated with the use and dissemination of information through public and private channels."**
+>
+> Borgman CL. *Scholarship in the Digital Age: Information, Infrastructure, and the Internet.* MIT Press, 2007.
+
+### 6. `open_science`
+
+> **"Open science is a set of principles and practices that aim to make scientific research from all fields accessible to everyone for the benefits of scientists and society as a whole."**
+> **"Open science is about making sure not only that scientific knowledge is accessible but also that the production of that knowledge itself is inclusive, equitable and sustainable."**
+>
+> UNESCO. *Recommendation on Open Science* (introduction), 2021. **193 countries adopted it.**
+
+The second sentence is the reason this category is not a synonym for "open access": UNESCO's definition makes **inclusivity and equity of knowledge production** part of open science itself, which is the criterion this challenge is judged on.
+
+### 7. `research_integrity` — **defined by its OBJECT; the sources do not define the field, and that is recorded**
+
+**Honest limitation, stated rather than hidden.** The two sources supplied define **what counts as misconduct** and **what publication ethics covers**. **Neither defines "research integrity research" as a discipline** the way Ioannidis defines metaresearch or Jasanoff defines STS. So this category is defined by its **object**, and the gap is on the record.
+
+> **"...the analysis was limited to behaviours that distort scientific knowledge: fabrication, falsification, 'cooking' of data, etc... Survey questions on plagiarism and other forms of professional misconduct were excluded."**
+>
+> Fanelli D. *How Many Scientists Fabricate and Falsify Research? A Systematic Review and Meta-Analysis of Survey Data.* PLoS ONE. 2009;4(5):e5738.
+
+> Publication ethics, per **COPE** (Committee on Publication Ethics), *Ethics Toolkit for Journal Editors and Publishers.*
+
+**Operational test:** the object is **research misconduct, questionable research practices, retraction, authorship, or publication ethics**, *as an object of study*. **Fanelli's boundary is adopted and its exclusion is carried:** fabrication, falsification and data cooking are in; **plagiarism and professional misconduct are recorded but marked, because Fanelli's own scope excludes them** and a rubric that silently widened his boundary while citing him would be misquoting its own source.
+
+**This category overlaps `metaresearch` heavily**: Ioannidis's own description of the *methods* area ends *"research integrity and ethics"*, so integrity research is inside metaresearch by his definition. **That overlap is expected and allowed**, because v3 is multi-label. It is not a hierarchy.
+
+### `insufficient_payload`
+
+Not a judgment; a statement that the record **cannot be screened** (a scraping artifact as a title, boilerplate in the abstract field, a title and abstract from different papers, spam). **Reported, never silently dropped**: the size of this class is a finding about OpenAlex.
+
+### `OUT`
+
+None of the above. **"OUT" now means "in no defined category", not "not near the important one."** That is the whole change.
+
+---
+
+## Canadian linkage
+
+- `CA_AFF` — at least one Canadian institutional affiliation. **Warning, measured:** OpenAlex misassigns these. **At least 17,466** works enter the frame with, as their *only* Canadian institution, one of six suspect assignments: a parse failure that is not an institution at all (`Impact`, attached to a Spanish COVID essay) or a real organization attached to papers it has nothing to do with (`Discovery Air (Canada)` on a Brazilian linguistics paper). That is a **lower bound** from six audited strings (finding 27), and the records are **flagged for audit, not deleted**. A Canadian affiliation is *evidence*, not proof.
+- `CA_FUND` — ≥1 funder whose OpenAlex `country_code` is Canada: an **external criterion, not a curated list**. *(An earlier four-funder list (CIHR, NSERC, SSHRC, CFI) failed twice: three of its four hardcoded IDs pointed at other funders, and even corrected it missed Canada Research Chairs, the Government of Canada, NRC, Mitacs, Genome Canada, and every provincial agency. OpenAlex knows 2,182 Canadian funders; `R/pin_entities.R` pins them.)*
+- **`ABOUT_CA_SYSTEM`** — the Canadian **research system or academy** is a substantive object. *A Canadian institution as setting is not this.*
+- **`ABOUT_CA_TOPIC`** — Canada is a substantive subject, whether or not research is the object.
+
+*(v1 had one boolean and it could not separate "Canadian data, universal claim" from "a claim about Canada". Four screening agents proposed this split independently.)*
+
+## Study design
+
+Coded for every work, from **this vocabulary and no other** (v3.0 said "coded for every work" and never listed the values, which is D20's exact shape: a field every screener codes and no two code alike):
+
+| `study_design` | MEDLINE publication type it is validated against |
+|---|---|
+| `randomized_trial` | Randomized Controlled Trial |
+| `nonrandomized_trial` | Controlled Clinical Trial |
+| `observational` | Observational Study |
+| `systematic_review` | Systematic Review |
+| `meta_analysis` | Meta-Analysis |
+| `case_report` | Case Reports |
+| `qualitative` | *(none; ships as a score, marked unvalidated)* |
+| `simulation_or_modeling` | *(none; ships as a score, marked unvalidated)* |
+| `bench_or_experimental` | *(none; ships as a score, marked unvalidated)* |
+| `theoretical_or_conceptual` | *(none; ships as a score, marked unvalidated)* |
+| `not_applicable` | *(the work is not empirical research: editorials, datasets, software)* |
+| `design_other` | *(none; ships as a score, marked unvalidated)* |
+
+**Validated against MEDLINE publication types, per record and not per year.** *(v3.0 called these "human-indexed by NLM", which is false; v3.1's first correction said "human-indexed until April 2022", which is also false. NLM stopped fully human indexing as universal practice around 2011 and completed automation in 2022, so a YEAR CUTOFF cannot separate the eras. The reference subset is defined by NLM's **record-level `IndexingMethod`** field: absent = fully human, `Curated` = automated with human review, `Automated` = machine. Human records are the reference; the others measure **agreement with another machine** and are reported as such.)*
+
+**Class-specific calendar eligibility, because a publication type that did not exist cannot be a negative.** *Observational Study* entered the vocabulary in **2014** and *Systematic Review* in **2019**. A 2008 cohort study carries no *Observational Study* tag, and treating that absence as "not observational" would train and score the model against a censoring artifact. Each design class is therefore validated **only on records published after its type existed**, and that eligibility window is prespecified per class. Where MEDLINE does not reach (most of the physical sciences, humanities and social sciences), the label ships as a **score, not an assertion**, and is **marked unvalidated**. *The dataset states, per field, which of its own annotations it has earned the right to assert.*
+
+## Genre
+
+**One vocabulary, defined here, and `screening-schema-v3.json` QUOTES this list rather than paraphrasing it.**
+
+`empirical` · `review` · `methods` · `commentary` · `editorial` · `protocol` · `dataset` · `software` · `other`
+
+*(In v1 the rubric and the schema named **two different vocabularies for this field**, overlapping on two values out of thirteen. Every screener was handed both and obeyed both privately; the validator checked `tier` and had never been asked to look at `genre`, so 16,800 labels passed every check that ran. See D20 and finding 24. **A codebook is code. It gets a test.**)*
+
+## `tier` is RETIRED
+
+v3 replaces it with `categories`, which is **multi-label**. The values `T1`, `T2`, `T3` and `OUT` remain in the **legacy** `screening-schema.json` **only so that the v1 and v2 label files stay readable**; the v3 contract, `screening-schema-v3.json`, **does not contain the field**, so no new screening can emit them. `OUT` in v3 means an empty `categories` array: *in no defined category*, not *near the important one*.
+
+## Confidence
+
+`high` / `medium` / `low`. **If the abstract is missing, judge on the title alone and set confidence to `low` unless the title is unambiguous.** The schema **quotes** this sentence; it does not paraphrase it (D24).
+
+**`low` is a legitimate answer.** A screener that never says `low` is not being careful; it is being confident.
+
+---
+
+## Sources
+
+Every quotation above was read from a PDF in **`docs/reference/definitions/`**, which is committed. Nothing is cited from memory, and since D29 that is a checked property, not a promise: `pilot/check_quotes.R` fails the build if any quotation marked verbatim is not a substring of its cited PDF. `pilot/check_instrument.R` fails the build if this rubric and `screening-schema-v3.json` disagree about any field, in either direction.
+
+
+# THE OUTPUT SCHEMA (screening-schema-v3.json)
+
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "MetaCan screening output, rubric v3.1",
+  "description": "The output contract for every screening run under rubric v3.1. This document QUOTES the rubric; it never paraphrases it. Where a description below restates a rule, the wording is copied from docs/protocol/rubric-v3.md, because the schema misquoting the rubric is D24 and two documents that disagree are two instruments (D20). pilot/check_instrument.R fails the build if this file and the rubric disagree about any field, in either direction. The legacy screening-schema.json remains ONLY so that v1 and v2 label files stay readable; no new screening validates against it.",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["id", "categories", "study_design", "genre", "about_ca_system", "about_ca_topic", "confidence"],
+    "properties": {
+      "id": {
+        "type": "string",
+        "pattern": "^W\\d+$",
+        "description": "The OpenAlex work id, exactly as given in the payload."
+      },
+      "categories": {
+        "type": "array",
+        "items": {
+          "enum": ["metaresearch", "metaepi_narrow", "metaepi_broad", "bibliometrics", "sts", "scholarly_communication", "open_science", "research_integrity", "insufficient_payload"]
+        },
+        "uniqueItems": true,
+        "description": "Every category the work belongs to; a work may carry more than one, and categories are not ranked and none is primary. An EMPTY array is OUT, which means 'in no defined category', not 'near the important one'. insufficient_payload means the record cannot be screened (a scraping artifact as a title, boilerplate in the abstract field, a title and abstract from different papers, spam) and is reported, never silently dropped."
+      },
+      "domain": {
+        "enum": ["methods", "reporting", "reproducibility", "evaluation", "incentives", null],
+        "description": "REQUIRED when categories contains metaresearch, and null otherwise. Taken verbatim from Ioannidis's five thematic areas: methods, reporting, reproducibility, evaluation, and incentives (how to do, report, verify, correct, and reward science)."
+      },
+      "study_design": {
+        "enum": ["randomized_trial", "nonrandomized_trial", "observational", "systematic_review", "meta_analysis", "case_report", "qualitative", "simulation_or_modeling", "bench_or_experimental", "theoretical_or_conceptual", "not_applicable", "design_other"],
+        "description": "Coded for every work, from this vocabulary and no other. not_applicable means the work is not empirical research: editorials, datasets, software."
+      },
+      "genre": {
+        "enum": ["empirical", "review", "methods", "commentary", "editorial", "protocol", "dataset", "software", "other"],
+        "description": "One vocabulary, defined in the rubric, and this schema QUOTES that list rather than paraphrasing it."
+      },
+      "about_ca_system": {
+        "type": "boolean",
+        "description": "ABOUT_CA_SYSTEM: the Canadian research system or academy is a substantive object. A Canadian institution as setting is not this."
+      },
+      "about_ca_topic": {
+        "type": "boolean",
+        "description": "ABOUT_CA_TOPIC: Canada is a substantive subject, whether or not research is the object."
+      },
+      "confidence": {
+        "enum": ["high", "medium", "low"],
+        "description": "If the abstract is missing, judge on the title alone and set confidence to low unless the title is unambiguous. low is a legitimate answer: a screener that never says low is not being careful; it is being confident."
+      },
+      "reason": {
+        "type": "string",
+        "maxLength": 400,
+        "description": "One sentence naming the rubric rule the decision rests on."
+      }
+    }
+  }
+}
+
+
+# THE RECORDS
+
+[
+ {
+  "id": "W4413625567",
+  "title": "Rethinking Multicultural Planning: An Empirical Study of Ethnic Retailing",
+  "abstract": "&lt;p dir=\"ltr\"&gt;The recent waves of immigration have dramatically impacted urban landscapes and economies of Canada’s largest metropolitan regions. One notable phenomenon is the rise of ethnic retail strips and centers as physical markers of increasing multiculturalism. The dynamics of ethnic retailing pose various opportunities and challenges for municipalities; yet, our knowledge of its complexities is limited and current literature on multicultural planning offers little useful guidance in planning practice. This study examines three retail strips in the inner city of Toronto, namely East Chinatown, the Gerrard India Bazaar, and Corso Italia, and one suburban Asian theme mall, the Pacific Mall in the City of Markham in an attempt to identify the role of urban planning in responding to the rise of ethnic retail neighbourhoods. The findings of the four cases indicate that urban planners have been unable to intervene actively in ethnic retail and direct its development and growth. The planning legislative structure and the lack of policy support hinder planners’ capacity to be proactive. Planners cannot work alone to build multicultural cities. This paper concludes on the importance of municipal intervention and interdepartmental collaboration as useful implications for multicultural planning practice.&lt;/p&gt;",
+  "year": 2025,
+  "lang": "en",
+  "type": "preprint",
+  "venue": null,
+  "topic": "Migration, Ethnicity, and Economy",
+  "field": "Social Sciences"
+ },
+ {
+  "id": "W4404378464",
+  "title": "Computational Evidence for Bisartan Arginine Blockers as Next-Generation Pan-Antiviral Therapeutics Targeting SARS-CoV-2, Influenza, and Respiratory Syncytial Viruses",
+  "abstract": "Severe acute respiratory syndrome coronavirus 2 (SARS-CoV-2), influenza, and respiratory syncytial virus (RSV) are significant global health threats. The need for low-cost, easily synthesized oral drugs for rapid deployment during outbreaks is crucial. Broad-spectrum therapeutics, or pan-antivirals, are designed to target multiple viral pathogens simultaneously by focusing on shared molecular features, such as common metal cofactors or conserved residues in viral catalytic domains. This study introduces a new generation of potent sartans, known as bisartans, engineered in our laboratories with negative charges from carboxylate or tetrazolate groups. These anionic tetrazoles interact strongly with cationic arginine residues or metal cations (e.g., Zn2+) within viral and host target sites, including the SARS-CoV-2 ACE2 receptor, influenza H1N1 neuraminidases, and the RSV fusion protein. Using virtual ligand docking and molecular dynamics, we investigated how bisartans and their analogs bind to these viral receptors, potentially blocking infection through a pan-antiviral mechanism. Bisartan, ACC519TT, demonstrated stable and high-affinity docking to key catalytic domains of the SARS-CoV-2 NSP3, H1N1 neuraminidase, and RSV fusion protein, outperforming FDA-approved drugs like Paxlovid and oseltamivir. It also showed strong binding to the arginine-rich furin cleavage sites S1/S2 and S2′, suggesting interference with SARS-CoV-2’s spike protein cleavage. The results highlight the potential of tetrazole-based bisartans as promising candidates for developing broad-spectrum antiviral therapies.",
+  "year": 2024,
+  "lang": "en",
+  "type": "article",
+  "venue": "Viruses",
+  "topic": "Respiratory viral infections research",
+  "field": "Medicine"
+ },
+ {
+  "id": "W2120401614",
+  "title": "Quand recherche et savoir scientifique cèdent le pas à l’activisme et au parti pris",
+  "abstract": "Populaires à la naissance de la victimologie, les études individuelles de victimes de crimes spécifiques ont été éclipsées, dans les années 1970, par des enquêtes de victimisation à grande échelle, l’approche micro cédant alors la place à une approche macro. Le but premier de ces enquêtes consistait à déterminer le volume de victimisation, à identifier la population de victimes, ainsi qu’à établir leurs caractéristiques sociodémographiques. Chacune de ces enquêtes donne une mine d’informations sur les victimes et permet une analyse minutieuse des modèles et des tendances spatiotemporelles pour des types variés de victimisation. Lors des trois dernières décennies du xx e siècle, cependant, la victimologie a subi une métamorphose très importante mais aussi inquiétante. La transformation idéologique de la victimologie a été nuisible à l’enrichissement et au progrès de la victimologie scientifique. La mutation idéologique de la victimologie est manifeste dans les conférences et les symposia qui se tiennent en son nom : l’étude des victimes qui cède le pas à l’art de les aider, la sur-identification avec des victimes de crimes, le zèle du missionnaire avec lequel les « intérêts » de la victime sont défendus et poursuivis, etc. Tout cela signale un glissement préoccupant : de savoir scientifique dépassionné, non biaisé et impartial, la victimologie est devenue un plaidoyer politique tombé dans un sectarisme déclaré. Le zèle du missionnaire montré par de nombreux victimologues au nom et dans l’intérêt des victimes de crimes est lourd de dangers. Quelques-uns de ces dangers sont examinés dans le présent article.",
+  "year": 2011,
+  "lang": "fr",
+  "type": "article",
+  "venue": "Criminologie",
+  "topic": "Historical and Scientific Studies",
+  "field": "Medicine"
+ },
+ {
+  "id": "W2760340246",
+  "title": "Rural‐urban disparity in oral health‐related quality of life",
+  "abstract": "Abstract Objectives The objective of this population‐based cross‐sectional study was to estimate rural‐urban disparity in the oral health‐related quality of life (OHRQoL) of the Quebec adult population. Methods A 2‐stage sampling design was used to collect data from the 1788 parents/caregivers of schoolchildren living in the 8 regions of the province of Quebec in Canada. Andersen's behavioural model for health services utilization was used as a conceptual framework. Place of residency was defined according to the Statistics Canada Census Metropolitan Area and Census Agglomeration Influenced Zone classification. The outcome of interest was OHRQoL measured using the Oral Health Impact Profile ( OHIP )‐14 validated questionnaire. Data weighting was applied, and the prevalence, extent and severity of negative oral health impacts were calculated. Statistical analyses included descriptive statistics, bivariate analyses and binary logistic regression. Results The prevalence of poor oral health‐related quality life ( OHRQ oL) was statistically higher in rural areas than in urban zones ( P = .02). Rural residents reported a significantly higher prevalence of negative daily‐life impacts in pain , psychological discomfort and social disability OHIP domains ( P &lt; .05). Additionally, the rural population showed a greater number of negative oral health impacts ( P = .03). There was no significant rural‐urban difference in the severity of poor oral health. Logistic regression indicated that the prevalence of poor OHRQ oL was significantly related to place of residency ( OR = 1.6; 95% CI = 1.1‐2.5; P = .022), perceived oral health ( OR = 9.4; 95% CI = 5.7‐15.5; P &lt; .001), dental treatment needs factors (perceived need for dental treatment, pain, dental care seeking) ( OR = 8.7; 95% CI = 4.8‐15.6; P &lt; .001) and education ( OR = 2.7; 95% CI = 1.8‐3.9; P &lt; .001). Conclusion The results of this study suggest a potential difference in OHRQ oL of Quebec rural and urban populations, and a need to develop strategies to promote oral health outcomes, specifically for rural residents. Further studies are needed to confirm these results.",
+  "year": 2017,
+  "lang": "en",
+  "type": "article",
+  "venue": "Community Dentistry And Oral Epidemiology",
+  "topic": "Dental Health and Care Utilization",
+  "field": "Dentistry"
+ },
+ {
+  "id": "W2092719753",
+  "title": "Clinical Translation of Recommendations from Randomized Clinical Trials on Patching Regimen for Amblyopia",
+  "abstract": "1. Ophthalmology. 2013 Apr;120(4):657-62. doi: 10.1016/j.ophtha.2012.09.019. Epub\n 2013 Feb 5.\n\nClinical translation of recommendations from randomized clinical trials on \npatching regimen for amblyopia.\n\nJin YP(1), Chow AH, Colpa L, Wong AM.\n\nAuthor information:\n(1)Department of Ophthalmology and Vision Sciences, University of Toronto, \nToronto, Canada. Yaping.Jin@utoronto.ca\n\nPURPOSE: To investigate whether the evidence-based recommendations by the \nPediatric Eye Disease Investigator Group (PEDIG) as initial treatment of \namblyopia have been implemented into clinical practice and to discuss the \nnecessary steps in translating evidence-based knowledge to inform clinical \ndecision making.\nDESIGN: Retrospective cohort study.\nPARTICIPANTS: Children with amblyopia seen from 2007 through 2009 by academic \nand community ophthalmologists in a large urban center in North America that \nserves a population of more than 8 million. Using PEDIG criteria, moderate \namblyopia was defined as visual acuity between 20/40 and 20/80 and severe \namblyopia was defined as visual acuity between 20/100 and 20/400.\nINTERVENTION: Patching of the sound eye.\nMAIN OUTCOME MEASURES: The number of prescribed patching hours daily and the \namblyopic eye visual acuity expressed as logarithm of the minimum angle of \nresolution (logMAR).\nRESULTS: For moderate amblyopia, the cohort (n = 71) was prescribed a mean of \n3.2 hours of daily patching (95% confidence interval [CI]: 2.8-3.6 hours), which \nis significantly greater than the recommended 2 hours of daily patching for \ninitial treatment. Only 24% (95% CI, 16%-35%) of them were prescribed the \nrecommended initial patching hours. The amblyopic eye acuity on the 3- to \n6-month visit in the cohort (0.23 logMAR) was similar to that of the 4-month \nvisit in the PEDIG cohort (0.24 logMAR; P = 0.74). For severe amblyopia, the \ncohort (n = 52) was prescribed a mean of 3.9 hours of daily patching (95% CI, \n3.5-4.3 hours), which is significantly lower than the recommended 6 hours of \ndaily patching for initial treatment. Only 12% (95% CI, 5%-23%) of them were \nprescribed the recommended initial patching hours. The amblyopic eye acuity at \nthe 7- to 12-month visit in the cohort (0.44 logMAR) was comparable with that of \nthe 4-month visit in the PEDIG cohort (0.40 logMAR; P = 0.35).\nCONCLUSIONS: The evidence-based recommendations for amblyopia management have \nnot been translated widely into changes in clinical practice in a large urban \ncenter in Nort",
+  "year": 2013,
+  "lang": "en",
+  "type": "article",
+  "venue": "Ophthalmology",
+  "topic": "Ophthalmology and Visual Impairment Studies",
+  "field": "Medicine"
+ },
+ {
+  "id": "W2150537403",
+  "title": "Values and preferences in oral anticoagulation in patients with atrial fibrillation, physicians' and patients' perspectives: protocol for a two-phase study",
+  "abstract": "",
+  "year": 2008,
+  "lang": "en",
+  "type": "article",
+  "venue": "BMC Health Services Research",
+  "topic": "Patient-Provider Communication in Healthcare",
+  "field": "Health Professions"
+ },
+ {
+  "id": "W4394707390",
+  "title": "Story-Sharing Facilitation Guide: An Educational Strategy to Develop Strengths-Based Nursing and Healthcare Leaders",
+  "abstract": "Background A reflective praxis process has been developed to facilitate story-sharing, an educational strategy grounded in narrative pedagogy. Method This article describes this strategy, the Story-Sharing Facilitation Guide (SSFG). The guide allows educators to facilitate the telling of a story that often triggers a memory of similar or contrasting experiences. Sharing stories helps learners find personal and professional meaning, develop new insights, and revise actions. The SSFG is underpinned by Dreyfus and Taylor's Contact Theory of how human beings learn and come to know and understand their different life-worlds. Results The SSFG was developed and used by faculty in a leadership training program. Evaluation results of the program found this to be an effective educational method. Conclusion The guide provides educators with an intentional process of reflection that deepens learning and allows for labeling the experience and linking it with the concepts being taught. [ J Nurs Educ . 2024;63(10):703–708.]",
+  "year": 2024,
+  "lang": "en",
+  "type": "article",
+  "venue": "Journal of Nursing Education",
+  "topic": "Digital Storytelling and Education",
+  "field": "Health Professions"
+ },
+ {
+  "id": "W7116052855",
+  "title": "straight_plate_tripped_BPT.stp",
+  "abstract": "",
+  "year": 2025,
+  "lang": null,
+  "type": "dataset",
+  "venue": "Recherche Data Gouv France",
+  "topic": null,
+  "field": null
+ },
+ {
+  "id": "W2012260550",
+  "title": "Le statut du serment et de la promesse dans la déclaration des droits de 1789",
+  "abstract": "Le sens et la fonction de la Déclaration des droits de l’homme et du citoyen furent l’objet de longues et nombreuses controverses. Parmi les différentes approches du texte, juridiques ou sociologiques, nous retiendrons la méthode conçue à propos de Ténoncé performatif par le philosophe anglais J. L. Austin, car elle nous permet de découvrir sur quelles procédures conventionnelles s’appuie la bonne réception de la Déclaration, à quelles règles de conduite existantes, les constituants ont-ils fait appel. Ces conventions, en l’occurrence l’acte de serment et de promesse, apparaissent dans le texte à l’état d’indices, cette dimension étant masquée par l’intensité de la rupture que la Déclaration instaure au plan politique. Ce décodage des intentions des constituants nécessite le recours à une analyse des contextes: contexte socio-historique immédiat et environnement conceptuel.",
+  "year": 2007,
+  "lang": "fr",
+  "type": "article",
+  "venue": "Philosophiques",
+  "topic": "Multiculturalism, Politics, Migration, Gender",
+  "field": "Social Sciences"
+ },
+ {
+  "id": "W2530783219",
+  "title": "Perinatal sexuality: An overview of women’s intimacy and sexuality during and after pregnancy",
+  "abstract": "",
+  "year": 2015,
+  "lang": "en",
+  "type": "article",
+  "venue": "Health Care Current Reviews",
+  "topic": "Adolescent Sexual and Reproductive Health",
+  "field": "Health Professions"
+ },
+ {
+  "id": "W4200327593",
+  "title": "Knowledge and Perceptions of the Health Impacts of Climate Change Among Canadians",
+  "abstract": "Abstract Background At a time of intersecting public health crises of COVID-19 and climate change, understanding public perceptions of the health risks of climate change is critical to inform risk communication and support the adoption of adaptive behaviours. In Canada, very few studies have explored public understandings and perceptions of climate impacts on health. Methods This study addresses this gap through a nationally-representative survey of Canadians (n=3,014) to explore public perceptions and awareness regarding the link between climate change and health in Canada. The 116-question survey measured awareness of the link between climate change and health, affective assessment of climate health impacts, unprompted knowledge of climate health impacts, and concern about a range of impacts. Kruskal-Wallis tests were used to test for differences in median values among sociodemographic groups. The survey also measured baseline climate opinion, which was used to segment the public into different audiences through a latent class analysis. Results Three climate opinion classes were identified in the sample (disengaged, concerned, and alarmed) and perceptions of climate health impacts were compared across these classes and other sociodemographic variables. Approximately half (53%) of respondents have considerable awareness of the link between climate change and health, and even more (61%) perceive climate change as bad for health. The majority of respondents (58%) can name one or more health impact without prompting. Concern about health impacts of climate change is highest among the alarmed and lowest among the disengaged, as compared to concerns about other categories of climate impacts such as economic. Across the survey, knowledge and concern are highest for water- and food-related health impacts. Conclusions The differential knowledge, awareness, and concern of climate health impacts across segments of the Canadian population can inform targeted communication and engagement to build broader support for adaptation and mitigation measures.",
+  "year": 2021,
+  "lang": "en",
+  "type": "preprint",
+  "venue": "Research Square",
+  "topic": "Climate Change Communication and Perception",
+  "field": "Social Sciences"
+ },
+ {
+  "id": "W4414059678",
+  "title": "Pain, Agitation, Delirium, and Iatrogenic Withdrawal Syndrome Management in Children Who Are Critically Ill: Protocol for a European Clinical Practice Guideline Using the Grading of Recommendations Assessment, Development, and Evaluation Approach",
+  "abstract": "Background In pediatric intensive care units, pain, sedation, delirium, and iatrogenic withdrawal syndrome (IWS) must be managed as interrelated conditions. Although clinical practice guidelines (CPGs) exist, new evidence needs to be incorporated, gaps in recommendations addressed, and recommendations adapted to the European context. Objective This protocol describes the development of the first patient- and family-informed European guideline for managing pain, sedation, delirium, and IWS by the European Society of Paediatric and Neonatal Intensive Care. Methods This guideline will follow the Grading of Recommendations Assessment, Development, and Evaluation ADOLOPMENT approach across seven phases: (1) setup—establish 3 groups, namely a steering committee, development panel (experts and patient and family partners), and patient and family partner advisory panel, to define guideline scope through voting and consensus; (2) preparation—vote on 30 summary recommendations compiled from existing CPGs of medium quality or above; prioritize new research questions; update the search for CPGs to match new research questions with recommendations using population, intervention, comparator, and outcome elements; prioritize outcomes for effectiveness questions using a 9-point Likert scale; with validation from patient and family partners; (3) evidence identification, analysis, and data extraction—develop individualized search strategies for each research question (2 independent appraisers will select and appraise studies and conduct data extraction); (4) evidence synthesis—expert pairs will summarize findings in evidence profiles and evidence-to-decision (EtD) frameworks (in the absence of evidence, the expert panel will be surveyed to assess current practices); (5) guideline development—expert pairs will draft recommendations, then topic-specific subgroups will reach consensus before full development panel voting (&gt;80% approval needed; subgroups will determine the need for additional supporting content); (6) review—conduct internal, society-level, and external international expert reviews using surveys with Likert scales and open-ended comments; and (7) issue and update—publish the guideline and monitor literature to assess the need for updates before 5 years. Results In phase 1, a total of 21 clinical experts and 17 patient and family partners were recruited, and the guideline scope was finalized with 80% to 100% agreement. In phase 2, a total of 23 summary recomme",
+  "year": 2025,
+  "lang": "en",
+  "type": "article",
+  "venue": "JMIR Research Protocols",
+  "topic": "Intensive Care Unit Cognitive Disorders",
+  "field": "Medicine"
+ },
+ {
+  "id": "W2255445672",
+  "title": "A Five-Country Survey on Ethics Education in Preservice Teaching Programs",
+  "abstract": "Despite a broad consensus on the ethical dimensions of the teaching profession, and long-standing efforts to align teacher education with wider trends in professional education, little is known about how teacher candidates are being prepared to face the ethical challenges of contemporary teaching. This article presents the results of an international survey on ethics content and curriculum in initial teacher education (ITE). Involving five Organisation for Economic Co-Operation and Development (OECD) countries—the United States, England, Canada, Australia, and the Netherlands—the study’s findings shed light on teacher educators’ perspectives on the contribution of ethics content to the education of future teachers and provide a snapshot of how well existing programs line up with their aspirations. The results showed that 24% of the ITE programs surveyed contain at least one mandatory stand-alone ethics course. The meaning of the results vis-à-vis opportunities for expanding ethics education in preservice teaching programs is also discussed.",
+  "year": 2016,
+  "lang": "en",
+  "type": "article",
+  "venue": "Journal of Teacher Education",
+  "topic": "Ethics in Business and Education",
+  "field": "Decision Sciences"
+ },
+ {
+  "id": "W3116112122",
+  "title": "Socioeconomic status and oral health‐related quality of life: A systematic review and meta‐analysis",
+  "abstract": "Abstract Objectives To systematically review observational studies assessing the association between socioeconomic status (SES) and oral health‐related quality of life (OHRQoL) in children, adolescents and adults. Methods Electronic searches were performed in the PubMed, Embase, Web of Science, LILACS and Scopus databases for articles published up to September 2020. Two independent reviewers performed the search and critical appraisal of the studies. The inclusion criteria were observational studies that evaluated the effect of SES on the OHRQoL in all age groups using validated methods. Quality assessment was conducted using the Newcastle‐Ottawa Scale. Data were extracted for meta‐analysis followed by a meta‐regression analysis. A random‐effects model was used to estimate the pooled calculate prevalence ratio (PR) and respective 95% confidence intervals (CI) for each study. Results The search strategy retrieved 6114 publications. Some 139 articles met the eligibility criteria and were included in the systematic review. Of those, 75 were included in the general meta‐analysis they represented a total sample of 109 269 individuals. People of lower SES had worse OHRQoL (PR 1.30; 95% CI 1.26‐1.35). In the meta‐analyses of different subgroups, an association was found between low SES and worse OHRQoL in countries of all economic classifications, in all age groups and irrespective of the socioeconomic indicator used. A socioeconomic gradient in OHRQoL was also observed, in which the lower the individuals' socioeconomic position, the poorer their OHRQoL. Conclusions Individuals of low SES had poorer OHRQoL, regardless of the country's economic classification, SES indicator and age group. Public policies aiming to reduce social inequalities are necessary for better OHRQoL throughout life.",
+  "year": 2020,
+  "lang": "en",
+  "type": "review",
+  "venue": "Community Dentistry And Oral Epidemiology",
+  "topic": "Dental Health and Care Utilization",
+  "field": "Dentistry"
+ },
+ {
+  "id": "W2142043345",
+  "title": "Cognitive decline and human (Homo sapiens) aging: An investigation using a comparative neuropsychological approach.",
+  "abstract": "1. J Comp Psychol. 2007 Aug;121(3):270-81. doi: 10.1037/0735-7036.121.3.270.\n\nCognitive decline and human (Homo sapiens) aging: an investigation using a \ncomparative neuropsychological approach.\n\nBoutet I(1), Milgram NW, Freedman M.\n\nAuthor information:\n(1)School of Psychology, University of Ottawa, Ottawa, ON, Canada. \niboutet@uottawa.ca\n\nUsing a comparative neuropsychological approach, the authors compared \nperformance of younger and healthy older adults ages 65 and over on tasks \noriginally developed to measure cognition in animals. A battery of 6 tasks was \nused to evaluate object discrimination, egocentric spatial abilities, visual and \nspatial working memory, and response shifting. Older adults performed more \npoorly than younger adults on tasks that evaluate egocentric spatial abilities, \nresponse shifting, and to a lesser extent object recognition. The two groups did \nnot differ for tasks that evaluate spatial working memory and object \ndiscrimination. The impairments the authors observed in tasks that evaluate \nresponse shifting and object recognition are consistent with those found in \ncanines and primates as well as those found in Alzheimer's disease. The results \nare consistent with the notion that cognitive processes supported by the \namygdala and the orbitofrontal cortex are among the first to decline with \nincreasing age in both humans and animals.\n\nDOI: 10.1037/0735-7036.121.3.270\nPMID: 17696653 [Indexed for MEDLINE]",
+  "year": 2007,
+  "lang": "en",
+  "type": "article",
+  "venue": "Journal of comparative psychology",
+  "topic": "Memory and Neural Mechanisms",
+  "field": "Neuroscience"
+ },
+ {
+  "id": "W2499635074",
+  "title": "Planetary Praxis and Pedagogy",
+  "abstract": "",
+  "year": 2015,
+  "lang": "en",
+  "type": "book-chapter",
+  "venue": "SensePublishers eBooks",
+  "topic": "Qualitative Research Methods and Ethics",
+  "field": "Social Sciences"
+ },
+ {
+  "id": "W4415982332",
+  "title": "Double sequential defibrillation: is it ready for prime time?",
+  "abstract": "Purpose of review Refractory ventricular fibrillation, which fails to respond to defibrillation, is associated with poor survival. Despite this, there are no treatments that are proven effective beyond standard defibrillation and cardiopulmonary resuscitation. Double sequential external defibrillation (DSED) has been proposed as an alternative defibrillation strategy for this patient population. In this review, we will discuss key evidence surrounding DSED, as we present two opposing arguments, ‘pro’ that DSED is ready for clinical practice and ‘con’ that more research is needed prior to implementation of this technique. Recent findings The Double Sequential External Defibrillation for Refractory Ventricular Fibrillation (DOSE VF) randomized clinical trial demonstrated improved patient outcomes for patients with refractory ventricular fibrillation who did not respond to standard defibrillation attempts. There remain unanswered questions with respect to the mechanism by which DSED may improve outcomes and the logistics of implementation into clinical practice. Summary This article discusses some of the key controversies surrounding DSED and whether this novel defibrillation strategy is ready for integration into standard practice. Further research is ongoing that may help to answer further questions related to the utility of DSED.",
+  "year": 2025,
+  "lang": "en",
+  "type": "review",
+  "venue": "Current Opinion in Critical Care",
+  "topic": "Cardiac Arrest and Resuscitation",
+  "field": "Medicine"
+ },
+ {
+  "id": "W6921066614",
+  "title": "Additional file 1 of Lessons from the COVID-19 pandemic to strengthen NCD care and policy in humanitarian settings: a mixed methods study exploring humanitarian actors’ experiences",
+  "abstract": "",
+  "year": 2024,
+  "lang": "en",
+  "type": "article",
+  "venue": "Figshare",
+  "topic": "Global Health and Surgery",
+  "field": "Medicine"
+ },
+ {
+  "id": "W1506351630",
+  "title": "Role of Academic Advising in Mitigating the Challenges of Ethnic Minority Students at Universiti Teknologi Malaysia",
+  "abstract": "",
+  "year": 2015,
+  "lang": "en",
+  "type": "article",
+  "venue": "International Education Studies",
+  "topic": "International Student and Expatriate Challenges",
+  "field": "Social Sciences"
+ },
+ {
+  "id": "W6907888404",
+  "title": "The importance of open access to scholarly scientific knowledge, science advice and national science advice mechanisms in building trust in science",
+  "abstract": "",
+  "year": 2024,
+  "lang": "en",
+  "type": "article",
+  "venue": "Figshare",
+  "topic": "Academic Publishing and Open Access",
+  "field": "Decision Sciences"
+ },
+ {
+  "id": "W2982401705",
+  "title": "Nonclinical Sexual Health Support for HIV, Viral Hepatitis, and Other Sexually Transmitted Infections in Gay, Bisexual, and Other Men Who Have Sex With Men: Protocol for a European Community Health Worker Online Survey (ECHOES)",
+  "abstract": "Background The term “community health worker” (CHW) can apply to a wide range of individuals providing health services and support for diverse populations. Very little is known about the role of CHWs in Europe working in nonclinical settings who promote sexual health and prevent HIV and other sexually transmitted infections (STIs) among gay, bisexual, and other men who have sex with men (MSM). Objective This paper describes the development and piloting of the first European Community Health Worker Online Survey (ECHOES) as part of the broader European Union-funded ESTICOM (European Surveys and Trainings to Improve MSM Community Health) project. The questionnaire aimed to assess the knowledge, attitudes, and practices of CHWs providing sexual health services to gay, bisexual, and other MSM in European settings. Methods ECHOES comprises three superordinate domains divided into 10 subsections with 175 items (routed) based on a scoping exercise and literature review, online prepiloting, and Europe-wide consultation. Additional piloting and cognitive debriefing interviews with stakeholders were conducted to identify comprehension issues and improve the clarity, intelligibility, accessibility, and acceptability of the survey. Psychometric properties, including internal consistency of the standardized scales used as part of the survey were examined. The final survey was available to 33 countries in 16 languages. Results Recruitment closed on January 31, 2018. Data from 1035 CHWs were available for analysis after application of the exclusion criteria. The findings of the ECHOES survey and the wider ESTICOM project, are now available from the ESTICOM website and/or by contacting the first author. Conclusions The findings of this survey will help characterize, for the first time, the diverse role of CHWs who provide sexual health services to gay, bisexual, and other MSM in Europe. Importantly, the data will be used to inform the content and design of a dedicated training program for CHWs as part of the larger ESTICOM project and provide recommendations for MSM-specific strategies to improve sexual health in general and to reduce the incidence and prevalence of HIV, viral hepatitis, and other STIs in particular. International Registered Report Identifier (IRRID) RR1-10.2196/15012",
+  "year": 2019,
+  "lang": "en",
+  "type": "article",
+  "venue": "JMIR Research Protocols",
+  "topic": "HIV/AIDS Research and Interventions",
+  "field": "Medicine"
+ },
+ {
+  "id": "W2158069915",
+  "title": "Management of Infantile Colic: A Review",
+  "abstract": "Infantile colic is an easily identified childhood entity that has no clear treatment guidelines. The management of infantile colic varies among physicians, and families are often frustrated by the medical community's inability to prescribe a cure for colic. This article reviews the current concepts for management options of infantile colic.",
+  "year": 2008,
+  "lang": "en",
+  "type": "review",
+  "venue": "Clinical Pediatrics",
+  "topic": "Infant Health and Development",
+  "field": "Health Professions"
+ },
+ {
+  "id": "W2750781151",
+  "title": "Scoping review protocol: education initiatives for medical psychiatry collaborative care",
+  "abstract": "Introduction The collaborative care model is an approach providing care to those with mental health and addictions disorders in the primary care setting. There is a robust evidence base demonstrating its clinical and cost-effectiveness in comparison with usual care; however, the transitioning to this new paradigm of care has been difficult. While there are efforts to train and prepare healthcare professionals, not much is known about the current state of collaborative care training programmes. The objective of this scoping review is to understand how widespread these collaborative care education initiatives are, how they are implemented and their impacts. Methods and analysis The scoping review methodology uses the established review methodology by Arksey and O’Malley. The search strategy was developed by a medical librarian and will be applied in eight different databases spanning multiple disciplines. A two-stage screening process consisting of a title and abstract scan and a full-text review will be used to determine the eligibility of articles. To be included, articles must report on an existing collaborative care education initiative for healthcare providers. All articles will be independently assessed for eligibility by pairs of reviewers, and all eligible articles will be abstracted and charted in duplicate using a standardised form. The extracted data will undergo a ‘narrative review’ or a descriptive analysis of the contextual or process-oriented data and simple quantitative analysis using descriptive statistics. Ethics and dissemination Research ethics approval is not required for this scoping review. The results of this scoping review will inform the development of a collaborative care training initiative emerging from the Medical Psychiatry Alliance, a four-institution philanthropic partnership in Ontario, Canada. The results will also be presented at relevant national and international conferences and published in a peer-reviewed journal.",
+  "year": 2017,
+  "lang": "en",
+  "type": "article",
+  "venue": "BMJ Open",
+  "topic": "Mental Health and Patient Involvement",
+  "field": "Health Professions"
+ },
+ {
+  "id": "W3004444768",
+  "title": "Interventions to Optimize Spinal Cord Perfusion in Patients with Acute Traumatic Spinal Cord Injuries: A Systematic Review",
+  "abstract": "1. J Neurotrauma. 2020 May 1;37(9):1127-1139. doi: 10.1089/neu.2019.6844. Epub\n2020  Mar 11.\n\nInterventions to Optimize Spinal Cord Perfusion in Patients with Acute Traumatic \nSpinal Cord Injuries: A Systematic Review.\n\nEvaniew N(1)(2), Mazlouman SJ(3), Belley-Côté EP(4), Jacobs WB(2), Kwon \nBK(1)(3).\n\nAuthor information:\n(1)Vancouver Spine Surgery Institute (VSSI), Department of Orthopaedics, \nUniversity of British Columbia, Vancouver, British Columbia, Canada.\n(2)Department of Clinical Neurosciences, University of Calgary, Calgary, \nAlberta, Canada.\n(3)International Collaboration on Repair Discoveries (ICORD), Department of \nOrthopaedics, Vancouver, British Columbia, Canada.\n(4)Population Health Research Institute and Department of Medicine, McMaster \nUniversity, Hamilton, Ontario, Canada.\n\nInterventions to optimize spinal cord perfusion via support of mean arterial \npressure (MAP) or spinal cord perfusion pressure (SCPP) are thought to play a \ncritical role in the management of patients with acute traumatic spinal cord \ninjuries, but there is ongoing controversy about efficacy and safety. We aimed \nto determine the effects of optimizing spinal cord perfusion on neurological \nrecovery and risks for adverse events. We searched multiple databases for \npublished and unpublished reports. Two reviewers independently screened \narticles, extracted data, and evaluated risk of bias. We synthesized data and \nevaluated confidence in anticipated treatment effects according to the Grades of \nRecommendation, Assessment, Development, and Evaluation (GRADE) approach. We \nidentified 20 eligible observational studies and 1 eligible randomized \ncontrolled trial. According to low or very low quality evidence, the effect of \nMAP support on neurological recovery after acute traumatic spinal cord injury is \nuncertain, and the use of vasopressors to support MAP may be associated with \nincreased rates of predominantly cardiac adverse events. Increased SCPP appears \nlikely to be associated with improved neurological recovery, but SCPP monitoring \nvia intradural catheters at the anatomical site of injury may involve increased \nrisks of cerebrospinal fluid leakage requiring revision surgery or \npseudomeningocele. No study directly compared the effects of specific MAP goal \nranges, SCPP ranges, SCPP monitoring techniques, or durations of treatment. Very \nlow quality evidence suggests that norepinephrine may have less risk of adverse \nevents than dopamine. The current literature is i",
+  "year": 2020,
+  "lang": "en",
+  "type": "review",
+  "venue": "Journal of Neurotrauma",
+  "topic": "Spinal Cord Injury Research",
+  "field": "Medicine"
+ },
+ {
+  "id": "W2129456902",
+  "title": "Evaluation and other issues",
+  "abstract": "",
+  "year": 2002,
+  "lang": "en",
+  "type": "editorial",
+  "venue": "Injury Prevention",
+  "topic": "Evaluation and Performance Assessment",
+  "field": "Decision Sciences"
+ }
+]
+warning: loading hooks from both /Users/choxos/.codex/hooks.json and /Users/choxos/.codex/config.toml; prefer a single representation for this layer
+2026-07-13T14:15:59.983389Z ERROR rmcp::transport::worker: worker quit with fatal: Transport channel closed, when Auth(AuthorizationRequired)
+warning: Skill descriptions were shortened to fit the 2% skills context budget. Codex can still see every skill, but some descriptions are shorter. Disable unused skills or plugins to leave more room for the rest.
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart Failed
+hook: SessionStart Completed
+hook: SessionStart Completed
+hook: SessionStart Failed
+hook: SessionStart Completed
+hook: SessionStart Failed
+hook: UserPromptSubmit
+hook: UserPromptSubmit
+hook: UserPromptSubmit Failed
+hook: UserPromptSubmit Failed
+codex
+[{"id":"W4413625567","categories":[],"study_design":"observational","genre":"empirical","about_ca_system":false,"about_ca_topic":true,"confidence":"high","reason":"The work studies urban planning and ethnic retailing, not science, research, or a defined MetaCan category."},{"id":"W4404378464","categories":[],"study_design":"simulation_or_modeling","genre":"empirical","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"Developing and testing antiviral compounds with docking and molecular dynamics is domain research, not research-on-research."},{"id":"W2120401614","categories":["sts"],"study_design":"theoretical_or_conceptual","genre":"commentary","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"The work studies how a scientific field and its knowledge practices changed through social and ideological processes."},{"id":"W2760340246","categories":[],"study_design":"observational","genre":"empirical","about_ca_system":false,"about_ca_topic":true,"confidence":"high","reason":"This is an observational oral-health study of Quebec residents, not a study of research practice."},{"id":"W2092719753","categories":[],"study_design":"observational","genre":"empirical","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"The retrospective cohort examines clinical implementation of treatment recommendations, not research practice itself."},{"id":"W2150537403","categories":[],"study_design":"not_applicable","genre":"protocol","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"The title unambiguously identifies a protocol, which is not empirical research and fits no defined category."},{"id":"W4394707390","categories":[],"study_design":"design_other","genre":"empirical","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"The work describes and evaluates a nursing education strategy rather than studying science, research, or scholarly communication."},{"id":"W7116052855","categories":["insufficient_payload"],"study_design":"not_applicable","genre":"dataset","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"The record is a data-file filename with no usable scholarly title or abstract and cannot be screened."},{"id":"W2012260550","categories":[],"study_design":"theoretical_or_conceptual","genre":"other","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"The work is a historical and philosophical analysis of a legal declaration, not a defined MetaCan category."},{"id":"W2530783219","categories":[],"study_design":"design_other","genre":"review","about_ca_system":false,"about_ca_topic":false,"confidence":"low","reason":"The title indicates an overview of perinatal sexuality, but the missing abstract does not establish a defined category or specific review design."},{"id":"W4200327593","categories":[],"study_design":"observational","genre":"empirical","about_ca_system":false,"about_ca_topic":true,"confidence":"high","reason":"This is a survey of Canadians about climate-health perceptions, not a study of research practice."},{"id":"W4414059678","categories":[],"study_design":"not_applicable","genre":"protocol","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"The work is explicitly a clinical-practice-guideline protocol and is not empirical research in a defined category."},{"id":"W2255445672","categories":[],"study_design":"observational","genre":"empirical","about_ca_system":false,"about_ca_topic":true,"confidence":"high","reason":"The survey studies ethics education in teacher training across five countries, not research integrity or research practice."},{"id":"W3116112122","categories":[],"study_design":"systematic_review","genre":"review","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"This systematic review and meta-analysis addresses oral-health inequalities, not a defined MetaCan category."},{"id":"W2142043345","categories":[],"study_design":"observational","genre":"empirical","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"The comparative neuropsychological study measures cognitive aging in participants and does not study research practice."},{"id":"W2499635074","categories":[],"study_design":"design_other","genre":"other","about_ca_system":false,"about_ca_topic":false,"confidence":"low","reason":"The missing abstract and nonspecific title do not establish a defined category or study design."},{"id":"W4415982332","categories":[],"study_design":"design_other","genre":"review","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"This narrative clinical review discusses defibrillation practice, not research practice or scholarly communication."},{"id":"W6921066614","categories":["insufficient_payload"],"study_design":"not_applicable","genre":"dataset","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"The record is labeled as an additional file with no abstract and cannot be reliably screened as a scholarly work."},{"id":"W1506351630","categories":[],"study_design":"design_other","genre":"empirical","about_ca_system":false,"about_ca_topic":false,"confidence":"low","reason":"The missing abstract leaves the study design and any defined category unresolved despite the topical title."},{"id":"W6907888404","categories":["scholarly_communication","open_science"],"study_design":"design_other","genre":"other","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"The title directly concerns dissemination and access to scholarly knowledge and the principles of open science."},{"id":"W2982401705","categories":[],"study_design":"not_applicable","genre":"protocol","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"The work is explicitly a survey protocol about community health workers, not a study of research practice."},{"id":"W2158069915","categories":[],"study_design":"design_other","genre":"review","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"This clinical management review concerns infantile colic rather than a defined MetaCan category."},{"id":"W2750781151","categories":[],"study_design":"not_applicable","genre":"protocol","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"The work is explicitly a scoping review protocol and is not empirical research in a defined category."},{"id":"W3004444768","categories":[],"study_design":"systematic_review","genre":"review","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"This systematic review evaluates spinal-cord-injury interventions, not research practice or another defined category."},{"id":"W2129456902","categories":[],"study_design":"not_applicable","genre":"editorial","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"The record is explicitly an editorial and its generic title provides no basis for a defined category."}]
+hook: Stop
+hook: Stop
+hook: Stop
+hook: Stop Completed
+hook: Stop Completed
+hook: Stop Failed
+tokens used
+29,952

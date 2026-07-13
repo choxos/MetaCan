@@ -105,11 +105,27 @@ def train_heads(include_holdout=False):
     vec = features.vectorizer()
     X = vec.fit_transform(texts)
     heads = {}
+    # THE MODEL IMPROVES EVERY ROUND, NOT JUST ITS DATA. C is re-chosen by
+    # cross-validated average precision on the current corpus: the right amount of
+    # regularization at 4,300 labels is not the right amount at 40,000, and a constant
+    # C would quietly become a worse and worse choice as the loop grows the corpus.
+    from sklearn.model_selection import GridSearchCV, StratifiedKFold
     for a in L.ARMS:
         y = np.array(Y[a])
-        clf = LogisticRegression(C=1.0, class_weight="balanced", max_iter=2000, solver="liblinear")
-        clf.fit(X, y)
-        heads[a] = clf
+        base = LogisticRegression(class_weight="balanced", max_iter=2000, solver="liblinear")
+        if y.sum() >= 15:
+            gs = GridSearchCV(
+                base, {"C": [0.1, 0.3, 1.0, 3.0, 10.0]},
+                scoring="average_precision",
+                cv=StratifiedKFold(n_splits=3, shuffle=True, random_state=7),
+                n_jobs=-1,
+            )
+            gs.fit(X, y)
+            heads[a] = gs.best_estimator_
+        else:
+            base.set_params(C=1.0)
+            base.fit(X, y)
+            heads[a] = base
     return vec, heads, len(texts)
 
 
