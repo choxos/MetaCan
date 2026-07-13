@@ -1,0 +1,279 @@
+```json
+[
+  {
+    "id": "W2603683329",
+    "categories": [],
+    "domain": null,
+    "study_design": "bench_or_experimental",
+    "genre": "methods",
+    "about_ca_system": false,
+    "about_ca_topic": false,
+    "confidence": "high",
+    "reason": "Lab protocol teaching domain tissue-prep technique for neuroscience EM; Rule 1 excludes developing or teaching a domain technique from metaresearch."
+  },
+  {
+    "id": "W6902218981",
+    "categories": [],
+    "domain": null,
+    "study_design": "not_applicable",
+    "genre": "protocol",
+    "about_ca_system": false,
+    "about_ca_topic": true,
+    "confidence": "low",
+    "reason": "Title-only additional file for clinical hypertension evidence-review protocol for the Canadian Task Force; clinical guideline synthesis, not study of research practices; Canada is a substantive topic."
+  },
+  {
+    "id": "W7075301064",
+    "categories": ["metaresearch"],
+    "domain": "methods",
+    "study_design": "qualitative",
+    "genre": "commentary",
+    "about_ca_system": false,
+    "about_ca_topic": false,
+    "confidence": "low",
+    "reason": "Title-only roundtable on relational practices in arts-based research treats researchers' methods as object; metaresearch methods under Rule 1, low confidence without abstract."
+  },
+  {
+    "id": "W3202884280",
+    "categories": [],
+    "domain": null,
+    "study_design": "not_applicable",
+    "genre": "methods",
+    "about_ca_system": false,
+    "about_ca_topic": false,
+    "confidence": "high",
+    "reason": "Tutorial teaching data-visualization technique for social scientists; Rule 1: teaching a domain communication technique is not evaluating research practices."
+  },
+  {
+    "id": "W1729984106",
+    "categories": [],
+    "domain": null,
+    "study_design": "observational",
+    "genre": "empirical",
+    "about_ca_system": false,
+    "about_ca_topic": false,
+    "confidence": "high",
+    "reason": "Contingent-valuation health economics study of parental WTP and gender bias for childhood diarrhoea in India; object is households, not research practice."
+  },
+  {
+    "id": "W1997995841",
+    "categories": [],
+    "domain": null,
+    "study_design": "not_applicable",
+    "genre": "commentary",
+    "about_ca_system": false,
+    "about_ca_topic": false,
+    "confidence": "high",
+    "reason": "Personal cancer-survivor narrative in a patient-voice series; not study of research practices, misconduct, or scholarly systems."
+  },
+  {
+    "id": "W6950135270",
+    "categories": ["sts"],
+    "domain": null,
+    "study_design": "theoretical_or_conceptual",
+    "genre": "other",
+    "about_ca_system": false,
+    "about_ca_topic": false,
+    "confidence": "low",
+    "reason": "Title-only piece on small-data projects versus big-data research with historical solutions reads as science-as-practice analysis; STS coded tentatively without abstract."
+  },
+  {
+    "id": "W1990993476",
+    "categories": [],
+    "domain": null,
+    "study_design": "observational",
+    "genre": "empirical",
+    "about_ca_system": false,
+    "about_ca_topic": true,
+    "confidence": "high",
+    "reason": "Stated-preference survey of Canadian adults on societal value of orphan-drug funding; healthcare policy valuation, not research practice; Canada is substantive topic."
+  },
+  {
+    "id": "W2045495767",
+    "categories": [],
+    "domain": null,
+    "study_design": "simulation_or_modeling",
+    "genre": "empirical",
+    "about_ca_system": false,
+    "about_ca_topic": false,
+    "confidence": "low",
+    "reason": "Title-only comparison of PDT dosimetry methods is domain clinical technique work; Rule 1 OUT for metaresearch."
+  },
+  {
+    "id": "W4394989576",
+    "categories": [],
+    "domain": null,
+    "study_design": "observational",
+    "genre": "empirical",
+    "about_ca_system": false,
+    "about_ca_topic": false,
+    "confidence": "high",
+    "reason": "Empirical study of HRQoL fluctuation and EQ-5D-5L recall in dementia; object is patient-reported outcome measurement, not research practices."
+  },
+  {
+    "id": "W2990611346",
+    "categories": [],
+    "domain": null,
+    "study_design": "qualitative",
+    "genre": "methods",
+    "about_ca_system": false,
+    "about_ca_topic": false,
+    "confidence": "medium",
+    "reason": "Advocates life-history methods for climate vulnerability research; Rule 1: teaching or expanding a technique for a domain is OUT of metaresearch."
+  },
+  {
+    "id": "W4393901348",
+    "categories": [],
+    "domain": null,
+    "study_design": "design_other",
+    "genre": "review",
+    "about_ca_system": false,
+    "about_ca_topic": false,
+    "confidence": "medium",
+    "reason": "Exploratory literature review of evaluation-capacity-building adjacent theories in program evaluation; object is organizational ECB, not Ioannidis research-assessment or research practices."
+  },
+  {
+    "id": "W2796017284",
+    "categories": [],
+    "domain": null,
+    "study_design": "observational",
+    "genre": "empirical",
+    "about_ca_system": false,
+    "about_ca_topic": false,
+    "confidence": "high",
+    "reason": "Program evaluation of a community physical-activity campaign using implicit cognitions; instance of applied evaluation, not study of research evaluation practices."
+  },
+  {
+    "id": "W1608940271",
+    "categories": [],
+    "domain": null,
+    "study_design": "qualitative",
+    "genre": "empirical",
+    "about_ca_system": false,
+    "about_ca_topic": true,
+    "confidence": "high",
+    "reason": "School literacy study of Canadian Aboriginal students' out-of-school literacy resources; education research with Canada as substantive topic, not research-on-research."
+  },
+  {
+    "id": "W2039003230",
+    "categories": [],
+    "domain": null,
+    "study_design": "observational",
+    "genre": "empirical",
+    "about_ca_system": false,
+    "about_ca_topic": false,
+    "confidence": "high",
+    "reason": "Validates eye-tracking to detect faking in penile plethysmography; domain forensic assessment technique, Rule 1 OUT."
+  },
+  {
+    "id": "W6958324860",
+    "categories": ["metaresearch"],
+    "domain": "methods",
+    "study_design": "not_applicable",
+    "genre": "other",
+    "about_ca_system": false,
+    "about_ca_topic": false,
+    "confidence": "low",
+    "reason": "Title-only additional file on search filters and citation searching to locate psychometric articles; object is evidence-retrieval methods used by researchers (metaresearch methods)."
+  },
+  {
+    "id": "W4283688983",
+    "categories": [],
+    "domain": null,
+    "study_design": "bench_or_experimental",
+    "genre": "methods",
+    "about_ca_system": false,
+    "about_ca_topic": false,
+    "confidence": "high",
+    "reason": "Presents a new head-mounted eye-tracking method for dogs; developing a domain measurement technique, Rule 1 OUT."
+  },
+  {
+    "id": "W3035183972",
+    "categories": ["metaresearch", "scholarly_communication"],
+    "domain": "incentives",
+    "study_design": "qualitative",
+    "genre": "empirical",
+    "about_ca_system": false,
+    "about_ca_topic": false,
+    "confidence": "high",
+    "reason": "Interview study of supervisory practices supporting doctoral academic writing; research-workforce training (metaresearch incentives) and scholarly writing dissemination practices."
+  },
+  {
+    "id": "W2134553529",
+    "categories": [],
+    "domain": null,
+    "study_design": "design_other",
+    "genre": "review",
+    "about_ca_system": false,
+    "about_ca_topic": false,
+    "confidence": "low",
+    "reason": "Title-only glioblastoma economic-evaluations piece is clinical HEOR/evidence synthesis about a disease, not research practice; insufficient detail for metaepi coding."
+  },
+  {
+    "id": "W2288716366",
+    "categories": [],
+    "domain": null,
+    "study_design": "theoretical_or_conceptual",
+    "genre": "methods",
+    "about_ca_system": false,
+    "about_ca_topic": false,
+    "confidence": "low",
+    "reason": "Title-only econometrics paper on unit-root tests; domain statistical technique development, Rule 1 OUT."
+  },
+  {
+    "id": "W2021093894",
+    "categories": [],
+    "domain": null,
+    "study_design": "not_applicable",
+    "genre": "other",
+    "about_ca_system": false,
+    "about_ca_topic": true,
+    "confidence": "low",
+    "reason": "Title-only arts/humanities piece on Emily Carr; cultural subject about Canada, not research practice or research system."
+  },
+  {
+    "id": "W4239068295",
+    "categories": ["insufficient_payload"],
+    "domain": null,
+    "study_design": "not_applicable",
+    "genre": "other",
+    "about_ca_system": false,
+    "about_ca_topic": false,
+    "confidence": "high",
+    "reason": "Paratext record titled only Back Matter with empty abstract; cannot be screened, reported as insufficient_payload."
+  },
+  {
+    "id": "W4399143356",
+    "categories": [],
+    "domain": null,
+    "study_design": "simulation_or_modeling",
+    "genre": "methods",
+    "about_ca_system": false,
+    "about_ca_topic": false,
+    "confidence": "low",
+    "reason": "Title-only econometrics modeling of long cycles; domain technique, not study of research practices."
+  },
+  {
+    "id": "W2278860758",
+    "categories": ["metaresearch"],
+    "domain": "evaluation",
+    "study_design": "design_other",
+    "genre": "methods",
+    "about_ca_system": false,
+    "about_ca_topic": false,
+    "confidence": "low",
+    "reason": "Title-only model to assess credibility of Iran Academy of Medical Sciences; research-institution assessment maps to metaresearch evaluation; low confidence without abstract."
+  },
+  {
+    "id": "W2750198314",
+    "categories": [],
+    "domain": null,
+    "study_design": "bench_or_experimental",
+    "genre": "methods",
+    "about_ca_system": false,
+    "about_ca_topic": false,
+    "confidence": "high",
+    "reason": "Methods chapter teaching techniques to visualize virus-derived dsRNA; domain lab technique, Rule 1 OUT of metaresearch."
+  }
+]
+```

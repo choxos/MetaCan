@@ -1,0 +1,535 @@
+You are screening scholarly works for the MetaCan project. Apply the rubric below to EVERY record and output ONE JSON array with ONE object per record, conforming EXACTLY to the JSON schema below. Output ONLY the JSON array, no prose before or after it.
+
+# THE RUBRIC (v3.1, locked)
+
+# MétaCan screening rubric (v3.1)
+
+**Status: LOCKED, 2026-07-13.** Supersedes v2.2. No screening ran under v3.0, which lived for hours: an adversarial review found that its Murad quotation inserted the word "treatment" into a sentence this document calls verbatim (D29). v3.1 corrects that quotation from the PDF, fixes the Kataoka page range, aligns the funder clause with the protocol, corrects two glosses against their sources, and adds the study-design vocabulary that v3.0 demanded but never listed. Since D29, `pilot/check_quotes.R` fails the build if any quotation marked verbatim is not a substring of its cited PDF.
+
+**No number produced so far was made under v3.** The pilot ran under v1.0; the 179-work re-screen under v2.0. Both instruments are kept byte for byte, so every figure stays attributable to the text that produced it. v3 is the instrument the **full screen** runs under, and the **v2-to-v3 difference is reported as a finding**.
+
+---
+
+## What changed, and why it is not cosmetic
+
+v1 and v2 had a tier hierarchy: **T1 core / T2 adjacent / T3 contextual**. That structure had a defect at its root, and the data found it before I did.
+
+> **"Adjacent" is defined by negation.** It means *not-T1*. A category whose only content is "near the important one" cannot be applied consistently, and **OUT-vs-adjacent was the largest tier confusion at every sample size we measured.** The models were not failing. **The category was empty.**
+
+It was also a value judgment I had no standing to make. Calling science and technology studies "adjacent" says STS is peripheral to metascience. **STS is a field with its own founding literature, its own journals, and its own account of what studying science means.**
+
+**v3 deletes the hierarchy.** Every tradition is a **category with its own positive definition, taken from its own literature, quoted verbatim from a source in `docs/reference/definitions/`.** There is no residual bucket. A record may carry **more than one** category, because the traditions genuinely overlap and forcing a single label is what created the problem.
+
+**Nothing here is cited from memory.** Every quotation below was read from the PDF named beside it. In a project whose worst deviation (D26) was that its own definition of metaresearch was mine and uncited for its entire life, a recalled citation would be the single worst thing this document could contain.
+
+---
+
+## The definitional problem is the field's, not this project's, and the field says so in print
+
+- **Puljak L, Lovric Makaric Z, Buljan I, Pieper D.** *What is a meta-epidemiological study? Analysis of published literature indicated heterogeneous study designs and definitions.* J Comp Eff Res. 2020. doi:10.2217/cer-2019-0201
+  > Analysed **175 information sources**. *"Definitions of meta-epidemiological studies varied and some studies used the term meta-epidemiological study to describe methodological research-on-research studies."* Conclusion: *"Research community would benefit from consensus about definition of meta-epidemiological study."*
+
+- **Kataoka Y, et al.** J Clin Epidemiol. 2023;154:219-220.
+  > A **published dispute** with Puljak, opening by naming *"the currently confusing nomenclatures around 'meta-epidemiology' and related terms such as 'meta-research' and 'research-on-research'."*
+
+- **Stevens ER, Laynor G.** *Recognizing the value of meta-research and making it easier to find.* J Med Libr Assoc. 2023;111(4). doi:10.5195/jmla.2023.1758
+  > *"The breadth of meta-research presents a significant challenge for identifying published meta-research studies,"* and it notes **the lack of a MeSH heading** for meta-research.
+
+**Those are claims about humans.** The pilot's numbers are claims about **models disagreeing under one rubric**. They are consistent, they are not the same estimand, and **only the human audit closes the gap** (`DEVIATIONS.md` D27).
+
+---
+
+## The categories
+
+A work may carry **more than one**. **Categories are not ranked and none is primary: the released landscape is the union of the defined categories, with every overlap reported.** The call's primary estimand is reported over `metaresearch` because that is the field the call names; that is a **reporting choice, not a rank**, and each of the other traditions gets the same per-category estimate.
+
+### 1. `metaresearch`
+
+> **"Meta-research is an evolving scientific discipline that aims to evaluate and improve research practices. It includes thematic areas of methods, reporting, reproducibility, evaluation, and incentives (how to do, report, verify, correct, and reward science)."**
+>
+> Ioannidis JPA, Fanelli D, Dunne DD, Goodman SN. *Meta-research: Evaluation and Improvement of Research Methods and Practices.* PLoS Biol. 2015;13(10):e1002264.
+> See also Ioannidis JPA. PLoS Biol. 2018;16(3):e2005468; METRICS, Stanford: <https://metrics.stanford.edu/research>
+
+Every `metaresearch` record carries a **`domain`**, taken verbatim from those five thematic areas and glossed by Ioannidis's own parenthetical:
+
+| `domain` | Ioannidis's gloss | operationally |
+|---|---|---|
+| `methods` | *how to **do** science* | design, conduct, analysis, bias, statistical practice, evidence-synthesis methodology; Ioannidis's own description of this area ends *"research integrity and ethics"* |
+| `reporting` | *how to **report** science* | reporting standards and completeness |
+| `reproducibility` | *how to **verify** science* | replication, data and code sharing, transparency |
+| `evaluation` | *how to **correct** science* | peer review and editorial process, research assessment, metrics |
+| `incentives` | *how to **reward** science* | funding allocation, careers and the research workforce, reward structures |
+
+**RULE 1 stands** (carried from v2; it resolved the largest single seam): *a work is `metaresearch` on methods only if its object is methods **as used, reported or performed by researchers**. Developing, deriving, validating or teaching a technique for a domain is OUT, however generic the technique.* **An instance of a research practice is not a study of it.**
+
+### 2. `metaepidemiology` — **CONTESTED IN PRINT. Both definitions are coded.**
+
+There is **no consensus definition** (Puljak 2020, above). **This rubric does not invent one.** It codes **both published definitions** and **flags where they disagree**, because the dispute is live, it is between named researchers in peer-reviewed journals, and hiding it inside a single label would destroy the only evidence of it.
+
+- **`metaepi_narrow`** — Murad MH, Wang Z. *Guidelines for reporting meta-epidemiological methodology research.* Evid Based Med. 2017;22(4):139-142. doi:10.1136/ebmed-2017-110713
+  > *"Meta-epidemiological studies adopt a systematic review or meta-analysis approach to examine the impact of certain characteristics of clinical studies on the observed effect and provide empirical evidence for hypothesised associations."*
+  >
+  > *(v3.0 quoted this sentence as 'the observed **treatment** effect'. The word is not in the paper; it narrowed Murad's definition while claiming his authority for the narrowing, and it survived a LOCK. D29.)*
+
+- **`metaepi_broad`** — Kataoka Y, et al. J Clin Epidemiol. 2023;154:219-220. *(Not 219-221: page 221 is Puljak's reply, which is the other side of the dispute.)*
+  > *"The greatest common defining concept of 'meta-epidemiological studies' would be **any studies in which the unit of analysis is a study, not a patient**."*
+
+**Where the two differ, the record is flagged, and the size of that class is reported as a finding.** A published dispute is a boundary to be *measured*, not settled by fiat.
+
+### 3. `bibliometrics` (scientometrics)
+
+> **"Scientometrics is the study of the quantitative aspects of the process of science as a communication system. It is centrally, but not only, concerned with the analysis of citations in the academic literature."**
+>
+> Mingers J, Leydesdorff L. *A Review of Theory and Practice in Scientometrics.* Eur J Oper Res. 2015. doi:10.1016/j.ejor.2015.04.002
+> Founding work: Price DJ de Solla. *Networks of Scientific Papers.* Science. 1965;149(3683):510-515.
+
+**Boundary with `metaresearch`, and it resolves v1's self-contradiction** (v1's T1 bullet and its own worked example gave opposite answers): a study that **characterises a literature** by quantitative means is `bibliometrics`. A study that uses bibliometric means to **make a claim about research practice** (citation distortion, reporting trends, citation of retracted work) is **also `metaresearch`**, and carries both. **v3 does not force the choice; that forcing was the bug.**
+
+### 4. `sts` (science and technology studies)
+
+> **"co-production is shorthand for the proposition that the ways in which we know and represent the world (both nature and society) are inseparable from the ways in which we choose to live in it."**
+> **"The idiom of co-production ... represents a major synthesis of scholarship in science and technology studies (S&TS)."**
+>
+> Jasanoff S (ed.). *States of Knowledge: The Co-Production of Science and the Social Order.* Routledge, 2004.
+
+> **"We study science in action and not ready made science or technology; to do so, we either arrive before the facts and machines are blackboxed or we follow the controversies that reopen them."**
+>
+> Latour B. *Science in Action: How to Follow Scientists and Engineers through Society.* Harvard University Press.
+
+**Operational test:** the work studies **science or technology as social practice**: how knowledge and social order are produced together, how facts are made rather than found, how controversies open and close. **The object must be science, research, or technoscientific knowledge**, at any period. *(v1 restricted history and philosophy of science to "contemporary research practice", an unexamined adverb that silently excluded the entire history of Canadian science. It is deleted.)*
+
+### 5. `scholarly_communication`
+
+> **"Scholarly communication is a rich and complex sociotechnical system formed over a period of centuries."**
+> **"...used here in the broader sense to include the formal and informal activities associated with the use and dissemination of information through public and private channels."**
+>
+> Borgman CL. *Scholarship in the Digital Age: Information, Infrastructure, and the Internet.* MIT Press, 2007.
+
+### 6. `open_science`
+
+> **"Open science is a set of principles and practices that aim to make scientific research from all fields accessible to everyone for the benefits of scientists and society as a whole."**
+> **"Open science is about making sure not only that scientific knowledge is accessible but also that the production of that knowledge itself is inclusive, equitable and sustainable."**
+>
+> UNESCO. *Recommendation on Open Science* (introduction), 2021. **193 countries adopted it.**
+
+The second sentence is the reason this category is not a synonym for "open access": UNESCO's definition makes **inclusivity and equity of knowledge production** part of open science itself, which is the criterion this challenge is judged on.
+
+### 7. `research_integrity` — **defined by its OBJECT; the sources do not define the field, and that is recorded**
+
+**Honest limitation, stated rather than hidden.** The two sources supplied define **what counts as misconduct** and **what publication ethics covers**. **Neither defines "research integrity research" as a discipline** the way Ioannidis defines metaresearch or Jasanoff defines STS. So this category is defined by its **object**, and the gap is on the record.
+
+> **"...the analysis was limited to behaviours that distort scientific knowledge: fabrication, falsification, 'cooking' of data, etc... Survey questions on plagiarism and other forms of professional misconduct were excluded."**
+>
+> Fanelli D. *How Many Scientists Fabricate and Falsify Research? A Systematic Review and Meta-Analysis of Survey Data.* PLoS ONE. 2009;4(5):e5738.
+
+> Publication ethics, per **COPE** (Committee on Publication Ethics), *Ethics Toolkit for Journal Editors and Publishers.*
+
+**Operational test:** the object is **research misconduct, questionable research practices, retraction, authorship, or publication ethics**, *as an object of study*. **Fanelli's boundary is adopted and its exclusion is carried:** fabrication, falsification and data cooking are in; **plagiarism and professional misconduct are recorded but marked, because Fanelli's own scope excludes them** and a rubric that silently widened his boundary while citing him would be misquoting its own source.
+
+**This category overlaps `metaresearch` heavily**: Ioannidis's own description of the *methods* area ends *"research integrity and ethics"*, so integrity research is inside metaresearch by his definition. **That overlap is expected and allowed**, because v3 is multi-label. It is not a hierarchy.
+
+### `insufficient_payload`
+
+Not a judgment; a statement that the record **cannot be screened** (a scraping artifact as a title, boilerplate in the abstract field, a title and abstract from different papers, spam). **Reported, never silently dropped**: the size of this class is a finding about OpenAlex.
+
+### `OUT`
+
+None of the above. **"OUT" now means "in no defined category", not "not near the important one."** That is the whole change.
+
+---
+
+## Canadian linkage
+
+- `CA_AFF` — at least one Canadian institutional affiliation. **Warning, measured:** OpenAlex misassigns these. **At least 17,466** works enter the frame with, as their *only* Canadian institution, one of six suspect assignments: a parse failure that is not an institution at all (`Impact`, attached to a Spanish COVID essay) or a real organization attached to papers it has nothing to do with (`Discovery Air (Canada)` on a Brazilian linguistics paper). That is a **lower bound** from six audited strings (finding 27), and the records are **flagged for audit, not deleted**. A Canadian affiliation is *evidence*, not proof.
+- `CA_FUND` — ≥1 funder whose OpenAlex `country_code` is Canada: an **external criterion, not a curated list**. *(An earlier four-funder list (CIHR, NSERC, SSHRC, CFI) failed twice: three of its four hardcoded IDs pointed at other funders, and even corrected it missed Canada Research Chairs, the Government of Canada, NRC, Mitacs, Genome Canada, and every provincial agency. OpenAlex knows 2,182 Canadian funders; `R/pin_entities.R` pins them.)*
+- **`ABOUT_CA_SYSTEM`** — the Canadian **research system or academy** is a substantive object. *A Canadian institution as setting is not this.*
+- **`ABOUT_CA_TOPIC`** — Canada is a substantive subject, whether or not research is the object.
+
+*(v1 had one boolean and it could not separate "Canadian data, universal claim" from "a claim about Canada". Four screening agents proposed this split independently.)*
+
+## Study design
+
+Coded for every work, from **this vocabulary and no other** (v3.0 said "coded for every work" and never listed the values, which is D20's exact shape: a field every screener codes and no two code alike):
+
+| `study_design` | MEDLINE publication type it is validated against |
+|---|---|
+| `randomized_trial` | Randomized Controlled Trial |
+| `nonrandomized_trial` | Controlled Clinical Trial |
+| `observational` | Observational Study |
+| `systematic_review` | Systematic Review |
+| `meta_analysis` | Meta-Analysis |
+| `case_report` | Case Reports |
+| `qualitative` | *(none; ships as a score, marked unvalidated)* |
+| `simulation_or_modeling` | *(none; ships as a score, marked unvalidated)* |
+| `bench_or_experimental` | *(none; ships as a score, marked unvalidated)* |
+| `theoretical_or_conceptual` | *(none; ships as a score, marked unvalidated)* |
+| `not_applicable` | *(the work is not empirical research: editorials, datasets, software)* |
+| `design_other` | *(none; ships as a score, marked unvalidated)* |
+
+**Validated against MEDLINE publication types, per record and not per year.** *(v3.0 called these "human-indexed by NLM", which is false; v3.1's first correction said "human-indexed until April 2022", which is also false. NLM stopped fully human indexing as universal practice around 2011 and completed automation in 2022, so a YEAR CUTOFF cannot separate the eras. The reference subset is defined by NLM's **record-level `IndexingMethod`** field: absent = fully human, `Curated` = automated with human review, `Automated` = machine. Human records are the reference; the others measure **agreement with another machine** and are reported as such.)*
+
+**Class-specific calendar eligibility, because a publication type that did not exist cannot be a negative.** *Observational Study* entered the vocabulary in **2014** and *Systematic Review* in **2019**. A 2008 cohort study carries no *Observational Study* tag, and treating that absence as "not observational" would train and score the model against a censoring artifact. Each design class is therefore validated **only on records published after its type existed**, and that eligibility window is prespecified per class. Where MEDLINE does not reach (most of the physical sciences, humanities and social sciences), the label ships as a **score, not an assertion**, and is **marked unvalidated**. *The dataset states, per field, which of its own annotations it has earned the right to assert.*
+
+## Genre
+
+**One vocabulary, defined here, and `screening-schema-v3.json` QUOTES this list rather than paraphrasing it.**
+
+`empirical` · `review` · `methods` · `commentary` · `editorial` · `protocol` · `dataset` · `software` · `other`
+
+*(In v1 the rubric and the schema named **two different vocabularies for this field**, overlapping on two values out of thirteen. Every screener was handed both and obeyed both privately; the validator checked `tier` and had never been asked to look at `genre`, so 16,800 labels passed every check that ran. See D20 and finding 24. **A codebook is code. It gets a test.**)*
+
+## `tier` is RETIRED
+
+v3 replaces it with `categories`, which is **multi-label**. The values `T1`, `T2`, `T3` and `OUT` remain in the **legacy** `screening-schema.json` **only so that the v1 and v2 label files stay readable**; the v3 contract, `screening-schema-v3.json`, **does not contain the field**, so no new screening can emit them. `OUT` in v3 means an empty `categories` array: *in no defined category*, not *near the important one*.
+
+## Confidence
+
+`high` / `medium` / `low`. **If the abstract is missing, judge on the title alone and set confidence to `low` unless the title is unambiguous.** The schema **quotes** this sentence; it does not paraphrase it (D24).
+
+**`low` is a legitimate answer.** A screener that never says `low` is not being careful; it is being confident.
+
+---
+
+## Sources
+
+Every quotation above was read from a PDF in **`docs/reference/definitions/`**, which is committed. Nothing is cited from memory, and since D29 that is a checked property, not a promise: `pilot/check_quotes.R` fails the build if any quotation marked verbatim is not a substring of its cited PDF. `pilot/check_instrument.R` fails the build if this rubric and `screening-schema-v3.json` disagree about any field, in either direction.
+
+
+# THE OUTPUT SCHEMA (screening-schema-v3.json)
+
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "MetaCan screening output, rubric v3.1",
+  "description": "The output contract for every screening run under rubric v3.1. This document QUOTES the rubric; it never paraphrases it. Where a description below restates a rule, the wording is copied from docs/protocol/rubric-v3.md, because the schema misquoting the rubric is D24 and two documents that disagree are two instruments (D20). pilot/check_instrument.R fails the build if this file and the rubric disagree about any field, in either direction. The legacy screening-schema.json remains ONLY so that v1 and v2 label files stay readable; no new screening validates against it.",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["id", "categories", "study_design", "genre", "about_ca_system", "about_ca_topic", "confidence"],
+    "properties": {
+      "id": {
+        "type": "string",
+        "pattern": "^W\\d+$",
+        "description": "The OpenAlex work id, exactly as given in the payload."
+      },
+      "categories": {
+        "type": "array",
+        "items": {
+          "enum": ["metaresearch", "metaepi_narrow", "metaepi_broad", "bibliometrics", "sts", "scholarly_communication", "open_science", "research_integrity", "insufficient_payload"]
+        },
+        "uniqueItems": true,
+        "description": "Every category the work belongs to; a work may carry more than one, and categories are not ranked and none is primary. An EMPTY array is OUT, which means 'in no defined category', not 'near the important one'. insufficient_payload means the record cannot be screened (a scraping artifact as a title, boilerplate in the abstract field, a title and abstract from different papers, spam) and is reported, never silently dropped."
+      },
+      "domain": {
+        "enum": ["methods", "reporting", "reproducibility", "evaluation", "incentives", null],
+        "description": "REQUIRED when categories contains metaresearch, and null otherwise. Taken verbatim from Ioannidis's five thematic areas: methods, reporting, reproducibility, evaluation, and incentives (how to do, report, verify, correct, and reward science)."
+      },
+      "study_design": {
+        "enum": ["randomized_trial", "nonrandomized_trial", "observational", "systematic_review", "meta_analysis", "case_report", "qualitative", "simulation_or_modeling", "bench_or_experimental", "theoretical_or_conceptual", "not_applicable", "design_other"],
+        "description": "Coded for every work, from this vocabulary and no other. not_applicable means the work is not empirical research: editorials, datasets, software."
+      },
+      "genre": {
+        "enum": ["empirical", "review", "methods", "commentary", "editorial", "protocol", "dataset", "software", "other"],
+        "description": "One vocabulary, defined in the rubric, and this schema QUOTES that list rather than paraphrasing it."
+      },
+      "about_ca_system": {
+        "type": "boolean",
+        "description": "ABOUT_CA_SYSTEM: the Canadian research system or academy is a substantive object. A Canadian institution as setting is not this."
+      },
+      "about_ca_topic": {
+        "type": "boolean",
+        "description": "ABOUT_CA_TOPIC: Canada is a substantive subject, whether or not research is the object."
+      },
+      "confidence": {
+        "enum": ["high", "medium", "low"],
+        "description": "If the abstract is missing, judge on the title alone and set confidence to low unless the title is unambiguous. low is a legitimate answer: a screener that never says low is not being careful; it is being confident."
+      },
+      "reason": {
+        "type": "string",
+        "maxLength": 400,
+        "description": "One sentence naming the rubric rule the decision rests on."
+      }
+    }
+  }
+}
+
+
+# THE RECORDS
+
+[
+ {
+  "id": "W2603683329",
+  "title": "Preparation of Non-human Primate Brain Tissue for Pre-embedding Immunohistochemistry and Electron Microscopy",
+  "abstract": "1. J Vis Exp. 2017 Apr 3;(122):55397. doi: 10.3791/55397.\n\nPreparation of Non-human Primate Brain Tissue for Pre-embedding \nImmunohistochemistry and Electron Microscopy.\n\nEid L(1), Parent M(2).\n\nAuthor information:\n(1)Centre de recherche de l'Institut universitaire en santé mentale de Québec, \nDepartment of Psychiatry and Neuroscience, Université Laval; Centre de recherche \ndu CHU Sainte-Justine; lara.eid@umontreal.ca.\n(2)Centre de recherche de l'Institut universitaire en santé mentale de Québec, \nDepartment of Psychiatry and Neuroscience, Université Laval.\n\nDespite all the technological advances at the light microscopy level, electron \nmicroscopy remains the only tool in neuroscience to examine and characterize \nultrastructural and morphological details of neurons, such as synaptic contacts. \nGood preservation of brain tissue for electron microscopy can be obtained by \nrigorous cryo-fixation methods, but these techniques are rather costly and limit \nthe use of immunolabeling, which is crucial to understand the connectivity of \nidentified neuronal systems. Freeze-substitution methods have been developed to \nallow the combination of cryo-fixation with immunolabeling. However, the \nreproducibility of these methodological approaches usually relies on costly \nfreezing devices. Moreover, achieving reliable results with this technique is \nvery time-consuming and skill-challenging. Hence, the traditional chemically \nfixed brain, particularly with acrolein fixative, remains a time-efficient and \nlow-cost method to combine electron microscopy with immunohistochemistry. Here, \nwe provide a reliable experimental protocol using chemical acrolein fixation \nthat leads to the preservation of primate brain tissue and is compatible with \npre-embedding immunohistochemistry and transmission electron microscopic \nexamination.\n\nDOI: 10.3791/55397\nPMCID: PMC5564458\nPMID: 28448038 [Indexed for MEDLINE]",
+  "year": 2017,
+  "lang": "en",
+  "type": "article",
+  "venue": "Journal of Visualized Experiments",
+  "topic": "Advanced Electron Microscopy Techniques and Applications",
+  "field": "Biochemistry, Genetics and Molecular Biology"
+ },
+ {
+  "id": "W6902218981",
+  "title": "Additional file 10 of Screening for hypertension in adults: protocol for evidence reviews to inform a Canadian Task Force on Preventive Health Care guideline update",
+  "abstract": "",
+  "year": 2024,
+  "lang": "en",
+  "type": "article",
+  "venue": "Figshare",
+  "topic": "Health Promotion and Cardiovascular Prevention",
+  "field": "Medicine"
+ },
+ {
+  "id": "W7075301064",
+  "title": "Relational Practices in Arts-Based Research: A Roundtable Reflection on the Fostering Dialogues Project",
+  "abstract": "",
+  "year": 2024,
+  "lang": "en",
+  "type": "article",
+  "venue": "DOAJ (DOAJ: Directory of Open Access Journals)",
+  "topic": "Water Quality and Resources Studies",
+  "field": "Environmental Science"
+ },
+ {
+  "id": "W3202884280",
+  "title": "Doing Better Data Visualization",
+  "abstract": "Methods in data visualization have rapidly advanced over the past decade. Although social scientists regularly need to visualize the results of their analyses, they receive little training in how to best design their visualizations. This tutorial is for individuals whose goal is to communicate patterns in data as clearly as possible to other consumers of science and is designed to be accessible to both experienced and relatively new users of R and ggplot2. In this article, we assume some basic statistical and visualization knowledge and focus on how to visualize rather than what to visualize. We distill the science and wisdom of data-visualization expertise from books, blogs, and online forum discussion threads into recommendations for social scientists looking to convey their results to other scientists. Overarching design philosophies and color decisions are discussed before giving specific examples of code in R for visualizing central tendencies, proportions, and relationships between variables.",
+  "year": 2021,
+  "lang": "en",
+  "type": "article",
+  "venue": "Advances in Methods and Practices in Psychological Science",
+  "topic": "Data Visualization and Analytics",
+  "field": "Computer Science"
+ },
+ {
+  "id": "W1729984106",
+  "title": "A contingent valuation study to estimate the parental willingness-to-pay for childhood diarrhoea and gender bias among rural households in India",
+  "abstract": "1. Health Res Policy Syst. 2004 Jun 24;2(1):3. doi: 10.1186/1478-4505-2-3.\n\nA contingent valuation study to estimate the parental willingness-to-pay for \nchildhood diarrhoea and gender bias among rural households in India.\n\nAmin M(1), Khondoker F.\n\nAuthor information:\n(1)Department of Economics, University of Ottawa, 2 Saddle Crescent, Ottawa, \nOntario K1G 5L4, Canada. mo.amin@sympatico.ca\n\nWe used contingent valuation technique to estimate the parental willingness to \npay for an episode of diarrhoea among 324 children of both sexes aged between \nfive and seven years in two rural villages of Chennai in India. The aim was to \nexamine if there was any gender bias in the parental willingness to treat \nchildren for a diarrhoeal episode, and if so to what extent. The willingness to \npay was specified as a hedonic function of the duration and severity of an \nepisode, and of parents' socioeconomic characteristics. The findings suggest \nthat parents were willing to pay more to protect their male child compared to \nthe female child suffering from a diarrhoeal episode. The median willingness to \npay to avoid an episode for male and female children were calculated at Rs. 33.7 \n(approx. US$ 0.72) and Rs. 25.2 (approx. US$ 0.54) respectively - a difference \nof around 34%. After adjusting for the greater duration and severity of the \nillness, it was found that the difference between the two medians increased to \n51%.\n\nDOI: 10.1186/1478-4505-2-3\nPMCID: PMC446217\nPMID: 15214964",
+  "year": 2004,
+  "lang": "en",
+  "type": "article",
+  "venue": "Health Research Policy and Systems",
+  "topic": "Economic and Environmental Valuation",
+  "field": "Economics, Econometrics and Finance"
+ },
+ {
+  "id": "W1997995841",
+  "title": "Reflections of a cancer survivor/research scientist",
+  "abstract": "Abstract [ Our original introduction to Listen to the Patient is published again to emphasize the Journal's commitment to this important series .] For more than 50 years, Cancer has been devoted to exploring every facet of malignant neoplasia, from morphology to therapy, from epidemiology to biology, from historical perspective to basic science. One aspect, however, needs emphasis, namely, the human being who bears the burden of the cancer. For this reason and with the encouragement of the Editor, we have undertaken to remedy this situation by directing attention to the fears and frustrations, hopes and expectations, and feelings and thoughts of all kinds of the person who has cancer, who is worried about it, and who is dependent on physicians specialized in its diagnosis and management. For doctors to be understanding of the very deep needs of patients with cancer, it is requisite that they be privy to authentic, but often unspoken, expressions of a patient's anxieties about physical and emotional pain, loss of control over personal destiny, and plain dread of dying and of the end of cherished relationships. Barrie R. Cassileth, Ph.D. Integrative Medicine Service, Memorial Sloan‐Kettering Cancer Center, New York, New York. A. Bernard Ackerman, M.D. Ackerman Academy of Dermatopathology, New York, New York. Cancer 2003;97:2707–9. © 2003 American Cancer Society. DOI 10.1002/cncr.11404",
+  "year": 2003,
+  "lang": "en",
+  "type": "article",
+  "venue": "Cancer",
+  "topic": "Advances in Oncology and Radiotherapy",
+  "field": "Medicine"
+ },
+ {
+  "id": "W6950135270",
+  "title": "Small Data projects/Big Data research: contemporary problems and historical solutions",
+  "abstract": "",
+  "year": 2022,
+  "lang": "en",
+  "type": "article",
+  "venue": "Zenodo (CERN European Organization for Nuclear Research)",
+  "topic": "Big Data Technologies and Applications",
+  "field": "Decision Sciences"
+ },
+ {
+  "id": "W1990993476",
+  "title": "Challenges in Measuring the Societal Value of Orphan Drugs: Insights from a Canadian Stated Preference Survey",
+  "abstract": "1. Patient. 2015 Feb;8(1):93-101. doi: 10.1007/s40271-014-0109-5.\n\nChallenges in measuring the societal value of orphan drugs: insights from a \ncanadian stated preference survey.\n\nDragojlovic N(1), Rizzardo S, Bansback N, Mitton C, Marra CA, Lynd LD.\n\nAuthor information:\n(1)Collaboration for Outcomes Research and Evaluation, Faculty of Pharmaceutical \nSciences, University of British Columbia, 4th Floor, 2405 Wesbrook Mall, \nVancouver, BC, V6T 1Z3, Canada, nick.dragojlovic@ubc.ca.\n\nBACKGROUND: Expensive drugs for rare diseases (i.e. orphan drugs) often do not \nmeet traditional cost-effectiveness criteria and thus put further strain on \nlimited healthcare budgets. Failing to provide medically necessary care to \npatients, however, violates one of the underlying tenets of most public health \ninsurance systems-equity. This has led payers to consider the value that society \nplaces on the treatment of rare diseases, given the opportunity cost, when \ndeciding on whether to fund specific treatments.\nAIMS: In this article we aim to illustrate two factors that make the measurement \nof societal value in this area particularly difficult: the low level of public \nawareness of, and engagement with, the orphan-drug issue, and the 'zero-sum' \nframing commonly used to describe the policy challenge posed by orphan drugs.\nMETHOD: We illustrate these challenges using data from an original survey of \n2,005 Canadian adults. Respondents completed two tasks in which they were asked \nto choose between funding the treatment of patients suffering from either rare \nor common diseases.\nRESULTS: Respondents were more likely to display choice aversion and unstable \npreferences if they had not completed a university degree and when a 'zero-sum' \nframe was used to introduce the choice sets.\nCONCLUSIONS: The results suggest that studies in which the stated opportunity \ncosts of funding orphan drugs focus exclusively on reductions in funding for \nother drugs or treatments may only provide a limited understanding of citizens' \npolicy preferences in the area of rare diseases.\n\nDOI: 10.1007/s40271-014-0109-5\nPMID: 25586645 [Indexed for MEDLINE]",
+  "year": 2015,
+  "lang": "en",
+  "type": "article",
+  "venue": "Patient",
+  "topic": "Health Systems, Economic Evaluations, Quality of Life",
+  "field": "Economics, Econometrics and Finance"
+ },
+ {
+  "id": "W2045495767",
+  "title": "Comparison of noninvasive photodynamic therapy dosimetry methods using a dynamic model of ALA-PDT of human skin",
+  "abstract": "",
+  "year": 2012,
+  "lang": "en",
+  "type": "article",
+  "venue": "Physics in Medicine and Biology",
+  "topic": "Photodynamic Therapy Research Studies",
+  "field": "Medicine"
+ },
+ {
+  "id": "W4394989576",
+  "title": "Health Fluctuations in Dementia and its Impact on the Assessment of Health-Related Quality of Life Using the EQ-5D-5L",
+  "abstract": "1. Value Health. 2024 Aug;27(8):1092-1099. doi: 10.1016/j.jval.2024.04.010. Epub \n2024 Apr 20.\n\nHealth Fluctuations in Dementia and its Impact on the Assessment of \nHealth-Related Quality of Life Using the EQ-5D-5L.\n\nMichalowsky B(1), Engel L(2), Buchholz M(3), Weber N(3), Kohlmann T(4), Xie \nF(5).\n\nAuthor information:\n(1)German Center for Neurodegenerative Diseases (DZNE) Rostock/Greifswald, \nPatient-reported Outcomes & Health Economics Research, Greifswald, Germany. \nElectronic address: bernhard.michalowsky@dzne.de.\n(2)Deakin University, Faculty of Health, Department School of Health and Social \nDevelopment, Melbourne, Australia.\n(3)German Center for Neurodegenerative Diseases (DZNE) Rostock/Greifswald, \nPatient-reported Outcomes & Health Economics Research, Greifswald, Germany.\n(4)University Medicine Greifswald, Section Methods in Community Medicine, \nGreifswald, Germany.\n(5)McMaster University, Health Research Methods, Evidence and Impact, Hamilton, \nON, Canada; Centre for Health Economics and Policy Analysis, McMaster \nUniversity, Hamilton, ON, Canada.\n\nOBJECTIVES: To quantify health fluctuations, identify affected health-related \nquality of life (HRQoL) dimensions, and evaluate if fluctuations affect the \nHRQoL instruments recall period adherence in people living with dementia (PlwD).\nMETHODS: Caregivers of PlwD completed a daily diary for 14 days, documenting if \nPlwD's health was better or worse than the day before and the affected HRQoL \ndimensions. Health fluctuation was categorized into low (0-4 fluctuations in 14 \ndays), moderate (5-8), and high (9-14). Also, caregivers and PlwD completed the \nEQ-5D-5L (proxy- and self-reported) on days 1, 7, and 14. Subsequently, \ncaregivers were interviewed to determine whether recurrent fluctuations were \nconsidered in the EQ-5D-5L assessment of today's health (recall period \nadherence).\nRESULTS: Fluctuations were reported for 96% of PlwD, on average, for 7 of the 14 \ndays. Dimensions most frequently triggering fluctuations included memory, \nmobility, concentration, sleep, pain, and usual activities. Fluctuations were \nassociated with higher EQ-5D-5L health-states variation and nonadherence to the \nEQ-5D-5L recall period \"today.\" PlwD with moderate to high fluctuation had the \nhighest EQ-5D-5L utility change between day 1 and 14 (0.157 and 0.134) and \nrecall period nonadherence (31% and 26%) compared with PlwD with low fluctuation \n(0.010; 17%). Recall period nonadherence was higher in PlwD with improved \nco",
+  "year": 2024,
+  "lang": "en",
+  "type": "article",
+  "venue": "Value in Health",
+  "topic": "Health Systems, Economic Evaluations, Quality of Life",
+  "field": "Economics, Econometrics and Finance"
+ },
+ {
+  "id": "W2990611346",
+  "title": "Exploring methodological approaches to assess climate change vulnerability and adaptation: reflections from using life history approaches",
+  "abstract": "Abstract People in developing countries face multiple risks, and their response decisions sit at the complex and often opaque interface of climatic stressors, constrained resource access, and changing livelihoods, social structures, and personal aspirations. Many risk management studies use a well-established toolkit of methodologies—household surveys, focus group discussions, and semi-structured interviews. We argue that such methodological conservatism tends to neglect the dynamic and differentiated nature of livelihood decisions. Since different methodologies privilege different portrayals of risk and response, we highlight how plural methodological approaches can capture a broader range of perspectives and problematisations. In this paper, we draw on life history (LH) interviews across four countries (Kenya, Namibia, Ghana, and India) to offer one way of expanding current methodological approaches on vulnerability and adaptation. We argue that LHs offer four key ‘value additions’. First, LHs give insights into the multiple and interacting nature of drivers of response behaviour. Second, they highlight intra-household dynamics to demonstrate how people with differential power shape risk management decisions. Third, LHs support explorations of past decisions, present situations, and future aspirations, thus producing temporally nuanced enquiries. Fourth, they provide a powerful analytical lens to capture the interplay of motivations, aspirations, and values on livelihood choices and adaptation outcomes. By adding value in these four ways, LHs challenge assumptions about how and why people respond to multiple risks and offer a nuanced understanding of adaptation processes.",
+  "year": 2019,
+  "lang": "en",
+  "type": "article",
+  "venue": "Regional Environmental Change",
+  "topic": "Climate Change, Adaptation, Migration",
+  "field": "Social Sciences"
+ },
+ {
+  "id": "W4393901348",
+  "title": "Exploring the Edges: Identifying the Next Generation of Evaluation Capacity Building Research and Practice Through Adjacency",
+  "abstract": "Evaluation capacity building (ECB) is a well-established domain of scholarship and practice within the broader field of evaluation. Stemming from a concern to ensure sustainable and useful evaluation practices in organizations, ECB draws on several evaluation theories and approaches such as collaborative evaluation and utilization-focused evaluation. In a recent integrative review, the authors and their colleagues identified other theories, frameworks, and models that inform ECB; many of these were developed in other fields, such as social sciences and public administration. The present exploratory study sought to identify some of the knowledge and theories that inform ECB from other fields through a review of 47 “ECB-adjacent” articles. This article describes the various themes and topics included in these articles to formulate potential future avenues for ECB research and practice.",
+  "year": 2024,
+  "lang": "en",
+  "type": "article",
+  "venue": "Canadian Journal of Program Evaluation",
+  "topic": "Evaluation and Performance Assessment",
+  "field": "Decision Sciences"
+ },
+ {
+  "id": "W2796017284",
+  "title": "Examining implicit cognitions in the evaluation of a community-wide physical activity program",
+  "abstract": "1. Eval Program Plann. 2018 Aug;69:10-17. doi:\n10.1016/j.evalprogplan.2018.04.001.  Epub 2018 Apr 3.\n\nExamining implicit cognitions in the evaluation of a community-wide physical \nactivity program.\n\nYun L(1), Berry TR(2).\n\nAuthor information:\n(1)University of Alberta, Faculty of Kinesiology, Sport, and Recreation, W1-16A, \nVan Vliet Centre, Edmonton, Alberta, T6G 2H9, Canada. Electronic address: \nlira@ualberta.ca.\n(2)Canada Research Chair, Physical Activity Promotion, University of Alberta, \nFaculty of Kinesiology, Sport, and Recreation, W1-16A, Van Vliet Centre, \nEdmonton, Alberta, T6G 2H9, Canada. Electronic address: tanyab@ualberta.ca.\n\nThe purpose of this study was to incorporate measures of attentional bias and \nimplicit attitudes in the evaluation of a community-wide physical activity \nprogram, UWALK, by examining the relationships among proximal, intermediate, and \ndistal outcomes of the program as outlined in the hierarchy of effects model. \nUWALK incorporated various communication and marketing strategies via mass \nmedia, on- and off-line platforms. Participants (N = 127) reported unprompted \nthen prompted awareness of UWALK followed by measures of attentional bias and \nimplicit attitudes, watched a 30-second UWALK video, then completed a thought \nlisting task and questionnaires measuring instrumental and affective attitudes, \nleisure time physical activity, and demographics. Results showed that \nparticipants with unprompted awareness of UWALK demonstrated attentional bias \ntoward UWALK images, positive implicit attitudes, and greater physical activity \nparticipation compared to unaware counterparts. Attentional bias, awareness, and \nimplicit attitudes significantly predicted behavior, accounting for 15.2% of the \nvariance. This study emphasizes the importance of including measures of \nautomatic cognitions during evaluation can further inform the effects of a \nprogram. The results also showed that it is problematic to assume that visiting \na website indicates a program will be remembered and related cognitions will be \naffected.\n\nCopyright © 2018 Elsevier Ltd. All rights reserved.\n\nDOI: 10.1016/j.evalprogplan.2018.04.001\nPMID: 29655059 [Indexed for MEDLINE]",
+  "year": 2018,
+  "lang": "en",
+  "type": "article",
+  "venue": "Evaluation and Program Planning",
+  "topic": "Behavioral Health and Interventions",
+  "field": "Psychology"
+ },
+ {
+  "id": "W1608940271",
+  "title": "Not just ‘sunny days’: Aboriginal students connect out‐of‐school literacy resources with school literacy practices",
+  "abstract": "Abstract In this paper, I report on a school‐university collaborative research project that investigated which practices and knowledges of Canadian Aboriginal students not acknowledged in school may provide these students with access to school literacy practices. The study, which took place in a small city in Western Canada, examined ways to merge the out‐of‐school literacy resources with school literacy practices for minority language learners who struggle with academic literacies. Drawing on the third space theory, in conjunction with the concept of “funds of knowledge,” I explain how students' linguistic and cultural resources from home and community networks were utilised to reshape school literacy practices through their involvement in the Heritage Fair programme. I analyse a representative case study of Darius, a 10‐year‐old boy who explored his familial hunting practices for his Heritage Fair project. This illustrative exemplar, “Not just sunny days,” highlights the ways in which children's out‐of‐school lives can be used as a scaffold for literacy learning. In conclusion, I discuss implications for educators and researchers working to improve literacy learning for minority students by connecting school learning to children's out‐of‐school learning.",
+  "year": 2014,
+  "lang": "en",
+  "type": "article",
+  "venue": "Literacy",
+  "topic": "Multilingual Education and Policy",
+  "field": "Social Sciences"
+ },
+ {
+  "id": "W2039003230",
+  "title": "Using Eye Tracking to Identify Faking Attempts During Penile Plethysmography Assessment",
+  "abstract": "1. J Sex Res. 2014;51(8):946-55. doi: 10.1080/00224499.2013.832133. Epub 2013 Dec\n 5.\n\nUsing eye tracking to identify faking attempts during penile plethysmography \nassessment.\n\nTrottier D(1), Rouleau JL, Renaud P, Goyette M.\n\nAuthor information:\n(1)a Department of Psychoeducation and Psychology , Université du Québec en \nOutaouais.\n\nPenile plethysmography (PPG) is considered the most rigorous method for sexual \ninterest assessment. Nevertheless, it is subject to faking attempts by \nparticipants, which compromises the internal validity of the instrument. To \ndate, various attempts have been made to limit voluntary control of sexual \nresponse during PPG assessments, without satisfactory results. This exploratory \nresearch examined eye-tracking technologies' ability to identify the presence of \ncognitive strategies responsible for erectile inhibition during PPG assessment. \nEye movements and penile responses for 20 subjects were recorded while exploring \nanimated human-like computer-generated stimuli in a virtual environment under \nthree distinct viewing conditions: (a) the free visual exploration of a \npreferred sexual stimulus without erectile inhibition; (b) the viewing of a \npreferred sexual stimulus with erectile inhibition; and (c) the free visual \nexploration of a non-preferred sexual stimulus. Results suggest that attempts to \ncontrol erectile responses generate specific eye-movement variations, \ncharacterized by a general deceleration of the exploration process and limited \nexploration of the erogenous zone. Findings indicate that recording eye \nmovements can provide significant information on the presence of competing \ncovert processes responsible for erectile inhibition. The use of eye-tracking \ntechnologies during PPG could therefore lead to improved internal validity of \nthe plethysmographic procedure.\n\nDOI: 10.1080/00224499.2013.832133\nPMID: 24308829 [Indexed for MEDLINE]",
+  "year": 2013,
+  "lang": "en",
+  "type": "article",
+  "venue": "The Journal of Sex Research",
+  "topic": "Evolutionary Psychology and Human Behavior",
+  "field": "Psychology"
+ },
+ {
+  "id": "W6958324860",
+  "title": "Additional file 2 of Insights from using an outcomes measurement properties search filter and conducting citation searches to locate psychometric articles of tools used to measure context attributes",
+  "abstract": "",
+  "year": 2024,
+  "lang": "en",
+  "type": "article",
+  "venue": "Figshare",
+  "topic": "Psychometric Methodologies and Testing",
+  "field": "Decision Sciences"
+ },
+ {
+  "id": "W4283688983",
+  "title": "Head-Mounted Mobile Eye-Tracking in the Domestic Dog: A New Method",
+  "abstract": "Humans rely on dogs for countless tasks, ranging from companionship to highly specialized detection work. In their daily lives, dogs must navigate a human-built visual world, yet comparatively little is known about what dogs visually attend to as they move through their environment. Real-world eye-tracking, or head-mounted eye-tracking, allows participants to freely move through their environment, providing more naturalistic results about visual attention while interacting with objects and agents. In dogs, real-world eye-tracking has the potential to inform our understanding of cross-species cognitive abilities as well as working dog training, however a robust and easily deployed head-mounted eye-tracking method for dogs has not previously been developed and tested. We present a novel method for real-world eye-tracking in dogs, using a simple head-mounted mobile apparatus mounted onto goggles designed for dogs. This new method, adapted from systems that are widely used in humans, allows for eye-tracking during more naturalistic behaviors, namely walking around and interacting with real-world stimuli, as well as reduced training time as compared to traditional stationary eye-tracking methods. We found that while completing a simple forced-choice treat-finding task, dogs look primarily to the treat, and we demonstrated the accuracy of this method using alternative gaze-tracking methods. Additionally, eye-tracking revealed more fine-grained time course information and individual differences in looking patterns.",
+  "year": 2022,
+  "lang": "en",
+  "type": "preprint",
+  "venue": null,
+  "topic": "Human-Animal Interaction Studies",
+  "field": "Biochemistry, Genetics and Molecular Biology"
+ },
+ {
+  "id": "W3035183972",
+  "title": "Understanding Supervisory Practices: Commonalities and Differences in Ways of Working with Doctoral Writers",
+  "abstract": "Thesis supervision is a crucial aspect of the doctoral writing experience. While scholarly attention to both doctoral writing and supervisory dynamics is increasing, supervisory support of doctoral students as novice academic writers is still an under-investigated topic. Not having a clear understanding of the way supervisors treat writing gives insufficient insight into a crucial aspect of the doctoral experience. To counter this lack of information about supervision as it pertains to writing, I conducted interviews with seven supervisors who were identified by their doctoral students as a good supervisor of writing. In this paper, I will discuss the practices that unified and those that distinguished these supervisors in their role as supporters of doctoral writing. The supervisors interviewed expressed similar ideas in three areas: reflexivity about academic writing; awareness of variability among doctoral writers; and acceptance of the profound challenges facing doctoral writers. In three other key areas, the supervisors expressed significant differences: attitudes towards the appropriate degree of supervisory support; commitment to writing support as professional development; and facilitation of peer mentoring. These patterns of commonality and difference suggest that good supervisory writing support may allow for significant variations while still drawing upon crucial shared precepts.",
+  "year": 2020,
+  "lang": "en",
+  "type": "article",
+  "venue": "Discourse and Writing/Rédactologie",
+  "topic": "Doctoral Education Challenges and Solutions",
+  "field": "Health Professions"
+ },
+ {
+  "id": "W2134553529",
+  "title": "Economic Evaluations Of Glioblastoma",
+  "abstract": "",
+  "year": 2015,
+  "lang": "en",
+  "type": "article",
+  "venue": "Value in Health",
+  "topic": "Health Systems, Economic Evaluations, Quality of Life",
+  "field": "Economics, Econometrics and Finance"
+ },
+ {
+  "id": "W2288716366",
+  "title": "E¢cient Unit Root Tests using GLS Detrended Data and Covariates in Structural Change Models ¤",
+  "abstract": "",
+  "year": 2005,
+  "lang": "en",
+  "type": "article",
+  "venue": null,
+  "topic": "Monetary Policy and Economic Impact",
+  "field": "Economics, Econometrics and Finance"
+ },
+ {
+  "id": "W2021093894",
+  "title": "Reconsidering Emily Carr",
+  "abstract": "",
+  "year": 2007,
+  "lang": "en",
+  "type": "article",
+  "venue": "Canadian ethnic studies",
+  "topic": "Cultural Heritage Management and Preservation",
+  "field": "Arts and Humanities"
+ },
+ {
+  "id": "W4239068295",
+  "title": "Back Matter",
+  "abstract": "",
+  "year": 2001,
+  "lang": "en",
+  "type": "paratext",
+  "venue": "Discourse and Writing/Rédactologie",
+  "topic": "Quality and Safety in Healthcare",
+  "field": "Health Professions"
+ },
+ {
+  "id": "W4399143356",
+  "title": "Modeling long cycles",
+  "abstract": "",
+  "year": 2024,
+  "lang": "en",
+  "type": "article",
+  "venue": "Journal of Econometrics",
+  "topic": "Monetary Policy and Economic Impact",
+  "field": "Economics, Econometrics and Finance"
+ },
+ {
+  "id": "W2278860758",
+  "title": "A model for assessment and development of the credibility of Iran Academy of Medical Sciences",
+  "abstract": "",
+  "year": 2015,
+  "lang": "en",
+  "type": "article",
+  "venue": "DOAJ (DOAJ: Directory of Open Access Journals)",
+  "topic": "Ophthalmology and Visual Health Research",
+  "field": "Medicine"
+ },
+ {
+  "id": "W2750198314",
+  "title": "Visualizing Virus-Derived dsRNA Using Antibody-Independent and -Dependent Methods",
+  "abstract": "1. Methods Mol Biol. 2017;1656:103-118. doi: 10.1007/978-1-4939-7237-1_5.\n\nVisualizing Virus-Derived dsRNA Using Antibody-Independent and -Dependent \nMethods.\n\nPoynter SJ(1), DeWitte-Orr SJ(2).\n\nAuthor information:\n(1)Department of Biology, Wilfrid Laurier University, Waterloo, ON, Canada, N2L \n3G1.\n(2)Departments of Health Sciences and Biology, Wilfrid Laurier University, \nWaterloo, ON, Canada. sdewitteorr@wlu.ca.\n\nLong double-stranded (ds) RNA molecules are produced as a byproduct of viral \nreplication. Studying virus-derived dsRNA is important for understanding virus \nreplication, understanding host responses to virus infections, and as a \ndiagnostic tool for virus presence and replication. Here, we describe four \ndifferent techniques for visualizing dsRNA; two antibody-dependent methods \n(immunoblotting and immunocytochemistry), as well as two antibody-independent \nmethods (differential digestion and acridine orange staining). The benefits and \ndisadvantages of each technique are also discussed.\n\nDOI: 10.1007/978-1-4939-7237-1_5\nPMID: 28808964 [Indexed for MEDLINE]",
+  "year": 2017,
+  "lang": "en",
+  "type": "article",
+  "venue": "Methods in molecular biology",
+  "topic": "Herpesvirus Infections and Treatments",
+  "field": "Medicine"
+ }
+]

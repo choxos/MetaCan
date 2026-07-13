@@ -29,6 +29,15 @@ import os
 import numpy as np
 
 ARMS = {"opus": "opus_r1", "gpt": "codex_r1", "grok": "grok_r1"}
+
+# The teachers for NEW loop rounds. Three until round 6; Grok's usage balance ran out
+# mid-round-7 (402 Payment Required) and the PI directed the loop to continue with
+# ChatGPT, so from round 7 the live set is {opus, gpt}. Grok's 17,000 historical labels
+# stay in the archive and in v1-era training exactly as they were; what retires is the
+# grok HEAD: a teacher that stops learning while the others grow would freeze its
+# boundary at round-6 knowledge, and a spread computed against a frozen boundary drifts
+# artifactually. Recorded as D36.
+ACTIVE_ARMS = {"opus": "opus_r1", "gpt": "codex_r1"}
 FRAME1K = "pilot/screening/frame1k"
 
 # v1's tier vocabulary. T1 = core metaresearch; T2 = "adjacent" (the category v3 deleted

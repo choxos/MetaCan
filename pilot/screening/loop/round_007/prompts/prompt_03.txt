@@ -1,0 +1,535 @@
+You are screening scholarly works for the MetaCan project. Apply the rubric below to EVERY record and output ONE JSON array with ONE object per record, conforming EXACTLY to the JSON schema below. Output ONLY the JSON array, no prose before or after it.
+
+# THE RUBRIC (v3.1, locked)
+
+# MétaCan screening rubric (v3.1)
+
+**Status: LOCKED, 2026-07-13.** Supersedes v2.2. No screening ran under v3.0, which lived for hours: an adversarial review found that its Murad quotation inserted the word "treatment" into a sentence this document calls verbatim (D29). v3.1 corrects that quotation from the PDF, fixes the Kataoka page range, aligns the funder clause with the protocol, corrects two glosses against their sources, and adds the study-design vocabulary that v3.0 demanded but never listed. Since D29, `pilot/check_quotes.R` fails the build if any quotation marked verbatim is not a substring of its cited PDF.
+
+**No number produced so far was made under v3.** The pilot ran under v1.0; the 179-work re-screen under v2.0. Both instruments are kept byte for byte, so every figure stays attributable to the text that produced it. v3 is the instrument the **full screen** runs under, and the **v2-to-v3 difference is reported as a finding**.
+
+---
+
+## What changed, and why it is not cosmetic
+
+v1 and v2 had a tier hierarchy: **T1 core / T2 adjacent / T3 contextual**. That structure had a defect at its root, and the data found it before I did.
+
+> **"Adjacent" is defined by negation.** It means *not-T1*. A category whose only content is "near the important one" cannot be applied consistently, and **OUT-vs-adjacent was the largest tier confusion at every sample size we measured.** The models were not failing. **The category was empty.**
+
+It was also a value judgment I had no standing to make. Calling science and technology studies "adjacent" says STS is peripheral to metascience. **STS is a field with its own founding literature, its own journals, and its own account of what studying science means.**
+
+**v3 deletes the hierarchy.** Every tradition is a **category with its own positive definition, taken from its own literature, quoted verbatim from a source in `docs/reference/definitions/`.** There is no residual bucket. A record may carry **more than one** category, because the traditions genuinely overlap and forcing a single label is what created the problem.
+
+**Nothing here is cited from memory.** Every quotation below was read from the PDF named beside it. In a project whose worst deviation (D26) was that its own definition of metaresearch was mine and uncited for its entire life, a recalled citation would be the single worst thing this document could contain.
+
+---
+
+## The definitional problem is the field's, not this project's, and the field says so in print
+
+- **Puljak L, Lovric Makaric Z, Buljan I, Pieper D.** *What is a meta-epidemiological study? Analysis of published literature indicated heterogeneous study designs and definitions.* J Comp Eff Res. 2020. doi:10.2217/cer-2019-0201
+  > Analysed **175 information sources**. *"Definitions of meta-epidemiological studies varied and some studies used the term meta-epidemiological study to describe methodological research-on-research studies."* Conclusion: *"Research community would benefit from consensus about definition of meta-epidemiological study."*
+
+- **Kataoka Y, et al.** J Clin Epidemiol. 2023;154:219-220.
+  > A **published dispute** with Puljak, opening by naming *"the currently confusing nomenclatures around 'meta-epidemiology' and related terms such as 'meta-research' and 'research-on-research'."*
+
+- **Stevens ER, Laynor G.** *Recognizing the value of meta-research and making it easier to find.* J Med Libr Assoc. 2023;111(4). doi:10.5195/jmla.2023.1758
+  > *"The breadth of meta-research presents a significant challenge for identifying published meta-research studies,"* and it notes **the lack of a MeSH heading** for meta-research.
+
+**Those are claims about humans.** The pilot's numbers are claims about **models disagreeing under one rubric**. They are consistent, they are not the same estimand, and **only the human audit closes the gap** (`DEVIATIONS.md` D27).
+
+---
+
+## The categories
+
+A work may carry **more than one**. **Categories are not ranked and none is primary: the released landscape is the union of the defined categories, with every overlap reported.** The call's primary estimand is reported over `metaresearch` because that is the field the call names; that is a **reporting choice, not a rank**, and each of the other traditions gets the same per-category estimate.
+
+### 1. `metaresearch`
+
+> **"Meta-research is an evolving scientific discipline that aims to evaluate and improve research practices. It includes thematic areas of methods, reporting, reproducibility, evaluation, and incentives (how to do, report, verify, correct, and reward science)."**
+>
+> Ioannidis JPA, Fanelli D, Dunne DD, Goodman SN. *Meta-research: Evaluation and Improvement of Research Methods and Practices.* PLoS Biol. 2015;13(10):e1002264.
+> See also Ioannidis JPA. PLoS Biol. 2018;16(3):e2005468; METRICS, Stanford: <https://metrics.stanford.edu/research>
+
+Every `metaresearch` record carries a **`domain`**, taken verbatim from those five thematic areas and glossed by Ioannidis's own parenthetical:
+
+| `domain` | Ioannidis's gloss | operationally |
+|---|---|---|
+| `methods` | *how to **do** science* | design, conduct, analysis, bias, statistical practice, evidence-synthesis methodology; Ioannidis's own description of this area ends *"research integrity and ethics"* |
+| `reporting` | *how to **report** science* | reporting standards and completeness |
+| `reproducibility` | *how to **verify** science* | replication, data and code sharing, transparency |
+| `evaluation` | *how to **correct** science* | peer review and editorial process, research assessment, metrics |
+| `incentives` | *how to **reward** science* | funding allocation, careers and the research workforce, reward structures |
+
+**RULE 1 stands** (carried from v2; it resolved the largest single seam): *a work is `metaresearch` on methods only if its object is methods **as used, reported or performed by researchers**. Developing, deriving, validating or teaching a technique for a domain is OUT, however generic the technique.* **An instance of a research practice is not a study of it.**
+
+### 2. `metaepidemiology` — **CONTESTED IN PRINT. Both definitions are coded.**
+
+There is **no consensus definition** (Puljak 2020, above). **This rubric does not invent one.** It codes **both published definitions** and **flags where they disagree**, because the dispute is live, it is between named researchers in peer-reviewed journals, and hiding it inside a single label would destroy the only evidence of it.
+
+- **`metaepi_narrow`** — Murad MH, Wang Z. *Guidelines for reporting meta-epidemiological methodology research.* Evid Based Med. 2017;22(4):139-142. doi:10.1136/ebmed-2017-110713
+  > *"Meta-epidemiological studies adopt a systematic review or meta-analysis approach to examine the impact of certain characteristics of clinical studies on the observed effect and provide empirical evidence for hypothesised associations."*
+  >
+  > *(v3.0 quoted this sentence as 'the observed **treatment** effect'. The word is not in the paper; it narrowed Murad's definition while claiming his authority for the narrowing, and it survived a LOCK. D29.)*
+
+- **`metaepi_broad`** — Kataoka Y, et al. J Clin Epidemiol. 2023;154:219-220. *(Not 219-221: page 221 is Puljak's reply, which is the other side of the dispute.)*
+  > *"The greatest common defining concept of 'meta-epidemiological studies' would be **any studies in which the unit of analysis is a study, not a patient**."*
+
+**Where the two differ, the record is flagged, and the size of that class is reported as a finding.** A published dispute is a boundary to be *measured*, not settled by fiat.
+
+### 3. `bibliometrics` (scientometrics)
+
+> **"Scientometrics is the study of the quantitative aspects of the process of science as a communication system. It is centrally, but not only, concerned with the analysis of citations in the academic literature."**
+>
+> Mingers J, Leydesdorff L. *A Review of Theory and Practice in Scientometrics.* Eur J Oper Res. 2015. doi:10.1016/j.ejor.2015.04.002
+> Founding work: Price DJ de Solla. *Networks of Scientific Papers.* Science. 1965;149(3683):510-515.
+
+**Boundary with `metaresearch`, and it resolves v1's self-contradiction** (v1's T1 bullet and its own worked example gave opposite answers): a study that **characterises a literature** by quantitative means is `bibliometrics`. A study that uses bibliometric means to **make a claim about research practice** (citation distortion, reporting trends, citation of retracted work) is **also `metaresearch`**, and carries both. **v3 does not force the choice; that forcing was the bug.**
+
+### 4. `sts` (science and technology studies)
+
+> **"co-production is shorthand for the proposition that the ways in which we know and represent the world (both nature and society) are inseparable from the ways in which we choose to live in it."**
+> **"The idiom of co-production ... represents a major synthesis of scholarship in science and technology studies (S&TS)."**
+>
+> Jasanoff S (ed.). *States of Knowledge: The Co-Production of Science and the Social Order.* Routledge, 2004.
+
+> **"We study science in action and not ready made science or technology; to do so, we either arrive before the facts and machines are blackboxed or we follow the controversies that reopen them."**
+>
+> Latour B. *Science in Action: How to Follow Scientists and Engineers through Society.* Harvard University Press.
+
+**Operational test:** the work studies **science or technology as social practice**: how knowledge and social order are produced together, how facts are made rather than found, how controversies open and close. **The object must be science, research, or technoscientific knowledge**, at any period. *(v1 restricted history and philosophy of science to "contemporary research practice", an unexamined adverb that silently excluded the entire history of Canadian science. It is deleted.)*
+
+### 5. `scholarly_communication`
+
+> **"Scholarly communication is a rich and complex sociotechnical system formed over a period of centuries."**
+> **"...used here in the broader sense to include the formal and informal activities associated with the use and dissemination of information through public and private channels."**
+>
+> Borgman CL. *Scholarship in the Digital Age: Information, Infrastructure, and the Internet.* MIT Press, 2007.
+
+### 6. `open_science`
+
+> **"Open science is a set of principles and practices that aim to make scientific research from all fields accessible to everyone for the benefits of scientists and society as a whole."**
+> **"Open science is about making sure not only that scientific knowledge is accessible but also that the production of that knowledge itself is inclusive, equitable and sustainable."**
+>
+> UNESCO. *Recommendation on Open Science* (introduction), 2021. **193 countries adopted it.**
+
+The second sentence is the reason this category is not a synonym for "open access": UNESCO's definition makes **inclusivity and equity of knowledge production** part of open science itself, which is the criterion this challenge is judged on.
+
+### 7. `research_integrity` — **defined by its OBJECT; the sources do not define the field, and that is recorded**
+
+**Honest limitation, stated rather than hidden.** The two sources supplied define **what counts as misconduct** and **what publication ethics covers**. **Neither defines "research integrity research" as a discipline** the way Ioannidis defines metaresearch or Jasanoff defines STS. So this category is defined by its **object**, and the gap is on the record.
+
+> **"...the analysis was limited to behaviours that distort scientific knowledge: fabrication, falsification, 'cooking' of data, etc... Survey questions on plagiarism and other forms of professional misconduct were excluded."**
+>
+> Fanelli D. *How Many Scientists Fabricate and Falsify Research? A Systematic Review and Meta-Analysis of Survey Data.* PLoS ONE. 2009;4(5):e5738.
+
+> Publication ethics, per **COPE** (Committee on Publication Ethics), *Ethics Toolkit for Journal Editors and Publishers.*
+
+**Operational test:** the object is **research misconduct, questionable research practices, retraction, authorship, or publication ethics**, *as an object of study*. **Fanelli's boundary is adopted and its exclusion is carried:** fabrication, falsification and data cooking are in; **plagiarism and professional misconduct are recorded but marked, because Fanelli's own scope excludes them** and a rubric that silently widened his boundary while citing him would be misquoting its own source.
+
+**This category overlaps `metaresearch` heavily**: Ioannidis's own description of the *methods* area ends *"research integrity and ethics"*, so integrity research is inside metaresearch by his definition. **That overlap is expected and allowed**, because v3 is multi-label. It is not a hierarchy.
+
+### `insufficient_payload`
+
+Not a judgment; a statement that the record **cannot be screened** (a scraping artifact as a title, boilerplate in the abstract field, a title and abstract from different papers, spam). **Reported, never silently dropped**: the size of this class is a finding about OpenAlex.
+
+### `OUT`
+
+None of the above. **"OUT" now means "in no defined category", not "not near the important one."** That is the whole change.
+
+---
+
+## Canadian linkage
+
+- `CA_AFF` — at least one Canadian institutional affiliation. **Warning, measured:** OpenAlex misassigns these. **At least 17,466** works enter the frame with, as their *only* Canadian institution, one of six suspect assignments: a parse failure that is not an institution at all (`Impact`, attached to a Spanish COVID essay) or a real organization attached to papers it has nothing to do with (`Discovery Air (Canada)` on a Brazilian linguistics paper). That is a **lower bound** from six audited strings (finding 27), and the records are **flagged for audit, not deleted**. A Canadian affiliation is *evidence*, not proof.
+- `CA_FUND` — ≥1 funder whose OpenAlex `country_code` is Canada: an **external criterion, not a curated list**. *(An earlier four-funder list (CIHR, NSERC, SSHRC, CFI) failed twice: three of its four hardcoded IDs pointed at other funders, and even corrected it missed Canada Research Chairs, the Government of Canada, NRC, Mitacs, Genome Canada, and every provincial agency. OpenAlex knows 2,182 Canadian funders; `R/pin_entities.R` pins them.)*
+- **`ABOUT_CA_SYSTEM`** — the Canadian **research system or academy** is a substantive object. *A Canadian institution as setting is not this.*
+- **`ABOUT_CA_TOPIC`** — Canada is a substantive subject, whether or not research is the object.
+
+*(v1 had one boolean and it could not separate "Canadian data, universal claim" from "a claim about Canada". Four screening agents proposed this split independently.)*
+
+## Study design
+
+Coded for every work, from **this vocabulary and no other** (v3.0 said "coded for every work" and never listed the values, which is D20's exact shape: a field every screener codes and no two code alike):
+
+| `study_design` | MEDLINE publication type it is validated against |
+|---|---|
+| `randomized_trial` | Randomized Controlled Trial |
+| `nonrandomized_trial` | Controlled Clinical Trial |
+| `observational` | Observational Study |
+| `systematic_review` | Systematic Review |
+| `meta_analysis` | Meta-Analysis |
+| `case_report` | Case Reports |
+| `qualitative` | *(none; ships as a score, marked unvalidated)* |
+| `simulation_or_modeling` | *(none; ships as a score, marked unvalidated)* |
+| `bench_or_experimental` | *(none; ships as a score, marked unvalidated)* |
+| `theoretical_or_conceptual` | *(none; ships as a score, marked unvalidated)* |
+| `not_applicable` | *(the work is not empirical research: editorials, datasets, software)* |
+| `design_other` | *(none; ships as a score, marked unvalidated)* |
+
+**Validated against MEDLINE publication types, per record and not per year.** *(v3.0 called these "human-indexed by NLM", which is false; v3.1's first correction said "human-indexed until April 2022", which is also false. NLM stopped fully human indexing as universal practice around 2011 and completed automation in 2022, so a YEAR CUTOFF cannot separate the eras. The reference subset is defined by NLM's **record-level `IndexingMethod`** field: absent = fully human, `Curated` = automated with human review, `Automated` = machine. Human records are the reference; the others measure **agreement with another machine** and are reported as such.)*
+
+**Class-specific calendar eligibility, because a publication type that did not exist cannot be a negative.** *Observational Study* entered the vocabulary in **2014** and *Systematic Review* in **2019**. A 2008 cohort study carries no *Observational Study* tag, and treating that absence as "not observational" would train and score the model against a censoring artifact. Each design class is therefore validated **only on records published after its type existed**, and that eligibility window is prespecified per class. Where MEDLINE does not reach (most of the physical sciences, humanities and social sciences), the label ships as a **score, not an assertion**, and is **marked unvalidated**. *The dataset states, per field, which of its own annotations it has earned the right to assert.*
+
+## Genre
+
+**One vocabulary, defined here, and `screening-schema-v3.json` QUOTES this list rather than paraphrasing it.**
+
+`empirical` · `review` · `methods` · `commentary` · `editorial` · `protocol` · `dataset` · `software` · `other`
+
+*(In v1 the rubric and the schema named **two different vocabularies for this field**, overlapping on two values out of thirteen. Every screener was handed both and obeyed both privately; the validator checked `tier` and had never been asked to look at `genre`, so 16,800 labels passed every check that ran. See D20 and finding 24. **A codebook is code. It gets a test.**)*
+
+## `tier` is RETIRED
+
+v3 replaces it with `categories`, which is **multi-label**. The values `T1`, `T2`, `T3` and `OUT` remain in the **legacy** `screening-schema.json` **only so that the v1 and v2 label files stay readable**; the v3 contract, `screening-schema-v3.json`, **does not contain the field**, so no new screening can emit them. `OUT` in v3 means an empty `categories` array: *in no defined category*, not *near the important one*.
+
+## Confidence
+
+`high` / `medium` / `low`. **If the abstract is missing, judge on the title alone and set confidence to `low` unless the title is unambiguous.** The schema **quotes** this sentence; it does not paraphrase it (D24).
+
+**`low` is a legitimate answer.** A screener that never says `low` is not being careful; it is being confident.
+
+---
+
+## Sources
+
+Every quotation above was read from a PDF in **`docs/reference/definitions/`**, which is committed. Nothing is cited from memory, and since D29 that is a checked property, not a promise: `pilot/check_quotes.R` fails the build if any quotation marked verbatim is not a substring of its cited PDF. `pilot/check_instrument.R` fails the build if this rubric and `screening-schema-v3.json` disagree about any field, in either direction.
+
+
+# THE OUTPUT SCHEMA (screening-schema-v3.json)
+
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "MetaCan screening output, rubric v3.1",
+  "description": "The output contract for every screening run under rubric v3.1. This document QUOTES the rubric; it never paraphrases it. Where a description below restates a rule, the wording is copied from docs/protocol/rubric-v3.md, because the schema misquoting the rubric is D24 and two documents that disagree are two instruments (D20). pilot/check_instrument.R fails the build if this file and the rubric disagree about any field, in either direction. The legacy screening-schema.json remains ONLY so that v1 and v2 label files stay readable; no new screening validates against it.",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["id", "categories", "study_design", "genre", "about_ca_system", "about_ca_topic", "confidence"],
+    "properties": {
+      "id": {
+        "type": "string",
+        "pattern": "^W\\d+$",
+        "description": "The OpenAlex work id, exactly as given in the payload."
+      },
+      "categories": {
+        "type": "array",
+        "items": {
+          "enum": ["metaresearch", "metaepi_narrow", "metaepi_broad", "bibliometrics", "sts", "scholarly_communication", "open_science", "research_integrity", "insufficient_payload"]
+        },
+        "uniqueItems": true,
+        "description": "Every category the work belongs to; a work may carry more than one, and categories are not ranked and none is primary. An EMPTY array is OUT, which means 'in no defined category', not 'near the important one'. insufficient_payload means the record cannot be screened (a scraping artifact as a title, boilerplate in the abstract field, a title and abstract from different papers, spam) and is reported, never silently dropped."
+      },
+      "domain": {
+        "enum": ["methods", "reporting", "reproducibility", "evaluation", "incentives", null],
+        "description": "REQUIRED when categories contains metaresearch, and null otherwise. Taken verbatim from Ioannidis's five thematic areas: methods, reporting, reproducibility, evaluation, and incentives (how to do, report, verify, correct, and reward science)."
+      },
+      "study_design": {
+        "enum": ["randomized_trial", "nonrandomized_trial", "observational", "systematic_review", "meta_analysis", "case_report", "qualitative", "simulation_or_modeling", "bench_or_experimental", "theoretical_or_conceptual", "not_applicable", "design_other"],
+        "description": "Coded for every work, from this vocabulary and no other. not_applicable means the work is not empirical research: editorials, datasets, software."
+      },
+      "genre": {
+        "enum": ["empirical", "review", "methods", "commentary", "editorial", "protocol", "dataset", "software", "other"],
+        "description": "One vocabulary, defined in the rubric, and this schema QUOTES that list rather than paraphrasing it."
+      },
+      "about_ca_system": {
+        "type": "boolean",
+        "description": "ABOUT_CA_SYSTEM: the Canadian research system or academy is a substantive object. A Canadian institution as setting is not this."
+      },
+      "about_ca_topic": {
+        "type": "boolean",
+        "description": "ABOUT_CA_TOPIC: Canada is a substantive subject, whether or not research is the object."
+      },
+      "confidence": {
+        "enum": ["high", "medium", "low"],
+        "description": "If the abstract is missing, judge on the title alone and set confidence to low unless the title is unambiguous. low is a legitimate answer: a screener that never says low is not being careful; it is being confident."
+      },
+      "reason": {
+        "type": "string",
+        "maxLength": 400,
+        "description": "One sentence naming the rubric rule the decision rests on."
+      }
+    }
+  }
+}
+
+
+# THE RECORDS
+
+[
+ {
+  "id": "W4401337768",
+  "title": "Adrift down under: An integrative review of international students’ experiences in Australian higher education including shaping factors",
+  "abstract": "Australia is currently one of the leading destination countries for International Students (IS), ranking third in popularity as a study destination. There is sparse research into the experience of IS including the factors influencing their experience within the Australian higher education system. This integrative review aims to synthesize knowledge on the IS’ experience in Australian higher education, including the factors influencing their experience. The review included 15 qualitative studies, three quantitative studies, three mixed methods studies and two literature reviews. IS perceived their study experience in Australia as challenging. They reported English unproficiency, poor academic performance, lack of academic support, low-quality courses, and work-study imbalance as factors that lead to insufficient learning engagement. IS reported difficulties in adjusting to the culture due to language barrier, negative emotions, and stronger acculturation orientation toward their heritage culture. IS reported the difficulties in establishing rapport with both domestic students, university teachers, and obstacles in building meaningful relationships within the local community as factors hindering the development of rapport with these entities. Despite encountering the challenges, IS have recognised the imperative of seeking avenues to foster connections with their fellow peers, their teachers, and the broader Australian community. They noted that their proactive efforts to connect with others, participation in work integrated learning, engagement in extracurricular activities, and prolonged residency in Australia were influential factors that facilitated opportunities for connectedness. These findings emphasise the significance of fostering networks between international students, domestic peers, university educators, and the Australian community. Such networks facilitate cultural understanding, elevate academic achievements, and contribute to the holistic well-being of students. The findings offer valuable assistance in equipping stakeholders and higher educational institutions with essential insights to effectively support IS and address their needs comprehensively. These insights are significant for global education providers aiming to support IS and cultivate a positive study environment. Further research should explore the experiences of international nursing, medical, and healthcare students, considering their involvement with patients and the healthcar",
+  "year": 2024,
+  "lang": "en",
+  "type": "article",
+  "venue": "Journal of Nursing Education and Practice",
+  "topic": "International Student and Expatriate Challenges",
+  "field": "Social Sciences"
+ },
+ {
+  "id": "W4416823644",
+  "title": "Referee report. For: Health Professions' Educators' Adaptation to Rapidly Changing Circumstances: The Ottawa 2020 Conference Experience [version 1; peer review: awaiting peer review]",
+  "abstract": "",
+  "year": 2020,
+  "lang": "en",
+  "type": "article",
+  "venue": "Faculty of 1000 Research Ltd",
+  "topic": "Public Health Policies and Education",
+  "field": "Health Professions"
+ },
+ {
+  "id": "W4416823441",
+  "title": "Referee report. For: Health Professions' Educators' Adaptation to Rapidly Changing Circumstances: The Ottawa 2020 Conference Experience [version 1; peer review: awaiting peer review]",
+  "abstract": "",
+  "year": 2020,
+  "lang": "en",
+  "type": "article",
+  "venue": "Faculty of 1000 Research Ltd",
+  "topic": "Public Health Policies and Education",
+  "field": "Health Professions"
+ },
+ {
+  "id": "W3010453467",
+  "title": "What risks should be permissible in controlled human infection model studies?",
+  "abstract": "Abstract Controlled human infection model (CHIM) studies involve the intentional exposure of healthy research volunteers to infectious agents. These studies contribute to knowledge about the cause or development of disease and to the advancement of vaccine research. But they also raise ethical questions about the kinds of risks that should be permissible and whether limits should be imposed on research risks in CHIM studies. Two possible risk thresholds have been considered for CHIM studies. The first suggests constraining ethically permissible risks according to a minimal risk threshold and the second endorses a higher risk threshold that excludes irreversible or fatal infections. I argue that neither of these thresholds is persuasive and situate questions about risk thresholds in CHIM studies within a broader debate about permissible risks in research. I argue that risks in CHIM studies should be constrained according to limits on research risks that do not offer corresponding benefits in all studies rather than developing a unique risk threshold for CHIM studies. I then propose five recommendations for the ethical assessment of risk in CHIM studies.",
+  "year": 2020,
+  "lang": "en",
+  "type": "article",
+  "venue": "Bioethics",
+  "topic": "Ethics in Clinical Research",
+  "field": "Medicine"
+ },
+ {
+  "id": "W3123106997",
+  "title": "The Twilight Zone: OTC Regulatory Regimes and Market Quality",
+  "abstract": "",
+  "year": 2013,
+  "lang": "en",
+  "type": "report",
+  "venue": "National Bureau of Economic Research",
+  "topic": "Banking stability, regulation, efficiency",
+  "field": "Economics, Econometrics and Finance"
+ },
+ {
+  "id": "W4214868455",
+  "title": "Evaluation of Digital Interventions for Physical Activity Promotion: Protocol for a Scoping Review",
+  "abstract": "Background Digital interventions (DIs) could support physical activity (PA) promotion, according to recent reviews. However, it remains unclear if and how DIs for PA promotion are evaluated; thus, it is unclear if they support behavior change in real-world settings. A mapping of evidence from published reviews is required to focus on the evaluation of DIs for PA promotion. Objective The aim of our study is to investigate evaluation strategies for any outcome in the context of DIs for PA promotion by conducting a scoping review of published reviews. Methods Our scoping review adheres to the PRISMA-ScR (Preferred Reporting Items for Systematic Reviews and Meta-Analyses extension for Scoping Reviews) guidelines. The information sources include bibliographic databases (MEDLINE, PsycINFO, and CINAHL) and the bibliographies of the selected studies. The electronic search strategy was developed and conducted in collaboration with an experienced database specialist. The electronic search was conducted in English with no limits up to March 19, 2021, for sources with the terms digital intervention AND evaluation AND physical activity in titles or abstracts. After deduplication, 300 reviews selected from 4912 search results were assessed for eligibility by 2 authors working independently. The inclusion criteria were (1) healthy or clinical samples (population), (2) DIs for PA promotion (intervention), (3) comparisons to any other intervention or no intervention (comparison), (4) evaluation strategies (methods, results, or frameworks) for any outcome in the context of DIs for PA promotion (outcome), and (5) any published review (study type). According to the consensus reached during a discussion, 40 reviews met the inclusion criteria—36 from the electronic search and 4 from the manual search of the bibliographies of the 36 reviews. All reviews reported the evaluation strategies for any outcomes in the context of DIs for PA promotion in healthy or clinical samples. Data coding and the quality appraisal of systematic reviews are currently being performed independently by 2 authors. Results Our scoping review includes data from 40 published reviews (1 rapid review, 9 scoping reviews, and 30 systematic reviews). The focus of data coding is on evaluation strategies in the context of DIs for PA promotion and on the critical appraisal of the included systematic reviews. The final consensus regarding all data is expected in early 2022. Conclusions Interventions for PA promotio",
+  "year": 2022,
+  "lang": "en",
+  "type": "review",
+  "venue": "JMIR Research Protocols",
+  "topic": "Physical Activity and Health",
+  "field": "Medicine"
+ },
+ {
+  "id": "W2104874431",
+  "title": "Fostering Research Partnerships: Interview with Dr. Gina Browne",
+  "abstract": "1. Nurs Leadersh (Tor Ont). 2008;21(4):16-23. doi: 10.12927/cjnl.2008.20282.\n\nFostering research partnerships: interview with Dr. Gina Browne. Interview by \nDorothy Pringle.\n\nBrowne G.\n\nDOI: 10.12927/cjnl.2008.20282\nPMID: 19048686 [Indexed for MEDLINE]",
+  "year": 2008,
+  "lang": "en",
+  "type": "article",
+  "venue": "Nursing leadership",
+  "topic": "Health Sciences Research and Education",
+  "field": "Health Professions"
+ },
+ {
+  "id": "W4387197550",
+  "title": "Rethinking Risks and Benefits in Stakeholder-Engaged Research: Lessons from HIV, Substance Use, and Sexual Health Research with Marginalized Communities",
+  "abstract": "",
+  "year": 2023,
+  "lang": "en",
+  "type": "book-chapter",
+  "venue": "Philosophy and medicine",
+  "topic": "Mental Health and Patient Involvement",
+  "field": "Health Professions"
+ },
+ {
+  "id": "W6977158599",
+  "title": "Wellcome Open Access Spend Report 2021/22",
+  "abstract": "",
+  "year": 2024,
+  "lang": "en",
+  "type": "dataset",
+  "venue": "Figshare",
+  "topic": null,
+  "field": null
+ },
+ {
+  "id": "W4384302929",
+  "title": "Pacific Northwest National Laboratory Regional Populations – 2020 Census: Richland Campus and Sequim Campus",
+  "abstract": "",
+  "year": 2023,
+  "lang": "en",
+  "type": "report",
+  "venue": null,
+  "topic": "Survey Methodology and Nonresponse",
+  "field": "Social Sciences"
+ },
+ {
+  "id": "W4403792737",
+  "title": "Accountability frameworks: A critical evolution in healthcare",
+  "abstract": "Canadians face prolonged waits for primary care, specialist care, hospital care, elective surgery, and advanced imaging relative to peer countries. A root problem is unclear queue management expectations. If programs have no mandate to provide timely care, the intuitive approach to demand challenges is not to innovate and improve, but to block access, create a queue, and force patients elsewhere. Patient care accountability frameworks define program expectations and accountability zones, clarifying that every patient has an accountable healthcare home and every program has a population (accountability zone). Program accountabilities include timely patient assessment and disposition; budget, space, and nursing care for program patients; and contingency plans for surges and queues. Accountability frameworks are an evolutionary stressor that would drive strategies to expedite appropriate care in the right place, to move patients out of queues into care. This article discusses accountability, accountability frameworks, and accountability strategies to improve system-wide access.",
+  "year": 2024,
+  "lang": "en",
+  "type": "article",
+  "venue": "Healthcare Management Forum",
+  "topic": "Healthcare cost, quality, practices",
+  "field": "Health Professions"
+ },
+ {
+  "id": "W4381839012",
+  "title": "Application of the theoretical framework of acceptability in a surgical setting: Theoretical and methodological insights",
+  "abstract": "Abstract Purpose Methods for assessing acceptability of healthcare interventions have been inconsistent until the development of the theoretical framework of acceptability (TFA). Despite its rapid adoption in healthcare research, the TFA has rarely been used to assess acceptability of surgical interventions. We sought to explore the sufficiency of the TFA in this context and provide methodological guidance to support systematic use of this framework in research. Method Acceptability was assessed in a consecutive sample of 15 patients at least 3 months post‐joint replacement surgery via theory‐informed semi‐structured interviews. A detailed description of the application of the TFA is reported. This includes: development of the interview guide (including questions to assess theoretical sufficiency), analysis of interview data and interpretation of findings. Results Interview data were substantially codable into the TFA constructs but required the addition of a construct, labelled ‘perceived safety and risk’, and relabelling and redefining an existing construct (new label: ‘opportunity costs and gains’). Methodological recommendations for theory‐informed interview studies include producing interview support material to enhance precision of the intervention description, conducting background conversations with a range of stakeholders in the healthcare setting, and conducting first inductive and then deductive thematic analysis. Conclusion The sufficiency of the TFA could be enhanced for use when assessing interventions with an identifiable risk profile, such as surgery, by the inclusion of an additional construct to capture perceptions of risk and safety. We offer these methodological recommendations to guide researchers and facilitate consistency in the application of the TFA in theory‐informed interview studies.",
+  "year": 2023,
+  "lang": "en",
+  "type": "article",
+  "venue": "British Journal of Health Psychology",
+  "topic": "Health Systems, Economic Evaluations, Quality of Life",
+  "field": "Economics, Econometrics and Finance"
+ },
+ {
+  "id": "W4311468933",
+  "title": "A holistic and practical framework for evaluating research co-production: Research Quality Plus for Co-Production (RQ+ 4 Co-Pro)",
+  "abstract": "Abstract Background Co-production is an umbrella term used to describe the process of generating knowledge by bringing together researchers and those who will use research to work in partnership. Multiple benefits of research co-production have been hypothesized, and in some cases documented, in the academic and practice record. However, there are significant gaps in understanding how to evaluate the quality of co-production designs, processes, and results. This gap in knowledge undermines the value of co-production and co-producers. Methods Our research tests the relevance and utility of a novel research co-production evaluation framework: Research Quality Plus for Co-Production (RQ + 4 Co-Pro). Following a co-production approach ourselves, members of our team collaborated to develop study objectives, questions, analysis and results sharing strategies. We used a dyadic field-test design to simulate RQ + 4 Co-Pro evaluations amongst 18 independently recruited subject matter experts. We used standardized reporting templates and qualitative interviews to collect data from field-test participants, and thematic analysis and deliberative dialogue to analysis and interpret results. Results The field test surfaced unanimous support for the relevance and utility of RQ + 4 Co-Pro. Research participants shared opportunities for fine-tuning language and criteria within the prototype version, but also, for alternative uses and users of RQ + 4 Co-Pro. This data facilitated our deliberative revision and publication herein of a field-tested RQ + 4 Co-Pro Framework and Assessment Instrument. Conclusion Evaluation is necessary for understanding and improving co-production, and, for ensuring co-production delivers on its promise of better health, health equity, and general public good. RQ + 4 Co-Pro provides an immediately practical evaluation tool, and we invite co-producers and stewards of co-production – including the funders, publishers, and universities who increasingly claim to encourage socially relevant research – to adapt and experiment with RQ + 4 Co-Pro in their contexts.",
+  "year": 2022,
+  "lang": "en",
+  "type": "preprint",
+  "venue": "Research Square",
+  "topic": "Mental Health and Patient Involvement",
+  "field": "Health Professions"
+ },
+ {
+  "id": "W4402602478",
+  "title": "Status of animal experimentation in nutrition and dietetic research: Policies of 100 leading journals and new approach methodologies",
+  "abstract": "1. Account Res. 2025 Nov;32(8):1545-1563. doi: 10.1080/08989621.2024.2398104.\nEpub  2024 Sep 18.\n\nStatus of animal experimentation in nutrition and dietetic research: Policies of \n100 leading journals and new approach methodologies.\n\nStorz MA(1), Dean E(2).\n\nAuthor information:\n(1)Department of Internal Medicine II, Centre for Complementary Medicine, \nFaculty of Medicine, Medical Center - University of Freiburg, University of \nFreiburg, Freiburg im Breisgau, Germany.\n(2)Department of Physical Therapy, Faculty of Medicine, University of British \nColumbia, Vancouver, Canada.\n\nGiven animal research is challenged with inadequacies, e.g., animal-to-human \nknowledge translation, ethical considerations, and cost:benefit, new approach \nmethodologies (NAMs) have been proposed as a replacement. With reference to the \nfield of nutrition and dietetics, our aim was to examine the policies of its \nleading journals regarding human-based vs. traditional animal-based research; \nand to explore emerging NAMs that provide alternatives to animal \nexperimentation. We reviewed 100 leading journals from an established database \n(SCImago Journal Rankings) in the nutrition and dietetics category for the year \n2022. Eighty-three journals met the inclusion criteria. NAMs were extracted from \na range of established sources. 9.6% (n = 8) of journals state they do not \npublish animal-based studies; 4.8% (n = 4) consider animal studies with \nqualifications, whereas the remaining 85.5% (n = 71) publish animal studies \nwithout qualification. Across sources, NAMs commonalities were identified \nincluding in vitro, in chemico, and in silico methods; and individual and \npopulation-based studies. Of leading nutrition/dietetic journals, relatively few \nhave shifted to strictly non-animal methods. Greater attention to the increasing \nrange of NAMs may not only reduce the need for animal research in the field, but \nmay provide superior human-relevant outcomes. Studies are needed to establish \ntheir potential superiority.\n\nDOI: 10.1080/08989621.2024.2398104\nPMID: 39292014 [Indexed for MEDLINE]",
+  "year": 2024,
+  "lang": "en",
+  "type": "review",
+  "venue": "Accountability in Research",
+  "topic": "Animal testing and alternatives",
+  "field": "Veterinary"
+ },
+ {
+  "id": "W4389686946",
+  "title": "Stories of Change: Covid-19 Responses for Equity",
+  "abstract": "Covid-19 Responses for Equity (CORE) was a three-year, CA$25m rapid research initiative that brought together 20 research projects to understand the socioeconomic impacts of the pandemic, improve existing responses, and generate better policy options for recovery. The research, funded by the Canadian International Development Research Centre (IDRC), took place across 42 countries in Africa, Asia, Latin America and the Middle East. The Institute of Development Studies (IDS) supported CORE to maximise the learning generated across the research portfolio and deepen engagement with governments, civil society, and the scientific community. This publication celebrates the impact of that research, and highlights Stories of Change from seven of the CORE projects that successfully influenced policy, practice, and understandings of the crisis. Collectively, these individual case studies provide a narrative about the nature of research impact in emergencies and the implications for the design and delivery of future rapid response research initiatives. There are clear lessons around the importance of organisational reputation, and the value of co-designing research with decision makers whilst simultaneously taking a critical position. Every story here emphasises the need to understand political context and to explore the trade-offs between research rigour and the timeliness of evidence. Above all, they illustrate the value of flexible funding arrangements that enable local teams to respond to fast-moving crises. These stories demonstrate unequivocally the value of locally led research responses to emergencies with the right international flow of resources and support. CORE’s research teams were well-placed to bring together communities, civil society organisations, and governments to create a space for vulnerable and marginalised groups to discuss their lived experiences of the pandemic and bring these perspectives into policy conversations. Their success hinged on their hyper-local knowledge and their unswerving focus on providing real-time evidence to advocate for the wellbeing of affected communities.",
+  "year": 2023,
+  "lang": "en",
+  "type": "report",
+  "venue": null,
+  "topic": "COVID-19 epidemiological studies",
+  "field": "Mathematics"
+ },
+ {
+  "id": "W3148764640",
+  "title": "Generating data sets for teaching the importance of regression analysis",
+  "abstract": "Abstract Summary statistics and data visualizations are often used to explore data and draw preliminary conclusions. Although valuable, these tools do not always reveal the underlying patterns and trends in the data and can sometimes be misleading. We describe an approach for teaching the need for more advanced statistical analysis using multiple linear regression. Our approach is based on using a method we developed for generating alternative multivariate data sets where all the variables (both independent and dependent) have the same summary statistics. However, we can deliberately change the statistical significance of one (or more) of the independent variables in the regression to illustrate why it is important to go beyond simple descriptive measures and examine inferential statistics on the inherent relationships in the data. Implementation of this methodology is provided in the R statistical programming language and an add‐in for Excel spreadsheets.",
+  "year": 2021,
+  "lang": "en",
+  "type": "article",
+  "venue": "Decision Sciences Journal of Innovative Education",
+  "topic": "Statistical Methods and Applications",
+  "field": "Mathematics"
+ },
+ {
+  "id": "W3112500270",
+  "title": "Monetary Policy and Redistribution in Open Economies",
+  "abstract": "",
+  "year": 2020,
+  "lang": "en",
+  "type": "preprint",
+  "venue": "National Bureau of Economic Research",
+  "topic": "Global Financial Crisis and Policies",
+  "field": "Economics, Econometrics and Finance"
+ },
+ {
+  "id": "W4383615433",
+  "title": "Professional responsibility, nurses, and conscientious objection: A framework for ethical evaluation",
+  "abstract": "Conscientious objections (CO) can be disruptive in a variety of ways and may disadvantage patients and colleagues who must step-in to assume care. Nevertheless, nurses have a right and responsibility to object to participation in interventions that would seriously harm their sense of integrity. This is an ethical problem of balancing risks and responsibilities related to patient care. Here we explore the problem and propose a nonlinear framework for exploring the authenticity of a claim of CO from the perspective of the nurse and of those who must evaluate such claims. We synthesized the framework using Rest’s Four Component Model of moral reasoning along with tenets of the International Council of Nursing’s (ICN) Code of Ethics for Nurses and insights from relevant ethics and nursing ethics literature. The resulting framework facilitates evaluating potential consequences of a given CO for all involved. We propose that the framework can also serve as an aid for nurse educators as they prepare students for practice. Gaining clarity about the sense in which the concept of conscience provides a defensible foundation for objecting to legally, or otherwise ethically, permissible actions, in any given case is critical to arriving at an ethical and reasonable plan of action.",
+  "year": 2023,
+  "lang": "en",
+  "type": "article",
+  "venue": "Nursing Ethics",
+  "topic": "Ethics in medical practice",
+  "field": "Health Professions"
+ },
+ {
+  "id": "W3121186031",
+  "title": "Corrigendum to “The use of Latin-square designs in educational and psychological research” [Educational Research Review 24 (2018) 84–97]",
+  "abstract": "",
+  "year": 2021,
+  "lang": "en",
+  "type": "review",
+  "venue": "Educational Research Review",
+  "topic": "Educational Methods and Teacher Development",
+  "field": "Computer Science"
+ },
+ {
+  "id": "W4408378962",
+  "title": "Access and use of general and mental health services before and during the COVID-19 pandemic: a systematic review and meta-analysis",
+  "abstract": "Objectives To quantify access to health services during the COVID-19 pandemic and measure the change in use between the prepandemic and the pandemic periods in a population with assessment of psychological distress or diagnosis of mental disorders. Data sources We developed and piloted a search syntax and adapted it to enter the following databases from 1 January 2020 to 31 March 2023: PubMed/MEDLINE, PsycINFO, Web of Science, Epistemonikos and the WHO International Clinical Trials Registry Platform. We reran the searches from the end of the original search to 3 December 2024. Design We systematically screened titles, abstracts and full texts of retrieved records. Eligibility criteria We included observational studies on any populations and regions, covering health services such as doctor visits, hospital admissions, diagnostic examinations, pharmaceutical therapies and mental health (MH) services. Only studies using validated scales to assess psychological distress or mental disorders as defined in the Diagnostic and Statistical Manual of Mental Disorders were included. Data extraction and synthesis We extracted data using a purposefully designed form and evaluated the studies’ quality with the Newcastle-Ottawa Scale. We measured the incidence rate (IR) of access to health services and the IR ratio (IRR) between the prepandemic and the pandemic periods. We calculated contacts days and catchment areas in the different periods. We used the random effects DerSimonian-Laird inverse-variance model and calculated heterogeneity with statistics I² and τ². We computed pooled IR and pooled IRR and tested the hypothesis of no variation (IRR=1). Results We retrieved 10 014 records and examined the full text of 580 articles. We included 136 primary studies of which 44 were meta-analysed. The IR of access to services during the pandemic was 2.59 contact months per 10 000 inhabitants (IR=2.592; 95% CI: 1.301 to 5.164). We observed a reduction of 28.5% in the use of services with negligible differences by age group and type of services (IRR=0.715; 95% CI: 0.651 to 0.785). We observed significant differences in effect sizes across studies (τ 2 =5.44; p&lt;0.001 and τ 2 =0.090; p&lt;0.001). Conclusion By considering MH, our study provides consolidated evidence and quantifies the reduction in the use of health services during the COVID-19 pandemic. PROSPERO registration number CRD42023403778.",
+  "year": 2025,
+  "lang": "en",
+  "type": "review",
+  "venue": "BMJ Open",
+  "topic": "COVID-19 and Mental Health",
+  "field": "Psychology"
+ },
+ {
+  "id": "W2028351059",
+  "title": "A Comparison of Veterinary Students Enrolled and Not Enrolled in an Animal-Welfare Course",
+  "abstract": "An online survey was conducted to compare 46 veterinary students who previously enrolled in a discussion-based animal-welfare elective with 45 veterinary students who did not take the course. Students were asked a series of questions about their attitudes toward animal welfare and were presented with animal-use scenarios that had not previously been discussed in the elective course: greyhound racing, veal calf production, and the use of genetically engineered mice in research. For each scenario, students' actual knowledge was scored on the basis of open-ended factual questions. Students were also asked how comfortable they were with educating themselves about each topic and to describe factors they would use to evaluate the welfare of animals in each scenario. Factors were classified as being associated with (a) biological functioning, (b) ability to exist in a natural state, or (c) measures of affective state or feelings. There was no significant difference in actual knowledge of the three scenarios between students who took the course and those who did not. Students who took the course were significantly more likely to be comfortable about educating themselves on each of the three animal-use scenarios and scored significantly higher in identifying welfare-affecting factors than students who did not take the course. The results suggest that this approach to instruction is an effective way to teach veterinary students about how to educate themselves about animal-welfare issues and to increase their confidence in appropriately evaluating novel animal-welfare topics.",
+  "year": 2010,
+  "lang": "en",
+  "type": "article",
+  "venue": "Journal of Veterinary Medical Education",
+  "topic": "Veterinary Practice and Education Studies",
+  "field": "Health Professions"
+ },
+ {
+  "id": "W2143561881",
+  "title": "Portraits of Plurilingualism in a French International School in Toronto: Exploring the Role of Visual Methods to Access Students’ Representations of their Linguistically Diverse Identities",
+  "abstract": "",
+  "year": 2014,
+  "lang": "en",
+  "type": "article",
+  "venue": "DOAJ (DOAJ: Directory of Open Access Journals)",
+  "topic": "Multilingual Education and Policy",
+  "field": "Social Sciences"
+ },
+ {
+  "id": "W2307807934",
+  "title": "Which One to Take On?: International Students’ Identity Acquisition in the Hyperdiversity of Montreal",
+  "abstract": "This study explored the role of linguistic variables (fluency in both official languages, passing in both official languages and University affiliation) and identity variables (centrality and satisfaction towards the new cultural group) in the acquisition of a new cultural identity among international students in Canada. Two hundred and fifty four international students were recruited from universities in the Montréal region. Self-reported questionnaires were used to assess which new identity international students are in the process of taking on, their linguistic abilities, their university affiliation and in-group identification. The results demonstrate that international students who were fluent in French, could pass for a bilingual or a Francophone, and who attended a primarily French-speaking University mostly took on the Québécois identity as their new cultural identity. International students who were fluent in English, could pass for an Anglophone or neither pass for an Anglophone nor a Francophone, and attended a primarily English-speaking University took on either the Montréalais or the Canadian identity. International students who took on the Montréalais identity reported higher satisfaction towards their new cultural group compared to those who took on the Québécois or Canadian identities. We discuss the implications of these findings for future research and policy. Cette étude explore le rôle que des variables linguistiques (fluidité dans les deux langues officielles, pouvoir passer comme un Francophone et/ou un Anglophone et l’affiliation universitaire) et que des variables identitaires (la centralité et la satisfaction envers le nouveau groupe culturel) peuvent jouer dans l’acquisition d’une nouvelle identité culturelle pour les étudiants internationaux au Canada. Deux cent cinquante-quatre étudiants internationaux furent recrutés dans des universités montréalaises. Ils remplirent des questionnaires auto-rapportés utilisés pour évaluer quelle identité les nouveaux étudiants internationaux souhaiteraient acquérir, leurs compétences linguistiques, leurs affiliations universitaires et leurs identifications envers leur nouveau groupe culturel. Les résultats démontrent que les étudiants internationaux qui étaient fluides en français, qui pouvaient passer comme un bilingue ou un francophone, et qui étaient affiliés à une université où le langage principal d’instruction est le français souhaitaient surtout acquérir l’identité québécoise. Les étudia",
+  "year": 2016,
+  "lang": "en",
+  "type": "article",
+  "venue": "Canadian ethnic studies",
+  "topic": "Multilingual Education and Policy",
+  "field": "Social Sciences"
+ },
+ {
+  "id": "W392811995",
+  "title": "A Review of Research on Aging Families: Emerging Issues",
+  "abstract": "",
+  "year": 2015,
+  "lang": "en",
+  "type": "review",
+  "venue": "Scholarship@Western (Western University)",
+  "topic": "Intergenerational Family Dynamics and Caregiving",
+  "field": "Social Sciences"
+ },
+ {
+  "id": "W1589224727",
+  "title": "La théorie de l’action sociale de Parsons : La conserver, mais la dépasser",
+  "abstract": "II n'est pas possible de réduire la sociologie à un seul modèle. La sociologie ne peut se définir en rupture avec un ou plusieurs d'entre eux. Rejeter l'utilitarisme et réserver le domaine des actions rationnelles à l'économie, comme le fait Parsons dans la Structure de l'action sociale, est se priver d'une méthodologie au nom d'une conception métaphysique. L'explication rationnelle des actions est à la portée de la sociologie. En réalité, il y a progrès lorsque l'explication de l'action passe du recours à l'irrationalité ou au non logique, au recours à la rationalité. La notion de la rationalité en sociologie est polysémique, alors que sa définition est d'ordre sémantique. En effet, il est impossible de définir des critères objectifs à la notion de rationalité. Dans ce contexte, retrouver le sens d'une action équivaut à reconstruire les raisons sur lesquelles elle s'appuie.",
+  "year": 2002,
+  "lang": "fr",
+  "type": "article",
+  "venue": "Sociologie et sociétés",
+  "topic": "Social Sciences and Governance",
+  "field": "Social Sciences"
+ }
+]

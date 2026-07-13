@@ -93,7 +93,7 @@ def evaluate_after_round(round_no: int):
     assert n_train <= 5600 - len(hold_ids) + n_loop, (
         f"train corpus ({n_train}) is larger than labelled-minus-holdout; the holdout is leaking")
     X = vec.transform(ho_texts)
-    S = np.vstack([heads[a].predict_proba(X)[:, 1] for a in L.ARMS])
+    S = np.vstack([heads[a].predict_proba(X)[:, 1] for a in L.ACTIVE_ARMS])
     mean_s = S.mean(axis=0)
 
     ap = float(average_precision_score(ho_y, mean_s)) if ho_y.sum() else float("nan")

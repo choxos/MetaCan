@@ -1101,3 +1101,21 @@ This is D33's class again (a metric computed on data the process controls), one 
 ### The repair
 
 One canonical definition, `ml/labels.py::frozen_holdout_ids()`, imported by both sides. `train_heads()` excludes it unless the maturity gate has passed. And two assertions run every evaluation: no holdout work may appear in any loop batch, and the training corpus must be smaller than labelled-minus-holdout. The number 0.969 appears in this entry so that the next person who sees an evaluation that good checks the corpus before the champagne.
+
+## D36. The teacher panel changed size mid-study, because a quota ran out.
+
+**Date:** 2026-07-13. **Grok Build returned 402 Payment Required halfway through round 7's grok arm.**
+
+### What happened
+
+The live loop ran three teachers for rounds 1 through 6. Mid-round-7, Grok's usage balance exhausted, and the PI directed the loop to continue with ChatGPT. From round 7 the active teacher set is **{Opus, ChatGPT}**.
+
+### What changes and what does not
+
+The 17,000+ historical Grok labels (the v1 pilot arms plus loop rounds 1-6 and round 7's two completed chunks) stay in the archive and in training exactly as produced; history is not rewritten. What retires is the **Grok head**: a teacher that stops receiving new labels while the others grow would freeze its boundary at round-6 knowledge, and a disagreement spread computed against a frozen boundary drifts artifactually, manufacturing "contestedness" that is really staleness.
+
+Consequences, stated rather than discovered later: the spread is now a two-boundary quantity (|Opus − ChatGPT|), which sees **less** of the contested region than three boundaries did; the maturity-curve AP target ("majority teacher") is now effectively agreement-of-two; and any comparison of pre-round-7 to post-round-7 disagreement statistics crosses a panel change and must say so. The v0 baseline frame pass, launched before the change from the rounds-1-6 corpus, carries all three heads and is internally consistent as a three-teacher snapshot.
+
+### The lesson
+
+A design that depends on N independent teachers depends on N **subscriptions**, and a preregistration that never says what happens when one lapses leaves the choice to the moment it happens. This one now says it: the active set is named in one place (`ml/labels.py::ACTIVE_ARMS`), the change is dated, and the panel history travels with the data.

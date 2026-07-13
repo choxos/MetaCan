@@ -1,0 +1,535 @@
+You are screening scholarly works for the MetaCan project. Apply the rubric below to EVERY record and output ONE JSON array with ONE object per record, conforming EXACTLY to the JSON schema below. Output ONLY the JSON array, no prose before or after it.
+
+# THE RUBRIC (v3.1, locked)
+
+# MétaCan screening rubric (v3.1)
+
+**Status: LOCKED, 2026-07-13.** Supersedes v2.2. No screening ran under v3.0, which lived for hours: an adversarial review found that its Murad quotation inserted the word "treatment" into a sentence this document calls verbatim (D29). v3.1 corrects that quotation from the PDF, fixes the Kataoka page range, aligns the funder clause with the protocol, corrects two glosses against their sources, and adds the study-design vocabulary that v3.0 demanded but never listed. Since D29, `pilot/check_quotes.R` fails the build if any quotation marked verbatim is not a substring of its cited PDF.
+
+**No number produced so far was made under v3.** The pilot ran under v1.0; the 179-work re-screen under v2.0. Both instruments are kept byte for byte, so every figure stays attributable to the text that produced it. v3 is the instrument the **full screen** runs under, and the **v2-to-v3 difference is reported as a finding**.
+
+---
+
+## What changed, and why it is not cosmetic
+
+v1 and v2 had a tier hierarchy: **T1 core / T2 adjacent / T3 contextual**. That structure had a defect at its root, and the data found it before I did.
+
+> **"Adjacent" is defined by negation.** It means *not-T1*. A category whose only content is "near the important one" cannot be applied consistently, and **OUT-vs-adjacent was the largest tier confusion at every sample size we measured.** The models were not failing. **The category was empty.**
+
+It was also a value judgment I had no standing to make. Calling science and technology studies "adjacent" says STS is peripheral to metascience. **STS is a field with its own founding literature, its own journals, and its own account of what studying science means.**
+
+**v3 deletes the hierarchy.** Every tradition is a **category with its own positive definition, taken from its own literature, quoted verbatim from a source in `docs/reference/definitions/`.** There is no residual bucket. A record may carry **more than one** category, because the traditions genuinely overlap and forcing a single label is what created the problem.
+
+**Nothing here is cited from memory.** Every quotation below was read from the PDF named beside it. In a project whose worst deviation (D26) was that its own definition of metaresearch was mine and uncited for its entire life, a recalled citation would be the single worst thing this document could contain.
+
+---
+
+## The definitional problem is the field's, not this project's, and the field says so in print
+
+- **Puljak L, Lovric Makaric Z, Buljan I, Pieper D.** *What is a meta-epidemiological study? Analysis of published literature indicated heterogeneous study designs and definitions.* J Comp Eff Res. 2020. doi:10.2217/cer-2019-0201
+  > Analysed **175 information sources**. *"Definitions of meta-epidemiological studies varied and some studies used the term meta-epidemiological study to describe methodological research-on-research studies."* Conclusion: *"Research community would benefit from consensus about definition of meta-epidemiological study."*
+
+- **Kataoka Y, et al.** J Clin Epidemiol. 2023;154:219-220.
+  > A **published dispute** with Puljak, opening by naming *"the currently confusing nomenclatures around 'meta-epidemiology' and related terms such as 'meta-research' and 'research-on-research'."*
+
+- **Stevens ER, Laynor G.** *Recognizing the value of meta-research and making it easier to find.* J Med Libr Assoc. 2023;111(4). doi:10.5195/jmla.2023.1758
+  > *"The breadth of meta-research presents a significant challenge for identifying published meta-research studies,"* and it notes **the lack of a MeSH heading** for meta-research.
+
+**Those are claims about humans.** The pilot's numbers are claims about **models disagreeing under one rubric**. They are consistent, they are not the same estimand, and **only the human audit closes the gap** (`DEVIATIONS.md` D27).
+
+---
+
+## The categories
+
+A work may carry **more than one**. **Categories are not ranked and none is primary: the released landscape is the union of the defined categories, with every overlap reported.** The call's primary estimand is reported over `metaresearch` because that is the field the call names; that is a **reporting choice, not a rank**, and each of the other traditions gets the same per-category estimate.
+
+### 1. `metaresearch`
+
+> **"Meta-research is an evolving scientific discipline that aims to evaluate and improve research practices. It includes thematic areas of methods, reporting, reproducibility, evaluation, and incentives (how to do, report, verify, correct, and reward science)."**
+>
+> Ioannidis JPA, Fanelli D, Dunne DD, Goodman SN. *Meta-research: Evaluation and Improvement of Research Methods and Practices.* PLoS Biol. 2015;13(10):e1002264.
+> See also Ioannidis JPA. PLoS Biol. 2018;16(3):e2005468; METRICS, Stanford: <https://metrics.stanford.edu/research>
+
+Every `metaresearch` record carries a **`domain`**, taken verbatim from those five thematic areas and glossed by Ioannidis's own parenthetical:
+
+| `domain` | Ioannidis's gloss | operationally |
+|---|---|---|
+| `methods` | *how to **do** science* | design, conduct, analysis, bias, statistical practice, evidence-synthesis methodology; Ioannidis's own description of this area ends *"research integrity and ethics"* |
+| `reporting` | *how to **report** science* | reporting standards and completeness |
+| `reproducibility` | *how to **verify** science* | replication, data and code sharing, transparency |
+| `evaluation` | *how to **correct** science* | peer review and editorial process, research assessment, metrics |
+| `incentives` | *how to **reward** science* | funding allocation, careers and the research workforce, reward structures |
+
+**RULE 1 stands** (carried from v2; it resolved the largest single seam): *a work is `metaresearch` on methods only if its object is methods **as used, reported or performed by researchers**. Developing, deriving, validating or teaching a technique for a domain is OUT, however generic the technique.* **An instance of a research practice is not a study of it.**
+
+### 2. `metaepidemiology` — **CONTESTED IN PRINT. Both definitions are coded.**
+
+There is **no consensus definition** (Puljak 2020, above). **This rubric does not invent one.** It codes **both published definitions** and **flags where they disagree**, because the dispute is live, it is between named researchers in peer-reviewed journals, and hiding it inside a single label would destroy the only evidence of it.
+
+- **`metaepi_narrow`** — Murad MH, Wang Z. *Guidelines for reporting meta-epidemiological methodology research.* Evid Based Med. 2017;22(4):139-142. doi:10.1136/ebmed-2017-110713
+  > *"Meta-epidemiological studies adopt a systematic review or meta-analysis approach to examine the impact of certain characteristics of clinical studies on the observed effect and provide empirical evidence for hypothesised associations."*
+  >
+  > *(v3.0 quoted this sentence as 'the observed **treatment** effect'. The word is not in the paper; it narrowed Murad's definition while claiming his authority for the narrowing, and it survived a LOCK. D29.)*
+
+- **`metaepi_broad`** — Kataoka Y, et al. J Clin Epidemiol. 2023;154:219-220. *(Not 219-221: page 221 is Puljak's reply, which is the other side of the dispute.)*
+  > *"The greatest common defining concept of 'meta-epidemiological studies' would be **any studies in which the unit of analysis is a study, not a patient**."*
+
+**Where the two differ, the record is flagged, and the size of that class is reported as a finding.** A published dispute is a boundary to be *measured*, not settled by fiat.
+
+### 3. `bibliometrics` (scientometrics)
+
+> **"Scientometrics is the study of the quantitative aspects of the process of science as a communication system. It is centrally, but not only, concerned with the analysis of citations in the academic literature."**
+>
+> Mingers J, Leydesdorff L. *A Review of Theory and Practice in Scientometrics.* Eur J Oper Res. 2015. doi:10.1016/j.ejor.2015.04.002
+> Founding work: Price DJ de Solla. *Networks of Scientific Papers.* Science. 1965;149(3683):510-515.
+
+**Boundary with `metaresearch`, and it resolves v1's self-contradiction** (v1's T1 bullet and its own worked example gave opposite answers): a study that **characterises a literature** by quantitative means is `bibliometrics`. A study that uses bibliometric means to **make a claim about research practice** (citation distortion, reporting trends, citation of retracted work) is **also `metaresearch`**, and carries both. **v3 does not force the choice; that forcing was the bug.**
+
+### 4. `sts` (science and technology studies)
+
+> **"co-production is shorthand for the proposition that the ways in which we know and represent the world (both nature and society) are inseparable from the ways in which we choose to live in it."**
+> **"The idiom of co-production ... represents a major synthesis of scholarship in science and technology studies (S&TS)."**
+>
+> Jasanoff S (ed.). *States of Knowledge: The Co-Production of Science and the Social Order.* Routledge, 2004.
+
+> **"We study science in action and not ready made science or technology; to do so, we either arrive before the facts and machines are blackboxed or we follow the controversies that reopen them."**
+>
+> Latour B. *Science in Action: How to Follow Scientists and Engineers through Society.* Harvard University Press.
+
+**Operational test:** the work studies **science or technology as social practice**: how knowledge and social order are produced together, how facts are made rather than found, how controversies open and close. **The object must be science, research, or technoscientific knowledge**, at any period. *(v1 restricted history and philosophy of science to "contemporary research practice", an unexamined adverb that silently excluded the entire history of Canadian science. It is deleted.)*
+
+### 5. `scholarly_communication`
+
+> **"Scholarly communication is a rich and complex sociotechnical system formed over a period of centuries."**
+> **"...used here in the broader sense to include the formal and informal activities associated with the use and dissemination of information through public and private channels."**
+>
+> Borgman CL. *Scholarship in the Digital Age: Information, Infrastructure, and the Internet.* MIT Press, 2007.
+
+### 6. `open_science`
+
+> **"Open science is a set of principles and practices that aim to make scientific research from all fields accessible to everyone for the benefits of scientists and society as a whole."**
+> **"Open science is about making sure not only that scientific knowledge is accessible but also that the production of that knowledge itself is inclusive, equitable and sustainable."**
+>
+> UNESCO. *Recommendation on Open Science* (introduction), 2021. **193 countries adopted it.**
+
+The second sentence is the reason this category is not a synonym for "open access": UNESCO's definition makes **inclusivity and equity of knowledge production** part of open science itself, which is the criterion this challenge is judged on.
+
+### 7. `research_integrity` — **defined by its OBJECT; the sources do not define the field, and that is recorded**
+
+**Honest limitation, stated rather than hidden.** The two sources supplied define **what counts as misconduct** and **what publication ethics covers**. **Neither defines "research integrity research" as a discipline** the way Ioannidis defines metaresearch or Jasanoff defines STS. So this category is defined by its **object**, and the gap is on the record.
+
+> **"...the analysis was limited to behaviours that distort scientific knowledge: fabrication, falsification, 'cooking' of data, etc... Survey questions on plagiarism and other forms of professional misconduct were excluded."**
+>
+> Fanelli D. *How Many Scientists Fabricate and Falsify Research? A Systematic Review and Meta-Analysis of Survey Data.* PLoS ONE. 2009;4(5):e5738.
+
+> Publication ethics, per **COPE** (Committee on Publication Ethics), *Ethics Toolkit for Journal Editors and Publishers.*
+
+**Operational test:** the object is **research misconduct, questionable research practices, retraction, authorship, or publication ethics**, *as an object of study*. **Fanelli's boundary is adopted and its exclusion is carried:** fabrication, falsification and data cooking are in; **plagiarism and professional misconduct are recorded but marked, because Fanelli's own scope excludes them** and a rubric that silently widened his boundary while citing him would be misquoting its own source.
+
+**This category overlaps `metaresearch` heavily**: Ioannidis's own description of the *methods* area ends *"research integrity and ethics"*, so integrity research is inside metaresearch by his definition. **That overlap is expected and allowed**, because v3 is multi-label. It is not a hierarchy.
+
+### `insufficient_payload`
+
+Not a judgment; a statement that the record **cannot be screened** (a scraping artifact as a title, boilerplate in the abstract field, a title and abstract from different papers, spam). **Reported, never silently dropped**: the size of this class is a finding about OpenAlex.
+
+### `OUT`
+
+None of the above. **"OUT" now means "in no defined category", not "not near the important one."** That is the whole change.
+
+---
+
+## Canadian linkage
+
+- `CA_AFF` — at least one Canadian institutional affiliation. **Warning, measured:** OpenAlex misassigns these. **At least 17,466** works enter the frame with, as their *only* Canadian institution, one of six suspect assignments: a parse failure that is not an institution at all (`Impact`, attached to a Spanish COVID essay) or a real organization attached to papers it has nothing to do with (`Discovery Air (Canada)` on a Brazilian linguistics paper). That is a **lower bound** from six audited strings (finding 27), and the records are **flagged for audit, not deleted**. A Canadian affiliation is *evidence*, not proof.
+- `CA_FUND` — ≥1 funder whose OpenAlex `country_code` is Canada: an **external criterion, not a curated list**. *(An earlier four-funder list (CIHR, NSERC, SSHRC, CFI) failed twice: three of its four hardcoded IDs pointed at other funders, and even corrected it missed Canada Research Chairs, the Government of Canada, NRC, Mitacs, Genome Canada, and every provincial agency. OpenAlex knows 2,182 Canadian funders; `R/pin_entities.R` pins them.)*
+- **`ABOUT_CA_SYSTEM`** — the Canadian **research system or academy** is a substantive object. *A Canadian institution as setting is not this.*
+- **`ABOUT_CA_TOPIC`** — Canada is a substantive subject, whether or not research is the object.
+
+*(v1 had one boolean and it could not separate "Canadian data, universal claim" from "a claim about Canada". Four screening agents proposed this split independently.)*
+
+## Study design
+
+Coded for every work, from **this vocabulary and no other** (v3.0 said "coded for every work" and never listed the values, which is D20's exact shape: a field every screener codes and no two code alike):
+
+| `study_design` | MEDLINE publication type it is validated against |
+|---|---|
+| `randomized_trial` | Randomized Controlled Trial |
+| `nonrandomized_trial` | Controlled Clinical Trial |
+| `observational` | Observational Study |
+| `systematic_review` | Systematic Review |
+| `meta_analysis` | Meta-Analysis |
+| `case_report` | Case Reports |
+| `qualitative` | *(none; ships as a score, marked unvalidated)* |
+| `simulation_or_modeling` | *(none; ships as a score, marked unvalidated)* |
+| `bench_or_experimental` | *(none; ships as a score, marked unvalidated)* |
+| `theoretical_or_conceptual` | *(none; ships as a score, marked unvalidated)* |
+| `not_applicable` | *(the work is not empirical research: editorials, datasets, software)* |
+| `design_other` | *(none; ships as a score, marked unvalidated)* |
+
+**Validated against MEDLINE publication types, per record and not per year.** *(v3.0 called these "human-indexed by NLM", which is false; v3.1's first correction said "human-indexed until April 2022", which is also false. NLM stopped fully human indexing as universal practice around 2011 and completed automation in 2022, so a YEAR CUTOFF cannot separate the eras. The reference subset is defined by NLM's **record-level `IndexingMethod`** field: absent = fully human, `Curated` = automated with human review, `Automated` = machine. Human records are the reference; the others measure **agreement with another machine** and are reported as such.)*
+
+**Class-specific calendar eligibility, because a publication type that did not exist cannot be a negative.** *Observational Study* entered the vocabulary in **2014** and *Systematic Review* in **2019**. A 2008 cohort study carries no *Observational Study* tag, and treating that absence as "not observational" would train and score the model against a censoring artifact. Each design class is therefore validated **only on records published after its type existed**, and that eligibility window is prespecified per class. Where MEDLINE does not reach (most of the physical sciences, humanities and social sciences), the label ships as a **score, not an assertion**, and is **marked unvalidated**. *The dataset states, per field, which of its own annotations it has earned the right to assert.*
+
+## Genre
+
+**One vocabulary, defined here, and `screening-schema-v3.json` QUOTES this list rather than paraphrasing it.**
+
+`empirical` · `review` · `methods` · `commentary` · `editorial` · `protocol` · `dataset` · `software` · `other`
+
+*(In v1 the rubric and the schema named **two different vocabularies for this field**, overlapping on two values out of thirteen. Every screener was handed both and obeyed both privately; the validator checked `tier` and had never been asked to look at `genre`, so 16,800 labels passed every check that ran. See D20 and finding 24. **A codebook is code. It gets a test.**)*
+
+## `tier` is RETIRED
+
+v3 replaces it with `categories`, which is **multi-label**. The values `T1`, `T2`, `T3` and `OUT` remain in the **legacy** `screening-schema.json` **only so that the v1 and v2 label files stay readable**; the v3 contract, `screening-schema-v3.json`, **does not contain the field**, so no new screening can emit them. `OUT` in v3 means an empty `categories` array: *in no defined category*, not *near the important one*.
+
+## Confidence
+
+`high` / `medium` / `low`. **If the abstract is missing, judge on the title alone and set confidence to `low` unless the title is unambiguous.** The schema **quotes** this sentence; it does not paraphrase it (D24).
+
+**`low` is a legitimate answer.** A screener that never says `low` is not being careful; it is being confident.
+
+---
+
+## Sources
+
+Every quotation above was read from a PDF in **`docs/reference/definitions/`**, which is committed. Nothing is cited from memory, and since D29 that is a checked property, not a promise: `pilot/check_quotes.R` fails the build if any quotation marked verbatim is not a substring of its cited PDF. `pilot/check_instrument.R` fails the build if this rubric and `screening-schema-v3.json` disagree about any field, in either direction.
+
+
+# THE OUTPUT SCHEMA (screening-schema-v3.json)
+
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "MetaCan screening output, rubric v3.1",
+  "description": "The output contract for every screening run under rubric v3.1. This document QUOTES the rubric; it never paraphrases it. Where a description below restates a rule, the wording is copied from docs/protocol/rubric-v3.md, because the schema misquoting the rubric is D24 and two documents that disagree are two instruments (D20). pilot/check_instrument.R fails the build if this file and the rubric disagree about any field, in either direction. The legacy screening-schema.json remains ONLY so that v1 and v2 label files stay readable; no new screening validates against it.",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["id", "categories", "study_design", "genre", "about_ca_system", "about_ca_topic", "confidence"],
+    "properties": {
+      "id": {
+        "type": "string",
+        "pattern": "^W\\d+$",
+        "description": "The OpenAlex work id, exactly as given in the payload."
+      },
+      "categories": {
+        "type": "array",
+        "items": {
+          "enum": ["metaresearch", "metaepi_narrow", "metaepi_broad", "bibliometrics", "sts", "scholarly_communication", "open_science", "research_integrity", "insufficient_payload"]
+        },
+        "uniqueItems": true,
+        "description": "Every category the work belongs to; a work may carry more than one, and categories are not ranked and none is primary. An EMPTY array is OUT, which means 'in no defined category', not 'near the important one'. insufficient_payload means the record cannot be screened (a scraping artifact as a title, boilerplate in the abstract field, a title and abstract from different papers, spam) and is reported, never silently dropped."
+      },
+      "domain": {
+        "enum": ["methods", "reporting", "reproducibility", "evaluation", "incentives", null],
+        "description": "REQUIRED when categories contains metaresearch, and null otherwise. Taken verbatim from Ioannidis's five thematic areas: methods, reporting, reproducibility, evaluation, and incentives (how to do, report, verify, correct, and reward science)."
+      },
+      "study_design": {
+        "enum": ["randomized_trial", "nonrandomized_trial", "observational", "systematic_review", "meta_analysis", "case_report", "qualitative", "simulation_or_modeling", "bench_or_experimental", "theoretical_or_conceptual", "not_applicable", "design_other"],
+        "description": "Coded for every work, from this vocabulary and no other. not_applicable means the work is not empirical research: editorials, datasets, software."
+      },
+      "genre": {
+        "enum": ["empirical", "review", "methods", "commentary", "editorial", "protocol", "dataset", "software", "other"],
+        "description": "One vocabulary, defined in the rubric, and this schema QUOTES that list rather than paraphrasing it."
+      },
+      "about_ca_system": {
+        "type": "boolean",
+        "description": "ABOUT_CA_SYSTEM: the Canadian research system or academy is a substantive object. A Canadian institution as setting is not this."
+      },
+      "about_ca_topic": {
+        "type": "boolean",
+        "description": "ABOUT_CA_TOPIC: Canada is a substantive subject, whether or not research is the object."
+      },
+      "confidence": {
+        "enum": ["high", "medium", "low"],
+        "description": "If the abstract is missing, judge on the title alone and set confidence to low unless the title is unambiguous. low is a legitimate answer: a screener that never says low is not being careful; it is being confident."
+      },
+      "reason": {
+        "type": "string",
+        "maxLength": 400,
+        "description": "One sentence naming the rubric rule the decision rests on."
+      }
+    }
+  }
+}
+
+
+# THE RECORDS
+
+[
+ {
+  "id": "W6949824102",
+  "title": "Modèle de plan de gestion des données : Méthodes mixtes (enquêtes et recherche qualitative)",
+  "abstract": "",
+  "year": 2021,
+  "lang": "fr",
+  "type": "other",
+  "venue": "Zenodo (CERN European Organization for Nuclear Research)",
+  "topic": null,
+  "field": null
+ },
+ {
+  "id": "W3093135202",
+  "title": "Exact tests for contemporaneous correlation of disturbances in seemingly unrelated regressions",
+  "abstract": "",
+  "year": 2002,
+  "lang": "en",
+  "type": "article",
+  "venue": "Journal of Econometrics",
+  "topic": "Monetary Policy and Economic Impact",
+  "field": "Economics, Econometrics and Finance"
+ },
+ {
+  "id": "W1964714699",
+  "title": "Power and perceptions in participatory monitoring and evaluation",
+  "abstract": "1. Eval Program Plann. 2009 Aug;32(3):229-37. doi: \n10.1016/j.evalprogplan.2009.03.003. Epub 2009 Apr 8.\n\nPower and perceptions in participatory monitoring and evaluation.\n\nParkinson S(1).\n\nAuthor information:\n(1)School of Environmental Design and Rural Development, University of Guelph, \nGuelph, Ontario, Canada. sparki01@uoguelph.ca\n\nThis paper examines the assumptions that commonly underpin the design of \nparticipatory monitoring and evaluation (PM&E) within development programmes \nthrough the examination of a case study of a large rural development programme \nin Uganda. This case study reveals a mismatch between programme assumptions and \nparticipant perceptions, which stymied the implementation of PM&E. In this case, \nPM&E was based on the assumptions that programme and participant goals were \ncompatible, participants were willing to volunteer and engage themselves for the \ngreater good of their communities, and information sharing and communication was \nfairly free and open. However, farmers within the programme felt that the \nbureaucratic and accountability requirements of the programme were not their \nconcern, and were acutely aware of power differences between farmers and \nprogramme officials, and between farmers of varying status. The key lesson to be \ndrawn from this case is the need for a heightened awareness of power dynamics \nand political factors in the design of PM&E.\n\nDOI: 10.1016/j.evalprogplan.2009.03.003\nPMID: 19419765 [Indexed for MEDLINE]",
+  "year": 2009,
+  "lang": "en",
+  "type": "article",
+  "venue": "Evaluation and Program Planning",
+  "topic": "Evaluation and Performance Assessment",
+  "field": "Decision Sciences"
+ },
+ {
+  "id": "W4380150846",
+  "title": "EE345 Strengths and Limitations of Different Costing Approaches Used for Hospital Budget Impact Models: Application to Imaging Guidance in Left Atrial Appendage Occlusion Procedures",
+  "abstract": "",
+  "year": 2023,
+  "lang": "en",
+  "type": "article",
+  "venue": "Value in Health",
+  "topic": "Health Systems, Economic Evaluations, Quality of Life",
+  "field": "Economics, Econometrics and Finance"
+ },
+ {
+  "id": "W3027623322",
+  "title": "PNS18 IMPROVING THE APPLICATION OF PUBLISHED HEALTH UTILITIES IN COST-UTILITY ANALYSES: DEVELOPMENT OF THE HEALTH UTILITY APPLICATION TOOL (HAT)",
+  "abstract": "",
+  "year": 2020,
+  "lang": "en",
+  "type": "article",
+  "venue": "Value in Health",
+  "topic": "Health Systems, Economic Evaluations, Quality of Life",
+  "field": "Economics, Econometrics and Finance"
+ },
+ {
+  "id": "W2139543842",
+  "title": "When does a conceptual framework become a theory? Reflections from an accidental theorist",
+  "abstract": "1. Eval Program Plann. 2013 Jun;38:67-70. doi:\n10.1016/j.evalprogplan.2012.03.016.  Epub 2012 Mar 21.\n\nWhen does a conceptual framework become a theory? Reflections from an accidental \ntheorist.\n\nCousins JB(1).\n\nAuthor information:\n(1)Faculty of Education, University of Ottawa, 145 Jean Jacques Lussier, Ottawa, \nON, Canada. bcousins@uottawa.ca\n\nIn this short paper I reflect on the application of a program logic modeling \napproach to visualizing evaluation theory as it relates to practical \nparticipatory evaluation (PPE). The work of Hansen, Alkin and associates \npresented in this volume is well-thought out, carefully done, rigorous, and \nimportant. I found that their application of the approach resonated well with my \nunderstanding of PPE with a few notable exceptions. Specifically, the essence of \nthe partnership aspect of the approach was underemphasized as was stakeholders' \nrole in augmenting the credibility of evaluation findings and PPEs contribution \nto conceptual use. I then reminisce about the development and evolution of the \nparticipatory evaluation framework that we have been working with for so many \nyears. I raise the point that we think of it as a theoretical framework to bound \ninquiry, not as an evaluation theory per se, which raises an interesting \nquestion: when does a theoretical framework become a theory?\n\nCopyright © 2012 Elsevier Ltd. All rights reserved.\n\nDOI: 10.1016/j.evalprogplan.2012.03.016\nPMID: 22497774 [Indexed for MEDLINE]",
+  "year": 2012,
+  "lang": "en",
+  "type": "article",
+  "venue": "Evaluation and Program Planning",
+  "topic": "Evaluation and Performance Assessment",
+  "field": "Decision Sciences"
+ },
+ {
+  "id": "W2162247559",
+  "title": "Evaluation of the quality of services provided by a gambling helpline: an empirical study",
+  "abstract": "This study evaluates the quality of the services provided by a helpline according to the type of caller and the type of request. One hundred and fifteen bogus calls made by simulated clients were used for the evaluation. Results showed that 87% of the calls received an adequate response from the helpline information/referral counsellors (IRCs). Referral requests made by a loved one were less frequently rated as adequate. The quality of responses was better for requests for a referral than they were for information. The simulated client method allowed for experimentation in how a caller could respond emotionally when contacting the helpline. The method revealed that answers given to a loved one could be frustrating and that some IRCs have more difficulties providing general information about gambling than providing the name of a rehabilitation centre. These results should help to improve the quality of the services offered by the helpline to respond more specifically to the callers' information and referral requests.",
+  "year": 2013,
+  "lang": "en",
+  "type": "article",
+  "venue": "Journal of Gambling Issues",
+  "topic": "Gambling Behavior and Treatments",
+  "field": "Psychology"
+ },
+ {
+  "id": "W4212867484",
+  "title": "COVID-19 Pandemic as A Catalyst for Fostering Reformed Pedagogy in Science Education",
+  "abstract": "The study examined the role of COVID-19 pandemic as a catalyst for fostering reformed pedagogy in science education within the South African context. The prevalence of COVID-19 pandemic compelled teachers as key agents of educational change to fundamentally rethink their pedagogical practices with a view to bring about reformed pedagogy. The study adopted a phenomenological design located within the critical paradigm. The empirical investigation involved 21 purposively selected in-service science teachers enrolled for postgraduate studies in science education at a South African university. Critical theory was adopted as a theoretical lens to provide insightful elucidation into how science teachers negotiated and transformed their pedagogical practices in response to the formidable challenges posed by COVID-19 pandemic. The COVID-19 pandemic critically exposed socio-economic disparities in science teaching and learning within the broader South African context. Under-resourced schools represented inappropriate educational entities which rendered encouragement of critical thinking and promotion of innovative pedagogical practices extremely difficult to realize. Science teachers at under-resourced schools were largely left to their own devices when navigating formidable challenges posed by the prevalence of COVID-19 pandemic. This dilemma represents a structural problem that ought to be addressed as a matter of priority in order to ensure social justice in terms of the creation of conducive teaching and learning environments at under-resourced schools in particular. Meaningful transformation of pedagogy remains an arduous task in the face of fundamental challenges afflicting teacher professional growth and its ramifications.",
+  "year": 2022,
+  "lang": "en",
+  "type": "article",
+  "venue": "International Journal of Higher Education",
+  "topic": "COVID-19 and Mental Health",
+  "field": "Psychology"
+ },
+ {
+  "id": "W2089616041",
+  "title": "Le patrimoine culturel immatériel dans les programmes de réhabilitation destinés aux peuples autochtones",
+  "abstract": "Le présent article propose une réflexion critique sur les effets et les rôles du patrimoine culturel immatériel (PCI – traditions séculaires, rituels, chants, danses, etc.) amérindien dans les programmes de réhabilitation destinés aux populations délinquantes autochtones qui purgent une peine dans un centre de détention au Canada. Nous tentons de comprendre quels sont les effets de l’intégration des pratiques liées au PCI amérindien dans le processus de réhabilitation des délinquants.",
+  "year": 2009,
+  "lang": "fr",
+  "type": "article",
+  "venue": "Criminologie",
+  "topic": "Cultural Heritage Management and Preservation",
+  "field": "Arts and Humanities"
+ },
+ {
+  "id": "W2394792307",
+  "title": "Indirect Costs Associated with Cardiovascular Disease in Canada: A Literature Review",
+  "abstract": "",
+  "year": 2016,
+  "lang": "en",
+  "type": "review",
+  "venue": "Value in Health",
+  "topic": "Health Systems, Economic Evaluations, Quality of Life",
+  "field": "Economics, Econometrics and Finance"
+ },
+ {
+  "id": "W2014366393",
+  "title": "Evaluability Assessment: A Tool for Incorporating Evaluation in Social Change Programmes",
+  "abstract": "",
+  "year": 2003,
+  "lang": "en",
+  "type": "article",
+  "venue": "Evaluation",
+  "topic": "Evaluation and Performance Assessment",
+  "field": "Decision Sciences"
+ },
+ {
+  "id": "W2084102355",
+  "title": "A Utility Algorithm forthe Pressure Ulcer Quality of Life – Utility Instrument (Puqol-Ui)",
+  "abstract": "1. Value Health. 2014 Nov;17(7):A513. doi: 10.1016/j.jval.2014.08.1582. Epub 2014\n Oct 26.\n\nA Utility Algorithm forthe Pressure Ulcer Quality of Life - Utility Instrument \n(Puqol-Ui).\n\nCzoski MC(1), Meads DM(1), McCabe C(2), Edlin R(3), Rutherford C(4), Hulme \nCT(1), Nixon J(1).\n\nAuthor information:\n(1)University of Leeds, Leeds, UK.\n(2)University of Alberta, Edmonton, AB, Canada.\n(3)University of Auckland, Auckland, New Zealand.\n(4)University of Sydney, Sydney, Australia.\n\nDOI: 10.1016/j.jval.2014.08.1582\nPMID: 27201583",
+  "year": 2014,
+  "lang": "en",
+  "type": "article",
+  "venue": "Value in Health",
+  "topic": "Health Systems, Economic Evaluations, Quality of Life",
+  "field": "Economics, Econometrics and Finance"
+ },
+ {
+  "id": "W4318450151",
+  "title": "Comparative performance and mapping algorithms between EQ-5D-5L and SF-6Dv2 among the Chinese general population",
+  "abstract": "",
+  "year": 2023,
+  "lang": "en",
+  "type": "article",
+  "venue": "The European Journal of Health Economics",
+  "topic": "Health Systems, Economic Evaluations, Quality of Life",
+  "field": "Economics, Econometrics and Finance"
+ },
+ {
+  "id": "W4399981604",
+  "title": "Re-visioning Cellphilming Methodology: An Introduction",
+  "abstract": "",
+  "year": 2024,
+  "lang": "en",
+  "type": "book-chapter",
+  "venue": "Studies in arts-based educational research",
+  "topic": "Cell Image Analysis Techniques",
+  "field": "Biochemistry, Genetics and Molecular Biology"
+ },
+ {
+  "id": "W2326111885",
+  "title": "(CL-214)SPECTRAL CHARACTERISTICS OF REFLECTIONS OFF THE CONJUNCTIVA/SCLERA",
+  "abstract": "",
+  "year": 2000,
+  "lang": "en",
+  "type": "article",
+  "venue": "Optometry and Vision Science",
+  "topic": "Advanced Scientific Research Methods",
+  "field": "Agricultural and Biological Sciences"
+ },
+ {
+  "id": "W3139794867",
+  "title": "Exploring the extent of digital food and beverage related content associated with a family-friendly event: a case study",
+  "abstract": "Abstract Background Exposure to unhealthy food and beverage content is a contributing factor to the obesity epidemic. Youth are susceptible to unhealthy digital food marketing including content shared by their peers, which can be as influential as commercial marketing. Current Canadian regulations do not consider the threat digital food marketing poses to health. No research to date has examined the prevalence of food related posts on social media surrounding family-friendly events. The aim of this study was to explore the frequency of food related content (including food marketing) and the marketing techniques employed in social media posts related to a family-friendly event in Canada. Methods In this case study, a content analysis of social media posts related to a family-friendly event on Facebook, Twitter, and Instagram was conducted between January to February 2019. Each post containing food related content was identified and categorized by source and food category using a coding manual. Marketing techniques found in each food related post were also assessed. Results A total of 732 food and beverage related posts were assessed. These posts were most commonly promoted through Instagram ( n = 561, 76.6%) with significantly more individual users (61.5%; p &lt; 0.05) generating food and beverage related content ( n = 198, 27%) than other post sources. The top most featured food category was fast food ( n = 328, 44.8%) followed by dine-in restaurants ( n = 126, 17.2%). The most frequently observed marketing techniques included predominantly featuring a child in the post ( n = 124, 16.9%; p &lt; 0.0001), followed by products intended for children ( n = 118, 16.1%; p &lt; 0.05), and the presence of family ( n = 57, 7.8%; p &lt; 0.0001). Conclusions The present study highlights the proliferation of unhealthy food and beverage content by individuals at a family-friendly event as well as the presence of food marketing. Due to the unfettered advertising found in digital spaces, and that they are largely unregulated, it is important for future policies looking to combat childhood obesity to consider incorporating social media into their regulations to safeguard family-friendly events. General awareness on the implications of peer to peer sharing of unhealthy food and beverage posts should also be considered.",
+  "year": 2021,
+  "lang": "en",
+  "type": "article",
+  "venue": "BMC Public Health",
+  "topic": "Social Media in Health Education",
+  "field": "Social Sciences"
+ },
+ {
+  "id": "W6902593716",
+  "title": "Multilingualism in the Canadian Educational Context: Identity, Belonging, and Translanguaging Pedagogies",
+  "abstract": "",
+  "year": 2024,
+  "lang": "en",
+  "type": "article",
+  "venue": "DOAJ (DOAJ: Directory of Open Access Journals)",
+  "topic": "Multilingual Education and Policy",
+  "field": "Social Sciences"
+ },
+ {
+  "id": "W2176764667",
+  "title": "Exploring the Gray Areas: Senior Gamblers' Perceptions Of What Is and What Isn't Gambling",
+  "abstract": "The basis of any health promotion or harm minimization initiative is effective engagement of the target audience. However, because “gambling” can be interpreted in a variety of ways, service providers, such as community educators and clinical practitioners, cannot always assume a shared understanding of the meaning of gambling with their clients. This paper aims to help reduce such discrepancies by highlighting conditions in which gambling is usually viewed as gambling by those engaged in the behavior and by describing scenarios that may be more ambiguous. Such awareness can help service providers to maximize engagement efforts while minimizing the stigma typically associated with gambling. Findings are based on secondary analyses of a study that examined pathways leading to late-life problematic gambling by using a grounded theory method. The results suggest that rational decision making may be compromised in otherwise nonvulnerable individuals.",
+  "year": 2015,
+  "lang": "en",
+  "type": "article",
+  "venue": "Journal of Gambling Issues",
+  "topic": "Gambling Behavior and Treatments",
+  "field": "Psychology"
+ },
+ {
+  "id": "W4206561547",
+  "title": "POSC299 Transportability Analysis: A Principled Method for Transporting Treatment Effects Observed in One Real-World Dataset to Another",
+  "abstract": "",
+  "year": 2022,
+  "lang": "en",
+  "type": "article",
+  "venue": "Value in Health",
+  "topic": "Health Systems, Economic Evaluations, Quality of Life",
+  "field": "Economics, Econometrics and Finance"
+ },
+ {
+  "id": "W2058501772",
+  "title": "Value Congruence and Charismatic Leadership in CEO–Top Manager Relationships: An Empirical Investigation",
+  "abstract": "",
+  "year": 2011,
+  "lang": "en",
+  "type": "article",
+  "venue": "Journal of Business Ethics",
+  "topic": "Job Satisfaction and Organizational Behavior",
+  "field": "Business, Management and Accounting"
+ },
+ {
+  "id": "W3095043942",
+  "title": "Evaluating community-based research: Hearing the views of student research partners",
+  "abstract": "Despite the increasing popularity in the academy of collaborative approaches to research, evaluating the impacts of Students-as-Partners (SaP) initiatives has thus far received less systematic attention. This paper presents an evaluation of a participatory community-based research project where academics partnered with 15 mature students in a socio-economically disadvantaged estate in the south of Ireland to co-construct a household survey and conduct field research to gather the views of fellow residents on the regeneration of their area. The paper reports the findings of a subsequent qualitative, participatory evaluation of the student’s experience of this partnership with academics and its impacts. The findings illuminate some of the benefits and challenges of community-based staff-student research partnerships and points to the imperatives of aligning institutional, funder, and community participants’ capacities and objectives throughout the research cycle and the importance of evaluation to inform good practice in community-based research.",
+  "year": 2020,
+  "lang": "en",
+  "type": "article",
+  "venue": "International Journal for Students as Partners",
+  "topic": "Higher Education Practises and Engagement",
+  "field": "Social Sciences"
+ },
+ {
+  "id": "W2178824826",
+  "title": "Using Single-Case Experiments to Support Evidence-Based Decisions",
+  "abstract": "For practitioners, the use of single-case experimental designs (SCEDs) in the research literature raises an important question: How many single-case experiments are enough to have sufficient confidence that an intervention will be effective with an individual from a given population? Although standards have been proposed to address this question, current guidelines do not appear to be strongly grounded in theory or empirical research. The purpose of our article is to address this issue by presenting guidelines to facilitate evidence-based decisions by adopting a simple statistical approach to quantify the support for interventions that have been validated using SCEDs. Specifically, we propose the use of success rates as a supplement to support evidence-based decisions. The proposed methodology allows practitioners to aggregate the results from single-case experiments to estimate the probability that a given intervention will produce a successful outcome. We also discuss considerations and limitations associated with this approach.",
+  "year": 2015,
+  "lang": "en",
+  "type": "article",
+  "venue": "Behavior Modification",
+  "topic": "Behavioral and Psychological Studies",
+  "field": "Psychology"
+ },
+ {
+  "id": "W2745263378",
+  "title": "Assessment of Specificity of an Adenovirus Targeted to HER3/4",
+  "abstract": "1. Methods Mol Biol. 2017;1652:275-293. doi: 10.1007/978-1-4939-7219-7_18.\n\nAssessment of Specificity of an Adenovirus Targeted to HER3/4.\n\nMacLeod SH(1), Potts KG(2), Chaurasiya S(2)(3), Hitt MM(2).\n\nAuthor information:\n(1)Department of Oncology, University of Alberta, Edmonton, AB, Canada. \nshm@ualberta.ca.\n(2)Department of Oncology, University of Alberta, Edmonton, AB, Canada.\n(3)City of Hope National Cancer Centre, Room# 1100, Familian Science Building, \n1500 E. Duarte Road, Duarte, CA, 91010, USA.\n\nGene therapy with viral vectors, such as adenovirus (Ad), targeted to the human \nepidermal growth factor receptors 3 and 4 (HER3/4) are potentially useful for \ncancer therapy. Testing the expression of a reporter gene from these viruses in \ntarget cells is essential to determine functionality of the targeted virus. A \ncompetition assay with a relevant ligand (heregulin, HRG) can provide convincing \nevidence that blocking binding to the HER3/4 receptor results in decreased \nreporter gene expression. Labeling individual viruses with a fluorescent \nmolecule allows examination of the targeted virus in specific steps in the \ninfection. Virus internalization into cell lines can be determined using \nantibody-labeled receptors, and the virus colocalization with receptors can also \nbe visualized. Characterization of a targeted virus in this fashion is important \nto demonstrate that the targeting of the virus functions in an expected manner, \nand provides support for larger-scale testing of the virus. Information acquired \nin these experiments may also be useful to inform and improve on the design of \nfuture targeted viruses.\n\nDOI: 10.1007/978-1-4939-7219-7_18\nPMID: 28791648 [Indexed for MEDLINE]",
+  "year": 2017,
+  "lang": "en",
+  "type": "article",
+  "venue": "Methods in molecular biology",
+  "topic": "Virus-based gene therapy research",
+  "field": "Biochemistry, Genetics and Molecular Biology"
+ },
+ {
+  "id": "W4223522335",
+  "title": "Recommendations for the use of propensity score methods in multiple sclerosis research",
+  "abstract": "Background: With many disease-modifying therapies currently approved for the management of multiple sclerosis, there is a growing need to evaluate the comparative effectiveness and safety of those therapies from real-world data sources. Propensity score methods have recently gained popularity in multiple sclerosis research to generate real-world evidence. Recent evidence suggests, however, that the conduct and reporting of propensity score analyses are often suboptimal in multiple sclerosis studies. Objectives: To provide practical guidance to clinicians and researchers on the use of propensity score methods within the context of multiple sclerosis research. Methods: We summarize recommendations on the use of propensity score matching and weighting based on the current methodological literature, and provide examples of good practice. Results: Step-by-step recommendations are presented, starting with covariate selection and propensity score estimation, followed by guidance on the assessment of covariate balance and implementation of propensity score matching and weighting. Finally, we focus on treatment effect estimation and sensitivity analyses. Conclusion: This comprehensive set of recommendations highlights key elements that require careful attention when using propensity score methods.",
+  "year": 2022,
+  "lang": "en",
+  "type": "article",
+  "venue": "Multiple Sclerosis Journal",
+  "topic": "Advanced Causal Inference Techniques",
+  "field": "Mathematics"
+ },
+ {
+  "id": "W4245777736",
+  "title": "Built-in bad luck: Evidence of near-miss outcomes by design in scratch cards",
+  "abstract": "Scratch cards are a pervasive form of gambling in the Canadian marketplace. Despite their widespread appeal, we are only beginning to understand the influence of their structural characteristics on the player. The most widely studied of these characteristics is the near-miss, a game outcome in which the player gets two of the three needed symbols to win a jackpot prize. Although other authors have noted the existence of these outcomes in scratch cards, no systematic investigation has been undertaken to understand their occurrence in these games. We present the results of an analysis to determine the frequency of these outcomes using two samples (sample A, n = 41; sample B, n = 61) of a popular scratch card game available in Ontario, Canada. Our results suggest that certain scratch card games may be designed to include more pairs of jackpot symbols (i.e., more near-miss outcomes) than any other symbol pair. In the game that we analyzed, the top prize symbol occurred more often than any other symbol and appeared to be manipulated to appear in clusters of two, creating many near-miss outcomes to the jackpot prize. This work has strong implications for the study of gambling behaviour, responsible gambling strategies, as well as for the scientific investigation of scratch card games. Les cartes à gratter sont une forme très répandue de jeux sur le marché canadien. Malgré leur grand attrait, nous commençons à comprendre l’influence de leurs caractéristiques structurelles sur le joueur. La caractéristique la plus étudiée parmi elles est un résultat s'approchant du résultat gagnant; le joueur obtient deux des trois symboles nécessaires pour gagner un gros lot. Bien que d’autres auteurs aient noté l’existence de ce genre de résultats dans des cartes à gratter, aucune enquête systématique n’a été entreprise pour comprendre leur occurrence dans ces jeux. Nous présentons les résultats d’une analyse pour déterminer la fréquence de ces résultats en utilisant deux échantillons (échantillon A, n = 41; échantillon B, n = 61) d’un jeu de cartes à gratter populaire, vendu en Ontario, au Canada. Selon nos résultats, certains jeux de cartes à gratter peuvent être conçus pour inclure plus de paires de symboles pour le gros lot (c’est-à-dire des résultats plus proches) que n’importe quelle autre paire de symboles. Dans le jeu que nous avons analysé, le symbole du prix le plus élevé était présent plus souvent que tout autre symbole et semblait être manipulé pour apparaître en gra",
+  "year": 2017,
+  "lang": "en",
+  "type": "article",
+  "venue": "Journal of Gambling Issues",
+  "topic": "Gambling Behavior and Treatments",
+  "field": "Psychology"
+ }
+]

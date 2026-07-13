@@ -78,7 +78,7 @@ estimate.
 **What broke, and what now runs.** Design weights survive a noisy stratifier **only while every record keeps a nonzero selection
 probability**, and **my own design violated exactly that**: I never checked `sum(N_h) = N`, so **549,370 works (12.9%) had
 inclusion probability zero**, including **328,912** in **the secondary estimand's own cell**. Adversarial review found it; seven
-strata now **partition** the frame, asserted on every build. **`DEVIATIONS.md` carries all thirty-five entries; every one produced
+strata now **partition** the frame, asserted on every build. **`DEVIATIONS.md` carries all thirty-six entries; every one produced
 output that looked correct, and none threw.**
 
 **One annotation contract, and no layer borrows another's authority.** The LLM reads **every** work under the full v3.1 rubric

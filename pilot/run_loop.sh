@@ -16,12 +16,10 @@ DIR=pilot/screening/loop/round_${R}
 # opus arm as if nothing had happened. Training was protected (a round only counts when
 # all three arms validate), but a driver that cannot notice a dead arm is a driver that
 # wastes the two arms that worked.
-bash pilot/run_loop_round.sh "$R" grok  & PID_G=$!
+# Grok retired from live rounds at round 7 (quota exhausted, PI directive; D36).
+# The active teachers are ChatGPT (codex CLI) and Opus.
 bash pilot/run_loop_round.sh "$R" codex & PID_C=$!
-FAIL=0
-wait "$PID_G" || { echo "[run_loop] grok arm FAILED";  FAIL=1; }
-wait "$PID_C" || { echo "[run_loop] codex arm FAILED"; FAIL=1; }
-[ "$FAIL" -eq 0 ] || exit 1
+wait "$PID_C" || { echo "[run_loop] codex arm FAILED"; exit 1; }
 bash pilot/run_loop_round.sh "$R" opus
 
 python3 ml/loop.py "$N"

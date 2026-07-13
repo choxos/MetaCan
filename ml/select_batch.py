@@ -78,7 +78,7 @@ def train_heads(include_holdout=False):
     keep = [i for i, wid in enumerate(ids) if wid not in hold]
     recs = [recs[i] for i in keep]
     texts = [features.render(r, fields) for r in recs]
-    Y = {a: [int(y_by_arm[a]["strict"][i]) for i in keep] for a in L.ARMS}
+    Y = {a: [int(y_by_arm[a]["strict"][i]) for i in keep] for a in L.ACTIVE_ARMS}
 
     # v3 loop labels: metaresearch in categories == the strict target
     if os.path.isdir(LOOP_DIR):
@@ -89,28 +89,29 @@ def train_heads(include_holdout=False):
                 continue
             batch = {r["id"]: r for r in json.load(open(batch_f))}
             arm_labels = {}
-            for arm in L.ARMS:
+            for arm in L.ACTIVE_ARMS:
                 lf = os.path.join(rd, f"labels_{arm}.json")
                 if os.path.exists(lf):
                     arm_labels[arm] = {r["id"]: r for r in json.load(open(lf))}
-            if len(arm_labels) < len(L.ARMS):
-                continue          # a round only counts when ALL teachers have reported
+            if len(arm_labels) < len(L.ACTIVE_ARMS):
+                continue          # a round only counts when ALL ACTIVE teachers have reported
             for wid, rec in batch.items():
-                if all(wid in arm_labels[a] for a in L.ARMS):
+                if all(wid in arm_labels[a] for a in L.ACTIVE_ARMS):
                     texts.append(features.render(rec, fields))
-                    for a in L.ARMS:
+                    for a in L.ACTIVE_ARMS:
                         cats = arm_labels[a][wid].get("categories", [])
                         Y[a].append(1 if "metaresearch" in cats else 0)
 
     vec = features.vectorizer()
     X = vec.fit_transform(texts)
     heads = {}
+    # heads only for the ACTIVE teachers; see ml/labels.py ACTIVE_ARMS and D36
     # THE MODEL IMPROVES EVERY ROUND, NOT JUST ITS DATA. C is re-chosen by
     # cross-validated average precision on the current corpus: the right amount of
     # regularization at 4,300 labels is not the right amount at 40,000, and a constant
     # C would quietly become a worse and worse choice as the loop grows the corpus.
     from sklearn.model_selection import GridSearchCV, StratifiedKFold
-    for a in L.ARMS:
+    for a in L.ACTIVE_ARMS:
         y = np.array(Y[a])
         base = LogisticRegression(class_weight="balanced", max_iter=2000, solver="liblinear")
         if y.sum() >= 15:
@@ -190,7 +191,7 @@ def main(round_no: int, seed: int | None = None):
 
     texts = [features.render(r, features.PAYLOAD_FRAME_PARITY) for r in recs]
     X = vec.transform(texts)
-    S = np.vstack([heads[a].predict_proba(X)[:, 1] for a in L.ARMS])
+    S = np.vstack([heads[a].predict_proba(X)[:, 1] for a in L.ACTIVE_ARMS])
     spread = S.max(axis=0) - S.min(axis=0)
     mean_s = S.mean(axis=0)
     uncertainty = 1.0 - np.abs(mean_s - 0.5) * 2
