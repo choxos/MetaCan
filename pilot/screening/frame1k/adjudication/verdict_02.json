@@ -1,0 +1,634 @@
+[
+  {
+    "id": "W2992813950",
+    "tier": "OUT",
+    "seam": "lis_sts_asymmetry",
+    "confidence": "high",
+    "reason": "The T2 LIS bullet sits under a preamble requiring work on science as a social system, and managing student volunteers in a university library is neither researcher information behavior, a repository, nor discovery.",
+    "rubric_is_silent": false
+  },
+  {
+    "id": "W2604270671",
+    "tier": "OUT",
+    "seam": "workforce_boundary",
+    "confidence": "medium",
+    "reason": "Accreditation and quality assurance of a national higher education system is institutional and teaching evaluation, not the research evaluation, metrics, or funding allocation T1 names.",
+    "rubric_is_silent": true
+  },
+  {
+    "id": "W1903562992",
+    "tier": "OUT",
+    "seam": "workforce_boundary",
+    "confidence": "low",
+    "reason": "A professional file on the university's mission has no abstract and the title alone does not establish research as the object, so it fails the primary object test.",
+    "rubric_is_silent": true
+  },
+  {
+    "id": "W4385843707",
+    "tier": "OUT",
+    "seam": "knowledge_translation",
+    "confidence": "medium",
+    "reason": "Readability of dementia information for patients is health literacy: the object is lay health information, and no tier bullet extends dissemination to non researchers.",
+    "rubric_is_silent": true
+  },
+  {
+    "id": "W4220927966",
+    "tier": "OUT",
+    "seam": "lis_sts_asymmetry",
+    "confidence": "medium",
+    "reason": "Evaluating automatic text retrieval against manual indexing is retrieval technology; the LIS bullet's bare word 'discovery' is constrained by T2's science as a social system preamble.",
+    "rubric_is_silent": true
+  },
+  {
+    "id": "W4403238055",
+    "tier": "T3",
+    "seam": "knowledge_translation",
+    "confidence": "medium",
+    "reason": "An editorial on Canada's time limited HTA and temporary access pathways comments on how evidence is used in reimbursement policy, and T3 covers commentary and policy positions.",
+    "rubric_is_silent": true
+  },
+  {
+    "id": "W2116879809",
+    "tier": "T2",
+    "seam": "methods_dev_vs_study",
+    "confidence": "medium",
+    "reason": "A conceptual essay on the inherent limits of applying modern linguistic theory to a dead language takes a discipline's contemporary research practice as its object, which is the T2 philosophy of science bullet.",
+    "rubric_is_silent": true
+  },
+  {
+    "id": "W3196648881",
+    "tier": "T2",
+    "seam": "bibliometrics_contradiction",
+    "confidence": "medium",
+    "reason": "A systematic review that maps which mathematical models the supply chain literature uses and where its gaps lie takes a research literature as its object, the reading the worked example codes T2.",
+    "rubric_is_silent": true
+  },
+  {
+    "id": "W1590594782",
+    "tier": "OUT",
+    "seam": "none",
+    "confidence": "medium",
+    "reason": "The essay's object is arts engagement with youth; the rubric warns that mentioning researcher roles is not studying research.",
+    "rubric_is_silent": false
+  },
+  {
+    "id": "W4376458578",
+    "tier": "OUT",
+    "seam": "history_of_science",
+    "confidence": "medium",
+    "reason": "The metatheory is the vehicle and a theory of money and finance is the payload; if the paper is right we know more about a domain, not about contemporary research practice.",
+    "rubric_is_silent": true
+  },
+  {
+    "id": "W2784457224",
+    "tier": "T3",
+    "seam": "insufficient_payload",
+    "confidence": "low",
+    "reason": "The title makes research dissemination the object but the abstract is missing and the genre cannot be established; judged on the title alone this reads as commentary about research practice.",
+    "rubric_is_silent": false
+  },
+  {
+    "id": "W3190470331",
+    "tier": "OUT",
+    "seam": "workforce_boundary",
+    "confidence": "medium",
+    "reason": "Indicators of a national higher education system's health (institutions, expenditure, students, teachers) evaluate an education system, not research evaluation or the research workforce.",
+    "rubric_is_silent": true
+  },
+  {
+    "id": "W4395018595",
+    "tier": "OUT",
+    "seam": "knowledge_translation",
+    "confidence": "medium",
+    "reason": "The effects of injury registry data on policy, hospitalization, and mortality are health surveillance outcomes; a clinical surveillance registry is not research infrastructure studied as such.",
+    "rubric_is_silent": true
+  },
+  {
+    "id": "W1629801733",
+    "tier": "OUT",
+    "seam": "methods_dev_vs_study",
+    "confidence": "medium",
+    "reason": "The primary object is whether social media helps patients waiting for pain care; the rubric's rule that a study using a method is not a study of the method outweighs the stated design aim.",
+    "rubric_is_silent": true
+  },
+  {
+    "id": "W3121644552",
+    "tier": "T1",
+    "seam": "methods_dev_vs_study",
+    "confidence": "medium",
+    "reason": "Showing that the assumptions researchers adopted when testing the Grossman Helpman model invalidate the literature's empirical support is a claim about methods as practiced (T1 bias, study design).",
+    "rubric_is_silent": true
+  },
+  {
+    "id": "W2163062456",
+    "tier": "OUT",
+    "seam": "lis_sts_asymmetry",
+    "confidence": "medium",
+    "reason": "An essay on why technical solutions go unheeded in the biodiversity access and benefit sharing controversy studies a policy arena, not science as a social system.",
+    "rubric_is_silent": true
+  },
+  {
+    "id": "W3089110923",
+    "tier": "OUT",
+    "seam": "none",
+    "confidence": "medium",
+    "reason": "The primary object is a First Nations cemetery and its community history; a note on 'practices for researching' does not make research the object.",
+    "rubric_is_silent": false
+  },
+  {
+    "id": "W7105639952",
+    "tier": "T1",
+    "seam": "workforce_boundary",
+    "confidence": "medium",
+    "reason": "Political tactics in professors' promotion is the academic workforce and its careers, which T1 names explicitly.",
+    "rubric_is_silent": true
+  },
+  {
+    "id": "W6901567890",
+    "tier": "T3",
+    "seam": "insufficient_payload",
+    "confidence": "low",
+    "reason": "A machine generated Data Planet record of one CANSIM cell on business R&D expenditure is a data artifact about the Canadian R&D system: ecosystem relevant, mapped, never pooled.",
+    "rubric_is_silent": true
+  },
+  {
+    "id": "W6921928966",
+    "tier": "OUT",
+    "seam": "methods_dev_vs_study",
+    "confidence": "medium",
+    "reason": "A tutorial introducing plant scientists to structural equation modeling, illustrated on an oat trial, teaches a technique and reports domain findings; per the Western blot example, technical properties of a domain tool are OUT.",
+    "rubric_is_silent": true
+  },
+  {
+    "id": "W2602266471",
+    "tier": "T2",
+    "seam": "history_of_science",
+    "confidence": "low",
+    "reason": "Judged on the title alone, a history of emigre scholars in North America takes the academic workforce as its object, which the STS bullet admits without the contemporary limit the philosophy of science bullet imposes.",
+    "rubric_is_silent": true
+  },
+  {
+    "id": "W3026613021",
+    "tier": "T2",
+    "seam": "bibliometrics_contradiction",
+    "confidence": "medium",
+    "reason": "A bibliometric map of a domain literature is the rubric's own worked example, coded T2 with medium confidence.",
+    "rubric_is_silent": false
+  },
+  {
+    "id": "W2075935553",
+    "tier": "T2",
+    "seam": "history_of_science",
+    "confidence": "medium",
+    "reason": "A history of how Canadian psychologists built social authority and shaped postwar norms is a social study of a scientific discipline, which the STS bullet admits.",
+    "rubric_is_silent": true
+  },
+  {
+    "id": "W4395458640",
+    "tier": "T1",
+    "seam": "workforce_boundary",
+    "confidence": "medium",
+    "reason": "Indigenous women recruited into senior leadership in Canadian universities after the TRC is equity in the academic workforce, which T1 names (careers, equity).",
+    "rubric_is_silent": true
+  },
+  {
+    "id": "W4391428684",
+    "tier": "T1",
+    "seam": "methods_dev_vs_study",
+    "confidence": "medium",
+    "reason": "Comparing machine translators on French medical research abstracts takes the writing and publishing of research by non anglophone researchers as its object, which is scholarly communication.",
+    "rubric_is_silent": true
+  },
+  {
+    "id": "W4206327032",
+    "tier": "T2",
+    "seam": "history_of_science",
+    "confidence": "medium",
+    "reason": "An institutional history of the Harvard Ukrainian Research Institute's scholarly output, departments, and conferences studies a research organization, which the STS bullet admits without a temporal limit.",
+    "rubric_is_silent": true
+  },
+  {
+    "id": "W6967592212",
+    "tier": "T3",
+    "seam": "t3_unscoped_genre",
+    "confidence": "medium",
+    "reason": "A project deliverable describing eight Beacon implementations is a report on infrastructure built, which T3's announcements bullet covers, not a study of infrastructure.",
+    "rubric_is_silent": true
+  },
+  {
+    "id": "W4367146478",
+    "tier": "T2",
+    "seam": "knowledge_translation",
+    "confidence": "medium",
+    "reason": "Measuring whether surgeons' practice changed after a trial's publication studies the uptake of research evidence in a professional system, which fits T2's science as a social system preamble.",
+    "rubric_is_silent": true
+  },
+  {
+    "id": "W4391134648",
+    "tier": "T2",
+    "seam": "lis_sts_asymmetry",
+    "confidence": "medium",
+    "reason": "A Canadian embodied health movement contesting diagnostic guidelines and expert knowledge is a social study of contested knowledge and controversy, which the unqualified STS bullet admits.",
+    "rubric_is_silent": true
+  },
+  {
+    "id": "W2137713946",
+    "tier": "T3",
+    "seam": "none",
+    "confidence": "medium",
+    "reason": "A first person account of the Toronto academic freedom, conflict of interest, and ghostwriting controversy is an opinion piece about research practice, which T3's first bullet routes to T3.",
+    "rubric_is_silent": false
+  },
+  {
+    "id": "W2000147542",
+    "tier": "T1",
+    "seam": "peer_review_artifact",
+    "confidence": "medium",
+    "reason": "Checking every empirical claim in a published paper against its cited sources takes citation accuracy and evidential support as its object, which is research integrity, even though the vehicle is a post publication rebuttal.",
+    "rubric_is_silent": true
+  },
+  {
+    "id": "W3080902019",
+    "tier": "T3",
+    "seam": "workforce_boundary",
+    "confidence": "medium",
+    "reason": "A roundtable extension describing a faculty workshop on feedback to thesis writers concerns research training but is a practice commentary in form, which T3 covers.",
+    "rubric_is_silent": true
+  },
+  {
+    "id": "W2897214127",
+    "tier": "T2",
+    "seam": "knowledge_translation",
+    "confidence": "medium",
+    "reason": "The conditions under which passively disseminated recommendations change primary care practice is a study of evidence uptake, which the definition names but no tier bullet does; T2's social system preamble is the closest fit.",
+    "rubric_is_silent": true
+  },
+  {
+    "id": "W2340766493",
+    "tier": "OUT",
+    "seam": "methods_dev_vs_study",
+    "confidence": "medium",
+    "reason": "Developing goodness of fit tests and comparing their power establishes the technical properties of a statistical tool, which the Western blot example routes to OUT.",
+    "rubric_is_silent": true
+  },
+  {
+    "id": "W2803880880",
+    "tier": "T3",
+    "seam": "guidelines_standards",
+    "confidence": "medium",
+    "reason": "Recommendations for expanding trial eligibility criteria take research design as their object but are a position statement in form, and T3 explicitly covers position statements.",
+    "rubric_is_silent": true
+  },
+  {
+    "id": "W1965599725",
+    "tier": "T2",
+    "seam": "t3_unscoped_genre",
+    "confidence": "medium",
+    "reason": "A project reporting 3D digitization, XML encoding standards, and a platform for a scholarly edition is research infrastructure and standards work, which T2 names, not a bare tool announcement.",
+    "rubric_is_silent": true
+  },
+  {
+    "id": "W4309245579",
+    "tier": "OUT",
+    "seam": "methods_dev_vs_study",
+    "confidence": "low",
+    "reason": "A statistics tutorial for researchers on censored time to event regression teaches a technique; with no abstract, the record shows a method's technical content rather than a study of research practice.",
+    "rubric_is_silent": true
+  },
+  {
+    "id": "W2936953207",
+    "tier": "OUT",
+    "seam": "instrument_validation",
+    "confidence": "medium",
+    "reason": "Testing whether a visual analog scale accurately reports Stroop induced fatigue is instrument validation for a domain construct, the polysemy trap the rubric flags but never resolves.",
+    "rubric_is_silent": true
+  },
+  {
+    "id": "W2613309781",
+    "tier": "OUT",
+    "seam": "workforce_boundary",
+    "confidence": "low",
+    "reason": "Judged on the title alone, an outreach program's effect on students' course and career choices is science education, not the research workforce.",
+    "rubric_is_silent": true
+  },
+  {
+    "id": "W6968682310",
+    "tier": "T3",
+    "seam": "insufficient_payload",
+    "confidence": "low",
+    "reason": "The abstract states only that this is a live version of a presentation with slides, so the record cannot be judged as a study; it is mapped, not pooled.",
+    "rubric_is_silent": true
+  },
+  {
+    "id": "W4251036510",
+    "tier": "T1",
+    "seam": "methods_dev_vs_study",
+    "confidence": "medium",
+    "reason": "The report's stated contribution is a design critique of Wizard of Oz methodology generalizable to other social HRI experiments, which is study design as practiced.",
+    "rubric_is_silent": true
+  },
+  {
+    "id": "W6976902796",
+    "tier": "T2",
+    "seam": "knowledge_translation",
+    "confidence": "low",
+    "reason": "A search strategy appendix to a protocol on implementation strategies for knowledge products belongs to work on how research evidence is used, which the definition names and only T2's preamble accommodates.",
+    "rubric_is_silent": true
+  },
+  {
+    "id": "W2260155201",
+    "tier": "T2",
+    "seam": "methods_dev_vs_study",
+    "confidence": "medium",
+    "reason": "A review of what mathematical models do for parasitology research reflects on the field's modeling and experimental practice, which is the T2 philosophy of science bullet, while the payload remains malaria biology.",
+    "rubric_is_silent": true
+  },
+  {
+    "id": "W3109871844",
+    "tier": "T1",
+    "seam": "methods_dev_vs_study",
+    "confidence": "medium",
+    "reason": "Examining how a trial's conclusions accumulate and stabilize across prespecified interim analyses takes trial monitoring and analysis practice as its object (T1 study design).",
+    "rubric_is_silent": true
+  },
+  {
+    "id": "W2403520411",
+    "tier": "T3",
+    "seam": "guidelines_standards",
+    "confidence": "medium",
+    "reason": "COBIDAS is a community best practice and reporting standard: T1 by object (transparency, reporting, data sharing) but a position statement in form, and T3 explicitly covers position statements.",
+    "rubric_is_silent": true
+  },
+  {
+    "id": "W2070748491",
+    "tier": "OUT",
+    "seam": "instrument_validation",
+    "confidence": "medium",
+    "reason": "A review of the concepts and measures used in attachment research appraises domain instruments, and validating a measurement instrument for a domain construct is the polysemy trap.",
+    "rubric_is_silent": true
+  },
+  {
+    "id": "W2041165583",
+    "tier": "OUT",
+    "seam": "methods_dev_vs_study",
+    "confidence": "medium",
+    "reason": "Reviewing longitudinal, experimental, and genetic designs for what they can contribute to gambling knowledge is methods advocacy for a domain, not a study of methods as used.",
+    "rubric_is_silent": true
+  },
+  {
+    "id": "W2917906870",
+    "tier": "OUT",
+    "seam": "lis_sts_asymmetry",
+    "confidence": "medium",
+    "reason": "A critical analysis of studies measuring library effectiveness evaluates library service performance, not researcher information behavior or research repositories.",
+    "rubric_is_silent": true
+  },
+  {
+    "id": "W3197454173",
+    "tier": "T2",
+    "seam": "lis_sts_asymmetry",
+    "confidence": "medium",
+    "reason": "Decolonial archival theory takes repositories, memory institutions, and ethical knowledge production as its object, which the T2 LIS bullet names.",
+    "rubric_is_silent": true
+  },
+  {
+    "id": "W7059310529",
+    "tier": "T2",
+    "seam": "history_of_science",
+    "confidence": "medium",
+    "reason": "A book introduction tracing the careers and scientific contributions of two women in Canadian political economy studies the academic workforce and a discipline historically, which the STS bullet admits.",
+    "rubric_is_silent": true
+  },
+  {
+    "id": "W2265964962",
+    "tier": "T2",
+    "seam": "workforce_boundary",
+    "confidence": "medium",
+    "reason": "A conceptual analysis of university performance criteria, comparison, and competitiveness is research policy on knowledge producing institutions, though its indicators straddle teaching and research.",
+    "rubric_is_silent": true
+  },
+  {
+    "id": "W2976428202",
+    "tier": "T2",
+    "seam": "history_of_science",
+    "confidence": "medium",
+    "reason": "An archival history of how politics became a taught university discipline studies a discipline's institutionalization, which the STS bullet admits although the philosophy of science bullet's contemporary limit would exclude it.",
+    "rubric_is_silent": true
+  },
+  {
+    "id": "W3145338206",
+    "tier": "T2",
+    "seam": "lis_sts_asymmetry",
+    "confidence": "medium",
+    "reason": "Diagnosing blockages in the global innovation system with STS and innovation systems theory across eighteen cases is STS shaped work on technology rather than on science, which the unqualified STS bullet admits.",
+    "rubric_is_silent": true
+  },
+  {
+    "id": "W2590116164",
+    "tier": "T1",
+    "seam": "none",
+    "confidence": "medium",
+    "reason": "Quantifying how feature selection bias inflates reported classification performance takes a methodological bias in published results as its object, which T1 names explicitly.",
+    "rubric_is_silent": false
+  },
+  {
+    "id": "W4386977249",
+    "tier": "T1",
+    "seam": "peer_review_artifact",
+    "confidence": "medium",
+    "reason": "A replication showing that a published model's benchmark dataset is flawed and its conclusions unsupported takes replication and the validity of published claims as its object (T1).",
+    "rubric_is_silent": true
+  },
+  {
+    "id": "W2806906455",
+    "tier": "T1",
+    "seam": "methods_dev_vs_study",
+    "confidence": "medium",
+    "reason": "Showing that innovation findings are sensitive to the patent classification schema makes a literature's methodological choice the object, even though a new taxonomy is also proposed.",
+    "rubric_is_silent": true
+  },
+  {
+    "id": "W1971156133",
+    "tier": "OUT",
+    "seam": "methods_dev_vs_study",
+    "confidence": "medium",
+    "reason": "Developing a stochastic context free grammar estimator for respondent driven sampling data delivers a new analytic tool; a technical method contribution is not a study of research as practiced.",
+    "rubric_is_silent": true
+  },
+  {
+    "id": "W7055519161",
+    "tier": "T2",
+    "seam": "history_of_science",
+    "confidence": "low",
+    "reason": "An edited volume covering the history, method, theory, and social status of archaeology as a discipline in Ghana takes the discipline partly as its object, though it also carries field reports.",
+    "rubric_is_silent": true
+  },
+  {
+    "id": "W2953894287",
+    "tier": "T2",
+    "seam": "lis_sts_asymmetry",
+    "confidence": "medium",
+    "reason": "A Foucauldian analysis of how an environmental impact study constructs a governable reality studies expert knowledge practice, which the unqualified STS bullet admits.",
+    "rubric_is_silent": true
+  },
+  {
+    "id": "W580944977",
+    "tier": "OUT",
+    "seam": "lis_sts_asymmetry",
+    "confidence": "medium",
+    "reason": "Convergence of campus information services is operational management of student facing services, not researcher information behavior, research repositories, or discovery.",
+    "rubric_is_silent": true
+  },
+  {
+    "id": "W7096346612",
+    "tier": "T2",
+    "seam": "workforce_boundary",
+    "confidence": "medium",
+    "reason": "Collegial self governance for academic librarians studies the conditions and status of academic staff, which sits with the academic workforce read through LIS.",
+    "rubric_is_silent": true
+  },
+  {
+    "id": "W2810879288",
+    "tier": "T1",
+    "seam": "methods_dev_vs_study",
+    "confidence": "medium",
+    "reason": "An empirical comparison of logic models against the action model/change model schema in real planning takes evaluation methods as practiced as its object (T1 methods and their properties).",
+    "rubric_is_silent": true
+  },
+  {
+    "id": "W2946125747",
+    "tier": "T3",
+    "seam": "research_governance",
+    "confidence": "medium",
+    "reason": "A briefing note on espionage threats to Compute Canada's supercomputers concerns the governance of Canadian research infrastructure, which no tier bullet covers, and is a policy document in form.",
+    "rubric_is_silent": true
+  },
+  {
+    "id": "W2771527454",
+    "tier": "T2",
+    "seam": "lis_sts_asymmetry",
+    "confidence": "medium",
+    "reason": "Students' perceptions of social science and social scientists is a social study of the image of science, which the unqualified STS bullet admits.",
+    "rubric_is_silent": true
+  },
+  {
+    "id": "W1933764499",
+    "tier": "T2",
+    "seam": "lis_sts_asymmetry",
+    "confidence": "medium",
+    "reason": "A university archives' outreach, standards, and research tools is repository practice serving research communities, which the T2 LIS bullet names.",
+    "rubric_is_silent": true
+  },
+  {
+    "id": "W2756169793",
+    "tier": "T2",
+    "seam": "peer_review_artifact",
+    "confidence": "medium",
+    "reason": "An evidence summary appraising a study of #icanhazpdf requests takes researchers' article seeking behavior as its object, matching the worked example on how researchers discover datasets.",
+    "rubric_is_silent": true
+  },
+  {
+    "id": "W4399855826",
+    "tier": "OUT",
+    "seam": "instrument_validation",
+    "confidence": "medium",
+    "reason": "Testing whether radio transmitters bias physiological measures validates a field measurement technique on its subjects, which the Western blot example routes to OUT.",
+    "rubric_is_silent": true
+  },
+  {
+    "id": "W2175161454",
+    "tier": "OUT",
+    "seam": "methods_dev_vs_study",
+    "confidence": "medium",
+    "reason": "Simulated maximum likelihood estimation and its validation for fisheries models is a technical estimation contribution, not a study of research as practiced.",
+    "rubric_is_silent": true
+  },
+  {
+    "id": "W3196558450",
+    "tier": "OUT",
+    "seam": "methods_dev_vs_study",
+    "confidence": "medium",
+    "reason": "The efficiency and breakdown point of a new robust estimator are the technical properties of a mathematical object, not research as done, reported, or evaluated.",
+    "rubric_is_silent": true
+  },
+  {
+    "id": "W2322153589",
+    "tier": "T1",
+    "seam": "none",
+    "confidence": "medium",
+    "reason": "Relating the number of foreign academics to universities' ranked academic performance is research evaluation and metrics plus the academic workforce, two T1 bullets.",
+    "rubric_is_silent": false
+  },
+  {
+    "id": "W2901282154",
+    "tier": "T2",
+    "seam": "research_governance",
+    "confidence": "medium",
+    "reason": "Statute based protection of research participant confidentiality is research governance, which the definition names but no T1 bullet covers; T2's research policy analysis is the closest bullet.",
+    "rubric_is_silent": true
+  },
+  {
+    "id": "W7132947126",
+    "tier": "T1",
+    "seam": "workforce_boundary",
+    "confidence": "medium",
+    "reason": "Evaluating a national science scholarship program's effect on training and the internationalization of science is evaluation of research funding and workforce capacity (T1).",
+    "rubric_is_silent": true
+  },
+  {
+    "id": "W4417238122",
+    "tier": "T1",
+    "seam": "history_of_science",
+    "confidence": "medium",
+    "reason": "The article's primary object is psychology's methodologism, epistemology, and knowledge production, which is research itself, although its conceptual form also satisfies the T2 philosophy of science bullet.",
+    "rubric_is_silent": true
+  },
+  {
+    "id": "W3157448507",
+    "tier": "T1",
+    "seam": "bibliometrics_contradiction",
+    "confidence": "medium",
+    "reason": "A scientometric study of scholarly output, collaboration, and inequality takes research activity itself, not a domain's knowledge, as its object, which the T1 bibliometrics bullet names.",
+    "rubric_is_silent": true
+  },
+  {
+    "id": "W6948001283",
+    "tier": "T1",
+    "seam": "none",
+    "confidence": "medium",
+    "reason": "A final evaluation report of a national industrial research assistance program is evaluation of research funding allocation, which T1 names.",
+    "rubric_is_silent": false
+  },
+  {
+    "id": "W3217745904",
+    "tier": "T2",
+    "seam": "none",
+    "confidence": "medium",
+    "reason": "Interviews with linguists about why their field never studied dying is a social study of a discipline's agenda, funding barriers, and taboos, which the STS bullet covers.",
+    "rubric_is_silent": false
+  },
+  {
+    "id": "W7133065251",
+    "tier": "T1",
+    "seam": "workforce_boundary",
+    "confidence": "medium",
+    "reason": "A Bourdieusian study of faculty careers, doctoral training, and academic work in a public research university is the research workforce (careers, training).",
+    "rubric_is_silent": true
+  },
+  {
+    "id": "W2104815409",
+    "tier": "T2",
+    "seam": "bibliometrics_contradiction",
+    "confidence": "medium",
+    "reason": "A systematic critique of how Western political science has researched the Communist Youth League takes a research literature as its object, the reading the worked example codes T2.",
+    "rubric_is_silent": true
+  },
+  {
+    "id": "W4239704798",
+    "tier": "T1",
+    "seam": "methods_dev_vs_study",
+    "confidence": "medium",
+    "reason": "Arguing that literature is a legitimate object of inquiry for qualitative social science is an argument about research methods and valid study design (T1).",
+    "rubric_is_silent": true
+  }
+]
