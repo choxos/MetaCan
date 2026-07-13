@@ -22,10 +22,17 @@ import { DEFAULT_LANG, LANG_COOKIE, isLang } from '@/lib/lang'
  * because an explicit /fr URL is an explicit request for French.
  */
 
-/** Paths the language layer must never touch. */
+/**
+ * Paths the language layer must never touch. The API check matches /api and
+ * /api/... but NOT /api-docs: the docs are a page and get a French twin, the
+ * API payloads do not. startsWith('/api') alone would 404 /api-docs, because
+ * it would reach the [lang] router unprefixed and dynamicParams=false rejects
+ * 'api-docs' as a language.
+ */
 function isExempt(pathname: string): boolean {
   return (
-    pathname.startsWith('/api') ||
+    pathname === '/api' ||
+    pathname.startsWith('/api/') ||
     pathname.startsWith('/_next') ||
     pathname === '/favicon.ico' ||
     pathname === '/robots.txt' ||
