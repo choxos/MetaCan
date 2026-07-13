@@ -14,6 +14,8 @@ import {
   YAxis,
 } from 'recharts'
 import type { YearPoint, FieldPoint, LangPoint, TypePoint, RouteStats, RetractionState } from '@/lib/stats'
+import { getDict } from '@/lib/i18n'
+import { numberLocale, type Lang } from '@/lib/lang'
 
 /**
  * Recharts over the frame's AGGREGATES. The client never sees a work row: every
@@ -22,23 +24,29 @@ import type { YearPoint, FieldPoint, LangPoint, TypePoint, RouteStats, Retractio
  *
  * Colors come from the CSS custom properties, so every chart is correct in both
  * light and dark without a second palette.
+ *
+ * Every chart takes `lang`: series names and route labels come from the
+ * dictionary, and numbers format under the reader's locale. The DATA (route
+ * keys, field names, venue names, RW nature strings) stays exactly what the
+ * API serves; only the labels around it switch.
  */
 
 const AXIS = { fontSize: 11, fill: 'var(--chart-axis)' }
 const compact = (n: number) =>
   n >= 1_000_000 ? `${(n / 1_000_000).toFixed(1)}M` : n >= 1_000 ? `${Math.round(n / 1_000)}k` : String(n)
-const full = (n: number) => n.toLocaleString('en-CA')
 
 function ChartTip({
   active,
   payload,
   label,
   suffix,
+  locale,
 }: {
   active?: boolean
   payload?: Array<{ name?: string; value?: number | string; color?: string }>
   label?: string | number
   suffix?: string
+  locale: string
 }) {
   if (!active || !payload?.length) return null
   return (
@@ -52,7 +60,7 @@ function ChartTip({
           <span style={{ display: 'inline-block', width: 8, height: 8, borderRadius: 2, background: p.color }} />
           <span style={{ color: 'var(--ink-3)' }}>{p.name}:</span>
           <span className="font-medium">
-            {typeof p.value === 'number' ? full(p.value) : p.value}
+            {typeof p.value === 'number' ? p.value.toLocaleString(locale) : p.value}
             {suffix ?? ''}
           </span>
         </div>
@@ -106,7 +114,9 @@ function Responsive({ height, children }: { height: number; children: React.Reac
   )
 }
 
-export function ByYearChart({ data, height = 340 }: { data: YearPoint[]; height?: number }) {
+export function ByYearChart({ data, lang, height = 340 }: { data: YearPoint[]; lang: Lang; height?: number }) {
+  const t = getDict(lang)
+  const locale = numberLocale(lang)
   return (
     <Responsive height={height}>
       <AreaChart data={data} margin={{ top: 4, right: 8, left: 0, bottom: 0 }}>
@@ -123,12 +133,12 @@ export function ByYearChart({ data, height = 340 }: { data: YearPoint[]; height?
         <CartesianGrid strokeDasharray="3 3" stroke="var(--chart-grid)" vertical={false} />
         <XAxis dataKey="year" tick={AXIS} stroke="var(--border-strong)" minTickGap={24} />
         <YAxis tick={AXIS} stroke="var(--border-strong)" tickFormatter={compact} width={48} />
-        <Tooltip content={<ChartTip />} />
+        <Tooltip content={<ChartTip locale={locale} />} />
         <Legend wrapperStyle={{ fontSize: 12 }} />
         <Area
           type="monotone"
           dataKey="works"
-          name="All works"
+          name={t.charts.allWorks}
           stroke="var(--mc)"
           fill="url(#gWorks)"
           strokeWidth={2}
@@ -136,7 +146,7 @@ export function ByYearChart({ data, height = 340 }: { data: YearPoint[]; height?
         <Area
           type="monotone"
           dataKey="no_aff"
-          name="No Canadian affiliation"
+          name={t.charts.noCaAff}
           stroke="var(--mc-accent)"
           fill="url(#gNoAff)"
           strokeWidth={2}
@@ -146,22 +156,44 @@ export function ByYearChart({ data, height = 340 }: { data: YearPoint[]; height?
   )
 }
 
-export function ByRouteChart({ data, height = 260 }: { data: RouteStats; height?: number }) {
+/** Route keys are API vocabulary; their display labels come from the dictionary. */
+function routeLabel(lang: Lang, route: string, fallback: string): string {
+  const t = getDict(lang)
+  switch (route) {
+    case 'aff':
+      return t.charts.routeAff
+    case 'fund':
+      return t.charts.routeFund
+    case 'venue':
+      return t.charts.routeVenue
+    case 'about':
+      return t.charts.routeAbout
+    default:
+      return fallback
+  }
+}
+
+export function ByRouteChart({ data, lang, height = 260 }: { data: RouteStats; lang: Lang; height?: number }) {
+  const t = getDict(lang)
+  const locale = numberLocale(lang)
+  const rows = data.marginals.map((m) => ({ ...m, label: routeLabel(lang, m.route, m.label) }))
   return (
     <Responsive height={height}>
-      <BarChart data={data.marginals} layout="vertical" margin={{ top: 4, right: 48, left: 8, bottom: 0 }}>
+      <BarChart data={rows} layout="vertical" margin={{ top: 4, right: 48, left: 8, bottom: 0 }}>
         <CartesianGrid strokeDasharray="3 3" stroke="var(--chart-grid)" horizontal={false} />
         <XAxis type="number" tick={AXIS} stroke="var(--border-strong)" tickFormatter={compact} />
         <YAxis type="category" dataKey="label" tick={AXIS} stroke="var(--border-strong)" width={140} />
-        <Tooltip content={<ChartTip />} cursor={{ fill: 'var(--surface-2)' }} />
-        <Bar dataKey="works" name="Works" fill="var(--mc)" radius={[0, 4, 4, 0]} />
+        <Tooltip content={<ChartTip locale={locale} />} cursor={{ fill: 'var(--surface-2)' }} />
+        <Bar dataKey="works" name={t.charts.works} fill="var(--mc)" radius={[0, 4, 4, 0]} />
       </BarChart>
     </Responsive>
   )
 }
 
 /** The overlap. The routes are not exclusive, so the combinations are the honest view. */
-export function RouteOverlapChart({ data, height = 260 }: { data: RouteStats; height?: number }) {
+export function RouteOverlapChart({ data, lang, height = 260 }: { data: RouteStats; lang: Lang; height?: number }) {
+  const t = getDict(lang)
+  const locale = numberLocale(lang)
   const top = data.combinations.filter((c) => c.combo !== 'none').slice(0, 10)
   return (
     <Responsive height={height}>
@@ -169,8 +201,8 @@ export function RouteOverlapChart({ data, height = 260 }: { data: RouteStats; he
         <CartesianGrid strokeDasharray="3 3" stroke="var(--chart-grid)" horizontal={false} />
         <XAxis type="number" tick={AXIS} stroke="var(--border-strong)" tickFormatter={compact} />
         <YAxis type="category" dataKey="combo" tick={AXIS} stroke="var(--border-strong)" width={140} />
-        <Tooltip content={<ChartTip />} cursor={{ fill: 'var(--surface-2)' }} />
-        <Bar dataKey="works" name="Works" radius={[0, 4, 4, 0]}>
+        <Tooltip content={<ChartTip locale={locale} />} cursor={{ fill: 'var(--surface-2)' }} />
+        <Bar dataKey="works" name={t.charts.works} radius={[0, 4, 4, 0]}>
           {top.map((c, i) => (
             <Cell
               key={i}
@@ -184,22 +216,32 @@ export function RouteOverlapChart({ data, height = 260 }: { data: RouteStats; he
   )
 }
 
-export function ByFieldChart({ data, height = 360 }: { data: FieldPoint[]; height?: number }) {
+export function ByFieldChart({ data, lang, height = 360 }: { data: FieldPoint[]; lang: Lang; height?: number }) {
+  const t = getDict(lang)
+  const locale = numberLocale(lang)
   const top = data.slice(0, 14)
   return (
     <Responsive height={height}>
       <BarChart data={top} layout="vertical" margin={{ top: 4, right: 48, left: 8, bottom: 0 }}>
         <CartesianGrid strokeDasharray="3 3" stroke="var(--chart-grid)" horizontal={false} />
         <XAxis type="number" tick={AXIS} stroke="var(--border-strong)" tickFormatter={compact} />
-        <YAxis type="category" dataKey="field" tick={{ ...AXIS, fontSize: 10 }} stroke="var(--border-strong)" width={170} />
-        <Tooltip content={<ChartTip />} cursor={{ fill: 'var(--surface-2)' }} />
-        <Bar dataKey="works" name="Works" fill="var(--mc)" radius={[0, 4, 4, 0]} />
+        <YAxis
+          type="category"
+          dataKey="field"
+          tick={{ ...AXIS, fontSize: 10 }}
+          stroke="var(--border-strong)"
+          width={170}
+        />
+        <Tooltip content={<ChartTip locale={locale} />} cursor={{ fill: 'var(--surface-2)' }} />
+        <Bar dataKey="works" name={t.charts.works} fill="var(--mc)" radius={[0, 4, 4, 0]} />
       </BarChart>
     </Responsive>
   )
 }
 
-export function ByLangChart({ data, height = 360 }: { data: LangPoint[]; height?: number }) {
+export function ByLangChart({ data, lang, height = 360 }: { data: LangPoint[]; lang: Lang; height?: number }) {
+  const t = getDict(lang)
+  const locale = numberLocale(lang)
   const top = data.slice(0, 10)
   return (
     <Responsive height={height}>
@@ -207,8 +249,8 @@ export function ByLangChart({ data, height = 360 }: { data: LangPoint[]; height?
         <CartesianGrid strokeDasharray="3 3" stroke="var(--chart-grid)" vertical={false} />
         <XAxis dataKey="lang" tick={AXIS} stroke="var(--border-strong)" />
         <YAxis tick={AXIS} stroke="var(--border-strong)" tickFormatter={compact} width={48} />
-        <Tooltip content={<ChartTip />} cursor={{ fill: 'var(--surface-2)' }} />
-        <Bar dataKey="works" name="Works" radius={[4, 4, 0, 0]}>
+        <Tooltip content={<ChartTip locale={locale} />} cursor={{ fill: 'var(--surface-2)' }} />
+        <Bar dataKey="works" name={t.charts.works} radius={[4, 4, 0, 0]}>
           {top.map((l, i) => (
             // French is the language the frame oversamples and the cascade rescues worst.
             <Cell key={i} fill={l.lang === 'fr' ? 'var(--mc-accent)' : 'var(--mc)'} />
@@ -224,7 +266,9 @@ export function ByLangChart({ data, height = 360 }: { data: LangPoint[]; height?
  * the finding is that the gap is structural — concentrated in types that never
  * carry an abstract — rather than uniform noise a better index would fix.
  */
-export function AbstractGapChart({ data, height = 400 }: { data: TypePoint[]; height?: number }) {
+export function AbstractGapChart({ data, lang, height = 400 }: { data: TypePoint[]; lang: Lang; height?: number }) {
+  const t = getDict(lang)
+  const locale = numberLocale(lang)
   const sorted = [...data].sort((a, b) => b.pct_no_abstract - a.pct_no_abstract)
   return (
     <Responsive height={height}>
@@ -237,39 +281,77 @@ export function AbstractGapChart({ data, height = 400 }: { data: TypePoint[]; he
           stroke="var(--border-strong)"
           tickFormatter={(v: number) => `${v}%`}
         />
-        <YAxis type="category" dataKey="type" tick={{ ...AXIS, fontSize: 10 }} stroke="var(--border-strong)" width={110} />
-        <Tooltip content={<ChartTip suffix="%" />} cursor={{ fill: 'var(--surface-2)' }} />
-        <Bar dataKey="pct_no_abstract" name="No abstract" fill="var(--contested)" radius={[0, 4, 4, 0]} />
+        <YAxis
+          type="category"
+          dataKey="type"
+          tick={{ ...AXIS, fontSize: 10 }}
+          stroke="var(--border-strong)"
+          width={110}
+        />
+        <Tooltip content={<ChartTip suffix="%" locale={locale} />} cursor={{ fill: 'var(--surface-2)' }} />
+        <Bar dataKey="pct_no_abstract" name={t.charts.noAbstract} fill="var(--contested)" radius={[0, 4, 4, 0]} />
       </BarChart>
     </Responsive>
   )
 }
 
-export function VenueChart({ data, height = 380 }: { data: Array<{ venue: string; works: number }>; height?: number }) {
+export function VenueChart({
+  data,
+  lang,
+  height = 380,
+}: {
+  data: Array<{ venue: string; works: number }>
+  lang: Lang
+  height?: number
+}) {
+  const t = getDict(lang)
+  const locale = numberLocale(lang)
   const top = data.slice(0, 12)
   return (
     <Responsive height={height}>
       <BarChart data={top} layout="vertical" margin={{ top: 4, right: 48, left: 8, bottom: 0 }}>
         <CartesianGrid strokeDasharray="3 3" stroke="var(--chart-grid)" horizontal={false} />
         <XAxis type="number" tick={AXIS} stroke="var(--border-strong)" tickFormatter={compact} />
-        <YAxis type="category" dataKey="venue" tick={{ ...AXIS, fontSize: 10 }} stroke="var(--border-strong)" width={190} />
-        <Tooltip content={<ChartTip />} cursor={{ fill: 'var(--surface-2)' }} />
-        <Bar dataKey="works" name="Works" fill="var(--mc)" radius={[0, 4, 4, 0]} />
+        <YAxis
+          type="category"
+          dataKey="venue"
+          tick={{ ...AXIS, fontSize: 10 }}
+          stroke="var(--border-strong)"
+          width={190}
+        />
+        <Tooltip content={<ChartTip locale={locale} />} cursor={{ fill: 'var(--surface-2)' }} />
+        <Bar dataKey="works" name={t.charts.works} fill="var(--mc)" radius={[0, 4, 4, 0]} />
       </BarChart>
     </Responsive>
   )
 }
 
-export function FunderChart({ data, height = 380 }: { data: Array<{ funder: string; works: number }>; height?: number }) {
+export function FunderChart({
+  data,
+  lang,
+  height = 380,
+}: {
+  data: Array<{ funder: string; works: number }>
+  lang: Lang
+  height?: number
+}) {
+  const t = getDict(lang)
+  const locale = numberLocale(lang)
   const top = data.slice(0, 12)
   return (
     <Responsive height={height}>
       <BarChart data={top} layout="vertical" margin={{ top: 4, right: 48, left: 8, bottom: 0 }}>
         <CartesianGrid strokeDasharray="3 3" stroke="var(--chart-grid)" horizontal={false} />
         <XAxis type="number" tick={AXIS} stroke="var(--border-strong)" tickFormatter={compact} />
-        <YAxis type="category" dataKey="funder" tick={{ ...AXIS, fontSize: 10 }} stroke="var(--border-strong)" width={190} />
-        <Tooltip content={<ChartTip />} cursor={{ fill: 'var(--surface-2)' }} />
-        <Bar dataKey="works" name="Works" fill="var(--mc-accent)" radius={[0, 4, 4, 0]} />
+        <YAxis
+          type="category"
+          dataKey="funder"
+          tick={{ ...AXIS, fontSize: 10 }}
+          stroke="var(--border-strong)"
+          width={190}
+        />
+        <Tooltip content={<ChartTip locale={locale} />} cursor={{ fill: 'var(--surface-2)' }} />
+        <Bar dataKey="works" name={t.charts.works} fill="var(--mc-accent)" radius={[0, 4, 4, 0]} />
       </BarChart>
     </Responsive>
   )
@@ -280,7 +362,9 @@ export function FunderChart({ data, height = 380 }: { data: Array<{ funder: stri
  * the works whose post-publication status OpenAlex's `is_retracted` reports as
  * false, which a reader takes to mean "fine".
  */
-export function RetractionChart({ data, height = 320 }: { data: RetractionState[]; height?: number }) {
+export function RetractionChart({ data, lang, height = 320 }: { data: RetractionState[]; lang: Lang; height?: number }) {
+  const t = getDict(lang)
+  const locale = numberLocale(lang)
   const color = (nature: string) => {
     const n = nature.toLowerCase()
     if (n.includes('concern')) return 'var(--concern)'
@@ -294,14 +378,14 @@ export function RetractionChart({ data, height = 320 }: { data: RetractionState[
         <CartesianGrid strokeDasharray="3 3" stroke="var(--chart-grid)" vertical={false} />
         <XAxis dataKey="nature" tick={{ ...AXIS, fontSize: 10 }} stroke="var(--border-strong)" />
         <YAxis tick={AXIS} stroke="var(--border-strong)" width={40} allowDecimals={false} />
-        <Tooltip content={<ChartTip />} cursor={{ fill: 'var(--surface-2)' }} />
+        <Tooltip content={<ChartTip locale={locale} />} cursor={{ fill: 'var(--surface-2)' }} />
         <Legend wrapperStyle={{ fontSize: 12 }} />
-        <Bar dataKey="openalex_flagged" name="OpenAlex flags it" stackId="a" radius={[0, 0, 0, 0]}>
+        <Bar dataKey="openalex_flagged" name={t.charts.flagged} stackId="a" radius={[0, 0, 0, 0]}>
           {data.map((d, i) => (
             <Cell key={i} fill={color(d.nature)} fillOpacity={0.85} />
           ))}
         </Bar>
-        <Bar dataKey="openalex_missed" name="OpenAlex reports FALSE" stackId="a" radius={[4, 4, 0, 0]}>
+        <Bar dataKey="openalex_missed" name={t.charts.missed} stackId="a" radius={[4, 4, 0, 0]}>
           {data.map((d, i) => (
             <Cell key={i} fill={color(d.nature)} fillOpacity={0.28} stroke={color(d.nature)} strokeDasharray="3 2" />
           ))}

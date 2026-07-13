@@ -1,11 +1,18 @@
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import { searchWorks, type WorkFilters } from '@/lib/query'
 import { getFacets } from '@/lib/stats'
 import { WorkRow } from '@/components/WorkRow'
 import { Filters } from '@/components/Filters'
+import { getDict } from '@/lib/i18n'
+import { formatInt, isLang, langAlternates, type Lang } from '@/lib/lang'
 
-export const metadata = { title: 'Works' }
 export const dynamic = 'force-dynamic'
+
+export function generateMetadata({ params }: { params: { lang: string } }): Metadata {
+  const lang: Lang = isLang(params.lang) ? params.lang : 'en'
+  return { title: getDict(lang).meta.works, alternates: langAlternates(lang, '/works') }
+}
 
 function parse(sp: Record<string, string | string[] | undefined>): WorkFilters {
   const s = (k: string) => {
@@ -37,10 +44,15 @@ function parse(sp: Record<string, string | string[] | undefined>): WorkFilters {
 }
 
 export default async function Works({
+  params,
   searchParams,
 }: {
+  params: { lang: string }
   searchParams: Record<string, string | string[] | undefined>
 }) {
+  const lang: Lang = isLang(params.lang) ? params.lang : 'en'
+  const t = getDict(lang)
+
   const f = parse(searchParams)
   // The filter options come from the DB, not a hardcoded list: a language or type
   // that exists in the frame but not in a literal in this file would be unfilterable.
@@ -58,34 +70,34 @@ export default async function Works({
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="font-serif text-3xl">Works</h1>
+        <h1 className="font-serif text-3xl">{t.works.title}</h1>
         <p className="mt-1 text-sm" style={{ color: 'var(--ink-4)' }}>
-          Every work in the frame. Each row carries the routes that admitted it, because a frame that forgets how it
-          found something cannot be audited.
+          {t.works.sub}
         </p>
       </div>
 
-      <Filters facets={facets} />
+      <Filters facets={facets} lang={lang} />
 
       <div className="flex items-baseline justify-between text-sm" style={{ color: 'var(--ink-4)' }}>
         <span className="tabular">
-          {capped ? '10,000+' : total.toLocaleString('en-CA')} works
-          {f.q ? <> matching “{f.q}”</> : null}
+          {t.works.countWorks(capped ? t.works.countCapped : formatInt(lang, total))}
+          {f.q ? t.works.matching(f.q) : null}
         </span>
         <span className="tabular">
-          page {page}
-          {!capped && pages > 0 ? ` of ${pages.toLocaleString('en-CA')}` : ''}
+          {!capped && pages > 0
+            ? t.common.pageOf(formatInt(lang, page), formatInt(lang, pages))
+            : t.common.page(formatInt(lang, page))}
         </span>
       </div>
 
       {rows.length === 0 ? (
         <div className="card p-8 text-center" style={{ color: 'var(--ink-4)' }}>
-          No works match these filters.
+          {t.works.empty}
         </div>
       ) : (
         <div className="space-y-2">
           {rows.map((w) => (
-            <WorkRow key={w.id} w={w} />
+            <WorkRow key={w.id} w={w} lang={lang} />
           ))}
         </div>
       )}
@@ -93,14 +105,14 @@ export default async function Works({
       <div className="flex justify-between pt-2">
         {page > 1 ? (
           <Link className="link text-sm" href={qs({ page: page - 1 })}>
-            ← previous
+            {t.common.previous}
           </Link>
         ) : (
           <span />
         )}
         {rows.length === perPage ? (
           <Link className="link text-sm" href={qs({ page: page + 1 })}>
-            next →
+            {t.common.next}
           </Link>
         ) : (
           <span />

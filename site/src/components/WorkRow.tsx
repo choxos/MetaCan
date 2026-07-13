@@ -1,4 +1,6 @@
 import Link from 'next/link'
+import { getDict, type Dictionary } from '@/lib/i18n'
+import { formatInt, localePath, type Lang } from '@/lib/lang'
 
 /**
  * One work in the browse list.
@@ -7,6 +9,11 @@ import Link from 'next/link'
  * because "why is this here?" is the question this frame exists to answer. A row
  * that showed only title and year would be a search result; this is a provenance
  * record.
+ *
+ * The short chip texts (aff, fund, venue, about, no aff) are deliberately NOT
+ * translated: they are the same tokens the API and the ?route= filter use, so
+ * they read as code in both languages. Their title attributes carry the
+ * explanation in the reader's language.
  */
 
 export interface WorkRowData {
@@ -30,13 +37,13 @@ export interface WorkRowData {
 }
 
 const ROUTE_DEFS = [
-  { key: 'routeCaAff', short: 'aff', title: 'Admitted by a Canadian affiliation' },
-  { key: 'routeCaFund', short: 'fund', title: 'Admitted by a Canadian funder' },
-  { key: 'routeCaVenue', short: 'venue', title: 'Admitted by a Canadian venue' },
-  { key: 'routeAboutCa', short: 'about', title: 'Admitted by being about Canada' },
+  { key: 'routeCaAff', short: 'aff', title: (t: Dictionary) => t.workRow.routeAffTitle },
+  { key: 'routeCaFund', short: 'fund', title: (t: Dictionary) => t.workRow.routeFundTitle },
+  { key: 'routeCaVenue', short: 'venue', title: (t: Dictionary) => t.workRow.routeVenueTitle },
+  { key: 'routeAboutCa', short: 'about', title: (t: Dictionary) => t.workRow.routeAboutTitle },
 ] as const
 
-export function RouteChips({ w }: { w: WorkRowData }) {
+export function RouteChips({ w, t }: { w: WorkRowData; t: Dictionary }) {
   const hit = ROUTE_DEFS.filter((r) => w[r.key])
   return (
     <span className="inline-flex flex-wrap gap-1">
@@ -44,7 +51,7 @@ export function RouteChips({ w }: { w: WorkRowData }) {
         <span
           key={r.short}
           className="chip"
-          title={r.title}
+          title={r.title(t)}
           style={{ borderColor: 'var(--mc)', color: 'var(--mc)', background: 'transparent' }}
         >
           {r.short}
@@ -54,7 +61,7 @@ export function RouteChips({ w }: { w: WorkRowData }) {
       {!w.routeCaAff && (
         <span
           className="chip"
-          title="No Canadian affiliation. An affiliation-only frame would never have seen this work."
+          title={t.workRow.noAffTitle}
           style={{ borderColor: 'var(--mc-accent)', color: 'var(--mc-accent)', background: 'transparent' }}
         >
           no&nbsp;aff
@@ -65,15 +72,11 @@ export function RouteChips({ w }: { w: WorkRowData }) {
 }
 
 /** The screen's consensus, when the work happens to be one of the 1,000 screened. */
-function ConsensusChip({ nIn }: { nIn: number }) {
+function ConsensusChip({ nIn, t }: { nIn: number; t: Dictionary }) {
   if (nIn === 0) return null
-  const color =
-    nIn === 3 ? 'var(--in-scope)' : 'var(--contested)'
-  const label = nIn === 3 ? '3/3 metaresearch' : `${nIn}/3 metaresearch`
-  const title =
-    nIn === 3
-      ? 'All three models called this metaresearch.'
-      : `Only ${nIn} of 3 models called this metaresearch: a contested work, on the field's empirical boundary.`
+  const color = nIn === 3 ? 'var(--in-scope)' : 'var(--contested)'
+  const label = nIn === 3 ? t.workRow.consensusAll : t.workRow.consensusN(nIn)
+  const title = nIn === 3 ? t.workRow.consensusAllTitle : t.workRow.consensusNTitle(nIn)
   return (
     <span className="chip" title={title} style={{ borderColor: color, color, background: 'transparent' }}>
       {label}
@@ -81,11 +84,12 @@ function ConsensusChip({ nIn }: { nIn: number }) {
   )
 }
 
-function RetractionChip({ w }: { w: WorkRowData }) {
+function RetractionChip({ w, t }: { w: WorkRowData; t: Dictionary }) {
   const r = w.retraction
   if (!r && !w.isRetracted) return null
 
   // The four-state space. OpenAlex's boolean can hold exactly one of these.
+  // The nature string is Retraction Watch's own data and stays verbatim.
   const nature = r?.nature ?? 'Retraction'
   const color = nature.toLowerCase().includes('concern')
     ? 'var(--concern)'
@@ -99,22 +103,23 @@ function RetractionChip({ w }: { w: WorkRowData }) {
   return (
     <span
       className="chip"
-      title={missed ? `${nature} — recorded by Retraction Watch, NOT flagged by OpenAlex.` : nature}
+      title={missed ? t.workRow.retractionMissedTitle(nature) : nature}
       style={{ borderColor: color, color, background: 'transparent' }}
     >
       {nature}
-      {missed ? ' · OpenAlex missed it' : ''}
+      {missed ? t.workRow.retractionMissedSuffix : ''}
     </span>
   )
 }
 
-export function WorkRow({ w }: { w: WorkRowData }) {
+export function WorkRow({ w, lang }: { w: WorkRowData; lang: Lang }) {
+  const t = getDict(lang)
   return (
     <article className="card p-4">
       <div className="flex items-start justify-between gap-4">
         <div className="min-w-0 flex-1">
-          <Link href={`/works/${w.id}`} className="font-medium leading-snug hover:underline">
-            {w.title || <span style={{ color: 'var(--ink-4)' }}>[no title]</span>}
+          <Link href={localePath(lang, `/works/${w.id}`)} className="font-medium leading-snug hover:underline">
+            {w.title || <span style={{ color: 'var(--ink-4)' }}>{t.common.noTitle}</span>}
           </Link>
 
           <div className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs" style={{ color: 'var(--ink-4)' }}>
@@ -130,25 +135,25 @@ export function WorkRow({ w }: { w: WorkRowData }) {
           </div>
 
           <div className="mt-2 flex flex-wrap items-center gap-1">
-            <RouteChips w={w} />
+            <RouteChips w={w} t={t} />
             {!w.hasAbstract && (
               <span
                 className="chip"
-                title="No abstract in OpenAlex. The screen finds half as much metaresearch in this stratum, so this is a measured bias, not a missing field."
+                title={t.workRow.noAbstractTitle}
                 style={{ borderColor: 'var(--contested)', color: 'var(--contested)', background: 'transparent' }}
               >
-                no abstract
+                {t.workRow.noAbstractChip}
               </span>
             )}
-            <RetractionChip w={w} />
-            {w.screened?.nIn != null && <ConsensusChip nIn={w.screened.nIn} />}
+            <RetractionChip w={w} t={t} />
+            {w.screened?.nIn != null && <ConsensusChip nIn={w.screened.nIn} t={t} />}
           </div>
         </div>
 
         <div className="shrink-0 text-right">
-          <div className="tabular text-lg font-semibold">{w.citedBy.toLocaleString('en-CA')}</div>
+          <div className="tabular text-lg font-semibold">{formatInt(lang, w.citedBy)}</div>
           <div className="text-xs" style={{ color: 'var(--ink-5)' }}>
-            citations
+            {t.common.citations}
           </div>
         </div>
       </div>

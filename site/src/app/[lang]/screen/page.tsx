@@ -1,9 +1,17 @@
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import { getScreened, getScreenSummary, type ScreenFilters } from '@/lib/screen'
 import findings from '@/data/findings.json'
+import { getDict, type Dictionary } from '@/lib/i18n'
+import { formatInt, formatPct, isLang, langAlternates, localePath, type Lang } from '@/lib/lang'
+import { frFinding } from '@/lib/findings-fr'
 
-export const metadata = { title: 'The three-model screen' }
 export const dynamic = 'force-dynamic'
+
+export function generateMetadata({ params }: { params: { lang: string } }): Metadata {
+  const lang: Lang = isLang(params.lang) ? params.lang : 'en'
+  return { title: getDict(lang).meta.screen, alternates: langAlternates(lang, '/screen') }
+}
 
 /**
  * THE DELIVERABLE.
@@ -19,13 +27,6 @@ export const dynamic = 'force-dynamic'
  * Nothing here is typed by hand.
  */
 
-const TIER_LABEL: Record<string, string> = {
-  T1: 'T1 — core metaresearch (counts as IN)',
-  T2: 'T2 — metaresearch (counts as IN)',
-  T3: 'T3 — adjacent. Does NOT count as in scope.',
-  OUT: 'out of scope',
-}
-
 /**
  * T1 and T2 are in scope. T3 is ADJACENT and is NOT, which is the rubric's own
  * definition: `n_in` counts T1 and T2 only. Colouring T3 as in-scope would make the
@@ -38,13 +39,21 @@ function tierColor(tier: string | null): string {
   return 'var(--out)'
 }
 
-function Verdict({ tier, conf }: { tier: string | null; conf: string | null }) {
-  const t = tier || 'OUT'
+function tierLabel(t: Dictionary, tier: string): string {
+  if (tier === 'T1') return t.screen.tierT1
+  if (tier === 'T2') return t.screen.tierT2
+  if (tier === 'T3') return t.screen.tierT3
+  if (tier === 'OUT') return t.screen.tierOut
+  return tier
+}
+
+function Verdict({ t, tier, conf }: { t: Dictionary; tier: string | null; conf: string | null }) {
+  const v = tier || 'OUT'
   const color = tierColor(tier)
   return (
     <span className="inline-flex items-center gap-1.5 whitespace-nowrap">
-      <span className="chip" title={TIER_LABEL[t] ?? t} style={{ borderColor: color, color, background: 'transparent' }}>
-        {t}
+      <span className="chip" title={tierLabel(t, v)} style={{ borderColor: color, color, background: 'transparent' }}>
+        {v}
       </span>
       {conf && (
         <span className="text-xs" style={{ color: 'var(--ink-5)' }}>
@@ -55,22 +64,39 @@ function Verdict({ tier, conf }: { tier: string | null; conf: string | null }) {
   )
 }
 
-const CONSENSUS_TABS = [
-  { v: 'dossier', label: 'The dossier (any model said in)' },
-  { v: '3', label: '3/3 — settled core' },
-  { v: '2', label: '2/3 — contested' },
-  { v: '1', label: '1/3 — one model only' },
-  { v: '0', label: '0/3 — settled rejects' },
-  { v: 'all', label: 'All 1,000' },
-] as const
+const CONSENSUS_VIEWS = ['dossier', '3', '2', '1', '0', 'all'] as const
+
+function tabLabel(t: Dictionary, view: (typeof CONSENSUS_VIEWS)[number]): string {
+  switch (view) {
+    case 'dossier':
+      return t.screen.tabDossier
+    case '3':
+      return t.screen.tab3
+    case '2':
+      return t.screen.tab2
+    case '1':
+      return t.screen.tab1
+    case '0':
+      return t.screen.tab0
+    case 'all':
+      return t.screen.tabAll
+  }
+}
 
 export default async function Screen({
+  params,
   searchParams,
 }: {
+  params: { lang: string }
   searchParams: Record<string, string | string[] | undefined>
 }) {
+  const lang: Lang = isLang(params.lang) ? params.lang : 'en'
+  const t = getDict(lang)
+  const p = (path: string) => localePath(lang, path)
+  const n = (x: number) => formatInt(lang, x)
+
   const raw = typeof searchParams.view === 'string' ? searchParams.view : 'dossier'
-  const view = CONSENSUS_TABS.find((t) => t.v === raw)?.v ?? 'dossier'
+  const view = CONSENSUS_VIEWS.find((v) => v === raw) ?? 'dossier'
   const pageRaw = typeof searchParams.page === 'string' ? Number(searchParams.page) : 1
   const page = Number.isFinite(pageRaw) && pageRaw > 0 ? pageRaw : 1
 
@@ -82,69 +108,58 @@ export default async function Screen({
   const pages = Math.ceil(total / perPage)
 
   // The screen's own finding, as written by the pipeline that produced the labels.
+  // In French, the hand-checked translation is used only while it still matches
+  // the artifact; otherwise the verbatim English is shown rather than a stale text.
   const f22 = findings.three_model_screen
+  const headline = (lang === 'fr' && frFinding('three_model_screen', f22.headline)) || f22.headline
 
   return (
     <div className="space-y-8">
       <section>
         <p className="mb-3 text-xs uppercase tracking-wider" style={{ color: 'var(--mc)' }}>
-          {s.n_screened.toLocaleString('en-CA')} works · Opus 4.8 · GPT-5.6 (high) · Grok 4.5 · one locked rubric
+          {t.screen.eyebrow(n(s.n_screened))}
         </p>
         <h1 className="font-serif text-4xl leading-tight" style={{ maxWidth: '26ch' }}>
-          The field&apos;s boundary is not a line. It is a region.
+          {t.screen.h1}
         </h1>
         <p className="mt-5 max-w-3xl text-base leading-relaxed" style={{ color: 'var(--ink-3)' }}>
-          Three frontier models screened the same {s.n_screened.toLocaleString('en-CA')} works, drawn from the real
-          frame with known selection probabilities, against the same locked rubric on its full eight-field payload. Of
-          the <strong style={{ color: 'var(--ink)' }}>{s.any_in}</strong> works <em>any</em> model called
-          metaresearch, only <strong style={{ color: 'var(--in-scope)' }}>{s.n_in_3}</strong> (
-          {s.pct_all_three}%) were called metaresearch by all three, and{' '}
-          <strong style={{ color: 'var(--contested)' }}>{s.n_in_1}</strong> ({s.pct_single_model}%) rest on a single
-          model&apos;s opinion.
+          {t.screen.p1({
+            n: n(s.n_screened),
+            anyIn: s.any_in,
+            n3: s.n_in_3,
+            pct3: formatPct(lang, String(s.pct_all_three)),
+            n1: s.n_in_1,
+            pct1: formatPct(lang, String(s.pct_single_model)),
+          })}
         </p>
         <p className="mt-3 max-w-3xl text-base leading-relaxed" style={{ color: 'var(--ink-3)' }}>
-          Two screeners can agree on a <em>rate</em> while finding almost entirely different <em>works</em>. At a ~1%
-          base rate, the settled rejects buy 98% agreement for free — which is why an agreement statistic computed
-          over the whole sample tells you nothing about the boundary, and why the table below, not a percentage, is
-          the deliverable.
+          {t.screen.p2}
         </p>
       </section>
 
       {/* The consensus histogram, computed, not asserted. */}
       <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <Stat label={t.screen.statAnyLabel} value={String(s.any_in)} note={t.screen.statAnyNote} color="var(--mc)" />
         <Stat
-          label="Any model said metaresearch"
-          value={String(s.any_in)}
-          note="the disagreement dossier: the field's empirical boundary"
-          color="var(--mc)"
-        />
-        <Stat
-          label="All three agreed"
+          label={t.screen.statAllLabel}
           value={`${s.n_in_3}`}
-          note={`${s.pct_all_three}% of the dossier — the settled core`}
+          note={t.screen.statAllNote(formatPct(lang, String(s.pct_all_three)))}
           color="var(--in-scope)"
         />
+        <Stat label={t.screen.statTwoLabel} value={`${s.n_in_2}`} note={t.screen.statTwoNote} color="var(--contested)" />
         <Stat
-          label="Two of three"
-          value={`${s.n_in_2}`}
-          note="contested"
-          color="var(--contested)"
-        />
-        <Stat
-          label="One model only"
+          label={t.screen.statOneLabel}
           value={`${s.n_in_1}`}
-          note={`${s.pct_single_model}% of the dossier rests on one model's opinion`}
+          note={t.screen.statOneNote(formatPct(lang, String(s.pct_single_model)))}
           color="var(--contested)"
         />
       </section>
 
       {/* Each model's own count. They are not interchangeable, and this is how you see it. */}
       <section className="card p-6">
-        <h2 className="font-serif text-xl">The three models are not interchangeable</h2>
+        <h2 className="font-serif text-xl">{t.screen.modelsTitle}</h2>
         <p className="mt-1 text-sm" style={{ color: 'var(--ink-4)' }}>
-          How many of the {s.n_screened.toLocaleString('en-CA')} works each model called metaresearch (tier T1 or T2),
-          on identical input. T3 is <em>adjacent</em> and does not count as in scope, which is why a model&apos;s count
-          can never exceed the {s.any_in} works in the dossier.
+          {t.screen.modelsSub({ n: n(s.n_screened), anyIn: s.any_in })}
         </p>
         <div className="mt-4 space-y-2">
           {s.per_model.map((m) => {
@@ -165,28 +180,24 @@ export default async function Screen({
           })}
         </div>
         <p className="mt-4 text-sm leading-relaxed" style={{ color: 'var(--ink-4)' }}>
-          Swap which model you call &ldquo;the screener&rdquo; and the size of the field moves. That spread — not the
-          binomial confidence interval on any one model&apos;s labels — is the honest uncertainty on how big Canadian
-          metaresearch is.
+          {t.screen.modelsSpread}
         </p>
       </section>
 
       {/* THE DOSSIER */}
       <section>
-        <h2 className="font-serif text-2xl">The disagreement dossier</h2>
+        <h2 className="font-serif text-2xl">{t.screen.dossierTitle}</h2>
         <p className="mt-1 max-w-3xl text-sm leading-relaxed" style={{ color: 'var(--ink-4)' }}>
-          All three verdicts, confidences and reasons side by side. These are the works against which the inclusion
-          criteria have to be written — because these are the works on which reasonable screeners, given the same
-          rubric and the same evidence, disagree.
+          {t.screen.dossierSub}
         </p>
 
         <div className="mt-4 flex flex-wrap gap-2">
-          {CONSENSUS_TABS.map((t) => {
-            const on = t.v === view
+          {CONSENSUS_VIEWS.map((v) => {
+            const on = v === view
             return (
               <Link
-                key={t.v}
-                href={`/screen?view=${t.v}`}
+                key={v}
+                href={`${p('/screen')}?view=${v}`}
                 className="chip"
                 style={{
                   borderColor: on ? 'var(--mc)' : 'var(--border)',
@@ -194,14 +205,14 @@ export default async function Screen({
                   color: on ? '#fff' : 'var(--ink-3)',
                 }}
               >
-                {t.label}
+                {tabLabel(t, v)}
               </Link>
             )
           })}
         </div>
 
         <div className="mt-3 text-sm tabular" style={{ color: 'var(--ink-4)' }}>
-          {total.toLocaleString('en-CA')} work{total === 1 ? '' : 's'}
+          {t.screen.workCount(n(total), total === 1)}
         </div>
 
         {/* Wide table scrolls inside its own container; the page body never scrolls sideways. */}
@@ -209,8 +220,8 @@ export default async function Screen({
           <table className="w-full min-w-[1100px] text-left text-sm">
             <thead>
               <tr className="border-b" style={{ background: 'var(--surface-2)' }}>
-                <Th>Work</Th>
-                <Th>Stratum</Th>
+                <Th>{t.screen.thWork}</Th>
+                <Th>{t.screen.thStratum}</Th>
                 <Th>n_in</Th>
                 <Th>Opus 4.8</Th>
                 <Th>GPT-5.6</Th>
@@ -221,15 +232,15 @@ export default async function Screen({
               {rows.length === 0 && (
                 <tr>
                   <td colSpan={6} className="p-8 text-center" style={{ color: 'var(--ink-4)' }}>
-                    No works in this view.
+                    {t.screen.emptyView}
                   </td>
                 </tr>
               )}
               {rows.map((r) => (
                 <tr key={r.id} className="border-b align-top last:border-0">
                   <td className="max-w-[26rem] p-3">
-                    <Link href={`/works/${r.id}`} className="font-medium hover:underline">
-                      {r.title || '[no title]'}
+                    <Link href={p(`/works/${r.id}`)} className="font-medium hover:underline">
+                      {r.title || t.common.noTitle}
                     </Link>
                     <div className="mt-0.5 text-xs" style={{ color: 'var(--ink-5)' }}>
                       {r.year ?? '—'} · {r.type ?? '—'} · {r.lang ?? '—'}
@@ -252,9 +263,9 @@ export default async function Screen({
                       {r.nIn ?? 0}/3
                     </span>
                   </td>
-                  <Cell tier={r.opusTier} conf={r.opusConfidence} reason={r.opusReason} genre={r.opusGenre} />
-                  <Cell tier={r.gptTier} conf={r.gptConfidence} reason={r.gptReason} genre={r.gptGenre} />
-                  <Cell tier={r.grokTier} conf={r.grokConfidence} reason={r.grokReason} genre={r.grokGenre} />
+                  <Cell t={t} tier={r.opusTier} conf={r.opusConfidence} reason={r.opusReason} genre={r.opusGenre} />
+                  <Cell t={t} tier={r.gptTier} conf={r.gptConfidence} reason={r.gptReason} genre={r.gptGenre} />
+                  <Cell t={t} tier={r.grokTier} conf={r.grokConfidence} reason={r.grokReason} genre={r.grokGenre} />
                 </tr>
               ))}
             </tbody>
@@ -264,18 +275,18 @@ export default async function Screen({
         {pages > 1 && (
           <div className="mt-4 flex justify-between text-sm">
             {page > 1 ? (
-              <Link className="link" href={`/screen?view=${view}&page=${page - 1}`}>
-                ← previous
+              <Link className="link" href={`${p('/screen')}?view=${view}&page=${page - 1}`}>
+                {t.common.previous}
               </Link>
             ) : (
               <span />
             )}
             <span className="tabular" style={{ color: 'var(--ink-4)' }}>
-              page {page} of {pages}
+              {t.common.pageOf(n(page), n(pages))}
             </span>
             {page < pages ? (
-              <Link className="link" href={`/screen?view=${view}&page=${page + 1}`}>
-                next →
+              <Link className="link" href={`${p('/screen')}?view=${view}&page=${page + 1}`}>
+                {t.common.next}
               </Link>
             ) : (
               <span />
@@ -285,18 +296,18 @@ export default async function Screen({
       </section>
 
       <section className="card p-6">
-        <h2 className="font-serif text-xl">What the screen actually found</h2>
+        <h2 className="font-serif text-xl">{t.screen.foundTitle}</h2>
         <p className="mt-3 leading-relaxed" style={{ color: 'var(--ink-3)' }}>
-          {f22.headline}
+          {headline}
         </p>
         <p className="mt-4 text-xs" style={{ color: 'var(--ink-5)' }}>
-          Computed {f22.computed_at_utc} ·{' '}
-          <Link href="/findings" className="link">
-            all 22 findings
+          {t.screen.computed(f22.computed_at_utc)} ·{' '}
+          <Link href={p('/findings')} className="link">
+            {t.screen.allFindings}
           </Link>{' '}
           ·{' '}
           <a className="link" href="/api/v1/screened?contested_only=1">
-            this dossier as JSON
+            {t.screen.dossierJson}
           </a>
         </p>
       </section>
@@ -306,18 +317,23 @@ export default async function Screen({
 
 function Th({ children }: { children: React.ReactNode }) {
   return (
-    <th className="whitespace-nowrap p-3 text-xs font-medium uppercase tracking-wider" style={{ color: 'var(--ink-4)' }}>
+    <th
+      className="whitespace-nowrap p-3 text-xs font-medium uppercase tracking-wider"
+      style={{ color: 'var(--ink-4)' }}
+    >
       {children}
     </th>
   )
 }
 
 function Cell({
+  t,
   tier,
   conf,
   reason,
   genre,
 }: {
+  t: Dictionary
   tier: string | null
   conf: string | null
   reason: string | null
@@ -325,7 +341,7 @@ function Cell({
 }) {
   return (
     <td className="max-w-[22rem] p-3">
-      <Verdict tier={tier} conf={conf} />
+      <Verdict t={t} tier={tier} conf={conf} />
       {genre && genre !== 'none' && (
         <div className="mt-1 text-xs" style={{ color: 'var(--ink-5)' }}>
           {genre}
