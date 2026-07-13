@@ -1,0 +1,535 @@
+You are screening scholarly works for the MetaCan project. Apply the rubric below to EVERY record and output ONE JSON array with ONE object per record, conforming EXACTLY to the JSON schema below. Output ONLY the JSON array, no prose before or after it.
+
+# THE RUBRIC (v3.1, locked)
+
+# MétaCan screening rubric (v3.1)
+
+**Status: LOCKED, 2026-07-13.** Supersedes v2.2. No screening ran under v3.0, which lived for hours: an adversarial review found that its Murad quotation inserted the word "treatment" into a sentence this document calls verbatim (D29). v3.1 corrects that quotation from the PDF, fixes the Kataoka page range, aligns the funder clause with the protocol, corrects two glosses against their sources, and adds the study-design vocabulary that v3.0 demanded but never listed. Since D29, `pilot/check_quotes.R` fails the build if any quotation marked verbatim is not a substring of its cited PDF.
+
+**No number produced so far was made under v3.** The pilot ran under v1.0; the 179-work re-screen under v2.0. Both instruments are kept byte for byte, so every figure stays attributable to the text that produced it. v3 is the instrument the **full screen** runs under, and the **v2-to-v3 difference is reported as a finding**.
+
+---
+
+## What changed, and why it is not cosmetic
+
+v1 and v2 had a tier hierarchy: **T1 core / T2 adjacent / T3 contextual**. That structure had a defect at its root, and the data found it before I did.
+
+> **"Adjacent" is defined by negation.** It means *not-T1*. A category whose only content is "near the important one" cannot be applied consistently, and **OUT-vs-adjacent was the largest tier confusion at every sample size we measured.** The models were not failing. **The category was empty.**
+
+It was also a value judgment I had no standing to make. Calling science and technology studies "adjacent" says STS is peripheral to metascience. **STS is a field with its own founding literature, its own journals, and its own account of what studying science means.**
+
+**v3 deletes the hierarchy.** Every tradition is a **category with its own positive definition, taken from its own literature, quoted verbatim from a source in `docs/reference/definitions/`.** There is no residual bucket. A record may carry **more than one** category, because the traditions genuinely overlap and forcing a single label is what created the problem.
+
+**Nothing here is cited from memory.** Every quotation below was read from the PDF named beside it. In a project whose worst deviation (D26) was that its own definition of metaresearch was mine and uncited for its entire life, a recalled citation would be the single worst thing this document could contain.
+
+---
+
+## The definitional problem is the field's, not this project's, and the field says so in print
+
+- **Puljak L, Lovric Makaric Z, Buljan I, Pieper D.** *What is a meta-epidemiological study? Analysis of published literature indicated heterogeneous study designs and definitions.* J Comp Eff Res. 2020. doi:10.2217/cer-2019-0201
+  > Analysed **175 information sources**. *"Definitions of meta-epidemiological studies varied and some studies used the term meta-epidemiological study to describe methodological research-on-research studies."* Conclusion: *"Research community would benefit from consensus about definition of meta-epidemiological study."*
+
+- **Kataoka Y, et al.** J Clin Epidemiol. 2023;154:219-220.
+  > A **published dispute** with Puljak, opening by naming *"the currently confusing nomenclatures around 'meta-epidemiology' and related terms such as 'meta-research' and 'research-on-research'."*
+
+- **Stevens ER, Laynor G.** *Recognizing the value of meta-research and making it easier to find.* J Med Libr Assoc. 2023;111(4). doi:10.5195/jmla.2023.1758
+  > *"The breadth of meta-research presents a significant challenge for identifying published meta-research studies,"* and it notes **the lack of a MeSH heading** for meta-research.
+
+**Those are claims about humans.** The pilot's numbers are claims about **models disagreeing under one rubric**. They are consistent, they are not the same estimand, and **only the human audit closes the gap** (`DEVIATIONS.md` D27).
+
+---
+
+## The categories
+
+A work may carry **more than one**. **Categories are not ranked and none is primary: the released landscape is the union of the defined categories, with every overlap reported.** The call's primary estimand is reported over `metaresearch` because that is the field the call names; that is a **reporting choice, not a rank**, and each of the other traditions gets the same per-category estimate.
+
+### 1. `metaresearch`
+
+> **"Meta-research is an evolving scientific discipline that aims to evaluate and improve research practices. It includes thematic areas of methods, reporting, reproducibility, evaluation, and incentives (how to do, report, verify, correct, and reward science)."**
+>
+> Ioannidis JPA, Fanelli D, Dunne DD, Goodman SN. *Meta-research: Evaluation and Improvement of Research Methods and Practices.* PLoS Biol. 2015;13(10):e1002264.
+> See also Ioannidis JPA. PLoS Biol. 2018;16(3):e2005468; METRICS, Stanford: <https://metrics.stanford.edu/research>
+
+Every `metaresearch` record carries a **`domain`**, taken verbatim from those five thematic areas and glossed by Ioannidis's own parenthetical:
+
+| `domain` | Ioannidis's gloss | operationally |
+|---|---|---|
+| `methods` | *how to **do** science* | design, conduct, analysis, bias, statistical practice, evidence-synthesis methodology; Ioannidis's own description of this area ends *"research integrity and ethics"* |
+| `reporting` | *how to **report** science* | reporting standards and completeness |
+| `reproducibility` | *how to **verify** science* | replication, data and code sharing, transparency |
+| `evaluation` | *how to **correct** science* | peer review and editorial process, research assessment, metrics |
+| `incentives` | *how to **reward** science* | funding allocation, careers and the research workforce, reward structures |
+
+**RULE 1 stands** (carried from v2; it resolved the largest single seam): *a work is `metaresearch` on methods only if its object is methods **as used, reported or performed by researchers**. Developing, deriving, validating or teaching a technique for a domain is OUT, however generic the technique.* **An instance of a research practice is not a study of it.**
+
+### 2. `metaepidemiology` — **CONTESTED IN PRINT. Both definitions are coded.**
+
+There is **no consensus definition** (Puljak 2020, above). **This rubric does not invent one.** It codes **both published definitions** and **flags where they disagree**, because the dispute is live, it is between named researchers in peer-reviewed journals, and hiding it inside a single label would destroy the only evidence of it.
+
+- **`metaepi_narrow`** — Murad MH, Wang Z. *Guidelines for reporting meta-epidemiological methodology research.* Evid Based Med. 2017;22(4):139-142. doi:10.1136/ebmed-2017-110713
+  > *"Meta-epidemiological studies adopt a systematic review or meta-analysis approach to examine the impact of certain characteristics of clinical studies on the observed effect and provide empirical evidence for hypothesised associations."*
+  >
+  > *(v3.0 quoted this sentence as 'the observed **treatment** effect'. The word is not in the paper; it narrowed Murad's definition while claiming his authority for the narrowing, and it survived a LOCK. D29.)*
+
+- **`metaepi_broad`** — Kataoka Y, et al. J Clin Epidemiol. 2023;154:219-220. *(Not 219-221: page 221 is Puljak's reply, which is the other side of the dispute.)*
+  > *"The greatest common defining concept of 'meta-epidemiological studies' would be **any studies in which the unit of analysis is a study, not a patient**."*
+
+**Where the two differ, the record is flagged, and the size of that class is reported as a finding.** A published dispute is a boundary to be *measured*, not settled by fiat.
+
+### 3. `bibliometrics` (scientometrics)
+
+> **"Scientometrics is the study of the quantitative aspects of the process of science as a communication system. It is centrally, but not only, concerned with the analysis of citations in the academic literature."**
+>
+> Mingers J, Leydesdorff L. *A Review of Theory and Practice in Scientometrics.* Eur J Oper Res. 2015. doi:10.1016/j.ejor.2015.04.002
+> Founding work: Price DJ de Solla. *Networks of Scientific Papers.* Science. 1965;149(3683):510-515.
+
+**Boundary with `metaresearch`, and it resolves v1's self-contradiction** (v1's T1 bullet and its own worked example gave opposite answers): a study that **characterises a literature** by quantitative means is `bibliometrics`. A study that uses bibliometric means to **make a claim about research practice** (citation distortion, reporting trends, citation of retracted work) is **also `metaresearch`**, and carries both. **v3 does not force the choice; that forcing was the bug.**
+
+### 4. `sts` (science and technology studies)
+
+> **"co-production is shorthand for the proposition that the ways in which we know and represent the world (both nature and society) are inseparable from the ways in which we choose to live in it."**
+> **"The idiom of co-production ... represents a major synthesis of scholarship in science and technology studies (S&TS)."**
+>
+> Jasanoff S (ed.). *States of Knowledge: The Co-Production of Science and the Social Order.* Routledge, 2004.
+
+> **"We study science in action and not ready made science or technology; to do so, we either arrive before the facts and machines are blackboxed or we follow the controversies that reopen them."**
+>
+> Latour B. *Science in Action: How to Follow Scientists and Engineers through Society.* Harvard University Press.
+
+**Operational test:** the work studies **science or technology as social practice**: how knowledge and social order are produced together, how facts are made rather than found, how controversies open and close. **The object must be science, research, or technoscientific knowledge**, at any period. *(v1 restricted history and philosophy of science to "contemporary research practice", an unexamined adverb that silently excluded the entire history of Canadian science. It is deleted.)*
+
+### 5. `scholarly_communication`
+
+> **"Scholarly communication is a rich and complex sociotechnical system formed over a period of centuries."**
+> **"...used here in the broader sense to include the formal and informal activities associated with the use and dissemination of information through public and private channels."**
+>
+> Borgman CL. *Scholarship in the Digital Age: Information, Infrastructure, and the Internet.* MIT Press, 2007.
+
+### 6. `open_science`
+
+> **"Open science is a set of principles and practices that aim to make scientific research from all fields accessible to everyone for the benefits of scientists and society as a whole."**
+> **"Open science is about making sure not only that scientific knowledge is accessible but also that the production of that knowledge itself is inclusive, equitable and sustainable."**
+>
+> UNESCO. *Recommendation on Open Science* (introduction), 2021. **193 countries adopted it.**
+
+The second sentence is the reason this category is not a synonym for "open access": UNESCO's definition makes **inclusivity and equity of knowledge production** part of open science itself, which is the criterion this challenge is judged on.
+
+### 7. `research_integrity` — **defined by its OBJECT; the sources do not define the field, and that is recorded**
+
+**Honest limitation, stated rather than hidden.** The two sources supplied define **what counts as misconduct** and **what publication ethics covers**. **Neither defines "research integrity research" as a discipline** the way Ioannidis defines metaresearch or Jasanoff defines STS. So this category is defined by its **object**, and the gap is on the record.
+
+> **"...the analysis was limited to behaviours that distort scientific knowledge: fabrication, falsification, 'cooking' of data, etc... Survey questions on plagiarism and other forms of professional misconduct were excluded."**
+>
+> Fanelli D. *How Many Scientists Fabricate and Falsify Research? A Systematic Review and Meta-Analysis of Survey Data.* PLoS ONE. 2009;4(5):e5738.
+
+> Publication ethics, per **COPE** (Committee on Publication Ethics), *Ethics Toolkit for Journal Editors and Publishers.*
+
+**Operational test:** the object is **research misconduct, questionable research practices, retraction, authorship, or publication ethics**, *as an object of study*. **Fanelli's boundary is adopted and its exclusion is carried:** fabrication, falsification and data cooking are in; **plagiarism and professional misconduct are recorded but marked, because Fanelli's own scope excludes them** and a rubric that silently widened his boundary while citing him would be misquoting its own source.
+
+**This category overlaps `metaresearch` heavily**: Ioannidis's own description of the *methods* area ends *"research integrity and ethics"*, so integrity research is inside metaresearch by his definition. **That overlap is expected and allowed**, because v3 is multi-label. It is not a hierarchy.
+
+### `insufficient_payload`
+
+Not a judgment; a statement that the record **cannot be screened** (a scraping artifact as a title, boilerplate in the abstract field, a title and abstract from different papers, spam). **Reported, never silently dropped**: the size of this class is a finding about OpenAlex.
+
+### `OUT`
+
+None of the above. **"OUT" now means "in no defined category", not "not near the important one."** That is the whole change.
+
+---
+
+## Canadian linkage
+
+- `CA_AFF` — at least one Canadian institutional affiliation. **Warning, measured:** OpenAlex misassigns these. **At least 17,466** works enter the frame with, as their *only* Canadian institution, one of six suspect assignments: a parse failure that is not an institution at all (`Impact`, attached to a Spanish COVID essay) or a real organization attached to papers it has nothing to do with (`Discovery Air (Canada)` on a Brazilian linguistics paper). That is a **lower bound** from six audited strings (finding 27), and the records are **flagged for audit, not deleted**. A Canadian affiliation is *evidence*, not proof.
+- `CA_FUND` — ≥1 funder whose OpenAlex `country_code` is Canada: an **external criterion, not a curated list**. *(An earlier four-funder list (CIHR, NSERC, SSHRC, CFI) failed twice: three of its four hardcoded IDs pointed at other funders, and even corrected it missed Canada Research Chairs, the Government of Canada, NRC, Mitacs, Genome Canada, and every provincial agency. OpenAlex knows 2,182 Canadian funders; `R/pin_entities.R` pins them.)*
+- **`ABOUT_CA_SYSTEM`** — the Canadian **research system or academy** is a substantive object. *A Canadian institution as setting is not this.*
+- **`ABOUT_CA_TOPIC`** — Canada is a substantive subject, whether or not research is the object.
+
+*(v1 had one boolean and it could not separate "Canadian data, universal claim" from "a claim about Canada". Four screening agents proposed this split independently.)*
+
+## Study design
+
+Coded for every work, from **this vocabulary and no other** (v3.0 said "coded for every work" and never listed the values, which is D20's exact shape: a field every screener codes and no two code alike):
+
+| `study_design` | MEDLINE publication type it is validated against |
+|---|---|
+| `randomized_trial` | Randomized Controlled Trial |
+| `nonrandomized_trial` | Controlled Clinical Trial |
+| `observational` | Observational Study |
+| `systematic_review` | Systematic Review |
+| `meta_analysis` | Meta-Analysis |
+| `case_report` | Case Reports |
+| `qualitative` | *(none; ships as a score, marked unvalidated)* |
+| `simulation_or_modeling` | *(none; ships as a score, marked unvalidated)* |
+| `bench_or_experimental` | *(none; ships as a score, marked unvalidated)* |
+| `theoretical_or_conceptual` | *(none; ships as a score, marked unvalidated)* |
+| `not_applicable` | *(the work is not empirical research: editorials, datasets, software)* |
+| `design_other` | *(none; ships as a score, marked unvalidated)* |
+
+**Validated against MEDLINE publication types, per record and not per year.** *(v3.0 called these "human-indexed by NLM", which is false; v3.1's first correction said "human-indexed until April 2022", which is also false. NLM stopped fully human indexing as universal practice around 2011 and completed automation in 2022, so a YEAR CUTOFF cannot separate the eras. The reference subset is defined by NLM's **record-level `IndexingMethod`** field: absent = fully human, `Curated` = automated with human review, `Automated` = machine. Human records are the reference; the others measure **agreement with another machine** and are reported as such.)*
+
+**Class-specific calendar eligibility, because a publication type that did not exist cannot be a negative.** *Observational Study* entered the vocabulary in **2014** and *Systematic Review* in **2019**. A 2008 cohort study carries no *Observational Study* tag, and treating that absence as "not observational" would train and score the model against a censoring artifact. Each design class is therefore validated **only on records published after its type existed**, and that eligibility window is prespecified per class. Where MEDLINE does not reach (most of the physical sciences, humanities and social sciences), the label ships as a **score, not an assertion**, and is **marked unvalidated**. *The dataset states, per field, which of its own annotations it has earned the right to assert.*
+
+## Genre
+
+**One vocabulary, defined here, and `screening-schema-v3.json` QUOTES this list rather than paraphrasing it.**
+
+`empirical` · `review` · `methods` · `commentary` · `editorial` · `protocol` · `dataset` · `software` · `other`
+
+*(In v1 the rubric and the schema named **two different vocabularies for this field**, overlapping on two values out of thirteen. Every screener was handed both and obeyed both privately; the validator checked `tier` and had never been asked to look at `genre`, so 16,800 labels passed every check that ran. See D20 and finding 24. **A codebook is code. It gets a test.**)*
+
+## `tier` is RETIRED
+
+v3 replaces it with `categories`, which is **multi-label**. The values `T1`, `T2`, `T3` and `OUT` remain in the **legacy** `screening-schema.json` **only so that the v1 and v2 label files stay readable**; the v3 contract, `screening-schema-v3.json`, **does not contain the field**, so no new screening can emit them. `OUT` in v3 means an empty `categories` array: *in no defined category*, not *near the important one*.
+
+## Confidence
+
+`high` / `medium` / `low`. **If the abstract is missing, judge on the title alone and set confidence to `low` unless the title is unambiguous.** The schema **quotes** this sentence; it does not paraphrase it (D24).
+
+**`low` is a legitimate answer.** A screener that never says `low` is not being careful; it is being confident.
+
+---
+
+## Sources
+
+Every quotation above was read from a PDF in **`docs/reference/definitions/`**, which is committed. Nothing is cited from memory, and since D29 that is a checked property, not a promise: `pilot/check_quotes.R` fails the build if any quotation marked verbatim is not a substring of its cited PDF. `pilot/check_instrument.R` fails the build if this rubric and `screening-schema-v3.json` disagree about any field, in either direction.
+
+
+# THE OUTPUT SCHEMA (screening-schema-v3.json)
+
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "MetaCan screening output, rubric v3.1",
+  "description": "The output contract for every screening run under rubric v3.1. This document QUOTES the rubric; it never paraphrases it. Where a description below restates a rule, the wording is copied from docs/protocol/rubric-v3.md, because the schema misquoting the rubric is D24 and two documents that disagree are two instruments (D20). pilot/check_instrument.R fails the build if this file and the rubric disagree about any field, in either direction. The legacy screening-schema.json remains ONLY so that v1 and v2 label files stay readable; no new screening validates against it.",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["id", "categories", "study_design", "genre", "about_ca_system", "about_ca_topic", "confidence"],
+    "properties": {
+      "id": {
+        "type": "string",
+        "pattern": "^W\\d+$",
+        "description": "The OpenAlex work id, exactly as given in the payload."
+      },
+      "categories": {
+        "type": "array",
+        "items": {
+          "enum": ["metaresearch", "metaepi_narrow", "metaepi_broad", "bibliometrics", "sts", "scholarly_communication", "open_science", "research_integrity", "insufficient_payload"]
+        },
+        "uniqueItems": true,
+        "description": "Every category the work belongs to; a work may carry more than one, and categories are not ranked and none is primary. An EMPTY array is OUT, which means 'in no defined category', not 'near the important one'. insufficient_payload means the record cannot be screened (a scraping artifact as a title, boilerplate in the abstract field, a title and abstract from different papers, spam) and is reported, never silently dropped."
+      },
+      "domain": {
+        "enum": ["methods", "reporting", "reproducibility", "evaluation", "incentives", null],
+        "description": "REQUIRED when categories contains metaresearch, and null otherwise. Taken verbatim from Ioannidis's five thematic areas: methods, reporting, reproducibility, evaluation, and incentives (how to do, report, verify, correct, and reward science)."
+      },
+      "study_design": {
+        "enum": ["randomized_trial", "nonrandomized_trial", "observational", "systematic_review", "meta_analysis", "case_report", "qualitative", "simulation_or_modeling", "bench_or_experimental", "theoretical_or_conceptual", "not_applicable", "design_other"],
+        "description": "Coded for every work, from this vocabulary and no other. not_applicable means the work is not empirical research: editorials, datasets, software."
+      },
+      "genre": {
+        "enum": ["empirical", "review", "methods", "commentary", "editorial", "protocol", "dataset", "software", "other"],
+        "description": "One vocabulary, defined in the rubric, and this schema QUOTES that list rather than paraphrasing it."
+      },
+      "about_ca_system": {
+        "type": "boolean",
+        "description": "ABOUT_CA_SYSTEM: the Canadian research system or academy is a substantive object. A Canadian institution as setting is not this."
+      },
+      "about_ca_topic": {
+        "type": "boolean",
+        "description": "ABOUT_CA_TOPIC: Canada is a substantive subject, whether or not research is the object."
+      },
+      "confidence": {
+        "enum": ["high", "medium", "low"],
+        "description": "If the abstract is missing, judge on the title alone and set confidence to low unless the title is unambiguous. low is a legitimate answer: a screener that never says low is not being careful; it is being confident."
+      },
+      "reason": {
+        "type": "string",
+        "maxLength": 400,
+        "description": "One sentence naming the rubric rule the decision rests on."
+      }
+    }
+  }
+}
+
+
+# THE RECORDS
+
+[
+ {
+  "id": "W6977388958",
+  "title": "Additional file 1: of A descriptive qualitative examination of knowledge translation practice among health researchers in Manitoba, Canada",
+  "abstract": "",
+  "year": 2017,
+  "lang": "en",
+  "type": "article",
+  "venue": "Figshare",
+  "topic": "Health Policy Implementation Science",
+  "field": "Health Professions"
+ },
+ {
+  "id": "W6920869511",
+  "title": "Additional file 2 of Improving the usefulness of evidence concerning the effectiveness of implementation strategies for knowledge products in primary healthcare: protocol for a series of systematic reviews",
+  "abstract": "",
+  "year": 2020,
+  "lang": "en",
+  "type": "article",
+  "venue": "Figshare",
+  "topic": "Health Policy Implementation Science",
+  "field": "Health Professions"
+ },
+ {
+  "id": "W2158745940",
+  "title": "Core competencies in the science and practice of knowledge translation: description of a Canadian strategic training initiative",
+  "abstract": "1. Implement Sci. 2011 Dec 9;6:127. doi: 10.1186/1748-5908-6-127.\n\nCore competencies in the science and practice of knowledge translation: \ndescription of a Canadian strategic training initiative.\n\nStraus SE(1), Brouwers M, Johnson D, Lavis JN, Légaré F, Majumdar SR, McKibbon \nKA, Sales AE, Stacey D, Klein G, Grimshaw J; KT Canada Strategic Training \nInitiative in Health Research (STIHR).\n\nAuthor information:\n(1)Li Ka Shing Knowledge Institute, St Michael's Hospital, 30 Bond Street, \nToronto, ON, M5B 1W8, Canada. sharon.straus@utoronto.ca\n\nBACKGROUND: Globally, healthcare systems are attempting to optimize quality of \ncare. This challenge has resulted in the development of implementation science \nor knowledge translation (KT) and the resulting need to build capacity in both \nthe science and practice of KT.\nFINDINGS: We are attempting to meet these challenges through the creation of a \nnational training initiative in KT. We have identified core competencies in this \nfield and have developed a series of educational courses and materials for three \ntraining streams. We report the outline for this approach and the progress to \ndate.\nCONCLUSIONS: We have prepared a strategy to develop, implement, and evaluate a \nnational training initiative to build capacity in the science and practice of \nKT. Ultimately through this initiative, we hope to meet the capacity demand for \nKT researchers and practitioners in Canada that will lead to improved care and a \nstrengthened healthcare system.\n\nDOI: 10.1186/1748-5908-6-127\nPMCID: PMC3292943\nPMID: 22152223 [Indexed for MEDLINE]",
+  "year": 2011,
+  "lang": "en",
+  "type": "article",
+  "venue": "Implementation Science",
+  "topic": "Health Policy Implementation Science",
+  "field": "Health Professions"
+ },
+ {
+  "id": "W3089040936",
+  "title": "Determinants that influence knowledge brokers' and opinion leaders' role to close knowledge practice gaps in rehabilitation: A realist review",
+  "abstract": "Abstract Rationale Despite the available evidence to support optimal practices in rehabilitation, significant knowledge practice gaps persist. Opinion leaders (OLs) and knowledge brokers (KBs) can enhance the success of knowledge translation (KT) interventions and improve uptake of best practices among clinicians. However, the literature on the mechanisms underpinning OLs'/KBs' activities, and guidance on the type of support needed for successful implementation of these roles in rehabilitation contexts is scarce. This research aimed to highlight the differences and similarities between OLs and KBs with respect to context, mechanism, and outcomes as well as describe the common patterns of OLs and KBs by creating a context‐mechanism‐outcomes configuration. Methods We conducted a realist review to synthesize the available evidence on OLs/KBs as active KT strategies. A search was conducted across five databases up to November 2019. Two independent reviewers extracted the data using a structured form. A context‐mechanism‐outcome configuration was used to conceptualize a cumulative portrait of the features of OLs/KBs roles. Results The search identified 3282 titles after removing duplicates. Seventeen studies (reported in 20 articles) were included in the review. Findings suggest a number of desirable features of OLs/KBs roles that may maximize the achievement of targeted outcomes namely being (a) embedded within their organization as “insiders”; (b) adequately skilled to perform their role; (c) identified as able to fulfil the role; (d) appropriately trained; and (e) able to use different KT interventions. Conclusion Findings of this realist review converge to create a context‐mechanism‐outcomes configuration with suggestions to optimally utilize OLs/KBs in rehabilitation. The configurations suggest desirable features that can lead to a greater potential to achieve targeted goals. It is preferable that OLs/KBs be embedded in the organization and that they are adequately skilful and well‐trained. Also, OLs/KBs should perform the required roles using KT interventions adapted to the local context.",
+  "year": 2020,
+  "lang": "en",
+  "type": "review",
+  "venue": "Journal of Evaluation in Clinical Practice",
+  "topic": "Health Policy Implementation Science",
+  "field": "Health Professions"
+ },
+ {
+  "id": "W1821441292",
+  "title": "The effectiveness of knowledge translation interventions for promoting evidence-informed decision-making among nurses in tertiary care: a systematic review and meta-analysis",
+  "abstract": "1. Implement Sci. 2015 Jul 14;10:98. doi: 10.1186/s13012-015-0286-1.\n\nThe effectiveness of knowledge translation interventions for promoting \nevidence-informed decision-making among nurses in tertiary care: a systematic \nreview and meta-analysis.\n\nYost J(1), Ganann R(2), Thompson D(3), Aloweni F(4), Newman K(5), Hazzan A(6), \nMcKibbon A(7), Dobbins M(8), Ciliska D(9).\n\nAuthor information:\n(1)School of Nursing, Faculty of Health Sciences, McMaster University, Main \nStreet West, Hamilton, ON, Canada. jyost@mcmaster.ca.\n(2)School of Nursing, Faculty of Health Sciences, McMaster University, Main \nStreet West, Hamilton, ON, Canada. ganannrl@mcmaster.ca.\n(3)School of Nursing, Faculty of Health and Behavioural Sciences, Lakehead \nUniversity, 955 Oliver Road, Thunder Bay, ON, Canada. dsthomp1@lakeheadu.ca.\n(4)Singapore General Hospital, 31 Third Hospital Avenue, Singapore, Singapore. \nfazila.abu.bakar.aloweni@sgh.com.sg.\n(5)Daphne Cockwell School of Nursing, Faculty of Community Services, Ryerson \nUniversity, 350 Victoria Street, Toronto, ON, Canada. \nkristine.newman@ryerson.ca.\n(6)Department of Medicine, McMaster University, St. Peter's Hospital-Hamilton \nHealth Sciences, 88 Maplewood Avenue, Hamilton, ON, Canada. \nhazzanaa@mcmaster.ca.\n(7)Clinical Epidemiology and Biostatistics, Faculty of Health Sciences, McMaster \nUniversity, Main Street West, Hamilton, ON, Canada. mckib@mcmaster.ca.\n(8)School of Nursing, Faculty of Health Sciences, McMaster University, Main \nStreet West, Hamilton, ON, Canada. dobbinsm@mcmaster.ca.\n(9)School of Nursing, Faculty of Health Sciences, McMaster University, Main \nStreet West, Hamilton, ON, Canada. ciliska@mcmaster.ca.\n\nBACKGROUND: Nurses are increasingly expected to engage in evidence-informed \ndecision-making (EIDM) to improve client and system outcomes. Despite an \nimproved awareness about EIDM, there is a lack of use of research evidence and \nunderstanding about the effectiveness of interventions to promote EIDM. This \nproject aimed to discover if knowledge translation (KT) interventions directed \nto nurses in tertiary care are effective for improving EIDM knowledge, skills, \nbehaviours, and, as a result, client outcomes. It also sought to understand \ncontextual factors that affect the impact of such interventions.\nMETHODS: A systematic review funded by the Canadian Institutes of Health \nResearch (PROSPERO registration: CRD42013003319) was conducted. Included studies \nexamined the implementation of any KT intervention involving n",
+  "year": 2015,
+  "lang": "en",
+  "type": "review",
+  "venue": "Implementation Science",
+  "topic": "Health Sciences Research and Education",
+  "field": "Health Professions"
+ },
+ {
+  "id": "W2103669116",
+  "title": "Applications of social constructivist learning theories in knowledge translation for healthcare professionals: a scoping review",
+  "abstract": "",
+  "year": 2014,
+  "lang": "en",
+  "type": "review",
+  "venue": "Implementation Science",
+  "topic": "Health Policy Implementation Science",
+  "field": "Health Professions"
+ },
+ {
+  "id": "W3178875310",
+  "title": "Barriers and facilitators to implementing evidence-based guidelines in long-term care: a qualitative evidence synthesis",
+  "abstract": "Abstract Background The long-term care setting poses unique challenges and opportunities for effective knowledge translation. The objectives of this review are to (1) synthesize barriers and facilitators to implementing evidence-based guidelines in long-term care, as defined as a home where residents require 24-h nursing care, and 50% of the population is over the age of 65 years; and (2) map barriers and facilitators to the Behaviour Change Wheel framework to inform theory-guided knowledge translation strategies. Methods Following the guidance of the Cochrane Qualitative and Implementation Methods Group Guidance Series and the ENTREQ reporting guidelines, we systematically reviewed the reported experiences of long-term care staff on implementing evidence-based guidelines into practice. MEDLINE Pubmed, EMBASE Ovid, and CINAHL were searched from the earliest date available until May 2021. Two independent reviewers selected primary studies for inclusion if they were conducted in long-term care and reported the perspective or experiences of long-term care staff with implementing an evidence-based practice guideline about health conditions. Appraisal of the included studies was conducted using the Critical Appraisal Skills Programme Checklist and confidence in the findings with the GRADE-CERQual approach. Findings After screening 2680 abstracts, we retrieved 115 full-text articles; 33 of these articles met the inclusion criteria. Barriers included time constraints and inadequate staffing, cost and lack of resources, and lack of teamwork and organizational support. Facilitators included leadership and champions, well-designed strategies, protocols, and resources, and adequate services, resources, and time. The most frequent Behaviour Change Wheel components were physical and social opportunity and psychological capability. We concluded moderate or high confidence in all but one of our review findings. Conclusions Future knowledge translation strategies to implement guidelines in long-term care should target physical and social opportunity and psychological capability, and include interventions such as environmental restructuring, training, and education.",
+  "year": 2021,
+  "lang": "en",
+  "type": "review",
+  "venue": "Implementation Science",
+  "topic": "Health Policy Implementation Science",
+  "field": "Health Professions"
+ },
+ {
+  "id": "W2007795708",
+  "title": "Knowledge Transfer on Complex Social Interventions in Public Health: A Scoping Study",
+  "abstract": "1. PLoS One. 2013 Dec 4;8(12):e80233. doi: 10.1371/journal.pone.0080233. \neCollection 2013.\n\nKnowledge transfer on complex social interventions in public health: a scoping \nstudy.\n\nDagenais C(1), Malo M, Robert É, Ouimet M, Berthelette D, Ridde V.\n\nAuthor information:\n(1)Université de Montréal, Montréal, Québec, Canada.\n\nOBJECTIVES: Scientific knowledge can help develop interventions that improve \npublic health. The objectives of this review are (1) to describe the status of \nresearch on knowledge transfer strategies in the field of complex social \ninterventions in public health and (2) to identify priorities for future \nresearch in this field.\nMETHOD: A scoping study is an exploratory study. After searching databases of \nbibliographic references and specialized periodicals, we summarized the relevant \nstudies using a predetermined assessment framework. In-depth analysis focused on \nthe following items: types of knowledge transfer strategies, fields of public \nhealth, types of publics, types of utilization, and types of research \nspecifications.\nRESULTS: From the 1,374 references identified, we selected 26 studies. The \nstrategies targeted mostly administrators of organizations and practitioners. \nThe articles generally dealt with instrumental utilization and most often used \nqualitative methods. In general, the bias risk for the studies is high.\nCONCLUSION: Researchers need to consider the methodological challenges in this \nfield of research in order to improve assessment of more complex knowledge \ntransfer strategies (when they exist), not just diffusion/dissemination \nstrategies and conceptual and persuasive utilization.\n\nDOI: 10.1371/journal.pone.0080233\nPMCID: PMC3851180\nPMID: 24324593 [Indexed for MEDLINE]\n\nConflict of interest statement: Competing Interests: The authors have declared \nthat no competing interests exist.",
+  "year": 2013,
+  "lang": "en",
+  "type": "review",
+  "venue": "PLoS ONE",
+  "topic": "Health Policy Implementation Science",
+  "field": "Health Professions"
+ },
+ {
+  "id": "W6902151088",
+  "title": "Additional file 3 of Screening for hypertension in adults: protocol for evidence reviews to inform a Canadian Task Force on Preventive Health Care guideline update",
+  "abstract": "",
+  "year": 2024,
+  "lang": "en",
+  "type": "article",
+  "venue": "Figshare",
+  "topic": "Health Promotion and Cardiovascular Prevention",
+  "field": "Medicine"
+ },
+ {
+  "id": "W6939748461",
+  "title": "Additional file 4 of Screening for hypertension in adults: protocol for evidence reviews to inform a Canadian Task Force on Preventive Health Care guideline update",
+  "abstract": "",
+  "year": 2024,
+  "lang": "en",
+  "type": "article",
+  "venue": "Figshare",
+  "topic": "Health Promotion and Cardiovascular Prevention",
+  "field": "Medicine"
+ },
+ {
+  "id": "W2137928701",
+  "title": "Defining the effect and mediators of two knowledge translation strategies designed to alter knowledge, intent and clinical utilization of rehabilitation outcome measures: a study protocol [NCT00298727]",
+  "abstract": "1. Implement Sci. 2006 Jul 4;1:14. doi: 10.1186/1748-5908-1-14.\n\nDefining the effect and mediators of two knowledge translation strategies \ndesigned to alter knowledge, intent and clinical utilization of rehabilitation \noutcome measures: a study protocol [NCT00298727].\n\nMacDermid JC(1), Solomon P, Law M, Russell D, Stratford P.\n\nAuthor information:\n(1)School of Rehabilitation Science, McMaster University, 1400 Main St, West, \nIAHS-403, Hamilton, Ontario, L8S 1C7, Canada. macderj@mcmaster.ca\n\nBACKGROUND: A substantial number of valid outcome measures have been developed \nto measure health in adult musculoskeletal and childhood disability. \nRegrettably, national initiatives have merely resulted in changes in attitude, \nwhile utilization remains unacceptably low. This study will compare the \neffectiveness and mediators of two different knowledge transfer (KT) \ninterventions in terms of their impact on changing knowledge and behavior \n(utilization and clinical reasoning) related to health outcome measures.\nMETHOD/DESIGN: Physical and occupational therapists (n = 144) will be recruited \nin partnership with the national professional associations to evaluate two \ndifferent KT interventions with the same curriculum: 1) Stakeholder-Hosted \nInteractive Problem-Based Seminar (SHIPS), and 2) Online Problem-Based course \n(e-PBL). SHIPS will consist of face-to-face problem-based learning (PBL) for 2 \n1/2 days with outcome measure developers as facilitators, using six problems \ngenerated in consultation with participants. The e-PBL will consist of a 6-week \nweb-based course with six generic problems developed by content experts. SHIPS \nwill be conducted in three urban centers in Canada. Participants will be \nblock-allocated by a minimization procedure to either of the two interventions \nto minimize any prognostic differences. Trained evaluators at each site will \nconduct chart audits and chart-stimulated recall. Trained interviewers will \nconduct semi-structured interviews focused on identifying critical elements in \nKT and implementing practice changes. Interviews will be transcribed verbatim. \nBaseline predictors including demographics, knowledge, attitudes/barriers \nregarding outcome measures, and Readiness to Change will be assessed by \nself-report. Immediately post-intervention and 6 months later, these will be \nre-administered. Primary qualitative and quantitative evaluations will be \nconducted 6-months post-intervention to assess the relative effectiveness of KT \n",
+  "year": 2006,
+  "lang": "en",
+  "type": "article",
+  "venue": "Implementation Science",
+  "topic": "Health Policy Implementation Science",
+  "field": "Health Professions"
+ },
+ {
+  "id": "W2991841828",
+  "title": "Effect of implementation interventions on nurses’ behaviour in clinical practice: a systematic review, meta-analysis and meta-regression protocol",
+  "abstract": "Abstract Background Practitioner-level implementation interventions such as audit and feedback, communities of practice, and local opinion leaders have shown potential to change nurses’ behaviour in clinical practice and improve patients’ health. However, their effectiveness remains unclear. Moreover, we have a paucity of data regarding the use of theory in implementation studies with nurses, the causal processes—i.e. mechanisms of action —targeted by interventions to change nurses’ behaviour in clinical practice, and the constituent components—i.e. behaviour change techniques —included in interventions. Thus, our objectives are threefold: (1) to examine the effectiveness of practitioner-level implementation interventions in changing nurses’ behaviour in clinical practice; (2) to identify, in included studies, the type and degree of theory use, the mechanisms of action targeted by interventions and the behaviour change techniques constituting interventions and (3) to examine whether intervention effectiveness is associated with the use of theory or with specific mechanisms of action and behaviour change techniques. Methods We will conduct a systematic review based on the Cochrane Effective Practice and Organization of Care (EPOC) Group guidelines. We will search six databases (CINAHL, EMBASE, ERIC, PsycINFO, PubMed and Web of Science) with no time limitation for experimental and quasi-experimental studies that evaluated practitioner-level implementation interventions aiming to change nurses’ behaviour in clinical practice. We will also hand-search reference lists of included studies. We will perform screening, full-text review, risk of bias assessment, and data extraction independently with the Covidence systematic review software. We will assess the quality of evidence using the GRADEpro software. We will code included studies independently for theory use (Theory Coding Scheme), mechanisms of action (coding guidelines from Michie) and behaviour change techniques (Behaviour Change Technique Taxonomy v1) with QSR International’s NVivo qualitative data analysis software. Meta-analyses will be performed using the Review Manager (RevMan) software. Meta-regression analyses will be performed with IBM SPSS Statistics software. Discussion This review will inform knowledge users and researchers interested in designing, developing and evaluating implementation interventions to support nurses’ behaviour change in clinical practice. Results will provide key insights r",
+  "year": 2019,
+  "lang": "en",
+  "type": "article",
+  "venue": "Systematic Reviews",
+  "topic": "Health Policy Implementation Science",
+  "field": "Health Professions"
+ },
+ {
+  "id": "W2763139081",
+  "title": "Organizational participatory research: a systematic mixed studies review exposing its extra benefits and the key factors associated with them",
+  "abstract": "1. Implement Sci. 2017 Oct 10;12(1):119. doi: 10.1186/s13012-017-0648-y.\n\nOrganizational participatory research: a systematic mixed studies review \nexposing its extra benefits and the key factors associated with them.\n\nBush PL(1), Pluye P(2), Loignon C(3), Granikov V(2), Wright MT(4), Pelletier \nJF(5), Bartlett-Esquilant G(2), Macaulay AC(6), Haggerty J(2), Parry S(7), \nRepchinsky C(8).\n\nAuthor information:\n(1)Department of Family Medicine, McGill University, 5858 Côte-des-Neiges, Suite \n300, Montréal, Quebec, H3S 1Z1, Canada. paula.bush@mcgill.ca.\n(2)Department of Family Medicine, McGill University, 5858 Côte-des-Neiges, Suite \n300, Montréal, Quebec, H3S 1Z1, Canada.\n(3)Department of Family Medicine, Sherbrooke University, 150 Place Charles \nLemoyne suite 200, Longueuil, Quebec, J4K 0A8, Canada.\n(4)Catholic University of Applied Sciences Berlin | Institute for Social Health, \nKöpenicker Allee, 39-57 10318, Berlin, Germany.\n(5)University of Montreal Mental Health Research Institute, Montreal, Canada.\n(6)CIET/Participatory Research at McGill (PRAM), 5858 Cote de Neiges, 3rd floor, \nMontreal, QC, H3S 1Z1, Canada.\n(7)West Island YMCA, |230 Brunswick Blvd, Pointe-Claire, Quebec, H9R 5N5, \nCanada.\n(8)Special Projects, Canadian Pharmacists Association, 1785 Alta Vista Drive, \nOttawa, ON, K1G 3Y6, Canada.\n\nBACKGROUND: In health, organizational participatory research (OPR) refers to \nhealth organization members participating in research decisions, with university \nresearchers, throughout a study. This non-academic partner contribution to the \nresearch may take the form of consultation or co-construction. A drawback of OPR \nis that it requires more time from all those involved, compared to \nnon-participatory research approaches; thus, understanding the added value of \nOPR, if any, is important. Thus, we sought to assess whether the OPR approach \nleads to benefits beyond what could be achieved through traditional research.\nMETHODS: We identified, selected, and appraised OPR health literature, and at \neach stage, two team members independently reviewed and coded the literature. We \nused quantitative content analysis to transform textual data into reliable \nnumerical codes and conducted a logistic regression to test the hypothesis that \na co-construction type OPR study yields extra benefits with a greater likelihood \nthan consultation-type OPR studies.\nRESULTS: From 8873 abstracts and 992 full text papers, we distilled a sample of \n107 OPR studies. We found no differe",
+  "year": 2017,
+  "lang": "en",
+  "type": "review",
+  "venue": "Implementation Science",
+  "topic": "Health Policy Implementation Science",
+  "field": "Health Professions"
+ },
+ {
+  "id": "W2071304386",
+  "title": "Mapping new theoretical and methodological terrain for knowledge translation: contributions from critical realism and the arts",
+  "abstract": "",
+  "year": 2009,
+  "lang": "en",
+  "type": "article",
+  "venue": "Implementation Science",
+  "topic": "Health Policy Implementation Science",
+  "field": "Health Professions"
+ },
+ {
+  "id": "W2800731026",
+  "title": "Identification of Implementation Strategies Used for the Circle of Security-Virginia Family Model Intervention: Concept Mapping Study",
+  "abstract": "1. JMIR Res Protoc. 2018 Jun 14;7(6):e10312. doi: 10.2196/10312.\n\nIdentification of Implementation Strategies Used for the Circle of \nSecurity-Virginia Family Model Intervention: Concept Mapping Study.\n\nNielsen B(1), Slinning K(1)(2), Weie Oddli H(1), Drozd F(2).\n\nAuthor information:\n(1)Department of Psychology, University of Oslo, Oslo, Norway.\n(2)Network for Infant Mental Health, Regional Center for Child and Adolescent \nMental Health, Eastern and Southern Norway, Oslo, Norway.\n\nBACKGROUND: A reoccurring finding from health and clinical services is the \nfailure to implement theory and research into practice and policy in appropriate \nand efficient ways, which is why it is essential to develop and identify \nimplementation strategies, as they constitute the how-to component of \ntranslating and changing health practices.\nOBJECTIVE: The aim of this study was to provide a systematic and comprehensive \nreview of the implementation strategies that have been applied for the Circle of \nSecurity-Virginia Family (COS-VF) model by developing an implementation \nprotocol.\nMETHODS: First, informal interviews and documents were analyzed using concept \nmapping to identify implementation strategies. All documentation from the \nNetwork for Infant Mental Health's work with COS-VF was made available and \nincluded for analysis, and the participants were interviewed to validate the \nfindings and add information not present in the archives. To avoid lack of \nclarity, an existing taxonomy of implementation strategies, the Expert \nRecommendations for Implementing Change, was used to conceptualize (ie, name and \ndefine) strategies. Second, the identified strategies were specified according \nto Proctor and colleagues' recommendations for reporting in terms of seven \ndimensions: actor, the action, action targets, temporality, dose, implementation \noutcomes, and theoretical justification. This ensures a full description of the \nimplementation strategies and how these should be used in practice.\nRESULTS: Ten implementation strategies were identified: (1) develop educational \nmaterials, (2) conduct ongoing training, (3) audit and feedback, (4) make \ntraining dynamic, (5) distribute educational materials, (6) mandate change, (7) \nobtain formal commitments, (8) centralize technical assistance, (9) create or \nchange credentialing and licensure standards, and (10) organize clinician \nimplementation team meetings.\nCONCLUSIONS: This protocol provides a systematic and comprehensive overview o",
+  "year": 2018,
+  "lang": "en",
+  "type": "article",
+  "venue": "JMIR Research Protocols",
+  "topic": "Health Policy Implementation Science",
+  "field": "Health Professions"
+ },
+ {
+  "id": "W4296025751",
+  "title": "Identifying candidate quality indicators of tools that support the practice of knowledge translation: a scoping review protocol",
+  "abstract": "Objective: The objective of this scoping review is to identify and characterize relevant knowledge translation methods tools (those that provide guidance for optimized knowledge translation practice) to uncover candidate quality indicators to inform a future quality assessment tool for knowledge translation strategies. Introduction: Knowledge translation strategies (defined as including knowledge translation interventions, tools, and products) target various knowledge users, including patients, clinicians, researchers, and policy-makers. The development and use of strategies that support knowledge translation practice have been rapidly increasing, making it difficult for knowledge users to decide which to use. There is limited evidence-based guidance or measures to help assess the overall quality of knowledge translation strategies. Inclusion criteria: Empirical and non-empirical documents will be considered if they explicitly describe a knowledge translation methods tool and its development, evaluation or validation, methodological strengths or limitations, and/or use over time. The review will consider a knowledge translation methods tool if it falls within at least one knowledge translation domain (ie, implementation, dissemination, sustainability, scalability, integrated knowledge translation) in the health field. Methods: We will conduct a systematic search of relevant electronic databases and gray literature. The search strategy will be developed iteratively by an experienced medical information specialist and peer-reviewed with the PRESS checklist. The search will be limited to English-only documents published from 2005 onward. Documents will be independently screened, selected, and extracted by 2 researchers. Data will be analyzed and summarized descriptively, including the characteristics of the included documents, knowledge translation methods tools, and candidate quality indicators. Scoping review registration: Open Science Framework (https://osf.io/chxvq)",
+  "year": 2022,
+  "lang": "en",
+  "type": "review",
+  "venue": "JBI Evidence Synthesis",
+  "topic": "Health Policy Implementation Science",
+  "field": "Health Professions"
+ },
+ {
+  "id": "W3028693686",
+  "title": "Unrecognized implementation science engagement among health researchers in the USA: a national survey",
+  "abstract": "Abstract Background Implementation science (IS) has the potential to serve an important role in encouraging the successful uptake of evidence-based interventions. The current state of IS awareness and engagement among health researchers, however, is relatively unknown. Methods To determine IS awareness and engagement among health researchers, we performed an online survey of health researchers in the USA in 2018. Basic science researchers were excluded from the sample. Engagement in and awareness of IS were measured with multiple questionnaire items that both directly and indirectly ask about IS methods used. Unrecognized IS engagement was defined as participating in research using IS elements and not indicating IS as a research method used. We performed simple logistic regressions and tested multivariable logistic regression models of researcher characteristics as predictors of IS engagement. Results Of the 1767 health researchers who completed the survey, 68% stated they would be able to describe IS. Only 12.7% of the population self-identified as using IS methods. Of the researchers not self-identifying as using IS methods, 86.4% reported using the IS elements “at least some of the time.” Nearly half (47.9%) reported using process/implementation evaluation, 89.2% use IS measures, 27.3% use IS frameworks, and 75.6% investigate or examine ways to integrate interventions into routine health settings. IS awareness significantly reduced the likelihood of all measures of unrecognized IS engagement (aOR 0.13, 95% CI 0.07 to 0.27, p &lt; 0.001). Conclusion Overall, awareness of IS is high among health researchers, yet there is also a high prevalence of unrecognized IS engagement. Efforts are needed to further disseminate what constitutes IS research and increase IS awareness among health researchers.",
+  "year": 2020,
+  "lang": "en",
+  "type": "article",
+  "venue": "Implementation Science Communications",
+  "topic": "Health Policy Implementation Science",
+  "field": "Health Professions"
+ },
+ {
+  "id": "W2204172252",
+  "title": "Collective action for knowledge mobilisation: a realist evaluation of the Collaborations for Leadership in Applied Health Research and Care",
+  "abstract": "Background The establishment of the Collaborations for Leadership in Applied Health Research and Care (CLAHRCs) was the culmination of a number of policy initiatives to bridge the gap between evidence and practice. CLAHRCs were created and funded to facilitate development of partnerships and connect the worlds of academia and practice in an effort to improve patient outcomes through the conduct and application of applied health research. Objectives Our starting point was to test the theory that bringing higher education institutions and health-care organisations closer together catalyses knowledge mobilisation. The overall purpose was to develop explanatory theory regarding implementation through CLAHRCs and answer the question ‘what works, for whom, why and in what circumstances?’. The study objectives focused on identifying and tracking implementation mechanisms and processes over time; determining what influences whether or not and how research is used in CLAHRCs; investigating the role played by boundary objects in the success or failure of implementation; and determining whether or not and how CLAHRCs develop and sustain interactions and communities of practice. Methods This study was a longitudinal realist evaluation using multiple qualitative case studies, incorporating stakeholder engagement and formative feedback. Three CLAHRCs were studied in depth over four rounds of data collection through a process of hypothesis generation, refining, testing and programme theory specification. Data collection included interviews, observation, documents, feedback sessions and an interpretive forum. Findings Knowledge mobilisation in CLAHRCs was a function of a number of interconnected issues that provided more or less conducive conditions for collective action. The potential of CLAHRCs to close the metaphorical ‘know–do’ gap was dependent on historical regional relationships, their approach to engaging different communities, their architectures, what priorities were set and how, and providing additional resources for implementation, including investment in roles and activities to bridge and broker boundaries. Additionally, we observed a balance towards conducting research rather than implementing it. Key mechanisms of interpretations of collaborative action, opportunities for connectivity, facilitation, motivation, review and reflection, and unlocking barriers/releasing potential were important to the processes and outcomes of CLAHRCs. These mechanisms operated",
+  "year": 2015,
+  "lang": "en",
+  "type": "article",
+  "venue": "Health Services and Delivery Research",
+  "topic": "Health Policy Implementation Science",
+  "field": "Health Professions"
+ },
+ {
+  "id": "W2110063032",
+  "title": "Evaluation of the Effects of an Evidence-Based Practice Curriculum on Knowledge, Attitudes, and Self-Assessed Skills and Behaviors in Chiropractic Students",
+  "abstract": "1. J Manipulative Physiol Ther. 2012 Nov-Dec;35(9):701-9. doi: \n10.1016/j.jmpt.2012.10.014.\n\nEvaluation of the effects of an evidence-based practice curriculum on knowledge, \nattitudes, and self-assessed skills and behaviors in chiropractic students.\n\nHaas M(1), Leo M, Peterson D, Lefebvre R, Vavrek D.\n\nAuthor information:\n(1)Center for Outcomes Studies, University of Western States, Portland, OR \n97230, USA. mhaas@uws.edu\n\nOBJECTIVE: The purpose of this study was to evaluate the effects of an \nevidence-based practice (EBP) curriculum incorporated throughout a chiropractic \ndoctoral program on EBP knowledge, attitudes, and self-assessed skills and \nbehaviors in chiropractic students.\nMETHODS: In a prospective cohort design, students from the last entering class \nunder an old curriculum were compared with students in the first 2 entering \nclasses under a new EBP curriculum during the 9th and 11th quarters of the \n12-quarter doctoral program at the University of Western States in Portland, OR \n(n = 370 students at matriculation). Analysis of variance (ANOVA) was performed \nusing a 3-cohort × 2-quarter repeated cross-sectional factorial design to assess \nthe effect of successive entering classes and stage of the students' education.\nRESULTS: For the knowledge exam (primary outcome), there was a statistically \nsignificant cohort effect with each succeeding cohort showing better performance \n(P < .001); students also performed slightly better in the 11th quarter than in \nthe 9th quarter (P < .05). A similar pattern in cohort and quarter effects was \nfound with behavior self-appraisal for greater time accessing databases such as \nPubMed. Student self-appraisal of their skills was higher in the 11th than the \n9th quarter. All cohorts rejected a set of sentinel misconceptions about \napplication of scientific literature (practice attitudes).\nCONCLUSIONS: The implementation of the EBP curriculum at this institution \nresulted in acquisition of knowledge necessary to access and interpret \nscientific literature, the retention and improvement of skills over time, and \nthe enhancement of self-reported behaviors favoring use of quality online \nresources.\n\nCopyright © 2012 National University of Health Sciences. Published by Mosby, \nInc. All rights reserved.\n\nDOI: 10.1016/j.jmpt.2012.10.014\nPMCID: PMC3515209\nPMID: 23206965 [Indexed for MEDLINE]\n\nConflict of interest statement: Conflicts of interest None.",
+  "year": 2012,
+  "lang": "en",
+  "type": "article",
+  "venue": "Journal of Manipulative and Physiological Therapeutics",
+  "topic": "Health Sciences Research and Education",
+  "field": "Health Professions"
+ },
+ {
+  "id": "W2148681326",
+  "title": "Protocol for CONSORT-SPI: an extension for social and psychological interventions",
+  "abstract": "Abstract Background Determining the effectiveness of social and psychological interventions is important for improving individual and population health. Such interventions are complex and, where possible, are best evaluated by randomised controlled trials (RCTs). The use of research findings in policy and practice decision making is hindered by poor reporting of RCTs. Poor reporting limits the ability to replicate interventions, synthesise evidence in systematic reviews, and utilise findings for evidence-based policy and practice. The lack of guidance for reporting the specific methodological features of complex intervention RCTs contributes to poor reporting. We aim to develop an extension of the Consolidated Standards of Reporting Trials Statement for Social and Psychological Interventions (CONSORT-SPI). Methods/design This research project will be conducted in five phases. The first phase was the project launch, which consisted of the establishment of a Project Executive and International Advisory Group, and recruitment of journal editors and the CONSORT Group. The second phase involves a Delphi process that will generate a list of possible items to include in the CONSORT Extension. Next, there will be a formal consensus meeting to select the reporting items to add to, or modify for, the CONSORT-SPI Extension. Fourth, guideline documents will be written, including an explanation and elaboration (E&amp;E) document that will provide detailed advice for each item and examples of good reporting. The final phase will comprise guideline dissemination, with simultaneous publication and endorsement of the guideline in multiple journals, endorsement by funding agencies, presentations at conferences and other meetings, and a dedicated website that will facilitate feedback about the guideline. Conclusion As demonstrated by previous CONSORT guidelines, the development of an evidence-based reporting guideline for social and psychological intervention RCTs should improve the accuracy, comprehensiveness, and transparency of study reports. This, in turn, promises to improve the critical appraisal of research and its use in policy and practice decision making. We invite readers to participate in the project by visiting our website ( http://tinyurl.com/CONSORT-study ).",
+  "year": 2013,
+  "lang": "en",
+  "type": "article",
+  "venue": "Implementation Science",
+  "topic": "Health Policy Implementation Science",
+  "field": "Health Professions"
+ },
+ {
+  "id": "W3087727097",
+  "title": "Advancing the pragmatic measurement of sustainment: a narrative review of measures",
+  "abstract": "Abstract Background Sustainment, an outcome indicating an intervention continues to be implemented over time, has been comparatively less studied than other phases of the implementation process. This may be because of methodological difficulties, funding cycles, and minimal attention to theories and measurement of sustainment. This review synthesizes the literature on sustainment measures, evaluates the qualities of each measure, and highlights the strengths and gaps in existing sustainment measures. Results of the review will inform recommendations for the development of a pragmatic, valid, and reliable measure of sustainment. Methods A narrative review of published sustainment outcome and sustainability measures (i.e., factors that influence sustainment) was conducted, including appraising measures in the Society of Implementation Research Collaboration (SIRC) instrument review project (IRP) and the Dissemination and Implementation Grid-Enabled Measures database initiative (GEM-D&amp;I). The narrative review used a snowballing strategy by searching the reference sections of literature reviews and definitions of sustainability and sustainment. Measures used frequently and judged to be comprehensive and/or validated by a team of implementation scientists were extracted for analysis. Results Eleven measures were evaluated. Three of the included measures were found in the SIRC-IRP, three in the GEM-D&amp;I database, (one measure was in both databases) and six were identified in our additional searches. Thirteen constructs relating to sustainment were coded from selected measures. Measures covered a range of determinants for sustainment (i.e., construct of sustainability) as well as constructs of sustainment as an outcome. Strengths of the measures included, development by expert panels knowledgeable about particular interventions, fields or contexts, and utility in specific scenarios. A number of limitations were found in the measures analyzed including inadequate assessment of psychometric characteristics, being overly intervention or context specific, being lengthy and/or complex, and focusing on outer context factors. Conclusion There is a lack of pragmatic and psychometrically sound measures of sustainment that can be completed by implementation stakeholders within inner context settings (e.g., frontline providers, supervisors).",
+  "year": 2020,
+  "lang": "en",
+  "type": "review",
+  "venue": "Implementation Science Communications",
+  "topic": "Health Policy Implementation Science",
+  "field": "Health Professions"
+ },
+ {
+  "id": "W4321486511",
+  "title": "LEADS+ Developmental Model: Proposing a new model based on an integrative conceptual review",
+  "abstract": "Abstract Background Leaders in academic health sciences centres (AHCs) must navigate multiple roles as an inherent component of their positions. Changing accountabilities, varying expectations, differing leadership capabilities required of multiple leadership roles can be exacerbated by health system disruption, such as during the COVID‐19 pandemic. We need improved models that support leaders in navigating the complexity of multiple leadership roles. Method This integrative conceptual review sought to examine leadership and followership constructs and how they intersect with current leadership practices in AHCs. The goal was to develop a refined model of healthcare leadership development. The authors used iterative cycles of divergent and convergent thinking to explore and synthesise various literature and existing leadership frameworks. The authors used simulated personas and stories to test the model and, finally, the approach sought feedback from knowledge users (including healthcare leaders, medical educators and leadership developers) to offer refinements. Results After five rounds of discussion and reformulation, the authors arrived at a refined model: the LEADS+ Developmental Model . The model describes four nested stages, organising progressive capabilities, as an individual toggles between followership and leadership. During the consultation stage, feedback from 29 out of 65 recruited knowledge users (44.6% response rate) was acquired. More than a quarter of respondents served as a senior leader in a healthcare network or national society (27.5%, n = 8). Consulted knowledge users were invited to indicate their endorsement for the refined model using a 10‐point scale (10 = highest level of endorsement). There was a high level of endorsement: 7.93 (SD 1.7) out of 10. Conclusion The LEADS+ Developmental Model may help foster development of academic health centre leaders. In addition to clarifying the synergistic dynamic between leadership and followership, this model describes the paradigms adopted by leaders within health systems throughout their development journey.",
+  "year": 2023,
+  "lang": "en",
+  "type": "review",
+  "venue": "Medical Education",
+  "topic": "Health Policy Implementation Science",
+  "field": "Health Professions"
+ },
+ {
+  "id": "W4253731119",
+  "title": "The effectiveness of knowledge translation interventions for promoting evidence-informed decision-making among nurses in tertiary care: a systematic review and meta-analysis",
+  "abstract": "Nurses are increasingly expected to engage in evidence-informed decision-making (EIDM) to improve client and system outcomes. Despite an improved awareness about EIDM, there is a lack of use of research evidence and understanding about the effectiveness of interventions to promote EIDM. This project aimed to discover if knowledge translation (KT) interventions directed to nurses in tertiary care are effective for improving EIDM knowledge, skills, behaviours, and, as a result, client outcomes. It also sought to understand contextual factors that affect the impact of such interventions. Methods A systematic review funded by the Canadian Institutes of Health Research (PROSPERO registration: CRD42013003319) was conducted. Included studies examined the implementation of any KT intervention involving nurses in tertiary care to promote EIDM knowledge, skills, behaviours, and client outcomes or studies that examined contextual factors. Study designs included systematic reviews, quantitative, qualitative, and mixed method studies. The search included electronic databases and manual searching of published and unpublished literature to November 2012; key databases included MEDLINE, Cumulative Index to Nursing and Allied Health Literature (CINAHL), and Excerpta Medica (EMBASE). Two reviewers independently performed study selection, risk of bias assessment, and data extraction. Studies with quantitative data determined to be clinically homogeneous were synthesized using meta-analytic methods. Studies with quantitative data not appropriate for meta-analysis were synthesized narratively by outcome. Studies with qualitative data were synthesized by theme. Results Of the 44,648 citations screened, 30 citations met the inclusion criteria (18 quantitative, 10 qualitative, and 2 mixed methods studies). The quality of studies with quantitative data ranged from very low to high, and quality criteria was generally met for studies with qualitative data. No studies evaluated the impact on knowledge and skills; they primarily investigated the effectiveness of multifaceted KT strategies for promoting EIDM behaviours and improving client outcomes. Almost all studies included an educational component. A meta-analysis of two studies determined that a multifaceted intervention (educational meetings and use of a mentor) did not increase engagement in a range of EIDM behaviours [mean difference 2.7, 95 % CI (−1.7 to 7.1), I 2 = 0 %]. Among the remaining studies, no definitive conclusions ",
+  "year": 2021,
+  "lang": "en",
+  "type": "review",
+  "venue": null,
+  "topic": "Health Sciences Research and Education",
+  "field": "Health Professions"
+ },
+ {
+  "id": "W2138444218",
+  "title": "The guideline implementability research and application network (GIRAnet): an international collaborative to support knowledge exchange: study protocol",
+  "abstract": "1. Implement Sci. 2012 Apr 2;7:26. doi: 10.1186/1748-5908-7-26.\n\nThe guideline implementability research and application network (GIRAnet): an \ninternational collaborative to support knowledge exchange: study protocol.\n\nGagliardi AR(1), Brouwers MC, Bhattacharyya OK.\n\nAuthor information:\n(1)University Health Network, Toronto, ON, Canada. anna.gagliardi@uhnresearch.ca\n\nBACKGROUND: Modifying the format and content of guidelines may facilitate their \nuse and lead to improved quality of care. We reviewed the medical literature to \nidentify features desired by different users and associated with guideline use \nto develop a framework of implementability and found that most guidelines do not \ncontain these elements. Further research is needed to develop and evaluate \nimplementability tools.\nMETHODS: We are launching the Guideline Implementability Research and \nApplication Network (GIRAnet) to enable the development and testing of \nimplementability tools in three domains: Resource Implications, Implementation, \nand Evaluation. Partners include the Guidelines International Network (G-I-N) \nand its member guideline developers, implementers, and researchers. In phase \none, international guidelines will be examined to identify and describe exemplar \ntools. Indication-specific and generic tools will populate a searchable \nrepository. In phase two, qualitative analysis of cognitive interviews will be \nused to understand how developers can best integrate implementability tools in \nguidelines and how health professionals use them for interpreting and applying \nguidelines. In phase three, a small-scale pilot test will assess the impact of \nimplementability tools based on quantitative analysis of chart-based behavioural \noutcomes and qualitative analysis of interviews with participants. The findings \nwill be used to plan a more comprehensive future evaluation of implementability \ntools.\nDISCUSSION: Infrastructure funding to establish GIRAnet will be leveraged with \nthe in-kind contributions of collaborating national and international guideline \ndevelopers to advance our knowledge of implementation practice and science. \nNeeds assessment and evaluation of GIRAnet will provide a greater understanding \nof how to develop and sustain such knowledge-exchange networks. Ultimately, by \nfacilitating use of guidelines, this research may lead to improved delivery and \noutcomes of patient care.\n\nDOI: 10.1186/1748-5908-7-26\nPMCID: PMC3338081\nPMID: 22471937 [Indexed for MEDLINE]",
+  "year": 2012,
+  "lang": "en",
+  "type": "article",
+  "venue": "Implementation Science",
+  "topic": "Health Policy Implementation Science",
+  "field": "Health Professions"
+ },
+ {
+  "id": "W2081631580",
+  "title": "Manipulative and Multimodal Therapy for Upper Extremity and Temporomandibular Disorders: A Systematic Review",
+  "abstract": "",
+  "year": 2013,
+  "lang": "en",
+  "type": "review",
+  "venue": "Journal of Manipulative and Physiological Therapeutics",
+  "topic": "Temporomandibular Joint Disorders",
+  "field": "Health Professions"
+ }
+]

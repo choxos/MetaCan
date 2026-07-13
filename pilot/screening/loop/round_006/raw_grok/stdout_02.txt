@@ -1,0 +1,264 @@
+```json
+[
+  {
+    "id": "W2103340238",
+    "categories": ["metaresearch"],
+    "domain": "methods",
+    "study_design": "design_other",
+    "genre": "empirical",
+    "about_ca_system": false,
+    "about_ca_topic": false,
+    "confidence": "low",
+    "reason": "Title-only record: evaluating clinical practice guideline quality targets research products' methodological rigor (metaresearch methods); empty abstract forces low confidence."
+  },
+  {
+    "id": "W4311338564",
+    "categories": [],
+    "study_design": "systematic_review",
+    "genre": "review",
+    "about_ca_system": false,
+    "about_ca_topic": false,
+    "confidence": "medium",
+    "reason": "Regional systematic review of EQ-5D instrument use is domain health-economics application, not research-on-research; empty abstract but title is unambiguous for OUT."
+  },
+  {
+    "id": "W4402328208",
+    "categories": ["metaresearch", "scholarly_communication", "open_science"],
+    "domain": "methods",
+    "study_design": "systematic_review",
+    "genre": "protocol",
+    "about_ca_system": false,
+    "about_ca_topic": false,
+    "confidence": "high",
+    "reason": "Scoping review protocol on K* practices in community-driven research studies knowledge mobilization methods and inclusive production (metaresearch methods; scholarly communication; open science equity)."
+  },
+  {
+    "id": "W281324965",
+    "categories": ["metaresearch"],
+    "domain": "methods",
+    "study_design": "design_other",
+    "genre": "other",
+    "about_ca_system": false,
+    "about_ca_topic": false,
+    "confidence": "low",
+    "reason": "Title targets integrated knowledge translation and stakeholder-informed research practices (metaresearch methods); no abstract so design/genre and confidence remain low."
+  },
+  {
+    "id": "W4382582272",
+    "categories": ["metaresearch"],
+    "domain": "methods",
+    "study_design": "qualitative",
+    "genre": "empirical",
+    "about_ca_system": false,
+    "about_ca_topic": false,
+    "confidence": "high",
+    "reason": "Qualitative case studies of how prevention researchers operationalise systemic vs systematic paradigms treat research practice as the object (metaresearch methods)."
+  },
+  {
+    "id": "W2020672080",
+    "categories": [],
+    "study_design": "design_other",
+    "genre": "empirical",
+    "about_ca_system": false,
+    "about_ca_topic": false,
+    "confidence": "medium",
+    "reason": "Comparing TTO and standard gamble preference instruments develops/validates domain techniques for patient valuation; RULE 1 excludes method development from metaresearch."
+  },
+  {
+    "id": "W4413788159",
+    "categories": ["metaepi_broad"],
+    "study_design": "meta_analysis",
+    "genre": "review",
+    "about_ca_system": false,
+    "about_ca_topic": false,
+    "confidence": "high",
+    "reason": "Clinical SR/MA of LT for HCC uses studies as analytic units (metaepi_broad/Kataoka) but does not test study-characteristic effects on observed effects (not metaepi_narrow/Murad)."
+  },
+  {
+    "id": "W2735430373",
+    "categories": [],
+    "study_design": "systematic_review",
+    "genre": "review",
+    "about_ca_system": false,
+    "about_ca_topic": false,
+    "confidence": "low",
+    "reason": "Literature synthesis on priority-setting influence on policymaking is health policy research, not a defined metascience category; title-only so confidence low."
+  },
+  {
+    "id": "W2885318744",
+    "categories": [],
+    "study_design": "systematic_review",
+    "genre": "review",
+    "about_ca_system": false,
+    "about_ca_topic": false,
+    "confidence": "high",
+    "reason": "Structured review of preference-based utility valuation for NGS outcomes is domain HTA method application (RULE 1), not evaluation of research practices."
+  },
+  {
+    "id": "W4389222730",
+    "categories": ["metaresearch"],
+    "domain": "methods",
+    "study_design": "not_applicable",
+    "genre": "commentary",
+    "about_ca_system": false,
+    "about_ca_topic": true,
+    "confidence": "high",
+    "reason": "Commentary on lessons from conducting implementation science research treats research practice as object (metaresearch methods); substantive subject is Canadian provincial vaccine rollouts (ABOUT_CA_TOPIC)."
+  },
+  {
+    "id": "W2161075463",
+    "categories": ["metaresearch", "scholarly_communication"],
+    "domain": "methods",
+    "study_design": "observational",
+    "genre": "empirical",
+    "about_ca_system": false,
+    "about_ca_topic": false,
+    "confidence": "high",
+    "reason": "Survey of researchers' knowledge transfer and exchange practices studies how researchers use and disseminate evidence (metaresearch methods; scholarly communication)."
+  },
+  {
+    "id": "W2119100170",
+    "categories": ["metaresearch"],
+    "domain": "methods",
+    "study_design": "theoretical_or_conceptual",
+    "genre": "commentary",
+    "about_ca_system": false,
+    "about_ca_topic": false,
+    "confidence": "high",
+    "reason": "Reflection on the science-to-practice gap and reforms across the research-to-practice pipeline evaluates research practice (metaresearch methods)."
+  },
+  {
+    "id": "W4367367803",
+    "categories": [],
+    "study_design": "design_other",
+    "genre": "empirical",
+    "about_ca_system": false,
+    "about_ca_topic": false,
+    "confidence": "high",
+    "reason": "Development of a China-specific CVD preference-based measure is domain instrument construction (RULE 1); Canada affiliations are setting, not object."
+  },
+  {
+    "id": "W3010563719",
+    "categories": [],
+    "study_design": "observational",
+    "genre": "empirical",
+    "about_ca_system": false,
+    "about_ca_topic": false,
+    "confidence": "medium",
+    "reason": "Social network analysis of partnerships in a youth mental health KT network characterises organisational collaboration, not research methods, integrity, or science-as-social-practice as defined."
+  },
+  {
+    "id": "W6902197653",
+    "categories": ["insufficient_payload"],
+    "study_design": "not_applicable",
+    "genre": "other",
+    "about_ca_system": false,
+    "about_ca_topic": false,
+    "confidence": "high",
+    "reason": "Figshare 'Additional file' with empty abstract is a supplementary-file scraping artifact and cannot be screened (insufficient_payload)."
+  },
+  {
+    "id": "W2098531697",
+    "categories": ["metaresearch", "sts", "scholarly_communication"],
+    "domain": "methods",
+    "study_design": "theoretical_or_conceptual",
+    "genre": "commentary",
+    "about_ca_system": true,
+    "about_ca_topic": true,
+    "confidence": "high",
+    "reason": "Analysis of stakeholders shaping Canada's healthcare KT agenda treats knowledge discovery and translation as co-produced social practice (metaresearch methods; STS; scholarly communication; ABOUT_CA_SYSTEM and TOPIC)."
+  },
+  {
+    "id": "W2610816048",
+    "categories": [],
+    "study_design": "systematic_review",
+    "genre": "review",
+    "about_ca_system": false,
+    "about_ca_topic": false,
+    "confidence": "high",
+    "reason": "Review of survey instruments measuring school PA implementation outcomes is domain measurement for program implementation (RULE 1), not study of research practices; Ontario is only a planned application setting."
+  },
+  {
+    "id": "W4229589109",
+    "categories": ["metaresearch", "open_science"],
+    "domain": "reproducibility",
+    "study_design": "theoretical_or_conceptual",
+    "genre": "review",
+    "about_ca_system": false,
+    "about_ca_topic": false,
+    "confidence": "high",
+    "reason": "Primer on transparency, openness, and reproducibility for prevention science directly maps open science principles and metaresearch reproducibility practices."
+  },
+  {
+    "id": "W2196012223",
+    "categories": [],
+    "study_design": "design_other",
+    "genre": "empirical",
+    "about_ca_system": false,
+    "about_ca_topic": false,
+    "confidence": "high",
+    "reason": "Describes building a KT platform in Malawi as an instance of practice; an instance of research/KT practice is not a study of it (RULE 1)."
+  },
+  {
+    "id": "W6958452849",
+    "categories": ["insufficient_payload"],
+    "study_design": "not_applicable",
+    "genre": "other",
+    "about_ca_system": false,
+    "about_ca_topic": false,
+    "confidence": "high",
+    "reason": "Figshare 'Additional file' with empty abstract is a supplementary-file scraping artifact and cannot be screened (insufficient_payload)."
+  },
+  {
+    "id": "W2617385918",
+    "categories": [],
+    "study_design": "systematic_review",
+    "genre": "review",
+    "about_ca_system": false,
+    "about_ca_topic": false,
+    "confidence": "high",
+    "reason": "SR of KT strategies to change physiotherapy clinical practice targets clinician behaviour, not research methods or other defined categories."
+  },
+  {
+    "id": "W3209288188",
+    "categories": ["metaresearch"],
+    "domain": "methods",
+    "study_design": "systematic_review",
+    "genre": "review",
+    "about_ca_system": false,
+    "about_ca_topic": false,
+    "confidence": "medium",
+    "reason": "Narrative review of how HCD methods are practiced across health research and innovation treats research methods as used by researchers as the object (metaresearch methods)."
+  },
+  {
+    "id": "W2029169184",
+    "categories": [],
+    "study_design": "observational",
+    "genre": "empirical",
+    "about_ca_system": false,
+    "about_ca_topic": false,
+    "confidence": "high",
+    "reason": "Program evaluation of a medical-student CBPR training fellowship is education/service evaluation, not research-on-research or another defined category."
+  },
+  {
+    "id": "W6902128111",
+    "categories": ["insufficient_payload"],
+    "study_design": "not_applicable",
+    "genre": "other",
+    "about_ca_system": false,
+    "about_ca_topic": false,
+    "confidence": "high",
+    "reason": "Figshare 'Additional file' with empty abstract is a supplementary-file scraping artifact and cannot be screened (insufficient_payload)."
+  },
+  {
+    "id": "W6977027163",
+    "categories": ["insufficient_payload"],
+    "study_design": "not_applicable",
+    "genre": "other",
+    "about_ca_system": false,
+    "about_ca_topic": false,
+    "confidence": "high",
+    "reason": "Figshare 'Additional file' with empty abstract is a supplementary-file scraping artifact and cannot be screened (insufficient_payload)."
+  }
+]
+```

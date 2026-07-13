@@ -22,8 +22,11 @@ for p in "$DIR"/prompts/prompt_*.txt; do
     claude -p --model claude-opus-4-8 --max-turns 3 \
       "$(cat "$p")" > "$RAW/stdout_${ch}.txt" 2> "$RAW/stderr_${ch}.txt"
   else
+    # </dev/null is load-bearing: with the prompt passed as an argument, codex still
+    # polls stdin, and a backgrounded harness hands it a pipe that never closes, so the
+    # call hangs forever printing 'Reading additional input from stdin...' (round 006).
     codex exec --model gpt-5.6-luna -c model_reasoning_effort='"medium"' --sandbox read-only \
-      --skip-git-repo-check "$(cat "$p")" > "$RAW/stdout_${ch}.txt" 2> "$RAW/stderr_${ch}.txt"
+      --skip-git-repo-check "$(cat "$p")" < /dev/null > "$RAW/stdout_${ch}.txt" 2> "$RAW/stderr_${ch}.txt"
   fi
   python3 - "$RAW/stdout_${ch}.txt" "$out" <<'PY'
 import json, sys

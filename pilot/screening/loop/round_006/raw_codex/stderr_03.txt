@@ -1,0 +1,603 @@
+Reading additional input from stdin...
+OpenAI Codex v0.144.0
+--------
+workdir: /Users/choxos/Documents/GitHub/CaRN-data-challenge
+model: gpt-5.6-luna
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: medium
+reasoning summaries: none
+session id: 019f5c6c-1455-7742-8869-e5e6d25c3910
+--------
+user
+You are screening scholarly works for the MetaCan project. Apply the rubric below to EVERY record and output ONE JSON array with ONE object per record, conforming EXACTLY to the JSON schema below. Output ONLY the JSON array, no prose before or after it.
+
+# THE RUBRIC (v3.1, locked)
+
+# MétaCan screening rubric (v3.1)
+
+**Status: LOCKED, 2026-07-13.** Supersedes v2.2. No screening ran under v3.0, which lived for hours: an adversarial review found that its Murad quotation inserted the word "treatment" into a sentence this document calls verbatim (D29). v3.1 corrects that quotation from the PDF, fixes the Kataoka page range, aligns the funder clause with the protocol, corrects two glosses against their sources, and adds the study-design vocabulary that v3.0 demanded but never listed. Since D29, `pilot/check_quotes.R` fails the build if any quotation marked verbatim is not a substring of its cited PDF.
+
+**No number produced so far was made under v3.** The pilot ran under v1.0; the 179-work re-screen under v2.0. Both instruments are kept byte for byte, so every figure stays attributable to the text that produced it. v3 is the instrument the **full screen** runs under, and the **v2-to-v3 difference is reported as a finding**.
+
+---
+
+## What changed, and why it is not cosmetic
+
+v1 and v2 had a tier hierarchy: **T1 core / T2 adjacent / T3 contextual**. That structure had a defect at its root, and the data found it before I did.
+
+> **"Adjacent" is defined by negation.** It means *not-T1*. A category whose only content is "near the important one" cannot be applied consistently, and **OUT-vs-adjacent was the largest tier confusion at every sample size we measured.** The models were not failing. **The category was empty.**
+
+It was also a value judgment I had no standing to make. Calling science and technology studies "adjacent" says STS is peripheral to metascience. **STS is a field with its own founding literature, its own journals, and its own account of what studying science means.**
+
+**v3 deletes the hierarchy.** Every tradition is a **category with its own positive definition, taken from its own literature, quoted verbatim from a source in `docs/reference/definitions/`.** There is no residual bucket. A record may carry **more than one** category, because the traditions genuinely overlap and forcing a single label is what created the problem.
+
+**Nothing here is cited from memory.** Every quotation below was read from the PDF named beside it. In a project whose worst deviation (D26) was that its own definition of metaresearch was mine and uncited for its entire life, a recalled citation would be the single worst thing this document could contain.
+
+---
+
+## The definitional problem is the field's, not this project's, and the field says so in print
+
+- **Puljak L, Lovric Makaric Z, Buljan I, Pieper D.** *What is a meta-epidemiological study? Analysis of published literature indicated heterogeneous study designs and definitions.* J Comp Eff Res. 2020. doi:10.2217/cer-2019-0201
+  > Analysed **175 information sources**. *"Definitions of meta-epidemiological studies varied and some studies used the term meta-epidemiological study to describe methodological research-on-research studies."* Conclusion: *"Research community would benefit from consensus about definition of meta-epidemiological study."*
+
+- **Kataoka Y, et al.** J Clin Epidemiol. 2023;154:219-220.
+  > A **published dispute** with Puljak, opening by naming *"the currently confusing nomenclatures around 'meta-epidemiology' and related terms such as 'meta-research' and 'research-on-research'."*
+
+- **Stevens ER, Laynor G.** *Recognizing the value of meta-research and making it easier to find.* J Med Libr Assoc. 2023;111(4). doi:10.5195/jmla.2023.1758
+  > *"The breadth of meta-research presents a significant challenge for identifying published meta-research studies,"* and it notes **the lack of a MeSH heading** for meta-research.
+
+**Those are claims about humans.** The pilot's numbers are claims about **models disagreeing under one rubric**. They are consistent, they are not the same estimand, and **only the human audit closes the gap** (`DEVIATIONS.md` D27).
+
+---
+
+## The categories
+
+A work may carry **more than one**. **Categories are not ranked and none is primary: the released landscape is the union of the defined categories, with every overlap reported.** The call's primary estimand is reported over `metaresearch` because that is the field the call names; that is a **reporting choice, not a rank**, and each of the other traditions gets the same per-category estimate.
+
+### 1. `metaresearch`
+
+> **"Meta-research is an evolving scientific discipline that aims to evaluate and improve research practices. It includes thematic areas of methods, reporting, reproducibility, evaluation, and incentives (how to do, report, verify, correct, and reward science)."**
+>
+> Ioannidis JPA, Fanelli D, Dunne DD, Goodman SN. *Meta-research: Evaluation and Improvement of Research Methods and Practices.* PLoS Biol. 2015;13(10):e1002264.
+> See also Ioannidis JPA. PLoS Biol. 2018;16(3):e2005468; METRICS, Stanford: <https://metrics.stanford.edu/research>
+
+Every `metaresearch` record carries a **`domain`**, taken verbatim from those five thematic areas and glossed by Ioannidis's own parenthetical:
+
+| `domain` | Ioannidis's gloss | operationally |
+|---|---|---|
+| `methods` | *how to **do** science* | design, conduct, analysis, bias, statistical practice, evidence-synthesis methodology; Ioannidis's own description of this area ends *"research integrity and ethics"* |
+| `reporting` | *how to **report** science* | reporting standards and completeness |
+| `reproducibility` | *how to **verify** science* | replication, data and code sharing, transparency |
+| `evaluation` | *how to **correct** science* | peer review and editorial process, research assessment, metrics |
+| `incentives` | *how to **reward** science* | funding allocation, careers and the research workforce, reward structures |
+
+**RULE 1 stands** (carried from v2; it resolved the largest single seam): *a work is `metaresearch` on methods only if its object is methods **as used, reported or performed by researchers**. Developing, deriving, validating or teaching a technique for a domain is OUT, however generic the technique.* **An instance of a research practice is not a study of it.**
+
+### 2. `metaepidemiology` — **CONTESTED IN PRINT. Both definitions are coded.**
+
+There is **no consensus definition** (Puljak 2020, above). **This rubric does not invent one.** It codes **both published definitions** and **flags where they disagree**, because the dispute is live, it is between named researchers in peer-reviewed journals, and hiding it inside a single label would destroy the only evidence of it.
+
+- **`metaepi_narrow`** — Murad MH, Wang Z. *Guidelines for reporting meta-epidemiological methodology research.* Evid Based Med. 2017;22(4):139-142. doi:10.1136/ebmed-2017-110713
+  > *"Meta-epidemiological studies adopt a systematic review or meta-analysis approach to examine the impact of certain characteristics of clinical studies on the observed effect and provide empirical evidence for hypothesised associations."*
+  >
+  > *(v3.0 quoted this sentence as 'the observed **treatment** effect'. The word is not in the paper; it narrowed Murad's definition while claiming his authority for the narrowing, and it survived a LOCK. D29.)*
+
+- **`metaepi_broad`** — Kataoka Y, et al. J Clin Epidemiol. 2023;154:219-220. *(Not 219-221: page 221 is Puljak's reply, which is the other side of the dispute.)*
+  > *"The greatest common defining concept of 'meta-epidemiological studies' would be **any studies in which the unit of analysis is a study, not a patient**."*
+
+**Where the two differ, the record is flagged, and the size of that class is reported as a finding.** A published dispute is a boundary to be *measured*, not settled by fiat.
+
+### 3. `bibliometrics` (scientometrics)
+
+> **"Scientometrics is the study of the quantitative aspects of the process of science as a communication system. It is centrally, but not only, concerned with the analysis of citations in the academic literature."**
+>
+> Mingers J, Leydesdorff L. *A Review of Theory and Practice in Scientometrics.* Eur J Oper Res. 2015. doi:10.1016/j.ejor.2015.04.002
+> Founding work: Price DJ de Solla. *Networks of Scientific Papers.* Science. 1965;149(3683):510-515.
+
+**Boundary with `metaresearch`, and it resolves v1's self-contradiction** (v1's T1 bullet and its own worked example gave opposite answers): a study that **characterises a literature** by quantitative means is `bibliometrics`. A study that uses bibliometric means to **make a claim about research practice** (citation distortion, reporting trends, citation of retracted work) is **also `metaresearch`**, and carries both. **v3 does not force the choice; that forcing was the bug.**
+
+### 4. `sts` (science and technology studies)
+
+> **"co-production is shorthand for the proposition that the ways in which we know and represent the world (both nature and society) are inseparable from the ways in which we choose to live in it."**
+> **"The idiom of co-production ... represents a major synthesis of scholarship in science and technology studies (S&TS)."**
+>
+> Jasanoff S (ed.). *States of Knowledge: The Co-Production of Science and the Social Order.* Routledge, 2004.
+
+> **"We study science in action and not ready made science or technology; to do so, we either arrive before the facts and machines are blackboxed or we follow the controversies that reopen them."**
+>
+> Latour B. *Science in Action: How to Follow Scientists and Engineers through Society.* Harvard University Press.
+
+**Operational test:** the work studies **science or technology as social practice**: how knowledge and social order are produced together, how facts are made rather than found, how controversies open and close. **The object must be science, research, or technoscientific knowledge**, at any period. *(v1 restricted history and philosophy of science to "contemporary research practice", an unexamined adverb that silently excluded the entire history of Canadian science. It is deleted.)*
+
+### 5. `scholarly_communication`
+
+> **"Scholarly communication is a rich and complex sociotechnical system formed over a period of centuries."**
+> **"...used here in the broader sense to include the formal and informal activities associated with the use and dissemination of information through public and private channels."**
+>
+> Borgman CL. *Scholarship in the Digital Age: Information, Infrastructure, and the Internet.* MIT Press, 2007.
+
+### 6. `open_science`
+
+> **"Open science is a set of principles and practices that aim to make scientific research from all fields accessible to everyone for the benefits of scientists and society as a whole."**
+> **"Open science is about making sure not only that scientific knowledge is accessible but also that the production of that knowledge itself is inclusive, equitable and sustainable."**
+>
+> UNESCO. *Recommendation on Open Science* (introduction), 2021. **193 countries adopted it.**
+
+The second sentence is the reason this category is not a synonym for "open access": UNESCO's definition makes **inclusivity and equity of knowledge production** part of open science itself, which is the criterion this challenge is judged on.
+
+### 7. `research_integrity` — **defined by its OBJECT; the sources do not define the field, and that is recorded**
+
+**Honest limitation, stated rather than hidden.** The two sources supplied define **what counts as misconduct** and **what publication ethics covers**. **Neither defines "research integrity research" as a discipline** the way Ioannidis defines metaresearch or Jasanoff defines STS. So this category is defined by its **object**, and the gap is on the record.
+
+> **"...the analysis was limited to behaviours that distort scientific knowledge: fabrication, falsification, 'cooking' of data, etc... Survey questions on plagiarism and other forms of professional misconduct were excluded."**
+>
+> Fanelli D. *How Many Scientists Fabricate and Falsify Research? A Systematic Review and Meta-Analysis of Survey Data.* PLoS ONE. 2009;4(5):e5738.
+
+> Publication ethics, per **COPE** (Committee on Publication Ethics), *Ethics Toolkit for Journal Editors and Publishers.*
+
+**Operational test:** the object is **research misconduct, questionable research practices, retraction, authorship, or publication ethics**, *as an object of study*. **Fanelli's boundary is adopted and its exclusion is carried:** fabrication, falsification and data cooking are in; **plagiarism and professional misconduct are recorded but marked, because Fanelli's own scope excludes them** and a rubric that silently widened his boundary while citing him would be misquoting its own source.
+
+**This category overlaps `metaresearch` heavily**: Ioannidis's own description of the *methods* area ends *"research integrity and ethics"*, so integrity research is inside metaresearch by his definition. **That overlap is expected and allowed**, because v3 is multi-label. It is not a hierarchy.
+
+### `insufficient_payload`
+
+Not a judgment; a statement that the record **cannot be screened** (a scraping artifact as a title, boilerplate in the abstract field, a title and abstract from different papers, spam). **Reported, never silently dropped**: the size of this class is a finding about OpenAlex.
+
+### `OUT`
+
+None of the above. **"OUT" now means "in no defined category", not "not near the important one."** That is the whole change.
+
+---
+
+## Canadian linkage
+
+- `CA_AFF` — at least one Canadian institutional affiliation. **Warning, measured:** OpenAlex misassigns these. **At least 17,466** works enter the frame with, as their *only* Canadian institution, one of six suspect assignments: a parse failure that is not an institution at all (`Impact`, attached to a Spanish COVID essay) or a real organization attached to papers it has nothing to do with (`Discovery Air (Canada)` on a Brazilian linguistics paper). That is a **lower bound** from six audited strings (finding 27), and the records are **flagged for audit, not deleted**. A Canadian affiliation is *evidence*, not proof.
+- `CA_FUND` — ≥1 funder whose OpenAlex `country_code` is Canada: an **external criterion, not a curated list**. *(An earlier four-funder list (CIHR, NSERC, SSHRC, CFI) failed twice: three of its four hardcoded IDs pointed at other funders, and even corrected it missed Canada Research Chairs, the Government of Canada, NRC, Mitacs, Genome Canada, and every provincial agency. OpenAlex knows 2,182 Canadian funders; `R/pin_entities.R` pins them.)*
+- **`ABOUT_CA_SYSTEM`** — the Canadian **research system or academy** is a substantive object. *A Canadian institution as setting is not this.*
+- **`ABOUT_CA_TOPIC`** — Canada is a substantive subject, whether or not research is the object.
+
+*(v1 had one boolean and it could not separate "Canadian data, universal claim" from "a claim about Canada". Four screening agents proposed this split independently.)*
+
+## Study design
+
+Coded for every work, from **this vocabulary and no other** (v3.0 said "coded for every work" and never listed the values, which is D20's exact shape: a field every screener codes and no two code alike):
+
+| `study_design` | MEDLINE publication type it is validated against |
+|---|---|
+| `randomized_trial` | Randomized Controlled Trial |
+| `nonrandomized_trial` | Controlled Clinical Trial |
+| `observational` | Observational Study |
+| `systematic_review` | Systematic Review |
+| `meta_analysis` | Meta-Analysis |
+| `case_report` | Case Reports |
+| `qualitative` | *(none; ships as a score, marked unvalidated)* |
+| `simulation_or_modeling` | *(none; ships as a score, marked unvalidated)* |
+| `bench_or_experimental` | *(none; ships as a score, marked unvalidated)* |
+| `theoretical_or_conceptual` | *(none; ships as a score, marked unvalidated)* |
+| `not_applicable` | *(the work is not empirical research: editorials, datasets, software)* |
+| `design_other` | *(none; ships as a score, marked unvalidated)* |
+
+**Validated against MEDLINE publication types, per record and not per year.** *(v3.0 called these "human-indexed by NLM", which is false; v3.1's first correction said "human-indexed until April 2022", which is also false. NLM stopped fully human indexing as universal practice around 2011 and completed automation in 2022, so a YEAR CUTOFF cannot separate the eras. The reference subset is defined by NLM's **record-level `IndexingMethod`** field: absent = fully human, `Curated` = automated with human review, `Automated` = machine. Human records are the reference; the others measure **agreement with another machine** and are reported as such.)*
+
+**Class-specific calendar eligibility, because a publication type that did not exist cannot be a negative.** *Observational Study* entered the vocabulary in **2014** and *Systematic Review* in **2019**. A 2008 cohort study carries no *Observational Study* tag, and treating that absence as "not observational" would train and score the model against a censoring artifact. Each design class is therefore validated **only on records published after its type existed**, and that eligibility window is prespecified per class. Where MEDLINE does not reach (most of the physical sciences, humanities and social sciences), the label ships as a **score, not an assertion**, and is **marked unvalidated**. *The dataset states, per field, which of its own annotations it has earned the right to assert.*
+
+## Genre
+
+**One vocabulary, defined here, and `screening-schema-v3.json` QUOTES this list rather than paraphrasing it.**
+
+`empirical` · `review` · `methods` · `commentary` · `editorial` · `protocol` · `dataset` · `software` · `other`
+
+*(In v1 the rubric and the schema named **two different vocabularies for this field**, overlapping on two values out of thirteen. Every screener was handed both and obeyed both privately; the validator checked `tier` and had never been asked to look at `genre`, so 16,800 labels passed every check that ran. See D20 and finding 24. **A codebook is code. It gets a test.**)*
+
+## `tier` is RETIRED
+
+v3 replaces it with `categories`, which is **multi-label**. The values `T1`, `T2`, `T3` and `OUT` remain in the **legacy** `screening-schema.json` **only so that the v1 and v2 label files stay readable**; the v3 contract, `screening-schema-v3.json`, **does not contain the field**, so no new screening can emit them. `OUT` in v3 means an empty `categories` array: *in no defined category*, not *near the important one*.
+
+## Confidence
+
+`high` / `medium` / `low`. **If the abstract is missing, judge on the title alone and set confidence to `low` unless the title is unambiguous.** The schema **quotes** this sentence; it does not paraphrase it (D24).
+
+**`low` is a legitimate answer.** A screener that never says `low` is not being careful; it is being confident.
+
+---
+
+## Sources
+
+Every quotation above was read from a PDF in **`docs/reference/definitions/`**, which is committed. Nothing is cited from memory, and since D29 that is a checked property, not a promise: `pilot/check_quotes.R` fails the build if any quotation marked verbatim is not a substring of its cited PDF. `pilot/check_instrument.R` fails the build if this rubric and `screening-schema-v3.json` disagree about any field, in either direction.
+
+
+# THE OUTPUT SCHEMA (screening-schema-v3.json)
+
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "MetaCan screening output, rubric v3.1",
+  "description": "The output contract for every screening run under rubric v3.1. This document QUOTES the rubric; it never paraphrases it. Where a description below restates a rule, the wording is copied from docs/protocol/rubric-v3.md, because the schema misquoting the rubric is D24 and two documents that disagree are two instruments (D20). pilot/check_instrument.R fails the build if this file and the rubric disagree about any field, in either direction. The legacy screening-schema.json remains ONLY so that v1 and v2 label files stay readable; no new screening validates against it.",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["id", "categories", "study_design", "genre", "about_ca_system", "about_ca_topic", "confidence"],
+    "properties": {
+      "id": {
+        "type": "string",
+        "pattern": "^W\\d+$",
+        "description": "The OpenAlex work id, exactly as given in the payload."
+      },
+      "categories": {
+        "type": "array",
+        "items": {
+          "enum": ["metaresearch", "metaepi_narrow", "metaepi_broad", "bibliometrics", "sts", "scholarly_communication", "open_science", "research_integrity", "insufficient_payload"]
+        },
+        "uniqueItems": true,
+        "description": "Every category the work belongs to; a work may carry more than one, and categories are not ranked and none is primary. An EMPTY array is OUT, which means 'in no defined category', not 'near the important one'. insufficient_payload means the record cannot be screened (a scraping artifact as a title, boilerplate in the abstract field, a title and abstract from different papers, spam) and is reported, never silently dropped."
+      },
+      "domain": {
+        "enum": ["methods", "reporting", "reproducibility", "evaluation", "incentives", null],
+        "description": "REQUIRED when categories contains metaresearch, and null otherwise. Taken verbatim from Ioannidis's five thematic areas: methods, reporting, reproducibility, evaluation, and incentives (how to do, report, verify, correct, and reward science)."
+      },
+      "study_design": {
+        "enum": ["randomized_trial", "nonrandomized_trial", "observational", "systematic_review", "meta_analysis", "case_report", "qualitative", "simulation_or_modeling", "bench_or_experimental", "theoretical_or_conceptual", "not_applicable", "design_other"],
+        "description": "Coded for every work, from this vocabulary and no other. not_applicable means the work is not empirical research: editorials, datasets, software."
+      },
+      "genre": {
+        "enum": ["empirical", "review", "methods", "commentary", "editorial", "protocol", "dataset", "software", "other"],
+        "description": "One vocabulary, defined in the rubric, and this schema QUOTES that list rather than paraphrasing it."
+      },
+      "about_ca_system": {
+        "type": "boolean",
+        "description": "ABOUT_CA_SYSTEM: the Canadian research system or academy is a substantive object. A Canadian institution as setting is not this."
+      },
+      "about_ca_topic": {
+        "type": "boolean",
+        "description": "ABOUT_CA_TOPIC: Canada is a substantive subject, whether or not research is the object."
+      },
+      "confidence": {
+        "enum": ["high", "medium", "low"],
+        "description": "If the abstract is missing, judge on the title alone and set confidence to low unless the title is unambiguous. low is a legitimate answer: a screener that never says low is not being careful; it is being confident."
+      },
+      "reason": {
+        "type": "string",
+        "maxLength": 400,
+        "description": "One sentence naming the rubric rule the decision rests on."
+      }
+    }
+  }
+}
+
+
+# THE RECORDS
+
+[
+ {
+  "id": "W4402643319",
+  "title": "Development and evaluation of a model to identify publications on the clinical impact of pharmacist interventions",
+  "abstract": "1. Res Social Adm Pharm. 2024 Dec;20(12 Pt A):1134-1141. doi: \n10.1016/j.sapharm.2024.09.004. Epub 2024 Sep 19.\n\nDevelopment and evaluation of a model to identify publications on the clinical \nimpact of pharmacist interventions.\n\nThibault M(1), Tanguay C(2).\n\nAuthor information:\n(1)Department of Pharmacy, CHU Sainte-Justine, 3175 Côte-Sainte-Catherine, \nMontréal, Québec, Canada; Research Center, CHU Sainte-Justine, 3175 \nCôte-Sainte-Catherine, Montréal, Québec, Canada.\n(2)Department of Pharmacy, CHU Sainte-Justine, 3175 Côte-Sainte-Catherine, \nMontréal, Québec, Canada. Electronic address: \nCynthia.tanguay.hsj@ssss.gouv.qc.ca.\n\nBACKGROUND: Pharmacists are increasingly involved in patient care. Pharmacy \npractice research helps them identify the most clinically meaningful \ninterventions. However, the lack of a widely accepted controlled vocabulary in \nthis field hinders the discovery of this literature.\nOBJECTIVE: To compare the performance of a machine learning model with manual \nliterature searches in identifying potentially relevant publications on the \nclinical impact of pharmacist interventions. To describe the dataset that was \nbuilt.\nMETHODS: An automated PubMed search was performed weekly starting in November \n2021. Titles and abstracts were retrieved and independently evaluated by two \nreviewers to select potentially relevant publications on the clinical impact of \npharmacists. A Cohen's kappa score was calculated. Data was collected during an \n11-month period to train a machine learning model. It was evaluated \nprospectively during a 5-month period (predictions were collected without being \nshown to the reviewers). The performance of the model was compared with manual \nsearches (positive predictive value [PPV] and sensitivity).\nRESULTS: A transformers-based model was selected. During the prospective \nevaluation period, 114/1631 (7 %) publications met selection criteria. If the \nmodel had been used, 1273/1631 (78 %) would not have needed review. Only 3/114 \n(3 %) would have been incorrectly excluded. The model showed a PPV of 0.310 and \na sensitivity of 0.974. The best manual search showed a PPV of 0.046 and a \nsensitivity of 0.711. On December 12, 2023, the dataset contained 8607 \npublications, of which 544 (6 %) met the criteria. The kappa between reviewers \nwas 0.786. The dataset and the model were used to develop a website and a \nnewsletter to share publications (https://impactpharmacy.net).\nCONCLUSION: A machine learning model was developed and",
+  "year": 2024,
+  "lang": "en",
+  "type": "article",
+  "venue": "Research in Social and Administrative Pharmacy",
+  "topic": "Pharmaceutical Practices and Patient Outcomes",
+  "field": "Medicine"
+ },
+ {
+  "id": "W4387401210",
+  "title": "Co-Creating Socio-Culturally-Appropriate Virtual Geriatric Care for Older Adults Living With HIV: A Community-Based Participatory, Intersectional Protocol",
+  "abstract": "The aging cohort of persons living with human immunodeficiency virus (HIV) in Canada has reached a critical point, with nearly half now 50 years age or older. Older persons living with HIV have specific needs which can be effectively addressed by geriatric specialists. However, the recognition of HIV care as a domain of geriatrics is recent, resulting in a lack of clinical recommendations and modern care models for delivering geriatric care to this population. Virtual care has been demonstrated to reduce existing barriers to accessing HIV care in some populations but before it can be adapted to geriatric HIV care a critical first step is to acknowledge and understand disparities in socioeconomic circumstances, technology access and ability and cultural differences in experiences. This protocol marks the initial step in a comprehensive program of research aimed at co-designing, implementing, and evaluating culturally-appropriate virtual geriatric care for diverse older adults living with HIV. The study employs qualitative methods with older adults living with HIV to lay the groundwork, to inform the future development of a virtual model of geriatric care. We will explore the perspectives of diverse groups of older persons with HIV on (1) The value and necessity of culturally-tailored virtual interventions for geriatric HIV care; and (2) Recommendations on how best to engage older persons with HIV in the future co-design of a virtual model of geriatric HIV care. Ultimately, a more culturally-appropriate approach to care will foster a more inclusive and supportive healthcare system for all individuals affected by HIV including those who are aging. Researchers can utilize this research protocol to employ qualitative co-design and participatory methods with diverse older adults living with HIV.",
+  "year": 2023,
+  "lang": "en",
+  "type": "article",
+  "venue": "International Journal of Qualitative Methods",
+  "topic": "HIV-related health complications and treatments",
+  "field": "Medicine"
+ },
+ {
+  "id": "W2062057130",
+  "title": "Conducting a Withdrawal Survey",
+  "abstract": "",
+  "year": 2001,
+  "lang": "en",
+  "type": "article",
+  "venue": "Quality in Higher Education",
+  "topic": "Higher Education Research Studies",
+  "field": "Social Sciences"
+ },
+ {
+  "id": "W4414343060",
+  "title": "Comparing Missing Data Imputation Methods for Patient-Reported Outcomes in Esophageal Cancer Research",
+  "abstract": "ABSTRACT Missing data is common in patient-reported outcomes (PRO) research, particularly in oncology settings. We evaluated common methods for handling missing data in esophageal cancer quality of life measurements, namely: multiple imputation by chained equations, variational autoencoder, denoising autoencoder, Bayesian principal component analysis, a deep autoen-coder method with patient-specific embeddings and temporal pattern modeling, SoftImpute, and K-nearest neighbors. Using data from McGill University’s Esophageal and Gastric Data- and Bio-Bank, we compared these imputation methods for 44 variables of the Functional Assessment of Cancer Therapy-Esophageal patient-reported outcome measure on execution time, distribution preservation, correlation maintenance, imputation accuracy, and clinical classification performance. Our comprehensive validation framework provides evidence-based recommendations for selecting appropriate imputation methods for esophageal cancer PRO research, which may improve the validity and reliability of research findings in this domain.",
+  "year": 2025,
+  "lang": "en",
+  "type": "preprint",
+  "venue": "medRxiv",
+  "topic": "Esophageal Cancer Research and Treatment",
+  "field": "Medicine"
+ },
+ {
+  "id": "W7100925027",
+  "title": "Atmospheric Chemistry and Physics Quantitative assessment of upstream source influences on total",
+  "abstract": "",
+  "year": 2011,
+  "lang": "en",
+  "type": "article",
+  "venue": null,
+  "topic": "Pharmaceutical industry and healthcare",
+  "field": "Pharmacology, Toxicology and Pharmaceutics"
+ },
+ {
+  "id": "W2890627487",
+  "title": "Smartphone-Delivered Peer Physical Activity Counseling Program for Individuals With Spinal Cord Injury: Protocol for Development and Pilot Evaluation",
+  "abstract": "1. JMIR Res Protoc. 2019 Mar 22;8(3):e10798. doi: 10.2196/10798.\n\nSmartphone-Delivered Peer Physical Activity Counseling Program for Individuals \nWith Spinal Cord Injury: Protocol for Development and Pilot Evaluation.\n\nBest KL(1)(2), Routhier F(1)(2), Sweet SN(3)(4), Lacroix E(1), \nArbour-Nicitopoulos KP(5), Borisoff JF(6)(7).\n\nAuthor information:\n(1)Centre for Interdisciplinary Research in Rehabilitation and Social \nIntegration, Institut de Réadaptation en Déficience Physique de Québec, Centre \nIntégré Universitaire de Santé et de Services Sociaux de la Capitale National, \nQuebec, QC, Canada.\n(2)Department of Rehabilitation, Faculty of Medicine, Université Laval, Quebec, \nQC, Canada.\n(3)Department of Kinesiology & Physical Education, McGill University, Montreal, \nQC, Canada.\n(4)Centre de Recherche Interdisciplinaire en Réadaptation du Montréal \nMétropolitain, Montreal, QC, Canada.\n(5)Faculty of Kinesiology and Physical Education, University of Toronto, \nToronto, ON, Canada.\n(6)Rehabilitation Engineering Design Laboratory, British Columbia Institute of \nTechnology, Burnaby, BC, Canada.\n(7)International Collaboration on Repair Discoveries, Vancouver Coastal Health, \nVancouver, BC, Canada.\n\nBACKGROUND: Leisure-time physical activity (LTPA) is a critical component of a \nhealthy lifestyle for individuals with spinal cord injury (SCI). However, most \nindividuals are not sufficiently active to accrue health benefits. The Active \nLiving Lifestyles program for individuals with SCI who use manual wheelchairs \n(ALLWheel) targets important psychological factors that are associated with LTPA \nuptake and adherence while overcoming some barriers associated with \nparticipation restrictions.\nOBJECTIVE: The goal of the paper is to describe the protocol for the development \nand evaluation of the ALLWheel program for individuals with SCI who use manual \nwheelchairs.\nMETHODS: The first three stages of the Medical Research Council framework for \ndeveloping and evaluating complex interventions (ie, preclinical, modeling, \nexploratory) are described. The preclinical phase will consist of scoping and \nsystematic reviews and review of theory. The intervention will be modeled by \nexpert opinions and consensus through focus groups and Delphi surveys with \nindividuals with SCI, clinicians, and community partners. Finally, the \nfeasibility and potential influence of the ALLWheel program on LTPA and \npsychological outcomes will be evaluated.\nRESULTS: This project is funded by the Craig",
+  "year": 2018,
+  "lang": "en",
+  "type": "article",
+  "venue": "JMIR Research Protocols",
+  "topic": "Spinal Cord Injury Research",
+  "field": "Medicine"
+ },
+ {
+  "id": "W4412166541",
+  "title": "P.006 Cost-effectiveness of Lecanemab for the treatment of early Alzheimer’s Disease: a Canadian societal perspective",
+  "abstract": "Background: The efficacy and safety of lecanemab have previously been evaluated in the Phase 3 randomized clinical trial, Clarity AD (NCT03887455). Methods: A Markov cohort model was developed to estimate the cost-effectiveness of lecanemab versus standard of care (SoC) in patients with mild cognitive impairment (MCI) or mild dementia due to Alzheimer’s disease (AD), with confirmed beta-amyloid (Aβ) pathology, from a Canadian societal perspective. Health states were determined by Clinical Dementia Rating-Sum of Boxes (CDR-SB) scores. Transitions between health states during month 0-18 were estimated from Clarity AD. Beyond month 18, relative efficacy for lecanemab in the form of the hazard ratio for time-to-worsening of CDR-SB was applied to literature-based transition probabilities. The model included the effects of lost productivity and impact on carer health-related quality of life. Results: The incremental cost-effectiveness ratio (ICER) for lecanemab vs SoC was estimated to be CAD 62,751 per QALY gained. The probability that lecanemab was cost-effective at a threshold of CAD 100,000 was estimated to be 88.5%. Conclusions: Lecanemab represents a cost-effective option for the treatment for early AD from the Canadian societal perspective. The results of this analysis can be used to inform clinical and economic decision making.",
+  "year": 2025,
+  "lang": "en",
+  "type": "article",
+  "venue": "Canadian Journal of Neurological Sciences / Journal Canadien des Sciences Neurologiques",
+  "topic": "Health Systems, Economic Evaluations, Quality of Life",
+  "field": "Economics, Econometrics and Finance"
+ },
+ {
+  "id": "W2789571318",
+  "title": "Western Faculty Profile: Dr. Susanne Schmid",
+  "abstract": "Dr. Susanne Schmid is the Associate Dean Research, Graduate &amp; Postdoctoral Studies at the Schulich School of Medicine &amp; Dentistry and an Associate Professor in the Department of Anatomy &amp; Cell Biology at Western University. Dr. Schmid has a background in biology and psychology and obtained a doctorate at the University Eye Hospital in Germany. Her research looks at early stages of sensory information processing and filtering, in particular habituation and prepulse inhibition. Anthony Li, a member of the Academic Affairs Committee for WURJHNS, had the pleasure of interviewing Dr. Schmid to learn more about her career path and her research.",
+  "year": 2017,
+  "lang": "en",
+  "type": "article",
+  "venue": "Western Undergraduate Research Journal Health and Natural Sciences",
+  "topic": "Health and Medical Studies",
+  "field": "Health Professions"
+ },
+ {
+  "id": "W4386067391",
+  "title": "A Collaborative Response to the COVID-19 Challenge: Developing an International Platform for Sharing E-learning Materials for Veterinary Education",
+  "abstract": "When the COVID-19 pandemic swept through Europe in 2020, veterinary educational institutions faced new challenges overnight: distance learning became imperative, and teachers were forced to develop e-learning material on the fly. As a response to the unfortunate situation, veterinary faculties at three European universities (Utrecht, Copenhagen, Helsinki) applied for and received an Erasmus+ grant to develop an international platform for sharing veterinary e-learning material. Technical and administrative challenges caused a slow start. This added to the already limited timeframe and demonstrated the obstacles involved in trying to fuse organizational, legal, digital, educational, and cultural systems across national borders. Still, within the 2-year grant period, the partners managed to establish a platform for sharing veterinary e-learning materials among veterinary schools in Europe and eventually beyond. Furthermore, a website was designed for the project, as well as a Teachers’ Forum, and relevant guidelines for up- and downloading and for the creation of new e-learning material. Privacy and copyright regulations were incorporated in a consent form to be accepted before uploading material. In order to disseminate the project, three webinars were held for colleagues at European veterinary schools. The current and additional papers as well as abstracts will make the project visible and subsequently available to the veterinary community. At present, 61 teachers have registered with the Veterinary Online Collection. Hopefully, a growing community of veterinary educators will become interested in sharing teaching material and experiences across national borders, thus facilitating veterinary teaching in general and during future lock-downs in particular.",
+  "year": 2023,
+  "lang": "en",
+  "type": "article",
+  "venue": "Journal of Veterinary Medical Education",
+  "topic": "Innovative Teaching Methods",
+  "field": "Social Sciences"
+ },
+ {
+  "id": "W4310593977",
+  "title": "Connecting for Care: a protocol for a mixed-method social network analysis to advance knowledge translation in the field of child development and rehabilitation",
+  "abstract": "Abstract Background Connections between individuals and organizations can impact knowledge translation (KT). This finding has led to growing interest in the study of social networks as drivers of KT. Social networks are formed by the patterns of relationships or connections generated through interactions. These connections can be studied using social network analysis (SNA) methodologies. The relatively small yet diverse community in the field of child development and rehabilitation (CD&amp;R) in Canada offers an ideal case study for applying SNA. The purposes of this work are to (1) quantify and map the structure of Canadian CD&amp;R KT networks among four groups: families, health care providers, KT support personnel, and researchers; (2) explore participant perspectives of the network structure and of KT barriers and facilitators within it; and (3) generate recommendations to improve KT capacity within and between groups. Aligning with the principles of integrated KT, we have assembled a national team whose members contribute throughout the research and KT process, with representation from the four participant groups. Methods A sequential, explanatory mixed-method study, within the bounds of a national case study in the field of CD&amp;R. Objective 1: A national SNA survey of family members with advocacy/partnership experience, health care providers, KT support personnel, and researchers, paired with an anonymous survey for family member without partnership experience, will gather data to describe the KT networks within and between groups and identify barriers and facilitators of network connections. Objective 2: Purposive sampling from Phase 1 will identify semi-structured interview participants with whom to examine conventional and network-driven KT barriers, facilitators, and mitigating strategies. Objective 3: Intervention mapping and a Delphi process will generate recommendations for network and conventional interventions to strengthen the network and facilitate KT. Discussion This study will integrate network and KT theory in mapping the structure of the CD&amp;R KT network, enhance our understanding of conventional and network-focused KT barriers and facilitators, and provide recommendations to strengthen KT networks. Recommendations can be applied and tested within the field of CD&amp;R to improve KT, with the aim of ensuring children achieve the best health outcomes possible through timely access to effective healthcare.",
+  "year": 2022,
+  "lang": "en",
+  "type": "article",
+  "venue": "Implementation Science Communications",
+  "topic": "Health Policy Implementation Science",
+  "field": "Health Professions"
+ },
+ {
+  "id": "W4416524812",
+  "title": "Sample size calculation",
+  "abstract": "",
+  "year": 2025,
+  "lang": "en",
+  "type": "book-chapter",
+  "venue": "Elsevier eBooks",
+  "topic": "Statistical Methods in Clinical Trials",
+  "field": "Mathematics"
+ },
+ {
+  "id": "W4285493004",
+  "title": "Interdisciplinary staff perceptions of advance care planning in long-term care homes: a qualitative study",
+  "abstract": "Abstract Background Residents living in long-term care homes (LTCH) have complex care needs, multiple chronic conditions, increasing frailty and cognitive impairment. A palliative approach that incorporates advance care planning (ACP) should be integrated with chronic disease management, yet it is not a norm in most LTCHs. Despite its growing need, there remains a lack of staff engagement in the ACP process. Objectives The aim of this study was to explore the perceptions and experiences of interdisciplinary staff related to the practice of ACP in LTCHs. Methods This study is part of a larger Canadian project, iCAN ACP, that aims to increase uptake, and access to ACP for older Canadians living with frailty. An exploratory qualitative design using an interpretive descriptive approach was employed utilizing focus groups and semi-structured interviews with staff from four LTCHs in Ontario, Canada. Findings There were 98 participants, including nurses ( n = 36), physicians ( n = 4), personal support workers ( n = 34), support staff ( n = 23), and a public guardian ( n = 1). Three common themes and nine subthemes were derived: a) ongoing nature of ACP; b) complexities around ACP conversations; and c) aspirations for ACP becoming a standard of care in LTCHs. Discussion The findings of this study provide important contributions to our understanding of the complexities surrounding ACP implementation as a standard of practice in LTCHs. One of the critical findings relates to a lack of ACP conversations prior to admission in the LTCHs, by which time many residents may have already lost cognitive abilities to engage in these discussions. The hierarchical nature of LTCH staffing also serves as a barrier to the interdisciplinary collaboration required for a successful implementation of ACP initiatives. Participants within our study expressed support for ACP communication and the need for open lines of formal and informal interdisciplinary communication. There is a need for revitalizing care in LTCHs through interdisciplinary care practices, clarification of role descriptions, optimized staffing, capacity building of each category of staff and commitment from the LTCH leadership for such care. Conclusion The findings build on a growing body of research illustrating the need to improve staff engagement in ACP communication in LTCHs.",
+  "year": 2022,
+  "lang": "en",
+  "type": "article",
+  "venue": "BMC Palliative Care",
+  "topic": "Palliative Care and End-of-Life Issues",
+  "field": "Medicine"
+ },
+ {
+  "id": "W4404119005",
+  "title": "Examining individual- versus population-level social determinants of health in a cluster randomized trial of health coaches for patients with multiple chronic conditions",
+  "abstract": "Abstract Introduction: Social determinants of health (SDOH) are an important contributor to health status and health outcomes. In this analysis, we compare SDOH measured both at the individual and population levels in patients with high comorbidity who receive primary care at Federally Qualified Health Centers in New York and Chicago and enrolled in the Tipping Points trial. Methods: We analyzed individual- and population-level measures of SDOH in 1,488 patients with high comorbidity (Charlson Comorbidity Index ≥ 4) enrolled in Tipping Points. At the individual level, we used a standardized patient-reported questionnaire. At the population level, we employed patient addresses to calculate the Social Deprivation Index (SDI) and Area Deprivation Index. Multivariable regressions were conducted in addition to qualitative feedback from stakeholders. Results: Individual-level SDOH are distinct from population-level measures. Significant component predictors of population SDI are being unhoused, unable to pay for utilities, and difficulty accessing medical transportation. Qualitative findings mirrored these results. High comorbidity patients report significant SDOH challenges at the individual level. Fitting a binomial generalized linear model, the comorbidity score is significantly predicted by the composite individual SDOH index ( p &lt; 0.0001) controlling for age and race/ethnicity. Conclusions: Individual- and population-level SDOH measures provide different risk assessments. The use of community-level SDI data is informative in the aggregate but should not be used to identify patients with individual unmet social needs. Health systems should implement a standardized individualized assessment of unmet SDOH needs and build strong, enduring partnerships with community-based organizations that can provide those services.",
+  "year": 2024,
+  "lang": "en",
+  "type": "article",
+  "venue": "Journal of Clinical and Translational Science",
+  "topic": "Food Security and Health in Diverse Populations",
+  "field": "Health Professions"
+ },
+ {
+  "id": "W2093143930",
+  "title": "Book Review: The Practice of Nursing Research: Conduct, Critique, and Utilization (5th ed.)",
+  "abstract": "",
+  "year": 2005,
+  "lang": "en",
+  "type": "article",
+  "venue": "Nursing Science Quarterly",
+  "topic": "Health Sciences Research and Education",
+  "field": "Health Professions"
+ },
+ {
+  "id": "W4392000361",
+  "title": "Evaluating the Feasibility, Acceptance, and Beneficial Effects of Online Occupational Therapy for Post–COVID-19 Condition: Protocol for a Randomized Controlled Trial (ErgoLoCo Study)",
+  "abstract": "Background Post–COVID-19 syndrome (PCS; also known as “long COVID”) is a relatively novel disease comprising physical, psychological, and cognitive complaints persisting several weeks to months after acute infection with SARS-CoV-2. Approximately 10% of patients with COVID-19 are affected by long-term symptoms. However, effective treatment strategies are lacking. The ErgoLoCo (Occupational Therapy [Ergotherapie] for Long COVID) study was designed to develop and evaluate a novel occupational therapy (OT) concept of online delivery of therapy for long COVID. Objective The primary study objective is to assess the feasibility of the online OT intervention in PCS. Secondary aims include the evaluation of online OT concerning cognitive problems, occupational performance, and social participation. Methods This randomized controlled interventional pilot study involves parallel mixed methods process analyses and a realist evaluation approach. A total of 80 clients with PCS aged at least 16 years will be recruited into two interventional groups. The control cohort (watch and wait) comprises 80 clients with long COVID. Treatment is provided through teletherapy (n=40) or delivery of prerecorded videos (n=40) using the same standardized OT concept twice weekly over 12 weeks. Analyses of quantitative questionnaires and qualitative interviews based on the theoretical framework of acceptability will be performed to assess feasibility. Focus group meetings will be used to assess how acceptable and helpful the intervention was to the participating occupational therapists. Standardized tests will be used to assess the initial efficacy of the intervention on neurocognitive performance; limitations in mobility, self-care, and everyday activities; pain; disabilities; quality of life (QoL); social participation; and anxiety and depression in PCS, and the possible effects of online OT on these complaints. Results The German Ministry of Education and Research provided funding for this research in March 2022. Data collection took place from October 2022 to August 31, 2023. Data analysis will be completed by the end of April 2024. We anticipate publishing the results in the fall of 2024. Conclusions Despite the enormous clinical need, effective and scalable treatment options for OT clients who have PCS remain scarce. The ErgoLoCo study will assess whether online-delivered OT is a feasible treatment approach in PCS. Furthermore, this study will assess the effect of the intervention o",
+  "year": 2024,
+  "lang": "en",
+  "type": "article",
+  "venue": "JMIR Research Protocols",
+  "topic": "Long-Term Effects of COVID-19",
+  "field": "Medicine"
+ },
+ {
+  "id": "W4413920014",
+  "title": "Screen, Stratify, and Treat: Data to Drive Worldwide CKD Health Policy",
+  "abstract": "1. Kidney Int Rep. 2025 Aug 27;10(10):3297-3299. doi: 10.1016/j.ekir.2025.08.026.\n eCollection 2025 Oct.\n\nScreen, Stratify, and Treat: Data to Drive Worldwide CKD Health Policy.\n\nRifkin B(1), Levin A(2).\n\nAuthor information:\n(1)Division of Nephrology, Hattiesburg Clinic, Hattiesburg, Mississippi, USA.\n(2)Department of Medicine, University of British Columbia, Vancouver, British \nColumbia, Canada.\n\nComment on\n    doi: 10.1016/j.ekir.2025.07.014.\n\nDOI: 10.1016/j.ekir.2025.08.026\nPMCID: PMC12546643\nPMID: 41141523",
+  "year": 2025,
+  "lang": "en",
+  "type": "editorial",
+  "venue": "Kidney International Reports",
+  "topic": "Health Systems, Economic Evaluations, Quality of Life",
+  "field": "Economics, Econometrics and Finance"
+ },
+ {
+  "id": "W2987382174",
+  "title": "Author response: A meta-analysis of threats to valid clinical inference in preclinical research of sunitinib",
+  "abstract": "",
+  "year": 2015,
+  "lang": "en",
+  "type": "peer-review",
+  "venue": null,
+  "topic": "Animal testing and alternatives",
+  "field": "Veterinary"
+ },
+ {
+  "id": "W3138386593",
+  "title": "The Covid-19 Pandemic Has Exposed Opportunities To Strengthen Our Health Research Systems",
+  "abstract": "Professor Sir Mark Walport, FRS, FMed Sci, FRCP, physicianscientist, academic leader and visionary health research planner, was the recipient of the 2020 Henry G. Friesen International Prize in Health Research. He is a former Chief Executive, UK Research and Innovation (UKRI) and UK government’s Chief Scientific Advisor. He continues to be a champion of fundamental science in health research, engineering, technology and innovation, and is a major spokesperson on COVID-19 pandemic trends at the global level.",
+  "year": 2021,
+  "lang": "en",
+  "type": "letter",
+  "venue": "Clinical and investigative medicine",
+  "topic": "Health and Medical Research Impacts",
+  "field": "Medicine"
+ },
+ {
+  "id": "W2731768897",
+  "title": "Do students perceive use of sectional CT/MRI imaging as helpful in teaching of veterinary anatomy, and does it relate to visual spatial ability? A student survey and Mental Rotations Test.",
+  "abstract": "",
+  "year": 2017,
+  "lang": "en",
+  "type": "article",
+  "venue": "Journal of Veterinary Medical Education",
+  "topic": "Veterinary Practice and Education Studies",
+  "field": "Health Professions"
+ },
+ {
+  "id": "W4254513552",
+  "title": "Specificity",
+  "abstract": "Abstract The false positive rate of a diagnostic or screening test is defined, and its clinical implications are discussed. An alternative use of the term “specificity” in factor analysis is also mentioned.",
+  "year": 2005,
+  "lang": "en",
+  "type": "other",
+  "venue": "Encyclopedia of Biostatistics",
+  "topic": "Meta-analysis and systematic reviews",
+  "field": "Decision Sciences"
+ },
+ {
+  "id": "W1969407063",
+  "title": "Analysis of Impact of Culture Shock on Individual Psychology",
+  "abstract": "In recent years, international communication has become a common phenomenon because of the trend of globalization. This makes culture shock start to be experienced by more people and causes growing concern. This project takes the negative effects of culture shock into account and pays attention to how to minimize psychological discomfort when entering new cultural patterns. First of all, the main reason and the negative impact of culture shock are given. Next, it describes a number of solutions and evaluates the effectiveness of them. Finally, this paper justifies the preferred choice of solution, and then noticeable points are emphasized. Considering that character and disposition may be various among different people, it is found that in order to attain satisfactory results, choosing appropriate methods and reducing psychological stress to the controllable level are very important. This may be helpful for people who are experiencing culture shock to keep a healthy psychology.",
+  "year": 2009,
+  "lang": "en",
+  "type": "article",
+  "venue": "International Journal of Psychological Studies",
+  "topic": "International Student and Expatriate Challenges",
+  "field": "Social Sciences"
+ },
+ {
+  "id": "W4401905327",
+  "title": "Epidemiological Study in Antiviral Innate Immunity",
+  "abstract": "1. Methods Mol Biol. 2025;2854:189-197. doi: 10.1007/978-1-0716-4108-8_19.\n\nEpidemiological Study in Antiviral Innate Immunity.\n\nZhao X(1), Liu Y(1), Cheng R(1), Zheng C(2), Shang P(3)(4).\n\nAuthor information:\n(1)Department of Neurology, Nanfang Hospital, Southern Medical University, \nGuangzhou, Guangdong Province, China.\n(2)Department of Microbiology, Immunology and Infectious Diseases, University of \nCalgary, Calgary, AB, Canada.\n(3)Department of Neurology, Nanfang Hospital, Southern Medical University, \nGuangzhou, Guangdong Province, China. Shang.Pei@Mayo.edu.\n(4)Department of Neurology, Mayo Clinic, Rochester, MN, USA. Shang.Pei@Mayo.edu.\n\nThis chapter summarizes the epidemiological study design of natural immune \nepidemiology studies based on recent COVID-19-related research. The \nepidemiological studies on antiviral innate immunity have mainly included \nrandomized controlled trials (RCTs) and observational studies. Importantly, this \nchapter will discuss how to use these methodologies to answer an epidemiological \nquestion of natural immunity in the viral infection process based on previous \nstudies. An observational case- or cohort-based study of antiviral innate \nimmunity may support this theoretical hypothesis but is not appropriate for \nclinical practice or treatment. RCTs are the gold standard for epidemiological \nstudies and occupy a greater role in the hierarchy of evidence.\n\n© 2025. The Author(s), under exclusive license to Springer Science+Business \nMedia, LLC, part of Springer Nature.\n\nDOI: 10.1007/978-1-0716-4108-8_19\nPMID: 39192130 [Indexed for MEDLINE]",
+  "year": 2024,
+  "lang": "en",
+  "type": "article",
+  "venue": "Methods in molecular biology",
+  "topic": "Respiratory viral infections research",
+  "field": "Medicine"
+ },
+ {
+  "id": "W3158345009",
+  "title": "Transition to practice for the new graduate NP: A checklist and guide to understanding next steps",
+  "abstract": "The transition to practice for the newly graduated nurse practitioner requires multiple steps. While accessible through multiple outlets it is cumbersome to gather. This article outlines a singular resource of next steps for the new graduate outlining the process for a successful transition to professional practice. A time-oriented checklist of essential tasks to keep the new graduate organized can reduce stress and delay on their path to becoming a nurse practitioner.",
+  "year": 2021,
+  "lang": "en",
+  "type": "article",
+  "venue": "Journal of Nursing Education and Practice",
+  "topic": "Nursing Roles and Practices",
+  "field": "Health Professions"
+ },
+ {
+  "id": "W4293050978",
+  "title": "Comparative Analysis of Religion and The Public Ethics of Stem-Cell Research: Community-Based Research",
+  "abstract": "",
+  "year": 2018,
+  "lang": "en",
+  "type": "article",
+  "venue": "Zenodo (CERN European Organization for Nuclear Research)",
+  "topic": "Ethics in medical practice",
+  "field": "Health Professions"
+ },
+ {
+  "id": "W1972770053",
+  "title": "Abstract 1274: Alcohol and lung cancer risk: a pooled analysis using International Lung Cancer Consortium studies",
+  "abstract": "Abstract Background: Alcohol consumption is known to be associated with risk of developing several cancers. It is unclear, however, whether alcohol consumption is a risk factor for lung cancer. The relationship between lung cancer and alcohol consumption is likely to be confounded by smoking. To minimize potential confounding by tobacco consumption, we conducted a pooled analysis to examine the association of alcohol consumption with lung cancer risk in a large sample of never-smokers. Methods: We pooled data from 22 case-control and cohort studies from North America, Europe and Asia within the International Lung Cancer Consortium (ILCCO) and SYNERGY Consortium. We examined the association of average lifetime alcohol consumption (expressed as average grams per day intake) with lung cancer risk in never smokers using logistic regression to model categories of alcohol consumption (0&amp;lt;5g per day, 5&amp;lt;10g per day, 10&amp;lt;20g per day, 20&amp;lt;30g per day, 30&amp;lt;45g per day, 45+ g per day). To investigate the shape of the dose response relationship, we applied restricted cubic spline models to examine the association for lung cancer risk overall and by histological subtype. Additional analyses examined wine, beer and liquor consumption in relation to risk, with mutual adjustment for each alcoholic beverage. All analyses were adjusted for age, sex, education, ethnicity and study. Results: A total of 2548 never-smoking cases and 9362 never-smoking controls were included in the analysis. The results showed lower risk among consumers of alcohol with strongest evidence found for moderate drinkers relative to non-drinkers with ORs of 0.80 (95% CI 0.70-0.90) and 0.82 (95% CI 0.69-0.99) for &amp;lt;5grams and 5-10 grams of alcohol per day respectively. Non-linear restricted cubic splines showed reduced lung cancer risk among moderate drinkers relative to non-drinkers with risk increasing towards the null as consumption increased. Similar results were seen for adenocarcinoma and squamous cell carcinoma. Associations with lung cancer differed for wine and beer consumption. Reduced risk was observed for wine drinking particularly at low levels of drinking, OR of 0.80 (95% CI=0.69-0.94) for &amp;lt;5g per day. Risk for beer consumption increased from close to null among occasional drinkers to 1.54 (95% CI 0.90-2.65) among consumers of 20-30g of alcohol per day (test for trend P=0.09). Conclusions: These results indicate an inverse association between mod",
+  "year": 2014,
+  "lang": "en",
+  "type": "article",
+  "venue": "Cancer Research",
+  "topic": "Alcohol Consumption and Health Effects",
+  "field": "Medicine"
+ }
+]
+warning: loading hooks from both /Users/choxos/.codex/hooks.json and /Users/choxos/.codex/config.toml; prefer a single representation for this layer
+2026-07-13T17:00:39.581488Z ERROR rmcp::transport::worker: worker quit with fatal: Transport channel closed, when Auth(AuthorizationRequired)
+warning: Skill descriptions were shortened to fit the 2% skills context budget. Codex can still see every skill, but some descriptions are shorter. Disable unused skills or plugins to leave more room for the rest.
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart Failed
+hook: SessionStart Completed
+hook: SessionStart Completed
+hook: SessionStart Completed
+hook: SessionStart Completed
+hook: SessionStart Failed
+hook: UserPromptSubmit
+hook: UserPromptSubmit
+hook: UserPromptSubmit Failed
+hook: UserPromptSubmit Failed
+codex
+[
+  {"id":"W4402643319","categories":["metaresearch"],"domain":"methods","study_design":"simulation_or_modeling","genre":"methods","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"Evaluates methods for identifying research publications, which is metaresearch on methods."},
+  {"id":"W4387401210","categories":[],"domain":null,"study_design":"qualitative","genre":"protocol","about_ca_system":false,"about_ca_topic":true,"confidence":"high","reason":"Studies virtual geriatric HIV care rather than a defined research tradition."},
+  {"id":"W2062057130","categories":[],"domain":null,"study_design":"observational","genre":"empirical","about_ca_system":false,"about_ca_topic":false,"confidence":"low","reason":"The title alone does not establish membership in a defined category."},
+  {"id":"W4414343060","categories":[],"domain":null,"study_design":"simulation_or_modeling","genre":"methods","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"Developing and comparing imputation techniques for a domain is OUT under Rule 1."},
+  {"id":"W7100925027","categories":["insufficient_payload"],"domain":null,"study_design":"not_applicable","genre":"other","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"The title is a scraping artifact and the abstract is missing."},
+  {"id":"W2890627487","categories":[],"domain":null,"study_design":"qualitative","genre":"protocol","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"Develops and evaluates a physical-activity intervention rather than studying research practice."},
+  {"id":"W4412166541","categories":[],"domain":null,"study_design":"simulation_or_modeling","genre":"empirical","about_ca_system":false,"about_ca_topic":true,"confidence":"high","reason":"A Canadian cost-effectiveness model is a substantive study of treatment economics, not a defined category."},
+  {"id":"W2789571318","categories":[],"domain":null,"study_design":"not_applicable","genre":"other","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"This is a faculty profile, not a work in a defined category."},
+  {"id":"W4386067391","categories":[],"domain":null,"study_design":"not_applicable","genre":"other","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"Reports development of an educational sharing platform without studying scholarly communication or open science as defined."},
+  {"id":"W4310593977","categories":[],"domain":null,"study_design":"design_other","genre":"protocol","about_ca_system":false,"about_ca_topic":true,"confidence":"high","reason":"Studies Canadian knowledge-translation networks, not science or research as a defined object."},
+  {"id":"W4416524812","categories":[],"domain":null,"study_design":"not_applicable","genre":"methods","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"A chapter on sample-size calculation teaches a technique rather than studying research practice."},
+  {"id":"W4285493004","categories":[],"domain":null,"study_design":"qualitative","genre":"empirical","about_ca_system":false,"about_ca_topic":true,"confidence":"high","reason":"Studies advance-care-planning practice rather than a defined research tradition."},
+  {"id":"W4404119005","categories":[],"domain":null,"study_design":"randomized_trial","genre":"empirical","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"Analyzes patient social determinants in a clinical trial rather than studying research practice."},
+  {"id":"W2093143930","categories":[],"domain":null,"study_design":"not_applicable","genre":"commentary","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"A book review is not itself a work in a defined category."},
+  {"id":"W4392000361","categories":[],"domain":null,"study_design":"randomized_trial","genre":"protocol","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"Evaluates an occupational-therapy intervention rather than a defined research tradition."},
+  {"id":"W4413920014","categories":["insufficient_payload"],"domain":null,"study_design":"not_applicable","genre":"editorial","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"The title and abstract are from different works, making the record unscreenable."},
+  {"id":"W2987382174","categories":["metaresearch"],"domain":"methods","study_design":"not_applicable","genre":"commentary","about_ca_system":false,"about_ca_topic":false,"confidence":"low","reason":"The title concerns threats to validity in preclinical research, but the missing abstract limits screening confidence."},
+  {"id":"W3138386593","categories":["insufficient_payload"],"domain":null,"study_design":"not_applicable","genre":"commentary","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"The title and abstract are mismatched, so the record cannot be screened."},
+  {"id":"W2731768897","categories":[],"domain":null,"study_design":"observational","genre":"empirical","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"A student survey of anatomy teaching is not a study of a defined research tradition."},
+  {"id":"W4254513552","categories":[],"domain":null,"study_design":"not_applicable","genre":"other","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"An encyclopedia entry defining specificity is outside all defined categories."},
+  {"id":"W1969407063","categories":[],"domain":null,"study_design":"design_other","genre":"empirical","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"Studies culture shock and psychological discomfort rather than research practice or science as a social object."},
+  {"id":"W4401905327","categories":[],"domain":null,"study_design":"not_applicable","genre":"methods","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"Describes epidemiological methods for antiviral immunity rather than studying research practice."},
+  {"id":"W3158345009","categories":[],"domain":null,"study_design":"not_applicable","genre":"other","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"A professional transition checklist is not a work in a defined category."},
+  {"id":"W4293050978","categories":["sts"],"domain":null,"study_design":"qualitative","genre":"empirical","about_ca_system":false,"about_ca_topic":false,"confidence":"low","reason":"The title indicates study of public ethics surrounding stem-cell research as a social and technoscientific object, but the abstract is missing."},
+  {"id":"W1972770053","categories":[],"domain":null,"study_design":"observational","genre":"empirical","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"A pooled patient-level cancer-risk analysis is not meta-epidemiology because its unit of analysis is not a study."}
+]
+hook: Stop
+hook: Stop
+hook: Stop
+hook: Stop Completed
+hook: Stop Completed
+hook: Stop Failed
+tokens used
+30,341

@@ -1,0 +1,603 @@
+Reading additional input from stdin...
+OpenAI Codex v0.144.0
+--------
+workdir: /Users/choxos/Documents/GitHub/CaRN-data-challenge
+model: gpt-5.6-luna
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: medium
+reasoning summaries: none
+session id: 019f5c6d-d69e-7412-9e8a-368787635708
+--------
+user
+You are screening scholarly works for the MetaCan project. Apply the rubric below to EVERY record and output ONE JSON array with ONE object per record, conforming EXACTLY to the JSON schema below. Output ONLY the JSON array, no prose before or after it.
+
+# THE RUBRIC (v3.1, locked)
+
+# MétaCan screening rubric (v3.1)
+
+**Status: LOCKED, 2026-07-13.** Supersedes v2.2. No screening ran under v3.0, which lived for hours: an adversarial review found that its Murad quotation inserted the word "treatment" into a sentence this document calls verbatim (D29). v3.1 corrects that quotation from the PDF, fixes the Kataoka page range, aligns the funder clause with the protocol, corrects two glosses against their sources, and adds the study-design vocabulary that v3.0 demanded but never listed. Since D29, `pilot/check_quotes.R` fails the build if any quotation marked verbatim is not a substring of its cited PDF.
+
+**No number produced so far was made under v3.** The pilot ran under v1.0; the 179-work re-screen under v2.0. Both instruments are kept byte for byte, so every figure stays attributable to the text that produced it. v3 is the instrument the **full screen** runs under, and the **v2-to-v3 difference is reported as a finding**.
+
+---
+
+## What changed, and why it is not cosmetic
+
+v1 and v2 had a tier hierarchy: **T1 core / T2 adjacent / T3 contextual**. That structure had a defect at its root, and the data found it before I did.
+
+> **"Adjacent" is defined by negation.** It means *not-T1*. A category whose only content is "near the important one" cannot be applied consistently, and **OUT-vs-adjacent was the largest tier confusion at every sample size we measured.** The models were not failing. **The category was empty.**
+
+It was also a value judgment I had no standing to make. Calling science and technology studies "adjacent" says STS is peripheral to metascience. **STS is a field with its own founding literature, its own journals, and its own account of what studying science means.**
+
+**v3 deletes the hierarchy.** Every tradition is a **category with its own positive definition, taken from its own literature, quoted verbatim from a source in `docs/reference/definitions/`.** There is no residual bucket. A record may carry **more than one** category, because the traditions genuinely overlap and forcing a single label is what created the problem.
+
+**Nothing here is cited from memory.** Every quotation below was read from the PDF named beside it. In a project whose worst deviation (D26) was that its own definition of metaresearch was mine and uncited for its entire life, a recalled citation would be the single worst thing this document could contain.
+
+---
+
+## The definitional problem is the field's, not this project's, and the field says so in print
+
+- **Puljak L, Lovric Makaric Z, Buljan I, Pieper D.** *What is a meta-epidemiological study? Analysis of published literature indicated heterogeneous study designs and definitions.* J Comp Eff Res. 2020. doi:10.2217/cer-2019-0201
+  > Analysed **175 information sources**. *"Definitions of meta-epidemiological studies varied and some studies used the term meta-epidemiological study to describe methodological research-on-research studies."* Conclusion: *"Research community would benefit from consensus about definition of meta-epidemiological study."*
+
+- **Kataoka Y, et al.** J Clin Epidemiol. 2023;154:219-220.
+  > A **published dispute** with Puljak, opening by naming *"the currently confusing nomenclatures around 'meta-epidemiology' and related terms such as 'meta-research' and 'research-on-research'."*
+
+- **Stevens ER, Laynor G.** *Recognizing the value of meta-research and making it easier to find.* J Med Libr Assoc. 2023;111(4). doi:10.5195/jmla.2023.1758
+  > *"The breadth of meta-research presents a significant challenge for identifying published meta-research studies,"* and it notes **the lack of a MeSH heading** for meta-research.
+
+**Those are claims about humans.** The pilot's numbers are claims about **models disagreeing under one rubric**. They are consistent, they are not the same estimand, and **only the human audit closes the gap** (`DEVIATIONS.md` D27).
+
+---
+
+## The categories
+
+A work may carry **more than one**. **Categories are not ranked and none is primary: the released landscape is the union of the defined categories, with every overlap reported.** The call's primary estimand is reported over `metaresearch` because that is the field the call names; that is a **reporting choice, not a rank**, and each of the other traditions gets the same per-category estimate.
+
+### 1. `metaresearch`
+
+> **"Meta-research is an evolving scientific discipline that aims to evaluate and improve research practices. It includes thematic areas of methods, reporting, reproducibility, evaluation, and incentives (how to do, report, verify, correct, and reward science)."**
+>
+> Ioannidis JPA, Fanelli D, Dunne DD, Goodman SN. *Meta-research: Evaluation and Improvement of Research Methods and Practices.* PLoS Biol. 2015;13(10):e1002264.
+> See also Ioannidis JPA. PLoS Biol. 2018;16(3):e2005468; METRICS, Stanford: <https://metrics.stanford.edu/research>
+
+Every `metaresearch` record carries a **`domain`**, taken verbatim from those five thematic areas and glossed by Ioannidis's own parenthetical:
+
+| `domain` | Ioannidis's gloss | operationally |
+|---|---|---|
+| `methods` | *how to **do** science* | design, conduct, analysis, bias, statistical practice, evidence-synthesis methodology; Ioannidis's own description of this area ends *"research integrity and ethics"* |
+| `reporting` | *how to **report** science* | reporting standards and completeness |
+| `reproducibility` | *how to **verify** science* | replication, data and code sharing, transparency |
+| `evaluation` | *how to **correct** science* | peer review and editorial process, research assessment, metrics |
+| `incentives` | *how to **reward** science* | funding allocation, careers and the research workforce, reward structures |
+
+**RULE 1 stands** (carried from v2; it resolved the largest single seam): *a work is `metaresearch` on methods only if its object is methods **as used, reported or performed by researchers**. Developing, deriving, validating or teaching a technique for a domain is OUT, however generic the technique.* **An instance of a research practice is not a study of it.**
+
+### 2. `metaepidemiology` — **CONTESTED IN PRINT. Both definitions are coded.**
+
+There is **no consensus definition** (Puljak 2020, above). **This rubric does not invent one.** It codes **both published definitions** and **flags where they disagree**, because the dispute is live, it is between named researchers in peer-reviewed journals, and hiding it inside a single label would destroy the only evidence of it.
+
+- **`metaepi_narrow`** — Murad MH, Wang Z. *Guidelines for reporting meta-epidemiological methodology research.* Evid Based Med. 2017;22(4):139-142. doi:10.1136/ebmed-2017-110713
+  > *"Meta-epidemiological studies adopt a systematic review or meta-analysis approach to examine the impact of certain characteristics of clinical studies on the observed effect and provide empirical evidence for hypothesised associations."*
+  >
+  > *(v3.0 quoted this sentence as 'the observed **treatment** effect'. The word is not in the paper; it narrowed Murad's definition while claiming his authority for the narrowing, and it survived a LOCK. D29.)*
+
+- **`metaepi_broad`** — Kataoka Y, et al. J Clin Epidemiol. 2023;154:219-220. *(Not 219-221: page 221 is Puljak's reply, which is the other side of the dispute.)*
+  > *"The greatest common defining concept of 'meta-epidemiological studies' would be **any studies in which the unit of analysis is a study, not a patient**."*
+
+**Where the two differ, the record is flagged, and the size of that class is reported as a finding.** A published dispute is a boundary to be *measured*, not settled by fiat.
+
+### 3. `bibliometrics` (scientometrics)
+
+> **"Scientometrics is the study of the quantitative aspects of the process of science as a communication system. It is centrally, but not only, concerned with the analysis of citations in the academic literature."**
+>
+> Mingers J, Leydesdorff L. *A Review of Theory and Practice in Scientometrics.* Eur J Oper Res. 2015. doi:10.1016/j.ejor.2015.04.002
+> Founding work: Price DJ de Solla. *Networks of Scientific Papers.* Science. 1965;149(3683):510-515.
+
+**Boundary with `metaresearch`, and it resolves v1's self-contradiction** (v1's T1 bullet and its own worked example gave opposite answers): a study that **characterises a literature** by quantitative means is `bibliometrics`. A study that uses bibliometric means to **make a claim about research practice** (citation distortion, reporting trends, citation of retracted work) is **also `metaresearch`**, and carries both. **v3 does not force the choice; that forcing was the bug.**
+
+### 4. `sts` (science and technology studies)
+
+> **"co-production is shorthand for the proposition that the ways in which we know and represent the world (both nature and society) are inseparable from the ways in which we choose to live in it."**
+> **"The idiom of co-production ... represents a major synthesis of scholarship in science and technology studies (S&TS)."**
+>
+> Jasanoff S (ed.). *States of Knowledge: The Co-Production of Science and the Social Order.* Routledge, 2004.
+
+> **"We study science in action and not ready made science or technology; to do so, we either arrive before the facts and machines are blackboxed or we follow the controversies that reopen them."**
+>
+> Latour B. *Science in Action: How to Follow Scientists and Engineers through Society.* Harvard University Press.
+
+**Operational test:** the work studies **science or technology as social practice**: how knowledge and social order are produced together, how facts are made rather than found, how controversies open and close. **The object must be science, research, or technoscientific knowledge**, at any period. *(v1 restricted history and philosophy of science to "contemporary research practice", an unexamined adverb that silently excluded the entire history of Canadian science. It is deleted.)*
+
+### 5. `scholarly_communication`
+
+> **"Scholarly communication is a rich and complex sociotechnical system formed over a period of centuries."**
+> **"...used here in the broader sense to include the formal and informal activities associated with the use and dissemination of information through public and private channels."**
+>
+> Borgman CL. *Scholarship in the Digital Age: Information, Infrastructure, and the Internet.* MIT Press, 2007.
+
+### 6. `open_science`
+
+> **"Open science is a set of principles and practices that aim to make scientific research from all fields accessible to everyone for the benefits of scientists and society as a whole."**
+> **"Open science is about making sure not only that scientific knowledge is accessible but also that the production of that knowledge itself is inclusive, equitable and sustainable."**
+>
+> UNESCO. *Recommendation on Open Science* (introduction), 2021. **193 countries adopted it.**
+
+The second sentence is the reason this category is not a synonym for "open access": UNESCO's definition makes **inclusivity and equity of knowledge production** part of open science itself, which is the criterion this challenge is judged on.
+
+### 7. `research_integrity` — **defined by its OBJECT; the sources do not define the field, and that is recorded**
+
+**Honest limitation, stated rather than hidden.** The two sources supplied define **what counts as misconduct** and **what publication ethics covers**. **Neither defines "research integrity research" as a discipline** the way Ioannidis defines metaresearch or Jasanoff defines STS. So this category is defined by its **object**, and the gap is on the record.
+
+> **"...the analysis was limited to behaviours that distort scientific knowledge: fabrication, falsification, 'cooking' of data, etc... Survey questions on plagiarism and other forms of professional misconduct were excluded."**
+>
+> Fanelli D. *How Many Scientists Fabricate and Falsify Research? A Systematic Review and Meta-Analysis of Survey Data.* PLoS ONE. 2009;4(5):e5738.
+
+> Publication ethics, per **COPE** (Committee on Publication Ethics), *Ethics Toolkit for Journal Editors and Publishers.*
+
+**Operational test:** the object is **research misconduct, questionable research practices, retraction, authorship, or publication ethics**, *as an object of study*. **Fanelli's boundary is adopted and its exclusion is carried:** fabrication, falsification and data cooking are in; **plagiarism and professional misconduct are recorded but marked, because Fanelli's own scope excludes them** and a rubric that silently widened his boundary while citing him would be misquoting its own source.
+
+**This category overlaps `metaresearch` heavily**: Ioannidis's own description of the *methods* area ends *"research integrity and ethics"*, so integrity research is inside metaresearch by his definition. **That overlap is expected and allowed**, because v3 is multi-label. It is not a hierarchy.
+
+### `insufficient_payload`
+
+Not a judgment; a statement that the record **cannot be screened** (a scraping artifact as a title, boilerplate in the abstract field, a title and abstract from different papers, spam). **Reported, never silently dropped**: the size of this class is a finding about OpenAlex.
+
+### `OUT`
+
+None of the above. **"OUT" now means "in no defined category", not "not near the important one."** That is the whole change.
+
+---
+
+## Canadian linkage
+
+- `CA_AFF` — at least one Canadian institutional affiliation. **Warning, measured:** OpenAlex misassigns these. **At least 17,466** works enter the frame with, as their *only* Canadian institution, one of six suspect assignments: a parse failure that is not an institution at all (`Impact`, attached to a Spanish COVID essay) or a real organization attached to papers it has nothing to do with (`Discovery Air (Canada)` on a Brazilian linguistics paper). That is a **lower bound** from six audited strings (finding 27), and the records are **flagged for audit, not deleted**. A Canadian affiliation is *evidence*, not proof.
+- `CA_FUND` — ≥1 funder whose OpenAlex `country_code` is Canada: an **external criterion, not a curated list**. *(An earlier four-funder list (CIHR, NSERC, SSHRC, CFI) failed twice: three of its four hardcoded IDs pointed at other funders, and even corrected it missed Canada Research Chairs, the Government of Canada, NRC, Mitacs, Genome Canada, and every provincial agency. OpenAlex knows 2,182 Canadian funders; `R/pin_entities.R` pins them.)*
+- **`ABOUT_CA_SYSTEM`** — the Canadian **research system or academy** is a substantive object. *A Canadian institution as setting is not this.*
+- **`ABOUT_CA_TOPIC`** — Canada is a substantive subject, whether or not research is the object.
+
+*(v1 had one boolean and it could not separate "Canadian data, universal claim" from "a claim about Canada". Four screening agents proposed this split independently.)*
+
+## Study design
+
+Coded for every work, from **this vocabulary and no other** (v3.0 said "coded for every work" and never listed the values, which is D20's exact shape: a field every screener codes and no two code alike):
+
+| `study_design` | MEDLINE publication type it is validated against |
+|---|---|
+| `randomized_trial` | Randomized Controlled Trial |
+| `nonrandomized_trial` | Controlled Clinical Trial |
+| `observational` | Observational Study |
+| `systematic_review` | Systematic Review |
+| `meta_analysis` | Meta-Analysis |
+| `case_report` | Case Reports |
+| `qualitative` | *(none; ships as a score, marked unvalidated)* |
+| `simulation_or_modeling` | *(none; ships as a score, marked unvalidated)* |
+| `bench_or_experimental` | *(none; ships as a score, marked unvalidated)* |
+| `theoretical_or_conceptual` | *(none; ships as a score, marked unvalidated)* |
+| `not_applicable` | *(the work is not empirical research: editorials, datasets, software)* |
+| `design_other` | *(none; ships as a score, marked unvalidated)* |
+
+**Validated against MEDLINE publication types, per record and not per year.** *(v3.0 called these "human-indexed by NLM", which is false; v3.1's first correction said "human-indexed until April 2022", which is also false. NLM stopped fully human indexing as universal practice around 2011 and completed automation in 2022, so a YEAR CUTOFF cannot separate the eras. The reference subset is defined by NLM's **record-level `IndexingMethod`** field: absent = fully human, `Curated` = automated with human review, `Automated` = machine. Human records are the reference; the others measure **agreement with another machine** and are reported as such.)*
+
+**Class-specific calendar eligibility, because a publication type that did not exist cannot be a negative.** *Observational Study* entered the vocabulary in **2014** and *Systematic Review* in **2019**. A 2008 cohort study carries no *Observational Study* tag, and treating that absence as "not observational" would train and score the model against a censoring artifact. Each design class is therefore validated **only on records published after its type existed**, and that eligibility window is prespecified per class. Where MEDLINE does not reach (most of the physical sciences, humanities and social sciences), the label ships as a **score, not an assertion**, and is **marked unvalidated**. *The dataset states, per field, which of its own annotations it has earned the right to assert.*
+
+## Genre
+
+**One vocabulary, defined here, and `screening-schema-v3.json` QUOTES this list rather than paraphrasing it.**
+
+`empirical` · `review` · `methods` · `commentary` · `editorial` · `protocol` · `dataset` · `software` · `other`
+
+*(In v1 the rubric and the schema named **two different vocabularies for this field**, overlapping on two values out of thirteen. Every screener was handed both and obeyed both privately; the validator checked `tier` and had never been asked to look at `genre`, so 16,800 labels passed every check that ran. See D20 and finding 24. **A codebook is code. It gets a test.**)*
+
+## `tier` is RETIRED
+
+v3 replaces it with `categories`, which is **multi-label**. The values `T1`, `T2`, `T3` and `OUT` remain in the **legacy** `screening-schema.json` **only so that the v1 and v2 label files stay readable**; the v3 contract, `screening-schema-v3.json`, **does not contain the field**, so no new screening can emit them. `OUT` in v3 means an empty `categories` array: *in no defined category*, not *near the important one*.
+
+## Confidence
+
+`high` / `medium` / `low`. **If the abstract is missing, judge on the title alone and set confidence to `low` unless the title is unambiguous.** The schema **quotes** this sentence; it does not paraphrase it (D24).
+
+**`low` is a legitimate answer.** A screener that never says `low` is not being careful; it is being confident.
+
+---
+
+## Sources
+
+Every quotation above was read from a PDF in **`docs/reference/definitions/`**, which is committed. Nothing is cited from memory, and since D29 that is a checked property, not a promise: `pilot/check_quotes.R` fails the build if any quotation marked verbatim is not a substring of its cited PDF. `pilot/check_instrument.R` fails the build if this rubric and `screening-schema-v3.json` disagree about any field, in either direction.
+
+
+# THE OUTPUT SCHEMA (screening-schema-v3.json)
+
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "MetaCan screening output, rubric v3.1",
+  "description": "The output contract for every screening run under rubric v3.1. This document QUOTES the rubric; it never paraphrases it. Where a description below restates a rule, the wording is copied from docs/protocol/rubric-v3.md, because the schema misquoting the rubric is D24 and two documents that disagree are two instruments (D20). pilot/check_instrument.R fails the build if this file and the rubric disagree about any field, in either direction. The legacy screening-schema.json remains ONLY so that v1 and v2 label files stay readable; no new screening validates against it.",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["id", "categories", "study_design", "genre", "about_ca_system", "about_ca_topic", "confidence"],
+    "properties": {
+      "id": {
+        "type": "string",
+        "pattern": "^W\\d+$",
+        "description": "The OpenAlex work id, exactly as given in the payload."
+      },
+      "categories": {
+        "type": "array",
+        "items": {
+          "enum": ["metaresearch", "metaepi_narrow", "metaepi_broad", "bibliometrics", "sts", "scholarly_communication", "open_science", "research_integrity", "insufficient_payload"]
+        },
+        "uniqueItems": true,
+        "description": "Every category the work belongs to; a work may carry more than one, and categories are not ranked and none is primary. An EMPTY array is OUT, which means 'in no defined category', not 'near the important one'. insufficient_payload means the record cannot be screened (a scraping artifact as a title, boilerplate in the abstract field, a title and abstract from different papers, spam) and is reported, never silently dropped."
+      },
+      "domain": {
+        "enum": ["methods", "reporting", "reproducibility", "evaluation", "incentives", null],
+        "description": "REQUIRED when categories contains metaresearch, and null otherwise. Taken verbatim from Ioannidis's five thematic areas: methods, reporting, reproducibility, evaluation, and incentives (how to do, report, verify, correct, and reward science)."
+      },
+      "study_design": {
+        "enum": ["randomized_trial", "nonrandomized_trial", "observational", "systematic_review", "meta_analysis", "case_report", "qualitative", "simulation_or_modeling", "bench_or_experimental", "theoretical_or_conceptual", "not_applicable", "design_other"],
+        "description": "Coded for every work, from this vocabulary and no other. not_applicable means the work is not empirical research: editorials, datasets, software."
+      },
+      "genre": {
+        "enum": ["empirical", "review", "methods", "commentary", "editorial", "protocol", "dataset", "software", "other"],
+        "description": "One vocabulary, defined in the rubric, and this schema QUOTES that list rather than paraphrasing it."
+      },
+      "about_ca_system": {
+        "type": "boolean",
+        "description": "ABOUT_CA_SYSTEM: the Canadian research system or academy is a substantive object. A Canadian institution as setting is not this."
+      },
+      "about_ca_topic": {
+        "type": "boolean",
+        "description": "ABOUT_CA_TOPIC: Canada is a substantive subject, whether or not research is the object."
+      },
+      "confidence": {
+        "enum": ["high", "medium", "low"],
+        "description": "If the abstract is missing, judge on the title alone and set confidence to low unless the title is unambiguous. low is a legitimate answer: a screener that never says low is not being careful; it is being confident."
+      },
+      "reason": {
+        "type": "string",
+        "maxLength": 400,
+        "description": "One sentence naming the rubric rule the decision rests on."
+      }
+    }
+  }
+}
+
+
+# THE RECORDS
+
+[
+ {
+  "id": "W2097723331",
+  "title": "Evidence-based Medicine: Top Ten Things to Know!",
+  "abstract": "ABSTRACT Evidence-based medicine is the conscientious use of the current best evidence in making health care decisions. It involves the incorporation of research findings, patient values and preferences, clinical circumstances and your own clinical expertise. This approach is not a blinkered adherence to only randomized trials, but to the best available evidence in clinical decision making. The skills of an EBM practitioner require asking clinically important questions, conducting searches for the best available evidence, appraising this evidence critically, and deciding whether to apply this evidence to patients. How to cite this article Mundi R, Mundi S, Bhandari M. Evidence-based Medicine: Top Ten Things to Know! J Postgrad Med Edu Res 2012;46(1):1-3.",
+  "year": 2012,
+  "lang": "en",
+  "type": "article",
+  "venue": "Journal of Postgraduate Medicine Education and Research",
+  "topic": "Health Sciences Research and Education",
+  "field": "Health Professions"
+ },
+ {
+  "id": "W2900887496",
+  "title": "Twitter in the Veterinary Diagnostic Imaging Classroom: Examination Outcomes and Student Views",
+  "abstract": "Radiographic lesion identification and differential diagnosis list generation can be difficult for veterinary students; thus, a novel means of distributing cases for study could improve students’ engagement and learning. The goal of this study was to determine whether using Twitter as an adjunct means of studying diagnostic imaging would improve student outcomes on the final exam for a radiology course. A secondary goal was to determine students’ preferred means of accessing additional cases for study. Twitter was used in a third-year veterinary radiology course to provide additional optional radiographic cases that were relevant to the topics covered in the course. At the end of the semester, students completed a survey to report their prior and current use of Twitter and to give preferences as to further distribution of optional cases. Mean final examination scores were compared between students who used Twitter in their studies and those who did not. No significant difference was found between the mean final examination score for each group (22.2; p = .98). Only 3% of respondents ( n = 2/79) preferred Twitter as a means of receiving additional radiographic cases; Moodle (the Web platform for classwork used at this institution) and Facebook were the most preferred platforms for further cases, receiving 41% ( n = 32/79) and 23% ( n = 18/79) of votes, respectively. Educational use of Twitter did not improve student examination performance in diagnostic imaging, and other media platforms may be more beneficial than Twitter for encouraging student use of additional resources.",
+  "year": 2018,
+  "lang": "en",
+  "type": "article",
+  "venue": "Journal of Veterinary Medical Education",
+  "topic": "Social Media in Health Education",
+  "field": "Social Sciences"
+ },
+ {
+  "id": "W4317910576",
+  "title": "Evaluating the Performance of ChatGPT in Ophthalmology: An Analysis of its Successes and Shortcomings",
+  "abstract": "ABSTRACT We tested the accuracy of ChatGPT, a large language model (LLM), in the ophthalmology question-answering space using two popular multiple choice question banks used for the high-stakes Ophthalmic Knowledge Assessment Program (OKAP) exam. The testing sets were of easy-to-moderate difficulty and were diversified, including recall, interpretation, practical and clinical decision-making problems. ChatGPT achieved 55.8% and 42.7% accuracy in the two 260-question simulated exams. Its performance varied across subspecialties, with the best results in general medicine and the worst in neuro-ophthalmology and ophthalmic pathology and intraocular tumors. These results are encouraging but suggest that specialising LLMs through domain-specific pre-training may be necessary to improve their performance in ophthalmic subspecialties.",
+  "year": 2023,
+  "lang": "en",
+  "type": "preprint",
+  "venue": "medRxiv",
+  "topic": "Artificial Intelligence in Healthcare and Education",
+  "field": "Medicine"
+ },
+ {
+  "id": "W2126074756",
+  "title": "A Commentary on Jaffe and Hope's Proposed Ethical Framework",
+  "abstract": "1. Public Health Ethics. 2010 Nov;3(3):303-304. doi: 10.1093/phe/phq029. Epub\n2010  Nov 17.\n\nA Commentary on Jaffe and Hope's Proposed Ethical Framework.\n\nSingh JA(1).\n\nAuthor information:\n(1)Centre for the AIDS Programme of Research in South Africa (CAPRISA), Durban, \nSouth Africa; Dalla Lana School of Public Health and Joint Centre for Bioethics, \nUniversity of Toronto, Toronto, Canada; McLaughlin-Rotman Centre for Global \nHealth, University Health Network and University of Toronto, Toronto, Canada.\n\nDOI: 10.1093/phe/phq029\nPMCID: PMC2984561\nPMID: 21103449",
+  "year": 2010,
+  "lang": "en",
+  "type": "article",
+  "venue": "Public Health Ethics",
+  "topic": "Ethics in medical practice",
+  "field": "Health Professions"
+ },
+ {
+  "id": "W7126267174",
+  "title": "Peeragogy and Heutagogical Framework for Teaching AI Ethics",
+  "abstract": "",
+  "year": 2025,
+  "lang": null,
+  "type": "article",
+  "venue": null,
+  "topic": "Educational Leadership and Innovation",
+  "field": "Social Sciences"
+ },
+ {
+  "id": "W4385388133",
+  "title": "Background-Foreground Segmentation Using Multi-Scale Attention Net (MA-Net): A Deep Learning Approach",
+  "abstract": "",
+  "year": 2023,
+  "lang": "en",
+  "type": "article",
+  "venue": "Revue d intelligence artificielle",
+  "topic": "Video Surveillance and Tracking Methods",
+  "field": "Computer Science"
+ },
+ {
+  "id": "W7047265021",
+  "title": "Évaluation du risque d'inondation à Rigaud (Québec, Canada) : le cas de l'inondation printanière de 2017",
+  "abstract": "",
+  "year": 2021,
+  "lang": "fr",
+  "type": "other",
+  "venue": "Archipelago (Université du Québec à Montréal)",
+  "topic": "Superconducting and THz Device Technology",
+  "field": "Physics and Astronomy"
+ },
+ {
+  "id": "W2512166791",
+  "title": "A&amp;nbsp;journal club for peer mentorship: helping to navigate the transition to independent practice",
+  "abstract": "The transition from residency to independent practice presents unique challenges for physicians. New attending physicians often have unmet learning needs in non-clinical domains. An attending physician is an independent medical practitioner, sometimes referred to as a staff physician or consultant. Peer mentorship has been explored as an alternative to traditional mentorship to meet the learning needs of new attendings. In this article, the authors describe how a journal club for general internal medicine fellowship graduates helped ease the transition by facilitating peer mentorship. Journal club members were asked to bring two things to each meeting: a practice-changing journal article, and a ‘transition to practice’ discussion topic such as a diagnostic dilemma, billing question, or a teaching challenge. Discussions fell into three broad categories that the authors have termed: trading war stories, measuring up, and navigating uncharted waters. It is likely that physicians have a strong need for peer mentorship in the first few years after the transition from residency, and a journal club or similar discussion group may be one way to fulfil this.",
+  "year": 2016,
+  "lang": "en",
+  "type": "article",
+  "venue": "Perspectives on Medical Education",
+  "topic": "Innovations in Medical Education",
+  "field": "Medicine"
+ },
+ {
+  "id": "W2115928902",
+  "title": "Effect of parity and stage of lactation on feed sorting behavior of lactating dairy cows",
+  "abstract": "1. J Dairy Sci. 2011 Aug;94(8):4039-45. doi: 10.3168/jds.2011-4264.\n\nEffect of parity and stage of lactation on feed sorting behavior of lactating \ndairy cows.\n\nDevries TJ(1), Holtshausen L, Oba M, Beauchemin KA.\n\nAuthor information:\n(1)Department of Animal and Poultry Science, University of Guelph, Kemptville \nCampus, 830 Prescott Street, Kemptville, ON, Canada, K0G 1J0. \ntdevries@uoguelph.ca\n\nThe objectives of this study were to determine if feed sorting differs between \nprimiparous (PP) and multiparous (MP) cows, if sorting changes from the period \nof peak lactation to peak dry matter intake (DMI), and whether feed sorting \naffects efficiency of production. Data on DMI, milk production, feed sorting \n(particle size of offered and refused feed), and energy status (plasma \nnonesterified fatty acid, β-hydroxybutyrate, insulin and glucose concentration) \nwere collected on 30 PP and 30 MP lactating Holstein dairy cows, individually \nhoused and fed in tie-stalls, during 3 wk (wk 2, 6, and 10) over 10 wk of a \nlactation study. Cows averaged 53, 81, and 109±10 d in milk (DIM) at the \nbeginning of each of the 3 recording weeks. To determine sorting, feed samples \nwere separated with a particle separator that had 3 screens (19, 8, and 1.18 mm) \nand a bottom pan, resulting in 4 fractions (long, medium, short, fine). Over the \nstudy period, MP cows consumed more DM and produced more milk than did the PP \ncows, but had similar efficiency of production (kg of milk/kg of DMI), and \nsimilar levels of plasma indicators of energy status. Across the study period, \nDMI increased, whereas milk yield decreased, resulting in decreased efficiency \nof milk production as cows moved further into lactation. All cows had higher \nnonesterified fatty acid and lower insulin concentrations in plasma at 53 DIM \ncompared with at 81 and 109 DIM, suggesting they were mobilizing more body fat \nat that earlier stage of lactation. Across periods, all cows sorted against the \nlongest ration particles, did not sort the medium ration particles, and sorted \nfor fine ration particles; as a result, all cows consumed less neutral detergent \nfiber (NDF) and physically effective NDF (proportion of NDF retained on the 19- \nand 8-mm screens of the particle separator) than predicted. Greater selection \nagainst the longest ration particles was associated with greater efficiency of \nmilk production; however, this sorting pattern also tended to be associated with \nlower milk fat percentage. The extent of th",
+  "year": 2011,
+  "lang": "en",
+  "type": "article",
+  "venue": "Journal of Dairy Science",
+  "topic": "Ruminant Nutrition and Digestive Physiology",
+  "field": "Agricultural and Biological Sciences"
+ },
+ {
+  "id": "W2157050063",
+  "title": "Molecular Epidemiology of <i>Neisseria meningitidis</i> Isolates from an Outbreak of Meningococcal Disease among Men Who Have Sex with Men, Chicago, Illinois, 2003",
+  "abstract": "ABSTRACT We characterized five Neisseria meningitidis serogroup C isolates from a Chicago outbreak of meningococcal disease that occurred in 2003 among a community of men who have sex with men. Isolates from this outbreak were identical to each other but distinct from the clone that caused a similar outbreak in Canada in 2001.",
+  "year": 2007,
+  "lang": "en",
+  "type": "article",
+  "venue": "Journal of Clinical Microbiology",
+  "topic": "Bacterial Infections and Vaccines",
+  "field": "Immunology and Microbiology"
+ },
+ {
+  "id": "W2594297204",
+  "title": "Narrowing the Theory Practice Gap through Interprofessional Knowledge Sharing",
+  "abstract": "",
+  "year": 2017,
+  "lang": "en",
+  "type": "article",
+  "venue": "Journal of medical imaging and radiation sciences",
+  "topic": "Interprofessional Education and Collaboration",
+  "field": "Health Professions"
+ },
+ {
+  "id": "W3090029015",
+  "title": "Anatomy of the Male Reproductive System - Prostate Cancer",
+  "abstract": "Media: Digital Illustration Artist statement:1 in 7 men will be diagnosed with prostate cancer in his lifetime. Prostate cancer can affect lymph flow, the colon, and ureter, causing symptoms such as urinary trouble, back pain and more. This schematic drawing of the Male Reproductive System could be used in a physician's office to aid explaination of this common disease.",
+  "year": 2017,
+  "lang": "en",
+  "type": "article",
+  "venue": "McGill Journal of Medicine",
+  "topic": "Prostate Cancer Diagnosis and Treatment",
+  "field": "Medicine"
+ },
+ {
+  "id": "W2094982943",
+  "title": "Compensation across executive labor markets: What can we learn from cross-listed firms?",
+  "abstract": "",
+  "year": 2009,
+  "lang": "en",
+  "type": "article",
+  "venue": "Journal of International Business Studies",
+  "topic": "Corporate Finance and Governance",
+  "field": "Business, Management and Accounting"
+ },
+ {
+  "id": "W2082578543",
+  "title": "Effects of age and gender on immune function of dragonflies (Odonata, Lestidae) from a wild population",
+  "abstract": "Immunity is a crucial determinant of fitness. Despite this, very few studies have addressed the expression of immune function in insect populations in the wild. I present data on two immune parameters, hemocyte load and expression of phenoloxidase, in adult damselflies (Lestes viridis) from a wild population. In a comparison of newly emerged with sexually mature adults, it was found that the latter had higher hemocyte loads but lower phenoloxidase expression. Mature females showed significantly higher phenoloxidase expression than mature males. The sexual differences might be explained by gender differences in life history.",
+  "year": 2001,
+  "lang": "en",
+  "type": "article",
+  "venue": "Canadian Journal of Zoology",
+  "topic": "Animal Behavior and Reproduction",
+  "field": "Agricultural and Biological Sciences"
+ },
+ {
+  "id": "W7006847954",
+  "title": "Zen en talentontwikkeling.: Een ‘ouderwetse’ denkrichting in loopbaanbegeleiding.",
+  "abstract": "",
+  "year": 2011,
+  "lang": "nl",
+  "type": "article",
+  "venue": "Data Archiving and Networked Services (DANS)",
+  "topic": "Cell Image Analysis Techniques",
+  "field": "Biochemistry, Genetics and Molecular Biology"
+ },
+ {
+  "id": "W2973116042",
+  "title": "A direct-AMS multi-isotope survey of uranium ore concentrates",
+  "abstract": "",
+  "year": 2019,
+  "lang": "en",
+  "type": "article",
+  "venue": "Nuclear Instruments and Methods in Physics Research Section B Beam Interactions with Materials and Atoms",
+  "topic": "Radioactive contamination and transfer",
+  "field": "Environmental Science"
+ },
+ {
+  "id": "W4392952944",
+  "title": "Cancer Classification From DNA Microarray Using Genetic Algorithms and Case-Based Reasoning",
+  "abstract": "There are many similarities in the symptoms of several types of cancer and that makes it sometimes difficult for the physicians to do an accurate diagnosis. In addition, it is a technical challenge to classify accurately the cancer cells in order to differentiate one type of cancer from another. The DNA microarray technique (also called the DNA chip) has been used in the past for the classification of cancer but it generates a large volume of noisy data that has many features, and is difficult to analyze directly. This paper proposes a new method, combining the genetic algorithm, case-based reasoning, and the k-nearest neighbor classifier, which improves the performance of the classification considerably. The authors have also used the well-known Mahalanobis distance of multivariate statistics as a similarity measure that improves the accuracy. A case-based classifier approach together with the genetic algorithm has never been applied before for the classification of cancer, same with the application of the Mahalanobis distance. Thus, the proposed approach is a novel method for the cancer classification. Furthermore, the results from the proposed method show considerably better performance than other algorithms. Experiments were done on several benchmark datasets such as the leukemia dataset, the lymphoma dataset, ovarian cancer dataset, and breast cancer dataset.",
+  "year": 2023,
+  "lang": "en",
+  "type": "book-chapter",
+  "venue": "IGI Global eBooks",
+  "topic": "Gene expression and cancer classification",
+  "field": "Biochemistry, Genetics and Molecular Biology"
+ },
+ {
+  "id": "W2078043400",
+  "title": "Introduction: Perspectives on Healthy Aging",
+  "abstract": "1. Can J Aging. 2005 Spring;24(1):3-7. doi: 10.1353/cja.2005.0006.\n\nIntroduction: perspectives on healthy aging.\n\nKeating N(1).\n\nAuthor information:\n(1)University of Alberta.\n\nDOI: 10.1353/cja.2005.0006\nPMID: 15838821 [Indexed for MEDLINE]",
+  "year": 2005,
+  "lang": "en",
+  "type": "article",
+  "venue": "Canadian Journal on Aging / La Revue canadienne du vieillissement",
+  "topic": "Global Public Health Policies and Epidemiology",
+  "field": "Business, Management and Accounting"
+ },
+ {
+  "id": "W2970977809",
+  "title": "Script concordance test examinations: Student perception and study approaches",
+  "abstract": "Introduction: Script concordance test questions (SCTs) are a style of question that has been developed based upon the script theory of information storage and retrieval. SCTs use script theory to examine a clinical reasoning construct purported to be different from that assessed by multiple-choice questions (MCQs). Evidence regarding the construct validity of SCT is somewhat limited, but generally supportive. Methods: This project involved a content-matched MCQ and SCT practice examination delivered to senior medical students (n = 211) from a single institution with an accompanying survey regarding educational consequences of SCT and MCQ examinations. Results:Students’ responses differed significantly between how they would prepare for an MCQ examination as compared to an SCT examination. These differences were present in a number of areas, including greater focus on textbooks and use of websites for MCQ examination preparation (p &lt; 0.001). Students reported that for an SCT examination they would benefit most from in-person teaching from local consultants involved in the process of SCT generation. Students felt that they would also benefit from further instruction regarding key elements of SCT technique, and from opportunities to provide written explanations of their reasoning during the exam. Conclusions:The results suggest that SCTs have educational consequences different from MCQs. Further research into the educational consequences of SCTs, and how these consequences may differ from that of other methods of assessment, is warranted.",
+  "year": 2019,
+  "lang": "en",
+  "type": "article",
+  "venue": "Focus on Health Professional Education A Multi-Professional Journal",
+  "topic": "Clinical Reasoning and Diagnostic Skills",
+  "field": "Medicine"
+ },
+ {
+  "id": "W4389294826",
+  "title": "Digital Communication Practices around the Experience of Resettlement from Kakuma Refugee Camp to Germany",
+  "abstract": "Kakuma refugee camp, one of the biggest refugee camps in the world, lies very marginalized in Northwestern Kenya. People living there are restricted in mobility,access to resources and work. While Kakuma has become a vivid city and home, the majority of people just want to get out. Resettlement means the chance to start a new life in places like the USA, Canada or Europe, it is everybody’s dream. With the use social media and access to wider transnational networks and information, the perception of resettlement has undergone major transformations. Based on conversations with people resettled, field work and online ethnography, I want to analyse how the journey of resettlement is personally experienced vis a vis its presentation on social media. How resettlement is perceived through pictures and texts and what is shown and what is hidden of the journey to a new life abroad.",
+  "year": 2023,
+  "lang": "en",
+  "type": "article",
+  "venue": "sozialpolitik ch",
+  "topic": "Education and experiences of immigrants and refugees",
+  "field": "Social Sciences"
+ },
+ {
+  "id": "W4388983263",
+  "title": "Powiat olkuski i nowe wyzwania po 24 lutego 2022 roku",
+  "abstract": "In the face of the humanitarian crisis after 24 February 2022, Olkusz County faced new challenges. Local authorities took instant decisions to organize aid for Ukraine. From 28 February to 10 March 2022, over 10,000 people came to Olkusz. The establishing of the “county tent city” used as a reception point was the main initiative undertaken by the local government. Numerous county-level institutions and local non-governmental organizations were involved in the aid initiatives. They were coordinating the collection of essential goods, organized their transports to Ukraine and participated in the aid operations of communities and organizations from Germany, the UK, Canada, the US, and France. The contribution of volunteers who worked in the “county tent city” and collection points was undoubtfully crucial and invaluable. The local community showed empathy engaging in bottom-up initiatives and those coordinated by county-level institutions and local non-governmental organizations. The authors of this article analyzed primary sources, including data received from the local government of Olkusz County, and secondary sources in the field of history and characteristics of the region. They also made a description of the previously conducted in-depth interview with the county office representatives.",
+  "year": 2023,
+  "lang": "en",
+  "type": "book-chapter",
+  "venue": "Ksiegarnia Akademicka Publishing eBooks",
+  "topic": "European Politics and Security",
+  "field": "Social Sciences"
+ },
+ {
+  "id": "W2088453475",
+  "title": "Multimodal pain management following cabg Sheila Gallinger",
+  "abstract": "",
+  "year": 2006,
+  "lang": "en",
+  "type": "article",
+  "venue": "Canadian Journal of Anesthesia/Journal canadien d anesthésie",
+  "topic": "Pain Management and Opioid Use",
+  "field": "Medicine"
+ },
+ {
+  "id": "W2099915602",
+  "title": "Observation of<mml:math xmlns:mml=\"http://www.w3.org/1998/Math/MathML\" display=\"inline\"><mml:msubsup><mml:mi>B</mml:mi><mml:mi>s</mml:mi><mml:mn>0</mml:mn></mml:msubsup><mml:mo>→</mml:mo><mml:msup><mml:mi>K</mml:mi><mml:mo>+</mml:mo></mml:msup><mml:msup><mml:mi>K</mml:mi><mml:mo>−</mml:mo></mml:msup></mml:math>and Measurements of Branching Fractions of Charmless Two-Body Decays of<mml:math xmlns:mml=\"http://www.w3.org/1998/Math/MathML\" display=\"inline\"><mml:msup><mml:mi>B</mml:mi><mml:mn>0</mml:mn></mml:msup></mml:math>and<mml:math xmlns:mml=\"http://www.w3.org/1998/Math/MathML\" display=\"inline\"><mml:msubsup><mml:mi>B</mml:mi><mml:mi>s</mml:mi><mml:mn>0</mml:mn></mml:msubsup></mml:math>Mesons in<mml:math xmlns:mml=\"http://www.w3.org/1998/Math/MathML\" display=\"inline\"><mml:mover accent=\"true\"><mml:mi>p</mml:mi><mml:mo>¯</mml:mo></mml:mover><mml:mi>p</mml:mi></mml:math>Collisions at<mml:math xmlns:mml=\"http://www.w3.org/1998/Math/MathML\" display=\"inline\"><mml:msqrt><mml:mi>s</mml:mi></mml:msqrt><mml:mo>=</mml:mo><mml:mn>1.96</mml:mn><mml:mtext> </mml:mtext><mml:mtext> </mml:mtext><mml:mi>TeV</mml:mi></mml:math>",
+  "abstract": "1. Phys Rev Lett. 2006 Nov 24;97(21):211802. doi: 10.1103/PhysRevLett.97.211802. \nEpub 2006 Nov 22.\n\nObservation of B(s)0-->K+ K- and measurements of branching fractions of \ncharmless two-body decays of B0 and B(s)0 mesons in pp collisions at square root \nof s = 1.96 TeV.\n\nAbulencia A(1), Acosta D, Adelman J, Affolder T, Akimoto T, Albrow MG, Ambrose \nD, Amerio S, Amidei D, Anastassov A, Anikeev K, Annovi A, Antos J, Aoki M, \nApollinari G, Arguin JF, Arisawa T, Artikov A, Ashmanskas W, Attal A, Azfar F, \nAzzi-Bacchetta P, Azzurri P, Bacchetta N, Bachacou H, Badgett W, \nBarbaro-Galtieri A, Barnes VE, Barnett BA, Baroiant S, Bartsch V, Bauer G, \nBedeschi F, Behari S, Belforte S, Bellettini G, Bellinger J, Belloni A, Ben Haim \nE, Benjamin D, Beretvas A, Beringer J, Berry T, Bhatti A, Binkley M, Bisello D, \nBlair RE, Blocker C, Blumenfeld B, Bocci A, Bodek A, Boisvert V, Bolla G, \nBolshov A, Bortoletto D, Boudreau J, Boveia A, Brau B, Bromberg C, Brubaker E, \nBudagov J, Budd HS, Budd S, Burkett K, Busetto G, Bussey P, Byrum KL, Cabrera S, \nCampanelli M, Campbell M, Canelli F, Canepa A, Carlsmith D, Carosi R, Carron S, \nCasarsa M, Castro A, Catastini P, Cauz D, Cavalli-Sforza M, Cerri A, Cerrito L, \nChang SH, Chapman J, Chen YC, Chertok M, Chiarelli G, Chlachidze G, Chlebana F, \nCho I, Cho K, Chokheli D, Chou JP, Chu PH, Chuang SH, Chung K, Chung WH, Chung \nYS, Ciljak M, Ciobanu CI, Ciocci MA, Clark A, Clark D, Coca M, Compostella G, \nConvery ME, Conway J, Cooper B, Copic K, Cordelli M, Cortiana G, Crescioli F, \nCruz A, Cuenca Almenar C, Cuevas J, Culbertson R, Cyr D, Daronco S, D'Auria S, \nD'Onofrio M, Dagenhart D, de Barbaro P, De Cecco S, Deisher A, De Lentdecker G, \nDell'Orso M, Delli Paoli F, Demers S, Demortier L, Deng J, Deninno M, De Pedis \nD, Derwent PF, Dionisi C, Dittmann JR, DiTuro P, Dörr C, Donati S, Donega M, \nDong P, Donini J, Dorigo T, Dube S, Ebina K, Efron J, Ehlers J, Erbacher R, \nErrede D, Errede S, Eusebi R, Fang HC, Farrington S, Fedorko I, Fedorko WT, \nFeild RG, Feindt M, Fernandez JP, Field R, Flanagan G, Flores-Castillo LR, \nFoland A, Forrester S, Foster GW, Franklin M, Freeman JC, Furic I, Gallinaro M, \nGalyardt J, Garcia JE, Garcia Sciveres M, Garfinkel AF, Gay C, Gerberich H, \nGerdes D, Giagu S, Giannetti P, Gibson A, Gibson K, Ginsburg C, Giokaris N, \nGiolo K, Giordani M, Giromini P, Giunta M, Giurgiu G, Glagolev V, Glenzinski D, \nGold M, Goldschmidt N, Goldstein J, Gomez G, Gomez-Ceballos G, Goncharov M, \nGonzález O, Gorelov I, Go",
+  "year": 2006,
+  "lang": "lv",
+  "type": "article",
+  "venue": "Physical Review Letters",
+  "topic": "Particle physics theoretical and experimental studies",
+  "field": "Physics and Astronomy"
+ },
+ {
+  "id": "W3041190533",
+  "title": "Exploring Body Image In Breast Cancer",
+  "abstract": "",
+  "year": 2020,
+  "lang": "en",
+  "type": "article",
+  "venue": "Medicine & Science in Sports & Exercise",
+  "topic": "Cancer survivorship and care",
+  "field": "Medicine"
+ },
+ {
+  "id": "W4238541876",
+  "title": "Crime and Punishment",
+  "abstract": "",
+  "year": 2013,
+  "lang": "en",
+  "type": "reference-entry",
+  "venue": "Renaissance and Reformation",
+  "topic": "Medieval and Early Modern Justice",
+  "field": "Social Sciences"
+ }
+]
+warning: loading hooks from both /Users/choxos/.codex/hooks.json and /Users/choxos/.codex/config.toml; prefer a single representation for this layer
+2026-07-13T17:02:45.402785Z ERROR rmcp::transport::worker: worker quit with fatal: Transport channel closed, when Auth(AuthorizationRequired)
+warning: Skill descriptions were shortened to fit the 2% skills context budget. Codex can still see every skill, but some descriptions are shorter. Disable unused skills or plugins to leave more room for the rest.
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart Failed
+hook: SessionStart Completed
+hook: SessionStart Failed
+hook: SessionStart Failed
+hook: SessionStart Completed
+hook: SessionStart Failed
+hook: UserPromptSubmit
+hook: UserPromptSubmit
+hook: UserPromptSubmit Failed
+hook: UserPromptSubmit Failed
+codex
+[
+  {"id":"W2097723331","categories":[],"study_design":"not_applicable","genre":"commentary","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"Teaching evidence-based medicine is not a study of research practices under Rule 1."},
+  {"id":"W2900887496","categories":[],"study_design":"observational","genre":"empirical","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"This evaluates educational media use rather than a defined MetaCan category."},
+  {"id":"W4317910576","categories":[],"study_design":"bench_or_experimental","genre":"empirical","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"Evaluating ChatGPT performance in ophthalmology is not research-on-research under Rule 1."},
+  {"id":"W2126074756","categories":[],"study_design":"not_applicable","genre":"commentary","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"The work is an ethical-framework commentary, not an object-level study of research or publication ethics."},
+  {"id":"W7126267174","categories":[],"study_design":"theoretical_or_conceptual","genre":"methods","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"A framework for teaching AI ethics is not a study of research practices."},
+  {"id":"W4385388133","categories":[],"study_design":"bench_or_experimental","genre":"methods","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"Developing a computer-vision technique for segmentation is explicitly OUT under Rule 1."},
+  {"id":"W7047265021","categories":[],"study_design":"simulation_or_modeling","genre":"empirical","about_ca_system":false,"about_ca_topic":true,"confidence":"low","reason":"Canada and a specific Canadian flood are substantive topics, but the missing abstract limits classification."},
+  {"id":"W2512166791","categories":[],"study_design":"design_other","genre":"empirical","about_ca_system":false,"about_ca_topic":false,"confidence":"medium","reason":"A peer-mentorship journal club report is not a defined study of research practice or scholarly communication."},
+  {"id":"W2115928902","categories":[],"study_design":"bench_or_experimental","genre":"empirical","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"An animal nutrition experiment is not a study of research practices."},
+  {"id":"W2157050063","categories":[],"study_design":"observational","genre":"empirical","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"The work studies pathogen isolates and only uses Canada as a comparison location."},
+  {"id":"W2594297204","categories":[],"study_design":"theoretical_or_conceptual","genre":"commentary","about_ca_system":false,"about_ca_topic":false,"confidence":"low","reason":"The title indicates an educational theory-practice discussion, not a defined MetaCan category."},
+  {"id":"W3090029015","categories":[],"study_design":"not_applicable","genre":"other","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"An anatomical illustration is not empirical research or a defined study of research practice."},
+  {"id":"W2094982943","categories":[],"study_design":"observational","genre":"empirical","about_ca_system":false,"about_ca_topic":false,"confidence":"low","reason":"The title indicates an executive-labor-market study but provides no evidence of a defined MetaCan category."},
+  {"id":"W2082578543","categories":[],"study_design":"observational","genre":"empirical","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"The work studies immune function in wild dragonflies, not research practices or scholarly systems."},
+  {"id":"W7006847954","categories":[],"study_design":"theoretical_or_conceptual","genre":"other","about_ca_system":false,"about_ca_topic":false,"confidence":"low","reason":"The title concerns Zen and career guidance rather than a defined MetaCan category."},
+  {"id":"W2973116042","categories":[],"study_design":"bench_or_experimental","genre":"empirical","about_ca_system":false,"about_ca_topic":false,"confidence":"low","reason":"The title indicates an analytical physical-science survey, not a defined MetaCan category."},
+  {"id":"W4392952944","categories":[],"study_design":"bench_or_experimental","genre":"methods","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"Developing a cancer-classification technique is OUT under Rule 1 because the technique is not studied as used by researchers."},
+  {"id":"W2078043400","categories":[],"study_design":"not_applicable","genre":"editorial","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"An introduction to healthy aging is editorial material, not a defined MetaCan study."},
+  {"id":"W2970977809","categories":[],"study_design":"observational","genre":"empirical","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"This studies student assessment and preparation, not research practices as used by researchers."},
+  {"id":"W4389294826","categories":[],"study_design":"qualitative","genre":"empirical","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"The work studies refugee resettlement and social-media experience, not scholarly communication as defined."},
+  {"id":"W4388983263","categories":[],"study_design":"qualitative","genre":"empirical","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"Canada is mentioned only as one external country involved in aid, not as a substantive topic."},
+  {"id":"W2088453475","categories":["insufficient_payload"],"study_design":"not_applicable","genre":"other","about_ca_system":false,"about_ca_topic":false,"confidence":"low","reason":"The title appears to be a scraping artifact with an author name appended and no abstract."},
+  {"id":"W2099915602","categories":["insufficient_payload"],"study_design":"bench_or_experimental","genre":"empirical","about_ca_system":false,"about_ca_topic":false,"confidence":"low","reason":"The title contains unparsed MathML and the abstract is a truncated metadata artifact."},
+  {"id":"W3041190533","categories":[],"study_design":"observational","genre":"empirical","about_ca_system":false,"about_ca_topic":false,"confidence":"low","reason":"The title indicates a breast-cancer body-image study but the missing abstract limits screening certainty."},
+  {"id":"W4238541876","categories":[],"study_design":"not_applicable","genre":"other","about_ca_system":false,"about_ca_topic":false,"confidence":"low","reason":"A reference entry titled Crime and Punishment is not demonstrably a study in any defined category."}
+]
+hook: Stop
+hook: Stop
+hook: Stop
+hook: Stop Completed
+hook: Stop Completed
+hook: Stop Failed
+tokens used
+16,230

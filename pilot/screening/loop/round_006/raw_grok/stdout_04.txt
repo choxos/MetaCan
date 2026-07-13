@@ -1,0 +1,279 @@
+I'll read the full screening prompt (rubric, schema, and records) and apply it to every record.```json
+[
+  {
+    "id": "W2097723331",
+    "categories": [],
+    "domain": null,
+    "study_design": "not_applicable",
+    "genre": "commentary",
+    "about_ca_system": false,
+    "about_ca_topic": false,
+    "confidence": "high",
+    "reason": "Clinical EBM primer teaching practitioners to use evidence; not a study of research practices, so OUT under Rule 1."
+  },
+  {
+    "id": "W2900887496",
+    "categories": [],
+    "domain": null,
+    "study_design": "observational",
+    "genre": "empirical",
+    "about_ca_system": false,
+    "about_ca_topic": false,
+    "confidence": "high",
+    "reason": "Veterinary education study of Twitter as a teaching adjunct; object is student learning, not research practice."
+  },
+  {
+    "id": "W4317910576",
+    "categories": [],
+    "domain": null,
+    "study_design": "observational",
+    "genre": "empirical",
+    "about_ca_system": false,
+    "about_ca_topic": false,
+    "confidence": "high",
+    "reason": "Benchmarks ChatGPT on ophthalmology exam items; domain AI evaluation, not meta-research on scientific practice."
+  },
+  {
+    "id": "W2126074756",
+    "categories": [],
+    "domain": null,
+    "study_design": "not_applicable",
+    "genre": "commentary",
+    "about_ca_system": false,
+    "about_ca_topic": false,
+    "confidence": "low",
+    "reason": "Public-health ethics commentary on a proposed framework; abstract is PubMed boilerplate, title alone does not place it in any defined category."
+  },
+  {
+    "id": "W7126267174",
+    "categories": [],
+    "domain": null,
+    "study_design": "theoretical_or_conceptual",
+    "genre": "other",
+    "about_ca_system": false,
+    "about_ca_topic": false,
+    "confidence": "low",
+    "reason": "Title-only record on teaching AI ethics via peeragogy/heutagogy; educational framework, not a defined meta-category."
+  },
+  {
+    "id": "W4385388133",
+    "categories": [],
+    "domain": null,
+    "study_design": "bench_or_experimental",
+    "genre": "methods",
+    "about_ca_system": false,
+    "about_ca_topic": false,
+    "confidence": "medium",
+    "reason": "Computer-vision segmentation method paper; Rule 1 excludes domain technique development from metaresearch."
+  },
+  {
+    "id": "W7047265021",
+    "categories": [],
+    "domain": null,
+    "study_design": "observational",
+    "genre": "empirical",
+    "about_ca_system": false,
+    "about_ca_topic": true,
+    "confidence": "low",
+    "reason": "Flood-risk case at Rigaud, Quebec: Canada is the substantive topic, but not research practices or the academy."
+  },
+  {
+    "id": "W2512166791",
+    "categories": [],
+    "domain": null,
+    "study_design": "qualitative",
+    "genre": "empirical",
+    "about_ca_system": false,
+    "about_ca_topic": false,
+    "confidence": "high",
+    "reason": "Medical-education piece on peer mentorship via journal club for new attendings; not research-on-research."
+  },
+  {
+    "id": "W2115928902",
+    "categories": [],
+    "domain": null,
+    "study_design": "observational",
+    "genre": "empirical",
+    "about_ca_system": false,
+    "about_ca_topic": false,
+    "confidence": "high",
+    "reason": "Dairy science study of cow feed-sorting behavior; domain animal nutrition, empty categories."
+  },
+  {
+    "id": "W2157050063",
+    "categories": [],
+    "domain": null,
+    "study_design": "observational",
+    "genre": "empirical",
+    "about_ca_system": false,
+    "about_ca_topic": false,
+    "confidence": "high",
+    "reason": "Molecular epidemiology of a Chicago meningococcal outbreak; Canada appears only as a clone comparison, not a substantive object."
+  },
+  {
+    "id": "W2594297204",
+    "categories": [],
+    "domain": null,
+    "study_design": "design_other",
+    "genre": "other",
+    "about_ca_system": false,
+    "about_ca_topic": false,
+    "confidence": "low",
+    "reason": "Title-only interprofessional education/knowledge-sharing piece; not a study of science as practice or research integrity."
+  },
+  {
+    "id": "W3090029015",
+    "categories": [],
+    "domain": null,
+    "study_design": "not_applicable",
+    "genre": "other",
+    "about_ca_system": false,
+    "about_ca_topic": false,
+    "confidence": "high",
+    "reason": "Medical illustration of prostate anatomy for patient education; not scholarly research in any defined category."
+  },
+  {
+    "id": "W2094982943",
+    "categories": [],
+    "domain": null,
+    "study_design": "observational",
+    "genre": "empirical",
+    "about_ca_system": false,
+    "about_ca_topic": false,
+    "confidence": "low",
+    "reason": "Title-only corporate finance paper on executive pay in cross-listed firms; business labor markets, not research incentives."
+  },
+  {
+    "id": "W2082578543",
+    "categories": [],
+    "domain": null,
+    "study_design": "observational",
+    "genre": "empirical",
+    "about_ca_system": false,
+    "about_ca_topic": false,
+    "confidence": "high",
+    "reason": "Field biology of damselfly immune parameters by age and sex; natural-science instance, not meta-category content."
+  },
+  {
+    "id": "W7006847954",
+    "categories": [],
+    "domain": null,
+    "study_design": "theoretical_or_conceptual",
+    "genre": "other",
+    "about_ca_system": false,
+    "about_ca_topic": false,
+    "confidence": "low",
+    "reason": "Dutch career-guidance piece on Zen and talent development; not research-workforce incentives or another defined category."
+  },
+  {
+    "id": "W2973116042",
+    "categories": [],
+    "domain": null,
+    "study_design": "bench_or_experimental",
+    "genre": "empirical",
+    "about_ca_system": false,
+    "about_ca_topic": false,
+    "confidence": "low",
+    "reason": "Title-only nuclear measurement survey of uranium ore concentrates; domain technique, Rule 1 OUT for metaresearch."
+  },
+  {
+    "id": "W4392952944",
+    "categories": [],
+    "domain": null,
+    "study_design": "simulation_or_modeling",
+    "genre": "methods",
+    "about_ca_system": false,
+    "about_ca_topic": false,
+    "confidence": "high",
+    "reason": "Develops a cancer-classification algorithm on microarray data; validating a domain method is OUT under Rule 1."
+  },
+  {
+    "id": "W2078043400",
+    "categories": [],
+    "domain": null,
+    "study_design": "not_applicable",
+    "genre": "editorial",
+    "about_ca_system": false,
+    "about_ca_topic": false,
+    "confidence": "low",
+    "reason": "Special-issue introduction on healthy aging with PubMed-boilerplate abstract; aging topic, not Canadian research system."
+  },
+  {
+    "id": "W2970977809",
+    "categories": [],
+    "domain": null,
+    "study_design": "observational",
+    "genre": "empirical",
+    "about_ca_system": false,
+    "about_ca_topic": false,
+    "confidence": "high",
+    "reason": "Medical-education study of how students prepare for SCT versus MCQ exams; student assessment, not research assessment."
+  },
+  {
+    "id": "W4389294826",
+    "categories": [],
+    "domain": null,
+    "study_design": "qualitative",
+    "genre": "empirical",
+    "about_ca_system": false,
+    "about_ca_topic": false,
+    "confidence": "high",
+    "reason": "Ethnography of resettlement and social media from Kakuma; object is migration experience, not science as social practice."
+  },
+  {
+    "id": "W4388983263",
+    "categories": [],
+    "domain": null,
+    "study_design": "qualitative",
+    "genre": "empirical",
+    "about_ca_system": false,
+    "about_ca_topic": false,
+    "confidence": "high",
+    "reason": "Polish local-government response to Ukraine refugees; Canada is a listed donor country only, not a substantive subject."
+  },
+  {
+    "id": "W2088453475",
+    "categories": [],
+    "domain": null,
+    "study_design": "design_other",
+    "genre": "other",
+    "about_ca_system": false,
+    "about_ca_topic": false,
+    "confidence": "low",
+    "reason": "Title-only clinical anesthesia item on multimodal pain after CABG; clinical care, not any defined meta-category."
+  },
+  {
+    "id": "W2099915602",
+    "categories": [],
+    "domain": null,
+    "study_design": "bench_or_experimental",
+    "genre": "empirical",
+    "about_ca_system": false,
+    "about_ca_topic": false,
+    "confidence": "high",
+    "reason": "Particle-physics measurement of B-meson decays at the Tevatron; experimental physics instance, empty categories."
+  },
+  {
+    "id": "W3041190533",
+    "categories": [],
+    "domain": null,
+    "study_design": "design_other",
+    "genre": "empirical",
+    "about_ca_system": false,
+    "about_ca_topic": false,
+    "confidence": "low",
+    "reason": "Title-only clinical/psychosocial topic on body image in breast cancer; domain health research, not meta-categories."
+  },
+  {
+    "id": "W4238541876",
+    "categories": [],
+    "domain": null,
+    "study_design": "not_applicable",
+    "genre": "other",
+    "about_ca_system": false,
+    "about_ca_topic": false,
+    "confidence": "medium",
+    "reason": "Reference-entry title in Renaissance and Reformation on medieval justice; historical encyclopedia item, not science studies."
+  }
+]
+```

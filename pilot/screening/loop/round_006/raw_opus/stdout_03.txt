@@ -1,0 +1,279 @@
+```json
+[
+ {
+  "id": "W4402643319",
+  "categories": ["metaresearch", "metaepi_broad"],
+  "domain": "methods",
+  "study_design": "simulation_or_modeling",
+  "genre": "methods",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "medium",
+  "reason": "Its object is literature identification as performed by reviewers (evidence-synthesis methodology under the methods domain), and its unit of analysis is a publication, not a patient, so Kataoka's broad definition applies while Murad's narrow one does not."
+ },
+ {
+  "id": "W4387401210",
+  "categories": [],
+  "domain": null,
+  "study_design": "qualitative",
+  "genre": "protocol",
+  "about_ca_system": false,
+  "about_ca_topic": true,
+  "confidence": "medium",
+  "reason": "Health-services co-design for older Canadians with HIV falls in no defined category, but Canada is a substantive subject (ABOUT_CA_TOPIC), not merely a setting, since the aging Canadian HIV cohort and its care model are the object."
+ },
+ {
+  "id": "W2062057130",
+  "categories": [],
+  "domain": null,
+  "study_design": "not_applicable",
+  "genre": "methods",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "low",
+  "reason": "Abstract missing, so judged on the title alone: institutional survey practice in higher education is in no defined category, and the title is not unambiguous, so confidence is low."
+ },
+ {
+  "id": "W4414343060",
+  "categories": [],
+  "domain": null,
+  "study_design": "simulation_or_modeling",
+  "genre": "methods",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "medium",
+  "reason": "RULE 1: validating imputation techniques for esophageal cancer PRO data is developing a technique for a domain, not studying methods as used by researchers, so it is OUT however generic the technique."
+ },
+ {
+  "id": "W7100925027",
+  "categories": ["insufficient_payload"],
+  "domain": null,
+  "study_design": "design_other",
+  "genre": "other",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "low",
+  "reason": "Truncated scraped title, empty abstract, and a topic/field assignment (pharmaceutical industry) unrelated to the atmospheric chemistry title: the record cannot be screened, and is reported rather than dropped."
+ },
+ {
+  "id": "W2890627487",
+  "categories": [],
+  "domain": null,
+  "study_design": "design_other",
+  "genre": "protocol",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "medium",
+  "reason": "An intervention-development and pilot-evaluation protocol for physical activity counseling is in no defined category; Canadian institutions are setting only."
+ },
+ {
+  "id": "W4412166541",
+  "categories": [],
+  "domain": null,
+  "study_design": "simulation_or_modeling",
+  "genre": "empirical",
+  "about_ca_system": false,
+  "about_ca_topic": true,
+  "confidence": "medium",
+  "reason": "A Markov cost-effectiveness model of a drug is in no defined category, but the Canadian societal perspective and Canadian decision-making are the substantive object (ABOUT_CA_TOPIC)."
+ },
+ {
+  "id": "W2789571318",
+  "categories": [],
+  "domain": null,
+  "study_design": "not_applicable",
+  "genre": "other",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "medium",
+  "reason": "A faculty interview profile is an instance of academic life, not a study of research practice, and an instance of a research practice is not a study of it."
+ },
+ {
+  "id": "W4386067391",
+  "categories": [],
+  "domain": null,
+  "study_design": "design_other",
+  "genre": "other",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "medium",
+  "reason": "The object is a teaching-material sharing platform for veterinary education, not scientific research or its dissemination, so it falls outside scholarly_communication and open_science as defined here."
+ },
+ {
+  "id": "W4310593977",
+  "categories": ["scholarly_communication"],
+  "domain": null,
+  "study_design": "design_other",
+  "genre": "protocol",
+  "about_ca_system": true,
+  "about_ca_topic": true,
+  "confidence": "medium",
+  "reason": "Mapping knowledge-translation networks among Canadian researchers, clinicians and families is Borgman's broader sense of the formal and informal activities of dissemination and use of information, and the Canadian child-development research community is itself the object."
+ },
+ {
+  "id": "W4416524812",
+  "categories": [],
+  "domain": null,
+  "study_design": "not_applicable",
+  "genre": "methods",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "low",
+  "reason": "RULE 1: a didactic chapter teaching a statistical technique is OUT; abstract is missing and the title is not unambiguous about the work's object, so confidence is low."
+ },
+ {
+  "id": "W4285493004",
+  "categories": [],
+  "domain": null,
+  "study_design": "qualitative",
+  "genre": "empirical",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "medium",
+  "reason": "Staff perceptions of advance care planning is clinical-practice research in no defined category, and the four Ontario homes are a setting for a general claim rather than Canada as a substantive subject."
+ },
+ {
+  "id": "W4404119005",
+  "categories": [],
+  "domain": null,
+  "study_design": "observational",
+  "genre": "empirical",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "medium",
+  "reason": "RULE 1: comparing individual- versus area-level social-determinants measures validates measurement instruments for a clinical domain rather than studying methods as used by researchers, so it is OUT."
+ },
+ {
+  "id": "W2093143930",
+  "categories": [],
+  "domain": null,
+  "study_design": "not_applicable",
+  "genre": "commentary",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "medium",
+  "reason": "A book review of a research-methods textbook is an instance of scholarly commentary, not a study of research practice, and RULE 1 places teaching a technique outside metaresearch."
+ },
+ {
+  "id": "W4392000361",
+  "categories": [],
+  "domain": null,
+  "study_design": "randomized_trial",
+  "genre": "protocol",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "A randomized controlled trial protocol of an occupational therapy intervention for long COVID is in no defined category."
+ },
+ {
+  "id": "W4413920014",
+  "categories": [],
+  "domain": null,
+  "study_design": "not_applicable",
+  "genre": "editorial",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "medium",
+  "reason": "The abstract field holds only PubMed boilerplate but the title is screenable: a commentary on chronic kidney disease screening policy is in no defined category, and not_applicable covers non-empirical editorials."
+ },
+ {
+  "id": "W2987382174",
+  "categories": ["metaresearch", "metaepi_broad"],
+  "domain": "methods",
+  "study_design": "not_applicable",
+  "genre": "other",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "low",
+  "reason": "The named work meta-analyzes threats to valid inference in preclinical research (design, conduct and bias as performed by researchers) with studies as the unit of analysis, so metaepi_broad applies but Murad's narrow definition, which requires clinical studies, does not; no abstract, so confidence is low."
+ },
+ {
+  "id": "W3138386593",
+  "categories": ["metaresearch"],
+  "domain": "incentives",
+  "study_design": "not_applicable",
+  "genre": "commentary",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "medium",
+  "reason": "Strengthening health research systems (funding, organization and reward structures for research) is the incentives thematic area: how to reward science."
+ },
+ {
+  "id": "W2731768897",
+  "categories": [],
+  "domain": null,
+  "study_design": "observational",
+  "genre": "empirical",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "medium",
+  "reason": "A student survey on anatomy teaching aids is education research in no defined category; the abstract is missing but the title is unambiguous about the object."
+ },
+ {
+  "id": "W4254513552",
+  "categories": [],
+  "domain": null,
+  "study_design": "not_applicable",
+  "genre": "methods",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "medium",
+  "reason": "RULE 1: an encyclopedia entry defining a statistical term teaches a technique rather than studying methods as used by researchers, so it is OUT."
+ },
+ {
+  "id": "W1969407063",
+  "categories": [],
+  "domain": null,
+  "study_design": "theoretical_or_conceptual",
+  "genre": "review",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "medium",
+  "reason": "An essay on the psychological effects of culture shock has no science, research or technoscientific knowledge as its object and falls in no defined category."
+ },
+ {
+  "id": "W4401905327",
+  "categories": [],
+  "domain": null,
+  "study_design": "not_applicable",
+  "genre": "methods",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "medium",
+  "reason": "RULE 1: a methods chapter teaching epidemiological study designs for antiviral innate immunity research is teaching a technique for a domain, which is OUT however generic the technique."
+ },
+ {
+  "id": "W3158345009",
+  "categories": [],
+  "domain": null,
+  "study_design": "not_applicable",
+  "genre": "other",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "medium",
+  "reason": "A professional transition-to-practice checklist for nurse practitioners is career guidance for clinicians, not a study of the research workforce, so it is in no defined category."
+ },
+ {
+  "id": "W4293050978",
+  "categories": ["sts"],
+  "domain": null,
+  "study_design": "qualitative",
+  "genre": "empirical",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "low",
+  "reason": "Comparing religious framings of the public ethics of stem-cell research studies a scientific controversy as social practice, which is the STS operational test; the abstract is missing, so confidence is low."
+ },
+ {
+  "id": "W1972770053",
+  "categories": [],
+  "domain": null,
+  "study_design": "observational",
+  "genre": "empirical",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "medium",
+  "reason": "A pooled individual-participant analysis of alcohol and lung cancer risk has the patient, not the study, as its unit of analysis, so neither meta-epidemiology definition applies and it is in no defined category."
+ }
+]
+```

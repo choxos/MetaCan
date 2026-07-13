@@ -1,0 +1,535 @@
+You are screening scholarly works for the MetaCan project. Apply the rubric below to EVERY record and output ONE JSON array with ONE object per record, conforming EXACTLY to the JSON schema below. Output ONLY the JSON array, no prose before or after it.
+
+# THE RUBRIC (v3.1, locked)
+
+# MétaCan screening rubric (v3.1)
+
+**Status: LOCKED, 2026-07-13.** Supersedes v2.2. No screening ran under v3.0, which lived for hours: an adversarial review found that its Murad quotation inserted the word "treatment" into a sentence this document calls verbatim (D29). v3.1 corrects that quotation from the PDF, fixes the Kataoka page range, aligns the funder clause with the protocol, corrects two glosses against their sources, and adds the study-design vocabulary that v3.0 demanded but never listed. Since D29, `pilot/check_quotes.R` fails the build if any quotation marked verbatim is not a substring of its cited PDF.
+
+**No number produced so far was made under v3.** The pilot ran under v1.0; the 179-work re-screen under v2.0. Both instruments are kept byte for byte, so every figure stays attributable to the text that produced it. v3 is the instrument the **full screen** runs under, and the **v2-to-v3 difference is reported as a finding**.
+
+---
+
+## What changed, and why it is not cosmetic
+
+v1 and v2 had a tier hierarchy: **T1 core / T2 adjacent / T3 contextual**. That structure had a defect at its root, and the data found it before I did.
+
+> **"Adjacent" is defined by negation.** It means *not-T1*. A category whose only content is "near the important one" cannot be applied consistently, and **OUT-vs-adjacent was the largest tier confusion at every sample size we measured.** The models were not failing. **The category was empty.**
+
+It was also a value judgment I had no standing to make. Calling science and technology studies "adjacent" says STS is peripheral to metascience. **STS is a field with its own founding literature, its own journals, and its own account of what studying science means.**
+
+**v3 deletes the hierarchy.** Every tradition is a **category with its own positive definition, taken from its own literature, quoted verbatim from a source in `docs/reference/definitions/`.** There is no residual bucket. A record may carry **more than one** category, because the traditions genuinely overlap and forcing a single label is what created the problem.
+
+**Nothing here is cited from memory.** Every quotation below was read from the PDF named beside it. In a project whose worst deviation (D26) was that its own definition of metaresearch was mine and uncited for its entire life, a recalled citation would be the single worst thing this document could contain.
+
+---
+
+## The definitional problem is the field's, not this project's, and the field says so in print
+
+- **Puljak L, Lovric Makaric Z, Buljan I, Pieper D.** *What is a meta-epidemiological study? Analysis of published literature indicated heterogeneous study designs and definitions.* J Comp Eff Res. 2020. doi:10.2217/cer-2019-0201
+  > Analysed **175 information sources**. *"Definitions of meta-epidemiological studies varied and some studies used the term meta-epidemiological study to describe methodological research-on-research studies."* Conclusion: *"Research community would benefit from consensus about definition of meta-epidemiological study."*
+
+- **Kataoka Y, et al.** J Clin Epidemiol. 2023;154:219-220.
+  > A **published dispute** with Puljak, opening by naming *"the currently confusing nomenclatures around 'meta-epidemiology' and related terms such as 'meta-research' and 'research-on-research'."*
+
+- **Stevens ER, Laynor G.** *Recognizing the value of meta-research and making it easier to find.* J Med Libr Assoc. 2023;111(4). doi:10.5195/jmla.2023.1758
+  > *"The breadth of meta-research presents a significant challenge for identifying published meta-research studies,"* and it notes **the lack of a MeSH heading** for meta-research.
+
+**Those are claims about humans.** The pilot's numbers are claims about **models disagreeing under one rubric**. They are consistent, they are not the same estimand, and **only the human audit closes the gap** (`DEVIATIONS.md` D27).
+
+---
+
+## The categories
+
+A work may carry **more than one**. **Categories are not ranked and none is primary: the released landscape is the union of the defined categories, with every overlap reported.** The call's primary estimand is reported over `metaresearch` because that is the field the call names; that is a **reporting choice, not a rank**, and each of the other traditions gets the same per-category estimate.
+
+### 1. `metaresearch`
+
+> **"Meta-research is an evolving scientific discipline that aims to evaluate and improve research practices. It includes thematic areas of methods, reporting, reproducibility, evaluation, and incentives (how to do, report, verify, correct, and reward science)."**
+>
+> Ioannidis JPA, Fanelli D, Dunne DD, Goodman SN. *Meta-research: Evaluation and Improvement of Research Methods and Practices.* PLoS Biol. 2015;13(10):e1002264.
+> See also Ioannidis JPA. PLoS Biol. 2018;16(3):e2005468; METRICS, Stanford: <https://metrics.stanford.edu/research>
+
+Every `metaresearch` record carries a **`domain`**, taken verbatim from those five thematic areas and glossed by Ioannidis's own parenthetical:
+
+| `domain` | Ioannidis's gloss | operationally |
+|---|---|---|
+| `methods` | *how to **do** science* | design, conduct, analysis, bias, statistical practice, evidence-synthesis methodology; Ioannidis's own description of this area ends *"research integrity and ethics"* |
+| `reporting` | *how to **report** science* | reporting standards and completeness |
+| `reproducibility` | *how to **verify** science* | replication, data and code sharing, transparency |
+| `evaluation` | *how to **correct** science* | peer review and editorial process, research assessment, metrics |
+| `incentives` | *how to **reward** science* | funding allocation, careers and the research workforce, reward structures |
+
+**RULE 1 stands** (carried from v2; it resolved the largest single seam): *a work is `metaresearch` on methods only if its object is methods **as used, reported or performed by researchers**. Developing, deriving, validating or teaching a technique for a domain is OUT, however generic the technique.* **An instance of a research practice is not a study of it.**
+
+### 2. `metaepidemiology` — **CONTESTED IN PRINT. Both definitions are coded.**
+
+There is **no consensus definition** (Puljak 2020, above). **This rubric does not invent one.** It codes **both published definitions** and **flags where they disagree**, because the dispute is live, it is between named researchers in peer-reviewed journals, and hiding it inside a single label would destroy the only evidence of it.
+
+- **`metaepi_narrow`** — Murad MH, Wang Z. *Guidelines for reporting meta-epidemiological methodology research.* Evid Based Med. 2017;22(4):139-142. doi:10.1136/ebmed-2017-110713
+  > *"Meta-epidemiological studies adopt a systematic review or meta-analysis approach to examine the impact of certain characteristics of clinical studies on the observed effect and provide empirical evidence for hypothesised associations."*
+  >
+  > *(v3.0 quoted this sentence as 'the observed **treatment** effect'. The word is not in the paper; it narrowed Murad's definition while claiming his authority for the narrowing, and it survived a LOCK. D29.)*
+
+- **`metaepi_broad`** — Kataoka Y, et al. J Clin Epidemiol. 2023;154:219-220. *(Not 219-221: page 221 is Puljak's reply, which is the other side of the dispute.)*
+  > *"The greatest common defining concept of 'meta-epidemiological studies' would be **any studies in which the unit of analysis is a study, not a patient**."*
+
+**Where the two differ, the record is flagged, and the size of that class is reported as a finding.** A published dispute is a boundary to be *measured*, not settled by fiat.
+
+### 3. `bibliometrics` (scientometrics)
+
+> **"Scientometrics is the study of the quantitative aspects of the process of science as a communication system. It is centrally, but not only, concerned with the analysis of citations in the academic literature."**
+>
+> Mingers J, Leydesdorff L. *A Review of Theory and Practice in Scientometrics.* Eur J Oper Res. 2015. doi:10.1016/j.ejor.2015.04.002
+> Founding work: Price DJ de Solla. *Networks of Scientific Papers.* Science. 1965;149(3683):510-515.
+
+**Boundary with `metaresearch`, and it resolves v1's self-contradiction** (v1's T1 bullet and its own worked example gave opposite answers): a study that **characterises a literature** by quantitative means is `bibliometrics`. A study that uses bibliometric means to **make a claim about research practice** (citation distortion, reporting trends, citation of retracted work) is **also `metaresearch`**, and carries both. **v3 does not force the choice; that forcing was the bug.**
+
+### 4. `sts` (science and technology studies)
+
+> **"co-production is shorthand for the proposition that the ways in which we know and represent the world (both nature and society) are inseparable from the ways in which we choose to live in it."**
+> **"The idiom of co-production ... represents a major synthesis of scholarship in science and technology studies (S&TS)."**
+>
+> Jasanoff S (ed.). *States of Knowledge: The Co-Production of Science and the Social Order.* Routledge, 2004.
+
+> **"We study science in action and not ready made science or technology; to do so, we either arrive before the facts and machines are blackboxed or we follow the controversies that reopen them."**
+>
+> Latour B. *Science in Action: How to Follow Scientists and Engineers through Society.* Harvard University Press.
+
+**Operational test:** the work studies **science or technology as social practice**: how knowledge and social order are produced together, how facts are made rather than found, how controversies open and close. **The object must be science, research, or technoscientific knowledge**, at any period. *(v1 restricted history and philosophy of science to "contemporary research practice", an unexamined adverb that silently excluded the entire history of Canadian science. It is deleted.)*
+
+### 5. `scholarly_communication`
+
+> **"Scholarly communication is a rich and complex sociotechnical system formed over a period of centuries."**
+> **"...used here in the broader sense to include the formal and informal activities associated with the use and dissemination of information through public and private channels."**
+>
+> Borgman CL. *Scholarship in the Digital Age: Information, Infrastructure, and the Internet.* MIT Press, 2007.
+
+### 6. `open_science`
+
+> **"Open science is a set of principles and practices that aim to make scientific research from all fields accessible to everyone for the benefits of scientists and society as a whole."**
+> **"Open science is about making sure not only that scientific knowledge is accessible but also that the production of that knowledge itself is inclusive, equitable and sustainable."**
+>
+> UNESCO. *Recommendation on Open Science* (introduction), 2021. **193 countries adopted it.**
+
+The second sentence is the reason this category is not a synonym for "open access": UNESCO's definition makes **inclusivity and equity of knowledge production** part of open science itself, which is the criterion this challenge is judged on.
+
+### 7. `research_integrity` — **defined by its OBJECT; the sources do not define the field, and that is recorded**
+
+**Honest limitation, stated rather than hidden.** The two sources supplied define **what counts as misconduct** and **what publication ethics covers**. **Neither defines "research integrity research" as a discipline** the way Ioannidis defines metaresearch or Jasanoff defines STS. So this category is defined by its **object**, and the gap is on the record.
+
+> **"...the analysis was limited to behaviours that distort scientific knowledge: fabrication, falsification, 'cooking' of data, etc... Survey questions on plagiarism and other forms of professional misconduct were excluded."**
+>
+> Fanelli D. *How Many Scientists Fabricate and Falsify Research? A Systematic Review and Meta-Analysis of Survey Data.* PLoS ONE. 2009;4(5):e5738.
+
+> Publication ethics, per **COPE** (Committee on Publication Ethics), *Ethics Toolkit for Journal Editors and Publishers.*
+
+**Operational test:** the object is **research misconduct, questionable research practices, retraction, authorship, or publication ethics**, *as an object of study*. **Fanelli's boundary is adopted and its exclusion is carried:** fabrication, falsification and data cooking are in; **plagiarism and professional misconduct are recorded but marked, because Fanelli's own scope excludes them** and a rubric that silently widened his boundary while citing him would be misquoting its own source.
+
+**This category overlaps `metaresearch` heavily**: Ioannidis's own description of the *methods* area ends *"research integrity and ethics"*, so integrity research is inside metaresearch by his definition. **That overlap is expected and allowed**, because v3 is multi-label. It is not a hierarchy.
+
+### `insufficient_payload`
+
+Not a judgment; a statement that the record **cannot be screened** (a scraping artifact as a title, boilerplate in the abstract field, a title and abstract from different papers, spam). **Reported, never silently dropped**: the size of this class is a finding about OpenAlex.
+
+### `OUT`
+
+None of the above. **"OUT" now means "in no defined category", not "not near the important one."** That is the whole change.
+
+---
+
+## Canadian linkage
+
+- `CA_AFF` — at least one Canadian institutional affiliation. **Warning, measured:** OpenAlex misassigns these. **At least 17,466** works enter the frame with, as their *only* Canadian institution, one of six suspect assignments: a parse failure that is not an institution at all (`Impact`, attached to a Spanish COVID essay) or a real organization attached to papers it has nothing to do with (`Discovery Air (Canada)` on a Brazilian linguistics paper). That is a **lower bound** from six audited strings (finding 27), and the records are **flagged for audit, not deleted**. A Canadian affiliation is *evidence*, not proof.
+- `CA_FUND` — ≥1 funder whose OpenAlex `country_code` is Canada: an **external criterion, not a curated list**. *(An earlier four-funder list (CIHR, NSERC, SSHRC, CFI) failed twice: three of its four hardcoded IDs pointed at other funders, and even corrected it missed Canada Research Chairs, the Government of Canada, NRC, Mitacs, Genome Canada, and every provincial agency. OpenAlex knows 2,182 Canadian funders; `R/pin_entities.R` pins them.)*
+- **`ABOUT_CA_SYSTEM`** — the Canadian **research system or academy** is a substantive object. *A Canadian institution as setting is not this.*
+- **`ABOUT_CA_TOPIC`** — Canada is a substantive subject, whether or not research is the object.
+
+*(v1 had one boolean and it could not separate "Canadian data, universal claim" from "a claim about Canada". Four screening agents proposed this split independently.)*
+
+## Study design
+
+Coded for every work, from **this vocabulary and no other** (v3.0 said "coded for every work" and never listed the values, which is D20's exact shape: a field every screener codes and no two code alike):
+
+| `study_design` | MEDLINE publication type it is validated against |
+|---|---|
+| `randomized_trial` | Randomized Controlled Trial |
+| `nonrandomized_trial` | Controlled Clinical Trial |
+| `observational` | Observational Study |
+| `systematic_review` | Systematic Review |
+| `meta_analysis` | Meta-Analysis |
+| `case_report` | Case Reports |
+| `qualitative` | *(none; ships as a score, marked unvalidated)* |
+| `simulation_or_modeling` | *(none; ships as a score, marked unvalidated)* |
+| `bench_or_experimental` | *(none; ships as a score, marked unvalidated)* |
+| `theoretical_or_conceptual` | *(none; ships as a score, marked unvalidated)* |
+| `not_applicable` | *(the work is not empirical research: editorials, datasets, software)* |
+| `design_other` | *(none; ships as a score, marked unvalidated)* |
+
+**Validated against MEDLINE publication types, per record and not per year.** *(v3.0 called these "human-indexed by NLM", which is false; v3.1's first correction said "human-indexed until April 2022", which is also false. NLM stopped fully human indexing as universal practice around 2011 and completed automation in 2022, so a YEAR CUTOFF cannot separate the eras. The reference subset is defined by NLM's **record-level `IndexingMethod`** field: absent = fully human, `Curated` = automated with human review, `Automated` = machine. Human records are the reference; the others measure **agreement with another machine** and are reported as such.)*
+
+**Class-specific calendar eligibility, because a publication type that did not exist cannot be a negative.** *Observational Study* entered the vocabulary in **2014** and *Systematic Review* in **2019**. A 2008 cohort study carries no *Observational Study* tag, and treating that absence as "not observational" would train and score the model against a censoring artifact. Each design class is therefore validated **only on records published after its type existed**, and that eligibility window is prespecified per class. Where MEDLINE does not reach (most of the physical sciences, humanities and social sciences), the label ships as a **score, not an assertion**, and is **marked unvalidated**. *The dataset states, per field, which of its own annotations it has earned the right to assert.*
+
+## Genre
+
+**One vocabulary, defined here, and `screening-schema-v3.json` QUOTES this list rather than paraphrasing it.**
+
+`empirical` · `review` · `methods` · `commentary` · `editorial` · `protocol` · `dataset` · `software` · `other`
+
+*(In v1 the rubric and the schema named **two different vocabularies for this field**, overlapping on two values out of thirteen. Every screener was handed both and obeyed both privately; the validator checked `tier` and had never been asked to look at `genre`, so 16,800 labels passed every check that ran. See D20 and finding 24. **A codebook is code. It gets a test.**)*
+
+## `tier` is RETIRED
+
+v3 replaces it with `categories`, which is **multi-label**. The values `T1`, `T2`, `T3` and `OUT` remain in the **legacy** `screening-schema.json` **only so that the v1 and v2 label files stay readable**; the v3 contract, `screening-schema-v3.json`, **does not contain the field**, so no new screening can emit them. `OUT` in v3 means an empty `categories` array: *in no defined category*, not *near the important one*.
+
+## Confidence
+
+`high` / `medium` / `low`. **If the abstract is missing, judge on the title alone and set confidence to `low` unless the title is unambiguous.** The schema **quotes** this sentence; it does not paraphrase it (D24).
+
+**`low` is a legitimate answer.** A screener that never says `low` is not being careful; it is being confident.
+
+---
+
+## Sources
+
+Every quotation above was read from a PDF in **`docs/reference/definitions/`**, which is committed. Nothing is cited from memory, and since D29 that is a checked property, not a promise: `pilot/check_quotes.R` fails the build if any quotation marked verbatim is not a substring of its cited PDF. `pilot/check_instrument.R` fails the build if this rubric and `screening-schema-v3.json` disagree about any field, in either direction.
+
+
+# THE OUTPUT SCHEMA (screening-schema-v3.json)
+
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "MetaCan screening output, rubric v3.1",
+  "description": "The output contract for every screening run under rubric v3.1. This document QUOTES the rubric; it never paraphrases it. Where a description below restates a rule, the wording is copied from docs/protocol/rubric-v3.md, because the schema misquoting the rubric is D24 and two documents that disagree are two instruments (D20). pilot/check_instrument.R fails the build if this file and the rubric disagree about any field, in either direction. The legacy screening-schema.json remains ONLY so that v1 and v2 label files stay readable; no new screening validates against it.",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["id", "categories", "study_design", "genre", "about_ca_system", "about_ca_topic", "confidence"],
+    "properties": {
+      "id": {
+        "type": "string",
+        "pattern": "^W\\d+$",
+        "description": "The OpenAlex work id, exactly as given in the payload."
+      },
+      "categories": {
+        "type": "array",
+        "items": {
+          "enum": ["metaresearch", "metaepi_narrow", "metaepi_broad", "bibliometrics", "sts", "scholarly_communication", "open_science", "research_integrity", "insufficient_payload"]
+        },
+        "uniqueItems": true,
+        "description": "Every category the work belongs to; a work may carry more than one, and categories are not ranked and none is primary. An EMPTY array is OUT, which means 'in no defined category', not 'near the important one'. insufficient_payload means the record cannot be screened (a scraping artifact as a title, boilerplate in the abstract field, a title and abstract from different papers, spam) and is reported, never silently dropped."
+      },
+      "domain": {
+        "enum": ["methods", "reporting", "reproducibility", "evaluation", "incentives", null],
+        "description": "REQUIRED when categories contains metaresearch, and null otherwise. Taken verbatim from Ioannidis's five thematic areas: methods, reporting, reproducibility, evaluation, and incentives (how to do, report, verify, correct, and reward science)."
+      },
+      "study_design": {
+        "enum": ["randomized_trial", "nonrandomized_trial", "observational", "systematic_review", "meta_analysis", "case_report", "qualitative", "simulation_or_modeling", "bench_or_experimental", "theoretical_or_conceptual", "not_applicable", "design_other"],
+        "description": "Coded for every work, from this vocabulary and no other. not_applicable means the work is not empirical research: editorials, datasets, software."
+      },
+      "genre": {
+        "enum": ["empirical", "review", "methods", "commentary", "editorial", "protocol", "dataset", "software", "other"],
+        "description": "One vocabulary, defined in the rubric, and this schema QUOTES that list rather than paraphrasing it."
+      },
+      "about_ca_system": {
+        "type": "boolean",
+        "description": "ABOUT_CA_SYSTEM: the Canadian research system or academy is a substantive object. A Canadian institution as setting is not this."
+      },
+      "about_ca_topic": {
+        "type": "boolean",
+        "description": "ABOUT_CA_TOPIC: Canada is a substantive subject, whether or not research is the object."
+      },
+      "confidence": {
+        "enum": ["high", "medium", "low"],
+        "description": "If the abstract is missing, judge on the title alone and set confidence to low unless the title is unambiguous. low is a legitimate answer: a screener that never says low is not being careful; it is being confident."
+      },
+      "reason": {
+        "type": "string",
+        "maxLength": 400,
+        "description": "One sentence naming the rubric rule the decision rests on."
+      }
+    }
+  }
+}
+
+
+# THE RECORDS
+
+[
+ {
+  "id": "W2103340238",
+  "title": "Evaluating the quality of clinical practice guidelines",
+  "abstract": "",
+  "year": 2001,
+  "lang": "en",
+  "type": "article",
+  "venue": "Journal of Manipulative and Physiological Therapeutics",
+  "topic": "Clinical practice guidelines implementation",
+  "field": "Medicine"
+ },
+ {
+  "id": "W4311338564",
+  "title": "PCR232 The Use of EuroQol EQ-5D in the Middle East and North Africa Region: A Systematic Review",
+  "abstract": "",
+  "year": 2022,
+  "lang": "en",
+  "type": "review",
+  "venue": "Value in Health",
+  "topic": "Health Systems, Economic Evaluations, Quality of Life",
+  "field": "Economics, Econometrics and Finance"
+ },
+ {
+  "id": "W4402328208",
+  "title": "Knowledge mobilization with and for equity-deserving communities invested in research: A scoping review protocol",
+  "abstract": "Abstract The practice of putting research into action is known by various names, depending on disciplinary norms. Knowledge mobilization, translation, and transfer (collectively referred to as K*) are three common terminologies used in research literature. Knowledge-to-action opportunities and gaps in academic research often remain obscure to non-academic researchers in communities, policy and decision makers, and practitioners who could benefit from up-to-date information on health and wellbeing. Academic research training, funding, and performance metrics rarely prioritize or address non-academic community needs from research. We propose to conduct a scoping review on reported K* in community-driven research contexts, examining the governance, processes, methods, and benefits of K*, and mapping who, what, where, and when K* terminology is used. This protocol paper outlines our approach to gathering, screening, analyzing, and reporting on available published literature from four databases.",
+  "year": 2024,
+  "lang": "en",
+  "type": "review",
+  "venue": "medRxiv",
+  "topic": "Health Policy Implementation Science",
+  "field": "Health Professions"
+ },
+ {
+  "id": "W281324965",
+  "title": "Integrated Knowledge Translation and Grant Development: Addressing the Research Practice Gap through Stakeholder-informed Research.",
+  "abstract": "",
+  "year": 2013,
+  "lang": "en",
+  "type": "article",
+  "venue": "PubMed",
+  "topic": "Health Policy Implementation Science",
+  "field": "Health Professions"
+ },
+ {
+  "id": "W4382582272",
+  "title": "Addressing Complexity in Chronic Disease Prevention Research",
+  "abstract": "There is wide agreement on the need for systems thinking to address complexity in chronic disease prevention but there is insufficient understanding of how such approaches are operationalised in prevention research. Ison and Straw propose that to address complexity, the right balance must be struck between ‘systemic’ and ‘systematic’ paradigms. We examined the nature and characteristics of this relationship in a series of six qualitative case studies of prevention research. Data comprised 29 semi-structured interviews with 16 participants, and online documents. The analysis combined inductive methods from grounded theory with a theoretically informed framework analysis. Systemic and systematic ways of working varied across each case as a whole, and within the dimensions of each case. Further, the interplay of systemic and systematic approaches was described along a dynamic continuum of variable proportions, with greater emphasis on systemic aspects balanced by less focus on the systematic, and vice versa. By expanding the boundaries for exploring prevention research, we gained empirical understanding of the potential and scope of systemic and systematic paradigms for addressing complexity in prevention research. There is inherent value in being more explicitly conscious and bilingual in both systemic and systematic paradigms so that their respective value and strengths may be utilised. Our findings propose a coherent theoretical frame to better understand existing approaches for addressing complexity in prevention research.",
+  "year": 2023,
+  "lang": "en",
+  "type": "article",
+  "venue": "Systems",
+  "topic": "Health Policy Implementation Science",
+  "field": "Health Professions"
+ },
+ {
+  "id": "W2020672080",
+  "title": "PRM104 Examination of Patient Preference: Comparisons of Results From the Time Trade-Off and Standard Gamble Instruments",
+  "abstract": "",
+  "year": 2012,
+  "lang": "en",
+  "type": "article",
+  "venue": "Value in Health",
+  "topic": "Health Systems, Economic Evaluations, Quality of Life",
+  "field": "Economics, Econometrics and Finance"
+ },
+ {
+  "id": "W4413788159",
+  "title": "Liver transplantation for HCC with macrovascular invasion: A systematic review and meta-analysis of observational studies",
+  "abstract": "1. JHEP Rep. 2025 Aug 28;8(1):101566. doi: 10.1016/j.jhepr.2025.101566.\neCollection  2026 Jan.\n\nLiver transplantation for HCC with macrovascular invasion: A systematic review \nand meta-analysis of observational studies.\n\nLadak F(1), Magyar CTJ(1)(2), Gaviria FD(1), Choi WJ(1), Zorigtbaatar A(1), \nBucur R(1), Rukavina N(1), Vogel A(3)(4)(5), O'Kane GM(5)(6)(7), Li Z(1), \nEnglesakis M(1), Sapisochin G(1).\n\nAuthor information:\n(1)HBP & Multi-Organ Transplant Program, University Health Network, Toronto, ON, \nCanada.\n(2)Department of Visceral Surgery and Medicine, Inselspital, Bern University \nHospital, University of Bern, Bern, Switzerland.\n(3)Division of Gastroenterology and Hepatology, Toronto General Hospital, \nToronto, ON, Canada.\n(4)Department of Hepatology, Gastroenterology, Endocrinology & Infectious \nDiseases, Hannover Medical School, Hannover, Germany.\n(5)Princess Margaret Cancer Center, University Health Network, Toronto, ON, \nCanada.\n(6)University of Toronto, Toronto, ON, Canada.\n(7)St Vincent's University Hospital and School of Medicine, University College \nDublin, Dublin, Ireland.\n\nBACKGROUND & AIMS: Traditional guidelines discourage liver transplantation (LT) \nin patients with hepatocellular carcinoma (HCC) with macrovascular invasion \n(MVI). However, emerging evidence suggests that long-term survival is possible \nwhen LT is preceded by downstaging therapies. Thus, a pooled analysis of \ntime-dependent risk factor effect size on overall survival (OS) is warranted to \ndetermine the effect size of MVI, estimate risk mitigation through downstaging, \nand design future trials.\nMETHODS: MEDLINE, EMBASE, Cochrane Database of Systematic Reviews, and the \nCochrane Register were systematically searched from their inception to 24 \nJanuary 2023. Studies with comparative oncological outcome data between patients \nwith HCC and MVI (MVI group) and HCC patients without MVI (non-MVI group) were \nincluded. Frequentist pairwise meta-analysis (random-effects model) was \nperformed for primary outcomes of OS and recurrence-free survival (RFS) at 5 \nyears. Only studies with adjusted effect estimates were considered for analysis.\nRESULTS: In total, 10 studies were included in this systematic review and \nmeta-analysis, contributing 15,899 patients. Seven studies included deceased \ndonor LT, and four studies included living donor LT. In the quantitative \nanalysis of studies reporting adjusted effect estimates, presence of MVI was \nassociated with lower 5-year OS (hazard ra",
+  "year": 2025,
+  "lang": "en",
+  "type": "review",
+  "venue": "JHEP Reports",
+  "topic": "Hepatocellular Carcinoma Treatment and Prognosis",
+  "field": "Medicine"
+ },
+ {
+  "id": "W2735430373",
+  "title": "How have systematic priority setting approaches influenced policy making? A synthesis of the current literature",
+  "abstract": "",
+  "year": 2017,
+  "lang": "en",
+  "type": "review",
+  "venue": "Health Policy",
+  "topic": "Health Systems, Economic Evaluations, Quality of Life",
+  "field": "Economics, Econometrics and Finance"
+ },
+ {
+  "id": "W2885318744",
+  "title": "Valuation of Health and Nonhealth Outcomes from Next-Generation Sequencing: Approaches, Challenges, and Solutions",
+  "abstract": "1. Value Health. 2018 Sep;21(9):1043-1047. doi: 10.1016/j.jval.2018.06.010. Epub \n2018 Aug 18.\n\nValuation of Health and Nonhealth Outcomes from Next-Generation Sequencing: \nApproaches, Challenges, and Solutions.\n\nRegier DA(1), Weymann D(2), Buchanan J(3), Marshall DA(4), Wordsworth S(3).\n\nAuthor information:\n(1)Canadian Centre for Applied Research in Cancer Control, Cancer Control \nResearch, BC Cancer, Vancouver, British Columbia, Canada; School of Population \nand Public Health, University of British Columbia, Vancouver, British Columbia, \nCanada. Electronic address: dregier@bccrc.ca.\n(2)Canadian Centre for Applied Research in Cancer Control, Cancer Control \nResearch, BC Cancer, Vancouver, British Columbia, Canada.\n(3)Health Economics Research Centre, University of Oxford, Oxford, United \nKingdom.\n(4)Department of Community Health Sciences, University of Calgary, Calgary, \nAlberta, Canada.\n\nErratum in\n    Value Health. 2019 Apr;22(4):502. doi: 10.1016/j.jval.2018.11.005.\n\nBACKGROUND: Next-generation sequencing (NGS) technologies have seen variable \nadoption in the clinic. This is partly due to a lack of clinical and economic \nstudies, with the latter increasingly challenged to examine patient preferences \nfor health and nonhealth outcomes (e.g., false-positive rate).\nOBJECTIVES: To conduct a structured review of studies valuing patients' \npreference-based utility for NGS outcomes, to highlight identified \nmethodological challenges, and to consider how studies addressed identified \nchallenges.\nMETHODS: We searched MEDLINE (PubMed), Embase (Ovid), and Web of Science for \npublished studies examining outcomes from health care decisions informed by NGS. \nWe focused our search on direct elicitations of preference-based utility. We \nreviewed included studies and qualitatively grouped and summarized stated \nchallenges and solutions by theme.\nRESULTS: Eleven studies were included. Most of them (n = 6) used discrete choice \nexperiments to value utility. We categorized challenges into four themes: 1) \nvaluing the full range of NGS outcomes, 2) accounting for accuracy and \nuncertainty surrounding effectiveness, 3) allowing for simultaneous multiple and \ncascading risks, and 4) incorporating downstream consequences. Studies found \nstrong evidence of utility for NGS information, regardless of health \nimprovement. Investigators addressed challenges by simplifying complex choices, \nby including health outcomes alongside nonhealth outcomes, and by using multiple \nelicitati",
+  "year": 2018,
+  "lang": "en",
+  "type": "review",
+  "venue": "Value in Health",
+  "topic": "Health Systems, Economic Evaluations, Quality of Life",
+  "field": "Economics, Econometrics and Finance"
+ },
+ {
+  "id": "W4389222730",
+  "title": "Lessons Learned Conducting Implementation Science Research on the COVID-19 Vaccination Rollout During a Global Pandemic",
+  "abstract": "When the COVID-19 virus rapidly spread across Canada in 2020, provinces and territories implemented various vaccine rollout plans. This commentary shares the experience of an implementation science research group conducting an equity-focused evaluation of the vaccine rollout plans of six Canadian provinces through a literature review and key informant interviews. Key lessons learned include employing humility to understand varying perspectives, appreciating the importance of limiting project scope, and developing strategies for connecting with decision-makers.",
+  "year": 2023,
+  "lang": "en",
+  "type": "article",
+  "venue": "Healthy Populations Journal",
+  "topic": "Health Policy Implementation Science",
+  "field": "Health Professions"
+ },
+ {
+  "id": "W2161075463",
+  "title": "Use of health systems and policy research evidence in the health policymaking in eastern Mediterranean countries: views and practices of researchers",
+  "abstract": "1. Implement Sci. 2012 Jan 11;7:2. doi: 10.1186/1748-5908-7-2.\n\nUse of health systems and policy research evidence in the health policymaking in \neastern Mediterranean countries: views and practices of researchers.\n\nEl-Jardali F(1), Lavis JN, Ataya N, Jamal D.\n\nAuthor information:\n(1)Department of Health Management and Policy, American University of Beirut, PO \nBox 11-0236, Riad El Solh, Beirut, 1107 2020, Lebanon. fe08@aub.edu.lb\n\nBACKGROUND: Limited research exists on researchers' knowledge transfer and \nexchange (KTE) in the eastern Mediterranean region (EMR). This multi-country \nstudy explores researchers' views and experiences regarding the role of health \nsystems and policy research evidence in health policymaking in the EMR, \nincluding the factors that influence health policymaking, barriers and \nfacilitators to the use of evidence, and the factors that increase researchers' \nengagement in KTE.\nMETHODS: Researchers who published health systems and policy relevant research \nin 12 countries in the EMR (Bahrain, Egypt, Iran, Jordan, Lebanon, Libya, \nMorocco, Oman, Palestine, Sudan, Syria, and Yemen) were surveyed. Descriptive \nanalysis and Linear Mixed Regression Models were performed for quantitative \nsections and the simple thematic analysis approach was used for open-ended \nquestions.\nRESULTS: A total of 238 researchers were asked to complete the survey (response \nrate 56%). Researchers indicated transferring results to other researchers \n(67.2%) and policymakers in the government (40.5%). Less than one-quarter stated \nthat they produced policy briefs (14.5%), disseminated messages that specified \npossible actions (24.4%), interacted with policymakers and stakeholders in \npriority-setting (16%), and involved them in their research (19.8%). \nInsufficient policy dialogue opportunities and collaboration between researchers \nand policymakers and stakeholders (67.9%), practical constraints to \nimplementation (66%), non-receptive policy environment (61.3%), and politically \nsensitive findings (57.7%) hindered the use of evidence. Factors that increase \nresearchers' engagement in KTE activities in the region were associated with \ninvolving policymakers and stakeholders at various stages such as \npriority-setting exercises and provision of technical assistance.\nCONCLUSIONS: Researchers in the EMR recognize the importance of using health \nsystems evidence in health policymaking. Potential strategies to improve the use \nof research evidence emphasize two-way ",
+  "year": 2012,
+  "lang": "en",
+  "type": "article",
+  "venue": "Implementation Science",
+  "topic": "Health Policy Implementation Science",
+  "field": "Health Professions"
+ },
+ {
+  "id": "W2119100170",
+  "title": "Closing the chasm between research and practice: evidence of and for change",
+  "abstract": "The usual remedy suggested for bridging the science‐to‐practice gap is to improve the efficiency of disseminating the evidencebased practices to practitioners. This reflection on the gap takes the position that it is the relevance and fit of the evidence with the majority of practices that limit its applicability and application in health promotion and related behavioural, community and population‐level interventions where variations in context, values and norms make uniform interventions inappropriate. To make the evidence more relevant and actionable to practice settings and populations will require reforms at many points in the research‐to‐practice pipeline. These points in the pipeline are described and remedies for them suggested.",
+  "year": 2014,
+  "lang": "en",
+  "type": "article",
+  "venue": "Health Promotion Journal of Australia",
+  "topic": "Health Policy Implementation Science",
+  "field": "Health Professions"
+ },
+ {
+  "id": "W4367367803",
+  "title": "China Health Related Outcomes Measures (CHROME): development of a descriptive system to support cardiovascular disease specific preference-based measure for the Chinese population",
+  "abstract": "1. Qual Life Res. 2023 Sep;32(9):2463-2476. doi: 10.1007/s11136-023-03416-y. Epub\n 2023 Apr 29.\n\nChina Health Related Outcomes Measures (CHROME): development of a descriptive \nsystem to support cardiovascular disease specific preference-based measure for \nthe Chinese population.\n\nLi X(1)(2), Zhao K(1)(3), Li K(4), Wang W(1), Feng S(5), Wu J(6)(7), He X(6)(7), \nXie S(2)(6), Hu H(8), Fan J(9)(10), Fu Q(11), Xie F(12)(13); CHROME Study Group.\n\nAuthor information:\n(1)Department of Health Technology Assessment, China National Health Development \nResearch Center, Beijing, China.\n(2)Department of Health Research Methods, Evidence and Impact, McMaster \nUniversity, 1280 Main Street West, Hamilton, ON, L8S 4K1, Canada.\n(3)Vanke School of Public Health, Tsinghua University, Beijing, China.\n(4)China Alliance for Rare Disease, Beijing, China.\n(5)Emergency and Critical Care Center, Beijing Anzhen Hospital, Capital Medical \nUniversity, Beijing, China.\n(6)School of Pharmaceutical Science and Technology, Tianjin University, Tianjin, \nChina.\n(7)Center for Social Science Survey and Data, Tianjin University, Tianjin, \nChina.\n(8)Liaoning Institute of Basic Medicine, Liaoning, China.\n(9)National Center for Cardiovascular Diseases, Beijing, China.\n(10)Fuwai Hospital, Chinese Academy of Medical Sciences, Beijing, China.\n(11)China National Health Development Research Center, 9 Chegongzhuang Street, \nXicheng District, Beijing, 100444, China. fuqiang@nhei.cn.\n(12)Department of Health Research Methods, Evidence and Impact, McMaster \nUniversity, 1280 Main Street West, Hamilton, ON, L8S 4K1, Canada. \nfengxie@mcmaster.ca.\n(13)Centre for Health Economics and Policy Analysis, McMaster University, \nHamilton, ON, Canada. fengxie@mcmaster.ca.\n\nPURPOSE: Preference-based measures have been increasingly recommended to measure \nhealth outcomes for economic evaluation. However, none of existing \ncardiovascular disease (CVD)-specific health-related quality of life (HRQoL) \ninstruments are preference-based. This study aimed to develop the descriptive \nsystem of preference-based HRQoL instrument for Chinese patients with CVDs under \nthe Initiative of China Health Related Outcomes Measures (CHROME).\nMETHODS: Qualitative face-to-face interviews were conducted with Chinese \npatients with CVDs. Content analysis was employed to generate candidate items \nfor the instrument. Then expert consultation and cognitive debriefing interviews \nwere conducted to guide further selection and revision of the items.\nRE",
+  "year": 2023,
+  "lang": "en",
+  "type": "article",
+  "venue": "Quality of Life Research",
+  "topic": "Health Systems, Economic Evaluations, Quality of Life",
+  "field": "Economics, Econometrics and Finance"
+ },
+ {
+  "id": "W3010563719",
+  "title": "Examining partnerships within an international knowledge translation network focused on youth mental health promotion",
+  "abstract": "Abstract Background Systems transformation for health promotion, involving engagement from multiple disciplines and levels of influence, requires an investment in partnership development. Integrated youth service is a collaborative model that brings organisations together to provide holistic care for youth. Frayme is an international knowledge translation network designed to support the uptake and scaling of integrated youth service. Social network analysis (SNA) is the study of relationships among social units and is useful to better understand how partners collaborate within a network to achieve major objectives. The purpose of this paper is to apply SNA to the Frayme network in order to (1) examine the level and strength of partnerships, (2) identify the strategies being employed to promote the main objectives and (3) apply the findings to current research in youth mental health and system transformation. Methods The PARTNER tool includes a validated survey and analysis software designed to examine partner interconnections. This tool was used to perform the SNA and 51 of the 75 partners completed the survey (14 researchers, 2 advisory groups and 35 organisations). A network map was created and descriptive frequencies were calculated. Results The overall network scores for the Frayme network were 20.6% for density, 81.5% for centralisation and 71.7% for overall trust. The Frayme secretariat received a 3.84 out of a possible 4 for value. In addition, the youth and family advisories each received a value score of 4 and all Leadership Team organisations received a score of 2.97 or above. Conclusions The Frayme secretariat links many partners who would otherwise be disconnected and acts as a significant conduit for novel information. Frayme may have the opportunity to enhance value perceptions among broader network members by profiling individual organisations and the potential leveraging opportunities that might exist through their work. These findings increase understanding with respect to the mechanisms of network development and will be helpful to inform partnership development in the future. In addition, they contribute to the literature with respect to knowledge translation practice as well as the scaling of collaborative interventions within youth mental health.",
+  "year": 2020,
+  "lang": "en",
+  "type": "article",
+  "venue": "Health Research Policy and Systems",
+  "topic": "Health Policy Implementation Science",
+  "field": "Health Professions"
+ },
+ {
+  "id": "W6902197653",
+  "title": "Additional file 1 of Essential content for teaching implementation practice in healthcare: a mixed-methods study of teams offering capacity-building initiatives",
+  "abstract": "",
+  "year": 2024,
+  "lang": "en",
+  "type": "article",
+  "venue": "Figshare",
+  "topic": "Health Policy Implementation Science",
+  "field": "Health Professions"
+ },
+ {
+  "id": "W2098531697",
+  "title": "Taking stock of current societal, political and academic stakeholders in the Canadian healthcare knowledge translation agenda",
+  "abstract": "1. Implement Sci. 2007 Oct 4;2:32. doi: 10.1186/1748-5908-2-32.\n\nTaking stock of current societal, political and academic stakeholders in the \nCanadian healthcare knowledge translation agenda.\n\nNewton MS(1), Scott-Findlay S.\n\nAuthor information:\n(1)Department of Pediatrics, Faculty of Medicine and Dentistry, University of \nAlberta, Edmonton, Alberta, Canada. mandi.newton@ualberta.ca\n\nBACKGROUND: In the past 15 years, knowledge translation in healthcare has \nemerged as a multifaceted and complex agenda. Theoretical and polemical \ndiscussions, the development of a science to study and measure the effects of \ntranslating research evidence into healthcare, and the role of key stakeholders \nincluding academe, healthcare decision-makers, the public, and government \nfunding bodies have brought scholarly, organizational, social, and political \ndimensions to the agenda.\nOBJECTIVE: This paper discusses the current knowledge translation agenda in \nCanadian healthcare and how elements in this agenda shape the discovery and \ntranslation of health knowledge.\nDISCUSSION: The current knowledge translation agenda in Canadian healthcare \ninvolves the influence of values, priorities, and people; stakes which greatly \nshape the discovery of research knowledge and how it is or is not instituted in \nhealthcare delivery. As this agenda continues to take shape and direction, \nensuring that it is accountable for its influences is essential and should be at \nthe forefront of concern to the Canadian public and healthcare community. This \ntransparency will allow for scrutiny, debate, and improvements in health \nknowledge discovery and health services delivery.\n\nDOI: 10.1186/1748-5908-2-32\nPMCID: PMC2064918\nPMID: 17916256",
+  "year": 2007,
+  "lang": "en",
+  "type": "article",
+  "venue": "Implementation Science",
+  "topic": "Health Policy Implementation Science",
+  "field": "Health Professions"
+ },
+ {
+  "id": "W2610816048",
+  "title": "A Review of Implementation Outcome Measures of School‐Based Physical Activity Interventions",
+  "abstract": "ABSTRACT BACKGROUND Measuring the implementation of school‐based physical activity (PA) interventions is an important prerequisite in assessing their impact. Prior to conducting a study to assess the implementation of the daily physical activity (DPA) policy in Ontario, Canada, a literature review was conducted to identify existing survey instruments to measure 5 implementation outcomes: adoption, fidelity, implementation cost, reach, and sustainability. METHODS A search for survey instruments to assess these implementation outcomes at the teacher and school administrator levels was conducted in 7 bibliographic databases, as well as the gray literature. Each survey instrument was coded as assessing 1 of the 5 implementation outcomes if it included at least 1 item measuring the construct. RESULTS Twenty‐three survey instruments were identified. None of the instruments were specifically developed to measure the implementation outcomes. Fidelity was the most common implementation outcome measured, followed by adoption. The least common implementation outcome measured was sustainability. Thirty‐five percent of survey instruments assessed were previously tested for validity and 26% were previously tested for reliability. CONCLUSIONS Based on this review, a gap in available instruments to measure implementation outcomes of school‐based PA programs was identified. An adapted theoretical framework, presented here, has potential application in future implementation studies.",
+  "year": 2017,
+  "lang": "en",
+  "type": "review",
+  "venue": "Journal of School Health",
+  "topic": "Health Policy Implementation Science",
+  "field": "Health Professions"
+ },
+ {
+  "id": "W4229589109",
+  "title": "Transparent, Open, and Reproducible Prevention Science",
+  "abstract": "The field of prevention science aims to understand societal problems, identify effective interventions, and translate scientific evidence into policy and practice. There is growing interest among prevention scientists in the potential for transparency, openness, and reproducibility to facilitate this mission by providing opportunities to align scientific practice with scientific ideals, accelerate scientific discovery, and broaden access to scientific knowledge. The overarching goal of this manuscript is to serve as a primer introducing and providing an overview of open science for prevention researchers. In this paper, we discuss factors motivating interest in transparency and reproducibility, research practices associated with open science, and stakeholders engaged in and impacted by open science reform efforts. In addition, we discuss how and why different types of prevention research could incorporate open science practices, as well as ways that prevention science tools and methods could be leveraged to advance the wider open science movement. To promote further discussion, we conclude with potential reservations and challenges for the field of prevention science to address as it transitions to greater transparency, openness, and reproducibility. Throughout, we identify activities that aim to strengthen the reliability and efficiency of prevention science, facilitate access to its products and outputs, and promote collaborative and inclusive participation in research activities. By embracing principles of transparency, openness, and reproducibility, prevention science can better achieve its mission to advance evidence-based solutions to promote individual and collective well-being.",
+  "year": 2020,
+  "lang": "en",
+  "type": "preprint",
+  "venue": null,
+  "topic": "Health Policy Implementation Science",
+  "field": "Health Professions"
+ },
+ {
+  "id": "W2196012223",
+  "title": "Building a knowledge translation platform in Malawi to support evidence-informed health policy",
+  "abstract": "1. Health Res Policy Syst. 2015 Dec 8;13:73. doi: 10.1186/s12961-015-0061-4.\n\nBuilding a knowledge translation platform in Malawi to support evidence-informed \nhealth policy.\n\nBerman J(1), Mitambo C(2), Matanje-Mwagomba B(3), Khan S(4), Kachimanga C(5), \nWroe E(6), Mwape L(7), van Oosterhout JJ(8)(9), Chindebvu G(10), van Schoor \nV(11), Puchalski Ritchie LM(12)(13)(14), Panisset U(15), Kathyola D(16).\n\nAuthor information:\n(1)Dignitas International, Zomba, Malawi. j.berman@dignitasinternational.org.\n(2)Ministry of Health, Department of Research, Public Health Institute of \nMalawi, Community Health Sciences Unit (CHSU), P.O. Box 65, Lilongwe, Malawi. \ncmitambo@gmail.com.\n(3)Ministry of Health, Department of Research, Public Health Institute of \nMalawi, Community Health Sciences Unit (CHSU), P.O. Box 65, Lilongwe, Malawi. \nbeatmat31@gmail.com.\n(4)University of North Carolina Project, Lilongwe, Malawi. \nskhan@unclilongwe.org.\n(5)Partners in Health, Neno, Malawi. chembekachimanga@yahoo.co.uk.\n(6)Partners in Health, Neno, Malawi. emwroe@gmail.com.\n(7)Department of Nursing Sciences and Zambia Forum for Health Research, \nUniversity of Zambia, School of Medicine, Lusaka, Zambia. loniamagolo@gmail.com.\n(8)Dignitas International, Zomba, Malawi. \nj.vanoosterhout@dignitasinternational.org.\n(9)Department of Medicine, University of Malawi College of Medicine, Blantyre, \nMalawi. j.vanoosterhout@dignitasinternational.org.\n(10)Dignitas International, Zomba, Malawi. \ng.chindebvu@dignitasinternational.org.\n(11)Dignitas International, Zomba, Malawi. \nv.vanschoor@dignitasinternational.org.\n(12)Department of Medicine, University of Toronto, Toronto, Ontario, Canada. \nlisa.puchalskiritchie@utoronto.ca.\n(13)University Health Network, Toronto, Ontario, Canada. \nlisa.puchalskiritchie@utoronto.ca.\n(14)Li Ka Shing Knowledge Institute, St. Michael's Hospital, Toronto, Ontario, \nCanada. lisa.puchalskiritchie@utoronto.ca.\n(15)Faculdade de Medicina da Universidade Federal de Minas Gerais (School of \nMedicine-UFMG), Belo Horizonte, Brazil. upanisset@gmail.com.\n(16)Ministry of Health, Department of Research, Public Health Institute of \nMalawi, Community Health Sciences Unit (CHSU), P.O. Box 65, Lilongwe, Malawi. \ndkathyola@gmail.com.\n\nWith the support of the World Health Organization's Evidence-Informed Policy \nNetwork, knowledge translation platforms have been developed throughout Africa, \nthe Americas, Eastern Europe, and Asia to further evidence-informed national \nhealth policy. In this ",
+  "year": 2015,
+  "lang": "en",
+  "type": "article",
+  "venue": "Health Research Policy and Systems",
+  "topic": "Health Policy Implementation Science",
+  "field": "Health Professions"
+ },
+ {
+  "id": "W6958452849",
+  "title": "Additional file 1 of Exploring the perspectives of primary care providers on use of the electronic Patient Reported Outcomes tool to support goal-oriented care: a qualitative study",
+  "abstract": "",
+  "year": 2021,
+  "lang": "en",
+  "type": "article",
+  "venue": "Figshare",
+  "topic": "Health Policy Implementation Science",
+  "field": "Health Professions"
+ },
+ {
+  "id": "W2617385918",
+  "title": "Strategies to translate knowledge related to common musculoskeletal conditions into physiotherapy practice: a systematic review",
+  "abstract": "1. Physiotherapy. 2018 Mar;104(1):1-8. doi: 10.1016/j.physio.2017.05.002. Epub\n2017  May 26.\n\nStrategies to translate knowledge related to common musculoskeletal conditions \ninto physiotherapy practice: a systematic review.\n\nBérubé MÈ(1), Poitras S(2), Bastien M(1), Laliberté LA(1), Lacharité A(1), Gross \nDP(3).\n\nAuthor information:\n(1)School of Rehabilitation Sciences, Faculty of Health Sciences, University of \nOttawa, 451 Smyth Road, Ottawa, Ontario K1H 8M5, Canada.\n(2)School of Rehabilitation Sciences, Faculty of Health Sciences, University of \nOttawa, 451 Smyth Road, Ottawa, Ontario K1H 8M5, Canada. Electronic address: \nstephane.poitras@uottawa.ca.\n(3)Department of Physical Therapy, University of Alberta, 2-50 Corbett Hall, \nEdmonton, Alberta T6G 2G4, Canada.\n\nBACKGROUND: Many physiotherapists underuse evidence-based practice guidelines or \nrecommendations when treating patients with musculoskeletal disorders, yet \nsynthesis of knowledge translation interventions used within the field of \nphysiotherapy fails to offer clear conclusions to guide the implementation of \nclinical practice guidelines.\nOBJECTIVES: To evaluate the effectiveness of various knowledge translation \ninterventions used to implement changes in the practice of current \nphysiotherapists treating common musculoskeletal issues.\nDATA SOURCES: A computerized literature search of MEDLINE, CINHAL and ProQuest \nof systematic reviews (from inception until May 2016) and primary research \nstudies (from January 2010 until June 2016).\nSTUDY SELECTION AND ELIGIBILITY CRITERIA: Eligibility criteria specified \narticles evaluating interventions for translating knowledge into physiotherapy \npractice.\nDATA EXTRACTION AND DATA SYNTHESIS: Two reviewers independently screened the \ntitles and abstracts, reviewed full-text articles, performed data extraction, \nand performed quality assessment. Of a total of 13014 articles located and \ntitles and abstracts screened, 34 studies met the inclusion criteria, including \nthree overlapping publications, resulting in 31 individual studies.\nRESULTS: Knowledge translation interventions appear to have resulted in a \npositive change in physiotherapist beliefs, attitudes, skills and guideline \nawareness. However, no consistent improvement in clinical practice, patient and \neconomic outcomes were observed.\nLIMITATIONS: The studies included had small sample sizes and low methodological \nquality. The heterogeneity of the studies was not conducive to pooling the data.\nCONCLUS",
+  "year": 2017,
+  "lang": "en",
+  "type": "review",
+  "venue": "Physiotherapy",
+  "topic": "Health Policy Implementation Science",
+  "field": "Health Professions"
+ },
+ {
+  "id": "W3209288188",
+  "title": "The Application of Human-Centered Design Approaches in Health Research and Innovation: A Narrative Review of Current Practices",
+  "abstract": "Background Human-centered design (HCD) approaches to health care strive to support the development of innovative, effective, and person-centered solutions for health care. Although their use is increasing, there is no integral overview describing the details of HCD methods in health innovations. Objective This review aims to explore the current practices of HCD approaches for the development of health innovations, with the aim of providing an overview of the applied methods for participatory and HCD processes and highlighting their shortcomings for further research. Methods A narrative review of health research was conducted based on systematic electronic searches in the PubMed, CINAHL, Embase, Cochrane Library, Web of Science, PsycINFO, and Sociological Abstracts (2000-2020) databases using keywords related to human-centered design, design thinking (DT), and user-centered design (UCD). Abstracts and full-text articles were screened by 2 reviewers independently based on predefined inclusion criteria. Data extraction focused on the methodology used throughout the research process, the choice of methods in different phases of the innovation cycle, and the level of engagement of end users. Results This review summarizes the application of HCD practices across various areas of health innovation. All approaches prioritized the user’s needs and the participatory and iterative nature of the design process. The design processes comprised several design cycles during which multiple qualitative and quantitative methods were used in combination with specific design methods. HCD- and DT-based research primarily targeted understanding the research context and defining the problem, whereas UCD-based work focused mainly on the direct generation of solutions. Although UCD approaches involved end users primarily as testers and informants, HCD and DT approaches involved end users most often as design partners. Conclusions We have provided an overview of the currently applied methodologies and HCD guidelines to assist health care professionals and design researchers in their methodological choices. HCD-based techniques are challenging to evaluate using traditional biomedical research methods. Previously proposed reporting guidelines are a step forward but would require a level of detail that is incompatible with the current publishing landscape. Hence, further development is needed in this area. Special focus should be placed on the congruence between the chosen methods, des",
+  "year": 2021,
+  "lang": "en",
+  "type": "review",
+  "venue": "JMIR mhealth and uhealth",
+  "topic": "Health Policy Implementation Science",
+  "field": "Health Professions"
+ },
+ {
+  "id": "W2029169184",
+  "title": "Reaching the Underserved Through Community-Based Participatory Research and Service Learning",
+  "abstract": "1. J Public Health Manag Pract. 2011 Jul-Aug;17(4):363-8. doi: \n10.1097/PHH.0b013e3182214707.\n\nReaching the underserved through community-based participatory research and \nservice learning: description and evaluation of a unique medical student \ntraining program.\n\nDehaven MJ(1), Gimpel NE, Dallo FJ, Billmeier TM.\n\nAuthor information:\n(1)Health Institutes of Texas, Texas Prevention Institute, Department of Family \nMedicine, University of North Texas Health Science Center, Fort Worth, TX 76107. \nUSA. Mark.DeHaven@unthsc.edu\n\nOBJECTIVES: To provide an overview of the Community Health Fellowship Program \n(CHFP), describe the types of projects completed by the community health fellows \nfrom 2005 to 2009 and to assess the program's effectiveness from the perspective \nof fellows and community partners.\nMETHODS: We developed the CHFP for training medical students in community-based \nparticipatory research (CBPR), and understanding the components of successful \ncommunity partnerships for addressing health disparities in underserved \ncommunities. The program has didactic and applied community research components.\nRESULTS: From 2005 to 2009, fellows completed 25 research projects with 19 \ndifferent community partners. Fellows reported favorable attitudes about the \nprogram, their mentors, and their community projects; their research knowledge \nincreased significantly in most areas, especially their ability to develop a \nsuccinct research question, familiarity with CBPR, and delivering a formal \nresearch presentation (Wilcoxon signed-rank test, P <.05). Community partners \nreported favorable attitudes toward the fellows and the program; using a 5-point \nLikert scale (1 = not favorable, 5 = very favorable), they reported highly \nfavorable attitudes about fellows' level of responsibility (4.85), level of \ncooperation (4.85), familiarity with the needs of the medically underserved \n(4.69), and knowledge of how to apply local solutions to health problems (4.54).\nCONCLUSIONS: The CHFP has high favorability and support among fellows and \ncommunity partners; the program can serve as a prototype for training future \nphysicians in understanding and addressing the needs of the underserved, through \ncommunity partnerships, and community-based participatory research.\n\nDOI: 10.1097/PHH.0b013e3182214707\nPMID: 21617414 [Indexed for MEDLINE]",
+  "year": 2011,
+  "lang": "en",
+  "type": "article",
+  "venue": "Journal of Public Health Management and Practice",
+  "topic": "Health Policy Implementation Science",
+  "field": "Health Professions"
+ },
+ {
+  "id": "W6902128111",
+  "title": "Additional file 1 of The Implementation in Context (ICON) Framework: A meta-framework of context domains, attributes and features in healthcare",
+  "abstract": "",
+  "year": 2023,
+  "lang": "en",
+  "type": "article",
+  "venue": "Figshare",
+  "topic": "Health Policy Implementation Science",
+  "field": "Health Professions"
+ },
+ {
+  "id": "W6977027163",
+  "title": "Additional file 3 of The Implementation in Context (ICON) Framework: A meta-framework of context domains, attributes and features in healthcare",
+  "abstract": "",
+  "year": 2023,
+  "lang": "en",
+  "type": "article",
+  "venue": "Figshare",
+  "topic": "Health Policy Implementation Science",
+  "field": "Health Professions"
+ }
+]
