@@ -46,6 +46,7 @@ model Work {
 
   retraction Retraction?
   screened   Screened?
+  score      WorkScore?
 
   @@map("works")
 }
@@ -112,4 +113,25 @@ model Screened {
   work Work @relation(fields: [id], references: [id], onDelete: Cascade)
 
   @@map("screened")
+}
+
+/// The PROVISIONAL baseline frame scores: the two teacher heads of the distilled
+/// student model (Opus and GPT; Grok was retired from the panel at D36) read over
+/// all 4,299,418 works. The model is NOT mature (pilot/results/maturity.json:
+/// passed = false after 7 training rounds), and `validationStatus` says so on
+/// every row, verbatim: score_only:v0-immature-baseline. A score ORDERS works for
+/// review; it never asserts a category, and no surface that reads this model may
+/// present these numbers as validated labels.
+model WorkScore {
+  id               String  @id @db.VarChar(20)
+  scoreOpus        Float?  @map("score_opus")
+  scoreGpt         Float?  @map("score_gpt")
+  /// |scoreOpus - scoreGpt|: the teachers' disagreement on this work.
+  scoreSpread      Float?  @map("score_spread")
+  /// Verbatim from the scoring run. Nothing downstream may soften it.
+  validationStatus String? @map("validation_status")
+
+  work Work @relation(fields: [id], references: [id], onDelete: Cascade)
+
+  @@map("work_score")
 }

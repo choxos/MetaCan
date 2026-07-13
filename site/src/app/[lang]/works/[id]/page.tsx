@@ -2,8 +2,9 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { getWork, fetchAbstract } from '@/lib/query'
 import { getDict, type Dictionary } from '@/lib/i18n'
-import { formatInt, isLang, langAlternates, type Lang } from '@/lib/lang'
+import { formatInt, isLang, langAlternates, numberLocale, type Lang } from '@/lib/lang'
 import { localePath } from '@/lib/lang'
+import { ScoreBanner } from '@/components/ScoreBanner'
 
 export const dynamic = 'force-dynamic'
 
@@ -34,6 +35,28 @@ function Field({ label, children }: { label: string; children: React.ReactNode }
         {label}
       </dt>
       <dd className="mt-0.5 break-words">{children ?? <span style={{ color: 'var(--ink-5)' }}>—</span>}</dd>
+    </div>
+  )
+}
+
+/** A score in [0, 1] as a bar. The number is the datum; the bar only makes two of them comparable at a glance. */
+function ScoreBar({ label, value, lang, color }: { label: string; value: number | null; lang: Lang; color: string }) {
+  const pct = value === null ? 0 : Math.max(0, Math.min(1, value)) * 100
+  const shown =
+    value === null
+      ? '—'
+      : value.toLocaleString(numberLocale(lang), { minimumFractionDigits: 3, maximumFractionDigits: 3 })
+  return (
+    <div>
+      <div className="flex items-baseline justify-between gap-2 text-sm">
+        <span>{label}</span>
+        <span className="tabular" style={{ color: 'var(--ink-3)' }}>
+          {shown}
+        </span>
+      </div>
+      <div className="mt-1 h-2 overflow-hidden rounded-full" style={{ background: 'var(--surface-3)' }}>
+        <div className="h-2 rounded-full" style={{ width: `${pct}%`, background: color }} />
+      </div>
     </div>
   )
 }
@@ -103,6 +126,7 @@ export default async function WorkDetail({ params }: { params: { lang: string; i
   const abstract = w.screened?.abstract ?? (await fetchAbstract(w.id))
   const s = w.screened
   const r = w.retraction
+  const sc = w.score
 
   const admitted = routeDefs(t).filter((route) => w[route.key])
   const chips = (arr: string) =>
@@ -261,6 +285,54 @@ export default async function WorkDetail({ params }: { params: { lang: string; i
               reason={s.grokReason}
             />
           </div>
+        </section>
+      )}
+
+      {/* The machine scores: a PROVISIONAL baseline from an immature model. The
+          banner is not decoration; it is the contract under which these numbers
+          may be shown at all. See ScoreBanner and pilot/results/maturity.json. */}
+      {sc && (
+        <section className="card p-6" style={{ borderColor: 'var(--contested)' }}>
+          <h2 className="font-serif text-xl">{t.workDetail.scoresTitle}</h2>
+          <div className="mt-3">
+            <ScoreBanner t={t} />
+          </div>
+          <p className="mt-3 text-sm leading-relaxed" style={{ color: 'var(--ink-4)' }}>
+            {t.workDetail.scoresSub}
+          </p>
+
+          <div className="mt-4 space-y-4">
+            <ScoreBar label={t.workDetail.scoreOpus} value={sc.scoreOpus} lang={lang} color="var(--mc)" />
+            <ScoreBar label={t.workDetail.scoreGpt} value={sc.scoreGpt} lang={lang} color="var(--mc-accent)" />
+          </div>
+
+          <dl className="mt-4">
+            <Field label={t.workDetail.scoreSpread}>
+              {sc.scoreSpread === null ? null : (
+                <>
+                  <span className="tabular" style={{ color: 'var(--contested)' }}>
+                    {sc.scoreSpread.toLocaleString(numberLocale(lang), {
+                      minimumFractionDigits: 3,
+                      maximumFractionDigits: 3,
+                    })}
+                  </span>{' '}
+                  <span className="text-xs" style={{ color: 'var(--ink-4)' }}>
+                    · {t.workDetail.scoreSpreadNote}
+                  </span>
+                </>
+              )}
+            </Field>
+            <Field label={t.workDetail.validationStatus}>
+              {sc.validationStatus === null ? null : (
+                <>
+                  <code className="font-mono text-xs">{sc.validationStatus}</code>{' '}
+                  <span className="text-xs" style={{ color: 'var(--ink-4)' }}>
+                    · {t.workDetail.validationStatusNote}
+                  </span>
+                </>
+              )}
+            </Field>
+          </dl>
         </section>
       )}
 

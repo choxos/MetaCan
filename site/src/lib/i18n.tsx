@@ -206,6 +206,16 @@ const en = {
     retractionMissedSuffix: ' · OpenAlex missed it',
   },
 
+  /**
+   * Shown ONLY on views that carry machine scores (the work detail block and the
+   * analytics spread row). The scores are a PROVISIONAL BASELINE from a model
+   * whose maturity gate has not passed (pilot/results/maturity.json), and this
+   * banner is the sentence that must travel with them everywhere they appear.
+   */
+  scoreBanner: {
+    text: 'Baseline scores from an immature model (maturity gate not passed, 7 training rounds). Scores rank; they never assert a category.',
+  },
+
   workDetail: {
     back: '← all works',
     onOpenAlex: (id: string) => `${id} on OpenAlex`,
@@ -269,6 +279,16 @@ const en = {
     aboutCanada: 'about Canada',
     confidence: 'confidence',
     tierAdjacent: 'T3 · adjacent, not in scope',
+    scoresTitle: 'Machine scores (provisional)',
+    scoresSub:
+      'The two teacher heads of the student model, read on this work. A score orders the frame for review; it never asserts a category, and the validation status ships verbatim with every row.',
+    scoreOpus: 'Opus teacher head',
+    scoreGpt: 'GPT teacher head',
+    scoreSpread: 'Teacher spread',
+    scoreSpreadNote: 'how far apart the two teachers sit on this one work',
+    validationStatus: 'Validation status',
+    validationStatusNote:
+      'verbatim from the scoring run: score_only means the number may rank works, and no category label ships from it',
     abstractTitle: 'Abstract',
     abstractStored: 'Stored with the screening record, where it is evidence for the labels above.',
     abstractFetched:
@@ -393,6 +413,17 @@ const en = {
     fundersTitle: 'Top funders',
     fundersNote:
       'Split from the semicolon-separated funder string. The funder route admits works that carry no Canadian affiliation at all.',
+    scoresTitle: 'Teacher spread over the frame (provisional baseline)',
+    scoresNote: (n: string) =>
+      `Every one of the ${n} works carries two provisional teacher-head scores, and the spread is how far the two heads sit apart on one work. These figures come from pilot/results/frame_scores.json, the file the scoring run writes; nothing here was typed by hand.`,
+    tileScored: 'Works scored',
+    tileScoredNote: 'every work in the frame, by the two-teacher panel',
+    tileMeanSpread: 'Mean teacher spread',
+    tileMeanSpreadNote: 'the average disagreement between the two heads',
+    tileP99Spread: 'Teacher spread, 99th percentile',
+    tileP99SpreadNote: '99% of works sit below this spread',
+    tileSplit: 'Works where the teachers would split',
+    tileSplitNote: 'spread above 0.5',
     apiNote: (p: P) => (
       <>
         Every series here is available as JSON:{' '}
@@ -884,6 +915,10 @@ const fr: Dictionary = {
     retractionMissedSuffix: ' · manqué par OpenAlex',
   },
 
+  scoreBanner: {
+    text: "Scores de référence d'un modèle non mature (critères de maturité non atteints, 7 itérations). Un score ordonne; il n'affirme jamais une catégorie.",
+  },
+
   workDetail: {
     back: '← tous les travaux',
     onOpenAlex: (id: string) => `${id} sur OpenAlex`,
@@ -953,6 +988,16 @@ const fr: Dictionary = {
     aboutCanada: 'porte sur le Canada',
     confidence: 'confiance',
     tierAdjacent: 'T3 · adjacent, hors champ',
+    scoresTitle: 'Scores machine (provisoires)',
+    scoresSub:
+      "Les deux têtes enseignantes du modèle étudiant, lues sur ce travail. Un score ordonne la base pour la relecture; il n'affirme jamais une catégorie, et le statut de validation accompagne chaque rangée tel quel.",
+    scoreOpus: 'Tête enseignante Opus',
+    scoreGpt: 'Tête enseignante GPT',
+    scoreSpread: 'Écart entre enseignants',
+    scoreSpreadNote: "la distance entre les deux têtes enseignantes sur ce seul travail",
+    validationStatus: 'Statut de validation',
+    validationStatusNote:
+      "tel quel depuis la passe de notation : score_only signifie que le nombre peut ordonner les travaux, et qu'aucune étiquette de catégorie n'en découle",
     abstractTitle: 'Résumé',
     abstractStored: 'Conservé avec la notice de tri, où il sert de preuve aux étiquettes ci-dessus.',
     abstractFetched:
@@ -1079,6 +1124,17 @@ const fr: Dictionary = {
     fundersTitle: 'Principaux organismes subventionnaires',
     fundersNote:
       "Extraits de la chaîne d'organismes séparée par des points-virgules. La voie du financement admet des travaux qui ne portent aucune affiliation canadienne.",
+    scoresTitle: "L'écart entre enseignants sur toute la base (référence provisoire)",
+    scoresNote: (n: string) =>
+      `Chacun des ${n} travaux porte deux scores provisoires de têtes enseignantes, et l'écart mesure la distance entre les deux têtes sur un même travail. Ces chiffres proviennent de pilot/results/frame_scores.json, le fichier qu'écrit la passe de notation; rien ici n'est saisi à la main.`,
+    tileScored: 'Travaux notés',
+    tileScoredNote: 'chaque travail de la base, par le tandem de têtes enseignantes',
+    tileMeanSpread: 'Écart moyen entre enseignants',
+    tileMeanSpreadNote: 'le désaccord moyen entre les deux têtes',
+    tileP99Spread: 'Écart entre enseignants, 99e centile',
+    tileP99SpreadNote: '99 % des travaux se situent sous cet écart',
+    tileSplit: 'Travaux où les enseignants divergeraient',
+    tileSplitNote: 'écart supérieur à 0,5',
     apiNote: (p: P) => (
       <>
         Chaque série est offerte en JSON :{' '}

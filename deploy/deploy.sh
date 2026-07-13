@@ -182,7 +182,18 @@ cd "$APP_ROOT"
 echo "--> npm ci"
 npm ci --no-audit --no-fund
 echo "--> npm run build"
-npm run build
+# The build prerenders pages against the SAME Postgres the live app is using,
+# and this host caps max_connections at 50, most of which the live app's idle
+# pool already holds. Prisma's default pool (2 x cores + 1, per build worker)
+# blows through the remainder and the build dies mid-prerender with "too many
+# clients". So the BUILD runs with a small explicit pool; the runtime app is
+# untouched.
+build_db_url="$(grep '^DATABASE_URL=' .env | head -1 | cut -d= -f2- | sed -e 's/^"//' -e 's/"$//')"
+case "$build_db_url" in
+    *\?*) build_db_url="${build_db_url}&connection_limit=5" ;;
+    *)    build_db_url="${build_db_url}?connection_limit=5" ;;
+esac
+DATABASE_URL="$build_db_url" npm run build
 
 # 5. Point pm2 at the new root. The cwd changed, so the process is recreated
 #    rather than reloaded.

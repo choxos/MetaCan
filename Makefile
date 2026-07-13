@@ -99,6 +99,9 @@ findings:
 	@Rscript pilot/render_findings.R
 	@for d in app/src/data site/src/data; do \
 		if [ -d "$$d" ]; then cp pilot/results/findings.json "$$d/findings.json"; echo "synced $$d/findings.json"; fi; \
+		if [ -f "$$d/frame_scores.json" ] && [ -f pilot/results/frame_scores.json ]; then \
+			cp pilot/results/frame_scores.json "$$d/frame_scores.json"; echo "synced $$d/frame_scores.json"; \
+		fi; \
 	done
 
 harvest-status:

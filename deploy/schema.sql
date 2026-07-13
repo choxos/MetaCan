@@ -5,6 +5,7 @@
 -- database is inferred, and every work carries the ROUTES that admitted it, so a
 -- reader can always ask "why is this here?" and get an answer.
 
+DROP TABLE IF EXISTS work_score CASCADE;
 DROP TABLE IF EXISTS screened CASCADE;
 DROP TABLE IF EXISTS retractions CASCADE;
 DROP TABLE IF EXISTS works CASCADE;
@@ -91,4 +92,29 @@ CREATE TABLE screened (
   gpt_tier        VARCHAR(8),  gpt_genre  VARCHAR(48),  gpt_about_ca  BOOLEAN,  gpt_confidence  VARCHAR(8),  gpt_reason  TEXT,
   grok_tier       VARCHAR(8),  grok_genre VARCHAR(48),  grok_about_ca BOOLEAN,  grok_confidence VARCHAR(8),  grok_reason TEXT,
   n_in            SMALLINT     -- 0..3: how many models called it in scope
+);
+
+-- ---------------------------------------------------------------------------
+-- work_score: the PROVISIONAL baseline frame scores, one row per work.
+--
+-- These are the two teacher heads of the distilled student model (Opus and GPT;
+-- Grok was retired from the panel at D36) read over the full frame. The model is
+-- NOT mature: pilot/results/maturity.json says passed = false after 7 training
+-- rounds, and every row's validation_status says score_only:v0-immature-baseline.
+-- A score ORDERS works for review; it never asserts a category, and nothing that
+-- reads this table may present it as a validated label.
+--
+-- Source: data/db/frame_scores.parquet (4,299,418 rows). Load, after works:
+--
+--   python: export the parquet to CSV, gzip it, then on the host
+--   zcat work_score.csv.gz | psql "$DATABASE_URL" \
+--     -c "\copy work_score FROM STDIN WITH (FORMAT csv, HEADER true)"
+--   psql "$DATABASE_URL" -c "ANALYZE work_score;"
+-- ---------------------------------------------------------------------------
+CREATE TABLE work_score (
+  id                VARCHAR(20) PRIMARY KEY REFERENCES works(id) ON DELETE CASCADE,
+  score_opus        DOUBLE PRECISION,
+  score_gpt         DOUBLE PRECISION,
+  score_spread      DOUBLE PRECISION,  -- |score_opus - score_gpt|: the teachers' disagreement
+  validation_status TEXT               -- verbatim from the scoring run; currently score_only:v0-immature-baseline
 );
