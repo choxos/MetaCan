@@ -1,0 +1,603 @@
+Reading additional input from stdin...
+OpenAI Codex v0.144.0
+--------
+workdir: /Users/choxos/Documents/GitHub/CaRN-data-challenge
+model: gpt-5.6-luna
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: medium
+reasoning summaries: none
+session id: 019f5c1d-5bb2-7012-8a35-4af3f32d2d7e
+--------
+user
+You are screening scholarly works for the MetaCan project. Apply the rubric below to EVERY record and output ONE JSON array with ONE object per record, conforming EXACTLY to the JSON schema below. Output ONLY the JSON array, no prose before or after it.
+
+# THE RUBRIC (v3.1, locked)
+
+# MétaCan screening rubric (v3.1)
+
+**Status: LOCKED, 2026-07-13.** Supersedes v2.2. No screening ran under v3.0, which lived for hours: an adversarial review found that its Murad quotation inserted the word "treatment" into a sentence this document calls verbatim (D29). v3.1 corrects that quotation from the PDF, fixes the Kataoka page range, aligns the funder clause with the protocol, corrects two glosses against their sources, and adds the study-design vocabulary that v3.0 demanded but never listed. Since D29, `pilot/check_quotes.R` fails the build if any quotation marked verbatim is not a substring of its cited PDF.
+
+**No number produced so far was made under v3.** The pilot ran under v1.0; the 179-work re-screen under v2.0. Both instruments are kept byte for byte, so every figure stays attributable to the text that produced it. v3 is the instrument the **full screen** runs under, and the **v2-to-v3 difference is reported as a finding**.
+
+---
+
+## What changed, and why it is not cosmetic
+
+v1 and v2 had a tier hierarchy: **T1 core / T2 adjacent / T3 contextual**. That structure had a defect at its root, and the data found it before I did.
+
+> **"Adjacent" is defined by negation.** It means *not-T1*. A category whose only content is "near the important one" cannot be applied consistently, and **OUT-vs-adjacent was the largest tier confusion at every sample size we measured.** The models were not failing. **The category was empty.**
+
+It was also a value judgment I had no standing to make. Calling science and technology studies "adjacent" says STS is peripheral to metascience. **STS is a field with its own founding literature, its own journals, and its own account of what studying science means.**
+
+**v3 deletes the hierarchy.** Every tradition is a **category with its own positive definition, taken from its own literature, quoted verbatim from a source in `docs/reference/definitions/`.** There is no residual bucket. A record may carry **more than one** category, because the traditions genuinely overlap and forcing a single label is what created the problem.
+
+**Nothing here is cited from memory.** Every quotation below was read from the PDF named beside it. In a project whose worst deviation (D26) was that its own definition of metaresearch was mine and uncited for its entire life, a recalled citation would be the single worst thing this document could contain.
+
+---
+
+## The definitional problem is the field's, not this project's, and the field says so in print
+
+- **Puljak L, Lovric Makaric Z, Buljan I, Pieper D.** *What is a meta-epidemiological study? Analysis of published literature indicated heterogeneous study designs and definitions.* J Comp Eff Res. 2020. doi:10.2217/cer-2019-0201
+  > Analysed **175 information sources**. *"Definitions of meta-epidemiological studies varied and some studies used the term meta-epidemiological study to describe methodological research-on-research studies."* Conclusion: *"Research community would benefit from consensus about definition of meta-epidemiological study."*
+
+- **Kataoka Y, et al.** J Clin Epidemiol. 2023;154:219-220.
+  > A **published dispute** with Puljak, opening by naming *"the currently confusing nomenclatures around 'meta-epidemiology' and related terms such as 'meta-research' and 'research-on-research'."*
+
+- **Stevens ER, Laynor G.** *Recognizing the value of meta-research and making it easier to find.* J Med Libr Assoc. 2023;111(4). doi:10.5195/jmla.2023.1758
+  > *"The breadth of meta-research presents a significant challenge for identifying published meta-research studies,"* and it notes **the lack of a MeSH heading** for meta-research.
+
+**Those are claims about humans.** The pilot's numbers are claims about **models disagreeing under one rubric**. They are consistent, they are not the same estimand, and **only the human audit closes the gap** (`DEVIATIONS.md` D27).
+
+---
+
+## The categories
+
+A work may carry **more than one**. **Categories are not ranked and none is primary: the released landscape is the union of the defined categories, with every overlap reported.** The call's primary estimand is reported over `metaresearch` because that is the field the call names; that is a **reporting choice, not a rank**, and each of the other traditions gets the same per-category estimate.
+
+### 1. `metaresearch`
+
+> **"Meta-research is an evolving scientific discipline that aims to evaluate and improve research practices. It includes thematic areas of methods, reporting, reproducibility, evaluation, and incentives (how to do, report, verify, correct, and reward science)."**
+>
+> Ioannidis JPA, Fanelli D, Dunne DD, Goodman SN. *Meta-research: Evaluation and Improvement of Research Methods and Practices.* PLoS Biol. 2015;13(10):e1002264.
+> See also Ioannidis JPA. PLoS Biol. 2018;16(3):e2005468; METRICS, Stanford: <https://metrics.stanford.edu/research>
+
+Every `metaresearch` record carries a **`domain`**, taken verbatim from those five thematic areas and glossed by Ioannidis's own parenthetical:
+
+| `domain` | Ioannidis's gloss | operationally |
+|---|---|---|
+| `methods` | *how to **do** science* | design, conduct, analysis, bias, statistical practice, evidence-synthesis methodology; Ioannidis's own description of this area ends *"research integrity and ethics"* |
+| `reporting` | *how to **report** science* | reporting standards and completeness |
+| `reproducibility` | *how to **verify** science* | replication, data and code sharing, transparency |
+| `evaluation` | *how to **correct** science* | peer review and editorial process, research assessment, metrics |
+| `incentives` | *how to **reward** science* | funding allocation, careers and the research workforce, reward structures |
+
+**RULE 1 stands** (carried from v2; it resolved the largest single seam): *a work is `metaresearch` on methods only if its object is methods **as used, reported or performed by researchers**. Developing, deriving, validating or teaching a technique for a domain is OUT, however generic the technique.* **An instance of a research practice is not a study of it.**
+
+### 2. `metaepidemiology` — **CONTESTED IN PRINT. Both definitions are coded.**
+
+There is **no consensus definition** (Puljak 2020, above). **This rubric does not invent one.** It codes **both published definitions** and **flags where they disagree**, because the dispute is live, it is between named researchers in peer-reviewed journals, and hiding it inside a single label would destroy the only evidence of it.
+
+- **`metaepi_narrow`** — Murad MH, Wang Z. *Guidelines for reporting meta-epidemiological methodology research.* Evid Based Med. 2017;22(4):139-142. doi:10.1136/ebmed-2017-110713
+  > *"Meta-epidemiological studies adopt a systematic review or meta-analysis approach to examine the impact of certain characteristics of clinical studies on the observed effect and provide empirical evidence for hypothesised associations."*
+  >
+  > *(v3.0 quoted this sentence as 'the observed **treatment** effect'. The word is not in the paper; it narrowed Murad's definition while claiming his authority for the narrowing, and it survived a LOCK. D29.)*
+
+- **`metaepi_broad`** — Kataoka Y, et al. J Clin Epidemiol. 2023;154:219-220. *(Not 219-221: page 221 is Puljak's reply, which is the other side of the dispute.)*
+  > *"The greatest common defining concept of 'meta-epidemiological studies' would be **any studies in which the unit of analysis is a study, not a patient**."*
+
+**Where the two differ, the record is flagged, and the size of that class is reported as a finding.** A published dispute is a boundary to be *measured*, not settled by fiat.
+
+### 3. `bibliometrics` (scientometrics)
+
+> **"Scientometrics is the study of the quantitative aspects of the process of science as a communication system. It is centrally, but not only, concerned with the analysis of citations in the academic literature."**
+>
+> Mingers J, Leydesdorff L. *A Review of Theory and Practice in Scientometrics.* Eur J Oper Res. 2015. doi:10.1016/j.ejor.2015.04.002
+> Founding work: Price DJ de Solla. *Networks of Scientific Papers.* Science. 1965;149(3683):510-515.
+
+**Boundary with `metaresearch`, and it resolves v1's self-contradiction** (v1's T1 bullet and its own worked example gave opposite answers): a study that **characterises a literature** by quantitative means is `bibliometrics`. A study that uses bibliometric means to **make a claim about research practice** (citation distortion, reporting trends, citation of retracted work) is **also `metaresearch`**, and carries both. **v3 does not force the choice; that forcing was the bug.**
+
+### 4. `sts` (science and technology studies)
+
+> **"co-production is shorthand for the proposition that the ways in which we know and represent the world (both nature and society) are inseparable from the ways in which we choose to live in it."**
+> **"The idiom of co-production ... represents a major synthesis of scholarship in science and technology studies (S&TS)."**
+>
+> Jasanoff S (ed.). *States of Knowledge: The Co-Production of Science and the Social Order.* Routledge, 2004.
+
+> **"We study science in action and not ready made science or technology; to do so, we either arrive before the facts and machines are blackboxed or we follow the controversies that reopen them."**
+>
+> Latour B. *Science in Action: How to Follow Scientists and Engineers through Society.* Harvard University Press.
+
+**Operational test:** the work studies **science or technology as social practice**: how knowledge and social order are produced together, how facts are made rather than found, how controversies open and close. **The object must be science, research, or technoscientific knowledge**, at any period. *(v1 restricted history and philosophy of science to "contemporary research practice", an unexamined adverb that silently excluded the entire history of Canadian science. It is deleted.)*
+
+### 5. `scholarly_communication`
+
+> **"Scholarly communication is a rich and complex sociotechnical system formed over a period of centuries."**
+> **"...used here in the broader sense to include the formal and informal activities associated with the use and dissemination of information through public and private channels."**
+>
+> Borgman CL. *Scholarship in the Digital Age: Information, Infrastructure, and the Internet.* MIT Press, 2007.
+
+### 6. `open_science`
+
+> **"Open science is a set of principles and practices that aim to make scientific research from all fields accessible to everyone for the benefits of scientists and society as a whole."**
+> **"Open science is about making sure not only that scientific knowledge is accessible but also that the production of that knowledge itself is inclusive, equitable and sustainable."**
+>
+> UNESCO. *Recommendation on Open Science* (introduction), 2021. **193 countries adopted it.**
+
+The second sentence is the reason this category is not a synonym for "open access": UNESCO's definition makes **inclusivity and equity of knowledge production** part of open science itself, which is the criterion this challenge is judged on.
+
+### 7. `research_integrity` — **defined by its OBJECT; the sources do not define the field, and that is recorded**
+
+**Honest limitation, stated rather than hidden.** The two sources supplied define **what counts as misconduct** and **what publication ethics covers**. **Neither defines "research integrity research" as a discipline** the way Ioannidis defines metaresearch or Jasanoff defines STS. So this category is defined by its **object**, and the gap is on the record.
+
+> **"...the analysis was limited to behaviours that distort scientific knowledge: fabrication, falsification, 'cooking' of data, etc... Survey questions on plagiarism and other forms of professional misconduct were excluded."**
+>
+> Fanelli D. *How Many Scientists Fabricate and Falsify Research? A Systematic Review and Meta-Analysis of Survey Data.* PLoS ONE. 2009;4(5):e5738.
+
+> Publication ethics, per **COPE** (Committee on Publication Ethics), *Ethics Toolkit for Journal Editors and Publishers.*
+
+**Operational test:** the object is **research misconduct, questionable research practices, retraction, authorship, or publication ethics**, *as an object of study*. **Fanelli's boundary is adopted and its exclusion is carried:** fabrication, falsification and data cooking are in; **plagiarism and professional misconduct are recorded but marked, because Fanelli's own scope excludes them** and a rubric that silently widened his boundary while citing him would be misquoting its own source.
+
+**This category overlaps `metaresearch` heavily**: Ioannidis's own description of the *methods* area ends *"research integrity and ethics"*, so integrity research is inside metaresearch by his definition. **That overlap is expected and allowed**, because v3 is multi-label. It is not a hierarchy.
+
+### `insufficient_payload`
+
+Not a judgment; a statement that the record **cannot be screened** (a scraping artifact as a title, boilerplate in the abstract field, a title and abstract from different papers, spam). **Reported, never silently dropped**: the size of this class is a finding about OpenAlex.
+
+### `OUT`
+
+None of the above. **"OUT" now means "in no defined category", not "not near the important one."** That is the whole change.
+
+---
+
+## Canadian linkage
+
+- `CA_AFF` — at least one Canadian institutional affiliation. **Warning, measured:** OpenAlex misassigns these. **At least 17,466** works enter the frame with, as their *only* Canadian institution, one of six suspect assignments: a parse failure that is not an institution at all (`Impact`, attached to a Spanish COVID essay) or a real organization attached to papers it has nothing to do with (`Discovery Air (Canada)` on a Brazilian linguistics paper). That is a **lower bound** from six audited strings (finding 27), and the records are **flagged for audit, not deleted**. A Canadian affiliation is *evidence*, not proof.
+- `CA_FUND` — ≥1 funder whose OpenAlex `country_code` is Canada: an **external criterion, not a curated list**. *(An earlier four-funder list (CIHR, NSERC, SSHRC, CFI) failed twice: three of its four hardcoded IDs pointed at other funders, and even corrected it missed Canada Research Chairs, the Government of Canada, NRC, Mitacs, Genome Canada, and every provincial agency. OpenAlex knows 2,182 Canadian funders; `R/pin_entities.R` pins them.)*
+- **`ABOUT_CA_SYSTEM`** — the Canadian **research system or academy** is a substantive object. *A Canadian institution as setting is not this.*
+- **`ABOUT_CA_TOPIC`** — Canada is a substantive subject, whether or not research is the object.
+
+*(v1 had one boolean and it could not separate "Canadian data, universal claim" from "a claim about Canada". Four screening agents proposed this split independently.)*
+
+## Study design
+
+Coded for every work, from **this vocabulary and no other** (v3.0 said "coded for every work" and never listed the values, which is D20's exact shape: a field every screener codes and no two code alike):
+
+| `study_design` | MEDLINE publication type it is validated against |
+|---|---|
+| `randomized_trial` | Randomized Controlled Trial |
+| `nonrandomized_trial` | Controlled Clinical Trial |
+| `observational` | Observational Study |
+| `systematic_review` | Systematic Review |
+| `meta_analysis` | Meta-Analysis |
+| `case_report` | Case Reports |
+| `qualitative` | *(none; ships as a score, marked unvalidated)* |
+| `simulation_or_modeling` | *(none; ships as a score, marked unvalidated)* |
+| `bench_or_experimental` | *(none; ships as a score, marked unvalidated)* |
+| `theoretical_or_conceptual` | *(none; ships as a score, marked unvalidated)* |
+| `not_applicable` | *(the work is not empirical research: editorials, datasets, software)* |
+| `design_other` | *(none; ships as a score, marked unvalidated)* |
+
+**Validated against MEDLINE publication types, per record and not per year.** *(v3.0 called these "human-indexed by NLM", which is false; v3.1's first correction said "human-indexed until April 2022", which is also false. NLM stopped fully human indexing as universal practice around 2011 and completed automation in 2022, so a YEAR CUTOFF cannot separate the eras. The reference subset is defined by NLM's **record-level `IndexingMethod`** field: absent = fully human, `Curated` = automated with human review, `Automated` = machine. Human records are the reference; the others measure **agreement with another machine** and are reported as such.)*
+
+**Class-specific calendar eligibility, because a publication type that did not exist cannot be a negative.** *Observational Study* entered the vocabulary in **2014** and *Systematic Review* in **2019**. A 2008 cohort study carries no *Observational Study* tag, and treating that absence as "not observational" would train and score the model against a censoring artifact. Each design class is therefore validated **only on records published after its type existed**, and that eligibility window is prespecified per class. Where MEDLINE does not reach (most of the physical sciences, humanities and social sciences), the label ships as a **score, not an assertion**, and is **marked unvalidated**. *The dataset states, per field, which of its own annotations it has earned the right to assert.*
+
+## Genre
+
+**One vocabulary, defined here, and `screening-schema-v3.json` QUOTES this list rather than paraphrasing it.**
+
+`empirical` · `review` · `methods` · `commentary` · `editorial` · `protocol` · `dataset` · `software` · `other`
+
+*(In v1 the rubric and the schema named **two different vocabularies for this field**, overlapping on two values out of thirteen. Every screener was handed both and obeyed both privately; the validator checked `tier` and had never been asked to look at `genre`, so 16,800 labels passed every check that ran. See D20 and finding 24. **A codebook is code. It gets a test.**)*
+
+## `tier` is RETIRED
+
+v3 replaces it with `categories`, which is **multi-label**. The values `T1`, `T2`, `T3` and `OUT` remain in the **legacy** `screening-schema.json` **only so that the v1 and v2 label files stay readable**; the v3 contract, `screening-schema-v3.json`, **does not contain the field**, so no new screening can emit them. `OUT` in v3 means an empty `categories` array: *in no defined category*, not *near the important one*.
+
+## Confidence
+
+`high` / `medium` / `low`. **If the abstract is missing, judge on the title alone and set confidence to `low` unless the title is unambiguous.** The schema **quotes** this sentence; it does not paraphrase it (D24).
+
+**`low` is a legitimate answer.** A screener that never says `low` is not being careful; it is being confident.
+
+---
+
+## Sources
+
+Every quotation above was read from a PDF in **`docs/reference/definitions/`**, which is committed. Nothing is cited from memory, and since D29 that is a checked property, not a promise: `pilot/check_quotes.R` fails the build if any quotation marked verbatim is not a substring of its cited PDF. `pilot/check_instrument.R` fails the build if this rubric and `screening-schema-v3.json` disagree about any field, in either direction.
+
+
+# THE OUTPUT SCHEMA (screening-schema-v3.json)
+
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "MetaCan screening output, rubric v3.1",
+  "description": "The output contract for every screening run under rubric v3.1. This document QUOTES the rubric; it never paraphrases it. Where a description below restates a rule, the wording is copied from docs/protocol/rubric-v3.md, because the schema misquoting the rubric is D24 and two documents that disagree are two instruments (D20). pilot/check_instrument.R fails the build if this file and the rubric disagree about any field, in either direction. The legacy screening-schema.json remains ONLY so that v1 and v2 label files stay readable; no new screening validates against it.",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["id", "categories", "study_design", "genre", "about_ca_system", "about_ca_topic", "confidence"],
+    "properties": {
+      "id": {
+        "type": "string",
+        "pattern": "^W\\d+$",
+        "description": "The OpenAlex work id, exactly as given in the payload."
+      },
+      "categories": {
+        "type": "array",
+        "items": {
+          "enum": ["metaresearch", "metaepi_narrow", "metaepi_broad", "bibliometrics", "sts", "scholarly_communication", "open_science", "research_integrity", "insufficient_payload"]
+        },
+        "uniqueItems": true,
+        "description": "Every category the work belongs to; a work may carry more than one, and categories are not ranked and none is primary. An EMPTY array is OUT, which means 'in no defined category', not 'near the important one'. insufficient_payload means the record cannot be screened (a scraping artifact as a title, boilerplate in the abstract field, a title and abstract from different papers, spam) and is reported, never silently dropped."
+      },
+      "domain": {
+        "enum": ["methods", "reporting", "reproducibility", "evaluation", "incentives", null],
+        "description": "REQUIRED when categories contains metaresearch, and null otherwise. Taken verbatim from Ioannidis's five thematic areas: methods, reporting, reproducibility, evaluation, and incentives (how to do, report, verify, correct, and reward science)."
+      },
+      "study_design": {
+        "enum": ["randomized_trial", "nonrandomized_trial", "observational", "systematic_review", "meta_analysis", "case_report", "qualitative", "simulation_or_modeling", "bench_or_experimental", "theoretical_or_conceptual", "not_applicable", "design_other"],
+        "description": "Coded for every work, from this vocabulary and no other. not_applicable means the work is not empirical research: editorials, datasets, software."
+      },
+      "genre": {
+        "enum": ["empirical", "review", "methods", "commentary", "editorial", "protocol", "dataset", "software", "other"],
+        "description": "One vocabulary, defined in the rubric, and this schema QUOTES that list rather than paraphrasing it."
+      },
+      "about_ca_system": {
+        "type": "boolean",
+        "description": "ABOUT_CA_SYSTEM: the Canadian research system or academy is a substantive object. A Canadian institution as setting is not this."
+      },
+      "about_ca_topic": {
+        "type": "boolean",
+        "description": "ABOUT_CA_TOPIC: Canada is a substantive subject, whether or not research is the object."
+      },
+      "confidence": {
+        "enum": ["high", "medium", "low"],
+        "description": "If the abstract is missing, judge on the title alone and set confidence to low unless the title is unambiguous. low is a legitimate answer: a screener that never says low is not being careful; it is being confident."
+      },
+      "reason": {
+        "type": "string",
+        "maxLength": 400,
+        "description": "One sentence naming the rubric rule the decision rests on."
+      }
+    }
+  }
+}
+
+
+# THE RECORDS
+
+[
+ {
+  "id": "W2604796760",
+  "title": "The development of an outcome measures toolkit for spinal cord injury rehabilitation",
+  "abstract": "Background. Spinal cord injury (SCI) is a complex medical condition that can be difficult to monitor. Purpose. This study aimed to establish a common set of validated outcome measures specifically for SCI clinical practice. Method. In a three-round online Delphi process, experts in SCI care across Canada suggested and ranked outcome measures for clinical practice. The facilitators provided feedback between rounds and determined if consensus (at least 75% agreement) was reached on a single outcome measure per clinical area. Findings. One hundred and forty-eight outcome measures were initially considered for inclusion. After three rounds, consensus was reached for 23 out of 30 clinical areas. In the remaining seven, more than one outcome measure was recommended. The final toolkit comprises 33 outcome measures with sufficient measurement properties for use with a SCI population. Implications. An outcome measures toolkit validated specifically for SCI should lead to improved identification of best practice and enable clinicians to monitor client progress effectively.",
+  "year": 2017,
+  "lang": "en",
+  "type": "article",
+  "venue": "Canadian Journal of Occupational Therapy",
+  "topic": "Spinal Cord Injury Research",
+  "field": "Medicine"
+ },
+ {
+  "id": "W2061802766",
+  "title": "The Evolution of a Professional Practice Forum: Balancing Peer-to-Peer Learning With Course Objectives",
+  "abstract": "1. JMIR Res Protoc. 2014 Oct 31;3(4):e58. doi: 10.2196/resprot.3287.\n\nThe Evolution of a Professional Practice Forum: Balancing Peer-to-Peer Learning \nWith Course Objectives.\n\nJanssen A(1), Robinson T, Shaw T.\n\nAuthor information:\n(1)Workforce Education and Development Group, Sydney Medical School, University \nof Sydney, Sydney, Australia. anna.janssen@sydney.edu.au.\n\nBACKGROUND: The Opioid Treatment Accreditation Course (OTAC) is a mandatory \naccreditation requirement in New South Wales, Australia, and aims to prepare \nmedical practitioners for the provision of safe and effective Opioid \nSubstitution Treatment to people with opioid dependence. The course has a strong \nfocus on safe prescribing practices and the course design includes a \nProfessional Practice Forum that is engaging for participants and effective at \nimparting complex ideas and concepts that do not place additional time \nconstraints on already time-poor health professionals.\nOBJECTIVE: The study aimed to use participatory action research methods to \ndevelop and evaluate an online Professional Practice Forum that is a key \ncomponent of the OTAC teaching and learning experience.\nMETHODS: Three evaluation cycles were implemented with three cohorts of \nparticipants (N=40) to inform the design and review of the updated OTAC course. \nOverall, the study relied on participatory action research methods to enhance a \nsense of online community and to revise the Professional Practice Forum \ncomponent of the course. Findings from survey feedback and an examination of Web \nmetrics were used to monitor participant learning and were subsequently subject \nto thematic analysis in order to identify key themes.\nRESULTS: The use of participatory action techniques in the redesign of the OTAC \ncourse was a successful means of engaging with participants and resulted in four \nrevisions based on feedback from facilitators and participants. The Professional \nPractice Forum was rated highly and received positive feedback from both \nmoderators and participants.\nCONCLUSIONS: The use of interactive forums in online learning in an educational \nmodule for adult learners can prove extremely valuable as a means for \nparticipants to share their expertise and improve their learning outcomes. In \nparticular, the use of sticky and welcome threads were significant features that \nenhanced interactions between participants and facilitators and resulted in \nincreased quantity and quality of postings. These findings can help inform \n",
+  "year": 2014,
+  "lang": "en",
+  "type": "article",
+  "venue": "JMIR Research Protocols",
+  "topic": "Health Policy Implementation Science",
+  "field": "Health Professions"
+ },
+ {
+  "id": "W2039151398",
+  "title": "An Overview of the Life Course Perspective: Implications for Health and Nutrition",
+  "abstract": "",
+  "year": 2005,
+  "lang": "en",
+  "type": "review",
+  "venue": "Journal of Nutrition Education and Behavior",
+  "topic": "Obesity and Health Practices",
+  "field": "Health Professions"
+ },
+ {
+  "id": "W4399803017",
+  "title": "Artificial Intelligence in Dental Education: Opportunities and Challenges of Large Language Models and Multimodal Foundation Models",
+  "abstract": "Abstract Instructional and clinical technologies have been transforming dental education. With the emergence of artificial intelligence (AI), the opportunities of using AI in education has increased. With the recent advancement of generative AI, large language models (LLMs) and foundation models gained attention with their capabilities in natural language understanding and generation as well as combining multiple types of data, such as text, images, and audio. A common example has been ChatGPT, which is based on a powerful LLM—the GPT model. This paper discusses the potential benefits and challenges of incorporating LLMs in dental education, focusing on periodontal charting with a use case to outline capabilities of LLMs. LLMs can provide personalized feedback, generate case scenarios, and create educational content to contribute to the quality of dental education. However, challenges, limitations, and risks exist, including bias and inaccuracy in the content created, privacy and security concerns, and the risk of overreliance. With guidance and oversight, and by effectively and ethically integrating LLMs, dental education can incorporate engaging and personalized learning experiences for students toward readiness for real-life clinical practice.",
+  "year": 2024,
+  "lang": "en",
+  "type": "article",
+  "venue": "JMIR Medical Education",
+  "topic": "Artificial Intelligence in Healthcare and Education",
+  "field": "Medicine"
+ },
+ {
+  "id": "W2107506212",
+  "title": "Jog Your Mind: methodology and challenges of conducting evaluative research in partnership with community organizations",
+  "abstract": "1. Int Psychogeriatr. 2015 Jan;27(1):79-94. doi: 10.1017/S1041610214001306. Epub \n2014 Jul 17.\n\nJog Your Mind: methodology and challenges of conducting evaluative research in \npartnership with community organizations.\n\nBier N(1), Lorthios-Guilledroit A(2), Nour K(3), Parisien M(4), Ellemberg D(5), \nLaforest S(4).\n\nAuthor information:\n(1)School of Rehabilitation,Faculty of Medicine,Université de \nMontréal,Montreal,Quebec H3C 3J7,Canada.\n(2)Research Centre of the Institut universitaire de gériatrie de \nMontréal,Montreal,Quebec H3W 1W5,Canada.\n(3)Direction de santé publique de la Montérégie,Longueuil,Quebec J4K 2M3,Canada.\n(4)Centre for Research and Expertise in Social Gerontology (CREGÉS),CSSS \nCavendish-Centre affilié universitaire,Côte St-Luc,Quebec H4W 2T5,Canada.\n(5)Department of Kinesiology,Université de Montréal,Quebec H3C 3J7,Canada.\n\nBACKGROUND: Jog Your Mind is a community-based program aiming at empowering \nelderly people to maintain their cognitive abilities using a multi-strategic \napproach including cognitively stimulating activities, mnemonic strategies, and \nstrategies to promote healthy behaviors. It is offered to elderly individuals \nwithout known or diagnosed cognitive impairment by volunteers or community \npractitioners over ten weekly sessions. This paper describes the protocol of a \nquasi-experimental study designed to evaluate Jog Your Mind.\nMETHODS: Community responsible to recruit participants were either assigned to \nthe experimental group (participating in the Jog Your Mind program) or to the \ncontrol group (one-year waiting list). All participants were interviewed at \nbaseline (T1), after the program (T2), and 12 months after the baseline (T3). \nPrimary outcomes were the use of everyday memory strategies and aids and \nsubjective memory functioning in daily life. Secondary outcomes included \nattitudes, knowledge, and behaviors related to cognitive vitality and cognitive \nabilities (memory and executive functions). Program delivery, organizational and \nenvironmental variables were recorded to document the implementation process.\nRESULTS: Twenty-three community organizations recruited 294 community-dwelling \nelderly individuals in total at T1. Between T1 and T3, an attrition rate of \n15.2% was obtained.\nCONCLUSIONS: Jog Your Mind is one of the only programs targeting cognition among \nolder adults being offered in community settings by community practitioners. The \nprotocol described was designed with a focus on maximizing broad genera",
+  "year": 2014,
+  "lang": "en",
+  "type": "article",
+  "venue": "International Psychogeriatrics",
+  "topic": "Dementia and Cognitive Impairment Research",
+  "field": "Medicine"
+ },
+ {
+  "id": "W7095990233",
+  "title": "RESEARCH ARTICLE Open Access",
+  "abstract": "",
+  "year": 2013,
+  "lang": "en",
+  "type": "article",
+  "venue": null,
+  "topic": "Chronic Disease Management Strategies",
+  "field": "Medicine"
+ },
+ {
+  "id": "W4407047034",
+  "title": "Evaluating a Digital Health Tool Designed to Improve Low Sexual Desire in Women: Mixed-Methods Implementation Science Study",
+  "abstract": "Background Sexual health difficulties affect up to 30% of women, with desire and arousal problems being the most prevalent. While cognitive behavioral therapy and mindfulness-based therapy are effective treatments, access is limited by barriers such as specialist shortages, cost, and embarrassment. Web-based interventions offer a potential solution by providing self-paced, cost-effective treatments. eSense, a digital health program, offers cognitive behavioral therapy and mindfulness-based therapy skills targeted to women with low sexual desire, and previous trials find eSense to be highly feasible and efficacious. Objective The goal of the present implementation science study was to use the RE-AIM (Reach, Effectiveness, Adoption, Implementation, and Maintenance of Implementation) framework to assess the integration of eSense into several sexual health clinics. We chose the RE-AIM framework because it addresses both dissemination (eg, reach) and implementation of an intervention. Methods A total of 14 specialty clinics participated, and we report on the reported experiences of those clinics in implementing eSense. We also examined responses from 12 women on waitlists to receive sex therapy or sexual medicine care. Results Per clinic outcomes, all aspects of implementation (reach, effectiveness, adoption, implementation, and maintenance) were in the moderate to high range for clinics, reporting that offering eSense helped them overcome negative feelings associated with their long clinic waitlists. The majority expressed a need for eSense and could see how it overcame the limitations of traditional therapy. Nearly all expressed a wish to continue offering eSense to patients after the implementation study was complete. One caveat was that half of the clinics noted cost as a key issue for future implementation, and one-third noted that the administrative burden of implementing eSense as a standard of care may be challenging. For individual users, the majority expressed an interest in knowing more about eSense and a desire to use eSense, though most of these did not complete the program in its entirety. Users experienced a significant improvement in sex-related distress with no clinically meaningful change in other outcomes and a high level of satisfaction with eSense. Most also reported doing things differently in their sexual lives after participating in eSense. Conclusions We found that eSense demonstrates potential as a digital intervention for sexual diffi",
+  "year": 2025,
+  "lang": "en",
+  "type": "article",
+  "venue": "Journal of Medical Internet Research",
+  "topic": "Digital Mental Health Interventions",
+  "field": "Psychology"
+ },
+ {
+  "id": "W4249137045",
+  "title": "Pratique, formation et recherche : l’espoir d’un dialogue",
+  "abstract": "Les termes science-action et praxéologie désignent une nouvelle approche qui, depuis vingt ans, contribue à renouveler les rapports entre la pratique, la formation et la recherche. L’analyse des difficultés rencontrées par des centaines de praticiens qui se sont initiés à la méthode de réflexion-sur-l’action, dans une démarche de praxéologie, conduit à la découverte d’un facteur important pour expliquer les difficultés du dialogue entre la pratique, la formation et la recherche : l’absence d’un discours valide sur la pratique. Quatre difficultés majeures que rencontrent les praticiens qui veulent nommer ce qu’ils font réellement, dans leur pratique, sont présentées et analysées. Suit une discussion quant aux conséquences pour le dialogue recherché.",
+  "year": 2019,
+  "lang": "fr",
+  "type": "article",
+  "venue": "Nouveaux cahiers de la recherche en éducation",
+  "topic": "Education, sociology, and vocational training",
+  "field": "Social Sciences"
+ },
+ {
+  "id": "W4254531105",
+  "title": "Addressing diversity and complexity in the community engagement literature: The rationale for a realist review",
+  "abstract": "In this research note we reflect on our failed attempt to synthesize the community engagement literature through a standard systematic review and explain our rationale for now embarking on a realist synthesis of community engagement in global health research. We believe this paper will be helpful for many who grapple with the lack of clarity about community engagement’s core elements and mechanisms.",
+  "year": 2020,
+  "lang": "en",
+  "type": "review",
+  "venue": "Wellcome Open Research",
+  "topic": "Mental Health and Patient Involvement",
+  "field": "Health Professions"
+ },
+ {
+  "id": "W3125200970",
+  "title": "Dynamics and Stability of Constitutions, Coalitions, and Clubs",
+  "abstract": "",
+  "year": 2008,
+  "lang": "en",
+  "type": "preprint",
+  "venue": "National Bureau of Economic Research",
+  "topic": "Economic Theory and Institutions",
+  "field": "Economics, Econometrics and Finance"
+ },
+ {
+  "id": "W3216469376",
+  "title": "Trustworthy Artificial Intelligence in Medical Imaging",
+  "abstract": "1. PET Clin. 2022 Jan;17(1):1-12. doi: 10.1016/j.cpet.2021.09.007.\n\nTrustworthy Artificial Intelligence in Medical Imaging.\n\nHasani N(1), Morris MA(2), Rhamim A(3), Summers RM(4), Jones E(4), Siegel E(5), \nSaboury B(6).\n\nAuthor information:\n(1)Department of Radiology and Imaging Sciences, Clinical Center, National \nInstitutes of Health (NIH), 9000 Rockville Pike, Building 10, Room 1C455, \nBethesda, MD 20892, USA; University of Queensland Faculty of Medicine, Ochsner \nClinical School, New Orleans, LA 70121, USA.\n(2)Department of Radiology and Imaging Sciences, Clinical Center, National \nInstitutes of Health (NIH), 9000 Rockville Pike, Building 10, Room 1C455, \nBethesda, MD 20892, USA; Department of Computer Science and Electrical \nEngineering, University of Maryland, Baltimore Country, Baltimore, MD, USA.\n(3)Department of Radiology, BC Cancer Research Institute, University of British \nColumbia, 675 West 10th Avenue, Vancouver, British Columbia, V5Z 1L3, Canada; \nDepartment of Physics, BC cancer Research Institute, University of British \nColumbia, Vancouver, British Columbia, Canada.\n(4)Department of Radiology and Imaging Sciences, Clinical Center, National \nInstitutes of Health (NIH), 9000 Rockville Pike, Building 10, Room 1C455, \nBethesda, MD 20892, USA.\n(5)Department of Radiology, BC Cancer Research Institute, University of British \nColumbia, 675 West 10th Avenue, Vancouver, British Columbia, V5Z 1L3, Canada.\n(6)Department of Radiology and Imaging Sciences, Clinical Center, National \nInstitutes of Health (NIH), 9000 Rockville Pike, Building 10, Room 1C455, \nBethesda, MD 20892, USA; Department of Computer Science and Electrical \nEngineering, University of Maryland, Baltimore Country, Baltimore, MD, USA; \nDepartment of Radiology and Nuclear Medicine, University of Maryland Medical \nCenter, 655 W. Baltimore Street, Baltimore, MD 21201, USA; Department of \nRadiology, Hospital of the University of Pennsylvania, Philadelphia, PA, USA. \nElectronic address: babak.saboury@nih.gov.\n\nTrust in artificial intelligence (AI) by society and the development of \ntrustworthy AI systems and ecosystems are critical for the progress and \nimplementation of AI technology in medicine. With the growing use of AI in a \nvariety of medical and imaging applications, it is more vital than ever to make \nthese systems dependable and trustworthy. Fourteen core principles are \nconsidered in this article aiming to move the needle more closely to systems \nthat are accurate, resilient, fair, ",
+  "year": 2021,
+  "lang": "en",
+  "type": "review",
+  "venue": "PET Clinics",
+  "topic": "Artificial Intelligence in Healthcare and Education",
+  "field": "Medicine"
+ },
+ {
+  "id": "W4414084292",
+  "title": "Using American Sign Language–Fluent Community Health Navigators to Advance Cancer Screening Adherence through Videoconferencing With Deaf, Deafblind, and Hard of Hearing Adults: Protocol for a Randomized Controlled Trial",
+  "abstract": "Background Cancer screening nonadherence persists among adults who are deaf, deafblind, and hard of hearing (DDBHH). These barriers span individual, clinician, and health care system levels, contributing to difficulties understanding cancer information, accessing screening services, and following treatment directives. Critical communication barriers include ineffective patient-physician communication, limited access to American Sign Language (ASL) cancer information, misconceptions about medical procedures, insurance navigation difficulties, and intersectional barriers for multiply marginalized individuals. Objective This randomized controlled trial addresses these barriers by implementing the first videoconference-based study of ASL-fluent community health navigators (ASL-CHNs) to improve cancer screening adherence among adults who are DDBHH. The study tests whether ASL-CHN intervention results in greater adherence to cancer screening guidelines, improved patient-physician communication ratings, and increased cancer knowledge compared to standard care. Methods The study uses a videoconference-delivered, block-randomized design stratifying 200 participants who are DDBHH by age and sex, with 100 participants assigned to the ASL-CHN intervention and 100 to standard care. All participants are confirmed as nonadherent to at least 1 of 5 age-appropriate cancer screening guidelines recommended by the United States Preventive Services Task Force for breast, cervical, colorectal, lung, and prostate cancers. Recruitment occurred nationwide through multiple strategies including prior study participants, community partners, and major community events. The intervention arm receives support from specially trained ASL-CHNs over several months, accommodating lengthy scheduling processes for cancer screenings. Primary outcomes measure completion of age- and risk-appropriate cancer screening, with prostate cancer focusing on shared decision-making participation. Secondary outcomes assess patient-physician communication using the validated National Cancer Institute’s Health Information National Trends Survey (NCI-HINTS) Patient Centered Communication questionnaire in ASL. Tertiary outcomes examine cancer knowledge through validated measures. The analysis uses intent-to-treat methodology using multivariable logistic regression, accounting for potential clustering effects and anticipated 25% attrition. Results As of August 2025, more than 75% of the target enrollment has been",
+  "year": 2025,
+  "lang": "en",
+  "type": "article",
+  "venue": "JMIR Research Protocols",
+  "topic": "Hearing Impairment and Communication",
+  "field": "Psychology"
+ },
+ {
+  "id": "W4395045665",
+  "title": "Cracking the Code: A Scoping Review to Unite Disciplines in Tackling Legal Issues in Health Artificial Intelligence",
+  "abstract": "ABSTRACT Objectives The rapid integration of artificial intelligence (AI) in healthcare requires robust legal safeguards to ensure safety, privacy, and non-discrimination, crucial for maintaining trust. Yet, unaddressed differences in disciplinary perspectives and priorities risks impeding effective reform. This study uncovers convergences and divergences in disciplinary comprehension, prioritization, and proposed solutions to legal issues with health-AI, providing law and policymaking guidance. Methods Employing a scoping review methodology, we searched MEDLINE® (Ovid), EMBASE (Ovid), HeinOnline Law Journal Library, Index to Foreign Legal Periodicals (HeinOnline), Index to Legal Periodicals and Books (EBSCOhost), Web of Science (Core Collection), Scopus, and IEEE Xplore, identifying legal issue discussions published, in English or French, from January 2012 to July 2021. Of 18,168 screened studies, 432 were included for data extraction and analysis. We mapped the legal concerns and solutions discussed by authors in medicine, law, nursing, pharmacy, other healthcare professions, public health, computer science, and engineering, revealing where they agree and disagree in their understanding, prioritization, and response to legal concerns. Results Critical disciplinary differences were evident in both the frequency and nature of discussions of legal issues and potential solutions. Notably, innovators in computer science and engineering exhibited minimal engagement with legal issues. Authors in law and medicine frequently contributed but prioritized different legal issues and proposed different solutions. Discussion and Conclusion Differing perspectives regarding law reform priorities and solutions jeopardize the progress of health-AI development. We need inclusive, interdisciplinary dialogues concerning the risks and trade-offs associated with various solutions to ensure optimal law and policy reform. KEY MESSAGES What is already known on this topic There has been no systematic examination of the multidisciplinary literature discussing legal challenges posed by health-AI. Prior efforts have addressed ethical concerns or limited subsets of legal issues or technologies, and therefore do not establish the comprehensive groundwork essential for fostering meaningful cross-disciplinary dialogue on health-AI regulation. What this study adds Our study uncovers a shared interdisciplinary apprehension regarding the effective regulation of health-AI. However, distinct s",
+  "year": 2024,
+  "lang": "en",
+  "type": "review",
+  "venue": "medRxiv",
+  "topic": "Artificial Intelligence in Healthcare and Education",
+  "field": "Medicine"
+ },
+ {
+  "id": "W4360586552",
+  "title": "An international study of healthcare professionals’ understandings of palliative care",
+  "abstract": "",
+  "year": 2022,
+  "lang": "en",
+  "type": "article",
+  "venue": "Palliative Medicine in Practice",
+  "topic": "Palliative Care and End-of-Life Issues",
+  "field": "Medicine"
+ },
+ {
+  "id": "W2121795537",
+  "title": "Use of concept mapping to characterize relationships among implementation strategies and assess their feasibility and importance: results from the Expert Recommendations for Implementing Change (ERIC) study",
+  "abstract": "1. Implement Sci. 2015 Aug 7;10:109. doi: 10.1186/s13012-015-0295-0.\n\nUse of concept mapping to characterize relationships among implementation \nstrategies and assess their feasibility and importance: results from the Expert \nRecommendations for Implementing Change (ERIC) study.\n\nWaltz TJ(1)(2), Powell BJ(3), Matthieu MM(4)(5)(6), Damschroder LJ(7), Chinman \nMJ(8)(9), Smith JL(10)(11), Proctor EK(12), Kirchner JE(13)(14)(15).\n\nAuthor information:\n(1)Department of Psychology, Eastern Michigan University, Ypsilanti, MI, USA. \ntwaltz1@emich.edu.\n(2)Center for Clinical Management Research and Diabetes QUERI, VA Ann Arbor \nHealthcare System, Ann Arbor, MI, USA. twaltz1@emich.edu.\n(3)Department of Health Policy and Management, Gillings School of Global Public \nHealth, University of North Carolina at Chapel Hill, Chapel Hill, NC, USA. \nbyronjpowell@gmail.com.\n(4)School of Social Work, College for Public Health & Social Justice, Saint \nLouis University, St. Louis, MO, USA. mmatthie@slu.edu.\n(5)Mental Health Quality Enhancement Research Initiative (QUERI), HSR&D, \nDepartment of Veterans Affairs, Little Rock, AR, USA. mmatthie@slu.edu.\n(6)Central Arkansas Veterans Healthcare System, Department of Veterans Affairs, \nLittle Rock, AR, USA. mmatthie@slu.edu.\n(7)Center for Clinical Management Research and Diabetes QUERI, VA Ann Arbor \nHealthcare System, Ann Arbor, MI, USA. laura.damschroder@va.gov.\n(8)VISN 4 MIRECC, VA Pittsburgh, Pittsburgh, PA, USA. chinman@rand.org.\n(9)RAND Corporation, Pittsburgh, PA, USA. chinman@rand.org.\n(10)Mental Health Quality Enhancement Research Initiative (QUERI), HSR&D, \nDepartment of Veterans Affairs, Little Rock, AR, USA. jeffrey.smith6@va.gov.\n(11)Central Arkansas Veterans Healthcare System, Department of Veterans Affairs, \nLittle Rock, AR, USA. jeffrey.smith6@va.gov.\n(12)Brown School, Washington University in St. Louis, St. Louis, MO, USA. \nekp@wustl.edu.\n(13)Mental Health Quality Enhancement Research Initiative (QUERI), HSR&D, \nDepartment of Veterans Affairs, Little Rock, AR, USA. joann.kirchner@va.gov.\n(14)Department of Psychiatry, College of Medicine, University of Arkansas for \nMedical Sciences, Little Rock, AR, USA. joann.kirchner@va.gov.\n(15)Central Arkansas Veterans Healthcare System, Department of Veterans Affairs, \nLittle Rock, AR, USA. joann.kirchner@va.gov.\n\nBACKGROUND: Poor terminological consistency for core concepts in implementation \nscience has been widely noted as an obstacle to effective meta-analyses. This \ninconsiste",
+  "year": 2015,
+  "lang": "en",
+  "type": "article",
+  "venue": "Implementation Science",
+  "topic": "Health Policy Implementation Science",
+  "field": "Health Professions"
+ },
+ {
+  "id": "W4412582784",
+  "title": "Data sharing statements for clinical trials: a cross-sectional survey of cardiology journals",
+  "abstract": "Objective The International Committee of Medical Journal Editors requires data sharing statements in trial publications, but whether cardiology journals request data sharing statements in clinical trial submissions is unclear. We performed a survey to assess whether cardiology journals request data sharing statements in clinical trials. Design, setting, data source and participants All cardiac and cardiovascular systems journals that published clinical trials from January 2019 to December 2022 were included. The study outcome was journal requests for data sharing statements. Multivariable logistic regression analysis was used to examine the association between journal characteristics and journal requests. We also explored whether journal requests aligned with their subsequently published clinical trials. Results A total of 126 journals were included, among which 96 (76.2%) requested data sharing statements in clinical trials. Elsevier journals and Consolidated Standards of Reporting Trials endorsement had increased adjusted odds of requesting data sharing statements, with an OR of 5.74 (95% CI 1.45 to 22.70) and 7.21 (2.69 to 19.32), respectively. In the 78 journals that requested statements, 24 (30.8%) indeed did not publish any data sharing statement in their trial reports. Conclusions Approximately one in four cardiology journals did not request data sharing statements on clinical trial submissions, while a substantial inconsistency existed between journal requests and the actual publications of statements in their published trial reports.",
+  "year": 2025,
+  "lang": "en",
+  "type": "article",
+  "venue": "BMJ Open",
+  "topic": "Research Data Management Practices",
+  "field": "Computer Science"
+ },
+ {
+  "id": "W7135418809",
+  "title": "Additional file 1: of A descriptive qualitative examination of knowledge translation practice among health researchers in Manitoba, Canada",
+  "abstract": "",
+  "year": 2017,
+  "lang": null,
+  "type": "article",
+  "venue": "Figshare",
+  "topic": "Health Policy Implementation Science",
+  "field": "Health Professions"
+ },
+ {
+  "id": "W3158300484",
+  "title": "An Unforgotten Iron Key",
+  "abstract": "",
+  "year": 2021,
+  "lang": "en",
+  "type": "article",
+  "venue": "Cultural and Pedagogical Inquiry",
+  "topic": "Asian American and Pacific Histories",
+  "field": "Social Sciences"
+ },
+ {
+  "id": "W4405184040",
+  "title": "Interventions to reduce burnout in emergency medicine: a national inventory of the Canadian experience to support global implementation of wellness initiatives",
+  "abstract": "1. Intern Emerg Med. 2025 Jun;20(4):1245-1264. doi: 10.1007/s11739-024-03811-4. \nEpub 2024 Dec 9.\n\nInterventions to reduce burnout in emergency medicine: a national inventory of \nthe Canadian experience to support global implementation of wellness \ninitiatives.\n\nLiu K(1)(2), Patey C(3)(4), Norman P(5), Moellekaer AB(6), Lim R(7), Alvarez \nA(8), Heymann EP(9)(10).\n\nAuthor information:\n(1)Carbonear Institute for Rural Reach and Innovation by the Sea (CIRRIS), \nCarbonear, NL, Canada. kathyliu429@gmail.com.\n(2)Rady Faculty of Health Sciences, University of Manitoba, Winnipeg, MB, \nCanada. kathyliu429@gmail.com.\n(3)Faculty of Medicine, Memorial University, St. John's, NL, Canada.\n(4)Family Medicine, Newfoundland and Labrador Health Services, Carbonear, NL, \nCanada.\n(5)Carbonear Institute for Rural Reach and Innovation by the Sea (CIRRIS), \nCarbonear, NL, Canada.\n(6)Department of Emergency Medicine, Esbjerg and Grindsted Hospital, University \nHospital of Southern Denmark, Odense, Denmark.\n(7)Department of Paediatric & Medicine, Schulich School of Medicine & Dentistry, \nUniversity of Western Ontario, London, ON, Canada.\n(8)Department of Emergency Medicine, Stanford University School of Medicine, \nPalo Alto, CA, USA.\n(9)Department of Emergency Medicine, Neuchâtel Cantonal Hospital, Neuchâtel, \nSwitzerland.\n(10)Department of Emergency Medicine, Faculty of Medicine, University of Bern, \nBern, Switzerland.\n\nBurnout in healthcare workers is a global issue, with Emergency Medicine (EM) \nparticularly impacted. Many countries have tried implementing wellness \ninitiatives to reduce burnout and improve wellness. This paper summarizes \ninterventions implemented in Canada to-date with the aim of supporting the \ndesign of wellness interventions in EDs globally. A systematic review and a grey \nliterature search were completed in November 2023. Original studies in both \nEnglish and French that included the implementation and evaluation of a wellness \nintervention in EDs in Canada were included. The study design, content of the \nintervention, target population, and outcomes were extracted and narratively \nanalyzed. 13 studies were included. Each implemented a unique wellness \nintervention for EDs. All three studies (3/3, 100%) that included a structured \nwellness curriculum demonstrated significant improvement in burnout as measured \nby the Maslach Burnout Inventory, physical health (PCS-8), and Brief Resident \nWellness Profile (BRWP). Other interventions included Ice Cream Roun",
+  "year": 2024,
+  "lang": "en",
+  "type": "review",
+  "venue": "Internal and Emergency Medicine",
+  "topic": "Healthcare professionals’ stress and burnout",
+  "field": "Health Professions"
+ },
+ {
+  "id": "W1746398764",
+  "title": "Reading with low vision: the impact of research on clinical management*",
+  "abstract": "",
+  "year": 2011,
+  "lang": "en",
+  "type": "review",
+  "venue": "Clinical and Experimental Optometry",
+  "topic": "Ophthalmology and Visual Health Research",
+  "field": "Medicine"
+ },
+ {
+  "id": "W4417184167",
+  "title": "“We Don’t Want to Cry Wolf”: A Qualitative Study About Nurses’ Experiences Activating Rapid Response Teams",
+  "abstract": "Background &amp; Purpose Patient clinical deterioration is a major safety concern. One strategy implemented for health providers to improve the timely recognition and response to patient deterioration is the Rapid Response Team (RRT). Despite this resource, patient deterioration still occurs and delayed activation of the RRT is one contributing factor. Little is known about unit-level nurses’ experiences related to RRT activation, especially within the Canadian context, which is problematic given they are the ones who are primarily responsible for initiating the process. The purpose of this study was to understand the experiences of nurses practising on general adult inpatient medicine units and their activation of the RRT. Methods &amp; Procedures The research question was addressed with a descriptive, exploratory qualitative study. Nurses working on general adult inpatient medicine units at an Ontario hospital study site were purposively recruited to participate. Semi-structured interviews with the six participants were held online and audio-video recorded. Inductive, thematic analysis was used. Results Eleven themes about the barriers and facilitators to RRT activation, and one overarching theme—the Self-Imposed Complexity of Deciding to Activate the RRT— resulted in relation to the nuanced, multi-factorial decision-making process unit-level nurses undertake when considering activation. Conclusion This study contributes novel information to better understand RRT activation by nurses and will inform practice changes surrounding RRT policies, nursing education about the RRT, and new research on optimizing strategies for RRTs and deteriorating patients. The multi-layered activation process intricacies positions future work to improve escalation of patient clinical deterioration.",
+  "year": 2025,
+  "lang": "en",
+  "type": "article",
+  "venue": "Canadian Journal of Nursing Research",
+  "topic": "Sepsis Diagnosis and Treatment",
+  "field": "Medicine"
+ },
+ {
+  "id": "W2915656893",
+  "title": "Current trends in sport injury prevention",
+  "abstract": "1. Best Pract Res Clin Rheumatol. 2019 Feb;33(1):3-15. doi: \n10.1016/j.berh.2019.02.009. Epub 2019 Feb 23.\n\nCurrent trends in sport injury prevention.\n\nEmery CA(1), Pasanen K(2).\n\nAuthor information:\n(1)Chair Sport Injury Prevention Research Centre, Faculty of Kinesiology, \nPediatrics and Community Health Sciences, Cumming School of Medicine, University \nof Calgary, 2500 University Dr. NW, Calgary, Alberta, T2N1N4, Canada. Electronic \naddress: caemery@ucalgary.ca.\n(2)Sport Injury Prevention Research Centre, Faculty of Kinesiology, University \nof Calgary, 2500 University Dr. NW, Calgary, Alberta, T2N1N4, Canada. Electronic \naddress: kati.pasanen@ucalgary.ca.\n\nParticipation in sport and recreation has important positive implications for \npublic health across the lifespan; however, the burden of sport-related \nmusculoskeletal injury is significant, with the greatest risk being in youth and \nyoung adults. Moving upstream to primary prevention of injury is a public health \npriority that will have significant implications for reducing the long-term \nconsequences of musculoskeletal injury including early post-traumatic \nosteoarthritis. The primary targets for the prevention of musculoskeletal injury \nin sport include neuromuscular training (NMT), rule modification, and equipment \nrecommendations. Currently, there is significant high-quality evidence to \nsupport the widespread use of NMT warm up programs in team and youth sport, with \nan expected significant impact of reducing the risk of musculoskeletal injury by \nover 35%. Policy disallowing body checking in youth ice hockey has led to a >50% \nreduction in injuries, and rules limiting contact practice in youth American \nfootball has significant potential for injury prevention. There is evidence to \nsupport the use of bracing and taping in elite sport to reduce the risk of \nrecurrent ankle sprain injury but not for use to prevent the primary injury, and \nwrist guards are protective of sprain injuries in snowboarding. Future research \nexamining the maintenance of NMT programs across real-world sport and school \nsettings, optimization of adherence, additional benefit of workload \nmodification, and evaluation of rule changes in other sports is needed.\n\nCopyright © 2019 Elsevier Ltd. All rights reserved.\n\nDOI: 10.1016/j.berh.2019.02.009\nPMID: 31431273 [Indexed for MEDLINE]",
+  "year": 2019,
+  "lang": "en",
+  "type": "review",
+  "venue": "Best Practice & Research Clinical Rheumatology",
+  "topic": "Sports injuries and prevention",
+  "field": "Medicine"
+ },
+ {
+  "id": "W7093338191",
+  "title": "Additional file 2 of An explanatory mixed methods study assessing Canadian chiropractors’ attitudes and orientation toward patient-centred care",
+  "abstract": "",
+  "year": 2025,
+  "lang": null,
+  "type": "article",
+  "venue": "Figshare",
+  "topic": "Patient-Provider Communication in Healthcare",
+  "field": "Health Professions"
+ },
+ {
+  "id": "W1740003218",
+  "title": "“It Puts us in our Students’ Shoes”: Listening to Voices from Teacher Candidates on Their Test-Taking Experience",
+  "abstract": "",
+  "year": 2015,
+  "lang": "en",
+  "type": "article",
+  "venue": "International Journal of Humanities and Social Science Research",
+  "topic": "Teacher Education and Leadership Studies",
+  "field": "Social Sciences"
+ },
+ {
+  "id": "W4206937399",
+  "title": "Understanding Engagement and the Potential Impact of an Electronic Drug Repository: Multi-Methods Study",
+  "abstract": "Background Centralized drug repositories can reduce adverse events and inappropriate prescriptions by enabling access to dispensed medication data at the point of care; however, how they achieve this goal is largely unknown. Objective This study aims to understand the perceived clinical value; the barriers to and enablers of adoption; and the clinician groups for which a provincial, centralized drug repository may provide the most benefit. Methods A mixed methods approach, including a web-based survey and semistructured interviews, was used. Participants were clinicians (eg, nurses, physicians, and pharmacists) in Ontario who were eligible to use the digital health drug repository (DHDR), irrespective of actual use. Survey data were ranked on a 7-point adjectival scale and analyzed using descriptive statistics, and interviews were analyzed using qualitative descriptions. Results Of the 161 survey respondents, only 40 (24.8%) actively used the DHDR. Perceptions of the utility of the DHDR were neutral (mean scores ranged from 4.11 to 4.76). Of the 75.2% (121/161) who did not use the DHDR, 97.5% (118/121) rated access to medication information (eg, dose, strength, and frequency) as important. Reasons for not using the DHDR included the cumbersome access process and the perception that available data were incomplete or inaccurate. Of the 33 interviews completed, 26 (79%) were active DHDR users. The DHDR was a satisfactory source of secondary information; however, the absence of medication instructions and prescribed medications (which were not dispensed) limited its ability to provide a comprehensive profile to meaningfully support clinical decision-making. Conclusions Digital drug repositories must be adjusted to align with the clinician’s needs to provide value. Ensuring integration with point-of-care systems, comprehensive clinical data, and streamlined onboarding processes would optimize clinically meaningful use. The electronic provision of accessible drug information to providers across health care settings has the potential to improve efficiency and reduce medication errors.",
+  "year": 2022,
+  "lang": "en",
+  "type": "article",
+  "venue": "JMIR Formative Research",
+  "topic": "Electronic Health Records Systems",
+  "field": "Health Professions"
+ }
+]
+warning: loading hooks from both /Users/choxos/.codex/hooks.json and /Users/choxos/.codex/config.toml; prefer a single representation for this layer
+2026-07-13T15:34:23.351260Z ERROR rmcp::transport::worker: worker quit with fatal: Transport channel closed, when Auth(AuthorizationRequired)
+warning: Skill descriptions were shortened to fit the 2% skills context budget. Codex can still see every skill, but some descriptions are shorter. Disable unused skills or plugins to leave more room for the rest.
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart Failed
+hook: SessionStart Completed
+hook: SessionStart Completed
+hook: SessionStart Completed
+hook: SessionStart Completed
+hook: SessionStart Failed
+hook: UserPromptSubmit
+hook: UserPromptSubmit
+hook: UserPromptSubmit Failed
+hook: UserPromptSubmit Failed
+codex
+[
+  {"id":"W2604796760","categories":[],"domain":null,"study_design":"design_other","genre":"empirical","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"The work develops a clinical outcome-measure toolkit, not a study of research methods or practices."},
+  {"id":"W2061802766","categories":[],"domain":null,"study_design":"design_other","genre":"empirical","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"The work evaluates an educational forum rather than science, research, or research practice as its object."},
+  {"id":"W2039151398","categories":[],"domain":null,"study_design":"design_other","genre":"review","about_ca_system":false,"about_ca_topic":false,"confidence":"low","reason":"The abstract is missing and the title concerns health and nutrition rather than a defined category."},
+  {"id":"W4399803017","categories":[],"domain":null,"study_design":"not_applicable","genre":"commentary","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"The paper discusses applications of artificial intelligence in dental education, not research practice or scholarly communication."},
+  {"id":"W2107506212","categories":[],"domain":null,"study_design":"nonrandomized_trial","genre":"protocol","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"The protocol evaluates a community intervention and does not study research methods or practices."},
+  {"id":"W7095990233","categories":["insufficient_payload"],"domain":null,"study_design":"not_applicable","genre":"other","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"The record is a boilerplate title with no abstract and cannot be screened."},
+  {"id":"W4407047034","categories":[],"domain":null,"study_design":"design_other","genre":"empirical","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"The implementation study evaluates integration of a clinical intervention, not research practice as its object."},
+  {"id":"W4249137045","categories":[],"domain":null,"study_design":"theoretical_or_conceptual","genre":"commentary","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"The paper discusses dialogue among practice, education, and research without studying science or research as a social practice."},
+  {"id":"W4254531105","categories":[],"domain":null,"study_design":"systematic_review","genre":"review","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"The review concerns community engagement mechanisms rather than research methods, scholarly communication, or open science."},
+  {"id":"W3125200970","categories":[],"domain":null,"study_design":"theoretical_or_conceptual","genre":"other","about_ca_system":false,"about_ca_topic":false,"confidence":"low","reason":"The abstract is missing and the title concerns economic theory rather than a defined category."},
+  {"id":"W3216469376","categories":[],"domain":null,"study_design":"design_other","genre":"review","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"The review concerns trustworthy artificial intelligence in medical imaging, not research practice or the research system."},
+  {"id":"W4414084292","categories":[],"domain":null,"study_design":"randomized_trial","genre":"protocol","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"The protocol tests a cancer-screening intervention and does not study research methods or practices."},
+  {"id":"W4395045665","categories":[],"domain":null,"study_design":"systematic_review","genre":"review","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"The scoping review maps legal discussions in health AI rather than characterizing research communication or research practice itself."},
+  {"id":"W4360586552","categories":[],"domain":null,"study_design":"design_other","genre":"empirical","about_ca_system":false,"about_ca_topic":false,"confidence":"low","reason":"The abstract is missing and the title does not indicate a defined category."},
+  {"id":"W2121795537","categories":[],"domain":null,"study_design":"design_other","genre":"empirical","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"The work studies implementation strategies and their feasibility, not research methods or practices as its object."},
+  {"id":"W4412582784","categories":["metaresearch","scholarly_communication","open_science"],"domain":"reporting","study_design":"observational","genre":"empirical","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"The study examines journal data-sharing requests and published statements, which are research reporting, scholarly communication, and open-science practices."},
+  {"id":"W7135418809","categories":["insufficient_payload"],"domain":null,"study_design":"not_applicable","genre":"dataset","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"The record is an additional-file artifact rather than a screenable scholarly work."},
+  {"id":"W3158300484","categories":[],"domain":null,"study_design":"design_other","genre":"other","about_ca_system":false,"about_ca_topic":false,"confidence":"low","reason":"The abstract is missing and the title does not indicate a defined category."},
+  {"id":"W4405184040","categories":[],"domain":null,"study_design":"systematic_review","genre":"review","about_ca_system":false,"about_ca_topic":true,"confidence":"high","reason":"The review concerns Canadian emergency-medicine burnout interventions, not research practice or the research system."},
+  {"id":"W1746398764","categories":[],"domain":null,"study_design":"design_other","genre":"review","about_ca_system":false,"about_ca_topic":false,"confidence":"low","reason":"The abstract is missing and the title concerns clinical management of low vision rather than a defined category."},
+  {"id":"W4417184167","categories":[],"domain":null,"study_design":"qualitative","genre":"empirical","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"The qualitative study examines nurses' experiences with rapid-response activation, not science or research practice."},
+  {"id":"W2915656893","categories":[],"domain":null,"study_design":"design_other","genre":"review","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"The review concerns sport-injury prevention rather than a defined research, communication, or open-science category."},
+  {"id":"W7093338191","categories":["insufficient_payload"],"domain":null,"study_design":"not_applicable","genre":"dataset","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"The record is an additional-file artifact rather than a screenable scholarly work."},
+  {"id":"W1740003218","categories":[],"domain":null,"study_design":"design_other","genre":"empirical","about_ca_system":false,"about_ca_topic":false,"confidence":"low","reason":"The abstract is missing and the title does not establish a defined category."},
+  {"id":"W4206937399","categories":[],"domain":null,"study_design":"design_other","genre":"empirical","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"The mixed-methods study evaluates clinician use of a drug repository, not research practice or scholarly communication."}
+]
+hook: Stop
+hook: Stop
+hook: Stop
+hook: Stop Completed
+hook: Stop Completed
+hook: Stop Failed
+tokens used
+30,980

@@ -1,0 +1,535 @@
+You are screening scholarly works for the MetaCan project. Apply the rubric below to EVERY record and output ONE JSON array with ONE object per record, conforming EXACTLY to the JSON schema below. Output ONLY the JSON array, no prose before or after it.
+
+# THE RUBRIC (v3.1, locked)
+
+# MétaCan screening rubric (v3.1)
+
+**Status: LOCKED, 2026-07-13.** Supersedes v2.2. No screening ran under v3.0, which lived for hours: an adversarial review found that its Murad quotation inserted the word "treatment" into a sentence this document calls verbatim (D29). v3.1 corrects that quotation from the PDF, fixes the Kataoka page range, aligns the funder clause with the protocol, corrects two glosses against their sources, and adds the study-design vocabulary that v3.0 demanded but never listed. Since D29, `pilot/check_quotes.R` fails the build if any quotation marked verbatim is not a substring of its cited PDF.
+
+**No number produced so far was made under v3.** The pilot ran under v1.0; the 179-work re-screen under v2.0. Both instruments are kept byte for byte, so every figure stays attributable to the text that produced it. v3 is the instrument the **full screen** runs under, and the **v2-to-v3 difference is reported as a finding**.
+
+---
+
+## What changed, and why it is not cosmetic
+
+v1 and v2 had a tier hierarchy: **T1 core / T2 adjacent / T3 contextual**. That structure had a defect at its root, and the data found it before I did.
+
+> **"Adjacent" is defined by negation.** It means *not-T1*. A category whose only content is "near the important one" cannot be applied consistently, and **OUT-vs-adjacent was the largest tier confusion at every sample size we measured.** The models were not failing. **The category was empty.**
+
+It was also a value judgment I had no standing to make. Calling science and technology studies "adjacent" says STS is peripheral to metascience. **STS is a field with its own founding literature, its own journals, and its own account of what studying science means.**
+
+**v3 deletes the hierarchy.** Every tradition is a **category with its own positive definition, taken from its own literature, quoted verbatim from a source in `docs/reference/definitions/`.** There is no residual bucket. A record may carry **more than one** category, because the traditions genuinely overlap and forcing a single label is what created the problem.
+
+**Nothing here is cited from memory.** Every quotation below was read from the PDF named beside it. In a project whose worst deviation (D26) was that its own definition of metaresearch was mine and uncited for its entire life, a recalled citation would be the single worst thing this document could contain.
+
+---
+
+## The definitional problem is the field's, not this project's, and the field says so in print
+
+- **Puljak L, Lovric Makaric Z, Buljan I, Pieper D.** *What is a meta-epidemiological study? Analysis of published literature indicated heterogeneous study designs and definitions.* J Comp Eff Res. 2020. doi:10.2217/cer-2019-0201
+  > Analysed **175 information sources**. *"Definitions of meta-epidemiological studies varied and some studies used the term meta-epidemiological study to describe methodological research-on-research studies."* Conclusion: *"Research community would benefit from consensus about definition of meta-epidemiological study."*
+
+- **Kataoka Y, et al.** J Clin Epidemiol. 2023;154:219-220.
+  > A **published dispute** with Puljak, opening by naming *"the currently confusing nomenclatures around 'meta-epidemiology' and related terms such as 'meta-research' and 'research-on-research'."*
+
+- **Stevens ER, Laynor G.** *Recognizing the value of meta-research and making it easier to find.* J Med Libr Assoc. 2023;111(4). doi:10.5195/jmla.2023.1758
+  > *"The breadth of meta-research presents a significant challenge for identifying published meta-research studies,"* and it notes **the lack of a MeSH heading** for meta-research.
+
+**Those are claims about humans.** The pilot's numbers are claims about **models disagreeing under one rubric**. They are consistent, they are not the same estimand, and **only the human audit closes the gap** (`DEVIATIONS.md` D27).
+
+---
+
+## The categories
+
+A work may carry **more than one**. **Categories are not ranked and none is primary: the released landscape is the union of the defined categories, with every overlap reported.** The call's primary estimand is reported over `metaresearch` because that is the field the call names; that is a **reporting choice, not a rank**, and each of the other traditions gets the same per-category estimate.
+
+### 1. `metaresearch`
+
+> **"Meta-research is an evolving scientific discipline that aims to evaluate and improve research practices. It includes thematic areas of methods, reporting, reproducibility, evaluation, and incentives (how to do, report, verify, correct, and reward science)."**
+>
+> Ioannidis JPA, Fanelli D, Dunne DD, Goodman SN. *Meta-research: Evaluation and Improvement of Research Methods and Practices.* PLoS Biol. 2015;13(10):e1002264.
+> See also Ioannidis JPA. PLoS Biol. 2018;16(3):e2005468; METRICS, Stanford: <https://metrics.stanford.edu/research>
+
+Every `metaresearch` record carries a **`domain`**, taken verbatim from those five thematic areas and glossed by Ioannidis's own parenthetical:
+
+| `domain` | Ioannidis's gloss | operationally |
+|---|---|---|
+| `methods` | *how to **do** science* | design, conduct, analysis, bias, statistical practice, evidence-synthesis methodology; Ioannidis's own description of this area ends *"research integrity and ethics"* |
+| `reporting` | *how to **report** science* | reporting standards and completeness |
+| `reproducibility` | *how to **verify** science* | replication, data and code sharing, transparency |
+| `evaluation` | *how to **correct** science* | peer review and editorial process, research assessment, metrics |
+| `incentives` | *how to **reward** science* | funding allocation, careers and the research workforce, reward structures |
+
+**RULE 1 stands** (carried from v2; it resolved the largest single seam): *a work is `metaresearch` on methods only if its object is methods **as used, reported or performed by researchers**. Developing, deriving, validating or teaching a technique for a domain is OUT, however generic the technique.* **An instance of a research practice is not a study of it.**
+
+### 2. `metaepidemiology` — **CONTESTED IN PRINT. Both definitions are coded.**
+
+There is **no consensus definition** (Puljak 2020, above). **This rubric does not invent one.** It codes **both published definitions** and **flags where they disagree**, because the dispute is live, it is between named researchers in peer-reviewed journals, and hiding it inside a single label would destroy the only evidence of it.
+
+- **`metaepi_narrow`** — Murad MH, Wang Z. *Guidelines for reporting meta-epidemiological methodology research.* Evid Based Med. 2017;22(4):139-142. doi:10.1136/ebmed-2017-110713
+  > *"Meta-epidemiological studies adopt a systematic review or meta-analysis approach to examine the impact of certain characteristics of clinical studies on the observed effect and provide empirical evidence for hypothesised associations."*
+  >
+  > *(v3.0 quoted this sentence as 'the observed **treatment** effect'. The word is not in the paper; it narrowed Murad's definition while claiming his authority for the narrowing, and it survived a LOCK. D29.)*
+
+- **`metaepi_broad`** — Kataoka Y, et al. J Clin Epidemiol. 2023;154:219-220. *(Not 219-221: page 221 is Puljak's reply, which is the other side of the dispute.)*
+  > *"The greatest common defining concept of 'meta-epidemiological studies' would be **any studies in which the unit of analysis is a study, not a patient**."*
+
+**Where the two differ, the record is flagged, and the size of that class is reported as a finding.** A published dispute is a boundary to be *measured*, not settled by fiat.
+
+### 3. `bibliometrics` (scientometrics)
+
+> **"Scientometrics is the study of the quantitative aspects of the process of science as a communication system. It is centrally, but not only, concerned with the analysis of citations in the academic literature."**
+>
+> Mingers J, Leydesdorff L. *A Review of Theory and Practice in Scientometrics.* Eur J Oper Res. 2015. doi:10.1016/j.ejor.2015.04.002
+> Founding work: Price DJ de Solla. *Networks of Scientific Papers.* Science. 1965;149(3683):510-515.
+
+**Boundary with `metaresearch`, and it resolves v1's self-contradiction** (v1's T1 bullet and its own worked example gave opposite answers): a study that **characterises a literature** by quantitative means is `bibliometrics`. A study that uses bibliometric means to **make a claim about research practice** (citation distortion, reporting trends, citation of retracted work) is **also `metaresearch`**, and carries both. **v3 does not force the choice; that forcing was the bug.**
+
+### 4. `sts` (science and technology studies)
+
+> **"co-production is shorthand for the proposition that the ways in which we know and represent the world (both nature and society) are inseparable from the ways in which we choose to live in it."**
+> **"The idiom of co-production ... represents a major synthesis of scholarship in science and technology studies (S&TS)."**
+>
+> Jasanoff S (ed.). *States of Knowledge: The Co-Production of Science and the Social Order.* Routledge, 2004.
+
+> **"We study science in action and not ready made science or technology; to do so, we either arrive before the facts and machines are blackboxed or we follow the controversies that reopen them."**
+>
+> Latour B. *Science in Action: How to Follow Scientists and Engineers through Society.* Harvard University Press.
+
+**Operational test:** the work studies **science or technology as social practice**: how knowledge and social order are produced together, how facts are made rather than found, how controversies open and close. **The object must be science, research, or technoscientific knowledge**, at any period. *(v1 restricted history and philosophy of science to "contemporary research practice", an unexamined adverb that silently excluded the entire history of Canadian science. It is deleted.)*
+
+### 5. `scholarly_communication`
+
+> **"Scholarly communication is a rich and complex sociotechnical system formed over a period of centuries."**
+> **"...used here in the broader sense to include the formal and informal activities associated with the use and dissemination of information through public and private channels."**
+>
+> Borgman CL. *Scholarship in the Digital Age: Information, Infrastructure, and the Internet.* MIT Press, 2007.
+
+### 6. `open_science`
+
+> **"Open science is a set of principles and practices that aim to make scientific research from all fields accessible to everyone for the benefits of scientists and society as a whole."**
+> **"Open science is about making sure not only that scientific knowledge is accessible but also that the production of that knowledge itself is inclusive, equitable and sustainable."**
+>
+> UNESCO. *Recommendation on Open Science* (introduction), 2021. **193 countries adopted it.**
+
+The second sentence is the reason this category is not a synonym for "open access": UNESCO's definition makes **inclusivity and equity of knowledge production** part of open science itself, which is the criterion this challenge is judged on.
+
+### 7. `research_integrity` — **defined by its OBJECT; the sources do not define the field, and that is recorded**
+
+**Honest limitation, stated rather than hidden.** The two sources supplied define **what counts as misconduct** and **what publication ethics covers**. **Neither defines "research integrity research" as a discipline** the way Ioannidis defines metaresearch or Jasanoff defines STS. So this category is defined by its **object**, and the gap is on the record.
+
+> **"...the analysis was limited to behaviours that distort scientific knowledge: fabrication, falsification, 'cooking' of data, etc... Survey questions on plagiarism and other forms of professional misconduct were excluded."**
+>
+> Fanelli D. *How Many Scientists Fabricate and Falsify Research? A Systematic Review and Meta-Analysis of Survey Data.* PLoS ONE. 2009;4(5):e5738.
+
+> Publication ethics, per **COPE** (Committee on Publication Ethics), *Ethics Toolkit for Journal Editors and Publishers.*
+
+**Operational test:** the object is **research misconduct, questionable research practices, retraction, authorship, or publication ethics**, *as an object of study*. **Fanelli's boundary is adopted and its exclusion is carried:** fabrication, falsification and data cooking are in; **plagiarism and professional misconduct are recorded but marked, because Fanelli's own scope excludes them** and a rubric that silently widened his boundary while citing him would be misquoting its own source.
+
+**This category overlaps `metaresearch` heavily**: Ioannidis's own description of the *methods* area ends *"research integrity and ethics"*, so integrity research is inside metaresearch by his definition. **That overlap is expected and allowed**, because v3 is multi-label. It is not a hierarchy.
+
+### `insufficient_payload`
+
+Not a judgment; a statement that the record **cannot be screened** (a scraping artifact as a title, boilerplate in the abstract field, a title and abstract from different papers, spam). **Reported, never silently dropped**: the size of this class is a finding about OpenAlex.
+
+### `OUT`
+
+None of the above. **"OUT" now means "in no defined category", not "not near the important one."** That is the whole change.
+
+---
+
+## Canadian linkage
+
+- `CA_AFF` — at least one Canadian institutional affiliation. **Warning, measured:** OpenAlex misassigns these. **At least 17,466** works enter the frame with, as their *only* Canadian institution, one of six suspect assignments: a parse failure that is not an institution at all (`Impact`, attached to a Spanish COVID essay) or a real organization attached to papers it has nothing to do with (`Discovery Air (Canada)` on a Brazilian linguistics paper). That is a **lower bound** from six audited strings (finding 27), and the records are **flagged for audit, not deleted**. A Canadian affiliation is *evidence*, not proof.
+- `CA_FUND` — ≥1 funder whose OpenAlex `country_code` is Canada: an **external criterion, not a curated list**. *(An earlier four-funder list (CIHR, NSERC, SSHRC, CFI) failed twice: three of its four hardcoded IDs pointed at other funders, and even corrected it missed Canada Research Chairs, the Government of Canada, NRC, Mitacs, Genome Canada, and every provincial agency. OpenAlex knows 2,182 Canadian funders; `R/pin_entities.R` pins them.)*
+- **`ABOUT_CA_SYSTEM`** — the Canadian **research system or academy** is a substantive object. *A Canadian institution as setting is not this.*
+- **`ABOUT_CA_TOPIC`** — Canada is a substantive subject, whether or not research is the object.
+
+*(v1 had one boolean and it could not separate "Canadian data, universal claim" from "a claim about Canada". Four screening agents proposed this split independently.)*
+
+## Study design
+
+Coded for every work, from **this vocabulary and no other** (v3.0 said "coded for every work" and never listed the values, which is D20's exact shape: a field every screener codes and no two code alike):
+
+| `study_design` | MEDLINE publication type it is validated against |
+|---|---|
+| `randomized_trial` | Randomized Controlled Trial |
+| `nonrandomized_trial` | Controlled Clinical Trial |
+| `observational` | Observational Study |
+| `systematic_review` | Systematic Review |
+| `meta_analysis` | Meta-Analysis |
+| `case_report` | Case Reports |
+| `qualitative` | *(none; ships as a score, marked unvalidated)* |
+| `simulation_or_modeling` | *(none; ships as a score, marked unvalidated)* |
+| `bench_or_experimental` | *(none; ships as a score, marked unvalidated)* |
+| `theoretical_or_conceptual` | *(none; ships as a score, marked unvalidated)* |
+| `not_applicable` | *(the work is not empirical research: editorials, datasets, software)* |
+| `design_other` | *(none; ships as a score, marked unvalidated)* |
+
+**Validated against MEDLINE publication types, per record and not per year.** *(v3.0 called these "human-indexed by NLM", which is false; v3.1's first correction said "human-indexed until April 2022", which is also false. NLM stopped fully human indexing as universal practice around 2011 and completed automation in 2022, so a YEAR CUTOFF cannot separate the eras. The reference subset is defined by NLM's **record-level `IndexingMethod`** field: absent = fully human, `Curated` = automated with human review, `Automated` = machine. Human records are the reference; the others measure **agreement with another machine** and are reported as such.)*
+
+**Class-specific calendar eligibility, because a publication type that did not exist cannot be a negative.** *Observational Study* entered the vocabulary in **2014** and *Systematic Review* in **2019**. A 2008 cohort study carries no *Observational Study* tag, and treating that absence as "not observational" would train and score the model against a censoring artifact. Each design class is therefore validated **only on records published after its type existed**, and that eligibility window is prespecified per class. Where MEDLINE does not reach (most of the physical sciences, humanities and social sciences), the label ships as a **score, not an assertion**, and is **marked unvalidated**. *The dataset states, per field, which of its own annotations it has earned the right to assert.*
+
+## Genre
+
+**One vocabulary, defined here, and `screening-schema-v3.json` QUOTES this list rather than paraphrasing it.**
+
+`empirical` · `review` · `methods` · `commentary` · `editorial` · `protocol` · `dataset` · `software` · `other`
+
+*(In v1 the rubric and the schema named **two different vocabularies for this field**, overlapping on two values out of thirteen. Every screener was handed both and obeyed both privately; the validator checked `tier` and had never been asked to look at `genre`, so 16,800 labels passed every check that ran. See D20 and finding 24. **A codebook is code. It gets a test.**)*
+
+## `tier` is RETIRED
+
+v3 replaces it with `categories`, which is **multi-label**. The values `T1`, `T2`, `T3` and `OUT` remain in the **legacy** `screening-schema.json` **only so that the v1 and v2 label files stay readable**; the v3 contract, `screening-schema-v3.json`, **does not contain the field**, so no new screening can emit them. `OUT` in v3 means an empty `categories` array: *in no defined category*, not *near the important one*.
+
+## Confidence
+
+`high` / `medium` / `low`. **If the abstract is missing, judge on the title alone and set confidence to `low` unless the title is unambiguous.** The schema **quotes** this sentence; it does not paraphrase it (D24).
+
+**`low` is a legitimate answer.** A screener that never says `low` is not being careful; it is being confident.
+
+---
+
+## Sources
+
+Every quotation above was read from a PDF in **`docs/reference/definitions/`**, which is committed. Nothing is cited from memory, and since D29 that is a checked property, not a promise: `pilot/check_quotes.R` fails the build if any quotation marked verbatim is not a substring of its cited PDF. `pilot/check_instrument.R` fails the build if this rubric and `screening-schema-v3.json` disagree about any field, in either direction.
+
+
+# THE OUTPUT SCHEMA (screening-schema-v3.json)
+
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "MetaCan screening output, rubric v3.1",
+  "description": "The output contract for every screening run under rubric v3.1. This document QUOTES the rubric; it never paraphrases it. Where a description below restates a rule, the wording is copied from docs/protocol/rubric-v3.md, because the schema misquoting the rubric is D24 and two documents that disagree are two instruments (D20). pilot/check_instrument.R fails the build if this file and the rubric disagree about any field, in either direction. The legacy screening-schema.json remains ONLY so that v1 and v2 label files stay readable; no new screening validates against it.",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["id", "categories", "study_design", "genre", "about_ca_system", "about_ca_topic", "confidence"],
+    "properties": {
+      "id": {
+        "type": "string",
+        "pattern": "^W\\d+$",
+        "description": "The OpenAlex work id, exactly as given in the payload."
+      },
+      "categories": {
+        "type": "array",
+        "items": {
+          "enum": ["metaresearch", "metaepi_narrow", "metaepi_broad", "bibliometrics", "sts", "scholarly_communication", "open_science", "research_integrity", "insufficient_payload"]
+        },
+        "uniqueItems": true,
+        "description": "Every category the work belongs to; a work may carry more than one, and categories are not ranked and none is primary. An EMPTY array is OUT, which means 'in no defined category', not 'near the important one'. insufficient_payload means the record cannot be screened (a scraping artifact as a title, boilerplate in the abstract field, a title and abstract from different papers, spam) and is reported, never silently dropped."
+      },
+      "domain": {
+        "enum": ["methods", "reporting", "reproducibility", "evaluation", "incentives", null],
+        "description": "REQUIRED when categories contains metaresearch, and null otherwise. Taken verbatim from Ioannidis's five thematic areas: methods, reporting, reproducibility, evaluation, and incentives (how to do, report, verify, correct, and reward science)."
+      },
+      "study_design": {
+        "enum": ["randomized_trial", "nonrandomized_trial", "observational", "systematic_review", "meta_analysis", "case_report", "qualitative", "simulation_or_modeling", "bench_or_experimental", "theoretical_or_conceptual", "not_applicable", "design_other"],
+        "description": "Coded for every work, from this vocabulary and no other. not_applicable means the work is not empirical research: editorials, datasets, software."
+      },
+      "genre": {
+        "enum": ["empirical", "review", "methods", "commentary", "editorial", "protocol", "dataset", "software", "other"],
+        "description": "One vocabulary, defined in the rubric, and this schema QUOTES that list rather than paraphrasing it."
+      },
+      "about_ca_system": {
+        "type": "boolean",
+        "description": "ABOUT_CA_SYSTEM: the Canadian research system or academy is a substantive object. A Canadian institution as setting is not this."
+      },
+      "about_ca_topic": {
+        "type": "boolean",
+        "description": "ABOUT_CA_TOPIC: Canada is a substantive subject, whether or not research is the object."
+      },
+      "confidence": {
+        "enum": ["high", "medium", "low"],
+        "description": "If the abstract is missing, judge on the title alone and set confidence to low unless the title is unambiguous. low is a legitimate answer: a screener that never says low is not being careful; it is being confident."
+      },
+      "reason": {
+        "type": "string",
+        "maxLength": 400,
+        "description": "One sentence naming the rubric rule the decision rests on."
+      }
+    }
+  }
+}
+
+
+# THE RECORDS
+
+[
+ {
+  "id": "W4387892913",
+  "title": "Tribute to Barbara Ehrenreich: Fighting for Labor Through Critical Research Journalism",
+  "abstract": "This is a short commentary to accompany the article “Hospital Workers: Class Conflicts in the Making” by Barbara Ehrenreich and John H. Ehrenreich. The article was originally published in the International Journal of Health Services in 1975. We are revisiting it in the current issue of the International Journal of Social Determinants of Health and Health Services due to its continued relevance and significance in the twenty-first Century.",
+  "year": 2023,
+  "lang": "en",
+  "type": "article",
+  "venue": "International Journal of Social Determinants of Health and Health Services",
+  "topic": "Employment and Welfare Studies",
+  "field": "Health Professions"
+ },
+ {
+  "id": "W2767003101",
+  "title": "Secukinumab vs. Adalimumab for the Treatment of Psoriatic Arthritis: A Cost Per Responder Analysis at 48 Weeks from a Brazilian Perspective",
+  "abstract": "",
+  "year": 2017,
+  "lang": "en",
+  "type": "article",
+  "venue": "Value in Health",
+  "topic": "Health Systems, Economic Evaluations, Quality of Life",
+  "field": "Economics, Econometrics and Finance"
+ },
+ {
+  "id": "W2338404181",
+  "title": "Evidence-based librarianship Level of evidence",
+  "abstract": "",
+  "year": 2002,
+  "lang": "en",
+  "type": "article",
+  "venue": "Hypothesis",
+  "topic": "Health Sciences Research and Education",
+  "field": "Health Professions"
+ },
+ {
+  "id": "W4409423144",
+  "title": "Navigating Unmeasured Confounding in Nonexperimental Psychological Research: A Practical Guide to Computing and Interpreting E-Value",
+  "abstract": "Randomized experiments remain the “gold standard” for establishing causality, yet ethical and practical constraints in certain fields often require researchers to rely on observational data. Although psychologists recognize that correlation does not imply causality, the conventional cautionary statements regarding correlation typically found at the end of articles have not sufficiently advanced psychological science, particularly in subfields, such as developmental and personality psychology, that predominantly rely on observational data. Sensitivity analyses commonly used in biostatistics and epidemiology offer powerful tools to quantify the risk of unmeasured confounding in observational data analysis, essentially encouraging applied researchers to assess how strongly an unmeasured confounder must be associated with both the predictor and outcome to negate an observed predictor-outcome association (i.e., reduce the effect to null). In this tutorial, we explore the frequently overlooked but critical issue of unmeasured confounding in psychological research and introduce psychologists to the E-value, a novel and straightforward method for assessing the robustness of exposure-outcome associations to unmeasured confounding. We demonstrate the application of E-value using common psychological-research scenarios in R and discuss its strengths, limitations, and recommended best practices. Psychologists can more accurately assess and transparently report research findings, particularly in subfields relying primarily on observational data, by more explicitly considering unmeasured confounding and incorporating sensitivity-analysis techniques such as the E-value into their methodological tool kits.",
+  "year": 2025,
+  "lang": "en",
+  "type": "article",
+  "venue": "Advances in Methods and Practices in Psychological Science",
+  "topic": "Advanced Causal Inference Techniques",
+  "field": "Mathematics"
+ },
+ {
+  "id": "W4410834927",
+  "title": "From Data to Cure: Leveraging Artificial Intelligence and Big Data Analytics in Accelerating Disease Research and Treatment Development",
+  "abstract": "The emergence of novel genotyping, big data, data sharing, open-source algorithms, and powerful computing resources has facilitated the integration of artificial intelligence (AI) and big data to elucidate disease mechanisms, find implements for drug design and development, and enhance precision medicine. The parallel explosion of published studies containing large quantities of biomolecular data with accompanying clinical or pathology information has indeed benefited disease studies. However, similar to the biases that plagued many of the datasets used for the development of commercial AI algorithms, diagnosing radiological images, biological oddities or data imbalances could mislead the outcome of AI and big data studies. There is a high need of standardization and heterogeneous curation practices in the input data for AI and big data prometheus. Therefore, a systematic overview of the key technological advances, challenges, and emerging solutions for data mining is warranted for benchmarking and motivating further development of AI and big-data-guided disease research. As the window of opportunity for the rapid advance of artificial intelligence (AI) solutions to emergent challenges in drug discovery and global health narrows, there is an immediate need to harness big data, AI, and shared research infrastructure to optimize the performance of AI systems on small data sets in biomedicine. The coordination of such systems is a massive and complex engineering challenge that must safeguard researcher freedom while preventing misuse and enhancing collaboration. Effective governance of AI in the life sciences and biomedicine requires specifying requirements and mechanisms to monitor the evolution of each constructed system with respect to agreed-upon principles.",
+  "year": 2022,
+  "lang": "en",
+  "type": "article",
+  "venue": "Journal of Survey in Fisheries Sciences",
+  "topic": "Artificial Intelligence in Healthcare and Education",
+  "field": "Medicine"
+ },
+ {
+  "id": "W4400047765",
+  "title": "Exploration of the Path of Computational Thinking Cultivation in University Mathematics Teaching",
+  "abstract": "",
+  "year": 2024,
+  "lang": "en",
+  "type": "article",
+  "venue": "Advances in Educational Technology and Psychology",
+  "topic": "Educational Reforms and Innovations",
+  "field": "Environmental Science"
+ },
+ {
+  "id": "W6887815647",
+  "title": "Prevalence, incidence, and factors associated with pain-related disabilities among Indigenous peoples in Canada: A scoping review.",
+  "abstract": "",
+  "year": 2022,
+  "lang": "en",
+  "type": "other",
+  "venue": "Open Science Framework",
+  "topic": "Pain Management and Opioid Use",
+  "field": "Medicine"
+ },
+ {
+  "id": "W6940093433",
+  "title": "Data files for \"Methane emissions from proglacial lakes: A synthesis study directed toward Lake Agassiz\"",
+  "abstract": "",
+  "year": 2024,
+  "lang": "en",
+  "type": "other",
+  "venue": "Figshare",
+  "topic": "Mycorrhizal Fungi and Plant Interactions",
+  "field": "Agricultural and Biological Sciences"
+ },
+ {
+  "id": "W2111376665",
+  "title": "A Meta-Analysis of Moral Reconation Therapy",
+  "abstract": "This study reports on a meta-analysis of moral reconation therapy (MRT). Recipients of MRT included adult and juvenile offenders who were in custody or in the community, typically on parole or probation. The study considered criminal offending subsequent to treatment as the outcome variable. The overall effect size measured by the correlation across 33 studies and 30,259 offenders was significant ( r = .16), indicating that MRT had a small but important effect on recidivism. Moderator analyses were conducted to detect the possible factors affecting the relationship between MRT and recidivism. Moderators included setting, age, gender, research design, sample size, type of recidivism, follow-up period, publisher, and year of publication. Moderator analysis demonstrated that MRT was more successful with adult than juvenile offenders in institutional settings as opposed to the community, and where researchers in the primary studies used randomization to allocate participants to either a treatment or control condition. The treatment effect size was greater when the type of recidivism used was rearrest rather than rearrest followed by conviction or reincarceration. The benefits of MRT were strongest with a relatively short follow-up period. MRT was more successful for relatively small samples and for large samples rather than medium-sized samples. The effect size was smaller for studies published by the owners of MRT than by other independent studies. The effect size was also smaller for studies published after 1999.",
+  "year": 2012,
+  "lang": "en",
+  "type": "review",
+  "venue": "International Journal of Offender Therapy and Comparative Criminology",
+  "topic": "Psychology of Moral and Emotional Judgment",
+  "field": "Neuroscience"
+ },
+ {
+  "id": "W1993324392",
+  "title": "Menger and Nöbeling on pointless topology",
+  "abstract": "",
+  "year": 2013,
+  "lang": "en",
+  "type": "article",
+  "venue": "Logic and Logical Philosophy",
+  "topic": "Philosophy and History of Science",
+  "field": "Arts and Humanities"
+ },
+ {
+  "id": "W4295138397",
+  "title": "Compte rendu de: De Finney, James et al. (dir.), L’Acadie des origines : mythes et figurations d’un parcours littéraire et historique, [Sudbury, Prise de parole, 2011]",
+  "abstract": "",
+  "year": 2013,
+  "lang": "fr",
+  "type": "preprint",
+  "venue": "HAL (Le Centre pour la Communication Scientifique Directe)",
+  "topic": "Canadian Identity and History",
+  "field": "Social Sciences"
+ },
+ {
+  "id": "W2006470317",
+  "title": "Granulocyte-Macrophage Colony-Stimulating Factor Is Neuroprotective in Experimental Traumatic Brain Injury",
+  "abstract": "1. J Neurotrauma. 2014 May 15;31(10):976-83. doi: 10.1089/neu.2013.3106. Epub\n2014  Mar 7.\n\nGranulocyte-macrophage colony-stimulating factor is neuroprotective in \nexperimental traumatic brain injury.\n\nShultz SR(1), Tan XL, Wright DK, Liu SJ, Semple BD, Johnston L, Jones NC, Cook \nAD, Hamilton JA, O'Brien TJ.\n\nAuthor information:\n(1)1 Department of Medicine (The Royal Melbourne Hospital), Melbourne Brain \nCentre, The University of Melbourne , Parkville, Victoria, Australia .\n\nTraumatic brain injury (TBI) is an international health concern with a complex \npathogenesis resulting in major long-term neurological, neurocognitive, and \nneuropsychiatric outcomes. Although neuroinflammation has been identified as an \nimportant pathophysiological process resulting from TBI, the function of \nspecific inflammatory mediators in the aftermath of TBI remains poorly \nunderstood. Granulocyte-macrophage colony-stimulating factor (GM-CSF) is an \ninflammatory cytokine that has been reported to have neuroprotective effects in \nvarious animal models of neurodegenerative disease that share pathological \nsimilarities with TBI. The importance of GM-CSF in TBI has yet to be studied, \nhowever. We examined the role of GM-CSF in TBI by comparing the effects of a \nlateral fluid percussion (LFP) injury or sham injury in GM-CSF gene deficient \n(GM-CSF(-/-)) versus wild-type (WT) mice. After a 3-month recovery interval, \nmice were assessed using neuroimaging and behavioral outcomes. All mice given a \nLFP injury displayed significant brain atrophy and behavioral impairments \ncompared with those given sham-injuries; however, this was significantly worse \nin the GM-CSF(-/-) mice compared with the WT mice. GM-CSF(-/-) mice given LFP \ninjury also had reduced astrogliosis compared with their WT counterparts. These \nnovel findings indicate that the inflammatory mediator, GM-CSF, may have \nsignificant protective properties in the chronic sequelae of experimental TBI \nand suggest that further research investigating GM-CSF and its potential \nbenefits in the injured brain is warranted.\n\nDOI: 10.1089/neu.2013.3106\nPMCID: PMC4012635\nPMID: 24392832 [Indexed for MEDLINE]",
+  "year": 2014,
+  "lang": "en",
+  "type": "article",
+  "venue": "Journal of Neurotrauma",
+  "topic": "Traumatic Brain Injury and Neurovascular Disturbances",
+  "field": "Medicine"
+ },
+ {
+  "id": "W2907854555",
+  "title": "Drive-By Education: The Role of Vocational Courses in the Migration Projects of Foreign Nurses in Canada",
+  "abstract": "",
+  "year": 2019,
+  "lang": "en",
+  "type": "article",
+  "venue": "Journal of International Migration and Integration / Revue de l integration et de la migration internationale",
+  "topic": "Global Health Workforce Issues",
+  "field": "Health Professions"
+ },
+ {
+  "id": "W2063159095",
+  "title": "Rapid Expansion of Human Hematopoietic Stem Cells by Automated Control of Inhibitory Feedback Signaling",
+  "abstract": "1. Cell Stem Cell. 2012 Feb 3;10(2):218-29. doi: 10.1016/j.stem.2012.01.003.\n\nRapid expansion of human hematopoietic stem cells by automated control of \ninhibitory feedback signaling.\n\nCsaszar E(1), Kirouac DC, Yu M, Wang W, Qiao W, Cooke MP, Boitano AE, Ito C, \nZandstra PW.\n\nAuthor information:\n(1)Institute for Biomaterials and Biomedical Engineering, University of Toronto, \nToronto, ON M5S 3E1, Canada.\n\nComment in\n    Cell Stem Cell. 2012 Feb 3;10(2):113-4. doi: 10.1016/j.stem.2012.01.012.\n    Regen Med. 2012 May;7(3):275-7. doi: 10.2217/rme.12.24.\n\nClinical hematopoietic transplantation outcomes are strongly correlated with the \nnumbers of cells infused. Anticipated novel therapeutic implementations of \nhematopoietic stem cells (HSCs) and their derivatives further increase interest \nin strategies to expand HSCs ex vivo. A fundamental limitation in all HSC-driven \nculture systems is the rapid generation of differentiating cells and their \nsecreted inhibitory feedback signals. Herein we describe an integrated \ncomputational and experimental strategy that enables a tunable reduction in the \nglobal levels and impact of paracrine signaling factors in an automated \nclosed-system process by employing a controlled fed-batch media dilution \napproach. Application of this system to human cord blood cells yielded a rapid \n(12-day) 11-fold increase of HSCs with self-renewing, multilineage repopulating \nability. These results highlight the marked improvements that control of \nfeedback signaling can offer primary stem cell culture and demonstrate a \nclinically relevant rapid and relatively low culture volume strategy for ex vivo \nHSC expansion.\n\nCopyright © 2012 Elsevier Inc. All rights reserved.\n\nDOI: 10.1016/j.stem.2012.01.003\nPMID: 22305571 [Indexed for MEDLINE]",
+  "year": 2012,
+  "lang": "en",
+  "type": "article",
+  "venue": "Cell stem cell",
+  "topic": "Pluripotent Stem Cells Research",
+  "field": "Biochemistry, Genetics and Molecular Biology"
+ },
+ {
+  "id": "W4406585127",
+  "title": "10.1016/s0967-0653(98)85068-0",
+  "abstract": "",
+  "year": 2000,
+  "lang": "en",
+  "type": "article",
+  "venue": "Time to knit",
+  "topic": "Algal biology and biofuel production",
+  "field": "Energy"
+ },
+ {
+  "id": "W7026810370",
+  "title": "Canadian Journal of University Continuing Education",
+  "abstract": "",
+  "year": 2016,
+  "lang": "en",
+  "type": "article",
+  "venue": "JINR Document Server (Joint Institute for Nuclear Research)",
+  "topic": "Adult and Continuing Education Topics",
+  "field": "Social Sciences"
+ },
+ {
+  "id": "W7055924179",
+  "title": "Effects of Nutrients, Photoinhibition &amp; Photoacclimation on Photosystem II Function of Freshwater Phytoplankton Communities",
+  "abstract": "",
+  "year": 2011,
+  "lang": "en",
+  "type": "dissertation",
+  "venue": "UWSpace (University of Waterloo)",
+  "topic": "Particle accelerators and beam dynamics",
+  "field": "Engineering"
+ },
+ {
+  "id": "W3111280279",
+  "title": "El impacto de los servicios de publicidad que brindan los influencers en la determinación del impuesto a la renta de las empresas del sector Retail, Lima, 2019",
+  "abstract": "El presente trabajo de investigación tiene el propósito de evaluar y cuantificar el impacto de los servicios de publicidad que brindan los influencers, a través de redes sociales, en la determinación del impuesto a la renta de las empresas del sector Retail que contratan sus servicios. Esta investigación se realiza debido a la presencia y el alcance que tienen actualmente las redes sociales en el público objetivo, y a la posición, cada vez más frecuente, que vienen adquiriendo las empresas Retail en contratar este tipo de servicios para su publicidad, a su vez que la inversión que se realiza con este propósito es, y tiende a seguir siendo, material. Las empresas objeto de este estudio son las del sector Retail, específicamente las principales empresas que contratan influencers para servicios de publicidad a través de sus redes sociales. Se tomó como premisa relevante, la existencia de lineamientos tributarios que rigen las deducciones aplicables sobre gastos realizados por conceptos de publicidad, los cuales deben ser cumplidos por las empresas en la adquisición de estos servicios brindados por las personas mencionadas anteriormente. Otro aspecto importante considerado es el hecho de que un tratamiento incorrecto realizado por las empresas en cuanto a servicios de publicidad a través de redes sociales puede generar distorsión en el registro y cálculo de los movimientos contables, y con ello, el reparo tributario. Para validar las hipótesis planteadas, se hizo uso de instrumentos cualitativos y cuantitativos. Por un lado, se realizó una entrevista a profundidad a expertos en tributación: el primero es miembro de la firma Ernst &amp; Young (EY) y el segundo forma parte del Grupo Elektra Perú; por otro lado, se realizaron encuestas a las principales empresas del sector retail que contratan influencers para servicios de publicidad. Además, se presenta un caso práctico en el que se plantean tres (3) escenarios, en los cuales se realizan simulaciones de contrataciones de influencers para servicios publicitarios en dos campañas anuales, esto permitirá evaluar el impacto obtenido en el cálculo del impuesto a la renta",
+  "year": 2020,
+  "lang": "es",
+  "type": "dissertation",
+  "venue": "Universidad Peruana de Ciencias Aplicadas (UPC)",
+  "topic": "Business, Innovation, and Economy",
+  "field": "Economics, Econometrics and Finance"
+ },
+ {
+  "id": "W4390670030",
+  "title": "An Empirical Mode Decomposition-Based Hybrid Model for Sub-Hourly Load Forecasting",
+  "abstract": "Sub-hourly load forecasting can provide accurate short-term load forecasts, which is important for ensuring a secure operation and minimizing operating costs. Decomposition algorithms are suitable for extracting sub-series and improving forecasts in the context of short-term load forecasting. However, some existing algorithms like singular spectrum analysis (SSA) struggle to decompose high sampling frequencies and rapidly changing sub-hourly load series due to inherent flaws. Considering this, we propose an empirical mode decomposition-based hybrid model, named EMDHM. The decomposition part of this novel model first detrends the linear and periodic components from the original series. The remaining detrended long-range correlation series is simplified using empirical mode decomposition (EMD), generating intrinsic mode functions (IMFs). Fluctuation analysis is employed to identify high-frequency information, which divide IMFs into two types of long-range series. In the forecasting part, linear and periodic components are predicted by linear and trigonometric functions, while two long-range components are fitted by long short-term memory (LSTM) for prediction. Four forecasting series are ensembled to find the final result of EMDHM. In experiments, the model’s framework we propose is highly suitable for handling sub-hourly load datasets. The MAE, RMSE, MARNE, and R2 of EMDHM have improved by 20.1%, 26.8%, 22.1%, and 5.4% compared to single LSTM, respectively. Furthermore, EMDHM can handle both short- and long-sequence, sub-hourly load forecasting tasks. Its R2 only decreases by 4.7% when the prediction length varies from 48 to 720, which is significantly lower than other models.",
+  "year": 2024,
+  "lang": "en",
+  "type": "article",
+  "venue": "Energies",
+  "topic": "Energy Load and Power Forecasting",
+  "field": "Engineering"
+ },
+ {
+  "id": "W4385827334",
+  "title": "Predicting wideband real-ear-to-coupler differences in children using wideband acoustic immittance",
+  "abstract": "Individual differences in ear-canal acoustics introduce variability into hearing aid output that can affect speech audibility. Measuring ear-canal acoustics in young children can be challenging, and relying on normative real-ear-to-coupler difference (RECD) transforms can lead to large fitting errors. Acoustic immittance measures characterize the impedance of the ear and are more easily measured than RECD. Using 226 Hz tympanometry to predict the RECD is more accurate than using age-based average RECD values. The current study sought to determine whether wideband acoustic immittance measurements could improve predictions of wideband real-ear-to-coupler difference (wRECD). 150 children ages 2–10 years with intact tympanic membranes underwent wRECD and wideband acoustic immittance measures in each ear. Three models were constructed to predict each child's measured wRECD: the age-based average wRECD, 226 Hz admittance wRECD, and wideband absorbance wRECD. The average age-based wRECD model predicted the child's measured wRECD within 3 dB in 62% of cases, but both the 226 Hz admittance and wideband absorbance wRECD were within 3 dB in 90% of cases. Using individual 226 Hz or wideband absorbance to predict wRECD improved the accuracy and precision of transforms used for pediatric hearing aid fitting.",
+  "year": 2023,
+  "lang": "en",
+  "type": "article",
+  "venue": "The Journal of the Acoustical Society of America",
+  "topic": "Hearing Loss and Rehabilitation",
+  "field": "Neuroscience"
+ },
+ {
+  "id": "W3096391099",
+  "title": "Phenotypic and genetic correlations of beef replacement heifer feeding behaviour, feed intake and feed efficiency with cow performance and lifetime productivity",
+  "abstract": "Abstract Objectives were to quantify the phenotypic ( r p ) and genetic ( r g ) correlations between early‐life feeding behaviours, dry matter intake, and feed efficiency and measures of cow performance and lifetime productivity traits. Traits were measured on 1,145 crossbred replacement beef heifers and then on cows over parities one to four. Feeding event duration (FD) was phenotypically correlated with cow prebreeding body weight (PBWT; r p 0.29–0.45), cow prebreeding back fat thickness (PBBF; r p 0.35–0.49), progeny weaning weight (WW; r p 0.09–0.31) and progeny birthweight (BW; r p −0.06 to 0.17). Feeding event frequency (FF) was phenotypically correlated with PBBF ( r p 0.16–0.30). Dry matter intake (DMI) was phenotypically correlated with PBWT ( r p 0.16–0.20) and PBBF ( r p −0.22 to −0.05). Feeding event duration was genetically correlated with PBWT ( r g 0.38–0.41). Feeding event frequency was genetically correlated with PBWT ( r g −0.43 to −0.39). Dry matter intake was genetically correlated with PBWT ( r g −0.27 to 0.14). Days in herd (DIH) was phenotypically correlated with FD and DMI ( r p = 0.12, 0.20, respectively). Lifetime productivity was phenotypically correlated with FD and FF ( r g = 0.25, 0.22, respectively). Calving interval was phenotypically correlated with FD and FF ( r p = −0.12, −0.14, respectively) and genetically correlated with FF ( r g = −0.41). Due to moderate positive correlations with cow weight, caution would be required in selection to prevent an increase in mature cow size. Use of FF, FD, DMI and a measure of feed efficiency such as residual feed intake adjusted for back fat (RFI FAT ) in a balanced selection index is recommended.",
+  "year": 2020,
+  "lang": "en",
+  "type": "article",
+  "venue": "Journal of Animal Breeding and Genetics",
+  "topic": "Genetic and phenotypic traits in livestock",
+  "field": "Biochemistry, Genetics and Molecular Biology"
+ },
+ {
+  "id": "W6967785567",
+  "title": "Ul 1449 pdf",
+  "abstract": "",
+  "year": 2024,
+  "lang": "en",
+  "type": "other",
+  "venue": "Zenodo (CERN European Organization for Nuclear Research)",
+  "topic": null,
+  "field": null
+ },
+ {
+  "id": "W2005585762",
+  "title": "Down-Regulation of Aquaporin 1 in Rats With Experimental Acute Necrotizing Pancreatitis",
+  "abstract": "1. Pancreas. 2012 Oct;41(7):1092-8. doi: 10.1097/MPA.0b013e318249938e.\n\nDown-regulation of aquaporin 1 in rats with experimental acute necrotizing \npancreatitis.\n\nFeng DX(1), Peng W, Chen YF, Chen T, Tian JY, Si HR, Cai J, Rao Y, Han F, Zhao \nR.\n\nAuthor information:\n(1)Department of General Surgery, Putuo Hospital, Shanghai University of \nTraditional Chinese Medicine, Shanghai, China.\n\nOBJECTIVES: The objectives of this study were to investigate the expression of \naquaporin 1 in capillary endothelial cells of rats with experimental acute \nnecrotizing pancreatitis (ANP) and to explore its pathogenic role in capillary \nleak.\nMETHODS: Sixty-four male Sprague-Dawley rats were randomly divided into control \n(n = 32) and ANP groups (n = 32). Eight rats in each group were killed at 3, 6, \n12, and 18 hours after induction of experimental models. Quantity of ascites and \nlevels of serum amylases were measured. Capillary permeability in pancreas, \nlung, and intestinal tissue was detected by Evans blue extravasation method. \nAquaporin 1 expression in pancreas, lung, and intestinal tissue was detected by \nreal-time polymerase chain reaction, immunohistochemical staining, and Western \nblot.\nRESULTS: Serum amylase level was significantly higher in ANP group than in \ncontrols (P < 0.05). Evans blue concentration in tissues in the ANP group was \nsignificantly higher than that in controls (P < 0.05). Aquaporin 1 mRNA and \nprotein expressions in tissues were significantly less in the ANP group than in \nthe controls (P < 0.05).\nCONCLUSIONS: The expression of aquaporin 1 was down-regulated in the pancreas, \nlung, and intestinal tissue of ANP rats, which could play an important role in \nthe pathogenesis of capillary leak syndrome.\n\nDOI: 10.1097/MPA.0b013e318249938e\nPMID: 22481286 [Indexed for MEDLINE]",
+  "year": 2012,
+  "lang": "en",
+  "type": "article",
+  "venue": "Pancreas",
+  "topic": "Pancreatitis Pathology and Treatment",
+  "field": "Medicine"
+ },
+ {
+  "id": "W4252766536",
+  "title": "Contributors",
+  "abstract": "",
+  "year": 2020,
+  "lang": "en",
+  "type": "book-chapter",
+  "venue": "Stanford University Press eBooks",
+  "topic": null,
+  "field": null
+ },
+ {
+  "id": "W4377835016",
+  "title": "Modulatory Effects of Noradrenergic and Serotonergic Signaling Pathway on Neurovascular Coupling",
+  "abstract": "",
+  "year": 2023,
+  "lang": "en",
+  "type": "preprint",
+  "venue": "SSRN Electronic Journal",
+  "topic": "Traumatic Brain Injury and Neurovascular Disturbances",
+  "field": "Medicine"
+ }
+]
