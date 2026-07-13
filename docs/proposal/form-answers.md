@@ -98,7 +98,7 @@ guard exists because an earlier draft claimed the topic route "covers a third of
 and nothing caught it.
 
 **Every error this project has made is recorded in `DEVIATIONS.md`, written before submission rather than after.**
-There are ten entries. They include a retracted coverage figure; a claim of *differential* bias against STS and LIS
+There are twenty-six entries. They include a retracted coverage figure; a claim of *differential* bias against STS and LIS
 that rested on four records and a non-significant interaction; a hard-coded sentence about francophone coverage that
 turned out to be backwards; a cost model that overstated the screening bill fivefold and thereby talked me into a
 design I did not need; an audit design that could not measure what an audit exists to measure; and, worst,

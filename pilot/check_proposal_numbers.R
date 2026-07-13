@@ -27,12 +27,28 @@ FINDINGS <- "pilot/results/findings.json"
 # Numbers that are legitimately NOT pilot outputs. Each needs a reason; an
 # unexplained entry here is just the original bug with extra steps.
 ALLOWED <- c(
-  # The definition of metaresearch is now the FIELD'S, not the applicant's, and a
-  # citation is the whole point: a reviewer checks the instrument against a published
-  # paper rather than against my judgment. These two are that citation.
-  "2018"    = "citation year: Ioannidis JPA, PLoS Biol 2018;16(3):e2005468 (the definition T1 is anchored to)",
-  "2005468" = "article number of that citation",
-  "16"      = "volume of that citation",
+  # EVERY CATEGORY IS NOW DEFINED FROM ITS OWN LITERATURE, AND CITED. These numbers are
+  # those citations. A citation is the whole point: a reviewer checks the instrument
+  # against a published paper rather than against my judgment (DEVIATIONS.md D26). The
+  # source PDFs are in docs/reference/definitions/ and every quoted definition was read
+  # from them, not recalled.
+  "2018"    = "Ioannidis JPA. PLoS Biol. 2018;16(3):e2005468",
+  "2005468" = "article number, Ioannidis 2018",
+  "16"      = "volume, Ioannidis 2018",
+  "2015"    = "Ioannidis JPA, Fanelli D, Dunne DD, Goodman SN. PLoS Biol. 2015;13(10):e1002264 (the definition of metaresearch, verbatim)",
+  "1002264" = "article number, Ioannidis 2015",
+  "13"      = "volume, Ioannidis 2015",
+  "175"     = "Puljak L et al. J Comp Eff Res 2020: 175 published sources analyzed; definitions varied, no consensus",
+  "2020"    = "Puljak et al., year",
+  "2023"    = "Kataoka Y et al. J Clin Epidemiol 2023;154:219-221; and Stevens ER, Laynor G. J Med Libr Assoc 2023",
+  "154"     = "volume, Kataoka et al. 2023",
+  "219"     = "first page, Kataoka et al. 2023",
+  "2017"    = "Murad MH, Wang Z. Evid Based Med 2017;22(4):139-142 (the narrow meta-epidemiology definition)",
+  # An EXTERNAL, human-indexed reference standard for study design, which the
+  # metaresearch boundary does not have. Reproduce with one request:
+  #   https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=%22Randomized+Controlled+Trial%22%5Bpt%5D+AND+Canada%5Bad%5D&rettype=count
+  "31442"   = "MEDLINE: Canadian works tagged 'Randomized Controlled Trial'[pt] (NLM human indexers), queried 2026-07-13",
+  "10000"   = "planned LLM training/validation set for the study-design classifier (the LLM never labels 4.3M; it labels 10k and a classifier does the rest)",
   "44.5"  = "prior work: linkage sensitivity (nihrtrials)",
   "94.3"  = "prior work: linkage PPV (nihrtrials)",
   "2000"  = "frame start year / audit codings (2,000)",

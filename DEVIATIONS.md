@@ -845,3 +845,55 @@ So: **the five domains are T1's spine. T2 keeps the traditions the call names.**
 Every guard in this repo was built to catch a claim that could not be checked. The **root definition** was not checkable, for the entire life of the project, and no guard could have caught that because a guard can only check a document against another document. **It took a human asking "where does this come from?"**
 
 That is the argument for the human audit, arriving from an unexpected direction and pointed at me.
+
+---
+
+## D27. I sold a measurement of model disagreement as a measurement of the field's disagreement.
+
+**Date found:** 2026-07-13, by an adversarial review I asked for, one day before submission.
+
+Ahmad supplied the literature that grounds the definition of metaresearch. Reading it, I found three papers that appeared to say, in print, what I thought were *our* findings:
+
+- **Puljak et al. 2020**: 175 published sources, *"definitions of meta-epidemiological studies varied"*, *"research community would benefit from consensus"*.
+- **Kataoka et al. 2023**: a published dispute with Puljak, naming *"the currently confusing nomenclatures"*.
+- **Stevens & Laynor 2023**: meta-research *"presents a significant challenge for identifying published meta-research studies"*; **no MeSH heading** exists for it.
+
+I was delighted, and I wrote this into the proposal:
+
+> **"This is not an artifact of my rubric. It is the field's condition, and the field says so in print."**
+> **"This project is the first to quantify what that costs."**
+
+**Both sentences are overclaims, and the second is unverifiable.** The reviewer put it exactly right:
+
+> *"Puljak/Kataoka/Stevens establish **human/literature** definitional mess. Your pilot measures **three LLMs disagreeing under one rubric**, with a fourth LLM naming seams. Those are not the same estimand."*
+
+**They are not.** A reviewer can grant the literature entirely and still say: *you quantified model disagreement, not the field's cost of non-consensus.* And they would be right. The bridge from "three models split" to "the field's boundary costs X" runs through **human coders**, and the human coders do not exist yet. That is the whole reason the audit is the study.
+
+### The pattern, again, and it is the one this project is about
+
+The literature did not change my evidence. It changed how good my evidence *felt*, and I promoted it. **A finding that arrives as corroboration is the most dangerous kind**, because it produces no friction: it agrees with you.
+
+Every deviation in this file has that shape. **The errors that survive are the ones that flatter you**, and an external paper appearing to confirm your result is the most flattering thing that can happen to it.
+
+### What the same review also caught, all of it mine
+
+| what I wrote | why it is wrong |
+|---|---|
+| *"Every category is defined from its own literature, and cited."* | **False on the page.** Five categories were named but unsourced. A 30-second catch, in a proposal about research integrity. |
+| *"This is the answer to the question the call asks."* | The call asks for a **dataset that captures the landscape**. I answered *how to build criteria for a contested boundary*. Related; not the same. |
+| *"Unbiased however noisy the stratifier is."* | True **only while every record keeps a nonzero selection probability**, and **my own design had π = 0 for 12.9% of the frame** (D22). I stated unconditionally the exact guarantee my own worst bug had destroyed. |
+| *"...matched its own teacher at Jaccard 0.17 **because** those labels are definitionally contested."* | A **causal claim I never tested.** Equally consistent with weak features, short text, and class rarity. |
+| *"the residual 83 works, the field's contested core"* | Contested **by three models under one rubric**. Not by the field. |
+| `form-answers.md`: *"There are ten entries."* | `DEVIATIONS.md` had **26**. **Stale honesty is not honesty.** |
+
+### The fix
+
+The claim ladder is now stated in the proposal as three rungs, and they are not welded:
+
+1. **The literature** says the field lacks a consensus definition (human claim, cited).
+2. **My pilot** says three models cut one rubric differently (machine claim, measured).
+3. **Only the human audit** closes the gap between them, and it has not run.
+
+The proposal now says exactly that: *"Those are claims about humans. Mine are claims about models. I do not conflate them."* The priority claim is deleted. The estimator guarantee is conditioned on the assumption my own design violated. The causal story for Jaccard 0.17 is downgraded to one hypothesis among several the pilot cannot separate.
+
+The proposal was also restructured on the reviewer's advice: **lead with the deliverable, box the failures.** Opening a grant with *"it broke repeatedly"* trains a reviewer to score you as high-risk on **feasibility, which is judging criterion #1**. Courageous content, bad allocation. It now opens with what exists on 27 October.
