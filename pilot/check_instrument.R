@@ -63,7 +63,16 @@ RUBRIC <- Filter(file.exists, c("docs/protocol/rubric-v3.md",
                                 "docs/protocol/rubric-v2.md",
                                 "docs/protocol/rubric.md"))[1]
 if (is.na(RUBRIC)) cli::cli_abort("no rubric found in docs/protocol/")
-SCHEMA  <- "docs/protocol/screening-schema.json"
+
+# THE SCHEMA IS VERSIONED THE SAME WAY, AND FOR THE SAME REASON. One schema
+# serving two rubric generations is itself a D20: v3 retired `tier`, and a
+# contract that still REQUIRES a retired field forces every v3 run to emit a
+# vocabulary its own rubric forbids. The legacy screening-schema.json exists
+# only so v1/v2 label files stay readable; the CURRENT pair is what gets
+# checked, newest first, resolved by the same one-string-per-version loop.
+SCHEMA <- Filter(file.exists, c("docs/protocol/screening-schema-v3.json",
+                                "docs/protocol/screening-schema.json"))[1]
+if (is.na(SCHEMA)) cli::cli_abort("no screening schema found in docs/protocol/")
 DEFECTS <- "docs/protocol/known-defects.json"
 
 known <- if (file.exists(DEFECTS)) fromJSON(DEFECTS, simplifyVector = FALSE)$defects else list()
@@ -104,13 +113,33 @@ if (is.na(rubric_line)) {
 # --- tier: the one field that WAS validated, checked anyway ----------------------
 # It has always agreed. That is exactly why it gets a test: the fields nobody
 # worries about are the ones that drift without anybody noticing.
-schema_tiers <- fromJSON(SCHEMA)$items$properties$tier$enum
+#
+# Under the v3 pair the field is RETIRED: the check inverts. A retired field
+# present in the current contract, or still REQUIRED by it, is the defect GPT-5.6
+# found in the v3.0 state (the schema required `tier`, and `categories`, the
+# field v3 actually runs on, was optional): every v3 run would be forced to emit
+# a vocabulary its own rubric forbids.
+schema_obj   <- fromJSON(SCHEMA)
+schema_tiers <- schema_obj$items$properties$tier$enum
+schema_req   <- schema_obj$items$required
 rubric_txt   <- paste(readLines(RUBRIC, warn = FALSE), collapse = "\n")
-missing_tier <- schema_tiers[!vapply(schema_tiers, \(t) grepl(t, rubric_txt, fixed = TRUE), logical(1))]
-if (length(missing_tier)) {
-  problems <- c(problems, glue("the schema allows tier{?s} {paste(missing_tier, collapse=', ')}, which the rubric never defines"))
-} else {
-  cli_alert_success("`tier`: every value the schema allows is defined in the rubric ({paste(schema_tiers, collapse=', ')})")
+tier_retired <- grepl("`tier` is RETIRED", rubric_txt, fixed = TRUE)
+
+if (tier_retired) {
+  if (!is.null(schema_tiers)) {
+    problems <- c(problems, "the rubric RETIRES `tier` and the current schema still contains the field; retired vocabularies live in the legacy schema only")
+  } else if (!"categories" %in% schema_req) {
+    problems <- c(problems, "`tier` is retired, so `categories` is the field a v3 run stands on, and the schema does not REQUIRE it")
+  } else {
+    cli_alert_success("`tier`: retired in the rubric, absent from the current schema, and `categories` is required in its place")
+  }
+} else if (!is.null(schema_tiers)) {
+  missing_tier <- schema_tiers[!vapply(schema_tiers, \(t) grepl(t, rubric_txt, fixed = TRUE), logical(1))]
+  if (length(missing_tier)) {
+    problems <- c(problems, glue("the schema allows tier{?s} {paste(missing_tier, collapse=', ')}, which the rubric never defines"))
+  } else {
+    cli_alert_success("`tier`: every value the schema allows is defined in the rubric ({paste(schema_tiers, collapse=', ')})")
+  }
 }
 
 # --- confidence -----------------------------------------------------------------
@@ -158,6 +187,24 @@ if (length(dom)) {
   }
 }
 
+# --- study_design: new in v3.1, checked from the moment it exists ----------------
+#
+# v3.0 said study design is "coded for every work" and never listed the values:
+# D20's exact shape, a field every screener codes and no two code alike. v3.1
+# added the vocabulary and this check on the same day.
+des <- fromJSON(SCHEMA)$items$properties$study_design$enum
+des <- des[!is.na(des)]
+if (length(des)) {
+  in_rubric <- vapply(des, \(d) grepl(paste0("`", d, "`"), rubric_txt, fixed = TRUE), logical(1))
+  if (!all(in_rubric)) {
+    problems <- c(problems, paste0(
+      "the schema allows study_design value(s) '", paste(des[!in_rubric], collapse = ", "),
+      "' that the rubric never defines."))
+  } else {
+    cli_alert_success("`study_design`: all {length(des)} values the schema allows are defined in the rubric")
+  }
+}
+
 # --- confidence: the RULE, not just the enum ------------------------------------
 #
 # The enum matched all along. The RULE did not, and the rule is what a screener
@@ -189,14 +236,17 @@ if (schema_says_always && rubric_says_unless) {
   cli_alert_success("`confidence`: the rubric's rule and the schema's gloss of it agree")
 }
 
-# --- does the rubric demand a TIER the schema cannot express? --------------------
+# --- does the rubric demand a value the schema cannot express? -------------------
 # The reverse direction of the tier check above, and the one that was missing. The
 # old check asked "does the rubric define every tier the schema allows?" and never
 # asked "can the schema express every tier the rubric demands?" v2 demands
-# `insufficient_payload`; the schema cannot say it.
+# `insufficient_payload`; the v1 schema cannot say it. Under v3 the value lives in
+# the `categories` enum, so expressibility is checked against EVERYTHING the
+# current schema can say, whichever field says it.
+expressible <- unique(c(schema_tiers, schema_obj$items$properties$categories$items$enum))
 demanded <- regmatches(rubric_txt, gregexpr("`(insufficient_payload)`", rubric_txt))[[1]]
 demanded <- unique(gsub("`", "", demanded))
-undeliverable <- setdiff(demanded, schema_tiers)
+undeliverable <- setdiff(demanded, expressible)
 if (length(undeliverable)) {
   if ("insufficient-payload-not-in-schema" %in% quarantined) {
     d <- known[[which(quarantined == "insufficient-payload-not-in-schema")]]

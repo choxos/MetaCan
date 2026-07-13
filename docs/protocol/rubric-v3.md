@@ -1,6 +1,6 @@
-# MétaCan screening rubric (v3.0)
+# MétaCan screening rubric (v3.1)
 
-**Status: LOCKED, 2026-07-13.** Supersedes v2.2.
+**Status: LOCKED, 2026-07-13.** Supersedes v2.2. No screening ran under v3.0, which lived for hours: an adversarial review found that its Murad quotation inserted the word "treatment" into a sentence this document calls verbatim (D29). v3.1 corrects that quotation from the PDF, fixes the Kataoka page range, aligns the funder clause with the protocol, corrects two glosses against their sources, and adds the study-design vocabulary that v3.0 demanded but never listed. Since D29, `pilot/check_quotes.R` fails the build if any quotation marked verbatim is not a substring of its cited PDF.
 
 **No number produced so far was made under v3.** The pilot ran under v1.0; the 179-work re-screen under v2.0. Both instruments are kept byte for byte, so every figure stays attributable to the text that produced it. v3 is the instrument the **full screen** runs under, and the **v2-to-v3 difference is reported as a finding**.
 
@@ -25,7 +25,7 @@ It was also a value judgment I had no standing to make. Calling science and tech
 - **Puljak L, Lovric Makaric Z, Buljan I, Pieper D.** *What is a meta-epidemiological study? Analysis of published literature indicated heterogeneous study designs and definitions.* J Comp Eff Res. 2020. doi:10.2217/cer-2019-0201
   > Analysed **175 information sources**. *"Definitions of meta-epidemiological studies varied and some studies used the term meta-epidemiological study to describe methodological research-on-research studies."* Conclusion: *"Research community would benefit from consensus about definition of meta-epidemiological study."*
 
-- **Kataoka Y, et al.** J Clin Epidemiol. 2023;154:219-221.
+- **Kataoka Y, et al.** J Clin Epidemiol. 2023;154:219-220.
   > A **published dispute** with Puljak, opening by naming *"the currently confusing nomenclatures around 'meta-epidemiology' and related terms such as 'meta-research' and 'research-on-research'."*
 
 - **Stevens ER, Laynor G.** *Recognizing the value of meta-research and making it easier to find.* J Med Libr Assoc. 2023;111(4). doi:10.5195/jmla.2023.1758
@@ -37,7 +37,7 @@ It was also a value judgment I had no standing to make. Calling science and tech
 
 ## The categories
 
-A work may carry **more than one**. **Categories are not ranked.** `metaresearch` is the canonical corpus for the primary estimand; the others are **mapped, released, and reported separately**, which is what the call's inclusiveness criterion asks for.
+A work may carry **more than one**. **Categories are not ranked and none is primary: the released landscape is the union of the defined categories, with every overlap reported.** The call's primary estimand is reported over `metaresearch` because that is the field the call names; that is a **reporting choice, not a rank**, and each of the other traditions gets the same per-category estimate.
 
 ### 1. `metaresearch`
 
@@ -50,7 +50,7 @@ Every `metaresearch` record carries a **`domain`**, taken verbatim from those fi
 
 | `domain` | Ioannidis's gloss | operationally |
 |---|---|---|
-| `methods` | *how to **do** science* | design, conduct, analysis, bias, statistical practice, evidence-synthesis methodology |
+| `methods` | *how to **do** science* | design, conduct, analysis, bias, statistical practice, evidence-synthesis methodology; Ioannidis's own description of this area ends *"research integrity and ethics"* |
 | `reporting` | *how to **report** science* | reporting standards and completeness |
 | `reproducibility` | *how to **verify** science* | replication, data and code sharing, transparency |
 | `evaluation` | *how to **correct** science* | peer review and editorial process, research assessment, metrics |
@@ -63,9 +63,11 @@ Every `metaresearch` record carries a **`domain`**, taken verbatim from those fi
 There is **no consensus definition** (Puljak 2020, above). **This rubric does not invent one.** It codes **both published definitions** and **flags where they disagree**, because the dispute is live, it is between named researchers in peer-reviewed journals, and hiding it inside a single label would destroy the only evidence of it.
 
 - **`metaepi_narrow`** — Murad MH, Wang Z. *Guidelines for reporting meta-epidemiological methodology research.* Evid Based Med. 2017;22(4):139-142. doi:10.1136/ebmed-2017-110713
-  > *"Meta-epidemiological studies adopt a systematic review or meta-analysis approach to examine the impact of certain characteristics of clinical studies on the observed treatment effect."*
+  > *"Meta-epidemiological studies adopt a systematic review or meta-analysis approach to examine the impact of certain characteristics of clinical studies on the observed effect and provide empirical evidence for hypothesised associations."*
+  >
+  > *(v3.0 quoted this sentence as 'the observed **treatment** effect'. The word is not in the paper; it narrowed Murad's definition while claiming his authority for the narrowing, and it survived a LOCK. D29.)*
 
-- **`metaepi_broad`** — Kataoka Y, et al. J Clin Epidemiol. 2023;154:219-221.
+- **`metaepi_broad`** — Kataoka Y, et al. J Clin Epidemiol. 2023;154:219-220. *(Not 219-221: page 221 is Puljak's reply, which is the other side of the dispute.)*
   > *"The greatest common defining concept of 'meta-epidemiological studies' would be **any studies in which the unit of analysis is a study, not a patient**."*
 
 **Where the two differ, the record is flagged, and the size of that class is reported as a finding.** A published dispute is a boundary to be *measured*, not settled by fiat.
@@ -120,7 +122,7 @@ The second sentence is the reason this category is not a synonym for "open acces
 
 **Operational test:** the object is **research misconduct, questionable research practices, retraction, authorship, or publication ethics**, *as an object of study*. **Fanelli's boundary is adopted and its exclusion is carried:** fabrication, falsification and data cooking are in; **plagiarism and professional misconduct are recorded but marked, because Fanelli's own scope excludes them** and a rubric that silently widened his boundary while citing him would be misquoting its own source.
 
-**This category overlaps `metaresearch` heavily** (Ioannidis's framework covers *verify* and *correct*). **That overlap is expected and allowed**, because v3 is multi-label. It is not a hierarchy.
+**This category overlaps `metaresearch` heavily**: Ioannidis's own description of the *methods* area ends *"research integrity and ethics"*, so integrity research is inside metaresearch by his definition. **That overlap is expected and allowed**, because v3 is multi-label. It is not a hierarchy.
 
 ### `insufficient_payload`
 
@@ -134,8 +136,8 @@ None of the above. **"OUT" now means "in no defined category", not "not near the
 
 ## Canadian linkage
 
-- `CA_AFF` — at least one Canadian institutional affiliation. **Warning, measured:** OpenAlex invents these. `Impact` is not an institution; it is a parse failure with an institution id, attached to a Spanish COVID essay. **At least 17,466** works enter the frame on an institution that does not exist, and that is a **lower bound** (finding 27). A Canadian affiliation is *evidence*, not proof.
-- `CA_FUND` — CIHR, NSERC, SSHRC, or CFI.
+- `CA_AFF` — at least one Canadian institutional affiliation. **Warning, measured:** OpenAlex misassigns these. **At least 17,466** works enter the frame with, as their *only* Canadian institution, one of six suspect assignments: a parse failure that is not an institution at all (`Impact`, attached to a Spanish COVID essay) or a real organization attached to papers it has nothing to do with (`Discovery Air (Canada)` on a Brazilian linguistics paper). That is a **lower bound** from six audited strings (finding 27), and the records are **flagged for audit, not deleted**. A Canadian affiliation is *evidence*, not proof.
+- `CA_FUND` — ≥1 funder whose OpenAlex `country_code` is Canada: an **external criterion, not a curated list**. *(An earlier four-funder list (CIHR, NSERC, SSHRC, CFI) failed twice: three of its four hardcoded IDs pointed at other funders, and even corrected it missed Canada Research Chairs, the Government of Canada, NRC, Mitacs, Genome Canada, and every provincial agency. OpenAlex knows 2,182 Canadian funders; `R/pin_entities.R` pins them.)*
 - **`ABOUT_CA_SYSTEM`** — the Canadian **research system or academy** is a substantive object. *A Canadian institution as setting is not this.*
 - **`ABOUT_CA_TOPIC`** — Canada is a substantive subject, whether or not research is the object.
 
@@ -143,11 +145,28 @@ None of the above. **"OUT" now means "in no defined category", not "not near the
 
 ## Study design
 
-Coded for every work. **Validated against MEDLINE publication types, which are human-indexed by NLM.** Where MEDLINE does not reach (most of the physical sciences, humanities and social sciences), the label ships as a **score, not an assertion**, and is **marked unvalidated**. *The dataset states, per field, which of its own annotations it has earned the right to assert.*
+Coded for every work, from **this vocabulary and no other** (v3.0 said "coded for every work" and never listed the values, which is D20's exact shape: a field every screener codes and no two code alike):
+
+| `study_design` | MEDLINE publication type it is validated against |
+|---|---|
+| `randomized_trial` | Randomized Controlled Trial |
+| `nonrandomized_trial` | Controlled Clinical Trial |
+| `observational` | Observational Study |
+| `systematic_review` | Systematic Review |
+| `meta_analysis` | Meta-Analysis |
+| `case_report` | Case Reports |
+| `qualitative` | *(none; ships as a score, marked unvalidated)* |
+| `simulation_or_modeling` | *(none; ships as a score, marked unvalidated)* |
+| `bench_or_experimental` | *(none; ships as a score, marked unvalidated)* |
+| `theoretical_or_conceptual` | *(none; ships as a score, marked unvalidated)* |
+| `not_applicable` | *(the work is not empirical research: editorials, datasets, software)* |
+| `design_other` | *(none; ships as a score, marked unvalidated)* |
+
+**Validated against MEDLINE publication types.** *(Stated precisely, because v3.0 called them "human-indexed by NLM" and that has not been true since April 2022, when NLM moved to automated indexing with selective human curation. So the validation reports the two eras separately: pre-2022 records are the human-indexed reference; post-2022 records measure agreement with NLM's automated indexer, which is itself a machine.)* Where MEDLINE does not reach (most of the physical sciences, humanities and social sciences), the label ships as a **score, not an assertion**, and is **marked unvalidated**. *The dataset states, per field, which of its own annotations it has earned the right to assert.*
 
 ## Genre
 
-**One vocabulary, defined here, and `screening-schema.json` QUOTES this list rather than paraphrasing it.**
+**One vocabulary, defined here, and `screening-schema-v3.json` QUOTES this list rather than paraphrasing it.**
 
 `empirical` · `review` · `methods` · `commentary` · `editorial` · `protocol` · `dataset` · `software` · `other`
 
@@ -155,7 +174,7 @@ Coded for every work. **Validated against MEDLINE publication types, which are h
 
 ## `tier` is RETIRED
 
-v3 replaces it with `categories`, which is **multi-label**. The values `T1`, `T2`, `T3` and `OUT` remain in the schema **only so that the v1 and v2 label files stay readable**; **no new screening emits them.** `OUT` in v3 means an empty `categories` array: *in no defined category*, not *near the important one*.
+v3 replaces it with `categories`, which is **multi-label**. The values `T1`, `T2`, `T3` and `OUT` remain in the **legacy** `screening-schema.json` **only so that the v1 and v2 label files stay readable**; the v3 contract, `screening-schema-v3.json`, **does not contain the field**, so no new screening can emit them. `OUT` in v3 means an empty `categories` array: *in no defined category*, not *near the important one*.
 
 ## Confidence
 
@@ -167,4 +186,4 @@ v3 replaces it with `categories`, which is **multi-label**. The values `T1`, `T2
 
 ## Sources
 
-Every quotation above was read from a PDF in **`docs/reference/definitions/`**, which is committed. Nothing is cited from memory. `pilot/check_instrument.R` fails the build if this rubric and `screening-schema.json` disagree about any field, in either direction.
+Every quotation above was read from a PDF in **`docs/reference/definitions/`**, which is committed. Nothing is cited from memory, and since D29 that is a checked property, not a promise: `pilot/check_quotes.R` fails the build if any quotation marked verbatim is not a substring of its cited PDF. `pilot/check_instrument.R` fails the build if this rubric and `screening-schema-v3.json` disagree about any field, in either direction.
