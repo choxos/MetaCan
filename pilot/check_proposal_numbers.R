@@ -21,7 +21,7 @@ suppressPackageStartupMessages({
   library(jsonlite); library(dplyr); library(purrr); library(stringr); library(cli)
 })
 
-PROPOSAL <- "proposal/metacan-proposal.md"
+PROPOSAL <- "docs/proposal/metacan-proposal.md"
 FINDINGS <- "pilot/results/findings.json"
 
 # Numbers that are legitimately NOT pilot outputs. Each needs a reason; an

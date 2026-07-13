@@ -13,14 +13,14 @@ DIR     <- "pilot/screening/frame1k"
 PROMPTS <- file.path(DIR, "prompts")
 dir.create(PROMPTS, showWarnings = FALSE)
 
-rubric <- paste(readLines("protocol/rubric.md", warn = FALSE), collapse = "\n")
+rubric <- paste(readLines("docs/protocol/rubric.md", warn = FALSE), collapse = "\n")
 
 instruction <- '
 --------------------------------------------------------------------------------
 You are screening works for MetaCan, a map of Canadian metaresearch.
 
 Apply the rubric above to every record in the JSON array below. Return a JSON
-array with one object per work, conforming to protocol/screening-schema.json:
+array with one object per work, conforming to docs/protocol/screening-schema.json:
 
   {"id": "W...", "tier": "T1|T2|T3|OUT", "genre": "...", "about_ca": true|false,
    "confidence": "high|medium|low", "reason": "one sentence"}

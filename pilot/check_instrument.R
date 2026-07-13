@@ -4,8 +4,8 @@
 # ------------------------------------------------------------------------------
 # WHY THIS EXISTS
 # ------------------------------------------------------------------------------
-# `protocol/rubric.md` tells a screener what the values of `genre` are.
-# `protocol/screening-schema.json` tells the same screener what the values of
+# `docs/protocol/rubric.md` tells a screener what the values of `genre` are.
+# `docs/protocol/screening-schema.json` tells the same screener what the values of
 # `genre` are. They named DIFFERENT SETS, overlapping on two values out of eleven,
 # and both documents went into every prompt.
 #
@@ -32,7 +32,7 @@
 # the failure mode this project is built to refuse.
 #
 # So a defect found after the lock has two honest destinations and no others:
-# `protocol/known-defects.json`, which names it, measures it, and says which
+# `docs/protocol/known-defects.json`, which names it, measures it, and says which
 # version pays it off; and the next version. A quarantined defect is a DEBT, not a
 # dismissal, and the entry is deleted when v2 locks. Anything NOT in that file
 # fails the build.
@@ -51,9 +51,9 @@ suppressPackageStartupMessages({ library(jsonlite); library(cli); library(glue) 
 #
 # WRITING A RULE DOES NOT ENFORCE A RULE. Only a check that runs, ON THE THING THAT
 # SHIPPED, enforces a rule.
-RUBRIC <- if (file.exists("protocol/rubric-v2.md")) "protocol/rubric-v2.md" else "protocol/rubric.md"
-SCHEMA  <- "protocol/screening-schema.json"
-DEFECTS <- "protocol/known-defects.json"
+RUBRIC <- if (file.exists("docs/protocol/rubric-v2.md")) "docs/protocol/rubric-v2.md" else "docs/protocol/rubric.md"
+SCHEMA  <- "docs/protocol/screening-schema.json"
+DEFECTS <- "docs/protocol/known-defects.json"
 
 known <- if (file.exists(DEFECTS)) fromJSON(DEFECTS, simplifyVector = FALSE)$defects else list()
 quarantined <- vapply(known, \(d) d$id, character(1))

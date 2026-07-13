@@ -71,7 +71,7 @@
 # ------------------------------------------------------------------------------
 # WHAT IT EXTRACTS: THE RUBRIC'S FULL EIGHT-FIELD PAYLOAD
 # ------------------------------------------------------------------------------
-# protocol/rubric.md says the screener sees: "title, abstract, publication year,
+# docs/protocol/rubric.md says the screener sees: "title, abstract, publication year,
 # language, VENUE, OpenAlex TOPIC AND FIELD, Canadian institutional AFFILIATIONS,
 # FUNDERS." The pilot harness sent six of those eight. All eight are extracted
 # here, so the full screen can obey the instrument. That is D1's root cause, and

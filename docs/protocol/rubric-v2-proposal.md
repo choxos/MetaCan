@@ -1,6 +1,6 @@
 # Rubric v2: the seams fifteen independent screeners found, and what to do about them
 
-**Status: PROPOSED. Not locked, not applied.** The v1 rubric (`protocol/rubric.md`) is the instrument the pilot ran
+**Status: PROPOSED. Not locked, not applied.** The v1 rubric (`docs/protocol/rubric.md`) is the instrument the pilot ran
 under, and changing it after seeing the data would be fitting the instrument to the data. This document is the
 **evidence for a revision**, to be locked *before* the full screen and recorded in `DEVIATIONS.md` as a versioned
 change.
@@ -29,12 +29,12 @@ contradicts itself**, and the screeners found that too.
 
 Before the seams, two defects that can be checked against the text rather than argued about.
 
-**A. The rubric and the schema name different vocabularies for `genre`.** `protocol/rubric.md` says
+**A. The rubric and the schema name different vocabularies for `genre`.** `docs/protocol/rubric.md` says
 `empirical · conceptual · editorial/commentary · policy · infrastructure/announcement · other`.
-`protocol/screening-schema.json` says `empirical · review · methods · commentary · editorial · protocol · dataset ·
+`docs/protocol/screening-schema.json` says `empirical · review · methods · commentary · editorial · protocol · dataset ·
 software · other`. **They overlap on two values out of thirteen.** Every screener was handed both and told to obey
 both; each invented a private reconciliation, and they did not invent the same one. Four separate agents reported
-this unprompted. See finding 24 and `DEVIATIONS.md` D20. It is now quarantined in `protocol/known-defects.json` and
+this unprompted. See finding 24 and `DEVIATIONS.md` D20. It is now quarantined in `docs/protocol/known-defects.json` and
 `make lint` fails on any *further* contradiction between the two documents.
 
 **B. Two of the six verbs in the rubric's own definition have no tier bullet.** The definition says metaresearch
@@ -290,7 +290,7 @@ The correct sequence, and the one the protocol commits to:
 
 1. Lock v2 **before** the full screen, with this evidence attached.
 2. Record the change in `DEVIATIONS.md` as a versioned rubric revision, and **delete the quarantine entry** in
-   `protocol/known-defects.json` so `make lint` enforces instrument self-consistency from that point on.
+   `docs/protocol/known-defects.json` so `make lint` enforces instrument self-consistency from that point on.
 3. Re-screen the 5,000-work sample under v2 and **report the difference against v1 as a finding**: *what did
    specifying these thirteen seams actually change?* That is a measurement nobody normally makes, and it is available
    only because the ambiguity was documented before it was resolved.

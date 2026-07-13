@@ -8,10 +8,10 @@
 # it could not code `genre`, because the two documents it had been handed name two
 # different controlled vocabularies for that field:
 #
-#   protocol/rubric.md          empirical . conceptual . editorial/commentary .
+#   docs/protocol/rubric.md          empirical . conceptual . editorial/commentary .
 #                               policy . infrastructure/announcement . other
 #
-#   protocol/screening-schema.json
+#   docs/protocol/screening-schema.json
 #                               empirical . review . methods . commentary .
 #                               editorial . protocol . dataset . software . other
 #
@@ -44,7 +44,7 @@
 #
 # The fix belongs in the INSTRUMENT (one vocabulary, in one place, machine-checked
 # against the schema before any model runs), and the instrument may only change at
-# a version boundary. See protocol/rubric-v2-proposal.md, seam 11.
+# a version boundary. See docs/protocol/rubric-v2-proposal.md, seam 11.
 
 suppressPackageStartupMessages({
   library(jsonlite); library(dplyr); library(purrr); library(cli); library(glue)
@@ -57,13 +57,13 @@ DIR <- "pilot/screening/frame1k"
 # rubric or the schema is fixed, this finding must change with it, and hardcoding
 # the lists would let the finding go on being true about a document that no longer
 # says it.
-rubric_line <- grep("^`empirical`", readLines("protocol/rubric.md", warn = FALSE), value = TRUE)[1]
-if (is.na(rubric_line)) cli_abort("cannot find the genre vocabulary line in protocol/rubric.md")
+rubric_line <- grep("^`empirical`", readLines("docs/protocol/rubric.md", warn = FALSE), value = TRUE)[1]
+if (is.na(rubric_line)) cli_abort("cannot find the genre vocabulary line in docs/protocol/rubric.md")
 RUBRIC_VOCAB <- rubric_line |>
   strsplit("·", fixed = TRUE) |> unlist() |> trimws() |> gsub("`", "", x = _) |> (\(x) x[nzchar(x)])()
 
-SCHEMA_VOCAB <- fromJSON("protocol/screening-schema.json")$items$properties$genre$enum
-if (is.null(SCHEMA_VOCAB)) cli_abort("cannot find the genre enum in protocol/screening-schema.json")
+SCHEMA_VOCAB <- fromJSON("docs/protocol/screening-schema.json")$items$properties$genre$enum
+if (is.null(SCHEMA_VOCAB)) cli_abort("cannot find the genre enum in docs/protocol/screening-schema.json")
 
 only_rubric <- setdiff(RUBRIC_VOCAB, SCHEMA_VOCAB)
 only_schema <- setdiff(SCHEMA_VOCAB, RUBRIC_VOCAB)

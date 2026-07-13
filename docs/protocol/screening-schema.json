@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://github.com/choxos/CaRN-data-challenge/protocol/screening-schema.json",
   "title": "MetaCan screening label",
-  "description": "The output contract for one screened work. protocol/rubric.md instructs both machine screeners and both human coders to return exactly this. It did not exist until 2026-07-11 (DEVIATIONS.md D9): the rubric pointed at a file that was not in the repository, and the schema was inlined in the prompts instead. A locked instrument that references a missing file is not locked.",
+  "description": "The output contract for one screened work. docs/protocol/rubric.md instructs both machine screeners and both human coders to return exactly this. It did not exist until 2026-07-11 (DEVIATIONS.md D9): the rubric pointed at a file that was not in the repository, and the schema was inlined in the prompts instead. A locked instrument that references a missing file is not locked.",
   "type": "array",
   "items": {
     "type": "object",

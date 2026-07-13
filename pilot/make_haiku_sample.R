@@ -6,7 +6,7 @@
 #              = exactly what the pilot harness sent (DEVIATIONS.md D1).
 #
 #   PAYLOAD-8  + venue, topic, field, ca_institutions, funders
-#              = what protocol/rubric.md ACTUALLY MANDATES and never got.
+#              = what docs/protocol/rubric.md ACTUALLY MANDATES and never got.
 #
 # These 1,290 works already carry labels from Claude Sonnet 4.6 (screener A) and
 # GPT-5.6 (screener B), both on payload-6. Screening them with Haiku on BOTH

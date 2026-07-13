@@ -107,7 +107,7 @@ payload_inflation_8_over_6 <- round(tok_work / tok_work_6, 2)
 # pilot/check_proposal_numbers.R will fail the build until the proposal agrees
 # again. Prose that silently stops matching its own arithmetic is the failure
 # this whole project is about.
-rubric_chars <- file.size("protocol/rubric.md")
+rubric_chars <- file.size("docs/protocol/rubric.md")
 tok_rubric   <- round(rubric_chars / CHARS_PER_TOKEN)
 
 # Output: one label per work. Measured from screener A's emitted labels.
@@ -225,7 +225,7 @@ cli_alert_warning(
 record_finding(
   "screening_cost",
   list(
-    measured_from            = "pilot/screening/chunks/*.json (6-field), pilot/screening/haiku/p8_guided/chunk_*.json (8-field), protocol/rubric.md; not asserted",
+    measured_from            = "pilot/screening/chunks/*.json (6-field), pilot/screening/haiku/p8_guided/chunk_*.json (8-field), docs/protocol/rubric.md; not asserted",
     chars_per_token_assumed  = CHARS_PER_TOKEN,
     tokens_per_work          = tok_work,
     tokens_per_work_six_field_deviation = tok_work_6,

@@ -1,6 +1,6 @@
 # Deviations, errors, and corrections
 
-`protocol/PROTOCOL.md` §9 says: *"Any departure from this protocol will be recorded in `DEVIATIONS.md`, with a
+`docs/protocol/PROTOCOL.md` §9 says: *"Any departure from this protocol will be recorded in `DEVIATIONS.md`, with a
 reason and a date. Silent revision is itself a research-integrity failure, and this is a metaresearch project."*
 
 This is that file. It is written before submission, not after. Every entry cost me something to write.
@@ -14,7 +14,7 @@ Numbering matches the pilot findings where relevant. Nothing here has been quiet
 **Date found:** 2026-07-11, by adversarial review, before submission.
 **Severity:** the most serious defect in this project.
 
-`protocol/rubric.md` (the locked instrument) tells the screener:
+`docs/protocol/rubric.md` (the locked instrument) tells the screener:
 
 > "You see: title, abstract, publication year, language, **venue, OpenAlex topic and field, Canadian institutional
 > affiliations, funders**."
@@ -198,9 +198,9 @@ cell is not identified and the estimator is not even a safe lower bound. **Cut**
 
 ---
 
-## D9. `protocol/screening-schema.json` is referenced by the rubric and does not exist.
+## D9. `docs/protocol/screening-schema.json` is referenced by the rubric and does not exist.
 
-`protocol/rubric.md` instructs the screener to "return the schema in `protocol/screening-schema.json`". No such file
+`docs/protocol/rubric.md` instructs the screener to "return the schema in `docs/protocol/screening-schema.json`". No such file
 is in the repository. The schema was inlined in the prompts instead. Fixed by writing the file the rubric points at.
 
 ---
@@ -555,8 +555,8 @@ It was right. A second agent, independently, reported the same thing.
 
 | document | the `genre` values it names |
 |---|---|
-| `protocol/rubric.md` (what screeners are told to apply) | `empirical` `conceptual` `editorial/commentary` `policy` `infrastructure/announcement` `other` |
-| `protocol/screening-schema.json` (what output must conform to) | `empirical` `review` `methods` `commentary` `editorial` `protocol` `dataset` `software` `other` |
+| `docs/protocol/rubric.md` (what screeners are told to apply) | `empirical` `conceptual` `editorial/commentary` `policy` `infrastructure/announcement` `other` |
+| `docs/protocol/screening-schema.json` (what output must conform to) | `empirical` `review` `methods` `commentary` `editorial` `protocol` `dataset` `software` `other` |
 
 **They overlap on two values out of eleven.** Four rubric terms do not exist in the schema; seven schema terms do not
 exist in the rubric. Every screener in every arm was handed both documents and told to obey both.
@@ -731,8 +731,8 @@ D20 recorded that the rubric and the schema name two different vocabularies for 
 
 | document | the rule it states |
 |---|---|
-| `protocol/rubric.md` | "If the abstract is missing, judge on the title alone and set confidence to `low` **unless the title is unambiguous**." |
-| `protocol/screening-schema.json` | "The rubric **requires `low` whenever** the abstract is missing and the judgement rests on the title alone." |
+| `docs/protocol/rubric.md` | "If the abstract is missing, judge on the title alone and set confidence to `low` **unless the title is unambiguous**." |
+| `docs/protocol/screening-schema.json` | "The rubric **requires `low` whenever** the abstract is missing and the judgement rests on the title alone." |
 
 **The schema misquotes the rubric.** One says *low unless the title is unambiguous*; the other says *low, always*. These are different instruments.
 
@@ -750,7 +750,7 @@ GPT-5.6's illegal tier values, this run, were `other` and `policy`. **Those are 
 
 ### Consequence
 
-Quarantined in `protocol/known-defects.json` alongside the genre split, with the same terms: not fixed in place (v1 is locked and 5,600 works were screened against it), fixed at the v2 boundary, and `make lint` fails on any further contradiction. `confidence` from the v1 screen is reported as **not comparable across arms**, and the adjudication queue for the human audit will be defined by the v2 rule, not the v1 ambiguity.
+Quarantined in `docs/protocol/known-defects.json` alongside the genre split, with the same terms: not fixed in place (v1 is locked and 5,600 works were screened against it), fixed at the v2 boundary, and `make lint` fails on any further contradiction. `confidence` from the v1 screen is reported as **not comparable across arms**, and the adjudication queue for the human audit will be defined by the v2 rule, not the v1 ambiguity.
 
 ---
 
@@ -768,7 +768,7 @@ Quarantined in `protocol/known-defects.json` alongside the genre split, with the
 
 A screener told to emit a value its contract forbids will emit *something else*, silently, and each screener will pick a different something. Which is precisely D20, committed by the document that fixes D20.
 
-**3. The guard did not catch it, because it was aimed at the wrong file.** `pilot/check_instrument.R` exists for exactly this class of bug. It reads `RUBRIC <- "protocol/rubric.md"`. **v2 is a new file.** The guard ran, passed, and reported "the instrument is self-consistent" without ever having looked at the instrument that shipped.
+**3. The guard did not catch it, because it was aimed at the wrong file.** `pilot/check_instrument.R` exists for exactly this class of bug. It reads `RUBRIC <- "docs/protocol/rubric.md"`. **v2 is a new file.** The guard ran, passed, and reported "the instrument is self-consistent" without ever having looked at the instrument that shipped.
 
 **4. I fixed the path, and the guard STILL did not catch it.** The new check appended its finding with:
 
@@ -801,7 +801,7 @@ Every one of them **produced output that looked correct**. None of them threw. T
 
 ### The rules that now run
 
-- `check_instrument.R` reads **the current rubric**, not a hardcoded path: `if (file.exists("protocol/rubric-v2.md")) ... else ...`. A guard that inspects a document nobody is using is theater.
+- `check_instrument.R` reads **the current rubric**, not a hardcoded path: `if (file.exists("docs/protocol/rubric-v2.md")) ... else ...`. A guard that inspects a document nobody is using is theater.
 - It checks **both directions**: not only "does the rubric define every value the schema allows?" (which passed all along) but "**can the schema express every value the rubric demands?**" (which is the one that was missing, and is the one that matters, because the codebook is upstream of the contract).
 - No cli pluralization inside `glue()`, ever. The specific bug is now impossible to reintroduce in this file because the message is built with `paste0()`.
 - Verified both ways: the guard **fails** on v2.0 as written, naming `insufficient_payload`, and **passes** on v2.1 after the schema was amended to carry it.

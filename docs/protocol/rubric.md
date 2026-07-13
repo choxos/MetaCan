@@ -149,4 +149,4 @@ Read the title and abstract. Apply the rubric. Do not use outside knowledge of t
 reputation. If the abstract is missing, judge on the title alone and set confidence to `low` unless the title is
 unambiguous.
 
-Return the schema in `protocol/screening-schema.json`. One object per work. No prose, no preamble.
+Return the schema in `docs/protocol/screening-schema.json`. One object per work. No prose, no preamble.

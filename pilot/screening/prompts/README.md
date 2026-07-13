@@ -8,7 +8,7 @@ That is `DEVIATIONS.md` **D10**, and this directory is the fix.
 
 ## What the screeners were actually sent
 
-Both screeners received the **same two things**: the locked rubric (`protocol/rubric.md`, reproduced verbatim as the
+Both screeners received the **same two things**: the locked rubric (`docs/protocol/rubric.md`, reproduced verbatim as the
 system prompt) and a chunk of records as JSON.
 
 **And here is the defect that matters more than the archiving one.** The rubric says the screener sees:

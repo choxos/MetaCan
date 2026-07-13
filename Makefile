@@ -98,9 +98,9 @@ harvest-status:
 	@Rscript R/harvest_progress.R
 
 # A proposal that needs a third page is not a proposal that respects the brief.
-proposal: proposal/metacan-proposal.pdf
+proposal: docs/proposal/metacan-proposal.pdf
 
-proposal/metacan-proposal.pdf: proposal/metacan-proposal.md proposal/tighten.tex pilot/results/findings.json
+docs/proposal/metacan-proposal.pdf: docs/proposal/metacan-proposal.md docs/proposal/tighten.tex pilot/results/findings.json
 	@Rscript pilot/check_proposal_numbers.R
 	@pandoc $< -o $@ \
 		--pdf-engine=xelatex \
@@ -108,7 +108,7 @@ proposal/metacan-proposal.pdf: proposal/metacan-proposal.md proposal/tighten.tex
 		-V fontsize=10pt \
 		-V mainfont="Helvetica Neue" \
 		-V colorlinks=true -V linkcolor=black -V urlcolor=black \
-		-H proposal/tighten.tex
+		-H docs/proposal/tighten.tex
 	@pages=$$(pdfinfo $@ | awk '/^Pages:/ {print $$2}'); \
 	words=$$(wc -w < $<); \
 	if [ "$$pages" -gt 2 ]; then \
@@ -122,7 +122,7 @@ proposal/metacan-proposal.pdf: proposal/metacan-proposal.md proposal/tighten.tex
 # one job, which is to be registered BEFORE the data are seen.
 #
 # It ships as ONE self-contained PDF, and the reason is the whole point of the
-# appendix structure. A protocol that says "coded against protocol/rubric.md" and
+# appendix structure. A protocol that says "coded against docs/protocol/rubric.md" and
 # links out to it is a protocol whose coding manual can be edited afterwards with
 # nothing in the registered artifact to contradict it. So the rubric the pilot
 # actually ran under (v1, LOCKED) travels inside the PDF as Appendix A, and the
@@ -132,19 +132,19 @@ proposal/metacan-proposal.pdf: proposal/metacan-proposal.md proposal/tighten.tex
 #
 # Headings are not demoted; each appendix keeps its own H1, retitled in place, so
 # the section numbering inside the rubric survives the bundle intact.
-PROTOCOL_PARTS := protocol/PROTOCOL.md protocol/rubric.md protocol/rubric-v2-proposal.md
+PROTOCOL_PARTS := docs/protocol/PROTOCOL.md docs/protocol/rubric.md docs/protocol/rubric-v2-proposal.md
 
-protocol: protocol/PROTOCOL.pdf
+protocol: docs/protocol/PROTOCOL.pdf
 
-protocol/PROTOCOL.pdf: $(PROTOCOL_PARTS) protocol/protocol.tex
+docs/protocol/PROTOCOL.pdf: $(PROTOCOL_PARTS) docs/protocol/protocol.tex
 	@mkdir -p build
-	@cp protocol/PROTOCOL.md build/protocol_bundle.md
+	@cp docs/protocol/PROTOCOL.md build/protocol_bundle.md
 	@printf '\n\\newpage\n\n' >> build/protocol_bundle.md
 	@sed '1s|^# .*|# Appendix A. Screening rubric v1.0: LOCKED, and the instrument the pilot ran under|' \
-		protocol/rubric.md >> build/protocol_bundle.md
+		docs/protocol/rubric.md >> build/protocol_bundle.md
 	@printf '\n\\newpage\n\n' >> build/protocol_bundle.md
 	@sed '1s|^# .*|# Appendix B. Rubric v2: PROPOSED, NOT APPLIED, and not in force for any number in this document|' \
-		protocol/rubric-v2-proposal.md >> build/protocol_bundle.md
+		docs/protocol/rubric-v2-proposal.md >> build/protocol_bundle.md
 	@pandoc build/protocol_bundle.md -o $@ \
 		--pdf-engine=xelatex \
 		--toc --toc-depth=2 \
@@ -153,7 +153,7 @@ protocol/PROTOCOL.pdf: $(PROTOCOL_PARTS) protocol/protocol.tex
 		-V mainfont="Helvetica Neue" \
 		-V monofont="Menlo" \
 		-V colorlinks=true -V linkcolor=black -V urlcolor=black \
-		-H protocol/protocol.tex 2> build/protocol.log; \
+		-H docs/protocol/protocol.tex 2> build/protocol.log; \
 	pandoc_status=$$?; cat build/protocol.log; test $$pandoc_status -eq 0
 # A DROPPED GLYPH IS A CHANGED RULE, SO IT FAILS THE BUILD.
 #
@@ -172,11 +172,11 @@ protocol/PROTOCOL.pdf: $(PROTOCOL_PARTS) protocol/protocol.tex
 		echo "FAIL: xelatex could not set these characters, and dropped them from the PDF:"; \
 		grep -o "There is no .\+ (U+[0-9A-F]*)" build/protocol.log | sort -u | sed 's/^/  /'; \
 		echo ""; \
-		echo "A dropped glyph in a coding manual is a changed instruction. Map it in protocol/protocol.tex."; \
+		echo "A dropped glyph in a coding manual is a changed instruction. Map it in docs/protocol/protocol.tex."; \
 		rm -f $@; exit 1; \
 	fi
 	@echo "OK: protocol is $$(pdfinfo $@ | awk '/^Pages:/ {print $$2}') pages, $$(wc -w < build/protocol_bundle.md) words, no dropped glyphs."
 
 clean:
-	rm -f proposal/metacan-proposal.pdf protocol/PROTOCOL.pdf
+	rm -f docs/proposal/metacan-proposal.pdf docs/protocol/PROTOCOL.pdf
 	rm -rf build

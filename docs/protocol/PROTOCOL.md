@@ -258,7 +258,7 @@ the boundary.
 
 ### 6.2 Coding
 - **Two HUMAN coders, independent, blinded** to the machine labels and to each other.
-- A **locked rubric** (`protocol/rubric.md`, versioned) with worked examples and explicit edge cases.
+- A **locked rubric** (`docs/protocol/rubric.md`, versioned) with worked examples and explicit edge cases.
 - Disagreements adjudicated against the rubric; adjudication decisions logged.
 - Agreement reported (Cohen's κ / Krippendorff's α) **as a property of the coding, not as evidence of classifier
   validity**: an agreement coefficient measures coders, not the instrument.

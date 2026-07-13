@@ -4,7 +4,7 @@
 
 > **v2.0 → v2.1, same day, recorded rather than quietly patched.** v2.0 mandated `insufficient_payload` as "a flag distinct from OUT" while `screening-schema.json`'s tier enum was `[T1, T2, T3, OUT]`: **v2.0 demanded a value its own output contract could not express.** That is exactly the defect v2 was written to fix (D20), committed by the document that fixes it, and the build guard aimed at that defect did not catch it because it was hardcoded to read v1's file. A screening agent found it, in a footnote, while doing something else. The schema now carries the value; the guard now reads the current rubric and checks both directions. See `DEVIATIONS.md` D25. **The 179-work re-screen ran under v2.0**, so its three `insufficient_payload` records were coded `OUT` with the flag in the reason string; that is stated rather than silently corrected.
 
-**v1.0 is not deleted and is not corrected.** It remains in `protocol/rubric.md`, byte for byte, because 5,600 works were screened against it and every number in the pilot is attributable to that text. A rubric edited after the data are seen is a rubric that can no longer say what any past number means. See `DEVIATIONS.md` D25.
+**v1.0 is not deleted and is not corrected.** It remains in `docs/protocol/rubric.md`, byte for byte, because 5,600 works were screened against it and every number in the pilot is attributable to that text. A rubric edited after the data are seen is a rubric that can no longer say what any past number means. See `DEVIATIONS.md` D25.
 
 ---
 
@@ -184,7 +184,7 @@ A supplement (`Additional file 3 of...`) **inherits its parent's tier**, or is f
 
 ## Genre
 
-**One vocabulary. This document is the only place it is defined, and `protocol/screening-schema.json` now QUOTES this list rather than paraphrasing it.**
+**One vocabulary. This document is the only place it is defined, and `docs/protocol/screening-schema.json` now QUOTES this list rather than paraphrasing it.**
 
 `empirical` · `review` · `methods` · `commentary` · `editorial` · `protocol` · `dataset` · `software` · `other`
 
@@ -245,7 +245,7 @@ Read the title and abstract. Apply the rubric. Do not use outside knowledge of t
 
 **When in doubt, ask RULE 1's question:** *if this paper is right, what do we now know more about: a scientific question, or the practice of science?*
 
-Return the schema in `protocol/screening-schema.json`. One object per work. No prose, no preamble.
+Return the schema in `docs/protocol/screening-schema.json`. One object per work. No prose, no preamble.
 
 ---
 

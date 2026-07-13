@@ -12,6 +12,30 @@ Ahmad Sofi-Mahmudi · independent researcher · <ahmad.pub@gmail.com>
 > **Every MétaCan record will show why it was found and why it counts as Canadian, and a bilingual human audit
 > will quantify what the pipeline missed.**
 
+## Layout
+
+```
+docs/            everything a reader reads
+  proposal/      the 2-page submission (make proposal; the build FAILS on a third page)
+  protocol/      the preregistration, both rubric versions, the schema, known defects
+  reference/     the call for proposals and prior drafts
+pilot/           every numbered finding, and the screening runs behind them
+R/               the frame harvester, the strata, the findings store
+site/            the bilingual explorer (metacan.xera.ac)
+deploy/          one-command redeploy
+legacy/          superseded. `app/` is a static prototype nothing points at any more.
+DEVIATIONS.md    every error, with the number it changed and the guard that now runs
+```
+
+Three guards run on every build, and each one exists because that exact failure
+already happened:
+
+- `check_strata_partition.R`: the strata must sum to the frame. They once did not, and
+  549,370 works (12.9%) had an inclusion probability of exactly zero.
+- `check_instrument.R`: the rubric and its schema must agree. They once named two
+  different vocabularies for the same field, and 16,800 labels passed anyway.
+- `check_self_masking.R`: a dplyr bug that published "3100%" as a base rate, three times.
+
 ## Why
 
 Mapping a research community from bibliographic metadata invites one specific failure: you map what your retrieval
@@ -35,7 +59,7 @@ Field membership becomes a *classification* question over that frame, not a *ret
 literature. Then you can just **count**.
 
 I screened **5,737 unfiltered Canadian works** (not a metaresearch search; a slice of Canadian research) against
-a locked rubric ([`protocol/rubric.md`](protocol/rubric.md)), with two independent machine screeners.
+a locked rubric ([`docs/protocol/rubric.md`](docs/protocol/rubric.md)), with two independent machine screeners.
 
 > **Metaresearch is 1.31% of Canadian research** by one screener's labels; **≈45,850 works** across the 3.5M-work
 > frame. The binomial CI (1.03–1.64%) is *not* the uncertainty: swap the screener and the field is **37,032 to
@@ -72,8 +96,8 @@ screened-out stratum directly instead of inferring it.
 ## What is here
 
 ```
-proposal/   the 2-page attachment (build FAILS if it spills to 3), and the form answers
-protocol/   PROTOCOL.md  the OSF-ready preregistration: estimand, frame, audit design
+docs/proposal/   the 2-page attachment (build FAILS if it spills to 3), and the form answers
+docs/protocol/   PROTOCOL.md  the OSF-ready preregistration: estimand, frame, audit design
             rubric.md    the locked screening rubric, with the three errors that decide everything
 pilot/      the analyses; every number above, with raw responses archived in pilot/raw/
             screening/   6,202 Canadian works, both screeners' labels, and their disagreements
@@ -82,7 +106,7 @@ R/          OpenAlex client (cursor paging, polite pool, 429 handling, response 
 app/        the bilingual explorer (Next.js; EN/FR; reads findings.json, hardcodes nothing)
 ```
 
-Read [`protocol/PROTOCOL.md`](protocol/PROTOCOL.md) for the method. Read
+Read [`docs/protocol/PROTOCOL.md`](docs/protocol/PROTOCOL.md) for the method. Read
 [`pilot/results/FINDINGS.md`](pilot/results/FINDINGS.md) for the numbers.
 
 ## Reproduce it
