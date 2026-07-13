@@ -1,0 +1,971 @@
+# MétaCan screening rubric (v2.0)
+
+**Status: LOCKED, 2026-07-13. Supersedes v1.0 for all screening from this date.**
+
+**v1.0 is not deleted and is not corrected.** It remains in `protocol/rubric.md`, byte for byte, because 5,600 works were screened against it and every number in the pilot is attributable to that text. A rubric edited after the data are seen is a rubric that can no longer say what any past number means. See `DEVIATIONS.md` D25.
+
+---
+
+## Why v2 exists, and how its sentences were chosen
+
+Not by taste. **By census.**
+
+Three frontier models screened 5,600 works against v1. They split on 179 of them. An independent judge, from outside the panel and blind to which model said what, adjudicated all 179 and was required to name, for every work, *which seam of the rubric produced the split*.
+
+Its verdict on v1:
+
+> **The rubric is silent on 159 of the 179 contested works (89%).** Only 17 splits were a screener misapplying a rule that actually existed.
+
+The field's boundary was being set by the screener, not by the instrument. Every model was left to invent the missing sentence privately, and none of them invented the same one.
+
+The seams, weighted by the works they actually cost:
+
+| seam | works | % of contested |
+|---|---:|---:|
+| `methods_dev_vs_study` | **39** | 21.8% |
+| `lis_sts_asymmetry` | **26** | 14.5% |
+| `history_of_science` | 19 | 10.6% |
+| `workforce_boundary` | 19 | 10.6% |
+| *(screener error; the rubric was fine)* | 17 | 9.5% |
+| `bibliometrics_contradiction` | 12 | 6.7% |
+| `instrument_validation` | 10 | 5.6% |
+| `insufficient_payload` | 8 | 4.5% |
+| `knowledge_translation` | 8 | 4.5% |
+| `guidelines_standards` | 7 | 3.9% |
+| `t3_unscoped_genre` | 6 | 3.4% |
+| `research_governance` | 5 | 2.8% |
+| `peer_review_artifact` | 3 | 1.7% |
+
+**Two judges worked disjoint batches with no contact. They named the same top seam, and they independently proposed nearly the same missing sentence.** That convergence is why the two rules below are stated first and stated hardest: they are not the ones I found most interesting, they are the ones that cost the most agreement.
+
+---
+
+## The two rules that carry the most weight
+
+Everything else in this document is detail. These two sentences resolve, between them, roughly **36% of every disagreement three frontier models had about this field.**
+
+### RULE 1 (resolves `methods_dev_vs_study`, `instrument_validation`, and much of `guidelines_standards`)
+
+> **A work is T1 on methods only if its object is methods *as used, reported, or performed by researchers*. Developing, deriving, validating, or teaching a technique for use in a domain is OUT, however generic the technique and however rigorously its properties are established.**
+
+The discriminator, which the rubric already almost states in its error 2: *if this paper is right, what do we now know more about: a scientific question, or the practice of science?*
+
+- A new high-breakdown estimator in a statistics journal → **OUT.** It *is* a contribution to research practice; it is not a *study* of it.
+- Psychometric validation of a depression scale → **OUT.** Same reason. `validation` was flagged as a polysemy trap in v1 and never resolved; it is resolved here.
+- A demonstration that feature-selection bias inflates the classification accuracies *published in a literature* → **T1.**
+- A review of how 200 network meta-analyses handled inconsistency → **T1.**
+- A COSMIN-style study of how a field *chooses* what to measure → **T1.**
+
+The same confusion wears three different hats, and this one sentence removes all three: **an instance of a research practice is not a study of it.** That is v1's own error 1 ("a study that uses a method is not a study of the method"), extended to cover *building* the method as well as *using* it.
+
+### RULE 2 (resolves `lis_sts_asymmetry` and `history_of_science`)
+
+> **The STS, LIS, history and philosophy of science bullets apply only where the object is science, research, or the research ecosystem. That condition governs all of them equally, at any period.**
+
+v1's LIS bullet said "information behaviour **of researchers**". The STS bullet directly above it carried no such qualifier, so STS-shaped work on non-science technology (municipal smart-city governance, public opinion on GMOs) had nothing in the text to stop it entering T2.
+
+And **"contemporary" is deleted** from the history/philosophy bullet. In v1 it silently excluded the entire history of Canadian science: a history of the Canadian archival profession, the transatlantic transfer of experimental pedagogy to Quebec, how cybernetics spread through Latin America. For a project whose inclusiveness criterion is about *traditions*, deleting a whole tradition on an unexamined adverb is the worst available outcome. If a date restriction is wanted it belongs in the **estimand**, not smuggled into one tier bullet.
+
+---
+
+## The unit
+
+Unchanged from v1. One work, identified by its OpenAlex ID. You see title, abstract, year, language, venue, OpenAlex topic and field, Canadian institutional affiliations, funders.
+
+## The question
+
+**Is the object of study *research itself*?**
+
+Metaresearch studies how research is done, reported, funded, evaluated, disseminated, or governed. The test is what the work is *about*, not what field it appears in and not what vocabulary it uses.
+
+A cardiology trial is not metaresearch. A study of *how cardiology trials report their outcomes* is.
+
+**v1 named six verbs and operationalized four.** `disseminated` and `governed` had no tier bullet at all, so knowledge translation and research ethics had nowhere to land and screeners coded them OUT while saying they were unsure. Both now have homes (T1 and T2 below). A definition that promises six things and delivers four is not a strict instrument; it is an instrument with two undefended doors.
+
+---
+
+## Tier
+
+Assign exactly one. **The object decides the tier. Genre never does.** (This single principle retires `guidelines_standards` and `t3_unscoped_genre`; see T3.)
+
+### T1: Core metaresearch
+
+The primary object of study is research itself.
+
+- **research methods as practiced**: bias, reporting, statistical practice, study design, analytic-choice sensitivity — **subject to RULE 1**
+- **reproducibility**, replication, data and code sharing
+- **research integrity**: misconduct, retraction, questionable research practices, authorship
+- **peer review** and editorial process *as objects of study* — **but a peer-review artifact whose content is a domain paper (a published referee report, an open-review record, a "Discussion of") is an INSTANCE, not a study: OUT.** It is RULE 1 again.
+- **research evaluation**, metrics, rankings, funding allocation
+- **scholarly communication**: publishing models, open access, preprints *as objects of study*
+- **bibliometrics and scientometrics** that study **research practice** through bibliometric means (citation distortion, reporting trends, retraction citation) — *see the bibliometrics rule below*
+- the **research workforce**: careers, equity, training, capacity — **subject to the workforce rule below**
+- **evidence synthesis methodology** (work *about* how syntheses are done, not an individual review's clinical answer)
+- **research ethics and governance as an object of study** — *new in v2; the definition promised "governed" and v1 delivered nothing*
+- **reporting and measurement standards** (COBIDAS, core outcome sets, a Delphi harmonizing definitions so results can be compared across centres) — **T1 by object, even though a position statement by form**
+
+### T2: Adjacent
+
+Empirically or conceptually grounded work on science as a social system that is not framed as metaresearch but studies it. **All bullets are subject to RULE 2.**
+
+- **science and technology studies**: social studies of scientific knowledge, practice, controversy — *where the knowledge or practice studied is research*
+- **library and information science**: information behaviour of researchers, repositories, discovery
+- **research infrastructure** studies: platforms, data repositories, identifiers, standards — *scholarly infrastructure; a domain instrument or analysis package is OUT*
+- **history and philosophy of science** where the object is science or research practice — **at any period**
+- **research policy** analysis grounded in evidence
+- **knowledge translation and implementation science** where the object is the **uptake of research findings** — *new in v2; health-service delivery that merely involves an intervention is OUT*
+- **bibliometric or scoping studies that characterize a literature** (who publishes, where the gaps are)
+
+T2 is where the field's diversity lives. Be generous here: a paper does not have to call itself metaresearch to be studying research.
+
+### T3: Contextual
+
+Relevant to the ecosystem, mapped and released, but **never pooled into the analytic corpus**.
+
+> **Every T3 bullet requires the item's OBJECT to be research or the research ecosystem, not merely its genre.** A letter about a domain result is OUT. A letter about peer review is T3. An erratum on a metallurgy paper is OUT. A reviewer-acknowledgement list is T3.
+
+- editorials, commentaries, opinion pieces **about research practice**
+- policy documents and position statements **about research** *(but a reporting/measurement standard is T1, by object; see above)*
+- announcements of **research-ecosystem** infrastructure, tools, or initiatives *(a bioinformatics package for a domain task is OUT)*
+- news, obituaries, corrections, letters **about research or the research ecosystem**
+
+### OUT: Not metaresearch
+
+Everything else. Including, and these remain the most common errors:
+
+- **A study that uses a method is not a study of the method.** A meta-analysis answering a clinical question is OUT. A study of how meta-analyses handle heterogeneity is T1.
+- **A work that BUILDS a method is not a study of the method either.** (RULE 1. New in v2, and it is the single largest source of disagreement in the field.)
+- **Mentioning a metaresearch term is not studying it.** A lab paper reporting "assay reproducibility", a methods section saying "peer reviewed", a licence note saying "open access": all OUT.
+- **Domain research that happens to be bibliometric in method**, but whose object is the domain.
+
+---
+
+## The bibliometrics rule (v1 contradicted itself here)
+
+v1's T1 bullet said "bibliometrics applied to a research literature". v1's worked example sent a bibliometric map of a domain literature to **T2**, using the T1 bullet's own criterion as the reason. **Both could not be right, and screeners followed different ones.**
+
+Resolved:
+
+- A bibliometric study that **characterizes a literature** (who publishes, where the gaps are, how a field grew) → **T2**.
+- A bibliometric study that **studies research practice** through bibliometric means (citation of retracted work, reporting trends over time, citation distortion) → **T1**.
+
+## The workforce rule
+
+"The **research** workforce" was always the wording; the failure was at the boundary of the role, not in the words.
+
+- The **research** workforce: careers, equity, training, capacity → **T1**.
+- **Academics acting in a teaching role** (student evaluation of teaching, faculty development for clinician teachers), **higher-education studies** (participation policy, university writing centres), and **professional or clinical training** (nursing retention, surgical curricula) → **OUT**.
+
+## Records that cannot be screened
+
+New in v2. Use **`insufficient_payload`**, a flag distinct from OUT.
+
+The frame carries scraping artifacts as titles (`178 PUBLICATIONS 2,994 CITATIONS`), thesis licence boilerplate, DOAJ and Crossref persistence boilerplate in the abstract field (which is *literally text about scholarly infrastructure*, a keyword trap), records whose title and abstract belong to different papers, and outright spam.
+
+**It is not a screening judgment. It is a statement that the record cannot be screened.** It must be *reported*, not silently dropped: the size of this class is a finding about OpenAlex, and the audit samples it.
+
+A supplement (`Additional file 3 of...`) **inherits its parent's tier**, or is flagged `insufficient_payload` when the parent cannot be identified.
+
+---
+
+## Canadian linkage
+
+**Split in two. v1's single boolean could not separate "Canadian data, universal claim" from "a claim about Canada", and four screening agents independently proposed exactly this repair.**
+
+- `CA_AFF`: at least one author affiliated with a Canadian institution.
+  **Warning, measured:** OpenAlex invents Canadian affiliations. `Impact` is not an institution; it is a parse failure with an institution id, and it is attached to a Spanish COVID essay. At least 17,466 works enter the frame on an institution that does not exist (finding 27), and that is a lower bound. A Canadian affiliation is *evidence*, not proof.
+- `CA_FUND`: funded by CIHR, NSERC, SSHRC, or CFI.
+- **`ABOUT_CA_SYSTEM`**: the Canadian **research system or academy** is a substantive object (not a passing mention, not one country among forty). *A Canadian institution as **setting** is not this.* A Quebec COVID cohort is not about the Canadian research system; an analysis of Canadian law faculties' tenure norms is.
+- **`ABOUT_CA_TOPIC`**: Canada is a substantive subject of the work, whether or not research is the object. *(Prairie drought, the 2006 federal election, BC grizzly bears.)*
+
+**Why this matters and is not bookkeeping:** in v1, `about_ca` could only be TRUE once a work was *already* about research, so it was nearly collinear with tier and carried almost no independent information **in the very stratum built to carry it**. The secondary estimand could not be estimated from the stratum designed for it (finding 27).
+
+## Genre
+
+**One vocabulary. This document is the only place it is defined, and `protocol/screening-schema.json` now QUOTES this list rather than paraphrasing it.**
+
+`empirical` · `review` · `methods` · `commentary` · `editorial` · `protocol` · `dataset` · `software` · `other`
+
+In v1 the rubric and the schema named **two different vocabularies for this field, overlapping on two values out of thirteen**, and every screener was handed both and told to obey both. Two models followed the rubric and were therefore a quarter illegal against the schema; one drew from both lists at once and emitted thirteen distinct values. The validator checked `tier` and had never been asked to look at `genre`, so 16,800 labels passed every check that ran (D20, finding 24). **A codebook is code. It gets a test**, and `pilot/check_instrument.R` now fails the build on any contradiction between this document and the schema.
+
+## Confidence
+
+- `high`: the rubric decides this cleanly.
+- `medium`: the rubric decides, but a reasonable coder could differ.
+- `low`: genuinely on the boundary, or the abstract is missing/too thin to judge.
+
+**The rule, stated once, here, and quoted verbatim by the schema:** if the abstract is missing, judge on the title alone and set confidence to **`low` unless the title is unambiguous**.
+
+In v1 the schema *misquoted* this, saying `low` was required *whenever* the abstract was missing. Since `low` is what routes a record to human adjudication, and a third of the frame has no abstract, the contradiction silently changed **which records a human ever looks at** (D24).
+
+**`low` is a legitimate answer and is not a failure.** A screener that never says `low` is not being careful; it is being confident.
+
+---
+
+## Worked examples
+
+| Title (abridged) | Tier | Why |
+|---|---|---|
+| "Data sharing practices in 500 randomised trials" | **T1** | The object is reporting practice. |
+| "Reproducibility of a Western blot protocol" | **OUT** | Assay reproducibility. Polysemy trap. |
+| **"A new high-breakdown estimator for multivariate location"** | **OUT** | **RULE 1.** Builds a method; does not study one. Generic ≠ metaresearch. |
+| **"Psychometric validation of a Persian self-injury inventory"** | **OUT** | **RULE 1.** Validating an instrument for a domain construct. |
+| **"A systematic review of the measurement properties of instruments for X"** | **T1** | Object is how the field measures, not one instrument. |
+| "Trends in citation of retracted papers" | **T1** | The literature's own behaviour. |
+| **"COBIDAS: best practices for reporting neuroimaging"** | **T1** | Object is how research should be reported. A position statement by form; **the object decides.** |
+| **"A published referee report on a hydrology manuscript"** | **OUT** | **RULE 1.** An instance of peer review, not a study of it. |
+| **"Reviewer acknowledgement list, volume 12"** | **T3** | Its object *is* peer review. |
+| **"Correction to: binder-jet metallurgy of Inconel 718"** | **OUT** | T3 genre, but the object is metallurgy. **The object decides.** |
+| "Laboratory life in a Canadian genomics centre: an ethnography" | **T2** | STS, object is research. |
+| **"Sidewalk Labs and urban socio-technical imaginaries in Toronto"** | **OUT** | **RULE 2.** STS in method; the object is corporate urbanism, not science. |
+| **"How cybernetics spread through Latin America, 1955-1975"** | **T2** | **RULE 2.** History of science; "contemporary" is deleted. |
+| **"A history of the Canadian archival profession"** | **T2** | **RULE 2.** Research ecosystem, historical. |
+| "How do researchers discover datasets? A survey" | **T2** | LIS, information behaviour of researchers. |
+| **"Des services pensés pour tous" (inclusive library services)** | **OUT** | **RULE 2.** LIS by venue; the object is library service users, not researchers. |
+| "Effectiveness of statins: a network meta-analysis" | **OUT** | Uses a synthesis method to answer a clinical question. |
+| "How network meta-analyses handle inconsistency: a review of 200 reviews" | **T1** | Object is the method. |
+| "Bibliometric analysis of diabetes research 2000-2020" | **T2** | Characterizes a literature. *(v1's T1 bullet said T1. The contradiction is resolved: this is T2.)* |
+| **"Citation distortion in the amyloid literature"** | **T1** | Studies research practice *through* bibliometrics. |
+| **"Bias in student evaluation of teaching"** | **OUT** | Academics in a **teaching** role. Not the research workforce. |
+| **"Career reconversion of doctoral graduates"** | **T1** | The research workforce. |
+| **"Barriers to uptake of a clinical guideline in Ontario hospitals"** | **T2** | Knowledge translation: object is the uptake of research. *(v1 had nowhere to put this.)* |
+| "Announcing the Canadian Research Data Repository" | **T3** | Research-ecosystem infrastructure. |
+| **"OSeMOSYS Global: an open electricity-system model generator"** | **OUT** | A tool, but for a domain task. |
+| "Open access mandates are failing early-career researchers" (editorial) | **T3** | Commentary about research practice. |
+| **"178 PUBLICATIONS 2,994 CITATIONS"** | **`insufficient_payload`** | A scraping artifact, not a title. Reported, not silently dropped. |
+| "Le libre accès dans les revues québécoises : état des lieux" | **T1** | Scholarly communication. French. |
+
+---
+
+## Instructions to the screener
+
+Read the title and abstract. Apply the rubric. Do not use outside knowledge of the authors or the journal's reputation. If the abstract is missing, judge on the title alone and set confidence to `low` unless the title is unambiguous.
+
+**When in doubt, ask RULE 1's question:** *if this paper is right, what do we now know more about: a scientific question, or the practice of science?*
+
+Return the schema in `protocol/screening-schema.json`. One object per work. No prose, no preamble.
+
+---
+
+## What v2 does not claim
+
+It has not been shown to work. **It has been shown to be written against the right questions**, which is not the same thing, and the difference is the next experiment.
+
+The 5,600-work sample will be re-screened under v2 and the **v1-to-v2 difference reported as a finding**: *what did specifying these seams actually change?* That measurement is available only because the ambiguity was enumerated, adjudicated, and published **before** it was resolved. If v2 does not move the agreement numbers, that is a result, and it will be reported as one.
+
+--------------------------------------------------------------------------------
+You are screening works for MetaCan, a map of Canadian metaresearch.
+
+Apply the rubric above to every record in the JSON array below. Return a JSON
+array with one object per work, conforming to protocol/screening-schema.json:
+
+  {"id": "W...", "tier": "T1|T2|T3|OUT", "genre": "...", "about_ca": true|false,
+   "confidence": "high|medium|low", "reason": "one sentence"}
+
+Rules:
+- Return the JSON array and NOTHING else. No prose, no preamble, no code fences.
+- Every input id must appear exactly once in the output, copied VERBATIM.
+- Do not run commands, read files, or browse. Classify from the RECORDS alone.
+
+RECORDS:
+[
+ {
+  "id": "W2992813950",
+  "title": "Research of the Students Volunteer Service and Management in University Library",
+  "abstract": "The service work of the students volunteer to participate in university library has injected fresh blood, also brings the challenge to the library management. To really play the strength of the team and contribute to the development of the library, the university library must seek an effective way of management. In this paper, by analyzing the present situation of the management of university library volunteers, it puts forward optimizing to recruited organization, strengthen the pre job training, volunteers set up files, management strategies of the construction of the system of volunteer service performance evaluation system.",
+  "year": 2015,
+  "lang": "en",
+  "type": "article",
+  "venue": "Higher education of social science",
+  "topic": "Tourism, Volunteerism, and Development",
+  "field": "Social Sciences",
+  "ca_institutions": [],
+  "funders": []
+ },
+ {
+  "id": "W2604270671",
+  "title": "Achievements and Lessons Learned from Vietnam’s Higher Education Quality Assurance System after a Decade of Establishment",
+  "abstract": "Higher education quality assurance and accreditation was officially implemented inVietnamover twelve years ago. From a totally centralized model,Vietnam’s accreditation system has been becoming more independent, especially with the establishment of accrediting agencies. The first accreditation certificates were also awarded to universities that met quality standards and criteria. This paper investigates the development ofVietnam’s higher education quality assurance and accreditation for the last decade since the national quality assurance organization was established. The study first synthesizes the results achieved within this system, both in policy and practice, leadership and management. It also discusses human resources development for quality assurance and accreditation in the national context. Next, the paper highlights the self-evaluation and external evaluation activities, two most important steps of the accreditation process. In addition, building quality culture within higher education institutions is also paid attention to. Finally, lessons from the establishment and development ofVietnam’s accreditation are drawn. This study looks at an overall picture ofVietnam’s higher education quality assurance system since its establishment with a focus on policy, practice, leadership and management. It also hopes to contribute to the literature related to accreditation ofVietnam’s higher education.",
+  "year": 2017,
+  "lang": "en",
+  "type": "article",
+  "venue": "International Journal of Higher Education",
+  "topic": "Higher Education Governance and Development",
+  "field": "Social Sciences",
+  "ca_institutions": [],
+  "funders": []
+ },
+ {
+  "id": "W1903562992",
+  "title": "The Mission of the University. Professional File. Number 26.",
+  "abstract": "",
+  "year": 2005,
+  "lang": "en",
+  "type": "article",
+  "venue": "Canadian Society for the Study of Higher Education",
+  "topic": "Higher Education Governance and Development",
+  "field": "Social Sciences",
+  "ca_institutions": [],
+  "funders": []
+ },
+ {
+  "id": "W4385843707",
+  "title": "Investigating the Readability and Linguistic, Psychological, and Emotional Characteristics of Digital Dementia Information Written in the English Language: Multitrait-Multimethod Text Analysis",
+  "abstract": "BACKGROUND: Past research in the Western context found that people with dementia search for digital dementia information in peer-reviewed medical research articles, dementia advocacy and medical organizations, and blogs written by other people with dementia. This past work also demonstrated that people with dementia do not perceive English digital dementia information as emotionally or cognitively accessible. OBJECTIVE: In this study, we sought to investigate the readability; linguistic, psychological, and emotional characteristics; and target audiences of digital dementia information. We conducted a textual analysis of 3 different types of text-based digital dementia information written in English: 300 medical articles, 35 websites, and 50 blogs. METHODS: We assessed the text's readability using the Flesch Reading Ease and Flesch-Kincaid Grade Level measurements, as well as tone, analytical thinking, clout, authenticity, and word frequencies using a natural language processing tool, Linguistic Inquiry and Word Count Generator. We also conducted a thematic analysis to categorize the target audiences for each information source and used these categorizations for further statistical analysis. RESULTS: The median Flesch-Kincaid Grade Level readability score and Flesch Reading Ease score for all types of information (N=1139) were 12.1 and 38.6, respectively, revealing that the readability scores of all 3 information types were higher than the minimum requirement. We found that medical articles had significantly (P=.05) higher word count and analytical thinking scores as well as significantly lower clout, authenticity, and emotional tone scores than websites and blogs. Further, blogs had significantly (P=.48) higher word count and authenticity scores but lower analytical scores than websites. Using thematic analysis, we found that most of the blogs (156/227, 68.7%) and web pages (399/612, 65.2%) were targeted at people with dementia. Website information targeted at a general audience had significantly lower readability scores. In addition, website information targeted at people with dementia had higher word count and lower emotional tone ratings. The information on websites targeted at caregivers had significantly higher clout and lower authenticity scores. CONCLUSIONS: Our findings indicate that there is an abundance of digital dementia information written in English that is targeted at people with dementia, but this information is not readable by a general audience. This is problematic considering that people with <12 years of education are at a higher risk of developing dementia. Further, our findings demonstrate that digital dementia information written in English has a negative tone, which may be a contributing factor to the mental health crisis many people with dementia face after receiving a diagnosis. Therefore, we call for content creators to lower readability scores to make the information more accessible to a general audience and to focus their efforts on providing information in a way that does not perpetuate overly negative narratives of dementia.",
+  "year": 2023,
+  "lang": "en",
+  "type": "article",
+  "venue": "JMIR Formative Research",
+  "topic": "Health Literacy and Information Accessibility",
+  "field": "Health Professions",
+  "ca_institutions": [],
+  "funders": []
+ },
+ {
+  "id": "W4220927966",
+  "title": "Automatic text searching for information retrieval",
+  "abstract": "The capabilities of automatic text search systems are reviewed and evaluation results are cited comparing the performance of automatic text searching systems with the effectiveness of manual controlled-term indexing methods. Some possibilities arethen examined for improving automatic text search systems, including the use of complex content identifiers instead of single words, and the introduction of user-system interaction. A likely scenario is given for the operations of future automatic text search systems.",
+  "year": 2022,
+  "lang": "en",
+  "type": "article",
+  "venue": "Proceedings of the Annual Conference of CAIS / Actes du congrès annuel de l ACSI",
+  "topic": "Semantic Web and Ontologies",
+  "field": "Computer Science",
+  "ca_institutions": [],
+  "funders": []
+ },
+ {
+  "id": "W4403238055",
+  "title": "Expanding the eligibility criteria for drugs in Canada’s time-limited health technology assessment and temporary drug access processes will further accelerate access to new medicines",
+  "abstract": "Canada’s Drug Agency (CDA-AMC) and the pan-Canadian Pharmaceutical Alliance (pCPA) have introduced new processes to balance timely patient access with decision-making for drugs showing early promise with high evidence uncertainties. In September 2023, CDA-AMC launched a time-limited reimbursement recommendation (TLR) category aimed at providing earlier access to new treatments for severe, rare, or debilitating illnesses. Concurrently, pCPA developed principles for a Temporary Access Process (pTAP) to guide negotiations for drugs following the TLR pathway. Drug eligibility for TLR and pTAP includes having a Notice of Compliance with Conditions (NOC/c) from Health Canada and a phase III clinical trial completion within three years.As of mid-2024, one drug, epcoritamab for diffuse large B-cell lymphoma, has successfully navigated this new pathway, which significantly accelerated time to listing. Despite this progress, current eligibility criteria may limit the broader impact of TLR and pTAP, as few drugs qualify. Future refinements could include broader eligibility criteria, such as NOC/c expansion to allow for other drug files, incorporating greater flexibility into the Phase III clinical trial requirements, and accepting real-world evidence (RWE) as a supplement to clinical trial data.Overall, the TLR and pTAP pathway represents a significant advancement in Canada’s approach to health technology assessments and drug reimbursement, promising timelier access to innovative treatments. Continued evaluation and adaptation of these processes will be crucial in ensuring their use, and their impact on timely patient access, with the expansion of drug eligibility criteria a logical next iteration.",
+  "year": 2024,
+  "lang": "en",
+  "type": "editorial",
+  "venue": "Journal of Pharmacy & Pharmaceutical Sciences",
+  "topic": "Pharmaceutical Economics and Policy",
+  "field": "Economics, Econometrics and Finance",
+  "ca_institutions": [],
+  "funders": []
+ },
+ {
+  "id": "W2116879809",
+  "title": "Issues in the Linguistic Analysis of a Dead Language, with Particular Reference to Ancient Hebrew",
+  "abstract": "With the increasing maturation of the linguistic analysis of ancient Hebrew, it becomes increasingly important that we keep in mind the inherent challenges of analyzing no-longer-spoken languages, like ancient Hebrew. In this article I address a number of such issues in the hopes of provoking some fruitful discussion. First, I address the distinction between linguistic analysis and philological analysis. Then I address some of the major methodological and theoretical challenges facing those who bring modern linguistic theories to bear upon a ‘dead’ language such as ancient Hebrew, including the lack of native speakers, the limited corpus, and the relationship of ancient Hebrew to modern Israeli Hebrew.",
+  "year": 2009,
+  "lang": "en",
+  "type": "article",
+  "venue": "Journal of Hebrew Scriptures",
+  "topic": "Biblical Studies and Interpretation",
+  "field": "Arts and Humanities",
+  "ca_institutions": [],
+  "funders": []
+ },
+ {
+  "id": "W3196648881",
+  "title": "Evaluation of Mathematical Models in Sustainable Supply Chain Management: Gap Analysis",
+  "abstract": "The main purpose of this paper is to present a comprehensive view of the application mathematical models in the designing and implementing SSCM beside to solving problems and making decision.&amp;nbsp; The research questions are: what kind of mathematical models are used for designing and implementing sustainable supply chain management, how to use them, which industries implemented in, what modules of SSCM depth in and finally finding the gaps between the goals of Sustainable development and current researches and suggestions for further researches. The methodology of the research is Systematic Literature review and evaluation peer review papers which are published in high ranking journals: First, we gather all papers through scientific data bases like Scopus, science direct, MDPI, Springer, Google Scholar. Then, screening papers based on the criteria such as object of paper, subject of paper, journals impact factor, peer review paper, and relative content of the papers. Finally, we selected 245 papers through three steps screening from 2806 papers that they have enough quality and relative to our research goals for context analysis. For context analysis: First we categorize the information of the papers and draw the current situation of researches in the framework of our topic. Then, we evaluate and compare the goals of sustainability and current situation and find the gapes, then, offer suggestions required researches for pollutant industries such as Casting Industry, Heavy Industry, Coal Industry and so on. On the other hand, there are gaps in researches in some modules of SSCM such as packaging, designing products, etc.&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;",
+  "year": 2021,
+  "lang": "en",
+  "type": "article",
+  "venue": "International Business Research",
+  "topic": "Sustainable Supply Chain Management",
+  "field": "Business, Management and Accounting",
+  "ca_institutions": [],
+  "funders": [
+   "Donghua University",
+   "National Natural Science Foundation of China",
+   "Schweizerischer Nationalfonds zur Förderung der Wissenschaftlichen Forschung",
+   "National Science Foundation"
+  ]
+ },
+ {
+  "id": "W1590594782",
+  "title": "‘POST CODE WAR’: Representations of Locality and Landscapes of Danger, Belonging and Understanding",
+  "abstract": "Arguments for the impact and significance of arts initiatives have been made previously, but these discussions have often been situated in the context of justifying a need for the arts to aid policy. This paper renders the unstable reality of engaging young people through a creative medium that raises a critical awareness about one's social position. While I am aware that two major questions may be asked in relation to this notion of ‘reality’, perhaps--whose reality? And what is the ‘real’ in reality?--I am interested in and would like us to consider the constantly shifting role of the artist, practitioner, researcher, participant, and student throughout the challenges of collaboration and facilitation.",
+  "year": 2014,
+  "lang": "en",
+  "type": "article",
+  "venue": "Postcolonial text",
+  "topic": "Participatory Visual Research Methods",
+  "field": "Social Sciences",
+  "ca_institutions": [],
+  "funders": []
+ },
+ {
+  "id": "W4376458578",
+  "title": "A Critical Realist Theory of Money and Finance: Social Cognitive Semiotics as Metatheory",
+  "abstract": "A nagging question for cognitive semiotics is, “What is the relationship between social structure and agency?” Answers to that question are as elusive as they are essential for explaining the social cognitive facets of meaningful interactions. Elusive in the sense that the social sciences have traditionally lacked ontological rigor in the investigation of social structures and their relationship to individuals. Indeed, the very idea of a social structure is a hotly contested ground. Critical in the sense that many participants within the cognitive semiotics programme aim to explain meaning-making as an emergent property of coordinated activities within normative institutions and organizations. This article aims to provide some measure of ontological rigor to social cognitive semiotics from a critical realist perspective as it applies to the semiotics of money and finance.",
+  "year": 2023,
+  "lang": "en",
+  "type": "article",
+  "venue": "Recherches sémiotiques",
+  "topic": "Critical Realism in Sociology",
+  "field": "Social Sciences",
+  "ca_institutions": [],
+  "funders": []
+ },
+ {
+  "id": "W2784457224",
+  "title": "Supporting research dissemination across languages and cultures",
+  "abstract": "",
+  "year": 2017,
+  "lang": "en",
+  "type": "article",
+  "venue": "Canadian Journal of Occupational Therapy",
+  "topic": "Multilingual Education and Policy",
+  "field": "Social Sciences",
+  "ca_institutions": [],
+  "funders": []
+ },
+ {
+  "id": "W3190470331",
+  "title": "Research on the Evaluation of higher Education Health system based on Principal Component Analysis",
+  "abstract": "The higher education system is the most important component of civic education in addition to primary and junior secondary education, and is therefore valuable both as an industry itself and as a source of national economic training and educated citizens. It is very important for a country to have a healthy and sustainable higher education system. First of all, this paper sets up six indicators to judge the health status of the higher education system: the number of higher education institutions, government education expenditure, the number of students receiving higher education, the number of teachers receiving higher education, student satisfaction and international exchanges. Then establish the principal component analysis model, through the principal component analysis to judge that among the six influencing factors, the number of colleges and universities, government education funds, the number of students receiving higher education and the number of teachers are the main influencing factors. Taking the above main factors as eigenvalues, the same number of countries are selected from the top, list and bottom of the list according to the list of the best countries in education in the world, and their relevant data are collected. The fuzzy comprehensive evaluation model is used for modeling and evaluation, and the analysis results of many countries are obtained.",
+  "year": 2021,
+  "lang": "en",
+  "type": "article",
+  "venue": "Advances in Educational Technology and Psychology",
+  "topic": "Research studies in Vietnam",
+  "field": "Environmental Science",
+  "ca_institutions": [],
+  "funders": []
+ },
+ {
+  "id": "W4395018595",
+  "title": "Effects of Injury Registry Data on Policy Making, Hospitalizations, and Mortality: Protocol for a Systematic Review and Meta-Analysis",
+  "abstract": "BACKGROUND: Initiated in 2021, a Brazilian project aims to establish a national injury registry, compiling comprehensive data on events and individuals across the country, irrespective of injury severity. The registry integrates information from prehospital and hospital care, diverse health systems lacking interoperability, and sectors such as firefighters and the police. Its primary goal is to enhance health surveillance by providing timely, high-quality information, guiding prevention strategies, and informing policy making. The project still aims to reduce long-term morbidity and mortality associated with injuries. OBJECTIVE: A knowledge gap remains regarding the effects of injury registries in relation to policies and injury outcomes. This protocol outlines a systematic review and meta-analysis to answer \"What is the effect of implementation and use of injury registry data on policy making, hospitalization, and mortality?\" METHODS: The systematic review follows PRISMA (Preferred Reporting Items for Systematic Reviews and Meta-Analyses) guidelines, focusing on studies reporting results related to the implementation and use of injury registries, including trauma registries. Outcomes of interest include policy making, hospitalization rates or duration, and mortality. Registries within well-defined administrative boundaries will be included. Data will be collected from PubMed, Embase, Scopus, Web of Science, Lilacs, and references. Records will be independently screened by 2 reviewers, with any disagreements resolved through arbitration by a third reviewer. Homogeneous studies, with 3 or more evaluating the same outcome, may undergo meta-analysis. Subgroup analyses by registry type, injury groups, and other selected variables of interest will be conducted. Sensitivity analysis, risk of bias assessment, publication bias evaluation, and quality appraisal will also be performed. RESULTS: This systematic review will run from November 2023 to June 2024. No identical review was found. Search strategies were finalized, the bibliographic search started, duplicates were eliminated, and title and abstract screening began. Of 35 studies retrieved, 85 were excluded due to duplication, leaving 50 for selection. CONCLUSIONS: This study is timely, aligning with ongoing national efforts to implement an injury registry. By synthesizing available evidence, we will identify the potential of injury registries to guide the decisions of Brazilian policy makers. TRIAL REGISTRATION: PROSPERO CRD42023481528; https://www.crd.york.ac.uk/prospero/display_record.php?RecordID=481528. INTERNATIONAL REGISTERED REPORT IDENTIFIER (IRRID): PRR1-10.2196/55029.",
+  "year": 2024,
+  "lang": "en",
+  "type": "review",
+  "venue": "JMIR Research Protocols",
+  "topic": "Injury Epidemiology and Prevention",
+  "field": "Medicine",
+  "ca_institutions": [],
+  "funders": []
+ },
+ {
+  "id": "W1629801733",
+  "title": "Using Social Media While Waiting in Pain: A Clinical 12-Week Longitudinal Pilot Study",
+  "abstract": "BACKGROUND: Chronic pain places an enormous burden on health care systems. Multidisciplinary pain management services are well documented as an effective means to improve patient outcomes. However, waiting lists to access these services are long and outcomes deteriorate. Innovative solutions such as social media are gaining attention as a way to decrease this burden and improve outcomes. It is a challenge to design research that demonstrates whether social media are acceptable to patients and clinically effective. OBJECTIVE: The aim was to conduct a longitudinal pilot study to understand what aspects of research design are key to the success of running a larger-scale study of social media use in the clinical management of chronic pain. METHODS: A 12-week study examined social media use by patients on the waiting list for the Royal Melbourne Hospital Pain Management Service. Selected social media resources were suggested for use by patients waiting for an appointment at the clinic. Patients filled out measures for pain interference and pain self-efficacy before and after the study. Follow-up was conducted at monthly intervals via telephone semistructured interviews to discuss engagement and garner individual perceptions towards social media use. A social media-use instrument was also administered as part of the after-study questionnaire. RESULTS: Targeted recruitment refined 235 patient referrals to 138 (58.7%) suitable potential participants. Contact was made with 84 out of 138 (60.9%) patients. After a further exclusion of 54 out of 84 (64%) patients for various reasons, this left 30 out of 84 (36%) patients fitting the inclusion criteria and interested in study participation. A final study cohort of 17 out of 30 (57%) was obtained. Demographics of the 17 patients were mixed. Low back pain was the primary condition reported as leading to chronic pain. Semistructured interviews collected data from 16 out of 17 (94%) patients who started the trial, and at final follow-up 9 out of 17 (53%) patients completed questionnaires. Low specificity of the resources to one's condition and time poorness may have been barriers to engagement. CONCLUSIONS: Results suggest that with refinements, this study design can be implemented successfully when conducting a larger social media study. At present, comment cannot be made on what effect using social media can have on patients on hospital waiting lists, nor whether those who use social media while waiting in pain achieve better outcomes from eventual participation in a chronic pain program. Long-term follow-up should be included in future studies to answer this. Future research should focus on multicenter randomized controlled trials, involving patients in the intervention design for improved participation and outcomes and for evidence to be sound.",
+  "year": 2015,
+  "lang": "en",
+  "type": "article",
+  "venue": "JMIR Research Protocols",
+  "topic": "Social Media in Health Education",
+  "field": "Social Sciences",
+  "ca_institutions": [],
+  "funders": "University of Melbourne"
+ },
+ {
+  "id": "W3121644552",
+  "title": "Reconsidering the empirical evidence on the Grossman‐Helpman model of endogenous protection",
+  "abstract": "Abstract. The emergence of the Grossman and Helpman (1994) model of endogenous protection as the preëminent model in the political economy of trade literature has been significantly advanced by the finding that its predictions about the cross‐industry pattern of protection are broadly consistent with the data. However, in their empirical implementation of the Grossman‐Helpman model, researchers have assumed the presence of multiple policy instruments and extraneous political factors. We argue that incorporating these assumptions into the theory significantly changes its predictions about the cross‐industry pattern of protection. JEL classification: F1",
+  "year": 2008,
+  "lang": "en",
+  "type": "article",
+  "venue": "Canadian Journal of Economics/Revue canadienne d économique",
+  "topic": "Global trade and economics",
+  "field": "Economics, Econometrics and Finance",
+  "ca_institutions": [],
+  "funders": []
+ },
+ {
+  "id": "W2163062456",
+  "title": "The Tragedy of Unpersuasive Power: The Convention on Biological Diversity as Exemplary",
+  "abstract": "The complement to “The Tragedy of the Commons” is “The Tragedy of Unpersuasive Power.” A class of problems exists for which technical solutions go unheeded. Logic and evidence do not prevail. Nevertheless, the fallacies and rhetoric do make sense in the light of human evolution as eusocial: groupthink is the consequence of group selection. Exemplary of the class of problems is “access to genetic resources [and] the fair and equitable sharing of benefits arising from the utilization of genetic resources,” (ABS) of the 1993 United Nations Convention on Biological Diversity (CBD). Capacious language in the 2010 Nagoya Protocol on ABS has immortalized contentious issues which could have been resolved through the economics of information, elaborated since 1992. The online discussion groups of the ABS Clearing House afford a natural experiment to test the tragedy. The solution is “delegated delegation” driven by a quest for legacy by the leadership.",
+  "year": 2013,
+  "lang": "en",
+  "type": "article",
+  "venue": "International Journal of Biology",
+  "topic": "Genetically Modified Organisms Research",
+  "field": "Agricultural and Biological Sciences",
+  "ca_institutions": [],
+  "funders": []
+ },
+ {
+  "id": "W3089110923",
+  "title": "Approaches to Indigenous Community History: Mapping the Cemetery at Soowahlie First Nation",
+  "abstract": "This paper is a result of my work at the Ethnohistory Field School at the University of Victoria in 2019. I partnered with Soowahlie First Nation who asked the Field School to produce an updated map of the cemetery on their reserve. The work outlines what I found to be the most useful and relevant practices for researching and mapping Stó:lō community cemeteries. The paper also includes a narrative history of the cemetery itself and its role in the community.",
+  "year": 2020,
+  "lang": "en",
+  "type": "article",
+  "venue": "The Graduate History Review",
+  "topic": "Cultural Heritage Management and Preservation",
+  "field": "Arts and Humanities",
+  "ca_institutions": [],
+  "funders": []
+ },
+ {
+  "id": "W7105639952",
+  "title": "Factores asociados al uso de tácticas políticas en el ascenso laboral: una evaluación desde el contexto de la Universidad de Los Andes, “Núcleo Dr. Pedro Rincón Gutierrez”, Venezuela.",
+  "abstract": "El presente trabajo tiene por objetivo analizar los factores asociados con el uso de tácticas políticas en el ascenso laboral a fin de evaluarlos desde el contexto de las universidades públicas venezolanas, específicamente en la Universidad de los Andes, núcleo “Dr. Pedro Rincón Gutiérrez” – Táchira. Para ello, a partir de una muestra de 77 profesores se aplicó un cuestionario y se realizaron estudios comparativos a través del Análisis de Varianza de un factor ANOVA usando como variable dependiente el género y distintas dimensiones de las tácticas políticas. Los resultados permitieron determinar que el género no es un factor que determina la utilización de las tácticas políticas y la categoría académica no es una variable determinante para la utilización de las tácticas políticas.",
+  "year": 2019,
+  "lang": "es",
+  "type": "article",
+  "venue": "DOAJ (DOAJ: Directory of Open Access Journals)",
+  "topic": "Higher Education in Latin America",
+  "field": "Social Sciences",
+  "ca_institutions": [],
+  "funders": []
+ },
+ {
+  "id": "W6901567890",
+  "title": "Most Recent Data (2005). Statistics Canada. CANSIM: Science and Technology - Research and Development | Country: Canada | Table: Survey of innovation, logging and manufacturing industries, percentage of plants with expenditures on research and development services by different locations | Variable: From all other countries, Clothing manufacturing and leather and allied product manufacturing, 0% of expenditures, Innovative plants | Units: %, 2005. Data-Planet™ Statistical Ready Reference by Conquest Systems, Inc. Dataset-ID: 075-001-182.",
+  "abstract": "Statistics Canada (2015). CANSIM: Science and Technology - Research and Development | Country: Canada | Table: Survey of innovation, logging and manufacturing industries, percentage of plants with expenditures on research and development services by different locations | Variable: From all other countries, Clothing manufacturing and leather and allied product manufacturing, 0% of expenditures, Innovative plants | Units: %, 2005. Data-Planet™ Statistical Ready Reference by Conquest Systems, Inc. [Data-file]. Dataset-ID: 075-001-182. Dataset: Reports statistics on scientific research and experimental development in Canada, including intellectual property management and technology transfer. CANSIM is Statistics Canada's key socioeconomic database. The datasets included here provide statistics on the Canadian population, and the nation’s resources, economy, society, and culture. In addition to conducting a Census every five years, approximately 350 active surveys are conducted on virtually all aspects of Canadian life. Statistics are provided for the nation as a whole, provinces, and other subnational geographies where available. Category: Industry, Business, and Commerce Source: Statistics Canada Established as Canada's central statistical office by the Statistics Act of 1985, Statistics Canada is required to \"collect, compile, analyse, abstract and publish statistical information relating to the commercial, industrial, financial, social, economic and general activities and conditions of the people of Canada.\" Its main objectives are to provide statistical information and analysis about Canada’s economic and social structure and to promote sound statistical standards and practices. http://www.statcan.gc.ca/ Subject: Science &amp; Technology, Research and Development",
+  "year": 2015,
+  "lang": "en",
+  "type": "other",
+  "venue": "Data Planet",
+  "ca_institutions": [],
+  "funders": []
+ },
+ {
+  "id": "W6921928966",
+  "title": "Structural equation modeling in the plant sciences: An example using yield components in oat",
+  "abstract": "Lamb, E. G., Shirtliffe, S. J. and May, W. E. 2011. Structural equation modeling in the plant sciences: An example using yield components in oat. Can. J. Plant Sci. 91: 603-619. Structural equation modeling (SEM) is a powerful statistical approach for the analysis of complex intercorrelated data with a wide range of potential applications in the plant sciences. In this paper we introduce plant scientists to the principles and practice of SEM using as an example an agronomic field trial. We briefly review the history of SEM and path analysis and introduce the statistical concepts underlying SEM. We demonstrate the use of observed and latent variable structural equation models using a multi-site multi-year field trial examining the effects of seed size and seeding density on the plant density and yield of oat in Saskatchewan. Using SEM allowed for insights that a standard univariate analysis would not have revealed. We show that seeding density has strong effects on plant and panicle density, but has very limited effects on final yield. Plant density has a consistent non-linear effect on panicle density across location that was not affected by precipitation. In contrast, the implicit effect of precipitation on seed number appears to be the main driver for final yield. Incorporating precipitation data into the model demonstrates how mechanistic models can be developed by including in the path diagram variables that would normally treated as random factors in a mixed model analysis. Finally, we provide a guideline to assist plant scientists in determining whether SEM is an appropriate method to be used for the analysis of their data.",
+  "year": 2011,
+  "lang": "en",
+  "type": "article",
+  "venue": "BioOne Complete (BioOne)",
+  "topic": "Genetics and Plant Breeding",
+  "field": "Agricultural and Biological Sciences",
+  "ca_institutions": [],
+  "funders": []
+ },
+ {
+  "id": "W2602266471",
+  "title": "German-Speaking Scholars in the United States and Canada from the 1930s",
+  "abstract": "",
+  "year": 2001,
+  "lang": "en",
+  "type": "article",
+  "venue": "Klio",
+  "topic": "Central European national history",
+  "field": "Social Sciences",
+  "ca_institutions": [],
+  "funders": []
+ },
+ {
+  "id": "W3026613021",
+  "title": "A Bibliometric Analysis and Mapping of On-Line Registration System in Hospital",
+  "abstract": "This study analyzes the Bibliometric study about online registration at the hospital. This analysis includes statistical information obtained from the Scopus database of 1,456 research journals taken from 1999 to 2019. Keywords verified from the survey result are used to retrieve relevant articles from the database. The result of the study shows that the journal article occupies the top position is \"Gefitinib plus the best supportive care in patients previously treated with difficult to cure non-small lung cancer: Results of a multicentre, multicentre randomized, placebo-controlled study (Evaluation of Iressa Survival in Lung Cancer\" written by Thatcher N., Chang A ., Parikh P., JR Pereira, Ciuleanu T., Von Pawel J., Thongprasert S., Tan EH, Pemberton K., Archer V., Carroll K with the number of citation 1,852 in 2005. The best author who wrote a journal article related to online registration is Jaffray, DA which donated nine research article publications related to online registration. The institution that most donated article publications is the University of Toronto, 54 journal articles. The majority of paper publications was dominated by United State with 326 papers. The number of articles written with this theme have increased from year to year, in other words this theme is still a tranding topic to be researched and developed by researchers.",
+  "year": 2020,
+  "lang": "en",
+  "type": "article",
+  "venue": "TIJAB (The International Journal of Applied Business)",
+  "topic": "Economic and Financial Impacts of Cancer",
+  "field": "Economics, Econometrics and Finance",
+  "ca_institutions": [],
+  "funders": []
+ },
+ {
+  "id": "W2075935553",
+  "title": "Normalizing the Ideal: Psychology, Schooling, and the Family in Postwar Canada",
+  "abstract": "Homemaker mom, breadwinning dad who played hockey with his son on the weekends, one brother or sister, this was normal Canadian life in the fifties, right? Well, not quite, but author Mona Gleason argues that Canadian psychologists were in part responsible for this fiction of normalcy. Postwar insecurity about the stability of family life became a platform on which to elevate the role of psychologists in society. Moving outside the universities with radio shows and child-rearing manuals, these figures of authority changed the tenor of parental and familial concern from physical to mental health. Influential psychologists like Samuel Laycock and William Blatz spread their own vision of life as the healthy goal for which society should strive. Their ideal of 'normal' reflected and helped entrench the dominant white, Anglo-Celtic, patriarchal vision of life. Those who did not fit the model due to skin colour, class, or ethnicity were marginalized or silenced, and, as Gleason's innovative feminist approach emphasizes, whether male or female, simply trying to fit within the prescribed gender roles inevitably led to alienation. This history of psychology and its effects asks new and necessary questions about the role of the social sciences in shaping the private experiences of ordinary Canadians.",
+  "year": 2000,
+  "lang": "en",
+  "type": "article",
+  "venue": "The American Historical Review",
+  "topic": "Academic and Historical Perspectives in Psychology",
+  "field": "Psychology",
+  "ca_institutions": [],
+  "funders": []
+ },
+ {
+  "id": "W4395458640",
+  "title": "Tricky Grounds",
+  "abstract": "Breaks the deafening silence of Indigenous women&rsquo;s voices in academic leadership positions. Since the 2015 release of the report on the Truth and Reconciliation Commission of Canada, new Indigenous policies have been enacted in universities and a variety of interconnecting Indigenous senior administrative roles have been created. Many of these newly created roles have been filled by Indigenous women. But what does it mean for Indigenous women to be recruited to Indigenize Western institutions that have not undergone introspective, structural change? &#160; Informed by her own experiences and the stories of other Indigenous women working in senior administrative roles in Canadian universities, Candace Brunette-Debassige explores the triple-binding position Indigenous women often find themselves trapped in when trying to implement reconciliation in institutions that remain colonial, Eurocentric, and male-dominated. The author considers too the gendered, emotional labour Indigenous women are tasked with when universities rush to Indigenize without the necessary preparatory work of decolonization. &#160; Drawing on an Indigenous feminist decolonial theoretical lens and positioning Indigenous story as theory, Brunette-Debassige illustrates how Indigenous women can and do preserve and enact their agency through resistance, and help lead deeper transformative changes in Canadian universities. Ultimately, her work provides a model for how reconciliation and Indigenization can be done at an institutional level. &#160;",
+  "year": 2023,
+  "lang": "en",
+  "type": "book",
+  "venue": "University of Regina Press eBooks",
+  "topic": "Indigenous Health, Education, and Rights",
+  "field": "Social Sciences",
+  "ca_institutions": [],
+  "funders": []
+ },
+ {
+  "id": "W4391428684",
+  "title": "Performance of machine translators in translating French medical research abstracts to English: A comparative study of DeepL, Google Translate, and CUBBITT",
+  "abstract": "BACKGROUND: Non-English speaking researchers may find it difficult to write articles in English and may be tempted to use machine translators (MTs) to facilitate their task. We compared the performance of DeepL, Google Translate, and CUBBITT for the translation of abstracts from French to English. METHODS: We selected ten abstracts published in 2021 in two high-impact bilingual medical journals (CMAJ and Canadian Family Physician) and used nine metrics of Recall-Oriented Understudy for Gisting Evaluation (ROUGE-1 recall/precision/F1-score, ROUGE-2 recall/precision/F1-score, and ROUGE-L recall/precision/F1-score) to evaluate the accuracy of the translation (scores ranging from zero to one [= maximum]). We also used the fluency score assigned by ten raters to evaluate the stylistic quality of the translation (ranging from ten [= incomprehensible] to fifty [= flawless English]). We used Kruskal-Wallis tests to compare the medians between the three MTs. For the human evaluation, we also examined the original English text. RESULTS: Differences in medians were not statistically significant for the nine metrics of ROUGE (medians: min-max = 0.5246-0.7392 for DeepL, 0.4634-0.7200 for Google Translate, 0.4815-0.7316 for CUBBITT, all p-values > 0.10). For the human evaluation, CUBBITT tended to score higher than DeepL, Google Translate, and the original English text (median = 43 for CUBBITT, vs. 39, 38, and 40, respectively, p-value = 0.003). CONCLUSION: The three MTs performed similarly when tested with ROUGE, but CUBBITT was slightly better than the other two using human evaluation. Although we only included abstracts and did not evaluate the time required for post-editing, we believe that French-speaking researchers could use DeepL, Google Translate, or CUBBITT when writing articles in English.",
+  "year": 2024,
+  "lang": "en",
+  "type": "article",
+  "venue": "PLoS ONE",
+  "topic": "Artificial Intelligence in Healthcare and Education",
+  "field": "Medicine",
+  "ca_institutions": [],
+  "funders": []
+ },
+ {
+  "id": "W4206327032",
+  "title": "Cultural and educational work of the Harvard Ukrainian Research Institute for preserving the national identity in the second half of the XX century (on materials of Ukrainian-language periodicals of the US diaspora)",
+  "abstract": "The article shows the activity of one of the leading Ukrainian scientific institutions in the diaspora, in particular the Harvard Ukrainian Research Institute, in the sphere of preserving the national identity. The main source base of the study was Ukrainian-language publications of the Ukrainian diaspora in the United States. The main directions of cultural and educational activity of this institution are described i.e. activity of Harvard Ukrainian Summer Institute, opening of three departments of Ukrainian studies in this prestigious university, scientific researches, publications presenting results of Ukrainian scientists and the ones about Ukraine, increase of library funds of Ukrainian, scientific conferences, book exhibitions, art exhibitions, cultural and entertainment events. The interaction of scientists from the USA and Canada in the field of Ukrainian studies, which resulted in the creation of the Standing Conference of Ukrainian Studies, is presented. The main topics of Harvard Ukrainian Studies in the study period are considered. The focus is on the first publications on the Holodomor, which were made at the Harvard Institute. The activities of the Harvard Ukrainian Research Institute are useful as it brings the light to the Ukrainian problem or segment of a particular topic from the Ukrainians’ point of view.",
+  "year": 2021,
+  "lang": "en",
+  "type": "article",
+  "venue": "Bulletin of Luhansk Taras Shevchenko National University",
+  "topic": "Military, Security, and Education Studies",
+  "field": "Social Sciences",
+  "ca_institutions": [],
+  "funders": []
+ },
+ {
+  "id": "W6967592212",
+  "title": "BY-COVID D2.3 Enabling data discovery at source using beacon-like mechanisms",
+  "abstract": "Deliverable D2.3, titled \"Enabling data discovery at source using beacon-like mechanisms,\" presents the outcomes and advancements achieved by Work Package 2 (WP2) partners within the BY-COVID project. The report delineates existing data discovery mechanisms and introduces novel cross-domain data discovery through extensions to the Beacon and the Beacon Network technologies, particularly focusing on its application to COVID-19 data. Throughout the duration of the project, significant progress has been made in expanding standard data discovery mechanisms. Collaborative efforts have resulted in the enhancement of Global Alliance for Genomics and Health (GA4GH) Beacon-based mechanisms, enabling efficient data discovery at its source. This deliverable describes eight different Beacon implementations from BY-COVID partners, and other institutions in Europe and other parts of the world (Canada and Australia). These beacons share cross-domain data, from viral genomes and epidemiology to rich patient information or combined viral and host genomes from the same donors. The achievements prove the commitment to enabling data discovery at its source. By extending Beacon technologies, the project has paved the way for enhanced data accessibility and interoperability across various research domains. Nevertheless, the deliverable shows that the use of popular models and dictionaries (like OMOP or ISARIC eCRF) is not enough to achieve solid interoperability, although it enormously reduces the harmonisation gap and opens the door to generation of tools to bridge these gaps. These advancements signify a crucial step forward in empowering researchers to efficiently access and use diverse datasets, ultimately contributing to more informed decision-making and research outcomes.",
+  "year": 2024,
+  "lang": "en",
+  "type": "article",
+  "venue": "Zenodo (CERN European Organization for Nuclear Research)",
+  "topic": "vaccines and immunoinformatics approaches",
+  "field": "Biochemistry, Genetics and Molecular Biology",
+  "ca_institutions": [],
+  "funders": "European Commission"
+ },
+ {
+  "id": "W4367146478",
+  "title": "Assessing the Change in Operative Treatment Rates for Acute Midshaft Clavicle Fractures",
+  "abstract": "In 2007, a randomized controlled trial (RCT) by the Canadian Orthopaedic Trauma Society (COTS) demonstrated better functional outcomes and a lower proportion of patients who developed malunion or nonunion following operative, compared with nonoperative, treatment of midshaft clavicle fractures. The primary aim of the present study was to compare the proportion of midshaft clavicle fractures treated operatively prior to and following the publication of the COTS RCT. An additional exploratory aim was to assess whether the proportion of midshaft clavicle fractures that were treated with surgery for malunion or nonunion decreased. Methods: This retrospective cohort analysis used population-level administrative health data on the residents of British Columbia, Canada. Cases were identified by International Classification of Diseases, Ninth Revision (ICD-9) diagnostic codes and procedure fee codes. Adult patients (≥18 years) with closed middle-third clavicle fractures between 1997 and 2018 were included. Multivariable logistic regression modeling compared the proportion of clavicle fractures treated operatively before and after January 1, 2007, controlling for patient factors. The Pearson chi-square test compared the proportion of fractures treated operatively for malunion or nonunion in the cohorts. Results: A total of 52,916 patients were included (mean age, 47.5 years; 65.6% male). More clavicle fractures were treated operatively from 2007 onward: 6.9% compared with 2.2% prior to 2007 (odds ratio [OR] = 3.35, 95% confidence interval [CI] = 3.03 to 3.70, p < 0.001). Male sex, moderate-to-high income, and younger age were associated with a greater proportion of operative fixation. The rate of surgery for clavicle malunion or nonunion also increased over this time period (to 4.1% from 3.4%, OR = 1.26, 95% CI = 1.15 to 1.38, p < 0.001). Conclusions: We found a significant change in surgeon practice regarding operative management of clavicle fractures following the publication of a Level-I RCT. With limited high-quality trials comparing operative and nonoperative management, it is important that clinicians, health-care institutions, and health-authority administrations determine what steps can be taken to increase responsiveness to new clinical studies and evidence-based guidelines. Level of Evidence: Prognostic Level III. See Instructions for Authors for a complete description of levels of evidence.",
+  "year": 2023,
+  "lang": "en",
+  "type": "article",
+  "venue": "JBJS Open Access",
+  "topic": "Shoulder and Clavicle Injuries",
+  "field": "Medicine",
+  "ca_institutions": [
+   "Vancouver General Hospital",
+   "Vancouver Coastal Health",
+   "University of British Columbia"
+  ],
+  "funders": []
+ },
+ {
+  "id": "W4391134648",
+  "title": "“Small Wins” for those with Lyme Disease in Canada: Patients in an Embodied Health Movement",
+  "abstract": "Lyme disease patient organizations have formed to challenge a health system that is failing Canadians who suffer from a disease that is ambiguous in its symptomology and trajectory. The framework of an embodied health movement illustrates the importance of the illness experience in mobilizing patients to oppose a system that is reliant on restrictive guidelines that deny testing and treatment and to seek alliances with researchers, physicians, and politicians who are sympathetic to their goals. The strategies of Lyme disease patient organizations, the importance of experiential knowledge, and the roles of both adversaries and allies are examined through a “small wins” approach to gauge successes and setbacks within a Canadian context.",
+  "year": 2024,
+  "lang": "en",
+  "type": "article",
+  "venue": "Zoonotic Diseases",
+  "topic": "Vector-borne infectious diseases",
+  "field": "Immunology and Microbiology",
+  "ca_institutions": [
+   "Mount Allison University",
+   "Queen's University"
+  ],
+  "funders": []
+ },
+ {
+  "id": "W2137713946",
+  "title": "Conflicting Interests in Toronto: Anatomy of a Controversy at the Interface of Academia and Industry",
+  "abstract": "In December 2000, the University of Toronto breached a contract it held with me, initiating a sequence of events that has led to a public letter to the University from a large number of senior figures in the psychopharmacology community, protesting against the infringement of academic freedom involved, and a first-ever legal action seeking redress for violation of academic freedom. This case has been intertwined from the start with a longer running debate about the possibility that the SSRI group of antidepressants may have the potential to trigger suicidality or other serious effects in a subgroup of takers. And this specific issue connects to concerns about conflict of interest in the domain of therapeutics, as well as in science in general, the ghostwriting of scientific articles, and a series of other hot-spots on the interface between academia and industry.",
+  "year": 2002,
+  "lang": "en",
+  "type": "article",
+  "venue": "Perspectives in biology and medicine",
+  "topic": "Pharmaceutical industry and healthcare",
+  "field": "Pharmacology, Toxicology and Pharmaceutics",
+  "ca_institutions": "University College of the North",
+  "funders": []
+ },
+ {
+  "id": "W2000147542",
+  "title": "Pereira’s Attack on Legalizing Euthanasia or Assisted Suicide: Smoke and Mirrors",
+  "abstract": "OBJECTIVE: To review the empirical claims made in: Pereira J. Legalizing euthanasia or assisted suicide: the illusion of safeguards and controls. Curr Oncol 2011;18:e38-45. DESIGN: We collected all of the empirical claims made by Jose Pereira in \"Legalizing euthanasia or assisted suicide: the illusion of safeguards and controls.\" We then collected all reference sources provided for those claims. We compared the claims with the sources (where sources were provided) and evaluated the level of support, if any, the sources provide for the claims. We also reviewed other available literature to assess the veracity of the empirical claims made in the paper. We then wrote the present paper using examples from the review. RESULTS: Pereira makes a number of factual statements without providing any sources. Pereira also makes a number of factual statements with sources, where the sources do not, in fact, provide support for the statements he made. Pereira also makes a number of false statements about the law and practice in jurisdictions that have legalized euthanasia or assisted suicide. CONCLUSIONS: Pereira's conclusions are not supported by the evidence he provided. His paper should not be given any credence in the public policy debate about the legal status of assisted suicide and euthanasia in Canada and around the world.",
+  "year": 2012,
+  "lang": "en",
+  "type": "article",
+  "venue": "Current Oncology",
+  "topic": "Palliative Care and End-of-Life Issues",
+  "field": "Medicine",
+  "ca_institutions": "Dalhousie University",
+  "funders": []
+ },
+ {
+  "id": "W3080902019",
+  "title": "Dissertation Pedagogy in Theory and Practice: Extending Our Roundtable",
+  "abstract": "In this paper, we extend our roundtable session from the 2019 Canadian Writing Centre Association Conference in Vancouver, which ignited dialogue about how writing centre practitioners and educational developers can help faculty review and strengthen their approaches to providing feedback on graduate student theses and dissertations. We discuss how we designed and delivered an instructional development workshop for faculty at our university to strengthen their approaches to supporting graduate student thesis and dissertation writers. In doing so, we aim to foster further dialogue about how writing centre professionals and educational developers can partner with faculty to enhance and develop their approaches to providing feedback on large-scale writing projects.",
+  "year": 2020,
+  "lang": "en",
+  "type": "article",
+  "venue": "Discourse and Writing/Rédactologie",
+  "topic": "Doctoral Education Challenges and Solutions",
+  "field": "Health Professions",
+  "ca_institutions": "University of Guelph",
+  "funders": []
+ },
+ {
+  "id": "W2897214127",
+  "title": "Shedding light on conditions for the successful passive dissemination of recommendations in primary care: a mixed methods study",
+  "abstract": "BACKGROUND: Passive dissemination of information in healthcare refers to the publication or mailing of newly established guidelines or recommendations. It is one of the least costly knowledge translation activities. This approach is generally considered to be ineffective or to result in only small changes in practice. Recent research, however, suggests that passive dissemination could, under certain conditions, result in modifications of practice, similar to more active dissemination approaches. The objective of our study was to uncover the conditions associated with the change in primary care practice, namely Family Medicine Groups (FMGs) in Quebec (Canada), following the passive dissemination of recommendations for the diagnosis and management of Alzheimer's disease and related dementia (AD). METHODS: We used a three-step, innovative, convergent mixed methods design based on a multiple case study in eight FMGs. Two studies were conducted in parallel: (1) a before and after retrospective chart review and a cluster analysis of FMGs performed on two clinical performance indicators-the rate of AD diagnosis and the quality of follow-up care; (2) a qualitative descriptive study using interviews and focus groups with FMG clinicians and healthcare managers. The results were integrated using joint displays. RESULTS: After the passive dissemination of the recommendations, some FMGs started to implement the recommendations while other FMGs did not change their practice with respect to the AD diagnosis rate and quality of follow-up care. Three interrelated conditions were identified for the successful passive dissemination of clinical recommendations: (1) FMG clinicians with a moderate to high baseline expertise and confidence, which was linked to their existing collaboration with hospital-based specialists in dementia and their motivation; (2) the presence of a self-identified champion (individual champion or collective championship) in the FMGs taking the lead, motivating the clinical staff or organizing training; (3) the availability of sufficient clinical staff enabled these two conditions to have an impact on the implementation of recommendations through passive dissemination. CONCLUSIONS: Passive dissemination of clinical recommendations, a low-cost knowledge translation approach, may lead to practice change under some specific conditions. More active dissemination efforts may only be needed in sites where these conditions are absent.",
+  "year": 2018,
+  "lang": "en",
+  "type": "article",
+  "venue": "Implementation Science",
+  "topic": "Health Policy Implementation Science",
+  "field": "Health Professions",
+  "ca_institutions": [
+   "McGill University",
+   "Jewish General Hospital"
+  ],
+  "funders": [
+   "Canadian Institutes of Health Research",
+   "Ministère de la Santé",
+   "Ministère de la Santé et des Services sociaux"
+  ]
+ },
+ {
+  "id": "W2340766493",
+  "title": "Goodness-of-fit tests for one-shot device accelerated life testing data",
+  "abstract": "In this article, we develop a formal goodness-of-fit testing procedure for one-shot device testing data, in which each observation in the sample is either left censored or right censored. Such data are also called current status data. We provide an algorithm for calculating the nonparametric maximum likelihood estimate (NPMLE) of the unknown lifetime distribution based on such data. Then, we consider four different test statistics that can be used for testing the goodness-of-fit of accelerated failure time (AFT) model by the use of samples of residuals: a chi-square-type statistic based on the difference between the empirical and expected numbers of failures at each inspection time; two other statistics based on the difference between the NPMLE of the lifetime distribution obtained from one-shot device testing data and the distribution specified under the null hypothesis; as a final statistic, we use White's idea of comparing two estimators of the Fisher Information (FI) to propose a test statistic. We then compare these tests in terms of power, and draw some conclusions. Finally, we present an example to illustrate the proposed tests.",
+  "year": 2015,
+  "lang": "en",
+  "type": "article",
+  "venue": "Communications in Statistics - Simulation and Computation",
+  "topic": "Statistical Distribution Estimation and Applications",
+  "field": "Mathematics",
+  "ca_institutions": "McMaster University",
+  "funders": []
+ },
+ {
+  "id": "W2803880880",
+  "title": "Making Lung Cancer Clinical Trials More Inclusive: Recommendations for Expanding Eligibility Criteria",
+  "abstract": "",
+  "year": 2018,
+  "lang": "en",
+  "type": "article",
+  "venue": "Journal of Thoracic Oncology",
+  "topic": "Lung Cancer Treatments and Mutations",
+  "field": "Medicine",
+  "ca_institutions": "University of Ottawa",
+  "funders": []
+ },
+ {
+  "id": "W1965599725",
+  "title": "The Dream and the Cross",
+  "abstract": "The Dream of the Rood is one of the earliest Christian poems in Old English and an example of the genre of dream poetry. While a complete text can be found in the 10th-century “Vercelli Book,” the poem is considerably older, and its oldest occurrence is carved (in runes) on the 7- to 8th-century Ruthwell Stone Cross. In this article, we present the work done in the framework of the “Visionary Cross” project, starting from the digitization of the Ruthwell Cross to the creation of a web-based digital edition of The Dream of the Rood , as it is carved on the Cross. The 3D data has been collected and processed with the explicit aim of creating a multimedia framework able to present the highly detailed digital model acquired with 3D scanning technology, together with the transcription and translation of the runes that can be found on its surface. The textual and spatial information are linked through a system of bidirectional links called Spots, which allow the users to navigate freely over the multimedia content, keeping the 3D and textual data synchronized. The present work discusses the different issues that arose during the work, from digitization and processing to the design of a tool for the integration of three-dimensional content in the context of the presentation on the web platform of heterogeneous multimedia data. We end with the difficulties involved in the creation of an XML encoding that could account for the necessities of the visualization system but remain within the scholarly encoding standards of the relevant disciplinary community.",
+  "year": 2015,
+  "lang": "en",
+  "type": "article",
+  "venue": "Journal on Computing and Cultural Heritage",
+  "topic": "Video Analysis and Summarization",
+  "field": "Computer Science",
+  "ca_institutions": "University of Lethbridge",
+  "funders": []
+ },
+ {
+  "id": "W4309245579",
+  "title": "Regression modeling of time-to-event data with censoring",
+  "abstract": "",
+  "year": 2022,
+  "lang": "en",
+  "type": "article",
+  "venue": "Nature Methods",
+  "topic": "Statistical Methods and Inference",
+  "field": "Mathematics",
+  "ca_institutions": "Canada's Michael Smith Genome Sciences Centre",
+  "funders": []
+ },
+ {
+  "id": "W2936953207",
+  "title": "Is stroop induced mental fatigue accurately reported using vas or is it just all in your head",
+  "abstract": "To determine the effectiveness of Stroop protocols (Stroop, 1935) as mentally fatiguing interference tasks, subjective measures such as visual-analog-scales (VAS) are often used. There is significant inter-individual variability associated with these types of scales however (Dittrich et al., 2007), and the absence of direct assessments may lead to overestimation of the degree to which Stroop truly induces mental fatigue. For example, we suggest that, not only should tasks sensitive to mental fatigue reveal performance decrements following a Stroop intervention, performance on the Stroop task itself should deteriorate as well. Participants completed a Raven's Progressive Matrices test, shown as sensitive to fatigue (Linde & Bergstrome, 1992) and were then randomly assigned into either Stroop or control (watch a documentary) groups. Following these interventions, participants completed a second Raven's test and recorded perceived levels of mental fatigue on VAS every two minutes. As expected, VAS scores increased with time suggesting increasing subjective levels of mental fatigue. Of greater interest was that, although performance on Raven's declined predictably with difficulty, it did so at the same rate for both groups. Furthermore, there was no evidence that performance on the Stroop task itself (in either RT or error data) deteriorated as the study progressed. Thus, although participants in the Stroop condition self-reported typically observed increases in VAS measures of mental fatigue, there was no evidence to suggest that Stroop: a) negatively influenced performance on a direct measure of executive function or b) that Stroop performance deteriorated as mental fatigue (suggested by VAS scores) accumulated.",
+  "year": 2018,
+  "lang": "en",
+  "type": "article",
+  "topic": "Neural and Behavioral Psychology Studies",
+  "field": "Neuroscience",
+  "ca_institutions": "McMaster University",
+  "funders": []
+ },
+ {
+  "id": "W2613309781",
+  "title": "Impact of a Gender-Balanced Summer Engineering and Science Program on Future Course and Career Choices",
+  "abstract": "",
+  "year": 2006,
+  "lang": "en",
+  "type": "article",
+  "venue": "Women in Engineering ProActive Network",
+  "topic": "Career Development and Diversity",
+  "field": "Social Sciences",
+  "ca_institutions": [
+   "Nortel (Canada)",
+   "Natural Sciences and Engineering Research Council"
+  ],
+  "funders": []
+ },
+ {
+  "id": "W6968682310",
+  "title": "Small Data projects/Big Data research: contemporary problems and historical solutions",
+  "abstract": "The live version of presentation with transcript and slides. Has a few minor changes.",
+  "year": 2022,
+  "lang": "en",
+  "type": "article",
+  "venue": "Zenodo (CERN European Organization for Nuclear Research)",
+  "topic": "Big Data Technologies and Applications",
+  "field": "Decision Sciences",
+  "ca_institutions": "University of Lethbridge",
+  "funders": []
+ },
+ {
+  "id": "W4251036510",
+  "title": "Exploring interruption in HRI using wizard of oz",
+  "abstract": "We are interested in exploring how robots controlled using Wizard of Oz (WoO) should interrupt humans in various social settings. While there is considerable work on interruption and interruptibility in HCI, little has been done to explore how these concepts will map robotic interaction. As part of our efforts to investigate interruption and interruptibility in HRI we used WoO-based methodology to investigate robot behaviours in a simple interruption scenario. In this report we contribute a design critique that discusses this methodology, and common concerns that could be generalized to other social HRI experiments as well as reflections on our future interruption HRI research.",
+  "year": 2010,
+  "lang": "en",
+  "type": "article",
+  "venue": "Proceeding of the 5th ACM/IEEE international conference on Human-robot interaction - HRI '10",
+  "topic": "Personal Information Management and User Behavior",
+  "field": "Decision Sciences",
+  "ca_institutions": "University of Calgary",
+  "funders": []
+ },
+ {
+  "id": "W6976902796",
+  "title": "Additional file 1 of Improving the usefulness of evidence concerning the effectiveness of implementation strategies for knowledge products in primary healthcare: protocol for a series of systematic reviews",
+  "abstract": "Additional file 1. Detailed search strategy in Ovid Medline.",
+  "year": 2020,
+  "lang": "en",
+  "type": "article",
+  "venue": "Figshare",
+  "topic": "Health Policy Implementation Science",
+  "field": "Health Professions",
+  "ca_institutions": [
+   "Université du Québec à Trois-Rivières",
+   "McGill University",
+   "Université de Montréal",
+   "Centre for Interdisciplinary Research in Rehabilitation",
+   "Université Laval"
+  ],
+  "funders": []
+ },
+ {
+  "id": "W2260155201",
+  "title": "The role of models in translating within-host dynamics to parasite evolution",
+  "abstract": "Mathematical modelling provides an effective way to challenge conventional wisdom about parasite evolution and investigate why parasites 'do what they do' within the host. Models can reveal when intuition cannot explain observed patterns, when more complicated biology must be considered, and when experimental and statistical methods are likely to mislead. We describe how models of within-host infection dynamics can refine experimental design, and focus on the case study of malaria to highlight how integration between models and data can guide understanding of parasite fitness in three areas: (1) the adaptive significance of chronic infections; (2) the potential for tradeoffs between virulence and transmission; and (3) the implications of within-vector dynamics. We emphasize that models are often useful when they highlight unexpected patterns in parasite evolution, revealing instead why intuition yields the wrong answer and what combination of theory and data are needed to advance understanding.",
+  "year": 2015,
+  "lang": "en",
+  "type": "review",
+  "venue": "Parasitology",
+  "topic": "Evolution and Genetic Dynamics",
+  "field": "Biochemistry, Genetics and Molecular Biology",
+  "ca_institutions": "University of Toronto",
+  "funders": [
+   "Natural Environment Research Council",
+   "Sight Research UK",
+   "Royal Society",
+   "Wellcome Trust"
+  ]
+ },
+ {
+  "id": "W3109871844",
+  "title": "REDUCE-IT: accumulation of data across prespecified interim analyses to final results",
+  "abstract": "Abstract Background REDUCE-IT (Reduction of Cardiovascular Events with Icosapent Ethyl-Intervention Trial), an event-driven trial, randomized 8,179 statin-treated patients with elevated triglycerides (TGs) and increased cardiovascular (CV) risk to icosapent ethyl (IPE); pure, stable prescription eicosapentaenoic acid, 4g/day or placebo. 1,612 primary endpoint events (CV death, nonfatal myocardial infarction [MI], nonfatal stroke, coronary revascularization, or hospitalization for unstable angina) projected 90% power to detect 15% relative risk reduction (5% 2-sided alpha). The key secondary composite endpoint was CV death, nonfatal MI, or nonfatal stroke. An independent data and safety monitoring committee (DMC) performed prespecified interim analyses (IAs) at ∼60% (IA1 31 May 2016 data cutoff; 2.9 y median primary endpoint follow-up) and ∼80% (IA2 01 May 2017; 3.7 y) of events; final analysis included 1,606 events (06 Sep 2018; 4.9 y median study follow-up). Purpose Explore REDUCE-IT efficacy and safety across prespecified IAs for insight into progression of robustness and consistency of conclusions. Methods The interim statistical analysis plan guided study continuation decisions by a prespecified decision-making process, including assessment of safety, treatment arm performance, primary composite endpoint formal analyses, and informal robustness analyses, with no futility or efficacy stopping requirements. Prior to DMC IA study continuation decisions, the need for a mature dataset to support the robustness of final efficacy and safety findings was discussed. Sponsor, Steering Committee, and Clinical Endpoint Committee were blinded throughout. Results Primary and key secondary endpoints achieved statistical significance at IA1 and IA2 that persisted at final analyses (p-value below final adjusted 2-sided alpha of 0.0437); hazard ratios also remained consistent and similar robustness was observed across individual endpoint components; clarity of findings across endpoints and subgroups improved with more events. Stopping for overwhelming efficacy was discussed at each IA; prior to IA study continuation recommendations, the DMC considered historical examples of failed CV outcome studies for TG-lowering and mixed omega-3 therapies, reflected on the potential for overestimating final demonstrated benefit using incomplete data, and weighed societal impacts of fuller datasets relative to patient therapy access. Conclusions Consistent, potent efficacy emerged early and persisted across the two prespecified interim and final analyses. The mature dataset demonstrated highly statistically significant reductions in the primary (25%; p=0.00000001) and key secondary (26%; p=0.0000006) endpoints and allowed robust analyses to support overall efficacy and safety conclusions. Allowing the REDUCE-IT dataset to fully mature provided clinicians with robust, consistent, and reliable data upon which to base clinical decisions for IPE in CV risk reduction. Funding Acknowledgement Type of funding source: Other. Main funding source(s): The study was funded by Amarin Pharma, Inc.",
+  "year": 2020,
+  "lang": "en",
+  "type": "article",
+  "venue": "European Heart Journal",
+  "topic": "Advanced Causal Inference Techniques",
+  "field": "Mathematics",
+  "ca_institutions": [
+   "Université de Montréal",
+   "Montreal Heart Institute"
+  ],
+  "funders": [
+   "Amarin Pharma",
+   "Amarin Corporation"
+  ]
+ },
+ {
+  "id": "W2403520411",
+  "title": "Best Practices in Data Analysis and Sharing in Neuroimaging using MRI",
+  "abstract": "Abstract Neuroimaging enables rich noninvasive measurements of human brain activity, but translating such data into neuroscientific insights and clinical applications requires complex analyses and collaboration among a diverse array of researchers. The open science movement is reshaping scientific culture and addressing the challenges of transparency and reproducibility of research. To advance open science in neuroimaging the Organization for Human Brain Mapping created the Committee on Best Practice in Data Analysis and Sharing (COBIDAS), charged with creating a report that collects best practice recommendations from experts and the entire brain imaging community. The purpose of this work is to elaborate the principles of open and reproducible research for neuroimaging using Magnetic Resonance Imaging (MRI), and then distill these principles to specific research practices. Many elements of a study are so varied that practice cannot be prescribed, but for these areas we detail the information that must be reported to fully understand and potentially replicate a study. For other elements of a study, like statistical modelling where specific poor practices can be identified, and the emerging areas of data sharing and reproducibility, we detail both good practice and reporting standards. For each of seven areas of a study we provide tabular listing of over 100 items to help plan, execute, report and share research in the most transparent fashion. Whether for individual scientists, or for editors and reviewers, we hope these guidelines serve as a benchmark, to raise the standards of practice and reporting in neuroimaging using MRI.",
+  "year": 2016,
+  "lang": "en",
+  "type": "preprint",
+  "venue": "bioRxiv (Cold Spring Harbor Laboratory)",
+  "topic": "Functional Brain Connectivity Studies",
+  "field": "Neuroscience",
+  "ca_institutions": "McGill University",
+  "funders": [
+   "Instituto Nacional de Psiquiatría Ramón de la Fuente Muñiz",
+   "National University of Singapore",
+   "Child Mind Institute",
+   "Medical Research Council",
+   "University of Warwick",
+   "McGill University"
+  ]
+ },
+ {
+  "id": "W2070748491",
+  "title": "Représentations mentales maternelles : concepts et mesures liés à l’attachement",
+  "abstract": "<titre>R&#233;sum&#233;</titre>Au cours des derni&#232;res ann&#233;es, la litt&#233;rature concernant l&#8217;attachement a vu &#233;merger de multiples concepts relatifs aux repr&#233;sentations mentales maternelles. La sensibilit&#233; maternelle ayant &#233;t&#233; d&#233;tr&#244;n&#233;e de son statut d&#8217;unique m&#233;diateur de la transmission interg&#233;n&#233;rationnelle des patrons d&#8217;attachement, plusieurs &#233;quipes de chercheurs proposent des concepts et mesures portant sur les repr&#233;sentations parentales de l&#8217;enfant qui visent notamment &#224; expliquer le d&#233;veloppement de la relation d&#8217;attachement parent-enfant. Ce foisonnement est certes encourageant, mais il comporte &#233;galement le risque que la validit&#233; de ces mesures ne soit pas suffisamment d&#233;montr&#233;e, conduisant ainsi &#224; un manque de rigueur empirique. Le but de cet article est d&#8217;introduire les cinq principaux concepts et mesures pr&#233;sents dans la litt&#233;rature actuelle en soulignant leurs forces et leurs limites sur les plans conceptuel et empirique.",
+  "year": 2009,
+  "lang": "fr",
+  "type": "article",
+  "venue": "Enfance",
+  "topic": "Attachment and Relationship Dynamics",
+  "field": "Psychology",
+  "ca_institutions": [
+   "Université Laval",
+   "Université de Montréal"
+  ],
+  "funders": []
+ },
+ {
+  "id": "W2041165583",
+  "title": "La m&amp;eacute;thodologie au service de l&amp;apos;avancement des connaissances en mati&amp;egrave;re de jeux de hasard et d&amp;apos;argent",
+  "abstract": "Cet article passe en revue trois méthodologies susceptibles de faire avancer les connaissances en matière de jeux de hasard et d'argent: la méthodologie longitudinale, la méthodologie expérimentale et la méthodologie génétique. Des exemples servent à illustrer comment ces méthodologies permettent: a) de documenter le développement des habitudes et des problèmes de jeu; b) d'identifier les facteurs de risque à présomption causale associés à leur apparition, à leur maintien ou à leur aggravation; c) d'explorer la signification de la cooccurrence des problèmes de jeu avec d'autres problèmes de santé mentale; d) d'analyser les possibles liens transactionnels entre les problèmes de jeu et d'autres problèmes d'adaptation; et, enfin, e) de dégager des leçons par rapport à la modélisation théorique et à l'intervention préventive.",
+  "year": 2012,
+  "lang": "fr",
+  "type": "article",
+  "venue": "Journal of Gambling Issues",
+  "topic": "Gambling Behavior and Treatments",
+  "field": "Psychology",
+  "ca_institutions": [
+   "Université de Montréal",
+   "Research Unit on Children's Psychosocial Maladjustment"
+  ],
+  "funders": []
+ },
+ {
+  "id": "W2917906870",
+  "title": "Évaluation de l’efficacité de la bibliothèque : analyse des études majeures",
+  "abstract": "L’évaluation scientifique de l’efficacité d’une bibliothèque exige la mesure de ses performances documentaires au moyen d’indicateurs de résultats. Les études d’évaluation en bibliothéconomie reposent sur l’approche systémique (recherche opérationnelle) et se servent de modèles analytiques pour quantifier la capacité des centres documentaires de répondre adéquatement aux multiples besoins des usagers. L’auteur effectue une analyse critique des principales études de performance ayant pour but de mesurer l’efficacité d’une bibliothèque qui doit répondre aux requêtes documentaires exprimées, soit par l’auteur ou le titre, soit par un sujet. L’emploi de méthodes quantitatives dans les projets d’évaluation des bibliothèques permettra d’améliorer la qualité des services documentaires et de modifier l’image de la bibliothéconomie.",
+  "year": 2019,
+  "lang": "fr",
+  "type": "article",
+  "venue": "Documentation et bibliothèques",
+  "topic": "Efficiency Analysis Using DEA",
+  "field": "Decision Sciences",
+  "ca_institutions": "Cegep de Trois-Rivieres",
+  "funders": []
+ },
+ {
+  "id": "W3197454173",
+  "title": "Déploiements des archives, altérité et espaces de mémoires relationnels : pour une archivistique éthique anticoloniale",
+  "abstract": "Dans un contexte où la communauté archivistique internationale insiste sur la nécessité pour les nations autochtones d’être en contrôle des archives qui les concernent, cet article expose différentes problématiques qui nous amènent à réfléchir sur les particularités de l’environnement archivistique au Québec. En premier lieu, il signale les composantes coloniales de la production d’archives sur l’Île de la Tortue (Amérique du Nord) et la contribution des conceptions archivistiques traditionnelles au colonialisme d’implantation. Évoquant des énoncés mis en lumière par l’archivistique communautaire et les valeurs émancipatrices de l’archivistique, cet article propose une exploration de variables et paradigmes orientés vers la décolonisation des espaces de mémoire et des concepts archivistiques au Québec. Il fait ainsi part de l’effet structurant de l’archivistique et de la nécessité d’un engagement avec les conceptions de mémoire et ontologies autochtones afin de favoriser un développement de connaissances éthique. Cet article évoque alors le rôle, les responsabilités et les limites des archivistes et des institutions de mémoire concernant la résurgence autochtone.",
+  "year": 2021,
+  "lang": "fr",
+  "type": "article",
+  "venue": "Documentation et bibliothèques",
+  "topic": "Digital and Traditional Archives Management",
+  "field": "Arts and Humanities",
+  "ca_institutions": "Library and Archives Canada",
+  "funders": []
+ },
+ {
+  "id": "W7059310529",
+  "title": "Introduction",
+  "abstract": "Femmes remarquables s’étant illustrées dans une discipline traditionnellement masculine, Sylvia Ostry et Kari Polanyi Levitt sont deux grandes figures de l’économie politique canadienne. Cet ouvrage retrace leurs trajectoires respectives, sur près d’un siècle, et montre les liens étroits entre celles-ci et leurs contributions scientifiques. Ostry et Polanyi Levitt ont marqué les débats économiques qui ont accompagné la définition des politiques publiques et la coopération économique internat...",
+  "year": 2025,
+  "lang": "fr",
+  "type": "book-chapter",
+  "venue": "Industrias Culturais (Universidade de Coimbra)",
+  "topic": "Magnetic Field Sensors Techniques",
+  "field": "Engineering",
+  "ca_institutions": [],
+  "funders": []
+ }
+]

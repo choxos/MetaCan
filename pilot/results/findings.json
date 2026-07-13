@@ -50,7 +50,7 @@
       "residual_pct_frame_title_only": 14.5,
       "caveat": "Run on a 500-work hash-ordered sample of the no-abstract stratum, not the frame: the cascade is rate-limited and a million lookups is days. The recovery rate is an estimate with sampling error, and it is an estimate of a CEILING (an abstract that EXISTS is recoverable; it does not follow the screen then classifies the work correctly). Only works with a DOI can be looked up, so the DOI-less part of the stratum is untouched and its size bounds what any cascade can do. PubMed and Europe PMC are biomedical; Crossref is not, and it is in the chain for exactly that reason: a cascade of biomedical indexes would close the gap unevenly and make the residual bias MORE discipline-shaped while appearing to improve coverage. That reasoning was right and the remedy is not available: Crossref recovered 2 of 189 and Europe PMC 7, because publishers largely do not deposit abstracts to Crossref, so no discipline-agnostic rescue exists (D15). Restricting screening to abstract-bearing works remains a DECLARED EXCLUSION with a measured cost, not a scoping convenience, and the audit keeps a sampling floor in the excluded stratum so that cost stays estimable."
     },
-    "computed_at_utc": "2026-07-13T04:26:15Z"
+    "computed_at_utc": "2026-07-13T05:25:29Z"
   },
   "adjudication": {
     "headline": "AN INDEPENDENT BLINDED JUDGE SAYS THE RUBRIC IS SILENT ON 89% OF THE WORKS THE MODELS FOUGHT OVER. Fable 5, which is not one of the three screened arms, adjudicated all 179 contested works seeing three screener opinions as A/B/C in random order with no model names, so it was asked which reading of the RUBRIC is right rather than which model to trust. It shows no arm preference (spread 1.16x, chi-square p = 0.493), so it is not a fourth vote for one of the screeners, and it overruled ALL THREE on 6 works. Its verdict on the instrument: the rubric is SILENT on 159 of 179 contested works, and only 17 splits are a screener misapplying a rule that actually exists. THE FIELD'S BOUNDARY IS BEING SET BY THE SCREENER, NOT BY THE INSTRUMENT. The seams that cost the most agreement are methods_dev_vs_study (39 works), lis_sts_asymmetry (26), and history_of_science (19). This is what converts adjudication from a tiebreak into a measurement: not 179 answers, but a frequency-weighted census of which sentences the rubric is missing and exactly how many works each one costs. The judge's TIERS are used for nothing and produce no estimate: a model cannot certify a model, and that argument applies to the judge too.",
@@ -59,7 +59,11 @@
       "blinded": true,
       "blinding": "three screener opinions presented as A/B/C, order randomized per work, no model names in the prompt",
       "contested_works": 179,
-      "judge_agrees_with": [94, 95, 109],
+      "judge_agrees_with": [
+        94,
+        95,
+        109
+      ],
       "judge_agrees_with_none": 6,
       "arm_preference_spread": 1.16,
       "arm_preference_chisq_p": 0.493,
@@ -67,12 +71,31 @@
       "rubric_is_silent": 159,
       "pct_rubric_is_silent": 89,
       "splits_from_screener_error": 17,
-      "seam_census": [39, 26, 19, 19, 17, 12, 10, 8, 8, 7, 6, 5, 3],
-      "adjudicated_tiers": [90, 23, 36, 30],
+      "seam_census": [
+        39,
+        26,
+        19,
+        19,
+        17,
+        12,
+        10,
+        8,
+        8,
+        7,
+        6,
+        5,
+        3
+      ],
+      "adjudicated_tiers": [
+        90,
+        23,
+        36,
+        30
+      ],
       "adjudicated_in_scope": 59,
       "caveat": "The judge is a MODEL, not a human, and this is NOT a reference standard. It is an independent, blinded, documented fourth reading whose value is the SEAM CENSUS, not the tiers. Its tiers are used for nothing downstream and produce no estimate. The arm-preference test shows the judge is not CAPTURED; it says nothing about whether it is CORRECT, and correctness is exactly what the human audit exists to establish. A model cannot certify a model, which is the whole argument of this project and it applies to the judge too."
     },
-    "computed_at_utc": "2026-07-13T04:26:25Z"
+    "computed_at_utc": "2026-07-13T05:25:40Z"
   },
   "affiliation_gap": {
     "headline": "508,744 of 793,883 works (64%) in the metaresearch topic space have no raw affiliation strings in OpenAlex.",
@@ -82,7 +105,7 @@
       "without_raw_affiliation": 508744,
       "pct_without": 64.1
     },
-    "computed_at_utc": "2026-07-13T04:25:42Z"
+    "computed_at_utc": "2026-07-13T05:24:55Z"
   },
   "agent_variance": {
     "headline": "Haiku, the model finding 13 budgets the entire screen on, lands near Sonnet's base rate (1.27% vs 1.06%) and agrees with it on 98.1% of the frame, but their in-scope SETS overlap 16% unweighted and 10% design-weighted (Sonnet-GPT: 54%/37%); of Sonnet's 58 positives Haiku agrees on 12. RATE AGREEMENT IS NOT SET AGREEMENT. Worse: agents of the SAME model on the SAME prompt disagree beyond chance in BOTH arms after conditioning on stratum (CMH p = 0.0056 and 0.015), with raw spreads 3.1x and 5.2x against 2.2x between models, and the agents' ordering FLIPS between arms. The noise inside one model is at least the size of the difference between models, and the pilot's own 40-agent screen is too underpowered to rule the same instability out (5 of 37 chunks found zero metaresearch; p = 0.113).",
@@ -122,7 +145,7 @@
       "pilot_underpowered_not_homogeneous": true,
       "caveat": "The first draft's between-agent test was CONFOUNDED: the stratum mix differs by agent (p = 1.3e-17), and the draft asserted a verification that did not exist (DEVIATIONS.md D13). The tests above condition on stratum, and the heterogeneity survives in both arms. The 13.2x design-weighted spread the draft led with rests on five high-weight events and is demoted to a recorded, leverage-sensitive descriptive. THE INFERENCE IS SCOPED: there are three agents per arm, assigned consecutive chunk blocks without randomisation or a run-time manifest, so these p-values license 'these runs are not exchangeable', not a population claim about agents in general; that is exactly enough to break a budget that assumed exchangeability, and the full study assigns agents randomised, manifest-logged, fixed-size chunks with a duplicate-agent reliability arm. The pilot's own agents give p = 0.113 on ~2 expected events per chunk: underpowered, so the pilot is uninformative on agent homogeneity, not exonerated. Haiku was tested on the six-field payload (the pilot's own deviation, D1) and on a guided eight-field arm, so the defensible conclusion is 'not shown to be an interchangeable measurer, and unstable in the arms tested', not 'cannot screen'. An eight-field neutral-prompt arm is not used at all: one agent claimed six label files it never wrote (D11), so no payload effect is reported from any arm. The guided arm is used ONLY for the between-agent contrast, which its shared prompt leaves internally valid."
     },
-    "computed_at_utc": "2026-07-13T04:25:56Z"
+    "computed_at_utc": "2026-07-13T05:25:08Z"
   },
   "agreement": {
     "headline": "Swap which model is called 'the screener' and the base rate moves from 1.06% to 2.37%: a 2.2x spread, from 45,397 to 101,776 works in the frame. The two screeners agree on in/out for 98.4% of the frame (design-weighted), but that figure is dominated by the settled rejects: agreement falls to 95% inside the contested boundary. THE SCREENER-SWAP RANGE, NOT THE BINOMIAL CI ON EITHER MODEL ALONE, IS THE HONEST UNCERTAINTY ON THE FIELD'S SIZE.",
@@ -183,7 +206,7 @@
       },
       "caveat": "PROCESS METRIC, NOT ACCURACY. Two LLMs share training data and failure modes; their errors are correlated and most correlated on the boundary. This is not 'duplicate screening': that term's warrant comes from independent human judgement. Accuracy rests on the human-coded probability sample (PROTOCOL s6.2). Agreement is reported per stratum because a pooled kappa on a 1.3% base rate is dominated by the cell where agreement is free (the kappa paradox). And note what the high agreement figure CONCEALS: it is dominated by the settled-OUT mass, while the two screeners imply base rates a factor of two apart. Quoting agreement without the swap would be presenting the reassuring statistic."
     },
-    "computed_at_utc": "2026-07-13T04:25:45Z"
+    "computed_at_utc": "2026-07-13T05:24:58Z"
   },
   "audit_power": {
     "headline": "The audit as first specified could not measure what it exists to measure. A simple random sample of the 4,243,096-record screened-out mass yields an expected 0.4 hits from the 600 records budgeted; seeing 20 would take 2,009 coder-hours against the 65 planned. Score-stratified oversampling rescues it only partly (the pilot shows 30 of 37 disputed works sit at the contested boundary), and it stays BLIND to the confident rejects. Which works those are is a MECHANISM, not a measured differential: the rubric says judge on the title alone with no abstract, and says T2 work may use none of the field's vocabulary, so a work with neither is rejected confidently and never sampled. (An earlier version cited a 3.6x figure here as if it were measured; it rested on four works and is withdrawn.) So recall is measured two other ways: against the 5,737 works that already carry rubric labels, and by KNOWN-ITEM recall on a venue reference set, because venue is an external criterion immune to the aboutness that defeats everything else.",
@@ -220,7 +243,7 @@
       "n_in_scope": 75,
       "caveat": "The recall grid assumes the screen's misses are uniform in the rejected mass, which the pilot shows they are not (they concentrate at the boundary). That makes the naive design LESS hopeless than the grid implies but does not save it, and it does nothing at all about the confident-reject blind spot. Known-item recall on a venue reference set is a non-probability estimate: it bounds and diagnoses recall on the hard cases, it does not replace the design-weighted population estimate."
     },
-    "computed_at_utc": "2026-07-13T04:25:48Z"
+    "computed_at_utc": "2026-07-13T05:25:01Z"
   },
   "base_rate": {
     "headline": "Screening 5,737 unfiltered Canadian works against the rubric puts metaresearch at 1.31% of Canadian research, implying ~56,206 works in the 4,299,418-work frame, sizing the field without a search strategy at all. The 95% CI on this screener's labels is 1.03-1.64%, but that is sampling error, NOT the uncertainty: swap the screener and the estimate lands outside it (finding 10). The field is somewhere between 37,000 and 83,000 works, and only the human audit can narrow that.",
@@ -246,7 +269,7 @@
       "binomial_ci_is_not_the_uncertainty": true,
       "caveat": "Machine labels, not a human gold standard, and the binomial CI above is sampling error on ONE screener; the honest uncertainty is the screener-swap range in finding 10 (1.06% to 2.37%). The partition is also not a uniform draw: it under-represents works with abstracts, where the screen finds 2x more metaresearch (finding 11). This is a hypothesis with a denominator; the human-coded probability sample tests it. Do NOT divide topic_route_retrieved by estimated_field_size; see finding 12."
     },
-    "computed_at_utc": "2026-07-13T04:25:45Z"
+    "computed_at_utc": "2026-07-13T05:24:57Z"
   },
   "base_rate_robustness": {
     "headline": "The base rate's real bias is not recency but MISSING ABSTRACTS: 31.5% of the partition has none, and the screen finds 0.78% metaresearch there against 1.55% where an abstract exists (chi-square p = 0.023, robust to adjustment for year and language). A third of the frame is screened on its title alone. What this does NOT show, and an earlier draft wrongly claimed, is that the blindness is DIFFERENTIAL by tradition: the T2 no-abstract cell holds 4 works and the interaction is not significant (p = 0.141). That claim is withdrawn, as is 'Erudit's exact profile' (the stratum is 99% English and the works are NEWER, not older). The main effect is the finding.",
@@ -292,7 +315,7 @@
       "supersedes": "THREE retractions live here. (1) An earlier version tested ERA only, called the base rate robust, and published 3100/2900/1500 as percentages (a dplyr summarise() column-masking bug). (2) It then claimed the blindness is DIFFERENTIAL, T2 losing 3.6x against T1's 1.4x, and made that the proposal's whole answer to the inclusiveness criterion. The T2 no-abstract cell holds FOUR works and the interaction is not significant (p = 0.141). WITHDRAWN. (3) It claimed missing abstracts track 'older, non-English' records, 'Erudit's exact profile'. Backwards: they are NEWER, and the stratum is 99% ENGLISH. WITHDRAWN. See DEVIATIONS.md D4, D5, D6.",
       "caveat": "What survives is the MAIN EFFECT and only the main effect: a third of the frame is screened on its title alone and the screen finds half as much metaresearch there (p = 0.023, robust to adjustment for year and language). That is a real coverage problem and a reason to stratify the audit on abstract availability. It is NOT evidence of differential blindness by tradition, and this finding no longer says it is. Separately, the era check is underpowered (75 events, 3 strata) and cannot refute an era effect; it merely fails to detect one. And note D2: the harness silently dropped 465 records, non-randomly, on this very covariate."
     },
-    "computed_at_utc": "2026-07-13T04:25:46Z"
+    "computed_at_utc": "2026-07-13T05:24:59Z"
   },
   "canadian_linkage": {
     "headline": "Affiliation finds 14,873 works; a further 3,964 are about Canada with no Canadian affiliation. NSERC has 9.2x SSHRC's linked works, so funder-based rules under-count the social sciences.",
@@ -315,7 +338,7 @@
         "Impact": 475
       }
     },
-    "computed_at_utc": "2026-07-13T04:25:44Z"
+    "computed_at_utc": "2026-07-13T05:24:57Z"
   },
   "canadian_linkage_misnames_itself": {
     "headline": "BOTH CLAUSES OF 'CANADIAN' MEASURE SOMETHING OTHER THAN WHAT THEY ARE NAMED. This project has spent all its effort on what retrieval MISSES; this is the first hard evidence about what it wrongly ADMITS. (1) CA-AFF, the PRIMARY estimand's main clause: 17,466 works enter the frame on a Canadian 'institution' that does not exist. OpenAlex hands 'Discovery Air (Canada)' to a Brazilian linguistics paper, 'Musee de la Civilisation' to a Brazilian food-science paper, and 'Impact', which is not an institution at all but a parse failure with an institution id, to a Spanish COVID essay. The CA-AFF route also carries thousands of works in Latvian and Indonesian. That count is a LOWER BOUND: the artifact strings tested are only the ones screening agents noticed BY EYE while doing something else, and nobody has swept the institution vocabulary, so the true precision is UNKNOWN rather than merely unmeasured. (2) ABOUT-CA, the SECONDARY estimand: the retrieval route means 'Canada appears in the text' and the rubric field means 'the Canadian research SYSTEM is a substantive object of study', and in the strata built entirely on the former, the latter fires on 1.8% to 3.5% of works. Worse, `about_ca` cannot be true unless the work is ALREADY about research, so it is nearly collinear with tier: only 39 works in 5,600 are both in-scope AND about the Canadian research system. THE SECONDARY ESTIMAND CANNOT BE ESTIMATED FROM THE STRATUM DESIGNED FOR IT. Four screening agents found this independently and all four proposed the same repair: split the field into `about_ca_system` and `about_ca_topic`, because one boolean cannot separate 'Canadian data, universal claim' from 'a claim about Canada'.",
@@ -358,7 +381,7 @@
       "found_by": "Screening agents, reporting records they were given for an unrelated reason. Four of them independently reported that the ABOUT-CA route and the rubric's about_ca field are different constructs, and all four proposed the same repair without having seen each other's reports.",
       "caveat": "The artifact count is a LOWER BOUND, and deliberately reported as one: the strings tested are only those agents noticed by eye. No sweep of the OpenAlex institution vocabulary has been done, so the true CA-AFF precision is unknown, not merely unmeasured. That is the honest state and it is why the human audit samples the retrieved stratum as well as the non-retrieved one: precision is measured, not assumed."
     },
-    "computed_at_utc": "2026-07-13T04:26:25Z"
+    "computed_at_utc": "2026-07-13T05:25:39Z"
   },
   "capture_recapture_fails": {
     "headline": "Naive two-route capture-recapture estimates 467,541 Canadian metaresearch works, implying Canada produces 59% of the world's metaresearch against an observed 1.9%. The estimator is void here; we cut it rather than dress it up as a lower bound.",
@@ -373,7 +396,7 @@
       "canada_implied_share_pct": 58.9,
       "estimator_void": true
     },
-    "computed_at_utc": "2026-07-13T04:25:43Z"
+    "computed_at_utc": "2026-07-13T05:24:56Z"
   },
   "distillation_ceiling": {
     "headline": "A CLASSIFIER TRAINED ON LLM LABELS CANNOT EVEN REPRODUCE ITS OWN TEACHER, LET ALONE ADJUDICATE THREE. Students distilled from each model match their own teacher at Jaccard 0.17, while the three teachers match EACH OTHER at 0.5 to 0.56: the classifier is a worse approximation of Opus than Grok is. Distilling from Opus also moves you AWAY from Grok (-0.35), so distillation does not bridge the models' disagreement, it degrades away from all of them. THE SELF-TRAINING LOOP THEN REFUTED MY OWN PREDICTION. I argued at length that it would shrink the positive class toward the confident anglophone core; run on 20,000 works the models never saw, it did not: positive rate drift +0.00 points, French share drift +0.00 points, because class weighting prevents the collapse, exactly as the adversarial review warned before the run ('a serious risk, NOT A THEOREM'). What the loop DID do is reach a fixed point immediately and recycle its own labels (224 -> 424 training positives, then nothing): it CONVERGED WITHOUT LEARNING, and a fixed point looks identical from the inside whether its labels are right or wrong. What the classifier IS worth is the stratifier: 48.2% of the in-scope works sit in its top decile against a blind baseline of 10%, a 4.8x lift in in-scope works found per unit of human coding effort, and design-weighted estimates stay unbiased however noisy it is. THE MACHINE DECIDES WHERE THE HUMANS LOOK. IT NEVER SUPPLIES A LABEL.",
@@ -426,7 +449,7 @@
       "used_to_produce_any_estimate": false,
       "caveat": "The student is TF-IDF word+char n-grams with a cross-validated logistic head: the cheap classifier the question was actually about. A fine-tuned multilingual encoder would raise the student-vs-teacher number and change none of the argument, because the ceiling is set by the LABELS, not by the model class. The self-training loop's non-collapse is CONDITIONAL on class weighting and should not be read as a general safety result: it says the collapse is avoidable, not that the loop is informative. And nothing here produces a prevalence estimate; the classifier is a stratifier, and the human audit is the instrument."
     },
-    "computed_at_utc": "2026-07-13T04:26:20Z"
+    "computed_at_utc": "2026-07-13T05:25:35Z"
   },
   "erudit": {
     "headline": "Erudit matches 0 sources in OpenAlex, but its OAI-PMH endpoint is live and exposes 379 harvestable sets.",
@@ -437,7 +460,7 @@
       "oai_earliest_datestamp": "2011-06-03",
       "oai_harvestable_sets": 379
     },
-    "computed_at_utc": "2026-07-13T04:25:42Z"
+    "computed_at_utc": "2026-07-13T05:24:55Z"
   },
   "funder_route_recall": {
     "headline": "The PRIMARY ESTIMAND leans on CA-FUND to rescue works whose affiliation is missing (finding 2: 64% have no affiliation string), and nothing had tested it. Tested against CIHR's own database of 44,190 funded projects, the result REFUTED THE HYPOTHESIS I WROTE BEFORE RUNNING IT: OpenAlex tags 178,133 frame works with CIHR, or 4.03 per grant, a plausible rate showing no under-tagging (DEVIATIONS.md D14). What the data DOES support needs no hypothesis of mine: 71.2% OF THE FRAME CARRIES NO FUNDER METADATA AT ALL, which is CA-FUND's hard ceiling, and 65.9% of Canadian-AFFILIATED works carry none either. Both clauses of the estimand rest on metadata that is mostly absent, which is why the frame is a union of four routes and why the audit must sample the works no route reached.",
@@ -471,7 +494,7 @@
       "is_an_aggregate_not_a_record_level_join": true,
       "caveat": "CIHR's CSV carries no DOIs and no publication links, so this is an AGGREGATE reconciliation, not a record-level known-item join, and NO RECALL POINT ESTIMATE is claimed. It establishes a CEILING on CA-FUND (the route cannot see a funder OpenAlex never recorded), which is a bound, not a measurement. The papers-per-grant ratio is reported because I ran it, and it REFUTES the hypothesis I wrote before running it: at 4.03 per grant it is a plausible publication rate and shows no CIHR under-tagging at all. It is also the wrong instrument, for the same reason the retracted 32.4% coverage figure was (D3): its numerator and denominator are not linked record to record, so the quotient has no estimand behind it. Record-level linkage is finding 21."
     },
-    "computed_at_utc": "2026-07-13T04:26:00Z"
+    "computed_at_utc": "2026-07-13T05:25:13Z"
   },
   "instrument_contradicts_itself": {
     "headline": "THE LOCKED INSTRUMENT CONTRADICTS ITSELF, AND NOTHING CAUGHT IT. The rubric and the output schema name TWO DIFFERENT controlled vocabularies for the same field, `genre`, overlapping on 2 values (empirical and other); 4 terms exist only in the rubric and 7 only in the schema. Every screener was handed both and told to obey both, and each invented its own reconciliation: GPT-5.6 and Grok followed the rubric and are therefore 26.9% and 20.9% ILLEGAL against the schema, while Opus drew from both lists at once and emitted 13 distinct values. The validator checked `tier` and never checked `genre`, so 16,800 labels passed every check that ran. It was found by an agent mentioning it in one clause of a report about something else. Nothing crashed; the variable simply meant a different thing in each arm, and the variance would have been attributed to the models. The labels are NOT repaired, because harmonising the arms after seeing them would destroy the only evidence that they diverged; the genre field is reported as unusable and the fix belongs in the instrument, at a version boundary.",
@@ -547,7 +570,7 @@
       "found_by": "An Opus screening agent mentioned it in one clause of a report about something else, while working chunks it had been given for an unrelated reason. It was not looking for this, no check was watching for it, and it had already survived 6,000 labels across three models.",
       "caveat": "The genre variable from this screen is reported as UNUSABLE and is used for nothing. It is not remapped to a common vocabulary: the three arms resolved the contradiction differently, and harmonising them after the fact would destroy the only evidence that they did."
     },
-    "computed_at_utc": "2026-07-13T04:26:20Z"
+    "computed_at_utc": "2026-07-13T05:25:34Z"
   },
   "label_limits": {
     "headline": "Two limits on the machine labels, found by attacking the fixes. (A) The topic route's recall is 12% against screener A and 7% against screener B: finding 14's instrument (ii) scores filters against MACHINE labels, so it measures agreement with a machine, not accuracy, and finding 10 already showed that swings by a factor of two. The conclusion strengthens (the second screener thinks the route is WORSE) but 12% is not truth. (B) The pilot holds exactly 1 French in-scope work, so seeing 20 French positives needs ~1,620 coded French records against an audit budget of 1,000. FRENCH SENSITIVITY IS NOT ESTIMABLE IN AN OPENALEX-ONLY FRAME. That is an argument for the Erudit harvest, not against the French claim, but the pilot did not run that harvest, so the power is stated as a condition rather than a promise.",
@@ -574,7 +597,7 @@
       "french_power_depends_on": "the Erudit harvest, which the pilot did NOT run (it verified the endpoint: 379 live sets)",
       "caveat": "(A) is a limit on every recall number this project quotes against machine labels, including its own headline. (B) is a limit on the inclusiveness promise: French sensitivity cannot be estimated in an OpenAlex-only frame, because Erudit matches zero OpenAlex sources and the francophone literature is therefore largely absent from the frame rather than merely sparse in it. Both are stated in the proposal rather than left for a reviewer."
     },
-    "computed_at_utc": "2026-07-13T04:25:48Z"
+    "computed_at_utc": "2026-07-13T05:25:01Z"
   },
   "language_gap": {
     "headline": "French is 2.7% (395/14,873) of Canadian metaresearch in OpenAlex. A dedicated French lexicon finds 168 Canadian works, against 8,026 in English.",
@@ -588,7 +611,7 @@
       "fr_lexicon_world_hits": 4682,
       "canada_share_of_world_french": 3.6
     },
-    "computed_at_utc": "2026-07-13T04:25:43Z"
+    "computed_at_utc": "2026-07-13T05:24:55Z"
   },
   "openalex_is_metered": {
     "headline": "The OpenAlex API is metered (1,000 credits per ~11h; $0.10 free tier). Enumerating the 4,299,418-work Canadian frame needs 21,498 cursor-paged calls: 10 days per pass on the free tier. An API-based pipeline at this scale is neither free nor reproducible; the pinned snapshot is both.",
@@ -603,7 +626,7 @@
       "days_on_free_tier_per_pass": 10,
       "prepaid_cost_per_pass_usd": 2.15
     },
-    "computed_at_utc": "2026-07-13T04:25:44Z"
+    "computed_at_utc": "2026-07-13T05:24:57Z"
   },
   "polysemy": {
     "headline": "The single term reproducibility retrieves 43,392 Canadian works, of which only 0.8% fall in the metaresearch topic space. Keyword retrieval cannot separate the metaresearch sense from the everyday one.",
@@ -629,7 +652,7 @@
       "disciplined_lexicon_hits": 8026,
       "worst_term": "reproducibility"
     },
-    "computed_at_utc": "2026-07-13T04:25:43Z"
+    "computed_at_utc": "2026-07-13T05:24:56Z"
   },
   "preprint_coverage": {
     "headline": "The frame carries 156,086 preprints, and the tempting move was to assert that OpenAlex covers the preprint servers and skip the ingest. That is a COVERAGE CLAIM, and this project does not get to make one from inside the pipeline being claimed for: it is the topic route certifying its own recall (finding 12). Measured instead against the servers' OWN API, OpenAlex indexes 99.6% of the 705 bioRxiv and medRxiv preprints enumerated (3 missing). The claim survives measurement, so no separate preprint ingest is built.",
@@ -646,7 +669,7 @@
       "separate_ingest_needed": false,
       "caveat": "The bioRxiv API exposes no author country, so the sample is mostly non-Canadian and the clean quantity is INDEX coverage (does OpenAlex hold the preprint at all?), not Canadian recall: a preprint the index lacks cannot enter any frame by any route, so index coverage is the binding upper bound. The Canadian sub-count is small and is reported as a check, not as an estimate. arXiv is NOT tested here (its OAI endpoint pages differently); the frame carries 11,647 arXiv works and that claim remains untested against arXiv itself."
     },
-    "computed_at_utc": "2026-07-13T04:26:16Z"
+    "computed_at_utc": "2026-07-13T05:25:30Z"
   },
   "retraction_record": {
     "headline": "Joined to the Canadian frame by DOI, Retraction Watch records 143 works that OpenAlex does NOT flag as retracted, including 49 outright retractions. But the undercount is the smaller problem. 52 of these carry an EXPRESSION OF CONCERN, and OpenAlex HAS NO FIELD FOR ONE: `is_retracted` is a boolean over a state space with at least four values (retraction, expression of concern, correction, reinstatement), so it can express one and silently reports the rest as FALSE, which reads as 'fine'. Nor can a boolean carry WHY. This is finding 1's disease in a second schema: the canonical database cannot express the distinction the field turns on.",
@@ -678,7 +701,7 @@
       "is_a_frame_route": false,
       "caveat": "This is an ATTRIBUTE, not a frame route. A retracted cardiology paper is retracted cardiology, not metaresearch, and admitting works on the strength of a retraction would let an interesting signal masquerade as the estimand. The DOI join can only see works that HAVE a DOI, and OpenAlex flags some works Retraction Watch does not match, which may be DOI drift rather than disagreement; the asymmetry reported here is one-directional on purpose (what RW adds), because that is the direction the join can support."
     },
-    "computed_at_utc": "2026-07-13T04:25:59Z"
+    "computed_at_utc": "2026-07-13T05:25:12Z"
   },
   "screening_cost": {
     "headline": "The full rubric over the 4,299,418-work frame with two screeners costs $6,567, not the $30,608 an earlier version of this script reported: the rubric is a system prompt sent once per CALL, and the pilot's own chunks batch 155 works per call, so it was overcharged 4.7x. That error was not cosmetic. It made me propose a cheap TRIAGE in front of the screen, which is a RETRIEVAL STEP in a project whose central finding is that retrieval destroys these maps. With the arithmetic right the triage is unnecessary: the full rubric over EVERY work in the frame, plus a second screener on a 20,000-record sample, costs $1,110 and leaves ~$1,790 for the human coder. THE PREFILTER IS DELETED.",
@@ -713,7 +736,7 @@
       "supersedes": "an earlier version charged the rubric once per work, reported $24,379 for the full-frame two-screener design, called it 'eight times the grant', and used that to justify a cheap prefilter. The rubric is a system prompt sent once per CALL, and the pilot's own chunks batch 155 works per call. DEVIATIONS.md D7.",
       "caveat": "Token counts use a 4-chars-per-token approximation and list prices as of 2026-07; both will move, and the conclusion is robust to +/-25% in either. Screening the frame with a cheaper model than the pilot used makes the CHOICE OF MODEL more consequential, not less: finding 10 shows two screeners already imply base rates a factor of two apart. That is precisely why the second screener and the screener-swap range are reported, and why the human audit is the study."
     },
-    "computed_at_utc": "2026-07-13T04:25:47Z"
+    "computed_at_utc": "2026-07-13T05:25:00Z"
   },
   "the_frame": {
     "headline": "The frame is BUILT, not estimated. All 482 partitions of a pinned OpenAlex snapshot were streamed and filtered, and the Canadian frame holds 4,299,418 works, each exactly once. For most of this project's life 'the frame' was 3,507,205, an EXTRAPOLATION from a single partition, hardcoded in six scripts; the estimate was 18% LOW, and every cost, audit-power and field-size figure computed against it has moved. The route that matters: 1,565,226 works (36.4% of the frame) are INVISIBLE TO AFFILIATION ALONE. A frame built on Canadian affiliation would hold 2,734,192 works and would never see them. That is finding 2 at frame scale, and it is why the frame is a union of four routes and why every record carries the provenance of the route that admitted it.",
@@ -740,7 +763,7 @@
       "built_utc": "2026-07-12T17:59:59Z",
       "caveat": "The frame is bounded by OpenAlex. A work whose Canadian link is invisible to the metadata (no affiliation, no funder, no textual mention, no Canadian venue) cannot enter ANY frame by any method, and scholarship indexed by neither OpenAlex nor Erudit is not estimated here. That is a hard boundary of the data, not of this design, and it is stated rather than hidden. Erudit matches ZERO OpenAlex sources (finding 3), so the francophone share reported here (5.5%) measures the pipeline, NOT Canadian scholarship."
     },
-    "computed_at_utc": "2026-07-13T04:26:19Z"
+    "computed_at_utc": "2026-07-13T05:25:34Z"
   },
   "three_model_screen": {
     "headline": "Three frontier models (Opus 4.8, GPT-5.6 high, Grok 4.5) screened the same 5,600 works, drawn from the real 4.3M frame under a design whose seven strata PARTITION it (an earlier five-stratum design could not reach 12.9% of the frame at all; D22). Design-weighted base rates span 2.54% to 3.81% (1.5x). But the RATE is not the finding, the SETS are: of the 274 works ANY model called metaresearch, only 104 (38%) were called metaresearch by ALL THREE, and 117 (43%) rest on a SINGLE model's opinion; pairwise Jaccard on the in-scope sets is about 50%. THE FIELD'S BOUNDARY IS NOT A LINE THE MODELS SHARE; IT IS A REGION THEY EACH CUT DIFFERENTLY, and that result is STABLE across n = 1,000, 2,000 and 5,600 (unanimity 37%, 37%, 38%). A SECOND, PRETTIER CLAIM DID NOT SURVIVE: at n = 2,000 the models agreed markedly more on 'is this about research at all' (1.43x here) than on 'is it in scope' (1.51x here), and this project said so in capitals; at n = 5,600 the two spreads are within noise (ratio 1.06) and the claim is WITHDRAWN (D23). The largest tier confusion is OUT-vs-T2, every time, at every sample size: the adjacent traditions the inclusiveness criterion exists to protect. The deliverable is not a base rate. It is the disagreement dossier, the 274 works that mark the empirical boundary, each carrying all three models' stated reasons, and the criteria that have to be written against them.",
@@ -806,7 +829,7 @@
       "deliverable": "pilot/screening/frame1k/disagreement_dossier.json: every work any model called in-scope, with all three labels. This, not the base rate, is what the criteria must be written against.",
       "caveat": "These are MACHINE labels and none of them is truth (finding 15). The unanimity rate is not accuracy: three models sharing training data can be wrong together, and they are most correlated exactly on the boundary cases the field's definition turns on. What this measures is where the RUBRIC is underspecified, which is a property of the instrument and is exactly what a criteria document needs. Base rates are design-weighted from a stratified sample, so they estimate the frame; the Jaccard and unanimity figures are unweighted set quantities over the sample and are NOT frame estimates."
     },
-    "computed_at_utc": "2026-07-13T04:26:19Z"
+    "computed_at_utc": "2026-07-13T05:25:33Z"
   },
   "topic_route_recall": {
     "headline": "Scored against the rubric, the topic route retrieves 12% of Canadian metaresearch (95% CI 5.6-21.6%) at 60% precision: it misses 66 of 75. It fails because OpenAlex files a work by what it is about, and metaresearch about cardiology reads as cardiology: the field is invisible to topic retrieval precisely because it is about other fields.",
@@ -838,7 +861,7 @@
       "supersedes": "the earlier 32.4% figure (14,873/45,850), which divided a retrieved set by a true field size",
       "caveat": "Small n on the positive class ( 75 metaresearch works, of which 15 were on the route), so the intervals are wide. Separately, the sample-implied route size does not reconcile with the API's 14,873 and I cannot say why at n = 15 on-route works; the likeliest cause is that one updated_date partition is not a uniform draw (finding 11). Recall is unaffected: it is a within-sample ratio, not an extrapolation."
     },
-    "computed_at_utc": "2026-07-13T04:25:47Z"
+    "computed_at_utc": "2026-07-13T05:24:59Z"
   },
   "topics": {
     "headline": "Of 4,516 OpenAlex topics, 0 name metaresearch as a field. The 11 topics that do carry metaresearch content are scattered across 7 different OpenAlex fields.",
@@ -871,7 +894,7 @@
         "T11875"
       ]
     },
-    "computed_at_utc": "2026-07-13T04:25:41Z"
+    "computed_at_utc": "2026-07-13T05:24:54Z"
   },
   "trial_linkage": {
     "headline": "The registry is the only REFERENCE STANDARD in this project not made of machine labels: ClinicalTrials.gov knows a Canadian trial happened independently of any pipeline, so it cannot be wrong in the pipeline's favour. Of 304 publications SPONSORS THEMSELVES reported as results of completed Canadian-located trials, the frame holds 160: a naive recall of 52.6%, which fell so close to the 44.5% THIS PROPOSAL OPENS WITH that it read as a replication. IT IS AN ARTIFACT, and running the disambiguation is the only thing that caught it: 137 of the 145 'misses' have NO CANADIAN AUTHOR (multi-site international trials with a Canadian SITE), and a frame of Canadian RESEARCH is CORRECT to exclude them. A trial with a Canadian site is not a publication with a Canadian author. Against the population the frame actually claims, recall is 95.2% (95% CI 90.8-97.9), and the real defect is 8 works OpenAlex holds WITH a Canadian author that the frame's own routes still missed. The frame is GOOD at this, the dramatic parallel was a coincidence between two different populations, and I had every incentive not to check. DEVIATIONS.md D16.",
@@ -904,7 +927,23 @@
       "is_metaresearch_recall": false,
       "caveat": "This measures FRAME recall (does the Canadian frame hold the publication at all?), NOT metaresearch recall: trial reports are primary research and the rubric screens them OUT. It is the precondition for screening, not the screen. The reference standard is the sponsor's OWN reported result publications, so it is incomplete in a known direction: sponsors under-report, which means the true set of trial publications is LARGER than the standard and this recall figure is measured only on the ones we can see. Trials are matched by Canadian LOCATION, which is not the same as Canadian authorship, so some result publications may have no Canadian author and legitimately fall outside the frame; that direction is not controlled here and it bounds the interpretation. Only PMIDs resolvable to a DOI can be looked up."
     },
-    "computed_at_utc": "2026-07-13T04:26:18Z"
+    "computed_at_utc": "2026-07-13T05:25:33Z"
+  },
+  "v1_to_v2": {
+    "headline": "WRITING THE MISSING SENTENCES RESOLVED 54% OF THE DISAGREEMENTS THEY WERE WRITTEN AGAINST. The 179 works three frontier models split on under rubric v1 were re-screened, by the same three models, under a v2 whose rules were written against a published, frequency-weighted census of WHICH SENTENCES THE RUBRIC WAS MISSING. 96 of 179 are now unanimous, and the pairwise Jaccard of the in-scope sets moves from 0.19 to 0.36. This is a measurement almost nobody makes, and it is available ONLY because the ambiguity was enumerated, adjudicated and PUBLISHED BEFORE it was resolved: the census went out first, so v2 could not be quietly tuned until the numbers looked good. SCOPE, stated rather than blurred: these works were SELECTED FOR DISAGREEMENT, so this says the rules resolve the cases they were written for; it does NOT say frame-wide agreement rose, because regression to the mean alone would move a set selected this way. The unbiased test is a full re-screen of all 5,600 under v2, prespecified, and it is what the funded work runs.",
+    "values": {
+      "contested_under_v1": 179,
+      "unanimous_under_v2": 96,
+      "pct_resolved": 54,
+      "still_contested": 83,
+      "in_scope_by_model_v1": [129, 68, 53],
+      "in_scope_by_model_v2": [73, 32, 44],
+      "jaccard_v1_mean": 0.187,
+      "jaccard_v2_mean": 0.362,
+      "sequence": "lock v1; screen 5,600 works with three models; have an independent blinded judge adjudicate every disagreement AND name the seam that caused it; PUBLISH the seam census; write v2 against the census and lock it BEFORE re-screening; re-screen; report the difference, whatever it is. Publishing the census before resolving it is what stops v2 being tuned until the numbers improve.",
+      "caveat": "SELECTED FOR DISAGREEMENT. These 179 works are exactly the ones the three models split on under v1, so this measures whether v2's rules resolve the cases they were written for. It CANNOT support a claim about agreement across the frame: regression to the mean alone would move a set selected this way. The unbiased test is a full re-screen of all 5,600 under v2, prespecified, and it is what the funded work runs."
+    },
+    "computed_at_utc": "2026-07-13T05:25:40Z"
   },
   "zero_probability_region": {
     "headline": "THE SAMPLING DESIGN COULD NOT REACH 12.9% OF THE FRAME, AND NO WEIGHT CAN FIX THAT. A stratified design rests on one identity, sum(N_h) = N. It was never checked. 549,370 works (12.9% of the sampling frame) had an inclusion probability of EXACTLY ZERO: 366,856 that no predicate claimed, because aff_core excluded everything ABOUT Canada while about_only excluded everything AFFILIATED with Canada, so a work that was both fell between them; and 182,514 more whose predicate evaluated to SQL NULL, which `WHERE p` and `WHERE NOT p` BOTH decline to select, so they were in no stratum and were not even orphans. Nothing threw. Every stratum returned exactly the n it asked for, because a stratum cannot know about the works it was never asked about, and the design drew a clean textbook probability sample OF 87% OF THE FRAME while every number computed from it said 'the frame'. A zero-probability work is not underweighted, it is UNREACHABLE, and design weights are the guarantee this project leans on hardest. THE CELL IT DELETED WAS THE SECONDARY ESTIMAND'S: 328,912 Canadian-affiliated works about Canada, in a study whose secondary estimand is 'metaresearch about the Canadian research system'. Repaired by adding the exact NULL-safe complement as two strata; the 7 strata now partition the frame by construction (4,255,410 = 4,255,410), asserted on every build. It was found by an adversarial model adding up five numbers I handed it. The defect made the sample TIDIER and the variance SMALLER, which is why nothing about it felt wrong: the errors that survive are the ones that flatter you.",
@@ -924,6 +963,6 @@
       "found_by": "An adversarial model asked to attack the classifier design. Its first move was to add up the five design weights in a summary table I had handed it: 2000x1119 + 1000x664.2 + 750x536.8 + 750x310.9 + 500x335.8 = 3,705,875, against a frame of 4,299,418. I had never added them up.",
       "caveat": "The repair does not retro-fix numbers produced under the broken design; those estimated a 3.7M subpopulation and were reported under the frame's name, and saying so IS the finding. Every design-weighted figure is now re-derived against the seven-stratum design. The five original predicates are kept byte-for-byte because 5,000 works had already been drawn from them by hash order, and widening a stratum silently re-draws it."
     },
-    "computed_at_utc": "2026-07-13T04:26:23Z"
+    "computed_at_utc": "2026-07-13T05:25:38Z"
   }
 }

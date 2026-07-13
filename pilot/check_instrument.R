@@ -39,7 +39,19 @@
 
 suppressPackageStartupMessages({ library(jsonlite); library(cli); library(glue) })
 
-RUBRIC  <- "protocol/rubric.md"
+# THE RUBRIC IS THE CURRENT ONE, NOT A HARDCODED PATH.
+#
+# This guard was written specifically to catch a codebook that contradicts its own
+# schema. It then FAILED TO CATCH EXACTLY THAT IN v2, because the path was hardcoded
+# to v1 and v2 is a new file. v2's "Records that cannot be screened" section mandates
+# `insufficient_payload` as "a flag distinct from OUT", and the schema's tier enum is
+# T1/T2/T3/OUT: v2 requires a value its own output contract cannot express. That is
+# D20, committed by the document that fixes D20, in front of a guard aimed at the
+# wrong file. See DEVIATIONS.md D25.
+#
+# WRITING A RULE DOES NOT ENFORCE A RULE. Only a check that runs, ON THE THING THAT
+# SHIPPED, enforces a rule.
+RUBRIC <- if (file.exists("protocol/rubric-v2.md")) "protocol/rubric-v2.md" else "protocol/rubric.md"
 SCHEMA  <- "protocol/screening-schema.json"
 DEFECTS <- "protocol/known-defects.json"
 
@@ -128,6 +140,38 @@ if (schema_says_always && rubric_says_unless) {
   }
 } else {
   cli_alert_success("`confidence`: the rubric's rule and the schema's gloss of it agree")
+}
+
+# --- does the rubric demand a TIER the schema cannot express? --------------------
+# The reverse direction of the tier check above, and the one that was missing. The
+# old check asked "does the rubric define every tier the schema allows?" and never
+# asked "can the schema express every tier the rubric demands?" v2 demands
+# `insufficient_payload`; the schema cannot say it.
+demanded <- regmatches(rubric_txt, gregexpr("`(insufficient_payload)`", rubric_txt))[[1]]
+demanded <- unique(gsub("`", "", demanded))
+undeliverable <- setdiff(demanded, schema_tiers)
+if (length(undeliverable)) {
+  if ("insufficient-payload-not-in-schema" %in% quarantined) {
+    d <- known[[which(quarantined == "insufficient-payload-not-in-schema")]]
+    cli_alert_warning(c(
+      "QUARANTINED DEFECT {.strong insufficient-payload-not-in-schema}: the rubric demands tier value{?s} \\
+       {.val {undeliverable}}, which the schema's enum cannot express.",
+      "i" = "Known, recorded ({d$deviation}). Paid off in: {d$paid_off_in}."
+    ))
+  } else {
+    # NO cli PLURALIZATION INSIDE glue(). `{?s}` is cli syntax; glue evaluates it as
+    # R's `?s` help operator, which returns character(0), so `c(problems, glue(...))`
+    # appends NOTHING and this guard reports "self-consistent" while holding an
+    # unreported contradiction. That is exactly what it did, in the guard whose job is
+    # to catch silent contradictions. See DEVIATIONS.md D25.
+    problems <- c(problems, paste0(
+      "the rubric DEMANDS the value '", paste(undeliverable, collapse = ", "),
+      "' for `tier`, and the schema enum (", paste(schema_tiers, collapse = ", "),
+      ") CANNOT EXPRESS it. A screener told to emit a value its output contract forbids ",
+      "will emit something else, silently, and each screener will pick a different something."))
+  }
+} else {
+  cli_alert_success("`tier`: the schema can express every value the rubric demands")
 }
 
 if (length(problems)) {

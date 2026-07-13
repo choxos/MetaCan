@@ -751,3 +751,61 @@ GPT-5.6's illegal tier values, this run, were `other` and `policy`. **Those are 
 ### Consequence
 
 Quarantined in `protocol/known-defects.json` alongside the genre split, with the same terms: not fixed in place (v1 is locked and 5,600 works were screened against it), fixed at the v2 boundary, and `make lint` fails on any further contradiction. `confidence` from the v1 screen is reported as **not comparable across arms**, and the adjudication queue for the human audit will be defined by the v2 rule, not the v1 ambiguity.
+
+---
+
+## D25. The rubric that fixes the codebook-vs-schema bug reintroduced the codebook-vs-schema bug, and the guard against it failed silently. Twice.
+
+**Date found:** 2026-07-13, by a screening agent, in a footnote to a report about something else. For the third consecutive time.
+
+### The chain
+
+**1. v2 was written to fix D20.** D20 was: the rubric and the schema named two different vocabularies for `genre`, every screener was handed both, and 16,800 labels passed every check because the validator looked at `tier` and never at `genre`. The lesson I wrote down was **"a codebook is code; it gets a test."**
+
+**2. v2 reintroduced it.** v2's new "Records that cannot be screened" section mandates `insufficient_payload` as *"a flag distinct from OUT"* that *"must be reported, not silently dropped."* The schema's tier enum is `["T1","T2","T3","OUT"]`.
+
+> **v2.0 demanded a value its own output contract could not express.**
+
+A screener told to emit a value its contract forbids will emit *something else*, silently, and each screener will pick a different something. Which is precisely D20, committed by the document that fixes D20.
+
+**3. The guard did not catch it, because it was aimed at the wrong file.** `pilot/check_instrument.R` exists for exactly this class of bug. It reads `RUBRIC <- "protocol/rubric.md"`. **v2 is a new file.** The guard ran, passed, and reported "the instrument is self-consistent" without ever having looked at the instrument that shipped.
+
+**4. I fixed the path, and the guard STILL did not catch it.** The new check appended its finding with:
+
+```r
+problems <- c(problems, glue("the rubric DEMANDS the value{?s} ..."))
+```
+
+`{?s}` is **cli** pluralization syntax. Inside `glue()` it is evaluated as R's `?s`, the help operator, which returns `character(0)`. So `c(problems, character(0))` appended **nothing**, `problems` stayed empty, and the guard printed:
+
+```
+✔ the instrument is self-consistent
+```
+
+**while holding an unreported contradiction in a variable it had just declined to fill.**
+
+### What this actually is
+
+A guard against silent contradictions, failing silently, in the guard whose entire purpose is to make failure loud. It did not error. It did not warn. It printed a green check.
+
+This is the fourth distinct instance of one pattern, and by now I take it as a property of the system rather than a run of bad luck:
+
+| | the failure | how it stayed alive |
+|---|---|---|
+| D4 / D19 | dplyr self-masking | printed a plausible-looking number |
+| D18 | GPT edited a primary key | a wrong id is invisible; a wrong label is not |
+| D20 | two genre vocabularies | the validator checked a different field |
+| **D25** | **guard didn't run, then didn't report** | **it printed a green check** |
+
+Every one of them **produced output that looked correct**. None of them threw. The through-line is not carelessness; it is that a defect which announces itself gets fixed on the spot and never reaches a deviations file. **The ones that survive to be written down are, necessarily, the ones that looked fine.**
+
+### The rules that now run
+
+- `check_instrument.R` reads **the current rubric**, not a hardcoded path: `if (file.exists("protocol/rubric-v2.md")) ... else ...`. A guard that inspects a document nobody is using is theater.
+- It checks **both directions**: not only "does the rubric define every value the schema allows?" (which passed all along) but "**can the schema express every value the rubric demands?**" (which is the one that was missing, and is the one that matters, because the codebook is upstream of the contract).
+- No cli pluralization inside `glue()`, ever. The specific bug is now impossible to reintroduce in this file because the message is built with `paste0()`.
+- Verified both ways: the guard **fails** on v2.0 as written, naming `insufficient_payload`, and **passes** on v2.1 after the schema was amended to carry it.
+
+### What is NOT done
+
+**The 179-work v2 re-screen ran under v2.0**, with the contradiction present. The screening agent hit it, could not emit the value, and encoded the three affected records as `OUT` with `insufficient_payload` at the head of the reason string so they would be recoverable. Those labels are **not** retroactively rewritten, and finding 29's numbers are the numbers that run produced. Saying so is cheaper than a re-run and more honest than a silent patch.

@@ -1,0 +1,234 @@
+[
+ {
+  "id": "W2265964962",
+  "tier": "T3",
+  "genre": "commentary",
+  "about_ca": false,
+  "confidence": "low",
+  "reason": "Essay on university performance criteria, competitiveness and the academy's knowledge role; research/HE evaluation as object, but higher-education studies are OUT."
+ },
+ {
+  "id": "W2976428202",
+  "tier": "T2",
+  "genre": "other",
+  "about_ca": false,
+  "confidence": "medium",
+  "reason": "RULE 2: disciplinary history of political science. Collides with the workforce rule, since the facet studied is teaching and curricula."
+ },
+ {
+  "id": "W3145338206",
+  "tier": "T2",
+  "genre": "empirical",
+  "about_ca": false,
+  "confidence": "low",
+  "reason": "Research/innovation-system policy analysis (blockages in the global innovation system); v2 does not say whether innovation policy counts as research policy."
+ },
+ {
+  "id": "W2590116164",
+  "tier": "T1",
+  "genre": "empirical",
+  "about_ca": false,
+  "confidence": "high",
+  "reason": "v2's own worked example: demonstrates that feature-selection bias inflates the classification accuracies reported in a literature."
+ },
+ {
+  "id": "W4386977249",
+  "tier": "T1",
+  "genre": "empirical",
+  "about_ca": false,
+  "confidence": "low",
+  "reason": "An explicit replication showing the benchmark dataset is unfit and a trivial baseline matches the published model; but it targets one paper, not a literature."
+ },
+ {
+  "id": "W2806906455",
+  "tier": "T1",
+  "genre": "methods",
+  "about_ca": false,
+  "confidence": "low",
+  "reason": "Headline finding is that a literature's quantitative results are sensitive to classification choice; but it also BUILDS the taxonomy, which RULE 1 sends OUT."
+ },
+ {
+  "id": "W1971156133",
+  "tier": "OUT",
+  "genre": "methods",
+  "about_ca": false,
+  "confidence": "high",
+  "reason": "RULE 1: develops a new analytic methodology (SCFGs) for a domain sampling problem."
+ },
+ {
+  "id": "W7055519161",
+  "tier": "T2",
+  "genre": "other",
+  "about_ca": false,
+  "confidence": "low",
+  "reason": "RULE 2: foregrounds the history, evolution and societal status of a discipline in Ghana, but the volume also contains domain field reports."
+ },
+ {
+  "id": "W2953894287",
+  "tier": "OUT",
+  "genre": "empirical",
+  "about_ca": false,
+  "confidence": "medium",
+  "reason": "RULE 2: STS-style analysis of an environmental impact assessment (a regulatory instrument), not of science or research practice."
+ },
+ {
+  "id": "W580944977",
+  "tier": "OUT",
+  "genre": "other",
+  "about_ca": false,
+  "confidence": "low",
+  "reason": "RULE 2: the object is campus information-service organization (largely student support), not researchers or research practice."
+ },
+ {
+  "id": "W7096346612",
+  "tier": "T2",
+  "genre": "commentary",
+  "about_ca": true,
+  "confidence": "low",
+  "reason": "Collegial self-governance of librarians in a Canadian university: the academy as object, but the academic-library workforce is a boundary case."
+ },
+ {
+  "id": "W2810879288",
+  "tier": "OUT",
+  "genre": "empirical",
+  "about_ca": false,
+  "confidence": "medium",
+  "reason": "RULE 1: compares two program-evaluation tools to guide practitioners' tool choice; evaluation practice, not research practice."
+ },
+ {
+  "id": "W2946125747",
+  "tier": "T3",
+  "genre": "commentary",
+  "about_ca": true,
+  "confidence": "medium",
+  "reason": "Briefing note on security threats to Canada's national research-computing infrastructure (Compute Canada): a research-ecosystem policy document."
+ },
+ {
+  "id": "W2771527454",
+  "tier": "T2",
+  "genre": "empirical",
+  "about_ca": false,
+  "confidence": "low",
+  "reason": "RULE 2 is satisfied (the object is the image of science and scientists), but v2 has no bullet for public understanding of science, and the framing is educational."
+ },
+ {
+  "id": "W1933764499",
+  "tier": "T2",
+  "genre": "other",
+  "about_ca": true,
+  "confidence": "medium",
+  "reason": "RULE 2: archival practice and outreach at a Canadian university archive; the archival profession is research ecosystem."
+ },
+ {
+  "id": "W2756169793",
+  "tier": "T1",
+  "genre": "review",
+  "about_ca": false,
+  "confidence": "medium",
+  "reason": "Object is informal scholarly sharing and access to literature (#icanhazpdf): scholarly communication. The record is an evidence-summary appraisal."
+ },
+ {
+  "id": "W4399855826",
+  "tier": "OUT",
+  "genre": "empirical",
+  "about_ca": false,
+  "confidence": "medium",
+  "reason": "RULE 1: a primary study validating whether a research technique (radio-tagging) biases a domain measurement; an instance of methods work."
+ },
+ {
+  "id": "W2175161454",
+  "tier": "OUT",
+  "genre": "methods",
+  "about_ca": false,
+  "confidence": "high",
+  "reason": "RULE 1: derives a maximum-likelihood estimation method for domain (fisheries) models."
+ },
+ {
+  "id": "W3196558450",
+  "tier": "OUT",
+  "genre": "methods",
+  "about_ca": false,
+  "confidence": "high",
+  "reason": "RULE 1: a new high-breakdown estimator of multivariate scatter and location. v2's own worked example, almost word for word."
+ },
+ {
+  "id": "W2322153589",
+  "tier": "T1",
+  "genre": "empirical",
+  "about_ca": false,
+  "confidence": "medium",
+  "reason": "Research evaluation: university academic-performance rankings (URAP) and the effect of the international academic workforce."
+ },
+ {
+  "id": "W2901282154",
+  "tier": "T1",
+  "genre": "other",
+  "about_ca": true,
+  "confidence": "high",
+  "reason": "Research ethics and governance as an object of study (new in v2): statutory protection of research-participant confidentiality, for Canada."
+ },
+ {
+  "id": "W7132947126",
+  "tier": "T1",
+  "genre": "empirical",
+  "about_ca": false,
+  "confidence": "low",
+  "reason": "Object is a national science-capacity scholarship programme (research workforce training), but the evaluation is of undergraduate study-abroad benefits."
+ },
+ {
+  "id": "W4417238122",
+  "tier": "T2",
+  "genre": "review",
+  "about_ca": false,
+  "confidence": "medium",
+  "reason": "RULE 2: conceptual critique of a discipline's colonial epistemology and research practices (science as a social system)."
+ },
+ {
+  "id": "W3157448507",
+  "tier": "T2",
+  "genre": "empirical",
+  "about_ca": false,
+  "confidence": "medium",
+  "reason": "Bibliometrics rule: characterizes a literature (who publishes, collaboration networks, output inequalities) rather than studying a research practice."
+ },
+ {
+  "id": "W6948001283",
+  "tier": "T2",
+  "genre": "other",
+  "about_ca": true,
+  "confidence": "low",
+  "reason": "Evaluation of a Canadian federal industrial-research assistance programme: research/innovation funding policy, but the beneficiaries are firms, not the academy."
+ },
+ {
+  "id": "W3217745904",
+  "tier": "T2",
+  "genre": "empirical",
+  "about_ca": false,
+  "confidence": "medium",
+  "reason": "Interviews with researchers plus a disciplinary history explaining why a field has never studied a topic (funding, data access, taboos): a research gap as object."
+ },
+ {
+  "id": "W7133065251",
+  "tier": "T1",
+  "genre": "empirical",
+  "about_ca": false,
+  "confidence": "low",
+  "reason": "Workforce rule: faculty's academic careers, habitus and doctoral training at a research university; but the title frames it as higher-education studies."
+ },
+ {
+  "id": "W2104815409",
+  "tier": "T2",
+  "genre": "review",
+  "about_ca": false,
+  "confidence": "low",
+  "reason": "RULE 2: systematically analyses a Western research literature's approach and bias on a topic; mixed with a substantive claim about the institution."
+ },
+ {
+  "id": "W4239704798",
+  "tier": "T2",
+  "genre": "commentary",
+  "about_ca": false,
+  "confidence": "low",
+  "reason": "RULE 2: epistemological essay on the boundaries of social-scientific inquiry and what counts as legitimate data; also advocacy for a method (RULE 1 tension)."
+ }
+]
