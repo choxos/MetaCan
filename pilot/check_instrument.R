@@ -51,7 +51,18 @@ suppressPackageStartupMessages({ library(jsonlite); library(cli); library(glue) 
 #
 # WRITING A RULE DOES NOT ENFORCE A RULE. Only a check that runs, ON THE THING THAT
 # SHIPPED, enforces a rule.
-RUBRIC <- if (file.exists("docs/protocol/rubric-v2.md")) "docs/protocol/rubric-v2.md" else "docs/protocol/rubric.md"
+# THE CURRENT RUBRIC, resolved newest-first. It was hardcoded to v1 once and the guard
+# passed while never looking at the instrument that shipped (D25). It then silently kept
+# reading v2 after v3 was written, because a path-rewrite during the repo reorg made my
+# patch a no-op and Python's .replace() does not complain when it matches nothing.
+#
+# So the resolution is a LOOP over the known versions, newest first: adding a v4 requires
+# adding one string, and forgetting to update this line cannot silently point the guard at
+# a document nobody is using.
+RUBRIC <- Filter(file.exists, c("docs/protocol/rubric-v3.md",
+                                "docs/protocol/rubric-v2.md",
+                                "docs/protocol/rubric.md"))[1]
+if (is.na(RUBRIC)) cli::cli_abort("no rubric found in docs/protocol/")
 SCHEMA  <- "docs/protocol/screening-schema.json"
 DEFECTS <- "docs/protocol/known-defects.json"
 
@@ -109,6 +120,23 @@ if (length(missing_conf)) {
   problems <- c(problems, glue("the schema allows confidence {paste(missing_conf, collapse=', ')}, which the rubric never defines"))
 } else {
   cli_alert_success("`confidence`: every value the schema allows is defined in the rubric ({paste(schema_conf, collapse=', ')})")
+}
+
+# --- categories: v3 is multi-label, and every value must be DEFINED in the rubric --
+#
+# The whole point of v3 is that no category is defined from memory. This check is what
+# makes that a fact rather than a promise: a category the schema allows but the rubric
+# never defines fails the build.
+cats <- fromJSON(SCHEMA)$items$properties$categories$items$enum
+if (length(cats)) {
+  in_rubric <- vapply(cats, \(c) grepl(paste0("`", c, "`"), rubric_txt, fixed = TRUE), logical(1))
+  if (!all(in_rubric)) {
+    problems <- c(problems, paste0(
+      "the schema allows categor(y/ies) '", paste(cats[!in_rubric], collapse = ", "),
+      "' that the rubric never defines. Every category must be defined VERBATIM from its own literature."))
+  } else {
+    cli_alert_success("`categories`: all {length(cats)} the schema allows are defined in the rubric")
+  }
 }
 
 # --- domain: new in rubric v2.2, checked on the day it was created ---------------

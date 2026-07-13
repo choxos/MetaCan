@@ -28,7 +28,7 @@
           "OUT",
           "insufficient_payload"
         ],
-        "description": "T1 core metaresearch; T2 adjacent (STS, LIS, research infrastructure); T3 contextual (policy, editorials: mapped, never pooled with T1/T2); OUT otherwise. The in-scope decision that gates the corpus is tier in {T1, T2}. `insufficient_payload` (v2.1) is NOT a screening judgment: it states that the record cannot be screened at all (a scraping artifact as a title, boilerplate in the abstract field, a title and abstract from different papers, spam). It is distinct from OUT and must be REPORTED, not silently dropped: the size of this class is a finding about OpenAlex. Rubric v2.0 mandated this value while this enum could not express it, which is DEVIATIONS.md D20 committed by the document that fixes D20. See D25."
+        "description": "RETIRED in rubric v3, which replaces it with the multi-label `categories`. These values are retained ONLY so the v1 and v2 label files stay readable; no new screening emits them. In v3, OUT is an empty `categories` array: in no defined category, NOT 'near the important one'. The old T1/T2/T3 hierarchy failed because 'adjacent' was defined by negation and OUT-vs-adjacent was the largest confusion at every sample size: the category was empty. T1 core metaresearch; T2 adjacent (STS, LIS, research infrastructure); T3 contextual (policy, editorials: mapped, never pooled with T1/T2); OUT otherwise. The in-scope decision that gates the corpus is tier in {T1, T2}. `insufficient_payload` (v2.1) is NOT a screening judgment: it states that the record cannot be screened at all (a scraping artifact as a title, boilerplate in the abstract field, a title and abstract from different papers, spam). It is distinct from OUT and must be REPORTED, not silently dropped: the size of this class is a finding about OpenAlex. Rubric v2.0 mandated this value while this enum could not express it, which is DEVIATIONS.md D20 committed by the document that fixes D20. See D25."
       },
       "genre": {
         "enum": [
@@ -75,6 +75,23 @@
           null
         ],
         "description": "Which of Ioannidis's five meta-research domains the work belongs to. QUOTED from rubric v2.2, which quotes Ioannidis JPA, PLoS Biol 2018;16(3):e2005468: \"Meta-research is the study of research itself: its methods, reporting, reproducibility, evaluation, and incentives.\" REQUIRED for T1 (the canonical corpus). null for T2/T3/OUT: T2 holds the adjacent traditions the call names by name (bibliometrics, STS, scholarly communication, open science), which are IN THE MAP but are not inside the canonical definition, and forcing them into one of the five would delete the traditions the inclusiveness criterion exists to protect."
+      },
+      "categories": {
+        "type": "array",
+        "items": {
+          "enum": [
+            "metaresearch",
+            "metaepi_narrow",
+            "metaepi_broad",
+            "bibliometrics",
+            "sts",
+            "scholarly_communication",
+            "open_science",
+            "research_integrity",
+            "insufficient_payload"
+          ]
+        },
+        "description": "Every category a work belongs to; MAY BE MORE THAN ONE, and empty means OUT. Each is defined VERBATIM from its own literature in rubric v3, from a PDF in docs/reference/definitions/: metaresearch (Ioannidis 2015), metaepi_narrow (Murad 2017) and metaepi_broad (Kataoka 2023) which are CODED SEPARATELY because the definition is disputed in print (Puljak 2020, 175 sources, no consensus), bibliometrics (Mingers & Leydesdorff 2015), sts (Jasanoff 2004; Latour), scholarly_communication (Borgman 2007), open_science (UNESCO 2021), research_integrity (Fanelli 2009; COPE). The previous T1/T2/T3 hierarchy is RETIRED: 'adjacent' was defined by negation and OUT-vs-adjacent was the largest confusion at every sample size, because the category was empty. Categories are NOT ranked."
       }
     }
   }

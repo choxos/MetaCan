@@ -64,13 +64,17 @@ correct, and none threw.**
 
 ## 1. Methodology
 
-**No category is defined from memory.** Two are **locked and cited**: `metaresearch` is Ioannidis's definition verbatim, with his
-five thematic areas as a per-record `domain` (PLoS Biol 2015;13:e1002264); `metaepidemiology` is coded under **both** published
-definitions (Murad 2017; Kataoka 2023) **and flagged where they disagree**. Bibliometrics, STS, scholarly communication, open
-science and research integrity are **categories, not "adjacent"**, and are **locked in Week 1 from their own literatures**. That
-word was the bug: **"adjacent" is defined by negation**, and a category meaning only *near the important one* cannot be applied
-consistently, which is exactly why **OUT-vs-adjacent was our largest confusion at every sample size.** The models were not failing;
-**the category was empty.** It was also a judgment I had no standing to make: STS is a field with its own founding literature.
+**No category is defined from memory. All seven are locked and cited**, each quoted verbatim from a source committed to the
+repository: `metaresearch` (Ioannidis, PLoS Biol 2015;13:e1002264, with his five thematic areas as a per-record `domain`);
+`bibliometrics` (Mingers & Leydesdorff 2015); `sts` (Jasanoff 2004; Latour); `scholarly_communication` (Borgman 2007);
+`open_science` (UNESCO 2021); `research_integrity` (Fanelli 2009; COPE). `metaepidemiology` is coded under **both** published
+definitions (Murad 2017; Kataoka 2023) **and flagged where they disagree**, because a live dispute between named researchers is a
+boundary to be *measured*, not settled by fiat. **The screen is multi-label**: a bibliometric study of citation distortion is
+*both*, and forcing the choice was the bug. **"Adjacent" is defined by negation**, and a category meaning only *near the important
+one* cannot be applied consistently, which is exactly why **OUT-vs-adjacent was our largest confusion at every sample size.** The
+models were not failing; **the category was empty.** It was also a judgment I had no standing to make: STS has its own founding
+literature and is not an appendage of metascience. The build **fails** if any category the schema allows is undefined in the
+rubric.
 
 **Estimand, prespecified.** *Primary:* Canadian-**produced** metaresearch (≥1 Canadian affiliation **or** funder). *Secondary:*
 metaresearch **about** the Canadian research system. **71.2% of the frame carries no funder metadata**, so both clauses rest on
@@ -132,8 +136,7 @@ independent researcher with no affiliation: **one of the people this dataset can
 
 ## 4. Work plan (1 Aug to 27 Oct)
 
-**W1–2** Source the remaining category definitions from their own literatures; **lock the rubric**; preregister (OSF); **recruit and
-pay the bilingual coder**. · **W3–5** Freeze the Érudit harvest; screen the full frame; **report the version-to-version
+**W1–2** Preregister (OSF); **recruit and pay the bilingual coder**. · **W3–5** Freeze the Érudit harvest; screen the full frame; **report the version-to-version
 difference**. · **W6–8** Stratified sample from screened-in **and** screened-out; dual blinded coding; adjudication. · **W9–10**
 Design-weighted estimation; the differential bias report; annotation validated against MEDLINE. · **W11–12** Release; deploy;
 plenary.

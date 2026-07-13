@@ -4,7 +4,7 @@ Every number below is produced by a script in `pilot/`, against the live OpenAle
 API, with the raw response archived under `pilot/raw/`. Re-derive them offline,
 with no network at all, using `make pilot-offline`.
 
-Computed: 2026-07-13T11:02:07Z
+Computed: 2026-07-13T11:54:42Z
 
 | # | Finding | Consequence for the design |
 |---|---|---|

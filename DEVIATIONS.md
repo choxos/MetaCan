@@ -897,3 +897,53 @@ The claim ladder is now stated in the proposal as three rungs, and they are not 
 The proposal now says exactly that: *"Those are claims about humans. Mine are claims about models. I do not conflate them."* The priority claim is deleted. The estimator guarantee is conditioned on the assumption my own design violated. The causal story for Jaccard 0.17 is downgraded to one hypothesis among several the pilot cannot separate.
 
 The proposal was also restructured on the reviewer's advice: **lead with the deliverable, box the failures.** Opening a grant with *"it broke repeatedly"* trains a reviewer to score you as high-risk on **feasibility, which is judging criterion #1**. Courageous content, bad allocation. It now opens with what exists on 27 October.
+
+---
+
+## D28. Rubric v3: the hierarchy is deleted, and every category is now defined from its own literature.
+
+**Date:** 2026-07-13. **A versioned rubric change, recorded before it is applied to anything.**
+
+### What was wrong with the hierarchy
+
+v1 and v2 ranked the field: **T1 core / T2 adjacent / T3 contextual**. Two things were wrong with that, and the data found the first before I did.
+
+**1. "Adjacent" is defined by negation.** It means *not-T1*. A category whose only content is *"near the important one"* has no positive definition, so it cannot be applied consistently. And it wasn't: **OUT-vs-adjacent was the largest tier confusion at every sample size we measured.** The models were not failing. **The category was empty**, and every screener had to invent what belonged in it.
+
+**2. It was a value judgment I had no standing to make.** Calling science and technology studies "adjacent" says STS is peripheral to metascience. STS has its own founding literature, its own journals, and its own account of what studying science means. It is not an appendage of anything, and the call names it as a tradition in its own right.
+
+### What v3 does
+
+**Deletes the hierarchy. Multi-label. Seven categories, each with a positive definition quoted verbatim from a source committed to `docs/reference/definitions/`.**
+
+| category | source, read from the PDF |
+|---|---|
+| `metaresearch` | Ioannidis, Fanelli, Dunne, Goodman. PLoS Biol 2015;13(10):e1002264 |
+| `metaepi_narrow` | Murad & Wang. Evid Based Med 2017;22(4):139-142 |
+| `metaepi_broad` | Kataoka et al. J Clin Epidemiol 2023;154:219-221 |
+| `bibliometrics` | Mingers & Leydesdorff. Eur J Oper Res 2015; Price, Science 1965;149:510 |
+| `sts` | Jasanoff (ed.), *States of Knowledge*, 2004; Latour, *Science in Action* |
+| `scholarly_communication` | Borgman, *Scholarship in the Digital Age*, MIT Press 2007 |
+| `open_science` | UNESCO, *Recommendation on Open Science*, 2021 |
+| `research_integrity` | Fanelli. PLoS ONE 2009;4(5):e5738; COPE |
+
+**A work may carry more than one, and that is the point.** A bibliometric study of citation distortion is *both* bibliometrics and metaresearch. Forcing a single label was the bug.
+
+**`metaepidemiology` is coded under BOTH published definitions and flagged where they disagree**, because the definition is **disputed in print** (Puljak 2020: 175 sources, no consensus; Kataoka 2023 disputes Murad). Settling a live dispute between named researchers by fiat would destroy the only evidence of it.
+
+### Two things I refused to do, and one limitation I am recording rather than hiding
+
+**I did not cite from memory.** An adversarial review named plausible references for each category and I could have typed them. In a project whose worst deviation (D26) is that its own definition of metaresearch was **mine and uncited for its entire life**, a recalled citation would have been the single worst thing this document could contain. Every quotation was read from a PDF, and the PDFs are committed.
+
+**I did not narrow the map to the canonical definition.** Ioannidis's five domains are a *metascience* definition; adopting them alone would delete the traditions the call's inclusiveness criterion exists to protect.
+
+**And `research_integrity` is honestly weaker than the rest.** The sources supplied define **what counts as misconduct** (Fanelli: *"behaviours that distort scientific knowledge: fabrication, falsification, 'cooking' of data... Survey questions on plagiarism and other forms of professional misconduct were excluded"*) and **what publication ethics covers** (COPE). **Neither defines "research integrity research" as a discipline**, the way Ioannidis defines metaresearch or Jasanoff defines STS. So that category is defined **by its object**, Fanelli's exclusion of plagiarism is **carried rather than silently widened**, and the gap is on the record instead of being papered over with a confident sentence.
+
+### The guard, and how it caught me twice
+
+`pilot/check_instrument.R` now fails the build if **any category the schema allows is undefined in the rubric**, in either direction. Writing that check immediately caught two live defects:
+
+1. **v3 had no genre vocabulary at all.** I had dropped the section while rewriting.
+2. **The guard was still reading v2.** My patch to point it at v3 had silently done nothing, because the repo reorg had already renamed the file and Python's `.replace()` does not complain when it matches nothing. **This is D25 recurring inside the fix for D25.** The rubric path is now resolved by a newest-first `Filter(file.exists, ...)` over the known versions, so forgetting to update one line cannot point the guard at a document nobody is using.
+
+**No number in this project was produced under v3.** The pilot ran under v1.0, the 179-work re-screen under v2.0, and both are kept byte for byte so every figure stays attributable to the text that produced it. v3 is what the full screen runs under, and **the v2-to-v3 difference is reported as a finding**, whatever it turns out to be.
