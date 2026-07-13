@@ -38,11 +38,12 @@ ALLOWED <- c(
   "2015"    = "Ioannidis JPA, Fanelli D, Dunne DD, Goodman SN. PLoS Biol. 2015;13(10):e1002264 (the definition of metaresearch, verbatim)",
   "1002264" = "article number, Ioannidis 2015",
   "13"      = "volume, Ioannidis 2015",
-  "175"     = "Puljak L et al. J Comp Eff Res 2020: 175 published sources analyzed; definitions varied, no consensus",
+  "175"     = "Puljak L et al. J Comp Eff Res 2020: 175 information sources analyzed; definitions varied, no consensus",
   "2020"    = "Puljak et al., year",
-  "2023"    = "Kataoka Y et al. J Clin Epidemiol 2023;154:219-221; and Stevens ER, Laynor G. J Med Libr Assoc 2023",
+  "2023"    = "Kataoka Y et al. J Clin Epidemiol 2023;154:219-220; and Stevens ER, Laynor G. J Med Libr Assoc 2023",
   "154"     = "volume, Kataoka et al. 2023",
   "219"     = "first page, Kataoka et al. 2023",
+  "29"      = "DEVIATIONS.md entry label (D29, the corrupted Murad quotation), not a measurement",
   "2017"    = "Murad MH, Wang Z. Evid Based Med 2017;22(4):139-142 (the narrow meta-epidemiology definition)",
   # An EXTERNAL, human-indexed reference standard for study design, which the
   # metaresearch boundary does not have. Reproduce with one request:

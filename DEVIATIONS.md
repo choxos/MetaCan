@@ -947,3 +947,39 @@ v1 and v2 ranked the field: **T1 core / T2 adjacent / T3 contextual**. Two thing
 2. **The guard was still reading v2.** My patch to point it at v3 had silently done nothing, because the repo reorg had already renamed the file and Python's `.replace()` does not complain when it matches nothing. **This is D25 recurring inside the fix for D25.** The rubric path is now resolved by a newest-first `Filter(file.exists, ...)` over the known versions, so forgetting to update one line cannot point the guard at a document nobody is using.
 
 **No number in this project was produced under v3.** The pilot ran under v1.0, the 179-work re-screen under v2.0, and both are kept byte for byte so every figure stays attributable to the text that produced it. v3 is what the full screen runs under, and **the v2-to-v3 difference is reported as a finding**, whatever it turns out to be.
+
+## D29. The rubric's "verbatim" Murad quotation contained a word Murad never wrote.
+
+**Date:** 2026-07-13. **Found by GPT-5.6, a model asked to attack the proposal, hours after v3.0 locked. No screening ran under v3.0.**
+
+### What happened
+
+Rubric v3.0 quoted Murad & Wang (Evid Based Med 2017) defining meta-epidemiology as examining characteristics of clinical studies *"on the observed **treatment** effect"*. The paper says *"on the observed effect"*. One inserted word, and not a neutral one: it **narrowed the definition** (any observed effect became treatment effects only) **while citing the author whose definition it narrowed**. The document containing it opens with the sentence "Nothing here is cited from memory."
+
+The same review pass surfaced three more citation-grade defects, all confirmed against the PDFs: the Kataoka letter is **pages 219-220**, not 219-221 (page 221 is Puljak's reply, the *other side* of the dispute the rubric is careful to keep separate); Puljak analyzed 175 **information sources**, which the proposal had upgraded to "published sources"; and the rubric's gloss placed research integrity outside Ioannidis's *methods* area when his own description of that area ends "research integrity and ethics".
+
+### Why it survived a lock
+
+The lock checked that every category HAD a quotation and a PDF. It never checked that the quotation MATCHED the PDF. I read the sentence from the paper, and somewhere between the PDF and the markdown the word appeared; the mechanism does not matter, because no mechanism was watching. D26 (the uncited definition) was repaired by requiring sources; this is the next failure class up: **a source, cited, quoted almost.**
+
+### The repair
+
+v3.1 corrects the quotation from the PDF, plus the page range, the gloss, and two other misalignments (the funder clause had regressed to a four-funder list the protocol had already retired; the study-design field said "coded for every work" and never listed the values, D20's exact shape). And the class now has a guard: **`pilot/check_quotes.R`** extracts every quoted span from the rubric, attributes it to the source cited beside it, normalizes both sides to a bare character stream (so hyphenation, ligatures and PDF watermarks cannot save or damn a quote), and **fails the build if any quotation marked verbatim is not a substring of its cited PDF**. Sixteen quotations verify; the guard was tested both ways with a planted corruption. A citation is code. It gets a test.
+
+### The recursion, because there is always one
+
+While testing the guard both ways I planted a corruption in the rubric, verified the guard caught it, and restored the file with `git checkout --`, **which reverted every uncommitted v3.1 correction along with the planted one**, silently, back to the v3.0 text containing the Murad error. The guard's next run failed on exactly the quote I believed I had fixed, and I initially read that failure as the *planted* corruption reappearing. The fix for a silent corruption was itself silently destroyed by the tool I used to verify the fix. Everything was reapplied and committed before anything else touched the file; the lesson (commit the repair before you test the guard that checks it) is recorded here because it will bite again.
+
+## D30. The budget spent money the call does not offer.
+
+**Date:** 2026-07-13. **Found by the same adversarial review, reading the call text I had summarized instead of quoted.**
+
+### What happened
+
+The call says, in its own words: *"Funding of up to CAD $4,000 will be available to support **travel, accommodation, and related participation costs** for the selected individual(s)."* The proposal's feasibility paragraph read that as a research budget: it costed the screen at $1,110 and concluded it "leaves ~$1,790 for the coder, who is the study". Compute and coder wages may not be eligible uses at all. The plan's arithmetic was fine; **it was arithmetic about money that may not legally reach the study.**
+
+The same review also caught that my working notes had the judging criteria in the wrong order and missing one: the call lists **methodological rigor first** (then feasibility, reproducibility/openness, inclusiveness, originality/impact, clarity of outputs); my notes had feasibility first and rigor absent. Nothing in the submitted documents enumerated the criteria, so nothing shipped wrong, but the emphasis of the proposal had been tuned against a misremembered rubric, by a project about instruments that get misremembered.
+
+### The repair
+
+`pilot/13_screening_cost.R` now states what the award buys in the call's words, prices the screen at the **locked v3.1 instrument** ($1,279, not the v1-instrument $1,110 the old page quoted), and the proposal says plainly: compute is **self-funded**; the coder is paid from the award **only if the organizers confirm eligibility**, otherwise from in-kind support through the recruitment networks; the no-coder fallback is prespecified either way. The cost finding no longer contains a `left_for_human_coder_usd` field, because the subtraction it performed assumed an eligibility nobody had checked.

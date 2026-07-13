@@ -182,14 +182,38 @@ SCREENER_B_N <- 20000L
 screener_b   <- cost(SCREENER_B_N, tok_work, tok_rubric, tok_out, IN_M, OUT_M)
 
 no_prefilter <- HAIKU_FRAME + screener_b
-GRANT_USD    <- 2900
+
+# THE INSTRUMENT THAT WILL ACTUALLY RUN. Everything above is priced at the v1
+# rubric, because the measured artifacts are v1's. The funded screen runs under
+# the locked v3.1 instrument, which is longer (seven cited categories, worked
+# examples, a study-design vocabulary) and emits more fields per label. Pricing
+# only the short instrument would understate the bound: D7 with the sign
+# flipped. The rubric resolves newest-first, so editing it moves these dollars
+# on the next build, and check_proposal_numbers fails until the proposal agrees.
+RUBRIC_CURRENT <- Filter(file.exists, c("docs/protocol/rubric-v3.md",
+                                        "docs/protocol/rubric-v2.md",
+                                        "docs/protocol/rubric.md"))[1]
+tok_rubric_v31 <- round(file.size(RUBRIC_CURRENT) / CHARS_PER_TOKEN)
+# v3.1 labels carry 8 fields where the measured v1 labels carried 6; scale the
+# MEASURED output tokens by the field ratio rather than asserting a number.
+tok_out_v31 <- round(tok_out * 8 / 6)
+HAIKU_FRAME_V31  <- cost(FRAME, tok_work, tok_rubric_v31, tok_out_v31, CHEAP_IN_M, CHEAP_OUT_M)
+screener_b_v31   <- cost(SCREENER_B_N, tok_work, tok_rubric_v31, tok_out_v31, IN_M, OUT_M)
+no_prefilter_v31 <- HAIKU_FRAME_V31 + screener_b_v31
+
+# WHAT THE AWARD BUYS, in the call's own words: "travel, accommodation, and
+# related participation costs". NOT compute, NOT coder wages. An earlier budget
+# quietly assumed the award paid for both (D30), which would have planned the
+# study against money that may not legally reach it. The grant figure below
+# stays ONLY to show the compute fits inside even a solo self-funded budget.
+GRANT_USD <- 2900
 
 cli_h2("The design that fits, and it needs no prefilter at all")
-cli_li("full rubric, ALL {format(FRAME, big.mark=',')} works, Haiku-class : ${format(round(HAIKU_FRAME), big.mark=',')}")
-cli_li("second screener (Sonnet) on {format(SCREENER_B_N, big.mark=',')} stratified : ${format(round(screener_b), big.mark=',')}")
+cli_li("full rubric, ALL {format(FRAME, big.mark=',')} works, Haiku-class : ${format(round(HAIKU_FRAME), big.mark=',')} (v1 instrument) / ${format(round(HAIKU_FRAME_V31), big.mark=',')} (locked v3.1)")
+cli_li("second screener (Sonnet) on {format(SCREENER_B_N, big.mark=',')} stratified : ${format(round(screener_b), big.mark=',')} / ${format(round(screener_b_v31), big.mark=',')}")
 cli_alert_success(
-  "TOTAL ${format(round(no_prefilter), big.mark=',')}, leaving ~${format(round(GRANT_USD - no_prefilter), big.mark=',')} of a ~USD ${format(GRANT_USD, big.mark=',')} grant for the human coder, \\
-   who is the study."
+  "TOTAL ${format(round(no_prefilter), big.mark=',')} at the v1 instrument; ${format(round(no_prefilter_v31), big.mark=',')} at the v3.1 instrument that will actually run. \\
+   SELF-FUNDED: the call's CAD $4,000 covers travel and participation, not compute (D30)."
 )
 
 # --- the design I nearly shipped, and why it is worse --------------------------
@@ -246,7 +270,14 @@ record_finding(
     cost_second_screener_on_sample_usd      = round(screener_b),
     second_screener_n                       = SCREENER_B_N,
     total_no_prefilter_usd                  = round(no_prefilter),
-    left_for_human_coder_usd                = round(GRANT_USD - no_prefilter),
+    # the instrument that will actually run (longer rubric, 8-field labels)
+    tokens_rubric_v31                       = tok_rubric_v31,
+    tokens_per_label_v31                    = tok_out_v31,
+    cost_full_rubric_whole_frame_v31_usd    = round(HAIKU_FRAME_V31),
+    cost_second_screener_v31_usd            = round(screener_b_v31),
+    total_no_prefilter_v31_usd              = round(no_prefilter_v31),
+    award_pays_for_compute                  = FALSE,
+    award_purpose_in_the_calls_words        = "travel, accommodation, and related participation costs",
     prefilter_needed                        = FALSE,
     # the design that was deleted
     prefilter_design_total_usd              = round(with_prefilter),
@@ -283,6 +314,8 @@ record_finding(
     "cosmetic. It made me propose a cheap TRIAGE in front of the screen, which is a RETRIEVAL STEP in a project ",
     "whose central finding is that retrieval destroys these maps. With the arithmetic right the triage is ",
     "unnecessary: the full rubric over EVERY work in the frame, plus a second screener on a {format(SCREENER_B_N, big.mark=',')}-record ",
-    "sample, costs ${format(round(no_prefilter), big.mark=',')} and leaves ~${format(round(GRANT_USD - no_prefilter), big.mark=',')} for the human coder. THE PREFILTER IS DELETED."
+    "sample, costs ${format(round(no_prefilter), big.mark=',')} at the v1 instrument and ${format(round(no_prefilter_v31), big.mark=',')} at the locked v3.1 instrument that will actually run. ",
+    "THE PREFILTER IS DELETED. And the compute is SELF-FUNDED: the call's CAD $4,000 covers, in its own words, ",
+    "'travel, accommodation, and related participation costs', not inference and not coder wages (D30)."
   )
 )

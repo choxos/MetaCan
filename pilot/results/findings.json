@@ -704,7 +704,7 @@
     "computed_at_utc": "2026-07-13T11:55:00Z"
   },
   "screening_cost": {
-    "headline": "The full rubric over the 4,299,418-work frame with two screeners costs $6,567, not the $30,633 an earlier version of this script reported: the rubric is a system prompt sent once per CALL, and the pilot's own chunks batch 155 works per call, so it was overcharged 4.7x. That error was not cosmetic. It made me propose a cheap TRIAGE in front of the screen, which is a RETRIEVAL STEP in a project whose central finding is that retrieval destroys these maps. With the arithmetic right the triage is unnecessary: the full rubric over EVERY work in the frame, plus a second screener on a 20,000-record sample, costs $1,110 and leaves ~$1,790 for the human coder. THE PREFILTER IS DELETED.",
+    "headline": "The full rubric over the 4,299,418-work frame with two screeners costs $6,567, not the $30,633 an earlier version of this script reported: the rubric is a system prompt sent once per CALL, and the pilot's own chunks batch 155 works per call, so it was overcharged 4.7x. That error was not cosmetic. It made me propose a cheap TRIAGE in front of the screen, which is a RETRIEVAL STEP in a project whose central finding is that retrieval destroys these maps. With the arithmetic right the triage is unnecessary: the full rubric over EVERY work in the frame, plus a second screener on a 20,000-record sample, costs $1,110 at the v1 instrument and $1,279 at the locked v3.1 instrument that will actually run. THE PREFILTER IS DELETED. And the compute is SELF-FUNDED: the call's CAD $4,000 covers, in its own words, 'travel, accommodation, and related participation costs', not inference and not coder wages (D30).",
     "values": {
       "measured_from": "pilot/screening/chunks/*.json (6-field), pilot/screening/haiku/p8_guided/chunk_*.json (8-field), docs/protocol/rubric.md; not asserted",
       "chars_per_token_assumed": 4,
@@ -725,7 +725,13 @@
       "cost_second_screener_on_sample_usd": 15,
       "second_screener_n": 20000,
       "total_no_prefilter_usd": 1110,
-      "left_for_human_coder_usd": 1790,
+      "tokens_rubric_v31": 4604,
+      "tokens_per_label_v31": 49,
+      "cost_full_rubric_whole_frame_v31_usd": 1261,
+      "cost_second_screener_v31_usd": 18,
+      "total_no_prefilter_v31_usd": 1279,
+      "award_pays_for_compute": false,
+      "award_purpose_in_the_calls_words": "travel, accommodation, and related participation costs",
       "prefilter_needed": false,
       "prefilter_design_total_usd": 1004,
       "prefilter_saving_usd": -106,
@@ -736,7 +742,7 @@
       "supersedes": "an earlier version charged the rubric once per work, reported $24,379 for the full-frame two-screener design, called it 'eight times the grant', and used that to justify a cheap prefilter. The rubric is a system prompt sent once per CALL, and the pilot's own chunks batch 155 works per call. DEVIATIONS.md D7.",
       "caveat": "Token counts use a 4-chars-per-token approximation and list prices as of 2026-07; both will move, and the conclusion is robust to +/-25% in either. Screening the frame with a cheaper model than the pilot used makes the CHOICE OF MODEL more consequential, not less: finding 10 shows two screeners already imply base rates a factor of two apart. That is precisely why the second screener and the screener-swap range are reported, and why the human audit is the study."
     },
-    "computed_at_utc": "2026-07-13T11:54:48Z"
+    "computed_at_utc": "2026-07-13T12:23:27Z"
   },
   "the_frame": {
     "headline": "The frame is BUILT, not estimated. All 482 partitions of a pinned OpenAlex snapshot were streamed and filtered, and the Canadian frame holds 4,299,418 works, each exactly once. For most of this project's life 'the frame' was 3,507,205, an EXTRAPOLATION from a single partition, hardcoded in six scripts; the estimate was 18% LOW, and every cost, audit-power and field-size figure computed against it has moved. The route that matters: 1,565,226 works (36.4% of the frame) are INVISIBLE TO AFFILIATION ALONE. A frame built on Canadian affiliation would hold 2,734,192 works and would never see them. That is finding 2 at frame scale, and it is why the frame is a union of four routes and why every record carries the provenance of the route that admitted it.",
@@ -936,8 +942,16 @@
       "unanimous_under_v2": 96,
       "pct_resolved": 54,
       "still_contested": 83,
-      "in_scope_by_model_v1": [129, 68, 53],
-      "in_scope_by_model_v2": [73, 32, 44],
+      "in_scope_by_model_v1": [
+        129,
+        68,
+        53
+      ],
+      "in_scope_by_model_v2": [
+        73,
+        32,
+        44
+      ],
       "jaccard_v1_mean": 0.187,
       "jaccard_v2_mean": 0.362,
       "sequence": "lock v1; screen 5,600 works with three models; have an independent blinded judge adjudicate every disagreement AND name the seam that caused it; PUBLISH the seam census; write v2 against the census and lock it BEFORE re-screening; re-screen; report the difference, whatever it is. Publishing the census before resolving it is what stops v2 being tuned until the numbers improve.",

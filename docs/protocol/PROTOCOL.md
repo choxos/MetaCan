@@ -42,7 +42,7 @@ The five that determine the design:
 |---|---|---|
 | 12 | Scored against the rubric, the best topic route retrieves **12%** of Canadian metaresearch (95% CI 5.6 to 21.6), at 60% precision. It misses **66 of 75**. OpenAlex files a work by what it is *about*, so metaresearch about cardiology reads as cardiology. | **The field is invisible to topic retrieval precisely because it is about other fields.** Retrieval is demoted to provenance; screening over a Canadian frame is the gate. |
 | 10 | Swap which model is "the screener" and the base rate moves from **1.06% to 2.37%** (design-weighted, same 1,290 records): 37,032 vs 83,022 works. The published binomial CI contains neither. | Machine agreement is a **process metric**, not accuracy. The screener-swap range, not the binomial interval, is the honest uncertainty. The human audit is the study. |
-| 11 | **31.5%** of the frame has no abstract, and the screen finds 0.78% metaresearch there against 1.55% where one exists (p = 0.023; robust to adjustment for year and language). An earlier version of this table also claimed the blindness was **differential** (T2 losing 3.6x against T1's 1.4x). **That cell holds four works and the interaction is not significant (p = 0.141). WITHDRAWN** (DEVIATIONS.md D6). | A third of the frame is screened on its title alone and the screen finds half as much there. The audit stratifies on abstract availability. It is **not** evidence of differential blindness by tradition, and this protocol no longer says it is. |
+| 11 | **31.5%** of the pilot partition (**23.3%** of the built frame: 1,003,117 works, finding 19) has no abstract, and the screen finds 0.78% metaresearch there against 1.55% where one exists (p = 0.023; robust to adjustment for year and language). An earlier version of this table also claimed the blindness was **differential** (T2 losing 3.6x against T1's 1.4x). **That cell holds four works and the interaction is not significant (p = 0.141). WITHDRAWN** (DEVIATIONS.md D6). | A third of the frame is screened on its title alone and the screen finds half as much there. The audit stratifies on abstract availability. It is **not** evidence of differential blindness by tradition, and this protocol no longer says it is. |
 | 14 | A simple random sample of the screened-out mass **cannot measure screening sensitivity**: 600 records return an expected **0.4** misses; twenty would need **2,009 coder-hours** against 65 budgeted. | The two-phase audit as first specified was impossible. **See §6.0 and §6.1.** |
 | 16 | Haiku lands near Sonnet's base rate (1.27% vs 1.06%, 98.1% agreement) but their in-scope sets overlap **16%** unweighted, **10%** design-weighted; of Sonnet's 58 positives Haiku confirms **12**. And agents of ONE model on ONE prompt disagree beyond chance after conditioning on what they were shown (CMH p = **0.0056**, replicated at **0.015**), with the agents' ordering flipping between arms. | **Rate agreement is not set agreement, and no machine pass measures this field.** The machine screen is demoted to a **stratifier** for the audit: design weights stay unbiased under a noisy stratifier, only efficiency suffers, and power is computed at Haiku-realistic concentration. Machine tiers are released marked provisional; every reported prevalence is design-weighted human coding. |
 | D1 | **The pilot screen did not obey this rubric.** It was sent 6 of the 8 fields §5 mandates: **venue, OpenAlex topic and field, Canadian affiliations and funders were all withheld.** Every pilot number came from a title-and-abstract screen. | The most serious defect in the project. The full screen sends the rubric's complete payload and reports the difference as a finding. **See DEVIATIONS.md D1.** |
@@ -103,9 +103,12 @@ whether it is Canadian. That makes the field boundary a property of the retrieva
 maps cannot be audited: a lexicon cannot show you what it never surfaced, so there is nothing left to measure the
 miss against.
 
-Here the frame is **all Canadian research**: an external, checkable criterion that owes nothing to our notion of
-metaresearch. Field membership then becomes a **classification** question over an enumerable universe, not a
-**retrieval** question over the literature. That is what makes "what did we miss?" answerable at all, and it is
+Here the frame is **Canadian research as four checkable metadata routes see it** (affiliation, funder country,
+venue, aboutness): an external, enumerable criterion that owes nothing to our notion of metaresearch. It is not
+literally "all Canadian research": it admits about-Canada works with no Canadian production, and it cannot see
+works invisible to all four routes; both facts are measured rather than wished away (findings 7 and 27). Field
+membership then becomes a **classification** question over an enumerable universe, not a **retrieval** question
+over the literature. That is what makes "what did we miss?" answerable at all, and it is
 what produced the base rate (§2, finding 9) that replaces the failed coverage estimator.
 
 **F IS NO LONGER A HYPOTHESIS. IT IS BUILT.** All 482 partitions of the pinned snapshot were streamed and filtered:
@@ -193,7 +196,7 @@ An earlier version of this protocol said: partition F into screened-in and scree
 from both, human-code them, and estimate sensitivity with design weights. That is the textbook two-phase audit and
 it is **arithmetically incapable of doing the job here.** Finding 14 does the sum.
 
-The works a screen wrongly rejects are a vanishing fraction of the rejected mass. At 95% screen recall, the ~3.2M
+The works a screen wrongly rejects are a vanishing fraction of the rejected mass. At 95% screen recall, the ~4.24M
 screened-out records contain ~2,300 missed works: a density of **0.07%**. A sample of 600 screened-out records
 therefore returns an **expected 0.4 of them**, and you cannot estimate a rate from zero events. Seeing twenty
 would take **30,134** human codings, about **2,009 coder-hours** against the ~65 this study can buy.
@@ -208,7 +211,7 @@ false starts is not a preregistration.
 misses **concentrate**. The pilot measured where: of the 37 works screener B pulled into scope that screener A
 rejected, **30 sit in the contested boundary and only 6 in the settled rejects**. So:
 
-- Partition **F** into **screened-in** (T1/T2) and **screened-out**.
+- Partition **F** into **screened-in** (any v3 category) and **screened-out** (empty `categories`).
 - Draw a **stratified probability sample from both**, with **known, recorded selection probabilities**. Strata
   cross: `language (EN/FR/other)` × `source (OpenAlex/Érudit)` × `partition` × `screener score` ×
   `abstract availability`.
@@ -220,6 +223,18 @@ rejected, **30 sit in the contested boundary and only 6 in the settled rejects**
 
 **Why stratification is binding rather than decorative:** at a ~1.3% base rate a uniform sample spends its whole
 budget confirming obvious exclusions. Without stratification the audit is uninformative at any feasible n.
+
+**What the human coders see, and what the audit can therefore claim.** Blinding the coders to machine labels
+prevents contamination; it does not create information. Two humans independently reading the same missing abstract
+cannot discover metaresearch that only the full text reveals, and design weights correct selection probabilities,
+not outcome misclassification. So: (a) sampled records are coded on the **best ascertainable evidence**, the
+finding-19 full-text cascade (PubMed, Europe PMC, Crossref) plus publisher pages where the cascade fails, not on
+the models' own payload; (b) the coding scheme includes an **`unresolved`** outcome, and unresolved is reported,
+never imputed; (c) every estimate is stated **conditional on ascertainment**, with the unresolved fraction
+alongside it; (d) the release is layered: **human-verified / high-precision / provisional / contested**, so no
+layer borrows another's authority. The audit estimates agreement between humans applying this rubric to the
+evidence they could obtain; that sentence, not "true sensitivity", is what the numbers mean, and the protocol says
+so before the numbers exist.
 
 **(ii) Recall against already-labelled data, not against the haystack.** Any filter's recall (the topic route, the
 lexical route, the cheap triage in finding 13) is measured directly against the **5,737 works that already carry
