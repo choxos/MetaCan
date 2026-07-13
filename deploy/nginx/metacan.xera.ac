@@ -16,9 +16,13 @@
 # as it did for the sibling sites on this box. Writing the TLS block by hand here
 # would collide with the one certbot generates.
 
+# IPv4 only, exactly like every sibling vhost on this box. This is deliberate.
+# metacan.xera.ac is an A record, and no other vhost here binds [::]:80. If this
+# file were the only one to bind it, nginx would make this server block the
+# DEFAULT for IPv6 port 80, and an IPv6 request for any OTHER xera.ac site would
+# land on MetaCan. Matching the siblings avoids that entirely.
 server {
     listen 80;
-    listen [::]:80;
     server_name metacan.xera.ac;
 
     location / {
