@@ -167,7 +167,7 @@ export async function searchWorks(f: WorkFilters) {
 export async function getWork(id: string) {
   return prisma.work.findUnique({
     where: { id },
-    include: { retraction: true, screened: true },
+    include: { retraction: true, screened: true, score: true },
   })
 }
 

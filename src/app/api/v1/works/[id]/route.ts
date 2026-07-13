@@ -69,5 +69,22 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
           grok: { tier: s.grokTier, genre: s.grokGenre, about_ca: s.grokAboutCa, confidence: s.grokConfidence, reason: s.grokReason },
         }
       : null,
+
+    // The machine scores are a PROVISIONAL BASELINE from an immature model
+    // (pilot/results/maturity.json: passed = false), and they never ship without
+    // saying so. A score orders works for review; it does not assert a category,
+    // and `validation_status` arrives verbatim from the scoring run.
+    machine_scores: w.score
+      ? {
+          provisional: true,
+          baseline: true,
+          maturity_gate_passed: false,
+          score_opus: w.score.scoreOpus,
+          score_gpt: w.score.scoreGpt,
+          score_spread: w.score.scoreSpread,
+          validation_status: w.score.validationStatus,
+          note: 'Baseline scores from an immature model (maturity gate not passed). Scores rank; they never assert a category.',
+        }
+      : null,
   })
 }

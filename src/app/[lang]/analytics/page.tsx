@@ -23,7 +23,12 @@ import {
   RetractionChart,
 } from '@/components/Charts'
 import { getDict } from '@/lib/i18n'
-import { formatInt, formatPct, isLang, langAlternates, localePath, type Lang } from '@/lib/lang'
+import { formatInt, formatPct, isLang, langAlternates, localePath, numberLocale, type Lang } from '@/lib/lang'
+import { ScoreBanner } from '@/components/ScoreBanner'
+// The provisional baseline scores, summarized. This file is the scoring run's own
+// output (pilot/results/frame_scores.json), synced by `make findings` exactly as
+// findings.json is: the numbers on this page are read, never typed.
+import frameScores from '@/data/frame_scores.json'
 
 export const dynamic = 'force-dynamic'
 
@@ -56,6 +61,8 @@ export default async function Analytics({ params }: { params: { lang: string } }
   ])
 
   const n = (x: number) => formatInt(lang, x)
+  const dec = (x: number) =>
+    x.toLocaleString(numberLocale(lang), { minimumFractionDigits: 4, maximumFractionDigits: 4 })
   const pctNoAff = formatPct(lang, (summary.no_aff / summary.works) * 100)
   const pctNoAbs = formatPct(lang, (summary.no_abstract / summary.works) * 100)
 
@@ -169,6 +176,39 @@ export default async function Analytics({ params }: { params: { lang: string } }
           <FunderChart data={funders} lang={lang} />
         </Frame>
       </div>
+
+      {/* The provisional baseline scores. This section, and only this section,
+          bears machine scores, so the banner lives here rather than site-wide. */}
+      <section className="space-y-4">
+        <div>
+          <h2 className="font-serif text-xl">{t.analytics.scoresTitle}</h2>
+          <p className="mt-1 max-w-3xl text-sm leading-relaxed" style={{ color: 'var(--ink-4)' }}>
+            {t.analytics.scoresNote(n(frameScores.n_scored))}
+          </p>
+        </div>
+        <ScoreBanner t={t} />
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <Tile label={t.analytics.tileScored} value={n(frameScores.n_scored)} note={t.analytics.tileScoredNote} />
+          <Tile
+            label={t.analytics.tileMeanSpread}
+            value={dec(frameScores.mean_teacher_spread)}
+            note={t.analytics.tileMeanSpreadNote}
+            color="var(--contested)"
+          />
+          <Tile
+            label={t.analytics.tileP99Spread}
+            value={dec(frameScores.p99_teacher_spread)}
+            note={t.analytics.tileP99SpreadNote}
+            color="var(--contested)"
+          />
+          <Tile
+            label={t.analytics.tileSplit}
+            value={n(frameScores.n_works_where_teachers_would_split)}
+            note={t.analytics.tileSplitNote}
+            color="var(--mc-accent)"
+          />
+        </div>
+      </section>
 
       <p className="text-xs" style={{ color: 'var(--ink-5)' }}>
         {t.analytics.apiNote(p)}
