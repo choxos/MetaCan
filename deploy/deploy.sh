@@ -94,13 +94,20 @@ printf '    clean at %s\n' "$(git rev-parse --short HEAD)"
 
 
 # ------------------------------------------------------- publish the deploy branch
-# subtree split rewrites the app directory's history into a branch whose root is
-# that directory. --force because renaming the app directory (which the coming
-# reorganization may do) changes the prefix and so rewrites the synthetic history.
+# ONE squashed commit of the app tree at HEAD, not `git subtree split`. The split
+# replays the app directory's entire history, and that history briefly tracked
+# site/node_modules (added in 28b5e5ad, untracked again in 0452c67c), including a
+# 109 MB binary that GitHub's 100 MB blob limit rejects on every push, forever.
+# The deploy branch is a build artifact, not the record; the research repo keeps
+# the history, and the server only ever does fetch --force + reset --hard, so a
+# fresh root commit per deploy is exactly what it already expects.
 step "Publishing $APP_DIR to the $DEPLOY_BRANCH branch"
 
-split_sha="$(git subtree split --prefix="$APP_DIR" HEAD)"
-[ -n "$split_sha" ] || die "git subtree split produced nothing for $APP_DIR"
+tree_sha="$(git rev-parse "HEAD:$APP_DIR")"
+[ -n "$tree_sha" ] || die "could not resolve the tree for $APP_DIR at HEAD"
+
+split_sha="$(git commit-tree "$tree_sha" -m "deploy: $APP_DIR at $(git rev-parse --short HEAD)")"
+[ -n "$split_sha" ] || die "git commit-tree produced nothing for $APP_DIR"
 
 git push --force origin "${split_sha}:refs/heads/${DEPLOY_BRANCH}"
 printf '    %s -> %s\n' "$DEPLOY_BRANCH" "${split_sha:0:12}"
