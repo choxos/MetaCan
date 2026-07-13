@@ -283,7 +283,7 @@ models would be a misrepresentation of method. The accuracy claim rests on §6.2
 
 What the machine pass *does* contribute is real and, after finding 16, precisely bounded: **stratification**
 (a noisy stratifier costs the audit efficiency, never validity, because design weights use known selection
-probabilities), an empirically located boundary (the disagreements), and the throughput to organize 3.5M works
+probabilities), an empirically located boundary (the disagreements), and the throughput to organize 4.3M works
 for sampling at all. **Machine tiers are released marked provisional. Every prevalence this study reports is
 design-weighted human coding. No machine number is reported as the field.** The pilot's machine base rate (§2,
 finding 9) stands as the motivating hypothesis the audit tests, not as a result the audit inherits.

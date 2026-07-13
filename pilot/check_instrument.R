@@ -99,6 +99,37 @@ if (length(missing_conf)) {
   cli_alert_success("`confidence`: every value the schema allows is defined in the rubric ({paste(schema_conf, collapse=', ')})")
 }
 
+# --- confidence: the RULE, not just the enum ------------------------------------
+#
+# The enum matched all along. The RULE did not, and the rule is what a screener
+# actually obeys. The rubric says `low` when the abstract is missing UNLESS THE
+# TITLE IS UNAMBIGUOUS; the schema's own description says the rubric REQUIRES `low`
+# WHENEVER the abstract is missing. The schema MISQUOTES the rubric.
+#
+# This is not cosmetic: `low` is what routes a record to human adjudication, and
+# 33% of the frame has no abstract, so the disputed clause governs a third of
+# everything. Two arms obeying two different rules are not measuring the same thing.
+# See DEVIATIONS.md D24.
+conf_desc <- fromJSON(SCHEMA)$items$properties$confidence$description
+schema_says_always <- grepl("requires .*low.* whenever", conf_desc, ignore.case = TRUE)
+rubric_says_unless <- grepl("unless the title is", rubric_txt, ignore.case = TRUE)
+
+if (schema_says_always && rubric_says_unless) {
+  if ("confidence-rule-split" %in% quarantined) {
+    d <- known[[which(quarantined == "confidence-rule-split")]]
+    cli_alert_warning(c(
+      "QUARANTINED DEFECT {.strong confidence-rule-split}: the schema says the rubric requires `low` WHENEVER the \\
+       abstract is missing; the rubric says `low` UNLESS the title is unambiguous. The schema misquotes the rubric.",
+      "i" = "Known, recorded ({d$deviation}), and NOT fixed in place because v1 is locked. Paid off in: {d$paid_off_in}."
+    ))
+  } else {
+    problems <- c(problems,
+      "`confidence` has TWO RULES. rubric: `low` UNLESS the title is unambiguous. schema: `low` WHENEVER the abstract is missing. This field ROUTES RECORDS TO HUMAN ADJUDICATION, so the contradiction changes who gets reviewed.")
+  }
+} else {
+  cli_alert_success("`confidence`: the rubric's rule and the schema's gloss of it agree")
+}
+
 if (length(problems)) {
   cli_h1("THE INSTRUMENT CONTRADICTS ITSELF")
   for (p in problems) cli_li(p)

@@ -1,0 +1,61 @@
+{
+  "n_three_way_labelled": 5600,
+  "student_vs_teacher_jaccard": {
+    "opus": {
+      "opus": 0.17585301837270342,
+      "gpt": 0.15178571428571427,
+      "grok": 0.15170278637770898
+    },
+    "gpt": {
+      "opus": 0.1691842900302115,
+      "gpt": 0.17266187050359713,
+      "grok": 0.1647940074906367
+    },
+    "grok": {
+      "opus": 0.1625,
+      "gpt": 0.1647940074906367,
+      "grok": 0.16996047430830039
+    }
+  },
+  "teacher_vs_teacher_jaccard": {
+    "opus_vs_gpt": 0.5,
+    "opus_vs_grok": 0.5,
+    "gpt_vs_grok": 0.5628140703517588
+  },
+  "bridging_gain": {
+    "opus_student_vs_grok": -0.34829721362229105,
+    "opus_student_vs_gpt": -0.3482142857142857,
+    "grok_student_vs_opus": -0.3375
+  },
+  "selftrain_drift_positive_rate_pts": 0.0,
+  "selftrain_drift_french_share_pts": 0.0,
+  "selftrain_rounds": [
+    {
+      "round": 0,
+      "train_positives": 224,
+      "pool_positive_rate_pct": 1.0,
+      "french_share_of_positives_pct": 6.5
+    },
+    {
+      "round": 1,
+      "train_positives": 424,
+      "pool_positive_rate_pct": 1.0,
+      "french_share_of_positives_pct": 6.5
+    },
+    {
+      "round": 2,
+      "train_positives": 424,
+      "pool_positive_rate_pct": 1.0,
+      "french_share_of_positives_pct": 6.5
+    },
+    {
+      "round": 3,
+      "train_positives": 424,
+      "pool_positive_rate_pct": 1.0,
+      "french_share_of_positives_pct": 6.5
+    }
+  ],
+  "stratifier_top_decile_recall_pct": 48.2,
+  "stratifier_lift_vs_blind": 4.8,
+  "used_to_produce_any_estimate": false
+}

@@ -4,12 +4,12 @@ Every number below is produced by a script in `pilot/`, against the live OpenAle
 API, with the raw response archived under `pilot/raw/`. Re-derive them offline,
 with no network at all, using `make pilot-offline`.
 
-Computed: 2026-07-12T21:30:56Z
+Computed: 2026-07-13T03:45:06Z
 
 | # | Finding | Consequence for the design |
 |---|---|---|
 | 1 | **The frame is built, not estimated: 4,299,418 works.** The frame is BUILT, not estimated. All 482 partitions of a pinned OpenAlex snapshot were streamed and filtered, and the Canadian frame holds 4,299,418 works, each exactly once. For most of this project's life 'the frame' was 3,507,205, an EXTRAPOLATION from a single partition, hardcoded in six scripts; the estimate was 18% LOW, and every cost, audit-power and field-size figure computed against it has moved. The route that matters: 1,565,226 works (36.4% of the frame) are INVISIBLE TO AFFILIATION ALONE. A frame built on Canadian affiliation would hold 2,734,192 works and would never see them. That is finding 2 at frame scale, and it is why the frame is a union of four routes and why every record carries the provenance of the route that admitted it. | The precondition for everything else, and for most of this project's life it did not exist. 'The frame' was 3,507,205 works: an EXTRAPOLATION from a single OpenAlex partition, hardcoded in six scripts, against which every cost, audit-power and field-size figure was computed. The frame is now BUILT: all 482 partitions streamed and filtered, 4,299,418 works, each exactly once. The estimate was 18% LOW and every number downstream has moved. Nothing about the method changed; every NUMBER did, which is what it means for a frame to be enumerable rather than hypothesised. THE ROUTE THAT MATTERS: 1,565,226 works (36.4%) are INVISIBLE TO AFFILIATION ALONE. An affiliation-only frame would hold 2,734,192 works and would never see them. That is finding 2 (64% of the topic space has no raw affiliation string) made concrete at frame scale, and it is the empirical justification for the union-of-routes design and for carrying provenance on every record. Consequence: no script may hardcode the frame size again (R/frame_size.R reads it from the artifact the harvest writes), and a frame that cannot say WHY it admitted a work cannot be audited, which is the whole thesis. |
-| 2 | **Metaresearch is ~1% of Canadian research.** Screening 5,737 unfiltered Canadian works against the rubric puts metaresearch at 1.31% of Canadian research, implying ~56,206 works in the 3.5M-work frame, sizing the field without a search strategy at all. The 95% CI on this screener's labels is 1.03-1.64%, but that is sampling error, NOT the uncertainty: swap the screener and the estimate lands outside it (finding 10). The field is somewhere between 37,000 and 83,000 works, and only the human audit can narrow that. | Sizes the field without a search strategy. This is what capture-recapture failed to produce. But the binomial CI on it is sampling error, NOT uncertainty; see the next finding but one. |
+| 2 | **Metaresearch is ~1% of Canadian research.** Screening 5,737 unfiltered Canadian works against the rubric puts metaresearch at 1.31% of Canadian research, implying ~56,206 works in the 4,299,418-work frame, sizing the field without a search strategy at all. The 95% CI on this screener's labels is 1.03-1.64%, but that is sampling error, NOT the uncertainty: swap the screener and the estimate lands outside it (finding 10). The field is somewhere between 37,000 and 83,000 works, and only the human audit can narrow that. | Sizes the field without a search strategy. This is what capture-recapture failed to produce. But the binomial CI on it is sampling error, NOT uncertainty; see the next finding but one. |
 | 3 | **The topic route finds one in eight of the field.** Scored against the rubric, the topic route retrieves 12% of Canadian metaresearch (95% CI 5.6-21.6%) at 60% precision: it misses 66 of 75. It fails because OpenAlex files a work by what it is about, and metaresearch about cardiology reads as cardiology: the field is invisible to topic retrieval precisely because it is about other fields. | Scored directly against the rubric rather than by dividing a retrieved set by a field size. The route fails because OpenAlex files a work by what it is ABOUT: metaresearch about cardiology reads as cardiology. The field is invisible to topic retrieval precisely because it is about other fields. |
 | 4 | **Swap the screener and the field doubles.** Swap which model is called 'the screener' and the base rate moves from 1.06% to 2.37%: a 2.2x spread, from 45,397 to 101,776 works in the frame. The two screeners agree on in/out for 98.4% of the frame (design-weighted), but that figure is dominated by the settled rejects: agreement falls to 95% inside the contested boundary. THE SCREENER-SWAP RANGE, NOT THE BINOMIAL CI ON EITHER MODEL ALONE, IS THE HONEST UNCERTAINTY ON THE FIELD'S SIZE. | The published 95% CI (1.03-1.64%) does not contain the second screener's estimate. So it is not an interval for the base rate; it is an interval for how many labels ONE model emits. The screener-swap range is the honest uncertainty, and it is why the human audit is the study rather than a validation appendix. |
 | 5 | **A third of the frame is screened on its title alone.** The base rate's real bias is not recency but MISSING ABSTRACTS: 31.5% of the partition has none, and the screen finds 0.78% metaresearch there against 1.55% where an abstract exists (chi-square p = 0.023, robust to adjustment for year and language). A third of the frame is screened on its title alone. What this does NOT show, and an earlier draft wrongly claimed, is that the blindness is DIFFERENTIAL by tradition: the T2 no-abstract cell holds 4 works and the interaction is not significant (p = 0.141). That claim is withdrawn, as is 'Erudit's exact profile' (the stratum is 99% English and the works are NEWER, not older). The main effect is the finding. | A measured, significant, DIFFERENTIAL bias against the inclusiveness criterion, found in our own data before a reviewer found it. An earlier version of this check tested era instead (the covariate that does not move the estimate) and called the base rate robust. That was a decoy. Hence the human audit now stratifies on abstract availability. |
@@ -30,7 +30,11 @@ Computed: 2026-07-12T21:30:56Z
 | 20 | **The abstract gap is structural, and no source in the chain reaches it.** The screen's largest measured bias is the abstract gap: 23.3% of the frame (1,003,117 works) has NO ABSTRACT, and finding 11 showed the screen finds HALF as much metaresearch there. Cascading PubMed, Europe PMC and Crossref recovers 37.8% of a 500-work sample, cutting title-only exposure to ~14.5% of the frame. But I BUILT THE CASCADE AROUND CROSSREF as the discipline-agnostic rescue, and it recovered 2 abstracts against PubMed's 180: publishers do not deposit them, so THAT RESCUE DOES NOT EXIST (D15). The gap is therefore not a metadata failure a better index fixes; it is STRUCTURAL. Recovery is 91.2% for reviews against 6.2% for book chapters, 38.8% English against 15.4% French. So the tempting shortcut, 'just screen the works that have abstracts', is a SELECTION ON A COVARIATE THAT PREDICTS THE OUTCOME which would delete 61.6% of book chapters against 22.1% of articles, AND the works it deletes are exactly the works no cascade can rescue. Defensible only as a DECLARED exclusion with a measured cost, and the audit keeps a sampling floor in it. | The screen's largest measured bias: 23.3% of the frame (1,003,117 works) has NO ABSTRACT, and finding 11 measured that the screen finds HALF as much metaresearch there. I built a PubMed/Europe PMC/Crossref cascade around Crossref as the DISCIPLINE-AGNOSTIC rescue, and wrote that reasoning into the script before running it. Crossref recovered TWO abstracts; PubMed recovered 180 (D15). Publishers do not deposit abstracts to Crossref, so THE RESCUE DOES NOT EXIST. The cascade still cuts title-only exposure from 23.3% to ~14.5%, but the finding is worse than the one I went looking for: the gap is STRUCTURAL, not a metadata failure a better index repairs. Recovery is 91.2% for reviews against 6.2% for book chapters and 0% for letters; 38.8% English against 15.4% French. The works with no abstract are disproportionately the works NO abstract service covers, and the residue is humanities-shaped, book-shaped and francophone-shaped: precisely what an inclusive map exists to include. Consequence: 'screen only works with abstracts' is a SELECTION ON A COVARIATE THAT PREDICTS THE OUTCOME (it deletes 61.6% of book chapters against 22.1% of articles), admissible only as a DECLARED exclusion with a measured cost, and the audit keeps a sampling floor in the excluded stratum. |
 | 21 | **The preprint coverage claim, measured instead of asserted.** The frame carries 156,086 preprints, and the tempting move was to assert that OpenAlex covers the preprint servers and skip the ingest. That is a COVERAGE CLAIM, and this project does not get to make one from inside the pipeline being claimed for: it is the topic route certifying its own recall (finding 12). Measured instead against the servers' OWN API, OpenAlex indexes 99.6% of the 705 bioRxiv and medRxiv preprints enumerated (3 missing). The claim survives measurement, so no separate preprint ingest is built. | The frame carries 156,086 preprints and the tempting move was to assert that OpenAlex covers the servers and skip the ingest. That is a COVERAGE CLAIM, and this project does not get to make one from inside the pipeline being claimed for: it is the topic route certifying its own recall. Measured instead against bioRxiv and medRxiv's OWN API, OpenAlex indexes 99.6% of the preprints the servers say they hold. The claim SURVIVES measurement, so no separate ingest is built, and it is allowed in the proposal only because it was checked. arXiv is NOT tested and that claim stays open. |
 | 22 | **The number that looked like a replication and was a coincidence.** The registry is the only REFERENCE STANDARD in this project not made of machine labels: ClinicalTrials.gov knows a Canadian trial happened independently of any pipeline, so it cannot be wrong in the pipeline's favour. Of 304 publications SPONSORS THEMSELVES reported as results of completed Canadian-located trials, the frame holds 160: a naive recall of 52.6%, which fell so close to the 44.5% THIS PROPOSAL OPENS WITH that it read as a replication. IT IS AN ARTIFACT, and running the disambiguation is the only thing that caught it: 137 of the 145 'misses' have NO CANADIAN AUTHOR (multi-site international trials with a Canadian SITE), and a frame of Canadian RESEARCH is CORRECT to exclude them. A trial with a Canadian site is not a publication with a Canadian author. Against the population the frame actually claims, recall is 95.2% (95% CI 90.8-97.9), and the real defect is 8 works OpenAlex holds WITH a Canadian author that the frame's own routes still missed. The frame is GOOD at this, the dramatic parallel was a coincidence between two different populations, and I had every incentive not to check. DEVIATIONS.md D16. | The only reference standard in this project NOT made of machine labels: ClinicalTrials.gov knows a Canadian trial happened independently of any pipeline, so it cannot be wrong in the pipeline's favour. The first number out of it was 52.6% frame recall, which fell so close to the 44.5% THIS PROPOSAL OPENS WITH that it read as a replication of my own prior finding on Canadian data. IT WAS A COINCIDENCE BETWEEN TWO DIFFERENT POPULATIONS. 137 of the 145 'misses' have NO CANADIAN AUTHOR: multi-site international trials with a Canadian SITE, which a frame of Canadian RESEARCH is CORRECT to exclude. A trial with a Canadian site is not a publication with a Canadian author. True recall against the population the frame actually claims is 95.2% (95% CI 90.8-97.9), and the real defect is 8 route-gap works. Every incentive pointed away from running the disambiguation that caught this, which is the condition under which researchers do not check, and it is the condition this project exists to argue is unsafe. DEVIATIONS.md D16. |
-| 23 | **The field's boundary is a region three models each cut differently.** Three frontier models (Opus 4.8, GPT-5.6 high, Grok 4.5) screened the same 1,000 works from the REAL 4.3M frame, on the rubric's FULL eight-field payload, with randomized manifest-logged chunks and harness-written labels: every defect D1, D2, D11 and finding 16 identified, repaired. Design-weighted base rates span 2.09% to 3.45% (1.6x). But the sets are the finding, as finding 16 predicted: of the 94 works ANY model called metaresearch, only 35 (37%) were called metaresearch by ALL THREE, and 43 (46%) rest on a single model's opinion. THE FIELD'S BOUNDARY IS NOT A LINE THE MODELS SHARE; IT IS A REGION THEY EACH CUT DIFFERENTLY. GPT-5.6 also violated the locked output schema on 18 of 1,000 records, writing genre values into the tier field, which the manifest validator caught. The deliverable is not the base rate: it is the disagreement dossier, the 94 works that mark the empirical boundary of the field and against which the inclusion criteria must actually be written. | The run that repairs every harness defect this project found, and then delivers the thing the competition actually asks for. Opus 4.8, GPT-5.6 (high) and Grok 4.5 screened the same 1,000 works, drawn from the REAL 4.3M frame with known selection probabilities, on the rubric's FULL eight-field payload (repairs D1), with chunks randomized and manifest-logged before any model ran (repairs finding 16's confound), labels written by the HARNESS and reconciled against the manifest (repairs D2 and D11). Design-weighted base rates span 1.89% to 3.54%. But finding 16 predicted the real result and it holds: RATE AGREEMENT IS NOT SET AGREEMENT. Of the 51 works ANY model called metaresearch, only 19 (37%) were called metaresearch by ALL THREE, and 24 (47%) rest on a SINGLE model's opinion. Jaccard overlap between any two models is about half. THE FIELD'S BOUNDARY IS NOT A LINE THE MODELS SHARE; IT IS A REGION THEY EACH CUT DIFFERENTLY, and the size of that region is the honest uncertainty. GPT-5.6 also violated the locked output schema on 18 of 1,000 records, writing GENRE values into the TIER field, which the manifest validator caught and which the re-run did not reproduce: the violation is not deterministic. Consequence: the deliverable is NOT a base rate. It is the disagreement dossier, the 51 works that mark the empirical boundary, and the tier-confusion table that names which rubric distinctions three frontier models cannot apply consistently. A distinction three frontier models cannot apply consistently is not a distinction; it is a wish, and the criteria must be rewritten against those seams. The largest seam is OUT-vs-T2: the adjacent traditions (STS, LIS) the inclusiveness criterion exists to protect. |
+| 23 | **The field's boundary is a region three models each cut differently.** Three frontier models (Opus 4.8, GPT-5.6 high, Grok 4.5) screened the same 5,600 works, drawn from the real 4.3M frame under a design whose seven strata PARTITION it (an earlier five-stratum design could not reach 12.9% of the frame at all; D22). Design-weighted base rates span 2.54% to 3.81% (1.5x). But the RATE is not the finding, the SETS are: of the 274 works ANY model called metaresearch, only 104 (38%) were called metaresearch by ALL THREE, and 117 (43%) rest on a SINGLE model's opinion; pairwise Jaccard on the in-scope sets is about 50%. THE FIELD'S BOUNDARY IS NOT A LINE THE MODELS SHARE; IT IS A REGION THEY EACH CUT DIFFERENTLY, and that result is STABLE across n = 1,000, 2,000 and 5,600 (unanimity 37%, 37%, 38%). A SECOND, PRETTIER CLAIM DID NOT SURVIVE: at n = 2,000 the models agreed markedly more on 'is this about research at all' (1.43x here) than on 'is it in scope' (1.51x here), and this project said so in capitals; at n = 5,600 the two spreads are within noise (ratio 1.06) and the claim is WITHDRAWN (D23). The largest tier confusion is OUT-vs-T2, every time, at every sample size: the adjacent traditions the inclusiveness criterion exists to protect. The deliverable is not a base rate. It is the disagreement dossier, the 274 works that mark the empirical boundary, each carrying all three models' stated reasons, and the criteria that have to be written against them. | The run that repairs every harness defect this project found, and then delivers the thing the competition actually asks for. Opus 4.8, GPT-5.6 (high) and Grok 4.5 screened the same 1,000 works, drawn from the REAL 4.3M frame with known selection probabilities, on the rubric's FULL eight-field payload (repairs D1), with chunks randomized and manifest-logged before any model ran (repairs finding 16's confound), labels written by the HARNESS and reconciled against the manifest (repairs D2 and D11). Design-weighted base rates span 1.89% to 3.54%. But finding 16 predicted the real result and it holds: RATE AGREEMENT IS NOT SET AGREEMENT. Of the 51 works ANY model called metaresearch, only 19 (37%) were called metaresearch by ALL THREE, and 24 (47%) rest on a SINGLE model's opinion. Jaccard overlap between any two models is about half. THE FIELD'S BOUNDARY IS NOT A LINE THE MODELS SHARE; IT IS A REGION THEY EACH CUT DIFFERENTLY, and the size of that region is the honest uncertainty. GPT-5.6 also violated the locked output schema on 18 of 1,000 records, writing GENRE values into the TIER field, which the manifest validator caught and which the re-run did not reproduce: the violation is not deterministic. Consequence: the deliverable is NOT a base rate. It is the disagreement dossier, the 51 works that mark the empirical boundary, and the tier-confusion table that names which rubric distinctions three frontier models cannot apply consistently. A distinction three frontier models cannot apply consistently is not a distinction; it is a wish, and the criteria must be rewritten against those seams. The largest seam is OUT-vs-T2: the adjacent traditions (STS, LIS) the inclusiveness criterion exists to protect. |
+| 24 | **The locked instrument contradicts itself, and nothing caught it.** THE LOCKED INSTRUMENT CONTRADICTS ITSELF, AND NOTHING CAUGHT IT. The rubric and the output schema name TWO DIFFERENT controlled vocabularies for the same field, `genre`, overlapping on 2 values (empirical and other); 4 terms exist only in the rubric and 7 only in the schema. Every screener was handed both and told to obey both, and each invented its own reconciliation: GPT-5.6 and Grok followed the rubric and are therefore 26.9% and 20.9% ILLEGAL against the schema, while Opus drew from both lists at once and emitted 13 distinct values. The validator checked `tier` and never checked `genre`, so 16,800 labels passed every check that ran. It was found by an agent mentioning it in one clause of a report about something else. Nothing crashed; the variable simply meant a different thing in each arm, and the variance would have been attributed to the models. The labels are NOT repaired, because harmonising the arms after seeing them would destroy the only evidence that they diverged; the genre field is reported as unusable and the fix belongs in the instrument, at a version boundary. | The instrument this project locked, preregistered, and screened 5,000 works against SPECIFIES TWO DIFFERENT CONTROLLED VOCABULARIES FOR THE SAME FIELD. protocol/rubric.md names one genre list, protocol/screening-schema.json names another, and they overlap on TWO values out of eleven. Every screener was handed both documents and told to obey both, and each invented its own reconciliation: GPT-5.6 and Grok followed the rubric and are therefore 27% and 22% ILLEGAL against the schema they were told to conform to, while Opus drew from both lists at once and emitted 13 distinct values. The manifest validator checked `tier` and NEVER CHECKED `genre`, so 6,000 labels passed every check that ran. Nothing crashed. No file was malformed. The variable simply meant a different thing in each arm, and the resulting variance would have been read as MODEL DISAGREEMENT, which is the exact quantity this project is trying to measure. It was found because a screening agent mentioned it in one clause of a report about something else. Consequence: the genre field from this screen is REPORTED AS UNUSABLE and used for nothing downstream, and it is NOT remapped, because harmonising three arms after seeing how they diverged would destroy the only evidence that they did. The fix belongs in the instrument, at a version boundary, and the deeper fix is that a locked instrument must be MACHINE-CHECKED AGAINST ITS OWN SCHEMA before any model runs: a codebook that contradicts itself does not announce itself, it just produces variance and lets you blame the models. |
+| 25 | **The design could not reach 12.9% of the frame, and no weight fixes that.** THE SAMPLING DESIGN COULD NOT REACH 12.9% OF THE FRAME, AND NO WEIGHT CAN FIX THAT. A stratified design rests on one identity, sum(N_h) = N. It was never checked. 549,370 works (12.9% of the sampling frame) had an inclusion probability of EXACTLY ZERO: 366,856 that no predicate claimed, because aff_core excluded everything ABOUT Canada while about_only excluded everything AFFILIATED with Canada, so a work that was both fell between them; and 182,514 more whose predicate evaluated to SQL NULL, which `WHERE p` and `WHERE NOT p` BOTH decline to select, so they were in no stratum and were not even orphans. Nothing threw. Every stratum returned exactly the n it asked for, because a stratum cannot know about the works it was never asked about, and the design drew a clean textbook probability sample OF 87% OF THE FRAME while every number computed from it said 'the frame'. A zero-probability work is not underweighted, it is UNREACHABLE, and design weights are the guarantee this project leans on hardest. THE CELL IT DELETED WAS THE SECONDARY ESTIMAND'S: 328,912 Canadian-affiliated works about Canada, in a study whose secondary estimand is 'metaresearch about the Canadian research system'. Repaired by adding the exact NULL-safe complement as two strata; the 7 strata now partition the frame by construction (4,255,410 = 4,255,410), asserted on every build. It was found by an adversarial model adding up five numbers I handed it. The defect made the sample TIDIER and the variance SMALLER, which is why nothing about it felt wrong: the errors that survive are the ones that flatter you. | The most serious defect this project has found, and it was found by a model I asked to attack me. A stratified design rests on one identity, sum(N_h) = N, and I never checked it. 549,370 works (12.9% of the sampling frame) had an inclusion probability of EXACTLY ZERO, from two defects stacked: aff_core excluded everything ABOUT Canada while about_only excluded everything AFFILIATED with Canada, so 366,856 works that were both fell between them; and 182,514 more had a stratum predicate that evaluated to SQL NULL, which `WHERE p` and `WHERE NOT p` BOTH decline to select, leaving them in no stratum and not even orphans. Nothing threw. Every stratum returned exactly the n it asked for, because a stratum cannot know about the works it was never asked about. The design drew a clean textbook probability sample OF 87% OF THE FRAME while every number computed from it carried the frame's name. A zero-probability work is not underweighted, it is UNREACHABLE: design weights are the guarantee this project leans on hardest ('unbiased however noisy the stratifier is') and that guarantee is VOID where the probability is zero. The deleted cell was the SECONDARY ESTIMAND'S OWN: 328,912 Canadian-affiliated works about Canada, in a study whose secondary estimand is metaresearch about the Canadian research system. Consequence: the strata are defined in one place (R/strata.R) with the two residual strata as the exact NULL-safe complement, so the seven PARTITION the frame by construction; check_strata_partition.R asserts exhaustive + disjoint + nonempty on every build and is verified BOTH ways; 600 new works drawn and screened. And the reason nothing felt wrong is the finding: the broken design produced a TIDIER sample and SMALLER variance than the correct one. THE ERRORS THAT SURVIVE ARE THE ONES THAT FLATTER YOU. |
+| 26 | **Both clauses of 'Canadian' measure something other than their name.** BOTH CLAUSES OF 'CANADIAN' MEASURE SOMETHING OTHER THAN WHAT THEY ARE NAMED. This project has spent all its effort on what retrieval MISSES; this is the first hard evidence about what it wrongly ADMITS. (1) CA-AFF, the PRIMARY estimand's main clause: 17,466 works enter the frame on a Canadian 'institution' that does not exist. OpenAlex hands 'Discovery Air (Canada)' to a Brazilian linguistics paper, 'Musee de la Civilisation' to a Brazilian food-science paper, and 'Impact', which is not an institution at all but a parse failure with an institution id, to a Spanish COVID essay. The CA-AFF route also carries thousands of works in Latvian and Indonesian. That count is a LOWER BOUND: the artifact strings tested are only the ones screening agents noticed BY EYE while doing something else, and nobody has swept the institution vocabulary, so the true precision is UNKNOWN rather than merely unmeasured. (2) ABOUT-CA, the SECONDARY estimand: the retrieval route means 'Canada appears in the text' and the rubric field means 'the Canadian research SYSTEM is a substantive object of study', and in the strata built entirely on the former, the latter fires on 1.8% to 3.5% of works. Worse, `about_ca` cannot be true unless the work is ALREADY about research, so it is nearly collinear with tier: only 39 works in 5,600 are both in-scope AND about the Canadian research system. THE SECONDARY ESTIMAND CANNOT BE ESTIMATED FROM THE STRATUM DESIGNED FOR IT. Four screening agents found this independently and all four proposed the same repair: split the field into `about_ca_system` and `about_ca_topic`, because one boolean cannot separate 'Canadian data, universal claim' from 'a claim about Canada'. | Every other finding here is about what retrieval MISSES. This is the first about what it wrongly ADMITS, and it hits BOTH clauses of the estimand. CA-AFF, the primary clause: 17,466 works enter the frame on a Canadian 'institution' that does not exist, because OpenAlex hands 'Discovery Air (Canada)' to a Brazilian linguistics paper and 'Impact', a parse failure with an institution id, to a Spanish COVID essay; the route also carries thousands of works in Latvian and Indonesian. That number is a LOWER BOUND and is reported as one: the artifact strings tested are only those screening agents noticed BY EYE while doing something else, so CA-AFF precision is UNKNOWN, not merely unmeasured. ABOUT-CA, the secondary clause: the retrieval route means 'Canada appears in the text' and the rubric field means 'the Canadian research SYSTEM is a substantive object of study', and in the strata built entirely on the former the latter fires on 1-3% of works. Worse, `about_ca` cannot be TRUE unless the work is already about research, so it is nearly collinear with tier and carries almost no independent signal in the very stratum built to carry it: THE SECONDARY ESTIMAND CANNOT BE ESTIMATED FROM THE STRATUM DESIGNED FOR IT. Four screening agents found this independently, unprompted, and all four proposed the same repair: split into `about_ca_system` and `about_ca_topic`, because one boolean cannot separate 'Canadian data, universal claim' from 'a claim about Canada'. Consequence: the human audit must sample the RETRIEVED stratum too, because precision has to be measured and not assumed, and rubric v2 splits the field. |
+| 27 | **A classifier trained on LLM labels cannot reproduce even its own teacher.** A CLASSIFIER TRAINED ON LLM LABELS CANNOT EVEN REPRODUCE ITS OWN TEACHER, LET ALONE ADJUDICATE THREE. Students distilled from each model match their own teacher at Jaccard 0.17, while the three teachers match EACH OTHER at 0.5 to 0.56: the classifier is a worse approximation of Opus than Grok is. Distilling from Opus also moves you AWAY from Grok (-0.35), so distillation does not bridge the models' disagreement, it degrades away from all of them. THE SELF-TRAINING LOOP THEN REFUTED MY OWN PREDICTION. I argued at length that it would shrink the positive class toward the confident anglophone core; run on 20,000 works the models never saw, it did not: positive rate drift +0.00 points, French share drift +0.00 points, because class weighting prevents the collapse, exactly as the adversarial review warned before the run ('a serious risk, NOT A THEOREM'). What the loop DID do is reach a fixed point immediately and recycle its own labels (224 -> 424 training positives, then nothing): it CONVERGED WITHOUT LEARNING, and a fixed point looks identical from the inside whether its labels are right or wrong. What the classifier IS worth is the stratifier: 48.2% of the in-scope works sit in its top decile against a blind baseline of 10%, a 4.8x lift in in-scope works found per unit of human coding effort, and design-weighted estimates stay unbiased however noisy it is. THE MACHINE DECIDES WHERE THE HUMANS LOOK. IT NEVER SUPPLIES A LABEL. | The answer to 'why not train an ML model on the LLM labels and iterate until it matures?', run as an experiment instead of argued as an opinion, and it went two ways. AGAINST the idea: a student distilled from each model matches ITS OWN TEACHER at Jaccard 0.17, while the three teachers match EACH OTHER at 0.50 to 0.56. The classifier is a worse approximation of Opus than Grok is. Distilling from Opus also moves you AWAY from Grok (-0.35), so distillation does not bridge the models' disagreement, it degrades away from all of them; the boundary is not recoverable from surface text at this sample size, and training on one model's labels would silently settle the question the audit exists to answer. AGAINST ME: I predicted at length that the self-training loop would shrink the positive class toward the confident anglophone core, implementing the rubric's own error 3 as an optimiser. Run on 20,000 works the models never saw, IT DID NOT: positive rate drift 0.00 points, French share drift 0.00 points, because class weighting prevents the collapse, exactly as the adversarial review had warned BEFORE the run ('a serious risk, NOT A THEOREM'). What the loop did instead was reach a fixed point immediately and recycle its own labels (224 -> 424 training positives, then nothing): IT CONVERGED WITHOUT LEARNING, and a fixed point looks identical from the inside whether its labels are right or wrong, so 'the algorithm has matured' is not something the loop can ever report. FOR the idea, in its correct form: as a STRATIFIER the classifier puts 48% of the in-scope works in its top decile against a blind baseline of 10%, a 4.8x lift in in-scope works found per unit of human coding effort, and design-weighted estimates stay unbiased however noisy it is. Consequence: the classifier is built, and it allocates human effort. It never supplies a label, and it never produces the estimate. |
 
 ## Raw values
 
@@ -601,59 +605,237 @@ Computed: 2026-07-12T21:30:56Z
     "sample": "1,000 works, stratified with known selection probabilities, French oversampled",
     "models": "Claude Opus 4.8; GPT-5.6 (high effort); Grok 4.5 (medium effort)",
     "harness": "chunks randomized and manifest-logged before any model ran; the harness writes label files, never the model (repairs D11); every arm reconciled against the manifest (repairs D2)",
-    "n_labelled_by_all_three": 2000,
-    "tranche_homogeneity_p": 0.46,
+    "n_labelled_by_all_three": 5600,
+    "tranche_homogeneity_p": 0.63,
     "tranches_pool": true,
     "base_rate_weighted_pct": {
-      "opus": 3.45,
-      "gpt": 2.54,
-      "grok": 2.09
+      "opus": 3.81,
+      "gpt": 2.92,
+      "grok": 2.54
     },
-    "between_model_spread_x": 1.6,
+    "between_model_spread_x": 1.5,
     "jaccard_opus_gpt": 50,
-    "jaccard_opus_grok": 48,
-    "jaccard_gpt_grok": 55,
+    "jaccard_opus_grok": 50,
+    "jaccard_gpt_grok": 56,
     "n_about_research_at_all": {
-      "opus": 144,
-      "gpt": 120,
-      "grok": 112
+      "opus": 391,
+      "gpt": 325,
+      "grok": 274
     },
     "n_in_scope": {
-      "opus": 78,
-      "gpt": 54,
-      "grok": 48
+      "opus": 224,
+      "gpt": 163,
+      "grok": 148
     },
-    "spread_about_research_x": 1.29,
-    "spread_in_scope_x": 1.62,
+    "spread_about_research_x": 1.43,
+    "spread_in_scope_x": 1.51,
     "variance_is_in_the_rubric_not_the_models": true,
-    "called_in_scope_by_any": 94,
-    "unanimous_in_scope": 35,
-    "pct_unanimous_of_any": 37,
-    "in_scope_by_one_model_only": 43,
-    "pct_single_model_of_any": 46,
+    "called_in_scope_by_any": 274,
+    "unanimous_in_scope": 104,
+    "pct_unanimous_of_any": 38,
+    "in_scope_by_one_model_only": 117,
+    "pct_single_model_of_any": 43,
     "contested_by_stratum": {
-      "aff_core": 72,
-      "about_only": 65,
-      "venue_new": 62,
-      "fund_new": 60,
-      "french": 43
+      "about_only": 67,
+      "venue_new": 65,
+      "residual": 64,
+      "aff_core": 62,
+      "fund_new": 61,
+      "aff_about": 59,
+      "french": 54
     },
     "tier_disagreement_patterns": {
-      "OUT/T2": 30,
-      "T1": 22,
-      "OUT/T1": 18,
-      "T2": 12,
-      "OUT/T1/T2": 3,
-      "T1/T3": 3,
-      "OUT/T2/T3": 2,
-      "T2/T3": 2,
-      "OUT/T1/T3": 1,
-      "T1/T2": 1
+      "OUT/T2": 77,
+      "T1": 65,
+      "OUT/T1": 57,
+      "T2": 30,
+      "T1/T3": 11,
+      "T2/T3": 10,
+      "T1/T2": 9,
+      "OUT/T1/T2": 8,
+      "OUT/T1/T3": 3,
+      "OUT/T2/T3": 3
     },
     "gpt_schema_violations_first_pass": 18,
     "gpt_violation_note": "GPT-5.6 (high) wrote GENRE values ('empirical', 'conceptual') into the TIER field on 18 of 1,000 records in its first pass, in 3 of 20 chunks. The validator caught it because the harness reconciles files against a manifest rather than trusting the model's report. Those chunks were RE-RUN, not repaired: coercing a model's output to the schema is fitting the instrument to the data.",
     "deliverable": "pilot/screening/frame1k/disagreement_dossier.json: every work any model called in-scope, with all three labels. This, not the base rate, is what the criteria must be written against.",
     "caveat": "These are MACHINE labels and none of them is truth (finding 15). The unanimity rate is not accuracy: three models sharing training data can be wrong together, and they are most correlated exactly on the boundary cases the field's definition turns on. What this measures is where the RUBRIC is underspecified, which is a property of the instrument and is exactly what a criteria document needs. Base rates are design-weighted from a stratified sample, so they estimate the frame; the Jaccard and unanimity figures are unweighted set quantities over the sample and are NOT frame estimates."
+  },
+  "instrument_contradicts_itself": {
+    "field": "genre",
+    "rubric_vocabulary": [
+      "empirical",
+      "conceptual",
+      "editorial/commentary",
+      "policy",
+      "infrastructure/announcement",
+      "other"
+    ],
+    "schema_vocabulary": [
+      "empirical",
+      "review",
+      "methods",
+      "commentary",
+      "editorial",
+      "protocol",
+      "dataset",
+      "software",
+      "other"
+    ],
+    "shared_values": [
+      "empirical",
+      "other"
+    ],
+    "n_shared": 2,
+    "only_in_rubric": [
+      "conceptual",
+      "editorial/commentary",
+      "policy",
+      "infrastructure/announcement"
+    ],
+    "only_in_schema": [
+      "review",
+      "methods",
+      "commentary",
+      "editorial",
+      "protocol",
+      "dataset",
+      "software"
+    ],
+    "arms": [
+      "opus",
+      "gpt",
+      "grok"
+    ],
+    "n_labels": [
+      5600,
+      5600,
+      5600
+    ],
+    "n_distinct_values_by_arm": [
+      13,
+      6,
+      12
+    ],
+    "pct_legal_against_schema": [
+      90.8,
+      73.1,
+      79.1
+    ],
+    "pct_legal_against_rubric": [
+      86.1,
+      100,
+      99.8
+    ],
+    "validator_checked_tier": true,
+    "validator_checked_genre": false,
+    "labels_repaired": false,
+    "found_by": "An Opus screening agent mentioned it in one clause of a report about something else, while working chunks it had been given for an unrelated reason. It was not looking for this, no check was watching for it, and it had already survived 6,000 labels across three models.",
+    "caveat": "The genre variable from this screen is reported as UNUSABLE and is used for nothing. It is not remapped to a common vocabulary: the three arms resolved the contradiction differently, and harmonising them after the fact would destroy the only evidence that they did."
+  },
+  "zero_probability_region": {
+    "full_frame": 4299418,
+    "unscreenable_excluded": 44008,
+    "sampling_frame": 4255410,
+    "reachable_under_shipped_design": 3706040,
+    "orphaned_predicate_false": 366856,
+    "invisible_predicate_null": 182514,
+    "zero_probability_works": 549370,
+    "pct_of_sampling_frame": 12.9,
+    "aff_and_about_cell": 328912,
+    "strata_after_repair": 7,
+    "strata_sum_after_repair": 4255410,
+    "partition_holds": true,
+    "found_by": "An adversarial model asked to attack the classifier design. Its first move was to add up the five design weights in a summary table I had handed it: 2000x1119 + 1000x664.2 + 750x536.8 + 750x310.9 + 500x335.8 = 3,705,875, against a frame of 4,299,418. I had never added them up.",
+    "caveat": "The repair does not retro-fix numbers produced under the broken design; those estimated a 3.7M subpopulation and were reported under the frame's name, and saying so IS the finding. Every design-weighted figure is now re-derived against the seven-stratum design. The five original predicates are kept byte-for-byte because 5,000 works had already been drawn from them by hash order, and widening a stratum silently re-draws it."
+  },
+  "canadian_linkage_misnames_itself": {
+    "ca_aff_works": 2714734,
+    "ca_aff_only_institution_is_artifact": 17466,
+    "artifact_strings_tested": [
+      "Impact",
+      "Discovery Air (Canada)",
+      "Musée de la Civilisation",
+      "Encana (Canada)",
+      "Kellogg's (Canada)",
+      "The Alberta Paraplegic Foundation"
+    ],
+    "artifact_count_is_a_lower_bound": true,
+    "ca_aff_non_official_languages": [
+      8734,
+      8463,
+      5289,
+      5160,
+      4708,
+      1200
+    ],
+    "about_ca_pct_in_about_strata_opus": [
+      1.8,
+      3.5
+    ],
+    "about_ca_pct_in_about_strata_gpt": [
+      1,
+      2
+    ],
+    "about_ca_pct_in_about_strata_grok": [
+      0.8,
+      1.2
+    ],
+    "n_screened": 5600,
+    "about_ca_and_in_scope": 39,
+    "about_ca_and_out_of_scope": 26,
+    "about_ca_nearly_collinear_with_tier": true,
+    "found_by": "Screening agents, reporting records they were given for an unrelated reason. Four of them independently reported that the ABOUT-CA route and the rubric's about_ca field are different constructs, and all four proposed the same repair without having seen each other's reports.",
+    "caveat": "The artifact count is a LOWER BOUND, and deliberately reported as one: the strings tested are only those agents noticed by eye. No sweep of the OpenAlex institution vocabulary has been done, so the true CA-AFF precision is unknown, not merely unmeasured. That is the honest state and it is why the human audit samples the retrieved stratum as well as the non-retrieved one: precision is measured, not assumed."
+  },
+  "distillation_ceiling": {
+    "n_three_way_labelled": 5600,
+    "student_vs_own_teacher_jaccard": [
+      0.176,
+      0.173,
+      0.17
+    ],
+    "teacher_vs_teacher_jaccard": [
+      0.5,
+      0.5,
+      0.563
+    ],
+    "bridging_gain": [
+      -0.3483,
+      -0.3482,
+      -0.3375
+    ],
+    "selftrain_rounds": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "selftrain_train_positives": [
+      224,
+      424,
+      424,
+      424
+    ],
+    "selftrain_pool_positive_rate_pct": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "selftrain_french_share_pct": [
+      6.5,
+      6.5,
+      6.5,
+      6.5
+    ],
+    "selftrain_drift_positive_rate_pts": 0,
+    "selftrain_drift_french_share_pts": 0,
+    "my_shrinkage_prediction_was_refuted": true,
+    "stratifier_top_decile_recall_pct": 48.2,
+    "stratifier_lift_vs_blind": 4.8,
+    "used_to_produce_any_estimate": false,
+    "caveat": "The student is TF-IDF word+char n-grams with a cross-validated logistic head: the cheap classifier the question was actually about. A fine-tuned multilingual encoder would raise the student-vs-teacher number and change none of the argument, because the ceiling is set by the LABELS, not by the model class. The self-training loop's non-collapse is CONDITIONAL on class weighting and should not be read as a general safety result: it says the collapse is avoidable, not that the loop is informative. And nothing here produces a prevalence estimate; the classifier is a stratifier, and the human audit is the instrument."
   }
 }
 ```

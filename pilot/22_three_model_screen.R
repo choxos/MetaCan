@@ -178,15 +178,44 @@ cli_li("gpt  vs grok : {jac(k$gpt,  k$grok)}%")
 # site's per-model counts disagreed with the dossier, and chasing that discrepancy
 # turned up the reason.
 #
-# Ask the models a COARSER question -- "is this work about research AT ALL?"
-# (T1, T2 or T3, versus OUT) -- and they agree almost exactly. Ask the FINER
-# question the estimand actually needs -- "is it IN SCOPE?" (T1 or T2, versus T3
-# or OUT) -- and they diverge by a factor approaching two, on identical input.
+# ------------------------------------------------------------------------------
+# A CLAIM THIS SCRIPT USED TO MAKE, AND THE DATA WITHDREW. READ THIS FIRST.
+# ------------------------------------------------------------------------------
+# At n = 2,000 the two spreads came apart cleanly:
 #
-# So the models are NOT failing to recognise metaresearch-adjacent material. They
-# see the same works. What they cannot do is agree on WHERE THE LINE FALLS between
-# "in scope" and "merely adjacent", which is exactly the T2/T3/OUT seam that ten
-# independent screening agents named without being asked (protocol/rubric-v2-proposal.md).
+#     "about research AT ALL" (T1/T2/T3 vs OUT)  spread 1.29x
+#     "IN SCOPE"              (T1/T2  vs T3/OUT) spread 1.62x
+#
+# and this script said, in capitals, that the models AGREE on recognition and
+# DIVERGE on the boundary, so THE VARIANCE IS NOT IN THE MODELS, IT IS IN THE
+# RUBRIC. It was the best line in the project. I put it in the commit message.
+#
+# At n = 5,600 it is gone:
+#
+#     coarse 1.43x     fine 1.51x     ratio 1.06 (was 1.26)
+#
+# The two spreads are now within noise of each other. The models disagree about
+# EQUALLY on "is this about research at all" and on "is it in scope". The
+# decomposition DID NOT REPLICATE, and a 2.8x larger sample is what killed it.
+#
+# The finding was not fabricated and it was not a coding error. It was a real
+# pattern in 2,000 works that was not a real pattern in the population, which is
+# the ordinary way a striking result dies, and the only reason it died in-house
+# instead of in the proposal is that the sample got bigger. Nothing else changed.
+#
+# WHAT SURVIVED, across n = 1,000, 2,000 and 5,600, unchanged:
+#   - unanimity among works ANY model calls in-scope: 37%, 37%, 38%
+#   - works resting on a SINGLE model's opinion:      47%, 46%, 43%
+#   - pairwise Jaccard of the in-scope sets:          about 50%
+#   - the dominant tier confusion:                    OUT vs T2, every time
+#
+# So the load-bearing claim is the one that was already true before the pretty
+# decomposition was layered on top of it: RATE AGREEMENT IS NOT SET AGREEMENT, and
+# the field's boundary is a REGION the models each cut differently. That does not
+# need the coarse/fine split, and it is what the proposal says.
+#
+# The spreads are still reported below, because withdrawing a claim means showing
+# the numbers that withdrew it. See DEVIATIONS.md D23.
 #
 # The variance is not in the models. IT IS IN THE RUBRIC.
 ANY <- function(t) t %in% c("T1", "T2", "T3")
@@ -198,13 +227,25 @@ fine_x   <- round(max(fine)   / min(fine),   2)
 cli_h2("Where the disagreement actually lives")
 cli_li("'about research AT ALL' (T1/T2/T3) : opus {coarse[['opus']]}, gpt {coarse[['gpt']]}, grok {coarse[['grok']]}  -> spread {coarse_x}x")
 cli_li("'IN SCOPE' (T1/T2)                 : opus {fine[['opus']]}, gpt {fine[['gpt']]}, grok {fine[['grok']]}  -> spread {fine_x}x")
-cli_alert_danger(
-  "The models agree on WHAT IS ABOUT RESEARCH ({coarse_x}x spread) and disagree on WHERE THE LINE IS \\
-   ({fine_x}x spread), on identical input. They are not failing to SEE the material; they cannot agree \\
-   where 'in scope' ends and 'adjacent' begins. THE VARIANCE IS NOT IN THE MODELS, IT IS IN THE \\
-   RUBRIC, and it sits exactly on the T2/T3 seam that ten independent screening agents named \\
-   unprompted (protocol/rubric-v2-proposal.md)."
-)
+# The claim this used to make is WITHDRAWN (see the block above and D23): at
+# n = 5,600 the coarse and fine spreads are within noise of each other, so the
+# models do NOT agree on recognition while disagreeing on the boundary. They
+# disagree about equally on both. Report the ratio and let it speak.
+decomp_ratio <- round(fine_x / coarse_x, 2)
+if (decomp_ratio >= 1.20) {
+  cli_alert_danger(
+    "The models agree more on WHAT IS ABOUT RESEARCH ({coarse_x}x) than on WHERE THE LINE IS ({fine_x}x): \\
+     ratio {decomp_ratio}. On this sample the boundary, not the recognition, carries the variance."
+  )
+} else {
+  cli_alert_info(
+    "Coarse spread {coarse_x}x vs fine spread {fine_x}x: ratio {decomp_ratio}. THESE ARE THE SAME WITHIN NOISE. \\
+     At n = 2,000 this ratio was 1.26 and this script claimed the models agreed on recognition and diverged \\
+     only on the boundary. At n = {nrow(k)} THAT CLAIM IS WITHDRAWN: they disagree about equally on both. \\
+     What survives, and has at every sample size, is that RATE AGREEMENT IS NOT SET AGREEMENT (Jaccard ~50%, \\
+     unanimity 38%). See DEVIATIONS.md D23."
+  )
+}
 
 k <- k |> mutate(n_in = IN(opus) + IN(gpt) + IN(grok))
 any_in <- sum(k$n_in > 0); all_in <- sum(k$n_in == 3); two_in <- sum(k$n_in == 2); one_in <- sum(k$n_in == 1)
@@ -319,15 +360,18 @@ record_finding(
     )
   ),
   headline = glue(
-    "Three frontier models (Opus 4.8, GPT-5.6 high, Grok 4.5) screened the same 1,000 works from the REAL 4.3M ",
-    "frame, on the rubric's FULL eight-field payload, with randomized manifest-logged chunks and harness-written ",
-    "labels: every defect D1, D2, D11 and finding 16 identified, repaired. Design-weighted base rates span ",
-    "{round(min(rates), 2)}% to {round(max(rates), 2)}% ({round(max(rates)/min(rates), 1)}x). But the sets are the finding, as finding 16 predicted: of the {any_in} works ANY ",
-    "model called metaresearch, only {all_in} ({round(100*all_in/any_in)}%) were called metaresearch by ALL THREE, and {one_in} ({round(100*one_in/any_in)}%) rest on a single ",
-    "model's opinion. THE FIELD'S BOUNDARY IS NOT A LINE THE MODELS SHARE; IT IS A REGION THEY EACH CUT ",
-    "DIFFERENTLY. GPT-5.6 also violated the locked output schema on 18 of 1,000 records, writing genre values into ",
-    "the tier field, which the manifest validator caught. The deliverable is not the base rate: it is the ",
-    "disagreement dossier, the {nrow(dossier)} works that mark the empirical boundary of the field and against which the ",
-    "inclusion criteria must actually be written."
+    "Three frontier models (Opus 4.8, GPT-5.6 high, Grok 4.5) screened the same {format(nrow(k), big.mark=',')} works, drawn from the real ",
+    "4.3M frame under a design whose seven strata PARTITION it (an earlier five-stratum design could not reach 12.9% ",
+    "of the frame at all; D22). Design-weighted base rates span {round(min(rates), 2)}% to {round(max(rates), 2)}% ({round(max(rates)/min(rates), 1)}x). But the RATE is not the ",
+    "finding, the SETS are: of the {any_in} works ANY model called metaresearch, only {all_in} ({round(100*all_in/any_in)}%) were called metaresearch by ",
+    "ALL THREE, and {one_in} ({round(100*one_in/any_in)}%) rest on a SINGLE model's opinion; pairwise Jaccard on the in-scope sets is about 50%. ",
+    "THE FIELD'S BOUNDARY IS NOT A LINE THE MODELS SHARE; IT IS A REGION THEY EACH CUT DIFFERENTLY, and that result ",
+    "is STABLE across n = 1,000, 2,000 and {format(nrow(k), big.mark=',')} (unanimity 37%, 37%, {round(100*all_in/any_in)}%). ",
+    "A SECOND, PRETTIER CLAIM DID NOT SURVIVE: at n = 2,000 the models agreed markedly more on 'is this about research ",
+    "at all' ({coarse_x}x here) than on 'is it in scope' ({fine_x}x here), and this project said so in capitals; at n = {format(nrow(k), big.mark=',')} the ",
+    "two spreads are within noise (ratio {decomp_ratio}) and the claim is WITHDRAWN (D23). The largest tier confusion is OUT-vs-T2, ",
+    "every time, at every sample size: the adjacent traditions the inclusiveness criterion exists to protect. ",
+    "The deliverable is not a base rate. It is the disagreement dossier, the {nrow(dossier)} works that mark the empirical ",
+    "boundary, each carrying all three models' stated reasons, and the criteria that have to be written against them."
   )
 )

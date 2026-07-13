@@ -67,7 +67,12 @@ est    <- rate * FRAME_CANADIAN
 est_lo <- ci[1] * FRAME_CANADIAN
 est_hi <- ci[2] * FRAME_CANADIAN
 
-cli_h2("What that implies for the 3.5M-work Canadian frame")
+# The label is derived, not typed. It said "3.5M-work frame" for a whole session
+# while the arithmetic beneath it already used the real 4.3M frame: a STALE NAME ON
+# A CORRECT NUMBER, which check_proposal_numbers.R cannot catch because the number
+# audits clean. Both the figure and the words that describe it now come from the
+# same source.
+cli_h2("What that implies for the {format(FRAME_CANADIAN, big.mark=',')}-work Canadian frame")
 cli_li("estimated metaresearch works : {format(round(est), big.mark=',')} \\
         ({format(round(est_lo), big.mark=',')}-{format(round(est_hi), big.mark=',')})")
 cli_li("the topic route retrieved    : {format(TOPIC_ROUTE, big.mark=',')}")
@@ -130,7 +135,7 @@ record_finding(
   ),
   headline = glue(
     "Screening {format(n, big.mark=',')} unfiltered Canadian works against the rubric puts metaresearch at ",
-    "{round(100*rate, 2)}% of Canadian research, implying ~{format(round(est), big.mark=',')} works in the 3.5M-work ",
+    "{round(100*rate, 2)}% of Canadian research, implying ~{format(round(est), big.mark=',')} works in the {format(FRAME_CANADIAN, big.mark=',')}-work ",
     "frame, sizing the field without a search strategy at all. The 95% CI on this screener's labels is ",
     "{round(100*ci[1],2)}-{round(100*ci[2],2)}%, but that is sampling error, NOT the uncertainty: swap the screener and ",
     "the estimate lands outside it (finding 10). The field is somewhere between 37,000 and 83,000 works, and ",

@@ -675,3 +675,79 @@ The seven strata now partition the sampling frame **by construction**: 4,255,410
 The check that catches this is **one line of arithmetic**. It is the first thing anyone should do to a stratified design and I never did it, through a whole session of writing careful comments about how rigorous the design was. The comments were the problem: they made the design *feel* checked.
 
 It also fits the pattern this project keeps finding, and this is the sharpest instance yet: **every defect that survives is the one that flatters you.** A design that quietly covers 87% of the frame produces *smaller, tidier, more confident* numbers than one that covers all of it. There is no friction to warn you, because the output looks better, not worse.
+
+---
+
+## D23. The best line in the project did not replicate, and a bigger sample is what killed it.
+
+**Date found:** 2026-07-12, by extending the sample I had already drawn a conclusion from.
+
+At n = 2,000, this project found something clean. Ask three models a coarse question (*is this work about research at all?*, T1/T2/T3 vs OUT) and they nearly agree. Ask the finer question the estimand actually needs (*is it in scope?*, T1/T2 vs T3/OUT) and they come apart:
+
+```
+n = 2,000     coarse 1.29x     fine 1.62x     ratio 1.26
+```
+
+I wrote it in capitals: **THE VARIANCE IS NOT IN THE MODELS, IT IS IN THE RUBRIC.** I put it in a commit message. I told Ahmad it was "the finding that reorders the project."
+
+At n = 5,600 it is gone:
+
+```
+n = 5,600     coarse 1.43x     fine 1.51x     ratio 1.06
+```
+
+**The two spreads are now within noise of each other.** The models disagree about equally on "is this about research at all" and on "is it in scope." The decomposition does not replicate.
+
+### What actually happened
+
+Nothing was fabricated and nothing was miscoded. It was a real pattern in 2,000 works that is not a real pattern in the population. That is the ordinary way a striking result dies. The only reason it died in-house instead of in the submitted proposal is that **the sample got bigger, and nothing else changed.**
+
+The uncomfortable part: I had every reason not to look. The finding was already written up, already quoted, already the headline. Extending to 5,000 was justified on other grounds entirely (Ahmad asked for it), and the decomposition was not what I was testing. **If he had not asked, the claim would have shipped.**
+
+### What survived
+
+The load-bearing result was true before the decomposition was layered on top of it, and it is stable at every sample size:
+
+| | n=1,000 | n=2,000 | n=5,600 |
+|---|---|---|---|
+| unanimity among works ANY model calls in-scope | 37% | 37% | **38%** |
+| works resting on a SINGLE model's opinion | 47% | 46% | **43%** |
+| pairwise Jaccard of the in-scope sets | ~50% | ~50% | **~50%** |
+| dominant tier confusion | OUT/T2 | OUT/T2 | **OUT/T2** |
+
+**Rate agreement is not set agreement**, and the field's boundary is a region the models each cut differently. That claim needs no coarse/fine split, and it is what the proposal says. The pretty decomposition was a decoration on a finding that was already load-bearing without it.
+
+### The rule that runs
+
+`22_three_model_screen.R` no longer asserts the claim. It **computes the ratio and branches**: above 1.20 it reports the decomposition, below it prints the withdrawal, with the 2,000-work numbers next to the current ones. If a larger sample ever brings the pattern back, the script will say so on its own. A withdrawn claim that leaves no trace is just a claim you stopped making.
+
+---
+
+## D24. A SECOND rubric/schema contradiction, and this one changes who gets human review.
+
+**Date found:** 2026-07-12, by a screening agent, in a footnote to a report about something else. Again.
+
+D20 recorded that the rubric and the schema name two different vocabularies for `genre`. They also contradict each other on `confidence`, and this one has teeth.
+
+| document | the rule it states |
+|---|---|
+| `protocol/rubric.md` | "If the abstract is missing, judge on the title alone and set confidence to `low` **unless the title is unambiguous**." |
+| `protocol/screening-schema.json` | "The rubric **requires `low` whenever** the abstract is missing and the judgement rests on the title alone." |
+
+**The schema misquotes the rubric.** One says *low unless the title is unambiguous*; the other says *low, always*. These are different instruments.
+
+### Why it is not cosmetic
+
+The rubric routes on this field: *"Records coded `low` by either screener are routed to adjudication."* So a contradiction in the confidence rule **silently changes which records a human ever looks at**, in a project whose entire thesis is that the human audit is the study.
+
+And 33% of the frame has no abstract. So the disputed clause governs a third of everything.
+
+An agent reported the consequence without being asked: *"If another arm followed the schema gloss, my `low` count is deflated relative to theirs by roughly the number of title-only records."* The arms are not measuring the same quantity.
+
+### It is the same root cause as D18 and D20
+
+GPT-5.6's illegal tier values, this run, were `other` and `policy`. **Those are `genre` vocabulary.** The model was handed two documents that disagreed about what `genre` may contain, and the confusion did not stay inside `genre`: it corrupted `tier`, the one field the validator was actually checking. A contradiction in an instrument does not stay in the field it is about.
+
+### Consequence
+
+Quarantined in `protocol/known-defects.json` alongside the genre split, with the same terms: not fixed in place (v1 is locked and 5,600 works were screened against it), fixed at the v2 boundary, and `make lint` fails on any further contradiction. `confidence` from the v1 screen is reported as **not comparable across arms**, and the adjudication queue for the human audit will be defined by the v2 rule, not the v1 ambiguity.

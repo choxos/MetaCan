@@ -23,6 +23,19 @@
       "deviation": "D20",
       "finding": "instrument_contradicts_itself",
       "paid_off_in": "rubric v2, seam 11: one vocabulary, in one place, machine-checked against the schema before any model runs"
+    },
+    {
+      "id": "confidence-rule-split",
+      "field": "confidence",
+      "found": "2026-07-12",
+      "found_by": "a screening agent, in a footnote to a report about something else, for the second time",
+      "summary": "protocol/rubric.md says set `low` when the abstract is missing UNLESS THE TITLE IS UNAMBIGUOUS. protocol/screening-schema.json says the rubric REQUIRES `low` WHENEVER the abstract is missing. The schema misquotes the rubric; they are different rules.",
+      "consequence": "The rubric routes on this field: records coded `low` are routed to adjudication. So the contradiction silently changes WHICH RECORDS A HUMAN EVER LOOKS AT, in a project whose thesis is that the human audit is the study. 33% of the frame has no abstract, so the disputed clause governs a third of everything. `confidence` from the v1 screen is NOT COMPARABLE ACROSS ARMS and is reported as such.",
+      "why_not_fixed_in_place": "v1 is the instrument 5,600 works were screened against. Editing it now would silently re-describe work already done under the old text.",
+      "tier_unaffected": true,
+      "deviation": "D24",
+      "finding": "instrument_contradicts_itself",
+      "paid_off_in": "rubric v2: one confidence rule, stated once, in the rubric, with the schema QUOTING it rather than paraphrasing it"
     }
   ]
 }
