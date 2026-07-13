@@ -1,0 +1,603 @@
+Reading additional input from stdin...
+OpenAI Codex v0.144.0
+--------
+workdir: /Users/choxos/Documents/GitHub/CaRN-data-challenge
+model: gpt-5.6-luna
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: medium
+reasoning summaries: none
+session id: 019f5c04-a50a-72f0-a477-929663d378e7
+--------
+user
+You are screening scholarly works for the MetaCan project. Apply the rubric below to EVERY record and output ONE JSON array with ONE object per record, conforming EXACTLY to the JSON schema below. Output ONLY the JSON array, no prose before or after it.
+
+# THE RUBRIC (v3.1, locked)
+
+# MétaCan screening rubric (v3.1)
+
+**Status: LOCKED, 2026-07-13.** Supersedes v2.2. No screening ran under v3.0, which lived for hours: an adversarial review found that its Murad quotation inserted the word "treatment" into a sentence this document calls verbatim (D29). v3.1 corrects that quotation from the PDF, fixes the Kataoka page range, aligns the funder clause with the protocol, corrects two glosses against their sources, and adds the study-design vocabulary that v3.0 demanded but never listed. Since D29, `pilot/check_quotes.R` fails the build if any quotation marked verbatim is not a substring of its cited PDF.
+
+**No number produced so far was made under v3.** The pilot ran under v1.0; the 179-work re-screen under v2.0. Both instruments are kept byte for byte, so every figure stays attributable to the text that produced it. v3 is the instrument the **full screen** runs under, and the **v2-to-v3 difference is reported as a finding**.
+
+---
+
+## What changed, and why it is not cosmetic
+
+v1 and v2 had a tier hierarchy: **T1 core / T2 adjacent / T3 contextual**. That structure had a defect at its root, and the data found it before I did.
+
+> **"Adjacent" is defined by negation.** It means *not-T1*. A category whose only content is "near the important one" cannot be applied consistently, and **OUT-vs-adjacent was the largest tier confusion at every sample size we measured.** The models were not failing. **The category was empty.**
+
+It was also a value judgment I had no standing to make. Calling science and technology studies "adjacent" says STS is peripheral to metascience. **STS is a field with its own founding literature, its own journals, and its own account of what studying science means.**
+
+**v3 deletes the hierarchy.** Every tradition is a **category with its own positive definition, taken from its own literature, quoted verbatim from a source in `docs/reference/definitions/`.** There is no residual bucket. A record may carry **more than one** category, because the traditions genuinely overlap and forcing a single label is what created the problem.
+
+**Nothing here is cited from memory.** Every quotation below was read from the PDF named beside it. In a project whose worst deviation (D26) was that its own definition of metaresearch was mine and uncited for its entire life, a recalled citation would be the single worst thing this document could contain.
+
+---
+
+## The definitional problem is the field's, not this project's, and the field says so in print
+
+- **Puljak L, Lovric Makaric Z, Buljan I, Pieper D.** *What is a meta-epidemiological study? Analysis of published literature indicated heterogeneous study designs and definitions.* J Comp Eff Res. 2020. doi:10.2217/cer-2019-0201
+  > Analysed **175 information sources**. *"Definitions of meta-epidemiological studies varied and some studies used the term meta-epidemiological study to describe methodological research-on-research studies."* Conclusion: *"Research community would benefit from consensus about definition of meta-epidemiological study."*
+
+- **Kataoka Y, et al.** J Clin Epidemiol. 2023;154:219-220.
+  > A **published dispute** with Puljak, opening by naming *"the currently confusing nomenclatures around 'meta-epidemiology' and related terms such as 'meta-research' and 'research-on-research'."*
+
+- **Stevens ER, Laynor G.** *Recognizing the value of meta-research and making it easier to find.* J Med Libr Assoc. 2023;111(4). doi:10.5195/jmla.2023.1758
+  > *"The breadth of meta-research presents a significant challenge for identifying published meta-research studies,"* and it notes **the lack of a MeSH heading** for meta-research.
+
+**Those are claims about humans.** The pilot's numbers are claims about **models disagreeing under one rubric**. They are consistent, they are not the same estimand, and **only the human audit closes the gap** (`DEVIATIONS.md` D27).
+
+---
+
+## The categories
+
+A work may carry **more than one**. **Categories are not ranked and none is primary: the released landscape is the union of the defined categories, with every overlap reported.** The call's primary estimand is reported over `metaresearch` because that is the field the call names; that is a **reporting choice, not a rank**, and each of the other traditions gets the same per-category estimate.
+
+### 1. `metaresearch`
+
+> **"Meta-research is an evolving scientific discipline that aims to evaluate and improve research practices. It includes thematic areas of methods, reporting, reproducibility, evaluation, and incentives (how to do, report, verify, correct, and reward science)."**
+>
+> Ioannidis JPA, Fanelli D, Dunne DD, Goodman SN. *Meta-research: Evaluation and Improvement of Research Methods and Practices.* PLoS Biol. 2015;13(10):e1002264.
+> See also Ioannidis JPA. PLoS Biol. 2018;16(3):e2005468; METRICS, Stanford: <https://metrics.stanford.edu/research>
+
+Every `metaresearch` record carries a **`domain`**, taken verbatim from those five thematic areas and glossed by Ioannidis's own parenthetical:
+
+| `domain` | Ioannidis's gloss | operationally |
+|---|---|---|
+| `methods` | *how to **do** science* | design, conduct, analysis, bias, statistical practice, evidence-synthesis methodology; Ioannidis's own description of this area ends *"research integrity and ethics"* |
+| `reporting` | *how to **report** science* | reporting standards and completeness |
+| `reproducibility` | *how to **verify** science* | replication, data and code sharing, transparency |
+| `evaluation` | *how to **correct** science* | peer review and editorial process, research assessment, metrics |
+| `incentives` | *how to **reward** science* | funding allocation, careers and the research workforce, reward structures |
+
+**RULE 1 stands** (carried from v2; it resolved the largest single seam): *a work is `metaresearch` on methods only if its object is methods **as used, reported or performed by researchers**. Developing, deriving, validating or teaching a technique for a domain is OUT, however generic the technique.* **An instance of a research practice is not a study of it.**
+
+### 2. `metaepidemiology` — **CONTESTED IN PRINT. Both definitions are coded.**
+
+There is **no consensus definition** (Puljak 2020, above). **This rubric does not invent one.** It codes **both published definitions** and **flags where they disagree**, because the dispute is live, it is between named researchers in peer-reviewed journals, and hiding it inside a single label would destroy the only evidence of it.
+
+- **`metaepi_narrow`** — Murad MH, Wang Z. *Guidelines for reporting meta-epidemiological methodology research.* Evid Based Med. 2017;22(4):139-142. doi:10.1136/ebmed-2017-110713
+  > *"Meta-epidemiological studies adopt a systematic review or meta-analysis approach to examine the impact of certain characteristics of clinical studies on the observed effect and provide empirical evidence for hypothesised associations."*
+  >
+  > *(v3.0 quoted this sentence as 'the observed **treatment** effect'. The word is not in the paper; it narrowed Murad's definition while claiming his authority for the narrowing, and it survived a LOCK. D29.)*
+
+- **`metaepi_broad`** — Kataoka Y, et al. J Clin Epidemiol. 2023;154:219-220. *(Not 219-221: page 221 is Puljak's reply, which is the other side of the dispute.)*
+  > *"The greatest common defining concept of 'meta-epidemiological studies' would be **any studies in which the unit of analysis is a study, not a patient**."*
+
+**Where the two differ, the record is flagged, and the size of that class is reported as a finding.** A published dispute is a boundary to be *measured*, not settled by fiat.
+
+### 3. `bibliometrics` (scientometrics)
+
+> **"Scientometrics is the study of the quantitative aspects of the process of science as a communication system. It is centrally, but not only, concerned with the analysis of citations in the academic literature."**
+>
+> Mingers J, Leydesdorff L. *A Review of Theory and Practice in Scientometrics.* Eur J Oper Res. 2015. doi:10.1016/j.ejor.2015.04.002
+> Founding work: Price DJ de Solla. *Networks of Scientific Papers.* Science. 1965;149(3683):510-515.
+
+**Boundary with `metaresearch`, and it resolves v1's self-contradiction** (v1's T1 bullet and its own worked example gave opposite answers): a study that **characterises a literature** by quantitative means is `bibliometrics`. A study that uses bibliometric means to **make a claim about research practice** (citation distortion, reporting trends, citation of retracted work) is **also `metaresearch`**, and carries both. **v3 does not force the choice; that forcing was the bug.**
+
+### 4. `sts` (science and technology studies)
+
+> **"co-production is shorthand for the proposition that the ways in which we know and represent the world (both nature and society) are inseparable from the ways in which we choose to live in it."**
+> **"The idiom of co-production ... represents a major synthesis of scholarship in science and technology studies (S&TS)."**
+>
+> Jasanoff S (ed.). *States of Knowledge: The Co-Production of Science and the Social Order.* Routledge, 2004.
+
+> **"We study science in action and not ready made science or technology; to do so, we either arrive before the facts and machines are blackboxed or we follow the controversies that reopen them."**
+>
+> Latour B. *Science in Action: How to Follow Scientists and Engineers through Society.* Harvard University Press.
+
+**Operational test:** the work studies **science or technology as social practice**: how knowledge and social order are produced together, how facts are made rather than found, how controversies open and close. **The object must be science, research, or technoscientific knowledge**, at any period. *(v1 restricted history and philosophy of science to "contemporary research practice", an unexamined adverb that silently excluded the entire history of Canadian science. It is deleted.)*
+
+### 5. `scholarly_communication`
+
+> **"Scholarly communication is a rich and complex sociotechnical system formed over a period of centuries."**
+> **"...used here in the broader sense to include the formal and informal activities associated with the use and dissemination of information through public and private channels."**
+>
+> Borgman CL. *Scholarship in the Digital Age: Information, Infrastructure, and the Internet.* MIT Press, 2007.
+
+### 6. `open_science`
+
+> **"Open science is a set of principles and practices that aim to make scientific research from all fields accessible to everyone for the benefits of scientists and society as a whole."**
+> **"Open science is about making sure not only that scientific knowledge is accessible but also that the production of that knowledge itself is inclusive, equitable and sustainable."**
+>
+> UNESCO. *Recommendation on Open Science* (introduction), 2021. **193 countries adopted it.**
+
+The second sentence is the reason this category is not a synonym for "open access": UNESCO's definition makes **inclusivity and equity of knowledge production** part of open science itself, which is the criterion this challenge is judged on.
+
+### 7. `research_integrity` — **defined by its OBJECT; the sources do not define the field, and that is recorded**
+
+**Honest limitation, stated rather than hidden.** The two sources supplied define **what counts as misconduct** and **what publication ethics covers**. **Neither defines "research integrity research" as a discipline** the way Ioannidis defines metaresearch or Jasanoff defines STS. So this category is defined by its **object**, and the gap is on the record.
+
+> **"...the analysis was limited to behaviours that distort scientific knowledge: fabrication, falsification, 'cooking' of data, etc... Survey questions on plagiarism and other forms of professional misconduct were excluded."**
+>
+> Fanelli D. *How Many Scientists Fabricate and Falsify Research? A Systematic Review and Meta-Analysis of Survey Data.* PLoS ONE. 2009;4(5):e5738.
+
+> Publication ethics, per **COPE** (Committee on Publication Ethics), *Ethics Toolkit for Journal Editors and Publishers.*
+
+**Operational test:** the object is **research misconduct, questionable research practices, retraction, authorship, or publication ethics**, *as an object of study*. **Fanelli's boundary is adopted and its exclusion is carried:** fabrication, falsification and data cooking are in; **plagiarism and professional misconduct are recorded but marked, because Fanelli's own scope excludes them** and a rubric that silently widened his boundary while citing him would be misquoting its own source.
+
+**This category overlaps `metaresearch` heavily**: Ioannidis's own description of the *methods* area ends *"research integrity and ethics"*, so integrity research is inside metaresearch by his definition. **That overlap is expected and allowed**, because v3 is multi-label. It is not a hierarchy.
+
+### `insufficient_payload`
+
+Not a judgment; a statement that the record **cannot be screened** (a scraping artifact as a title, boilerplate in the abstract field, a title and abstract from different papers, spam). **Reported, never silently dropped**: the size of this class is a finding about OpenAlex.
+
+### `OUT`
+
+None of the above. **"OUT" now means "in no defined category", not "not near the important one."** That is the whole change.
+
+---
+
+## Canadian linkage
+
+- `CA_AFF` — at least one Canadian institutional affiliation. **Warning, measured:** OpenAlex misassigns these. **At least 17,466** works enter the frame with, as their *only* Canadian institution, one of six suspect assignments: a parse failure that is not an institution at all (`Impact`, attached to a Spanish COVID essay) or a real organization attached to papers it has nothing to do with (`Discovery Air (Canada)` on a Brazilian linguistics paper). That is a **lower bound** from six audited strings (finding 27), and the records are **flagged for audit, not deleted**. A Canadian affiliation is *evidence*, not proof.
+- `CA_FUND` — ≥1 funder whose OpenAlex `country_code` is Canada: an **external criterion, not a curated list**. *(An earlier four-funder list (CIHR, NSERC, SSHRC, CFI) failed twice: three of its four hardcoded IDs pointed at other funders, and even corrected it missed Canada Research Chairs, the Government of Canada, NRC, Mitacs, Genome Canada, and every provincial agency. OpenAlex knows 2,182 Canadian funders; `R/pin_entities.R` pins them.)*
+- **`ABOUT_CA_SYSTEM`** — the Canadian **research system or academy** is a substantive object. *A Canadian institution as setting is not this.*
+- **`ABOUT_CA_TOPIC`** — Canada is a substantive subject, whether or not research is the object.
+
+*(v1 had one boolean and it could not separate "Canadian data, universal claim" from "a claim about Canada". Four screening agents proposed this split independently.)*
+
+## Study design
+
+Coded for every work, from **this vocabulary and no other** (v3.0 said "coded for every work" and never listed the values, which is D20's exact shape: a field every screener codes and no two code alike):
+
+| `study_design` | MEDLINE publication type it is validated against |
+|---|---|
+| `randomized_trial` | Randomized Controlled Trial |
+| `nonrandomized_trial` | Controlled Clinical Trial |
+| `observational` | Observational Study |
+| `systematic_review` | Systematic Review |
+| `meta_analysis` | Meta-Analysis |
+| `case_report` | Case Reports |
+| `qualitative` | *(none; ships as a score, marked unvalidated)* |
+| `simulation_or_modeling` | *(none; ships as a score, marked unvalidated)* |
+| `bench_or_experimental` | *(none; ships as a score, marked unvalidated)* |
+| `theoretical_or_conceptual` | *(none; ships as a score, marked unvalidated)* |
+| `not_applicable` | *(the work is not empirical research: editorials, datasets, software)* |
+| `design_other` | *(none; ships as a score, marked unvalidated)* |
+
+**Validated against MEDLINE publication types, per record and not per year.** *(v3.0 called these "human-indexed by NLM", which is false; v3.1's first correction said "human-indexed until April 2022", which is also false. NLM stopped fully human indexing as universal practice around 2011 and completed automation in 2022, so a YEAR CUTOFF cannot separate the eras. The reference subset is defined by NLM's **record-level `IndexingMethod`** field: absent = fully human, `Curated` = automated with human review, `Automated` = machine. Human records are the reference; the others measure **agreement with another machine** and are reported as such.)*
+
+**Class-specific calendar eligibility, because a publication type that did not exist cannot be a negative.** *Observational Study* entered the vocabulary in **2014** and *Systematic Review* in **2019**. A 2008 cohort study carries no *Observational Study* tag, and treating that absence as "not observational" would train and score the model against a censoring artifact. Each design class is therefore validated **only on records published after its type existed**, and that eligibility window is prespecified per class. Where MEDLINE does not reach (most of the physical sciences, humanities and social sciences), the label ships as a **score, not an assertion**, and is **marked unvalidated**. *The dataset states, per field, which of its own annotations it has earned the right to assert.*
+
+## Genre
+
+**One vocabulary, defined here, and `screening-schema-v3.json` QUOTES this list rather than paraphrasing it.**
+
+`empirical` · `review` · `methods` · `commentary` · `editorial` · `protocol` · `dataset` · `software` · `other`
+
+*(In v1 the rubric and the schema named **two different vocabularies for this field**, overlapping on two values out of thirteen. Every screener was handed both and obeyed both privately; the validator checked `tier` and had never been asked to look at `genre`, so 16,800 labels passed every check that ran. See D20 and finding 24. **A codebook is code. It gets a test.**)*
+
+## `tier` is RETIRED
+
+v3 replaces it with `categories`, which is **multi-label**. The values `T1`, `T2`, `T3` and `OUT` remain in the **legacy** `screening-schema.json` **only so that the v1 and v2 label files stay readable**; the v3 contract, `screening-schema-v3.json`, **does not contain the field**, so no new screening can emit them. `OUT` in v3 means an empty `categories` array: *in no defined category*, not *near the important one*.
+
+## Confidence
+
+`high` / `medium` / `low`. **If the abstract is missing, judge on the title alone and set confidence to `low` unless the title is unambiguous.** The schema **quotes** this sentence; it does not paraphrase it (D24).
+
+**`low` is a legitimate answer.** A screener that never says `low` is not being careful; it is being confident.
+
+---
+
+## Sources
+
+Every quotation above was read from a PDF in **`docs/reference/definitions/`**, which is committed. Nothing is cited from memory, and since D29 that is a checked property, not a promise: `pilot/check_quotes.R` fails the build if any quotation marked verbatim is not a substring of its cited PDF. `pilot/check_instrument.R` fails the build if this rubric and `screening-schema-v3.json` disagree about any field, in either direction.
+
+
+# THE OUTPUT SCHEMA (screening-schema-v3.json)
+
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "MetaCan screening output, rubric v3.1",
+  "description": "The output contract for every screening run under rubric v3.1. This document QUOTES the rubric; it never paraphrases it. Where a description below restates a rule, the wording is copied from docs/protocol/rubric-v3.md, because the schema misquoting the rubric is D24 and two documents that disagree are two instruments (D20). pilot/check_instrument.R fails the build if this file and the rubric disagree about any field, in either direction. The legacy screening-schema.json remains ONLY so that v1 and v2 label files stay readable; no new screening validates against it.",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["id", "categories", "study_design", "genre", "about_ca_system", "about_ca_topic", "confidence"],
+    "properties": {
+      "id": {
+        "type": "string",
+        "pattern": "^W\\d+$",
+        "description": "The OpenAlex work id, exactly as given in the payload."
+      },
+      "categories": {
+        "type": "array",
+        "items": {
+          "enum": ["metaresearch", "metaepi_narrow", "metaepi_broad", "bibliometrics", "sts", "scholarly_communication", "open_science", "research_integrity", "insufficient_payload"]
+        },
+        "uniqueItems": true,
+        "description": "Every category the work belongs to; a work may carry more than one, and categories are not ranked and none is primary. An EMPTY array is OUT, which means 'in no defined category', not 'near the important one'. insufficient_payload means the record cannot be screened (a scraping artifact as a title, boilerplate in the abstract field, a title and abstract from different papers, spam) and is reported, never silently dropped."
+      },
+      "domain": {
+        "enum": ["methods", "reporting", "reproducibility", "evaluation", "incentives", null],
+        "description": "REQUIRED when categories contains metaresearch, and null otherwise. Taken verbatim from Ioannidis's five thematic areas: methods, reporting, reproducibility, evaluation, and incentives (how to do, report, verify, correct, and reward science)."
+      },
+      "study_design": {
+        "enum": ["randomized_trial", "nonrandomized_trial", "observational", "systematic_review", "meta_analysis", "case_report", "qualitative", "simulation_or_modeling", "bench_or_experimental", "theoretical_or_conceptual", "not_applicable", "design_other"],
+        "description": "Coded for every work, from this vocabulary and no other. not_applicable means the work is not empirical research: editorials, datasets, software."
+      },
+      "genre": {
+        "enum": ["empirical", "review", "methods", "commentary", "editorial", "protocol", "dataset", "software", "other"],
+        "description": "One vocabulary, defined in the rubric, and this schema QUOTES that list rather than paraphrasing it."
+      },
+      "about_ca_system": {
+        "type": "boolean",
+        "description": "ABOUT_CA_SYSTEM: the Canadian research system or academy is a substantive object. A Canadian institution as setting is not this."
+      },
+      "about_ca_topic": {
+        "type": "boolean",
+        "description": "ABOUT_CA_TOPIC: Canada is a substantive subject, whether or not research is the object."
+      },
+      "confidence": {
+        "enum": ["high", "medium", "low"],
+        "description": "If the abstract is missing, judge on the title alone and set confidence to low unless the title is unambiguous. low is a legitimate answer: a screener that never says low is not being careful; it is being confident."
+      },
+      "reason": {
+        "type": "string",
+        "maxLength": 400,
+        "description": "One sentence naming the rubric rule the decision rests on."
+      }
+    }
+  }
+}
+
+
+# THE RECORDS
+
+[
+ {
+  "id": "W4210789668",
+  "title": "The path from big data analytics capabilities to value in hospitals: a scoping review",
+  "abstract": "Abstract Background As the uptake of health information technologies increased, most healthcare organizations have become producers of big data. A growing number of hospitals are investing in the development of big data analytics (BDA) capabilities. If the promises associated with these capabilities are high, how hospitals create value from it remains unclear. The present study undertakes a scoping review of existing research on BDA use in hospitals to describe the path from BDA capabilities (BDAC) to value and its associated challenges. Methods This scoping review was conducted following Arksey and O’Malley’s 5 stages framework. A systematic search strategy was adopted to identify relevant articles in Scopus and Web of Science. Data charting and extraction were performed following an analytical framework that builds on the resource-based view of the firm to describe the path from BDA capabilities to value in hospitals. Results Of 1,478 articles identified, 94 were included. Most of them are experimental research ( n =69) published in medical ( n =66) or computer science journals ( n =28). The main value targets associated with the use of BDA are improving the quality of decision-making ( n =56) and driving innovation ( n =52) which apply mainly to care ( n =67) and administrative ( n =48) activities. To reach these targets, hospitals need to adequately combine BDA capabilities and value creation mechanisms (VCM) to enable knowledge generation and drive its assimilation. Benefits are endpoints of the value creation process. They are expected in all articles but realized in a few instances only ( n =19). Conclusions This review confirms the value creation potential of BDA solutions in hospitals. It also shows the organizational challenges that prevent hospitals from generating actual benefits from BDAC-building efforts. The configuring of strategies, technologies and organizational capabilities underlying the development of value-creating BDA solutions should become a priority area for research, with focus on the mechanisms that can drive the alignment of BDA and organizational strategies, and the development of organizational capabilities to support knowledge generation and assimilation.",
+  "year": 2022,
+  "lang": "en",
+  "type": "review",
+  "venue": "BMC Health Services Research",
+  "topic": "Big Data and Business Intelligence",
+  "field": "Business, Management and Accounting"
+ },
+ {
+  "id": "W6920491591",
+  "title": "A rapid review of community engagement and informed consent processes for adaptive platform trials and alternative design trials for public health emergencies",
+  "abstract": "",
+  "year": 2023,
+  "lang": "en",
+  "type": "article",
+  "venue": "Greater South Information System",
+  "topic": "Ethics in Clinical Research",
+  "field": "Medicine"
+ },
+ {
+  "id": "W1534032619",
+  "title": "Doing the Right Things to Do Things Right: A Commentary on Leadership and the Use of Evidence in Practice",
+  "abstract": "1. Worldviews Evid Based Nurs. 2008;5(4):170-1. doi: \n10.1111/j.1741-6787.2008.00132.x.\n\nDoing the right things to do things right: a commentary on leadership and the \nuse of evidence in practice.\n\nGifford WA(1), Davies B.\n\nAuthor information:\n(1)University of Ottawa, Faculty of Health Sciences, School of Nursing, Ontario, \nCanada. wgifford@rogers.com\n\nDOI: 10.1111/j.1741-6787.2008.00132.x\nPMID: 19076917 [Indexed for MEDLINE]",
+  "year": 2008,
+  "lang": "en",
+  "type": "article",
+  "venue": "Worldviews on Evidence-Based Nursing",
+  "topic": "Healthcare Quality and Management",
+  "field": "Health Professions"
+ },
+ {
+  "id": "W7128515512",
+  "title": "Impact of temporal granularity on machine learning models for time series forecasting",
+  "abstract": "This study examines the impact of timestep variation on the predictive performance of machine learning (ML) forecasting models, emphasizing the importance of optimal timestep selection for improved accuracy. The results show that Support Vector Regression (SVR) performs best with shorter timesteps but struggles with longer sequences. In contrast, Recurrent Neural Networks (RNNs) and Long Short-Term Memory (LSTM) networks excel at 26 timesteps, leveraging their ability to capture patterns from extended contexts. RNNs demonstrate consistent performance across various timesteps, with their peak accuracy also observed at 26 timesteps. These findings highlight the need for careful timestep selection to enhance model efficiency and forecast reliability.",
+  "year": 2025,
+  "lang": "en",
+  "type": "article",
+  "venue": "SKUAST JOURNAL OF RESEARCH",
+  "topic": "Stock Market Forecasting Methods",
+  "field": "Decision Sciences"
+ },
+ {
+  "id": "W2951761668",
+  "title": "Preparing Today’s Nurses: Social Determinants of Health and Nursing Education",
+  "abstract": "Reducing health inequity in the United States is a social mandate for nursing in the 21st century. The World Health Organization and others have defined and identified multiple social determinants of health (SDOH) that may negatively impact patient health and contribute to health inequity. Nurses, on the frontlines of healthcare, are uniquely positioned to assess for social determinants of health and positively address health equity. The purpose of this article is to explore social determinants of health and nursing education, including clinical and classroom opportunities. We also discuss faculty development and diversity as a strategy of impact, and conclude with a call to action and recommendations for nurse educators working to include SDOH in nursing program curricula.",
+  "year": 2018,
+  "lang": "en",
+  "type": "article",
+  "venue": "OJIN The Online Journal of Issues in Nursing",
+  "topic": "Food Security and Health in Diverse Populations",
+  "field": "Health Professions"
+ },
+ {
+  "id": "W3003661931",
+  "title": "Psychiatric Disorders in the Adolescent Offspring of Mothers with Thyroid Problems During Pregnancy",
+  "abstract": "1. Child Psychiatry Hum Dev. 2020 Jun;51(3):461-470. doi: \n10.1007/s10578-020-00957-y.\n\nPsychiatric Disorders in the Adolescent Offspring of Mothers with Thyroid \nProblems During Pregnancy.\n\nYoung J(1), Savoy C(2), Colman I(3), Ferro M(4), Van Lieshout RJ(2).\n\nAuthor information:\n(1)Department of Psychiatry and Behavioural Neurosciences, McMaster University, \nHamilton, ON, Canada. youngjm@mcmaster.ca.\n(2)Department of Psychiatry and Behavioural Neurosciences, McMaster University, \nHamilton, ON, Canada.\n(3)School of Epidemiology, Public Health, and Preventive Medicine, University of \nOttawa, Ottawa, ON, Canada.\n(4)School of Public Health and Health Systems, University of Waterloo, Waterloo, \nON, Canada.\n\nMaternal thyroid problems during pregnancy have been linked to neurocognitive \nimpairments in children. While studies suggest that disorders of maternal \nthyroid function during pregnancy are associated with symptoms of mental health \nproblems in children, little is known about the risk of clinically significant \npsychiatric disorders in adolescence. A sample of 2451 Canadian adolescents \nenrolled in the Ontario Child Health Study completed the Mini International \nNeuropsychiatric Interview for Children and Adolescents at 12-17 years of age. \nTheir mothers self-reported thyroid problems during pregnancy. Gestational \nthyroid problems were associated with offspring oppositional defiant disorder \n(ODD; OR 3.73; 95% CI 1.69-8.24), conduct disorder (CD; OR 12.95; 95% CI \n5.12-32.75), and social anxiety disorder (SAD; OR 6.25; 95% CI 2.53-15.47). \nNeither sex nor gestational age moderated associations between prenatal thyroid \ndysfunction and the majority of outcomes. School performance mediated 8% of the \nassociation between thyroid problems and SAD, 21% for CD and 53% for ODD.\n\nDOI: 10.1007/s10578-020-00957-y\nPMID: 32008126 [Indexed for MEDLINE]",
+  "year": 2020,
+  "lang": "en",
+  "type": "article",
+  "venue": "Child Psychiatry & Human Development",
+  "topic": "Thyroid Disorders and Treatments",
+  "field": "Medicine"
+ },
+ {
+  "id": "W2921815814",
+  "title": "The crisis of democracy and the science of deliberation",
+  "abstract": "",
+  "year": 2019,
+  "lang": "en",
+  "type": "article",
+  "venue": "Science",
+  "topic": "Social Media and Politics",
+  "field": "Social Sciences"
+ },
+ {
+  "id": "W4416543324",
+  "title": "Effects of prenatal cannabis exposure on offspring mental health: A focus on the role of the immune system",
+  "abstract": "1. Neurosci Biobehav Rev. 2026 Feb;181:106488. doi: \n10.1016/j.neubiorev.2025.106488. Epub 2025 Nov 22.\n\nEffects of prenatal cannabis exposure on offspring mental health: A focus on the \nrole of the immune system.\n\nVecchiarelli HA(1), Baglot SL(2), Black T(3), Choi EY(4), Cupo L(5), Sandberg \nC(6), Siron L(7), Chakravarty MM(8), Hill MN(2), Howland JG(9), Khokhar JY(4), \nTremblay MÈ(10).\n\nAuthor information:\n(1)School of Medical Sciences, Faculty of Health, University of Victoria, \nVictoria, BC, Canada. Electronic address: haleyvecchiarelli@uvic.ca.\n(2)Departments of Cell Biology & Anatomy and Psychiatry, Hotchkiss Brain \nInstitute, Matheson Centre for Mental Health Research and Education, Alberta \nChildren's Hospital Research Institute, University of Calgary, Calgary, AB, \nCanada.\n(3)Department of Anatomy, Physiology, and Pharmacology, College of Medicine, \nUniversity of Saskatchewan, SK, Canada; College of Pharmacy and Nutrition, \nUniversity of Saskatchewan, SK, Canada.\n(4)Department of Anatomy and Cell Biology, Schulich School of Medicine, Western \nUniversity, London, ON, Canada.\n(5)Computational Brain Anatomy Laboratory, Cerebral Imaging Center, Douglas \nMental Health University Institute, Montreal, QC, Canada; Integrated Program in \nNeuroscience, McGill University, Montreal, QC, Canada.\n(6)School of Medical Sciences, Faculty of Health, University of Victoria, \nVictoria, BC, Canada.\n(7)School of Medical Sciences, Faculty of Health, University of Victoria, \nVictoria, BC, Canada; Paris-Saclay University, Gif-sur-Yvette, France; \nParis-Saclay Institute of Neuroscience (NeuroPSI), CNRS, Paris-Saclay \nUniversity, Saclay, France.\n(8)Computational Brain Anatomy Laboratory, Cerebral Imaging Center, Douglas \nMental Health University Institute, Montreal, QC, Canada; Integrated Program in \nNeuroscience, McGill University, Montreal, QC, Canada; Departments of Psychiatry \nand Biological & Biomedical Engineering, McGill University, Montreal, Quebec, \nCanada.\n(9)Department of Anatomy, Physiology, and Pharmacology, College of Medicine, \nUniversity of Saskatchewan, SK, Canada.\n(10)School of Medical Sciences, Faculty of Health, University of Victoria, \nVictoria, BC, Canada; Institute on Aging and Lifelong Health (IALH) and Centre \nfor Advanced Materials and Related Technology (CAMTEC), University of Victoria, \nVictoria, BC, Canada; Department of Biochemistry and Molecular Biology, \nUniversity of British Columbia, Vancouver, BC, Canada.\n\nGlobally, there is increasing leg",
+  "year": 2025,
+  "lang": "en",
+  "type": "article",
+  "venue": "Neuroscience & Biobehavioral Reviews",
+  "topic": "Cannabis and Cannabinoid Research",
+  "field": "Medicine"
+ },
+ {
+  "id": "W6943412651",
+  "title": "Occurrence Download",
+  "abstract": "",
+  "year": 2025,
+  "lang": "en",
+  "type": "dataset",
+  "venue": "Global Biodiversity Information Facility",
+  "topic": "Mycorrhizal Fungi and Plant Interactions",
+  "field": "Agricultural and Biological Sciences"
+ },
+ {
+  "id": "W6921197322",
+  "title": "Students’ attitudes, beliefs and perceptions surrounding 2SLGBTQIA + health education and inclusiveness in Canadian physiotherapy programs",
+  "abstract": "",
+  "year": 2023,
+  "lang": "en",
+  "type": "other",
+  "venue": "Figshare",
+  "topic": null,
+  "field": null
+ },
+ {
+  "id": "W2781899786",
+  "title": "Using vibrational molecular spectroscopy to reveal association of steam-flaking induced carbohydrates molecular structural changes with grain fractionation, biodigestion and biodegradation",
+  "abstract": "1. Spectrochim Acta A Mol Biomol Spectrosc. 2018 Apr 5;194:181-188. doi: \n10.1016/j.saa.2018.01.019. Epub 2018 Jan 5.\n\nUsing vibrational molecular spectroscopy to reveal association of steam-flaking \ninduced carbohydrates molecular structural changes with grain fractionation, \nbiodigestion and biodegradation.\n\nXu N(1), Liu J(2), Yu P(3).\n\nAuthor information:\n(1)College of Animal Sciences, Zhejiang University, Hangzhou, China; Department \nof Animal and Poultry Science, University of Saskatchewan, Saskatoon S7N 5A8, \nCanada.\n(2)College of Animal Sciences, Zhejiang University, Hangzhou, China. Electronic \naddress: liujx@zju.edu.cn.\n(3)Department of Animal and Poultry Science, University of Saskatchewan, \nSaskatoon S7N 5A8, Canada; College of Life Science and Engineering, Foshan \nUniversity, Guangdong, China. Electronic address: peiqiang.yu@usask.ca.\n\nAdvanced vibrational molecular spectroscopy has been developed as a rapid and \nnon-destructive tool to reveal intrinsic molecular structure conformation of \nbiological tissues. However, this technique has not been used to systematically \nstudy flaking induced structure changes at a molecular level. The objective of \nthis study was to use vibrational molecular spectroscopy to reveal association \nbetween steam flaking induced CHO molecular structural changes in relation to \ngrain CHO fractionation, predicted CHO biodegradation and biodigestion in \nruminant system. The Attenuate Total Reflectance Fourier-transform Vibrational \nMolecular Spectroscopy (ATR-Ft/VMS) at SRP Key Lab of Molecular Structure and \nMolecular Nutrition, Ministry of Agriculture Strategic Research Chair Program \n(SRP, University of Saskatchewan) was applied in this study. The fractionation, \npredicted biodegradation and biodigestion were evaluated using the Cornell Net \nCarbohydrate Protein System. The results show that: (1) The steam flaking \ninduced significant changes in CHO subfractions, CHO biodegradation and \nbiodigestion in ruminant system. There were significant differences between \nnon-processed (raw) and steam flaked grain corn (P<.01); (2) The ATR-Ft/VMS \nmolecular technique was able to detect the processing induced CHO molecular \nstructure changes; (3) Induced CHO molecular structure spectral features are \nsignificantly correlated (P<.05) to CHO subfractions, CHO biodegradation and \nbiodigestion and could be applied to potentially predict CHO biodegradation \n(R2=0.87, RSD=0.74, P<.01) and intestinal digestible undegraded CHO (R2=0.87,",
+  "year": 2018,
+  "lang": "en",
+  "type": "article",
+  "venue": "Spectrochimica Acta Part A Molecular and Biomolecular Spectroscopy",
+  "topic": "Ruminant Nutrition and Digestive Physiology",
+  "field": "Agricultural and Biological Sciences"
+ },
+ {
+  "id": "W2569574764",
+  "title": "Perancangan Aplikasi Property Perumahan dengan Visualisasi Objek 3D Berbasis Mobile",
+  "abstract": "Property perumahan merupakan sebidang tanah yang sudah dikembangkan dan digunakan untuk kebutuhan tempat tinggal. Membuat keputusan untuk membeli sebuah property bukanlah hal yang mudah karena banyak faktor yang dapat dipertimbangkan. Biasanya seorang pembeli hanya dapat melihat property yang ingin dibeli melalui brosur, majalah, ataupun media massa lainnya, sehingga untuk melihat secara detil property yang ingin dibelinya, pembeli masih harus datang ke lokasi property tersebut. Visualisasi objek secara 3D dimaksudkan untuk mempermudah pembeli dalam melihat perumahan secara lebih realistis hanya melalui smartphone tanpa harus pergi ke lokasi perumahan tersebut.??? Visualisasi objek secara 3D akan memudahkan penjual memvisualisasikan dan memasarkan property yang akan dijual, dimana seorang agen dapat meng-upload property beserta file 3D agar dapat diakses dan juga memudahkan pembeli dalam menemukan property perumahan yang sesuai dengan yang diinginkan, dimana melalui visualisasi objek secara 3D maka pembeli seolah-olah sedang berada di lokasi property tanpa harus datang ke lokasi property tersebut.",
+  "year": 2016,
+  "lang": "id",
+  "type": "article",
+  "venue": "Jurnal SIFO Mikroskil",
+  "topic": "Edcuational Technology Systems",
+  "field": "Computer Science"
+ },
+ {
+  "id": "W7036292878",
+  "title": "Caractérisation d'aquifères régionaux en socle rocheux à partir de mines souterraines",
+  "abstract": "",
+  "year": 2014,
+  "lang": "fr",
+  "type": "other",
+  "venue": "Constellation (Université du Québec à Chicoutimi)",
+  "topic": "Environmental Monitoring and Data Management",
+  "field": "Earth and Planetary Sciences"
+ },
+ {
+  "id": "W2799898098",
+  "title": "A new approach to model friction losses in the water‐assisted pipeline transportation of heavy oil and bitumen",
+  "abstract": "ABSTRACT Continuous water‐assisted flow (CWAF), where a water layer surrounds a viscous oil core, provides low energy, long distance transport of heavy oil and bitumen without requiring heating or solvent addition. In industrial applications of CWAF, the pipe wall is fouled by a thin coating of oil, an effect not considered in many studies of water‐lubricated pipe flows. In the present study, a new method to model pressure loss in the water‐assisted pipeline flow of heavy oil is introduced. The hydrodynamic effects produced by the wall‐fouling layer are incorporated in the model as input parameters for CFD simulations. The most important of these parameters are the thickness of the wall‐fouling layer and the equivalent hydrodynamic roughness it produces. The CFD methodology described here was developed on the ANSYS‐CFX platform and is able to capture the effects of the wall‐fouling layer, the hydrodynamic roughness produced by this layer, and the water hold‐up. The new CFD model was validated using previously collected data from tests conducted in two separate pipeline loops (100 and 260 mm in diameter), using a range of oil viscosities, water fractions, and mixture velocities. Compared to existing models, the one presented here provides more accurate predictions and requires significantly fewer computing resources. Because the model was developed using a physics‐based approach, it is a useful tool in evaluating the effects of pipe diameter, oil viscosity (or temperature), water cut, and mixture velocity on pressure losses in water‐assisted heavy oil pipelines.",
+  "year": 2019,
+  "lang": "en",
+  "type": "article",
+  "venue": "The Canadian Journal of Chemical Engineering",
+  "topic": "Petroleum Processing and Analysis",
+  "field": "Chemistry"
+ },
+ {
+  "id": "W4315700855",
+  "title": "Thermal Modeling of Polyamide 12 Powder in the Selective Laser Sintering Process Using the Discrete Element Method",
+  "abstract": "Selective laser sintering (SLS) is one of the key additive manufacturing technologies that can build any complex three-dimensional structure without the use of any special tools. Thermal modeling of this process is required to anticipate the quality of the manufactured parts by assessing the microstructure, residual stresses, and structural deformations of the finished product. This paper proposes a framework for the thermal simulation of the SLS process based on the discrete element method (DEM) and numerically generated in Python. This framework simulates a polyamide 12 (PA12) particle domain to describe the temperature evolution in this domain using simple interaction laws between the DEM particles and considering the exchange of these particles with the boundary planes. The results obtained and the comparison with the literature show that the DEM frame accurately captures the temperature distribution in the domain scanned by the laser. The effect of laser power and projection time on the temperature of PA12 particles is investigated and validated with experimental settings to show the reliability of DEM in simulating powder-based additive manufacturing processes.",
+  "year": 2023,
+  "lang": "en",
+  "type": "article",
+  "venue": "Materials",
+  "topic": "Additive Manufacturing and 3D Printing Technologies",
+  "field": "Engineering"
+ },
+ {
+  "id": "W2075847578",
+  "title": "Chandler, T.J. 1965: The climate of London. London: Hutchinson, 292 pp",
+  "abstract": "",
+  "year": 2009,
+  "lang": "en",
+  "type": "article",
+  "venue": "Progress in Physical Geography Earth and Environment",
+  "topic": "Water management and technologies",
+  "field": "Agricultural and Biological Sciences"
+ },
+ {
+  "id": "W4246615486",
+  "title": "An Objective Metric of Individual Health And Aging For Population Surveys",
+  "abstract": "Abstract Background: Generalized, biomarker-based metrics of health status have numerous applications in fields ranging from sociology and economics to clinical research. We recently proposed a novel metric of health status based on physiological dysregulation measured as a Mahalanobis distance (DM) among clinical biomarkers. While DM was not particularly sensitive to the choice of biomarkers, it required calibration when used in different populations, making it difficult to compare findings across studies. To facilitate its use, here we aimed to identify and validate a standard version of DM that would be highly stable across populations, while using fewer biomarkers drawn exclusively from common blood panels. Methods: Using three datasets, we identified nine-biomarker (DM9) and seventeen-biomarker (DM17) versions of DM, choosing biomarkers based on their consistent levels across populations. We validated them in a fourth dataset. We assessed DM stability within and across populations by looking at correlations of DM versions calibrated using different populations or their demographic subsets. We used regression models to compare these standard DM versions to allostatic load and self-assessed health in their association with diverse health outcomes. Results: DM9 and DM17 were highly stable across population subsets (mean r = 0.96 and 0.95, respectively) and across populations (mean r = 0.94 for both). Performance predicting health outcomes was competitive with allostatic load and self-assessed health, though performance of these markers were somewhat variable for different health outcomes. Conclusions: Both DM9 and DM17 are highly stable within and across populations, supporting their use as objective metrics of health status. DM17 performs slightly better than DM9 and at least as well as other comparable metrics, but requires more biomarkers. The metrics we propose here are easy to measure with data that are available in a wide array of panel, cohort, and clinical studies.",
+  "year": 2021,
+  "lang": "en",
+  "type": "preprint",
+  "venue": "Research Square",
+  "topic": "Health disparities and outcomes",
+  "field": "Social Sciences"
+ },
+ {
+  "id": "W1991282154",
+  "title": "Psychometric Properties of the Breastfeeding Self‐Efficacy Scale‐ Short Form in an Ethnically Diverse U.K. Sample",
+  "abstract": "ABSTRACT Objective: To psychometrically assess the Breastfeeding Self‐Efficacy Scale‐Short Form (BSES‐SF) among a multicultural U.K. sample and to examine the relationship between breastfeeding self‐efficacy and maternal demographic variables. Design: A cohort study where breastfeeding women completed questionnaires in‐hospital and at 4 weeks postpartum. Sample: 165 breastfeeding women at the maternity ward in Birmingham Women's Hospital inpatient department. Measurements: BSES‐SF. Results: The Cronbach's α co‐efficient was .90 and evidence for predictive validity was demonstrated through exclusively breastfeeding mothers at 4 weeks postpartum having significantly higher in‐hospital BSES‐SF scores ( M =49.4, SD =12.9) than mothers who were partially breastfeeding ( M =44.7, SD =9.5) or bottle‐feeding, M =42.4, SD =11.7; F (2)=1.62, p &lt;.001. Caucasian mothers had significantly lower mean scores ( M =44.4, SD =12.1) than those of other ethnicity, M =48.4, SD =12.9, t (163)=−2.06, p =.04. Conclusions: This study builds upon previous research and provides additional evidence suggesting that the BSES‐SF has sound psychometric properties and can be utilized among diverse samples, including Southeast Asian mothers.",
+  "year": 2008,
+  "lang": "en",
+  "type": "article",
+  "venue": "Public Health Nursing",
+  "topic": "Breastfeeding Practices and Influences",
+  "field": "Medicine"
+ },
+ {
+  "id": "W4254516102",
+  "title": "Selected Ion Monitoring (SIM)",
+  "abstract": "",
+  "year": 2016,
+  "lang": "en",
+  "type": "dataset",
+  "venue": "IUPAC Standards Online",
+  "topic": "Mass Spectrometry Techniques and Applications",
+  "field": "Chemistry"
+ },
+ {
+  "id": "W2012377092",
+  "title": "Acellular Lung Scaffolds Direct Differentiation of Endoderm to Functional Airway Epithelial Cells: Requirement of Matrix-Bound HS Proteoglycans",
+  "abstract": "1. Stem Cell Reports. 2015 Mar 10;4(3):419-30. doi: 10.1016/j.stemcr.2015.01.004.\n Epub 2015 Feb 5.\n\nAcellular lung scaffolds direct differentiation of endoderm to functional airway \nepithelial cells: requirement of matrix-bound HS proteoglycans.\n\nShojaie S(1), Ermini L(2), Ackerley C(2), Wang J(2), Chin S(3), Yeganeh B(2), \nBilodeau M(4), Sambi M(5), Rogers I(6), Rossant J(7), Bear CE(8), Post M(9).\n\nAuthor information:\n(1)Program in Physiology and Experimental Medicine, Peter Gilgan Centre for \nResearch and Learning, Hospital for Sick Children, Toronto, ON M5G 0A4, Canada; \nDepartment of Physiology, Faculty of Medicine, University of Toronto, Toronto, \nON M5S1A8, Canada.\n(2)Program in Physiology and Experimental Medicine, Peter Gilgan Centre for \nResearch and Learning, Hospital for Sick Children, Toronto, ON M5G 0A4, Canada.\n(3)Program in Molecular Structure and Function, Peter Gilgan Centre for Research \nand Learning, Hospital for Sick Children, Toronto, ON M5G 0A4, Canada.\n(4)Program in Developmental and Stem Cell Biology, Peter Gilgan Centre for \nResearch and Learning, Hospital for Sick Children, Toronto, ON M5G 0A4, Canada.\n(5)Lunenfeld-Tanenbaum Research Institute, Mount Sinai Hospital, Toronto, ON M5G \n1X5, Canada.\n(6)Department of Physiology, Faculty of Medicine, University of Toronto, \nToronto, ON M5S1A8, Canada; Lunenfeld-Tanenbaum Research Institute, Mount Sinai \nHospital, Toronto, ON M5G 1X5, Canada.\n(7)Program in Developmental and Stem Cell Biology, Peter Gilgan Centre for \nResearch and Learning, Hospital for Sick Children, Toronto, ON M5G 0A4, Canada; \nDepartment of Molecular Genetics, University of Toronto, Toronto, ON M5S 1A8, \nCanada.\n(8)Department of Physiology, Faculty of Medicine, University of Toronto, \nToronto, ON M5S1A8, Canada; Program in Molecular Structure and Function, Peter \nGilgan Centre for Research and Learning, Hospital for Sick Children, Toronto, ON \nM5G 0A4, Canada.\n(9)Program in Physiology and Experimental Medicine, Peter Gilgan Centre for \nResearch and Learning, Hospital for Sick Children, Toronto, ON M5G 0A4, Canada; \nDepartment of Physiology, Faculty of Medicine, University of Toronto, Toronto, \nON M5S1A8, Canada. Electronic address: martin.post@sickkids.ca.\n\nEfficient differentiation of pluripotent cells to proximal and distal lung \nepithelial cell populations remains a challenging task. The 3D extracellular \nmatrix (ECM) scaffold is a key component that regulates the interaction of \nsecreted factors with cells durin",
+  "year": 2015,
+  "lang": "en",
+  "type": "article",
+  "venue": "Stem Cell Reports",
+  "topic": "Tissue Engineering and Regenerative Medicine",
+  "field": "Medicine"
+ },
+ {
+  "id": "W2100400824",
+  "title": "The effect of pregnancy on lupus nephritis",
+  "abstract": "Abstract Objective To evaluate the effect of pregnancy on lupus nephritis with respect to renal activity and renal deterioration. Methods Seventy‐eight pregnancies occurred in 53 women with systemic lupus erythematosus (SLE) and renal disease. Seventy‐eight nonpregnant SLE patients with evidence of renal disease were matched to the study population by age at the time of each pregnancy and by the presence of a renal manifestation at the beginning of the study. The nonpregnant controls were seen within 2 years of the assessment dates of the pregnant patients with whom they were matched. Renal activity was defined as the presence of active urine sediment or proteinuria, and changes in these parameters were monitored throughout the study period in both study populations. Renal deterioration was defined as an increase in the serum creatinine level that was &gt;20% above the baseline value or an increase to &gt;120 mmoles/liter. Results Renal disease activity patterns were available for 74 pairs of pregnancies and controls. Renal disease became active during the study period in 33 pregnancies (44.6%) and 31 controls (41.9%). Serial serum creatinine levels were available for 75 study pairs, among which 62 pregnancies (82.7%) and 57 controls (76.0%) showed no deterioration. Comparison of the treatments received by both the pregnant and the nonpregnant patients showed no significant difference in the amount of steroids taken. A significantly lower amount of immunosuppressive and antimalarial agents were taken during the pregnancies. Conclusion During pregnancy in patients with SLE and renal disease, changes in renal disease activity and deterioration in renal function are similar to those which occur in nonpregnant patients with lupus nephritis.",
+  "year": 2004,
+  "lang": "en",
+  "type": "article",
+  "venue": "Arthritis & Rheumatism",
+  "topic": "Systemic Lupus Erythematosus Research",
+  "field": "Medicine"
+ },
+ {
+  "id": "W2054976157",
+  "title": "Highly Chemoselective Metal-Free Reduction of Tertiary Amides",
+  "abstract": "1. J Am Chem Soc. 2008 Jan 9;130(1):18-9. doi: 10.1021/ja077463q. Epub 2007 Dec\n13.\n\nHighly chemoselective metal-free reduction of tertiary amides.\n\nBarbe G(1), Charette AB.\n\nAuthor information:\n(1)Département de chimie, Université de Montréal, P.O. Box 6128, Station \nDowntown, Montréal, Quebec, Canada H3C 3J7.\n\nThis communication describes the chemoselective metal-free reduction of tertiary \namides to the corresponding amines. Hantzsch ester is used as a mild reducing \nagent for the reduction of trifluoromethanesulfonic anhydride activated amides \nproviding the tertiary amines with high functional group tolerance.\n\nDOI: 10.1021/ja077463q\nPMID: 18076177 [Indexed for MEDLINE]",
+  "year": 2007,
+  "lang": "en",
+  "type": "article",
+  "venue": "Journal of the American Chemical Society",
+  "topic": "Advanced Synthetic Organic Chemistry",
+  "field": "Chemistry"
+ },
+ {
+  "id": "W4298415171",
+  "title": "Canada - Measures Affecting the Export of Civilian Aircraft",
+  "abstract": "",
+  "year": 2000,
+  "lang": "en",
+  "type": "article",
+  "venue": "World Trade and Arbitration Materials",
+  "topic": "International Law and Aviation",
+  "field": "Social Sciences"
+ },
+ {
+  "id": "W4399842911",
+  "title": "Apport de la MTE dans l’étude des stratégiesde communication non verbale",
+  "abstract": "",
+  "year": 2012,
+  "lang": "fr",
+  "type": "book-chapter",
+  "venue": "Presses de l'Université du Québec eBooks",
+  "topic": "Linguistics and Discourse Analysis",
+  "field": "Arts and Humanities"
+ },
+ {
+  "id": "W2054666188",
+  "title": "Expression and purification of an anti-Foot-and-mouth disease virus single chain variable antibody fragment in tobacco plants",
+  "abstract": "1. Transgenic Res. 2009 Oct;18(5):685-96. doi: 10.1007/s11248-009-9257-0. Epub\n2009  Apr 3.\n\nExpression and purification of an anti-Foot-and-mouth disease virus single chain \nvariable antibody fragment in tobacco plants.\n\nJoensuu JJ(1), Brown KD, Conley AJ, Clavijo A, Menassa R, Brandle JE.\n\nAuthor information:\n(1)Agriculture and Agri-Food Canada, London, ON N5V 4T3, Canada.\n\nLow-cost recombinant antibodies could provide a new strategy to control \nFoot-and-mouth disease virus (FMDV) outbreaks by passive immunization of \nsusceptible animals. In this study, a single chain variable antibody fragment \n(scFv) recognizing FMDV coat protein VP1 was expressed in transgenic tobacco \nplants. To enhance the accumulation of scFv protein, the codon-usage of a murine \nhybridoma-derived scFv gene was adjusted to mimic highly expressed tobacco genes \nand fused to an elastin-like polypeptide (ELP) tag. This scFv-ELP fusion \naccumulated up to 0.8% of total soluble leaf protein in transgenic tobacco. To \nrecover scFv-ELP protein from the leaf extract, a simple and scalable \npurification strategy was established. Purified scFv-ELP fusion was cleaved to \nseparate the scFv portion. Finally, it was shown that the purified scFv proteins \nretained their capacity to bind the FMDV in the absence or presence of ELP \nfusion.\n\nDOI: 10.1007/s11248-009-9257-0\nPMID: 19343526 [Indexed for MEDLINE]",
+  "year": 2009,
+  "lang": "en",
+  "type": "article",
+  "venue": "Transgenic Research",
+  "topic": "Transgenic Plants and Applications",
+  "field": "Biochemistry, Genetics and Molecular Biology"
+ }
+]
+warning: loading hooks from both /Users/choxos/.codex/hooks.json and /Users/choxos/.codex/config.toml; prefer a single representation for this layer
+2026-07-13T15:07:32.138550Z ERROR rmcp::transport::worker: worker quit with fatal: Transport channel closed, when Auth(AuthorizationRequired)
+warning: Skill descriptions were shortened to fit the 2% skills context budget. Codex can still see every skill, but some descriptions are shorter. Disable unused skills or plugins to leave more room for the rest.
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart Failed
+hook: SessionStart Completed
+hook: SessionStart Completed
+hook: SessionStart Completed
+hook: SessionStart Completed
+hook: SessionStart Failed
+hook: UserPromptSubmit
+hook: UserPromptSubmit
+hook: UserPromptSubmit Failed
+hook: UserPromptSubmit Failed
+codex
+[
+  {"id":"W4210789668","categories":[],"domain":null,"study_design":"systematic_review","genre":"review","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"The review studies hospital big-data capabilities, not research practices or scholarly communication."},
+  {"id":"W6920491591","categories":[],"domain":null,"study_design":"systematic_review","genre":"review","about_ca_system":false,"about_ca_topic":false,"confidence":"low","reason":"The title-only record concerns trial consent and community engagement, not a defined rubric category."},
+  {"id":"W1534032619","categories":[],"domain":null,"study_design":"not_applicable","genre":"commentary","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"The commentary concerns leadership and evidence use in clinical practice, not research as an object."},
+  {"id":"W7128515512","categories":[],"domain":null,"study_design":"design_other","genre":"empirical","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"The study develops and evaluates forecasting models for time series, which is a domain technique rather than metaresearch."},
+  {"id":"W2951761668","categories":[],"domain":null,"study_design":"not_applicable","genre":"commentary","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"The article discusses nursing education and recommendations, not research practices as an object."},
+  {"id":"W3003661931","categories":[],"domain":null,"study_design":"observational","genre":"empirical","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"The cohort study examines prenatal thyroid problems and adolescent psychiatric outcomes, not a defined category."},
+  {"id":"W2921815814","categories":[],"domain":null,"study_design":"not_applicable","genre":"other","about_ca_system":false,"about_ca_topic":false,"confidence":"low","reason":"The title-only record does not establish that science or research is studied as a social practice."},
+  {"id":"W4416543324","categories":[],"domain":null,"study_design":"design_other","genre":"review","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"The review concerns prenatal cannabis exposure and mental health, not research practices or scholarly systems."},
+  {"id":"W6943412651","categories":[],"domain":null,"study_design":"not_applicable","genre":"dataset","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"This is a biodiversity occurrence dataset and does not study a defined rubric category."},
+  {"id":"W6921197322","categories":[],"domain":null,"study_design":"design_other","genre":"other","about_ca_system":false,"about_ca_topic":true,"confidence":"low","reason":"The title identifies Canada as the substantive setting and subject, but the missing abstract prevents more specific screening."},
+  {"id":"W2781899786","categories":[],"domain":null,"study_design":"bench_or_experimental","genre":"empirical","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"The experiment applies spectroscopy to grain processing, which is a domain technique rather than metaresearch."},
+  {"id":"W2569574764","categories":[],"domain":null,"study_design":"design_other","genre":"software","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"The article describes a property-visualization application, not a defined category."},
+  {"id":"W7036292878","categories":[],"domain":null,"study_design":"design_other","genre":"other","about_ca_system":false,"about_ca_topic":false,"confidence":"low","reason":"The title-only record concerns aquifer characterization and does not establish a defined category."},
+  {"id":"W2799898098","categories":[],"domain":null,"study_design":"simulation_or_modeling","genre":"empirical","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"The work models heavy-oil pipeline friction losses, which is engineering research rather than research-on-research."},
+  {"id":"W4315700855","categories":[],"domain":null,"study_design":"simulation_or_modeling","genre":"empirical","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"The work simulates additive-manufacturing temperatures, which is a domain modeling technique rather than metaresearch."},
+  {"id":"W2075847578","categories":["insufficient_payload"],"domain":null,"study_design":"not_applicable","genre":"other","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"The title is a bibliographic citation artifact and the record cannot be screened as a scholarly work."},
+  {"id":"W4246615486","categories":[],"domain":null,"study_design":"observational","genre":"methods","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"The study develops a health metric for population research, and Rule 1 excludes domain techniques from metaresearch."},
+  {"id":"W1991282154","categories":[],"domain":null,"study_design":"observational","genre":"empirical","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"The cohort study validates a breastfeeding scale in a clinical population, not research practices as an object."},
+  {"id":"W4254516102","categories":[],"domain":null,"study_design":"not_applicable","genre":"dataset","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"This is a mass-spectrometry standards dataset and does not study a defined category."},
+  {"id":"W2012377092","categories":[],"domain":null,"study_design":"bench_or_experimental","genre":"empirical","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"The experiment studies lung-cell differentiation and scaffolds, not research practices or scholarly systems."},
+  {"id":"W2100400824","categories":[],"domain":null,"study_design":"observational","genre":"empirical","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"The matched observational study examines pregnancy and lupus nephritis, not a defined rubric category."},
+  {"id":"W2054976157","categories":[],"domain":null,"study_design":"bench_or_experimental","genre":"methods","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"The work develops a chemical reduction method, which Rule 1 excludes from metaresearch."},
+  {"id":"W4298415171","categories":[],"domain":null,"study_design":"not_applicable","genre":"other","about_ca_system":false,"about_ca_topic":true,"confidence":"high","reason":"Canada is the substantive subject of this trade-law work, but the record does not belong to another defined category."},
+  {"id":"W4399842911","categories":[],"domain":null,"study_design":"design_other","genre":"other","about_ca_system":false,"about_ca_topic":false,"confidence":"low","reason":"The title-only book chapter concerns nonverbal communication strategies and does not establish a defined category."},
+  {"id":"W2054666188","categories":[],"domain":null,"study_design":"bench_or_experimental","genre":"empirical","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"The experiment produces an antibody fragment in tobacco plants, which is domain research rather than research-on-research."}
+]
+hook: Stop
+hook: Stop
+hook: Stop
+hook: Stop Completed
+hook: Stop Completed
+hook: Stop Failed
+tokens used
+30,483

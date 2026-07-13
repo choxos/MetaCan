@@ -1,0 +1,535 @@
+You are screening scholarly works for the MetaCan project. Apply the rubric below to EVERY record and output ONE JSON array with ONE object per record, conforming EXACTLY to the JSON schema below. Output ONLY the JSON array, no prose before or after it.
+
+# THE RUBRIC (v3.1, locked)
+
+# MétaCan screening rubric (v3.1)
+
+**Status: LOCKED, 2026-07-13.** Supersedes v2.2. No screening ran under v3.0, which lived for hours: an adversarial review found that its Murad quotation inserted the word "treatment" into a sentence this document calls verbatim (D29). v3.1 corrects that quotation from the PDF, fixes the Kataoka page range, aligns the funder clause with the protocol, corrects two glosses against their sources, and adds the study-design vocabulary that v3.0 demanded but never listed. Since D29, `pilot/check_quotes.R` fails the build if any quotation marked verbatim is not a substring of its cited PDF.
+
+**No number produced so far was made under v3.** The pilot ran under v1.0; the 179-work re-screen under v2.0. Both instruments are kept byte for byte, so every figure stays attributable to the text that produced it. v3 is the instrument the **full screen** runs under, and the **v2-to-v3 difference is reported as a finding**.
+
+---
+
+## What changed, and why it is not cosmetic
+
+v1 and v2 had a tier hierarchy: **T1 core / T2 adjacent / T3 contextual**. That structure had a defect at its root, and the data found it before I did.
+
+> **"Adjacent" is defined by negation.** It means *not-T1*. A category whose only content is "near the important one" cannot be applied consistently, and **OUT-vs-adjacent was the largest tier confusion at every sample size we measured.** The models were not failing. **The category was empty.**
+
+It was also a value judgment I had no standing to make. Calling science and technology studies "adjacent" says STS is peripheral to metascience. **STS is a field with its own founding literature, its own journals, and its own account of what studying science means.**
+
+**v3 deletes the hierarchy.** Every tradition is a **category with its own positive definition, taken from its own literature, quoted verbatim from a source in `docs/reference/definitions/`.** There is no residual bucket. A record may carry **more than one** category, because the traditions genuinely overlap and forcing a single label is what created the problem.
+
+**Nothing here is cited from memory.** Every quotation below was read from the PDF named beside it. In a project whose worst deviation (D26) was that its own definition of metaresearch was mine and uncited for its entire life, a recalled citation would be the single worst thing this document could contain.
+
+---
+
+## The definitional problem is the field's, not this project's, and the field says so in print
+
+- **Puljak L, Lovric Makaric Z, Buljan I, Pieper D.** *What is a meta-epidemiological study? Analysis of published literature indicated heterogeneous study designs and definitions.* J Comp Eff Res. 2020. doi:10.2217/cer-2019-0201
+  > Analysed **175 information sources**. *"Definitions of meta-epidemiological studies varied and some studies used the term meta-epidemiological study to describe methodological research-on-research studies."* Conclusion: *"Research community would benefit from consensus about definition of meta-epidemiological study."*
+
+- **Kataoka Y, et al.** J Clin Epidemiol. 2023;154:219-220.
+  > A **published dispute** with Puljak, opening by naming *"the currently confusing nomenclatures around 'meta-epidemiology' and related terms such as 'meta-research' and 'research-on-research'."*
+
+- **Stevens ER, Laynor G.** *Recognizing the value of meta-research and making it easier to find.* J Med Libr Assoc. 2023;111(4). doi:10.5195/jmla.2023.1758
+  > *"The breadth of meta-research presents a significant challenge for identifying published meta-research studies,"* and it notes **the lack of a MeSH heading** for meta-research.
+
+**Those are claims about humans.** The pilot's numbers are claims about **models disagreeing under one rubric**. They are consistent, they are not the same estimand, and **only the human audit closes the gap** (`DEVIATIONS.md` D27).
+
+---
+
+## The categories
+
+A work may carry **more than one**. **Categories are not ranked and none is primary: the released landscape is the union of the defined categories, with every overlap reported.** The call's primary estimand is reported over `metaresearch` because that is the field the call names; that is a **reporting choice, not a rank**, and each of the other traditions gets the same per-category estimate.
+
+### 1. `metaresearch`
+
+> **"Meta-research is an evolving scientific discipline that aims to evaluate and improve research practices. It includes thematic areas of methods, reporting, reproducibility, evaluation, and incentives (how to do, report, verify, correct, and reward science)."**
+>
+> Ioannidis JPA, Fanelli D, Dunne DD, Goodman SN. *Meta-research: Evaluation and Improvement of Research Methods and Practices.* PLoS Biol. 2015;13(10):e1002264.
+> See also Ioannidis JPA. PLoS Biol. 2018;16(3):e2005468; METRICS, Stanford: <https://metrics.stanford.edu/research>
+
+Every `metaresearch` record carries a **`domain`**, taken verbatim from those five thematic areas and glossed by Ioannidis's own parenthetical:
+
+| `domain` | Ioannidis's gloss | operationally |
+|---|---|---|
+| `methods` | *how to **do** science* | design, conduct, analysis, bias, statistical practice, evidence-synthesis methodology; Ioannidis's own description of this area ends *"research integrity and ethics"* |
+| `reporting` | *how to **report** science* | reporting standards and completeness |
+| `reproducibility` | *how to **verify** science* | replication, data and code sharing, transparency |
+| `evaluation` | *how to **correct** science* | peer review and editorial process, research assessment, metrics |
+| `incentives` | *how to **reward** science* | funding allocation, careers and the research workforce, reward structures |
+
+**RULE 1 stands** (carried from v2; it resolved the largest single seam): *a work is `metaresearch` on methods only if its object is methods **as used, reported or performed by researchers**. Developing, deriving, validating or teaching a technique for a domain is OUT, however generic the technique.* **An instance of a research practice is not a study of it.**
+
+### 2. `metaepidemiology` — **CONTESTED IN PRINT. Both definitions are coded.**
+
+There is **no consensus definition** (Puljak 2020, above). **This rubric does not invent one.** It codes **both published definitions** and **flags where they disagree**, because the dispute is live, it is between named researchers in peer-reviewed journals, and hiding it inside a single label would destroy the only evidence of it.
+
+- **`metaepi_narrow`** — Murad MH, Wang Z. *Guidelines for reporting meta-epidemiological methodology research.* Evid Based Med. 2017;22(4):139-142. doi:10.1136/ebmed-2017-110713
+  > *"Meta-epidemiological studies adopt a systematic review or meta-analysis approach to examine the impact of certain characteristics of clinical studies on the observed effect and provide empirical evidence for hypothesised associations."*
+  >
+  > *(v3.0 quoted this sentence as 'the observed **treatment** effect'. The word is not in the paper; it narrowed Murad's definition while claiming his authority for the narrowing, and it survived a LOCK. D29.)*
+
+- **`metaepi_broad`** — Kataoka Y, et al. J Clin Epidemiol. 2023;154:219-220. *(Not 219-221: page 221 is Puljak's reply, which is the other side of the dispute.)*
+  > *"The greatest common defining concept of 'meta-epidemiological studies' would be **any studies in which the unit of analysis is a study, not a patient**."*
+
+**Where the two differ, the record is flagged, and the size of that class is reported as a finding.** A published dispute is a boundary to be *measured*, not settled by fiat.
+
+### 3. `bibliometrics` (scientometrics)
+
+> **"Scientometrics is the study of the quantitative aspects of the process of science as a communication system. It is centrally, but not only, concerned with the analysis of citations in the academic literature."**
+>
+> Mingers J, Leydesdorff L. *A Review of Theory and Practice in Scientometrics.* Eur J Oper Res. 2015. doi:10.1016/j.ejor.2015.04.002
+> Founding work: Price DJ de Solla. *Networks of Scientific Papers.* Science. 1965;149(3683):510-515.
+
+**Boundary with `metaresearch`, and it resolves v1's self-contradiction** (v1's T1 bullet and its own worked example gave opposite answers): a study that **characterises a literature** by quantitative means is `bibliometrics`. A study that uses bibliometric means to **make a claim about research practice** (citation distortion, reporting trends, citation of retracted work) is **also `metaresearch`**, and carries both. **v3 does not force the choice; that forcing was the bug.**
+
+### 4. `sts` (science and technology studies)
+
+> **"co-production is shorthand for the proposition that the ways in which we know and represent the world (both nature and society) are inseparable from the ways in which we choose to live in it."**
+> **"The idiom of co-production ... represents a major synthesis of scholarship in science and technology studies (S&TS)."**
+>
+> Jasanoff S (ed.). *States of Knowledge: The Co-Production of Science and the Social Order.* Routledge, 2004.
+
+> **"We study science in action and not ready made science or technology; to do so, we either arrive before the facts and machines are blackboxed or we follow the controversies that reopen them."**
+>
+> Latour B. *Science in Action: How to Follow Scientists and Engineers through Society.* Harvard University Press.
+
+**Operational test:** the work studies **science or technology as social practice**: how knowledge and social order are produced together, how facts are made rather than found, how controversies open and close. **The object must be science, research, or technoscientific knowledge**, at any period. *(v1 restricted history and philosophy of science to "contemporary research practice", an unexamined adverb that silently excluded the entire history of Canadian science. It is deleted.)*
+
+### 5. `scholarly_communication`
+
+> **"Scholarly communication is a rich and complex sociotechnical system formed over a period of centuries."**
+> **"...used here in the broader sense to include the formal and informal activities associated with the use and dissemination of information through public and private channels."**
+>
+> Borgman CL. *Scholarship in the Digital Age: Information, Infrastructure, and the Internet.* MIT Press, 2007.
+
+### 6. `open_science`
+
+> **"Open science is a set of principles and practices that aim to make scientific research from all fields accessible to everyone for the benefits of scientists and society as a whole."**
+> **"Open science is about making sure not only that scientific knowledge is accessible but also that the production of that knowledge itself is inclusive, equitable and sustainable."**
+>
+> UNESCO. *Recommendation on Open Science* (introduction), 2021. **193 countries adopted it.**
+
+The second sentence is the reason this category is not a synonym for "open access": UNESCO's definition makes **inclusivity and equity of knowledge production** part of open science itself, which is the criterion this challenge is judged on.
+
+### 7. `research_integrity` — **defined by its OBJECT; the sources do not define the field, and that is recorded**
+
+**Honest limitation, stated rather than hidden.** The two sources supplied define **what counts as misconduct** and **what publication ethics covers**. **Neither defines "research integrity research" as a discipline** the way Ioannidis defines metaresearch or Jasanoff defines STS. So this category is defined by its **object**, and the gap is on the record.
+
+> **"...the analysis was limited to behaviours that distort scientific knowledge: fabrication, falsification, 'cooking' of data, etc... Survey questions on plagiarism and other forms of professional misconduct were excluded."**
+>
+> Fanelli D. *How Many Scientists Fabricate and Falsify Research? A Systematic Review and Meta-Analysis of Survey Data.* PLoS ONE. 2009;4(5):e5738.
+
+> Publication ethics, per **COPE** (Committee on Publication Ethics), *Ethics Toolkit for Journal Editors and Publishers.*
+
+**Operational test:** the object is **research misconduct, questionable research practices, retraction, authorship, or publication ethics**, *as an object of study*. **Fanelli's boundary is adopted and its exclusion is carried:** fabrication, falsification and data cooking are in; **plagiarism and professional misconduct are recorded but marked, because Fanelli's own scope excludes them** and a rubric that silently widened his boundary while citing him would be misquoting its own source.
+
+**This category overlaps `metaresearch` heavily**: Ioannidis's own description of the *methods* area ends *"research integrity and ethics"*, so integrity research is inside metaresearch by his definition. **That overlap is expected and allowed**, because v3 is multi-label. It is not a hierarchy.
+
+### `insufficient_payload`
+
+Not a judgment; a statement that the record **cannot be screened** (a scraping artifact as a title, boilerplate in the abstract field, a title and abstract from different papers, spam). **Reported, never silently dropped**: the size of this class is a finding about OpenAlex.
+
+### `OUT`
+
+None of the above. **"OUT" now means "in no defined category", not "not near the important one."** That is the whole change.
+
+---
+
+## Canadian linkage
+
+- `CA_AFF` — at least one Canadian institutional affiliation. **Warning, measured:** OpenAlex misassigns these. **At least 17,466** works enter the frame with, as their *only* Canadian institution, one of six suspect assignments: a parse failure that is not an institution at all (`Impact`, attached to a Spanish COVID essay) or a real organization attached to papers it has nothing to do with (`Discovery Air (Canada)` on a Brazilian linguistics paper). That is a **lower bound** from six audited strings (finding 27), and the records are **flagged for audit, not deleted**. A Canadian affiliation is *evidence*, not proof.
+- `CA_FUND` — ≥1 funder whose OpenAlex `country_code` is Canada: an **external criterion, not a curated list**. *(An earlier four-funder list (CIHR, NSERC, SSHRC, CFI) failed twice: three of its four hardcoded IDs pointed at other funders, and even corrected it missed Canada Research Chairs, the Government of Canada, NRC, Mitacs, Genome Canada, and every provincial agency. OpenAlex knows 2,182 Canadian funders; `R/pin_entities.R` pins them.)*
+- **`ABOUT_CA_SYSTEM`** — the Canadian **research system or academy** is a substantive object. *A Canadian institution as setting is not this.*
+- **`ABOUT_CA_TOPIC`** — Canada is a substantive subject, whether or not research is the object.
+
+*(v1 had one boolean and it could not separate "Canadian data, universal claim" from "a claim about Canada". Four screening agents proposed this split independently.)*
+
+## Study design
+
+Coded for every work, from **this vocabulary and no other** (v3.0 said "coded for every work" and never listed the values, which is D20's exact shape: a field every screener codes and no two code alike):
+
+| `study_design` | MEDLINE publication type it is validated against |
+|---|---|
+| `randomized_trial` | Randomized Controlled Trial |
+| `nonrandomized_trial` | Controlled Clinical Trial |
+| `observational` | Observational Study |
+| `systematic_review` | Systematic Review |
+| `meta_analysis` | Meta-Analysis |
+| `case_report` | Case Reports |
+| `qualitative` | *(none; ships as a score, marked unvalidated)* |
+| `simulation_or_modeling` | *(none; ships as a score, marked unvalidated)* |
+| `bench_or_experimental` | *(none; ships as a score, marked unvalidated)* |
+| `theoretical_or_conceptual` | *(none; ships as a score, marked unvalidated)* |
+| `not_applicable` | *(the work is not empirical research: editorials, datasets, software)* |
+| `design_other` | *(none; ships as a score, marked unvalidated)* |
+
+**Validated against MEDLINE publication types, per record and not per year.** *(v3.0 called these "human-indexed by NLM", which is false; v3.1's first correction said "human-indexed until April 2022", which is also false. NLM stopped fully human indexing as universal practice around 2011 and completed automation in 2022, so a YEAR CUTOFF cannot separate the eras. The reference subset is defined by NLM's **record-level `IndexingMethod`** field: absent = fully human, `Curated` = automated with human review, `Automated` = machine. Human records are the reference; the others measure **agreement with another machine** and are reported as such.)*
+
+**Class-specific calendar eligibility, because a publication type that did not exist cannot be a negative.** *Observational Study* entered the vocabulary in **2014** and *Systematic Review* in **2019**. A 2008 cohort study carries no *Observational Study* tag, and treating that absence as "not observational" would train and score the model against a censoring artifact. Each design class is therefore validated **only on records published after its type existed**, and that eligibility window is prespecified per class. Where MEDLINE does not reach (most of the physical sciences, humanities and social sciences), the label ships as a **score, not an assertion**, and is **marked unvalidated**. *The dataset states, per field, which of its own annotations it has earned the right to assert.*
+
+## Genre
+
+**One vocabulary, defined here, and `screening-schema-v3.json` QUOTES this list rather than paraphrasing it.**
+
+`empirical` · `review` · `methods` · `commentary` · `editorial` · `protocol` · `dataset` · `software` · `other`
+
+*(In v1 the rubric and the schema named **two different vocabularies for this field**, overlapping on two values out of thirteen. Every screener was handed both and obeyed both privately; the validator checked `tier` and had never been asked to look at `genre`, so 16,800 labels passed every check that ran. See D20 and finding 24. **A codebook is code. It gets a test.**)*
+
+## `tier` is RETIRED
+
+v3 replaces it with `categories`, which is **multi-label**. The values `T1`, `T2`, `T3` and `OUT` remain in the **legacy** `screening-schema.json` **only so that the v1 and v2 label files stay readable**; the v3 contract, `screening-schema-v3.json`, **does not contain the field**, so no new screening can emit them. `OUT` in v3 means an empty `categories` array: *in no defined category*, not *near the important one*.
+
+## Confidence
+
+`high` / `medium` / `low`. **If the abstract is missing, judge on the title alone and set confidence to `low` unless the title is unambiguous.** The schema **quotes** this sentence; it does not paraphrase it (D24).
+
+**`low` is a legitimate answer.** A screener that never says `low` is not being careful; it is being confident.
+
+---
+
+## Sources
+
+Every quotation above was read from a PDF in **`docs/reference/definitions/`**, which is committed. Nothing is cited from memory, and since D29 that is a checked property, not a promise: `pilot/check_quotes.R` fails the build if any quotation marked verbatim is not a substring of its cited PDF. `pilot/check_instrument.R` fails the build if this rubric and `screening-schema-v3.json` disagree about any field, in either direction.
+
+
+# THE OUTPUT SCHEMA (screening-schema-v3.json)
+
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "MetaCan screening output, rubric v3.1",
+  "description": "The output contract for every screening run under rubric v3.1. This document QUOTES the rubric; it never paraphrases it. Where a description below restates a rule, the wording is copied from docs/protocol/rubric-v3.md, because the schema misquoting the rubric is D24 and two documents that disagree are two instruments (D20). pilot/check_instrument.R fails the build if this file and the rubric disagree about any field, in either direction. The legacy screening-schema.json remains ONLY so that v1 and v2 label files stay readable; no new screening validates against it.",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["id", "categories", "study_design", "genre", "about_ca_system", "about_ca_topic", "confidence"],
+    "properties": {
+      "id": {
+        "type": "string",
+        "pattern": "^W\\d+$",
+        "description": "The OpenAlex work id, exactly as given in the payload."
+      },
+      "categories": {
+        "type": "array",
+        "items": {
+          "enum": ["metaresearch", "metaepi_narrow", "metaepi_broad", "bibliometrics", "sts", "scholarly_communication", "open_science", "research_integrity", "insufficient_payload"]
+        },
+        "uniqueItems": true,
+        "description": "Every category the work belongs to; a work may carry more than one, and categories are not ranked and none is primary. An EMPTY array is OUT, which means 'in no defined category', not 'near the important one'. insufficient_payload means the record cannot be screened (a scraping artifact as a title, boilerplate in the abstract field, a title and abstract from different papers, spam) and is reported, never silently dropped."
+      },
+      "domain": {
+        "enum": ["methods", "reporting", "reproducibility", "evaluation", "incentives", null],
+        "description": "REQUIRED when categories contains metaresearch, and null otherwise. Taken verbatim from Ioannidis's five thematic areas: methods, reporting, reproducibility, evaluation, and incentives (how to do, report, verify, correct, and reward science)."
+      },
+      "study_design": {
+        "enum": ["randomized_trial", "nonrandomized_trial", "observational", "systematic_review", "meta_analysis", "case_report", "qualitative", "simulation_or_modeling", "bench_or_experimental", "theoretical_or_conceptual", "not_applicable", "design_other"],
+        "description": "Coded for every work, from this vocabulary and no other. not_applicable means the work is not empirical research: editorials, datasets, software."
+      },
+      "genre": {
+        "enum": ["empirical", "review", "methods", "commentary", "editorial", "protocol", "dataset", "software", "other"],
+        "description": "One vocabulary, defined in the rubric, and this schema QUOTES that list rather than paraphrasing it."
+      },
+      "about_ca_system": {
+        "type": "boolean",
+        "description": "ABOUT_CA_SYSTEM: the Canadian research system or academy is a substantive object. A Canadian institution as setting is not this."
+      },
+      "about_ca_topic": {
+        "type": "boolean",
+        "description": "ABOUT_CA_TOPIC: Canada is a substantive subject, whether or not research is the object."
+      },
+      "confidence": {
+        "enum": ["high", "medium", "low"],
+        "description": "If the abstract is missing, judge on the title alone and set confidence to low unless the title is unambiguous. low is a legitimate answer: a screener that never says low is not being careful; it is being confident."
+      },
+      "reason": {
+        "type": "string",
+        "maxLength": 400,
+        "description": "One sentence naming the rubric rule the decision rests on."
+      }
+    }
+  }
+}
+
+
+# THE RECORDS
+
+[
+ {
+  "id": "W6920865590",
+  "title": "Additional file 2 of Improving the usefulness of evidence concerning the effectiveness of implementation strategies for knowledge products in primary healthcare: protocol for a series of systematic reviews",
+  "abstract": "",
+  "year": 2020,
+  "lang": "en",
+  "type": "article",
+  "venue": "Figshare",
+  "topic": "Health Policy Implementation Science",
+  "field": "Health Professions"
+ },
+ {
+  "id": "W1594257894",
+  "title": "Reframing Evaluation: Defining an Indigenous Evaluation Framework",
+  "abstract": "Abstract: The American Indian Higher Education Consortium (AIHEC), comprising 34 American Indian tribally controlled colleges and universities, has undertaken a comprehensive effort to develop an “Indigenous Framework for Evaluation” that synthesizes Indigenous ways of knowing and Western evaluation practice. To ground the framework, AIHEC engaged in an extensive consultation process including conducting a number of focus groups in major regions of the United States. Cultural experts, Indian educators, and evaluators shared their concerns regarding evaluation and described how evaluation fits within a cultural framework. This article summarizes the focus group discussions and describes how the framework developed using the key principles of Indigenous ways of knowing and four core values common to tribal communities.",
+  "year": 2008,
+  "lang": "en",
+  "type": "article",
+  "venue": "Canadian Journal of Program Evaluation",
+  "topic": "Evaluation and Performance Assessment",
+  "field": "Decision Sciences"
+ },
+ {
+  "id": "W6958638947",
+  "title": "Additional file 1 of Screening for hypertension in adults: protocol for evidence reviews to inform a Canadian Task Force on Preventive Health Care guideline update",
+  "abstract": "",
+  "year": 2024,
+  "lang": "en",
+  "type": "article",
+  "venue": "Figshare",
+  "topic": "Blood Pressure and Hypertension Studies",
+  "field": "Medicine"
+ },
+ {
+  "id": "W6978095319",
+  "title": "Screening for hypertension in adults: protocol for evidence reviews to inform a Canadian Task Force on Preventive Health Care guideline update",
+  "abstract": "",
+  "year": 2024,
+  "lang": "en",
+  "type": "other",
+  "venue": "Figshare",
+  "topic": null,
+  "field": null
+ },
+ {
+  "id": "W3207991248",
+  "title": "The Rights of Nature: An Emerging Transformation Opportunity for Evaluation",
+  "abstract": "Abstract: “Building back better” in the post-COVID-19 Anthropocene era requires novel ideas and ways of working to truly challenge “business as usual” and contribute to urgently needed systems transformations. This article invites post-normal evaluation professionals to engage with the concept of the Rights of Nature, a generative form of institutional innovation that recognizes ecosystems and natural communities as entities that have an independent right to exist and flourish that can be enforced under legal or social norms. Pathways are suggested to use evaluation as values-driven practice to reflect on and encourage human-nature relationships founded on mutual dependence, cooperation, and synergy.",
+  "year": 2021,
+  "lang": "en",
+  "type": "article",
+  "venue": "Canadian Journal of Program Evaluation",
+  "topic": "Evaluation and Performance Assessment",
+  "field": "Decision Sciences"
+ },
+ {
+  "id": "W3009664453",
+  "title": "Reflections on Evaluating in Indigenous Contexts: Looking to the Future",
+  "abstract": "",
+  "year": 2020,
+  "lang": "en",
+  "type": "article",
+  "venue": "Canadian Journal of Program Evaluation",
+  "topic": "Evaluation and Performance Assessment",
+  "field": "Decision Sciences"
+ },
+ {
+  "id": "W4403430056",
+  "title": "Leading a faculty-wide peer-support programme for widening participation students",
+  "abstract": "Whilst existing research has explored the impact of a peer support role on the holistic development of mentees and mentors, very little is known about the experiences of those students who work in partnership alongside academic and service colleagues in co-creating, implementing, and delivering these programs. In this exploratory case study, the unique aspect was to use the P.O.W.E.R Reflective Framework for Students-as-Partners Practices and Processes to contextualise an undergraduate intern’s experiences of leading a project and the consequent impact it has had upon their personal and professional development. Key findings and reflections from the intern’s interview provide a deeper understanding of the peer mentor experience, highlighting aspects that are often overlooked or not readily apparent. The value of these activities for interns and how best to support their needs, motivations, and expectations are shared, as are implications for academic and service colleagues involved in promoting collaborative learning and mentoring.",
+  "year": 2024,
+  "lang": "en",
+  "type": "article",
+  "venue": "International Journal for Students as Partners",
+  "topic": "Reflective Practices in Education",
+  "field": "Social Sciences"
+ },
+ {
+  "id": "W6902059616",
+  "title": "Additional file 2 of Healthcare provider characteristics that influence the implementation of individual-level patient-centered outcome measure (PROM) and patient-reported experience measure (PREM) data across practice settings: a protocol for a mixed methods systematic review with a narrative synthesis",
+  "abstract": "",
+  "year": 2021,
+  "lang": "en",
+  "type": "article",
+  "venue": "Figshare",
+  "topic": "Patient Satisfaction in Healthcare",
+  "field": "Health Professions"
+ },
+ {
+  "id": "W1964748302",
+  "title": "Transformational Leadership and Leaders’ Mode of Care Reasoning",
+  "abstract": "",
+  "year": 2011,
+  "lang": "en",
+  "type": "article",
+  "venue": "Journal of Business Ethics",
+  "topic": "Ethics in Business and Education",
+  "field": "Decision Sciences"
+ },
+ {
+  "id": "W2614040351",
+  "title": "Pereira's Attack on Legalizing Euthanasia or Assisted Suicide: Smoke and Mirrors",
+  "abstract": "",
+  "year": 2012,
+  "lang": "en",
+  "type": "article",
+  "venue": "SSRN Electronic Journal",
+  "topic": "Palliative Care and End-of-Life Issues",
+  "field": "Medicine"
+ },
+ {
+  "id": "W6902186256",
+  "title": "Additional file 4 of Screening for prostate cancer: protocol for updating multiple systematic reviews to inform a Canadian Task Force on Preventive Health Care guideline update",
+  "abstract": "",
+  "year": 2022,
+  "lang": "en",
+  "type": "article",
+  "venue": "Figshare",
+  "topic": "Prostate Cancer Diagnosis and Treatment",
+  "field": "Medicine"
+ },
+ {
+  "id": "W1964725497",
+  "title": "The Development of a Measure of Auditors’ Virtue",
+  "abstract": "",
+  "year": 2006,
+  "lang": "en",
+  "type": "article",
+  "venue": "Journal of Business Ethics",
+  "topic": "Ethics in Business and Education",
+  "field": "Decision Sciences"
+ },
+ {
+  "id": "W2119423313",
+  "title": "Understanding effective care management implementation in primary care: a macrocognition perspective analysis",
+  "abstract": "1. Implement Sci. 2015 Aug 21;10:122. doi: 10.1186/s13012-015-0316-z.\n\nUnderstanding effective care management implementation in primary care: a \nmacrocognition perspective analysis.\n\nHoltrop JS(1), Potworowski G(2), Fitzpatrick L(3), Kowalk A(4), Green LA(5).\n\nAuthor information:\n(1)Department of Family Medicine, University of Colorado Denver School of \nMedicine, 12631 E 17th Avenue, Mail Stop F496, Room 3505 Academic Office 1, \nAurora, CO, 80045, USA. Jodi.holtrop@ucdenver.edu.\n(2)Department of Health Policy, Management, and Behavior, School of Public \nHealth, University at Albany, State University of New York, Albany, NY, USA.\n(3)Department of Family Medicine, Michigan State University College of Human \nMedicine, Grand Rapids, MI, USA.\n(4)Priority Health, Grand Rapids, MI, USA.\n(5)Department of Family Medicine, University of Alberta, Edmonton, Alberta, \nCanada.\n\nBACKGROUND: Care management in primary care can be effective in helping patients \nwith chronic disease improve their health status. Primary care practices, \nhowever, are often challenged with its implementation. Incorporating care \nmanagement involves more than a simple physical process redesign to existing \nclinical care routines. It involves changes to who is working with patients, and \nconsequently such things as who is making decisions, who is sharing patient \ninformation, and how. Studying the range of such changes in \"knowledge work\" \nduring implementation requires a perspective and tools designed to do so. We \nused the macrocognition perspective, which is designed to understand how \nindividuals think in dynamic, messy real-world environments such as care \nmanagement implementation. To do so, we used cognitive task analysis to \nunderstand implementation in terms of such thinking as decision making, \nknowledge, and communication.\nMETHODS: Data collection involved semi-structured interviews and observations at \nbaseline and at approximately 9 months into implementation at five practices in \none physician-owned administratively connected group of practices in the state \nof Michigan, USA. Practices were intervention participants in a larger trial of \nchronic care model implementation. Data were transcribed, qualitatively coded \nand analyzed, initially using an editing approach and then a template approach \nwith macrocognition as a guiding framework.\nRESULTS: Seventy-four interviews and five observations were completed. There \nwere differences in implementation success across the practices, and",
+  "year": 2015,
+  "lang": "en",
+  "type": "article",
+  "venue": "Implementation Science",
+  "topic": "Health Policy Implementation Science",
+  "field": "Health Professions"
+ },
+ {
+  "id": "W4389482760",
+  "title": "Canadian Covid-19 pandemic public health mitigation measures at the province level",
+  "abstract": "Abstract The Covid-19 pandemic has prompted governments across the world to enforce a range of public health interventions. We introduce the Covid-19 Policy Response Canadian tracker (CPRCT) database that tracks and records implemented public health measures in every province and territory in Canada. The implementations are recorded on a four-level ordinal scale (0–3) for three domains, (Schools, Work, and Other), capturing differences in degree of response. The data-set allows the exploration of the effects of public health mitigation on the spread of Covid-19, as well as provides a near-real-time record in an accessible format that is useful for a diverse range of modeling and research questions.",
+  "year": 2023,
+  "lang": "en",
+  "type": "article",
+  "venue": "Scientific Data",
+  "topic": "COVID-19 epidemiological studies",
+  "field": "Mathematics"
+ },
+ {
+  "id": "W3122474220",
+  "title": "Measuring the lack of monotonicity in functions",
+  "abstract": "",
+  "year": 2014,
+  "lang": "en",
+  "type": "preprint",
+  "venue": "arXiv (Cornell University)",
+  "topic": "Risk and Portfolio Optimization",
+  "field": "Decision Sciences"
+ },
+ {
+  "id": "W1607364779",
+  "title": "Mixed Motives and Ethical Decisions in Business",
+  "abstract": "",
+  "year": 2000,
+  "lang": "en",
+  "type": "article",
+  "venue": "Journal of Business Ethics",
+  "topic": "Ethics in Business and Education",
+  "field": "Decision Sciences"
+ },
+ {
+  "id": "W4401363971",
+  "title": "Reinhard Stockmann, Wolfgang Meyer, &amp; Laszlo Szentmarjay. (Eds.) (2022). <i>The Institutionalisation of Evaluation in the Americas</i>",
+  "abstract": "",
+  "year": 2024,
+  "lang": "en",
+  "type": "article",
+  "venue": "Canadian Journal of Program Evaluation",
+  "topic": "Evaluation and Performance Assessment",
+  "field": "Decision Sciences"
+ },
+ {
+  "id": "W2053200870",
+  "title": "Literature Syntheses for the Council on Chiropractic Guidelines and Practice Parameters: Methodology",
+  "abstract": "",
+  "year": 2008,
+  "lang": "en",
+  "type": "article",
+  "venue": "Journal of Manipulative and Physiological Therapeutics",
+  "topic": "Clinical practice guidelines implementation",
+  "field": "Medicine"
+ },
+ {
+  "id": "W2903909248",
+  "title": "Best Practices Recommendations for Diagnostic Immunohistochemistry in Lung Cancer",
+  "abstract": "1. J Thorac Oncol. 2019 Mar;14(3):377-407. doi: 10.1016/j.jtho.2018.12.005. Epub \n2018 Dec 18.\n\nBest Practices Recommendations for Diagnostic Immunohistochemistry in Lung \nCancer.\n\nYatabe Y(1), Dacic S(2), Borczuk AC(3), Warth A(4), Russell PA(5), Lantuejoul \nS(6), Beasley MB(7), Thunnissen E(8), Pelosi G(9), Rekhtman N(10), Bubendorf \nL(11), Mino-Kenudson M(12), Yoshida A(13), Geisinger KR(14), Noguchi M(15), \nChirieac LR(16), Bolting J(17), Chung JH(18), Chou TY(19), Chen G(20), Poleri \nC(21), Lopez-Rios F(22), Papotti M(23), Sholl LM(16), Roden AC(24), Travis \nWD(10), Hirsch FR(25), Kerr KM(26), Tsao MS(27), Nicholson AG(28), Wistuba \nI(29), Moreira AL(30).\n\nAuthor information:\n(1)Department of Pathology and Molecular Diagnostics, Aichi Cancer Center, \nNagoya, Japan. Electronic address: yyatabi@aichi-cc.jp.\n(2)Department of Pathology University of Pittsburgh, Pittsburgh, Pennsylvania.\n(3)Department of Pathology, Weill Cornell Medicine, New York, New York.\n(4)Institute of Pathology, Cytopathology, and Molecular Pathology MVZ UEGP \nGiessen, Wetzlar, Limburg, Germany.\n(5)Anatomical Pathology Department, St. Vincent's Hospital and the University of \nMelbourne, Fitzroy, Victoria, Australia.\n(6)Department of Biopathology, Centre Léon Bérard, Grenoble Alpes University, \nLyon, France.\n(7)Department of Pathology, Mount Sinai Medical Center, New York, New York.\n(8)Department of Pathology, VU University Medical Center, Amsterdam, The \nNetherlands.\n(9)Department of Oncology and Hemato-Oncology, University of Milan and IRCCS \nMultiMedica, Milan, Italy.\n(10)Department of Pathology, Memorial Sloan Kettering Cancer Center, New York, \nNew York.\n(11)Institute of Pathology, University Hospital Basel, Basel, Switzerland.\n(12)Department of Pathology, Massachusetts General Hospital and Harvard Medical \nSchool, Boston, Massachusetts.\n(13)Department of Pathology and Clinical Laboratories, National Cancer Center \nHospital, Tokyo, Japan.\n(14)Department of Pathology, The University of Mississippi Medical Center, \nJackson, Mississippi.\n(15)Department of Pathology, Institute of Basic Medical Sciences, University of \nTsukuba, Tsukuba, Japan.\n(16)Department of Pathology, Brigham and Women's Hospital and Harvard Medical \nSchool, Boston, Massachusetts.\n(17)Department of Immunology Genetics and Pathology, Science for Life \nLaboratory, Uppsala University, Uppsala, Sweden.\n(18)Department of Pathology and Respiratory Center, Seoul National University \nBundang Hospital, Seongnam city, Gyeon",
+  "year": 2018,
+  "lang": "en",
+  "type": "article",
+  "venue": "Journal of Thoracic Oncology",
+  "topic": "Medical Imaging and Pathology Studies",
+  "field": "Medicine"
+ },
+ {
+  "id": "W6901950818",
+  "title": "Information bias in the Canadian Occupational Performance Measure COREQ checklist.pdf",
+  "abstract": "",
+  "year": 2021,
+  "lang": "en",
+  "type": "article",
+  "venue": "Figshare",
+  "topic": "Occupational Therapy Practice and Research",
+  "field": "Health Professions"
+ },
+ {
+  "id": "W4235659671",
+  "title": "Internet Gambling: A Critical Review of Behavioural Tracking Research",
+  "abstract": "This paper reviews and analyzes studies that are focused on Internet gambling with the use of behavioural tracking and big data to identify gambling behaviour. The behaviour of gamblers has been extensively studied and much has been published on the subject. The vast majority of research has relied on self-reported gambling behaviour or case study research. With the advent of the Internet, however, it has become possible for researchers to remotely study the real behaviour of gamblers. The goal has been to empirically describe playing behaviour in several conditions and contexts. Existing research, conducted since the 2000s, focuses on several forms of gambling such as sports betting, casino, poker, and lottery, but there is still only a concise body of research on gambling behaviour with the use of Internet gambling tracking data. Most studies are based on the same databases, meaning that a few companies and websites were the basis for most of the research produced so far. It is important to explore new sources of information, methodologies, and approaches to enrich discussion and contribute to a better understanding of this field. The empirical analysis of gambling behaviour with the use of tracking data was found to greatly contribute to the understanding of player behaviour, despite existing limitations and problems. Considering that Internet gambling behavioural tracking is still a fairly recent phenomenon, much can still be done to further develop this field of research.Cet article examine et analyse les études axées sur le jeu en ligne qui recourent au suivi comportemental et aux mégadonnées pour cerner le comportement lié au jeu. Or, on a souvent étudié le comportement des joueurs et on a beaucoup publié sur le sujet, mais jusqu’à présent, la majeure partie de la recherche repose sur le comportement autodéclaré ou la recherche fondée sur les études de cas. Avec l’avènement d’Internet, il est dorénavant possible pour les chercheurs d’étudier à distance le comportement réel des joueurs. L’objectif a donc consisté à décrire de manière empirique le comportement lié au jeu dans plusieurs conditions et contextes. La recherche existante, menée depuis les années 2000, se concentre sur plusieurs formes de jeux de hasard tels que les paris sportifs, le casino, le poker et la loterie. Mais à ce jour, il n’existe qu’un corpus de recherches très concis sur le comportement lié au jeu qui utilise des données de suivi sur le jeu par Internet. La plupart des études",
+  "year": 2017,
+  "lang": "en",
+  "type": "review",
+  "venue": "Journal of Gambling Issues",
+  "topic": "Gambling Behavior and Treatments",
+  "field": "Psychology"
+ },
+ {
+  "id": "W4384704311",
+  "title": "<i>Ethics for Evaluation. Beyond “Doing No Harm” to “Tackling Bad” and “Doing Good”</i> , par Rob van den Berg, Penny Hawkins et Nicoletta Stame (dir.)",
+  "abstract": "",
+  "year": 2023,
+  "lang": "en",
+  "type": "article",
+  "venue": "Canadian Journal of Program Evaluation",
+  "topic": "Evaluation and Performance Assessment",
+  "field": "Decision Sciences"
+ },
+ {
+  "id": "W4220870230",
+  "title": "Announcement from Roots and Relations: Celebrating Good Medicine in Indigenous Evaluation",
+  "abstract": "",
+  "year": 2022,
+  "lang": "en",
+  "type": "article",
+  "venue": "Canadian Journal of Program Evaluation",
+  "topic": "Evaluation and Performance Assessment",
+  "field": "Decision Sciences"
+ },
+ {
+  "id": "W4366449572",
+  "title": "Will Evaluation Prosper in the Future?",
+  "abstract": "Abstract: The main thesis of this article is that program evaluation and program evaluators have largely missed out on the movement, now into its second decade, to make performance measurement the centrepiece of public sector management and accountability. If these developments are not strategically faced by evaluators, program evaluation runs the risk of becoming less and less relevant to public sector and nonprofit organizations. Evaluators, divided by epistemological and methodological differences, have collectively not been willing to embrace professionalization as a way to reclaim territory lost to the audit and management consulting professions. It is essential that evaluators develop and implement strategies that are intended to create a professional practice space that includes designing and implementing performance measurement systems. Evaluators are well-positioned to do so, if they act collectively.",
+  "year": 2007,
+  "lang": "en",
+  "type": "article",
+  "venue": "Canadian Journal of Program Evaluation",
+  "topic": "Evaluation and Performance Assessment",
+  "field": "Decision Sciences"
+ },
+ {
+  "id": "W2121971373",
+  "title": "The use of patient-specific measurement instruments in the process of goal-setting: a systematic review of available instruments and their feasibility",
+  "abstract": "Objective: The aim of this study was to identify the currently available patient-specific measurement instruments used in the process of goal-setting and to assess their feasibility. Methods: After a systematic search in PubMed, EMBASE, CINAHL, PsychINFO and REHABDATA, patient-specific instruments were included, structured in a goal-setting practice framework and subjected to a qualitative thematic analysis of feasibility. Results: A total of 25 patient-specific instruments were identified and 11 were included. These instruments can be used for goal negotiation, goal-setting and evaluation. Each instrument has its own strengths and weaknesses during the different phases of the goal-setting process. Objective feasibility data were revealed for all instruments such as administration time, instruction, training and availability. Subjective feasibility could only be analysed for the Canadian Occupational Performance Measure, Goal Attainment Scaling, Self-Identified Goal Assessment and Talking Mats. Relevant themes were that Canadian Occupational Performance Measure and Goal Attainment Scaling were time consuming and difficult for patients with cognitive problems, but they facilitated goal-setting in a client-centred approach. Talking Mats was especially feasible for patients with cognitive and communication impairments. Conclusions: A total of 11 instruments were identified, and although some had strong points, there is no single good instrument that can be recommended specifically. Applying a combination of the strengths of the available instruments within a goal-setting framework can improve goal setting and tailor it to individual patients.",
+  "year": 2013,
+  "lang": "en",
+  "type": "review",
+  "venue": "Clinical Rehabilitation",
+  "topic": "Occupational Therapy Practice and Research",
+  "field": "Health Professions"
+ }
+]
