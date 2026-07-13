@@ -1,0 +1,894 @@
+Reading additional input from stdin...
+OpenAI Codex v0.144.0
+--------
+workdir: /Users/choxos/Documents/GitHub/CaRN-data-challenge
+model: gpt-5.6-luna
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: high
+reasoning summaries: none
+session id: 019f596e-14b7-70d3-b040-93445930e490
+--------
+user
+# MétaCan screening rubric (v1.0)
+
+**Locked before screening. Version-controlled. Any change is a new version with a dated entry in `DEVIATIONS.md`.**
+
+Both machine screeners and both human coders work from this document and nothing else. The rubric is the
+instrument; if two coders disagree, the rubric is what they are adjudicated against.
+
+---
+
+## The unit
+
+One work (journal article, preprint, book chapter, report, dataset, or software), identified by its OpenAlex ID.
+You see: title, abstract, publication year, language, venue, OpenAlex topic and field, Canadian institutional
+affiliations, funders.
+
+## The question
+
+**Is the object of study *research itself*?**
+
+Metaresearch studies how research is done, reported, funded, evaluated, disseminated, or governed. The test is
+what the work is *about*, not what field it appears in and not what vocabulary it uses.
+
+A cardiology trial is not metaresearch. A study of *how cardiology trials report their outcomes* is.
+
+---
+
+## Tier
+
+Assign exactly one.
+
+### T1: Core metaresearch
+The primary object of study is research itself. Typical objects:
+
+- research **methods** and their properties (bias, reporting, statistical practice, study design)
+- **reproducibility**, replication, data and code sharing
+- **research integrity**: misconduct, retraction, questionable research practices, authorship
+- **peer review** and editorial process *as objects of study*
+- **research evaluation**, metrics, rankings, funding allocation
+- **scholarly communication**: publishing models, open access, preprints *as objects of study*
+- **bibliometrics and scientometrics** applied to a research literature
+- the **research workforce**: careers, equity, training, capacity
+- **evidence synthesis methodology** (not an individual systematic review's clinical answer, but work *about* how
+  syntheses are done)
+
+### T2: Adjacent
+Empirically or conceptually grounded work on science as a social system that is not framed as metaresearch but
+studies it:
+
+- **science and technology studies (STS)**: social studies of scientific knowledge, practice, controversy
+- **library and information science**: information behaviour of researchers, repositories, discovery
+- **research infrastructure** studies: platforms, data repositories, identifiers, standards
+- **history and philosophy of science** *when the object is contemporary research practice*
+- **research policy** analysis grounded in evidence
+
+T2 is where the field's diversity lives. Be generous here: a paper does not have to call itself metaresearch to
+be studying research.
+
+### T3: Contextual
+Relevant to the ecosystem, mapped and released, but **never pooled into the analytic corpus**:
+
+- editorials, commentaries, opinion pieces about research practice
+- policy documents and position statements
+- announcements of infrastructure, tools, or initiatives
+- news, obituaries, corrections, letters
+
+### OUT: Not metaresearch
+Everything else. Includes, and this is the most common error:
+
+- **A study that uses a method is not a study of the method.** A meta-analysis answering a clinical question is
+  OUT. A study of how meta-analyses handle heterogeneity is T1.
+- **Mentioning a metaresearch term is not studying it.** A lab paper reporting "assay reproducibility", a methods
+  section saying "peer reviewed", a licence note saying "open access": all OUT.
+- **Domain research that happens to be bibliometric in method** but whose object is the domain, not the research:
+  e.g. a bibliometric map of diabetes treatments, produced to summarise diabetes knowledge. Borderline; see below.
+
+---
+
+## The three errors that matter most
+
+These are where the pilot showed retrieval and screening break down. Read them twice.
+
+1. **Polysemy.** `reproducibility` in a biochemistry paper means the assay gives the same reading twice. In a
+   metaresearch paper it means the reproducibility crisis. Only the second is in scope. The same applies to
+   `validation`, `replication`, `bias`, `peer review`, `open access`. **Judge the sense, not the token.**
+
+2. **Method vs. object.** Using bibliometrics ≠ studying research. Ask: *if this paper is right, what do we now
+   know more about: a scientific question, or the practice of science?* If the former, OUT.
+
+3. **Absence of vocabulary is not absence of content.** An STS paper about laboratory practice, or an LIS paper
+   about how researchers find data, may use none of the field's keywords and still be squarely T2. **Do not
+   require the vocabulary.** This is the error that makes the field look smaller and more anglophone than it is.
+
+---
+
+## Canadian linkage
+
+Record which apply (this is metadata, not an inclusion test; the estimand is defined separately in
+`PROTOCOL.md`):
+
+- `CA_AFF`: at least one author affiliated with a Canadian institution
+- `CA_FUND`: funded by CIHR, NSERC, SSHRC, or CFI
+- `ABOUT_CA`: the Canadian research system is a substantive object of study (not a passing mention, not one
+  country among forty in a global comparison)
+
+## Genre
+
+`empirical` · `conceptual` · `editorial/commentary` · `policy` · `infrastructure/announcement` · `other`
+
+OpenAlex's `type` is unreliable and this field is commentary-heavy, so genre is coded, not inherited.
+
+## Language of the work
+
+As published. Do not infer from the venue.
+
+---
+
+## Confidence
+
+- `high`: the rubric decides this cleanly.
+- `medium`: the rubric decides, but a reasonable coder could differ.
+- `low`: genuinely on the boundary, or the abstract is missing/too thin to judge.
+
+**`low` is a legitimate answer and is not a failure.** Records coded `low` by either screener are routed to
+adjudication. A screener that never says `low` is not being careful; it is being confident.
+
+---
+
+## Worked examples
+
+| Title (abridged) | Tier | Why |
+|---|---|---|
+| "Data sharing practices in 500 randomised trials" | **T1** | The object is reporting practice. |
+| "Reproducibility of a Western blot protocol" | **OUT** | Assay reproducibility. Polysemy trap. |
+| "Trends in citation of retracted papers" | **T1** | Object is the literature's own behaviour. |
+| "Laboratory life in a Canadian genomics centre: an ethnography" | **T2** | STS. No metaresearch vocabulary; still studies research. |
+| "How do researchers discover datasets? A survey" | **T2** | LIS, information behaviour of researchers. |
+| "Effectiveness of statins: a network meta-analysis" | **OUT** | Uses a synthesis method to answer a clinical question. |
+| "How network meta-analyses handle inconsistency: a review of 200 reviews" | **T1** | Object is the method. |
+| "Announcing the Canadian Research Data Repository" | **T3** | Infrastructure announcement. Mapped, not pooled. |
+| "Open access mandates are failing early-career researchers" (editorial) | **T3** | Commentary about research practice. |
+| "Bibliometric analysis of diabetes research 2000–2020" | **T2** | Borderline. Bibliometric method, and the object *is* a research literature, so it studies research output. Code T2, `medium`. |
+| "Le libre accès dans les revues québécoises : état des lieux" | **T1** | Scholarly communication, object is publishing practice. French. |
+
+---
+
+## Instructions to the screener
+
+Read the title and abstract. Apply the rubric. Do not use outside knowledge of the authors or the journal's
+reputation. If the abstract is missing, judge on the title alone and set confidence to `low` unless the title is
+unambiguous.
+
+Return the schema in `protocol/screening-schema.json`. One object per work. No prose, no preamble.
+--------------------------------------------------------------------------------
+You are screening works for MetaCan, a map of Canadian metaresearch.
+
+Apply the rubric above to every record in the JSON array below. Return a JSON
+array with one object per work, conforming to protocol/screening-schema.json:
+
+  {"id": "W...", "tier": "T1|T2|T3|OUT", "genre": "...", "about_ca": true|false,
+   "confidence": "high|medium|low", "reason": "one sentence"}
+
+Rules:
+- Return the JSON array and NOTHING else. No prose, no preamble, no code fences.
+- Every input id must appear exactly once in the output.
+- Do not run commands, read files, or browse. Classify from the RECORDS alone.
+
+RECORDS:
+[
+  {
+    "id": "W2000263692",
+    "title": "Effect of High‐Molybdenum Compost on Soils and the Growth of Lettuce and Barley",
+    "abstract": "A pot experiment evaluated the growth of lettuce (Lactuca sativa L.) and barley (Hordeum vulgar) and accumulation of molybdenum (Mo) in plants and soils following amendments of Mo compost (1.0 g kg−1) to a Truro sandy loam. The treatments consisted of 0 (control), 12.5, 25, and 50% Mo compost by volume. The Mo compost did not affect dry‐matter yield (DMY) up to 25% compost, but DMY decreased at the 50% compost treatment. The 50% compost treatments increased the soil pH an average of 0.5 units and increased the nitric acid (HNO3)–extractable Mo to 150 mg kg−1 and diethylenetriaminepentaacetic acid (DTPA)–extractable Mo to 100 mg kg−1 in the growth medium; the same treatment increased tissue Mo concentration to 569 and 478 mg kg−1 in the lettuce and barley, respectively. Plants grown in the 25% compost produced about 55 mg kg−1 of total Mo in the growth medium; this resulted in tissue Mo concentration of 348 mg kg−1 in lettuce and 274 mg kg−1 in barley without any phytotoxicity. Our results suggested that 55 mg Mo kg−1 soil would be an appropriate limit for Mo loading of soil developed from compost additions, a value which is presently greater than the Canadian Council for Ministers of the Environment (CCME) Guidelines for the use of type B compost in Canada.",
+    "year": 2009,
+    "lang": "en",
+    "type": "article",
+    "venue": "Communications in Soil Science and Plant Analysis",
+    "topic": "Geochemistry and Elemental Analysis",
+    "field": "Earth and Planetary Sciences",
+    "ca_institutions": "Nova Scotia Department of Agriculture",
+    "funders": "Natural Sciences and Engineering Research Council of Canada"
+  },
+  {
+    "id": "W7111071125",
+    "title": "Engagement in HIV care in relation to the COVID-19 pandemic, by viral load history in 2022.",
+    "abstract": "<a href=\"http://www.plosone.org/article/info:doi/10.1371/journal.pone.0320911#pone.0320911.g003\" target=\"_blank\">Fig 3<\/a> shows monthly visits rates of PWH and the proportion of PWH who had at least one HIV care visit from January 2019 to December 2021 by VL history in 2022. Q1-4 refer to quarterly averages of the months within the quarter of the respective calendar year. Grey areas highlight March through May 2020 during which COVID-19 limitations on activities were most strict. Abbreviations: PWH People with HIV; c/ml copies per milliliter of blood.",
+    "year": 2025,
+    "type": "other",
+    "venue": "Figshare",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4245633597",
+    "title": "Unmediated is the Message: Enhancements to Traditional Interlibrary Loan in a Canadian University",
+    "abstract": "Unmediated is the Message: Enhancements to Traditional Interlibrary Loan in a Canadian University",
+    "year": 2021,
+    "lang": "en",
+    "type": "preprint",
+    "topic": "Diverse Global Research Studies",
+    "field": "Social Sciences",
+    "ca_institutions": "Toronto Metropolitan University",
+    "funders": []
+  },
+  {
+    "id": "W2770848608",
+    "title": "Teenage pregnancy and long-term mental health outcomes among Indigenous women in Canada",
+    "abstract": "",
+    "year": 2017,
+    "lang": "en",
+    "type": "article",
+    "venue": "Archives of Women s Mental Health",
+    "topic": "Maternal Mental Health During Pregnancy and Postpartum",
+    "field": "Medicine",
+    "ca_institutions": ["The Scarborough Hospital", "Public Health Ontario", "Women's College Hospital", "University of Toronto"],
+    "funders": ["Aboriginal Affairs and Northern Development Canada", "Canadian Institutes of Health Research"]
+  },
+  {
+    "id": "W6990574757",
+    "title": "DTE Energy reports third quarter 2014 results, increases guidance - Commodities (COMMODIT) News",
+    "abstract": "",
+    "year": 2014,
+    "lang": "en",
+    "type": "other",
+    "topic": "Diverse Scientific and Economic Studies",
+    "field": "Economics, Econometrics and Finance",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4313236322",
+    "title": "The primary care COVID-19 integrated pathway: a rapid response to health and social impacts of COVID-19",
+    "abstract": "BACKGROUND: The first wave of COVID-19 in Calgary, Alberta accelerated the integration of primary care with the province's centrally managed health system. This integration aimed to deliver wraparound in-community patient care through two interventions that combined to create the COVID-19 Integrated Pathway (CIP). The CIP's interventions were: 1) a data sharing platform that ensured COVID-19 test results were directly available to family physicians (FPs), and 2) a clinical algorithm that supported FPs in delivering in-community follow up to improve patient outcomes. We describe the CIP function and its capacity to facilitate FP follow-up with COVID-19 patients and evaluate its impact on Emergency Department (ED) visits and hospitalization. METHOD: We generated descriptive statistics by analyzing data from a Calgary Zone hub clinic called the Calgary COVID-19 Care Clinic (C4), provincially maintained records of hospitalization, ED visits, and physician claims. RESULTS: Between Apr. 16 and Sep. 27, 2020, 7289 patients were referred by the Calgary Public Health team to the C4 clinic. Of those, 48.6% were female, the median age was 37.4 y. 97% of patients had at least one visit with a healthcare professional, where follow-up was conducted using the CIP's algorithm. 5.1% of patients visited an ED and 1.9% were hospitalized within 30 days of diagnosis. 75% of patients had a median of 4 visits with their FP. DISCUSSION: Our data suggest that information exchange between Primary Care (PC) and central systems facilitates primary care-based management of patients with COVID-19 in the community and has potential to reduce acute care visits.",
+    "year": 2022,
+    "lang": "en",
+    "type": "article",
+    "venue": "BMC Primary Care",
+    "topic": "Primary Care and Health Outcomes",
+    "field": "Health Professions",
+    "ca_institutions": ["Alberta Health Services", "University of Calgary"],
+    "funders": "College of Family Physicians of Canada"
+  },
+  {
+    "id": "W2164987490",
+    "title": "Gender and Elections: An Examination of the 2006 Canadian Federal Election",
+    "abstract": "Abstract. The existing literature on gender effects in the electoral process offers little evidence of significant gender vote share differentials. In this paper it is shown that for the 2006 Canadian federal election, once candidate campaign spending is introduced into the model with appropriate flexibility in the vote share responsiveness across genders, significant differences are found to exist between male and female candidates. The findings suggest that, for equal levels of spending, male incumbents have a vote share advantage relative to female incumbents, though this vote share advantage is found to diminish with increased expenditures. Female non-incumbent candidates, on the other hand, have a vote share advantage over male non-incumbent candidates for higher levels of expenditure and this advantage was found to increase with increased expenditures. Résumé. Les écrits traitant des effets du genre dans le processus électoral offrent peu de preuves d'un écart significatif dans le pourcentage des voix selon le genre. Cet article montrera que, dans le contexte des élections fédérales canadiennes de 2006, une fois que les dépenses de campagne des candidats sont introduites dans le modèle avec la flexibilité adéquate sur la réceptivité du pourcentage des voix selon les genres, on découvre que des différences significatives existent entre les candidats masculins et féminins. Le résultat des recherches montre que pour des dépenses équivalentes, les titulaires masculins ont un avantage sur le pourcentage des voix par rapport aux titulaires de sexe féminin bien qu'il s'avère que cet avantage diminue lorsque les dépenses augmentent. D'autre part, les candidates féminines non-titulaires ont un avantage sur le pourcentage des voix par rapport aux candidats masculins non-titulaires quand les dépenses sont plus élevées et cet avantage s'avère augmenter lorsque les dépenses augmentent.",
+    "year": 2008,
+    "lang": "en",
+    "type": "article",
+    "venue": "Canadian Journal of Political Science",
+    "topic": "Gender, Labor, and Family Dynamics",
+    "field": "Social Sciences",
+    "ca_institutions": "Simon Fraser University",
+    "funders": []
+  },
+  {
+    "id": "W7098032876",
+    "title": "PERMISSION TO USE",
+    "abstract": "this thesis freely available for inspection. Moreover, the author has agreed that permission for extensive copying of this thesis for scholarly purposes may be granted by the professor or professors who supervised the thesis work recorded herein or, in their absence, by the Head of the Department or the Dean of the College in which this thesis work was done. It is understood that due recognition shall be given to the author of this thesis and to the University of Saskatchewan in any scholarly use of the material in this thesis. Copying or publication or any other use of the thesis for financial gains without approval by the University of Saskatchewan and the author’s written permission is prohibited.",
+    "year": 2016,
+    "lang": "en",
+    "type": "article",
+    "topic": "Engineering and Material Science Research",
+    "field": "Materials Science",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2022076623",
+    "title": "WIRCam: the infrared wide-field camera for the Canada-France-Hawaii Telescope",
+    "abstract": "WIRCam (Wide-field InfraRed Camera) is a near-infrared (0.9-2.4 microns) camera developed for the prime focus of the Canada France Hawaii Telescope (CFHT), a 3.6-m telescope located on Mauna Kea, Hawaii. WIRCam is based on 4 x 2048x2048 HAWAII2RG arrays, developed by Rockwell. The camera provides a 0.3\"/pixel sampling, and the close packaging of the detectors allows to cover an almost contiguous field-of-view of 20.5' x 20.5'. All optical elements are assembled in a cryovessel and cooled down to 85K by a He closed cycle cryogenerator. The two filter wheels have capacity for 8 filters (110 mm in diameter), cooled at low temperature together with the Lyot stop. These wheels are mounted on sapphire ball bearings and powered by external motors. Passive spring indexers define their positioning. A fused-silica tip/tilt plate powered by voice coil type motors provides image stabilization in front of the cryovessel. It compensates for flexures as well as for low frequency telescope oscillations from wind shake. This paper describes the overall architecture of the camera, giving the optical estimated performances and details some specific points of the design such as filter wheels, thermal connections, etc.",
+    "year": 2004,
+    "lang": "en",
+    "type": "article",
+    "venue": "Proceedings of SPIE, the International Society for Optical Engineering/Proceedings of SPIE",
+    "topic": "Adaptive optics and wavefront sensing",
+    "field": "Physics and Astronomy",
+    "ca_institutions": ["Institut National d'Optique", "Université de Montréal"],
+    "funders": []
+  },
+  {
+    "id": "W3176498924",
+    "title": "Use of Whitebark Pine (&lt;i&gt;Pinus albicaulis&lt;/i&gt;) seeds by GPS-collared Grizzly Bears (&lt;i&gt;Ursus arctos&lt;/i&gt;) in Banff National Park, Alberta",
+    "abstract": "Seeds of Whitebark Pine (Pinus albicaulis) are a major food for Grizzly Bears (Ursus arctos) in the Yellowstone ecosystem. In Canada, Grizzly Bears are known to eat Whitebark Pine seeds, but little additional information, such as the extent of such use and habitat characteristics of feeding sites, is available. Because Grizzly Bears almost always obtain Whitebark Pine seeds by excavating cones from persistent caching sites (middens) made by Red Squirrels (Tamiasciurus hudsonicus), it is possible to infer Whitebark Pine feeding when bears are located near excavated middens in Whitebark Pine stands. During 2013–2018, I conducted a retrospective study in Banff National Park using data from 23 Grizzly Bears equipped by Parks Canada staff with global positioning system (GPS) collars. My objectives were to use GPS fixes to determine the percentage of these bears that had been located in close proximity to excavated middens containing Whitebark Pine seeds and to describe the habitat at these excavated middens. I linked 15 bears (65%) to excavated middens and, by inference, consumption of Whitebark Pine seeds. Excavated middens occurred on high-elevation (mean 2103 ± 101 [SD] m), steep (mean 26° ± 8°) slopes facing mostly (96%) north through west (0–270°). Use of Whitebark Pine seeds by at least 65% of the 23 studied Grizzly Bears suggests that conservation of Whitebark Pine in Banff National Park would concomitantly benefit the at-risk population of Grizzly Bears.",
+    "year": 2021,
+    "lang": "en",
+    "type": "article",
+    "venue": "The Canadian Field-Naturalist",
+    "topic": "Wildlife Ecology and Conservation",
+    "field": "Environmental Science",
+    "ca_institutions": "Canmore Museum and Geoscience Centre",
+    "funders": []
+  },
+  {
+    "id": "W7133110067",
+    "title": "Litigating identity: the challenge of aboriginality",
+    "abstract": "In Aboriginal rights litigation in Canada, claimants must demonstrate continuity with ‘pre-contact’ peoples and practices. This is a daunting task for communities, such as mine, whose encounter with Europeans commenced nearly four centuries ago. As a child, my grandmother told me that hers was the Otter clan. When my Great-great-grandfather signed treaties in the nineteenth century, he signed by drawing an Otter, his totem. It is my thesis that totemic identity is the crucial link in the Anishinabek chain of continuity. In Anishinabek culture, people reckon their kinship from a other-than-human progenitor traced patrilineally. In seeking to understand totemic identity, I have traced a path from clans, to marks, to souls; from geography to a sacred landscape; from genealogy to Anishinabek cosmology. It remains to be seen whether this totemic system, with its implications for territorial claims, can be made intelligible to the Canadian legal imagination.",
+    "year": 2003,
+    "type": "dissertation",
+    "venue": "TSpace",
+    "topic": "Indigenous Health, Education, and Rights",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2921142577",
+    "title": "Evolution of an ancient (Lower Cretaceous) marginal‐marine system from tide‐dominated to wave‐dominated deposition, McMurray Formation",
+    "abstract": "Abstract Regionally extensive parasequences in the upper McMurray Formation, Grouse Paleovalley, north‐east Alberta, Canada, preserve a shift in depositional processes in a paralic environment from tide domination, with notable fluvial influence, through to wave domination. Three stacked parasequences form the upper McMurray Formation and are separated by allogenic flooding surfaces. Sediments within the three parasequences are grouped into three facies associations: wave‐dominated/storm‐dominated deltas, storm‐affected shorefaces to sheltered bay‐margin and fluvio‐tidal brackish‐water channels. The two oldest parasequences comprise dominantly tide‐dominated, wave‐influenced/fluvial‐influenced, shoreface to bay‐margin deposits bisected by penecontemporaneous brackish‐water channels. Brackish‐water channels trend approximately north‐west/south‐east, which is perpendicular to the interpreted shoreline trend; this implies that the basinward and progradational direction was towards the north‐west during deposition of the upper McMurray Formation in Grouse Paleovalley. The youngest parasequence is interpreted as amalgamated wave‐dominated/storm‐dominated delta lobes. The transition from tide‐dominated deposition in the oldest two parasequences to wave‐dominated deposition in the youngest is attributed mainly to drowning of carbonate highlands to the north and north‐west of the study area, and potentially to relative changes in accommodation space and deposition rate. The sedimentological, ichnological and regional distribution of the three facies associations within each parasequence are compared to modern and Holocene analogues that have experienced similar shifts in process dominance. Through this comparison it is possible to consider how shifts in depositional processes are expressed in the rock record. In particular, this study provides one of few ancient examples of preservation of depositional process shifts and showcases how topography impacts the character and architecture of marginal‐marine systems.",
+    "year": 2019,
+    "lang": "en",
+    "type": "article",
+    "venue": "Sedimentology",
+    "topic": "Geological formations and processes",
+    "field": "Earth and Planetary Sciences",
+    "ca_institutions": "Simon Fraser University",
+    "funders": ["Cenovus Energy", "BP"]
+  },
+  {
+    "id": "W4407285913",
+    "title": "A133 QUALITY INDICATOR ADHERENCE FOR BARRETT’S ESOPHAGUS: A RETROSPECTIVE ANALYSIS",
+    "abstract": "Abstract Background Consensus guidelines advocate for quality indicator adherence in patients with Barrett’s Esophagus (BE). This includes documentation of landmarks/extent of BE, adherence to biopsy protocols and recommended surveillance intervals. Aims Evaluate adherence to established quality indicators for patients with BE in a tertiary referral centre. Methods Between 01/2012 - 01/2024, consecutive patients with intestinal metaplasia with goblet cells on esophageal biopsies were identified using a validated histopathology registry at St. Paul’s Hospital (Vancouver, BC, Canada). After confirming the diagnosis of BE (≥ 1cm of columnar epithelium above the top of the gastric folds on index esophagogastroduodenoscopy), quality indicator adherence was evaluated (documentation of landmarks/extent of BE (Prague Classification), adherence to biopsy protocols (Seattle Protocol) and recommended surveillance intervals). Continuous variables were summarised using median (IQR). Categorical variables were summarised as frequencies (%). Results Preliminary analysis between 01/2012 - 03/2015 identified 253 patients with BE. Median age was 61 years (IQR 17), with 196 (77.5%) being male. Of these, 81 patients were diagnosed with neoplastic BE (33.3% referred for neoplastic BE management; 24.7% at index esophagogastroduodenoscopy; 42.0% during surveillance). The median time to low-grade dysplasia, high-grade dysplasia and esophageal adenocarcinoma from BE diagnosis was 12 months (IQR 48 months), 13 months (IQR 47 months) and 48 months (IQR 33 months), respectively. At index or follow-up evaluation, landmark delineation/extent of BE was documented in 23.3%. Biopsy protocol adherence was 86.6%. Adherence to surveillance recommendations was 57.7%. Conclusions Quality Indicators for BE are poorly adhered to, outside of established biopsy protocols. Programmatic BE management may carry the potential to improve patient outcomes and resource utilization. Funding Agencies None",
+    "year": 2025,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of the Canadian Association of Gastroenterology",
+    "topic": "Esophageal Cancer Research and Treatment",
+    "field": "Medicine",
+    "ca_institutions": ["St. Paul's Hospital", "University of British Columbia"],
+    "funders": []
+  },
+  {
+    "id": "W4385512091",
+    "title": "The Geography of the Crown: Reflections on Mikisew Cree and Williams Lake",
+    "abstract": "In this article, we argue for the importance of the geographic underpinnings of the concepts of “the Crown”, the “honour of the Crown”, “fiduciary duty”, and the “duty to consult” in cases concerning Aboriginal title and rights in Canada. Recent decisions, including Williams Lake (2018) and Mikisew Cree (2018), while further developing and refining these concepts, continue to skirt around the fundamentally geographic issue of territorial sovereignty. We argue that both political and legal discussions fail to recognize fully how the honour of the Crown, fiduciary duty, and the duty to consult arise from this geographical basis, rather than from a legal or abstracted definition of the Crown. More than a bounded space or a specific site, territory is a strategic process of settler-colonial statecraft, in which the law is a constitutive instrument in the unmaking and remaking of territory. The concepts of the Crown, its honour and its duties are not exempt from this process.",
+    "year": 2020,
+    "lang": "en",
+    "type": "article",
+    "venue": "Supreme Court law review",
+    "topic": "Mining and Resource Management",
+    "field": "Engineering",
+    "ca_institutions": "York University",
+    "funders": []
+  },
+  {
+    "id": "W4414492037",
+    "title": "Probing ultra-high-energy neutrinos with the IceCube-Gen2 in-ice radio array",
+    "abstract": "The next generation neutrino telescope, IceCube-Gen2, will be sensitive to the astrophysical and cosmogenic flux of neutrinos across a broad energy range, from the TeV to the EeV scale. The planned design includes 8 cubic kilometers of ice instrumented with approximately 10,000 optical sensors, a surface array, and a radio array of antennas embedded in the ice laid out sparsely over 500 km$^2$. The radio array provides sensitivity to ultra-high energy neutrinos using independent radio stations that can trigger on Askaryan emission from neutrino interactions in the ice. In this contribution, we present the design for the radio array along with its planned implementation, which is expected to increase sensitivity to neutrinos with energies beyond 100 PeV by at least an order of magnitude over existing arrays. Furthermore, we will quantify the expected science output by presenting measurement forecasts for the main science cases of diffuse flux and point source discovery, as well as cross-section and flavor measurements.",
+    "year": 2025,
+    "lang": "en",
+    "type": "article",
+    "topic": "Astrophysics and Cosmic Phenomena",
+    "field": "Physics and Astronomy",
+    "ca_institutions": [],
+    "funders": ["Office of Experimental Program to Stimulate Competitive Research", "Marsden Fund", "Japan Society for the Promotion of Science", "Deutsches Elektronen-Synchrotron", "Natural Sciences and Engineering Research Council of Canada", "Office of Polar Programs", "College of Engineering, Michigan State University", "Chiba University", "Alliance de recherche numérique du Canada", "Helmholtz Alliance for Astroparticle Physics", "Institute for Global Prominent Research, Chiba University", "RWTH Aachen University", "Knut och Alice Wallenbergs Stiftelse", "Villum Fonden", "National Research Foundation of Korea", "Schweizerischer Nationalfonds zur Förderung der Wissenschaftlichen Forschung", "National Science Foundation", "Belgian Federal Science Policy Office", "Deutsche Forschungsgemeinschaft", "Michigan State University", "National Research Foundation", "University of Wisconsin-Madison", "Vetenskapsrådet", "U.S. Department of Energy", "Office of Advanced Cyberinfrastructure", "European Commission", "Western Canada Research Grid", "Fonds De La Recherche Scientifique - FNRS", "Polarforskningssekretariatet", "Fonds Wetenschappelijk Onderzoek", "Nvidia", "Marquette University"]
+  },
+  {
+    "id": "W1967348679",
+    "title": "Near‐field air concentrations of pesticides in potato agriculture in Prince Edward Island",
+    "abstract": "BACKGROUND: Pesticides in air have become of increasing concern in recent years. This study examined downwind air concentrations of carbofuran, methamidophos, mancozeb and diquat dibromide resulting from spray drift within 24 h of application, within 100 m of potato fields. RESULTS: Concentrations ranged from less than 0.05 microg m(-3) in prespray samples to 6.37 microg m(-3) for methamidophos at 3 h post-spray. For most applications, air concentrations decreased with distance from the field and with time after application. Methamidophos concentrations in the air downwind continued to increase up to 3 h after spray. Air concentrations during spray were positively correlated with application rate (r = 0.904), and air concentrations at 1 h and 3 h post-spray were positively correlated with vapour pressure (r = 1.000 and r = 0.999 respectively). Carbofuran, methamidophos and diquat dibromide concentrations during spray were above some Canadian and international health protection guidelines. CONCLUSION: Although pesticide air concentrations measured in this study are generally consistent with other studies, maximum concentrations are greater than those that have been measured elsewhere, and some are above published air quality guidelines. An evaluation of the degree of risk posed by these and other pest control products to human and wildlife receptors is recommended.",
+    "year": 2009,
+    "lang": "en",
+    "type": "article",
+    "venue": "Pest Management Science",
+    "topic": "Plant Surface Properties and Treatments",
+    "field": "Agricultural and Biological Sciences",
+    "ca_institutions": ["Université de Moncton", "Environment and Climate Change Canada"],
+    "funders": "Arizona Department of Health Services"
+  },
+  {
+    "id": "W2250039455",
+    "title": "Women in a Transitioning Canadian Resource Town",
+    "abstract": "This paper builds on previous studies of women’s role in and experiences of natural resource-dependent communities in Canada, which demonstrate that women have limited opportunities and negative experiences in these locales. It investigates women’s spaces of employment and experiences of everyday life in High Level, Alberta. Preliminary insights reveal that formal employment opportunities for women are increasing in both number and variety, and women’s experiences in this community are overwhelmingly positive. Further, women are fostering positive connections to place through their multiple roles in employment, personal, and civic realms. It is noted that such circumstances are enveloped within a traditional gender division of labour such that the work spaces opening up are largely contained within the tertiary sector and female-dominated jobs. As such, economic transition alone in Canadian resource towns is not enough to address issues of gender inequity.",
+    "year": 2008,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of rural and community development",
+    "topic": "Rural development and sustainability",
+    "field": "Agricultural and Biological Sciences",
+    "ca_institutions": "University of Guelph",
+    "funders": []
+  },
+  {
+    "id": "W7099064697",
+    "title": "178 PUBLICATIONS\\t\\t\\t2,994\\tCITATIONS",
+    "abstract": "ABSTRACT. This summary and update of information on the marine birds of the southeastern Beaufort Sea is intended to support discussions on how to improve management of marine resources in the Canadian Beaufort Sea region. Perhaps the most outstanding use of the Beaufort Sea by marine birds is the staging during spring migration by hundreds of thousands of eiders and long-tailed ducks in the early open water off Cape Bathurst and Banks Island. During midsummer, tens of thousands of long-tailed ducks, scoters, scaup, and mergansers moult in the sheltered bays and behind barrier beaches and spits. Although several species of geese, ducks, loons, gulls, and terns nest on islands and in wetlands along the Beaufort Sea coast, this region has relatively few nesting seabirds compared to eastern Arctic Canada and the Bering Sea. Two possible reasons for this are a shortage of cliffs suitable for nesting and a lack of pelagic fish. The five most common sea duck species that occur in the region, long-tailed duck, king eider, common eider, surf scoter, and white-winged scoter, have all declined in numbers since the mid-1970s. Western Arctic brant populations have also declined, although their status within the Beaufort Sea region is unclear. Brant and king eider are the only marine bird species harvested there in substantial numbers. Other threats to Beaufort Sea marine bird populations include oil spills, global warming, coastal development, and contaminants. Certain threats can be managed at a local level since they are a result of local economic development, but others, such as global warming or loss of critical wintering areas, stem from environmental problems outside the region. Solving these issues will require mutual understanding and commitment",
+    "year": 2001,
+    "lang": "en",
+    "type": "article",
+    "topic": "Geochemistry and Geologic Mapping",
+    "field": "Computer Science",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W3212978063",
+    "title": "COVID-19 vaccine hesitancy and refusal and associated factors in an adult population in Saskatchewan, Canada: Evidence from predictive modelling",
+    "abstract": "BACKGROUND: A high population level of vaccination is required to control the COVID-19 pandemic, but not all Canadians are convinced of the value and safety of vaccination. Understanding more about these individuals can aid in developing strategies to increase their acceptance of a COVID-19 vaccine. The objectives of this study were to describe COVID-19 vaccine acceptance, hesitancy and refusal rates and associated factors in Saskatchewan, Canada. METHODS: This is a cross-sequential study that consisted of pooled responses from weighted samples of 9,252 Saskatchewan adults (≥18 years) across nine rounds of data collection between May 4, 2020 and April 3, 2021. The outcome variable was vaccine intention: vaccine acceptance, hesitancy, and refusal. The independent variables were layered into socio-demographic factors, risk of exposure to coronavirus, mitigating behaviours, and perceptions of COVID-19. Data were analyzed using multinomial logistic regression and a classification and regression tree. RESULTS: Seventy-six percent of the respondents indicated that they had been or were willing to be vaccinated, 13% had not yet decided, and the remaining 11% said they would not be vaccinated. Factors that increased the likelihood of vaccine refusal and hesitancy were lower education level, financial instability, Indigenous status, and not being concerned about spreading the coronavirus. Perceiving COVID-19 to be more of a threat to one's community and believing that one had a higher risk of illness or death from COVID-19 decreased the likelihood of both vaccine refusal and hesitancy. Women and newcomers to Canada were more likely to be unsure about getting vaccinated. Respondents who did not plan to be vaccinated were less likely to wear face masks and practice physical distancing. CONCLUSION: While many Canadians have voluntarily and eagerly become vaccinated already, reaching sufficient coverage of the population is likely to require targeted efforts to convince those who are resistant or unsure. Identifying and overcoming any barriers to vaccination that exist within the socio-demographic groups we found were least likely to be vaccinated is a crucial component.",
+    "year": 2021,
+    "lang": "en",
+    "type": "article",
+    "venue": "PLoS ONE",
+    "topic": "Vaccine Coverage and Hesitancy",
+    "field": "Social Sciences",
+    "ca_institutions": ["University of Saskatchewan", "Saskatchewan Health"],
+    "funders": "University of Saskatchewan"
+  },
+  {
+    "id": "W7095426125",
+    "title": "Effective Teachers in QuébecAttracting, Developing, and Retaining Effective Teachers in Québec",
+    "abstract": "version. These pages will therefore not appear when you print the PDF file. The pagination of the PDF version is identical to that of the print version. Attracting, Developing, and Retaining",
+    "year": 2003,
+    "lang": "en",
+    "type": "article",
+    "topic": "Collaborative Teaching and Inclusion",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2045334890",
+    "title": "Comparison of United States and Canadian Glaucoma Medication Costs and Price Change from 2006 to 2013",
+    "abstract": "Objective. Compare glaucoma medication costs between the United States (USA) and Canada. Methods. We modelled glaucoma brand name and generic medication annual costs in the USA and Canada based on October 2013 Costco prices and previously reported bottle overfill rates, drops per mL, and wastage adjustment. We also calculated real wholesale price changes from 2006 to 2013 based on the Average Wholesale Price (USA) and the Ontario Drug Benefit Price (Canada). Results. US brand name medication costs were on average 4x more than Canadian medication costs (range: 1.9x-6.9x), averaging a cost difference of $859 annually. US generic costs were on average the same as Canadian costs, though variation exists. US brand name wholesale prices increased from 2006 to 2013 more than Canadian prices (US range: 29%-349%; Canadian range: 9%-16%). US generic wholesale prices increased modestly (US range: -23%-58%), and Canadian wholesale prices decreased (Canadian range: -38%-0%). Conclusions. US brand name glaucoma medications are more expensive than Canadian medications, though generic costs are similar (with some variation). The real prices of brand name medications increased more in the USA than in Canada. Generic price changes were more modest, with real prices actually decreasing in Canada.",
+    "year": 2015,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Ophthalmology",
+    "topic": "Glaucoma and retinal disorders",
+    "field": "Medicine",
+    "ca_institutions": ["Kensington Health", "Toronto Western Hospital", "University of Toronto"],
+    "funders": []
+  },
+  {
+    "id": "W3080142041",
+    "title": "An Evaluation of an Experiential Learning Program in Global and Indigenous Health: The University of Manitoba’s Queen Elizabeth II Diamond Jubilee Scholarship Program",
+    "abstract": "We conducted a mixed-methods outcome evaluation to examine student experiences and learning in the University of Manitoba’s Queen Elizabeth II Diamond Jubilee Scholarship Program in Global and Indigenous Health. Our scholarship program is a bi-directional, 3-month international experiential learning program, including both undergraduate and graduate students, with associated online course focused on community engagement. Students completed a semi-structured narrative report at the conclusion of their funding related to their experience and learning. The Likert questions were analyzed descriptively and student responses to the open-ended questions were utilized for thematic analysis. Also included in this paper is a summary of our lessons learned through program administration. A total of 38 students completed the program between 2016 and 2018, with 95% reporting that they either met or exceeded their goals in the program. Three overarching and inter-related themes emerged in our thematic-analysis of students’ narrative reports, including success through relationships and new perspectives, challenges of the unfamiliar, and personal growth through strong emotions. Many students reported personal growth as their greatest success and linked this with new perspectives and awareness of how different contexts shaped their understanding of health issues. Overcoming challenges in their placements contributed to students’ confidence in their ability to problem-solve. Overall, students reported value in their experiential learning, which further supports the growing trend to incorporate both experiential learning and formal education in community engagement in public health pedagogy. However, international experiential learning requires considerable financial and human resource commitments to ensure its success.",
+    "year": 2020,
+    "lang": "en",
+    "type": "article",
+    "venue": "INQUIRY The Journal of Health Care Organization Provision and Financing",
+    "topic": "Global Health and Surgery",
+    "field": "Medicine",
+    "ca_institutions": "University of Manitoba",
+    "funders": ["Canadian Institutes of Health Research", "Universities Canada"]
+  },
+  {
+    "id": "W4324029273",
+    "title": "Environmental DNA (eDNA) applications in freshwater fisheries management and conservation in Canada: overview of current challenges and opportunities",
+    "abstract": "Environmental DNA (eDNA) monitoring methods have played a significant role in improving fisheries management decisions. Yet, their impact to date has been rather limited in Canada, where eDNA sampling and analyses are only beginning to be used to inform management and conservation decisions, practices, and policies. Studies investigating hurdles to the incorporation of eDNA evidence into fisheries management decisions generally focus on technical challenges (i.e., risks of false-positive and false-negative detections). We set out to identify challenges that eDNA researchers and conservation practitioners must overcome to fully unlock the benefits of eDNA sampling for fish management in the Canadian context. We discuss aspects of the broad and heterogeneous geography, preponderance of regions located far from densely populated areas, complex political landscape, and cultural diversity of Canada that may complicate the design of reliable eDNA monitoring tools or restrict their use if not adequately addressed. To advocate for the wider use of eDNA sampling, we outline a number of action items that would facilitate the broad adoption of eDNA sampling as a monitoring tool at the Canadian scale.",
+    "year": 2023,
+    "lang": "en",
+    "type": "article",
+    "venue": "Canadian Journal of Fisheries and Aquatic Sciences",
+    "topic": "Environmental DNA in Biodiversity Studies",
+    "field": "Environmental Science",
+    "ca_institutions": ["York University", "The Scarborough Hospital", "University of Guelph", "University of Manitoba", "University of Windsor", "University of Toronto"],
+    "funders": ["Government of Canada", "Ontario Genomics", "Ontario Genomics Institute", "Genome Canada"]
+  },
+  {
+    "id": "W4405642332",
+    "title": "“It's not being ‘on‐the‐land,’ it's like we are a part of the Land”: Indigenous youth share visual stories at “on‐the‐land” camps in the Dehcho",
+    "abstract": "Abstract In northern Canada, Indigenous Peoples face rapid environmental and sociocultural changes that disrupt access to traditional places and practices. This disruption limits cross‐generational knowledge transfer and decreases opportunities for youth to connect with the Land. Land‐based education programs aim to provide Indigenous youth with spaces to learn about and connect with the Land, their language, and culture. However, there is limited research on what youth experience, enjoy, and learn during these programs. Our paper explores this through a study with Dene and Métis youth in the Dehcho region of the Northwest Territories. We investigate what youth experience and learn during “on‐the‐land” camps and how these camps provide spaces for youth to connect with the Land. Using a community‐based, Indigenous research methodology, we employed photovoice, allowing youth to share visual stories of their camp experiences and their (re)connection with the Land. Our results are categorized into three themes: (1) connections with the Land; (2) enjoyment of the camp environment; and (3) land‐based learning. We argue that land‐based education programs, such as on‐the‐land camps, are effective for fostering relationships between Indigenous youth and the Land. These camps teach youth various ways to connect with and protect the Land for future generations .",
+    "year": 2024,
+    "lang": "en",
+    "type": "article",
+    "venue": "Canadian Geographies / Géographies canadiennes",
+    "topic": "Tourism, Volunteerism, and Development",
+    "field": "Social Sciences",
+    "ca_institutions": ["Wilfrid Laurier University", "First Nations Health and Social Secretariat of Manitoba", "University of Ottawa"],
+    "funders": "Social Sciences and Humanities Research Council of Canada"
+  },
+  {
+    "id": "W3205006156",
+    "title": "Association Between Excess Sleep Duration and Risk of Stroke: A Population-Based Study",
+    "abstract": "BACKGROUND: Excess sleep is associated with higher risk of stroke, but whether the risk is modified by age and if it remains elevated after accounting for the competing risk of death is not well understood. METHODS: We used nine years of the Canadian Community Health Survey between 2000 to 2016 to obtain self-reported sleep duration and created a cohort of individuals without prior stroke, heart disease, or cancer. We linked to hospital records to determine subsequent admissions or emergency department visits for acute stroke until December 31, 2017. We used Cox proportional hazard models to determine the association between sleep duration and risk of stroke, assessing for modification by age and sex and adjusting for demographic, vascular, and social factors. We obtained cumulative incidence of stroke accounting for the competing risk of death. RESULTS: There were 82,795 individuals in our cohort who met inclusion criteria and had self-reported sleep duration, with 1705 stroke events in follow-up. There was an association between excess sleep (≥10 h/night) and risk of stroke in those <70 years (fully adjusted hazard ratio 2.29, 95% CI 1.04-5.06), but not ≥70 years of age, with a similar association after accounting for the competing risk of death. CONCLUSION: Sleep duration ≥10 h/night is associated with increased risk of stroke in those <70 years of age. The findings support current guidelines for 7-9 h of sleep per night. Further research is needed to elucidate the relationship between sleep and cerebrovascular disease.",
+    "year": 2021,
+    "lang": "en",
+    "type": "article",
+    "venue": "Canadian Journal of Neurological Sciences / Journal Canadien des Sciences Neurologiques",
+    "topic": "Sleep and related disorders",
+    "field": "Psychology",
+    "ca_institutions": ["Hamilton Health Sciences", "McMaster University", "Population Health Research Institute", "University of Calgary"],
+    "funders": ["University of Cambridge", "Alnylam Pharmaceuticals", "Canadian Institutes of Health Research", "Biogen"]
+  },
+  {
+    "id": "W2413970719",
+    "title": "P04.02 Partner notification in north america: a historical account",
+    "abstract": "<h3>Introduction<\/h3> Partner notification (PN) has been an integral part of sexually transmitted infection (STI) prevention for decades. Initially proposed for syphilis control, it now extends to a wide range of STI. NCCID PN project included documenting its origins in North America (NA). <h3>Methods<\/h3> A multi-pronged approach has been adopted due to paucity of historical evidence. Literature search: electronic database (PubMed), manual reference list search, printed literature on public health (PH) history in NA, search of significant PH organisation websites for related publications. Semi-structured interviews of key participants in STD control programs National STD prevention conference in Minnesota. Blogging: obtain historical accounts through use of online discussion sites or focus groups e.g. stdpreventiononline.org Request of materials: participants in the online blog and those for the structured interviews were to bring memorabilia, documents, letters. <h3>Results<\/h3> PN might have been in use since the 19th century, PN has been shown effective when implemented as part of a larger PH initiative. Crucial to its success was the monitoring of performance. Confidentiality was a priority. Identifiers were used in reports to make it possible to trend networks and patterns. PN evolved in time with changes in diseases. Efforts were made to make available free services for testing and treatment. The costs implications favoured adoption of methods such as provider-referral and patient-referral. Given the importance of PN to STI prevention, it was disappointing to find limited documentation published particularly in Canada compared to United States. <h3>Conclusion<\/h3> PN has been touted as the cornerstone in STI control. Looking at its origins and principles of success helps informs decisions regarding its current role and practice. Prevailing circumstances such as restricted budgets, high rates of mobility and increasing numbers of anonymous partners call for a modification in the use of PN today. Newer models employing social media are being developed. <h3>Disclosure of interest statement<\/h3> The National Collaborating Centre for Infectious Diseases is funded by the Public Health Agency of Canada. No pharmaceutical grants were received in the development of this study.",
+    "year": 2015,
+    "lang": "en",
+    "type": "article",
+    "venue": "Sexually Transmitted Infections",
+    "topic": "Syphilis Diagnosis and Treatment",
+    "field": "Medicine",
+    "ca_institutions": ["International Centre for Infectious Diseases", "Institut National de Santé Publique du Québec", "McGill University"],
+    "funders": []
+  },
+  {
+    "id": "W3027553295",
+    "title": "Failure to Launch: One-Person-One-Fare Airline Policy and the Drawbacks to the Disabled-By-Obesity Legal Argument",
+    "abstract": "Since January 2009, the Canadian Transportation Agency has required domestic airlines to uphold a one-person-one-fare policy (1P1F), according to which passengers requiring additional seating due to disability – including persons found to be functionally disabled by obesity – are entitled to it without extra cost. In this article, the authors show that the jurisprudence that upholds 1P1F by design makes possible domestic airline policy and practice that impose undue obstacles for, and offend the dignity of, fat persons. Specifically, because fat flyers must prove their condition is disabling, the medical documentation they must submit discursively pathologizes their bodies. Further, the process travelers must undergo to complete and submit documentation in order to qualify for the 1P1F accommodation perpetuates, even exacerbates, their vulnerability to discriminatory treatment. The authors ultimately show that policies and processes developed to comply with Canada’s 1P1F standard do pathologizing and stigmatizing work because airlines have an economic interest in holding to the “disabled by obesity” model rather than adjusting the normative geographies they produce (and profit from) on flights.",
+    "year": 2020,
+    "lang": "en",
+    "type": "article",
+    "venue": "Fat Studies",
+    "topic": "Disability Rights and Representation",
+    "field": "Social Sciences",
+    "ca_institutions": ["Okanagan College", "University of Guelph", "Ontario Tech University"],
+    "funders": []
+  },
+  {
+    "id": "W2793773576",
+    "title": "“#inhabitation.” (Exhibition/performance), The International Digital Media and Arts Association Conference (“The Digital Narrative”), Emily Carr University of Art + Design, Vancouver, B.C.",
+    "abstract": "",
+    "year": 2010,
+    "lang": "en",
+    "type": "article",
+    "topic": "Digital Storytelling and Education",
+    "field": "Health Professions",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W1484897168",
+    "title": "Preventing mental disorders in children: a public health priority.",
+    "abstract": "BACKGROUND: Mental disorders affect 14% of children, cause significant long-term disability and are arguably the leading health problems that Canadian children face after infancy. Treatment services alone cannot meet children's mental health needs. In addition to treatment, prevention programs hold potential to reduce the number of children with disorders in the population. Effective programs exist for preventing conduct, anxiety and depressive disorders, three of the most prevalent disorders in children. Therefore, we investigated the state of Canadian programs in comparison with prevention programs described in the literature for these three disorders. METHODS: We identified children's mental health and early child development (ECD) programs across Canada with national or provincial/territorial scope and significance and with potential relevance to mental health. We then interviewed policy-makers to determine which programs included goals related to mental health, and incorporated key features from programs known to be effective for preventing the three disorders of interest. RESULTS: No prevention programs specific to children's mental health were identified. However, 17 ECD programs incorporated generic goals related to mental health and incorporated key features seen in effective prevention programs. Only Ontario's Better Beginnings, Better Futures (BBBF) explicitly included mental health within its major program goals, incorporated multiple features seen in effective (conduct disorder) prevention programs and demonstrated positive child mental health outcomes. DISCUSSION: The lack of Canadian prevention programs specific to children's mental health is concerning. ECD programs have the potential to improve child mental health outcomes within their wider mandates. BBBF is an exemplar for such programs. However, new investments in implementing (and evaluating) programs that specifically aim to prevent mental disorders are required to improve the mental health of children in the population. Preventing children's mental disorders must be a Canadian public health priority.",
+    "year": 2007,
+    "lang": "en",
+    "type": "article",
+    "venue": "PubMed",
+    "topic": "Child and Adolescent Psychosocial and Emotional Development",
+    "field": "Psychology",
+    "ca_institutions": "Simon Fraser University",
+    "funders": []
+  },
+  {
+    "id": "W4417110593",
+    "title": "ירושלים, העיר העתיקה, רחוב סנט ג'ורג'",
+    "abstract": "In December 2015, a salvage excavation was conducted at 19 St. George Street in the Christian Quarter of Jerusalem's Old City (Permit No. A-7585; map ref. 221751-60/ 631621-37), prior to renovations. The excavation, undertaken on behalf of the Israel Antiquities Authority and funded by the UNDP, was directed by M. Shor, with the assistance of V. Essman and Y. Shmidov (surveying and drawing), A. Peretz (field photography), B. Dolinka (pottery), I. Lidsky-Reznikov (pottery drawing), N. Zak (plan) and N. Sapir.",
+    "year": 2017,
+    "type": "article",
+    "venue": "Ḥadašŵt ʾarkeyŵlŵgiyŵt.",
+    "topic": "Archaeology and Historical Studies",
+    "field": "Arts and Humanities",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W6984874760",
+    "title": "Female Canada lynx",
+    "abstract": "A newly collared female lynx heads back to the forest, displaying the large hind feet that keep her balanced on top of the deep snow. Lynx Project At Yukon Flats National Wildlife Refuge.",
+    "year": 2019,
+    "lang": "en",
+    "type": "other",
+    "topic": "Diverse Scientific and Economic Studies",
+    "field": "Economics, Econometrics and Finance",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2005274028",
+    "title": "Knowledge and attitudes towards food safety among Canadian dairy producers",
+    "abstract": "",
+    "year": 2009,
+    "lang": "en",
+    "type": "article",
+    "venue": "Preventive Veterinary Medicine",
+    "topic": "Food Safety and Hygiene",
+    "field": "Agricultural and Biological Sciences",
+    "ca_institutions": ["University of Prince Edward Island", "Public Health Agency of Canada", "University of Saskatchewan", "University of Guelph"],
+    "funders": "Public Health Agency of Canada"
+  },
+  {
+    "id": "W4312441148",
+    "title": "Study of Combined Heat and Power Integrated Carbon Capture and Compression at the Lehigh Edmonton Cement Manufacturing Facility",
+    "abstract": "",
+    "year": 2022,
+    "lang": "en",
+    "type": "article",
+    "venue": "SSRN Electronic Journal",
+    "topic": "Concrete and Cement Materials Research",
+    "field": "Engineering",
+    "ca_institutions": ["University of Regina", "Saskatchewan Disease Control Laboratory"],
+    "funders": []
+  },
+  {
+    "id": "W2162163191",
+    "title": "The Physical Activity Scale for the Elderly (PASE) Questionnaire; Does It Predict Physical Health?",
+    "abstract": "A lack of physical activity is common in older adults. With the increasing Canadian senior population, identifying the minimum amount of physical activity required to maintain the health of older adults is essential. This study determined whether relationships existed between the Physical Activity Scale for the Elderly (PASE) questionnaire scores and health-related measurements in community-dwelling older adults who were meal delivery volunteers. Based on observed relationships between PASE scores and health parameters, the study attempted to predict an optimal PASE score that would ensure health parameters fell in desired ranges for older adults. 297 community-dwelling older adults (61.3% female) 60-88 years (72.1 ± 6.5) completed the PASE and were measured for body composition, cardiovascular and blood parameters, flexibility, and handgrip strength. Significant regression models using PASE were produced for the health-related measures, but the relationships were not meaningful due to low predictive capacity. However, correlational data suggested that a minimum PASE score of ~140 for males and ~120 for females predicted a favorable waist circumference. In conclusion, findings demonstrated that PASE scores cannot be used to predict healthy physical measures, although the relationships between PASE and WC could be used to encourage older adults to become more physically active.",
+    "year": 2013,
+    "lang": "en",
+    "type": "article",
+    "venue": "International Journal of Environmental Research and Public Health",
+    "topic": "Physical Activity and Health",
+    "field": "Medicine",
+    "ca_institutions": "University of Guelph",
+    "funders": "Canadian Institutes of Health Research"
+  },
+  {
+    "id": "W6996790783",
+    "title": "Stronghold Digital Mining Reports First Quarter 2022 Results and Provides Operational Update",
+    "abstract": "",
+    "year": 2022,
+    "lang": "en",
+    "type": "other",
+    "topic": "Mining Techniques and Economics",
+    "field": "Engineering",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2502729583",
+    "title": "Innovations in the Use of Technology and Teacher Professional Development",
+    "abstract": "This chapter explores the innovative uses of technology for teachers’ professional development as well as its impact in the classroom on learning and teaching. Two international case studies are included. The first outlines technological innovations in graduate programme delivery within the university context in Canada. The second case presents a multi-dimensional professional development initiative in Australia which has influenced teachers’ and students’ learning. Two models are described: the macrooriented “Webs of Enhanced Practice” that addresses the professional development of educators and experts; and the micro-oriented “Webs of Enhanced Learning” focusing on the learning occurring at the classroom level. These two models represent innovations in the use of technology as they conceptualise the eclectic use of multi-modal, varied technologies to advance the professional development of communities of learners.",
+    "year": 2010,
+    "lang": "en",
+    "type": "book-chapter",
+    "venue": "IGI Global eBooks",
+    "topic": "Education and Technology Integration",
+    "field": "Social Sciences",
+    "ca_institutions": "University of Calgary",
+    "funders": []
+  },
+  {
+    "id": "W4307320949",
+    "title": "The Development of a Hypertension Prevention and Financial-Incentive mHealth Program Using a “No-Code” Mobile App Builder: Development and Usability Study (Preprint)",
+    "abstract": "<sec> <title>BACKGROUND<\/title> Regular physical activity (PA) is a key lifestyle component for hypertension prevention. Previous studies have shown that mobile health (mHealth) apps can be an effective tool for improving PA behaviors. However, adherence to and poor engagement with these apps is a challenge. A potential solution to overcome this challenge may be to combine financial incentives with innovative behavior theory, such as the Multiprocess Action Control (M-PAC) framework. Currently, there is a lack of PA financial incentive–driven M-PAC mHealth programs aimed at hypertension prevention. <\/sec> <sec> <title>OBJECTIVE<\/title> We aimed to describe the process of developing an 8-week mHealth PA and financial-incentive hypertension education program (Healthy Hearts) and to evaluate usability of the Healthy Hearts program. <\/sec> <sec> <title>METHODS<\/title> The first 2 stages of the Integrate, Design, Assess, and Share framework were used to guide the development of the Healthy Hearts program. The development process consisted of 2 phases. In phase 1, the research team met to discuss implementing the M-PAC framework to adopt an existing web-based hypertension prevention program to a mobile app. The app was developed using a no-code app development platform, Pathverse (Pathverse Inc), to help decrease overall development time. In phase 2, we created a prototype and conducted usability testing to evaluate lesson 1 of the Healthy Hearts program to further enhance the user experience. We used semistructured interviews and the mHealth App Usability Questionnaire to evaluate program acceptability and usability. <\/sec> <sec> <title>RESULTS<\/title> Intervention development among the research team successfully created an 8-week financial-incentive hypertension education program for adults aged 40-65 years who did not currently meet the Canadian Physical Activity Guidelines (&amp;lt;150 minutes of moderate to vigorous PA per week). This program lasted 8 weeks and comprised 25 lessons guided by the M-PAC framework. The program used various behavior change techniques to further support PA adherence. Usability testing of the first lesson was successful, with 6 participants recruited for 2 rounds of testing. Feedback was gathered to enhance the content, layout, and design of the Healthy Hearts program to prepare the mHealth program for feasibility testing. Results of round 1 of usability testing suggested that the content delivered in the lessons was long. Therefore, the content was divided into multiple lessons before round 2 of usability testing, where feedback was only on design preferences. A minimum viable product was created with these results. <\/sec> <sec> <title>CONCLUSIONS<\/title> The iterative development process and the usability assessments suggested by the Integrate, Design, Assess, and Share framework enabled participants to provide valuable feedback on the content, design, and layout of the program before advancing to feasibility testing. Furthermore, the use of the “no-code” app development tool enabled our team to rapidly make changes to the app based on user feedback during the iterative design process. <\/sec> <sec> <title>CLINICALTRIAL<\/title> <p /> <\/sec>",
+    "year": 2022,
+    "lang": "en",
+    "type": "preprint",
+    "topic": "Mobile Health and mHealth Applications",
+    "field": "Health Professions",
+    "ca_institutions": "University of Victoria",
+    "funders": []
+  },
+  {
+    "id": "W7084111220",
+    "title": "For a Canadian in London, King Charles’ Royal Garden Party inspires sustainability education",
+    "abstract": "",
+    "year": 2025,
+    "lang": "en",
+    "type": "article",
+    "topic": "Health disparities and outcomes",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4401271631",
+    "title": "Mapping <i>Ixodes pacificus<\/i> and <i>Borrelia burgdorferi<\/i> Habitat Suitability Under Current and Mid-Century Climate in the Pacific Northwest (BC and WA)",
+    "abstract": "Introduction: Lyme disease is the most common vector-borne disease in the United States and Canada. The primary vector for the causative agent of Lyme disease, Borrelia burgdorferi, in the Pacific Northwest is the western blacklegged tick, Ixodes pacificus. Materials and Methods: Using active tick surveillance data from British Columbia, Canada, and Washington State, USA, habitat suitability models using MaxEnt (maximum entropy) were developed for I. pacificus to predict its current and mid-century geographic distributions. Passive surveillance data both from BC and WA were also visualized. Results: According to the constructed models, the number of frost-free days during the winter is the most relevant predictor of its habitat suitability, followed by summer climate moisture, ecoregion, and mean minimum fall temperature. The ensemble geographic distribution map predicts that the coastal regions and inland valleys of British Columbia and the Puget Lowlands of Washington State provide the most suitable habitats for I. pacificus . The density map of ticks submitted from passive surveillance data was overlaid on the current distribution map and demonstrates the correlation between numbers of submissions and habitat suitability. Mid-century projections, based on current climate change predictions, indicate a range expansion, especially of low and moderate suitability, from current distribution. Regarding Lyme disease risk, I. pacificus identified from both active and passive surveillance and tested positive for B. burgdorferi were found to be in areas of moderate to very high suitability for I. pacificus . Conclusion: According to developed models, the total suitable habitat area for I. pacificus will expand in the interior regions of British Columbia and Washington State. However, the risk remains small given relatively low infection rates among I. pacificus . Further studies are required to better understand how this might change in the future.",
+    "year": 2024,
+    "lang": "en",
+    "type": "article",
+    "venue": "Vector-Borne and Zoonotic Diseases",
+    "topic": "Species Distribution and Climate Change",
+    "field": "Environmental Science",
+    "ca_institutions": ["University of British Columbia", "BC Centre for Disease Control", "University of Calgary"],
+    "funders": ["Public Health Agency", "Public Health Agency of Canada", "British Columbia Centre for Disease Control", "Washington State University"]
+  },
+  {
+    "id": "W4387575159",
+    "title": "Extreme Hydrological Drought in Southern Quebec (Canada): Natural and Anthropogenic Factors Interactions on its Spatio-Temporal Variability",
+    "abstract": "Despite the relatively humid character of their climate, many cold temperate regions face increasingly extreme hydrological droughts that turn rivers from steady to intermittent.The spatio-temporal variability of these droughts depends on the interaction of natural and anthropogenic factors.The objective of this study is to determine these factors in southern Quebec (Canada).The annual daily minimum flows (1-day) of 17 rivers, grouped into three homogeneous hydroclimatic regions, were analyzed during the period 1930-2019.With regard to spatial variability, the comparison of the flow averages by means of ANOVA and Kruskal-Wallis tests revealed that the flows of rivers of the north shore (southwestern hydroclimatic region) are on average twice as higher than those of the southern shore (Southeastern and Eastern hydroclimatic regions).Linear correlation analysis revealed that these flows are negatively correlated with agricultural areas and snowfall but positively with wetlands areas and watershed mean slopes.As for temporal variability, the southeastern region river flows, the most agricultural, have increased significantly over time due to the significant decrease in agricultural areas and the increase in the amount of rainfall.In the eastern hydroclimatic region, flows have generally decreased due to the significant decrease in the autumn snowfall.Finally, in the southwestern hydroclimatic region, the less agricultural, overall, no significant change in flows occurred, probably due to the low amount of fall snowfall, the decrease in which was offset by the increase in rainfall.This study reveals that the eastern hydroclimatic region is the most vulnerable to the decrease in the amount of snow, which is the main source of low flows in Quebec.Finally, few significant correlations were observed between climatic indices and flows.",
+    "year": 2023,
+    "lang": "en",
+    "type": "article",
+    "venue": "International Journal of Environmental Sciences & Natural Resources",
+    "topic": "Cryospheric studies and observations",
+    "field": "Earth and Planetary Sciences",
+    "ca_institutions": "Université du Québec à Trois-Rivières",
+    "funders": []
+  },
+  {
+    "id": "W4367599339",
+    "title": "Courting Victims: Exploring the Legal Framing of Exploitation in Human Trafficking Cases",
+    "abstract": "&lt;p&gt;This article examines how exploitation informs judicial interpretations of human trafficking in Canadian criminal cases. While socio-legal and popular notions of trafficking often suggest that forced movement into a decidedly exploitative labour context is required, our analysis of key appellate cases and constitutional challenges reveals that actual exploitation is not a necessary element of the offence. Instead, the trafficking in persons provision criminalizes the &lt;em&gt;intent&lt;/em&gt; to exploit, while requiring the court to adopt an “objective” assessment of whether a reasonable person in the complainant’s circumstances could potentially fear for their safety in the context of providing (sexual) labour. We argue that this objective standard contributes to a gendered hierarchy of legal knowledge and ultimately privileges the perceived masculinized rationality of the courts and legal actors while rendering the subjective experiences of complainants as less central to the prosecution of human trafficking.&lt;/p&gt;",
+    "year": 2023,
+    "lang": "en",
+    "type": "preprint",
+    "topic": "Sex work and related issues",
+    "field": "Social Sciences",
+    "ca_institutions": ["Wilfrid Laurier University", "Toronto Metropolitan University"],
+    "funders": []
+  },
+  {
+    "id": "W4214897876",
+    "title": "Management of incomplete and missed spontaneous abortions: a cohort study of trends in Calgary emergency departments",
+    "abstract": "",
+    "year": 2022,
+    "lang": "en",
+    "type": "article",
+    "venue": "Canadian Journal of Emergency Medicine",
+    "topic": "Reproductive Health and Contraception",
+    "field": "Medicine",
+    "ca_institutions": ["Alberta Health Services", "University of Calgary"],
+    "funders": []
+  },
+  {
+    "id": "W3174911746",
+    "title": "A Short History of K-12 Public School Spending in British Columbia, 1970-2020",
+    "abstract": "This article looks at fifty years’ worth (1970-2020) of public K-12 education expenditure data from the Canadian province of British Columbia. It asks if spending has increased or decreased in this period and examines the causes and correlates of spending changes. Previous research has tended to assume that spending has decreased during this “neoliberal” period. However, historical and empirical research in this article gives a much different picture. K-12 public education spending in British Columbia – adjusted for inflation – is 250 percent higher in 2020 than it was in 1970. Meanwhile, enrolment in 2020 is only 110 percent of 1970 enrolment. The main cause of spending growth is increase in the number of teachers the system employs, which depended in no small part on the British Columbia Teachers’ Federation (BCTF)’s successful attempts to negotiate class size and composition rules. Other causes of spending growth are provincial and district spending priorities. Successive provincial governments have tried to rein in education spending by legislating cost controls on district spending and teacher contracts but have seldom achieved reductions for long. Spending increases and attempts at cost control are at best only linked partially to governing party ideology, with right-wing and left-wing provincial governments both initiating years of increases and cutbacks. More empirical research is needed, especially into spending’s effects on educational equity and quality, to complete the picture of education finance in British Columbia.",
+    "year": 2021,
+    "lang": "en",
+    "type": "article",
+    "venue": "Canadian Journal of Educational Administration and Policy",
+    "topic": "Canadian Policy and Governance",
+    "field": "Social Sciences",
+    "ca_institutions": "University of British Columbia",
+    "funders": []
+  },
+  {
+    "id": "W2947610743",
+    "title": "Annual survival in female white‐winged scoters and lesser scaup",
+    "abstract": "ABSTRACT Quantifying survival and understanding underlying sources of variation are important for developing population models and informing management decisions. We estimated apparent survival (i.e., true survival less permanent emigration) for adult female white‐winged scoters ( Melanitta fusca ) and lesser scaup ( Aythya affinis ) breeding at a northern boreal forest site in western Canada, 2002–2008. We also evaluated variation in survival relative to indices of breeding status, individual quality, spring weather conditions, local small‐mammal abundance, and overwinter climate. Breeding female scoters had higher apparent survival than did nonbreeding females, suggesting that breeders had higher survival or fidelity to the study area, or that more nonbreeders were transient birds that may have bred elsewhere in subsequent years. Apparent survival rate for breeding female scoters was unrelated to other individual and environmental covariates. Nest‐trapped female scaup had higher apparent survival rates than did prenesting females captured in decoy traps, implying that more pre‐nesters dispersed permanently or died after marking. Nesting female scaup with higher body condition or those in years when small mammals were more abundant had higher apparent survival; associations between survival and other environmental covariates were less certain. Overall, apparent survival rate of breeding adult female scoters was lower than reported for scoters from other North American locations or for other sea duck species, whereas estimates for nesting female scaup were comparable with those from other boreal and prairie‐parkland locations. Our results indicate that for scaup in this region, factors influencing female body condition, such as maintaining high‐quality habitat, areas with abundant food or low disturbance, could improve annual survival. © The Wildlife Society, 2019",
+    "year": 2019,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Wildlife Management",
+    "topic": "Avian ecology and behavior",
+    "field": "Environmental Science",
+    "ca_institutions": ["Environment and Climate Change Canada", "Ducks Unlimited Canada"],
+    "funders": ["Natural Sciences and Engineering Research Council of Canada", "National Oceanic and Atmospheric Administration", "Environment and Climate Change Canada"]
+  },
+  {
+    "id": "W4400443655",
+    "title": "Cancer Prevention and Cultural Continuity for Métis Peoples in Canada: A Scoping Review",
+    "abstract": "The purpose of this scoping review was to map the literature on the relationship between cultural continuity and health among Métis people as well as how this knowledge could be translated into cancer prevention initiatives. We included any Métis-specific literature evaluating connections between culture, health, and well-being. We conducted electronic searches of Medline, PubMed, Embase, PsychInfo, I-Portal, and hand-searched journals, and reviewed the grey literature. Based on our inclusion criteria, articles were screened and assessed for eligibility, resulting in a sample of 22 publications. Qualitative, quantitative, and mixed methods designs were considered. The 22 publications included in this review were diverse, ranging from population-based studies to reports and news articles. There were no limitations to publication year, and most of the data presented in this review were published more than five years ago. Nevertheless, the results demonstrate the potential role of Métis cultural continuity in cancer prevention. The scoping review revealed the current lack of Métis-specific data regarding health and its intersectionality with culture. However, the existing literature indicates that cultural continuity for Métis appears to influence health and well-being positively. As such, there may be benefits to incorporating cultural continuity in cancer prevention efforts.",
+    "year": 2024,
+    "lang": "en",
+    "type": "review",
+    "venue": "Current Oncology",
+    "topic": "Cultural Competency in Health Care",
+    "field": "Social Sciences",
+    "ca_institutions": ["York University", "Ministry of Health", "University of Saskatchewan"],
+    "funders": ["Canadian Cancer Society", "Saskatchewan Cancer Agency"]
+  },
+  {
+    "id": "W2090455477",
+    "title": "Multipliers of spherical harmonics and energy of measures on the sphere",
+    "abstract": "We consider the operator, f(Δ) for Δ the Laplacian, on spaces of measures on the sphere in Rd, show how to determine a family of approximating kernels for this operator assuming that certain technical conditions are satisfied, and give estimates for the L2-norm of f(Δ)μ in terms of the energy of the measure μ. We derive a formula, analogous to the classical formula relating the energy of a measure on Rd with its Fourier transform, comparing the energy of a measure on the sphere with the size of its spherical harmonics. An application is given to pluriharmonic measures.",
+    "year": 2003,
+    "lang": "sv",
+    "type": "article",
+    "venue": "Arkiv för matematik",
+    "topic": "Advanced Mathematical Modeling in Engineering",
+    "field": "Computer Science",
+    "ca_institutions": "University of Waterloo",
+    "funders": []
+  },
+  {
+    "id": "W27079753",
+    "title": "Les déterminants métaboliques de développement et de progression de la sténose aortique calcifiée",
+    "abstract": "Identifying accurate biomarkers of cognitive decline is essential for advancing early diagnosis and prevention therapies in Alzheimer's disease. The Alzheimer's disease DREAM Challenge was designed as a computational crowdsourced project to benchmark the current state-of-the-art in predicting cognitive outcomes in Alzheimer's disease based on high dimensional, publicly available genetic and structural imaging data. This meta-analysis failed to identify a meaningful predictor developed from either data modality, suggesting that alternate approaches should be considered for prediction of cognitive performance.",
+    "year": 2007,
+    "lang": "en",
+    "type": "dissertation",
+    "topic": "Cardiac Valve Diseases and Treatments",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": ["National Institute of Biomedical Imaging and Bioengineering", "National Institute of Mental Health", "University of California, San Francisco", "University of California, Los Angeles", "National Institutes of Health", "European Medicines Agency", "Canadian Institutes of Health Research", "University of Washington", "BrightFocus Foundation", "Alzheimer’s Research UK", "McGill University", "Illinois Department of Public Health", "National Institute on Aging", "Alzheimer's Association"]
+  },
+  {
+    "id": "W2278104827",
+    "title": "Federalism and Fiscal Transfers: Essays on Australia, Germany, Switzerland and the United States",
+    "abstract": "Surprisingly, very little attention has been given in Canada to the ways other federalist countries manage programs similar to Canada’s equalization program. Federalism and Fiscal Transfers is a series of essays by regional experts examining the experience of four other federalist countries -- Australia, Germany, Switzerland, and the United States -- and how they transfer revenues from the federal government to subnational levels of government. The report aims to identify ways Canada could improve its own program of transfers to the provinces.One common finding is that poorer jurisdictions come to rely on the infusion of federal cash from senior governments. Consequently, they have little incentive to take action to improve their economic position through better policies, something that has also been observed in Canada.Possible solutions the authors identify are to simplify the transfer programs and give receiving jurisdictions more autonomy in how they use federal transfers, either through block grants or untied transfers.",
+    "year": 2013,
+    "lang": "en",
+    "type": "article",
+    "venue": "SSRN Electronic Journal",
+    "topic": "Political Systems and Governance",
+    "field": "Social Sciences",
+    "ca_institutions": "Fraser Institute",
+    "funders": []
+  },
+  {
+    "id": "W2126897079",
+    "title": "Income and heart disease: Neglected risk factor.",
+    "abstract": "OBJECTIVE: To determine the unadjusted and adjusted effects of income on heart disease; its main disease intermediary, high blood pressure; and its main behavioural risk factors, smoking and physical inactivity. DESIGN: Random-digit dialing telephone survey collected through the Canadian Community Health Survey by Statistics Canada. SETTING: Saskatchewan. PARTICIPANTS: A total of 27 090 residents aged 20 years and older; each health region in Saskatchewan was represented. MAIN OUTCOME MEASURES: Overall, 178 variables related to demographic characteristics, socioeconomic factors, behaviour, life stress, disease intermediaries, health outcomes, and access to health care were analyzed to determine their unadjusted and adjusted effects on heart disease. RESULTS: The mean age of the sample was 52.6 years. Women represented 55.9% of the sample. Most respondents were married (52.3%) and had some postsecondary or graduate education (52.5%). The mean personal income was $23 931 and the mean household income was $37 533. All models statistically controlled for age. Five covariates independently associated with heart disease included high blood pressure, household income of $29 999 or less per year, being a daily smoker, male sex, and being physically inactive. Five covariates independently associated with high blood pressure included being overweight or obese, being a daily smoker, household income of $29 999 or less per year, male sex, and being physically inactive. Five covariates independently associated with daily smoking included being a visible minority, household income of $29 999 or less per year, not being overweight or obese, education level of less than secondary school, and male sex. Six covariates independently associated with physical inactivity included being a visible minority, being overweight or obese, education level of less than secondary school, male sex, household income of $29 999 or less per year, and being a daily smoker. CONCLUSION: Household income was strongly and independently associated with heart disease; its main disease intermediary, high blood pressure; and its main behavioural risk factors, smoking and physical inactivity. Income inequality is a neglected risk factor worthy of appropriate public debate and policy intervention.",
+    "year": 2015,
+    "lang": "en",
+    "type": "article",
+    "venue": "PubMed",
+    "topic": "Health disparities and outcomes",
+    "field": "Social Sciences",
+    "ca_institutions": "University of Saskatchewan",
+    "funders": []
+  },
+  {
+    "id": "W4395033777",
+    "title": "Severe Maternal Morbidity and Mental Health Hospitalizations or Emergency Department Visits",
+    "abstract": "Importance: Severe maternal morbidity (SMM) can have long-term health consequences for the affected mother. The association between SMM and future maternal mental health conditions has not been well studied. Objective: To assess the association between SMM in the first recorded birth and the risk of hospitalization or emergency department (ED) visits for a mental health condition over a 13-year period. Design, Setting, and Participants: This population-based retrospective cohort study used data from postpartum individuals aged 18 to 55 years with a first hospital delivery between 2008 and 2021 in 11 provinces and territories in Canada, except Québec. Data were analyzed from January to June 2023. Exposure: SMM, defined as a composite of conditions, such as septic shock, severe preeclampsia or eclampsia, severe hemorrhage with intervention, or other complications, occurring after 20 weeks' gestation and up to 42 days after a first delivery. Main Outcomes and Measures: The main outcome was a hospitalization or ED visit for a mental health condition, including mood and anxiety disorders, substance use, schizophrenia, and other psychotic disorder, or suicidality or self-harm event, arising at least 43 days after the first birth hospitalization. Cox regression models generated hazard ratios with 95% CIs, adjusted for baseline maternal comorbidities, maternal age at delivery, income quintile, type of residence, hospital type, and delivery year. Results: Of 2 026 594 individuals with a first hospital delivery, 1 579 392 individuals (mean [SD] age, 30.0 [5.4] years) had complete ED and hospital records and were included in analyses; among these, 35 825 individuals (2.3%) had SMM. Compared with individuals without SMM, those with SMM were older (mean [SD] age, 29.9 [5.4] years vs 30.7 [6.0] years), were more likely to deliver in a teaching tertiary care hospital (40.8% vs 51.1%), and to have preexisting conditions (eg, ≥2 conditions: 1.2% vs 5.3%), gestational diabetes (8.2% vs 11.7%), stillbirth (0.5% vs 1.6%), preterm birth (7.7% vs 25.0%), or cesarean delivery (31.0% vs 54.3%). After a median (IQR) duration of 2.6 (1.3-6.4) years, 1287 (96.1 per 10 000) individuals with SMM had a mental health hospitalization or ED visit, compared with 41 779 (73.2 per 10 000) individuals without SMM (adjusted hazard ratio, 1.26 [95% CI, 1.19-1.34]). Conclusions and Relevance: In this cohort study of postpartum individuals with and without SMM in pregnancy and delivery, there was an increased risk of mental health hospitalizations or ED visits up to 13 years after a delivery complicated by SMM. Enhanced surveillance and provision of postpartum mental health resources may be especially important after SMM.",
+    "year": 2024,
+    "lang": "en",
+    "type": "article",
+    "venue": "JAMA Network Open",
+    "topic": "Maternal Mental Health During Pregnancy and Postpartum",
+    "field": "Medicine",
+    "ca_institutions": ["Institut National de Santé Publique du Québec", "University of Ottawa", "University of Toronto", "McGill University Health Centre", "University of British Columbia", "Douglas College", "McGill University"],
+    "funders": []
+  }
+]
+warning: loading hooks from both /Users/choxos/.codex/hooks.json and /Users/choxos/.codex/config.toml; prefer a single representation for this layer
+2026-07-13T03:03:42.189431Z ERROR rmcp::transport::worker: worker quit with fatal: Transport channel closed, when Auth(AuthorizationRequired)
+warning: Skill descriptions were shortened to fit the 2% skills context budget. Codex can still see every skill, but some descriptions are shorter. Disable unused skills or plugins to leave more room for the rest.
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart Failed
+hook: SessionStart Completed
+hook: SessionStart Completed
+hook: SessionStart Completed
+hook: SessionStart Completed
+hook: SessionStart Failed
+hook: UserPromptSubmit
+hook: UserPromptSubmit
+hook: UserPromptSubmit Failed
+hook: UserPromptSubmit Failed
+codex
+[
+  {"id":"W2000263692","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study examines compost effects on plant growth and soil chemistry, not research practice."},
+  {"id":"W7111071125","tier":"OUT","genre":"other","about_ca":false,"confidence":"high","reason":"The record is a figure describing HIV-care utilization, not a study of research."},
+  {"id":"W4245633597","tier":"T2","genre":"infrastructure/announcement","about_ca":false,"confidence":"low","reason":"The title suggests a study of university interlibrary-loan infrastructure, but the abstract provides no detail."},
+  {"id":"W2770848608","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"low","reason":"The title concerns health outcomes among Indigenous women, not research practice, but the abstract is missing."},
+  {"id":"W6990574757","tier":"OUT","genre":"other","about_ca":false,"confidence":"high","reason":"This is a corporate financial news report, not metaresearch."},
+  {"id":"W4313236322","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study evaluates a clinical care pathway and patient outcomes, not research practice."},
+  {"id":"W2164987490","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study analyzes gender effects in an election, not the conduct or communication of research."},
+  {"id":"W7098032876","tier":"OUT","genre":"other","about_ca":false,"confidence":"high","reason":"The record is a thesis permission notice rather than research about research."},
+  {"id":"W2022076623","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The paper describes the engineering of an astronomical camera, not research infrastructure as a social or governance object."},
+  {"id":"W3176498924","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study examines grizzly bear feeding ecology, not research practice."},
+  {"id":"W7133110067","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"The dissertation analyzes Indigenous identity and Aboriginal rights litigation, not research itself."},
+  {"id":"W2921142577","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study reconstructs geological depositional processes, not the practice of science."},
+  {"id":"W4407285913","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The quality indicators concern clinical management of Barrett’s esophagus rather than research quality."},
+  {"id":"W4385512091","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"The article examines geographic and legal concepts of the Crown, not research practice."},
+  {"id":"W4414492037","tier":"OUT","genre":"infrastructure/announcement","about_ca":false,"confidence":"high","reason":"The contribution describes a planned neutrino detector and its scientific forecasts, not research infrastructure as an object of study."},
+  {"id":"W1967348679","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study measures pesticide concentrations in agricultural air, not research practice."},
+  {"id":"W2250039455","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The paper studies women’s employment and everyday life in a resource town, not research itself."},
+  {"id":"W7099064697","tier":"OUT","genre":"other","about_ca":false,"confidence":"high","reason":"The report summarizes marine bird ecology and management concerns, not research practice."},
+  {"id":"W3212978063","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study investigates COVID-19 vaccine hesitancy and its predictors, not research practice."},
+  {"id":"W7095426125","tier":"OUT","genre":"other","about_ca":false,"confidence":"low","reason":"The title concerns teacher recruitment and retention rather than research, but the abstract is too fragmentary for a fuller assessment."},
+  {"id":"W2045334890","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study compares glaucoma medication prices in the United States and Canada, not research practice."},
+  {"id":"W3080142041","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The evaluation studies student experiences in a global-health learning program, not the research system."},
+  {"id":"W4324029273","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"The paper discusses adoption of eDNA tools in fisheries management, not research practice as its primary object."},
+  {"id":"W4405642332","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study examines Indigenous youth experiences in land-based education camps, not research itself."},
+  {"id":"W3205006156","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The cohort study examines sleep duration and stroke risk, not research practice."},
+  {"id":"W2413970719","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The historical account concerns partner notification in STI control, not how research is conducted or communicated."},
+  {"id":"W3027553295","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"The article analyzes legal treatment of obesity and airline accommodation, not research practice."},
+  {"id":"W2793773576","tier":"OUT","genre":"other","about_ca":false,"confidence":"high","reason":"The record describes an exhibition or performance rather than research about research."},
+  {"id":"W1484897168","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study assesses Canadian child mental-health prevention programs, not research practice."},
+  {"id":"W4417110593","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The article reports an archaeological excavation, not research itself."},
+  {"id":"W6984874760","tier":"OUT","genre":"other","about_ca":false,"confidence":"high","reason":"This is a wildlife photograph caption, not metaresearch."},
+  {"id":"W2005274028","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"low","reason":"The title concerns food-safety knowledge among dairy producers rather than research, but the abstract is missing."},
+  {"id":"W4312441148","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"low","reason":"The title indicates an engineering feasibility study, not research practice, but the abstract is missing."},
+  {"id":"W2162163191","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"medium","reason":"The study evaluates a physical-activity questionnaire for predicting health measures, rather than studying research practice."},
+  {"id":"W6996790783","tier":"OUT","genre":"other","about_ca":false,"confidence":"high","reason":"This is a corporate mining operational update, not metaresearch."},
+  {"id":"W2502729583","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"The chapter concerns technology and teacher professional development, not the research workforce or research practice."},
+  {"id":"W4307320949","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study develops and tests a hypertension-prevention mobile health program, not research practice."},
+  {"id":"W7084111220","tier":"OUT","genre":"editorial/commentary","about_ca":false,"confidence":"high","reason":"The record is a news or commentary piece about sustainability education, not research practice."},
+  {"id":"W4401271631","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study models tick habitat suitability and Lyme disease risk, not research itself."},
+  {"id":"W4387575159","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study analyzes hydrological drought drivers in Quebec, not research practice."},
+  {"id":"W4367599339","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"The article analyzes legal framing of human-trafficking exploitation, not research practice."},
+  {"id":"W4214897876","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The cohort study examines management trends for spontaneous abortions, not research practice."},
+  {"id":"W3174911746","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The article analyzes public education spending and policy in British Columbia, not research policy or practice."},
+  {"id":"W2947610743","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study estimates survival of wild birds and its ecological determinants, not research practice."},
+  {"id":"W4400443655","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"This scoping review addresses Métis cultural continuity and cancer prevention, using synthesis methods to answer a health question."},
+  {"id":"W2090455477","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"The article develops mathematical results on spherical harmonics and measures, not research itself."},
+  {"id":"W27079753","tier":"T1","genre":"empirical","about_ca":false,"confidence":"low","reason":"The abstract studies the performance of prediction methods in a research challenge, but its contradiction with the title lowers confidence."},
+  {"id":"W2278104827","tier":"OUT","genre":"policy","about_ca":false,"confidence":"high","reason":"The report analyzes intergovernmental fiscal transfers, not research policy or practice."},
+  {"id":"W2126897079","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study examines income as a risk factor for heart disease, not research practice."},
+  {"id":"W4395033777","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The cohort study examines maternal morbidity and later mental-health outcomes, not research itself."}
+]
+hook: Stop
+hook: Stop
+hook: Stop
+hook: Stop Completed
+hook: Stop Completed
+hook: Stop Failed
+tokens used
+40,165

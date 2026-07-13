@@ -610,3 +610,68 @@ invisible to every check in the pipeline.
 not by convention. The label files themselves are already safe because they are named after the chunk, which is unique
 by design. The lesson is the one D11 already stated and this is a second instance of: *an agent cannot corrupt a file
 it was never allowed to write*, and the harness, not the agent, should be the thing that guarantees it.
+
+---
+
+## D22. The sampling design could not reach 12.9% of the frame, and the hole was exactly where the secondary estimand lives.
+
+**Date found:** 2026-07-12, by an adversarial model I asked to attack the design. It found it by adding up five numbers I had handed it in a summary table. I had not added them up.
+
+I gave GPT-5.6 a design brief that listed the strata and their weights, and asked it to attack the classifier proposal. Its first move was arithmetic:
+
+```
+2000 x 1119.0 + 1000 x 664.2 + 750 x 536.8 + 750 x 310.9 + 500 x 335.8 = 3,705,875
+frame = 4,299,418
+gap   =   593,543   (13.8%)
+```
+
+It was right. The measured hole, checked against the data, is **549,370 works, 12.9% of the sampling frame**, and it is two independent defects stacked on top of each other.
+
+### Defect 1: the strata did not meet in the middle (366,856 works)
+
+```
+aff_core   = route_ca_aff   AND language='en' AND NOT route_about_ca
+about_only = route_about_ca AND NOT route_ca_aff AND ...
+```
+
+Read them together. `aff_core` throws away everything **about** Canada. `about_only` throws away everything **affiliated with** Canada. So a work that is **both** is claimed by **neither**.
+
+That is not a random slice of the frame. **It is precisely where the secondary estimand lives.** The secondary estimand of this study is *"metaresearch about the Canadian research system"*, and the design had a **zero probability of ever sampling a Canadian-affiliated work that is about Canada**. It would have reported a number for that estimand anyway.
+
+### Defect 2: SQL three-valued logic ate 182,514 more, silently
+
+388,446 works carry a NULL `route_ca_venue`; 54,161 a NULL `language`. In SQL, `NOT(NULL)` is `NULL`, not `TRUE`. So for those rows the stratum predicate evaluates to NULL, and a NULL predicate is selected by
+
+```sql
+WHERE (covered)       -- no
+WHERE NOT (covered)   -- ALSO no
+```
+
+The row is in no stratum **and is not even an orphan**. It is **invisible**. It never appeared in a count, never failed a check, never threw. This is why `sum(strata)` and `count(orphans)` did not add up to the frame, and why nobody noticed that they did not add up.
+
+### Why nothing caught it
+
+Nothing failed. Every script ran green. **Every stratum returned exactly the `n` it asked for**, because there were always enough works matching the predicate; a stratum has no way to know about the works it was never asked about. The design drew a clean, valid, textbook stratified probability sample **of 87% of the frame**, and every number computed from it said *"the frame"*.
+
+A work with inclusion probability zero **is not underweighted. It is unreachable.** No reweighting recovers it, and no design-based estimator is defined over it. Design weights are the thing this project leans on hardest ("unbiased however noisy the stratifier is"), and that guarantee is void over a zero-probability region.
+
+### The fix
+
+`R/strata.R` now holds the stratification in one place. The five original predicates are kept **byte-for-byte**, because 5,000 works were already drawn from them by hash order and a hash-order draw is a probability sample *of the set it was drawn from*: widening a stratum would silently re-draw it and the labels on disk would stop matching the design that selected them.
+
+So the hole is closed **from outside**, with two new strata defined as the exact NULL-safe complement (`IS NOT TRUE`, which catches FALSE *and* NULL):
+
+- **`aff_about`** (328,912 works): Canadian-affiliated **and** about Canada. The cell defect 1 deleted, and the home of the secondary estimand. Drew 400.
+- **`residual`** (220,458 works): everything else the five predicates could not see, including every work whose membership was NULL. Drew 200.
+
+The seven strata now partition the sampling frame **by construction**: 4,255,410 = 4,255,410, pairwise disjoint, none empty. 600 new works drawn, chunks 101 to 112, screened by all three arms.
+
+### The rule that runs
+
+`pilot/check_strata_partition.R`, wired into `make lint` as a prerequisite of every build. It asserts **exhaustive** (`sum(N_h) == N`), **disjoint** (pairwise, checked against the data, not assumed from precedence), and **nonempty**. Verified both ways: it passes on the repaired design, and it **fails on the design as it actually shipped**, printing the exact 549,370.
+
+### What I take from this
+
+The check that catches this is **one line of arithmetic**. It is the first thing anyone should do to a stratified design and I never did it, through a whole session of writing careful comments about how rigorous the design was. The comments were the problem: they made the design *feel* checked.
+
+It also fits the pattern this project keeps finding, and this is the sharpest instance yet: **every defect that survives is the one that flatters you.** A design that quietly covers 87% of the frame produces *smaller, tidier, more confident* numbers than one that covers all of it. There is no friction to warn you, because the output looks better, not worse.

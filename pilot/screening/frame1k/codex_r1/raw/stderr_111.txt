@@ -1,0 +1,892 @@
+Reading additional input from stdin...
+OpenAI Codex v0.144.0
+--------
+workdir: /Users/choxos/Documents/GitHub/CaRN-data-challenge
+model: gpt-5.6-luna
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: high
+reasoning summaries: none
+session id: 019f5969-dac5-7312-a383-4dc8307df6cf
+--------
+user
+# MétaCan screening rubric (v1.0)
+
+**Locked before screening. Version-controlled. Any change is a new version with a dated entry in `DEVIATIONS.md`.**
+
+Both machine screeners and both human coders work from this document and nothing else. The rubric is the
+instrument; if two coders disagree, the rubric is what they are adjudicated against.
+
+---
+
+## The unit
+
+One work (journal article, preprint, book chapter, report, dataset, or software), identified by its OpenAlex ID.
+You see: title, abstract, publication year, language, venue, OpenAlex topic and field, Canadian institutional
+affiliations, funders.
+
+## The question
+
+**Is the object of study *research itself*?**
+
+Metaresearch studies how research is done, reported, funded, evaluated, disseminated, or governed. The test is
+what the work is *about*, not what field it appears in and not what vocabulary it uses.
+
+A cardiology trial is not metaresearch. A study of *how cardiology trials report their outcomes* is.
+
+---
+
+## Tier
+
+Assign exactly one.
+
+### T1: Core metaresearch
+The primary object of study is research itself. Typical objects:
+
+- research **methods** and their properties (bias, reporting, statistical practice, study design)
+- **reproducibility**, replication, data and code sharing
+- **research integrity**: misconduct, retraction, questionable research practices, authorship
+- **peer review** and editorial process *as objects of study*
+- **research evaluation**, metrics, rankings, funding allocation
+- **scholarly communication**: publishing models, open access, preprints *as objects of study*
+- **bibliometrics and scientometrics** applied to a research literature
+- the **research workforce**: careers, equity, training, capacity
+- **evidence synthesis methodology** (not an individual systematic review's clinical answer, but work *about* how
+  syntheses are done)
+
+### T2: Adjacent
+Empirically or conceptually grounded work on science as a social system that is not framed as metaresearch but
+studies it:
+
+- **science and technology studies (STS)**: social studies of scientific knowledge, practice, controversy
+- **library and information science**: information behaviour of researchers, repositories, discovery
+- **research infrastructure** studies: platforms, data repositories, identifiers, standards
+- **history and philosophy of science** *when the object is contemporary research practice*
+- **research policy** analysis grounded in evidence
+
+T2 is where the field's diversity lives. Be generous here: a paper does not have to call itself metaresearch to
+be studying research.
+
+### T3: Contextual
+Relevant to the ecosystem, mapped and released, but **never pooled into the analytic corpus**:
+
+- editorials, commentaries, opinion pieces about research practice
+- policy documents and position statements
+- announcements of infrastructure, tools, or initiatives
+- news, obituaries, corrections, letters
+
+### OUT: Not metaresearch
+Everything else. Includes, and this is the most common error:
+
+- **A study that uses a method is not a study of the method.** A meta-analysis answering a clinical question is
+  OUT. A study of how meta-analyses handle heterogeneity is T1.
+- **Mentioning a metaresearch term is not studying it.** A lab paper reporting "assay reproducibility", a methods
+  section saying "peer reviewed", a licence note saying "open access": all OUT.
+- **Domain research that happens to be bibliometric in method** but whose object is the domain, not the research:
+  e.g. a bibliometric map of diabetes treatments, produced to summarise diabetes knowledge. Borderline; see below.
+
+---
+
+## The three errors that matter most
+
+These are where the pilot showed retrieval and screening break down. Read them twice.
+
+1. **Polysemy.** `reproducibility` in a biochemistry paper means the assay gives the same reading twice. In a
+   metaresearch paper it means the reproducibility crisis. Only the second is in scope. The same applies to
+   `validation`, `replication`, `bias`, `peer review`, `open access`. **Judge the sense, not the token.**
+
+2. **Method vs. object.** Using bibliometrics ≠ studying research. Ask: *if this paper is right, what do we now
+   know more about: a scientific question, or the practice of science?* If the former, OUT.
+
+3. **Absence of vocabulary is not absence of content.** An STS paper about laboratory practice, or an LIS paper
+   about how researchers find data, may use none of the field's keywords and still be squarely T2. **Do not
+   require the vocabulary.** This is the error that makes the field look smaller and more anglophone than it is.
+
+---
+
+## Canadian linkage
+
+Record which apply (this is metadata, not an inclusion test; the estimand is defined separately in
+`PROTOCOL.md`):
+
+- `CA_AFF`: at least one author affiliated with a Canadian institution
+- `CA_FUND`: funded by CIHR, NSERC, SSHRC, or CFI
+- `ABOUT_CA`: the Canadian research system is a substantive object of study (not a passing mention, not one
+  country among forty in a global comparison)
+
+## Genre
+
+`empirical` · `conceptual` · `editorial/commentary` · `policy` · `infrastructure/announcement` · `other`
+
+OpenAlex's `type` is unreliable and this field is commentary-heavy, so genre is coded, not inherited.
+
+## Language of the work
+
+As published. Do not infer from the venue.
+
+---
+
+## Confidence
+
+- `high`: the rubric decides this cleanly.
+- `medium`: the rubric decides, but a reasonable coder could differ.
+- `low`: genuinely on the boundary, or the abstract is missing/too thin to judge.
+
+**`low` is a legitimate answer and is not a failure.** Records coded `low` by either screener are routed to
+adjudication. A screener that never says `low` is not being careful; it is being confident.
+
+---
+
+## Worked examples
+
+| Title (abridged) | Tier | Why |
+|---|---|---|
+| "Data sharing practices in 500 randomised trials" | **T1** | The object is reporting practice. |
+| "Reproducibility of a Western blot protocol" | **OUT** | Assay reproducibility. Polysemy trap. |
+| "Trends in citation of retracted papers" | **T1** | Object is the literature's own behaviour. |
+| "Laboratory life in a Canadian genomics centre: an ethnography" | **T2** | STS. No metaresearch vocabulary; still studies research. |
+| "How do researchers discover datasets? A survey" | **T2** | LIS, information behaviour of researchers. |
+| "Effectiveness of statins: a network meta-analysis" | **OUT** | Uses a synthesis method to answer a clinical question. |
+| "How network meta-analyses handle inconsistency: a review of 200 reviews" | **T1** | Object is the method. |
+| "Announcing the Canadian Research Data Repository" | **T3** | Infrastructure announcement. Mapped, not pooled. |
+| "Open access mandates are failing early-career researchers" (editorial) | **T3** | Commentary about research practice. |
+| "Bibliometric analysis of diabetes research 2000–2020" | **T2** | Borderline. Bibliometric method, and the object *is* a research literature, so it studies research output. Code T2, `medium`. |
+| "Le libre accès dans les revues québécoises : état des lieux" | **T1** | Scholarly communication, object is publishing practice. French. |
+
+---
+
+## Instructions to the screener
+
+Read the title and abstract. Apply the rubric. Do not use outside knowledge of the authors or the journal's
+reputation. If the abstract is missing, judge on the title alone and set confidence to `low` unless the title is
+unambiguous.
+
+Return the schema in `protocol/screening-schema.json`. One object per work. No prose, no preamble.
+--------------------------------------------------------------------------------
+You are screening works for MetaCan, a map of Canadian metaresearch.
+
+Apply the rubric above to every record in the JSON array below. Return a JSON
+array with one object per work, conforming to protocol/screening-schema.json:
+
+  {"id": "W...", "tier": "T1|T2|T3|OUT", "genre": "...", "about_ca": true|false,
+   "confidence": "high|medium|low", "reason": "one sentence"}
+
+Rules:
+- Return the JSON array and NOTHING else. No prose, no preamble, no code fences.
+- Every input id must appear exactly once in the output.
+- Do not run commands, read files, or browse. Classify from the RECORDS alone.
+
+RECORDS:
+[
+  {
+    "id": "W2437425712",
+    "title": "An Investigation of the Role of Legends and Storytelling in Early Childhood Practices in a Kanien’kehá:ka (Mohawk) Early Childhood Facility",
+    "abstract": "Through the course of Indigenous history, cultural and spiritual knowledge remains, in many places as faint as the smoke rising from the embers of last night’s fire; in other places, with enough flame to ignite another log. In spite of the genocidal acts portrayed through colonialism’s experimentation through religious doctrine, residential school, legislation, treaties broken and unbroken, reservations, and spiritual disregard, the Indigenous peoples of Turtle Island remain living, breathing and believing that their history is alive through the oral stories of their beginnings and endings. Indigenous education can only be defined through the culture of the people themselves. Historical Indigenous education was transferred orally for thousands of years with very little disruption or inconsistencies; therefore distinct meanings and connections were continuously addressed through one’s lifetime through the wisdom of elder’s legends and stories. The investigation of the role of legends and storytelling in an early childhood setting in Kahnawa:ke, Quebec is portrayed through a combination of research literature, classroom observations and personal interviews documented as portraiture. The main finding was that cultural legends and stories familiar to historical, ceremonial and spiritual practices are vital to the cultural foundation of the Haudenosaunee (peoples of the longhouse or the Iroquois) and Kahnawake’hró:non (people of Kahnawa:ke).",
+    "year": 2016,
+    "lang": "en",
+    "type": "article",
+    "venue": "in education",
+    "topic": "Indigenous Health, Education, and Rights",
+    "field": "Social Sciences",
+    "ca_institutions": "McGill University",
+    "funders": []
+  },
+  {
+    "id": "W1994408979",
+    "title": "Facial Protective Equipment, Personnel, and Pandemics: Impact of the Pandemic (H1N1) 2009 Virus on Personnel and Use of Facial Protective Equipment",
+    "abstract": "BACKGROUND: Before the emergence of the pandemic (H1N1) 2009 virus, estimates of the stockpiles of facial protective equipment (FPE) and the impact that information had on personnel during a pandemic varied. OBJECTIVE: To describe the impact of H1N1 on FPE use and hospital employee absenteeism. Setting. One tertiary care hospital and 2 community hospitals in the Vancouver Coastal Health (VCH) region, Vancouver, Canada. Patients. All persons with influenza-like illness admitted to the 3 VCH facilities during the period from June 28 through December 19, 2009. METHODS: Data on patients and on FPE use were recorded prospectively. Data on salaried employee absenteeism were recorded during the period from August 1 through December 19, 2009. RESULTS: During the study period, 865 patients with influenza-like illness were admitted to the 3 VCH facilities. Of these patients, 149 (17.2%) had laboratory-confirmed H1N1 influenza infection. The mean duration of hospital stay for these patients was 8.9 days, and the mean duration of intensive care unit stay was 9.2 days. A total of 134,281 masks and 173,145 N95 respirators (hereafter referred to as respirators) were used during the 24-week epidemic, double the weekly use of both items, compared with the previous influenza season. A ratio of 3 masks to 4 respirators was observed. Use of disposable eyewear doubled. Absenteeism mirrored the community epidemiologic curve, with a 260% increase in sick calls at the epidemic peak, compared with the nadir. CONCLUSION: Overall, FPE use more than doubled, compared with the previous influenza season, with respirator use exceeding literature estimates. A significant proportion of FPE resources were used while managing suspected cases. Planners should prepare for at least a doubling in mask and respirator use, and a 3.6-fold increase in staff sick calls.",
+    "year": 2010,
+    "lang": "en",
+    "type": "article",
+    "venue": "Infection Control and Hospital Epidemiology",
+    "topic": "Infection Control and Ventilation",
+    "field": "Medicine",
+    "ca_institutions": ["Vancouver Infectious Diseases Centre", "University of British Columbia"],
+    "funders": "University of British Columbia"
+  },
+  {
+    "id": "W2030583808",
+    "title": "Drinking Water Management: Health Risk Perceptions and Choices in First Nations and Non-First Nations Communities in Canada",
+    "abstract": "The relationship between tap water and health has been a topic of public concern and calls for better management in Canada since well-publicized contamination events in two provinces (Ontario and Saskatchewan) in 2000-2001. This study reports the perspectives on health risks from tap water and corresponding use of, and spending on, bottled water in a number of different communities in Canada. In 2009-2010, four First Nations communities (three from Ontario and one from Saskatchewan) and a geographically diverse sample of non-First Nations Canadians were surveyed about their beliefs concerning health risks from tap water and their spending practices for bottled water as a substitute. Responses to five identical questions were examined, revealing that survey respondents from Ontario First Nations communities were more likely than non-First Nations Canadians to believe bottled water is safer than tap water (OR 1.6); more likely to report someone became ill from tap water (OR 3.6); more likely to express water and health concerns related to tap water consumption (OR 2.4); and more likely to spend more on bottled water (OR 4.9). On the other hand, participants from one Saskatchewan First Nations community were less likely than non-First Nations Canadians to believe that someone had become ill from drinking tap water (OR 3.8), less likely to believe bottled water is safer than tap (OR 2.0), and less likely to have health concerns with tap water (OR 1.5). These differences, however, did not translate into differences in the likelihood of high bottled water expenditures or being a 100% bottled water consumer. The paper discusses how the differences observed may be related to water supply and regulation, trust, perceived control, cultural background, location, and past experience.",
+    "year": 2014,
+    "lang": "en",
+    "type": "article",
+    "venue": "International Journal of Environmental Research and Public Health",
+    "topic": "Environmental Justice and Health Disparities",
+    "field": "Social Sciences",
+    "ca_institutions": ["Global Institute for Water Security", "United Nations University Institute for Water, Environment, and Health", "University of Waterloo", "University of Saskatchewan", "Brock University"],
+    "funders": ["Canadian Water Network", "Saskatchewan Health Research Foundation"]
+  },
+  {
+    "id": "W2140250558",
+    "title": "Detailed Urinary Excretion Time Courses of Biomarkers of Exposure to Permethrin and Estimated Exposure in Workers of a Corn Production Farm in Quebec, Canada",
+    "abstract": "Permethrin is a synthetic pyrethroid insecticide widely used in agriculture. Farm workers are thus regularly exposed during spraying season. To help interpret routine biomonitoring results, a proper knowledge of the time courses of biomarkers of exposure is necessary. The kinetics of biomarkers of exposure to permethrin has recently been documented in volunteers exposed to permethrin under controlled conditions but there is a lack of detailed time profiles following real exposure conditions. This study aimed at obtaining data on the excretion time courses of permethrin metabolites in agricultural workers following typical exposure conditions in the field. Twelve workers exposed to permethrin were recruited from a corn production farm in the Montérégie, Quebec, Canada. They provided all their urine voided over a period of 3 days following the onset of a spraying episode of permethrin or work in a treated area. Three major metabolites of permethrin, trans- and cis- 3-(2,2-dichlorovinyl)-2,2-dimethylcyclopropane-l-carboxylic acid metabolites (trans-DCCA, cis-DCCA), and 3-phenoxybenzoic acid (3-PBA), were analyzed. For the applicator, a progressive rise in excretion values was observed with a single peak being reached 29h following the onset of the 3.5h exposure and ensuing elimination with a half-life of 6.4h for trans-DCCA and 8.7h for 3-PBA. In the other workers (supervisor and corn pickers), excretion profiles were generally more compatible with multiple entries in the treated area during the 3-day sampling period and rapid elimination between exposure episodes. In general, 3-PBA was found in slightly higher levels than trans-DCCA, except for the applicator and a harvester. For both trans-DCCA and 3-PBA in a given worker, excretion values expressed as creatinine-normalized concentrations were less variable than those expressed as excretion rates per kilogram body weight. Time-dependent variability in excretion values of workers confirms the need for serial urine sampling of at least two biomarkers of exposure, with minimally pre-exposure, end-of-shift sample the day of onset of exposure, and following morning void.",
+    "year": 2015,
+    "lang": "en",
+    "type": "article",
+    "venue": "The Annals of Occupational Hygiene",
+    "topic": "Pesticide Exposure and Toxicity",
+    "field": "Agricultural and Biological Sciences",
+    "ca_institutions": "Université de Montréal",
+    "funders": []
+  },
+  {
+    "id": "W7117722753",
+    "title": "Passeurs d’Évangile . Autour d’une pastorale d’engendrement, éd. Ph. Bacq et Chr. Theobald , coll. Théologies pratiques, Bruxelles / Montréal / Paris, Lumen Vitae / Novalis / L’Atelier, 2008, 24x15, 231 p., 25 €. ISBN 978-2-87324-331-9",
+    "abstract": "",
+    "year": 2009,
+    "type": "article",
+    "venue": "Nouvelle revue théologique",
+    "topic": "Military, Security, and Education Studies",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2136920205",
+    "title": "Snowpack sensitivity to perturbed climate in a cool mid‐latitude mountain catchment",
+    "abstract": "Abstract There is great interest in ascertaining the degree of climate change necessary to induce substantial changes in snow accumulation and ablation processes in mountain headwater catchments. Therefore, the response of mountain snow hydrology to changes in air temperature and precipitation was examined by simulating a perturbed climate in Reynolds Mountain East (RME), a headwater catchment with a cool mountain climate in Idaho, USA. The cold regions hydrological model was used to calculate snow accumulation, wind redistribution by blowing snow, interception by forest canopies, sublimation and melt for 25 seasons in RME. The uncalibrated simulations of the highly redistributed snow water equivalent compared well to measurements. Results showed that with concomitant occurrence of warming (5 °C) and precipitation change (±20%) in RME, the peak seasonal snow accumulation decreased by 84–90%, snowmelt decreased 51–79%, rainfall to total precipitation ratio increased from 30% to 78%, and overwinter blowing snow transport and sublimation losses from intercepted snow, the snow surface and blowing snow decreased dramatically. Warming causes an increase in inter‐water year snowcover variability but a decrease in spatial snow accumulation variability. When warming exceeded 1 °C and a precipitation increased by less than 20%, the peak snow accumulation declined dramatically. The results contrast with those from further north along the North American Cordillera in Yukon, Canada, where the impacts of similar warming on alpine snow can be partly compensated for by concomitant increases in precipitation of less than 20%. Copyright © 2015 John Wiley &amp; Sons, Ltd.",
+    "year": 2015,
+    "lang": "en",
+    "type": "article",
+    "venue": "Hydrological Processes",
+    "topic": "Cryospheric studies and observations",
+    "field": "Earth and Planetary Sciences",
+    "ca_institutions": "University of Saskatchewan",
+    "funders": "Natural Sciences and Engineering Research Council of Canada"
+  },
+  {
+    "id": "W4381490105",
+    "title": "Reconnecting to Land, People, and Community",
+    "abstract": "In this chapter, the authors explore how they teach ecological sustainability through Puebla-Alberta Community Service Exchange (PACSE), a five-month, full-credit program that has evolved over the past 15 years. Their focus is on providing students with the opportunity to become part of, rather than observers of, rural communities. The sort of experience and community-based education often results in a disconnect between what students have learned as members of a prosperous society and what they see during their brief periods as members of rural communities that have been directly affected by the values of the dominant economic and political interests of society and motivates them to search for alternatives. While learners still have agency about how, if, and what they learn, the immersion model has significantly increased the likelihood that they will form meaningful relationships with the people and land in a rural community. A challenge in building capacity among new instructors is to communicate the nature of immersion learning.",
+    "year": 2023,
+    "lang": "en",
+    "type": "book-chapter",
+    "topic": "Rural development and sustainability",
+    "field": "Agricultural and Biological Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4392166308",
+    "title": "Age and psychosocial contributors to well-being among older adults living with chronic pain",
+    "abstract": "Objectives: this study examined the influence of age variables along with psychosocial variables on well-being among older adults living with chronic pain.Methods: Using a cross-sectional survey design, older adults living with chronic pain in canada (N = 220) completed an online survey assessing age variables (ie age at onset of chronic pain, current age), psychosocial variables (ie pain catastrophizing, pain disability, physical functioning, psychological inflexibility), and well-being variables (ie autonomy, environmental mastery, self-acceptance, overall eudaimonic well-being).Results: current age, but not age of onset of chronic pain, significantly predicted eudaimonic well-being and self-acceptance.Physical functioning, pain catastrophizing, and pain disability significantly predicted eudaimonic well-being, autonomy, and environmental mastery.Pain catastrophizing also significantly predicted self-acceptance.With regards to the relative importance of effect sizes, physical functioning followed by pain catastrophizing were the most important factors contributing to autonomy, environmental mastery, and self-acceptance.these psychosocial factors were more important for self-acceptance than they were for autonomy or environmental mastery.Conclusion: When living with chronic pain, the psychosocial variables of most importance to older adults' well-being may be physical functioning and pain catastrophizing, and the development of psychological interventions for older chronic pain populations should account for these psychosocial factors.",
+    "year": 2024,
+    "lang": "en",
+    "type": "article",
+    "venue": "Cogent Psychology",
+    "topic": "Musculoskeletal pain and rehabilitation",
+    "field": "Medicine",
+    "ca_institutions": ["Dalhousie University", "University of Regina"],
+    "funders": "Saskatchewan Health Research Foundation"
+  },
+  {
+    "id": "W2167504482",
+    "title": "Bioeconomic Modelling of Raccoon Rabies Spread Management Impacts in Quebec, Canada",
+    "abstract": "Beginning in 2006, point infection control operations and aerial distribution of oral rabies vaccines along the US border were performed in Quebec, Canada, to control the potential spread of raccoon rabies. A benefit-cost analysis assessed the economic efficiency of this rabies control programme into the future. In this study, a mathematical simulation model was used to determine the potential spread of raccoon rabies from the 2006 index case, and incidence rates of human post-exposure prophylaxis (PEP), animal testing and human exposure investigations were calculated. Benefits were calculated as the potential savings from reduced numbers of human PEP, animal testing and human exposure investigations owing to control, which ranged from $47 million to $53 million. Programme cost scenarios were based on projections of total expenditures, which ranged from $33 million to $49 million. Economic efficiency was indicated for approximately half of the modelled scenarios, with the greatest benefit-cost ratios resulting from reduced future programme costs.",
+    "year": 2012,
+    "lang": "en",
+    "type": "article",
+    "venue": "Transboundary and Emerging Diseases",
+    "topic": "Rabies epidemiology and control",
+    "field": "Immunology and Microbiology",
+    "ca_institutions": ["Institut National de Santé Publique du Québec", "Cegep de Saint Hyacinthe", "Public Health Agency of Canada", "Université de Montréal"],
+    "funders": "Public Health Agency"
+  },
+  {
+    "id": "W1973467076",
+    "title": "A culturally appropriate approach to civic engagement: Addressing forestry and cumulative social impacts in southwest Yukon",
+    "abstract": "This article reports on an experimental civic engagement approach to link community observed cumulative effects ofnumerous local events and periods of resource development to indicators for sustainable forest and land management forthe future. We describe a process where the interview findings with 28 key aboriginal and non-aboriginal informants inthe Champagne Aishihik First Nations’ (CAFN) Traditional Territory were summarized into key themes by researchersin a community workshop to elicit a selection of social indicators for future cumulative effects assessments. Theseresponses were visions for the future based on a great deal of experiential learning that interviewees identified—part andparcel of any betterment to the community as new developments unfold. Themes such as “social healing” were furtherbroken into indicators such as “community support systems” and then further broken into local measures, such as “thepresence of, and access to, a youth centre, youth programs, and youth centres”. The local historical approach to cumulativeeffects assessment helps us not only understand more about forestry, but more about the broader connectionsbetween community members and leaders, forestry and other resource developments, and lessons people have learnedfrom the past and visions for the future.Key words: civic engagement, cumulative social impacts, social indicators, sustainable forest management, NorthernCanada",
+    "year": 2010,
+    "lang": "en",
+    "type": "article",
+    "venue": "The Forestry Chronicle",
+    "topic": "Mining and Resource Management",
+    "field": "Engineering",
+    "ca_institutions": ["University of Alberta", "Yukon University"],
+    "funders": []
+  },
+  {
+    "id": "W4415450330",
+    "title": "MON-180 Weight Stigma is Prevalent Among People with Polycystic Ovary Syndrome in Canada: A Cross-Sectional Study",
+    "abstract": "Abstract Disclosure: M. Virk: None. C. Song: None. M. Bhogal: None. R. Vettese: None. S. Gill: None. H. Vanden Brink: None. J.L. Benham: None. Background: Polycystic ovary syndrome (PCOS) is a common endocrine-metabolic disorder affecting 10-13% of reproductive-aged people with ovaries globally, with significant metabolic and mental health implications. Current PCOS management emphasizes lifestyle and behavioral interventions. The objective of this study is to examine the prevalence of weight stigma among people with PCOS living in Canada and whether weight stigma is associated with differences in approaches to medical management and healthcare experiences. Methods: Participants aged 18 or older, residing in Canada, and self- or formally diagnosed with PCOS were recruited using purposive sampling to complete an online survey about their diagnostic experiences and management for PCOS. The survey was co-designed with a patient partner and conducted via Qualtrics from August 1 to October 16, 2024. For the present analyses, data were stratified by those who reported experiencing weight stigma and those who did not. T-tests with unequal variance and two-sided tests of proportions were used to evaluate differences between groups. Results: Among 480 respondents, 362 (75%) reported experiencing weight stigma while 118 (25%) denied experiencing weight stigma. Individuals with PCOS who reported weight stigma were of older age than those who had not experienced weight stigma (31.1 years vs. 23.9 years, p &amp;lt;0.001) and were more likely to have been diagnosed with insulin resistance (75% vs. 43%, p &amp;lt;0.0001). Depression (70% vs 50%, p &amp;lt;0.0001), anxiety (86% vs 79%, p &amp;lt;0.05), eating disorders (37% vs 19%, p &amp;lt;0.0005) and body image concerns (89% vs 55%, p &amp;lt;0.0001) were more frequently reported among those who had experienced weight stigma than those who had not. Among those who reported experiencing weight stigma, 307 (85%) were advised to lose weight as part of PCOS management, compared to 30 (25%) who had not experienced weight stigma (p &amp;lt;0.001). Efforts to make dietary modifications to treat PCOS were significantly more common among those experiencing weight stigma, with 336 (93%) reporting such attempts compared to 85 (72%) of those without weight stigma (p &amp;lt;0.001). However, among all respondents, only 197 (54%) of those who reported experiencing weight stigma received support for their dietary goals, compared to 73 (62%) of those without weight stigma (p=0.048). Physical activity levels were similar between groups (p=0.48). Conclusion: Weight stigma is highly prevalent among individuals with PCOS. Those experiencing weight stigma reported higher rates of metabolic and mental health conditions, were more likely to be advised to lose weight, yet received less supportive care for dietary goals. These findings highlight the need for stigma-free, patient-centered approaches to improve PCOS management and overall well-being. Presentation: Monday, July 14, 2025",
+    "year": 2025,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of the Endocrine Society",
+    "topic": "Ovarian function and disorders",
+    "field": "Medicine",
+    "ca_institutions": "University of Calgary",
+    "funders": []
+  },
+  {
+    "id": "W4239054671",
+    "title": "Viability Of Hybrid Ground Source Heat Pump System With Solar Thermal Collectors",
+    "abstract": "This thesis presents a study for examining the viability of hybrid ground source heat pump (GSHP) systems that use solar thermal collectors as the supplemental component in heating dominated buildings. Loads for an actual house in the City of Milton near Toronto were estimated. TRNSYS, a system simulation software tool, was used to model the yearly performance of conventional GSHP as well as the proposed hybrid GSHP system. The house was equipped with a data monitoring system which was installed to read and record fluid flow, temperature and electricity consumption in different components of the system. The actual yearly data collected from the site was examined against the simulation results. In addition, a sensitivity analysis was carried out to determine the relationship between the solar collector area and the ground loop heat exchanger (GHX) length. It was shown that the ratio of GHX length reduction to solar panel area of 4.7 m/m This study demonstrates that a hybrid GSHP system, combined with solar thermal collectors, is a feasible choice for space conditioning for heating dominated houses. It was shown that the solar thermal energy storage in the ground could reduce a large amount of ground loop heat exchanger length. Combining three solar thermal collectors with a total area of 6.81m",
+    "year": 2021,
+    "lang": "en",
+    "type": "preprint",
+    "topic": "Geothermal Energy Systems and Applications",
+    "field": "Energy",
+    "ca_institutions": [],
+    "funders": "Natural Sciences and Engineering Research Council of Canada"
+  },
+  {
+    "id": "W6990822938",
+    "title": "Electric Car Market to Witness Substantial Growth at a Stunning 13.7% CAGR through 2031 – Latestus Financial News",
+    "abstract": "",
+    "year": 2024,
+    "lang": "en",
+    "type": "other",
+    "topic": "Energy, Environment, and Transportation Policies",
+    "field": "Energy",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4408433009",
+    "title": "From Unmodelable to Understandable: A Model Agnostic Approach in Prairie Pothole Hydrology",
+    "abstract": "Modelling the streamflow of flat, and pothole-dominated prairie or arctic regions presents challenges due to the influence of variable Non-Contributing Areas (NCAs) on converting local runoff to streamflow. Various models have been developed to represent these NCAs and their impact on streamflow prediction. However, these models may not adequately capture NCAs dynamics, rely heavily on calibration, are not applicable to large-scale basins, or are not model agnostic. In response, we introduce an open-source and model-agnostic version of a revised Hysteretic Depressional Storage (HDS) model. This model incorporates an improved numerical solution that accurately captures the hysteretic relationships of prairie potholes and NCAs, and their effect on streamflow generation. The revised HDS model is implemented and tested in three hydrological models (HYPE, MESH, and SUMMA) on a prairie pothole basin in Canada. Results demonstrate enhanced simulations of streamflow responses in the tested basins. Notably, the modified models successfully replicate the known hysteretic relationships between depressional storage and contributing areas in the region. The open-source HDS implementation approach facilitates integration into hydrologic or land surface modelling systems, enabling improvements in simulating complex hydrology and streamflow patterns globally.",
+    "year": 2025,
+    "lang": "en",
+    "type": "preprint",
+    "topic": "Groundwater flow and contamination studies",
+    "field": "Environmental Science",
+    "ca_institutions": "University of Calgary",
+    "funders": []
+  },
+  {
+    "id": "W7055519161",
+    "title": "Current Perspectives in the Archaeology of Ghana",
+    "abstract": "This collection of essays on archaeology and heritage studies is authored by local and expatriate scholars who are either past or current practitioners in archaeological work in Ghana. They are from Ghana, UK, US and Canada. The subject matter covered includes the history and evolution of the discipline in Ghana; the method and theory or 'how to do it' in archaeology, field research reports, and syntheses on findings from past and recent investigations. The eclectic or multidisciplinary strategy has been the research vogue in Ghanaian archaeology recently, and this is reflected in the various chapters. The essays engage with current theoretical trends in global archaeology and also focus on the role and status of archaeology as a discipline in Ghanaian society today. Archaeology is a relatively 'novel' subject to many in Ghana. This Reader will, therefore, be a huge asset to local students and experts alike. Foreign scholars will also find it very useful.",
+    "year": 2014,
+    "lang": "en",
+    "type": "article",
+    "topic": "Laser Design and Applications",
+    "field": "Engineering",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4313332154",
+    "title": "Immobilised by the pandemic: Filipino domestic workers and seafarers in the time of COVID‐19",
+    "abstract": "This essay documents the experiences of two different groups of 'essential' Filipino migrant workers: female domestic workers and male seafarers, each confined in new ways in their work/home situations and spaces. These two categories of workers make up a large proportion of migrants within the Philippines' extensive export labor economy. For domestic workers, the Canadian government virtually stopped processing applications for permanent resident status. Held in limbo in their temporary work status, many domestic workers experienced increased employer control over their movements and their bodies. Seafarers have been no less immobilized, disallowed from leaving their workplace (their ship) when in port or within the normal and expected work period of 9 months at sea. Extended 'shifts' at sea for some seafarers have left other seafarers at home, waiting in the Philippines in precarious situations of loss of income and mounting debt. In the case of both domestic workers and seafarers, the pandemic and a range of state and international regulatory failures and/or gaps have placed temporary workers into new conditions of precarity and into intensified experiences of immobility. We also show how their immobilization as precarious workers reverberates throughout their families, and across the globe.",
+    "year": 2022,
+    "lang": "en",
+    "type": "article",
+    "venue": "Transactions of the Institute of British Geographers",
+    "topic": "Migration and Labor Dynamics",
+    "field": "Social Sciences",
+    "ca_institutions": "University of British Columbia",
+    "funders": []
+  },
+  {
+    "id": "W3214289857",
+    "title": "Haitianos no Brasil",
+    "abstract": "O presente artigo visa refletir sobre o recente fluxo de haitianos no Brasil e suas implicações práticas, considerando aspectos sociais e políticos imbricados no espaço e no tempo da permanência de haitianos no país. Busca-se, também, perceber as implicações de ordem conceitual, sobretudo à luz de conceitos contemporâneos da geografia que promovem a ideia de movimento e mobilidade. Entendendo a singularidade da imigração haitiana ao Brasil e seus reflexos, dentre eles o poder de capilaridade expressivo dos haitianos no território brasileiro, a proposta é analisar a ideia de territóriorede, caracterizada pela promoção de diversas relações de poder no espaço, atraída por diversos agentes, no qual a capilaridade aponta certamente a importância das redes múltiplas que grupos haitianos apostam em suas estratégias de permanência.",
+    "year": 2017,
+    "lang": "pt",
+    "type": "article",
+    "venue": "Temáticas",
+    "topic": "Migration, Racism, and Human Rights",
+    "field": "Social Sciences",
+    "ca_institutions": "Capilano University",
+    "funders": []
+  },
+  {
+    "id": "W1905218570",
+    "title": "Inadequate Diet Is Associated with Acquiring <i>Mycobacterium tuberculosis<\/i> Infection in an Inuit Community. A Case–Control Study",
+    "abstract": "BACKGROUND: Tuberculosis predominantly affects socioeconomically disadvantaged communities. The extent to which specific dietary and lifestyle factors contribute to tuberculosis susceptibility has not been established. METHODS: A total of 200 residents of a village in Northern Quebec were investigated during a tuberculosis outbreak and identified to have active tuberculosis, latent tuberculosis infection, or neither. Participants completed questionnaires about their intake of food from traditional and commercial sources, and provided blood samples. Adults were asked about recent smoking and drug and alcohol intake. Nutritional adequacy was evaluated with reference to North American standards. Multiple dietary, lifestyle, and housing factors were combined in a logistic regression model evaluating the contributions of each to disease and infection. FINDINGS: After adjusting for potential confounding, new infection was associated with inadequate intake of fruit and vegetables (odds ratio [OR], 2.1; 95% confidence interval [CI], 1.03-4.3), carbohydrates (OR, 4.4; 95% CI, 1.2-16.3), and certain vitamins and minerals. A multivariable model, combining nutrition, housing, and lifestyle factors, found associations between new infection and inadequate fruit and vegetable intake (OR, 2.3; 95% CI, 1.0-5.1), living in the same house as a person with smear-positive tuberculosis (OR, 14.7; 95% CI, 1.6-137.3), and visiting a community gathering house (OR, 3.7; 95% CI, 1.7-8.3). Current smoking was associated with new infection (OR, 9.4; 95% CI, 1.2-72) among adults completing a detailed lifestyle survey. INTERPRETATION: Inadequate nutrition was associated with increased susceptibility to infection, but not active tuberculosis. Interventions addressed at improving nutrition may reduce susceptibility to infection in settings where access to healthy foods is limited.",
+    "year": 2015,
+    "lang": "en",
+    "type": "article",
+    "venue": "Annals of the American Thoracic Society",
+    "topic": "Tuberculosis Research and Epidemiology",
+    "field": "Medicine",
+    "ca_institutions": ["Nunavik Regional Board of Health and Social Services", "McGill University Health Centre", "McGill University", "Université Laval", "Montreal Neurological Institute and Hospital"],
+    "funders": "Canadian Institutes of Health Research"
+  },
+  {
+    "id": "W6958690656",
+    "title": "Key process features of personalized diet counselling in metabolic syndrome: secondary analysis of feasibility study in primary care",
+    "abstract": "Abstract Background Personalized diet counselling, as part of lifestyle change programs for cardiometabolic risk conditions (combinations of prediabetes or type 2 diabetes, hypertension, dyslipidemia and high waist circumference) has been shown to reduce progression to type 2 diabetes overall. To identify key process of care measures that could be linked to changes in diet, we undertook a secondary analysis of a Canadian pre-post study of lifestyle treatment of metabolic syndrome (MetS). Diet counselling process measures were documented and association with diet quality changes after 3 months were assessed. Results of the primary study showed 19% reversal of MetS after 1 year. Methods Registered dietitians (RDs) reported on contact time, specific food behaviour goals (FBG), behaviour change techniques (BCT; adapted from the Michie CALO-RE taxonomy) and teaching resources at each contact. Diet quality was measured by 2005 Canadian Healthy Eating Index (HEI-C) and assessed for possible associations with individual BCT and FBG. Results Food behaviour goals associated with improved HEI-C at 3 months were: poultry more than red meat, increased plant protein, increased fish, increased olive oil, increased fruits and vegetables, eating breakfast, increased milk and alternatives, healthier fats, healthier snacks and increased nuts, with an adverse association noted for more use (&gt; 2 times/ 3 months) of the balanced meal concept (F test; p 3 times/3 months) was associated with poorer HEI-C at 3 months (F test; p = 0.007). Only self-monitoring, feedback on performance and focus on past success were associated with improved HEI-C. Conclusions These results identify key aspects of process that impact diet quality. Documentation of both FBG and BCT is highly relevant in diet counselling and a summary diet quality score is a promising target for assessing short-term counselling success.",
+    "year": 2022,
+    "lang": "en",
+    "type": "other",
+    "venue": "Figshare",
+    "ca_institutions": ["Université Laval", "University of Toronto", "Trillium Health Centre", "University of Alberta", "University of Guelph"],
+    "funders": []
+  },
+  {
+    "id": "W2789075823",
+    "title": "Ingstad, Benedicte. 2017. A Grand Adventure: The Lives of Helge and Anne Stine Ingstad and Their Discovery of a Viking Settlement in North America . Montreal and Kingston: McGill-Queen’s University Press.",
+    "abstract": "",
+    "year": 2016,
+    "lang": "en",
+    "type": "article",
+    "venue": "Material Culture Review / Revue de la culture matérielle",
+    "topic": "Indigenous Studies and Ecology",
+    "field": "Health Professions",
+    "ca_institutions": "Cape Breton University",
+    "funders": []
+  },
+  {
+    "id": "W2214716702",
+    "title": "Rates of Anomalous Bupropion Prescriptions in Ontario, Canada",
+    "abstract": "PURPOSE: Reports of bupropion misuse have increased since it was first reported in 2002. The purpose of this study was to explore trends in bupropion prescribing suggestive of misuse or diversion in Ontario, Canada. METHODS: A serial cross-sectional study was conducted of Ontarians aged younger than 65 years who received prescriptions under Ontario's public drug program from April 1, 2000, to March 31, 2013. We determined the number of potentially inappropriate prescriptions in each quarter, defined as early refills dispensed within 50% of the duration of the preceding prescription, as well as potentially duplicitous prescriptions, defined as similarly early refills originating from a different prescriber and different pharmacy. We replicated these analyses for citalopram and sertraline, antidepressants not known to be prone to abuse. RESULTS: We identified 1,780,802 prescriptions for bupropion, 3,402,462 for citalopram, and 1,775,285 for sertraline. Rates of early refills for bupropion declined during the study from 4.8% to 3.1%. In the final quarter, rates of early refills for bupropion were more common than for citalopram (3.1% vs 2.2%) (P <.001) but not for sertraline (3.1% vs 2.9%) (P =.16). Potentially duplicitous prescriptions for bupropion increased dramatically, from <0.05% of all prescriptions in early 2000 to 0.47% in early 2013 and by the final quarter were more common than both citalopram (0.11%) and sertraline (0.12%) (P <.001). CONCLUSIONS: Although no marked differences were seen for early refills of bupropion relative to its comparators, potentially duplicitous prescriptions have increased dramatically in Ontario, suggesting growing misuse of the drug.",
+    "year": 2015,
+    "lang": "en",
+    "type": "article",
+    "venue": "The Annals of Family Medicine",
+    "topic": "Opioid Use Disorder Treatment",
+    "field": "Medicine",
+    "ca_institutions": ["Institute for Clinical Evaluative Sciences", "Sunnybrook Hospital", "McMaster University", "University of Toronto", "St. Michael's Hospital"],
+    "funders": []
+  },
+  {
+    "id": "W4404100073",
+    "title": "A response bias exists away from Borg Category-Ratio 0-10 scale values without associated verbal descriptors for symptom intensity ratings during cardiopulmonary exercise testing",
+    "abstract": "Borg’s modified Category-Ratio 0-10 (CR10) scale is a 12-point scale with verbal descriptors (e.g., 5=severe, 7=very severe, 9=very, very severe) at each numerical rating other than 6 and 8. A cohort study of 1,048 people with malignant and non-malignant disease reported a lower-than-expected frequency of Borg CR10 ratings of 6 and 8 when breathlessness intensity was assessed at rest (Eur Resp J, 2016, 47:1861). We explored whether a response bias exists away from Borg CR10 ratings 6 and 8 for breathlessness and leg discomfort at peak exercise. We included 1,190 adults aged ≥40 years that completed symptom-limited incremental CPET on a cycle ergometer as part of the Canadian Cohort Obstructive Lung Disease study. A Poisson distribution was applied to determine the expected vs. observed rating frequency for each value on the Borg CR10 scale at peak exercise for breathlessness and leg discomfort. The observed frequency for Borg CR10 rating 6 was lower than expected for breathlessness and leg discomfort (n=61 vs. 180; n=67 vs. 193, p<0.001), as well as for rating 8 for leg discomfort (n=74 vs. 137, p<0.001) but not breathlessness (n=90 vs. 92, p=0.527). The observed frequencies were not different from expected for Borg CR10 ratings ≤5 (all p>0.05). In conclusion, a response bias away from Borg CR10 scale values of 6 and 8 without verbal descriptions exists for intensity ratings of breathlessness and leg discomfort at the symptom-limited peak of CPET in older adults.",
+    "year": 2024,
+    "lang": "en",
+    "type": "article",
+    "topic": "Reliability and Agreement in Measurement",
+    "field": "Decision Sciences",
+    "ca_institutions": ["McGill University Health Centre", "University of British Columbia", "McGill University"],
+    "funders": []
+  },
+  {
+    "id": "W4416863280",
+    "title": "Exploring factors associated with the physical, mental, and financial health of unpaid caregivers: An analysis of the Canadian National Caregiving Survey",
+    "abstract": "",
+    "year": 2025,
+    "lang": "en",
+    "type": "article",
+    "venue": "Canadian Journal of Public Health",
+    "topic": "Intergenerational Family Dynamics and Caregiving",
+    "field": "Social Sciences",
+    "ca_institutions": ["University of Alberta", "Canadian Heart Research Centre", "University Health Network", "SickKids Foundation", "University of Toronto", "Centre for Addiction and Mental Health"],
+    "funders": []
+  },
+  {
+    "id": "W6893991032",
+    "title": "Daphnia O. F. Muller 1785",
+    "abstract": "Genus Daphnia O. F. Müller, 1785 This genus was represented in our collections by six species, all well discriminated by COI sequences. Three of the species belonged to the subgenus Daphnia (D. parvula, D. cheraphila Hebert and Finston 1996, Daphnia sp.), and three to the subgenus Ctenodaphnia (D. magna, D. exilis, D. lumholtzi). Comparisons with sequence records in GenBank revealed that Daphnia exilis showed little divergence from its close relative D. spinulata (minimum 0.80, maximum 3.9%), from Argentina. Despite this fact, the D. exilis from Mexico was grouped in the same cluster, which was distinct from the cluster formed by D. spinulata. These two species do show allozyme (Adamowicz et al. 2004) and morphological differences (Benzie 2005). Daphnia cheraphila was recently described by Hebert & Finston (1996) who included material from Mexico in their original description. Our material showed 1.94% COI divergence from sequences in GenBank for this species. Another Daphnia, a member of the pulex group, seems to represent a new species as its closest COI match (12.7%) was to Daphnia parvula from Río Coronda, Argentina. We recorded the invasive species D. lumholtzi for the first time in Mexico in the northern state of Sonora. Given its broad distribution across the United States and its presence in southern Canada, its detection was not unexpected. The Mexican specimens showed barcode identity with populations from the other North American populations that have been sequenced (0.47% maximum) and high divergences (8.68% minimum) with Australian specimens (Havel et al. 2000).",
+    "year": 2008,
+    "lang": "en",
+    "type": "article",
+    "venue": "Zenodo (CERN European Organization for Nuclear Research)",
+    "topic": "Aquatic Ecosystems and Phytoplankton Dynamics",
+    "field": "Environmental Science",
+    "ca_institutions": "University of Guelph",
+    "funders": []
+  },
+  {
+    "id": "W7005257168",
+    "title": "Power Co. of Canada (TSE:POW) Price Target Lowered to C$31.00 at BMO Capital Markets",
+    "abstract": "",
+    "year": 2018,
+    "lang": "en",
+    "type": "other",
+    "topic": "Herbal Medicine and Trade Cooperation",
+    "field": "Economics, Econometrics and Finance",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4411778107",
+    "title": "A Study Protocol for a Comprehensive Evaluation of Two Artificial Intelligence‐Based Tools in Title and Abstract Screening for the Development of Evidence‐Based Cancer Guidelines",
+    "abstract": "Background: Conducting a systematic review (SR) is a time-intensive process and represents the first phase in developing a clinical practice guideline (CPG). Completing a CPG through the Program in Evidence-Based Care (PEBC), a globally acknowledged guideline program supported by Ontario Health (Cancer Care Ontario), typically takes about 2 years. Thus, expediting an SR can significantly reduce the overall time required to complete a CPG. Our recently published review identified two artificial intelligence (AI) tools, DistillerSR and EPPI-Reviewer that reduced time in the title and abstract screening in an SR process when developing a CPG. However, the consistency and generalizability of these tools remain unclear within or across different SRs related to cancer. This study protocol aims to evaluate and compare the performance of DistillerSR and EPPI-Reviewer against human reviewers for title and abstract screening (Stage I screening) in cancer CPG development. Methods: We will conduct a retrospective simulation study to evaluate and compare the performance of DistillerSR and EPPI-Reviewer across 10 previously published CPGs by PEBC. These CPGs include the five cancer types with the highest incidence (lung, breast, prostate, colorectal, and bladder). We will run 30 simulation trials for one CPG per AI tool. Primary outcomes are workload savings and time savings in Stage I screening. The secondary outcome is the percentage of missing articles among the final included articles. This informs the accuracy and comprehensiveness of the AI tools. Descriptive and inferential statistical analysis will be conducted to evaluate the outcomes. Results: This is a study protocol. The data presented in the tables are illustrative examples rather than actual study results, in accordance with the journal s standard structure. All data included in the final study will be thoroughly validated. Discussion: This will be the first study to investigate and compare the performance of DistillerSR and EPPI-Reviewer in Stage I screening of SRs in CPGs across different cancer types. These findings will inform the reliable use of AI tools in future cancer-related CPGs. The results from this retrospective study will need to be confirmed by prospective studies.",
+    "year": 2025,
+    "lang": "en",
+    "type": "article",
+    "venue": "Cancer Innovation",
+    "topic": "Artificial Intelligence in Healthcare and Education",
+    "field": "Medicine",
+    "ca_institutions": ["McMaster University", "Impact"],
+    "funders": ["Hamilton Health Sciences Foundation", "Hamilton Health Sciences"]
+  },
+  {
+    "id": "W2034193381",
+    "title": "Environmental Racialization: Linking Racialization to the Environment in Canada",
+    "abstract": "Abstract This paper introduces the concept of environmental racialization to account for how race is socially and spatially organized in large Canadian cities. Drawing on a theoretical analysis of the notion of intentionality as conceived in environmental justice literature, the argument is made that claims of environmental racism must include direct a connection between agent's subjective racist intent and the powerful racist outcomes. In contrast, environmental racialization recognizes that agents’ intentional actions can result in unpurposeful racist outcomes, even if these outcomes are systemic. The case study of the community of Mid-Scarborough in Toronto illustrates the relevance of the concept of environment racialization.",
+    "year": 2007,
+    "lang": "en",
+    "type": "article",
+    "venue": "Local Environment",
+    "topic": "Environmental Justice and Health Disparities",
+    "field": "Social Sciences",
+    "ca_institutions": "Toronto Metropolitan University",
+    "funders": []
+  },
+  {
+    "id": "W2237974707",
+    "title": "Effect of Direct Coal Liquefaction Conditions on Coal Liquid Quality",
+    "abstract": "Solvent extraction of coal was investigated with a focus on the quality of the coal liquids rather than coal conversion. The aim was to determine how the hydrogen/carbon ratio and other quality measures were influenced by liquefaction conditions. Liquefaction was performed using Canadian Bienfait lignite in the temperature range of 350–450 °C, 4 MPa H 2, solvent/coal ratio of 2:1, and residence times up to 30 min at liquefaction temperature. An industrial hydrotreated coal liquid was used as the solvent. The hydrogen/carbon ratio of the coal liquids decreased with an increase in coal conversion, so that coal liquid quality decreased with an increase in the maximum liquefaction temperature. Selective extraction of hydrogen-rich material during the initial stages of liquefaction could be explained in terms of the low solubility parameter of the solvent, the weaker association of less polar molecules, and the limited extent of hydrogen transfer between phases. At longer residence times, especially at higher temperature, the coal liquids became heavier (>550 °C boiling material) and more aromatic and had a higher density and refractive index. These changes were partly due to increased coal conversion and partly due to increased time for hydrogen transfer, cracking, and recombination reactions to take place. It was further found that the nitrogen content of the coal liquids increased with increasing temperature and residence time. Some industrial implications of the changes in coal liquid quality on process development for coal liquefaction were discussed.",
+    "year": 2015,
+    "lang": "en",
+    "type": "article",
+    "venue": "Energy & Fuels",
+    "topic": "Thermochemical Biomass Conversion Processes",
+    "field": "Engineering",
+    "ca_institutions": "University of Alberta",
+    "funders": "Natural Sciences and Engineering Research Council of Canada"
+  },
+  {
+    "id": "W4231465786",
+    "title": "Lignes directrices sur l’activité physique à l’intention des enfants et des jeunesCet article est tiré d’un supplément intitulé <i>Advancing physical activity measurement and guidelines in Canada: a scientific review and evidence-based foundation for the future of Canadian physical activity guidelines<\/i> (Favoriser les lignes directrices et la mesure de l’activité physique au Canada: examen scientifique et justification selon les données probantes pour l’avenir des lignes directrices de l’activité physique canadienne) publié par <i>Physiologie appliquée, nutrition et métabolisme<\/i> et la <i>Revue canadienne de santé publique<\/i>. On peut aussi mentionner Appl. Physiol. Nutr. Metab. 32 (Suppl. 2F) ou Can. J. Public Health 98 (Suppl. 2).",
+    "abstract": "The aim of this review is to provide a scientific update on evidence related to the biological and psycho-social health benefits of physical activity in school-aged children and youth. To accomplish this aim, the first part of the paper reviews existing physical activity guidelines for school-aged children and youth, with an emphasis placed on how Canada’s guidelines compare and contrast with those of other countries and organizations. The paper then provides an overview of physical activity levels of Canadian children and youth, which indicates that few Canadian youngsters meet current physical activity recommendations. The next section of the paper summarizes the literature that informs how much physical activity is required to promote health and well-being in children and youth. The paper then provides suggestions on modifications that could be made to Canada’s physical activity guidelines for children and youth. Specifically, consideration should be given to setting both minimal (≥60 min/d) and optimal (up to several hours per day) physical activity targets. The final section identifies future research needs. In this section, a need is noted for comprehensive dose–response studies of physical activity and health in the paediatric age group",
+    "year": 2007,
+    "lang": "en",
+    "type": "review",
+    "venue": "Applied Physiology Nutrition and Metabolism",
+    "topic": "Obesity, Physical Activity, Diet",
+    "field": "Medicine",
+    "ca_institutions": "Queen's University",
+    "funders": []
+  },
+  {
+    "id": "W2329838854",
+    "title": "Restricting resident work hours",
+    "abstract": "University of British Columbia, Vancouver, BC, Canada The authors have not disclosed any potential conflicts of interest.",
+    "year": 2012,
+    "lang": "en",
+    "type": "article",
+    "venue": "Critical Care Medicine",
+    "topic": "Hospital Admissions and Outcomes",
+    "field": "Medicine",
+    "ca_institutions": "University of British Columbia",
+    "funders": []
+  },
+  {
+    "id": "W2533308569",
+    "title": "Seasonal marine mammal occurrence detected from passive acoustic monitoring in Scott Inlet, Nunavut, Canada",
+    "abstract": "",
+    "year": 2016,
+    "lang": "en",
+    "type": "article",
+    "venue": "Polar Biology",
+    "topic": "Marine animal studies overview",
+    "field": "Environmental Science",
+    "ca_institutions": ["Cégep de Rimouski", "University of Victoria", "Government of Canada", "Université du Québec à Rimouski", "Fisheries and Oceans Canada"],
+    "funders": ["Fisheries and Oceans Canada", "City University of New York"]
+  },
+  {
+    "id": "W7096493660",
+    "title": "Adaptations",
+    "abstract": "There are over 9,000 species of birds in the world. Ap-proximately 925 different species have been seen in the U.S. and Canada. About 1,000 have been seen in Europe. By far the largest concentration of bird species is found in South America, over 3,200 species. South Mississippi alone, is home to more than 320 species. Birds are the only animals to have feathers; most species are capable of flight. Feathers are composed of keritan, which is the same substance comprising hair, hooves, and beaks. A bird’s wing consists of primary feathers forming the point of the wing; secondary and tertiary feathers are located in closer proximity to the bird’s body. Contour feathers give the bird its overall shape and down feathers provide insulation. Like their reptile ancestors, birds lay eggs; like mammals, birds are warm-blooded and have a four-chambered heart. The bird skeleton is adapted for flight with lightweight bones that have a sponge-like interior.",
+    "year": 2016,
+    "lang": "en",
+    "type": "article",
+    "topic": "Avian ecology and behavior",
+    "field": "Environmental Science",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W7161645436",
+    "title": "Periprosthetic Fracture Fixation in Ankylosing Spondylitis: A Surgical Challenge in a Stiffened Skeleton",
+    "abstract": "Periprosthetic femoral fractures are challenging complications following total hip arthroplasty, especially in patients with ankylosing spondylitis due to altered biomechanics and compromised bone quality. We report a 37-year-old male with a history of bilateral total hip replacement (13 years prior) for ankylosed hips, who presented after a motorcycle fall with a right Vancouver type B1 periprosthetic femoral fracture. He was successfully managed with open reduction and internal fixation using a reversed contralateral distal femur anatomical locking plate augmented with cerclage wire. At six-month follow-up, the fracture had united, resulting in an excellent functional outcome. This case highlights the importance of accurate classification, stable fixation, and appropriate implant selection in complex periprosthetic settings. Keywords: Periprosthetic fracture, Ankylosing spondylitis, Vancouver B1, Locking plate, Cerclage wire.",
+    "year": 2025,
+    "type": "article",
+    "topic": "Orthopaedic implants and arthroplasty",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2399077397",
+    "title": "Introduction to the Two Special Issues of Music Perception on BKN25",
+    "abstract": "Research Article| September 01 2015 Introduction to the Two Special Issues of Music Perception on BKN25: Milestones in Music Cognition Stephen McAdams, Stephen McAdams McGill University, Montreal, Canada Search for other works by this author on: This Site PubMed Google Scholar Alexander Rozin, Alexander Rozin West Chester University of Pennsylvania Search for other works by this author on: This Site PubMed Google Scholar David Temperley David Temperley Eastman School of Music Search for other works by this author on: This Site PubMed Google Scholar Music Perception (2015) 33 (1): 1–2. https://doi.org/10.1525/mp.2015.33.1.1 Views Icon Views Article contents Figures & tables Video Audio Supplementary Data Peer Review Share Icon Share Facebook Twitter LinkedIn MailTo Tools Icon Tools Get Permissions Cite Icon Cite Search Site Citation Stephen McAdams, Alexander Rozin, David Temperley; Introduction to the Two Special Issues of Music Perception on BKN25: Milestones in Music Cognition. Music Perception 1 September 2015; 33 (1): 1–2. doi: https://doi.org/10.1525/mp.2015.33.1.1 Download citation file: Ris (Zotero) Reference Manager EasyBib Bookends Mendeley Papers EndNote RefWorks BibTex toolbar search Search Dropdown Menu toolbar search search input Search input auto suggest filter your search All ContentMusic Perception Search This content is only available via PDF. © 2015 by The Regents of the University of California2015 Article PDF first page preview Close Modal You do not currently have access to this content.",
+    "year": 2015,
+    "lang": "en",
+    "type": "article",
+    "venue": "Music Perception An Interdisciplinary Journal",
+    "topic": "Neuroscience and Music Perception",
+    "field": "Neuroscience",
+    "ca_institutions": "McGill University",
+    "funders": []
+  },
+  {
+    "id": "W2127106934",
+    "title": "An exploratory analysis of the effect of pesticide exposure on the risk of spontaneous abortion in an Ontario farm population.",
+    "abstract": "The toxicity of pesticides on human reproduction is largely unknown--particularly how mixtures of pesticide products might affect fetal toxicity. The Ontario Farm Family Health Study collected data by questionnaire on the identity and timing of pesticide use on the farm, lifestyle factors, and a complete reproductive history from the farm operator and eligible couples living on the farm. A total of 2,110 women provided information on 3,936 pregnancies, including 395 spontaneous abortions. To explore critical windows of exposure and target sites for toxicity, we examined exposures separately for preconception (3 months before and up to month of conception) and postconception (first trimester) windows and for early (< 12 weeks) and late (12-19 weeks) spontaneous abortions. We observed moderate increases in risk of early abortions for preconception exposures to phenoxy acetic acid herbicides [odds ratio (OR) = 1.5; 95% confidence interval (CI), 1.1-2.1], triazines (OR = 1.4; 95% CI, 1.0-2.0), and any herbicide (OR = 1.4; 95% CI, 1.1-1.9). For late abortions, preconception exposure to glyphosate (OR = 1.7; 95% CI, 1.0-2.9), thiocarbamates (OR = 1.8; 95% CI, 1.1-3.0), and the miscellaneous class of pesticides (OR = 1.5; 95% CI, 1.0-2.4) was associated with elevated risks. Postconception exposures were generally associated with late spontaneous abortions. Older maternal age (> 34 years of age) was the strongest risk factor for spontaneous abortions, and we observed several interactions between pesticides in the older age group using Classification and Regression Tree analysis. This study shows that timing of exposure and restricting analyses to more homogeneous endpoints are important in characterizing the reproductive toxicity of pesticides.",
+    "year": 2001,
+    "lang": "en",
+    "type": "article",
+    "venue": "Environmental Health Perspectives",
+    "topic": "Pesticide Exposure and Toxicity",
+    "field": "Agricultural and Biological Sciences",
+    "ca_institutions": "Health Canada",
+    "funders": "National Institute of Environmental Health Sciences"
+  },
+  {
+    "id": "W7047006012",
+    "title": "The Experiences of Iraqi Refugees in Canada: A Life History Study of War and Resilience in the Aftermath of Migration",
+    "abstract": "This thesis reports on a life history narrative on the experiences of Iraqi refugees who resettled in Canada after living through war. The aim of this study is to help change the narrow perspectives on the mental health of war affected populations to a broader perception shaped by cultural and social aspects and to inform the development of meaningful and cultural relevant programs and policies with a particular attention to the concept of resilience.\\nThe first part of the study presents the chronological narratives, or profiles. of eight participants. The second part of the study is a thematic discussion of their experiences with war and resilience. Six major themes are presented. The first major theme describes the war-related experiences the participants faced, and the impact that those experiences had on their daily lives while they were living In Iraq. The second major theme describes the impact that living amidst war had on the social structure of society which then affected participants in various ways depending on their class, gender, ethnicity and religion. The third theme discusses how participants managed the adversities of war in the context of their socio-cultural development. The fourth theme addresses the after-effects of war and describes the meaning-making that resulted from living through traumatic war experiences and how these experiences continue to shape their lives. The fifth theme describes the resilience strategies that participants enacted to manage the negative impacts of war experiences. The final theme describes how participants adapted to resettling in Canada and some of their current major concerns.\\nThe results of this study show that the experiences of the Iraqi war refugees who resettled in Canada vary. Participating in this study afforded safe social spaces to express their narratives and memories. This process enabled the participants to attain political and social acknowledgement and develop new perspectives or modify existing ones. The findings of this study highlights the need for mental health services and public sectors to develop or modify their services to attend to the needs of the refugees and immigrants by adapting more culturally informed approaches.",
+    "year": 2021,
+    "lang": "en",
+    "type": "article",
+    "venue": "Scholarship@Western (Western University)",
+    "topic": "Magnetic confinement fusion research",
+    "field": "Physics and Astronomy",
+    "ca_institutions": "Western University",
+    "funders": []
+  },
+  {
+    "id": "W2398190709",
+    "title": "SUMMARY OF REPORTED ATLANTIC SALMON (Salmo salar) CATCHES AND SIGHTINGS IN BRITISH COLUMBIA AND RESULTS OF FIELD WORK CONDUCTED IN 2011 AND 2012",
+    "abstract": "",
+    "year": 2015,
+    "lang": "en",
+    "type": "article",
+    "topic": "Marine Ecology and Invasive Species",
+    "field": "Environmental Science",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2106981782",
+    "title": "Unsupervised pattern discovery in electronic health care data using probabilistic clustering models",
+    "abstract": "Bedside clinicians routinely identify temporal patterns in physiologic data in the process of choosing and administering treatments intended to alter the course of critical illness for individual patients. Our primary interest is the study of unsupervised learning techniques for automatically uncovering such patterns from the physiologic time series data contained in electronic health care records. This data is sparse, high-dimensional and often both uncertain and incomplete. In this paper, we develop and study a probabilistic clustering model designed to mitigate the effects of temporal sparsity inherent in electronic health care records data. We evaluate the model qualitatively by visualizing the learned cluster parameters and quantitatively in terms of its ability to predict mortality outcomes associated with patient episodes. Our results indicate that the model can discover distinct, recognizable physiologic patterns with prognostic significance.",
+    "year": 2012,
+    "lang": "en",
+    "type": "article",
+    "topic": "Time Series Analysis and Forecasting",
+    "field": "Computer Science",
+    "ca_institutions": [],
+    "funders": "Pacific Institute for the Mathematical Sciences"
+  },
+  {
+    "id": "W4412727362",
+    "title": "Co-designing physical activity programs with immigrant children and families: a Strengthening Community Roots: Anchoring Newcomers in Wellness and Sustainability (SCORE!) Research Study",
+    "abstract": "Physical activity (PA) is a key health promotion strategy for preventing non-communicable diseases such as obesity. However, certain populations, such as immigrants, may participate less and have lower levels of PA. The objective of this study was to co-design a PA program aimed at increasing PA participation among immigrant children in Canada. This program was developed in partnership with community members (caregivers and children), service providers, and community leaders. Using an experience-based co-design (EBCD) approach, participants identified key issues and challenges related to PA in their community and then co-designed programs and activities that addressed these concerns. Three co-design workshops were held to explore barriers and facilitators to PA and a healthy lifestyle. In small groups, 49 participants led the design of seasonal community programs, including swimming, soccer, gardening, and tennis. Through the workshops, a tailored program was developed in collaboration with the community to address barriers and facilitators to PA for immigrant families. By actively involving relevant community members in the design and development process, the co-design workshops aimed to create a PA program that is more likely to be effective, accepted, and sustainable in promoting PA and a healthy lifestyle for immigrant children and families.",
+    "year": 2025,
+    "lang": "en",
+    "type": "article",
+    "venue": "Health Promotion Practice",
+    "topic": "Physical Activity and Health",
+    "field": "Medicine",
+    "ca_institutions": ["Impact", "McMaster University Medical Centre", "Population Health Research Institute", "McMaster University"],
+    "funders": ["Public Health Agency of Canada", "Novartis"]
+  },
+  {
+    "id": "W2489366105",
+    "title": "ŠEŠUPĖS IR ŽEIMENOS UPIŲ NUOTĖKIO FORMAVIMOSI IR KAITOS YPATYBĖS",
+    "abstract": "Straipsnyje nagrinjama nuotkio kaita 2 upiu baseinuose: Sesups ir Žeimenos. Sie baseinai issidste skirtingose Lietuvos teritorijos dalyse (Sesup teka vidurio Lietuvos dalyje, o Žeimena – pietryciu), jie turi skirtingas litologines (Žeimenos upje smlio gruntai užima 76 %, o Sesups tik 10 %) ir fizines-geografines (miskai Žeimenos baseine užima 37 %, o Sesups 17 %) salygas. Straipsnyje analizuojami naujausi hidrologiniai (upiu vandens debitai ir lygiai) ir meteorologiniai (krituliu intensyvumai, trukm, reiskiniu pobudis, bei temperaturos Vilniaus ir Kybartu stotyse) duomenys. Darbo pagrindas susideda is sudarytu hidrografu analizs. Is ju galima spresti apie nuotkio kaita. Hidrografai sudaryti pagal ryskiausius metus, t.y. pagal metus, kai krituliu intensyvumas buvo didžiausias, bei vandens debitas. Žeimenos upje nuotkis labiau islygintas, nei Sesupje. Intensyviausiais metais (vertinant didžiausia krituliu kieki) Sesupje pavasario potvynis prasidjo labai anksti, jau sausio mnesi debitas žymiai padidjo, Žeimenos upje aiskus debito didjimas buvo tik kovo mnesi, nors vertinant meteorologines salygas, krituliu intensyvumai ir vidutins dienos temperaturos buvo maždaug panasus. Tai ir rodo, kad didžiausia itaka daro baseino issidstymo salygos. Darbo tikslas – ivertinti nuotkio kaita pasirinktose objektuose, pasinaudojus naujausiomis duomenimis.",
+    "year": 2014,
+    "lang": "lt",
+    "type": "article",
+    "topic": "Integrated Water Resources Management",
+    "field": "Environmental Science",
+    "ca_institutions": "The Alberta Paraplegic Foundation",
+    "funders": []
+  },
+  {
+    "id": "W7114789100",
+    "title": "Overlooked Information Technologies: The Double-Ender, the Sound Recordist, and <i>The Journal<\/i> at the Canadian Broadcasting Corporation",
+    "abstract": "Background: Information technologies that have become obsolete, such as the double-ender device, tend to be under-researched. Analysis: This article employs Bruno Latour’s Actor-Network Theory (ANT) to explore how television current affairs programs such as The Journal (1982–1992) were innovative precisely because they relied on such technologies (and their facilitators) to produce high-quality audiovisual interviews with remote guests. Conclusions and implications: The double-ender technology set the stage for the instantaneous nature of television news programming today.",
+    "year": 2025,
+    "lang": "en",
+    "type": "article",
+    "venue": "Canadian Journal of Communication",
+    "topic": "Media Studies and Communication",
+    "field": "Social Sciences",
+    "ca_institutions": "University of Toronto",
+    "funders": []
+  },
+  {
+    "id": "W1605094539",
+    "title": "Community Networking: A Policy Approach to Enhance Aboriginal Child Welfare in Off-Reserve Communities",
+    "abstract": "This paper presents results from a community based participatory research initiative involving an Aboriginal Interagency Committee located in northern Alberta. The research aimed at developing knowledge and understanding of community oriented policy frameworks that promote social change at community and structural levels, to enhance off-reserve Aboriginal child welfare. Emerging policy lessons suggest community networking as a viable approach to address off-reserve Aboriginal child welfare. This approach utilizes a formal structure, grounding in Aboriginal values and traditions, leadership and guidance from Aboriginal community members, and the values of inclusiveness and respect for cultural diversity. There is a need for further research to understand the outcomes of such an approach for the welfare of Aboriginal children and families and for similar research within other contexts.",
+    "year": 2010,
+    "lang": "en",
+    "type": "article",
+    "venue": "Indigenous policy",
+    "topic": "Indigenous Health, Education, and Rights",
+    "field": "Social Sciences",
+    "ca_institutions": ["University of Calgary", "University of British Columbia"],
+    "funders": []
+  },
+  {
+    "id": "W2142813473",
+    "title": "The intergenerational effects of Indian Residential Schools: Implications for the concept of historical trauma",
+    "abstract": "The current paper reviews research that has explored the intergenerational effects of the Indian Residential School (IRS) system in Canada, in which Aboriginal children were forced to live at schools where various forms of neglect and abuse were common. Intergenerational IRS trauma continues to undermine the well-being of today's Aboriginal population, and having a familial history of IRS attendance has also been linked with more frequent contemporary stressor experiences and relatively greater effects of stressors on well-being. It is also suggested that familial IRS attendance across several generations within a family appears to have cumulative effects. Together, these findings provide empirical support for the concept of historical trauma, which takes the perspective that the consequences of numerous and sustained attacks against a group may accumulate over generations and interact with proximal stressors to undermine collective well-being. As much as historical trauma might be linked to pathology, it is not possible to go back in time to assess how previous traumas endured by Aboriginal peoples might be related to subsequent responses to IRS trauma. Nonetheless, the currently available research demonstrating the intergenerational effects of IRSs provides support for the enduring negative consequences of these experiences and the role of historical trauma in contributing to present day disparities in well-being.",
+    "year": 2013,
+    "lang": "en",
+    "type": "article",
+    "venue": "Transcultural Psychiatry",
+    "topic": "Indigenous Health, Education, and Rights",
+    "field": "Social Sciences",
+    "ca_institutions": ["Carleton University", "University of Ottawa"],
+    "funders": "Canadian Institutes of Health Research"
+  },
+  {
+    "id": "W6983319132",
+    "title": "Mathematics education reform:The role of coherence within the complexity of change",
+    "abstract": "This paper draws on data gathered from a large-scale, multi-year research project, Curriculum Implementation in Intermediate Mathematics (CIIM), that examines the implementation of a reform (inquiry-oriented) mathematics curriculum in Grades 7 – 10 in Ontario, Canada. To describe classroom practices and ways that teachers have been challenged and supported in implementing an inquiry-oriented approach, the data included teacher questionnaires (n =1096), focus group interviews with mathematics educators across the province, and nine case studies. While some of our data align with the research of others who show that teacher change is complex and inquiry-oriented pedagogies are slow to emerge (Frykholm, 1999; Jacobs, Hiebert, Givven, Hollingsworth, Garnier, & Wearne, 2006), we also have evidence of teachers engaged in a variety of classroom practices that involve students in inquiry-oriented mathematics learning.",
+    "year": 2012,
+    "lang": "en",
+    "type": "other",
+    "venue": "Qucosa (Saxon State and University Library Dresden)",
+    "ca_institutions": "University of Ottawa",
+    "funders": []
+  },
+  {
+    "id": "W7087685522",
+    "title": "Data and R Script for \"Alpine surface temperature amplification in summer is horizontally heterogeneous at small scales and intensified with wind and sun\" by MacDonald et al. (2025)",
+    "abstract": "The files included were used in the analyses for \"Alpine surface temperature amplification in summer is horizontally heterogeneous at small scales and intensified with wind and sun\" by MacDonald et al. (2025). Data were collected at Cardinal Divide in Whitehorse Wildlands Provincial Park, Alberta, Canada. The data contained in the file \"MainWS.csv\" were collected by a weather station at Cardinal Divide located at (52.896777, -117.250102). Only free air temperature (°C), wind speed (m/s), and solar radiation (W/m2) were used in analyses; free air temperature was measured using a Hobo temperature sensor (E348-S-THB-M002), with a solar radiation shield (E348-RS3-B); wind speed was measured using a Davis Wind Speed and Direction Smart Sensor (E348-S-WCF-M003); solar radiation was measured using a silicon pyranometer sensor (E348-S-LIB-M003). The sampling frequency was 15 minutes. The data contained in files labeled as \" P#T_24HR.csv\" or P#O_24HR.csv\" were recorded by thermocouple (Perfect Prime TC0520) units using K-type fibreglass coated wires. The data in \"rel_point_temp_master.csv\" were recorded using an 8-channel thermocouple (Huato S220-T8) with K-type fibreglass coated wires attached to a PVC pole at 0 cm, 10 cm, 25 cm, 50 cm, 75 cm, 100 cm, 150 cm, and 200 cm. The data in \"WS_TC_#.csv\" files were recorded by a thermocouple (Perfect Prime TC0520) unit using K-type fibreglass coated wires at our weather station location. The column titled \"ROCK\" contains the data collected by a thermocouple wire located at the surface on a rock; the column titled \"SHRUB\" contains the data collected by a thermocouple wire located at the surface under a small shrub; the column titled \"SHIELD\" contains the data collected by a thermocouple wire located at 2 m height on the weather station within a solar radiation shield (E348-RS3-B); the column titled \"OPEN\" contains the data collected by a thermocouple wire located at 2 m height on the weather station which was not shielded. The data in \"CoverData.csv\" are recordings of percentage species cover (species are listed as column names). The quadrat sizes represent nested quadrats, where the small (25 cm by 25 cm) was contained by the large (50 cm by 50 cm), both centred around the measurement point. Species names are listed as abbreviations, showing the first three letters of the genus followed by the first three letters of the specific epithet. Note that for unknown species, they are listed as UNK#. Additional data in this file are densiometer (canopy cover) recordings; vegetation height at the centre of the quadrat and the maximum vegetation height within the quadrat (any height above 200 cm is listed as 201); aspect; slope; soil depth (cm). The data in the .csv files were used to perform the analyses in the given R script. This analysis is part of Chapter 1 of the MSc thesis of Alexa A.C. MacDonald, being completed at the Applied Conservation Ecology Lab at the University of Alberta, under the supervision of Dr Scott E. Nielsen.",
+    "year": 2025,
+    "lang": "en",
+    "type": "dataset",
+    "venue": "Zenodo (CERN European Organization for Nuclear Research)",
+    "topic": "Climate change and permafrost",
+    "field": "Earth and Planetary Sciences",
+    "ca_institutions": ["Natural Resources Canada", "University of Alberta"],
+    "funders": []
+  },
+  {
+    "id": "W4385278137",
+    "title": "Evaluation of a pharmacist-led interprofessional chronic pain clinic in Canada",
+    "abstract": "Background: Chronic noncancer pain (CNCP) is a common condition that affects individuals at a biopsychosocial level and can significantly impair function and quality of life. Referral to an interprofessional CNCP program is recommended for most patients; however, these clinics are limited in number and capacity. Expanding access by testing new service delivery models would be of value. The purpose of this study was to measure the impact of a new pharmacist-led, interprofessional model of care developed at the University of Saskatchewan Chronic Pain Clinic. Methods: A retrospective chart audit was conducted using data that included adult patients referred for CNCP management between May 2020 and December 2021. Medication use, overall health status (using the Clinical Global Impression of Change-Improvement [CGI-I] scale) and patient readiness to change (using the Transtheoretical Model) were measured 6 months after the initial appointment. Results: The study included 138 patients. Of the 80 patients taking an opioid, 22.5% were switched to buprenorphine/naloxone and the remainder had their mean morphine-equivalent dose reduced by a mean of 41.7 mg/d. Overall patient health status was minimally improved and many patients moved into the Action stage of change. Discussion: Changes in opioid use demonstrate a clinically important shift toward safer medication regimens that are less likely to lead to toxicity and unintended overdose. CGI-I data suggest that these patients, whose health status is typically very difficult to change, did not deteriorate but slightly improved after attending the clinic. Conclusion: The unique pharmacist-led, interprofessional model of care used by the University of Saskatchewan Chronic Pain Clinic may offer a viable alternative to traditional physician-led models.",
+    "year": 2023,
+    "lang": "en",
+    "type": "article",
+    "venue": "Canadian Pharmacists Journal / Revue des Pharmaciens du Canada",
+    "topic": "Opioid Use Disorder Treatment",
+    "field": "Medicine",
+    "ca_institutions": "University of Saskatchewan",
+    "funders": "Indigenous and Northern Affairs Canada"
+  },
+  {
+    "id": "W3099316021",
+    "title": "Constitutional Rights at the Kitchen Table: British Columbia Francophones and the Making of a Minority-Language Educational System",
+    "abstract": "In a recent landmark decision, the Supreme Court of Canada confirmed that the underfunding of British Columbia’s Conseil scolaire francophone constitutes a breach of Charter of Rights and Freedoms guarantees in matters of minority-language education. While this marked the end of a decade of judicial proceedings, this article situates the decision in a broader historical context by examining the struggle to develop French-language educational programs in BC. If the province did not experience the education crises that tore through other parts of Canada in the decades following Confederation, BC francophones seized on the growing acceptance of bilingualism in the 1970s, 1980s, and 1990s to fight for an education system catering to their linguistic and cultural aspirations. Shifting the scholarly focus from the constitutional negotiating tables at which sat politicians and high-level bureaucrats to the kitchen tables around which parent groups gathered to formulate their demands, this article traces the grassroots battle to bring French-language schools to the province with Canada’s highest rate of linguistic assimilation.",
+    "year": 2020,
+    "lang": "en",
+    "type": "article",
+    "venue": "Historical Studies in Education / Revue d histoire de l éducation",
+    "topic": "Canadian Identity and History",
+    "field": "Social Sciences",
+    "ca_institutions": "Simon Fraser University",
+    "funders": []
+  },
+  {
+    "id": "W7095093311",
+    "title": "SARA BOUHOUT ELABORATION ET CARACTERISATION D&amp;apos;UN ÉQUIVALENT VESICAL",
+    "abstract": "à la Faculté des études supérieures de l&amp;apos;Université Laval dans le cadre du programme de maîtrise en Biologie Cellulaire et Moléculaire pour l&amp;apos;obtention du grade de maître es sciences (M.Sc.)",
+    "year": 2015,
+    "lang": "en",
+    "type": "article",
+    "topic": "Irish and British Studies",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2314699245",
+    "title": "Late Pleistocene Western Camel (<i>Camelops Hesternus<\/i>) Hunting in Southwestern Canada",
+    "abstract": "Abstract Late Pleistocene large mammal extinctions in North America have been attributed to a number of factors or combination of factors, primarily climate change and human hunting, but the relative roles of these factors remain much debated. Clo-vis-period hunters exploited species such as mammoth, but many now extinct species such as camels were seemingly not hunted. Archaeological evidence from the Wally’s Beach site in southern Canada, including stone tools and butchered bone, provide the first evidence that Clovis people hunted North American camels. Archaeologists generally dismiss human hunting as a significant contributor to Pleistocene extinctions in North America, but Wally’s Beach demonstrates that human hunting was more inclusive than assumed and we must continue to consider hunting as a factor in Pleistocene extinctions.",
+    "year": 2012,
+    "lang": "en",
+    "type": "article",
+    "venue": "American Antiquity",
+    "topic": "Pleistocene-Era Hominins and Archaeology",
+    "field": "Social Sciences",
+    "ca_institutions": "University of Calgary",
+    "funders": "Natural Sciences and Engineering Research Council of Canada"
+  },
+  {
+    "id": "W2532943886",
+    "title": "Health Services Data: The Ontario Cancer Registry (a Unique, Linked, and Automated Population-Based Registry)",
+    "abstract": "",
+    "year": 2016,
+    "lang": "en",
+    "type": "book-chapter",
+    "topic": "Global Cancer Incidence and Screening",
+    "field": "Medicine",
+    "ca_institutions": "Cancer Care Ontario",
+    "funders": []
+  }
+]
+warning: loading hooks from both /Users/choxos/.codex/hooks.json and /Users/choxos/.codex/config.toml; prefer a single representation for this layer
+2026-07-13T02:59:06.221117Z ERROR rmcp::transport::worker: worker quit with fatal: Transport channel closed, when Auth(AuthorizationRequired)
+warning: Skill descriptions were shortened to fit the 2% skills context budget. Codex can still see every skill, but some descriptions are shorter. Disable unused skills or plugins to leave more room for the rest.
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart Failed
+hook: SessionStart Completed
+hook: SessionStart Completed
+hook: SessionStart Completed
+hook: SessionStart Completed
+hook: SessionStart Failed
+hook: UserPromptSubmit
+hook: UserPromptSubmit
+hook: UserPromptSubmit Failed
+hook: UserPromptSubmit Failed
+codex
+[
+  {"id":"W2437425712","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study examines Indigenous storytelling in early childhood education, not research itself."},
+  {"id":"W1994408979","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study examines pandemic protective-equipment use and hospital absenteeism, not research practice."},
+  {"id":"W2030583808","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study examines health-risk perceptions and bottled-water use, not research itself."},
+  {"id":"W2140250558","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study examines pesticide exposure biomarkers in farm workers, not research practice."},
+  {"id":"W7117722753","tier":"OUT","genre":"editorial/commentary","about_ca":false,"confidence":"high","reason":"This is a book review concerning pastoral theology rather than research practice."},
+  {"id":"W2136920205","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study models snowpack responses to climate perturbations, not research itself."},
+  {"id":"W4381490105","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The chapter examines immersion-based ecological education, not the practice of research."},
+  {"id":"W4392166308","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study examines well-being and psychosocial factors among people with chronic pain, not research."},
+  {"id":"W2167504482","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study evaluates the economic efficiency of a rabies-control program, not research itself."},
+  {"id":"W1973467076","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study examines forestry-related civic engagement and social impacts, not research practice."},
+  {"id":"W4415450330","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study examines weight stigma and care experiences among people with PCOS, not research."},
+  {"id":"W4239054671","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The thesis evaluates a hybrid heat-pump system, not research methods or the research system."},
+  {"id":"W6990822938","tier":"OUT","genre":"other","about_ca":false,"confidence":"high","reason":"This is a financial news item about electric-car market growth, not research."},
+  {"id":"W4408433009","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The work develops a hydrological model for streamflow simulation, not a study of research practice."},
+  {"id":"W7055519161","tier":"T2","genre":"conceptual","about_ca":false,"confidence":"medium","reason":"The collection examines archaeology as a discipline, including its methods, history, theory, and social role."},
+  {"id":"W4313332154","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The essay examines migrant workers' pandemic experiences and precarity, not research itself."},
+  {"id":"W3214289857","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"The article analyzes Haitian migration and territorial networks in Brazil, not research practice."},
+  {"id":"W1905218570","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study examines dietary and lifestyle factors associated with tuberculosis infection, not research."},
+  {"id":"W6958690656","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study examines diet-counselling processes and diet quality, not research methods or conduct."},
+  {"id":"W2789075823","tier":"OUT","genre":"editorial/commentary","about_ca":false,"confidence":"high","reason":"This is a book review about an archaeological biography rather than research practice."},
+  {"id":"W2214716702","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study examines anomalous bupropion prescribing and possible drug misuse, not research."},
+  {"id":"W4404100073","tier":"T1","genre":"empirical","about_ca":false,"confidence":"medium","reason":"The study directly examines response bias in a measurement scale used to generate research and clinical data."},
+  {"id":"W4416863280","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The work concerns unpaid caregivers' health and well-being, not research itself."},
+  {"id":"W6893991032","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The work reports genetic and taxonomic findings about Daphnia, not research practice."},
+  {"id":"W7005257168","tier":"OUT","genre":"other","about_ca":false,"confidence":"high","reason":"This is a financial-market news item about a price target, not research."},
+  {"id":"W4411778107","tier":"T1","genre":"other","about_ca":false,"confidence":"high","reason":"The protocol evaluates artificial-intelligence tools and human performance in systematic-review screening."},
+  {"id":"W2034193381","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"The paper develops a concept explaining environmental racialization, not research itself."},
+  {"id":"W2237974707","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study examines coal-liquefaction conditions and product quality, not research practice."},
+  {"id":"W4231465786","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"The review concerns physical-activity benefits and guidelines for children, not how research is conducted."},
+  {"id":"W2329838854","tier":"OUT","genre":"editorial/commentary","about_ca":false,"confidence":"high","reason":"The item concerns resident work-hour policy in medicine, not research practice."},
+  {"id":"W2533308569","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The work concerns seasonal marine-mammal occurrence, not research itself."},
+  {"id":"W7096493660","tier":"OUT","genre":"other","about_ca":false,"confidence":"high","reason":"The text provides general information about bird biology, not research practice."},
+  {"id":"W7161645436","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The case report concerns surgical fixation of a periprosthetic fracture, not research."},
+  {"id":"W2399077397","tier":"OUT","genre":"editorial/commentary","about_ca":false,"confidence":"high","reason":"The introduction presents music-cognition special issues rather than studying scholarly communication or research practice."},
+  {"id":"W2127106934","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study examines pesticide exposure and spontaneous abortion risk, not research itself."},
+  {"id":"W7047006012","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The thesis examines Iraqi refugees' experiences, resilience, and resettlement, not research practice."},
+  {"id":"W2398190709","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The work reports Atlantic salmon catches, sightings, and field observations, not research itself."},
+  {"id":"W2106981782","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The paper develops a clustering model for electronic health records rather than studying research practice."},
+  {"id":"W4412727362","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study co-designs physical-activity programs for immigrant families, not research itself."},
+  {"id":"W2489366105","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The article analyzes river runoff and hydrological conditions in Lithuania, not research practice."},
+  {"id":"W7114789100","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"The article examines obsolete technologies in television news production, not research itself."},
+  {"id":"W1605094539","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The paper examines community networking for Aboriginal child welfare, not research practice."},
+  {"id":"W2142813473","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"The review concerns historical trauma and Indigenous well-being, not how research is conducted."},
+  {"id":"W6983319132","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study examines mathematics-curriculum implementation and teacher change, not research itself."},
+  {"id":"W7087685522","tier":"OUT","genre":"other","about_ca":false,"confidence":"high","reason":"The dataset supports climate and vegetation analyses and is not itself about research practice."},
+  {"id":"W4385278137","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study evaluates a pharmacist-led chronic-pain clinic, not research methods or conduct."},
+  {"id":"W3099316021","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"The article examines the historical development of French-language education in British Columbia, not research."},
+  {"id":"W7095093311","tier":"OUT","genre":"other","about_ca":false,"confidence":"high","reason":"The record identifies a biology master's thesis rather than a work about research itself."},
+  {"id":"W2314699245","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The article examines archaeological evidence of camel hunting and Pleistocene extinctions, not research practice."},
+  {"id":"W2532943886","tier":"T2","genre":"infrastructure/announcement","about_ca":true,"confidence":"high","reason":"The work describes the Ontario Cancer Registry as a linked and automated research data infrastructure."}
+]
+hook: Stop
+hook: Stop
+hook: Stop
+hook: Stop Completed
+hook: Stop Completed
+hook: Stop Failed
+tokens used
+41,254

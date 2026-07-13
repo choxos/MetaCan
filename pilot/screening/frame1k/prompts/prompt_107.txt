@@ -1,0 +1,798 @@
+# MétaCan screening rubric (v1.0)
+
+**Locked before screening. Version-controlled. Any change is a new version with a dated entry in `DEVIATIONS.md`.**
+
+Both machine screeners and both human coders work from this document and nothing else. The rubric is the
+instrument; if two coders disagree, the rubric is what they are adjudicated against.
+
+---
+
+## The unit
+
+One work (journal article, preprint, book chapter, report, dataset, or software), identified by its OpenAlex ID.
+You see: title, abstract, publication year, language, venue, OpenAlex topic and field, Canadian institutional
+affiliations, funders.
+
+## The question
+
+**Is the object of study *research itself*?**
+
+Metaresearch studies how research is done, reported, funded, evaluated, disseminated, or governed. The test is
+what the work is *about*, not what field it appears in and not what vocabulary it uses.
+
+A cardiology trial is not metaresearch. A study of *how cardiology trials report their outcomes* is.
+
+---
+
+## Tier
+
+Assign exactly one.
+
+### T1: Core metaresearch
+The primary object of study is research itself. Typical objects:
+
+- research **methods** and their properties (bias, reporting, statistical practice, study design)
+- **reproducibility**, replication, data and code sharing
+- **research integrity**: misconduct, retraction, questionable research practices, authorship
+- **peer review** and editorial process *as objects of study*
+- **research evaluation**, metrics, rankings, funding allocation
+- **scholarly communication**: publishing models, open access, preprints *as objects of study*
+- **bibliometrics and scientometrics** applied to a research literature
+- the **research workforce**: careers, equity, training, capacity
+- **evidence synthesis methodology** (not an individual systematic review's clinical answer, but work *about* how
+  syntheses are done)
+
+### T2: Adjacent
+Empirically or conceptually grounded work on science as a social system that is not framed as metaresearch but
+studies it:
+
+- **science and technology studies (STS)**: social studies of scientific knowledge, practice, controversy
+- **library and information science**: information behaviour of researchers, repositories, discovery
+- **research infrastructure** studies: platforms, data repositories, identifiers, standards
+- **history and philosophy of science** *when the object is contemporary research practice*
+- **research policy** analysis grounded in evidence
+
+T2 is where the field's diversity lives. Be generous here: a paper does not have to call itself metaresearch to
+be studying research.
+
+### T3: Contextual
+Relevant to the ecosystem, mapped and released, but **never pooled into the analytic corpus**:
+
+- editorials, commentaries, opinion pieces about research practice
+- policy documents and position statements
+- announcements of infrastructure, tools, or initiatives
+- news, obituaries, corrections, letters
+
+### OUT: Not metaresearch
+Everything else. Includes, and this is the most common error:
+
+- **A study that uses a method is not a study of the method.** A meta-analysis answering a clinical question is
+  OUT. A study of how meta-analyses handle heterogeneity is T1.
+- **Mentioning a metaresearch term is not studying it.** A lab paper reporting "assay reproducibility", a methods
+  section saying "peer reviewed", a licence note saying "open access": all OUT.
+- **Domain research that happens to be bibliometric in method** but whose object is the domain, not the research:
+  e.g. a bibliometric map of diabetes treatments, produced to summarise diabetes knowledge. Borderline; see below.
+
+---
+
+## The three errors that matter most
+
+These are where the pilot showed retrieval and screening break down. Read them twice.
+
+1. **Polysemy.** `reproducibility` in a biochemistry paper means the assay gives the same reading twice. In a
+   metaresearch paper it means the reproducibility crisis. Only the second is in scope. The same applies to
+   `validation`, `replication`, `bias`, `peer review`, `open access`. **Judge the sense, not the token.**
+
+2. **Method vs. object.** Using bibliometrics ≠ studying research. Ask: *if this paper is right, what do we now
+   know more about: a scientific question, or the practice of science?* If the former, OUT.
+
+3. **Absence of vocabulary is not absence of content.** An STS paper about laboratory practice, or an LIS paper
+   about how researchers find data, may use none of the field's keywords and still be squarely T2. **Do not
+   require the vocabulary.** This is the error that makes the field look smaller and more anglophone than it is.
+
+---
+
+## Canadian linkage
+
+Record which apply (this is metadata, not an inclusion test; the estimand is defined separately in
+`PROTOCOL.md`):
+
+- `CA_AFF`: at least one author affiliated with a Canadian institution
+- `CA_FUND`: funded by CIHR, NSERC, SSHRC, or CFI
+- `ABOUT_CA`: the Canadian research system is a substantive object of study (not a passing mention, not one
+  country among forty in a global comparison)
+
+## Genre
+
+`empirical` · `conceptual` · `editorial/commentary` · `policy` · `infrastructure/announcement` · `other`
+
+OpenAlex's `type` is unreliable and this field is commentary-heavy, so genre is coded, not inherited.
+
+## Language of the work
+
+As published. Do not infer from the venue.
+
+---
+
+## Confidence
+
+- `high`: the rubric decides this cleanly.
+- `medium`: the rubric decides, but a reasonable coder could differ.
+- `low`: genuinely on the boundary, or the abstract is missing/too thin to judge.
+
+**`low` is a legitimate answer and is not a failure.** Records coded `low` by either screener are routed to
+adjudication. A screener that never says `low` is not being careful; it is being confident.
+
+---
+
+## Worked examples
+
+| Title (abridged) | Tier | Why |
+|---|---|---|
+| "Data sharing practices in 500 randomised trials" | **T1** | The object is reporting practice. |
+| "Reproducibility of a Western blot protocol" | **OUT** | Assay reproducibility. Polysemy trap. |
+| "Trends in citation of retracted papers" | **T1** | Object is the literature's own behaviour. |
+| "Laboratory life in a Canadian genomics centre: an ethnography" | **T2** | STS. No metaresearch vocabulary; still studies research. |
+| "How do researchers discover datasets? A survey" | **T2** | LIS, information behaviour of researchers. |
+| "Effectiveness of statins: a network meta-analysis" | **OUT** | Uses a synthesis method to answer a clinical question. |
+| "How network meta-analyses handle inconsistency: a review of 200 reviews" | **T1** | Object is the method. |
+| "Announcing the Canadian Research Data Repository" | **T3** | Infrastructure announcement. Mapped, not pooled. |
+| "Open access mandates are failing early-career researchers" (editorial) | **T3** | Commentary about research practice. |
+| "Bibliometric analysis of diabetes research 2000–2020" | **T2** | Borderline. Bibliometric method, and the object *is* a research literature, so it studies research output. Code T2, `medium`. |
+| "Le libre accès dans les revues québécoises : état des lieux" | **T1** | Scholarly communication, object is publishing practice. French. |
+
+---
+
+## Instructions to the screener
+
+Read the title and abstract. Apply the rubric. Do not use outside knowledge of the authors or the journal's
+reputation. If the abstract is missing, judge on the title alone and set confidence to `low` unless the title is
+unambiguous.
+
+Return the schema in `protocol/screening-schema.json`. One object per work. No prose, no preamble.
+--------------------------------------------------------------------------------
+You are screening works for MetaCan, a map of Canadian metaresearch.
+
+Apply the rubric above to every record in the JSON array below. Return a JSON
+array with one object per work, conforming to protocol/screening-schema.json:
+
+  {"id": "W...", "tier": "T1|T2|T3|OUT", "genre": "...", "about_ca": true|false,
+   "confidence": "high|medium|low", "reason": "one sentence"}
+
+Rules:
+- Return the JSON array and NOTHING else. No prose, no preamble, no code fences.
+- Every input id must appear exactly once in the output.
+- Do not run commands, read files, or browse. Classify from the RECORDS alone.
+
+RECORDS:
+[
+  {
+    "id": "W4367369228",
+    "title": "Cryoablation for the treatment of chronic rhinitis: A systematic review",
+    "abstract": "BACKGROUND: ClariFix is a novel intranasal cryotherapy device developed for clinic-based cryosurgical ablation of the posterior nasal nerves region. As a relatively new technology, there is a paucity of studies within the literature assessing the efficacy and safety profile of ClariFix for chronic rhinitis. METHODS: A systematic review was completed in accordance with PRISMA guidelines. Databases searched included: Ovid Medline, Ovid EMBASE, Pubmed, Cochrane and Web of Science. Inclusion criteria consisted of studies investigating the use of ClariFix in chronic rhinitis (i.e., allergic and non-allergic rhinitis) in patients of all ages. RESULTS: The initial search identified 1110 studies. Final analysis consisted of 8 articles, evaluating a total of 472 patients. The data showed a significant reduction in scores post-treatment across all studies based on validated outcome measures. In all studies, at all time intervals, there was a significant improvement in outcome scores from baseline. Minor adverse effects included post-procedural pain and discomfort, headache and palate numbness. No major adverse events were identified. CONCLUSION: ClariFix is a novel intranasal cryotherapy device that was introduced in Canada in 2021. This is the first systematic review evaluating its efficacy and safety profile. Across all studies, there was a significant reduction in validated outcome scores at multiple time intervals. Further, the treatment is safe with only minor adverse effects reported by patients. Overall, the consensus from this study highlights an apparent benefit in using this intervention for chronic rhinitis that is refractory to medical management.",
+    "year": 2023,
+    "lang": "en",
+    "type": "review",
+    "venue": "Journal of Otolaryngology - Head and Neck Surgery",
+    "topic": "Allergic Rhinitis and Sensitization",
+    "field": "Medicine",
+    "ca_institutions": ["St. Michael's Hospital", "University of Toronto", "Queen's University"],
+    "funders": []
+  },
+  {
+    "id": "W6991300557",
+    "title": "General Electric (NYSE:GE) Price Target Raised to $118.00 at Royal Bank of Canada",
+    "abstract": "",
+    "year": 2022,
+    "lang": "en",
+    "type": "other",
+    "topic": "Canadian Policy and Governance",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2981758189",
+    "title": "Indicator mineral counts for regional till samples around the Izok Lake Zn-Cu-Pb-Ag VMS deposit, Nunavut",
+    "abstract": "The application of indicator mineral methods to exploration in glaciated terrain for volcanogenic massive sulphide (VMS) deposits is being tested and developed as part of the Geological Survey of Canada's Geomapping for Energy and Minerals Program (GEM 2008-2013). As part of this research project, and to demonstrate to the exploration community the importance of examining the entire heavy mineral concentrate for all indicator minerals, 25 selected archived heavy mineral concentrates from till samples originally collected in 1994 by the Geological Survey of Canada (GSC) around the Izok Lake Zn-Cu-Pb-Ag VMS deposit, Nunavut were re-examined. This open file reports the abundances of selected VMS indicator minerals picked from the concentrates in 2011. Interpretation of the data reported here and its significance to glacial dispersal of mineralized debris from the Izok Lake VMS deposit will be described in a subsequent GSC Open File.",
+    "year": 2012,
+    "lang": "en",
+    "type": "report",
+    "topic": "Geochemistry and Geologic Mapping",
+    "field": "Computer Science",
+    "ca_institutions": "Natural Resources Canada",
+    "funders": []
+  },
+  {
+    "id": "W4291915093",
+    "title": "Benefits of a 3-month cycle of weekly virtual museum tours in community dwelling older adults: Results of a randomized controlled trial",
+    "abstract": "Background: Museums can be instrumental in fostering social inclusion and may improve the overall health of the older population. Over the course of the 2019 coronavirus pandemic, many older adults suffered as a result of confinement measures, which may have accelerated the processes that lead to physical frailty and increased mental health risks. This study aims to examine whether a 3-month cycle of weekly virtual tours of the Montreal Museum of Fine Arts (MMFA) may have improved feelings of social inclusion, wellbeing and quality of life, and reduced physical frailty in older adults living within the community of Montreal. Methods and design: = 53) between January and April 2022. The intervention consisted of a 3-month cycle of weekly virtual museum tours of the MMFA. Social isolation, wellbeing, quality of life and frailty were evaluated using validated scales that were assessed on a web platform at baseline (M0) and after 3 months (M3) in the intervention group. The control group completed the same assessment according to the same schedule. The outcomes were the mean scores at M0 and M3, and changes in mean scores between M0 and M3. Results: The intervention group showed significant improvements in their social isolation, wellbeing, quality of life and frailty scores when compared to the control group, the highest benefits being observed with frailty. Conclusion: The results suggest that the 3-month cycle of weekly virtual MMFA tours may improve social inclusion, physical and mental health in community-dwelling older adults living in Montreal. Trial registration: https://clinicaltrials.gov/ct2/show/NCT05046288, identifier NCT05046288.",
+    "year": 2022,
+    "lang": "en",
+    "type": "article",
+    "venue": "Frontiers in Medicine",
+    "topic": "Art Therapy and Mental Health",
+    "field": "Arts and Humanities",
+    "ca_institutions": ["Concordia University", "National Museum of Fine Arts of Quebec", "Université de Montréal", "McGill University", "Institut Universitaire de Gériatrie de Montréal", "Jewish General Hospital"],
+    "funders": "Fonds de Recherche du Québec-Société et Culture"
+  },
+  {
+    "id": "W2511896912",
+    "title": "Rainfall-Runoff Dynamics Following Wildfire in Mountainous Headwater Catchments, Alberta, Canada.",
+    "abstract": "",
+    "year": 2015,
+    "lang": "en",
+    "type": "article",
+    "venue": "AGU Fall Meeting Abstracts",
+    "topic": "Landslides and related hazards",
+    "field": "Environmental Science",
+    "ca_institutions": "University of Alberta",
+    "funders": []
+  },
+  {
+    "id": "W2801307989",
+    "title": "Data rescue archive weather (DRAW)",
+    "abstract": "Purpose To rescue at-risk historical scientific data stored at the McGill Observatory, the objectives of the Data Rescue Archive Weather (DRAW) project are: to build a repository; to develop a protocol to preserve the data in weather registers; and to make the data available to research communities and the public. The paper aims to discuss these issues. Design/methodology/approach The DRAW project adopts an open archive information system compliant model as a conceptual framework for building a digital repository. The model consists of data collection, conversion, data capture, transcription, arrangement, description, data extraction, database design and repository setup. Findings A climate data repository, as the final product, is set up for digital images of registers and a database is designed for data storage. The repository provides dissemination of and access to the data for researchers, information professionals and the public. Research limitations/implications Doing a quality check is the most important aspect of rescuing historical scientific data to ensure the accuracy, reliability and consistency of data. Practical implications The DRAW project shows how the use of historical scientific data has become a key element in research analysis on scientific fields, such as climatology and environmental protection. Originality/value The historical climate data set of the McGill Observatory is by nature unique and complex for preservation and research purposes. The management of historical scientific data is a challenge to rescue and describe as a result of its heterogeneous and non-standardized form.",
+    "year": 2018,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Documentation",
+    "topic": "Research Data Management Practices",
+    "field": "Computer Science",
+    "ca_institutions": "McGill University",
+    "funders": []
+  },
+  {
+    "id": "W1553861155",
+    "title": "Thermal Design and Analysis of the Phoenix Mars Lander Meteorological Instrument",
+    "abstract": "&lt;div class=\"htmlview paragraph\"&gt;The Phoenix Mars Lander is scheduled to be launched in August 2007 and will land in the northern Vastitas Borealis region. The lander is equipped with a suite of instruments designed to investigate the mineralogy and geochemistry of the soil and to study the atmosphere. The Canadian Meteorological Instrument (MET) will measure the location and the extent of clouds and the distribution of scatterers in the atmosphere as well as measuring the air temperature and the barometric pressure. The MET will provide Canadian scientists with a unique opportunity to study the Martian atmosphere and enhance our understanding of the planet in key areas of Canadian expertise.&lt;/div&gt; &lt;div class=\"htmlview paragraph\"&gt;The MET instrument is composed of multiple elements in order to fulfil the science objectives. The MET Light Imaging Detection and Ranging (LIDAR) will probe the atmosphere by sending out laser pulses and measuring the backscattered returns. The MET mast that is instrumented with three thermocouples will measure the atmosphere temperature at three different heights and a Tell Tale installed at the tip will measure wind speed and direction. The upper Payload Electronic Box (PEB) will house the MET barometric pressure sensor and the MET main electronics.&lt;/div&gt; &lt;div class=\"htmlview paragraph\"&gt;This paper will describe Canada's participation in the mission, provide details about the instrument, and explain the rationale behind the thermal design. Furthermore, heat balance and transient results from detailed thermal analyses will be presented.&lt;/div&gt;",
+    "year": 2007,
+    "lang": "en",
+    "type": "article",
+    "venue": "SAE technical papers on CD-ROM/SAE technical paper series",
+    "topic": "Spacecraft Design and Technology",
+    "field": "Engineering",
+    "ca_institutions": "Canadian Space Agency",
+    "funders": ["Jet Propulsion Laboratory", "Dalhousie University"]
+  },
+  {
+    "id": "W1591601971",
+    "title": "Influenza serological studies to inform public health action: best practices to optimise timing, quality and reporting",
+    "abstract": "BACKGROUND: Serological studies can detect infection with a novel influenza virus in the absence of symptoms or positive virology, providing useful information on infection that goes beyond the estimates from epidemiological, clinical and virological data. During the 2009 A(H1N1) pandemic, an impressive number of detailed serological studies were performed, yet the majority of serological data were available only after the first wave of infection. This limited the ability to estimate the transmissibility and severity of this novel infection, and the variability in methodology and reporting limited the ability to compare and combine the serological data. OBJECTIVES: To identify best practices for conduct and standardisation of serological studies on outbreak and pandemic influenza to inform public policy. METHODS/SETTING: An international meeting was held in February 2011 in Ottawa, Canada, to foster the consensus for greater standardisation of influenza serological studies. RESULTS: Best practices for serological investigations of influenza epidemiology include the following: classification of studies as pre-pandemic, outbreak, pandemic or inter-pandemic with a clearly identified objective; use of international serum standards for laboratory assays; cohort and cross-sectional study designs with common standards for data collection; use of serum banks to improve sampling capacity; and potential for linkage of serological, clinical and epidemiological data. Advance planning for outbreak studies would enable a rapid and coordinated response; inclusion of serological studies in pandemic plans should be considered. CONCLUSIONS: Optimising the quality, comparability and combinability of influenza serological studies will provide important data upon emergence of a novel or variant influenza virus to inform public health action.",
+    "year": 2012,
+    "lang": "en",
+    "type": "article",
+    "venue": "Influenza and Other Respiratory Viruses",
+    "topic": "Influenza Virus Research Studies",
+    "field": "Medicine",
+    "ca_institutions": ["Public Health Ontario", "Public Health Agency of Canada"],
+    "funders": ["Medical Research Council", "Wellcome Trust"]
+  },
+  {
+    "id": "W4390917356",
+    "title": "Digital technologies and food security during crisis: COVID-19 experiences from smallholder farmers in Odisha, India",
+    "abstract": "This research explores the significance of digital agricultural technology concerning food security for smallholder farmers and their communities in Odisha, India, amidst the COVID-19 pandemic. The study is a collaborative effort between academic researchers based in Canada, 15 small-scale farmers from Odisha, and the India-based social enterprise, eKutir. The farmers’ experiences utilizing eKutir’s technology are examined to understand how it aids them in meeting their food security requirements, sustaining their livelihoods and participating in local food systems before and during the pandemic. eKutir shares transactional data that illustrate how their platform facilitates food movement through local food systems during the pandemic while exploring its potential to enhance food security and food system resilience further. The primary goal of this research is to strengthen the adaptive capacity of smallholder farmers and the food systems dependent on them, particularly during non-conflict crises like the COVID pandemic, that affect economic, physical, and social aspects of life. This research is also intended to contribute to the continued development of digital technology in a way that supports smallholder farmer interests. Our findings reveal that access to eKutir’s platform enabled farmers to remain connected to essential markets, continue earning income, and support local food systems during the COVID pandemic. While potential negative consequences associated with data-focused agricultural technologies can acrue, when technology design is guided by and tailored to the needs of resource-constrained farmers, it can substantially contribute to their resilience in the face of contemporary challenges and risks.",
+    "year": 2024,
+    "lang": "en",
+    "type": "article",
+    "venue": "Frontiers in Sustainable Food Systems",
+    "topic": "COVID-19 Pandemic Impacts",
+    "field": "Economics, Econometrics and Finance",
+    "ca_institutions": ["Centre for Global Health Research", "York University"],
+    "funders": "York University"
+  },
+  {
+    "id": "W4205709424",
+    "title": "Cold Urticaria in a Pediatric Cohort: Clinical Characteristics, Management, and Natural History",
+    "abstract": "Background Cold urticaria (coldU) is associated with substantial morbidity and risk of fatality. Data on coldU in children are sparse. We aimed to evaluate the clinical characteristics, management, risk of associated anaphylaxis, and resolution rate of coldU in a pediatric cohort. Additionally, we sought to compare these metrics to children with chronic spontaneous urticaria (CSU). Methods We prospectively enrolled children with coldU from 2013-2021 in a cohort study at the Montreal Children’s Hospital and an affiliated allergy clinic. Data for comparison with participants with solely CSU were extracted from a previous study. Data on demographics, comorbidities, severity of presentation, management, and laboratory values were collected at study entry. Patients were contacted yearly to assess for resolution. Results Fifty-two children with cold urticaria were recruited, 51.9% were female and the median age of symptom onset was 9.5 years. Most patients were managed with second generation H1-antihistamines (sgAHs). Well-controlled disease on sgAHs was negatively associated with concomitant CSU (adjusted odds ratio (aOR)=0.69 [95%CI: 0.53, 0.92]). Elevated eosinophils were associated with cold-induced anaphylaxis (coldA) (aOR=1.38 [95%CI: 1.04, 1.83]), which occurred in 17.3% of patients. The resolution rate of coldU was 4.8 per 100 patient-years, which was lower than that of CSU (adjusted hazard ratio=0.43 [95%CI: 0.21, 0.89], P&lt;10-2). Conclusion Pediatric coldU bears a substantial risk of anaphylaxis and a low resolution rate. Absolute eosinophil count and co-existing CSU may be useful predictive factors.",
+    "year": 2022,
+    "lang": "en",
+    "type": "preprint",
+    "topic": "Urticaria and Related Conditions",
+    "field": "Medicine",
+    "ca_institutions": ["Montreal Children's Hospital", "McGill University", "McGill University Health Centre"],
+    "funders": "Sanofi"
+  },
+  {
+    "id": "W2953499948",
+    "title": "England and Canada",
+    "abstract": "",
+    "year": 2010,
+    "lang": "en",
+    "type": "book",
+    "topic": "Political Systems and Governance",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4281692619",
+    "title": "Supplementary material to \"NH <sub>3<\/sub> spatio-temporal variability over Paris, Mexico and Toronto and its link to PM <sub>2.5<\/sub> during pollution events\"",
+    "abstract": "",
+    "year": 2022,
+    "lang": "en",
+    "type": "preprint",
+    "topic": "Air Quality Monitoring and Forecasting",
+    "field": "Environmental Science",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2035645071",
+    "title": "The multiple mini‐interview for selection of international medical graduates into family medicine residency education",
+    "abstract": "CONTEXT: The multiple mini-interview (MMI) was used to measure professionalism in international medical graduate (IMG) applicants for family medicine residency in Alberta for positions accessed through the Alberta International Medical Graduate (AIMG) Program. This paper assesses the evidence for the MMI's reliability and validity in this context. METHODS: A group of 71 IMGs participated in our 12-station MMI designed to assess professionalism competency. A 10-point scale evaluated applicants on ability to address the objectives of the situation, interpersonal skills, suitability for a residency and for family medicine, and overall performance. We conducted generalisability and decision studies to assess the reliability of MMI scores. We assessed the validity by examining the differences in MMI scores associated with session, track and socio-demographic characteristics of applicants and by measuring the correlations between MMI scores and scores on compulsory examinations, including the AIMG objective structured clinical examination, the Medical Council of Canada Evaluating Examination (MCCEE) and the Medical Council of Canada Qualifying Examination Part I (MCCQE I). We measured the correlation between MMI and non-requisite MCCQE Part II (MCCQE II) scores that were provided. RESULTS: The reliability as indicated by the generalisability coefficient associated with average station scores was 0.70 with one interviewer per station. There were no statistically significant differences in total MMI scores or mean station sum scores based on session, track, applicant age, gender, years since medical school completion, or language of medical school. There were low, non-significant correlations with OSCE overall (r = 0.15), MCCEE (r = 0.01) and MCCQE I (r = 0.06) scores and a higher non-significant correlation with MCCQE II scores (r = 0.33). CONCLUSIONS: There is evidence that the MMI offers a reliable and valid assessment of professionalism in IMG doctors applying for Canadian family medicine residencies and that this clinically situated MMI assessed facets of competency other than those assessed by the OSCE.",
+    "year": 2009,
+    "lang": "en",
+    "type": "article",
+    "venue": "Medical Education",
+    "topic": "Global Health Workforce Issues",
+    "field": "Health Professions",
+    "ca_institutions": "University of Calgary",
+    "funders": []
+  },
+  {
+    "id": "W3207702613",
+    "title": "Surveillance of laboratory exposures to human pathogens and toxins, Canada 2020",
+    "abstract": "BACKGROUND: . The objective of this report is to describe laboratory exposures that were reported in Canada in 2020 and the individuals who were affected. METHODS: Laboratory incident exposures occurring in licensed Canadian laboratories in 2020 were analyzed. The exposure incident rate was calculated and the descriptive statistics were performed. Exposure incidents were analyzed by sector, activity type, occurrence type, root cause and pathogen/toxin. Affected persons were analyzed by education, route of exposure sector, role and laboratory experience. The time between the incident and the reporting date was also analyzed. RESULTS: Forty-two incidents involving 57 individuals were reported to Laboratory Incident Notification Canada in 2020. There were no suspected or confirmed laboratory acquired infections. The annual incident exposure rate was 4.2 incidents per 100 active licenses. Most exposure incidents occurred during microbiology activities (n=22, 52.4%) and/or were reported by the hospital sector (n=19, 45.2%). Procedural issues (n=16, 27.1%) and sharps-related incidents (n=13, 22.0%) were the most common occurrences. Most affected individuals were exposed via inhalation (n=28, 49.1%) and worked as technicians or technologists (n=36, 63.2%). Issues with standard operating procedures was the most common root cause (n=24, 27.0%), followed by human interactions (n=21, 23.6%). The median number of days between the incident and the reporting date was six days. CONCLUSION: The rate of laboratory incidents were lower in 2020 than 2019, although the ongoing pandemic may have contributed to this decrease because of the closure of non-essential workplaces, including laboratories, for a portion of the year. The most common occurrence type was procedural while issues with not complying to standard operating procedures and human interactions as the most cited root causes.",
+    "year": 2021,
+    "lang": "en",
+    "type": "article",
+    "venue": "Canada Communicable Disease Report",
+    "topic": "Occupational exposure and asthma",
+    "field": "Medicine",
+    "ca_institutions": "Public Health Agency of Canada",
+    "funders": []
+  },
+  {
+    "id": "W3082934409",
+    "title": "LibGuides: University of Toronto: Institution Main",
+    "abstract": "",
+    "year": 2014,
+    "lang": "en",
+    "type": "libguides",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4390911248",
+    "title": "External Validation of the Post-Concussion Symptoms Rule for Predicting Mild Traumatic Brain Injury Outcome",
+    "abstract": "Persistent symptoms are common after a mild traumatic brain injury (mTBI). The Post-Concussion Symptoms (PoCS) Rule is a newly developed clinical decision rule for the prediction of persistent post-concussion symptoms (PPCS) 3 months after an mTBI. The PoCS Rule includes assessment of demographic and clinical characteristics and headache presence in the emergency department (ED), and follow-up assessment of symptoms at 7 days post-injury using two thresholds (lower/higher) for symptom scoring. We examined the PoCS Rule in an independent sample. We analyzed a clinical trial that recruited participants with mTBI from EDs in Greater Vancouver, Canada. The primary analysis used data from 236 participants, who were randomized to a usual care control group, and completed the Rivermead Postconcussion Symptoms Questionnaire at 3 months. The primary outcome was PPCS, as defined by the PoCS authors. We assessed the overall performance of the PoCS rule (area under the receiver operating characteristic curve [AUC]), sensitivity, and specificity. More than 40% of participants (median age 38 years, 59% female) reported PPCS at 3 months. Most participants (88%) were categorized as being at medium risk based on the ED assessment, and a majority were considered as being at high risk according to the final PoCS Rule (81% using a lower threshold and 72% using a higher threshold). The PoCS Rule showed a sensitivity of 93% (95% confidence interval [CI], 88-98; lower threshold) and 85% (95% CI, 78-92; higher threshold), and a specificity of 28% (95% CI, 21-36) and 37% (95% CI, 29-46), respectively. The overall performance was modest (AUC 0.61, 95% CI 0.59, 0.65). In conclusion, the PoCS Rule was sensitive for PPCS, but had a low specificity in our sample. Follow-up assessment of symptoms can improve risk stratification after mTBI.",
+    "year": 2024,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Neurotrauma",
+    "topic": "Traumatic Brain Injury Research",
+    "field": "Medicine",
+    "ca_institutions": ["Université Laval", "Vancouver Coastal Health Research Institute", "University of British Columbia", "Vancouver Coastal Health"],
+    "funders": []
+  },
+  {
+    "id": "W3017269241",
+    "title": "Test of CP invariance in vector-boson fusion production of the Higgs boson in the H → ττ channel in proton–proton collisions at <mml:math xmlns:mml=\"http://www.w3.org/1998/Math/MathML\" altimg=\"si1.svg\"><mml:msqrt><mml:mrow><mml:mi>s<\/mml:mi><\/mml:mrow><\/mml:msqrt><mml:mo linebreak=\"goodbreak\" linebreakstyle=\"after\">=<\/mml:mo><mml:mn>13<\/mml:mn><mml:mspace width=\"0.2em\"/><mml:mtext>TeV<\/mml:mtext><\/mml:math> with the ATLAS detector",
+    "abstract": "A test of CP invariance in Higgs boson production via vector-boson fusion is performed in the H→ττ decay channel. This test uses the Optimal Observable method and is carried out using 36.1fb−1 of s=13TeV proton–proton collision data collected by the ATLAS experiment at the LHC. Contributions from CP-violating interactions between the Higgs boson and electroweak gauge bosons are described by an effective field theory, in which the parameter d˜ governs the strength of CP violation. No sign of CP violation is observed in the distributions of the Optimal Observable, and d˜ is constrained to the interval [−0.090, 0.035] at the 68% confidence level (CL), compared to an expected interval of d˜∈[−0.035,0.033] based upon the Standard Model prediction. No constraints can be set on d˜ at 95% CL, while an expected 95% CL interval of d˜∈[−0.21,0.15] for the Standard Model hypothesis was expected.",
+    "year": 2020,
+    "lang": "lv",
+    "type": "article",
+    "venue": "Physics Letters B",
+    "topic": "Particle physics theoretical and experimental studies",
+    "field": "Physics and Astronomy",
+    "ca_institutions": "University of Toronto",
+    "funders": ["H2020 Marie Skłodowska-Curie Actions", "Agencia Nacional de Promoción Científica y Tecnológica", "Fundação para a Ciência e a Tecnologia", "Australian Research Council", "Horizon 2020 Framework Programme", "Japan Society for the Promotion of Science", "National Research Center \"Kurchatov Institute\"", "Services Fédéraux des Affaires Scientifiques, Techniques et Culturelles", "European Regional Development Fund", "British Columbia Knowledge Development Fund", "European Research Council", "Max-Planck-Gesellschaft", "Centre National de la Recherche Scientifique", "Institut National de Physique Nucléaire et de Physique des Particules", "Ministry of Science and Technology, Taiwan", "Ministerstwo Edukacji i Nauki", "Canada Foundation for Innovation", "Narodowe Centrum Nauki", "Conselho Nacional de Desenvolvimento Científico e Tecnológico", "Bundesministerium für Wissenschaft, Forschung und Wirtschaft", "Austrian Science Fund", "Deutsche Forschungsgemeinschaft", "Nederlandse Organisatie voor Wetenschappelijk Onderzoek", "Chinese Academy of Sciences", "Natural Sciences and Engineering Research Council of Canada", "Ministerio de Economía y Competitividad", "Ministry of Education, Culture, Sports, Science and Technology", "Bundesministerium für Bildung und Forschung", "Departamento Administrativo de Ciencia, Tecnología e Innovación (COLCIENCIAS)", "German-Israeli Foundation for Scientific Research and Development", "Ministry of Education and Science", "Danmarks Grundforskningsfond", "Javna Agencija za Raziskovalno Dejavnost RS", "Science and Technology Facilities Council", "Schweizerischer Nationalfonds zur Förderung der Wissenschaftlichen Forschung", "Ministry of Science and Technology of the People's Republic of China", "Agence Nationale de la Recherche", "European Cooperation in Science and Technology", "Generalitat Valenciana", "Generalitat de Catalunya", "Department of Science and Technology, Ministry of Science and Technology, India", "General Secretariat for Research and Technology", "European Commission", "Fundação de Amparo à Pesquisa do Estado de São Paulo", "Leverhulme Trust", "Israel Science Foundation", "Comisión Nacional de Investigación Científica y Tecnológica", "Türkiye Atom Enerjisi Kurumu", "Joint Institute for Nuclear Research", "Arizona-Nevada Academy of Science", "European Social Fund", "Centre National pour la Recherche Scientifique et Technique", "Royal Society", "National Science Foundation", "Compute Canada", "Alexander von Humboldt-Stiftung", "TRIUMF", "Helmholtz-Gemeinschaft", "National Research Council Canada", "Istituto Nazionale di Fisica Nucleare Sezione di Padova", "Canarie", "Centres de Recerca de Catalunya", "CERN", "National Natural Science Foundation of China", "U.S. Department of Energy"]
+  },
+  {
+    "id": "W7162445270",
+    "title": "Building Compliant Data Pipelines in Regulated Sectors: A Privacy-First Engineering Approach",
+    "abstract": "As data becomes increasingly central to operations in regulated sectors such as healthcare, finance, and government, the imperative for privacy-first data engineering has never been more urgent. This presents a comprehensive exploration of how compliant data pipelines can be architected and operationalized with privacy at their core, addressing the mounting complexity of regulatory landscapes defined by frameworks such as the General Data Protection Regulation (GDPR), Health Insurance Portability and Accountability Act (HIPAA), and the California Consumer Privacy Act (CCPA). We argue that traditional data pipelines—built for scale and speed—must evolve into systems that prioritize legal compliance, data protection, and ethical handling of sensitive information. Central to this transformation is the application of Privacy-by-Design principles, which advocate embedding data minimization, access control, encryption, and purpose limitation directly into the architecture of data systems. This outlines how consent-aware ingestion, anonymization during transformation, and policy-based access control in storage and output stages can help ensure compliance without sacrificing analytical capabilities. This also reviews contemporary tools and frameworks that enable compliance automation, including policy-as-code engines like Open Policy Agent (OPA), metadata governance platforms like DataHub and Amundsen, and audit-enabling observability stacks. Through case studies in healthcare and finance, we illustrate how privacy-first pipelines are implemented in real-world environments to achieve both regulatory adherence and business agility. This concludes by examining emerging frontiers, such as AI-powered compliance, federated data processing, and privacy-enhancing technologies (PETs), emphasizing the strategic importance of proactive and scalable compliance architectures. We advocate for a cultural and technical shift where privacy is not an afterthought but a foundational design requirement—transforming compliance from a bottleneck into a competitive advantage in data-driven innovation.",
+    "year": 2024,
+    "type": "article",
+    "venue": "International Journal of Scientific Research in Computer Science Engineering and Information Technology",
+    "topic": "Privacy, Security, and Data Protection",
+    "field": "Social Sciences",
+    "ca_institutions": ["JDA Software (Canada)", "Alberta Energy"],
+    "funders": []
+  },
+  {
+    "id": "W4377098686",
+    "title": "What Explains Elite Affective Polarization? Evidence from Canadian Politicians",
+    "abstract": "Affective polarization is on the rise globally, and has been associated with diminished trust in government and discrimination against out-partisans. While elected politicians are typically thought to be a major source of mass-level affective polarization, existing research has focused almost exclusively on the measurement and explanation of affective polarization among citizens. As a result, we know far less about elite affective polarization: the degree of partisan hostility held by elected politicians themselves. In this paper, we explore whether affective polarization persists among political elites even in the absence of political institutions that incentivize partisan animosity. We do so by leveraging the distinctive institutional setting of Canadian municipal politics, using an original survey of sitting local politicians to compare affective polarization between politicians and citizens and to explore, for the first time, individual-level predictors of elite affective polarization. We find that Canadian local politicians are, on average, less affectively polarized than the citizens they represent. However, levels of affective polarization among these politicians vary considerably, with higher levels of affective polarization among politicians who are ideologues, partisans, and who harbour strong progressive ambition. We conclude by discussing the implications of our findings for research on affective polarization and describe the need for comparative studies of affective polarization among political elites.",
+    "year": 2023,
+    "lang": "en",
+    "type": "preprint",
+    "topic": "Social Media and Politics",
+    "field": "Social Sciences",
+    "ca_institutions": "University of Calgary",
+    "funders": []
+  },
+  {
+    "id": "W4391865105",
+    "title": "Making Babies",
+    "abstract": "Although the infant has been a consistent figure in literature (and, for many people, a significant figure in personal life), there’s been little attention focused on infants, or on their place in Canadian fiction, until now. In this book, Sandra Sabatini examines Canadian fiction to trace the ideological charge behind the represented infant. Examining writers from L.M. Montgomery and Frederick Philip Grove to Thomas King and Terry Griggs, Sabatini compares women’s writing about babies with the way infants appear in texts by men over the course of a century. She discovers a range of changing attitudes toward babies. After being seen as a source of financial burden, social shame, or sentimental fantasy, infants have increasingly become a source of value and meaning. The book challenges the perception of babies as passive objects of care and argues for a reading of the infant as a subject in itself. It also reflects upon how the representations of infancy in Canadian literature offer an intriguing portrait of how we imagine ourselves.",
+    "year": 2006,
+    "lang": "en",
+    "type": "book",
+    "topic": "Child Welfare and Adoption",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W6948704264",
+    "title": "Lake Ontario April Prey Fish Bottom Trawl Survey, 1978-2022",
+    "abstract": "This data release includes Lake Ontario prey fish data including species captured, relative abundance, spatial distribution, size structure, and age data from the April or spring prey fish bottom trawl survey, 1978 through 2022. Data from 1978 - 2015 are from U.S. waters of Lake Ontario while data from 2016 - 2022 include both U.S. and Canadian waters of Lake Ontario. Details about the vessel and gear descriptions, sampling protocols, and catch processing protocols are provided in the associated metadata. Portions of this data release follows the data model of the USGS Great Lakes Science Center Research Vessel Catalog (RVCAT). The trawl data included in this data release are a subset of the larger RVCAT data base. The RVCAT data can be found here: https://doi.org/10.5066/F75M63X0.",
+    "year": 2022,
+    "lang": "en",
+    "type": "dataset",
+    "venue": "USGS DOI Tool Production Environment",
+    "topic": "Research Data Management Practices",
+    "field": "Computer Science",
+    "ca_institutions": ["Ministry of Energy, Northern Development and Mines", "Ministry of Natural Resources and Forestry"],
+    "funders": []
+  },
+  {
+    "id": "W4408541686",
+    "title": "An analytical approach to designing a circular waste management system",
+    "abstract": "The increasing generation of medical waste, driven by higher consumption levels, changing lifestyles, and natural disasters, threatens both the environment and human health. Medical waste from healthcare centers is particularly concerning due to its hazardous nature, necessitating effective management strategies. This study addresses key challenges in Medical Waste Management Systems (MWMS), including fluctuating waste generation, diverse waste types, incompatible handling practices, container and truck management, and the need for sustainable circular waste management. To tackle these issues, we developed a two-stage Stochastic Mixed-Integer Linear Programming (MILP) model to optimize MWMS network design. The model incorporates revenue generation from recycling, Waste-to-Energy (WTE) conversion, and container reuse while minimizing costs and environmental impacts. The model’s robustness is enhanced through data-driven parameter estimation, treatment technology selection, and revenue forecasting. To efficiently address the computational complexities associated with large-scale stochastic optimization, we employed a combination of the Sample Average Approximation (SAA) technique and a novel Hybrid algorithm that integrates deterministic optimization with metaheuristic methods, enhancing solution robustness and scalability. The model’s efficacy was validated through a case study in Hamilton, Ontario, Canada, where results demonstrated a 90.5 % reduction in computational time and a 56.7 % reduction in binary variables compared to the original model. The optimized solution achieved an annual waste disposal capacity of 300,000 tons, with an average revenue of $55 million, including $24.1 million from waste disposal, $17.1 million from recycled products and electricity, and $12.3 million from container reuse. Additionally, the network design reduced operational costs to $29.6 million and transportation costs to $6.4 million. This research contributes to the field by addressing gaps related to waste-to-container compatibility, revenue generation from reused materials, and uncertainty management. Future work may focus on enhancing predictive models for waste generation, integrating real-time data analytics, and expanding the framework to other regions with diverse waste management challenges.",
+    "year": 2025,
+    "lang": "en",
+    "type": "article",
+    "venue": "Cleaner Waste Systems",
+    "topic": "Healthcare and Environmental Waste Management",
+    "field": "Medicine",
+    "ca_institutions": "McMaster University",
+    "funders": []
+  },
+  {
+    "id": "W7034592272",
+    "title": "Vistra to Report Second Quarter 2021 Results on August 5, 2021",
+    "abstract": "",
+    "year": 2021,
+    "lang": "en",
+    "type": "other",
+    "topic": "Marine Biology and Environmental Chemistry",
+    "field": "Engineering",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2037754303",
+    "title": "Harmonic functions on topological groups and symmetric spaces",
+    "abstract": "",
+    "year": 2010,
+    "lang": "de",
+    "type": "article",
+    "venue": "Mathematische Zeitschrift",
+    "topic": "Advanced Operator Algebra Research",
+    "field": "Mathematics",
+    "ca_institutions": "University of Alberta",
+    "funders": []
+  },
+  {
+    "id": "W1629097694",
+    "title": "Planck 2015 resultsXV. Gravitational lensing",
+    "abstract": "Acknowledgements. The Planck Collaboration acknowledges the support of:\\n\\t\\t\\t\\t ESA; CNES and CNRS/INSU-IN2P3-INP (France); ASI, CNR, and INAF\\n\\t\\t\\t\\t (Italy); NASA and DoE (USA); STFC and UKSA (UK); CSIC, MINECO,\\n\\t\\t\\t\\t JA, and RES (Spain); Tekes, AoF, and CSC (Finland); DLR and MPG\\n\\t\\t\\t\\t (Germany); CSA (Canada); DTU Space (Denmark); SER/SSO (Switzerland);\\n\\t\\t\\t\\t RCN (Norway); SFI (Ireland); FCT/MCTES (Portugal); ERC and PRACE\\n\\t\\t\\t\\t (EU). A description of the Planck Collaboration and a list of its members, indicating which technical or scientific activities they have been involved in, can be found at http://www.cosmos.esa.int/web/planck/\\n\\t\\t\\t\\t planck-collaboration. Some of the results in this paper have been derived\\n\\t\\t\\t\\t using the HEALPix package. We acknowledge support from the Science and\\n\\t\\t\\t\\t Technology Facilities Council [grant number ST/L000652/1]. The research leading to these results has received funding from the European Research Council\\n\\t\\t\\t\\t under the European Union’s Seventh Framework Programme (FP/2007-2013)/\\n\\t\\t\\t\\t ERC Grant Agreement No. [616170]. Part of this work was undertaken on the\\n\\t\\t\\t\\t STFC DiRAC HPC Facilities at the University of Cambridge funded by UK BIS\\n\\t\\t\\t\\t National E-infrastructure capital grants.",
+    "year": 2016,
+    "lang": "en",
+    "type": "article",
+    "venue": "LA Referencia (Red Federada de Repositorios Institucionales de Publicaciones Científicas)",
+    "topic": "Cosmology and Gravitation Theories",
+    "field": "Physics and Astronomy",
+    "ca_institutions": ["University of British Columbia", "McGill University", "University of Toronto"],
+    "funders": ["Fundação para a Ciência e a Tecnologia", "Institut National de Physique Nucléaire et de Physique des Particules", "Ministério da Ciência, Tecnologia e Ensino Superior", "Centre National de la Recherche Scientifique", "National Aeronautics and Space Administration", "China Scholarship Council", "Science and Technology Facilities Council", "Tekes", "Centre National d’Etudes Spatiales", "Partnership for Advanced Computing in Europe AISBL", "European Commission", "European Space Agency", "Max-Planck-Gesellschaft", "UK Space Agency", "Science Foundation Ireland"]
+  },
+  {
+    "id": "W4389951586",
+    "title": "2023 European Society for Medical Oncology (ESMO) Congress",
+    "abstract": "INTRODUCTIONthe european society for medical oncology (esmo) Congress, held in madrid, spain and online on october 20-24, 2023, provided a comprehensive update on the latest breakthroughs in cancer research.the program focused on recent advances in basic science, translational research, and clinical study results, as well as prevention, screening, and early diagnosis, and aimed to help participants understand and optimize the clinical implementation of these advancements.this year's congress included over 2500 abstracts, with more than 33 000 participants from 155 countries.following the congress on november 1, the Canadian Urological Association (CUA) held an online webinar, where Canadian experts reviewed the latest evidence in urologic cancers.this report highlights the most relevant and cutting-edge advances in prostate, kidney, and bladder cancers.the entire webinar can be viewed on Uropedia Canada, and meeting abstracts can be found on esmo oncologypro. PROSTATE CANCERdr. Kim Chi presented novel and potentially impactful findings in prostate cancer.the final analysis of the mAgnItUde trial, a phase 3, randomized, doubleblind, placebo-controlled study, evaluated the combination of niraparib (nIrA), a poly(Adp-ribose) polymerase inhibitor (pArpi), with abiraterone acetate plus prednisone (AAp) as first-line therapy in patients with metastatic castration-resistant prostate cancer (mCrpC) and homologous recombination repair (Hrr) gene alterations. 1mCrpC patients with Hrr gene alterations, BRCA1 and BRCA2 in particular, have poor outcomes compared to patients without these gene alterations.At primary analysis, mAgnItUde demonstrated significant improvement in radiographic progressionfree survival (rpfs) with nIrA + AAp compared with placebo + AAp in patients with BRCA-mutated mCrpC (hazard ratio [Hr] 0.53, p=0.001).the final, pre-planned, event-driven overall survival (os) analysis was conducted after a median followup of 35.9 months, with a focus on patients with BRCA-mutated mCrpC.the median treatment duration was 20.5 months for the nIrA + AAp arm and 14.4 months for the placebo + AAp arm.final os analysis demonstrated no significant difference, with a median survival of 30 months for those on nIrA compared to 28.6 months for those on placebo (Hr 0.788).A pre-planned multivariate analysis adjusting for baseline imbalances demonstrated an os benefit favoring nIrA + AAp (Hr 0.663, p=0.0237), this despite 70% of nIrA vs. 86% of placebo patients receiving subsequent life-prolonging therapy, including over 40% of placebo patients receiving a subsequent pArpi or cisplatin-based chemotherapy.other endpoints, such as time to symptomatic progression and time to cytotoxic chemotherapy, were also in favor of nIrA.Adverse events (Aes) were as expected, with greater Aes associated with nIrA.this analysis supports the positive benefit-risk profile of first-line nIrA with AAp as a new standard of care for patients with BRCA-mutated mCrpC.this further demonstrates the benefit of earlier use of pArpi with androgen receptor pathway inhibition (ArpI) as first-line therapy for mCrpC in patients with BRCA1/2 mutations in line with the propel 2 and tAlApro-2 3 studies.these studies emphasize the need for tumor and germline testing to identify HHr alterations for patients with metastatic prostate cancer.A health-related quality-of-life (Qol) analysis was performed in patients participating in the emBArK study. 4In this study, patients with non-metastatic hormone-sensitive prostate cancer (nmHspC) with",
+    "year": 2023,
+    "lang": "en",
+    "type": "article",
+    "venue": "Canadian Urological Association Journal",
+    "topic": "Prostate Cancer Treatment and Research",
+    "field": "Medicine",
+    "ca_institutions": ["Université de Montréal", "Centre Hospitalier de l’Université de Montréal", "University of Calgary", "University of Ottawa", "Prevention of Organ Failure", "Ottawa Hospital", "University of British Columbia"],
+    "funders": ["Daiichi Sankyo Europe", "EMD Serono", "Ipsen", "Astellas Pharma", "Seagen", "Gilead Sciences", "Eisai", "Sanofi", "AstraZeneca", "Pfizer"]
+  },
+  {
+    "id": "W2160223391",
+    "title": "LoCuSS: Testing hydrostatic equilibrium in galaxy clusters",
+    "abstract": "Abstract We test the assumption of hydrostatic equilibrium in an X-ray luminosity selected sample of 50 galaxy clusters at 0.15 &amp;lt; z &amp;lt; 0.3 from the Local Cluster Substructure Survey (LoCuSS). Our weak-lensing measurements of M500 control systematic biases to sub-4 per cent, and our hydrostatic measurements of the same achieve excellent agreement between XMM–Newton and Chandra. The mean ratio of X-ray to lensing mass for these 50 clusters is $\\mathrel {\\beta _{\\rm X}}\\;= 0.95\\pm 0.05$, and for the 44 clusters also detected by Planck, the mean ratio of Planck mass estimate to LoCuSS lensing mass is $\\mathrel {\\beta _{\\rm P}}\\;= 0.95\\pm 0.04$. Based on a careful like-for-like analysis, we find that LoCuSS, the Canadian Cluster Comparison Project, and Weighing the Giants agree on $\\mathrel {\\beta _{\\rm P}}\\;\\simeq 0.9{\\rm -}0.95$ at 0.15 &amp;lt; z &amp;lt; 0.3. This small level of hydrostatic bias disagrees at ∼5σ with the level required to reconcile Planck cosmology results from the cosmic microwave background and galaxy cluster counts.",
+    "year": 2015,
+    "lang": "en",
+    "type": "article",
+    "venue": "Monthly Notices of the Royal Astronomical Society Letters",
+    "topic": "Galaxies: Formation, Evolution, Phenomena",
+    "field": "Physics and Astronomy",
+    "ca_institutions": ["University of Waterloo", "University of Victoria"],
+    "funders": ["Comisión Nacional de Investigación Científica y Tecnológica", "National Aeronautics and Space Administration", "Science and Technology Facilities Council", "Ministry of Education, Culture, Sports, Science and Technology", "National Science Foundation"]
+  },
+  {
+    "id": "W4242907883",
+    "title": "Ammi Canada – Cacmid Annual Conference",
+    "abstract": "Clostridium difficile (CD) is responsible for the majority of antibioticassociated infections acquired at hospitals. Infected patients frequently shed CD spores into the environment, making it a major transmission factor and essential to its ability to cause outbreaks. Using high-resolution typing techniques (MMLVA), we found that strains isolated during outbreaks consisted of a main strain ('outbreak', with multiple identical isolates) and several sporadic strains. The outbreak strain was commonly of NAP1 type. Previous research focused on identifying markers of a 'hypervirulent' phenotype. However, because NAP1 strains are highly variable, we sought to determine markers of an 'outbreak' strains. Outbreak and sporadic strains from eight outbreaks were cultured until sporulation had occurred. Vegetative cells morphology and sporulation rates were documented by microscopy, while germination dynamics were estimated using Terbium fluorescence assay. No statistically significant difference in morphology, sporulation and germination of outbreak and non-outbreak strains was identified. Thus, we assessed other characteristics which might promote transmissibility of CD strains, such as spore adhesion and surface features as resolved by electron microscopy. Our data indicate that CD exosporium or spore crust can be responsible for adhesion of the spore to surfaces and its persistence in a hospital environment. Further studies of strains with mutated genes responsible for these features of CD spores should identify roles of these spore's components and assist with development of diagnostic tests to differentiate strains capable causing outbreaks from sporadic strains and develop effective measures of infection control to prevent transmission of this very important hospital-associated pathogen.",
+    "year": 2014,
+    "lang": "en",
+    "type": "article",
+    "venue": "Canadian Journal of Infectious Diseases and Medical Microbiology",
+    "topic": "Clostridium difficile and Clostridium perfringens research",
+    "field": "Medicine",
+    "ca_institutions": ["Institute for Clinical Evaluative Sciences", "Provincial Health Services Authority", "Children's & Women's Health Centre of British Columbia", "St. Joseph’s Healthcare Hamilton", "Royal Victoria Regional Health Centre", "St. Paul's Hospital", "University of Calgary", "Royal Jubilee Hospital", "Mount Sinai Hospital", "University of Alberta Hospital", "Ottawa Hospital", "BC Centre for Disease Control", "Sunnybrook Health Science Centre", "Royal University Hospital", "Island Health", "University of Toronto", "Public Health Ontario", "North York General Hospital", "Toronto Public Health"],
+    "funders": []
+  },
+  {
+    "id": "W4244087032",
+    "title": "Welcome from - Ottawa, Canada 2007",
+    "abstract": "",
+    "year": 2007,
+    "lang": "en",
+    "type": "article",
+    "topic": "Human auditory perception and evaluation",
+    "field": "Engineering",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W1977546494",
+    "title": "Structure and dynamics changes induced by 2,2,2-trifluoro-ethanol (TFE) on the N-terminal half of hepatitis C virus core proteinThis paper is one of a selection of papers published in this special issue entitled “Canadian Society of Biochemistry, Molecular &amp; Cellular Biology 52nd Annual Meeting — Protein Folding: Principles and Diseases” and has undergone the Journal's usual peer review process.",
+    "abstract": "The Core protein of hepatitis C virus is involved in several interactions other than the encapsidation of viral RNA. We recently proposed that this is related to the fact that the N-terminal half of this protein (C82) is an intrinsically unstructured protein (IUP) domain. IUP domains can adopt a secondary structure when they are interacting with another molecule, such as a nucleic acid or a protein. It is also possible to mimic these conditions by modifying the environment of the protein. We investigated the propensity of this protein to fold as a function of salt concentration, detergent, pH, and 2,2,2-trifluoro-ethanol (TFE); only the addition of TFE resulted in a structural change. The effect of TFE addition was studied by circular dichroism, structural, and dynamic data obtained by NMR. The data indicate that C82 can adopt an alpha-helical structure; this conformation is likely relevant to one of the functional roles of the HCV Core protein.",
+    "year": 2010,
+    "lang": "en",
+    "type": "article",
+    "venue": "Biochemistry and Cell Biology",
+    "topic": "Hepatitis C virus research",
+    "field": "Medicine",
+    "ca_institutions": "Université Laval",
+    "funders": "Canadian Institutes of Health Research"
+  },
+  {
+    "id": "W4414036698",
+    "title": "User Guide: A Curated Dataset of Regional Meteor Events with Simultaneous Optical and Infrasound Observations",
+    "abstract": "This user guide supports a curated dataset of 71 meteor events recorded between 2006 and 2011 in Southwestern Ontario, Canada. Each event was simultaneously observed by ground-based optical cameras and an infrasound array, providing a rare opportunity to examine meteor trajectories and acoustic signals from the same atmospheric entry events.",
+    "year": 2025,
+    "lang": "en",
+    "type": "report",
+    "topic": "Geochemistry and Geologic Mapping",
+    "field": "Computer Science",
+    "ca_institutions": "Western University",
+    "funders": ["Laboratory Directed Research and Development", "National Nuclear Security Administration", "Sandia National Laboratories", "U.S. Department of Energy"]
+  },
+  {
+    "id": "W4240962454",
+    "title": "Sedimentology, stratigraphy, and clast biostratigraphy of Cretaceous and Tertiary strata, northeastern Ellesmere Island, Nunavut",
+    "abstract": "The Eureka Sound Group clastic deposits on northeastern Ellesmere Island make up over 3 km of strata of Late Paleocene-Early Eocene age and were deposited in braidplain to alluvial fan and alluvial plain environments. The new Pavy Formation is the oldest unit, and consists of coarse-grained, volcanic-rich, channel-deposit sandstone displaying abundant, decimetre-scale trough-crossbedding. Boulder polymictic orthoconglomerate typifi es the alluvial fan deposits of the Cape Lawrence Formation and grades into the fi ne-grained calcarenite of the Cape Back Formation, deposited in a fl oodplain environment. The mineralogy refl ects the changing nature of the tectonic regime resulting from the movements between Canada and Greenland during the Late Paleocene. Clasts in the conglomerate yield faunas rang- ing in age from latest Cambrian to Early Devonian. Identifi ed faunas and conodont colour alteration indices are highly variable and do not indicate a simple unroofi ng history.",
+    "year": 2009,
+    "lang": "en",
+    "type": "report",
+    "topic": "Geological Studies and Exploration",
+    "field": "Earth and Planetary Sciences",
+    "ca_institutions": "Natural Resources Canada",
+    "funders": []
+  },
+  {
+    "id": "W3035567626",
+    "title": "Ore mineralogy and mineral chemistry of the Whale Tail zone, Amaruq gold deposit, Nunavut",
+    "abstract": "The 6 Moz Au (190 metric t Au) Amaruq deposit is hosted in a sequence of complexly deformed and metamorphosed chert, graphitic argillite, silicate-facies banded iron formation and mafic-ultramafic volcanic rocks of the Archean Woodburn Lake group in the Kivalliq region of Nunavut. The region was affected by Archean and Paleoproterozoic orogeneses and most Au occurrences are interpreted to be associated with the ca 1.91-1.81 Ga Trans-Hudson event. However, new work indicates that some of the Au may be Early Paleoproterozoic or perhaps even Archean, raising uncertainty about the timing of the Au ore-forming event(s) versus the tectonometamorphic evolution of the region. The arsenopyrite- and pyrrhotite-dominant Au mineralization of the Whale Tail zone of the Amaruq deposit was sampled from representative drill core to determine the timing of Au introduction relative to the main deformation and associated metamorphism in the study area. Petrography and micro-analyses indicate that the sulphides underwent a complete prograde-retrograde metamorphic cycle, with pre-peak metamorphism Au-rich arsenopyrite being replaced by an assemblage of syn-peak prograde Au-rich löllingite and pyrrhotite. This was followed by retrogression of löllingite to Au-poor secondary arsenopyrite and native Au and electrum inclusions.",
+    "year": 2020,
+    "lang": "en",
+    "type": "report",
+    "topic": "Geochemistry and Geologic Mapping",
+    "field": "Computer Science",
+    "ca_institutions": "Natural Resources Canada",
+    "funders": []
+  },
+  {
+    "id": "W3034318223",
+    "title": "Miedo, Histeria e impacto diferencial en la pandemia actual",
+    "abstract": "En la pandemia del covid-19, la comunicacin tiene un papel central como medio para coordinar las actividades colectivas, globales y nacionales que pueden contenerla; pero tambin ha demostrado ser un espacio utilizable con fines polticos mediante fake news y teoras de la conspiracin, que encuentran terreno frtil en el miedo y la histeria. Sobre todo, cuando estos factores son negados. El miedo es producto de la asimetra bsica entre un ente sistmico invasivo, frente al cual el individuo esta indefenso. Las reacciones dependen entonces de la posibilidad de entender y operar las acciones colectivas que redundarn",
+    "year": 2020,
+    "lang": "es",
+    "type": "book-chapter",
+    "topic": "Communication and COVID-19 Impact",
+    "field": "Social Sciences",
+    "ca_institutions": "Impact",
+    "funders": []
+  },
+  {
+    "id": "W2137811691",
+    "title": "Physicochemical properties of fruit of 16 saskatoon (<i>Amelanchier alnifolia<\/i> Nutt.) cultivars",
+    "abstract": "Physicochemical properties were assessed for the fruit of 16 saskatoon (Amelanchier alnifolia Nutt.) cultivars harvested in 1998–2000 from replicated trials at two sites (Saskatoon and Moonlake, SK). The cultivars included Bluff, Buffalo, Elizabeth (at Saskatoon only), Forestburg, Honeywood, JB30, Martin, Nelson, Northline, PAR 90, Parkhill, Pearson II, Pembina, Smoky, Success, and Thiessen. Fruit weight and total solids, soluble solids, pH, titratable acidity, anthocyanin content, and colour characteristics of the fruit juice extracts were measured. Fruit of Martin, Thiessen and PAR 90 had the highest fruit weights (mean = 1.63 g), and Success and Bluff the lowest (mean = 0.79 g). Total and soluble solids contents ranged among cultivars from 19.9% and 14.0 °Brix, respectively, for JB30, to 27.9% and 20.1 °Brix, respectively, for Pembina. Fruit pH ranged from 3.65 for Nelson to 4.18 for Parkhill and Smoky. Fruit of Nelson had a titratable acidity (0.63%) that was approximately twice that of Success, Pearson II, Forestburg, Honeywood, Smoky and Parkhill. The soluble solids to titratable acidity ratio (SS/TA) differed greatly among cultivars ranging from 27 for JB30 to 55 for Parkhill. The colour characteristics of the fruit juice extracts differed among cultivars in chroma and L values, but not in hue angle. Anthocyanin analysis by HPLC identified four peaks: cyanidin-3-galactoside, cyanidin-3- glucoside and two unknowns. Total fruit anthocyanin content ranged from 414 µg g -1 for Forestburg to 852 µg g -1 for Nelson. Correlations were found between anthocyanin content and fruit pH, titratable acidity, hue angle and L value. Key words: Amelanchier alnifolia, saskatoon, fruit composition, acidity, anthocyanin content",
+    "year": 2005,
+    "lang": "en",
+    "type": "article",
+    "venue": "Canadian Journal of Plant Science",
+    "topic": "Horticultural and Viticultural Research",
+    "field": "Agricultural and Biological Sciences",
+    "ca_institutions": "University of Saskatchewan",
+    "funders": []
+  },
+  {
+    "id": "W2909263492",
+    "title": "Petrography, geochemistry, and Nd isotope systematics of metaconglomerates and matrix-rich metasedimentary rocks: implications for the provenance and tectonic setting of the Labrador Trough, Canada",
+    "abstract": "The New Quebec Orogen consists of a supracrustal belt that was reworked when the Superior Craton collided with the Core Zone terrane during the Paleoproterozoic Trans-Hudson Orogeny. Within the New Quebec Orogen, the Kaniapiskau Supergroup can be divided into four terrigenous lithotypes metamorphosed at low-grade: one set with greater compositional and textural sedimentary maturity classified as quartz arenites and subarkoses, and another set with lower textural maturity classified as feldspathic wackes and mudrocks. In contrast, the Laporte Group includes homogeneous lithotypes represented by feldspathic and lithic wackes with a range of matrix contents metamorphosed at low to medium grade. The Kaniapiskau Supergroup rocks have a wide range of SiO 2 and Al 2 O 3 contents (SiO 2 /Al 2 O 3 = 3.7–51) compared to the restricted compositional range of the Laporte Group rocks (SiO 2 /Al 2 O 3 = 4.4–6.8). In general, the geochemical variations in both formations of the Laporte Group are within the range of the main clast varieties from basal metaconglomerates, although the Deborah Formation (top unit) records higher TiO 2 , P 2 O 5 , MgO, and Ni contents and high Cr/Th, Co/Ba, Th/U, and Rb/Sr ratios indicating additional mafic sources. Our results support the hypothesis that the Kaniapiskau Supergroup was deposited along an intraplate continental margin with predominantly recycled (εNd (1.87Ga) –12) Paleoarchean sources (TDM 3.2 Ga). In contrast, the Laporte Group marks the transition from a continental forearc (Grand Rosoy Fm.) with a typical juvenile source, including granitic clasts (εNd (1.83Ga) –0.1 to +3.1), to a wedge-top depozone (Deborah Fm.) in the context of a collisional proforeland basin. This syncollisional sedimentary environment is characterized by the presence of old crustal components (εNd (1.83Ga) –4.4 to –9.1).",
+    "year": 2019,
+    "lang": "en",
+    "type": "article",
+    "venue": "Canadian Journal of Earth Sciences",
+    "topic": "Geochemistry and Elemental Analysis",
+    "field": "Earth and Planetary Sciences",
+    "ca_institutions": ["Université du Québec à Montréal", "Ministère des Ressources naturelles et des Forêts (Québec)", "Université Laval"],
+    "funders": "Natural Sciences and Engineering Research Council of Canada"
+  },
+  {
+    "id": "W2910572816",
+    "title": "Structural evolution of Tertiary rocks on Judge Daly Promontory",
+    "abstract": "Tertiary deposits on Judge Daly Promontory allow for the study of unequivocal Eurekan structures. As a result of their position adjacent to Nares Strait, the structural evolution of the Tertiary strata provides insight into the kinematics of the proposed Wegener Fault and Greenland plate, assumed to be situated offshore in the strait. The geometry of the deformation, as well as the analysis of faults and shear planes, suggests a twostage structural evolution of convergent tectonics on Judge Daly Promontory during the Tertiary. The pattern of steeply dipping fault planes on the promontory as well as in Tertiary rocks indicates an episode of sinistral strike-slip tectonics in the late Paleocene to Early Eocene. This phase was followed by northwest - southeast contraction (Early to Middle Eocene) resulting in renewed or continued activation of the pre-existing faults, and southeast-directed thrusting combined with left-lateral shear. The structural evolution during the Tertiary can be linked with plate-tectonic models for the Canadian Arctic region.",
+    "year": 2008,
+    "lang": "en",
+    "type": "report",
+    "topic": "Geological Modeling and Analysis",
+    "field": "Earth and Planetary Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4246832633",
+    "title": "PALEO-GLACIER RECONSTRUCTION IN SOUTHWESTERN BRITISH COLUMBIA, CANADA: A GLACIOVOLCANIC MODEL",
+    "abstract": "",
+    "year": 2019,
+    "lang": "en",
+    "type": "article",
+    "venue": "Abstracts with programs - Geological Society of America",
+    "topic": "Geological and Geophysical Studies",
+    "field": "Earth and Planetary Sciences",
+    "ca_institutions": "Simon Fraser University",
+    "funders": []
+  },
+  {
+    "id": "W2033048717",
+    "title": "High temporal and spatial diversity in marine RNA viruses implies that they have an important role in mortality and structuring plankton communities",
+    "abstract": "Viruses in the order Picornavirales infect eukaryotes, and are widely distributed in coastal waters. Amplicon deep-sequencing of the RNA dependent RNA polymerase (RdRp) revealed diverse and highly uneven communities of picorna-like viruses in the coastal waters of British Columbia (BC), Canada. Almost 300 000 pyrosequence reads revealed 145 operational taxonomic units (OTUs) based on 95% sequence similarity at the amino-acid level. Each sample had between 24 and 71 OTUs and there was little overlap among samples. Phylogenetic analysis revealed that some clades of OTUs were only found at one site; whereas, other clades included OTUs from all sites. Since most of these OTUs are likely from viruses that infect eukaryotic phytoplankton, and viral isolates infecting phytoplankton are strain-specific; each OTU probably arose from the lysis of a specific phytoplankton taxon. Moreover, the patchiness in OTU distribution, and the high turnover of viruses in the mixed layer, implies continuous infection and lysis by RNA viruses of a diverse array of eukaryotic phytoplankton taxa. Hence, these viruses are likely important elements structuring the phytoplankton community, and play a significant role in nutrient cycling and energy transfer.",
+    "year": 2014,
+    "lang": "en",
+    "type": "article",
+    "venue": "Frontiers in Microbiology",
+    "topic": "Bacteriophages and microbial interactions",
+    "field": "Environmental Science",
+    "ca_institutions": ["Canadian Institute for Advanced Research", "University of British Columbia"],
+    "funders": ["Natural Sciences and Engineering Research Council of Canada", "Tula Foundation"]
+  },
+  {
+    "id": "W2313566451",
+    "title": "Associations among evening snacking, screen time, weight status, and overall diet quality in young adolescents",
+    "abstract": "The purpose of this study was to determine the associations among evening snacking (food choices, portion sizes), afterschool-evening screen time, overall diet quality, and weight status. Participants consisted of 1008 young adolescents (secondary analyses, n = 651) from schools in Windsor-Essex, Ontario. The Web-based Food Behaviour Questionnaire, including a 24-h diet recall, was used to assess eating and screen time behaviours (television and video and computer games), as well as nutrient intake; height and weight for BMI were measured using a stadiometer. Results indicated that the majority of participants (62%) consumed an evening snack that contributed approximately 11% of their daily caloric intake. Evening snacking was associated with an overall good diet quality compared with that of non-evening snackers (p < 0.001). Increased afterschool-evening screen time was associated with fewer evening snack servings of vegetables and fruit (p < 0.05) and an overall increase in evening snack food portion sizes (p < 0.001). After accounting for other evening snacking factors, participants with greater than 6 h of afterschool-evening screen time were less likely to have a good overall diet quality compared with those with less than 1 h of afterschool-evening screen time. Therefore, increased screen time, because it is associated with greater evening snack portion sizes and overall poor diet quality, is of great concern regarding young adolescents' evening behaviour.",
+    "year": 2013,
+    "lang": "en",
+    "type": "article",
+    "venue": "Applied Physiology Nutrition and Metabolism",
+    "topic": "Obesity, Physical Activity, Diet",
+    "field": "Medicine",
+    "ca_institutions": "University of Windsor",
+    "funders": []
+  },
+  {
+    "id": "W1554697359",
+    "title": "The Origin of the Freedom of Association and of the Right to Strike in Canada. An Historical Perspective",
+    "abstract": "The authors first relate the circumstances surrounding the adoption of an important pièce of our labour legislation and examine the effect of the 1872 legislation on the legal status of union activities.",
+    "year": 2005,
+    "lang": "en",
+    "type": "article",
+    "venue": "Relations industrielles",
+    "topic": "Labor Movements and Unions",
+    "field": "Social Sciences",
+    "ca_institutions": ["Université de Montréal", "Université Laval"],
+    "funders": ["Université de Montréal", "York University"]
+  },
+  {
+    "id": "W2325408608",
+    "title": "If it ain't on the page, it ain't on the stage: screenwriting, national specificity and the English-Canadian feature film",
+    "abstract": "Like other film-producing nations, Canada's movie landscape was long ago colonized by US interests. While other nations also welcome American movies, the Canadian case is extreme: Canada has the lowest market share in the world of its own movies on its own screens. Living next to the world's most powerful country, Canada occupies geographically, economically, linguistically and culturally a position unique in the world. The historical and ongoing predicament of the lack of success of English-Canadian feature films has been variously attributed to similarities to the United States in language and culture, lower production budgets, and weaknesses in distribution, exhibition, marketing and quality. The role of screenwriting, however, is little understood and rarely broached. In this article, we argue the importance of screenwriting in understanding national cinemas; show that it has institutional, sociological and nation-specific dimensions; and present Canada as an ideal case to begin examining such factors. The first dimension the institutional is defined by auteurism as well as the collaborative nature of production. The second the sociological is greatly affected by exclusionary networks and various levels of discrimination based on such factors as gender, ethnicity/race, age, sexuality and economic class. The nation-specific area pertains to diverse historical, cultural and institutional practices particular or exclusive to the country or region. English-Canada, for instance, experiences a unique and complex cultural policy environment. Moreover, its fractured and regional history is one that has resulted in the production of obsessively performed narratives of national identity, particularly imbricated with Qubec, the United States, Britain and France. Our analysis draws together strands of intersecting disciplines, combining film theory and history with production studies, close textual analyses, political economy and nation theory, calling for a more complete picture of the role of screenwriting in national cinemas.",
+    "year": 2010,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Screenwriting",
+    "topic": "Cinema and Media Studies",
+    "field": "Economics, Econometrics and Finance",
+    "ca_institutions": "Toronto Metropolitan University",
+    "funders": []
+  },
+  {
+    "id": "W2096363894",
+    "title": "<b>Initial Experience with a Low Profile, High Energy Excimer Laser Catheter for Heavily Calcified Coronary Lesion Debulking:<\/b> Parameters and Results of First Seven Human Case Experiences",
+    "abstract": "BACKGROUND: Excimer laser coronary angioplasty (ELCA) has not been used in the setting of highly calcified, tight stenoses because the energies required to use existing catheters would lead to excessive heat damage and dissection. There are, however, cases that frequently benefit from debulking prior to percutaneous intervention. A new, small laser catheter capable of high energies and repetition was previously examined in vitro. This study describes the first in vivo use. PURPOSE: To determine the safety and feasibility of a new, low profile, high energy laser catheter for creating a pilot hole to facilitate coronary angioplasty and stenting in patients with heavily calcified and occluded coronary arteries where a balloon has either failed to pass or was predicted to perform poorly. These patients represent the first patients treated with this new catheter. METHODS: At a high volume center, seven consecutive patients with anatomy as summarized above were treated and studied with QCA and then followed for 30 days postprocedure for complications and Canadian Cardiovascular Society (CCS) angina class. RESULTS: The laser catheter crossed five out of seven lesions and partially penetrated the remaining lesions. The mean maximum luminal diameter (MLD) postlasing was 1.0 mm with Thrombolysis in Myocardial Infarction (TIMI) 3 flow. It was possible to easily balloon and stent after the pilot hole creation in all but one patient. TIMI 3 was achieved for the final result after adjunct therapy in all patients. All patients except one, who died at 3 months postprocedure of stroke, were improved by an average of two angina classes. No late procedural-related complications developed. CONCLUSIONS: The new, low profile laser catheter is easy to use and achieved good results in cases where a balloon either failed to pass or was predicted to give poor results. Further trials are warranted for this niche technology.",
+    "year": 2001,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Interventional Cardiology",
+    "topic": "Coronary Interventions and Diagnostics",
+    "field": "Medicine",
+    "ca_institutions": "Victoria Heart Institute Foundation",
+    "funders": []
+  },
+  {
+    "id": "W2040478829",
+    "title": "Driving transit retention to renaissance: trends in Montreal commute public transport mode share and factors by age group and birth cohort",
+    "abstract": "",
+    "year": 2013,
+    "lang": "en",
+    "type": "article",
+    "venue": "Public Transport",
+    "topic": "Urban Transport and Accessibility",
+    "field": "Social Sciences",
+    "ca_institutions": "McGill University",
+    "funders": []
+  },
+  {
+    "id": "W4377093173",
+    "title": "“Your Skin Crawled Every Time He Touched You”: A Secondary Qualitative Analysis Exploring Bagwell-Gray's Taxonomy of Intimate Partner Sexual Violence",
+    "abstract": "Bagwell-Gray et al. developed a taxonomy of intimate partner sexual violence (IPSV) focusing on type of force (physical or nonphysical) and type of sexual activity (penetration or no penetration). The current secondary descriptive qualitative analysis of interviews with 89 Canadian women IPV victims assessed IPSV that fit Bagwell-Gray's taxonomy. About half (46 or 51.7%) described sexual violence, most commonly sexual abuse (26 or 29.2%), sexual assaults (17 or 19%), and sexual coercion (16 or 17.9%), with overlap across categories. Forced sexual activity was seldom mentioned (3 or 3.4%). Implications for service providers and researchers are provided.",
+    "year": 2023,
+    "lang": "en",
+    "type": "article",
+    "venue": "Violence Against Women",
+    "topic": "Intimate Partner and Family Violence",
+    "field": "Social Sciences",
+    "ca_institutions": ["University of Manitoba", "University of Calgary"],
+    "funders": ["Social Sciences and Humanities Research Council of Canada", "Prairieaction Foundation", "University of Alberta", "University of Lethbridge", "University of Regina"]
+  },
+  {
+    "id": "W7099637875",
+    "title": "Jean-Claude Trichet: Global economic governance and euro area economic governance Speech by Mr Jean-Claude Trichet, President of the European Central Bank, at the World",
+    "abstract": "It is a real pleasure to be here in Marrakech – a city which, in its history, is a demonstration of the link between economic success and political events and choices. Morocco is also an important partner for the EU in the context of the Union for the Mediterranean and the Barcelona process. Let me also mention that the ECB and the Bank Al Maghrib have wellestablished bilateral relations, as well as close contacts in a multilateral framework. For example, the ECB and the other Eurosystem central banks regularly meet with Bank Al Maghrib and the other central banks of the Mediterranean region in the framework of highlevel seminars, in which they discuss economic and financial issues of common interest. Let me start by saying a few words about the current economic outlook in the euro area. Real GDP in the euro area grew by 1%, quarter on quarter, in the second quarter of this year. Growth has been supported mainly by domestic demand, but also reflects some temporary factors. Recent statistical releases and survey evidence generally confirm our expectation of a moderation in the second half of this year in the euro area. Therefore, we do not declare victory and we have to remain cautious and prudent. That being said, the positive but modest underlying momentum of the recovery remains in place. Annual inflation in the",
+    "year": 2010,
+    "lang": "en",
+    "type": "article",
+    "topic": "Geochemistry and Geologic Mapping",
+    "field": "Computer Science",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W7100299766",
+    "title": "with a Decrease in the Monitored Viral Load",
+    "abstract": "Background: HIV drug resistance represents a major threat for effective treatment. We assessed the trends in the frequency of drug resistance mutations and the monitored viral load (VL) in treatment-naı̈ve (TN) and treatment-experienced (TE) individuals infected with HIV-1 in Québec, Canada, between 2001 and 2011. Methods and Findings: Resistance data were obtained from 4,105 and 5,086 genotypic tests performed on TN and TE patients, respectively. Concomitantly, 274,161 VL tests were carried out in the Province. Changes over time in drug resistance frequency and in different categories of VL were assessed using univariate logistic regression. Multiple logistic regression was used to evaluate associations between the rates of certain mutations and antiretroviral prescriptions. From 2001 to 2011, the proportion of undetectable VL test results continually increased, from 42.1 % to 75.9%, while a significant decrease in the frequency of resistance mutations associated with protease inhibitors [PI (from 54 % to 16%)], nucleoside [NRTI (from 78 % to 37%) and non-nucleoside reverse transcriptase inhibitors [NNRTI (from 44 % to 31%)] was observed in TE patients. In TN individuals, the overall frequency of transmitted drug resistance was 13.1%. A multiple logistic regression",
+    "year": 2016,
+    "lang": "en",
+    "type": "article",
+    "topic": "HIV/AIDS drug development and treatment",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W7132947126",
+    "title": "Fostering Cross-border Learning and Engagement through Study Abroad Scholarships: Lessons from Brazil&apos;s Science without Borders Program",
+    "abstract": "This study examines the potential benefits of participating in the Science without Borders (Ciência sem Fronteiras - CsF) program, a study abroad scholarship program created in 2011 by the Brazilian government. Like other scholarship programs, CsF seeks to foster human capital development and the internationalization of science and technology in the country. Differently from other programs, however, CsF targets undergraduate students in the sciences. While Brazil has received positive feedback for this initiative, critics have argued that insufficient planning may hinder this program’s ability to deliver desired outcomes. Thus, through a literature review and 20 interviews with CsF scholarship recipients at the University of Toronto, this qualitative study evaluates the program’s ability to promote important benefits. Although the study identified various student benefits, the research also found structural issues that prevented all participants from benefitting equally, demonstrating the importance of collaborative planning and implementation of study abroad scholarship programs.",
+    "year": 2015,
+    "type": "dissertation",
+    "venue": "TSpace",
+    "topic": "International Science and Diplomacy",
+    "field": "Social Sciences",
+    "ca_institutions": "Canadian Counselling and Psychotherapy Association",
+    "funders": ["Division of Graduate Education", "Consejo Nacional de Ciencia y Tecnología", "Ciência sem Fronteiras", "Conselho Nacional de Desenvolvimento Científico e Tecnológico", "Canadian Bureau for International Education"]
+  },
+  {
+    "id": "W2014557777",
+    "title": "Interspecific covariation between stomatal density and other functional leaf traits in a local flora",
+    "abstract": "Despite the importance of stomata in leaf functioning, and despite the recent interest in interspecific leaf trait covariation in functional ecology, little is known about how stomatal density relates to other leaf traits in a broad interspecific context. This is especially important because stomatal density has been widely used to deduce temporal variation in atmospheric CO 2 concentrations [CO 2atm ] from fossilized or herbarium leaves. We therefore measured stomatal density, specific leaf area (SLA) and its components, leaf thickness, and leaf chlorophyll content in both sun and shade leaves of 169 individuals from 52 angiosperm species in southwestern Quebec. Using mixed models, we show that stomatal density decreases allometrically with increasing SLA and chlorophyll content, and increases allometrically with increasing lamina thickness. The sun–shade contrast changes the intercepts, but not the slopes, of these relationships. It is important to take into consideration these relations when correlating stomatal density with [CO 2 ], to avoid spurious interpretations.",
+    "year": 2010,
+    "lang": "en",
+    "type": "article",
+    "venue": "Botany",
+    "topic": "Plant responses to elevated CO2",
+    "field": "Agricultural and Biological Sciences",
+    "ca_institutions": "Université de Sherbrooke",
+    "funders": "Natural Sciences and Engineering Research Council of Canada"
+  },
+  {
+    "id": "W2170454784",
+    "title": "Medical Savings Accounts: will they reduce costs?",
+    "abstract": "BACKGROUND: Medical Savings Accounts are an attempt to reduce health care costs by transferring responsibility for expenditures to patients, while providing them with state-supported base amounts to cover some of the costs. We wondered whether such a system would actually be effective, given the fact that medical care expenditures (and illness) are unequally distributed across the population. METHODS: We used the Manitoba Population Health Research Data Respository to assess costs incurred by individual residents of Manitoba for all physician visits and admissions to hospital between 1997 and 1999, and we calculated an average expenditure per person per year over the 3 years. RESULTS: During fiscal years 1997-1999, physician and hospital costs that could be attributed to individual Manitoba residents averaged $730 each year. Most users accounted for very little expenditure. About 40% of the entire population of Manitoba used less than $100 each, and 80% used less than $600. The highest-using 1% of the Manitoba population accounted for 26% of all spending on hospital and physician care, whereas the lowest-using 50% accounted for 4%. When examined by age category, the results were similar. Even in the highest age category, most of the population falls into the low-usage category. If the entitlement under a Medical Savings Account scheme was set at the current average cost of $730 per year, then total spending by government on health care for this healthy group would increase (by $505 million) rather than decrease. If the \"catastrophic threshold,\" above which the insurer would pay costs, was set at $1,000 per year, then the sickest 20% of Manitoba residents would become personally responsible for just over $60 million of current health care costs. The net result is a 54% increase in spending on hospital and physician costs that can be allocated to individuals. INTERPRETATION: Medical Savings Accounts will not save money but will instead, under most formulations, lead to an increase in spending on the healthiest members of the population.",
+    "year": 2002,
+    "lang": "en",
+    "type": "article",
+    "venue": "PubMed",
+    "topic": "Healthcare Policy and Management",
+    "field": "Economics, Econometrics and Finance",
+    "ca_institutions": "University of Manitoba",
+    "funders": []
+  }
+]

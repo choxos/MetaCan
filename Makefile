@@ -62,9 +62,25 @@ pilot-offline: lint
 # crashed; the field simply meant a different thing in each arm, and the variance
 # would have been read as model disagreement, which is the quantity this project
 # exists to measure. A CODEBOOK IS CODE. IT GETS A TEST. See DEVIATIONS.md D20.
+#
+# check_strata_partition.R is the third rule, and it is the one that should have
+# existed first. The five original strata left 549,370 works (12.9% of the sampling
+# frame) with an inclusion probability of EXACTLY ZERO: 366,856 that no predicate
+# claimed, because aff_core excluded everything about Canada while about_only
+# excluded everything affiliated with Canada, so a work that was both fell between
+# them; plus 182,514 whose predicate evaluated to SQL NULL, which `WHERE p` and
+# `WHERE NOT p` BOTH decline to select.
+#
+# Nothing failed. Every stratum returned exactly the n it asked for. The design drew
+# a clean probability sample of 87% of the frame while every number computed from it
+# said "the frame". The check that catches it is sum(N_h) == N: one line of
+# arithmetic nobody ran, including me. It was found by an adversarial model adding up
+# five weights in a summary table I had handed it. It runs on every build now.
+# See DEVIATIONS.md D22 and finding 26.
 lint:
 	@Rscript pilot/check_self_masking.R
 	@Rscript pilot/check_instrument.R
+	@Rscript pilot/check_strata_partition.R
 
 # The site renders its own COPY of findings.json (app/src/data/). Copying it here,
 # in the same target that renders FINDINGS.md, is what keeps the two from

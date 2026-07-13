@@ -1,0 +1,898 @@
+Reading additional input from stdin...
+OpenAI Codex v0.144.0
+--------
+workdir: /Users/choxos/Documents/GitHub/CaRN-data-challenge
+model: gpt-5.6-luna
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: high
+reasoning summaries: none
+session id: 019f5973-e5a4-73e0-ba2c-6abc6ad9c5bc
+--------
+user
+# MétaCan screening rubric (v1.0)
+
+**Locked before screening. Version-controlled. Any change is a new version with a dated entry in `DEVIATIONS.md`.**
+
+Both machine screeners and both human coders work from this document and nothing else. The rubric is the
+instrument; if two coders disagree, the rubric is what they are adjudicated against.
+
+---
+
+## The unit
+
+One work (journal article, preprint, book chapter, report, dataset, or software), identified by its OpenAlex ID.
+You see: title, abstract, publication year, language, venue, OpenAlex topic and field, Canadian institutional
+affiliations, funders.
+
+## The question
+
+**Is the object of study *research itself*?**
+
+Metaresearch studies how research is done, reported, funded, evaluated, disseminated, or governed. The test is
+what the work is *about*, not what field it appears in and not what vocabulary it uses.
+
+A cardiology trial is not metaresearch. A study of *how cardiology trials report their outcomes* is.
+
+---
+
+## Tier
+
+Assign exactly one.
+
+### T1: Core metaresearch
+The primary object of study is research itself. Typical objects:
+
+- research **methods** and their properties (bias, reporting, statistical practice, study design)
+- **reproducibility**, replication, data and code sharing
+- **research integrity**: misconduct, retraction, questionable research practices, authorship
+- **peer review** and editorial process *as objects of study*
+- **research evaluation**, metrics, rankings, funding allocation
+- **scholarly communication**: publishing models, open access, preprints *as objects of study*
+- **bibliometrics and scientometrics** applied to a research literature
+- the **research workforce**: careers, equity, training, capacity
+- **evidence synthesis methodology** (not an individual systematic review's clinical answer, but work *about* how
+  syntheses are done)
+
+### T2: Adjacent
+Empirically or conceptually grounded work on science as a social system that is not framed as metaresearch but
+studies it:
+
+- **science and technology studies (STS)**: social studies of scientific knowledge, practice, controversy
+- **library and information science**: information behaviour of researchers, repositories, discovery
+- **research infrastructure** studies: platforms, data repositories, identifiers, standards
+- **history and philosophy of science** *when the object is contemporary research practice*
+- **research policy** analysis grounded in evidence
+
+T2 is where the field's diversity lives. Be generous here: a paper does not have to call itself metaresearch to
+be studying research.
+
+### T3: Contextual
+Relevant to the ecosystem, mapped and released, but **never pooled into the analytic corpus**:
+
+- editorials, commentaries, opinion pieces about research practice
+- policy documents and position statements
+- announcements of infrastructure, tools, or initiatives
+- news, obituaries, corrections, letters
+
+### OUT: Not metaresearch
+Everything else. Includes, and this is the most common error:
+
+- **A study that uses a method is not a study of the method.** A meta-analysis answering a clinical question is
+  OUT. A study of how meta-analyses handle heterogeneity is T1.
+- **Mentioning a metaresearch term is not studying it.** A lab paper reporting "assay reproducibility", a methods
+  section saying "peer reviewed", a licence note saying "open access": all OUT.
+- **Domain research that happens to be bibliometric in method** but whose object is the domain, not the research:
+  e.g. a bibliometric map of diabetes treatments, produced to summarise diabetes knowledge. Borderline; see below.
+
+---
+
+## The three errors that matter most
+
+These are where the pilot showed retrieval and screening break down. Read them twice.
+
+1. **Polysemy.** `reproducibility` in a biochemistry paper means the assay gives the same reading twice. In a
+   metaresearch paper it means the reproducibility crisis. Only the second is in scope. The same applies to
+   `validation`, `replication`, `bias`, `peer review`, `open access`. **Judge the sense, not the token.**
+
+2. **Method vs. object.** Using bibliometrics ≠ studying research. Ask: *if this paper is right, what do we now
+   know more about: a scientific question, or the practice of science?* If the former, OUT.
+
+3. **Absence of vocabulary is not absence of content.** An STS paper about laboratory practice, or an LIS paper
+   about how researchers find data, may use none of the field's keywords and still be squarely T2. **Do not
+   require the vocabulary.** This is the error that makes the field look smaller and more anglophone than it is.
+
+---
+
+## Canadian linkage
+
+Record which apply (this is metadata, not an inclusion test; the estimand is defined separately in
+`PROTOCOL.md`):
+
+- `CA_AFF`: at least one author affiliated with a Canadian institution
+- `CA_FUND`: funded by CIHR, NSERC, SSHRC, or CFI
+- `ABOUT_CA`: the Canadian research system is a substantive object of study (not a passing mention, not one
+  country among forty in a global comparison)
+
+## Genre
+
+`empirical` · `conceptual` · `editorial/commentary` · `policy` · `infrastructure/announcement` · `other`
+
+OpenAlex's `type` is unreliable and this field is commentary-heavy, so genre is coded, not inherited.
+
+## Language of the work
+
+As published. Do not infer from the venue.
+
+---
+
+## Confidence
+
+- `high`: the rubric decides this cleanly.
+- `medium`: the rubric decides, but a reasonable coder could differ.
+- `low`: genuinely on the boundary, or the abstract is missing/too thin to judge.
+
+**`low` is a legitimate answer and is not a failure.** Records coded `low` by either screener are routed to
+adjudication. A screener that never says `low` is not being careful; it is being confident.
+
+---
+
+## Worked examples
+
+| Title (abridged) | Tier | Why |
+|---|---|---|
+| "Data sharing practices in 500 randomised trials" | **T1** | The object is reporting practice. |
+| "Reproducibility of a Western blot protocol" | **OUT** | Assay reproducibility. Polysemy trap. |
+| "Trends in citation of retracted papers" | **T1** | Object is the literature's own behaviour. |
+| "Laboratory life in a Canadian genomics centre: an ethnography" | **T2** | STS. No metaresearch vocabulary; still studies research. |
+| "How do researchers discover datasets? A survey" | **T2** | LIS, information behaviour of researchers. |
+| "Effectiveness of statins: a network meta-analysis" | **OUT** | Uses a synthesis method to answer a clinical question. |
+| "How network meta-analyses handle inconsistency: a review of 200 reviews" | **T1** | Object is the method. |
+| "Announcing the Canadian Research Data Repository" | **T3** | Infrastructure announcement. Mapped, not pooled. |
+| "Open access mandates are failing early-career researchers" (editorial) | **T3** | Commentary about research practice. |
+| "Bibliometric analysis of diabetes research 2000–2020" | **T2** | Borderline. Bibliometric method, and the object *is* a research literature, so it studies research output. Code T2, `medium`. |
+| "Le libre accès dans les revues québécoises : état des lieux" | **T1** | Scholarly communication, object is publishing practice. French. |
+
+---
+
+## Instructions to the screener
+
+Read the title and abstract. Apply the rubric. Do not use outside knowledge of the authors or the journal's
+reputation. If the abstract is missing, judge on the title alone and set confidence to `low` unless the title is
+unambiguous.
+
+Return the schema in `protocol/screening-schema.json`. One object per work. No prose, no preamble.
+--------------------------------------------------------------------------------
+You are screening works for MetaCan, a map of Canadian metaresearch.
+
+Apply the rubric above to every record in the JSON array below. Return a JSON
+array with one object per work, conforming to protocol/screening-schema.json:
+
+  {"id": "W...", "tier": "T1|T2|T3|OUT", "genre": "...", "about_ca": true|false,
+   "confidence": "high|medium|low", "reason": "one sentence"}
+
+Rules:
+- Return the JSON array and NOTHING else. No prose, no preamble, no code fences.
+- Every input id must appear exactly once in the output.
+- Do not run commands, read files, or browse. Classify from the RECORDS alone.
+
+RECORDS:
+[
+  {
+    "id": "W2742074347",
+    "title": "Abstract 5694: Multi institutional evaluation of a new NGS assay for mutation detection from cfDNA in lung cancer",
+    "abstract": "Abstract Introduction: The detection of actionable mutations in lung cancer is still a major challenge due to the lack of tissue specimens for molecular profiling of the tumor in approximately 25% of patients. The circulating cell-free tumor DNA (ctDNA) isolated from plasma of cancer patients is an alternative, minimally invasive source of tumor DNA that also allows rapid determination of the mutational status of the tumor. However, the intrinsic low abundance of mutations in cfDNA makes their detection and quantification in plasma a challenging task. Here we report a multi-institutional validation of the Oncomine cfDNA Lung Cancer assay for the analyses of cfDNA in molecular pathology laboratories. Methods: The Oncomine cfDNA Lung assays is a multiplexed sequencing assay for liquid biopsy that generates reads containing targeted ctDNA regions along with a molecular tag. In order to allow an initial uniform evaluation of the assay, the Multiplex I cfDNA Reference Standard (Horizon Dx) derived from human cell lines, and fragmented to an average size of 160bp±10% (144bp–176bp) to closely resemble cfDNA extracted from human plasma, was used. The reference sample covers 8 mutations in the EGFR, KRAS, NRAS and PIK3CA genes at 5%, 1%, 0.1% allelic frequencies and wildtype allele. The same lot of control sample was distributed to the participating laboratories within the OncoNetwork Consortium. Samples were sequenced twice in each laboratory either using the Ion PGM system or the Ion S5 system. Libraries were templated using the Ion Chef and multiplexed as four libraries on a 318/520 chip or eight libraries on a 530 chip. A bioinformatics pipeline within the Torrent Server software allowed for automated variant calling. Results: The laboratories involved in the study were able to detect the 8 hotspot base changes and indels present in the control samples at allelic frequencies from 0.1% to 5% with an average 94.05% sensitivity (range 87.50% - 97.92%) and an average 99.87% specificity (range 99.53% - 100%). When only considering variants at the 0.1% allelic frequency, the average sensitivity was 83.04% (range 68.75% - 99.95%) and the average specificity was 99.95% (range 99.68% - 99.95%). Notably, at the 0.1% allelic frequency, all the participating laboratories were able to detect the challenging EGFR p.T790M variant that is a marker of sensitivity to EGFR tyrosine kinase inhibitors. Conclusions: These preliminary data confirm the potential of the Oncomine cfDNA lung assay for plasma genotyping to allow for the noninvasive, multiplexed detection of complex, targetable genomic alterations in lung cancer. Citation Format: Jose L. Costa, Robbert Weren, Anna Maria Rachiglio, Andrea Mafficini, Henriette Kurth, Anne Reiman, Audrey Didelot, Alexander Boag, Claudia Vollbrecht, Kazuto Nishino, Harriet E. Feilotter, Pierre Laurent-Puig, Orla Sheils, Aldo Scarpa, Marjolijn Ligtenberg, Ian A. Cree, Michael Hummel, Jose Carlos Machado, Nicola Normanno. Multi institutional evaluation of a new NGS assay for mutation detection from cfDNA in lung cancer [abstract]. In: Proceedings of the American Association for Cancer Research Annual Meeting 2017; 2017 Apr 1-5; Washington, DC. Philadelphia (PA): AACR; Cancer Res 2017;77(13 Suppl):Abstract nr 5694. doi:10.1158/1538-7445.AM2017-5694",
+    "year": 2017,
+    "lang": "en",
+    "type": "article",
+    "venue": "Cancer Research",
+    "topic": "Cancer Genomics and Diagnostics",
+    "field": "Biochemistry, Genetics and Molecular Biology",
+    "ca_institutions": "Queen's University",
+    "funders": []
+  },
+  {
+    "id": "W2132142972",
+    "title": "Reflective Kleislisubcategories of the category of Eilenberg-Moore algebras for factorization monads",
+    "abstract": "It is well known that for any monad, the associated Kleisli category is embedded in the category of Eilenberg-Moore algebras as the free ones.We discovered some interesting examples in which this embedding is reflective; that is, it has a left adjoint.To understand this phenomenon we introduce and study a class of monads arising from factorization systems, and thereby termed factorization monads.For them we show that under some simple conditions on the factorization system the free algebras are a full reflective subcategory of the algebras.We provide various examples of this situation of a combinatorial nature.",
+    "year": 2005,
+    "lang": "en",
+    "type": "article",
+    "venue": "Theory and applications of categories",
+    "topic": "Advanced Topics in Algebra",
+    "field": "Mathematics",
+    "ca_institutions": [],
+    "funders": "Engineering and Physical Sciences Research Council"
+  },
+  {
+    "id": "W4200140974",
+    "title": "Recurrent high-impact mutations at cognate structural positions in class A G protein-coupled receptors expressed in tumors",
+    "abstract": "G protein-coupled receptors (GPCRs) are the largest family of human proteins. They have a common structure and, signaling through a much smaller set of G proteins, arrestins, and effectors, activate downstream pathways that often modulate hallmark mechanisms of cancer. Because there are many more GPCRs than effectors, mutations in different receptors could perturb signaling similarly so as to favor a tumor. We hypothesized that somatic mutations in tumor samples may not be enriched within a single gene but rather that cognate mutations with similar effects on GPCR function are distributed across many receptors. To test this possibility, we systematically aggregated somatic cancer mutations across class A GPCRs and found a nonrandom distribution of positions with variant amino acid residues. Individual cancer types were enriched for highly impactful, recurrent mutations at selected cognate positions of known functional motifs. We also discovered that no single receptor drives this pattern, but rather multiple receptors contain amino acid substitutions at a few cognate positions. Phenotypic characterization suggests these mutations induce perturbation of G protein activation and/or β-arrestin recruitment. These data suggest that recurrent impactful oncogenic mutations perturb different GPCRs to subvert signaling and promote tumor growth or survival. The possibility that multiple different GPCRs could moonlight as drivers or enablers of a given cancer through mutations located at cognate positions across GPCR paralogs opens a window into cancer mechanisms and potential approaches to therapeutics.",
+    "year": 2021,
+    "lang": "en",
+    "type": "article",
+    "venue": "Proceedings of the National Academy of Sciences",
+    "topic": "Receptor Mechanisms and Signaling",
+    "field": "Biochemistry, Genetics and Molecular Biology",
+    "ca_institutions": "Dalhousie University",
+    "funders": ["National Institute of General Medical Sciences", "National Institute on Aging", "Welch Foundation"]
+  },
+  {
+    "id": "W4403306763",
+    "title": "Some Simple Examples of Recursive Algorithms",
+    "abstract": "Understand algorithms and their design with this revised student-friendly textbook. Unlike other algorithms books, this one is approachable, the methods it explains are straightforward, and the insights it provides are numerous and valuable. Without grinding through lots of formal proof, students will benefit from step-by-step methods for developing algorithms, expert guidance on common pitfalls, and an appreciation of the bigger picture. Revised and updated, this second edition includes a new chapter on machine learning algorithms, and concise key concept summaries at the end of each part for quick reference. Also new to this edition are more than 150 new exercises: selected solutions are included to let students check their progress, while a full solutions manual is available online for instructors. No other text explains complex topics such as loop invariants as clearly, helping students to think abstractly and preparing them for creating their own innovative ways to solve problems.",
+    "year": 2024,
+    "lang": "en",
+    "type": "book-chapter",
+    "venue": "Cambridge University Press eBooks",
+    "topic": "Advanced Algebra and Logic",
+    "field": "Computer Science",
+    "ca_institutions": "York University",
+    "funders": []
+  },
+  {
+    "id": "W4299298761",
+    "title": "Advancing an Ecosystem Approach in the Gulf of Maine",
+    "abstract": "&lt;i&gt;Abstract&lt;/i&gt;.—This chapter summarizes contributions to a theme session of the 2009 Gulf of Maine Science Symposium held in St. Andrew’s, New Brunswick in October, 2009. The session highlighted the present status of science required to observe, interpret, and predict changes in the Gulf of Maine ecosystem in the context of strategies for regional implementation of an ecosystem approach to management (EAM). Perspectives on present ecosystem approaches to Gulf of Maine fisheries management contrast the integrated ecosystem assessment approach by the U.S. National Oceanic and Atmospheric Administration, with the more incremental advancement to EAM based on traditional fisheries management practices undertaken by Fisheries and Oceans Canada. A section on contributions from the broader research community provides perspectives on observations and different approaches to analysis, including coupled physical biological modeling as a tool for the integration, interpretation, and prediction of multidisciplinary environmental data. The Atlantic Zonal Monitoring Program has established an observing system for physical and biological characteristics of Canadian coastal waters, and NERACOOS (the Northeast Regional Association of Coastal Ocean Observing Systems) is developing infrastructure for coordination of U.S. regional observing activities. A common theme is the need for more sustained time series of critical physical and biological variables that document change, especially in nearshore, coastal, and benthic habitats. Additionally, there is a need to development and maintain bridges to transfer new research knowledge, understanding, and analysis tools to the state, provincial, and federal agencies and fisheries management councils where EAM will be implemented.",
+    "year": 2012,
+    "lang": "en",
+    "type": "book-chapter",
+    "venue": "American Fisheries Society eBooks",
+    "topic": "Marine and fisheries research",
+    "field": "Environmental Science",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W7110330862",
+    "title": "INTRODUCTION TO THE SPECIAL ISSUE",
+    "abstract": "Distance education has paid little attention to its own history and to how this history has influenced its development over the years, and how it is still influencing current events. It is generally acknowledged that, living on a small planet, we have to work together if we want to be successful. In our case, this means sharing resources, assisting in implementing effective and efficient distance education and, possibly most important of all, learning from and with each other.If we discuss the international aspects of the history of distance education, it often refers to the distance education efforts in Europe and the United States. We all know at least something about the first efforts to implement distance education in the United States some 150 years ago, we are familiar with the history of the Open University in the United Kingdom in the 1960s, but we may not know that, at the same time in a country in Africa, distance education using print and audiovisual media had a modest but important beginning with the establishment of the Mauritius College of the Air. We are aware of the ever-growing number of universities and other institutions of education that offer distance education programs— or, as we may call it, distributed learning, online learning, or just-in-time learning—in Europe, Canada, and the United States. However, we are, perhaps, less familiar with developments in distance education in the Soviet Union in the twentieth century and its influence on the state of the art of distance education in today’s Russia. Mexico has managed to set up a quality distance education system in a short time, while Australia has a long history of distance education and has used this experience very well to blend distance education and traditional education. In France, distance education made important advances during the Second World War as the nation implemented its own education system even as it was occupied by Germany. From Canada comes an example of how difficult it sometimes is to bring continuity to distance education and how exciting it is if there is success. In Hong Kong, distance education is a daily reality, but still has to cope with many challenges.This special issue of the Quarterly Review of Distance Education does not look at distance education in one specific context, one particular country, or even one continent. It looks at the development of distance education worldwide. The contributions in this issue look not only at success stories (which is easy), but they also analyze why there was success and why there was failure—in short, what has been learned. In these contributions we recognize the difficulties that may be present in our own daily work environment and that may make it difficult to implement distance education. We read about the doubts and even aversions that some traditional educators voice; the push for technology; and the overly optimistic views of decision makers who may have made promises to offer education for all, but are unable to keep these promises and now turn to distance education as a guaranteed solution.We recognize the learning process of which we are all part of. We, as researchers, professors, practitioners, designers, and providers of distance education, should encourage a dialogue regarding distance education, a dialogue that is not restricted to research only, but one that looks at our common past, our common concerns, our common ideas, and our common—often not discussed—ideals.I am, as guest editor, very grateful to Mike Simonson and Charlie Schlosser for allowing this journal to help explore the international history of distance education. Charlie has been not only a good friend and colleague, but more than editors usually are, a keen and interested partner in the choices of countries and in the realization of this issue. I am equally excited that, from now on, the Quarterly Review of Distance Education will have a special section for contributions from international distance education practitioners and theorists. We will, in the next issue, offer an insight into how distance education in Indonesia has changed the educational view in an important, large country that consists of several thousand islands and a great variety of cultures. If you have contributions, or ideas for publications, do not hesitate to get in touch with me, Lya Visser, at: lvisser@learndev.org.Lastly, I want to thank all contributors to this issue. They have made this issue possible and I am truly grateful for their professionalism and their friendship.",
+    "year": 2005,
+    "lang": "en",
+    "type": "article",
+    "venue": "Quarterly review of distance education",
+    "topic": "Online and Blended Learning",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W1972772572",
+    "title": "Cognitive behavioural and neuropsychiatric treatment of post‐traumatic conversion disorder: a case study",
+    "abstract": "Conversion disorder consists of involuntary sensory or motor symptoms and deficits that cannot be explained by a general medical condition. There are several treatment options, although none has emerged as the treatment of choice. The present case study examined the effects of adding cognitive behaviour therapy to neuropsychiatric management of conversion disorder (motor subtype). The patient, a retired emergency services worker, presented with a history of intermittent episodes of speech disruption (inability to speak or difficulty speaking properly). Although episodes of speech disturbance sometimes occurred unexpectedly, they were more likely to occur under conditions of stress and fatigue, and were triggered by reminders of work-related traumatic events. The patient was treated with pharmacotherapy and psychoeducation from a neuropsychiatrist. With the aim of improving treatment outcome, cognitive behaviour therapy was added, involving imaginal exposure to trauma memories, along with cognitive restructuring. The frequency of between- and within-session speech disturbance episodes declined over the course of cognitive behaviour therapy to the point that the patient was essentially symptom-free. Within-session distress ratings also decreased, which suggested habituation to trauma-related memories. This case study demonstrates how particular cognitive behaviour therapy interventions can be usefully applied to one form of conversion disorder.",
+    "year": 2004,
+    "lang": "en",
+    "type": "article",
+    "venue": "Cognitive Behaviour Therapy",
+    "topic": "Psychosomatic Disorders and Their Treatments",
+    "field": "Medicine",
+    "ca_institutions": "University of British Columbia",
+    "funders": []
+  },
+  {
+    "id": "W2141467625",
+    "title": "The effect of decision aids on the agreement between women’s and physicians’ decisional conflict about hormone replacement therapy",
+    "abstract": "",
+    "year": 2003,
+    "lang": "en",
+    "type": "article",
+    "venue": "Patient Education and Counseling",
+    "topic": "Patient-Provider Communication in Healthcare",
+    "field": "Health Professions",
+    "ca_institutions": ["The Sisters of Charity of Ottawa", "Ottawa Hospital", "Bruyère", "University of Ottawa"],
+    "funders": []
+  },
+  {
+    "id": "W3049687453",
+    "title": "Mobility, Migrations and Creative Writing in Pulaar: What a 'Migrant Literature' is?",
+    "abstract": "This paper will discuss the notion of Migrant Literature through the case of literature in an African language, the Pulaar, produced and circulating in Europe and Africa. / The question of migrations and diasporas in African literature is generally studied from novels in European languages. / Paradoxically, the notions of Literature of Immigration in France or Migrant Writings in Canada refer to creative writings produced by migrants using only European languages. However those countries are multilingual. So, what about writings of migrants who use their mother tongue? I argue that the existence of creative writings in African languages in France, as is the case for Pulaar, is not only a clear evidence of globalization and Super-diversity in European countries. It is also a possibility to question the limits of a national approach of literature and to replace the paradigm of mobility and movement at the heart of the interpretation of texts. In those conditions, what a Migrant Literature is? This question will be illustrated by the example of a life story written in Pulaar Nguurndam Tumaranke [Life of an Immigran by a Senegalese worker, Baylaa Kulibali, in Paris and first published in 1981.",
+    "year": 2013,
+    "lang": "en",
+    "type": "article",
+    "venue": "SSRN Electronic Journal",
+    "topic": "African history and culture studies",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2890184823",
+    "title": "Nanoscale Precursor Sites and their Importance in the Prediction of Stress Corrosion Cracking Failure",
+    "abstract": "Stress corrosion cracking (SCC) usually initiates at locally compromised surface regions, and ultimately at nanoscale precursor sites. The ability to identify such sites would be instrumental in predicting SCC failure and developing proactive mitigation strategies. Modern microscopy capabilities allow for the requisite micro-to-atomic scale analysis to characterize SCC and identify precursor sites at various length scales. In the latter part of his career, Roger Staehle recognized and emphasized the benefit of modern capabilities in microscopy and computational science for modeling and performing physical characterization of atomic and nanoscale processes related to SCC. Consequently, he developed the quantitative micro-nano (QMN) approach with the goal of attaining a global model of SCC on an atomistic basis. This article reviews recent studies that have applied state-of-the-art microscopy techniques to characterize SCC and associated precursors in the context of the QMN approach. Initial examples used to demonstrate characterization of nanoscale precursors include SCC of Alloy 800 in Pb-containing, caustic, and acid sulfate solutions relevant to secondary side crevice environments in nuclear power plants. In line with the QMN approach, the focus is on characterizing and understanding SCC mechanisms, leading to prediction and identification of associated precursors. Precursors to secondary side SCC of Alloy 800 are shown to include monolayer-level S or Pb at oxide-metal interfaces, the onset of dealloying, or metastable pitting corrosion. Following this, intergranular oxidation embrittlement of Alloy 600 in hydrogenated water/steam environments is explored to demonstrate the benefits of a multitechnique approach to identify SCC precursors and highlight recent advancements in in situ microscopy. Although nuclear-relevant SCC systems are used as examples, the QMN approach and benefit of identifying nanoscale precursors that correlate with SCC failure are applicable to a broad spectrum of SCC systems.",
+    "year": 2018,
+    "lang": "en",
+    "type": "article",
+    "venue": "CORROSION",
+    "topic": "Hydrogen embrittlement and corrosion behaviors in metals",
+    "field": "Materials Science",
+    "ca_institutions": ["University of Toronto", "Canadian Nuclear Laboratories", "Queen's University"],
+    "funders": "University of Toronto"
+  },
+  {
+    "id": "W7011367088",
+    "title": "Modélisation numérique du comportement hydrogéologique du parc à résidus miniers de la mine Goldex (Abitibi-Témiscamingue, Québec)",
+    "abstract": "Au site minier Goldex d'Agnico Eagle, un parc à résidus a été construit au début du projet minier en 2007. Le parc à résidus, qui jusqu'à présent a été utilisé comme parc à résidus secondaire, sera à l'avenir utilisé comme parc à résidus principal. La compagnie minière souhaite donc améliorer ses connaissances du contexte hydrogéologique actuel du site afin d'assurer la protection des eaux souterraines lors des futures opérations minières. Des nouveaux travaux sur le terrain comprenant l'implantation de nouveaux piézomètres, des tests de perméabilité in situ, des tests au perméamètre de Guelph, des essais granulométriques et un levé de résistivité électrique ont été effectués. Un modèle 2D a été développé à l'aide du logiciel SEEP/W et a d'abord été calibré en régime permanent pour les données d'été et d'automne. Le modèle 2D a ensuite été recalibré en régime transitoire en utilisant des conditions climatiques réelles. Pendant la calibration, il était difficile de reproduire les niveaux d'eau élevés dans les résidus près des digues. Les analyses de sensibilité ont mis en évidence l'importance des conductivités hydrauliques des résidus et des matériaux naturels ainsi que les propriétés de la courbe de rétention d'eau des résidus. Ces paramètres pourraient être des cibles pour la caractérisation future du site. Un modèle 3D développé à l'aide du code FEFLOW a montré, qu'avec les conditions imposées, la majeure partie de l'eau circulant dans les résidus refait surface au pied de la digue du bassin de sédimentation. Cependant, il est important de considérer que l'eau provenant des résidus et les futurs contaminants potentiels devraient se déplacer plus rapidement via les divers étangs de surface et le drainage de surface que par l'écoulement souterrain. Les zones critiques et sensibles du modèle ont également été identifiées.",
+    "year": 2021,
+    "lang": "fr",
+    "type": "other",
+    "venue": "Corpus Université Laval (Université Laval)",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4319006547",
+    "title": "Abstract WP128: Incidence Of Intracranial Hemorrhage And Clinical Outcomes In Fast Versus Slow Progressors As Defined By Aspects",
+    "abstract": "Introduction: Heterogeneity of collateralization in patients with acute ischemic stroke (AIS) is a marker of fast versus slow progression of penumbral consumption and infarct expansion. Our aim was to evaluate the relationship between time-dependent stroke progression and incidence of intracranial hemorrhage (ICH) and acute neurological deficits. Methods: Retrospective chart review of patients presenting with anterior circulation large vessel occlusion (LVO)-associated AIS at our comprehensive stroke center with 24 hours last known normal (LKN) who underwent endovascular thrombectomy (EVT) without intra-arterial thrombolytics or non-thrombolytics were included. We used Alberta Stroke Program Early CT Score (ASPECTS) on initial non-contrast CT to identify slow versus fast progressors. ASPECTS &lt;=7 was defined as fast progressor. Subgroup analysis was performed based on LKN &lt;3 hours, 3-9 hours, and 9-24 hours. We evaluated rate of hemorrhagic transformation using ECASS-3 criteria and determined change in NIHSS from baseline to discharge. Mann-Whitney U test and Fisher exact test statistic with Social science statistics software used for data analysis. Results: From September 2019 to December 2021, out of 268 subjects who underwent EVT, 48 met inclusion criteria. Mean age was 65.29 (95% CI 61.32, 69.27), and median presenting NIHSS was 16 (95% CI 14.39, 18.40). Mean ASPECTS was 7.71 (95% CI 7.21, 8.20). There was significant difference is hemorrhagic transformation rate between ASPECTS &gt;7 and &lt;=7 (Fisher value=0.018). Sample size was not large enough to perform subgroup analysis based on last known normal. However, there was a trend towards increase in hemorrhagic transformation rate with greater time from last known well at same ASPECTS score. Slow progressors also had a significant improvement in presenting and discharge NIHSS as compared to fast progressors (z-score is -3.10, p-value is 0.002). Conclusion: Our study suggests that ASPECTS score as assessed in different time windows to differentiate fast versus slow progressors is not only a predictor of clinical outcome, but also independently associated with risk of hemorrhagic transformation. Larger, prospective studies are needed to validate our results.",
+    "year": 2023,
+    "lang": "en",
+    "type": "article",
+    "venue": "Stroke",
+    "topic": "Acute Ischemic Stroke Management",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4239502952",
+    "title": "Strain Influences the Hydrogen Evolution Activity and Absorption Capacity of Palladium",
+    "abstract": "Abstract Strain engineering can increase the activity and selectivity of an electrocatalyst. Tensile strain is known to improve the electrocatalytic activity of palladium electrodes for reduction of carbon dioxide or dioxygen, but determining how strain affects the hydrogen evolution reaction (HER) is complicated by the fact that palladium absorbs hydrogen concurrently with HER. We report here a custom electrochemical cell, which applies tensile strain to a flexible working electrode, that enabled us to resolve how tensile strain affects hydrogen absorption and HER activity for a thin film palladium electrocatalyst. When the electrodes were subjected to mechanically‐applied tensile strain, the amount of hydrogen that absorbed into the palladium decreased, and HER electrocatalytic activity increased. This study showcases how strain can be used to modulate the hydrogen absorption capacity and HER activity of palladium.",
+    "year": 2020,
+    "lang": "en",
+    "type": "article",
+    "venue": "Angewandte Chemie",
+    "topic": "Electrocatalysts for Energy Conversion",
+    "field": "Energy",
+    "ca_institutions": "University of British Columbia",
+    "funders": ["Canada Research Chairs", "Canadian Institute for Advanced Research", "Google"]
+  },
+  {
+    "id": "W2799324417",
+    "title": "Nutritional recovery from a low-protein diet during pregnancy does not restore the kinetics of insulin secretion and Ca<sup>2+<\/sup> or alterations in the cAMP/PKA and PLC/PKC pathways in islets from adult rats",
+    "abstract": "We investigated the insulin release induced by glucose, the Ca 2+ oscillatory pattern, and the cyclic AMP (cAMP)/protein kinase A (PKA) and phospholipase C (PLC)/protein kinase C (PKC) pathways in islets from adult rats that were reared under diets with 17% protein (C) or 6% protein (LP) during gestation, suckling, and after weaning and in rats receiving diets with 6% protein during gestation and 17% protein after birth (R). First-phase glucose-induced insulin secretion was reduced in LP and R islets, and the second phase was partially restored in the R group. Glucose stimulation did not modify intracellular Ca 2+ concentration, but it reduced the Ca 2+ oscillatory frequency in the R group compared with the C group. Intracellular cAMP concentration was higher and PKA-Cα expression was lower in the R and LP groups compared with the C group. The PKCα content in islets from R rats was lower than that in C and LP rats. Thus, nutritional recovery from a low-protein diet during fetal life did not repair the kinetics of insulin release, impaired Ca 2+ handling, and altered the cAMP/PKA and PLC/PKC pathways.",
+    "year": 2018,
+    "lang": "en",
+    "type": "article",
+    "venue": "Applied Physiology Nutrition and Metabolism",
+    "topic": "Pancreatic function and diabetes",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": "Fundação de Amparo à Pesquisa do Estado de Mato Grosso"
+  },
+  {
+    "id": "W2105997113",
+    "title": "Assembly Yields Characterization of High IO Density, Fine Pitch Flip Chip in Package Using No-Flow Underfill",
+    "abstract": "The application of no-flow underfills for high IO density, fine-pitch, flip chip in package (FCIP) applications is analyzed. A number of commercially developed no flow underfills are evaluated. Process parameters for improved assembly yields depend strongly on the underfill materials characteristics and particularly the reflow profile. The test vehicles used in this study incorporate high I/O density, large chip size, and small interconnect pitch. This paper presents a methodology for evaluating new commercial no flow underfill materials, techniques for establishing baseline reflow profiles for yielding FCIP devices, and initial yield sensitivity analysis for the FCIP assembly process.",
+    "year": 2007,
+    "lang": "en",
+    "type": "article",
+    "topic": "3D IC and TSV technologies",
+    "field": "Engineering",
+    "ca_institutions": "Advanced Micro Devices (Canada)",
+    "funders": []
+  },
+  {
+    "id": "W4399875335",
+    "title": "De la francophonie africaine comme formation discursive",
+    "abstract": "",
+    "year": 2016,
+    "lang": "fr",
+    "type": "book-chapter",
+    "topic": "Linguistic and Sociocultural Studies",
+    "field": "Social Sciences",
+    "ca_institutions": "University of Calgary",
+    "funders": []
+  },
+  {
+    "id": "W354993360",
+    "title": "Pointe-à-Callière : Le marché, façon XVIIIe",
+    "abstract": "",
+    "year": 2003,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Continuité",
+    "topic": "Historical and Literary Studies",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W3216996509",
+    "title": "Peer Review of “Medical Brain Drain From Southeastern Europe: Using Digital Demography to Forecast Health Worker Emigration”",
+    "abstract": "This paper This is extremely important in the management and planning of population development, especially in those populations that, as the examples of countries (subject areas) mentioned in the text, are struggling with intensive and increased emigration of young people. Given the lack of such studies, I consider this paper very important for developing new methods in demography and therefore suggest that you publish this paper because it represents an excellent starting point for further research and validation of digital traces that enrich the classical demographic methodological system and alleviate existing methodological limitations in the monitoring migration process.",
+    "year": 2021,
+    "lang": "en",
+    "type": "article",
+    "venue": "JMIRx Med",
+    "topic": "Healthcare Systems and Reforms",
+    "field": "Economics, Econometrics and Finance",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W3111028250",
+    "title": "Shanghaied in Singapore: Dogmas of Orientalism",
+    "abstract": "L’auteur propose un examen approfondi d ’Orientalism ( L’Orientalisme) d’Edward Saïd (1978), afin de réfuter la critique classique selon laquelle l’analyse de Saïd serait entachée de ce même défaut de binarité essentialiste qu’il relève dans le discours orientaliste. L’œuvre de Saïd serait, en effet, plus nuancée que ce que l’on tient souvent pour acquis, tout en demeurant un paradigme assez clair qui permet l’étude multidimensionnelle des textes filmiques : 1) repérage de schémas dans les représentations orientales ; 2) évaluation du degré de conformité aux stéréotypes orientalistes ; et 3) tracé de l’évolution du discours orientaliste dans les films, compte tenu à la fois les thèmes persistants et des nouvelles variantes telles que le techno-orientalisme. Les films de fiction narratifs qui se déroulent à Singapour servent d’étude de cas, notamment le film de Bette Davis The Letter ( La Lettre) (1940).",
+    "year": 2020,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Canadian Journal of Film Studies",
+    "topic": "Socioeconomic Development in Asia",
+    "field": "Social Sciences",
+    "ca_institutions": ["Campion College", "University of Regina"],
+    "funders": []
+  },
+  {
+    "id": "W1516151904",
+    "title": "An unusual tandem‐domain rhodanese harbouring two active sites identified in <i>Desulfitobacterium hafniense<\/i>",
+    "abstract": "The rhodanese protein domain is common throughout all kingdoms of life and is characterized by an active site cysteine residue that is able to bind sulfane sulfur and catalyse sulfur transfer. No unique function has been attributed to rhodanese-domain-containing proteins, most probably because of their diversity at both the level of sequence and protein domain architecture. In this study, we investigated the biochemical properties of an unusual rhodanese protein, PhsE, from Desulfitobacterium hafniense strain TCE1 which we have previously shown to be massively expressed under anaerobic respiration with tetrachloroethene. The peculiarity of the PhsE protein is its domain architecture which is constituted of two rhodanese domains each with an active site cysteine. The N-terminal rhodanese domain is preceded by a lipoprotein signal peptide anchoring PhsE on the outside of the cytoplasmic membrane. In vitro sulfur-transferase activity of recombinant PhsE variants was measured for both domains contrasting with other tandem-domain rhodaneses in which usually only the C-terminal domain has been found to be active. The genetic context of phsE shows that it is part of a six-gene operon displaying homology with gene clusters encoding respiratory molybdoenzymes of the PhsA/PsrA family, possibly involved in the reduction of sulfur compounds. Our data suggest, however, that the presence of sulfide in the medium is responsible for the high expression of PhsE in Desulfitobacterium, where it could play a role in the sulfur homeostasis of the cell.",
+    "year": 2012,
+    "lang": "en",
+    "type": "article",
+    "venue": "FEBS Journal",
+    "topic": "Sulfur Compounds in Biology",
+    "field": "Biochemistry, Genetics and Molecular Biology",
+    "ca_institutions": [],
+    "funders": ["Provincial Health Services Authority", "Schweizerischer Nationalfonds zur Förderung der Wissenschaftlichen Forschung", "École Polytechnique Fédérale de Lausanne"]
+  },
+  {
+    "id": "W2727646269",
+    "title": "“Worthy my blood”: Inheritance, Imitation, and Gendered Familial Emotions in John Marston’s &lt;i&gt;Antonio&lt;/i&gt; Plays",
+    "abstract": "Examining the Antonio plays by John Marston, I argue that the metaphors used to portray familial emotions reveal the ideologies that underpin both excessive and normative versions of familial relationships; these metaphors reveal the pressures placed on family emotions by economic and political ideologies. While critics have traditionally read instances of family breakdown in plays as moments that violate kinship norms, I argue that such moments of violence are caused by ideologies associated with inheritance structures which underpin descriptions and experiences of normative familial emotions.&#x0D; A travers l’examen des pièces de théâtre d’Antonio de John Marston, je soutiens que les métaphores employées pour représenter les émotions familiales font apparaître les idéologies qui sous-tendent tant des versions excessives que des modèles normatifs pour lees relations familiales. Ces métaphores révèlent la pression que font subir aux émotions familiales les systèmes de pensée économiques et politiques. Alors que les critiques ont traditionnellement lu les exemples d’éclatement familial dans le théâtre comme des moments violant les normes de la parenté, je soutiens que de tels moments de violence sont causés par des systèmes associés aux structures d’héritage qui sous-tendent les descriptions et les expériences des émotions familiales normatives.",
+    "year": 2014,
+    "lang": "en",
+    "type": "article",
+    "venue": "Renaissance and Reformation",
+    "topic": "Foucault, Power, and Ethics",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": "Andrew W. Mellon Foundation"
+  },
+  {
+    "id": "W4406428947",
+    "title": "10.1016/0967-0653(95)97721-x",
+    "abstract": "",
+    "year": 2000,
+    "lang": "en",
+    "type": "article",
+    "venue": "Time to knit",
+    "topic": "Insect and Arachnid Ecology and Behavior",
+    "field": "Biochemistry, Genetics and Molecular Biology",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2887491454",
+    "title": "Zymographic Determination of Intrinsic Specific Activity of Oxidases in the Presence of Interfering Proteins",
+    "abstract": "",
+    "year": 2018,
+    "lang": "en",
+    "type": "article",
+    "venue": "Methods in molecular biology",
+    "topic": "Microbial metabolism and enzyme function",
+    "field": "Biochemistry, Genetics and Molecular Biology",
+    "ca_institutions": "Université du Québec à Montréal",
+    "funders": []
+  },
+  {
+    "id": "W6924459062",
+    "title": "Occurrence Download",
+    "abstract": "A dataset containing 75 species occurrences available in GBIF matching the query: { \"and\" : [ { \"or\" : [ \"PublishingCountry is Canada\", \"Country is Canada\" ] }, \"TaxonKey is one of (Geranium pyrenaicum Burm.f.)\" ] } The dataset includes 75 records from 14 constituent datasets; see https://api.gbif.org/v1/occurrence/download/0041406-240626123714530/datasets/export for details. Data from some individual datasets included in this download may be licensed under less restrictive terms.",
+    "year": 2024,
+    "lang": "en",
+    "type": "dataset",
+    "venue": "Global Biodiversity Information Facility",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4395998810",
+    "title": "Occurrence Download",
+    "abstract": "A dataset containing 1215 species occurrences available in GBIF matching the query: { \"and\" : [ \"HasCoordinate is true\", \"Country is one of (United States of America, Mexico, Canada)\", \"Year is greater than 1978\", \"Year is less than 2014\", \"HasGeospatialIssue is false\", \"TaxonKey is Peromyscus spicilegus J.A.Allen, 1897\" ] } The dataset includes 1215 records from 25 constituent datasets; see https://api.gbif.org/v1/occurrence/download/0095334-230224095556074/datasets/export for details. Data from some individual datasets included in this download may be licensed under less restrictive terms.",
+    "year": 2023,
+    "lang": "en",
+    "type": "dataset",
+    "venue": "Global Biodiversity Information Facility",
+    "topic": "Species Distribution and Climate Change",
+    "field": "Environmental Science",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W6958160435",
+    "title": "Movement behaviours are associated with lung function in middle-aged and older adults: a cross-sectional analysis of the Canadian longitudinal study on aging",
+    "abstract": "Abstract Background Physical activity has been shown to attenuate the age-associated decline in lung function; however, there is little research evaluating different movement behaviours as potential correlates of lung function. Modifiable determinants need to be identified, as the prevalence of chronic respiratory disease is on the rise. The purpose of this study was to investigate associations of self-reported movement behaviours (i.e., sitting time, walking, different intensities of physical activity, and strengthening activities), with lung function in middle-aged and older adults without a respiratory disease, according to their smoking history. Methods Data from participants of the Canadian Longitudinal Study on Aging were used for analysis (n = 16,839). Lung function was assessed using spirometry. A modified version of the Physical Activity Scale for the Elderly was used to assess sitting time and physical activity levels. Smoking status was classified as non-smoking,",
+    "year": 2018,
+    "lang": "en",
+    "type": "other",
+    "venue": "Figshare",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W1980789694",
+    "title": "Mobility management protocols for wireless mesh networks",
+    "abstract": "Wireless Mesh Networks (WMNs) are a novel wireless technology with many advantages such as easy deployment, low cost and dynamic self-configuration. The question of how to design a seamless and scalable wireless mesh is the driving force behind research. For conventional wireless networks, many mobility management solutions have been developed. Although some of the solutions could be migrated to mesh networks, considering the differences between WMNs and conventional wireless networks, new mobility management solutions should be designed and implemented for WMNs. In this paper, a comprehensive review, analysis, and comparison of many mobility management solutions over WMNs is presented, and future challenges in mobility management over WMNs are discussed.",
+    "year": 2009,
+    "lang": "en",
+    "type": "article",
+    "topic": "Mobile Ad Hoc Networks",
+    "field": "Computer Science",
+    "ca_institutions": "University of Ottawa",
+    "funders": []
+  },
+  {
+    "id": "W6958458100",
+    "title": "Additional file 4 of A reappraisal of the phylogeny and historical biogeography of Sparganium (Typhaceae) using complete chloroplast genomes",
+    "abstract": "Additional file 4: Table S1. Sequence similarity among the chloroplast genomes of Sparganium species.",
+    "year": 2023,
+    "lang": "en",
+    "type": "dataset",
+    "venue": "Figshare",
+    "ca_institutions": "Trent University",
+    "funders": []
+  },
+  {
+    "id": "W2098181948",
+    "title": "The Ethical Significance of Cheating in Online Computer Games",
+    "abstract": "In this article cheating in network and specifically online computer games is looked into as a moral offence. Reasons for the public ignoring the issue are brought forth. We present what could be considered as cheating in generic terms and in context. Different kinds of cheating are delineated, and remedies proposed. We also identify what is not cheating.",
+    "year": 2005,
+    "lang": "en",
+    "type": "article",
+    "venue": "The International Review of Information Ethics",
+    "topic": "Digital Games and Media",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2287940117",
+    "title": "Telecommunication integration in e‐healthcare: technologies, applications and challenges",
+    "abstract": "Abstract The technological advancements in sensing, signal processing, computing and communication have had great influence in different aspect of our lives. One of the fields that benefit from these technologies is health care. Trustworthiness of sensors, electronic devices, networks and wireless communications have matured enough to replace traditional legacy systems. However, there remains unexplored aspects of e‐healthcare especially considering the challenges in service provisioning, integration and resource optimization. Pervasive and continuous health monitoring is an important service, and it specifically provides the elderly and chronically ill patients with continuous and seamless health monitoring, benefiting both of them and the caretakers. In this survey article, we review and discuss different elements of e‐healthcare, introduce wireless transmission technologies that are used in e‐healthcare, present the quality of service (QoS) requirements and discuss the potential challenges as in security and privacy of data, power allocation, scheduling, meeting the QoS needs and confronting the electromagnetic interference. Some of the future research directions in healthcare areas are also discussed. Copyright © 2016 John Wiley &amp; Sons, Ltd.",
+    "year": 2016,
+    "lang": "en",
+    "type": "article",
+    "venue": "Transactions on Emerging Telecommunications Technologies",
+    "topic": "Wireless Body Area Networks",
+    "field": "Engineering",
+    "ca_institutions": "Toronto Metropolitan University",
+    "funders": []
+  },
+  {
+    "id": "W4390724391",
+    "title": "Positive orientation in the context of ways of coping with stress and social support in patients with multiple sclerosis",
+    "abstract": "AMA Segiet N, Przyborowska N, Kruk M, Rusek S, Klimkowicz-Mrowiec A, Bober-Płonka B. Positive orientation in the context of ways of coping with stress and social support in patients with multiple sclerosis. Neuropsychiatria i Neuropsychologia/Neuropsychiatry and Neuropsychology. 2023;18(3):161-168. doi:10.5114/nan.2023.134152. APA Segiet, N., Przyborowska, N., Kruk, M., Rusek, S., Klimkowicz-Mrowiec, A., & Bober-Płonka, B. (2023). Positive orientation in the context of ways of coping with stress and social support in patients with multiple sclerosis. Neuropsychiatria i Neuropsychologia/Neuropsychiatry and Neuropsychology, 18(3), 161-168. https://doi.org/10.5114/nan.2023.134152 Chicago Segiet, Natalia M., Natalia Przyborowska, Maria Kruk, Stanisław Rusek, Aleksandra Klimkowicz-Mrowiec, and Bogusława Bober-Płonka. 2023. \"Positive orientation in the context of ways of coping with stress and social support in patients with multiple sclerosis\". Neuropsychiatria i Neuropsychologia/Neuropsychiatry and Neuropsychology 18 (3): 161-168. doi:10.5114/nan.2023.134152. Harvard Segiet, N., Przyborowska, N., Kruk, M., Rusek, S., Klimkowicz-Mrowiec, A., and Bober-Płonka, B. (2023). Positive orientation in the context of ways of coping with stress and social support in patients with multiple sclerosis. Neuropsychiatria i Neuropsychologia/Neuropsychiatry and Neuropsychology, 18(3), pp.161-168. https://doi.org/10.5114/nan.2023.134152 MLA Segiet, Natalia M. et al. \"Positive orientation in the context of ways of coping with stress and social support in patients with multiple sclerosis.\" Neuropsychiatria i Neuropsychologia/Neuropsychiatry and Neuropsychology, vol. 18, no. 3, 2023, pp. 161-168. doi:10.5114/nan.2023.134152. Vancouver Segiet N, Przyborowska N, Kruk M, Rusek S, Klimkowicz-Mrowiec A, Bober-Płonka B. Positive orientation in the context of ways of coping with stress and social support in patients with multiple sclerosis. Neuropsychiatria i Neuropsychologia/Neuropsychiatry and Neuropsychology. 2023;18(3):161-168. doi:10.5114/nan.2023.134152.",
+    "year": 2023,
+    "lang": "en",
+    "type": "article",
+    "venue": "Neuropsychiatria i Neuropsychologia",
+    "topic": "Social Issues in Poland",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2060327264",
+    "title": "Renal cell carcinoma with inferior vena caval extention: impact of tumour extent on surgical outcome",
+    "abstract": "OBJECTIVE: To evaluate our experience with surgical resection of renal cell carcinoma (RCC) with inferior vena cava (IVC) involvement and examine the relationship between prognosis and tumour extent. PATIENTS AND METHODS: A retrospective review of nephrectomy performed between 1985 and 2005 identified 50 patients presenting with tumour thrombus extension into the IVC. Clinical characteristics and outcome were evaluated. RESULTS: Of the 50 patients evaluated, 7, 26, 10 and 7 presented with level I, II, III and IV thrombus, respectively. Major postoperative complications occurred in 16% of patients. Local or distant failure occurred in 25 (64%) patients. The mean time to recurrence was 10 months. Only supra-diaphragmatic extension of the tumour thrombus was predictive of disease recurrence. CONCLUSION: Locally advanced RCC with IVC thrombus remains associated with significant local and distant failure rate. The level of thrombus extension is significantly associated with disease recurrence. Effective adjuvant therapy is needed to improve outcome in this patient population.",
+    "year": 2009,
+    "lang": "en",
+    "type": "article",
+    "venue": "British Journal of Urology",
+    "topic": "Renal cell carcinoma treatment",
+    "field": "Medicine",
+    "ca_institutions": ["McGill University", "McGill University Health Centre"],
+    "funders": []
+  },
+  {
+    "id": "W6982150480",
+    "title": "Guiding issues of artificial light use in urban landscape architecture",
+    "abstract": "The principles of human expectation, safety and security, legibility, and physiological characteristics of the human eye and brain all contribute to the perception of urban outdoor space at night. Illuminating engineering, lighting design, and environmental psychology have contributed to a greater understanding of these principles and their impact in terms of artificial light use in urban landscape architecture. The information gathered on artificial light use was achieved through an extensive literature review on illuminating engineering, lighting design and environmental psychology. The contributions of each are summarized in Chapter One. Chapters Two and Three focus on human perception and the physiology of vision, and lighting technology respectively. Emphasis has been placed on their implications in terms of implementation, safety and security, legibility, aesthetics, and the design process. Chapter Four synthesizes this information and generates lighting principles for landscape architects. These results are applied to a proposed urban park design located within the downtown area of Winnipeg, Manitoba. Special attention was given to the implementation of these principles into a cohesive lighting scheme.",
+    "year": 2000,
+    "lang": "en",
+    "type": "other",
+    "venue": "Library and Archives Canada (Government of Canada)",
+    "topic": "American Sports and Literature",
+    "field": "Arts and Humanities",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2407055687",
+    "title": "Detection of erythroblast antibodies in mitogen‐stimulated bone marrow cultures from patients with myelodysplastic syndromes",
+    "abstract": "BACKGROUND: Low-risk myelodysplastic syndromes (MDS) show several immunologic abnormalities, including increased frequency of autoimmune manifestations and/or overt autoimmune diseases, whose prognostic significance still remains controversial. STUDY DESIGN AND METHODS: We studied the presence of erythroblast antibodies in mitogen-stimulated bone marrow (BM) cultures of 70 patients with early-stage MDS (refractory anemia and refractory anemia with ringed sideroblasts). RESULTS: Sixty-six percent of patients showed positive erythroblast antibodies, along with BM erythroid hyperplasia and a hemolytic picture in the peripheral blood. Supernatants from positive cultures induced an increase of overall cellularity, the appearance of erythroblastic clustering, and dyserythropoietic signs in normal BM. We identified CD45(dim) Gly-A(dim) CD71(bright) cells (red blood cell precursors at different maturation stage) as the target of the antibodies. Erythropoietin (EPO) levels were reduced and EPO receptors (EPO-R) increased in BM culture supernatants from positive patients. However, flow cytometric analysis showed that neither EPO nor EPO-R was involved in an abnormal stimulation driven by these autoantibodies. Values of the proapoptotic protein Bax were increased in positive patients and Bcl-2 levels were decreased, although not significantly. CONCLUSION: MDS patients with anti-erythroblast autoimmunity showed increased BM apoptosis, suggesting that the autoimmune reaction may contribute to an unfavorable BM microenvironment for optimal erythropoiesis.",
+    "year": 2016,
+    "lang": "en",
+    "type": "article",
+    "venue": "Transfusion",
+    "topic": "Acute Myeloid Leukemia Research",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": "Ministry of Health, British Columbia"
+  },
+  {
+    "id": "W4399068194",
+    "title": "Improving the five-point bootstrap",
+    "abstract": "A bstract We present a new algorithm for the numerical evaluation of five-point conformal blocks in d -dimensions, greatly improving the efficiency of their computation. To do this we use an appropriate ansatz for the blocks as a series expansion in radial coordinates, derive a set of recursion relations for the unknown coefficients in the ansatz, and evaluate the series using a Padé approximant to accelerate its convergence. We then study the 〈 σσϵσσ 〉 correlator in the 3d critical Ising model by truncating the operator product expansion (OPE) and only including operators with conformal dimension below a cutoff ∆ ⩽ ∆ cutoff . We approximate the contributions of the operators above the cutoff by the corresponding contributions in a suitable disconnected five-point correlator. Using this approach, we compute a number of OPE coefficients with greater accuracy than previous methods.",
+    "year": 2024,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of High Energy Physics",
+    "topic": "Tensor decomposition and applications",
+    "field": "Mathematics",
+    "ca_institutions": "Perimeter Institute",
+    "funders": []
+  },
+  {
+    "id": "W3047586714",
+    "title": "Genome-wide Modeling of Polygenic Risk Score in Colorectal Cancer Risk",
+    "abstract": "",
+    "year": 2020,
+    "lang": "en",
+    "type": "article",
+    "venue": "The American Journal of Human Genetics",
+    "topic": "Genetic factors in colorectal cancer",
+    "field": "Medicine",
+    "ca_institutions": ["Lunenfeld-Tanenbaum Research Institute", "Mount Sinai Hospital", "Memorial University of Newfoundland", "University of Toronto", "Ontario Institute for Cancer Research"],
+    "funders": ["Cancer Research UK", "National Cancer Institute", "Fred Hutchinson Cancer Research Center", "World Health Organization"]
+  },
+  {
+    "id": "W4398818220",
+    "title": "ddAle_Ott_20161227_05382000.mat",
+    "abstract": ":unav",
+    "year": 2020,
+    "lang": "fr",
+    "type": "dataset",
+    "venue": "Harvard Dataverse",
+    "ca_institutions": "Natural Resources Canada",
+    "funders": []
+  },
+  {
+    "id": "W4400779800",
+    "title": "A Digital Trail of Rupture. The German Film Exile 1933-1945 in the Data of Günter Peter Straschek",
+    "abstract": "How can digital humanities methods reveal the productivity and connectedness of a group of historical individuals linked by displacement from a country? German film exile during National Socialism, 1933-1945, has always been a complex subject to research because of the scattered nature of the sources in the international distribution of archives (Asper, Horak, Hilchenbach). It remains challenging to reconstruct the worldwide dispersed separate flight routes of more than 3000 individuals who worked for the German film industry before 1933. This contribution concerns a list of film exiles collected by the exile researcher and filmmaker Günter Peter Straschek (1942-2009), whose collection of files belongs to the _German National Library, German Exile Archive 1933-1945, Frankfurt am Main_ and was inventoried according to their Normdata. To this end, a database of GND exile data containing names, birth and death dates, professions, and countries of exile was compiled and enriched with data from online resources (Wikidata and IMDb). How can a more comprehensive look at the data reveal the devastating loss for German film (2) and, on the other hand, the collaboration on the flight (3) showing exiles remaining defiant? By incorporating new data from the Straschek Estate, digital methods further enhance historical research findings.",
+    "year": 2024,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Cultural Analytics",
+    "topic": "Italian Fascism and Post-war Society",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W3205089027",
+    "title": "Sustainability Indicators for Community Enterprises Producing Renewable Energy in Thailand",
+    "abstract": "This study aims to propose sustainability indicators for community enterprises producing renewable energy in Thailand by applying the Sustainability Balanced Scorecard (SBSC) as a conceptual framework. The literature review, a survey of the community enterprise producing renewable energy, and the assessment by eighteen experts and academics were able to summarize nineteen sustainability indicators for community enterprises producing renewable energy in Thailand which could be divided into six perspectives: (1) financial perspective of three indicators (2) stakeholder perspective of three indicators (3) internal process perspective of five indicators (4) learning and growth perspective of two indicators (5) social perspective of two indicators (6) environmental perspective of four indicators. Community enterprises producing renewable energy in Thailand can use these sustainability indicators to set their operational goals or management plans. In addition, government sector and related agencies are able to use the sustainability indicators as guidelines for the formulation of appropriate policies or measures to jointly develop and support community enterprises producing renewable energy in Thailand to self-reliance and achieve more sustainable success, affect strengthening the grassroots economy, reducing the negative social and environmental impacts of non-renewable energy production and use, increasing energy security.",
+    "year": 2021,
+    "lang": "en",
+    "type": "article",
+    "venue": "International Journal of Sustainable Development and Planning",
+    "topic": "Sustainable Development and Environmental Policy",
+    "field": "Environmental Science",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4414380501",
+    "title": "Transcriptome-wide Mendelian randomization exploring dynamic CD4+ T cell gene expression in colorectal cancer development",
+    "abstract": "Recent research suggests higher circulating lymphocyte counts may protect against colorectal cancer (CRC). However, the role of specific lymphocyte subtypes and activation states remain unclear. CD4+ T cells-a highly dynamic lymphocyte subtype-undergo gene expression changes upon activation that are critical to their effector function. Previous studies using bulk tissue have limited our understanding of their role in CRC risk to static associations. We applied Mendelian randomization (MR) and genetic colocalisation to evaluate causal relationships of gene expression on CRC risk across multiple CD4+ T cell subtypes and activation states. Genetic proxies were obtained from single-cell transcriptomic data, allowing us to investigate the causal effect of expression of 1,805 genes across CD4+ T cell activation states on CRC risk (78,473 cases; 107,143 controls). Analyses were stratified by CRC anatomical subsites and sex, with sensitivity analyses assessing whether the observed effect estimates were likely to be CD4+ T cell-specific. We identified 6 genes-FADS2, FHL3, HLA-DRB1, HLA-DRB5, RPL28, and TMEM258-with strong evidence for a causal role in CRC development (FDR-P < 0.05; colocalisation H4 > 0.8). Causal estimates varied by CD4+ T cell subtype, activation state, CRC subsite and sex. However, many of genetic proxies used to instrument gene expression in CD4+ T cells also act as eQTLs in other tissues, highlighting the challenges of using genetic proxies to instrument tissue-specific expression changes. We demonstrate the importance of capturing the dynamic nature of CD4+ T cells in understanding CRC risk, and prioritize genes for further investigation in cancer prevention.",
+    "year": 2025,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Leukocyte Biology",
+    "topic": "Colorectal Cancer Treatments and Studies",
+    "field": "Medicine",
+    "ca_institutions": "Princess Margaret Cancer Centre",
+    "funders": ["National Cancer Institute", "Cancer Research UK", "Ministerstvo Zdravotnictví Ceské Republiky", "Instituto Nacional do Câncer, Ministério da Saúde", "National Heart, Lung, and Blood Institute", "Norges Idrettshøgskole", "Medical Research Council", "National Institutes of Health", "National Cancer Research Institute", "Wellcome Trust", "University of Bristol", "World Health Organization"]
+  },
+  {
+    "id": "W4232717987",
+    "title": "Law and Environmental Statistics",
+    "abstract": "Abstract Many environmental regulations and standards are based on statistical data and inferences drawn from them. Often the statistical analysis used by the US Environmental Protection Agency (EPA) or other governmental body, in developing an exposure or effluent limit or a monitoring program, is challenged by the industry or public interest group that is most affected by its decision. Then, the courts need to examine the record on which the EPA or other agency relied in setting the standard. Because there are several statutes regulating the environment in the United States as well as in Europe, in assessing the adequacy of the underlying scientific support of a regulation or protocol, one needs to be aware of the relevant statute. This article discusses several important statistical issues that have arisen in actual cases and briefly describe some other topics that arise in this area.",
+    "year": 2014,
+    "lang": "en",
+    "type": "other",
+    "venue": "Wiley StatsRef: Statistics Reference Online",
+    "topic": "Environmental Justice and Health Disparities",
+    "field": "Social Sciences",
+    "ca_institutions": ["Okanagan University College", "University of British Columbia, Okanagan Campus", "University of British Columbia"],
+    "funders": []
+  },
+  {
+    "id": "W2077438793",
+    "title": "A Dynamic Energy Budget (DEB) growth model for Pacific oyster larvae, Crassostrea gigas",
+    "abstract": "",
+    "year": 2010,
+    "lang": "en",
+    "type": "article",
+    "venue": "Aquaculture",
+    "topic": "Marine Bivalve and Aquaculture Studies",
+    "field": "Environmental Science",
+    "ca_institutions": [],
+    "funders": "Université Laval"
+  },
+  {
+    "id": "W4411914013",
+    "title": "Antihypertensive medications and cancer risk: Evidence from 0.27 million patients with newly diagnosed hypertension",
+    "abstract": "Background Whether specific antihypertensive treatments increase cancer risk in patients with hypertension is still controversial. We aimed to estimate the associations of different antihypertensive treatments with cancer risk in real-world settings. Methods A longitudinal cohort study was designed in a population of 1.2 million individuals from the CHinese Electronic health Records Research in Yinzhou (CHERRY). Propensity score matching (PSM) and the Cox regression model were used to estimate the associations. Several sensitivity analyses were then performed to reduce potential residual confounding. Results From 2009 to 2019, a total of 270,320 patients with newly diagnosed hypertension were included in this study. With a median follow-up time of 7.7 years, 14,264 cases of cancer occurred. There were no significant associations of angiotensin-converting enzyme inhibitors (ACEIs), angiotensin receptor blockers (ARBs), β-blockers, or thiazide diuretics (TDs) with cancer risk ( p &amp;gt; 0.05). Compared with other antihypertensive treatments, the use of calcium channel blockers (CCBs) was significantly associated with a marginally mild increase in the risk of all cancers (hazard ratio, HR = 1.05; 95% CI: 1.01, 1.09; p = 0.017). However, this association was no longer observed in sensitivity analyses excluding patients with less than 1, 2, or 3 years of follow-up. Nevertheless, the association between CCBs and the risk of endocrine cancer, especially thyroid cancer, still exists. Conclusion Despite previous controversy, in this study, we found no clinically meaningful cancer risk associated with antihypertensive medications. However, the association of CCBs with specific cancer still requires further research. These findings should be interpreted with caution due to the potential residual confounding.",
+    "year": 2025,
+    "lang": "en",
+    "type": "article",
+    "venue": "Frontiers in Pharmacology",
+    "topic": "Blood Pressure and Hypertension Studies",
+    "field": "Medicine",
+    "ca_institutions": "McGill University",
+    "funders": []
+  },
+  {
+    "id": "W4403281573",
+    "title": "Identification and analysis of differentially expressed lncRNAs and their ceRNA networks in DMD/mdx primary myoblasts",
+    "abstract": "This study explored the significance of long non-coding RNAs (lncRNAs), particularly their role in maintaining dystrophin protein stability and regulating myocyte proliferation and differentiation. The investigation focused on DMD/mdx mouse skeletal muscle primary myoblasts, aiming to identify lncRNAs potential as biomarkers and therapeutic targets for Duchenne muscular dystrophy (DMD). Utilizing CLC Genomics Workbench software, 554 differentially expressed lncRNAs were identified in DMD/mdx mice compared to wild-type (WT) control. Among them, 373 were upregulated, and 181 were downregulated. The study highlighted specific lncRNAs (e.g., 5930430L01Rik, Gm10143, LncRNA1490, LncRNA580) and their potential regulatory roles in DMD key genes like IGF1, FN1, TNNI1, and MYOD1. By predicting miRNA and their connections with lncRNA and mRNA (ceRNA network) using tools such as miRNet, miRSYSTEM and miRCARTA, the study revealed potential indirect regulation of Dystrophin, IGF1R and UTRN genes by identified lncRNAs (e.g. 2310001H17Rik-203, C130073E24Rik-202, LncRNA2767, 5930430L01Rik and LncRNA580). These findings suggest that the identified lncRNAs may play crucial roles in the development and progression of DMD through their regulatory influence on key gene expression, providing valuable insights for potential therapeutic interventions.",
+    "year": 2024,
+    "lang": "en",
+    "type": "article",
+    "venue": "Scientific Reports",
+    "topic": "Cancer-related molecular mechanisms research",
+    "field": "Biochemistry, Genetics and Molecular Biology",
+    "ca_institutions": [],
+    "funders": ["Directorate for Biological Sciences", "Agri-Food and Biosciences Institute", "Szkola Glówna Gospodarstwa Wiejskiego w Warszawie", "Queen's University", "Queen's University Belfast"]
+  },
+  {
+    "id": "W2163967261",
+    "title": "α-Crystallin B prevents apoptosis after H<sub>2<\/sub>O<sub>2<\/sub> exposure in mouse neonatal cardiomyocytes",
+    "abstract": "α-Crystallin B (cryAB) is the most abundant small heat shock protein in cardiomyocytes (CMs) and has been shown to have potent antiapoptotic properties. Because the mechanism by which cryAB prevents apoptosis has not been fully characterized, we examined its protective effects at the cellular level by silencing cryAB in mouse neonatal CMs using lentivector-mediated transduction of short hairpin RNAs. Subcellular fractionation of whole hearts showed that cryAB is cytosolic under control conditions, and after H(2)O(2) exposure, it translocates to the mitochondria. Phosphorylated cryAB (PcryAB) is mainly associated with the mitochondria, and any residual cytosolic PcryAB translocates to the mitochondria after H(2)O(2) exposure. H(2)O(2) exposure caused increases in cryAB and PcryAB levels, and cryAB silencing resulted in increased levels of apoptosis after exposure to H(2)O(2). Coimmunoprecipitation assays revealed an apparent interaction of both cryAB and PcryAB with mitochondrial voltage-dependent anion channels (VDAC), translocase of outer mitochondrial membranes 20 kDa (TOM 20), caspase 3, and caspase 12 in mouse cardiac tissue. Our results are consistent with the conclusion that the cardioprotective effects of cryAB are mediated by its translocation from the cytosol to the mitochondria under conditions of oxidative stress and that cryAB interactions with VDAC, TOM 20, caspase 3, and caspase 12 may be part of its protective mechanism.",
+    "year": 2012,
+    "lang": "en",
+    "type": "article",
+    "venue": "American Journal of Physiology-Heart and Circulatory Physiology",
+    "topic": "Heat shock proteins research",
+    "field": "Biochemistry, Genetics and Molecular Biology",
+    "ca_institutions": ["Heart and Stroke Foundation", "University of Toronto"],
+    "funders": "Canadian Institutes of Health Research"
+  },
+  {
+    "id": "W2963760108",
+    "title": "Improvement of accelerating gradients in niobium quarter wave resonators",
+    "abstract": "Abstract Systematic studies have been performed on the effect of the surface processing techniques for improving accelerating gradients in superconducting niobium quarter wave resonators (QWR). These include high pressure rinsing (HPR), high temperature heat treatment of cavities and helium pulse processing. Tests done after HPR have not only shown a reduction in field emission in the cavities at high accelerating gradients but also an improvement in the low field quality factor ( Q ). The effect of the high temperature (650 °C) heat treatment of jacketed QWRs (QWR with the outer helium vessel) on the cavity gradients has also been investigated. This was performed for two different QWR designs and a substantial improvement in performance has been observed in both the cases. The increase in gradients is beyond that due to hydrogen degassing alone. Helium pulse processing during 4 K tests has been tried out on several cavities and its effect on the quality factor at both high and low gradients has been observed. This technique has been found to be useful for those resonators which have a high Q at lower fields but are limited due to the field emission at higher gradients. They have exhibited a marked improvement in the high field Q -slope over and above that obtained with conventional pulse processing under high vacuum. A comprehensive overview of all these developments carried out over the past few years has been reported.",
+    "year": 2019,
+    "lang": "en",
+    "type": "article",
+    "venue": "Superconductor Science and Technology",
+    "topic": "Particle accelerators and beam dynamics",
+    "field": "Engineering",
+    "ca_institutions": [],
+    "funders": "Inter-University Accelerator Centre"
+  },
+  {
+    "id": "W2893694560",
+    "title": "On the Privilege of Being a Diversity Scholar and How We Choose to Use It",
+    "abstract": "This editorial opens up a series of conversations that IJIDI would like to have with its readers and authors. Editorials will raise one or several diversity-related questions and present a combination of informative and viewpoint pieces. Opinions in the editorials are those of the Editor or Guest Editors, whoever authors or co-authors them. Editorials will also present a grand-tour of the respective issues.",
+    "year": 2018,
+    "lang": "en",
+    "type": "article",
+    "venue": "The International Journal of Information Diversity & Inclusion (IJIDI)",
+    "topic": "Experimental Behavioral Economics Studies",
+    "field": "Social Sciences",
+    "ca_institutions": "University of Calgary",
+    "funders": []
+  },
+  {
+    "id": "W3092560629",
+    "title": "Épisode 15 : Mon quartier préféré de Montréal (2)",
+    "abstract": "Decouvrez le quartier prefere de Montreal de John (le Square Saint-Louis) et Cesar (le Port d'Escale).",
+    "year": 2015,
+    "lang": "fr",
+    "type": "article",
+    "topic": "French Urban and Social Studies",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4411618025",
+    "title": "10.51847/ig1FOaJU1F",
+    "abstract": "Remarkable progresses and information technology's increased, deep and effective changes in the business environment are going on.Super-computing is one of the most innovative distribution models and IT services that can be named as the development and deployment of Internet-based services or supercomputing.Super-computing is a model of distributed computing, consisting of a large number of resources and applications with the goal of sharing resources as a service over the Internet, and more efficient use of resources is a timeless challenge, hence the problem of scheduling tasks in super-computing, is considered as important that seeks an optimal scheduling to execute tasks and determine the optimal resource allocation.In this regard, different algorithms with different features there exist that are discussed in this article.",
+    "year": 2000,
+    "lang": "en",
+    "type": "review",
+    "venue": "Time to knit",
+    "topic": "Scheduling and Optimization Algorithms",
+    "field": "Engineering",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2593929034",
+    "title": "Observation of thermodynamic phase noise using a slow-light resonance in a fiber Bragg grating",
+    "abstract": "Thermodynamic phase noise in passive fiber devices is generally so weak that in most devices, in particular fiber sensors, it has only been observed in fiber lengths in the range of 1 meter or much longer. Here we present a passive fiber strain sensor only 4.5 mm in length in which the noise in the frequency range of 1 kHz to ~12 kHz is limited by thermal phase noise in the fiber. The phase noise could be measured in such a short fiber by utilizing a slow-light fiber Bragg grating (FBG) resonator in which the phase noise is magnified by the resonator's slowing-down factor n<sub>g<\/sub>/n ≈ 370, where n<sub>g<\/sub> is the group index. At the same time, the usually dominant laser frequency noise was brought below the level of the phase noise by using a short fiber and a low-noise laser with a linewidth under 200 Hz. At 4 kHz, the total measured noise expressed in units of strain is 110 fε/&radic;Hz, and the phase noise accounts for 77% of it. This sensor resolves a single-pass thermodynamic length fluctuation of only 5 x10<sup>-16<\/sup> m/&radic;Hz. These measurements provide experimental support for the dependencies of the phase noise on the fiber resonator length and group index predicted by a recent model.",
+    "year": 2017,
+    "lang": "en",
+    "type": "article",
+    "venue": "Proceedings of SPIE, the International Society for Optical Engineering/Proceedings of SPIE",
+    "topic": "Advanced Fiber Optic Sensors",
+    "field": "Engineering",
+    "ca_institutions": "Université Laval",
+    "funders": []
+  }
+]
+warning: loading hooks from both /Users/choxos/.codex/hooks.json and /Users/choxos/.codex/config.toml; prefer a single representation for this layer
+2026-07-13T03:10:03.177107Z ERROR rmcp::transport::worker: worker quit with fatal: Transport channel closed, when Auth(AuthorizationRequired)
+warning: Skill descriptions were shortened to fit the 2% skills context budget. Codex can still see every skill, but some descriptions are shorter. Disable unused skills or plugins to leave more room for the rest.
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart Failed
+hook: SessionStart Completed
+hook: SessionStart Completed
+hook: SessionStart Completed
+hook: SessionStart Completed
+hook: SessionStart Failed
+hook: UserPromptSubmit
+hook: UserPromptSubmit
+hook: UserPromptSubmit Failed
+hook: UserPromptSubmit Failed
+codex
+[
+  {"id":"W2742074347","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"This evaluates a cancer diagnostic assay, so assay performance rather than research practice is the object."},
+  {"id":"W2132142972","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"This is a theoretical mathematics paper about factorization monads, not research itself."},
+  {"id":"W4200140974","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"This investigates cancer mutations and receptor mechanisms, not research practice."},
+  {"id":"W4403306763","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"This is a textbook chapter explaining recursive algorithms rather than studying research."},
+  {"id":"W4299298761","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"This concerns Gulf of Maine ecosystem management and environmental science, not the research system."},
+  {"id":"W7110330862","tier":"OUT","genre":"editorial/commentary","about_ca":false,"confidence":"high","reason":"This editorial introduces a special issue on distance education history rather than studying research practice."},
+  {"id":"W1972772572","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"This reports treatment of a patient with conversion disorder, not research itself."},
+  {"id":"W2141467625","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The title clearly indicates a clinical study of decision aids and decisional conflict, not metaresearch."},
+  {"id":"W3049687453","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"This is a literary analysis of migrant writing in Pulaar, not an analysis of research."},
+  {"id":"W2890184823","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"This reviews mechanisms of stress corrosion cracking and its precursors, not research methodology."},
+  {"id":"W7011367088","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"This models groundwater behavior at a mining tailings site, not research practice."},
+  {"id":"W4319006547","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"This studies stroke progression and hemorrhagic outcomes in patients, not research itself."},
+  {"id":"W4239502952","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"This examines palladium electrocatalysis and hydrogen absorption, not metaresearch."},
+  {"id":"W2799324417","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"This investigates insulin secretion and molecular pathways in rats, not research practice."},
+  {"id":"W2105997113","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"This evaluates semiconductor underfill materials and assembly yields, not research itself."},
+  {"id":"W4399875335","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"The title identifies a linguistic and sociocultural analysis rather than a study of research."},
+  {"id":"W354993360","tier":"OUT","genre":"other","about_ca":false,"confidence":"high","reason":"The title concerns a historical market exhibition or site and is not about research practice."},
+  {"id":"W3216996509","tier":"T3","genre":"editorial/commentary","about_ca":false,"confidence":"high","reason":"This is a peer-review report evaluating a demographic manuscript, serving as contextual commentary rather than studying peer review."},
+  {"id":"W3111028250","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"This analyzes Orientalism and film representations, not research itself."},
+  {"id":"W1516151904","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"This characterizes a bacterial protein and its biochemical activity, not research practice."},
+  {"id":"W2727646269","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"This is a literary analysis of familial emotions and inheritance in plays, not metaresearch."},
+  {"id":"W4406428947","tier":"OUT","genre":"other","about_ca":false,"confidence":"low","reason":"The DOI-like title and ecological topic provide too little information for a detailed genre judgment, but nothing indicates research as the object."},
+  {"id":"W2887491454","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"low","reason":"The title suggests a biochemical measurement technique applied to oxidases rather than study of research practice."},
+  {"id":"W6924459062","tier":"OUT","genre":"infrastructure/announcement","about_ca":false,"confidence":"high","reason":"This is a species-occurrence dataset, not a study of research or research infrastructure."},
+  {"id":"W4395998810","tier":"OUT","genre":"infrastructure/announcement","about_ca":false,"confidence":"high","reason":"This is a GBIF species-occurrence dataset concerning a taxon distribution query, not metaresearch."},
+  {"id":"W6958160435","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"medium","reason":"This analyzes movement behaviors and lung function in adults, not research practice."},
+  {"id":"W1980789694","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"This reviews mobility-management solutions for wireless mesh networks, with the technology rather than research as its object."},
+  {"id":"W6958458100","tier":"OUT","genre":"infrastructure/announcement","about_ca":false,"confidence":"high","reason":"This is a supplementary sequence-similarity table for a plant phylogeny study, not a study of research."},
+  {"id":"W2098181948","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"This examines cheating as an ethical issue in online games, not research practice."},
+  {"id":"W2287940117","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"This surveys telecommunications technologies and challenges in e-healthcare, not research itself."},
+  {"id":"W4390724391","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"low","reason":"The record provides only a citation for a clinical psychology study, with no substantive abstract indicating metaresearch."},
+  {"id":"W2060327264","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"This studies surgical outcomes in renal cell carcinoma, not research practice."},
+  {"id":"W6982150480","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"This develops lighting principles for urban landscape architecture, not research itself."},
+  {"id":"W2407055687","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"This investigates autoimmune mechanisms in myelodysplastic syndromes, not metaresearch."},
+  {"id":"W4399068194","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"This develops a computational algorithm for conformal blocks and applies it to a physics model, not research practice."},
+  {"id":"W3047586714","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The title clearly identifies a genetic study of colorectal cancer risk, not research itself."},
+  {"id":"W4398818220","tier":"OUT","genre":"infrastructure/announcement","about_ca":false,"confidence":"low","reason":"This is an unidentified data file with no substantive abstract, and nothing indicates research as the object."},
+  {"id":"W4400779800","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"This applies digital humanities methods to German film exile history, with historical individuals rather than research as the object."},
+  {"id":"W3205089027","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"This develops sustainability indicators for renewable-energy enterprises, not research practice."},
+  {"id":"W4414380501","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"This applies Mendelian randomization to colorectal cancer biology, not to the practice of research."},
+  {"id":"W4232717987","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"This discusses statistical issues in environmental regulation and litigation rather than studying research practice."},
+  {"id":"W2077438793","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"The title clearly identifies a growth model for oyster larvae, not research itself."},
+  {"id":"W4411914013","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"This analyzes antihypertensive medications and cancer risk in patients, not metaresearch."},
+  {"id":"W4403281573","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"This studies lncRNA expression and regulation in a disease model, not research practice."},
+  {"id":"W2163967261","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"This investigates a cardioprotective protein mechanism in mouse cardiomyocytes, not research itself."},
+  {"id":"W2963760108","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"This evaluates processing techniques for superconducting resonators, not research practice."},
+  {"id":"W2893694560","tier":"T3","genre":"editorial/commentary","about_ca":false,"confidence":"medium","reason":"This is an editorial commentary on diversity scholars and scholarly inclusion, relevant as contextual research-ecosystem material."},
+  {"id":"W3092560629","tier":"OUT","genre":"other","about_ca":false,"confidence":"high","reason":"This is a short item about preferred Montreal neighborhoods, not research itself."},
+  {"id":"W4411618025","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"This discusses task scheduling algorithms for supercomputing, not research practice."},
+  {"id":"W2593929034","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"This experimentally measures thermodynamic phase noise in a fiber sensor, not metaresearch."}
+]
+hook: Stop
+hook: Stop
+hook: Stop
+hook: Stop Completed
+hook: Stop Completed
+hook: Stop Failed
+tokens used
+39,600

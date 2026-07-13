@@ -1,0 +1,900 @@
+Reading additional input from stdin...
+OpenAI Codex v0.144.0
+--------
+workdir: /Users/choxos/Documents/GitHub/CaRN-data-challenge
+model: gpt-5.6-luna
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: high
+reasoning summaries: none
+session id: 019f5904-b27b-7363-8e9a-28334ed3af5b
+--------
+user
+# MétaCan screening rubric (v1.0)
+
+**Locked before screening. Version-controlled. Any change is a new version with a dated entry in `DEVIATIONS.md`.**
+
+Both machine screeners and both human coders work from this document and nothing else. The rubric is the
+instrument; if two coders disagree, the rubric is what they are adjudicated against.
+
+---
+
+## The unit
+
+One work (journal article, preprint, book chapter, report, dataset, or software), identified by its OpenAlex ID.
+You see: title, abstract, publication year, language, venue, OpenAlex topic and field, Canadian institutional
+affiliations, funders.
+
+## The question
+
+**Is the object of study *research itself*?**
+
+Metaresearch studies how research is done, reported, funded, evaluated, disseminated, or governed. The test is
+what the work is *about*, not what field it appears in and not what vocabulary it uses.
+
+A cardiology trial is not metaresearch. A study of *how cardiology trials report their outcomes* is.
+
+---
+
+## Tier
+
+Assign exactly one.
+
+### T1: Core metaresearch
+The primary object of study is research itself. Typical objects:
+
+- research **methods** and their properties (bias, reporting, statistical practice, study design)
+- **reproducibility**, replication, data and code sharing
+- **research integrity**: misconduct, retraction, questionable research practices, authorship
+- **peer review** and editorial process *as objects of study*
+- **research evaluation**, metrics, rankings, funding allocation
+- **scholarly communication**: publishing models, open access, preprints *as objects of study*
+- **bibliometrics and scientometrics** applied to a research literature
+- the **research workforce**: careers, equity, training, capacity
+- **evidence synthesis methodology** (not an individual systematic review's clinical answer, but work *about* how
+  syntheses are done)
+
+### T2: Adjacent
+Empirically or conceptually grounded work on science as a social system that is not framed as metaresearch but
+studies it:
+
+- **science and technology studies (STS)**: social studies of scientific knowledge, practice, controversy
+- **library and information science**: information behaviour of researchers, repositories, discovery
+- **research infrastructure** studies: platforms, data repositories, identifiers, standards
+- **history and philosophy of science** *when the object is contemporary research practice*
+- **research policy** analysis grounded in evidence
+
+T2 is where the field's diversity lives. Be generous here: a paper does not have to call itself metaresearch to
+be studying research.
+
+### T3: Contextual
+Relevant to the ecosystem, mapped and released, but **never pooled into the analytic corpus**:
+
+- editorials, commentaries, opinion pieces about research practice
+- policy documents and position statements
+- announcements of infrastructure, tools, or initiatives
+- news, obituaries, corrections, letters
+
+### OUT: Not metaresearch
+Everything else. Includes, and this is the most common error:
+
+- **A study that uses a method is not a study of the method.** A meta-analysis answering a clinical question is
+  OUT. A study of how meta-analyses handle heterogeneity is T1.
+- **Mentioning a metaresearch term is not studying it.** A lab paper reporting "assay reproducibility", a methods
+  section saying "peer reviewed", a licence note saying "open access": all OUT.
+- **Domain research that happens to be bibliometric in method** but whose object is the domain, not the research:
+  e.g. a bibliometric map of diabetes treatments, produced to summarise diabetes knowledge. Borderline; see below.
+
+---
+
+## The three errors that matter most
+
+These are where the pilot showed retrieval and screening break down. Read them twice.
+
+1. **Polysemy.** `reproducibility` in a biochemistry paper means the assay gives the same reading twice. In a
+   metaresearch paper it means the reproducibility crisis. Only the second is in scope. The same applies to
+   `validation`, `replication`, `bias`, `peer review`, `open access`. **Judge the sense, not the token.**
+
+2. **Method vs. object.** Using bibliometrics ≠ studying research. Ask: *if this paper is right, what do we now
+   know more about: a scientific question, or the practice of science?* If the former, OUT.
+
+3. **Absence of vocabulary is not absence of content.** An STS paper about laboratory practice, or an LIS paper
+   about how researchers find data, may use none of the field's keywords and still be squarely T2. **Do not
+   require the vocabulary.** This is the error that makes the field look smaller and more anglophone than it is.
+
+---
+
+## Canadian linkage
+
+Record which apply (this is metadata, not an inclusion test; the estimand is defined separately in
+`PROTOCOL.md`):
+
+- `CA_AFF`: at least one author affiliated with a Canadian institution
+- `CA_FUND`: funded by CIHR, NSERC, SSHRC, or CFI
+- `ABOUT_CA`: the Canadian research system is a substantive object of study (not a passing mention, not one
+  country among forty in a global comparison)
+
+## Genre
+
+`empirical` · `conceptual` · `editorial/commentary` · `policy` · `infrastructure/announcement` · `other`
+
+OpenAlex's `type` is unreliable and this field is commentary-heavy, so genre is coded, not inherited.
+
+## Language of the work
+
+As published. Do not infer from the venue.
+
+---
+
+## Confidence
+
+- `high`: the rubric decides this cleanly.
+- `medium`: the rubric decides, but a reasonable coder could differ.
+- `low`: genuinely on the boundary, or the abstract is missing/too thin to judge.
+
+**`low` is a legitimate answer and is not a failure.** Records coded `low` by either screener are routed to
+adjudication. A screener that never says `low` is not being careful; it is being confident.
+
+---
+
+## Worked examples
+
+| Title (abridged) | Tier | Why |
+|---|---|---|
+| "Data sharing practices in 500 randomised trials" | **T1** | The object is reporting practice. |
+| "Reproducibility of a Western blot protocol" | **OUT** | Assay reproducibility. Polysemy trap. |
+| "Trends in citation of retracted papers" | **T1** | Object is the literature's own behaviour. |
+| "Laboratory life in a Canadian genomics centre: an ethnography" | **T2** | STS. No metaresearch vocabulary; still studies research. |
+| "How do researchers discover datasets? A survey" | **T2** | LIS, information behaviour of researchers. |
+| "Effectiveness of statins: a network meta-analysis" | **OUT** | Uses a synthesis method to answer a clinical question. |
+| "How network meta-analyses handle inconsistency: a review of 200 reviews" | **T1** | Object is the method. |
+| "Announcing the Canadian Research Data Repository" | **T3** | Infrastructure announcement. Mapped, not pooled. |
+| "Open access mandates are failing early-career researchers" (editorial) | **T3** | Commentary about research practice. |
+| "Bibliometric analysis of diabetes research 2000–2020" | **T2** | Borderline. Bibliometric method, and the object *is* a research literature, so it studies research output. Code T2, `medium`. |
+| "Le libre accès dans les revues québécoises : état des lieux" | **T1** | Scholarly communication, object is publishing practice. French. |
+
+---
+
+## Instructions to the screener
+
+Read the title and abstract. Apply the rubric. Do not use outside knowledge of the authors or the journal's
+reputation. If the abstract is missing, judge on the title alone and set confidence to `low` unless the title is
+unambiguous.
+
+Return the schema in `protocol/screening-schema.json`. One object per work. No prose, no preamble.
+--------------------------------------------------------------------------------
+You are screening works for MetaCan, a map of Canadian metaresearch.
+
+Apply the rubric above to every record in the JSON array below. Return a JSON
+array with one object per work, conforming to protocol/screening-schema.json:
+
+  {"id": "W...", "tier": "T1|T2|T3|OUT", "genre": "...", "about_ca": true|false,
+   "confidence": "high|medium|low", "reason": "one sentence"}
+
+Rules:
+- Return the JSON array and NOTHING else. No prose, no preamble, no code fences.
+- Every input id must appear exactly once in the output.
+- Do not run commands, read files, or browse. Classify from the RECORDS alone.
+
+RECORDS:
+[
+  {
+    "id": "W3201196691",
+    "title": "Bridging Agrarianism: The Potential of Value‐Added Craft Cider Production to Support Rural Livelihoods in the Pacific Northwest*",
+    "abstract": "Abstract Against the decades‐long trend of aging farmers and farmland consolidation in the United States and Canada, value‐added farm production has been pitched as a lifeline to provide viable rural livelihoods for younger generations. How do producers perceive the possibilities and limitations of value‐added craft production in supporting agrarian livelihoods? More broadly, how are contemporary structural constraints and cultural shifts shaping new agrarian strategies? This article draws on in‐depth interviews and ethnographic data with urban and farm‐based cidermakers in the Pacific Northwest (British Columbia, Washington State, and Oregon). I find that while craft cider has helped buffer some producers against the volatility of selling raw fruit to large commodity markets, the benefits of this niche market do not widely support continued primary production or farm succession. I underscore the emergence of a livelihood strategy I refer to as “bridging agrarianism” among young cidermakers who wish to maintain a connection to agriculture but are shifting away from full‐time farming due to lifestyle preferences and economic constraints. Bridging agrarianism is manifest in modest forms of on‐site production that carry great symbolic weight. This study provides insight into how current generations of agriculturalists are developing new strategic responses to the political‐economic challenges of farming.",
+    "year": 2021,
+    "lang": "en",
+    "type": "article",
+    "venue": "Rural Sociology",
+    "topic": "Organic Food and Agriculture",
+    "field": "Agricultural and Biological Sciences",
+    "ca_institutions": [],
+    "funders": "Pierre Elliott Trudeau Foundation"
+  },
+  {
+    "id": "W1503014997",
+    "title": "Tilings by Translation: Enumeration by a Rational Language Approach",
+    "abstract": "Beauquier and Nivat introduced and gave a characterization of the class of pseudo-square polyominoes, i.e. those polyominoes that tile the plane by translation: a polyomino tiles the plane by translation if and only if its boundary word $W$ may be factorized as $W = XY\\overline{X} \\,\\overline{Y}$. In this paper we consider the subclass PSP of pseudo-square polyominoes which are also parallelogram. By using the Beauquier-Nivat characterization we provide by means of a rational language the enumeration of the subclass of $psp$-polyominoes with a fixed planar basis according to the semi-perimeter. The case of pseudo-square convex polyominoes is also analyzed.",
+    "year": 2006,
+    "lang": "en",
+    "type": "article",
+    "venue": "The Electronic Journal of Combinatorics",
+    "topic": "Advanced Combinatorial Mathematics",
+    "field": "Mathematics",
+    "ca_institutions": "Université du Québec à Montréal",
+    "funders": []
+  },
+  {
+    "id": "W2198779068",
+    "title": "Healthy Living after Cancer: a dissemination and implementation study evaluating a telephone-delivered healthy lifestyle program for cancer survivors",
+    "abstract": "BACKGROUND: Given evidence shows physical activity, a healthful diet and weight management can improve cancer outcomes and reduce chronic disease risk, the major cancer organisations and health authorities have endorsed related guidelines for cancer survivors. Despite these, and a growing evidence base on effective lifestyle interventions, there is limited uptake into survivorship care. METHODS/DESIGN: Healthy Living after Cancer (HLaC) is a national dissemination and implementation study that will evaluate the integration of an evidence-based lifestyle intervention for cancer survivors into an existing telephone cancer information and support service delivered by Australian state-based Cancer Councils. Eligible participants (adults having completed cancer treatment with curative intent) will receive 12 health coaching calls over 6 months from Cancer Council nurses/allied health professionals targeting national guidelines for physical activity, healthy eating and weight control. Using the RE-AIM evaluation framework, primary outcomes are service-level indicators of program reach, adoption, implementation/costs and maintenance, with secondary (effectiveness) outcomes of patient-reported anthropometric, behavioural and psychosocial variables collected at pre- and post-program completion. The total participant accrual target across four participating Cancer Councils is 900 over 3 years. DISCUSSION: The national scope of the project and broad inclusion of cancer survivors, alongside evaluation of service-level indicators, associated costs and patient-reported outcomes, will provide the necessary practice-based evidence needed to inform future allocation of resources to support healthy living among cancer survivors. TRIAL REGISTRATION: Australian and New Zealand Clinical Trials Registry (ANZCTR)--ACTRN12615000882527 (registered on 24/08/2015).",
+    "year": 2015,
+    "lang": "en",
+    "type": "article",
+    "venue": "BMC Cancer",
+    "topic": "Cancer survivorship and care",
+    "field": "Medicine",
+    "ca_institutions": "University of Alberta",
+    "funders": ["Cancer Council Queensland", "Cancer Council Victoria", "Cancer Council NSW", "National Health and Medical Research Council", "Australian Research Council", "Medical Research Council", "Friends of The Mater Foundation", "Ingham Institute for Applied Medical Research", "Canada Research Chairs", "Perelman School of Medicine, University of Pennsylvania", "Swinburne University of Technology", "University of Alberta", "National Breast Cancer Foundation", "University of New South Wales", "Peter MacCallum Cancer Centre", "University of Technology Sydney", "University of Sydney", "University of Pennsylvania", "Cancer Institute NSW", "Mater Foundation"]
+  },
+  {
+    "id": "W6918043589",
+    "title": "Online Lecture: \"The Early Years of Ottoman Rule in Egypt in the Light of the Cairo Geniza,\" by Jane Hathaway (Ohio State University), 13 Sept 2021",
+    "abstract": "Part of the Princeton Near Eastern Studies seminar series: Respondent: Amy Singer, Brandeis University Time: 12:00 PM in Eastern Time (US and Canada) More Info To Register",
+    "year": 2021,
+    "lang": "en",
+    "type": "article",
+    "venue": "OpenEdition (OpenEdition)",
+    "topic": "Islamic Studies and History",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W3109207274",
+    "title": "Correlation between Student Self-Assessment and Proctor Evaluation in a Veterinary Surgical Laboratory",
+    "abstract": "Self-assessment has been shown to facilitate learning, goal setting, and professional development. We sought to evaluate whether veterinary students in a surgical curriculum would have self-assessments that differed from proctor evaluations and whether high-performing students would differ from low-performing students in self-assessment characteristics. Student and proctor assessments were compared for 8 weeks of a spay/neuter surgical laboratory taking place in the second year of the curriculum. Eight students were classified as high-performing, and 10 students were classified as low-performing. A quantitative evaluation of the scores and a qualitative assessment of written comments were completed. Proctors assigned higher scores to high-performing students compared to low-performing students, but no difference was observed overall in self-assessment scores assigned by students. When only anesthesia students were evaluated, we found a difference in self-assessment scores for high- versus low-performers, but this was not true for surgery students. Differences between proctor and student assessment scores diminished over time for all students and for anesthesia students, but not for surgery students. High-performing student anesthetists self-assessed and received proctor assessments with higher scores in technical skills. Comments from high-performing students tended to be less reflective and more positive. Low-performing students were more defensive and more likely to use I-statements in their comments. Overall, quantitative analysis did not reveal a difference in self-assessment between high-performers and low-performers; however, specific differences existed in qualitative characteristics, surgery versus anesthesia students, and proctor assessments. The differences in self-assessment between high- and low-performing students suggest areas of further investigation for the use of reflection in education.",
+    "year": 2020,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Veterinary Medical Education",
+    "topic": "Innovations in Medical Education",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4416208798",
+    "title": "OA2999 Severe Injuries in Children: Burns and Choking",
+    "abstract": "Abstract Issue/Problem Severe injuries remain a leading cause of morbidity and mortality in childhood, with burns and choking representing two of the most preventable yet devastating events, especially in those aged 5 years or younger. Pediatric burns often lead not only to medical emergencies but also to long-term functional, psychological, and social impairment. The consequences of choking range from transient or long-standing symptoms to sudden, fatal airway obstruction. Description: Despite major advances in acute care, around 830,000 children die annually from unintentional injuries. Prevention remains the most effective strategy to reduce incidence, severity and optimize outcomes. Results Choking incidents may not be witnessed. Depending on the location (airway or intestinal compromise) and the type of foreign body (e.g battery, magnet), clinical management differs, and sometimes urgent removal is required. Pediatric burns according to thickness and the surface require specific care in designated burn centers. Outcomes for severely burned children are generally poor, not only due to multi-organ failure and life-threatening complications, but also because of the profoundly reduced long-term quality of life. However, the recent introduction of new safety standards has led to a reduction in occurrences, achieved through stricter marketing regulations and the promotion of preventative bundles. The key strategies for preventing such unintentional injuries are a combination of environmental and behavior modification, that can be achieved through enforcement and education. Lessons Effective prevention requires a comprehensive, multifaceted approach to enhance health services to implement prevention measures and support rehabilitation when unintentional injuries occur. Key messages • Increased awareness, implementation of prevention strategies and public education and counseling remain the cornerstone for minimizing incidence and severity in pediatric burns and choking. Topic children, choking, burns",
+    "year": 2025,
+    "lang": "en",
+    "type": "article",
+    "venue": "European Journal of Public Health",
+    "topic": "Burn Injury Management and Outcomes",
+    "field": "Medicine",
+    "ca_institutions": "Child, Adolescent and Family Mental Health",
+    "funders": []
+  },
+  {
+    "id": "W4411265386",
+    "title": "Rebalancing the Psyche and Care for the Environment",
+    "abstract": "The video is a personal and an archetypal story. It tells about an individual psychological journey of re-balancing the conscious and unconscious aspects of the psyche and how that led the author to a heightened awareness about the natural world and to her ability to hear corals “speak.” The narrative is weaving the perspective of Jungian psychology that sees water as the symbol of the unconscious psyche and the underwater images captured by the author during her scuba diving experiences. The video exemplifies Jungian arts-based research into individual and collective unconscious and urgent environmental matters. It serves as an invitation to the viewers to care for the diversity of the psyche and the biodiversity of the natural environment, both of which are needed for survival.",
+    "year": 2025,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Jungian Scholarly Studies",
+    "topic": "Climate Change and Geoengineering",
+    "field": "Environmental Science",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2795191602",
+    "title": "The Exploration of Teacher Professionalism in Early Childhood and Care according to Policy Change",
+    "abstract": "",
+    "year": 2011,
+    "lang": "en",
+    "type": "article",
+    "venue": "Early childhood education",
+    "topic": "Educational Systems and Policies",
+    "field": "Computer Science",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4406428317",
+    "title": "10.1016/s1887-2050(08)38100-8",
+    "abstract": "",
+    "year": 2000,
+    "lang": "en",
+    "type": "book-chapter",
+    "venue": "Time to knit",
+    "topic": "Inflammatory mediators and NSAID effects",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W3216044503",
+    "title": "Petit guide du «disempowerment» pour hommes profeministes",
+    "abstract": "",
+    "year": 2014,
+    "lang": "fr",
+    "type": "article",
+    "topic": "Social Policies and Family",
+    "field": "Social Sciences",
+    "ca_institutions": "Université de Montréal",
+    "funders": []
+  },
+  {
+    "id": "W7010799755",
+    "title": "IRC frames model national security code for buildings",
+    "abstract": "Aussi disponible en français: L'IRC prépare un code modèle national sur la sécurité dans les bâtiments",
+    "year": 2004,
+    "lang": "en",
+    "type": "article",
+    "venue": "NPARC",
+    "topic": "Information and Cyber Security",
+    "field": "Computer Science",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4387367110",
+    "title": "Ramanujan-type series for , revisited",
+    "abstract": "Abstract In this note, we revisit Ramanujan-type series for $\\frac {1}{\\pi }$ and show how they arise from genus zero subgroups of $\\mathrm {SL}_{2}(\\mathbb {R})$ that are commensurable with $\\mathrm {SL}_{2}(\\mathbb {Z})$ . As illustrations, we reproduce a striking formula of Ramanujan for $\\frac {1}{\\pi }$ and a recent result of Cooper et al., as well as derive a new rational Ramanujan-type series for $\\frac {1}{\\pi }$ . As a byproduct, we obtain a Clausen-type formula in some general sense and reproduce a Clausen-type quadratic transformation formula closely related to the aforementioned formula of Ramanujan.",
+    "year": 2023,
+    "lang": "en",
+    "type": "article",
+    "venue": "Canadian Mathematical Bulletin",
+    "topic": "Advanced Mathematical Identities",
+    "field": "Mathematics",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4396772360",
+    "title": "“In the Village That She Comes from, Most of the People Don’t Know Anything about Cervical Cancer”: A Health Systems Appraisal of Cervical Cancer Prevention Services in Tanzania",
+    "abstract": "Introduction: Cervical cancer is the fourth most common cancer in women globally and the most common cancer in Tanzania, resulting in about 9772 new cases and 6695 deaths each year. Research has shown an association between low levels of risk perception and knowledge of the prevention, risks, signs, etiology, and treatment of cervical cancer and low screening uptake, as contributing to high rates of cervical cancer-related mortality. However, there is scant literature on the perspectives of a wider group of stakeholders (e.g., policymakers, healthcare providers (HCPs), and women at risk), especially those living in rural and semi-rural settings. Methods: We adapted Risso-Gill and colleagues’ framework for a Health Systems Appraisal (HSA), to identify HCPs&amp;#039; perspective of the extent to which health system requirements for effective cervical cancer screening, prevention, and control are in place in Tanzania. We adapted interview topic guides for cervical cancer screening using the HSA framework approach. Study participants (69 in total) were interviewed between 2014-2018 –participants included key stakeholders, HCPs, and women at risk for cervical cancer. The data was analyzed using reflexive thematic analysis methodology. Results: Seven themes emerged from our analysis of semi-structured interviews and focus groups: 1) knowledge of cervical cancer risk and the role of screening and preventive care/services (e.g., prevention, risks, signs, etiology, and treatment), 2) training and knowledge of HCPs, 3) knowledge of cervical cancer screening among women at risk, 4) beliefs about cervical cancer screening, 5) role of traditional medicine, 6) risk factors, and 7) symptoms and signs. Conclusion: It is evident that there is a low level of knowledge of cervical cancer risk and the role of screening and preventive services among stakeholders, HCPs, and women living in rural and semi-rural locations in Tanzania. There is a critical need to implement more initiatives and programs to increase the uptake of screening and related services and allow women to make more informed decisions on their health.",
+    "year": 2024,
+    "lang": "en",
+    "type": "preprint",
+    "venue": "Preprints.org",
+    "topic": "Cervical Cancer and HPV Research",
+    "field": "Medicine",
+    "ca_institutions": ["Public Health Agency of Canada", "University of Toronto", "Queen's University"],
+    "funders": []
+  },
+  {
+    "id": "W2317854404",
+    "title": "Le surtitrage intralingual au théâtre… ou son absence : une étude de cas des Belles-Soeurs à Paris",
+    "abstract": "Cet article fait le point sur l’évolution du débat linguistique entourant la présentation des Belles-Soeurs en France, en faisant l’analyse de l’interdiscours sur le joual relevé dans les dossiers de presse de 2012 et en le comparant aux propos des journalistes qui avaient vu la pièce de Tremblay à Paris en 1973. Le second volet de cette étude est une réflexion sur la pertinence du surtitrage lorsqu’il s’agit de présenter une pièce de théâtre dont la langue de départ est bien celle du public cible, mais dont la variante diatopique pose un problème de compréhension pour l’auditoire. L’analyse de l’interdiscours sur le joual révèle que le débat est empreint d’émotion et que cette composante affective, sous-jacente au discours des différents intervenants, pourrait avoir influencé les propos des journalistes de la presse écrite. L’auteure conclut qu’il serait intéressant de rendre au surtitrage intralingual ses lettres de noblesse en considérant toutes les avenues qu’il serait en mesure de créer pour la représentation théâtrale, et cela sur les plans dramaturgique, esthétique et interculturel.",
+    "year": 2015,
+    "lang": "fr",
+    "type": "article",
+    "venue": "L’Annuaire théâtral Revue québécoise d’études théâtrales",
+    "topic": "Linguistics and Discourse Analysis",
+    "field": "Arts and Humanities",
+    "ca_institutions": "Université du Québec en Outaouais",
+    "funders": []
+  },
+  {
+    "id": "W7030265571",
+    "title": "New Hampshire Border Planning: Facilitating Transportation Across the Northern Border",
+    "abstract": "Border transportation planning involves the development of goals, objectives, and strategies for moving people and goods across the U.S—Canada border. FHWA leads multiple binational stakeholders to collaboratively create safe and effective cross-border transportation. FHWA also facilitates the development and maintenance of the surface transportation system along the U.S.–Canada border to address existing and anticipated demand for cross border travel and trade while working with federal, state, regional, and local agencies, the private sector, and various stakeholders. In 2016, nearly 6,500 personal vehicles crossed through the one Land Port of Entry (LPOE) along New Hampshire's 58 miles of shared border with the province of Quebec, Canada.1,2\\n",
+    "year": 2018,
+    "lang": "en",
+    "type": "other",
+    "venue": "Rosa P: A digital library for transportation research (United States Department of Transportation)",
+    "topic": "Physics and Engineering Research Articles",
+    "field": "Engineering",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W7140155696",
+    "title": "Planning sustainable communities: diversities of approaches and implementation challenges",
+    "abstract": "University of Calgary, Faculty of Environmental Design, Cities, Policy &amp; Planning Research Series.",
+    "year": 2009,
+    "lang": "en",
+    "type": "report",
+    "venue": "Open MIND",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4249116783",
+    "title": "WFUMB Guidelines and Recommendations for Clinical Use of Ultrasound Elastography: Part 2: Breast",
+    "abstract": "",
+    "year": 2015,
+    "lang": "en",
+    "type": "review",
+    "venue": "Ultrasound in Medicine & Biology",
+    "topic": "Ultrasound Imaging and Elastography",
+    "field": "Medicine",
+    "ca_institutions": ["Foothills Medical Centre", "University of Calgary"],
+    "funders": ["Engineering and Physical Sciences Research Council", "Cancer Research UK"]
+  },
+  {
+    "id": "W2740766247",
+    "title": "La découverte du Québec par un universitaire lyonnais",
+    "abstract": "",
+    "year": 2010,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Érudit (Université de Montréal)",
+    "topic": "Canadian Identity and History",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2548638197",
+    "title": "Fabrication and performance of 40-60 MHz annular arrays",
+    "abstract": "The fabrication and performance of miniature high frequency (40-60 MHz) annular arrays is described. The arrays were fabricated using photolithography to define the electrode pattern, and ultrasonic wire bonding to make electrical contacts. The transducers were 2 mm in diameter with seven equal area elements and a centre frequency of 50 MHz. A -6 dB two-way beam width of 75 microns was found at f/2. The radiation pattern decreased smoothly to less than -60 dB at a distance of 550 microns.",
+    "year": 2004,
+    "lang": "en",
+    "type": "article",
+    "topic": "Microwave Engineering and Waveguides",
+    "field": "Engineering",
+    "ca_institutions": "Queen's University",
+    "funders": []
+  },
+  {
+    "id": "W2150893216",
+    "title": "Marc Bernard, le « Goncourt » et le populisme",
+    "abstract": "L’auteur de Zig-Zag , son premier roman paru en 1929 chez Gallimard, avait, en raison de ses origines sociales, vocation à fonder, au début des années 1930, le groupe des écrivains prolétariens avec, entre autres, Henri Poulaille, Eugène Dabit ou Louis Guilloux, et à adopter des positions politiques proches du communisme. Toutefois, dans les mêmes années, il fut l’ami de certains poètes surréalistes, peu enclins à suivre la ligne et dont l’inspiration était parfois voisine de la sienne. À travers ses articles de presse ( Monde , Le Figaro ) et des archives inédites, c’est la complexité de Marc Bernard en matière d’esthétique littéraire que veut refléter cette étude depuis ses premiers essais jusqu’à la consécration du Goncourt.",
+    "year": 2014,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Études littéraires",
+    "topic": "Political and Social Issues",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2163985941",
+    "title": "Breast-feeding and complementary feeding practices in the first 6 months of life among Norwegian-Somali and Norwegian-Iraqi infants: the InnBaKost survey",
+    "abstract": "OBJECTIVE: To examine breast-feeding and complementary feeding practices during the first 6 months of life among Norwegian infants of Somali and Iraqi family origin. DESIGN: A cross-sectional survey was performed during March 2013-February 2014. Data were collected using a semi-quantitative FFQ adapted from the second Norwegian national dietary survey among infants in 2006-2007. SETTING: Somali-born and Iraqi-born mothers living in eastern Norway were invited to participate. SUBJECTS: One hundred and seven mothers/infants of Somali origin and eighty mothers/infants of Iraqi origin participated. RESULTS: Breast-feeding was almost universally initiated after birth. Only 7 % of Norwegian-Somali and 10 % of Norwegian-Iraqi infants were exclusively breast-fed at 4 months of age. By 1 month of age, water had been introduced to 30 % of Norwegian-Somali and 26 % of Norwegian-Iraqi infants, and infant formula to 44 % and 34 %, respectively. Fifty-four per cent of Norwegian-Somali and 68 % of Norwegian-Iraqi infants had been introduced to solid or semi-solid foods at 4 months of age. Breast-feeding at 6 months of age was more common among Norwegian-Somali infants (79 %) compared with Norwegian-Iraqi infants (58 %; P=0·001). Multivariate analyses indicated no significant factors associated with exclusive breast-feeding at 3·5 months of age. Factors positively associated with breast-feeding at 6 months were country of origin (Somalia) and parity (>2). CONCLUSIONS: Breast-feeding initiation was common among Iraqi-born and Somali-born mothers, but the exclusive breast-feeding period was shorter than recommended in both groups. The study suggests that there is a need for new culture-specific approaches to support exclusive breast-feeding and complementary feeding practices among foreign-born mothers living in Norway.",
+    "year": 2015,
+    "lang": "en",
+    "type": "article",
+    "venue": "Public Health Nutrition",
+    "topic": "Breastfeeding Practices and Influences",
+    "field": "Medicine",
+    "ca_institutions": ["Public Health Ontario", "University of Toronto"],
+    "funders": ["Norges Forskningsråd", "Universitetet i Oslo", "Høgskolen i Oslo og Akershus"]
+  },
+  {
+    "id": "W4285529525",
+    "title": "Anthony Feneuil, L’évidence de Dieu. Études sur le doute religieux. Genève, Éditions Labor et Fides, 2021, 208 p.",
+    "abstract": "Anthony Feneuil, L’évidence de Dieu. Études sur le doute religieux. Genève, Éditions Labor et Fides, 2021, 208 p.. Un article de la revue Laval théologique et philosophique (Émotions, relations et dialogues : la question du coeur) diffusée par la plateforme Érudit.",
+    "year": 2021,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Laval théologique et philosophique",
+    "topic": "Religious, Philosophical, and Educational Studies",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W899286121",
+    "title": "Binarization of Degraded Historical Document Images",
+    "abstract": "Document images often suffer from different types of degradation that renders the document image binarization a challenging task. In this paper, a new binarization algorithm for degraded document images is presented. The method is based on active contours evolving according to intrinsic geometric measures of the document image; Niblack’s thresholding is also used to control the active contours propagation. The validity of the proposed method is demonstrated on both recent and historical document images including different types of degradations, the results are compared with a number of known techniques in the literature. Keywords—Document image; binarization; active contours; level sets method; Niblack’s thresholding.",
+    "year": 2014,
+    "lang": "en",
+    "type": "article",
+    "venue": "Rapports de recherche internes",
+    "topic": "Handwritten Text Recognition Techniques",
+    "field": "Computer Science",
+    "ca_institutions": "École de Technologie Supérieure",
+    "funders": []
+  },
+  {
+    "id": "W1963918672",
+    "title": "The Investment Opportunity Set and Acquired Goodwill*",
+    "abstract": "Abstract This paper examines how managers in New Zealand allocate the cost of firms' investments in subsidiaries between net tangible assets and acquired goodwill. We find a negative relation between acquired goodwill and leverage. This could be interpreted as the result of managers of highly leveraged acquiring firms opportunistically allocating a lower portion of the acquisition price to acquired goodwill. However, this analysis, like much of the research on accounting choice, suffers from an omitted variables problem. We present evidence that the observed negative relation between acquired goodwill and leverage may stem from each variable's relation to the investment opportunity set. Further, we find no evidence that acquired goodwill is related to the existence of debt covenants. Together, these results suggest an endogenous relation between the firm's asset structure, its financing policy, and the allocation of acquisition price to acquired goodwill.",
+    "year": 2001,
+    "lang": "en",
+    "type": "article",
+    "venue": "Contemporary Accounting Research",
+    "topic": "Auditing, Earnings Management, Governance",
+    "field": "Business, Management and Accounting",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2936953207",
+    "title": "Is stroop induced mental fatigue accurately reported using vas or is it just all in your head",
+    "abstract": "To determine the effectiveness of Stroop protocols (Stroop, 1935) as mentally fatiguing interference tasks, subjective measures such as visual-analog-scales (VAS) are often used. There is significant inter-individual variability associated with these types of scales however (Dittrich et al., 2007), and the absence of direct assessments may lead to overestimation of the degree to which Stroop truly induces mental fatigue. For example, we suggest that, not only should tasks sensitive to mental fatigue reveal performance decrements following a Stroop intervention, performance on the Stroop task itself should deteriorate as well. Participants completed a Raven's Progressive Matrices test, shown as sensitive to fatigue (Linde & Bergstrome, 1992) and were then randomly assigned into either Stroop or control (watch a documentary) groups. Following these interventions, participants completed a second Raven's test and recorded perceived levels of mental fatigue on VAS every two minutes. As expected, VAS scores increased with time suggesting increasing subjective levels of mental fatigue. Of greater interest was that, although performance on Raven's declined predictably with difficulty, it did so at the same rate for both groups. Furthermore, there was no evidence that performance on the Stroop task itself (in either RT or error data) deteriorated as the study progressed. Thus, although participants in the Stroop condition self-reported typically observed increases in VAS measures of mental fatigue, there was no evidence to suggest that Stroop: a) negatively influenced performance on a direct measure of executive function or b) that Stroop performance deteriorated as mental fatigue (suggested by VAS scores) accumulated.",
+    "year": 2018,
+    "lang": "en",
+    "type": "article",
+    "topic": "Neural and Behavioral Psychology Studies",
+    "field": "Neuroscience",
+    "ca_institutions": "McMaster University",
+    "funders": []
+  },
+  {
+    "id": "W4247828943",
+    "title": "Reviewer Acknowledgements for Journal of Plant Studies, Vol. 9, No. 2",
+    "abstract": "Journal of Plant Studies wishes to acknowledge the following individuals for their assistance with peer review of manuscripts for this issue. Their help and contributions in maintaining the quality of the journal are greatly appreciated. Journal of Plant Studies is recruiting reviewers for the journal. If you are interested in becoming a reviewer, we welcome you to join us. Please contact us for the application form at: jps@ccsenet.org Reviewers for Volume 9, Number 2 Adriana F. Sestras, University of Agricultural Sciences and Veterinary Medicine, Romania Alejandra Matiz, University of Sao Paulo, Brazil Fardausi Akhter, Agriculture and Agri-Food Canada, Canada Khyati Hitesh Shah, Stanford University, United States Kirandeep Kaur Mani, California seed and Plant Labs, USA Malgorzata Pietrowska-Borek, Poznan University of Life Sciences, Poland Massimo Zacchini, National Research Council of Italy, Italy Md. Asaduzzaman, Agricultural Research Institute, Bangladesh Melekber Sulusoglu, Arslanbey Vocational School Kocaeli University, Turkey Milana Trifunovic-Momcilov, Institute for Biological Research “Sinisa Stankovic”, Serbia Mohamed Ahmed El-Esawi, Tanta University, Egypt Rakesh Ponnala, Zoetis Inc, United States Romina A. Marc, Univ. of Agricultural Sciences and Veterinary Medicine Cluj-Napoca, Romania Slawomir Borek, Adam Mickiewicz University, Poland Tomoo misawa, Donan Agricultural Experiment Station, Hokkaido Research Organization, Japan",
+    "year": 2020,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Plant Studies",
+    "topic": "Plant Physiology and Cultivation Studies",
+    "field": "Agricultural and Biological Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4309245579",
+    "title": "Regression modeling of time-to-event data with censoring",
+    "abstract": "",
+    "year": 2022,
+    "lang": "en",
+    "type": "article",
+    "venue": "Nature Methods",
+    "topic": "Statistical Methods and Inference",
+    "field": "Mathematics",
+    "ca_institutions": "Canada's Michael Smith Genome Sciences Centre",
+    "funders": []
+  },
+  {
+    "id": "W4406675031",
+    "title": "10.1016/b978-0-08-009681-0.50005-3",
+    "abstract": "",
+    "year": 2000,
+    "lang": "en",
+    "type": "book-chapter",
+    "venue": "Time to knit",
+    "topic": "Diverse Scientific and Economic Studies",
+    "field": "Economics, Econometrics and Finance",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2051301267",
+    "title": "Minimising IV site infection while saving time and money",
+    "abstract": "",
+    "year": 2000,
+    "lang": "en",
+    "type": "article",
+    "venue": "Australian Infection Control",
+    "topic": "Central Venous Catheters and Hemodialysis",
+    "field": "Health Professions",
+    "ca_institutions": "Dalhousie University",
+    "funders": []
+  },
+  {
+    "id": "W1489482167",
+    "title": "The Great Increase in Relative Volatility of Real Wages in Ithe United States",
+    "abstract": "",
+    "year": 2010,
+    "lang": "en",
+    "type": "article",
+    "venue": "SSRN Electronic Journal",
+    "topic": "Monetary Policy and Economic Impact",
+    "field": "Economics, Econometrics and Finance",
+    "ca_institutions": "Université du Québec à Montréal",
+    "funders": []
+  },
+  {
+    "id": "W4323669580",
+    "title": "Photocatalytic oxidation of volatile organic compounds (VOCs) in air using ultraviolet light-emitting diodes (UV-LEDs)",
+    "abstract": "",
+    "year": 2023,
+    "lang": "en",
+    "type": "article",
+    "venue": "Chemical Engineering Science",
+    "topic": "Gas Sensing Nanomaterials and Sensors",
+    "field": "Engineering",
+    "ca_institutions": "University of British Columbia",
+    "funders": "Natural Sciences and Engineering Research Council of Canada"
+  },
+  {
+    "id": "W1562162460",
+    "title": "Le vagabond stoïque. Louis Hémon. Bleton, Paul et Mario Poirier, Le vagabond stoïque. Louis Hémon, Montréal, Les Presses de l’Université de Montréal (Socius), 2004.",
+    "abstract": "Le vagabond stoïque. Louis Hémon / Bleton, Paul et Mario Poirier, Le vagabond stoïque. Louis Hémon, Montréal, Les Presses de l’Université de Montréal (Socius), 2004.. An article from journal Études littéraires (Dérives de l’essai), on Érudit.",
+    "year": 2005,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Études littéraires",
+    "topic": "Historical and Literary Studies",
+    "field": "Social Sciences",
+    "ca_institutions": "McGill University",
+    "funders": []
+  },
+  {
+    "id": "W1628010634",
+    "title": "Nonoscillation for System of Neutral Delay Dynamic Equation on Time Scales",
+    "abstract": "In this paper, by fixed theorem, some sufficient  conditions for nonoscillation  of the system of neutral delay dynamic equations on time scales $\\mathbb{T}$ are established. Our results as special case when $\\mathbb{T}=R$ and $\\mathbb{T}=N$, involve and improve some known results.",
+    "year": 2012,
+    "lang": "en",
+    "type": "article",
+    "venue": "Progress in applied mathematics",
+    "topic": "Nonlinear Differential Equations Analysis",
+    "field": "Mathematics",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W1918288470",
+    "title": "Alterations in the phosphoproteomic profile of cells expressing a non-functional form of the SHP2 phosphatase",
+    "abstract": "",
+    "year": 2015,
+    "lang": "en",
+    "type": "article",
+    "venue": "New Biotechnology",
+    "topic": "Protein Tyrosine Phosphatases",
+    "field": "Biochemistry, Genetics and Molecular Biology",
+    "ca_institutions": [],
+    "funders": ["Institute of Cancer Research", "Biotechnology and Biological Sciences Research Council", "Associazione Italiana per la Ricerca sul Cancro", "Wellcome Trust", "Wellcome"]
+  },
+  {
+    "id": "W2491925477",
+    "title": "A MEGACAM SURVEY OF OUTER HALO SATELLITES. VI. THE SPATIALLY RESOLVED STAR-FORMATION HISTORY OF THE CARINA DWARF SPHEROIDAL GALAXY*",
+    "abstract": "ABSTRACT We present the spatially resolved star-formation history (SFH) of the Carina dwarf spheroidal galaxy, obtained from deep, wide-field g and r imaging and a metallicity distribution from the literature. Our photometry covers ∼2 deg 2 , reaching up to ∼10 times the half-light radius of Carina with a completeness higher than 50% at g ∼ 24.5, more than one magnitude fainter than the oldest turnoff. This is the first time a combination of depth and coverage of this quality has been used to derive the SFH of Carina, enabling us to trace its different populations with unprecedented accuracy. We find that Carina’s SFH consists of two episodes well separated by a star-formation temporal gap. These episodes occurred at old ( Gyr) and intermediate (2–8 Gyr) ages. Our measurements show that the old episode comprises the majority of the population, accounting for 54 ± 5% of the stellar mass within 1.3 times the King tidal radius, while the total stellar mass derived for Carina is , and the stellar mass-to-light ratio is 1.8 ± 0.2. The SFH derived is consistent with no recent star formation, which hints that the observed blue plume is due to blue stragglers. We conclude that the SFH of Carina evolved independently of the tidal field of the Milky Way, since the frequency and duration of its star-formation events do not correlate with its orbital parameters. This result is supported by the age–metallicity relation observed in Carina and the gradients calculated indicating that outer regions are older and more metal-poor.",
+    "year": 2016,
+    "lang": "en",
+    "type": "article",
+    "venue": "The Astrophysical Journal",
+    "topic": "Stellar, planetary, and galactic studies",
+    "field": "Physics and Astronomy",
+    "ca_institutions": "Herzberg Institute of Astrophysics",
+    "funders": []
+  },
+  {
+    "id": "W4411656785",
+    "title": "10.51847/dL1U6JjMeI",
+    "abstract": "Evaluation and Analysis of Executive Method in Accelerating Integrated Production Line and Its Effect on Developing Industrial Processes of Production Sectors (The Case of Urmia Industrial Zone Companies)",
+    "year": 2000,
+    "lang": "en",
+    "type": "article",
+    "venue": "Time to knit",
+    "topic": "Enterprise Management and Information Systems",
+    "field": "Business, Management and Accounting",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2154825138",
+    "title": "The Nature of Bonding between Argon and Mixed Gold–Silver Trimers",
+    "abstract": "The controversial nature of chemical bonding between noble gases and noble metals is addressed. Experimental evidence of exceptionally strong Au-Ar bonds in Ar complexes of mixed Au-Ag trimers is presented. IR spectra reveal an enormous influence of the attached Ar atoms on vibrational modes, particularly in Au-rich trimers, where Ar atoms are heavily involved owing to a relativistically enhanced covalency. In Ag-rich trimers, vibrational transitions of the metal framework predominate, indicating a pure electrostatic character of the Ag-Ar bonds. The experimental findings are analyzed by means of DFT calculations, which show how the relativistic differences between Au and Ag are manifested in stronger Au-Ar binding energies. Because of the ability to vary composition and charge distribution, the trimers serve as ideal model systems to study the chemical nature of the bonding of noble gases to closed-shell systems containing gold.",
+    "year": 2015,
+    "lang": "en",
+    "type": "article",
+    "venue": "Angewandte Chemie International Edition",
+    "topic": "Inorganic Fluorides and Related Compounds",
+    "field": "Chemistry",
+    "ca_institutions": "National Research Council Canada",
+    "funders": ["Office of Science", "Stichting voor Fundamenteel Onderzoek der Materie", "Engineering and Physical Sciences Research Council", "Deutsche Forschungsgemeinschaft", "University of Birmingham"]
+  },
+  {
+    "id": "W2093035092",
+    "title": "Nonlinear modeling of concentrically loaded reinforced blockwork masonry columns",
+    "abstract": "Since only a limited number of experimental and analytical studies have been carried out for the purpose of developing strength design procedures for reinforced blockwork masonry columns, there is a certain need for further studies that reflect material properties and behavior of blockwork masonry more closely. This paper deals with a nonlinear finite element modeling of the concentrically loaded reinforced blockwork masonry columns making use of both elasto-plastic and isotropic damage models. If the damage model is enriched with the introduction of a simple relation for the material damage parameter that accounts for the mesh size effect, three-dimensional finite element analyses of columns for the well-known experimental works in the literature are accomplished. Finally, the predictions from both the numerical analyses and the existing expressions for the ultimate load of the masonry columns are compared with the experimental results.Key words: compressive strength, reinforced blockwork masonry column, finite element method, Drucker-Prager yield criterion, isotropic damage theory.",
+    "year": 2004,
+    "lang": "en",
+    "type": "article",
+    "venue": "Canadian Journal of Civil Engineering",
+    "topic": "Masonry and Concrete Structural Analysis",
+    "field": "Engineering",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2989757082",
+    "title": "Brain structural correlates of alexithymia in patients with major depressive disorder",
+    "abstract": "Background: Alexithymia is a risk factor for major depressive disorder (MDD) and has been associated with diminished treatment response. Neuroimaging studies have revealed structural aberrations of the anterior cingulate cortex and the fusiform gyrus in healthy controls with high levels of alexithymia. The present study tried to corroborate and extend these results to patients with MDD compared with healthy controls. Methods: We investigated the relationship between alexithymia, depression and grey matter volume in 63 patients with MDD (mean age ± standard deviation = 42.43 yr ± 11.91; 33 female) and 46 healthy controls (45.35 yr ± 8.37; 22 female). We assessed alexithymia using the Toronto Alexithymia Scale. We conducted an alexithymia × group analysis of covariance; we used a region-of-interest approach, including the fusiform gyrus and anterior cingulate cortex, and conducted whole brain analysis using voxelbased morphometry. Results: Our analysis revealed a significant alexithymia × group interaction in the fusiform gyrus (left, pFWE = 0.031; right, pFWE = 0.010). Higher alexithymia scores were associated with decreased grey matter volume in patients with MDD (pFWE = 0.009), but with increased grey matter volume of the fusiform gyrus in healthy controls (pFWE = 0.044). We found no significant main effects in the region-of-interest analysis. Limitations: Owing to the naturalistic nature of our study, patients with MDD and healthy controls differed significantly in their alexithymia scores. Conclusion: Our results showed the fusiform gyrus as a correlate of alexithymia. We also found differences related to alexithymia between patients with MDD and healthy controls in the fusiform gyrus. Our study encourages research related to the transition from risk to MDD in people with alexithymia.",
+    "year": 2020,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Psychiatry and Neuroscience",
+    "topic": "Psychosomatic Disorders and Their Treatments",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": "Deutsche Forschungsgemeinschaft"
+  },
+  {
+    "id": "W4390765823",
+    "title": "Assouad-type dimensions of overlapping self-affine sets",
+    "abstract": "We study the Assouad and quasi-Assoaud dimensions of dominated rectangular self-affine sets in the plane. In contrast to previous work on the dimension theory of self-affine sets, we assume that the sets satisfy certain separation conditions on the projection to the principal axis, but otherwise have arbitrary overlaps in the plane. We introduce and study regularity properties of a certain symbolic non-autonomous iterated function system corresponding to ``symbolic slices'' of the self-affine set. We then establish dimensional formulas for the self-affine sets in terms of the dimension of the projection along with the maximal dimension of slices orthogonal to the projection. Our results are new even in the case when the self-affine set satisfies the strong separation condition: in fact, as an application, we show that self-affine sets satisfying the strong separation condition can have distinct Assouad and quasi-Assouad dimensions, answering a question of the first named author.",
+    "year": 2024,
+    "lang": "en",
+    "type": "article",
+    "venue": "Annales Fennici Mathematici",
+    "topic": "Mathematical Dynamics and Fractals",
+    "field": "Mathematics",
+    "ca_institutions": [],
+    "funders": ["Engineering and Physical Sciences Research Council", "Natural Sciences and Engineering Research Council of Canada", "Leverhulme Trust"]
+  },
+  {
+    "id": "W2047705814",
+    "title": "Nonlinear dynamics of silk and Mylar flags flapping in axial flow",
+    "abstract": "",
+    "year": 2012,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Wind Engineering and Industrial Aerodynamics",
+    "topic": "Biomimetic flight and propulsion mechanisms",
+    "field": "Engineering",
+    "ca_institutions": ["Concordia University", "McGill University"],
+    "funders": "Natural Sciences and Engineering Research Council of Canada"
+  },
+  {
+    "id": "W4246481645",
+    "title": "Fragments: A Poetic Approach To Place-Making",
+    "abstract": "The notion of regional particularity and sensitivity to place remains in constant struggle with the persistent autonomous approach evident in most contemporary architecture, which under the pressures of globalization has paved the path toward commodification and the creation of universal non-places. Meanwhile the decline of craftsmanship within architecture and the perpetual emphasis on visual images and iconic forms continues to undermine human connection to the built environment. The use of Fragments in architectural design involves a distinct understanding of perception of space that takes its theoretical basis in the communicative and situational character of Synthetic Cubism and Picturesque Landscape theory. Brought into an architectural context, these theories work in contrast to the rational approach based on proportion and perspectival imagery, bringing focus towards the experience of the body moving through space with emphasis on the poetics of construction, materiality, corporeal experience, and details that express craftsmanship, meaning, and emotion. Guided by Kenneth Frampton’s theory of Critical Regionalism with the aim of resisting placelessness, the nature of such tectonic articulation is informed by the context and specificity of a site.",
+    "year": 2021,
+    "lang": "en",
+    "type": "preprint",
+    "topic": "Architecture and Cultural Influences",
+    "field": "Arts and Humanities",
+    "ca_institutions": "Toronto Metropolitan University",
+    "funders": []
+  },
+  {
+    "id": "W4406542046",
+    "title": "10.1016/j.ysur.2014.03.122",
+    "abstract": "",
+    "year": 2000,
+    "lang": "en",
+    "type": "article",
+    "venue": "Time to knit",
+    "topic": "Trauma, Hemostasis, Coagulopathy, Resuscitation",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2038357002",
+    "title": "Oral hairy leukoplakia: a clinical indicator of immunosuppression",
+    "abstract": "A 29-year-old man presented with non-painful white lesions on his tongue that he had recently noticed while brushing his teeth. Testing for oral candidal infection by his general practitioner was negative. The patient was feeling otherwise healthy and had no further complaints. Clinical examination",
+    "year": 2011,
+    "lang": "en",
+    "type": "article",
+    "venue": "Canadian Medical Association Journal",
+    "topic": "Oral and gingival health research",
+    "field": "Health Professions",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2897824080",
+    "title": "Neighbouring Proximity - An Key Impact Factor of Deep Machine Learning",
+    "abstract": "Deep Learning has become increasingly popular since Alexnet was proposed. It has been applied to many domains such as pattern recognition, computer vision, machine translation, and natural language processing. While the advantages of deep learning methods are wildly accepted, the limitations of them are not well researched. In this paper, we present our study and analysis of cases where deep learning methods lose their advantages over traditional methods. Our experiments show that, when the neighbouring proximity disappears, the accuracy of deep learning methods is at most as good as, if not worse than, that of advanced traditional shallow methods. As the resources that traditional shallow methods needed are always much less than deep learning methods. We conclude that, in situations where neighbouring elements of input samples do not have proximity, deep learning methods are significantly less powerful than traditional methods. Furthermore, this clearly indicates that deep structure methods cannot fully replace traditional shallow methods.",
+    "year": 2018,
+    "lang": "en",
+    "type": "article",
+    "topic": "Advanced Neural Network Applications",
+    "field": "Computer Science",
+    "ca_institutions": "University of Northern British Columbia",
+    "funders": []
+  },
+  {
+    "id": "W6923243841",
+    "title": "Level of evidence for type of psychedelic.",
+    "abstract": "&lt;div&gt;&lt;p&gt;Psychedelics, including ketamine, 3,4-Methyl enedioxy methamphetamine (MDMA), and psilocybin, have gained attention for their potential therapeutic role in mental health treatment. While recreational use is prohibited in Canada, medicinal exemptions can be granted. There are several psychedelic clinics in Ontario, Canada, promoting the use of psychedelics for a variety of medical indications. Our objective was to identify the indications for which psychedelics are being prescribed in Ontario clinics and assess the quality of evidence used to support these claims. Internet searches were conducted using Google and Bing to identify psychedelic clinics in Ontario. Inclusion criteria was as follow: clinics were physically located in Ontario, had a functioning website link, and demonstrated involvement of a licensed physician or nurse practitioner. Identified clinics were evaluated for their claims of effectiveness, the quality of evidence used to support these claims, and statements on psychedelic-related harms. The cited studies were appraised for quality using Oxford Centre for Evidence-Based Medicine Levels of Evidence, “level 5” being the lowest quality and “level 1” being the highest quality. Out of 200 search results, 10 psychedelic clinic websites met our inclusion criteria. These clinics advertised psychedelics for 47 medical conditions, most commonly for depression. Only 2 out of 10 clinics described potential risks associated with psychedelic use. There were 29 studies cited by these websites, majority coming from “level 4” evidence consisting of case-series and case-control studies. Overall, the cited evidence quality was low to moderate. Psychedelic clinics in Ontario promote a wide range of medical indications for psychedelics using primarily low to moderate “level 4” evidence. There is limited information shared on the potential adverse effects of psychedelics. Our study emphasizes the importance of using transparent and high-quality evidence by clinics and clinicians to ensure safe and effective use of psychedelics in mental health treatments.&lt;/p&gt;&lt;/div&gt;",
+    "year": 2024,
+    "lang": "en",
+    "type": "other",
+    "venue": "Figshare",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W7064957517",
+    "title": "Cyclotron production and cyclometallation chemistry of 192Ir",
+    "abstract": "Introduction To explore new questions and techniques in nuclear medicine, new isotopes with novel chemical and nuclear properties must be developed. We are interested in the small cyclotron production of new radiometals for the development of new radiopharmaceuticals (RX). In an example of RX multifunctionality, Luminescence Cell Imaging (LCI) has been combined with radio-isotopes to allow compounds that can be imaged with both optical microscopy and nuclear techniques [1]. Within this field, iridium cy-clometalates have good potential with excellent photophysical properties [2]. As well, low specific activity iridium-192 has found use in brachy-therapy as a high-intensity beta emitter [3]. Despite this, iridium radioisotopes have yet to be applied to cyclometalation chemistry, or a radiochemical isolation method developed for carrier free production on a medical cyclotron. Our goal is to demonstrate the feasibility of the production and isolation of radio-iridium, and its application to cyclometalate chemistry as a potentially interesting tool for nuclear medicine research. Materials and Methods Following literature precedent [4], natural osmium was electroplated onto a silver disc from basic media containing osmium tetroxide and sulphamic acid. The thin deposits obtained (15–20 mg cm−2) were weighed and characterized with scanning electron microscopy. Targets were irradiated using the TRIUMF TR13 cyclotron, delivering 12.5 MeV protons to the target disc. Initial bombardments were per-formed at 5 μA; gamma spectra of the targets were collected 24 hours after end of bombardment. The irradiated material was oxidized, dissolved from the target backing, and separated via anion exchange. In parallel to the isotope production work, non-radioactive iridium was used to define a chemical procedure suitable for the synthesis of model iridium cyclometalate compounds given low concentrations of radioiridium. These experiments will be performed with radioactive iridium in the next step of the research project. Results and Conclusion Proton bombardment of natural osmium yielded a range of iridium isotopes, with characteristic spectral lines corresponding to 186-190Ir, and 192Ir; no other characteristic radiation was observed. The EOB activity of each isotope was then used in thin target calculations to approximate their (p,n) cross section. Preliminary cross section measurements of the 192Os(p,n)192Ir reaction (53 ± 13 mb @ 12.5 MeV) confirm published data (52.3 ± 5.7 mb @ 12.2 MeV) [6], and provide as-yet unpublished data on the lower mass number isotopes. The progress of radioactive iridium through the radiochemical separation was tracked with a dose calibrator; the osmium complex formed was brightly coloured and could be seen retained on the column. The overall efficiency of the process is estimated at 80 %. Radioactive cyclometallation chemistry is currently under-way. The production and isolation of a range of iridium isotopes in a chemically useful form was demonstrated, and is ready to be applied to a cyclometalate model compound. Future work will investigate the production of 192Ir from enriched 192Os.",
+    "year": 2015,
+    "lang": "en",
+    "type": "other",
+    "venue": "Qucosa (Saxon State and University Library Dresden)",
+    "topic": "Astrophysical Phenomena and Observations",
+    "field": "Physics and Astronomy",
+    "ca_institutions": [],
+    "funders": ["Natural Sciences and Engineering Research Council of Canada", "Simon Fraser University", "TRIUMF"]
+  },
+  {
+    "id": "W6886022638",
+    "title": "Hastings St., Vancouver, B.C.",
+    "abstract": "Aerial view of Hastings St. showing street car tracks, pedestrians and storefronts [Woodward's].&lt;br&gt;Title taken from caption on recto.",
+    "year": 2023,
+    "lang": "en",
+    "type": "other",
+    "venue": "Open Collections",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4404807994",
+    "title": "Présentation",
+    "abstract": "",
+    "year": 2024,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Rabaska Revue d ethnologie de l Amérique française",
+    "topic": "Linguistics and Discourse Analysis",
+    "field": "Arts and Humanities",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W3114346701",
+    "title": "A Systematic Characterization of Sampling Algorithms for Open-ended Language Generation",
+    "abstract": "Moin Nadeem, Tianxing He, Kyunghyun Cho, James Glass. Proceedings of the 1st Conference of the Asia-Pacific Chapter of the Association for Computational Linguistics and the 10th International Joint Conference on Natural Language Processing. 2020.",
+    "year": 2020,
+    "lang": "en",
+    "type": "article",
+    "topic": "Natural Language Processing Techniques",
+    "field": "Computer Science",
+    "ca_institutions": "Canadian Institute for Advanced Research",
+    "funders": ["Samsung Advanced Institute of Technology", "Canadian Institute for Advanced Research", "Samsung", "Nvidia"]
+  }
+]
+warning: loading hooks from both /Users/choxos/.codex/hooks.json and /Users/choxos/.codex/config.toml; prefer a single representation for this layer
+2026-07-13T01:08:40.996712Z ERROR rmcp::transport::worker: worker quit with fatal: Transport channel closed, when Auth(AuthorizationRequired)
+warning: Skill descriptions were shortened to fit the 2% skills context budget. Codex can still see every skill, but some descriptions are shorter. Disable unused skills or plugins to leave more room for the rest.
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart Failed
+hook: SessionStart Completed
+hook: SessionStart Completed
+hook: SessionStart Completed
+hook: SessionStart Completed
+hook: SessionStart Failed
+hook: UserPromptSubmit
+hook: UserPromptSubmit
+hook: UserPromptSubmit Failed
+hook: UserPromptSubmit Failed
+codex
+[
+  {"id":"W3201196691","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study examines craft cider production and rural livelihoods, not research itself."},
+  {"id":"W1503014997","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"The work develops mathematical results on polyomino tilings, not research practice."},
+  {"id":"W2198779068","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study evaluates a cancer survivorship intervention rather than research itself."},
+  {"id":"W6918043589","tier":"OUT","genre":"infrastructure/announcement","about_ca":false,"confidence":"high","reason":"This is an announcement for a history lecture, not a study of research."},
+  {"id":"W3109207274","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study examines student assessment in veterinary education, not research assessment."},
+  {"id":"W4416208798","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The work concerns prevention and clinical management of pediatric injuries, not research itself."},
+  {"id":"W4411265386","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"The video explores psychological and environmental themes rather than research practice."},
+  {"id":"W2795191602","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"low","reason":"The title indicates a study of teacher professionalism and policy change, not research itself."},
+  {"id":"W4406428317","tier":"OUT","genre":"other","about_ca":false,"confidence":"low","reason":"The title and topic indicate a medical book chapter unrelated to research itself."},
+  {"id":"W3216044503","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"The work addresses feminist politics and masculinity, not research practice."},
+  {"id":"W7010799755","tier":"OUT","genre":"policy","about_ca":false,"confidence":"high","reason":"The item concerns building security standards rather than the research system."},
+  {"id":"W4387367110","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"The paper develops mathematical series and identities, not metaresearch."},
+  {"id":"W4396772360","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study examines cervical cancer prevention services in Tanzania, not research itself."},
+  {"id":"W2317854404","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The article studies theater translation and press discourse, not research practice."},
+  {"id":"W7030265571","tier":"OUT","genre":"policy","about_ca":false,"confidence":"high","reason":"The report concerns cross-border transportation planning rather than research."},
+  {"id":"W7140155696","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"The report discusses sustainable community planning, not the research system."},
+  {"id":"W4249116783","tier":"OUT","genre":"policy","about_ca":false,"confidence":"high","reason":"The work provides clinical ultrasound guidelines rather than studying research practice."},
+  {"id":"W2740766247","tier":"OUT","genre":"editorial/commentary","about_ca":false,"confidence":"low","reason":"The title indicates a historical or literary work about Québec, not Canadian research."},
+  {"id":"W2548638197","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The paper reports engineering fabrication and performance results, not research itself."},
+  {"id":"W2150893216","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"The article analyzes a French author and literary history, not research practice."},
+  {"id":"W2163985941","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study examines infant feeding practices in Norway, not research itself."},
+  {"id":"W4285529525","tier":"OUT","genre":"editorial/commentary","about_ca":false,"confidence":"high","reason":"This is a book review about religious philosophy, not research practice."},
+  {"id":"W899286121","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The paper presents an image-processing algorithm, not a study of research methods."},
+  {"id":"W1963918672","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The paper studies accounting choices by managers, not research itself."},
+  {"id":"W2936953207","tier":"T1","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study evaluates the validity of measurement protocols and indicators for research on mental fatigue."},
+  {"id":"W4247828943","tier":"T3","genre":"editorial/commentary","about_ca":false,"confidence":"high","reason":"This is a contextual acknowledgement of peer reviewers rather than an empirical study of peer review."},
+  {"id":"W4309245579","tier":"T1","genre":"conceptual","about_ca":false,"confidence":"high","reason":"The title clearly indicates a work about statistical modeling methodology itself."},
+  {"id":"W4406675031","tier":"OUT","genre":"other","about_ca":false,"confidence":"low","reason":"The title and topic indicate an economics book chapter unrelated to research itself."},
+  {"id":"W2051301267","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The work concerns prevention of intravenous-site infection, not research practice."},
+  {"id":"W1489482167","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The paper studies wage volatility and economic behavior, not research itself."},
+  {"id":"W4323669580","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The article studies photocatalytic oxidation technology, not research practice."},
+  {"id":"W1562162460","tier":"OUT","genre":"editorial/commentary","about_ca":false,"confidence":"high","reason":"This is a literary book review about Louis Hémon, not research itself."},
+  {"id":"W1628010634","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"The paper develops mathematical results on differential equations, not metaresearch."},
+  {"id":"W1918288470","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study examines cellular phosphoproteomic changes, not research practice."},
+  {"id":"W2491925477","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The paper reconstructs the star-formation history of a galaxy, not research itself."},
+  {"id":"W4411656785","tier":"OUT","genre":"other","about_ca":false,"confidence":"low","reason":"The title and abstract indicate an industrial management study unrelated to research."},
+  {"id":"W2154825138","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study investigates chemical bonding in molecular systems, not research practice."},
+  {"id":"W2093035092","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The paper develops structural engineering models for masonry columns, not research itself."},
+  {"id":"W2989757082","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study examines brain correlates of alexithymia and depression, not research practice."},
+  {"id":"W4390765823","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"The paper develops mathematical dimension theory for self-affine sets, not metaresearch."},
+  {"id":"W2047705814","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The work studies flag aerodynamics and nonlinear dynamics, not research itself."},
+  {"id":"W4246481645","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"The preprint presents architectural design theory, not research practice."},
+  {"id":"W4406542046","tier":"OUT","genre":"other","about_ca":false,"confidence":"low","reason":"The title and topic indicate a medical item unrelated to research itself."},
+  {"id":"W2038357002","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The item presents a clinical case of oral disease, not research practice."},
+  {"id":"W2897824080","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The paper compares machine-learning methods for predictive performance, not research methods as a social or methodological object."},
+  {"id":"W6923243841","tier":"T1","genre":"empirical","about_ca":true,"confidence":"high","reason":"The study evaluates the quality and dissemination of research evidence used by psychedelic clinics in Ontario."},
+  {"id":"W7064957517","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The work reports radiochemical production and cyclometallation experiments, not research itself."},
+  {"id":"W6886022638","tier":"OUT","genre":"other","about_ca":false,"confidence":"high","reason":"This is an archival image record about Vancouver, not research practice."},
+  {"id":"W4404807994","tier":"OUT","genre":"editorial/commentary","about_ca":false,"confidence":"low","reason":"The title suggests a journal presentation or introduction, but there is no evidence that it concerns research practice."},
+  {"id":"W3114346701","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The work characterizes sampling algorithms for language generation rather than studying research methods or communication."}
+]
+hook: Stop
+hook: Stop
+hook: Stop
+hook: Stop Completed
+hook: Stop Completed
+hook: Stop Failed
+tokens used
+21,313

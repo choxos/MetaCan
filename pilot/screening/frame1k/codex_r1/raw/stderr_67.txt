@@ -1,0 +1,908 @@
+Reading additional input from stdin...
+OpenAI Codex v0.144.0
+--------
+workdir: /Users/choxos/Documents/GitHub/CaRN-data-challenge
+model: gpt-5.6-luna
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: high
+reasoning summaries: none
+session id: 019f5906-89a9-73a0-bbec-a6e2a19bbda7
+--------
+user
+# MétaCan screening rubric (v1.0)
+
+**Locked before screening. Version-controlled. Any change is a new version with a dated entry in `DEVIATIONS.md`.**
+
+Both machine screeners and both human coders work from this document and nothing else. The rubric is the
+instrument; if two coders disagree, the rubric is what they are adjudicated against.
+
+---
+
+## The unit
+
+One work (journal article, preprint, book chapter, report, dataset, or software), identified by its OpenAlex ID.
+You see: title, abstract, publication year, language, venue, OpenAlex topic and field, Canadian institutional
+affiliations, funders.
+
+## The question
+
+**Is the object of study *research itself*?**
+
+Metaresearch studies how research is done, reported, funded, evaluated, disseminated, or governed. The test is
+what the work is *about*, not what field it appears in and not what vocabulary it uses.
+
+A cardiology trial is not metaresearch. A study of *how cardiology trials report their outcomes* is.
+
+---
+
+## Tier
+
+Assign exactly one.
+
+### T1: Core metaresearch
+The primary object of study is research itself. Typical objects:
+
+- research **methods** and their properties (bias, reporting, statistical practice, study design)
+- **reproducibility**, replication, data and code sharing
+- **research integrity**: misconduct, retraction, questionable research practices, authorship
+- **peer review** and editorial process *as objects of study*
+- **research evaluation**, metrics, rankings, funding allocation
+- **scholarly communication**: publishing models, open access, preprints *as objects of study*
+- **bibliometrics and scientometrics** applied to a research literature
+- the **research workforce**: careers, equity, training, capacity
+- **evidence synthesis methodology** (not an individual systematic review's clinical answer, but work *about* how
+  syntheses are done)
+
+### T2: Adjacent
+Empirically or conceptually grounded work on science as a social system that is not framed as metaresearch but
+studies it:
+
+- **science and technology studies (STS)**: social studies of scientific knowledge, practice, controversy
+- **library and information science**: information behaviour of researchers, repositories, discovery
+- **research infrastructure** studies: platforms, data repositories, identifiers, standards
+- **history and philosophy of science** *when the object is contemporary research practice*
+- **research policy** analysis grounded in evidence
+
+T2 is where the field's diversity lives. Be generous here: a paper does not have to call itself metaresearch to
+be studying research.
+
+### T3: Contextual
+Relevant to the ecosystem, mapped and released, but **never pooled into the analytic corpus**:
+
+- editorials, commentaries, opinion pieces about research practice
+- policy documents and position statements
+- announcements of infrastructure, tools, or initiatives
+- news, obituaries, corrections, letters
+
+### OUT: Not metaresearch
+Everything else. Includes, and this is the most common error:
+
+- **A study that uses a method is not a study of the method.** A meta-analysis answering a clinical question is
+  OUT. A study of how meta-analyses handle heterogeneity is T1.
+- **Mentioning a metaresearch term is not studying it.** A lab paper reporting "assay reproducibility", a methods
+  section saying "peer reviewed", a licence note saying "open access": all OUT.
+- **Domain research that happens to be bibliometric in method** but whose object is the domain, not the research:
+  e.g. a bibliometric map of diabetes treatments, produced to summarise diabetes knowledge. Borderline; see below.
+
+---
+
+## The three errors that matter most
+
+These are where the pilot showed retrieval and screening break down. Read them twice.
+
+1. **Polysemy.** `reproducibility` in a biochemistry paper means the assay gives the same reading twice. In a
+   metaresearch paper it means the reproducibility crisis. Only the second is in scope. The same applies to
+   `validation`, `replication`, `bias`, `peer review`, `open access`. **Judge the sense, not the token.**
+
+2. **Method vs. object.** Using bibliometrics ≠ studying research. Ask: *if this paper is right, what do we now
+   know more about: a scientific question, or the practice of science?* If the former, OUT.
+
+3. **Absence of vocabulary is not absence of content.** An STS paper about laboratory practice, or an LIS paper
+   about how researchers find data, may use none of the field's keywords and still be squarely T2. **Do not
+   require the vocabulary.** This is the error that makes the field look smaller and more anglophone than it is.
+
+---
+
+## Canadian linkage
+
+Record which apply (this is metadata, not an inclusion test; the estimand is defined separately in
+`PROTOCOL.md`):
+
+- `CA_AFF`: at least one author affiliated with a Canadian institution
+- `CA_FUND`: funded by CIHR, NSERC, SSHRC, or CFI
+- `ABOUT_CA`: the Canadian research system is a substantive object of study (not a passing mention, not one
+  country among forty in a global comparison)
+
+## Genre
+
+`empirical` · `conceptual` · `editorial/commentary` · `policy` · `infrastructure/announcement` · `other`
+
+OpenAlex's `type` is unreliable and this field is commentary-heavy, so genre is coded, not inherited.
+
+## Language of the work
+
+As published. Do not infer from the venue.
+
+---
+
+## Confidence
+
+- `high`: the rubric decides this cleanly.
+- `medium`: the rubric decides, but a reasonable coder could differ.
+- `low`: genuinely on the boundary, or the abstract is missing/too thin to judge.
+
+**`low` is a legitimate answer and is not a failure.** Records coded `low` by either screener are routed to
+adjudication. A screener that never says `low` is not being careful; it is being confident.
+
+---
+
+## Worked examples
+
+| Title (abridged) | Tier | Why |
+|---|---|---|
+| "Data sharing practices in 500 randomised trials" | **T1** | The object is reporting practice. |
+| "Reproducibility of a Western blot protocol" | **OUT** | Assay reproducibility. Polysemy trap. |
+| "Trends in citation of retracted papers" | **T1** | Object is the literature's own behaviour. |
+| "Laboratory life in a Canadian genomics centre: an ethnography" | **T2** | STS. No metaresearch vocabulary; still studies research. |
+| "How do researchers discover datasets? A survey" | **T2** | LIS, information behaviour of researchers. |
+| "Effectiveness of statins: a network meta-analysis" | **OUT** | Uses a synthesis method to answer a clinical question. |
+| "How network meta-analyses handle inconsistency: a review of 200 reviews" | **T1** | Object is the method. |
+| "Announcing the Canadian Research Data Repository" | **T3** | Infrastructure announcement. Mapped, not pooled. |
+| "Open access mandates are failing early-career researchers" (editorial) | **T3** | Commentary about research practice. |
+| "Bibliometric analysis of diabetes research 2000–2020" | **T2** | Borderline. Bibliometric method, and the object *is* a research literature, so it studies research output. Code T2, `medium`. |
+| "Le libre accès dans les revues québécoises : état des lieux" | **T1** | Scholarly communication, object is publishing practice. French. |
+
+---
+
+## Instructions to the screener
+
+Read the title and abstract. Apply the rubric. Do not use outside knowledge of the authors or the journal's
+reputation. If the abstract is missing, judge on the title alone and set confidence to `low` unless the title is
+unambiguous.
+
+Return the schema in `protocol/screening-schema.json`. One object per work. No prose, no preamble.
+--------------------------------------------------------------------------------
+You are screening works for MetaCan, a map of Canadian metaresearch.
+
+Apply the rubric above to every record in the JSON array below. Return a JSON
+array with one object per work, conforming to protocol/screening-schema.json:
+
+  {"id": "W...", "tier": "T1|T2|T3|OUT", "genre": "...", "about_ca": true|false,
+   "confidence": "high|medium|low", "reason": "one sentence"}
+
+Rules:
+- Return the JSON array and NOTHING else. No prose, no preamble, no code fences.
+- Every input id must appear exactly once in the output.
+- Do not run commands, read files, or browse. Classify from the RECORDS alone.
+
+RECORDS:
+[
+  {
+    "id": "W2019652018",
+    "title": "Who will judge?",
+    "abstract": "Do you know why you're here?” Truth be told, I thought that was all I did know; that and the fact that in life I had been a physician. I certainly didn't know where “here” was, and wasn't too sure who “I” was … Can you remember who I was? can you still feel it?[1][1] ... or when “",
+    "year": 2007,
+    "lang": "en",
+    "type": "article",
+    "venue": "Canadian Medical Association Journal",
+    "topic": "Medical Malpractice and Liability Issues",
+    "field": "Health Professions",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4403788255",
+    "title": "Impact of Clinical Decision Support Systems on Medical Students’ Case-Solving Performance: Comparison Study with a Focus Group",
+    "abstract": "Background: Health care practitioners use clinical decision support systems (CDSS) as an aid in the crucial task of clinical reasoning and decision-making. Traditional CDSS are online repositories (ORs) and clinical practice guidelines (CPG). Recently, large language models (LLMs) such as ChatGPT have emerged as potential alternatives. They have proven to be powerful, innovative tools, yet they are not devoid of worrisome risks. Objective: This study aims to explore how medical students perform in an evaluated clinical case through the use of different CDSS tools. Methods: The authors randomly divided medical students into 3 groups, CPG, n=6 (38%); OR, n=5 (31%); and ChatGPT, n=5 (31%); and assigned each group a different type of CDSS for guidance in answering prespecified questions, assessing how students' speed and ability at resolving the same clinical case varied accordingly. External reviewers evaluated all answers based on accuracy and completeness metrics (score: 1-5). The authors analyzed and categorized group scores according to the skill investigated: differential diagnosis, diagnostic workup, and clinical decision-making. Results: Answering time showed a trend for the ChatGPT group to be the fastest. The mean scores for completeness were as follows: CPG 4.0, OR 3.7, and ChatGPT 3.8 (P=.49). The mean scores for accuracy were as follows: CPG 4.0, OR 3.3, and ChatGPT 3.7 (P=.02). Aggregating scores according to the 3 students' skill domains, trends in differences among the groups emerge more clearly, with the CPG group that performed best in nearly all domains and maintained almost perfect alignment between its completeness and accuracy. Conclusions: This hands-on session provided valuable insights into the potential perks and associated pitfalls of LLMs in medical education and practice. It suggested the critical need to include teachings in medical degree courses on how to properly take advantage of LLMs, as the potential for misuse is evident and real.",
+    "year": 2024,
+    "lang": "en",
+    "type": "article",
+    "venue": "JMIR Medical Education",
+    "topic": "Clinical Reasoning and Diagnostic Skills",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W6939425074",
+    "title": "Additional file 1 of Zinc limitation in Klebsiella pneumoniae profiled by quantitative proteomics influences transcriptional regulation and cation transporter-associated capsule production",
+    "abstract": "Additional file 1.",
+    "year": 2021,
+    "lang": "en",
+    "type": "article",
+    "venue": "Figshare",
+    "topic": "Bacterial Genetics and Biotechnology",
+    "field": "Biochemistry, Genetics and Molecular Biology",
+    "ca_institutions": "University of Guelph",
+    "funders": []
+  },
+  {
+    "id": "W3157448507",
+    "title": "How the COVID-19 pandemic is shaping research in Africa: inequalities in scholarly output and collaborations and new opportunities for scientific leadership",
+    "abstract": "Abstract Background Scientometrics enables scholars to assess and visualize emerging research trends and hot-spots in the scientific literature from a quantitative standpoint. In the last decades, Africa has nearly doubled its absolute count of scholarly output, even though its share in global knowledge production has dramatically decreased. This limited contribution of African scholars to the global research output is in part impacted by the availability of adequate infrastructures and research collaborative networks. The still ongoing COVID-19 pandemic has profoundly impacted the way scholarly research is conducted, published and disseminated. However, the COVID-19 related research focus, the scientific productivity and the research collaborative network of African researchers during the ongoing COVID-19 pandemic remain to be elucidated yet. Methods This study aimed to clarify the COVID-19 research patterns among African researchers and estimate the strength of collaborations and partnerships between African researchers and scholars from the rest of the world during the COVID-19 pandemic, collecting data from electronic scholarly databases such as Web of Sciences (WoS), PubMed/MEDLINE and African Journals OnLine (AJOL), the largest and prominent platform of African-published scholarly journals. Results In the present bibliometric study, we found that COVID-19 related collaboration patterns varied among African regions, being shaped and driven by historical, social, cultural, linguistic, and even religious determinants. For instance, most of the scholarly partnerships occurred with formerly colonial countries (like European or North-American countries). In other cases, scholarly ties of North African countries were above all with the Kingdom of Saudi Arabia. In terms of amount of publications, South Africa and Egypt were among the most productive countries. Discussion Bibliometrics and, in particular, scientometrics can help scholars identify research areas of particular interest, as well as emerging topics, such as the COVID-19 pandemic. With a specific focus on the still ongoing viral outbreak, they can assist decision- and policy-makers in allocating funding and economic-financial, logistic, organizational, and human resources, based on the specific gaps and needs of a given country or research area. Conclusions In conclusion, the ongoing COVID-19 pandemic has exerting a subtle, complex impact on research and publishing patterns in African countries. On the one hand, it has distorted and even amplified existing inequalities and disparities in terms of amount of scholarly output, share of global knowledge, and patterns of collaborations. On the other hand, COVID-19 provided new opportunities for research collaborations.",
+    "year": 2021,
+    "lang": "en",
+    "type": "preprint",
+    "venue": "medRxiv",
+    "topic": "COVID-19 epidemiological studies",
+    "field": "Mathematics",
+    "ca_institutions": "York University",
+    "funders": []
+  },
+  {
+    "id": "W2406211933",
+    "title": "Recurrence Relations Of The Second Order And Infinite Series Identities.",
+    "abstract": "",
+    "year": 2011,
+    "lang": "en",
+    "type": "article",
+    "venue": "Ars Combinatoria",
+    "topic": "Computability, Logic, AI Algorithms",
+    "field": "Computer Science",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W3122170191",
+    "title": "Development of MEMS-based piezoresistive 3D stress/strain sensor using strain technology and smart temperature compensation",
+    "abstract": "Abstract This paper presents the microfabrication and testing of a membrane-free eight-element single-polarity (n-type) sensing rosette integrated with strained silicon technology over (111) silicon plane to measure the full 3D stress/strain tensor with full temperature compensation. Such n-type piezoresistive (PR) sensor has low sensitivity to the out-of-plane components compared to the in-plane components. To improve the sensitivity of such sensors to the out-of-plane components, a strained silicon technique was integrated into the sensing rosette during the microfabrication process using a highly compressive film produced by plasma enhanced chemical vapor deposition silicon nitride. For experimental verification, a prototype device featuring the proposed sensing rosette was microfabricated using semiconductors fabrication processes. The experimental analysis applied both, in-plane and out-of-plane stresses at different temperatures over a range from −20 °С to 60 °С. In this work, a smart sensing calibration algorithm, utilizing machine learning, is employed to reduce the temperature impact on both sensitivity and resistance of PR coefficients during stress measurement. The developed sensor is capable of accurately extracting the applied stress/strain components with temperature compensation.",
+    "year": 2021,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Micromechanics and Microengineering",
+    "topic": "Advanced MEMS and NEMS Technologies",
+    "field": "Engineering",
+    "ca_institutions": "University of Alberta",
+    "funders": ["Natural Sciences and Engineering Research Council of Canada", "CMC Microsystems"]
+  },
+  {
+    "id": "W3093499426",
+    "title": "Oncological outcomes of pathologically organ-confined, lymph node-positive prostate cancer after radical prostatectomy",
+    "abstract": "",
+    "year": 2020,
+    "lang": "en",
+    "type": "article",
+    "venue": "Urologic Oncology Seminars and Original Investigations",
+    "topic": "Prostate Cancer Diagnosis and Treatment",
+    "field": "Medicine",
+    "ca_institutions": "Université de Montréal",
+    "funders": []
+  },
+  {
+    "id": "W4308381477",
+    "title": "Efzofitimod for the Treatment of Pulmonary Sarcoidosis",
+    "abstract": "BackgroundPulmonary sarcoidosis is characterized by the accumulation of immune cells that form granulomas affecting the lungs. Efzofitimod (ATYR1923), a novel immunomodulator, selectively binds neuropilin 2, which is upregulated on immune cells in response to lung inflammation.Research QuestionWhat is the tolerability, safety, and effect on outcomes of efzofitimod in pulmonary sarcoidosis?Study Design And MethodsIn this randomized, double-blind, placebo-controlled study evaluating multiple ascending doses of efzofitimod administered intravenously every 4 weeks for 24 weeks, randomized patients (2:1) underwent a steroid taper to 5 mg/d by week 8 or < 5 mg/d after week 16. The primary end point was the incidence of adverse events (AEs); secondary end points included steroid reduction, change in lung function, and patient-reported outcomes on health-related quality-of-life scales.ResultsThirty-seven patients received at least one dose of study medication. Efzofitimod was well tolerated at all doses, with no new or unexpected AEs and no dose-dependent AE incidence. Average daily steroid doses through end of study were 6.8 mg, 6.5 mg, and 5.6 mg for the 1 mg/kg, 3 mg/kg, and 5 mg/kg groups compared with 7.2 mg for placebo, resulting in a baseline-adjusted relative steroid reduction of 5%, 9%, and 22%, respectively. Clinically meaningful improvements were achieved across several patient-reported outcomes, several of which reached statistical significance in the 5 mg/kg dose arm. A dose-dependent but nonsignificant trend toward improved lung function also was observed for 3 and 5 mg/kg.InterpretationEfzofitimod was safe and well tolerated and was associated with dose-dependent improvements of several clinically relevant end points compared with placebo. The results of this study support further evaluation of efzofitimod in pulmonary sarcoidosis.Trial RegistryClinicalTrials.gov; No.: NCT03824392; URL: www.clinicaltrials.gov Pulmonary sarcoidosis is characterized by the accumulation of immune cells that form granulomas affecting the lungs. Efzofitimod (ATYR1923), a novel immunomodulator, selectively binds neuropilin 2, which is upregulated on immune cells in response to lung inflammation. What is the tolerability, safety, and effect on outcomes of efzofitimod in pulmonary sarcoidosis? In this randomized, double-blind, placebo-controlled study evaluating multiple ascending doses of efzofitimod administered intravenously every 4 weeks for 24 weeks, randomized patients (2:1) underwent a steroid taper to 5 mg/d by week 8 or < 5 mg/d after week 16. The primary end point was the incidence of adverse events (AEs); secondary end points included steroid reduction, change in lung function, and patient-reported outcomes on health-related quality-of-life scales. Thirty-seven patients received at least one dose of study medication. Efzofitimod was well tolerated at all doses, with no new or unexpected AEs and no dose-dependent AE incidence. Average daily steroid doses through end of study were 6.8 mg, 6.5 mg, and 5.6 mg for the 1 mg/kg, 3 mg/kg, and 5 mg/kg groups compared with 7.2 mg for placebo, resulting in a baseline-adjusted relative steroid reduction of 5%, 9%, and 22%, respectively. Clinically meaningful improvements were achieved across several patient-reported outcomes, several of which reached statistical significance in the 5 mg/kg dose arm. A dose-dependent but nonsignificant trend toward improved lung function also was observed for 3 and 5 mg/kg. Efzofitimod was safe and well tolerated and was associated with dose-dependent improvements of several clinically relevant end points compared with placebo. The results of this study support further evaluation of efzofitimod in pulmonary sarcoidosis. ClinicalTrials.gov; No.: NCT03824392; URL: www.clinicaltrials.gov Take-home PointsResearch Question: What is the tolerability of efzofitimod for pulmonary sarcoidosis, and can we discern any evidence of clinical efficacy to support a larger trial?Results: No differences were found in adverse effects or tolerability between participants randomized to efzofitimod or placebo. Patient-reported outcomes improved in the higher-dose arms and positive trends for other end points were found.Interpretation: Efzofitimod may be useful for pulmonary sarcoidosis. Larger studies are needed to confirm and extend these findings. Research Question: What is the tolerability of efzofitimod for pulmonary sarcoidosis, and can we discern any evidence of clinical efficacy to support a larger trial? Results: No differences were found in adverse effects or tolerability between participants randomized to efzofitimod or placebo. Patient-reported outcomes improved in the higher-dose arms and positive trends for other end points were found. Interpretation: Efzofitimod may be useful for pulmonary sarcoidosis. Larger studies are needed to confirm and extend these findings. Sarcoidosis is a multisystem, granulomatous disorder that most commonly affects the lungs.1Culver D.A. Judson M.A. New advances in the management of pulmonary sarcoidosis.BMJ. 2019; 367: l5553Crossref PubMed Scopus (43) Google Scholar Patients often demonstrate organ-specific symptoms such as dyspnea and cough, but also show a range of other disabling nonspecific symptoms (eg, fatigue) that have a major impact on quality of life (QOL). For patients with pulmonary sarcoidosis, the goal of treatment is to reduce the risk of death or permanent disability (danger) or to improve the patient’s QOL,2Baughman R.P. Valeyre D. Korsten P. et al.ERS clinical practice guidelines on treatment of sarcoidosis.Eur Respir J. 2021; 5820040709Crossref PubMed Scopus (185) Google Scholar while secondarily managing the inflammation that may lead to pulmonary fibrosis and irreversible loss of lung function.3Drent M. Costabel U. Crouser E.D. Grunewald J. Bonella F. Misconceptions regarding symptoms of sarcoidosis.Lancet Respir Med. 2021; 9: 816-818Abstract Full Text Full Text PDF PubMed Scopus (13) Google Scholar,4Faverio P. De Giacomi F. Bonaiti G. et al.Management of chronic respiratory failure in interstitial lung diseases: overview and clinical insights.Int J Med. 2019; 16: 967-980Google Scholar The consensus standard of care includes oral corticosteroids that act mainly by suppressing inflammatory genes.1Culver D.A. Judson M.A. New advances in the management of pulmonary sarcoidosis.BMJ. 2019; 367: l5553Crossref PubMed Scopus (43) Google Scholar,5Schutt A.C. Bullington W.M. Judson M.A. Pharmacotherapy for pulmonary sarcoidosis: a Delphi consensus study.Respir Med. 2010; 104: 717-723Abstract Full Text Full Text PDF PubMed Scopus (162) Google Scholar Although corticosteroid therapy has been shown to stabilize or improve the disease, long-term corticosteroid use is associated with significant side effects, including substantial weight gain, development of insulin resistance, risk of infection,6Khan N.A. Donatelli C.V. Tonelli A.R. et al.Toxicity risk from glucocorticoids in sarcoidosis patients.Respir Med. 2017; 132: 9-14Abstract Full Text Full Text PDF PubMed Scopus (95) Google Scholar and impaired QOL.7Cox S.E. Donohue J.F. Brown C.D. Kataria Y.P. Judson M.A. Health-related quality of life in persons with sarcoidosis.Chest. 2004; 125: 997-1004Abstract Full Text Full Text PDF PubMed Scopus (164) Google Scholar Alternatives, such as immunosuppressive and cytotoxic agents (eg, methotrexate), can be used; however, these therapies also have significant side effects and toxicities.8Judson M.A. The treatment of pulmonary sarcoidosis.Respir Med. 2012; 106: 1351-1361Abstract Full Text Full Text PDF PubMed Scopus (54) Google Scholar Hence, a need exists to find new and effective treatments for pulmonary sarcoidosis with fewer side effects and a positive impact on QOL. Efzofitimod (ATYR1923) is a novel IV biological immunomodulator composed of a splice variant of histidyl-tRNA synthetase9Zhou J.J. Wang F. Xu Z. et al.Secreted histidyl-tRNA synthetase splice variants elaborate major epitopes for autoantibodies in inflammatory myositis.J Biol Chem. 2014; 289: 19269-19275Abstract Full Text Full Text PDF PubMed Scopus (40) Google Scholar,10Lo W.S. Gardiner E. Xu Z. et al.Human tRNA synthetase catalytic nulls with diverse functions.Science. 2014; 345: 328-332Crossref PubMed Scopus (92) Google Scholar that encodes the immunomodulatory domain that binds to the neuropilin 2 receptor protein.11Xu Z. Chong Y. Crampton S. et al.ATYR1923 specifically binds to neuropilin-2, a novel therapeutic target for the treatment of immune-mediated diseases [abstract].Am J Respir Crit Care Med. 2020; 201: A3074Google Scholar Neuropilin 2 is a pleiotropic receptor12Immormino R.M. Lauzier D.C. Nakano H. et al.Neuropilin-2 regulates airway inflammatory responses to inhaled lipopolysaccharide.Am J Physiol Lung Cell Mol Physiol. 2018; 315: L202-L211Crossref PubMed Scopus (15) Google Scholar that is upregulated on the surface of activated immune cells responsible for inflammation and granuloma formation in the lungs of patients with pulmonary sarcoidosis.13Paz S. Chu S. Ferrer M. et al.Neuropilin-2, the specific binding partner to ATYR1923, is expressed in sarcoid granulomas and key immune cells [abstract].Am J Respir Crit Care Med. 2020; 201: A3099Google Scholar Preclinical studies have shown that efzofitimod regulates immune responses14Burkett C. Seikkula M. Eide L. et al.ATYR1923 modulates the inflammatory response in experimental models of interstitial lung disease [abstract].Am J Respir Crit Care Med. 2019; 199: A2421Google Scholar, 15Adams R.A. Fernandes-Cerqueira C. Notarnicola A. et al.Serum-circulating his-tRNA synthetase inhibits organ-targeted immune responses.Cell Mol Immunol. 2021; 18: 1463-1475Crossref PubMed Scopus (17) Google Scholar, 16Paz S. Polizzi C. Chu D. et al.ATYR1923 reduces neutrophil Infiltration in an acute lipopolysaccharide (LPS) lung injury model.Keystone Symposia Conference. 2019; B7 ([abstract])Google Scholar and significantly reduces lung fibrosis and inflammation.17Nangle L.A. Tong Y. Crampton S.P. et al.The resokine pathway is implicated in the pathology of interstitial lung disease [abstract].Am J Respir Crit Care Med. 2017; 195: A7068Google Scholar,18Ogilvie K. Xu Q. Do M.H. et al.Pre-clinical characterization of iMod. Fc, an immune-modulatory therapeutic with potentially broad application in interstitial lung diseases.Am J Respir Crit Care Med. 2018; 197 ([abstract]): A1064Google Scholar Thus, efzofitimod may leverage a naturally occurring human immunomodulatory function to control or balance the human immune system therapeutically. In healthy volunteers, single doses of efzofitimod (0.03-5 mg/kg) are well tolerated, with no significant safety concerns.19aTyr Pharma, Inc.aTyr Pharma announces positive phase 1 data for ATYR1923 therapeutic candidate [online press release]. June 26, 2018. aTyr Pharma, Inc..https://investors.atyrpharma.com/news-releases/news-release-details/atyr-pharma-announces-positive-phase-1-data-atyr1923-therapeuticDate accessed: January 3, 2022Google Scholar Efzofitimod pharmacokinetics are dose proportional over the range of 0.03 to 5.0 mg/kg, with a mean half-life ranging from 167 to 242 h (7-10 days), supporting once every 4 weeks dosing.19aTyr Pharma, Inc.aTyr Pharma announces positive phase 1 data for ATYR1923 therapeutic candidate [online press release]. June 26, 2018. aTyr Pharma, Inc..https://investors.atyrpharma.com/news-releases/news-release-details/atyr-pharma-announces-positive-phase-1-data-atyr1923-therapeuticDate accessed: January 3, 2022Google Scholar Herein, we present the primary clinical data from the first investigation of efzofitimod in patients with pulmonary sarcoidosis designed to evaluate the safety, tolerability, and preliminary efficacy in this patient population. Patients were 18 to 75 years of age, had a diagnosis of pulmonary sarcoidosis for ≥ 6 months according to the 1999 American Thoracic Society standards,20Hunninghake G.W. Costabel U. Ando M. et al.ATS/ERS/WASOG statement on sarcoidosis. American Thoracic Society/European Respiratory Society/World Association of Sarcoidosis and other Granulomatous Disorders.Sarcoidosis Vasc Diffuse Lung Dis. 1999; 16: 149-173PubMed Google Scholar and showed evidence of parenchymal involvement. The full inclusion and exclusion criteria are provided in e-Appendix 1. This was a randomized, double-blind, placebo-controlled multiple ascending dose study with three sequential dose cohorts with a 2:1 randomization (efzofitimod to placebo) in each cohort; the planned study size was 36 patients Patients from each of the three cohorts were safety and efficacy between and The treatment of IV of study (efzofitimod or placebo) once every 4 weeks for a of weeks 1 and weeks and with the study at week and tolerability of evaluation of adverse events and and clinical of daily corticosteroid dose over the study and the of patients achieved the dose of 5 through week 24 also were Pulmonary function including the and of the lungs for were also Patient-reported was by the Sarcoidosis the Sarcoidosis the the and the and The of is in 1. on patients a taper of corticosteroid from the dose of to mg/d of to a target dose of 5 which was to be on or The corticosteroid dose was to be every 1 to 2 weeks, on the with the as as the patient reached the goal dose by Patients were at the target corticosteroid dose of 5 mg/d through week in the corticosteroid dose < 5 mg/d after week the further to be Patients acute of sarcoidosis symptoms or were to the taper were to treatment with corticosteroid doses the clinical on of the taper be the The primary end point was to evaluate the safety and tolerability of efzofitimod in patients with pulmonary sarcoidosis. events were from the of and the for were as any AE or of an after of the study through after the The of each AE was by the the for to e-Appendix 1 for of The were by of of patients the to study and Patients were study and any AEs that or 24 h after study were as For the secondary of effect of the included the the from to week 24 for each patient and a the for the through end of The the the daily corticosteroid dose patient over the The development of and that histidyl-tRNA was to outcomes the change from in lung function through week The change in from to week 24 also were as patient-reported outcomes of impact of disease and response to M.A. M. and differences for the Sarcoidosis A new patient-reported J Respir Crit Care Med. PubMed Scopus Google to and lung D. et al.The development and of the Sarcoidosis for the of PubMed Scopus Google of chronic of a specific for patients with chronic PubMed Scopus Google of ≥ are to substantial J. H. M. in sarcoidosis: the J 2004; 9: PubMed Scopus Google and of in the of dyspnea at and at the the is the the of D. of the in a clinical Respir J. PubMed Scopus Google The primary all patients received any of study and was on the treatment The primary efficacy was the as all randomized patients received at least one of study were in an to the phase of the were mean and were with the and of patients each for were the of or a for with the results as the between groups and in the least mean A of patients were randomized and received at least one dose of study received and and patients received the 1 mg/kg, 3 mg/kg, and 5 mg/kg efzofitimod doses, respectively. patients of (eg, and of and one of patients the study were well across the treatment The mean was with and disease including pulmonary function, were across treatment corticosteroid use was across treatment of patients in the were compared with the efzofitimod treatment all patients were received with a mean daily steroid dose of and patients to < mg/d of and by treatment are in and and randomized patients received at least one of study mg/kg mg/kg mg/kg of disease, lung function dyspnea to steroid use were to dose to < to < immunomodulator use are as or mean were as the on or the first dose multiple were on 1 (eg, the the first dose was as dyspnea of lungs for Research randomized patients received at least one of study were to dose in a new are as or mean were as the on or the first dose multiple were on 1 (eg, the the first dose was as dyspnea of lungs for Research No or AEs were observed in the the of patients with an AE was between the and efzofitimod treatment with no between AE and efzofitimod dose AEs the respiratory system system were most and included cough, and respiratory events were dose to be in and treatment The incidence of respiratory events across all treatment groups is in this patient and with the and to mg/kg mg/kg mg/kg respiratory are as adverse in a new are as adverse the treatment patients in the and patients efzofitimod 3 For these events included and of pulmonary sarcoidosis. The between sarcoidosis and study was as was to the study patient in the 3 AEs and pulmonary which were to be to the study In events at 1 mg/kg and and events at 5 mg/kg and of the 3 events with efzofitimod were or were in one patients received and one patient received and acute mg/kg patients study treatment of an of which were as to the study one patient in the of and one patient in the 1 mg/kg efzofitimod of patient in the 1 mg/kg efzofitimod an acute of pulmonary sarcoidosis that was to study but in treatment on the incidence of patients was with one patient in the 3 mg/kg efzofitimod to on three that were by the to be to study but of the No patients received efzofitimod showed positive results for or synthetase (eg, and no trends were or across treatment groups for or The daily dose of corticosteroid at was across treatment efzofitimod groups showed a corticosteroid use through week 24 compared with the to be dose with the reduction observed in the 5 mg/kg treatment with a from compared with a in placebo, a of Average daily steroid doses through end of study were 6.8 mg, 6.5 mg, and 5.6 mg for the 1 mg/kg, 3 mg/kg, and 5 mg/kg compared with 7.2 mg for the resulting in a baseline-adjusted relative steroid reduction of 5%, 9%, and 22%, respectively. A of between and efzofitimod that the efzofitimod treatment groups showed a from in corticosteroid use the study for 3 mg/kg and for 5 mg/kg) compared with placebo. these trends in corticosteroid reduction, three patients at the dose mg/kg) were to taper corticosteroid and this through the end of the corticosteroid that was was to end points use the to end of mg/kg mg/kg mg/kg daily from of for steroid from in the of change from to to to to mg and are as mean or the corticosteroid that was was to end points use the to end of from of for steroid the of change from in a new are as mean or the the doses of efzofitimod in improvements in key lung function at week 24 from compared with placebo, with a dose-dependent effect to placebo, the effects of 5 mg/kg efzofitimod were observed (eg, week 4 for and week for and were across all points through week over the study with and 1 mg/kg efzofitimod and with the doses of efzofitimod Although the improvements in and statistical significance at the 5 mg/kg dose in of the the trend we observed the of biological further investigation in a larger population. observed with the support the that the 5 mg/kg dose may a with trends that were significant improvements in the mean change from to week 24 for and compared with trends in week 24 5 mg/kg significant improvements were observed week 24 as statistical observed by week statistical observed by week 8 statistical observed by week 4 and through week 24 and trends toward in observed at week 8 The in other or were in at 24 from in the from for for mg/kg mg/kg mg/kg lung in lung in in in significance < Sarcoidosis patient-reported Sarcoidosis from for for in a new significance < Sarcoidosis patient-reported Sarcoidosis The results from the present study that efzofitimod is safe and well tolerated in patients with pulmonary sarcoidosis, with no dose regarding the incidence of no trends or across efzofitimod treatment were regarding change from in clinical and no differences from were No and or of AEs in a of or AEs were with no dose-dependent between AE and The 3 AEs after efzofitimod treatment and were by the to be to be to the study and in or of No was as by the incidence of patients with and the of after efzofitimod treatment groups showed a corticosteroid use at week 24 compared with the which to be dose with the observed in the 5 mg/kg treatment patients were to taper patient in the and three patients 5 the patient be for 8 weeks of sarcoidosis and of to corticosteroid was in all with data that patients with sarcoidosis in clinical can taper corticosteroid over a of several M.A. R.P. Costabel U. et and efficacy of or in patients with chronic sarcoidosis.Eur Respir J. 2014; PubMed Scopus Google Scholar to of patients with occurring 6 months of R.M. J. H. in sarcoidosis: the of to corticosteroid Full Text Full Text PDF PubMed Scopus Google G. L. P. The of chronic sarcoid patients with Vasc Diffuse Lung Dis. Google Scholar the of this we were to demonstrate differences in to corticosteroid taper the study which may biological of the medication. Although the of steroid reduction be steroid on dose A in the daily dose may in a meaningful in the over 1 the Society steroid reduction a R.P. Valeyre D. Korsten P. et al.ERS clinical practice guidelines on treatment of sarcoidosis.Eur Respir J. 2021; 5820040709Crossref PubMed Scopus (185) Google Scholar with placebo, the doses of efzofitimod in improvements in and through week a dose-dependent effect on lung The of observed in the study was but all patients were therapy for pulmonary sarcoidosis at the of study of chronic pulmonary sarcoidosis have a significant in R.P. Valeyre D. Korsten P. et al.ERS clinical practice guidelines on treatment of sarcoidosis.Eur Respir J. 2021; 5820040709Crossref PubMed Scopus (185) Google R.P. H. and experimental therapy of pulmonary sarcoidosis.Eur Respir J. PubMed Scopus Google Scholar The in were to observed in the treatment of a randomized of in which the mean was R.P. M. M. et therapy in patients with chronic sarcoidosis and pulmonary J Respir Crit Care Med. PubMed Scopus Google Scholar In that corticosteroids were of corticosteroid as therapy for pulmonary sarcoidosis have found improvements in et Thoracic Society sarcoidosis effects of long-term corticosteroid PubMed Scopus Google A. P. Pulmonary Sarcoidosis treatment of sarcoidosis pulmonary Full Text Full Text PDF PubMed Scopus Google Scholar in have been a major for treatment of R.P. K. et patient treatment 2018; PubMed Scopus Google Scholar end points were that were for multiple observed significant improvements at week 24 in such as and in the 5 mg/kg Patients received 5 mg/kg efzofitimod significant improvements in lung at week 8 and significant improvements in as as week of these significance through week The of change in these at 24 weeks the clinically differences For improved by points with 5 mg/kg efzofitimod the of 8 for the 3 mg/kg and 5 mg/kg efzofitimod groups the of 4 the dose was For the lung the change in the 3 mg/kg and 5 mg/kg groups meaningful M.A. M. and differences for the Sarcoidosis A new patient-reported J Respir Crit Care Med. PubMed Scopus Google Scholar The in the also the of 4 De J. M. differences for the in sarcoidosis.Respir Med. Full Text Full Text PDF Scopus (92) Google however, these patients may have The of these in studies evaluating in health-related treatment of pulmonary R.P. Judson M.A. D.A. et to reduce acute pulmonary events in sarcoidosis: a randomized clinical Vasc Diffuse Lung Dis. 2021; R.P. et for chronic pulmonary 2017; 195: PubMed Scopus Google Scholar The major of this study is the and as such the results need to be in a larger by the for most of the of the were present for several of the key end points and the are which to statistical for that the major end points in of a effect of that a larger may the findings. also that statistical for multiple and were of the of the patients in this study were mg of further in was to be the a effect and improved the is the of a corticosteroid on for or in corticosteroid may in the but in this effect to reduce the of positive the patients were corticosteroid is also to improvements in efzofitimod or efzofitimod a reduction of which has been associated with as by the 36 and Respiratory S.E. Donohue J.F. Brown C.D. Kataria Y.P. Judson M.A. Health-related quality of life in persons with sarcoidosis.Chest. 2004; 125: 997-1004Abstract Full Text Full Text PDF PubMed Scopus (164) Google Scholar The dose response that the a corticosteroid reduction, is to to the observed several patients of the study of the of clinical the In patients with pulmonary sarcoidosis, efzofitimod was safe and well clinically meaningful improvements after 5 mg/kg efzofitimod with corticosteroid use and improvements in lung function and compared with placebo, the risk of side of the of patients in this these be as results support further evaluation in of efzofitimod in patients with pulmonary sarcoidosis. by aTyr Pharma L. A. M. is by the of and P. H. S. S. is by the of and the American Thoracic Society",
+    "year": 2022,
+    "lang": "en",
+    "type": "article",
+    "venue": "CHEST Journal",
+    "topic": "Sarcoidosis and Beryllium Toxicity Research",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": ["Roivant Sciences", "Foundation for Sarcoidosis Research", "National Institutes of Health", "aTyr", "National Heart, Lung, and Blood Institute", "Mallinckrodt Pharmaceuticals", "Savara Pharmaceuticals", "American Thoracic Society", "University of Cincinnati", "Genentech", "United Therapeutics Corporation"]
+  },
+  {
+    "id": "W173656928",
+    "title": "Coding of Thoughts, Words and Things",
+    "abstract": "This short paper highlights some new work being performed at the National Centre for Classification in Health (NCCH), relating newly created term sets developed for specific purposes to existing reference terminologies and classifications such as SNOMED CT and ICD-10-AM. It describes some of the inherent difficulties experienced by the NCCH team in interpreting terms in the term set and therefore in locating equivalent concepts in reference terminologies and classifications, in the absence of a context with which to associate each term. Also examined is the effect that a person's background and past experience has on their understanding and interpretation of clinical terms and how this results in inconsistent \"world views\".",
+    "year": 2005,
+    "lang": "en",
+    "type": "article",
+    "venue": "Health Information Management",
+    "topic": "Medical Coding and Health Information",
+    "field": "Health Professions",
+    "ca_institutions": "Victoria Park",
+    "funders": []
+  },
+  {
+    "id": "W7068773636",
+    "title": "Border Barometer",
+    "abstract": "This inaugural Border Barometer provides a preliminary context for officials to consider when thinking about strengthening collaboration to enhance security and competitiveness, as well as the appropriate mechanism for accomplishing these goals. Data collected thus far tell a Northern-border-wide story of increased Canada-US economic interdependence amidst a decline in social interaction.",
+    "year": 2009,
+    "lang": "en",
+    "type": "article",
+    "venue": "Western CEDAR (Western Washington University)",
+    "topic": "Diverse Scientific and Economic Studies",
+    "field": "Economics, Econometrics and Finance",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4377239194",
+    "title": "Comment on egusphere-2023-611",
+    "abstract": "<strong class=\"journal-contentHeaderColor\">Abstract.<\/strong> Physical features preserved in ice cores may provide unique records about past atmospheric variability. Linking the formation and preservation of these features and the atmospheric processes causing them is key to their interpretation as paleoclimate proxies. We imaged ice cores from Law Dome, East Antarctica using an Intermediate Layer Ice Core Scanner (ILCS) which shows that thin bubble-free layers (BFLs) occur multiple times per year at this site. The origin of these features is unknown. We used a previously developed age-depth scale in conjunction with regional accumulation estimated from atmospheric reanalysis data (ERA5) to estimate the year and month that the BFLs occurred, and then performed seasonal and annual analysis to reduce the overall dating errors. We then investigated measurements of snow surface height from a co-located automatic weather station to determine snow surface features co-occurring with BFLs, as well as their estimated occurrence date. We also used ERA5 to investigate potentially relevant local/regional atmospheric processes (temperature inversions, wind scour, accumulation hiatuses and extreme precipitation) associated with BFL occurrence. Finally, we used a synoptic typing dataset of the southern Indian and southwest Pacific Oceans to investigate the relationship between large scale atmospheric patterns and BFL occurrence. Our results show that BFLs occur (1) primarily in autumn and winter, (2) in conjunction with accumulation hiatuses &gt;4 days, and (3) during synoptic patterns characterised by meridional atmospheric flow related to the episodic blocking and channeling of maritime moisture to the ice core site. Thus, BFLs may act as a seasonal marker (autumn/winter), and may indicate episodic changes in accumulation (such as hiatuses) associated with large-scale circulation. This study provides a pathway to the development of a new proxy for past climate in the Law Dome ice cores; specifically past snowfall conditions relating to synoptic variability over the southern Indian Ocean.",
+    "year": 2023,
+    "lang": "en",
+    "type": "peer-review",
+    "topic": "Cryospheric studies and observations",
+    "field": "Earth and Planetary Sciences",
+    "ca_institutions": "University of Alberta",
+    "funders": "Australian Government"
+  },
+  {
+    "id": "W6922049495",
+    "title": "L’intégration culture-élevage, une opportunité pour l’élevage et la transition agroécologique des systèmes agricoles",
+    "abstract": "\\nL’élevage, dans ses formes dites « industrielles », est aujourd’hui largement critiqué pour ses impacts environnementaux. Pour autant, d’autres formes d’élevage plus vertueuses existent, et l’élevage peut s’avérer indispensable pour répondre aux enjeux de production alimentaire, de fourniture de services écosystémiques et de dynamiques socioterritoriales, pour autant qu’il s’intègre dans un paysage agricole diversifié. L’agroécologie nous invite à mieux valoriser la diversité cultivée et élevée dans les exploitations et dans les territoires. L’intégration culture-élevage correspond aux pratiques agricoles à même d’exploiter les synergies entre composantes animales et végétales de cette diversité, à travers le bouclage des cycles de nutriments (fertilisation, alimentation) et les complémentarités fonctionnelles (lutte biologique, désherbage). Ces pratiques déployées au sein d’exploitations diversifiées et/ou entre exploitations spécialisées d’un territoire permettent ainsi de réduire la dépendance aux intrants (aliments achetés, fertilisants chimiques, phytosanitaires, carburants pour la mécanisation) et d’améliorer l’efficience d’utilisation des ressources. Elle peut également accroître la résilience en diluant les risques liés aux aléas (climatiques, économique), et améliorer la productivité du milieu par la diversité des produits. Pour autant, ces pratiques ne font pas (encore) partie du modèle agricole dominant et leur développement nécessitera de lever certains freins techniques, territoriaux et socioéconomiques qui, à défaut d’être rédhibitoires, en limitent aujourd’hui le déploiement.\\n",
+    "year": 2024,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Springer Link (Chiba Institute of Technology)",
+    "topic": "Agriculture and Rural Development Research",
+    "field": "Agricultural and Biological Sciences",
+    "ca_institutions": "ASTER",
+    "funders": []
+  },
+  {
+    "id": "W7014460818",
+    "title": "Perception des professeurs et des étudiants quant à l'utilisation et à l'impact des TIC à l'École Polytechnique de Montréal",
+    "abstract": "",
+    "year": 2001,
+    "lang": "fr",
+    "type": "other",
+    "venue": "PolyPublie (École Polytechnique de Montréal)",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4390698897",
+    "title": "Utilizing NMR fecal metabolomics as a novel technique for detecting the physiological effects of food shortages in waterfowl",
+    "abstract": "Metabolomics is the study of small, endogenous metabolites that participate in metabolic reactions, including responses to stressors. Anthropogenic and environmental changes that alter habitat and food supply can act as stressors in wild waterfowl. These alterations invoke a series of physiological processes to provide energy to restore homeostasis and increase survival. In this study, we utilized fecal metabolomics to measure metabolites and identify pathways related to a 6-day feed restriction in captive mallard ducks ( Anas platyrhynchos , n = 9). Fecal samples were collected before (baseline) and during feed restriction (treatment). H 1 Nuclear Magnetic Resonance (NMR) spectroscopy was performed to identify metabolites. We found that fecal metabolite profiles could be used to distinguish between the feed-restricted and baseline samples. We identified metabolites related to pathways for energy production and metabolism endpoints, and metabolites indicative of gut microbiota changes. We also demonstrated that mallard ducks could utilize endogenous reserves in times of limited caloric intake. Fecal metabolomics shows promise as a non-invasive novel tool in identifying and characterizing physiological responses associated with stressors in a captive wild bird species.",
+    "year": 2024,
+    "lang": "en",
+    "type": "article",
+    "venue": "Frontiers in Physiology",
+    "topic": "Metabolomics and Mass Spectrometry Studies",
+    "field": "Biochemistry, Genetics and Molecular Biology",
+    "ca_institutions": "University of Saskatchewan",
+    "funders": "Environment and Climate Change Canada"
+  },
+  {
+    "id": "W4393122600",
+    "title": "Implantation d’Un Programme d’ Éveil À La Lecture Et À l’écriture Dans Les Services De Garde En Milieu Scolaire : Vocabulaire, Compréhension Orale, Processus Inférentiels Et Engagement Face Aux Livres",
+    "abstract": "Le présent article traite de l’éveil à la lecture et à l’écriture (ÉLÉ) dans un contexte de service de garde en milieu scolaire. Cette recherche-intervention consiste à présenter les effets d’un programme d’ÉLÉ sur le vocabulaire, la compréhension orale, l’engagement envers la lecture et les processus inférentiels en comparant un groupe d’enfants de quatre ans exposés au programme (n = 52) à celui d’enfants n’y ayant pas été exposés (n = 26). Bien que le programme n’ait pas montré d’effets significatifs sur le développement des habiletés de compréhension orale, de vocabulaire, de processus inférentiels et d’engagement envers la lecture, l’étude soulève sa pertinence au regard du développement global de l’enfant.",
+    "year": 2024,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Language and Literacy",
+    "topic": "French Language Learning Methods",
+    "field": "Social Sciences",
+    "ca_institutions": "Université de Sherbrooke",
+    "funders": []
+  },
+  {
+    "id": "W2809429683",
+    "title": "Major Authors: Robertson Davies, Margaret Atwood, Michael Ondaatje",
+    "abstract": "This chapter discusses the works of three Canadian novelists best known internationally: Robertson Davies, Margaret Atwood, and Michael Ondaatje. The careers of Davies, Atwood, and Ondaatje, although overlapping chronologically, represent distinctive stages in Canada's evolving cultural traditions and publishing practices since the 1950s. Davies's novels signal the first stage in a transition from colonial to postcolonial identity in post-war Canada. Atwood in the 1970s provided the script for a Canadian cultural and literary identity separate from British and American in what Carol Shields called ‘a period of explosive patriotism’. Ondaatje's novels and family memoir epitomize the ‘refocusing and defocusing’ of Canadian literature since the 1980s, coinciding with the nation's shifts into multiculturalism and transnationalism. The chapter first provides a background on Davies, Atwood, and Ondaatje's careers before considering some of their works, including <italic>the Deptford trilogy<\/italic> (Davies), <italic>The Handmaid's Tale<\/italic> (Atwood), and <italic>The English Patient<\/italic> (Ondaatje).",
+    "year": 2018,
+    "lang": "en",
+    "type": "book",
+    "venue": "Oxford University Press eBooks",
+    "topic": "Short Stories in Global Literature",
+    "field": "Arts and Humanities",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W7062561639",
+    "title": "Työmaatoimitilat Suomessa - Tutkimus työmaatoimitilojen tarjonnasta, ja niiden vaikutuksista työmaatoimihenkilöiden työhyvinvointiin ja työtehokkuuteen",
+    "abstract": "This master's thesis examined the role of construction site office facilities in promoting occupational well-being and work efficiency in the Finnish construction industry. The significance of the study is particularly emphasized now as the industry faces major profitability challenges due to rising interest rates and increasing construction costs. The construction industry forms a significant part of the Finnish national economy, accounting for approximately 8.6% of total gross domestic product and employing about 7.6% of the employed workforce. The work included an extensive literature review and empirical research. The empirical research was conducted using survey research methods. The survey was aimed at companies providing construction site office facilities in Finland, with 21 out of 51 companies responding (response rate 41%). The research was guided by five key research questions, which addressed the development of facility markets; definitions of occupational well-being and work efficiency; the state of occupational well-being and work efficiency in the construction industry; the impact of facility properties on its users; and the current level of construction site facility offerings. The literature review found significant challenges in the occupational well-being of construction site personnel. About a quarter of general site supervisors and one-fifth of site supervisors frequently or almost continuously experience stress. The mental workload is at a particularly concerning level: 70% of general site supervisors find their work mentally at least somewhat stressful. Only about 60% of site management believes they will work until retirement age. The survey showed that while 83% of industry operators reported considering factors of occupational well-being and work efficiency in the design of construction site office facilities, significant deficiencies were found in practical implementation across many areas. Particularly acoustics, ergonomics, indoor air quality, and digital solutions received little attention. The range of additional services also proved limited. Research reveals three significant conclusions regarding construction site office facilities in Finland in 2024: 1) More attention should be paid to the importance of site offices in promoting occupational well-being and work efficiency, as construction site personnel spend a considerable part of their careers in these facilities. 2) The current approach, which focuses on basic features of site offices, requires a more comprehensive examination, considering various spatial characteristics that support occupational well-being and work efficiency in a more balanced way. 3) Site office facility providers should expand their business with more comprehensive service concepts and \"turnkey\"; -solutions, as the current range of auxiliary services is generally limited and fragmented. Further research is recommended from two perspectives: long-term research on the effects of construction site office facilities in Finland and international comparative research. Long-term research would include regular measurements of facility characteristics and employee well-being. International comparison, in turn, could bring new perspectives and innovative solutions to the Finnish market. Despite the limitations of the study, the results provide valuable information for developing the industry and improving occupational well-being in the construction sector.",
+    "year": 2024,
+    "lang": "en",
+    "type": "other",
+    "venue": "Aaltodoc (Aalto University)",
+    "topic": "Gyrotron and Vacuum Electronics Research",
+    "field": "Physics and Astronomy",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W3040047666",
+    "title": "SPOŁECZNY KOMITET ODNOWY ZABYTKÓW KRAKOWA: GENEZA, DOŚWIADCZENIA, PROGRAM",
+    "abstract": "The Committee (acronym: SKOZK) was established in 1978, following listing Krakow as a world heritage site. It fulfilled expectations from the past, when heritage assets were damaged by industrial pollution and state ideology curtailed financing of works on sacred and private grounds.An undoubted strength of the early time was the recognition of Krakow heritage protection as a matter of state importance, while the domination of political circumstances remained a weakness.The political transformation of 1989/90 changed the environment: SKOZK was now dominated by heritage preservation milieus, and members were appointed by the President of the Republic of Poland, and his Chancellery provided a major part of financial means. As grants generally cover up to 50% of the cost, the fund has a stimulating role as beneficiaries need to find sources for matching funds. Since 1990, the Committee’s activity has concentrated on the most valuable complexes: Wawel, the historical centre of the city, former town of Kazimierz with Jewish quarter, and the most treasurable enclaves situated on the outskirts of the city.Achievements of SKOZK include development of a model for cooperation between private (NGO) and public (central and territorial authorities) sectors, definition of strategic goals, and a priority of the ensuing tasks.",
+    "year": 2017,
+    "lang": "en",
+    "type": "article",
+    "venue": "Protection of cultural heritage",
+    "topic": "Urban Development and Cultural Heritage",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2937800559",
+    "title": "L’expérience du personnel enseignant formé à l’étranger dans les écoles de Montréal. Apports et enseignements d’une recherche collaborative",
+    "abstract": "L’intégration professionnelle du personnel enseignant formé à l’étranger travaillant dans les écoles montréalaises est un enjeu d’importance. S’il suit une courte formation, c’est surtout au coeur des situations de travail qu’il réapprend le métier. Jusqu’à présent, la focale a surtout été mise sur les difficultés d’intégration des membres de ce personnel enseignant dans leur nouvel environnement de travail. À rebours, une approche interactionniste de l’intégration d’un groupe minoritaire à un groupe majoritaire conduit plutôt à considérer leurs expériences comme le produit de conventions professionnelles, propres aux contextes de travail, qui s’entrechoquent. La réalisation d’entretiens individuels et collectifs avec des enseignantes et des enseignants formés à l’étranger et avec certains de leurs partenaires a permis une coanalyse des événements marquants ayant jalonné leurs premières expériences dans les écoles montréalaises, et traduisant des tensions avec leurs expériences d’enseignement antérieures à la migration. Dans cette contribution, nous mettons l’accent sur les chocs entre conventions tacites définissant le travail enseignant et en examinons trois dimensions : les relations de travail, l’expertise au fondement du métier et les sources de la reconnaissance professionnelle. Enfin, nous discutons de l’intérêt du dispositif collaboratif pour les participantes et les participants et, au-delà, pour les personnels éducatifs, notamment les directions d’établissement qui accueillent du personnel enseignant de différents horizons dans leur équipe-école.",
+    "year": 2019,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Éducation et francophonie",
+    "topic": "Education, sociology, and vocational training",
+    "field": "Social Sciences",
+    "ca_institutions": "Université de Montréal",
+    "funders": []
+  },
+  {
+    "id": "W2145985597",
+    "title": "Neisserial Outer Membrane Vesicles Bind the Coinhibitory Receptor Carcinoembryonic Antigen-Related Cellular Adhesion Molecule 1 and Suppress CD4 <sup>+<\/sup> T Lymphocyte Function",
+    "abstract": "Pathogenic Neisseria bacteria naturally liberate outer membrane \"blebs,\" which are presumed to contribute to pathology, and the detergent-extracted outer membrane vesicles (OMVs) from Neisseria meningitidis are currently employed as meningococcal vaccines in humans. While the composition of these vesicles reflects the bacteria from which they are derived, the functions of many of their constituent proteins remain unexplored. The neisserial colony opacity-associated Opa proteins function as adhesins, the majority of which mediate bacterial attachment to human carcinoembryonic antigen-related cellular adhesion molecules (CEACAMs). Herein, we demonstrate that the Opa proteins within OMV preparations retain the capacity to bind the immunoreceptor tyrosine-based inhibitory motif-containing coinhibitory receptor CEACAM1. When CD4(+) T lymphocytes were exposed to OMVs from Opa-expressing bacteria, their activation and proliferation in response to a variety of stimuli were effectively halted. This potent immunosuppressive effect suggests that localized infection will generate a \"zone of inhibition\" resulting from the diffusion of membrane blebs into the surrounding tissues. Moreover, it demonstrates that OMV-based vaccines must be developed from strains that lack CEACAM1-binding Opa variants.",
+    "year": 2007,
+    "lang": "en",
+    "type": "article",
+    "venue": "Infection and Immunity",
+    "topic": "Bacterial Infections and Vaccines",
+    "field": "Immunology and Microbiology",
+    "ca_institutions": "University of Toronto",
+    "funders": ["Canadian Institutes of Health Research", "Sanofi Pasteur", "Sanofi"]
+  },
+  {
+    "id": "W4254196324",
+    "title": "Feedback Control of Movement",
+    "abstract": "",
+    "year": 2008,
+    "lang": "en",
+    "type": "book-chapter",
+    "topic": "Motor Control and Adaptation",
+    "field": "Neuroscience",
+    "ca_institutions": "University of Alberta",
+    "funders": []
+  },
+  {
+    "id": "W565863398",
+    "title": "Semi-rigid biopolyurethane foams based on palm-oil polyol and reinforced with cellulose nanocrystals",
+    "abstract": "",
+    "year": 2015,
+    "lang": "en",
+    "type": "article",
+    "venue": "Composites Part A Applied Science and Manufacturing",
+    "topic": "Advanced Cellulose Research Studies",
+    "field": "Materials Science",
+    "ca_institutions": "University of Toronto",
+    "funders": "U.S. Department of Agriculture"
+  },
+  {
+    "id": "W4386739045",
+    "title": "Bringing Up Mischievous Strips: The Katzenjammer Kids’ Domestication in Spanish and Italian Children’s Comics Magazines",
+    "abstract": "This article examines how the comic series The Katzenjammer Kids , created by Rudolph Dirks in 1897 and whose main characters are two wicked children, has been usually altered, modified, and reframed due to its publication in Spain and Italy. By using the concept of domestication and utilizing tools of the history and formal analysis of comics and the contextual studies used in iconography, we try to study the influence and the afterlife impact of the forms, narratives, and gags of The Katzenjammer Kids and, at the same time, to provide a theoretical-methodological framework for understanding the cultural scope of these phenomena that characterize a field of study such as comics reception, which has been relatively underdeveloped.",
+    "year": 2023,
+    "lang": "en",
+    "type": "article",
+    "venue": "Mémoires du livre",
+    "topic": "Comics and Graphic Narratives",
+    "field": "Arts and Humanities",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2087455195",
+    "title": "X‐Ray Photoelectron Spectroscopy Study of Rare‐Earth Filled Skutterudites LaFe<sub>4<\/sub>P<sub>12<\/sub> and CeFe<sub>4<\/sub>P<sub>12<\/sub>.",
+    "abstract": "Abstract ChemInform is a weekly Abstracting Service, delivering concise information at a glance that was extracted from about 200 leading journals. To access a ChemInform Abstract, please click on HTML or PDF.",
+    "year": 2006,
+    "lang": "en",
+    "type": "article",
+    "venue": "ChemInform",
+    "topic": "Advancements in Battery Materials",
+    "field": "Engineering",
+    "ca_institutions": "University of Alberta",
+    "funders": []
+  },
+  {
+    "id": "W2471289324",
+    "title": "Pivotal role of α2 Na<sup>+<\/sup>pumps and their high affinity ouabain binding site in cardiovascular health and disease",
+    "abstract": "Abstract Reduced smooth muscle (SM)‐specific α2 Na + pump expression elevates basal blood pressure (BP) and increases BP sensitivity to angiotensin II (Ang II) and dietary NaCl, whilst SM‐α2 overexpression lowers basal BP and decreases Ang II/salt sensitivity. Prolonged ouabain infusion induces hypertension in rodents, and ouabain‐resistant mutation of the α2 ouabain binding site (α2 R/R mice) confers resistance to several forms of hypertension. Pressure overload‐induced heart hypertrophy and failure are attenuated in cardio‐specific α2 knockout, cardio‐specific α2 overexpression and α2 R/R mice. We propose a unifying hypothesis that reconciles these apparently disparate findings: brain mechanisms, activated by Ang II and high NaCl, regulate sympathetic drive and a novel neurohumoral pathway mediated by both brain and circulating endogenous ouabain (EO). Circulating EO modulates ouabain‐sensitive α2 Na + pump activity and Ca 2+ transporter expression and, via Na + /Ca 2+ exchange, Ca 2+ homeostasis. This regulates sensitivity to sympathetic activity, Ca 2+ signalling and arterial and cardiac contraction. image",
+    "year": 2016,
+    "lang": "en",
+    "type": "review",
+    "venue": "The Journal of Physiology",
+    "topic": "Ion Transport and Channel Regulation",
+    "field": "Biochemistry, Genetics and Molecular Biology",
+    "ca_institutions": "University of Ottawa",
+    "funders": ["National Heart, Lung, and Blood Institute", "Canadian Institutes of Health Research", "National Institutes of Health", "National Institute of Arthritis and Musculoskeletal and Skin Diseases", "American Heart Association"]
+  },
+  {
+    "id": "W2890229885",
+    "title": "Functions of stone cells and oleoresin terpenes in the conifer defense syndrome",
+    "abstract": "Conifers depend on complex defense systems against herbivores. Stone cells (SC) and oleoresin are physical and chemical defenses of Sitka spruce that have been separately studied in previous work. Weevil oviposit at the tip of the previous year's apical shoot (PYAS). We investigated interactions between weevil larvae and trees in controlled oviposition experiments with resistant (R) and susceptible (S) Sitka spruce. R trees have an abundance of SC in the PYAS cortex. SC are mostly absent in S trees. R trees and S trees also differ in the composition of oleoresin terpenes. Transcriptomes of R and S trees revealed differences in long-term weevil-induced responses. Performance of larvae was significantly reduced on R trees compared with S trees under experimental conditions that mimicked natural oviposition behavior at apical shoot tips and may be attributed to the effects of SC. In oviposition experiments designed for larvae to feed below the area of highest SC abundance, larvae showed an unusual feeding behavior and oleoresin appeared to function as the major defense. The results support a role for both SC and oleoresin terpenes and possible synergies between these traits in the defense syndrome of weevil-resistant Sitka spruce.",
+    "year": 2018,
+    "lang": "en",
+    "type": "article",
+    "venue": "New Phytologist",
+    "topic": "Forest Insect Ecology and Management",
+    "field": "Environmental Science",
+    "ca_institutions": ["Ministry of Forests", "Canada's Michael Smith Genome Sciences Centre", "University of British Columbia"],
+    "funders": ["Natural Sciences and Engineering Research Council of Canada", "University of British Columbia", "Genome Canada"]
+  },
+  {
+    "id": "W3135888487",
+    "title": "VOUS AVEZ DIT : « DIEU E(S)T VERITÉ » ?",
+    "abstract": "Le lien entre Dieu et la vérité ne va pas de soi et il a une longue histoire. Dans cet article, il s’agit d’explorer, de déceler des anomalies étonnantes (métaphysiques, épistémologiques et éthiques) par rapport aux habitudes de penser la vérité et son rapport à Dieu en lien avec la figure mythifiée ou fantasmée de Thomas d’Aquin dans la Summa theologiae pour dépoussiérer l’expression de la vérité comme adaequatio rei et intellectum . Cet article médite sur a) la vérité en rapport avec Dieu qui connaît le monde qu’il a créé et notre capacité à articuler des jugements vrais sur Dieu et ce monde ; b) la vérité de Dieu en tant que, se révélant, il est « véridique » et « vérace », c’est-à-dire fidèle ; c) des vérités dans des interactions humaines lorsque Dieu est à l’horizon.",
+    "year": 2021,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Science et Esprit",
+    "topic": "Historical and Literary Studies",
+    "field": "Social Sciences",
+    "ca_institutions": "Dominican University College",
+    "funders": []
+  },
+  {
+    "id": "W6910367751",
+    "title": "Rock mass characterization using ground penetrating radar (GPR), rotary-percussion drilling performance, and indentation test",
+    "abstract": "This thesis aims to develop a comprehensive rock characterization method for the rock's mechanical and Electromagnetic (EM) properties. In the mining industry's exploration and excavation stage, the rock properties' characterization plays a vital role. The precise mapping of the subsurface geometry and the characterization of the spatial lithology distribution is crucial for establishing the mining development plan. However, several problems regarding rock characterization in both EM and mechanical scope remain to be investigated. For subsurface geology mapping, shielded mono-hole Ground Penetrating Radar (GPR) has been a helpful tool. The limitation of the borehole GPR was identified in our previous study in that the groundwater significantly impacts its signal quality. The precise GPR data interpretation depends on the detailed EM properties (especially the dielectric permittivity) characterization of the target rock formation. A rapid and economical method to obtain the dielectric permittivity of the rock is required to be developed to provide solid proof for the subsurface geology mapping through GPR data interpretation. The accuracy was verified to be satisfactory for the field trial application. The invention of a new fluid system was proposed to eliminate the groundwater problem in the borehole GPR survey, which is required to possess appropriate EM properties and the ability to replace the groundwater in the borehole during the GPR survey. For the rock mechanical properties characterization, the in-situ unconfined compressive strength (UCS) plays an important role, and its measurement has always been problematic in field operation. For the highly fractured formation, the highly developed fractures and joints system in the rock mass limit the selection of the applicable rock samples for the UCS test because there is a strict requirement on the sample size. An alternative method that lowers the sample size requirement and presents reliable UCS result needs to be investigated. Regarding the rock EM properties characterization, A quick and economic measurement method of the dielectric permittivity was proposed, which presented acceptable accuracy, straightforward operation procedures, and low requirement of the test rock sample. A series of field tests proved the ability of the mono-hole shielded antenna to map the subsurface geometry with the borehole filled with air. The impact of the wellbore groundwater on the borehole GPR imaging quality was illustrated in detail in both theory and experiment. Then a practical solution was proposed by substituting the groundwater in the borehole with a newly developed fluid. The effectiveness of that fluid was proved through numerical simulation, lab tests, and field trials. These three innovations helped identify and remove the obstacles that hinder the application of the shielded mono-hole GPR for subsurface imaging. A Data Acquisition System (DAQ) was developed for the rock mechanical property characterization to collect the real-time Logging While Drilling (LWD) data of the Rotary-Percussion Drilling in the mining field. An analytical model was developed to predict the in-situ UCS and gold grade of the ore formation based on the real-time LWD data, which directly reveals the spatial distribution of the lithology and provides valuable information for the gold mine excavation and development. A series of indentation laboratory tests were conducted on the NQ size rock core as an alternative lab test to the traditional UCS test. Two analytical models were developed to predict the UCS value from the indentation test result. In the indentation test, the required sample size is much smaller than the traditional method, which indicates that it is more suitable for highly fractured formation. Its sample size requirement and the experiment's Standard of Procedures (SOP) were presented, proving its feasibility in determining the rock formation's intact UCS. Then, a Discrete Element Method (DEM) simulation was carried out to elaborate the sample preparation layout and optimize the sample preparation procedure. After calibration against the lab test result, through the DEM simulation, the indentation test was optimized where the minimum required size of the rock sample was obtained. It is also proposed that the particle size of the DEM rock model is a fundamental influence parameter on the rock failure model and the stress-strain response during its compressional failure process. Overall, this study provides practical solutions to rock characterization in EM and mechanical scopes and facilitates subsurface imaging and stability and safety evaluation.",
+    "year": 2023,
+    "lang": "en",
+    "type": "article",
+    "venue": "Memorial University Research Repository (Memorial University)",
+    "topic": "Geophysical Methods and Applications",
+    "field": "Engineering",
+    "ca_institutions": "Memorial University of Newfoundland",
+    "funders": []
+  },
+  {
+    "id": "W2801831528",
+    "title": "Diabetes Online Community User Perceptions of Successful Aging With Diabetes: Analysis of a #DSMA Tweet Chat",
+    "abstract": "BACKGROUND: According to the American Diabetes Association, there are approximately 30.3 million Americans with diabetes, and the incidence is growing by nearly 1.5 million cases per year. These individuals are at particularly high risk of developing secondary comorbid conditions related to diabetes and aging. Nearly 45% of individuals aged 65 to 75 years use social media, and this number is steadily growing. The use of social media provides the opportunity to assess the perceptions and needs of this population. OBJECTIVE: The purpose of this study was to examine stakeholder perceptions of successful aging with diabetes. METHODS: This study presents a retrospective analysis of a tweet chat focused on aging with diabetes. Tweets were collected using Symplur Signals data analytics software (Symplur LLC) and analyzed for content analysis, sentiment, and participant demographics. Two authors reviewed discussion posts for accuracy of analysis. RESULTS: A total of 59 individuals participated in this tweet chat generating 494 tweets and nearly 2 million impressions. Most (36/59, 63%) tweet chat participants were people living with diabetes; 25% (14/59) were caregivers and advocates. Seven countries were represented in the conversation. A majority (352/494, 71.3%) of the tweets indicated positive sentiment related to aging with diabetes. Five major themes emerged from the qualitative analysis: (1) personal decline now and in the future, (2) limited access to treatment, (3) inability to provide self-care, (4) health care provider capacity to support aging with diabetes, and (5) life-long online peer health support to facilitate diabetes management. CONCLUSIONS: Individuals with diabetes are living longer and want to be supported with specialized care and access to technology that will allow them to successfully age. Aging- and diabetes-related changes may complicate diabetes management into old age. People with diabetes desire options including aging in place; therefore, special training for care partners and health care providers who care for older adults is needed.",
+    "year": 2018,
+    "lang": "en",
+    "type": "article",
+    "venue": "JMIR Aging",
+    "topic": "Health Literacy and Information Accessibility",
+    "field": "Health Professions",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2759908232",
+    "title": "Éthier-Blais mémorialiste : l’Ontario français et la genèse d’une vocation d’écrivain",
+    "abstract": "Michel Gaulin s’attache aux écrits rétrospectifs de l’auteur franco-ontarien Jean Éthier-Blais, chez qui la veine autobiographique fut une tentation constante. Pour qualifier le travail sur la matière mémorielle des deux livres de souvenirs, que l’écrivain a consacrés à ses années d’enfance et d’adolescence – Fragments d’une enfance et Le Seuil des vingt ans –, c’est l’épithète « mémorialiste » plutôt qu’« autobiographe » que, pour des considérations théoriques, l’auteur a retenue. Parmi ces souvenirs revus et corrigés, il dégage la genèse de la vocation de l’écrivain qui, selon lui, était vraisemblablement le dessein du mémorialiste ; il en extrait encore l’idée que ce dernier se faisait de la condition franco-ontarienne en rapport avec l’apparent paradoxe de ses prises de position en faveur de l’autonomie du Québec. La publication in-extenso de l’entrevue que l’auteur avait réalisée auprès de Jean Éthier-Blais en 1989 apporte un complément judicieux à cet article en prolongeant jusqu’à l’âge mûr les confidences de l’écrivain. En discutant des liens entre la lecture et l’écriture, et entre l’écriture et l’action, Jean Éthier-Blais évoque les lectures, les études et les lieux qui ont marqué sa jeunesse et son enfance dans le nord de l’Ontario, explique sa réponse tardive à sa vocation d’écrivain, et décrit l’évolution de sa carrière vers la création et son engagement au service de ses camarades de profession.",
+    "year": 2017,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Cahiers Charlevoix Études franco-ontariennes",
+    "topic": "Canadian Identity and History",
+    "field": "Social Sciences",
+    "ca_institutions": "Carleton University",
+    "funders": []
+  },
+  {
+    "id": "W1974615982",
+    "title": "Stimulated Brillouin scattering reduction induced by self-focusing for a single laser speckle interacting with an expanding plasma",
+    "abstract": "The origin of the low level of stimulated Brillouin scattering (SBS) observed in laser-plasma experiments carried out with a single laser speckle is investigated by means of three-dimensional simulations and modeling in the limit when the laser beam power P is well above the critical power for ponderomotive self-focusing We find that the order of magnitude of the time averaged reflectivities, together with the temporal and spatial SBS localization observed in our simulations, are correctly reproduced by our modeling. It is observed that, after a short transient stage, SBS reaches a significant level only (i) as long as the incident laser pulse is increasing in amplitude and (ii) in a single self-focused speckle located in the low-density front part of the plasma. In order to describe self-focusing in an inhomogeneous expanding plasma, we have derived a new Lagrangian density describing this process. Using then a variational approach, our model reproduces the position and the peak intensity of the self-focusing hot spot in the front part of the plasma density profile as well as the local density depletion in this hot spot. The knowledge of these parameters then makes it possible to estimate the spatial amplification of SBS as a function of the laser beam power and consequently to explain the experimentally observed SBS reflectivity, considerably reduced with respect to standard theory in the regime of large laser beam power.",
+    "year": 2014,
+    "lang": "en",
+    "type": "article",
+    "venue": "Physics of Plasmas",
+    "topic": "Laser-Matter Interactions and Applications",
+    "field": "Physics and Astronomy",
+    "ca_institutions": "Institut National de la Recherche Scientifique",
+    "funders": "Agence Nationale de la Recherche"
+  },
+  {
+    "id": "W2083332673",
+    "title": "Influence of Tillage System on Water Quality and Quantity in Prairie Pothole Wetlands",
+    "abstract": "Since zero tlllage (ZT) requires more herbicide and fertilizer use than conventional tillage (CT) and may improve water infiltration into soil, the system may negatively impact prairie pothole wetlands.In this paper, the hydrology and water quality of pothole wetlands tn zero tillage and conventional tillage systems were compared by monitoring three wetlands (ZT-L, ZT2 and CT) from 1995 to 7997, ar'd during a runoff-producing summer storm in 1998.Wetland water levels were recorded during snowmelt runoff and throughout the unfrozen period.Water samples from the wetlands were analyzed for total P, ortho R NOr-NO3, NFI3 and a suite of commonly-used herbicides.In each year of the study, similar snow accumulations generated more runoff per unit area from the ZT basins than the CT basin.Water levels were similar in the three wetlands in the spring of 1995, but by 7997 the water depths were less in the ZT wetlands than in the CT wetland.Despite greater fertllizer use in the ZT basins, we did not observe a consistent effect of tillage system on available N and P in the surface soil.Phosphorus concentrations were generaily higher in the ZT than the CT wetlands during snowmelt but there was no consistent effect of tillage on NOr-NO, or NH, concentrations in the wetlands.The herbicides found in all three wetlands included those that were applied during the study and some that were not.At least one herbicide was detected in trace amounts in approximately 750/o of samples from the wetlands. REsUME",
+    "year": 2001,
+    "lang": "en",
+    "type": "article",
+    "venue": "Canadian Water Resources Journal / Revue canadienne des ressources hydriques",
+    "topic": "Soil and Water Nutrient Dynamics",
+    "field": "Environmental Science",
+    "ca_institutions": [],
+    "funders": "Ministry of Agriculture - Saskatchewan"
+  },
+  {
+    "id": "W85721533",
+    "title": "Vickers, Daniel, and Vince Walsh —Young Men and the Sea: Yankee Seafarers in the Age of Sail",
+    "abstract": "",
+    "year": 2006,
+    "lang": "en",
+    "type": "article",
+    "venue": "Histoire sociale",
+    "topic": "Asian American and Pacific Histories",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2094922833",
+    "title": "Threshold photoelectron study of naphthalene, anthracene, pyrene, 1,2-dihydronaphthalene, and 9,10-dihydroanthracene",
+    "abstract": "Threshold photoelectron spectra (TPESs) were obtained for naphthalene, anthracene, pyrene, 1,2-dihydronaphthalene, and 9,10-dihydroanthracene using imaging photoelectron photoion coincidence spectroscopy, from threshold to a photon energy of ∼20 eV. Outer valence Green's function calculations at the OVGF∕cc-pVTZ level of theory were used to assign molecular orbitals to the observed TPES features. There is generally good agreement between the predicted and observed bands. Threshold regions for each molecule exhibit vibrational structure which is readily assigned based on previous PES studies. While the measured adiabatic ionization energies (IE(a)) for naphthalene, anthracene, and pyrene are in good agreement with previous works, new values are reported for the two dihydro species (1,2-dihydronaphthalene, 8.010 ± 0.010 eV and 9,10-dihydroanthracene, 8.335 ± 0.010 eV). A comparison is also made with the G3∕∕B3LYP composite method, which consistently overestimates the IE values by 0.06-0.09 eV. The double ionization energies for anthracene and pyrene have been measured to be 19.3 ± 0.2 and 19.8 ± 0.2 eV, respectively.",
+    "year": 2011,
+    "lang": "en",
+    "type": "article",
+    "venue": "The Journal of Chemical Physics",
+    "topic": "Advanced Chemical Physics Studies",
+    "field": "Physics and Astronomy",
+    "ca_institutions": "University of Ottawa",
+    "funders": "Agence Nationale de la Recherche"
+  },
+  {
+    "id": "W4323521523",
+    "title": "LES BONNES HUMEURS, LE BONHEUR ET LE BIEN-ÊTRE",
+    "abstract": "Dans cet article, je propose d’analyser le concept de bonheur en termes d’humeurs positives. Je montre que cette analyse constitue une voie moyenne entre l’analyse du bonheur comme émotion et l’analyse du bonheur en termes de propensions émotionnelles. Je soutiens plus particulièrement qu’être heureux consiste à ressentir une humeur positive, quelle que soit cette humeur. Cette analyse est donc réductionniste – être heureux n’est rien d’autre qu’être de bonne humeur – et pluraliste –nos bonnes humeurs, dans toute leur diversité, constituent autant de manières différentes d’être heureux. Afin de soutenir cette approche, je défends la thèse selon laquelle les humeurs sont des attitudes prospectives, consistant à évaluer l’impact affectif possible de notre environnement sur nos états motivationnels tels que nos désirs ou nos préférences. Je m’efforce ensuite d’explorer les relations que le bonheur entretient avec le bien-être à partir de cette analyse du bonheur comme bonne humeur.",
+    "year": 2023,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Les ateliers de l éthique",
+    "topic": "Psychological Well-being and Life Satisfaction",
+    "field": "Psychology",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4392132027",
+    "title": "Correction to: Deep learning-based 1-D magnetotelluric inversion: performance comparison of architectures",
+    "abstract": "",
+    "year": 2024,
+    "lang": "en",
+    "type": "article",
+    "venue": "Earth Science Informatics",
+    "topic": "Geophysical and Geoelectrical Methods",
+    "field": "Earth and Planetary Sciences",
+    "ca_institutions": "University of Manitoba",
+    "funders": []
+  },
+  {
+    "id": "W3128594088",
+    "title": "Aspects of Political Leadership Relevant to Voters’ Choice and Preferences",
+    "abstract": "This paper intends to analyse political leadership from the perspective of political behaviour of political leaders. There must be a reason for voters to decide which election candidate to vote. Political leadership as contextually described represent some of the most important elements for voters to decide whether or not a particular leader should be elected as Member of Parliament or State Legislative Assemblies in Malaysia. There are five aspects of political leadership forming leadership characters relevant to voters&amp;rsquo; choice and preferences in any given election. They are loyalty, integrity, competency, commitment and resilience. The absence of these characters could render a particular candidacy a fatal. These five characters could be regarded as principle centred of a leader and in the same time the main features that would contribute to the success of an elected political leader. It is not only words best spoken by the candidate but also the campaigner&amp;rsquo;s success in highlighting these characters to the voters that would open their eyes to vote the best candidate. In some cases, traditionally, at some constituency votes are given to the parties that have been traditionally representing the constituency. To a certain extent it is called the party&amp;rsquo;s &amp;lsquo;traditional seat&amp;rsquo;. Now, voters do not only look to a party or the so-called &amp;lsquo;traditional seat&amp;rsquo; context. Today voters give high regards to who the candidates are and what are the qualities the candidates have.",
+    "year": 2020,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Politics and Law",
+    "topic": "Education and Islamic Studies",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2279755464",
+    "title": "An Examination of the Factors and Characteristics that Contribute to the Success of Putnam Fellows",
+    "abstract": "The William Lowell Putnam Mathematical Competition is an intercollegiate mathematics competition for students in the United States and Canada and is regarded as the most prestigious and challenging mathematics competition in North America (Alexanderson, 2004; AMS, 2020; Grossman, 2002; Reznick, 1994; Schoenfeld, 1985). Students who earn the five highest scores on the examination are named Putnam Fellows. Since its inception in 1938, only 306 individuals have won the competition and a select few have won multiple times. Clearly, being named a Putnam Fellow is a remarkable achievement and therefore, understanding the factors and characteristics that contribute to their success is important for students interested in mathematics and STEM-related fields. Twenty-five males who were named Putnam Fellows either four, three, or two times were recruited for the study. A 17-item questionnaire was created from various research sources (Campbell, 1996a, 1996b; Campbell & Wu, 1996; DeFranco, 1996), and used to collect information around four broad areas—personal experiences, formal educational experiences, the affective domain and the cognitive domain. Qualitative research techniques were used to analyze the data. The results indicated that four subcategories of personal experiences, five subcategories of formal educational experiences, seven subcategories involving the affective domain, and three subcategories of the cognitive domain all played an important role in the development of Putnam Fellows. Future research recommendations should examine the factors and characteristics of female Putnam winners and ways to promote and support them as well as the role that Pólya-like heuristics play in the development of Putnam winners.",
+    "year": 2023,
+    "lang": "en",
+    "type": "article",
+    "venue": "The Mathematics Enthusiast",
+    "topic": "History and Theory of Mathematics",
+    "field": "Mathematics",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2176028763",
+    "title": "Allowed and Forbidden d-d Bands in Octahedral Coordination Compounds: Intensity Borrowing and Interference Dips in Absorption Spectra",
+    "abstract": "",
+    "year": 2004,
+    "lang": "en",
+    "type": "book-chapter",
+    "venue": "Structure and bonding",
+    "topic": "Magnetism in coordination complexes",
+    "field": "Materials Science",
+    "ca_institutions": "Université de Montréal",
+    "funders": []
+  },
+  {
+    "id": "W7029432412",
+    "title": "L'ajustement par l'innovation : l'expÃ©rience du Canada atlantique",
+    "abstract": "La faible densité humaine et la dépendance sur l'exploitation des ressources naturelles semblent être à la base des difficultés structurelles que connaît la région du Canada atlantique. Une précarité relative qui, au cours des années 1990, aurait pu s'amplifier face aux nouvelles contraintes émanant de la globalisation, de l'entrée en force des technologies, de la rationalisation de l'appareil public et de la maturation du capital-ressources. Contre toute attente, l'espace régional a pu surmonter ces obstacles et adapter sa base traditionnelle aux impératifs de la nouvelle économie. Mieux, la région a réussi à mettre en place une panoplie de secteurs à forte intensité technologique et de connaissances qui attirent de plus en plus les investisseurs étrangers. Reste le problème des régions de ressources qui, pour l'instant, ne semblent pas vraiment imprégnées de cette nouvelle dynamique.",
+    "year": 2001,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Persée (Ministère de lEnseignement supérieur et de la Recherche)",
+    "topic": "Regional resilience and development",
+    "field": "Economics, Econometrics and Finance",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W3215613026",
+    "title": "Raising a Child in the Era of Smartphones",
+    "abstract": "In light of an increasing technological dependence for millenials, and the fact that members of this generation are starting to become parents, this paper examines a crucial area of technology use: how smartphone use impacts a parent's relationship with their child. Rather than looking at the issue of technology and parenting in the purely psychological context of affects on a child's brain development, as is most often the case, this paper takes a sociological perspective to focus on the bond between parent and child. This issue is only very recently starting to become of interest to researchers, so this paper consolidates existing work in the field to bring attention to the ways in which a parent's dependence on, and distraction with, their smartphone, is changing how they interact with their child. For future and current parents to learn to juggle technology use and sustainable practices of caring for their child, it is important that they are cognizant of the patterns of disengagement and dissatisfaction that are produced by the common habits of smartphone use.",
+    "year": 2021,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of integrative research & reflection",
+    "topic": "Child Development and Digital Technology",
+    "field": "Social Sciences",
+    "ca_institutions": "McMaster University",
+    "funders": []
+  },
+  {
+    "id": "W2310510783",
+    "title": "Formation of VO2 by rapid thermal annealing and cooling of sputtered vanadium thin films",
+    "abstract": "Sputtered vanadium-rich films were subjected to rapid thermal annealing-cooling (RTAC) in air to produce vanadium dioxide (VO2) thin films with thermochromic switching behavior. High heating and cooling rates in the thermal oxidation process provided an increased ability to control the film's microstructure. X-ray diffraction patterns of the films revealed less intense VO2 peaks compared to traditional polycrystalline samples fabricated with a standard (slower) cooling time. Such films also exhibit a high optical switching reflectance contrast, unlike the traditional polycrystalline VO2 thin films, which show a more pronounced transmittance switching. The authors find that the RTAC process stabilizes the VO2 (M2) metastable phase, enabling a rutile-semiconductor phase transition (R-M2), followed by a semiconductor–semiconductor phase transition (M2-M1).",
+    "year": 2016,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Vacuum Science & Technology A Vacuum Surfaces and Films",
+    "topic": "Transition Metal Oxide Nanomaterials",
+    "field": "Materials Science",
+    "ca_institutions": ["Université de Moncton", "Université Laval"],
+    "funders": ["Natural Sciences and Engineering Research Council of Canada", "New Brunswick Innovation Foundation"]
+  },
+  {
+    "id": "W3018724755",
+    "title": "Alteration of the Dopamine Receptors’ Expression in the Cerebellum of the Lysosomal Acid Phosphatase 2 Mutant (Naked–Ataxia (NAX)) Mouse",
+    "abstract": "A spontaneous mutation in the lysosomal acid phosphatase (Acp2) enzyme (nax: naked–ataxia) in experimental mice results in delayed hair appearance and severe cytoarchitectural impairments of the cerebellum, such as a Purkinje cell (PC) migration defect. In our previous investigation, our team showed that Acp2 expression plans a significant role in cerebellar development. On the other hand, the dopaminergic system is also a player in central nervous system (CNS) development, including cerebellar structure and function. In the current investigation, we have explored how Acp2 can be involved in the regulation of the dopaminergic pathway in the cerebellum via the regulation of dopamine receptor expression and patterning. We provided evidence about the distribution of different dopamine receptors in the developing cerebellum by comparing the expression of dopamine receptors on postnatal days (P) 5 and 17 between nax mice and wild–type (wt) littermates. To this aim, immunohistochemistry and Western blot analysis were conducted using five antibodies against dopamine receptors (DRD1, –2, –3, –4, and –5) accompanied by RNAseq data. Our results revealed that DRD1, –3, and –4 gene expressions significantly increased in nax cerebella but not in wt, while gene expressions of all 5 receptors were evident in PCs of both wt and nax cerebella. DRD3 was strongly expressed in the PCs’ somata and cerebellar nuclei neurons at P17 in nax mice, which was comparable to the expression levels in the cerebella of wt littermates. In addition, DRD3 was expressed in scattered cells in a granular layer reminiscent of Golgi cells and was observed in the wt cerebella but not in nax mice. DRD4 was expressed in a subset of PCs and appeared to align with the unique parasagittal stripes pattern. This study contributes to our understanding of alterations in the expression pattern of DRDs in the cerebellum of nax mice in comparison to their wt littermates, and it highlights the role of Acp2 in regulating the dopaminergic system.",
+    "year": 2020,
+    "lang": "en",
+    "type": "article",
+    "venue": "International Journal of Molecular Sciences",
+    "topic": "Cellular transport and secretion",
+    "field": "Biochemistry, Genetics and Molecular Biology",
+    "ca_institutions": ["CancerCare Manitoba", "Research Institute in Oncology and Hematology", "University of Manitoba", "Children's Hospital Research Institute of Manitoba"],
+    "funders": "Natural Sciences and Engineering Research Council of Canada"
+  },
+  {
+    "id": "W2035870244",
+    "title": "Sexual Victimization and Clinical Challenges in Women Receiving Hospital Treatment for Depression",
+    "abstract": "The study examined the prevalence of sexual victimization among 60 female inpatients and outpatients with depression. Sixty-five percent of the sample reported previous sexual violation in either childhood or adolescence/adulthood. Of these, 52% indicated that they had been victimized both in childhood and adolescence/adulthood. Based on the history of sexual victimization, participants were allocated to one of three groups. Body satisfaction, global self-esteem, and internality were progressively lower from Group 1 (no history), to Group 2 (childhood or adolescent/adult victimization), to Group 3 (both childhood and adolescent/adult victimization). Body satisfaction was further shown to be independently affected by sexual violation.",
+    "year": 2000,
+    "lang": "en",
+    "type": "article",
+    "venue": "Canadian Journal of Community Mental Health",
+    "topic": "Sexual Assault and Victimization Studies",
+    "field": "Social Sciences",
+    "ca_institutions": ["Regent Park Community Health Centre", "University of Toronto"],
+    "funders": []
+  },
+  {
+    "id": "W4283791036",
+    "title": "Revealing Individual Neuroanatomical Heterogeneity in Alzheimer’s Disease",
+    "abstract": "Abstract Alzheimer’s disease is clinically heterogeneous, in symptom profiles, progression rates and outcomes. This clinical heterogeneity is linked to underlying neuroanatomical heterogeneity. To explore this, we employed the emerging technique of neuroanatomical normative modelling to index regional patterns of variability in cortical thickness in individual patients from the large multi-site Alzheimer’s Disease Neuroimaging Initiative. We aimed to characterise individual differences and outliers in cortical thickness in patients with Alzheimer’s disease, people with mild cognitive impairment and cognitively normal controls. Furthermore, we assessed the relationships between cortical thickness heterogeneity and cognitive function, amyloid-beta, tau, ApoE genotype. Finally, we examined whether individual neuroanatomical normative maps were predictive of conversion from mild cognitive impairment to diagnosed Alzheimer’s disease. Data on cortical thickness from the 148 brain regions of the Destrieux FreeSurfer atlas was obtained from T1-weighted MRI scans of 1492 participants scanned at 62 different sites. A neuroanatomical normative model was developed to index normal cortical thickness distributions using a separate healthy reference dataset (n= 33,072), employing hierarchical Bayesian regression to predict cortical thickness per region using age and sex. These regional normative models were then fine-tuned to the ADNI dataset after which cortical thickness z-scores per region were calculated, resulting in a z-score ‘map’ for each participant. Regions with z-scores &lt; -1.96 were classified as outliers. Patients with Alzheimer’s disease had a median of 12 outlier regions out of a possible 148. Individual patterns of outlier regions were highly variable, with the highest overlap in the parahippocampal gyrus at only 47% of patients. For 62 regions, over 90% of these patients had cortical thicknesses within the normal range. Patients with Alzheimer’s disease had significantly more outlier regions than people with mild cognitive impairment or controls [ F (2, 1022) = 95.39), P = 2.0 x ×10 −16 ]. They were also statistically more dissimilar to each other than were people with mild cognitive impairment or cognitive normal controls [ F (2, 1024) = 209.42, P = 2.2×10 −16 ]. Having a greater number of outlier regions was associated with worse cognitive function, CSF protein concentrations and an increased risk of converting from mild cognitive impairment to Alzheimer’s disease within three years (HR =1.028, 95% CI[1.016,1.039], P =1.8 ×10 −16 ). Individualised normative maps of cortical thickness highlight the heterogeneity of Alzheimer’s effects on the brain. Regional outlier estimates have the potential to be a marker of disease and could be used to track an individual’s disease progression or treatment response in clinical trials.",
+    "year": 2022,
+    "lang": "en",
+    "type": "preprint",
+    "venue": "medRxiv",
+    "topic": "Dementia and Cognitive Impairment Research",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": ["Engineering and Physical Sciences Research Council", "National Institute of Biomedical Imaging and Bioengineering", "Canadian Institutes of Health Research", "Genentech", "National Institutes of Health", "British Heart Foundation", "IXICO", "H. Lundbeck A/S", "Servier", "Eisai", "University College London", "Alzheimer's Society", "U.S. Department of Defense", "Eli Lilly and Company", "Brain Research UK", "Weston Brain Institute", "National Institute on Aging", "National Institute for Health and Care Research", "Northern California Institute for Research and Education", "BioClinica", "Biogen", "Pfizer", "Novartis Pharmaceuticals Corporation", "F. Hoffmann-La Roche", "Bristol-Myers Squibb", "Medical Research Council", "Meso Scale Diagnostics", "Alzheimer's Association", "Foundation for the National Institutes of Health"]
+  },
+  {
+    "id": "W3006192622",
+    "title": "Editorial: Time for sharing knowledge",
+    "abstract": "Research for All serves authors and readers who have a strong interest in different ways of knowing, and we have already discussed the language and writing styles adopted by authors sharing their perspectives Here, we consider the investment of time required for the task of understanding and sharing orally different ways of knowing. Academic knowledge develops through formal studies to offer new ideas and theoretical understanding supported by empirical observations and codified analyses of how entities relate to each other -how the world generally fits together. More often, our understanding is not of the world generally, but of where or how we live in particular. We rely on our implicit understanding of local issues based on impressions and priorities, about how things are done by individuals and organizations, and changes over time. We tend to navigate our day-to-day personal lives by relying on tacit knowledge accrued through experience and familiarity with our immediate surroundings. Academics are steeped in planned observation and systematic analysis, many community organizations are steeped in change making, and schoolteachers and public engagement professionals (both feature in this issue) rely on valuable communication 'know how'. We all have different windows through which we make sense of the bigger picture.",
+    "year": 2020,
+    "lang": "en",
+    "type": "editorial",
+    "venue": "Research for All",
+    "topic": "Interdisciplinary Research and Collaboration",
+    "field": "Decision Sciences",
+    "ca_institutions": [],
+    "funders": ["Queen's University", "University of Galway", "Queen's University Belfast", "University of Brighton", "University of Glasgow"]
+  },
+  {
+    "id": "W6999803308",
+    "title": "Designing an Architecture of Labour Affirmation, Harm Reduction and Community Development for Vancouver's Sex Worker Population",
+    "abstract": "Within the current political, social, and legal landscape of Canada, sex workers face a considerable number of barriers to labour recognition that would afford them labour rights, dignity, and safety. The refusal to accept this labour as legitimate work augments the precarity of sex work; when it is treated as inherently criminogenic and exploitative, it is pushed into sociospatial zones that breed crime and exploitation in a cycle that reinforces the “common sense” knowledge that is responsible for marginalizing this community. One critical factor in this reproduction of precarity is the nonexistence of a place of indoor sex work created with the input of sex workers. How can rethinking the architectural design process to emphasize the expert knowledge of sex workers create a new commercial typology of adult entertainment that prioritizes health, safety, and dignity for sex workers? Sex workers themselves have speculated about a new typology of commercial sex workplaces for decades but have lacked the cooperation with a designer who could feasibly produce this as an architectural project through drawings, models, and renderings. My work uses a participatory methodology to generate architectural design as a diagram for “sex industry best practice” knowledge to provided context for, and disseminate, information that exists within expert communities but has not become mainstream due to the social and political challenges sex workers face today.",
+    "year": 2022,
+    "lang": "en",
+    "type": "dissertation",
+    "venue": "UWSpace (University of Waterloo)",
+    "topic": "Sex work and related issues",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2353341228",
+    "title": "Environmentalism is dead: Long live sustainability",
+    "abstract": "Item consists of a digitized copy of an audio recording of a Cecil and Ida Green Lecture delivered at the Vancouver Institute by Timothy O'Riordan on November 14, 1998. Original audio recording available in the University Archives (UBC AT 2263).",
+    "year": 2009,
+    "lang": "en",
+    "type": "article",
+    "venue": "Open Collections",
+    "topic": "Sustainable Development and Environmental Policy",
+    "field": "Environmental Science",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4322728180",
+    "title": "Italians Swindled to New York: False Promises at the Dawn of Immigration",
+    "abstract": "As Italian authorities on migration studies Lorenzo Prencipe and Matteo Sanfilippo have recently remarked, the history of early Italian migrations to the Americas in the 1870s and 1880s is still a largely uncharted territory (Studi emigrazione. 2019. “Per una storia dell'emigrazione italiana ai tempi di Scalabrini,” LVI:355–79). Thus, this book is a particularly welcome addition to the literature. Tucciarone, an illustrator and the author of astronomical animations that have appeared in dozens of TV documentaries, and Lariccia, a retired teacher and writer, are regular contributors to La Gazzetta Italiana. Their previous book, Coal War in the Mahoning Valley: The Origins of Greater Youngstown's Italians (2019), laid the groundwork for this one. While researching, they came across a series of frauds committed against thousands of Italians in the waning months of 1872 and into the following year. The “swindle” referred to in the title concerns nearly three thousand Italians who entered New York between November 1872 and January 1873 who were defrauded through the fabrications of freelance speculators, ticket brokers, and aggressive steamship lines. Also to blame are the administrative failures of the Italian and American governments, local and national, which were not to be remedied for another quarter of a century (see Sebastiano Marco Cicciò, Il porto di imbarco di Messina: L'ispettorato e i servizi di emigrazione [1904–1929]; rev. in Italian Americana 2017, 35n2:248–52). Long neglected, this story is now rescued from oblivion thanks to painstaking research conducted mostly on obscure and forgotten contemporary local newspapers on both sides of the ocean.Tucciarone and Lariccia present a succinct “Prelude” to the main story through a quick overview of the push (privatization of commons and other feudal properties, heavy taxation, and overpopulation) and pull (the attraction exerted by booming U.S. cities) factors that help explain mass migrations across the Atlantic. The second chapter, comprising almost half the book, provides great detail about the swindle, its perpetrators, and its victims. The latter include about 280 peasants from Campania and Basilicata who in 1872, after being persuaded by unscrupulous shipping dealers from Naples and Turin to leave for Buenos Aires where they had been assured gainful employment in a land of milk and honey, found themselves utterly stranded in New York, with neither money nor assistance and the prospect of being deported due to lack of documentation. The third chapter shows how the techniques of exploitation by which the swindlers carried on their “experiments” in the 1870s were applied on a larger scale in the following decade to meet the American businesses’ desperate search for cheap labor.The rich anecdotal narrative provided by Tucciarone and Lariccia is unfortunately not matched by an adequate command of the vast literature on the larger picture of migration and of the relations between Italy and the United States in the nineteenth century. This serious limitation affects the book, whose bibliography does not exceed a dozen monographs, in terms of context and interpretations. Yet the authors are to be commended for unearthing and putting at our disposal such a treasure trove of materials, which should be further explored in a more scholarly manner.",
+    "year": 2022,
+    "lang": "en",
+    "type": "article",
+    "venue": "Italian Americana",
+    "topic": "Italian Fascism and Post-war Society",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W7134097083",
+    "title": "Baldios, communal land, and the Portuguese colonial legacy in Timor-Leste",
+    "abstract": "This chapter explores, from a socio-legal perspective, the Portuguese colonial land legacy in legal language and political thought in Timor-Leste through the concept of <em>baldio<\/em>. To do so, the chapter establishes a parallel between the uses of the word <em>baldio <\/em>in both Portugal and Timor-Leste and discusses the ideological views that surround the various uses of this multi-dimensional concept, with definitions ranging from communal to abandoned land. In other words, I consider whether the ideology of a colonial administration is passed on through legal language, whether legal language is passed on through ideology, or something else or in between. To this end, the chapter reflects on two interconnected questions: First, to what extent does (legal) language work as “imperial debris” and promote the perpetuation of colonial legacies regarding land-related policies? Second, to what extent can a look at the national land-related laws and policies of colonial powers provide a complementary view of colonial practices related to the exploitation of resources, and therefore a better understanding of those colonial legacies?",
+    "year": 2025,
+    "lang": "en",
+    "type": "article",
+    "venue": "Leiden Repository (Leiden University)",
+    "topic": "Peacebuilding and International Security",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": ["University of Oxford", "Canada Council for the Arts", "Government of Canada", "Government of Alberta"]
+  }
+]
+warning: loading hooks from both /Users/choxos/.codex/hooks.json and /Users/choxos/.codex/config.toml; prefer a single representation for this layer
+2026-07-13T01:10:43.940766Z ERROR rmcp::transport::worker: worker quit with fatal: Transport channel closed, when Auth(AuthorizationRequired)
+warning: Skill descriptions were shortened to fit the 2% skills context budget. Codex can still see every skill, but some descriptions are shorter. Disable unused skills or plugins to leave more room for the rest.
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart Failed
+hook: SessionStart Completed
+hook: SessionStart Completed
+hook: SessionStart Completed
+hook: SessionStart Completed
+hook: SessionStart Failed
+hook: UserPromptSubmit
+hook: UserPromptSubmit
+hook: UserPromptSubmit Failed
+hook: UserPromptSubmit Failed
+codex
+[
+  {"id":"W2019652018","tier":"OUT","genre":"other","about_ca":false,"confidence":"low","reason":"The abstract is too fragmentary to establish a research object, and the title is not sufficient to identify metaresearch."},
+  {"id":"W4403788255","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study evaluates clinical decision-support tools for medical students rather than studying research practice."},
+  {"id":"W6939425074","tier":"OUT","genre":"other","about_ca":false,"confidence":"high","reason":"This is an additional data file for a biological study, not a study of research itself."},
+  {"id":"W3157448507","tier":"T2","genre":"empirical","about_ca":false,"confidence":"medium","reason":"It studies African scholarly output and collaboration patterns as a social system using scientometrics."},
+  {"id":"W2406211933","tier":"OUT","genre":"other","about_ca":false,"confidence":"low","reason":"The title identifies a mathematical topic but provides no evidence that the object is research practice."},
+  {"id":"W3122170191","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study develops and tests an engineering sensor rather than examining research practice."},
+  {"id":"W3093499426","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"low","reason":"The title concerns prostate cancer outcomes, not research itself."},
+  {"id":"W4308381477","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"This randomized clinical trial studies a treatment for pulmonary sarcoidosis, not research practice."},
+  {"id":"W173656928","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"The paper studies clinical terminology and classification rather than the production or evaluation of research."},
+  {"id":"W7068773636","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The report examines Canada-US border relations and economic interdependence, not the research system."},
+  {"id":"W4377239194","tier":"OUT","genre":"editorial/commentary","about_ca":false,"confidence":"high","reason":"Although framed as a comment, the work addresses ice-core climate processes rather than peer review or research practice."},
+  {"id":"W6922049495","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"The article discusses integrated crop-livestock agriculture and agroecological transition, not research itself."},
+  {"id":"W7014460818","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"low","reason":"The title suggests an education technology study rather than a study of research practice, but the abstract is missing."},
+  {"id":"W4390698897","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study uses metabolomics to investigate physiological effects in ducks rather than studying research methods."},
+  {"id":"W4393122600","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The article evaluates a literacy intervention for children rather than research itself."},
+  {"id":"W2809429683","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"The chapter analyzes Canadian novelists and literary identity, with publishing mentioned only as context."},
+  {"id":"W7062561639","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The thesis studies construction-site facilities, worker well-being, and efficiency rather than research practice."},
+  {"id":"W3040047666","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The article examines a Polish cultural-heritage committee and its program, not the research system."},
+  {"id":"W2937800559","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study examines immigrant teachers' professional integration in Montreal schools, not research practice."},
+  {"id":"W2145985597","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The biological study investigates bacterial vesicles and immune responses rather than research itself."},
+  {"id":"W4254196324","tier":"OUT","genre":"other","about_ca":false,"confidence":"low","reason":"The title indicates a motor-control topic, but the missing abstract provides no indication of metaresearch."},
+  {"id":"W565863398","tier":"OUT","genre":"other","about_ca":false,"confidence":"low","reason":"The title concerns biopolyurethane materials, not research practice."},
+  {"id":"W4386739045","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The article studies comic translation and reception rather than research itself."},
+  {"id":"W2087455195","tier":"OUT","genre":"other","about_ca":false,"confidence":"high","reason":"This record concerns spectroscopy of chemical compounds, not research practice."},
+  {"id":"W2471289324","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"The review develops a physiological hypothesis about sodium pumps and cardiovascular disease rather than studying research."},
+  {"id":"W2890229885","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study investigates conifer defenses against weevils, not research practice."},
+  {"id":"W3135888487","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"The article is a theological and philosophical analysis of truth and God, not metaresearch."},
+  {"id":"W6910367751","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The thesis develops methods for characterizing rock and mining formations rather than studying research methods."},
+  {"id":"W2801831528","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study analyzes diabetes-community perceptions of aging, not research itself."},
+  {"id":"W2759908232","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"The article studies a writer's memoirs, literary vocation, and Franco-Ontarian identity rather than research practice."},
+  {"id":"W1974615982","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study models laser-plasma interactions and stimulated scattering rather than research itself."},
+  {"id":"W2083332673","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study compares tillage systems and wetland water quality, not research practice."},
+  {"id":"W85721533","tier":"OUT","genre":"editorial/commentary","about_ca":false,"confidence":"high","reason":"This is a book review concerning maritime history, not research itself."},
+  {"id":"W2094922833","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study measures and models molecular photoelectron spectra rather than examining research practice."},
+  {"id":"W4323521523","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"The article develops a philosophical account of happiness and well-being, not metaresearch."},
+  {"id":"W4392132027","tier":"T3","genre":"other","about_ca":false,"confidence":"high","reason":"This is a correction to a scientific article and is contextual research communication rather than an analytic metaresearch study."},
+  {"id":"W3128594088","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The paper studies political leadership and voter preferences, not research itself."},
+  {"id":"W2279755464","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study examines factors associated with success in a mathematics competition rather than research practice."},
+  {"id":"W2176028763","tier":"OUT","genre":"other","about_ca":false,"confidence":"low","reason":"The title identifies a chemistry topic but the missing abstract gives no evidence of metaresearch."},
+  {"id":"W7029432412","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"The article analyzes regional economic innovation and resilience in Atlantic Canada, not the Canadian research system."},
+  {"id":"W3215613026","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"The paper discusses smartphone use and parent-child relationships rather than research itself."},
+  {"id":"W2310510783","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study investigates fabrication and phase transitions in vanadium oxide films, not research practice."},
+  {"id":"W3018724755","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study examines dopamine receptor expression in mutant mice rather than research itself."},
+  {"id":"W2035870244","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study investigates sexual victimization among women receiving depression treatment, not research practice."},
+  {"id":"W4283791036","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study applies normative modeling to Alzheimer disease heterogeneity rather than studying research methods as its object."},
+  {"id":"W3006192622","tier":"T3","genre":"editorial/commentary","about_ca":false,"confidence":"high","reason":"This editorial comments on knowledge sharing and academic knowledge, making it contextual commentary about research practice."},
+  {"id":"W6999803308","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"The dissertation develops an architectural design approach for sex-worker workplaces rather than studying research itself."},
+  {"id":"W2353341228","tier":"OUT","genre":"other","about_ca":false,"confidence":"high","reason":"The item is a recorded environmental lecture about sustainability, not research practice."},
+  {"id":"W4322728180","tier":"OUT","genre":"editorial/commentary","about_ca":false,"confidence":"high","reason":"This is a book review about Italian migration history, not metaresearch."},
+  {"id":"W7134097083","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"The chapter analyzes colonial legal language and land policy in Timor-Leste rather than research itself."}
+]
+hook: Stop
+hook: Stop
+hook: Stop
+hook: Stop Completed
+hook: Stop Completed
+hook: Stop Failed
+tokens used
+32,617

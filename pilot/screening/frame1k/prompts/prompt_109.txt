@@ -1,0 +1,790 @@
+# MétaCan screening rubric (v1.0)
+
+**Locked before screening. Version-controlled. Any change is a new version with a dated entry in `DEVIATIONS.md`.**
+
+Both machine screeners and both human coders work from this document and nothing else. The rubric is the
+instrument; if two coders disagree, the rubric is what they are adjudicated against.
+
+---
+
+## The unit
+
+One work (journal article, preprint, book chapter, report, dataset, or software), identified by its OpenAlex ID.
+You see: title, abstract, publication year, language, venue, OpenAlex topic and field, Canadian institutional
+affiliations, funders.
+
+## The question
+
+**Is the object of study *research itself*?**
+
+Metaresearch studies how research is done, reported, funded, evaluated, disseminated, or governed. The test is
+what the work is *about*, not what field it appears in and not what vocabulary it uses.
+
+A cardiology trial is not metaresearch. A study of *how cardiology trials report their outcomes* is.
+
+---
+
+## Tier
+
+Assign exactly one.
+
+### T1: Core metaresearch
+The primary object of study is research itself. Typical objects:
+
+- research **methods** and their properties (bias, reporting, statistical practice, study design)
+- **reproducibility**, replication, data and code sharing
+- **research integrity**: misconduct, retraction, questionable research practices, authorship
+- **peer review** and editorial process *as objects of study*
+- **research evaluation**, metrics, rankings, funding allocation
+- **scholarly communication**: publishing models, open access, preprints *as objects of study*
+- **bibliometrics and scientometrics** applied to a research literature
+- the **research workforce**: careers, equity, training, capacity
+- **evidence synthesis methodology** (not an individual systematic review's clinical answer, but work *about* how
+  syntheses are done)
+
+### T2: Adjacent
+Empirically or conceptually grounded work on science as a social system that is not framed as metaresearch but
+studies it:
+
+- **science and technology studies (STS)**: social studies of scientific knowledge, practice, controversy
+- **library and information science**: information behaviour of researchers, repositories, discovery
+- **research infrastructure** studies: platforms, data repositories, identifiers, standards
+- **history and philosophy of science** *when the object is contemporary research practice*
+- **research policy** analysis grounded in evidence
+
+T2 is where the field's diversity lives. Be generous here: a paper does not have to call itself metaresearch to
+be studying research.
+
+### T3: Contextual
+Relevant to the ecosystem, mapped and released, but **never pooled into the analytic corpus**:
+
+- editorials, commentaries, opinion pieces about research practice
+- policy documents and position statements
+- announcements of infrastructure, tools, or initiatives
+- news, obituaries, corrections, letters
+
+### OUT: Not metaresearch
+Everything else. Includes, and this is the most common error:
+
+- **A study that uses a method is not a study of the method.** A meta-analysis answering a clinical question is
+  OUT. A study of how meta-analyses handle heterogeneity is T1.
+- **Mentioning a metaresearch term is not studying it.** A lab paper reporting "assay reproducibility", a methods
+  section saying "peer reviewed", a licence note saying "open access": all OUT.
+- **Domain research that happens to be bibliometric in method** but whose object is the domain, not the research:
+  e.g. a bibliometric map of diabetes treatments, produced to summarise diabetes knowledge. Borderline; see below.
+
+---
+
+## The three errors that matter most
+
+These are where the pilot showed retrieval and screening break down. Read them twice.
+
+1. **Polysemy.** `reproducibility` in a biochemistry paper means the assay gives the same reading twice. In a
+   metaresearch paper it means the reproducibility crisis. Only the second is in scope. The same applies to
+   `validation`, `replication`, `bias`, `peer review`, `open access`. **Judge the sense, not the token.**
+
+2. **Method vs. object.** Using bibliometrics ≠ studying research. Ask: *if this paper is right, what do we now
+   know more about: a scientific question, or the practice of science?* If the former, OUT.
+
+3. **Absence of vocabulary is not absence of content.** An STS paper about laboratory practice, or an LIS paper
+   about how researchers find data, may use none of the field's keywords and still be squarely T2. **Do not
+   require the vocabulary.** This is the error that makes the field look smaller and more anglophone than it is.
+
+---
+
+## Canadian linkage
+
+Record which apply (this is metadata, not an inclusion test; the estimand is defined separately in
+`PROTOCOL.md`):
+
+- `CA_AFF`: at least one author affiliated with a Canadian institution
+- `CA_FUND`: funded by CIHR, NSERC, SSHRC, or CFI
+- `ABOUT_CA`: the Canadian research system is a substantive object of study (not a passing mention, not one
+  country among forty in a global comparison)
+
+## Genre
+
+`empirical` · `conceptual` · `editorial/commentary` · `policy` · `infrastructure/announcement` · `other`
+
+OpenAlex's `type` is unreliable and this field is commentary-heavy, so genre is coded, not inherited.
+
+## Language of the work
+
+As published. Do not infer from the venue.
+
+---
+
+## Confidence
+
+- `high`: the rubric decides this cleanly.
+- `medium`: the rubric decides, but a reasonable coder could differ.
+- `low`: genuinely on the boundary, or the abstract is missing/too thin to judge.
+
+**`low` is a legitimate answer and is not a failure.** Records coded `low` by either screener are routed to
+adjudication. A screener that never says `low` is not being careful; it is being confident.
+
+---
+
+## Worked examples
+
+| Title (abridged) | Tier | Why |
+|---|---|---|
+| "Data sharing practices in 500 randomised trials" | **T1** | The object is reporting practice. |
+| "Reproducibility of a Western blot protocol" | **OUT** | Assay reproducibility. Polysemy trap. |
+| "Trends in citation of retracted papers" | **T1** | Object is the literature's own behaviour. |
+| "Laboratory life in a Canadian genomics centre: an ethnography" | **T2** | STS. No metaresearch vocabulary; still studies research. |
+| "How do researchers discover datasets? A survey" | **T2** | LIS, information behaviour of researchers. |
+| "Effectiveness of statins: a network meta-analysis" | **OUT** | Uses a synthesis method to answer a clinical question. |
+| "How network meta-analyses handle inconsistency: a review of 200 reviews" | **T1** | Object is the method. |
+| "Announcing the Canadian Research Data Repository" | **T3** | Infrastructure announcement. Mapped, not pooled. |
+| "Open access mandates are failing early-career researchers" (editorial) | **T3** | Commentary about research practice. |
+| "Bibliometric analysis of diabetes research 2000–2020" | **T2** | Borderline. Bibliometric method, and the object *is* a research literature, so it studies research output. Code T2, `medium`. |
+| "Le libre accès dans les revues québécoises : état des lieux" | **T1** | Scholarly communication, object is publishing practice. French. |
+
+---
+
+## Instructions to the screener
+
+Read the title and abstract. Apply the rubric. Do not use outside knowledge of the authors or the journal's
+reputation. If the abstract is missing, judge on the title alone and set confidence to `low` unless the title is
+unambiguous.
+
+Return the schema in `protocol/screening-schema.json`. One object per work. No prose, no preamble.
+--------------------------------------------------------------------------------
+You are screening works for MetaCan, a map of Canadian metaresearch.
+
+Apply the rubric above to every record in the JSON array below. Return a JSON
+array with one object per work, conforming to protocol/screening-schema.json:
+
+  {"id": "W...", "tier": "T1|T2|T3|OUT", "genre": "...", "about_ca": true|false,
+   "confidence": "high|medium|low", "reason": "one sentence"}
+
+Rules:
+- Return the JSON array and NOTHING else. No prose, no preamble, no code fences.
+- Every input id must appear exactly once in the output.
+- Do not run commands, read files, or browse. Classify from the RECORDS alone.
+
+RECORDS:
+[
+  {
+    "id": "W7095188880",
+    "title": "Complete Genome Sequences of Two Helicobacter pylori Strains from a Canadian Arctic Aboriginal Community",
+    "abstract": "We report here the complete genome sequences of two AmerindHelicobacter pylori strains from Aklavik, Northwest Territories, Canada. One strain contains extra iron-cofactored urease genes and ~140 rearrangements in its chromosome relative to other described strains (typically differing from one another by&amp;lt;10 rearrangements), suggesting that it represents a novel lineage of H. pylori.",
+    "year": 2016,
+    "lang": "en",
+    "type": "article",
+    "topic": "Helicobacter pylori-related gastroenterology studies",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4300772004",
+    "title": "Seasonal impact of scavenger guilds as taphonomic agents in central and northern Ontario, Canada",
+    "abstract": "The process of human decomposition is driven by biological decomposers, mainly bacteria, vertebrates, and invertebrate scavengers. When vertebrate scavengers have access to a body, they can considerably accelerate decomposition through consumption of soft tissue and dispersal of skeletal elements. Presently, there are limited data available on vertebrate scavenging activity in Canada, particularly in densely populated provinces such as Ontario. This study aimed to determine which vertebrate species belong to the scavenger guilds in central and northern Ontario, and the impact of season and habitat on these taphonomic agents. Seasonal trials were conducted in summer, fall, and spring of 2020/2021 with pig carcasses placed in open (grassland) and closed (forest) sites. Vertebrate scavenger activity was recorded continuously using cellular and non-cellular trail cameras. Photographs were analyzed to identify species, quantify feeding intensity, and document scavenging behavior. We identified four mammalian scavengers, namely coyote, red fox, fisher, and pine marten, and three avian scavengers, namely bald eagle, turkey vulture, and American crows/northern ravens (grouped as corvids) across the trials. Season impacted scavenger presence with feeding and loss of soft tissue occurring more quickly in the summer, followed by spring and fall. None of the scavengers demonstrated a clear preference for the open versus closed sites. Our findings have identified the most prevalent vertebrate scavengers in central and northern Ontario and their taphonomic impact on soft and hard tissues. It is important to consider these agents and their ability to degrade and disperse remains during the search and recovery of human remains.",
+    "year": 2022,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Forensic Sciences",
+    "topic": "Archaeology and ancient environmental studies",
+    "field": "Earth and Planetary Sciences",
+    "ca_institutions": ["Government of Ontario", "Université du Québec à Trois-Rivières"],
+    "funders": "Natural Sciences and Engineering Research Council of Canada"
+  },
+  {
+    "id": "W4404660005",
+    "title": "ELABORAÇÃO, ANÁLISE NUTRICIONAL E SENSORIAL DE PASTA DE AMENDOIM SABORIZADA COM QUEIJO MUSSARELA",
+    "abstract": "O amendoim é um dos alimentos que está ligado com a cultura nordestino do Brasil. O consumo desta leguminosa varia desde a semente in natura, torrada e salgada, a doces (como a tradicional paçoca nordestina), além de produtos derivados que possuem o amendoim em sua formulação. Entretanto, ainda há possibilidade na agregação de valor e inovação utilizando o amendoim, visto que, as indústrias do ramo alimentício estão sempre em busca de produtos inovadores e que sejam mais saudáveis. Consoante a isso, a pasta de amendoim é uma excelente alternativa, pois é um produto a base de amendoim bem aceito por grande parte da população, e é consumida por todas as classes sociais e faixas etárias, além de ser um alimento riquíssimo em quesitos nutricionais. A pasta de amendoim também pode ser suplementada com outros alimentos, com o intuito de aumentar seus valores nutricionais e sensoriais. Visando este quesito, a utilização do queijo como alternativa para suplementar a pasta de amendoim é uma opção viável, já que, o mesmo é um alimento muito apreciado pela população brasileira por conta das suas características sensoriais e nutricionais. Neste sentido, o presente trabalho tem como objetivo a elaboração de pasta de amendoim com queijo utilizando os seguintes ingredientes: amendoim, queijo mussarela, óleo vegetal e sal. Foram analisada a composição nutricional e avaliação sensorial da pasta de amendoim enriquecida com o queijo mussarela, a fim de averiguar a aceitação do público e a intenção de compra dos mesmos. No presente estudo foram elaboradas cinco formulações de pasta de amendoim variando respectivamente de 0, 10, 15, 20 e 25% de queijo mussarela. Observou-se que enquanto maior a quantidade de queijo mussarela adicionado à pasta de amendoim, menos energético é o produto elaborado. De acordo com os resultados obtidos é possível concluir que as pastas de amendoim enriquecidas com queijo mussarela não atingiram o resultado mínimo em relação a todos os parâmetros analisados (aparência, cor, textura, sabor e aceitação global) sendo a media 7 (sete) o tal resultado mínimo esperado. Ressalta-se que a amostra E com 35% de queijo mussarela foi a que mais se aproximou dos requisitos mínimos sensoriais, já para a intenção de compra a amostra C com 25% de queijo mussarela. Dito isto, é perceptível a necessidade de uma melhor adaptação na formulação ou adição de componentes extras que aumentem as qualidades sensoriais do produto, também é notório que o produto desenvolvido é incomum ao paladar brasileiro, causando assim, um alto desvio em relação os quesitos sensoriais.",
+    "year": 2024,
+    "lang": "pt",
+    "type": "article",
+    "venue": "Aracê.",
+    "topic": "Coconut Research and Applications",
+    "field": "Chemistry",
+    "ca_institutions": "Musée de la Civilisation",
+    "funders": []
+  },
+  {
+    "id": "W4392125316",
+    "title": "LEAP-ASIA-2019 Centrifuge Test Simulations of Liquefiable Sloping Ground",
+    "abstract": "Abstract Numerical simulations of a liquefiable sloping ground for LEAP-ASIA-2019 centrifuge tests are presented. The simulations are performed using a pressure-dependent constitutive model implemented with the characteristics of dilatancy, cyclic mobility, and associated shear deformation. The soil model parameters are determined based on a series of stress-controlled cyclic torsional shear tests of Ottawa F-65 sand with relative density D r = 60% during calibration phase. Computational framework for the seismic response analysis is discussed and the computed results are presented for all selected centrifuge experiments during Type-C phase. Measured time histories of these experiments are reasonably captured. It is demonstrated that the pressure-dependent constitutive model as well as the overall employed computational framework has the potential to predict the response of the liquefiable sloping ground, and subsequently realistically evaluates the performance of an equivalent soil system subjected to seismically induced liquefaction.",
+    "year": 2024,
+    "lang": "en",
+    "type": "book-chapter",
+    "topic": "Geotechnical Engineering and Soil Mechanics",
+    "field": "Engineering",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2152456578",
+    "title": "Treatment With Synthetic Brood Pheromone (SuperBoost) Enhances Honey Production and Improves Overwintering Survival of Package Honey Bee (Hymenoptera: Apidae) Colonies",
+    "abstract": "We evaluated a year-long treatment regime testing synthetic, 10-component, honey bee, Apis mellifera L. (Hymenoptera: Apidae), brood pheromone (SuperBoost; Contech Enterprises Inc., Delta, BC, Canada) on the productivity and vigor of package bee colonies in the lower Fraser Valley of British Columbia, Canada. Fifty-eight newlyestablished 1.3-kg (3-lb) colonies treated three times with SuperBoost at 5-wk intervals starting 30 April 2009 were compared with 52 untreated control colonies. Treated colonies produced 84.3% more honey than untreated control colonies. By 8 September 2009, SuperBoost-treated colonies had 35.4% more adults than untreated colonies. By 28 September, net survival of treated and control colonies was 72.4 and 67.3%, respectively. On 5 October, treated and control colonies were divided into two additional groups, making up four cohorts: SuperBoost-treated colonies treated again during fall and spring build-up feeding with pollen substitute diet (BeePro, Mann Lake Ltd., Hackensack, MN; TIT); controls that remained untreated throughout the year (CCC); colonies treated with SuperBoost in spring-summer 2009 but not treated thereafter (TCC); and original control colonies treated with SuperBoost during the fall and spring build-up feeding periods (CTT). There was no difference among cohorts in consumption of BeePro during fall feeding, but TTT colonies (including daughter colonies split off from parent colonies) consumed 50.8% more diet than CCC colonies during spring build-up feeding. By 21 April, the normalized percentages of the original number of colonies remaining (dead colonies partially offset by splits) were as follows: CCC, 31.4%; CTT, 43.8%; TCC, 53.59%; and TTT, 80.0%. The net benefit of placing 100 newly established package bee colonies on a year-long six-treatment regime with SuperBoost would be US$6,202 (US$62.02 per colony). We conclude that treatment with SuperBoost enhanced the productivity and survival of package bee colonies and hypothesize that similar results could be achieved with established colonies.",
+    "year": 2012,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Economic Entomology",
+    "topic": "Plant and animal studies",
+    "field": "Agricultural and Biological Sciences",
+    "ca_institutions": ["Golder Associates (Canada)", "Optech (Canada)"],
+    "funders": []
+  },
+  {
+    "id": "W7128669150",
+    "title": "Lotus Gardens",
+    "abstract": "Menu from Lotus Gardens restaurant in Toronto, ON. Cocktails, fancy long tails, Collins, sours, toddys, egg nogs, flips, fizzes, gins, rye whiskies, scotch whiskies, imported scotch whiskies, rums, bourbons, brandies, liqueurs, wines, beer and ale, minerals, soup, boiled fresh noodles, relishes & appetizers, chow mein, chop suey, foo yong dun, beef and pork dishes, chicken and duck suggestions, fried and boild rice, sea foods, steaks, sandwiches, special suggestions, desserts, special full course dinners.",
+    "year": 2016,
+    "type": "other",
+    "venue": "Open MIND",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2888912504",
+    "title": "Comparison of Advanced Imaging Resources, Radiology Workforce, and Payment Methodologies between the United States and Canada",
+    "abstract": "The purpose of this Practice Perspectives was to review the United States and Canadian approaches to health care access and payment for advanced imaging. The historical background, governmental role, workforce, coding, payment, radiologic challenges, cost, resource intensity, and overall outcomes in longevity are reviewed.",
+    "year": 2018,
+    "lang": "en",
+    "type": "article",
+    "venue": "American Journal of Neuroradiology",
+    "topic": "Medical Malpractice and Liability Issues",
+    "field": "Health Professions",
+    "ca_institutions": ["Canadian Association of Gastroenterology", "Vancouver Coastal Health"],
+    "funders": []
+  },
+  {
+    "id": "W4281561192",
+    "title": "Future <scp>Eco‐Perfect<\/scp>: Temporal Fixes of Liberal Environmentalism",
+    "abstract": "Abstract In the last half century runaway wildlife declines have been simultaneous with the liberal environmental state’s ascent. Despite proliferating legislation to arrest these declines, states have fuelled economic growth at species’ expense. Through what tactics of power does the liberal environmental state manage this contradiction between promising species protection while authorising their obliteration? Manipulations of tense, futurity, temporal pace and scope are central. Responding to the plight of endangered caribou in Canada, the state tinkers and repeatedly resets time (“starting … now!”) while hailing the future eco‐perfect, a time just‐around‐the‐corner when caribou and the economy will flourish.",
+    "year": 2022,
+    "lang": "en",
+    "type": "article",
+    "venue": "Antipode",
+    "topic": "Geographies of human-animal interactions",
+    "field": "Social Sciences",
+    "ca_institutions": ["University of British Columbia", "Simon Fraser University"],
+    "funders": []
+  },
+  {
+    "id": "W4412562945",
+    "title": "Addressing the Underrepresentation of Lesbian, Gay, Bisexual, Transgender, and Gender-Diverse Populations in the Canadian Longitudinal Study on Aging (CLSA)",
+    "abstract": "The current research report examines the extent to which lesbian, gay, bisexual (LGB), and transgender and gender-diverse (TGD) older adults are represented in the Canadian Longitudinal Study on Aging (CLSA) relative to Canadian population data. To accomplish this aim, we descriptively and statistically compared LGB and TGD representation in the CLSA against national-level data from the 2023 Canadian Community Health Survey and 2021 Canadian Census. We found that bisexual people, transgender men, and transgender women were underrepresented in the CLSA (0.66% for bisexual people, and 0.01% each for transgender men and women) compared to national-level data (0.95% for bisexual people, 0.05% for transgender men, and 0.09% for transgender women). However, lesbian/gay and nonbinary participants were adequately represented in the CLSA (2.01% for lesbian/gay and 0.02% for nonbinary people) relative to national-level data (1.87% for lesbian/gay and 0.03% for nonbinary people). Varying assessment methods for sexual orientation and gender identity across CLSA waves complicate analyses but underscore evolving inclusivity efforts in longitudinal research. Based on our analyses, we detail recommendations for researchers using the CLSA to examine health outcomes and resilience factors among LGB and TGD populations, even with small sample sizes. Ultimately, these findings highlight the necessity of robust, inclusive data to inform interventions and support policy decisions for older LGB and TGD populations.",
+    "year": 2025,
+    "lang": "en",
+    "type": "preprint",
+    "topic": "Retirement, Disability, and Employment",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2901598814",
+    "title": "Influência do Estado Mental Cognitivo no Equilíbrio Postural de Idosos",
+    "abstract": "ResumoO estado cognitivo tem um papel importante na independência e na funcionalidade do idoso, assim é importante identificar sua influência no contexto do equilíbrio postural. O objetivo deste estudo foi analisar se o estado mental influência no desempenho de equilíbrio postural de idosos. Duzentos e sete idosos, fisicamente independentes de ambos os sexos, com idade média 67 anos foram divididos em três grupos de acordo com resultados obtidos pelo questionário do mini exame de estado mental (grupo 1, Funções cognitivas preservadas – FCP, n=57; grupo 2, Déficit cognitivo não sugestivo – DCNS, n=72; grupo 3, Sugestivo de déficit cognitivo – SDC, n=78). O equilíbrio postural foi avaliado em duas condições (bipodal e unipodal) por meio de uma plataforma de força. Três tentativas foram realizadas em cada condição e a média das tentativas foi utilizada para analisar a oscilação dos parâmetros do centro pressão (COP). Os resultados encontrados mostraram diferenças significativas entre todos grupos no questionário de mini mental (FCP &gt; DCNS &gt; SDC, P= &lt;0,001). Por outro lado, nenhuma diferença estatisticamente significativa (P= &gt;0,05) foi encontrada entre os grupos para todos os parâmetros do COP nas duas condições de equilíbrio avaliadas. Os achados do presente estudo sugerem que, a diferença encontrada no estado cognitivo não influenciou significativamente no equilíbrio postural de idosos fisicamente independentes.Palavras-chave: Envelhecimento. Disfunção Cognitiva. Equilíbrio Postural.Abstract Cognitive status have an important role in the independence and functionality of the older people, so it is important to identify their influence in the context of postural balance. The aim of this study was to analyze whether the mental state influences the postural balance performance of the older people. Two hundred and seven physically independent older people of both sexes, mean age 67 ± 4 years were divided into three groups according to results obtained by the mini mental state examination. (group 1, Preserved cognitive functions - PCF, n = 57; group 2, Non suggestive cognitive deficit - NSCD, n = 72; group 3, Suggestive cognitive deficit - SCD, n = 78). The postural balance was evaluated in two conditions (two- and one-legged stand) by means of a force platform. Three trials were performed in each condition and the mean number of trials was used to analyze the oscillation of the center pressure (COP). The results showed significant differences between all groups in the mini mental questionnaire (PCF&gt; NSCD&gt; SCD, P = &lt;0.001) On the other hand, no statistically significant difference (P = &gt;0.05) was found between the groups for all COP parameters in the two balance conditions evaluated. The findings of the present study suggest that the differences found in cognitive status do not significantly influence in the postural balance of physically independent elderly.Keywords: Aging. Cognitive Dysfunction. Postural Balance. Influência",
+    "year": 2018,
+    "lang": "pt",
+    "type": "article",
+    "venue": "Journal of Health Sciences",
+    "topic": "Balance, Gait, and Falls Prevention",
+    "field": "Health Professions",
+    "ca_institutions": "Université du Québec à Chicoutimi",
+    "funders": []
+  },
+  {
+    "id": "W2573058887",
+    "title": "Runö : Historien om svenskön i Rigabukten, by Jörgen Hedman and Lars Åhlander",
+    "abstract": "",
+    "year": 2006,
+    "lang": "sv",
+    "type": "article",
+    "venue": "Lund University Publications (Lund University)",
+    "topic": "Historical and Archaeological Studies",
+    "field": "Arts and Humanities",
+    "ca_institutions": "University of Alberta",
+    "funders": []
+  },
+  {
+    "id": "W2981588400",
+    "title": "Geology, Mount Beirnes, British Columbia",
+    "abstract": "",
+    "year": 2008,
+    "lang": "en",
+    "type": "report",
+    "topic": "Geology and Paleoclimatology Research",
+    "field": "Earth and Planetary Sciences",
+    "ca_institutions": "Natural Resources Canada",
+    "funders": []
+  },
+  {
+    "id": "W7099415260",
+    "title": "A PRELIMINARY SURVEY",
+    "abstract": "In order to gain a general appreciation of the volume of audio-visual collections throughout the country and conditions under which they are kept, the Task Force carried out a survey (the first of its kind in Canada) of such repositories. Unfortunately, the tight timeframe did not allow for a more thorough preparation of the survey (the entire process, including return time for responses, took seven months), nor did it allow for a survey of all identified potential holders of audio-visual collections; instead, a selection had to be made. I. THE SURVEY METHODOLOGY Selection of the sample The survey was designed to elicit information on audio-visual archival holdings from the following general types of organizations:! Cultural organizations (archives, museums, libraries and other cultural organizations)! Industry organizations (film producers, distributors, stockshot libraries, laboratories, television and radio broadcasters and networks). The names and addresses of the organizations to be surveyed were taken from the following sources:",
+    "year": 2008,
+    "lang": "en",
+    "type": "article",
+    "topic": "Design Education and Practice",
+    "field": "Engineering",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2779829051",
+    "title": "2013 Annual Global Tax Competitiveness Ranking: Corporate Tax Policy at a Crossroads",
+    "abstract": "Canada is losing its appeal as a destination for business investment. Its ability to compete against other countries for investment slipped considerably this year in our global tax competitiveness ranking, down six spots among OECD countries, and down 11 spots among the 90 countries. While many governments around the world responded to the fallout of the global recession by significantly reducing corporate tax rates, certain policy moves in Canada have us headed in the opposite direction. Canada is in danger of repelling business investment, which can only worsen current economic and fiscal challenges. Canada’s fading advantage is the result of recent anti-competitive provincial tax policies that increased the cost of investment. This includes, most notably, British Columbia’s decision to reverse the harmonization of its provincial sales tax with the federal GST, as well as recent corporate income tax rate hikes in B.C. and New Brunswick. When economic calamity strikes, and workers and their families feel the pain of lost jobs and lost wealth, politicians know they can score populist points by targeting the corporate sector. After all, corporations do not vote and they do not have a human face. News stories about major multinational corporations using tax-avoidance techniques to minimize their tax bills, only feed the populism, leaving voters believing that companies are getting away without paying a “fair share” of taxes. But when the corporate sector is targeted, it is not only supposedly wealthy capitalists who pay, but also employees, through lost wages and jobs, and working-class people who have a stake in companies through pension plans and mutual funds. On a larger scale, it is the economy that suffers. The same profit-maximizing imperative that leads companies to seek ways to reduce their tax liabilities also motivates firms to redirect investment to competing, lower-tax jurisdictions. Populist policies aimed at squeezing businesses may win votes in the short term, but they come at significant costs. Yet, there are politicians calling for still higher taxes on corporations. The federal Opposition leader, Thomas Mulcair, of the New Democratic Party, wants to raise the federal corporate income tax rate from 15 to 22 per cent, making Canada’s combined federal-provincial tax rate (over 33 per cent) one of the highest in the world. Such proposals promise an easy source of new revenue at no cost to individual taxpayers. In reality, the cost to taxpayers is lost competitiveness, resulting in a shrinking corporate tax base that will only leave Canadians with a weaker economy, profit-shifting to other countries leading to little additional revenue available to Canadian governments and, inevitably, a larger tax burden to bear individually. The right direction for Canada is the other way: improving tax competitiveness and enhancing tax neutrality by broadening the corporate tax base to further fund rate reduction. The harmonization of provincial sales taxes with the federal GST, in those provinces that have yet to do so, would substantially improve Canada’s tax competitiveness, as would the elimination of economically inefficient tax breaks for favoured business activities. And Canadian governments should continue to lower corporate taxes across the board, whenever possible. Canada’s edge as a globally competitive investment destination has been hard won over many years. It would be a pity to now see it squandered by reckless populist politics.",
+    "year": 2017,
+    "lang": "en",
+    "type": "article",
+    "venue": "RePEc: Research Papers in Economics",
+    "topic": "Canadian Policy and Governance",
+    "field": "Social Sciences",
+    "ca_institutions": "University of Calgary",
+    "funders": []
+  },
+  {
+    "id": "W2102817032",
+    "title": "Declining Clinical Autopsy Rates Versus Increasing Medicolegal Autopsy Rates in Halifax, Nova Scotia",
+    "abstract": "The downward trend in the rate of clinical autopsies has been extensively documented in the literature. This decline is of concern when the benefits of the clinical autopsy are considered. In contrast, the rate of medicolegal autopsies has not been studied in such detail. What little reference there is to medicolegal autopsy rates suggests an absence of the same downward trend. A retrospective review of autopsy data over a 13-year period from the Queen Elizabeth II Health Sciences Centre in Halifax, Nova Scotia, and from the Office of the Chief Medical Examiner of Nova Scotia was conducted. This review showed a difference between the rates of clinical and medicolegal autopsies for the metro Halifax area. The clinical autopsy rate was consistently less than 30% and declined to 15% in 1999, while the medicolegal autopsy rate was consistently greater than 40% and rose to 62% in 1999. The literature proposes many reasons for the decline in the clinical autopsy rate, but none for this difference between rates. The explanation proposed here is the changing and currently uncertain purpose of the clinical autopsy versus the clear, and consistent over time, purpose of the medicolegal autopsy.",
+    "year": 2001,
+    "lang": "en",
+    "type": "article",
+    "venue": "Archives of Pathology & Laboratory Medicine",
+    "topic": "Autopsy Techniques and Outcomes",
+    "field": "Medicine",
+    "ca_institutions": ["Queen Elizabeth II Health Sciences Centre", "Dalhousie University"],
+    "funders": []
+  },
+  {
+    "id": "W7138911994",
+    "title": "Insecure AI Image Watermarking - Is it Really Damaging The Future?",
+    "abstract": "The rapid advancement of generative artificial intelligence (AI) has revolutionized image creation, enabling the production of hyper realistic visuals that are becoming increasingly indistinguishable from genuine photographs. While this technology enhances creative capabilities, it also introduces significant risks related to misinformation, privacy breaches, and the erosion of public trust. This study addresses the urgent challenge of securing AI-generated images against manipulation, unauthorized distribution, and adversarial attacks by proposing a multilayered content authentication framework. Conceptual qualitative methodology was employed to analyze academic literature, encryption protocols, and tools such as Google's SynthID and Samsung's Magic Editor. The analysis revealed that current watermarking techniques are easily removable and lack of interoperability across platforms. To overcome these challenges, the study proposes a secure a watermarking approach for AI-generated images that ensures logos embedded by large language models (LLMs) remain uneditable by end users using Discrete Wavelet Transform (DWT)-based watermarking, Digital Rights Management (DRM), adaptive machine-learning classifiers, and blockchain-verified digital signatures. The importance of this study lies in its interdisciplinary nature, integrating technological, ethical, and regulatory aspects to deal with the emerging threats from synthetic media. Through the promotion of standardized, interoperable, and legally backed verification systems, the research contributes to the establishment of reliable AI-generated content and also emphasizes the necessity of international cooperation among policymakers, researchers, and industry leaders to counter the threats of AI-generated misinformation.",
+    "year": 2025,
+    "type": "article",
+    "topic": "Advanced Steganography and Watermarking Techniques",
+    "field": "Computer Science",
+    "ca_institutions": "Lakehead University",
+    "funders": []
+  },
+  {
+    "id": "W3131886724",
+    "title": "Info Guides: Canadian Reference Centre: Home",
+    "abstract": "",
+    "year": 2020,
+    "lang": "en",
+    "type": "libguides",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4250221790",
+    "title": "Abstracts from Dietetic Research Event – June 12–14, 2014",
+    "abstract": "Welcome to the nation's capital, Ottawa, Ontario host city of the 2014 Dietitians of Canada Annual Conference. The submissions for this year's Canadian Foundation for Dietetic Research event reflected the very high level of scientific quality and diversity of topics associated with Dietetic research in Canada. Through the support of Dietitians of Canada and the Canadian Foundation for Dietetic Research, the 2014 event was an educational and inspiring exchange of research and experience-sharing initiatives to help motivate conference attendees. The topics highlighted from this year's abstracts include Dietetic Practice and Education, Community-based Nutrition Education, Nutrition Health and Education, Vulnerable Groups and their Nutritional Needs, Clinical Research and Patient Services and much, much more. The research and experience-sharing work will provide new insights which can be applied to your work. Each presenter provided an 11 minute oral presentation (8 minutes for presenting and 3 minutes for questions). This allowed for meaningful interaction between the presenters and those attending the sessions. This year there were oral research presentations on each day of the conference: I urge you to use these presentations as an impetus to start your own research projects or to engage in conversations with your colleagues. This Research Event would not be possible without the commitment and dedication of many people. On behalf of Dietitians of Canada and the Canadian Foundation for Dietetic Research, I would like to extend a special thank you to the 2014 Abstracts Review Committee who represented research, clinical nutrition, community nutrition, education, food services and academics: Jennifer Brown (Registered Dietitian, The Ottawa Hospital Weight Management Clinic and Bariatric Surgery Program), Josée Bertrand (Acting Chief of Dietetics, The Ottawa Hospital), Marketa Graham (Public Health Dietitian, Ottawa Public Health Unit), Mahsa Jessri (PhD Candidate, Faculty of Medicine, University of Toronto), Mary Elizabeth Davies (Coordinator/Professor, Food and Nutrition Management, School of Hospitality &amp; Tourism, Algonquin College), Dr. Bénédicte Fontaine-Bisson (Assistant Professor, Nutrition Sciences Program, University of Ottawa). I would also like to thank all of our moderators who took the time during the conference to keep our research presentation sessions on time. A special thank you to Shilpa Mukund and Isla Horvath at the Canadian Foundation for Dietetic Research for their guidance, patience, and support throughout the review process. I enjoyed interacting with many of you at the oral research presentations where we showcased the talents, efforts and important findings from our dietetic colleagues across our country. Marcia Cooper, PhD, RD Chair, 2014 Abstracts Review Committee Health Canada",
+    "year": 2014,
+    "lang": "en",
+    "type": "article",
+    "venue": "Canadian Journal of Dietetic Practice and Research",
+    "topic": "Dietetics, Nutrition, and Education",
+    "field": "Health Professions",
+    "ca_institutions": ["McMaster University", "McGill University", "St. Michael's Hospital", "Ottawa Hospital", "Ottawa Public Health", "University of Toronto", "McGill University Health Centre", "University of Ottawa", "Algonquin College"],
+    "funders": "Canadian Foundation for Dietetic Research"
+  },
+  {
+    "id": "W4235079942",
+    "title": "Sentinel surveillance of child maltreatment cases presenting to Canadian emergency departments",
+    "abstract": "",
+    "year": 2019,
+    "lang": "en",
+    "type": "preprint",
+    "venue": "Research Square",
+    "topic": "Child Abuse and Trauma",
+    "field": "Psychology",
+    "ca_institutions": ["Université du Québec à Montréal", "Public Health Agency of Canada"],
+    "funders": ["Public Health Agency", "Public Health Agency of Canada"]
+  },
+  {
+    "id": "W7017875260",
+    "title": "Boralex : Advisory - Boralex to Release the 2019 Second Quarter Financial Results on August 8",
+    "abstract": "",
+    "year": 2019,
+    "lang": "en",
+    "type": "other",
+    "topic": "Porphyrin Metabolism and Disorders",
+    "field": "Biochemistry, Genetics and Molecular Biology",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4390918713",
+    "title": "Complicações cardiovasculares da doença de Kawasaki: avaliação e prognóstico",
+    "abstract": "A doença de Kawasaki, também denominada Síndrome dos linfonodos mucocutâneos, é uma vasculite sistêmica, autolimitada e aguda, que predomina-se em crianças menores de 5 anos, acometendo vasos de médio calibre e caracterizada principalmente pela febre alta e de longa duração. As complicações cardiovasculares, particularmente as anormalidades coronarianas são as mais prevalentes. Assim, o prognóstico da doença relaciona-se à avaliação e diagnósico precoce, afim de minimizar o risco de sequelas graves.",
+    "year": 2024,
+    "lang": "pt",
+    "type": "article",
+    "venue": "Cuadernos de Educación y Desarrollo",
+    "topic": "Kawasaki Disease and Coronary Complications",
+    "field": "Medicine",
+    "ca_institutions": "Discovery Air (Canada)",
+    "funders": []
+  },
+  {
+    "id": "W7057165807",
+    "title": "From Hospital to Home: Providers’ Experiences of Collaboration when Facilitating Care Transitions across Palliative Care Settings",
+    "abstract": "Research shows that many patients with advanced illness prefer to receive care and die in their homes; therefore, transitions from acute care to community settings are common. However, while many studies have examined the patient and caregiver experience of this transition process, few studies have focused on the provider’s perspective. This qualitative study explored interprofessional and interorganizational collaboration among providers when transitioning patients from hospital to home in the context of palliative care. Four themes were elucidated that reflect providers’ experiences of collaboration within and across palliative care settings. Key barriers include a perceived lack of formalized leadership roles and having continuously changing inpatient providers involved during discharge planning, inconsistent communication during patient handovers, and insufficient system-level infrastructure to support information sharing across settings. The findings of this study reveal several opportunities at the organizational and broader health system levels to better assist providers in supporting these types of transitions.",
+    "year": 2021,
+    "type": "dissertation",
+    "venue": "TSpace",
+    "topic": "Magnetic confinement fusion research",
+    "field": "Physics and Astronomy",
+    "ca_institutions": [],
+    "funders": "University of Toronto"
+  },
+  {
+    "id": "W7114991129",
+    "title": "The nexus between cognitive function and self-care ablility in patients with chronic heart failure",
+    "abstract": "Background: The prevalence of chronic heart failure (CHF) within in the Western World remains high and is rapidly increasing in developing nations. The clinical trajectory of CHF is often characterised by chronic symptoms with periods of acute decompensation requiring hospitalisations for treatment. Yet almost half of these readmissions are potentially preventable through better adherence with self-care practices. For patients with CHF, self-care involves a level of confidence to adhere to behaviours that maintain physiological stability as well as recognising and making pertinent decisions in response to symptom changes. These self-care skills are not readily learnt and there are many barriers that account for this. Cognitive impairment occurs frequently in adults with CHF and is hypothesised to be a barrier in the acquisition of self-care skills. Aims: The research program is a series of systematically designed studies the specific aims were to: Review the literature surrounding the management of heart failure and teaching patients self-care behaviours; Identify clinical tools that measure heart failure self-care; Identify factors that appear to hinder the practice of self-care; Develop (Phase 1) and test (Phase 2) a conceptual model of factors that predict CHF self-care; compare the Mini Mental State Exam (MMSE) with the Montreal Cognitive Assessment (MoCA) in screening for Mild Cognitive Impairment (MCI); Examine the influence experience with heart failure symptoms has on self-care behaviours. Methods: The program consisted of comprehensive reviews of the literature, identification of clinical tools to measure self-care and cognitive function and two studies using descriptive survey methodology to develop (Phase 1) and test (Phase 2) a conceptual model of variables deemed to predict self-care.;Patients were recruited for the studies during their index hospital admission patients with CHF were assessed for self-care (Self-Care of Heart Failure Index) and screened for MCI and depressive symptoms (scores Scale). In Phase 1, patients were coded as MCI by scores 2, patients were coded as MCI by scores /or scores (MoCA). Adequate self-care was indicated by scores &gt;70 on self-care domains: maintenance, management and confidence of the SCHFI. These factors along with demographic and clinical characteristics (age, gender, social isolation, education level, new diagnosis and co-morbid illnesses) were tested in multiple regression models for self-care. Results: In Phase 1 (n=50), seven variables (cognitive function, depressive symptoms, age, gender, social isolation, self-care confidence and co-morbid illnesses) explained 39% (F (7, 42) 3.80, p=0.003) of the variance in self-care maintenance and 38% (F (7,42) 3.73 p=0.003) of the variance in self-care management. Two variables were significant in predicting self-care maintenance: Age (p2 months. Conclusion: This systematically designed research program enhances the knowledge of heart failure self-care and provides a unique contribution in understanding the relationship between this phenomena and cognitive function. Cognitive impairment is a hidden co-morbidity in patients with CHF and to reflect this, the research program has henceforth been named the 'The InCOGNITO Heart Failure Study'. This co-morbidity impacts negatively upon self-care actions and decisions, potentially increasing the risk of hospital readmissions or even premature death. Such evidence suggests that CHF patients with MCI require ongoing support in developing self-care skills and behaviours directed at reducing CHF symptoms and improving their health and quality of life.;The research program provides further insight into the patient's experience of coping and adjusting to living with CHF. A number of other factors also help to predict self-care behaviours including the presence of symptoms causing functional limitations (NYHA class III or IV), higher co-morbidity, younger age and absence of depressive symptoms. These factors are a reflection of the complex nature of this syndrome and highlight the need for an integrated multidisciplinary health team in the long-term management of CHF. In order to clearly identify and articulate effective support and educational strategies directed at patients with CHF, ongoing research is required to further explore factors that hinder the application of teaching and counselling strategies and develop programs of care to specifically address these barriers.",
+    "year": 2009,
+    "type": "dissertation",
+    "venue": "Australian Catholic University",
+    "topic": "Heart Failure Treatment and Management",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W7162006816",
+    "title": "The ability of functional magnetic resonance imaging responses to alcohol and different emotional challenges to predict escalating drinking in different at-risk individuals",
+    "abstract": "Alcohol use disorders are among the top two most prevalent psychiatric conditions in the Americas. Their expression is complex and their developmental pathways are varied. Understanding how individual differences in these pathways lead to the full pathology is imperative for designing and implementing effective therapeutic and preventative interventions. To investigate these pathways, we studied healthy young adults who classified as high in either anxiety-sensitivity or sensation-seeking traits (HAS and HSS, respectively). All subjects completed two functional magnetic resonance imaging sessions following the ingestion of either ethanol (g/kg) or placebo given in a double-blind, counter-balanced repeated-measures design. In the scanner, subjects performed a Face Emotion Processing Task and the Montreal Imaging Stress Task (MIST). Behavioral (performance), subjective mood, and endocrine response profiles were assessed throughout. 2-3 years later, subjects' substance use and mental health status were re-assessed. 7 propositions were made and defended: (1) HAS subjects (HASSs) were hyper-vigilant toward aversive faces, whereas HSSs were hyporesponsive or unresponsive; (2) acute social stress (MIST) induced arousal and a threat to social standing in HASSs, especially males, whereas in HSSSs, particularly males, it was perceived as a stimulating challenge eliciting energetic arousal; (3) alcohol blunted responses to aversive faces in HAS but had no effect in HSSSs; (4) alcohol-induced effects on social stress (MIST) reactivity differed as a function of personality profile, consistent with the pathways of risk; (5) escalation to alcohol misuse at follow-up was seen in HASSs who had previously exhibited the largest amygdalae activations to threatening faces under placebo and deactivation un- der alcohol; (6) escalation to alcohol or other drugs misuse at follow-up was seen in HSSSs who had previously exhibited mar- ked medial orbitofrontal activations to social stress (MIST) under placebo and diminished responses under alcohol; and (7) the predictive power of these neural responses was above and beyond other measured risk factors, These results suggest that at-risk individuals with distinct personality profiles respond differently to alcohol and stressful events, with the response patterns predicting their alcohol and illicit drug use behaviors 2-3 y to three years later.",
+    "year": 2017,
+    "lang": "en",
+    "type": "dissertation",
+    "topic": "Substance Abuse Treatment and Outcomes",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4400942905",
+    "title": "Nem criptoteologia nem reducionismo sociológico: contribuições para o debate epistemológico das Ciências da Religião no Brasil",
+    "abstract": "Construiu-se ao longo das últimas décadas um conflito teórico-político interno às Ciências da Religião no Brasil. De um lado, estão as abordagens próximas à filosofia, à teologia e à fenomenologia, onde autores como Otto, Tillich e Eliade são referências. De outro, as abordagens em perspectiva social científica, quando autores como Durkheim, Weber e Bourdieu constituem o parâmetro. Esta polarização, ao passo que, acirra os ânimos, ao mesmo tempo constiui um panorama pouco auspicioso para a consolidação da área. Fluem, de ambos os lados, acusações de “criptoteologia” e de “reducionismo sociológico”. A tendência é a de um encastelamento disciplinar e ideológico que não possibilita nem horizontes dialogais e nem a construção identitária das Ciências da Religião no contexto das demais humanidades. Uma possibilidade de superação de tal polarização consiste no entendimento da disciplina como composta por dois momentos complementares, um sistemático e outro histórico. Trata-se de uma compreensão que surge nos inícios da Ciência da Religião europeia e que pode lançar luzes no atual debate brasileiro. Sustentando tal concepção, uma atitude empática ante o fenômeno religioso continua sendo necessária por parte dos pesquisadores.",
+    "year": 2024,
+    "lang": "pt",
+    "type": "article",
+    "venue": "Estudos de religião",
+    "topic": "Religion and Society in Latin America",
+    "field": "Social Sciences",
+    "ca_institutions": "Discovery Air (Canada)",
+    "funders": []
+  },
+  {
+    "id": "W2331572424",
+    "title": "Spirits of a Drum Beat: African Caribbean Traditional Healers and their Healing Practices in Toronto",
+    "abstract": "Abstract African Caribbean communities in the diaspora use a wide variety of traditional healing practices, such as Voodoo, Spiritism, Espiritismo, Santeria, Spiritual Baptist, Maat and Christian Pentecostal, and many others. Outside of the communities directly involved in these healing traditions, not much is known about many of these healers and the kinds of healing practices they engage in. This research explores and offers insights into African Caribbean traditional healers and their healing practices in the GTA (Greater Toronto Area), in Canada. Five individuals (three males and two females) who identified as African Caribbean traditional healers and practiced in the Greater Toronto Area were interviewed. The healers described their healing practices, shared issues related to the assessment and treatment of patients' presenting problems, and discussed collaboration between Western healthcare practitioners and themselves. Grounded theory was used to analyse the transcripts.",
+    "year": 2011,
+    "lang": "en",
+    "type": "article",
+    "venue": "International Journal of Health Promotion and Education",
+    "topic": "Community Health and Development",
+    "field": "Health Professions",
+    "ca_institutions": "University of Toronto",
+    "funders": []
+  },
+  {
+    "id": "W4389207630",
+    "title": "Access to a regular primary care physician among young people with early psychosis in Ontario, Canada",
+    "abstract": "AIM: Access to a primary care physician in early psychosis facilitates help-seeking and engagement with psychiatric treatment. We examined access to a regular primary care physician in people with early psychosis, compared to the general population, and explored factors associated with access. METHODS: Using linked health administrative data from Ontario (Canada), we identified people aged 14-35 years with a first diagnosis of nonaffective psychotic disorder (n = 39 449; 2005-2015). We matched cases to four randomly selected general population controls based on age, sex, neighbourhood, and index date (n = 157 796). We used modified Poisson regression to estimate prevalence ratios (PR) for access to a regular primary care physician in the year prior to first diagnosis of psychotic disorder, and the sociodemographic and clinical factors associated with access. RESULTS: A larger proportion of people with early psychosis had a regular primary care physician, relative to the general population (89% vs. 68%; PR = 1.30, 95%CI = 1.30-1.31). However, this was accounted for by a higher prevalence of comorbidities among people with psychosis, and this association was no longer present after adjustment (PR = 0.97, 95%CI = 0.97, 0.98). People with early psychosis who were older, male, refugees and those residing in lower income or high residential instability neighbourhoods were less likely to have a regular primary care physician. CONCLUSION: Approximately one in ten young people with early psychosis in Ontario lack access to a regular primary care physician. Strategies to improve primary care physician access are needed for management of physical comorbidities and to ensure continuity of care.",
+    "year": 2023,
+    "lang": "en",
+    "type": "article",
+    "venue": "Early Intervention in Psychiatry",
+    "topic": "Schizophrenia research and treatment",
+    "field": "Medicine",
+    "ca_institutions": ["University of Toronto", "Centre for Addiction and Mental Health", "McGill University", "Institute for Clinical Evaluative Sciences", "Douglas Mental Health University Institute", "Public Health Ontario", "NOSM University", "McMaster University", "Western University"],
+    "funders": ["Ministry of Long-Term Care", "Canadian Institutes of Health Research", "Ministry of Health, British Columbia", "McMaster University"]
+  },
+  {
+    "id": "W3135001871",
+    "title": "Are closed campus policies associated with adolescent eating behaviours?",
+    "abstract": "INTRODUCTION: The effectiveness of school nutrition regulations may be undermined by food environments surrounding schools. Given challenges in regulating external retail, some have recommended policies that ensure students are unable to leave school property during the day (closed campus policies; CCP). We aimed to examine whether CCP are associated with student eating behaviours. METHODS: We used student and school-administrator survey data from the 60 610 Grades 9 to 12 students and 134 Canadian secondary schools that participated in Year 7 (2018/19) of the COMPASS study. Multiple ordinal regression models tested school CCP as a predictor of weekday dietary behaviours (0-5 days), controlling for student-level (grade, sex, spending money, ethnicity) and school-level (urbanicity, province, area median household income, vending machines) covariates. RESULTS: CCP were reported by 16 schools. Students who attended CCP schools reported eating lunch purchased from fast food outlets or other restaurants and drinking sugar-sweetened beverages (SSBs; soft drinks and sports drinks; sweetened coffee or tea drinks) on fewer weekdays, but consumed snacks from school vending machines on more weekdays, relative to students at open campus schools. No significant differences were observed in student reports of eating home-packed or school cafeteria lunches or snacks purchased off-campus. CONCLUSION: CCP may help improve adolescent diets by reducing SSB and lunchtime fast food consumption on weekdays; however, students already purchasing food may shift from off-campus to within-school options, highlighting the importance of ensuring healthy school food environments and encouraging students to bring home-prepared lunches. Future studies using experimental longitudinal designs are needed to determine the effect of CCP on various health behaviours and outcomes.",
+    "year": 2021,
+    "lang": "en",
+    "type": "article",
+    "venue": "Health Promotion and Chronic Disease Prevention in Canada",
+    "topic": "Obesity, Physical Activity, Diet",
+    "field": "Medicine",
+    "ca_institutions": ["University of Waterloo", "Ontario Tech University", "Brock University"],
+    "funders": []
+  },
+  {
+    "id": "W166195607",
+    "title": "Learning the Chinese Language in a Multicultural Milieu: Factors Affecting Chinese-Canadian Adolescents' Ethnic Language School Experience",
+    "abstract": "",
+    "year": 2001,
+    "lang": "en",
+    "type": "article",
+    "venue": "Alberta Journal of Educational Research",
+    "topic": "Multilingual Education and Policy",
+    "field": "Social Sciences",
+    "ca_institutions": "University of Regina",
+    "funders": ["Government of Canada", "University of Regina"]
+  },
+  {
+    "id": "W4380853380",
+    "title": "Space weather monitoring with Health Canada’s terrestrial radiation monitoring network",
+    "abstract": "This work presents a feasibility study of utilizing Health Canada’s terrestrial radiation monitoring network, the Fixed Point Surveillance (FPS) network, for space weather monitoring through demonstrating detections of Forbush decrease and ground level enhancement events. The network is currently comprised of more than eighty sodium iodide spectrometers distributed across Canada. It was designed for terrestrial radiation monitoring but is also capable of registering cosmic radiation in a high-energy channel. Data from fourteen FPS stations for the period from 2003 to 2018 were analyzed and compared with data obtained by other ground-level cosmic radiation monitoring systems. The level of atmospheric impacts on measurements can be well explained, and signatures of both long-term solar cycle variations and sporadic solar events have been detected in the FPS network. The Forbush decrease amplitudes in FPS were found to be comparable to those obtained in the global muon detector network but about 2–3 times lower than those recorded by the global neutron monitoring network. This study suggests that the 20 years of cosmic ray data from the FPS network can be used for climatological space weather studies. In addition, the network can be readily available for real-time space weather monitoring.",
+    "year": 2023,
+    "lang": "en",
+    "type": "article",
+    "venue": "Advances in Space Research",
+    "topic": "Ionosphere and magnetosphere dynamics",
+    "field": "Physics and Astronomy",
+    "ca_institutions": ["Natural Resources Canada", "Health Canada"],
+    "funders": ["Russian Academy of Sciences", "Shinshu University", "Environment and Climate Change Canada"]
+  },
+  {
+    "id": "W2899718081",
+    "title": "The Optimum Pipeline Burial Depth Considering Slow Downslope Soil Movement and Seasonal Temperature Variation",
+    "abstract": "Thermal stress induced in a buried pipeline due to temperature variation is of great concern in Canada due to its extreme cold winter and warm summer. Thermal stress decreases by increasing the pipe’s burial depth while the interaction forces due to ground displacement increase by increasing the burial depth. As a result, the optimum burial depth of a pipeline is of great importance to pipeline companies to minimize interactions between the pipeline and soil in case of temperature variations and ground displacements. Thermal stress is estimated from a heat transfer analysis considering the phase change in the soil using COMSOL. Soil-pipeline interaction based on 1984 ASCE Guidelines [1] is used for considering the effects of ground movements. The combined stress on the pipeline is estimated as a function of burial depth and is presented in a curve for design purposes. Numerical analysis by ABAQUS shows the adequacy of the presented curve.",
+    "year": 2018,
+    "lang": "en",
+    "type": "article",
+    "topic": "Climate change and permafrost",
+    "field": "Earth and Planetary Sciences",
+    "ca_institutions": "University of Manitoba",
+    "funders": []
+  },
+  {
+    "id": "W7132981760",
+    "title": "Collaborative Professional Development: The Journey of Five Core French Teachers Navigating the COVID-19 Pandemic in Ontario Public Schools",
+    "abstract": "In this study, I bring forward five elementary Core French teachers’ experiences of teaching during the COVID-19 pandemic in a large school board in the Greater Toronto Area in Ontario, Canada. The study evolved from a collaborative professional development group I initiated within the school board in September of 2020. The aim was to support each other, so that we in turn could help our students. The objective of my research is to explore the extent to which the collaboration group enabled us to develop teacher agency as Core French teachers despite the challenges associated with unstable school planning. This study will look at how Core French teachers 1) planned their programs, 2) supported students, particularly those who are learning the main school language, also referred to as English Language Learners, and 3) utilized technology to support learning throughout the different stages of teaching through the pandemic.",
+    "year": 2022,
+    "type": "dissertation",
+    "venue": "TSpace",
+    "topic": "Teacher Education and Leadership Studies",
+    "field": "Social Sciences",
+    "ca_institutions": "University of Toronto",
+    "funders": []
+  },
+  {
+    "id": "W2991130234",
+    "title": "Pengaruh Risiko Usaha terhadapReturn On Asset (Roa) pada BankPembangunan Daerah",
+    "abstract": "The purpose of this research is analyzing whether LDR, NPL, IRR, FBIR\r\nand BOPO has a significant influence simultaneously and partially on Bank\r\nPembangunan Daerah (Regional Development Bank). Samplesof this research\r\nare five banks : BPD Aceh , BPD Bali, BPD West Sumatera, BPD West Sumatera,\r\nBPD South Sulawesi dan West Sulawesi and South Kalimantan. Data is a\r\nsecondary data and data collection method in this research is collection data from\r\npublication financial report of Regional Bank in Bank Indonesia website, starts\r\nfrom the first quarter period of 2009 until the second quarter of 2012. Data\r\nanalysis technique in this research is descriptive analysis and multiple linear\r\nregression.\r\nBased on the accounting and result by using SPSS 16.0 for windows, is\r\nshows that LDR,NPL, IRR, FBIR has significant influence simultaneously on ROA\r\nat Regional Development Bank. BOPO partially has negative and no significant\r\ninfluence on ROA at Regional Development Bank.\r\nKeywords : LDR, NPL, IRR, FBIR and BOPO on ROA",
+    "year": 2013,
+    "lang": "id",
+    "type": "dissertation",
+    "topic": "Financial Analysis and Corporate Governance",
+    "field": "Business, Management and Accounting",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2398288358",
+    "title": "LA INFLUENCIA DE PAULO FREIRE EN LA CONFORMACIÓN DE LA EDUCACIÓN POPULAR AUTÓNOMA EN LA PROVINCIA DE QUEBEC",
+    "abstract": "Este artículo tiene como objetivo analizar la influencia que tuvo Paulo Freire en el discurso y en la práctica de la Educación popular, especialmente en las experiencias de la Educación Popular Autónoma, epa, tal como fue definida en la provincia francoparlante de Quebec Canadá. Con este propósito, se resumirá la historia de la aparición del discurso de la educación popular en Quebec y se intentará una definición de la Educación Popular Autónoma, epa, destacando la influencia que Freire tuvo, y aún tiene, en su definición y su praxis por parte de los grupos que la han adoptado como referente.",
+    "year": 2009,
+    "lang": "es",
+    "type": "article",
+    "venue": "Pedagogía y Saberes",
+    "topic": "Educational Practices and Policies",
+    "field": "Social Sciences",
+    "ca_institutions": "Université de Montréal",
+    "funders": []
+  },
+  {
+    "id": "W2948706910",
+    "title": "Efeitos das mudanças climáticas sobre as comunidades de peixes na Bacia Amazônica",
+    "abstract": "As mudanças climáticas, principalmente em decorrência das ações antrópicas, têm sido causas de impactos ambientais a nível regional e global. Dentre as regiões do planeta, a região Amazônica é uma das mais prejudicadas pelos impactos das mudanças climáticas que têm se manifestado por meio de eventos extremos com sérias implicações para a biodiversidade mais rica e endêmica do planeta. Diante disso, o objetivo deste trabalho foi discutir os efeitos das mudanças climáticas sobre os peixes amazônicos. Tais efeitos induzem ao aumento da temperatura, oscilações nos níveis de oxigênio e alterações no ciclo hidrológico em decorrência dos eventos de secas e inundações extremas. Nos peixes, esses efeitos têm implicações biológicas comprometendo a fisiologia das espécies; ecológicas com significativas alterações nos aspectos reprodutivos, alimentares e migratórios, além de variações na abundância e riqueza das espécies; as quais eventualmente terão consequências diretas na produção pesqueira. Os efeitos das mudanças climáticas na ictiofauna necessitam ser investigados e avaliados profundamente para que estratégias de conservação e manejo possam ser traçadas a fim de assegurar a manutenção da biodiversidade íctica na amazônia.",
+    "year": 2019,
+    "lang": "pt",
+    "type": "article",
+    "venue": "REVISTA CIÊNCIAS DA SOCIEDADE",
+    "topic": "Fish biology, ecology, and behavior",
+    "field": "Environmental Science",
+    "ca_institutions": "Impact",
+    "funders": []
+  },
+  {
+    "id": "W2256445397",
+    "title": "Hurry up and wait. The experiences of young women in rural Nova Scotia accessing specialized care.",
+    "abstract": "INTRODUCTION: This study explored experiences of waiting to access specialized health care among young women living in selected rural communities on the south shore of Nova Scotia. We asked women about the challenges they faced during wait times and how they perceived the impact of these experiences on their health. METHODS: We conducted qualitative interviews with 10 women aged 21-37 years. We used thematic analysis to identify common experiences among participants. RESULTS: Some women expressed feelings of frustration about waiting, but others resigned themselves to the wait. Women reported challenges such as caregiving for ailing family members who waited for care. Some women took control of their situation by accessing private health care or what they called \"the next best thing\" (e.g., care from alternative health providers), although in some cases this was financially costly. A few women sought assistance through support networks. Many women reported that wait times affected their health. CONCLUSION: Our results support previous research indicating that young rural women's caregiving roles and support networks influence their experiences with wait times. Our research indicates that waiting to access specialized care can be financially costly for some women and may also affect their health.",
+    "year": 2011,
+    "lang": "en",
+    "type": "article",
+    "venue": "PubMed",
+    "topic": "Intergenerational Family Dynamics and Caregiving",
+    "field": "Social Sciences",
+    "ca_institutions": "Dalhousie University",
+    "funders": []
+  },
+  {
+    "id": "W7099655851",
+    "title": "Distribution of Strain Signatures in Quaternary Sediments, Regional Municipality of",
+    "abstract": "In 2003, the Ontario Geological Survey (OGS) released “Surficial Geology of Southern Ontario ” that captures Quaternary surficial geology across southern Ontario in ArcInfo coverages. Data were digitized and standardized from hard copy maps. This enabled geologists to spatially overlay sediment distributions with other variables of landform evolution (e.g.",
+    "year": 2016,
+    "lang": "en",
+    "type": "article",
+    "topic": "Geochemistry and Geologic Mapping",
+    "field": "Computer Science",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W7128793023",
+    "title": "NSIS: Observations on salt marsh pools, Minas Basin, Nova Scotia 1965-1977",
+    "abstract": "The principal study area was located along the Habitant Creek estuary southeast of Canning, Kings County, NS in a Spartina patens and S. alterniflora marsh next to the old pilings of Pickett's Wharf. Habitant Creek is dyked to the west of the saltmarsh area and fresh water flows out through an aboideau only at low tide, some 6m below the level of the marsh. The marsh extends in width about 250 m from the adjacent roadbed to the creek bank at the wharf pilings. This resource contains a listing of taxa observed in this area.",
+    "year": 2017,
+    "lang": "en",
+    "type": "dataset",
+    "venue": "Open MIND",
+    "ca_institutions": "Fisheries and Oceans Canada",
+    "funders": []
+  },
+  {
+    "id": "W4411965949",
+    "title": "Disease burden in children with moderate to severe perennial allergic rhinitis and concomitant asthma in Canada, Denmark, and the United Kingdom",
+    "abstract": "Background: Allergic rhinitis (AR) affects up to 40% of children in the United States and Europe. AR is often associated with asthma and has a negative impact on quality of life for the children and their families. Objective: We investigated the AR burden in children with moderate to severe perennial AR in Canada, Denmark, and the United Kingdom, focusing on the role of concomitant asthma. We assessed the health impact on the children, their receipt of allergy medication and health care services, and the impact on their families. Methods: An online survey was distributed to caregivers of children aged 5 to 17 with moderate to severe perennial AR (both with and without asthma) and to a control group of caregivers of children without allergies. Results: In total, 877 and 855 caregivers of children with perennial AR and without allergies, respectively, completed the survey. Children with AR and asthma, compared with those without asthma, experienced more sleep disturbances (69% vs 58%), schoolwork limitations (33% vs 22%), daily activities restrictions (55% vs 41%), and missed school hours (7.2 vs 4.6 hours per month). Children with AR and asthma had a higher receipt of allergy medication compared with those without asthma, and they also visited their general practitioner more often (4.6 vs 3.5 times a year). Overall, 32% of all caregivers of children with AR expressed dissatisfaction with allergy medication. Conclusion: Perennial AR, especially with concomitant asthma, imposes a substantial disease burden in children and their families, highlighting the need for long-term disease control.",
+    "year": 2025,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Allergy and Clinical Immunology Global",
+    "topic": "Allergic Rhinitis and Sensitization",
+    "field": "Medicine",
+    "ca_institutions": "Humber River Regional Hospital",
+    "funders": []
+  },
+  {
+    "id": "W2612639656",
+    "title": "Summer Season Water Temperature Modeling under the Climate Change: Case Study for Fourchue River, Quebec, Canada",
+    "abstract": "It is accepted that human-induced climate change is unavoidable and it will have effects on physical, chemical, and biological properties of aquatic habitats. This will be especially important for cold water fishes such as trout. The objective of this study is to simulate water temperature for future periods under the climate change situations. Future water temperature in the Fourchue River (St-Alexandre-de-Kamouraska, QC, Canada) were simulated by the CEQUEAU hydrological and water temperature model, using meteorological inputs from the Coupled Model Intercomparison Project Phase 5 (CMIP5) Global Circulation Models (GCMs) with Representative Concentration Pathway (RCP) 2.6, 4.5 and 8.5 climate change scenarios. The result of the study indicated that water temperature in June will increase 0.2–0.7 °C and that in September, median water temperature could decrease by 0.2–1.1 °C. The rise in summer water temperature may be favorable to brook trout (Salvelinus fontinalis) growth, but several days over the Upper Incipient Lethal Temperature (UILT) are also likely to occur. Therefore, flow regulation procedures, including cold water releases from the Morin dam may have to be considered for the Fourchue River.",
+    "year": 2017,
+    "lang": "en",
+    "type": "article",
+    "venue": "Water",
+    "topic": "Fish Ecology and Management Studies",
+    "field": "Environmental Science",
+    "ca_institutions": "Institut National de la Recherche Scientifique",
+    "funders": ["BC Cancer Agency", "Ministry of Public Safety and Security"]
+  },
+  {
+    "id": "W7148869710",
+    "title": "Analyse des effets d'échelle, d'organisation spatiale et de structuration géomorphologique pour la modélisation des débits et de flux hydrochimiques en bassins non jaugés",
+    "abstract": "La connaissance des dynamiques hydrologiques et du transport chimique associé est indispensable à la mise en place de stratégies de gestion de l’eau et du territoire, mais elle est difficile à consolider pour tous les exutoires de bassins versants porteurs d’enjeux car ils sont souvent « non-jaugés ». A partir d’un hydrogramme observé à l’exutoire d’un bassin jaugé, l'inversion d’un modèle hydrologique à base géomorphologique rend accessible la variable pluie nette en pied de versant. Cette variable indépendante d'échelle est ensuite transposée vers un bassin non-jaugé similaire et reconvoluée en hydrogramme à son exutoire. Cette méthode de \"transposition d'hydrogramme\", est appliquée pour la première fois en régime pluvio-nival dans 21 bassins Québécois. Le succès de la simulation pour le couple de bassins « jaugé » et « non-jaugé » est conditionné par la similarité hydrologique, soit l’ensemble des caractéristiques assurant un fonctionnement proche entre bassins versants. Nous testons si la composition chimique de l’eau est susceptible de révéler cette similarité à l’aide d’une analyse de type spectral développée sur l’ouest de la France, à l’échelle synoptique. Des groupes de bassins versants se démarquent par une homogénéité / hétérogénéité spatiale des faciès de concentrations, et de l’aire à partir de laquelle est observée la stabilisation de ce faciès. Ceci suggère que la composition chimique des rivières est informative d’un fonctionnement hydrologique similaire. Cette hypothèse est ensuite validée grâce à la transposition avec succès sur six bassins de méso-échelle des hydrogrammes et des relations concentrationdébit (CQ), les meilleurs résultats étant obtenus lorsque le couple respecte une similarité hydrochimique. Enfin, le couplage des hydrogrammes et des relations CQ a permis de prédire efficacement, grâce au principe de similarité, les flux en bassin versant non-jaugé, au pas de temps de 15 minutes.",
+    "year": 2019,
+    "type": "dissertation",
+    "topic": "Hydrology and Watershed Management Studies",
+    "field": "Environmental Science",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W7097959372",
+    "title": "An approach to operational forest fire growth predictions for Canada",
+    "abstract": "Abstract. This paper presents an operational approach to predicting fire growth for wildland fires in Canada. The approach addresses data assimilation to provide predictions in a timely and efficient manner. Fuels and elevation grids, forecast weather, and active fire locations are entered into a fire-growth model; then predicted fire perimeters are mapped and presented on the web. The Moderate Resolution Imaging Spectroradiometer (MODIS) and the National Oceanic and Atmospheric Administration Advanced Very High Resolution Radiometer (NOAA/AVHRR) satellite-based detection systems are used to detect current wildland fires (referred to as hotspots). For selected regions, fire-growth simulation environments are assembled. Fuel type data from several fire management agencies are available in grid format at a resolution of 100 m or less; in areas where such data are not available, a national fuels map based on Satellite Pour l’Observation de la Terre Vegetation sensor (SPOT VGT) land cover and forest inventory is used. Similarly, terrain data are available from a variety of sources. Current hotspots are used as ignition points while past hotspots are used to delineate area burned. Surface wind, temperature, and dew-point values (forecast by Environment Canada) are used to determine the fire weather conditions at the fire location. A case study of two large fires in Canada consisting of 54 fire simulation days is used to test these hypotheses.",
+    "year": 2016,
+    "lang": "en",
+    "type": "article",
+    "topic": "Fire effects on ecosystems",
+    "field": "Environmental Science",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4416161881",
+    "title": "Simulation-Based Evaluation of Bio-Inspired Wall Materials for Energy-Efficient Prefabricated Housing in Hot-Arid Climates",
+    "abstract": "",
+    "year": 2025,
+    "type": "article",
+    "venue": "International Journal of Design & Nature and Ecodynamics",
+    "topic": "Hygrothermal properties of building materials",
+    "field": "Engineering",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W7104605707",
+    "title": "Acicnemis cryptica Lewis & Kojima 2025, sp. nov.",
+    "abstract": "Acicnemis cryptica Lewis & Kojima sp. nov. Figs 6 C 1–6, 2, 12 Type material (Japan: 72). Holotype. Japan: Nagano Prefecture: • Otari Onsen, Otari-mura, 23. VII. 1990, M. Hasegawa, bears a red holotype label reading “ HOLOTYPE / Acicnemis cryptica / Lewis & Kojima, 2025 ”, JHL_AREV_672, dissected male, deposited in KUM. Paratypes. Japan: Aomori Prefecture: • Towada, 14. VI. 1957, K. Shimoyama (1 dissected male, KUM), JHL_AREV_498; Fukushima Prefecture: • Yunohana, Tateiwa V., Minami-Aizu, 14. VI. 1947, “ Y. K. ” (1 dissected male, NMNS), JHL_AREV_139; Fukuoka Prefecture: • Hikosan (Buzen), 19. V. 1939, H. Hori (1 dissected male, KUM), JHL_AREV_981; Gunma Prefecture: • Mt. Buson, 13–15. VII. 1975, H. Irie (2, KUM), JHL_AREV_904 (dissected male), JHL_AREV_905; Kochi Prefecture: • Mt. Tebako, 7–10. VIII. 1957, K. Morimoto (13, KUM), JHL_AREV_479 (dissected male), JHL_AREV_823 – JHL_AREV_827, JHL_AREV_829 – JHL_AREV_831, JHL_AREV_833 – JHL_AREV_835, JHL_AREV_837; • Mt. Tebako, 18–21. VII. 1955, K. Kojima (2, KUM), JHL_AREV_828, JHL_AREV_832; • Monobe-mura, 26–28. VIII. 1959, K. Morimoto (2, KUM), JHL_AREV_836, JHL_AREV_845; Ibaraki Prefecture: • Mt. Yamizo-san, Daigo-machi, 1. XII. 1995, S. Nomura (1 dissected male, KUM), JHL_AREV_901; Iwate Prefecture: • Mt. Hayachine, 2–5. VIII. 1982, H. Makihara (8, KUM), JHL_AREV_594 (dissected male), JHL_AREV_817, JHL_AREV_818, JHL_AREV_822, JHL_AREV_841 – JHL_AREV_844; Nagano Prefecture: • Otari Onsen, Otari-mura, 23. VII. 1990, M. Hasegawa (1, TUA), JHL_AREV_819; Oita Prefecture: • Mt. Sobo, 29. VII. 1953, T. Matsuda (1 dissected male, KUM), JHL_AREV_544; Shizuoka Prefecture: • Amagi-toge, Hacchoike Izu-hanto, 14. V. 1980, J. Okuma (4, TUA), JHL_AREV_947 (dissected male), JHL_AREV_959; • Tokyo Metropolis: Nippara, 19. IX, 1971, H. Takizawa, JHL_AREV_118 (1, HUM); • Ogawadani, Okutama, “ 1966.8. 6 ”, T. Goh (1 dissected male, HUM), JHL_AREV_140; • Mt. Takao, 27. V. 1917, E. Gallois (3, HUM) JHL_AREV_114 (dissected male), JHL_AREV_141, JHL_AREV_142; • Mt. Takao, 10. V. 1914, E. Gallois (1, HUM), JHL_AREV_115; • Mt. Takao, Hachioji, 22. VIII. 2024, 35.62972°N, 139.2525°E, R. Anderson, beating in mixed maple / beech / cypress forest, “ 2024-102 ” (2, CMNC), JHL_AREV_2035, JHL_AREV_2026; • Takao Musashi, V. 1912, H. Takabayashi (1, HUM), JHL_AREV_116; Yamanashi Prefecture: • Daibosatsu, 19. V. 1974, M. Tao (1, TUA), JHL_AREV_778; • Koganezawa-rindo, Ohtsuki-shi, 30–31. V. 1980, J. Okuma (5, TUA), JHL_AREV_630 (dissected male), JHL_AREV_820, JHL_AREV_821; • Koganezawa-rindo, 23. VI. 1974, S. Miyakawa (8, TUA), JHL_AREV_941 – JHL_AREV_945. Diagnosis. Body length 4.9–7.0 mm. Covered in dark to pale gray and black scales. Pronotum covered in black scales medially, but with white to yellow scales laterally (compare with A. albofasciata which also has white lateral pronotal bands, but bordered by black scales at the lateral-most extreme of the pronotum). Apical 1 / 2 of elytra with a V-shaped patch of white scales. Pronotum evenly punctured across dorsal surface, but often with shiny, impunctate longitudinal midline. Scutellum bare over anterior 1 / 2 of dorsal surface, otherwise covered in pale yellowish scales. Only odd elytral intervals with erect scales (even elytral intervals may possess erect scales at the extreme elytral apex). Sclerolepidia distinct and protruding. Third tarsomeres distinctly emarginate. Pedon with lateral edges approx. parallel in dorsal view, but sinuating into an acute point (Fig. 6 C 1 – 2). Internal sac without tuberculate or roughened musculature inside the aedeagus (compare with A. albofasciata, which has a tuberculate internal sac visible inside the aedeagus), but with hook-shaped protruding structure surrounded by tuberculate, roughened musculature. Distribution. This species is endemic to mainland Japan (excluding Hokkaido), north from Aomori Prefecture and south to Kyushu (Oita Prefecture, Fukuoka Prefecture). Etymology. The specific name cryptica is a reference to the remarkable similarity of this species in external morphology to A. albofasciata and also explains why it was overlooked for decades. We also suggest the Japanese common name ハイイロカレキゾウムシ [Haiiro-kareki-zoumushi], which translates in English to “ Gray-dead-wood-weevil ”. Remarks. This cryptic species was previously assumed to be a pale-color morph of A. albofasciata (see Morimoto and Miyakawa 1995: 50, fig. 11), and indeed only differs externally from A. albofasciata in overall color (pale gray in A. cryptica; black to dark gray in A. albofasciata) and weakly in scale pattern (entire lateral portion of pronotum white to yellow scaled in A. cryptica; isolated white to yellow band, bordered by black lateral pronotal band in A. albofasciata). The male genitalia of A. cryptica (which were apparently not examined previously), however, are completely distinct from A. albofasciata and differ in the shape of the aedeagus as well as in internal sac morphology (Fig. 6 C 1 – 2).",
+    "year": 2025,
+    "type": "article",
+    "venue": "Zenodo (CERN European Organization for Nuclear Research)",
+    "topic": "Diatoms and Algae Research",
+    "field": "Materials Science",
+    "ca_institutions": "Canadian Food Inspection Agency",
+    "funders": []
+  },
+  {
+    "id": "W2466221976",
+    "title": "Missionaries, merchants, and Inuit entrepreneurs: An examination of trade relations along the Labrador coast",
+    "abstract": "The study of Inuit-European contact in Labrador has often divided the coast into north and south, creating a dichotomy that ignores Inuit mobility and emphasizes the arrival and placement of Europeans along the coast. This has caused some researchers to focus too heavily on missionary trade involvement in the north while ignoring merchant activity in the south, and vice versa. This paper seeks to provide further evidence in support of Inuit entrepreneurs as catalysts for the abundance and diversity of European-made trade goods along the coast, rather than the missionaries or merchants themselves. This study presents an analysis of four Inuit dwellings dating from the mid-18th through early 19th centuries, both pre- and post- missionary arrival, from two distinct regions: Nain and Hamilton Inlet. The results show no significant difference in the quantity of trade goods between the two regions, either before or after the arrival of Moravian missionaries. There may have been another factor at work: influential Inuit traders who were a key component of the trade network, who likely rose to entrepreneurial status prior to the arrival of missionaries, and who continued to move items along the coast thereafter. Thus, the increasing European presence did not largely affect the trade network that had emerged by the early 18th century, aside from providing the Inuit population with access to additional resources and more options.",
+    "year": 2016,
+    "lang": "en",
+    "type": "article",
+    "venue": "Études/Inuit/Studies",
+    "topic": "Indigenous Studies and Ecology",
+    "field": "Health Professions",
+    "ca_institutions": "Memorial University of Newfoundland",
+    "funders": "Memorial University of Newfoundland"
+  },
+  {
+    "id": "W4396714817",
+    "title": "Part A Setting the Stage: Recognizing the Importance of the Open Court Principle and Access to Justice in Manitoba During the COVID-19 Pandemic",
+    "abstract": "Part A Setting the Stage: Recognizing the Importance of the Open Court Principle and Access to Justice in Manitoba During the COVID-19 Pandemic",
+    "year": 2023,
+    "lang": "en",
+    "type": "article",
+    "venue": "Manitoba Law Journal",
+    "topic": "Medical Malpractice and Liability Issues",
+    "field": "Health Professions",
+    "ca_institutions": ["Brandon University", "Global Affairs Canada"],
+    "funders": "University of Manitoba"
+  },
+  {
+    "id": "W4362565728",
+    "title": "Daniel Macfarlane. Fixing Niagara Falls: Environment, Energy, and Engineers at the World’s Most Famous Waterfall. 332pp., index. Vancouver: UBC Press, 2020. $89.95 (hardcover). ISBN 9780774864220; $34.95 (paperback). ISBN 9780774864237. Also available in e-book formats.",
+    "abstract": "Daniel Macfarlane. Fixing Niagara Falls: Environment, Energy, and Engineers at the World’s Most Famous Waterfall. 332pp., index. Vancouver: UBC Press, 2020. $89.95 (hardcover). ISBN 9780774864220; $34.95 (paperback). ISBN 9780774864237. Also available in e-book formats. https://www.ubcpress.ca/fixing-niagara-falls. Un article de la revue Scientia Canadensis (Photography: Science, Technology and Practice) diffusée par la plateforme Érudit.",
+    "year": 2022,
+    "lang": "en",
+    "type": "article",
+    "venue": "Scientia Canadensis Canadian Journal of the History of Science Technology and Medicine",
+    "topic": "History of Science and Medicine",
+    "field": "Arts and Humanities",
+    "ca_institutions": "University of Calgary",
+    "funders": []
+  },
+  {
+    "id": "W2972314397",
+    "title": "Community-based exercise for health promotion and secondary cancer prevention in Canada: protocol for a hybrid effectiveness-implementation study",
+    "abstract": "INTRODUCTION: Cancer care has expanded from a disease-focused, survival-oriented model to an approach that now considers how survivors can live well in the aftermath of intensive therapy, where they may deal with significant changes to their bodies, mental health or emotional well-being. Research evidence supports the benefit of exercise during and following cancer treatments for cancer-related symptoms, physical functioning and fitness, and health-related quality of life. To move this efficacy evidence into practice, we designed and launched a 5-year study to evaluate the relative benefit from implementing a clinic-to-community-based cancer and exercise model of care. METHODS AND ANALYSIS: A hybrid effectiveness and implementation trial design is being used to evaluate the effectiveness of delivery of community-based exercise and to collect data on implementation of the programme. The study opened in January 2017, with estimated completion by January 2022. The programme will be delivered in seven cities across the province of Alberta, Canada, with sites including three academic institutions, six YMCA locations, Wellspring Edmonton and Calgary, and six municipal fitness centres. Participants are adult cancer survivors (n=2500) from all tumour groups and stages and at any time point along their cancer treatment trajectory, up to 3 years post treatment completion. Survivors take part in a minimum of 60 min of mild-to-moderate intensity full body exercise twice weekly for a 12-week period. The primary effectiveness outcome is the proportion of participants meeting or exceeding 150 min of moderate intensity exercise per week at 1-year follow-up. The Reach, Effectiveness, Adoption, Implementation and Maintenance (RE-AIM) framework will be utilised to capture individual-level and organizational-level impact of the exercise programme at 12 and 24 weeks and 1-year follow-up. The cohort of survivors participating in the study will allow for long-term (>5-year) evaluation of rates of cancer recurrence and secondary cancers beyond the funding period. ETHICS AND DISSEMINATION: The study was approved by the Health Research Ethics Board of Alberta. The study is funded by Alberta Innovates and the Alberta Cancer Foundation. The study will help to answer critical questions on the effectiveness of cancer-specific community-based exercise programming in both the short-term and the long-term. Collectively, the findings will help to inform the acceptability, adoption, feasibility, reach and sustainability of community-based exercise. TRIAL REGISTRATION NUMBER: NCT02984163; Pre-results.",
+    "year": 2019,
+    "lang": "en",
+    "type": "article",
+    "venue": "BMJ Open",
+    "topic": "Cancer survivorship and care",
+    "field": "Medicine",
+    "ca_institutions": ["Athabasca University", "University of Calgary", "Alberta Cancer Foundation", "University of Alberta"],
+    "funders": ["Alberta Innovates - Health Solutions", "Alberta Cancer Foundation"]
+  },
+  {
+    "id": "W6999026096",
+    "title": "Brookfield Renewable Announces Strong First Quarter Results",
+    "abstract": "",
+    "year": 2022,
+    "lang": "en",
+    "type": "other",
+    "topic": "Photovoltaic Systems and Sustainability",
+    "field": "Environmental Science",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4414200832",
+    "title": "Scale and colonialism in nuclear waste siting: The geography of spent nuclear fuel in northwestern Ontario, Canada",
+    "abstract": "Abstract This article examines the social justice implications of the scales at which decisions are made about nuclear waste in northwestern Ontario. Drawing on a case study of a proposed deep geological repository, it argues that the nuclear industry's approach to site selection focuses on strategically constructed “local” and “national” scales of decision making which can exclude potentially affected First Nations and municipalities. By excluding other scales from decision making—including the scales that First Nations have mobilized like watersheds, transportation corridors, and First Nations territories —the nuclear industry has failed to include many First Nations and municipalities that could be exposed to environmental risk if the proposed waste repository is built and operated. As a result, the proposed waste repository is posed to move through assessment and regulatory processes without the free, prior, and informed consent of all potentially affected First Nations.",
+    "year": 2025,
+    "lang": "en",
+    "type": "article",
+    "venue": "Canadian Geographies / Géographies canadiennes",
+    "topic": "Risk Perception and Management",
+    "field": "Social Sciences",
+    "ca_institutions": "University of Manitoba",
+    "funders": []
+  }
+]

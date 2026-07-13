@@ -1,0 +1,904 @@
+Reading additional input from stdin...
+OpenAI Codex v0.144.0
+--------
+workdir: /Users/choxos/Documents/GitHub/CaRN-data-challenge
+model: gpt-5.6-luna
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: high
+reasoning summaries: none
+session id: 019f597e-554f-7961-9f54-4b7826e327e9
+--------
+user
+# MétaCan screening rubric (v1.0)
+
+**Locked before screening. Version-controlled. Any change is a new version with a dated entry in `DEVIATIONS.md`.**
+
+Both machine screeners and both human coders work from this document and nothing else. The rubric is the
+instrument; if two coders disagree, the rubric is what they are adjudicated against.
+
+---
+
+## The unit
+
+One work (journal article, preprint, book chapter, report, dataset, or software), identified by its OpenAlex ID.
+You see: title, abstract, publication year, language, venue, OpenAlex topic and field, Canadian institutional
+affiliations, funders.
+
+## The question
+
+**Is the object of study *research itself*?**
+
+Metaresearch studies how research is done, reported, funded, evaluated, disseminated, or governed. The test is
+what the work is *about*, not what field it appears in and not what vocabulary it uses.
+
+A cardiology trial is not metaresearch. A study of *how cardiology trials report their outcomes* is.
+
+---
+
+## Tier
+
+Assign exactly one.
+
+### T1: Core metaresearch
+The primary object of study is research itself. Typical objects:
+
+- research **methods** and their properties (bias, reporting, statistical practice, study design)
+- **reproducibility**, replication, data and code sharing
+- **research integrity**: misconduct, retraction, questionable research practices, authorship
+- **peer review** and editorial process *as objects of study*
+- **research evaluation**, metrics, rankings, funding allocation
+- **scholarly communication**: publishing models, open access, preprints *as objects of study*
+- **bibliometrics and scientometrics** applied to a research literature
+- the **research workforce**: careers, equity, training, capacity
+- **evidence synthesis methodology** (not an individual systematic review's clinical answer, but work *about* how
+  syntheses are done)
+
+### T2: Adjacent
+Empirically or conceptually grounded work on science as a social system that is not framed as metaresearch but
+studies it:
+
+- **science and technology studies (STS)**: social studies of scientific knowledge, practice, controversy
+- **library and information science**: information behaviour of researchers, repositories, discovery
+- **research infrastructure** studies: platforms, data repositories, identifiers, standards
+- **history and philosophy of science** *when the object is contemporary research practice*
+- **research policy** analysis grounded in evidence
+
+T2 is where the field's diversity lives. Be generous here: a paper does not have to call itself metaresearch to
+be studying research.
+
+### T3: Contextual
+Relevant to the ecosystem, mapped and released, but **never pooled into the analytic corpus**:
+
+- editorials, commentaries, opinion pieces about research practice
+- policy documents and position statements
+- announcements of infrastructure, tools, or initiatives
+- news, obituaries, corrections, letters
+
+### OUT: Not metaresearch
+Everything else. Includes, and this is the most common error:
+
+- **A study that uses a method is not a study of the method.** A meta-analysis answering a clinical question is
+  OUT. A study of how meta-analyses handle heterogeneity is T1.
+- **Mentioning a metaresearch term is not studying it.** A lab paper reporting "assay reproducibility", a methods
+  section saying "peer reviewed", a licence note saying "open access": all OUT.
+- **Domain research that happens to be bibliometric in method** but whose object is the domain, not the research:
+  e.g. a bibliometric map of diabetes treatments, produced to summarise diabetes knowledge. Borderline; see below.
+
+---
+
+## The three errors that matter most
+
+These are where the pilot showed retrieval and screening break down. Read them twice.
+
+1. **Polysemy.** `reproducibility` in a biochemistry paper means the assay gives the same reading twice. In a
+   metaresearch paper it means the reproducibility crisis. Only the second is in scope. The same applies to
+   `validation`, `replication`, `bias`, `peer review`, `open access`. **Judge the sense, not the token.**
+
+2. **Method vs. object.** Using bibliometrics ≠ studying research. Ask: *if this paper is right, what do we now
+   know more about: a scientific question, or the practice of science?* If the former, OUT.
+
+3. **Absence of vocabulary is not absence of content.** An STS paper about laboratory practice, or an LIS paper
+   about how researchers find data, may use none of the field's keywords and still be squarely T2. **Do not
+   require the vocabulary.** This is the error that makes the field look smaller and more anglophone than it is.
+
+---
+
+## Canadian linkage
+
+Record which apply (this is metadata, not an inclusion test; the estimand is defined separately in
+`PROTOCOL.md`):
+
+- `CA_AFF`: at least one author affiliated with a Canadian institution
+- `CA_FUND`: funded by CIHR, NSERC, SSHRC, or CFI
+- `ABOUT_CA`: the Canadian research system is a substantive object of study (not a passing mention, not one
+  country among forty in a global comparison)
+
+## Genre
+
+`empirical` · `conceptual` · `editorial/commentary` · `policy` · `infrastructure/announcement` · `other`
+
+OpenAlex's `type` is unreliable and this field is commentary-heavy, so genre is coded, not inherited.
+
+## Language of the work
+
+As published. Do not infer from the venue.
+
+---
+
+## Confidence
+
+- `high`: the rubric decides this cleanly.
+- `medium`: the rubric decides, but a reasonable coder could differ.
+- `low`: genuinely on the boundary, or the abstract is missing/too thin to judge.
+
+**`low` is a legitimate answer and is not a failure.** Records coded `low` by either screener are routed to
+adjudication. A screener that never says `low` is not being careful; it is being confident.
+
+---
+
+## Worked examples
+
+| Title (abridged) | Tier | Why |
+|---|---|---|
+| "Data sharing practices in 500 randomised trials" | **T1** | The object is reporting practice. |
+| "Reproducibility of a Western blot protocol" | **OUT** | Assay reproducibility. Polysemy trap. |
+| "Trends in citation of retracted papers" | **T1** | Object is the literature's own behaviour. |
+| "Laboratory life in a Canadian genomics centre: an ethnography" | **T2** | STS. No metaresearch vocabulary; still studies research. |
+| "How do researchers discover datasets? A survey" | **T2** | LIS, information behaviour of researchers. |
+| "Effectiveness of statins: a network meta-analysis" | **OUT** | Uses a synthesis method to answer a clinical question. |
+| "How network meta-analyses handle inconsistency: a review of 200 reviews" | **T1** | Object is the method. |
+| "Announcing the Canadian Research Data Repository" | **T3** | Infrastructure announcement. Mapped, not pooled. |
+| "Open access mandates are failing early-career researchers" (editorial) | **T3** | Commentary about research practice. |
+| "Bibliometric analysis of diabetes research 2000–2020" | **T2** | Borderline. Bibliometric method, and the object *is* a research literature, so it studies research output. Code T2, `medium`. |
+| "Le libre accès dans les revues québécoises : état des lieux" | **T1** | Scholarly communication, object is publishing practice. French. |
+
+---
+
+## Instructions to the screener
+
+Read the title and abstract. Apply the rubric. Do not use outside knowledge of the authors or the journal's
+reputation. If the abstract is missing, judge on the title alone and set confidence to `low` unless the title is
+unambiguous.
+
+Return the schema in `protocol/screening-schema.json`. One object per work. No prose, no preamble.
+--------------------------------------------------------------------------------
+You are screening works for MetaCan, a map of Canadian metaresearch.
+
+Apply the rubric above to every record in the JSON array below. Return a JSON
+array with one object per work, conforming to protocol/screening-schema.json:
+
+  {"id": "W...", "tier": "T1|T2|T3|OUT", "genre": "...", "about_ca": true|false,
+   "confidence": "high|medium|low", "reason": "one sentence"}
+
+Rules:
+- Return the JSON array and NOTHING else. No prose, no preamble, no code fences.
+- Every input id must appear exactly once in the output.
+- Do not run commands, read files, or browse. Classify from the RECORDS alone.
+
+RECORDS:
+[
+  {
+    "id": "W4300920754",
+    "title": "6 The Supreme Court of Canada",
+    "abstract": "",
+    "year": 2008,
+    "lang": "en",
+    "type": "book-chapter",
+    "venue": "University of Toronto Press eBooks",
+    "topic": "Judicial and Constitutional Studies",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W3123851494",
+    "title": "Experimental studies on ablation characteristics of alumina after irradiation with a 193-nm ArF excimer laser",
+    "abstract": "",
+    "year": 2021,
+    "lang": "en",
+    "type": "article",
+    "venue": "The European Physical Journal Plus",
+    "topic": "Laser Material Processing Techniques",
+    "field": "Engineering",
+    "ca_institutions": "University of Windsor",
+    "funders": []
+  },
+  {
+    "id": "W3122956505",
+    "title": "Models and branch‐and‐cut algorithms for pickup and delivery problems with time windows",
+    "abstract": "Abstract In the pickup and delivery problem with time windows (PDPTW), capacitated vehicles must be routed to satisfy a set of transportation requests between given origins and destinations. In addition to capacity and time window constraints, vehicle routes must also satisfy pairing and precedence constraints on pickups and deliveries. This paper introduces two new formulations for the PDPTW and the closely related dial‐a‐ride problem (DARP) in which a limit is imposed on the elapsed time between the pickup and the delivery of a request. Several families of valid inequalities are introduced to strengthen these two formulations. These inequalities are used within branch‐and‐cut algorithms which have been tested on several instance sets for both the PDPTW and the DARP. Instances with up to eight vehicles and 96 requests (194 nodes) have been solved to optimality. © 2007 Wiley Periodicals, Inc. NETWORKS, Vol. 49(4), 258–272 2007",
+    "year": 2007,
+    "lang": "en",
+    "type": "article",
+    "venue": "Networks",
+    "topic": "Vehicle Routing Optimization Methods",
+    "field": "Engineering",
+    "ca_institutions": "HEC Montréal",
+    "funders": []
+  },
+  {
+    "id": "W2782133747",
+    "title": "Le potentiel d’influence de l’intérêt scolaire dans la motivation des collégiens en difficulté",
+    "abstract": "Conférence présentée lors du colloque « Journée de la recherche sur la motivation au collégial » Acfas, Montréal, 10 mai 2017",
+    "year": 2017,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Bibliothèque et Archives nationales du Québec (Québec government)",
+    "topic": "Motivation and Self-Concept in Sports",
+    "field": "Psychology",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2337018665",
+    "title": "Structuring collaboration amongst B.C. First Nations and local governments : learning from Katzie First Nation and neighbouring local governments",
+    "abstract": "First Nations and local government communities in urban areas in British Columbia find themselves living in close proximity to each other as a result of urban growth. Local governments are becoming concerned about the impacts final treaty settlements will have on their communities. In general, they are unsure about the effects increased self-governing powers will have on their communities. In order for treaty implementation to be successful and, for First Nations and local government communities to co-exist in urban areas, it is necessary for these two parties to develop collaborative relationships. The main objectives of this research were to identify ways First Nations and local governments could collaborate on planning matters and to contribute to the literature on First Nation and local government planning relationships in BC. A framework of opportunities and obstacles to structuring collaboration among a First Nation and local government was developed by interviewing individuals from Katzie First Nation and neighbouring local governments. A discussion on the need for both parties to be motivated by a critical interest to structure collaboration is included in the framework. For the current study, the critical interest for the two parties stems from Katzie's treaty negotiations. The study found five key elements that together increase the opportunity for First Nations and local governments to structure collaboration. These are First Nation participation in the BC treaty process, face to face communication, mutual learning, First Nation participation in neighbouring community events, and informed municipal leaders on First Nation issues. The study identified the following four obstacles to collaboration: First Nations and local governments inability to negotiate at the treaty table, competing land use and development, relative government and administrative capacity, and lack of legislation requiring First Nations to consult with local governments. The framework considers issues that are specific to urban areas in BC where First Nations are negotiating treaties and how these issues affect collaboration among First Nations and local governments. The opportunities are consistent with the general principles of collaborative planning. It is concluded that the BC treaty process, in this case, acts as a catalyst in bringing these two parties together in long term dialogue and eventual collaboration.",
+    "year": 2009,
+    "lang": "en",
+    "type": "article",
+    "venue": "cIRcle (University of British Columbia)",
+    "topic": "Indigenous Health, Education, and Rights",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W3212269695",
+    "title": "La loi québécoise sur l’équité salariale à l’aulne des théories féministes",
+    "abstract": "Depuis son entrée en vigueur, la Loi sur l’équité salariale a mobilisé temps et ressources et continue de le faire chez l’ensemble des acteurs du marché du travail, y compris l’administration québécoise. La pratique, l’expérience et les résultats permettent aujourd’hui de jeter un regard lucide sur le chemin parcouru qui inscrit l’équité salariale dans un mouvement irréversible, mais aussi sur la route qu’il reste à parcourir et les moyens à prendre pour atteindre l’équité salariale et la maintenir pour les femmes du Québec. Ainsi, même dans les milieux syndiqués, dans les plus grandes entreprises privées, voire au sein de la fonction publique québécoise, des ajustements salariaux ont du être versés au terme des exercices d’équité salariale pour resserrer cette fourchette de rémunération résiduelle entre les hommes et les femmes. Ce sont autant de progrès notables qui mettent en lumière l’efficacité d’une loi novatrice à l’esprit véritablement féministe.",
+    "year": 2020,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Revue de droit comparé du travail et de la sécurité sociale",
+    "topic": "Historical and Scientific Studies",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W133122769",
+    "title": "Soft and hard interactions in<mml:math xmlns:mml=\"http://www.w3.org/1998/Math/MathML\" display=\"inline\"><mml:mi>p<\/mml:mi><mml:mrow><mml:mrow><mml:mover><mml:mrow><mml:mi>p<\/mml:mi><\/mml:mrow><mml:mrow><mml:mi>¯<\/mml:mi><\/mml:mrow><\/mml:mover><\/mml:mrow><\/mml:mrow><\/mml:math>collisions at<mml:math xmlns:mml=\"http://www.w3.org/1998/Math/MathML\" display=\"inline\"><mml:mrow><mml:msqrt><mml:mrow><mml:mi>s<\/mml:mi><\/mml:mrow><\/mml:msqrt><\/mml:mrow><mml:mrow><mml:mrow><mml:mrow/><\/mml:mrow><\/mml:mrow><mml:mo>=<\/mml:mo><mml:mn>1800<\/mml:mn><mml:mn/><\/mml:math>and 630 GeV",
+    "abstract": "We present a study of $p\\overline{p}$ collisions at $\\sqrt{s}=1800$ and 630 GeV collected using a minimum bias trigger by the CDF experiment in which the data set is divided into two classes corresponding to ``soft'' and ``hard'' interactions. For each subsample, the analysis includes measurements of the multiplicity, transverse momentum ${(p}_{T})$ spectrum, and the average ${p}_{T}$ and event-by-event ${p}_{T}$ dispersion as a function of multiplicity. A comparison of results shows distinct differences in the behavior of the two samples as a function of the center of mass (c.m.) energy. We find evidence that the properties of the soft sample are invariant as a function of c.m. energy.",
+    "year": 2002,
+    "lang": "lv",
+    "type": "article",
+    "venue": "Physical review. D. Particles, fields, gravitation, and cosmology/Physical review. D. Particles and fields",
+    "topic": "High-Energy Particle Collisions Research",
+    "field": "Physics and Astronomy",
+    "ca_institutions": [],
+    "funders": ["Natural Sciences and Engineering Research Council of Canada", "Istituto Nazionale di Fisica Nucleare", "Korea Science and Engineering Foundation", "National Science Council", "Alfred P. Sloan Foundation", "Fermilab", "U.S. Department of Energy", "Schweizerischer Nationalfonds zur Förderung der Wissenschaftlichen Forschung", "National Science Foundation"]
+  },
+  {
+    "id": "W4253710338",
+    "title": "Canadian cities' lobbying could increase clout",
+    "abstract": "Headline CANADA: Cities' lobbying could increase clout",
+    "year": 2015,
+    "lang": "en",
+    "type": "other",
+    "venue": "Emerald expert briefings",
+    "topic": "Canadian Policy and Governance",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W1970193084",
+    "title": "High spatial resolution mapping of partially strain-compensated SiGe:C films in the presence of postannealed defects",
+    "abstract": "An experimental-analytical technique for the model-independent nondestructive characterization of single-crystal alloys is applied to partially strain-compensated SiGe:C∕Si single layer structures with high concentrations of Ge. The studies were performed on pre- and postannealed SiGe:C∕Si samples. X-ray Bragg diffraction profiles were collected at a synchrotron radiation source near the absorption edge of Ge. The studies have allowed the reconstruction of the complex crystal structure factor as a function of crystal depth, permitting direct observation of the effect of the thermal annealing on lattice strain and structural composition in the SiGe:C layer. The technique was shown to be applicable to the analysis of both perfect crystals and crystal structures containing a low defect concentration.",
+    "year": 2006,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Applied Physics",
+    "topic": "Integrated Circuits and Semiconductor Failure Analysis",
+    "field": "Engineering",
+    "ca_institutions": [],
+    "funders": ["Alzheimer Society Research Program", "Australian Synchrotron"]
+  },
+  {
+    "id": "W2795530412",
+    "title": "Global Impacts of the extratropical transition of Hurricane Noel (2007)",
+    "abstract": "",
+    "year": 2008,
+    "lang": "en",
+    "type": "article",
+    "venue": "18th Conference on Atmospheric BioGeosciences/28th Conference on Agricultural and Forest Meteorology/28th Conference on Hurricanes and Tropical Meteorology<br> (28 April–2 May 2008)",
+    "topic": "Tropical and Extratropical Cyclones Research",
+    "field": "Earth and Planetary Sciences",
+    "ca_institutions": "McGill University",
+    "funders": []
+  },
+  {
+    "id": "W4404060536",
+    "title": "Teachers’ Interaction with Prescribed Teaching Materials: Evaluation, Adaptation and Exploitation",
+    "abstract": "In recent years, material development in English language teaching has received growing attention, yet the interaction between English language teachers and prescribed teaching materials remains an under-researched area. This study aims to address this issue and contribute to the understanding of teachers&amp;rsquo; agency in their interactions with prescribed textbooks. The study addresses this gap by exploring how five high school English teachers in two major cities in southern and southwestern China interact with prescribed textbooks within the curriculum policy context. Through in-depth semi-structured interviews and documentary analysis, the study investigates teachers&amp;rsquo; evaluation, adaptation, and exploitation of materials, revealing that while teachers exercise agency in material development, both textbook structure and external factors contribute to the deprofessionalisation of teachers. The findings underscore the complex relationship between a standardised curriculum and teachers&amp;rsquo; context-sensitive practices, highlighting the need for flexible textbook designs and more supportive administrative practices to better facilitate teacher agency in classroom material use.",
+    "year": 2024,
+    "lang": "en",
+    "type": "article",
+    "venue": "English Language Teaching",
+    "topic": "Teacher Education and Leadership Studies",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W3128229421",
+    "title": "Multimorbidité : les enjeux liés à la surveillance populationnelle",
+    "abstract": "Les maladies chroniques sont la première cause de mortalité dans les pays industrialisés. La multimorbidité (cooccurrence d’au moins 2 maladies chroniques chez un même individu) toucherait environ 15 % des Canadiens âgés de 20 ans et plus et 30 % de 65 ans et plus. Le vieillissement de la population, combiné au progrès du traitement des maladies chroniques, contribue à l’augmentation de la multimorbidité. La multimorbidité est plus qu’une simple addition de conditions chroniques, elle est associée à une diminution de la qualité de vie, à une augmentation du risque de décès et d’hospitalisations, à une augmentation du nombre de consultations médicales et à une consommation plus élevée de médicaments. De plus, la multimorbidité complexifie la prise en charge des patients atteints et soulève de nombreux défis pour la prévention.&#13;\\n&#13;\\nPrésentement, aucune surveillance de la multimorbidité et du fardeau global des maladies chroniques n’est effectuée au niveau québécois et canadien. De plus, aucun cadre de surveillance consensuel n’existe au niveau international, chaque juridiction utilisant sa propre définition et sa propre mesure. Les principaux enjeux sont liés au concept même de multimorbidité et de la mesure populationnelle de ce phénomène. Premièrement, comment définir la multimorbidité dans un contexte de surveillance? Doit-on s’intéresser à des indicateurs simples de multimorbidité (2 conditions ou plus, 3 conditions ou plus), au nombre absolu de conditions, à des combinaisons de maladies, au fardeau global des conditions chroniques? Ensuite, devons-nous considérer toutes les maladies sur le même pied d’égalité ou certaines maladies ont-elles un impact plus grand sur la santé? Les conférences et la table ronde de ce colloque permettaient d’entamer une discussion sur les enjeux conceptuels et méthodologiques de la multimorbidité dans un contexte de surveillance populationnelle.",
+    "year": 2019,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Corpus Université Laval (Université Laval)",
+    "topic": "Healthcare Systems and Practices",
+    "field": "Health Professions",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2126997884",
+    "title": "The Revelation of Administrative Case System in Taiwan to the Transformation of Administrative Case Guidance System in Mainland China",
+    "abstract": "Compared with legal systems in other countries and regions, Cross-Strait legal systems are more portable and referential to each other because of the impact of civil law and the homology of law culture. The administrative case guidance system in mainland China is facing a need of transformation and reformation. The administrative case system in Taiwan has played an important role in the development, improvement and innovation of the administrative law theory. It will delineate a revelation to the construction of administrative case guidance system in mainland China, including mode selection, properties, efficacy and other aspects. Key words: Adminis trat ive case system; Administrative case guidance system; Cross-Strait Resume Le systeme juridique du detroit, basee sur l’impact de la loi civile et la culture juridique de l’homologie, par rapport a d’autres pays et regions, le systeme juridique plus portable et peut apprendre de la nature. Systeme de guidage administratif en Chine fait face a la necessite de changement et de transformation. Systeme de Taiwan le droit administratif dans la theorie le cas du developpement administratif, l’amelioration et l’innovation a joue un role enorme, il sera en Chine du mode de selection des cas le systeme administratif, la nature, l’efficacite et d’autres aspects de la construction de notre inspiration. Mots-cles: Systeme de decision d’administratif; Systeme de Guidage des affaires administrativen; Detroit",
+    "year": 2011,
+    "lang": "en",
+    "type": "article",
+    "venue": "Cross-cultural communication",
+    "topic": "Dispute Resolution and Class Actions",
+    "field": "Business, Management and Accounting",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2494965242",
+    "title": "Oxygen utilization rate (OUR) underestimates ocean respiration: A model study",
+    "abstract": "Abstract We use a simple 1‐D model representing an isolated density surface in the ocean and 3‐D global ocean biogeochemical models to evaluate the concept of computing the subsurface oceanic oxygen utilization rate (OUR) from the changes of apparent oxygen utilization (AOU) and water age. The distribution of AOU in the ocean is not only the imprint of respiration in the ocean's interior but is strongly influenced by transport processes and eventually loss at the ocean surface. Since AOU and water age are subject to advection and diffusive mixing, it is only when they are affected both in the same way that OUR represents the correct rate of oxygen consumption. This is the case only when advection prevails or with uniform respiration rates, when the proportions of AOU and age are not changed by transport. In experiments with the 1‐D tube model, OUR underestimates respiration when maximum respiration rates occur near the outcrops of isopycnals and overestimates when maxima occur far from the outcrops. Given the distribution of respiration in the ocean, i.e., elevated rates near high‐latitude outcrops of isopycnals and low rates below the oligotrophic gyres, underestimates are the rule. Integrating these effects globally in three coupled ocean biogeochemical and circulation models, we find that AOU‐over‐age based calculations underestimate true model respiration by a factor of 3. Most of this difference is observed in the upper 1000 m of the ocean with the discrepancies increasing toward the surface where OUR underestimates respiration by as much as factor of 4.",
+    "year": 2016,
+    "lang": "en",
+    "type": "article",
+    "venue": "Global Biogeochemical Cycles",
+    "topic": "Marine and coastal ecosystems",
+    "field": "Earth and Planetary Sciences",
+    "ca_institutions": [],
+    "funders": ["Bundesministerium für Bildung und Forschung", "Deutsche Forschungsgemeinschaft", "University of Victoria"]
+  },
+  {
+    "id": "W1990801760",
+    "title": "The Plurality of Languages and Literature in Translation: The Post-Colonial Context",
+    "abstract": "Linguistic pluralism in India is not a sign of social and cultural fragmentation but rather a positive force, a recognition of the differences which constitute the nation. This recognition needs to be extended beyond the languages recognized in the Indian Constitution to those which create an intermediary space, thereby subverting received hierarchies.",
+    "year": 2002,
+    "lang": "en",
+    "type": "article",
+    "venue": "Meta Journal des traducteurs",
+    "topic": "Translation Studies and Practices",
+    "field": "Arts and Humanities",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2970597142",
+    "title": "Does depressive symptomology moderate the relationship between alexithymic traits and emotion perception ability?",
+    "abstract": "While a relationship between alexithymic traits and emotion perception difficulties has been consistently demonstrated, no prior research has examined whether depressive symptomology influences this relationship. The present study examined the relationship between alexithymic traits and the ability to identify a range of dynamically displayed basic emotions (happiness, sadness, and fear), across various emotion intensity levels (20%, 60%, and 100%), and whether depressive symptomology moderated this relationship. One-hundred and twenty participants (68 females; aged 18 to 65 years, `M` = 24.95, `SD` = 7.19) completed the Toronto Alexithymia Scale, the Depression, Anxiety, and Stress Scale, and the Emotion Recognition Task. The present results indicate that higher levels of alexithymic traits may be associated with a reduced ability to identify fear at full intensity levels, which provides some limited support for the prior literature. Furthermore, higher levels of depressive symptomology may be associated with an enhanced ability to identify fear at low intensity levels, which provides tentative support for the negative bias in emotion processing typically found in depressed individuals. However, no further enhancement, attenuation, or moderation effects were evident. Future research in individuals with higher levels of alexithymic traits and depressive symptomology is required to support these findings and to better inform potential targeted treatment programs for those who may be experiencing interpersonal difficulties.",
+    "year": 2018,
+    "lang": "en",
+    "type": "dissertation",
+    "venue": "UTAS Research Repository",
+    "topic": "Psychosomatic Disorders and Their Treatments",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2143606571",
+    "title": "Hepatic regulation of fatty acid synthase by insulin and T<sub>3<\/sub>: evidence for T<sub>3<\/sub>genomic and nongenomic actions",
+    "abstract": "Fatty acid synthase (FAS) is a key enzyme of hepatic lipogenesis responsible for the synthesis of long-chain saturated fatty acids. This enzyme is mainly regulated at the transcriptional level by nutrients and hormones. In particular, glucose, insulin, and T(3) increase FAS activity, whereas glucagon and saturated and polyunsaturated fatty acids decrease it. In the present study we show that, in liver, T(3) and insulin were able to activate FAS enzymatic activity, mRNA expression, and gene transcription. We localized the T(3) response element (TRE) that mediates the T(3) genomic effect, on the FAS promoter between -741 and -696 bp that mediates the T(3) genomic effect. We show that both T(3) and insulin regulate FAS transcription via this sequence. The TRE binds a TR/RXR heterodimer even in the absence of hormone, and this binding is increased in response to T(3) and/or insulin treatment. The use of H7, a serine/threonine kinase inhibitor, reveals that a phosphorylation mechanism is implicated in the transcriptional regulation of FAS in response to both hormones. Specifically, we show that T(3) is able to modulate FAS transcription via a nongenomic action targeting the TRE through the activation of a PI 3-kinase-ERK1/2-MAPK-dependent pathway. Insulin also targets the TRE sequence, probably via the activation of two parallel pathways: Ras/ERK1/2 MAPK and PI 3-kinase/Akt. Finally, our data suggest that the nongenomic actions of T(3) and insulin are probably common to several TREs, as we observed similar effects on a classical DR4 consensus sequence.",
+    "year": 2008,
+    "lang": "en",
+    "type": "article",
+    "venue": "American Journal of Physiology-Endocrinology and Metabolism",
+    "topic": "Peroxisome Proliferator-Activated Receptors",
+    "field": "Biochemistry, Genetics and Molecular Biology",
+    "ca_institutions": "Université du Québec à Montréal",
+    "funders": []
+  },
+  {
+    "id": "W2182425999",
+    "title": "Developing a purchasing strategy for high chromium grinding media. Case company: KGHM Polska Miedź S.A, Ore Enrichment Plants.",
+    "abstract": "This thesis was conducted according to the needs of KGHM Polska Miedź S.A. The company was interested in improving the purchasing strategy of high chromium grinding media, which are relatively new to Ore Enrichment Plants and require further research.\\n\\nThe objective of this thesis was to give development suggestions to Ore Enrichment Plants on their purchasing strategy. The researcher analysed two different aspects helping to answer the Research Problem. According to the received and studied data it was important to determine the current purchasing strategy of high chromium grinding media is the company’s experience of using the current purchasing strategy.\\n\\nThe thesis project was initiated in November 2012 and was concluded in August 2013. Theoretical literature has been studied in October and November 2012 in order to support cooperation with KGHM Polska Miedź S.A. Studies included purchasing process, product characteristics, contracting, supplier selection and evaluation, quality control and industrial customer behavior. Data was collected between December 2012 and May 2013. Data collection methods included e-mails and telephone consultation, and interviews at the company’s headquarters. The research tools aimed at elaborating on the current and previous experiences in using certain purchasing strategies and finding the best way to suggest valuable improvements. Improvement ideas were based on personal observations and judgement.\\n\\nIt was found that the current purchasing strategy for high chromium grinding media is already well developed and a lot of attention is given to supplier selection and quality issues. Some development ideas were also given. One example are changes in the purchasing process by adding tender procedures, supplier database maintenance and purchasing strategy unification in relation to KGHM International in Canada.",
+    "year": 2013,
+    "lang": "en",
+    "type": "article",
+    "venue": "Theseus (Ammattikorkeakoulujen)",
+    "topic": "Advancements in Materials Engineering",
+    "field": "Engineering",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4390201636",
+    "title": "Detection of Early Alzheimer’s disease at AdventHealth: A Davos Alzheimer’s Collaborative flagship site",
+    "abstract": "Abstract Background Early identification of Alzheimer’s disease (AD) is critical for disease‐modifying therapies. The Davos Alzheimer’s Collaborative flagship program tested the feasibility of implementing a digital cognitive assessment (DCA) followed by a blood biomarker (BBM) for early detection of cognitive impairment (CI). Method Individuals ≥65 years without dementia were approached via their primary care provider (PCP) or through direct‐to‐consumer (DTC) social media. After consenting, participants completed the Cogstate Brief Battery (CBB) DCA. Participants with an abnormal or borderline CBB score were offered the Montreal Cognitive Assessment (MoCA) and the PrecivityAD® blood test, a CLIA‐certified laboratory developed test that uses mass spectrometry to analyze biomarkers to identify brain amyloid plaques (reported by the Amyloid Probability Score‐APS) in individuals with CI. Result Over 2300 participants expressed interest. Of 2001 eligible, 1076 (96% social media, 4% PCP) e‐consented. 742 completed the CBB of which 211 (28%) were borderline, 113 (15%) abnormal, and 418 (56%) were negative for CI. Of the 324 with borderline or abnormal CBB scores, 219 (67%) completed the MoCA (59% Normal range, 38% Mild CI range, 2% Moderate CI range, and 0.5% Severe CI range). Of the 324, 218 (67%) received BBM: 18.8% had High APS, 67.9% Low APS, and 13.3% Intermediate (e.g. non‐informative) APS. The APS result for participants with a normal MoCA showed 20% with High APS, 12% with an Intermediate APS, and 69% with Low APS. Of those with an impaired MoCA 18% had High APS, 15% Intermediate and 67% low APS. A Fisher’s Exact test determined there was no statistically significant relationship between MoCA impairment and APS category (p‐value 0.68). Conclusion This study highlights the success of a DTC approach. The MoCA, alone, is insufficient to identify risk of AD in individuals with CI. A more comprehensive clinical evaluation of AD can be enhanced with the addition of a BBM leading to better disease‐modifying strategies.",
+    "year": 2023,
+    "lang": "en",
+    "type": "article",
+    "venue": "Alzheimer s & Dementia",
+    "topic": "Dementia and Cognitive Impairment Research",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4380448259",
+    "title": "#5489 CROSS-TALK BETWEEN FRAILTY AND IMMUNOSENESCENCE IN PATIENTS WITH CHRONIC KIDNEY DISEASE",
+    "abstract": "Abstract Background and Aims Chronic kidney disease (CKD) has been proposed as a model of premature ageing. The immune system is an important factor in the ageing process and can modulate the rate of ageing. The uremic environment highly affects this system, deteriorating its functionality and increasing susceptibility to infections, cancer, and pathologies like cardiovascular disease. Also, CKD patients are highly predisposed to frailty, which increases the organism's vulnerability to disease. This premature ageing, partially caused by the immune disorder and increased frailty, is responsible for these patients' high morbidity and mortality. Understanding these processes and how they are affected by different treatments will help generate better nutritional, pharmacological and lifestyle strategies. For this, the aim of this study was to determine the immune and frailty status of patients with CKD and their therapies. Method We performed a cross-sectional study involving 18 healthy subjects (HS) and 156 patients from the Nephrology Department of the Hospital Universitario “12 de Octubre” (Madrid, Spain). The distribution of patients was as follows: 40 with end-stage renal disease (ESRD), 40 on haemodialysis (HD), 36 on peritoneal dialysis (PD) and 40 patients who had received initial kidney transplantation (KT). The frailty status of the patients was assessed by the Edmonton Frail Scale test. Lymphocyte populations (T lymphocytes, T-helper lymphocytes, T-cytotoxic lymphocytes, and B lymphocytes) and monocytes (classical, intermediate, non-classical, and the expression of the adhesion molecule ICAM-1 and co-stimulatory B7.2) were determined in peripheral blood samples. Results The patients were similar in age and sex. The number of frail individuals was higher in patients (ESRD p&amp;lt;0.001, PD p&amp;lt;0.001, KT p = 0.004) than in HS, particularly in HD (p&amp;lt;0.001) (Figure 1). Regarding immune phenotype (Figure 2), HD patients showed a lower number of T-cells (p&amp;lt;0.001), particularly T-helper cells (p&amp;lt;0.001), than the other groups. Also, DP patients presented fewer T and T-cytotoxic cells than HS (p = 0.029, p = 0.05). Also, HD showed lower T-cytotoxic and helper/cytotoxic ratios than HS (p = 0.022; p = 0.011) and ESRD (p = 0.017; p = 0.008). The proportion of classical monocytes decreased, and the proportion of intermediate and non-classical monocytes increased in HD with respect to the other groups (p&amp;lt;0.001). The expression of the costimulatory molecule B7.2 was increased in the patients with respect to HS in all monocyte subsets (Classical: ESRD p = 0.002, HD p&amp;lt;0.001, PD p&amp;lt;0.001, KT p&amp;lt;0.001; Intermediate: ESRD p = 0.014, HD p&amp;lt;0.001, PD p&amp;lt;0.001, KT p = 0.002; Non-classical: ESRD p = 0.006, HD p&amp;lt;0.001, PD p&amp;lt;0.001, KT p = 0.013), while adhesion molecules were only elevated in HD with respect to HS in all subsets (classical p&amp;lt;0.001, intermediate p&amp;lt;0.001, non-classical p = 0.023). Conclusion The CKD patients, regardless of the treatment, showed, in general, an alteration in the lymphocyte subsets. These alterations were more significant in dialysis patients, particularly in HD patients. This group also presented the most significant alterations in monocyte subsets and higher frailty. This may explain why haemodialysis patients show major adverse outcomes compared to other treatments. Determining immune profiles can help us to relate these alterations to adverse events to carry out preventive and personalised medicine.",
+    "year": 2023,
+    "lang": "en",
+    "type": "article",
+    "venue": "Nephrology Dialysis Transplantation",
+    "topic": "Dialysis and Renal Disease Management",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W6923568107",
+    "title": "The British Columbia Retailer",
+    "abstract": "",
+    "year": 2017,
+    "lang": "en",
+    "type": "article",
+    "venue": "Open Collections",
+    "topic": "Wine Industry and Tourism",
+    "field": "Business, Management and Accounting",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W1524213711",
+    "title": "Ecolabels, Ecocertification and Ecotourism",
+    "abstract": "In recent years, ecolabelling has proliferated in virtually all economic sectors of society, including the tourism industry. Ecolabels are intended to provide reliable information to consumers about the environmental impact of products or services in the expectation that this information will influence their purchasing decisions. The idea is that to win consumers with positive environmental values to their products and services, providers will ensure that these products and services meet the standards necessary to qualify for the use of ecolabels in their marketing, thus having a positive impact on the preservation of the environment. However, given the proliferation of ecolabels and the variability of ecocertification programs, nomenclatures and standards, the field is immensely complex. It can be difficult for researchers, let alone consumers, to determine precisely what the use of a given label means or warrants. Some recent reports put the number of international ecolabels near 340 with almost 40 dealing specifically with tourism related products and services. The aim of this paper is to provide an overview of the use of ecolabels and ecocertification programs in tourism products and to identify gaps in our knowledge about ecolabels and ecocertification programs specifically geared to the growing area of ecotourism.",
+    "year": 2011,
+    "lang": "en",
+    "type": "article",
+    "venue": "SSRN Electronic Journal",
+    "topic": "Environmental Sustainability in Business",
+    "field": "Business, Management and Accounting",
+    "ca_institutions": ["Nipissing University", "Laurentian University"],
+    "funders": []
+  },
+  {
+    "id": "W2051001825",
+    "title": "Impulsive Action but Not Impulsive Choice Determines Problem Gambling Severity",
+    "abstract": "BACKGROUND: Impulsivity is a hallmark of problem gambling. However, impulsivity is not a unitary construct and this study investigated the relationship between problem gambling severity and two facets of impulsivity: impulsive action (impaired ability to withhold a motor response) and impulsive choice (abnormal aversion for the delay of reward). METHODS: The recruitment includes 65 problem gamblers and 35 normal control participants. On the basis of DSM-IV-TR criteria, two groups of gamblers were distinguished: problem gamblers (n = 38) and pathological gamblers (n = 27) with similar durations of gambling practice. Impulsive action was assessed using a response inhibition task (the stop-signal task). Impulsive choice was estimated with the delay-discounting task. Possible confounds (e.g., IQ, mood, ADHD symptoms) were recorded. RESULTS: Both problem and pathological gamblers discounted reward at a higher rate than their controls, but only pathological gamblers showed abnormally low performance on the most demanding condition of the stop-signal task. None of the potential confounds covaried with these results. CONCLUSIONS: These results suggest that, whereas abnormal impulsive choice characterizes all problem gamblers, pathological gamblers' impairments in impulsive action may represent an important developmental pathway of pathological gambling.",
+    "year": 2012,
+    "lang": "en",
+    "type": "article",
+    "venue": "PLoS ONE",
+    "topic": "Gambling Behavior and Treatments",
+    "field": "Psychology",
+    "ca_institutions": "Douglas Mental Health University Institute",
+    "funders": ["Economic and Social Research Council", "Fonds De La Recherche Scientifique - FNRS"]
+  },
+  {
+    "id": "W2931718085",
+    "title": "L’intersectionnalité et l’éthique du care pour approfondir le rôle du logement en santé publique",
+    "abstract": "La santé publique envisage généralement le logement pour ses risques ou encore comme un lieu pour intervenir auprès des populations vulnérables. Bien que pertinentes, ces visions reposent sur une conception statique de la vulnérabilité et du logement, mais elles négligent d’importantes inégalités de pouvoir et formes de care qui conditionnent le rapport au logement et au système d’habitation. Le présent article mobilise les éthiques du care et une approche intersectionnelle pour approfondir ces angles morts. Ces perspectives théoriques permettent, d’une part, de concevoir le logement comme un nœud pour le déploiement de relations, d’espaces et de temporalités favorables au care pour se maintenir en santé. D’autre part, elles contribuent à définir le rôle potentiel du logement pour imbriquer et créer une synergie de désavantages qui pose des risques et crée une vulnérabilité par rapport à ceux-ci. Selon cette perspective, des interventions en matière d’habitation peuvent jouer un rôle clé pour que les populations en situation de vulnérabilité puissent reprendre du pouvoir sur leur situation et constituer un moyen de lutte efficace contre les inégalités de santé.",
+    "year": 2018,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Éthique Publique",
+    "topic": "Global Maternal and Child Health",
+    "field": "Medicine",
+    "ca_institutions": "Musée de la Civilisation",
+    "funders": []
+  },
+  {
+    "id": "W4415417687",
+    "title": "COGNITIVE IMPAIRMENT AND DEMENTIA IN PARKINSON'S DISEASE",
+    "abstract": "Cognitive impairment is one of the most frequent and disabling non-motor manifestations of Parkinson's disease. It significantly reduces patients' quality of life, increases caregiver burden, and contributes to loss of independence. Early identification of cognitive decline is crucial for timely intervention and prevention of dementia progression. The purpose of the study. To determine the prevalence of cognitive impairment and identify predictors of progression to dementia among patients with Parkinson's disease. Material and Methods. A total of 106 patients with PD were examined and followed in outpatient clinics in Almaty. The diagnosis of Parkinson's disease was confirmed according to international criteria. Cognitive status was assessed using the Mini-Mental State Examination and Montreal Cognitive Assessment. Disease severity was evaluated using the Hoehn and Yahr scale and the Schwab and England Activities of Daily Living Scale. Demographic and clinical parameters, including age, education level, disease duration, and motor subtype, were analyzed. Results. Mild cognitive impairment was identified in 26.4% of patients, dementia in 34.9%, and no cognitive impairment in 38.7%. More pronounced cognitive decline was more common among older patients, those with lower educational attainment, disease duration over 10 years, and the akinetic-rigid subtype of Parkinson's disease. Regression analysis revealed the key predictors of dementia: disease onset after age 60, duration exceeding 19 years, low education level, and severe motor deficit. Conclusion. Cognitive impairment is common among Parkinson's disease patients and tends to progress with disease duration and severity. Early detection and systematic monitoring of cognitive functions are essential for implementing preventive measures, slowing dementia progression, and improving the quality of life of individuals with Parkinson's disease.",
+    "year": 2025,
+    "lang": "ru",
+    "type": "article",
+    "venue": "Actual Problems of Theoretical and Clinical Medicine",
+    "topic": "Parkinson's Disease Mechanisms and Treatments",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2766466178",
+    "title": "Do Foreign Multinationals Gain from Transparency Regulation? Evidence from Canadian Oil",
+    "abstract": "What is the role of information for firms in cross-border investments? Based on the theories on foreign direct investment and mandatory disclosure, this paper explores the informational aspect of liability of foreignness. The new regulations in Canada and the U.S. have mandated the domestic companies to include the estimated size and value of the gas and oil reserves in their financial reporting, from 2003 and from 2009, respectively, and changed the information environment for firms investing in these areas. Using the gas and oil field acquisition data in North America, the empirical analysis examines whether foreign firms face information disadvantage compared to domestic firms and the information effect from the regulatory change is different among them.",
+    "year": 2017,
+    "lang": "en",
+    "type": "article",
+    "venue": "Academy of Management Proceedings",
+    "topic": "International Arbitration and Investment Law",
+    "field": "Business, Management and Accounting",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4367663466",
+    "title": "An FLL Providing Real-Time Frequency Calibration for OOK Power Oscillator Transmitters",
+    "abstract": "A frequency-locked loop (FLL) is proposed to provide a real-time frequency calibration for OOK power oscillator transmitters. This FLL incorporates a pulse-width detector (PWD) based on Time-Registers (TRs) to discriminate accurately between the carrier frequency and the preset target frequency during the data modulation. As a result, frequency calibration can be performed simultaneously with data modulation without interruption. A prototype of an OOK power oscillator transmitter integrated with the proposed FLL is implemented with onboard discrete electronic elements for demonstration. The measurement indicates that the FLL can accurately lock to a carrier frequency of 160MHz despite electromagnetic (EM) interference in the loop antenna of the transmitter. In contrast, with EM interference and charge leakage, the carrier frequency differs from the expected value by about 1 MHz when the FLL is disabled.",
+    "year": 2023,
+    "lang": "en",
+    "type": "article",
+    "venue": "IEEE Transactions on Circuits & Systems II Express Briefs",
+    "topic": "Advancements in PLL and VCO Technologies",
+    "field": "Engineering",
+    "ca_institutions": "Dalhousie University",
+    "funders": []
+  },
+  {
+    "id": "W6958885860",
+    "title": "Canadians’ knowledge of cancer risk factors and belief in cancer myths",
+    "abstract": "Abstract Background Many untrue statements about cancer prevention and risks are circulating. The objective of this study was to assess Canadians’ awareness of known cancer risk factors and cancer myths (untruths or statements that are not completely true), and to explore how awareness may vary by sociodemographic and cognitive factors. Methods Cancer myths were identified by conducting scans of published, grey literature, and social media. Intuitive-analytic thinking disposition scores included were actively open- and close-minded thinking, as well as preference for intuitive and effortful thinking. A survey was administered online to participants aged 18 years and older through Prolific. Results were summarized descriptively and analyzed using chi-square tests, as well as Spearman rank and Pearson correlations. Results Responses from 734 Canadians were received. Participants were better at identifying known cancer risk factors (70% of known risks) compared to cancer myths (49%). Bivariate analyses showed differential awareness of known cancer risk factors (p &lt; 0.05) by population density and income, cancer myths by province, and for both by ethnicity, age, and all thinking disposition scores. Active open-minded thinking and preference for effortful thinking were associated with greater discernment. Tobacco-related risk factors were well-identified (&gt; 90% correctly identified), but recognition of other known risk factors was poor (as low as 23% for low vegetable and fruit intake). Mythical cancer risk factors with high support were consuming additives (61%), feeling stressed (52%), and consuming artificial sweeteners (49%). High uncertainty of causation was observed for glyphosate (66% neither agreed or disagreed). For factors that reduce cancer risk, reasonable awareness was observed for HPV vaccination (60%), but there was a high prevalence in cancer myths, particularly that consuming antioxidants (65%) and organic foods (45%) are protective, and some uncertainty whether drinking red wine (41%), consuming vitamins (32%), and smoking cannabis (30%) reduces cancer risk. Conclusions While Canadians were able to identify tobacco-related cancer risk factors, many myths were believed and numerous risk factors were not recognized. Cancer myths can be harmful in themselves and can detract the public’s attention from and action on established risk factors.",
+    "year": 2024,
+    "lang": "en",
+    "type": "other",
+    "venue": "Figshare",
+    "topic": "Topic Modeling",
+    "field": "Computer Science",
+    "ca_institutions": ["BC Centre for Disease Control", "Canadian Cancer Society", "University of Calgary", "University of British Columbia"],
+    "funders": []
+  },
+  {
+    "id": "W6931757955",
+    "title": "Port Burwell Ontario. 1:50,000. Map Sheet 040I10, ed. 5, 1977",
+    "abstract": "This is a georeferenced raster image of a printed paper map of the Port Burwell, Ontario region (Sheet No. 040I10), published in 1977. It is the fifth edition in a series of maps, which show both natural and man-made features such as relief, spot heights, administrative boundaries, secondary and side roads, railways, trails, wooded areas, waterways including lakes, rivers, streams and rapids, bridges, buildings, mills, power lines, terrain, and land formations. This map was published in 1977 and the information on the map is current as of 1976. Maps were produced by Natural Resources Canada (NRCan) and it's preceding agencies, in partnership with other government agencies. &lt;b&gt;Please note:&lt;/b&gt; image / survey capture dates can span several years, and some details may have been updated later than others. Please consult individual map sheets for detailed production information, which can be found in the bottom left hand corner. Original maps were digitally scanned by McGill Libraries in partnership with Canadiana.org, and georeferencing for the maps was provided by the University of Toronto Libraries and Eastview Corporation.",
+    "year": 2021,
+    "lang": "en",
+    "type": "dataset",
+    "venue": "Borealis",
+    "topic": "Nuclear Structure and Function",
+    "field": "Biochemistry, Genetics and Molecular Biology",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W3084554721",
+    "title": "Recombination-independent Determination of the Sound Horizon and the Hubble Constant from BAO",
+    "abstract": "Abstract The Hubble tension and attempts to resolve it by modifying the physics of (or at) recombination motivate finding ways to determine H 0 and the sound horizon at the epoch of baryon decoupling r d in ways that rely neither on a recombination model nor on late-time Hubble data. In this work, we investigate what one can learn from the current and future BAO data when treating r d and H 0 as independent free parameters. It is well known that baryon acoustic oscillations (BAOs) give exquisite constraints on the product r d H 0 . We show here that imposing a moderate prior on Ω m h 2 breaks the degeneracy between r d and H 0 . Using the latest BAO data, including the recently released the extended Baryon Oscillation Spectroscopic Survey Data Release 16, along with a Ω m h 2 prior based on the Planck best-fit Λ cold dark matter (ΛCDM) model, we find r d = 143.7 ± 2.7 Mpc and H 0 = 69.6 ± 1.8 km s −1 Mpc −1 . BAO data prefers somewhat lower r d and higher H 0 than those inferred from Planck data in a ΛCDM model. We find similar values when combing BAO with the Pantheon supernovae, the Dark Energy Survey Year 1 galaxy weak lensing, Planck or SPTPol cosmic microwave background lensing, and the cosmic chronometer data. We perform a forecast for the Dark Energy Spectroscopic Instrument (DESI) and find that, when aided with a moderate prior on Ω m h 2 , DESI will measure r d and H 0 without assuming a recombination model with an accuracy surpassing the current best estimates from Planck.",
+    "year": 2020,
+    "lang": "en",
+    "type": "article",
+    "venue": "The Astrophysical Journal Letters",
+    "topic": "Pulsars and Gravitational Waves Research",
+    "field": "Physics and Astronomy",
+    "ca_institutions": "Simon Fraser University",
+    "funders": "National Natural Science Foundation of China"
+  },
+  {
+    "id": "W2058935282",
+    "title": "Partial protection against H5N1 influenza in mice with a single dose of a chimpanzee adenovirus vector expressing nucleoprotein",
+    "abstract": "",
+    "year": 2007,
+    "lang": "en",
+    "type": "article",
+    "venue": "Vaccine",
+    "topic": "Virus-based gene therapy research",
+    "field": "Biochemistry, Genetics and Molecular Biology",
+    "ca_institutions": ["University of Manitoba", "Public Health Agency of Canada"],
+    "funders": ["National Institute of Diabetes and Digestive and Kidney Diseases", "Public Health Agency of Canada"]
+  },
+  {
+    "id": "W4238345982",
+    "title": "Design for a FET based 1 MHz, 10 kV pulse generator",
+    "abstract": "A pulse generator consisting of a coaxial cable and a high voltage modulator, incorporating two stacks of field-effect transistor (FET) switches operating in \"push-pull\" mode, has been designed and built. The modulator generates a continuous, unipolar, pulse train at a fundamental frequency of 1 MHz and a magnitude of 10 kV. The rise and fall times of the pulses are less than 39 ns. The two stacks each utilize 14 FETS, which are individually rated at 1 kV. The design incorporates a low-loss coaxial cable on which pulses are stored. Extensive PSpice simulations have been carried out to evaluate various design options. Subsequent measurements on the prototype pulse generator confirm the PSpice predictions.",
+    "year": 2002,
+    "lang": "en",
+    "type": "article",
+    "topic": "Pulsed Power Technology Applications",
+    "field": "Engineering",
+    "ca_institutions": "TRIUMF",
+    "funders": []
+  },
+  {
+    "id": "W2920856460",
+    "title": "Multi-User Regularized Zero-Forcing Beamforming",
+    "abstract": "Regularized zero-forcing beamforming (RZFB) is an interesting class of linear signal processing problems, which is very attractive for use in large-scale communication networks due its simple visualization as a straightforward extension of the well-accepted zero-forcing beamforming (ZFB). However, unlike ZFB, which is multi-user interference free, RZFB must manage multi-user interference to achieve its high throughput performance. Most existing works focus on the performance analysis of particular RZBF schemes such as the equip-power allocated RZBF under a fixed regularization parameter. This paper is the first work to consider the joint design of power allocation and regularization parameter for RZFB to maximize the worst users' throughput or the quality-of-service awarded energy efficiency under a fixed transmit power constraint. Such designs pose very computationally challenging optimization problems, for which the paper proposes two-stage optimization algorithms of low computational complexity. Their computational and performance efficiencies are substantiated through numerical examples.",
+    "year": 2019,
+    "lang": "en",
+    "type": "article",
+    "venue": "IEEE Transactions on Signal Processing",
+    "topic": "Advanced MIMO Systems Optimization",
+    "field": "Engineering",
+    "ca_institutions": [],
+    "funders": ["Institute for Computational Science and Technology", "Queen's University", "Queen's University Belfast", "Royal Academy of Engineering", "National Science Foundation"]
+  },
+  {
+    "id": "W4225069485",
+    "title": "Interior marginally outer trapped surfaces of spherically symmetric black holes",
+    "abstract": "There are notable similarities between the marginally outer trapped surfaces (MOTSs) present in the interior of a binary black hole merger and those present in the interior of the Schwarzschild black hole. Here we study the existence and properties of MOTSs with self-intersections in the interior of more general static and spherically symmetric black holes and coordinate systems. Our analysis is carried out in a parametrized family of Painlev\\'e-Gullstrand-like coordinates that we introduce. First, for the Schwarzschild spacetime, we study the existence of these surfaces for various slicings of the spacetime finding them to be generic within the family of coordinate systems we investigate. Then, we study how an inner horizon affects the existence and properties of these surfaces by exploring examples: the Reissner-Nordstr\\\"om black hole and the four-dimensional Gauss-Bonnet black hole. We find that an inner horizon results in a finite number of self-intersecting MOTSs, but their properties depend sensitively on the interior structure of the black hole. By analyzing the spectrum of the stability operator, we show that our results for two-horizon black holes provide exact-solution examples of recently observed properties of unstable MOTSs present in the interior of a binary black hole merger, such as the sequence of bifurcations/annihilations that lead to the disappearance of apparent horizons.",
+    "year": 2022,
+    "lang": "en",
+    "type": "article",
+    "venue": "Physical review. D/Physical review. D.",
+    "topic": "Black Holes and Theoretical Physics",
+    "field": "Physics and Astronomy",
+    "ca_institutions": ["University of Waterloo", "Wilfrid Laurier University", "Memorial University of Newfoundland"],
+    "funders": ["Natural Sciences and Engineering Research Council of Canada", "Asian Office of Aerospace Research and Development"]
+  },
+  {
+    "id": "W2921371567",
+    "title": "Amine-terminated dendritic polymers as a multifunctional chelating agent for heavy metal ion removals",
+    "abstract": "",
+    "year": 2019,
+    "lang": "en",
+    "type": "article",
+    "venue": "Environmental Science and Pollution Research",
+    "topic": "Dendrimers and Hyperbranched Polymers",
+    "field": "Materials Science",
+    "ca_institutions": "McGill University",
+    "funders": []
+  },
+  {
+    "id": "W6987383385",
+    "title": "The Struggle for Imperial Preferential Trade, 1887-1917, with Particular Reference to New Zealand",
+    "abstract": "The years 1887-1917 were years of continuous efforts to reconcile seeming irreconcilables in the economic sphere of relations between Great Britain and those of her self-governing colonies who were rapidly attaining to nationhood: Canada, the Australian and South African colonies, and New Zealand. Simply stated the problem on the one side was how the Mother Country could satisfy the demands of these colonies for some preference to their exports, when to do so would involve her in a fiscal revolution. She stood firmly, with almost religious fervour by the tenets of free trade, and to advocate any radical change would be a policy of political suicide for any party which adopted it as its platform. At the time she was the leader of the world's commerce, a fact that she attributed to the very free trade policy which the colonies would overthrow. From the colonial point of view, the problem was to meet what appeared to them, a growing threat to their own exports by those foreign powers, mainly Germany and America, who through a policy of protection were keeping British products out of their own markets, and who through subsidies and differential rates were able to undersell the colonies on the Home market. These same foreign powers, in spite of colonial protective tariffs, were able to compete with the small local industries, and in many cases could undersell the the produce of the Mother Country in the colonies. The answer which the colonies seized eagerly upon and fought so long and strenuously for, was an imperial preferential trade. Immediately, however, they were faced with the fact that the portion of the Empire most concerned, namely Britain, refused to change her fiscal system for a policy which she considered unnecessary and inimical to her own interests.",
+    "year": 2012,
+    "lang": "en",
+    "type": "article",
+    "venue": "ResearchArchive–Te Puna Rangahau (Victoria University of Wellington)",
+    "topic": "Australian History and Society",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W7056313560",
+    "title": "A DIFFERENT KIND OF STATION: RADIO SOUTHERN MANITOBA AND THE REFORMULATION OF MENNONITE IDENTITY, 1957-1977",
+    "abstract": "ii In 1957 the Southern Manitoba Broadcasting Company launched radio station CFAM in Altona, Manitoba. The privately owned outlet emerged from the province’s Mennonite community at a moment when its people were negotiating the powerful forces of social, economic, and cultural change that were transforming North American rural life. This study describes the origins of what became known as Radio Southern Manitoba and its development into a regional cultural institution as it cultivated a broad audience over its first two decades on the air. The primary focus of this analysis is Radio Southern Manitoba’s role in the Mennonite community, and its influence in the cultural reformulation that transmuted Mennonite group identity in the latter half of the twentieth century. Through an examination of the activities and materials pertaining to the production of the radio broadcast, and a limited consideration of sources describing its consumption, this thesis explores how the broadcaster reflected and attempted to shape the culture and practices of",
+    "year": 2014,
+    "lang": "en",
+    "type": "article",
+    "venue": "Mspace (University of Manitoba)",
+    "topic": "Thermal properties of materials",
+    "field": "Materials Science",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2763307789",
+    "title": "La loi des différents ouvriers de Québec (1901-1909)",
+    "abstract": "Voici le second d'une série de textes sur la législation québécoise du travail (et sur les services connexes des ministères pertinents) de 1885 à nos jours.",
+    "year": 2014,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Relations industrielles",
+    "topic": "Labor Movements and Unions",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2545325326",
+    "title": "A 3.3 GHz LC-based digitally controlled oscillator with 5kHz frequency resolution",
+    "abstract": "This paper reports a LC-based digitally controlled oscillator (DCO) with an enhanced frequency resolution and an extended linear frequency tuning range. It has a center frequency of 3.3GHz and a frequency tuning range of 600MHz covered by 64 different frequency bands. Each frequency band has 2048 linear tuning levels with a frequency step of 5kHz. This DCO was implemented in 90nm CMOS and the measured frequency tuning characteristics are provided in this paper. The DCO exhibits a phase noise of −118dBc/Hz at 1MHz frequency offset. The DCO core consumes 2mA current from 1.2V supply.",
+    "year": 2007,
+    "lang": "en",
+    "type": "article",
+    "topic": "Advancements in PLL and VCO Technologies",
+    "field": "Engineering",
+    "ca_institutions": "Carleton University",
+    "funders": "Natural Sciences and Engineering Research Council of Canada"
+  },
+  {
+    "id": "W2001961563",
+    "title": "An empirical analysis of autobiographical memory specificity subtypes in brief emotion-focused and client-centered treatments of depression",
+    "abstract": "Overgeneral autobiographical memory (ABM) disclosure has been established as a key cognitive marker of clinical depression in experimental research studies. To determine the ecological validity of these findings for psychotherapy treatments of depression, the present study investigated the relationship between change in level of depression and ABM specificity in the context of early, middle, and late therapy session transcripts selected from 34 clients undergoing emotion-focused therapy and client-centered therapy in the York I Depression Study. A hierarchical linear modeling analysis demonstrated that clients disclosed significantly more specific ABMs over the course of therapy. There were no differences in ABM specificity between treatment groups. There was also no evidence that increased specificity differentiated between recovered and unchanged clients at treatment termination.",
+    "year": 2008,
+    "lang": "en",
+    "type": "article",
+    "venue": "Psychotherapy Research",
+    "topic": "Identity, Memory, and Therapy",
+    "field": "Psychology",
+    "ca_institutions": "York University",
+    "funders": []
+  },
+  {
+    "id": "W6902536685",
+    "title": "Standardising costs or standardising care? Qualitative evaluation of the implementation and impact of a hospital funding reform in Ontario, Canada",
+    "abstract": "Abstract Background Since 2011, the Government of Ontario, Canada, has phased in hospital funding reforms hoping to encourage standardised, evidence-based clinical care processes to both improve patient outcomes and reduce system costs. One aspect of the reform – quality-based procedures (QBPs) – replaced some of each hospital’s global budget with a pre-set price per episode of care for patients with specific diagnoses or procedures. The QBP initiative included publication and dissemination of a handbook for each of these diagnoses or procedures, developed by an expert technical group. Each handbook was intended to guide hospitals in reducing inappropriate variation in patient care and cost by specifying an evidence-based episode of care pathway. We explored whether, how and why hospitals implemented these episode of care pathways in response to this initiative. Methods We interviewed key informants at three levels in the healthcare system, namely individuals who conceived and designed the QBP policy, individuals and organisations supporting QBP adoption, and leaders in five case-study hospitals responsible for QBP implementation. Analysis involved an inductive approach, incorporating framework analysis to generate descriptive and explanatory themes from data. Results The 46 key informants described variable implementation of best practice episode of care pathways across QBPs and across hospitals. Handbooks outlining evidence-based clinical pathways did not address specific barriers to change for different QBPs nor differences in hospitals’ capacity to manage change. Hospitals sometimes found it easier to focus on containing and standardising costs of care than on implementing standardised care processes that adhered to best clinical practices. Conclusion Implementation of QBPs in Ontario’s hospitals depended on the interplay between three factors, namely complexity of changes required, internal capacity for organisational change, and availability and appropriateness of targeted external facilitators and supports to manage change. Variation in these factors across QBPs and hospitals suggests the need for more tailored and flexible implementation supports designed to fit all elements of the policy, rather than one-size-fits-all handbooks alone. Without such supports, hospitals may enact quick fixes aimed mainly at preserving budgets, rather than pursue evidence- and value-based changes in care management. Overestimating hospitals’ change management capacity increases the risk of implementation failure.",
+    "year": 2018,
+    "lang": "en",
+    "type": "other",
+    "venue": "Figshare",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W7030465652",
+    "title": "A new species of troodontid theropod (Dinosauria: Maniraptora) from the Horseshoe Canyon Formation (Maastrichtian) of Alberta, Canada",
+    "abstract": "Troodontid material from the Maastrichtian of North America is extremely rare, beyond isolated teeth from microvertebrate sites. Here we describe troodontid frontals from the early Maastrichtian Horseshoe Canyon Formation (Horsethief Member). The most complete specimen, TMP 1993.105.0001, is notably foreshortened and robust when compared with numerous specimens referred to Troodon from the Dinosaur Park Formation, and exhibits several characteristics that distinguish it from other Late Cretaceous troodontids. Morphometric analyses reinforce shape differences between TMP 1993.105.0001 and other North American troodontids, and show that proportional differences are independent of size. We therefore erect a new taxon, Albertavenator curriei gen. et sp. nov., which is diagnosed by the following autapomorphies: (1) primary supraciliary foramen is truncated anteriorly by the lacrimal contact; (2) superficial (ectocranial) surface of the frontal proportionally shorter than all known troodontids, with a length to width ratio under 1.3; and (3) frontoparietal contact in which an enlarged lappet of the frontal extends medially to extensively overlap the lateral region of the anteromedial process of the parietal. Interestingly, tooth and jaw morphology from the single relatively complete dentary recovered from the Horseshoe Canyon cannot be distinguished from dentaries and teeth from the Dinosaur Park Formation. If the dentary and teeth from the Horsethief Member of the Horseshoe Canyon Formation prove to belong to A. curriei, extensive overlap in tooth morphology between the Dinosaur Park and Horseshoe Canyon formations reinforces the notion that tooth morphotypes do not exhibit strong correspondence to species alpha diversity, and may encompass multiple closely related taxa.",
+    "year": 2018,
+    "lang": "en",
+    "type": "other",
+    "venue": "OSF Preprints (OSF Preprints)",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W115029218",
+    "title": "Frères ennemis : La Guerre de la « race » de 14-18Jean Mohsen Fahmy, Frères ennemis, roman, VLB éditeur, Montréal, 2009, 355 pagesJean Mohsen Fahmy, Frères ennemis, roman, VLB éditeur, Montréal, 2009, 355 pages",
+    "abstract": "",
+    "year": 2009,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Liaison",
+    "topic": "African history and culture studies",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W6949318732",
+    "title": "Handbuch für den vereinsvorsitzenden pdf",
+    "abstract": "&amp;lt;pre&amp;gt;&amp;lt;code&amp;gt;&amp;lt;b&amp;gt;Handbuch für den vereinsvorsitzenden pdf&amp;lt;/b&amp;gt;&amp;lt;br&amp;gt;Rating: 4.9 / 5 (2176 votes)&amp;lt;br&amp;gt;Downloads: 16759&amp;lt;br&amp;gt;&amp;lt;br&amp;gt;&amp;lt;a href=\"https://juhip.hkjhsuies.com.es/LcmR6B?sub_id_1=no&amp;amp;keyword=handbuch für den vereinsvorsitzenden pdf\"&amp;gt;&amp;gt;&amp;gt;&amp;gt;CLICK HERE TO DOWNLOAD&amp;lt;&amp;lt;&amp;lt;&amp;lt;/a&amp;gt;&amp;lt;br&amp;gt;&amp;lt;br&amp;gt;&amp;lt;br&amp;gt;&amp;lt;br&amp;gt;&amp;lt;br&amp;gt;&amp;lt;br&amp;gt;&amp;lt;br&amp;gt;&amp;lt;br&amp;gt;&amp;lt;br&amp;gt;&amp;lt;br&amp;gt;&amp;lt;br&amp;gt;&amp;lt;br&amp;gt;&amp;lt;br&amp;gt;&amp;lt;br&amp;gt;&amp;lt;br&amp;gt;&amp;lt;br&amp;gt;&amp;lt;br&amp;gt;&amp;lt;br&amp;gt;&amp;lt;br&amp;gt;&amp;lt;br&amp;gt;&amp;lt;br&amp;gt;&amp;lt;br&amp;gt;&amp;lt;br&amp;gt;&amp;lt;br&amp;gt;&amp;lt;p&amp;gt;Produktart: buch isbn- 10: isbn- 13: verlag: vnr verlag für die deutsche wirtschaft herstellungsland: deutschland erscheinungsjahr: format: 22, 6 x 24, 4 x 10, 8 cm. in diesem bereich findet ihr außerdem die wichtigsten musterdokumente zu diversen prozessen im vereinswesen aufgelistet. aktive jugendarbeit: wie sie jugendliche in 10 schritten langfristig für das vereinsleben begeistern. kostenlos testen. handbuch für den vereinsvorsitzenden author:. sichern sie sich jetzt den kostenlosen ratgeber zusammen mit dem 544 seiten umfassenden \" handbuch für den vereinsvorsitzenden\"!&amp;lt;/p&amp;gt; &amp;lt;p&amp;gt; seite 6 &amp;gt; b – dolby nr* a cassettenausschub ta ein/ aus: taste tim ca. 14 tage gratis: das \" handbuch für den vereinsvorsitzenden\". kurzum: sie finden im handbuch für den vereinsvorsitzenden alle relevanten informationen für erfolgreiche vorstandsarbeit! bücher bei weltbild: jetzt handbuch für den vereinsvorsitzenden von handbuch für den vereinsvorsitzenden pdf heinz- wilhelm vogel einfach online bestellen bei weltbild, ihrem bücher- spezialisten! mit rechtssicheren arbeitshilfen und praxisnahen tipps für eine erfolgreiche vereinsführung. für den fall, dass sie versehentlich zu oft gedrückt haben, können sie einfach weiter drü- cken, bis die gewünschte zahl erscheint.&amp;lt;/p&amp;gt; &amp;lt;p&amp;gt; das handbuch für den vereinsvorsitzenden ist für sie die perfekte unterstützung: es liefert ihnen vorlagen, praxisbeispiele, schritt für schritt- anleitungen, checklisten und sofort verwendbare muster und erspart ihnen damit eine. obwohl in dieser bedienungsanleitung die anzeige des gx20 verwendet wird, können gx10/ gp10/ gp20 in gleicher weise bedient werden. downloadbereich für musterdokumente und das vereinshandbuch. einer seiner schwerpunkte sind hier steuerrecht- liche themen. leitfaden zum vereinsrecht pdf, 2mb, datei ist nicht barrierefrei.&amp;lt;/p&amp;gt; &amp;lt;p&amp;gt; das \" handbuch für den vereinsvorsitzenden\". linking issn ( issn- l) :. sprechen den codes beglaubigter institutionen, welche unter den oben erwähnten direktiven konsultiert wurden. die ober- fläche des hörsystems ist spezifiziert als anwen- dungsteil des types bf. wiederholen sie den vorgang für alle vier ziffern ihrer pin. die ehrenordnungen der djk, des blsv und seiner fachverbände ist in der jeweils gültigen fassung bestandteil dieser ehrenordnung.&amp;lt;/p&amp;gt; &amp;lt;p&amp;gt; und deshalb ist das \" handbuch für vereinsvorsitzende\" für sie als vereinsvorsitzender eine so wertvolle unterstützung: es liefert ihnen vorlagen, praxisbeispiele, schritt für schritt- anleitungen, checklisten und sofort verwendbare muster und pdf spart ihnen damit eine menge zeit. beitragsgestalltung. das \" handbuch für den vereinsvorsitzenden\" deckt das ganze spektrum zum thema erfolgreiche vereinsführung ab: zeitgemäßer aufnahmeantrag: so nehmen sie neue mitglieder rechtssicher und datenschutzkonform in ihren verein auf. ( fh) jörg wilde ist als betriebs- prüfer und fachautor unter anderem für das \" handbuch für den vereinsvorsitzenden\" tätig. überzeugen sie sich selbst: jetzt das standardwerk für deutschlands vereins- vorsitzende sichern. jahreshauptversammlung. title proper: handbuch für den. wir haben gemeinsam mit neun experten ein vollständiges vereinshandbuch rund um die aktuellsten themen erstellt, das ihr kostenlos herunterladen könnt. der vereinsvorstand ist demnach für die repräsentative und strategische planung des vereins sowie in fragen der haftung verantwortlich.&amp;lt;/p&amp;gt; &amp;lt;p&amp;gt; für die rechtsfähigkeit des e. mitglieder binden und für den verein begeistern. nach etwa 3 sekunden wird automatisch die nächste stelle angesteuert. vereinswelt bietet umfassende unterstützung für vereinsverantwortliche in allen bereichen der vereinsführung. versandkostenfrei. werden kurz angespielt. sind zwei organe gesetzlich vorgeschrieben, eines davon ist der vereinsvorstand.&amp;lt;/p&amp;gt; &amp;lt;p&amp;gt; die redaktion des \" handbuch für den vereinsvorsitzenden\" liefert ihnen regelmäßig auf 80 seiten ausgewählte beiträge im ergänzungs- und aktualisierungsdienst. gedruckte bedienungsanleitungen. zudem besitzt er eine 15- jährige erfahrung in verschiedenen funktionen von vereinen. ganz genau wie ein erfolgreiches unternehmen. handbuch für den vereinsvorsitzenden ( cd- rom) identifiers.&amp;lt;/p&amp;gt; &amp;lt;p&amp;gt; stellen sie nun die zweite stelle entsprechend ein. das handbuch für vereinsvorsitzende bietet vereinsvorständen lösungen, wie sie auf aktuelle herausforderungen im verein optimal reagieren, leicht verständlich und direkt umsetzbar. dezember aus- schließlich per e- mail de;. die rechte und pflichten des vereinsvorstandes sind in § 26 bgb geregelt. jetzt kostenpflichtig bestellen. der djk verband, der blsv verband und seine fachverbände ehren nach einer bestimmten ehrenordnung mitglieder für langjährige vereinstätigkeit an führender stelle im verein durch verdienstnadeln und urkunden. 14 tage gratis testen. es können cassetten abgespielt wer- drücken den, die mit dolby- nr b aufgenommen beachten sie den warnhinweis auf wurden.&amp;lt;/p&amp;gt; &amp;lt;p&amp;gt; unsere plattform bietet praxisnahe lösungen aus fachzeitschriften, online- portal und webinaren. resource information. handbuch für den vereinsvorsitzenden: der umfassende management- und organisationsberater für ihre erfolgreiche vereins- arbeit | müller, joachim, rodatus, angelika, arndt, christine, gieseler, jens, massmann, lothar | isbn: | kostenloser versand für alle bücher mit versand und verkauf duch amazon. taste kurz drücken - die auf den stati- gedrückt halten: onstasten abgespeicherten sender cue/ review. förderanträge ( pdf- dokumente) können formlos bis zum 15. um den korrekten einsatz des geräts sicherzustellen, lesen sie bitte vorher diese bedienungsanleitung und die folgenden handbücher sorgfältig. dieses symbol zeigt an, dass audéo produkte die anforderungen für ein anwendungsteil des types bf der eneinhalten. das neue \" handbuch für den vereinsvorsitzenden\" ist eine in dieser form einmalige und stets rechtssichere informations- und beratungsquelle für sie als vereins- vorsitzenden. sofort verfügbar.&amp;lt;/p&amp;gt; &amp;lt;p&amp;gt; wer einen verein gründen, einem verein beitreten oder vereinsämter übernehmen möchte, findet in dieser broschüre viele nützliche informationen. unser erfahrenes expertenteam steht zu themen wie steuern, satzung und vorstandspflichten zur handbuch für den vereinsvorsitzenden pdf seite. leitfaden zum vereinsrecht.&amp;lt;/p&amp;gt;&amp;lt;/code&amp;gt;&amp;lt;/pre&amp;gt;",
+    "year": 2024,
+    "lang": "de",
+    "type": "other",
+    "venue": "Zenodo (CERN European Organization for Nuclear Research)",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W6903552386",
+    "title": "Supplemental material: Tectonic evolution of the Mesozoic South Anyui suture zone, eastern Russia: A critical component of paleogeographic reconstructions of the Arctic region",
+    "abstract": "Geosphere, October 2015, v. 11, p. 1530-1564, doi:10.1130/GES01165.1, Animation 1 - Arctic plate model from 180 Ma to Present, shown holding North America fixed, created by J. Toro in GPlates by modifying the global model of Seton et al. (2012). The yellow star tracks the location of the Iceland hotspot. Yellow lines are the mid-ocean ridges relevant to the Arctic and some shelf edges. Magnetic anomalies and subduction zones are shown as lines of the color of the plate to which they are attached in the model. Color key: Dark Blue—Kamchatka, Rocky Mountains, Canadian Arctic Islands; Dark Green—Laurentia, Central Ellesmere, South Anyui zone; Dark Grey—Eurasia, Yukon-Tanana, Chukchi Cap; Light Blue—Lower Yukon, Svalbard, Western Europe, Sakhalin; Light Green—Brooks Range; Orange—Prikolyma, North Slope, Seward Peninsula, Baffin Island, Peninsular terrane, Alexander terrane; Pink—Greenland, Lomonosov Ridge, Western Ellesmere, Northwind Ridge; Red—Kolyma-Omolon terrane, Kokukuk arc; Yellow—Chukotka, Eastern Ellesmere. Some of the light grey area are continental shelves.",
+    "year": 2015,
+    "lang": "en",
+    "type": "article",
+    "venue": "Figshare",
+    "topic": "Geological Studies and Exploration",
+    "field": "Earth and Planetary Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W369500825",
+    "title": "1999, Michel de Broin, Matière dangereuse : Déplacement/Détournement : l’interdit du carré",
+    "abstract": "",
+    "year": 2007,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Espace Sculpture",
+    "topic": "Psychoanalysis and Psychopathology Research",
+    "field": "Psychology",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2765969840",
+    "title": "Teaching teams to teach: Program evaluation results from an interprofessional faculty development program in academic family medicine",
+    "abstract": "Introduction: The transformation of primary care into integrated health care teams has resulted in the urgent need for health professional teachers to be prepared to teach interprofessional learners and to contextualize this teaching to team based health care. At the University of Toronto (UT), new physician teachers in the Faculty of Medicine have access to a professional development program (BASICS) designed to prepare clinician teachers for academic medicine. In 2015, St. Michael’s Hospital opened a 6th family medicine academic health centre and welcomed more than 25 new family physicians and health professional educators (HPEs). Recognizing the new cohort of mixed profession educators, a modified version of the BASICS program was created, tailored to this mixed group of teachers, who all have a role in teaching health professional learners in the department.Purpose/Objective: The modified BASICS program was specifically designed to target an interprofessional (IP) audience (physicians and health professional educators (HPEs)) and evaluated with the goal of determining:1- if the BASICS program could be successfully modified for an IP audience2- if learning about teaching together could facilitate the acquisition of participants’ competencies for both collaborative teaching and clinical practice.Methods: Mixed methods were used including:a pre-program participant needs assessmentpre- and post-program questionnaires (to assess knowledge (MCQs), self perceived collaborative competency (HPCCPS), program reflections)session-specific evaluations of each modulequalitative feedback from module teachers (debrief)Results: 13 physicians and 27 HPEs participated. 100% indicated somewhat or very satisfied with the program. Pre-post HPCCPS (Health Professional Collaborative Competency Perception Scale) indicated improvement in self perceived collaborative competency (p &lt;0.0001) and MCQs showed increased attainment of knowledge over the course. 89.7% reported that learning needs were met and 50% felt more prepared for their teaching roles. Facilitators also found that teaching together enhanced their own collaborative competency.Conclusions: This project demonstrated the feasibility of successfully implementing this educational program for an IP team audience, with potential positive impacts on confidence in teaching, collaborative ability and adoption of an enhanced IP lens amongst participants and teachers. These elements are essential to ensure that future health professionals are appropriately trained to participate in and deliver integrated care.Lessons learned: A pre-program needs assessment of participants was important to ensure their learning needs were identified prior to program planning.Careful use of inclusive language by teachers to model IP behaviour (not too physician focused)Limitations: This program was specifically adapted from a faculty development program provided by the Faculty of Medicine at the UT and may not be applicable in other jurisdictions. The modified program was implemented in an integrated primary care family health team teaching clinic which may not be transferable outside of the primary care setting.Suggestions for future research: The learning from this research and the integration of core adult learning principles and IP teaching pedagogy lend themselves for testing this type of program in other health professional training contexts.",
+    "year": 2017,
+    "lang": "en",
+    "type": "article",
+    "venue": "International Journal of Integrated Care",
+    "topic": "Interprofessional Education and Collaboration",
+    "field": "Health Professions",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2297712559",
+    "title": "The restructuring of the Open Learning Agency: a predictive analysis",
+    "abstract": "This paper presents a case study and analysis of changes in the organizational structure of the Open Learning Agency (OLA) of British Columbia in 1992. Under the aegis of the Ministry of Advanced Education, Technology and Training, the Agency carries a five-fold mandate - in collaboration with universities, institutions, boards of school trustees and other agencies concerned with education, OLA is to: provide an educational credit bank for students; coordinate the development of open learning education; use open learning methods to provide educational programs and services; carry out research related to open learning education; and operate one or more broadcasting undertakings devoted primarily to the field of educational broadcasting. The central question of the paper is: How will OLA restructure to achieve its mandate and strategic direction? In particular, the paper examines the Agency's structure prior to reorganization, the internal and external forces acting upon it as seen through the eyes of its executive members and the key issues facing the organization, including the reasons which precipitated a review of the organizational structure in 1991. The structure prior to reorganization is analyzed and classified as an example of Mintzberg's (1989) innovative configuration. The paper also predicts an innovative configuration for the Agency's reorganized structure based upon Mintzberg's contingency and life cycle hypotheses. The reorganized structure (which came into effect May 1, 1992) is subsequently analyzed and agrees with the prediction. The method of investigation included interviews with executive members conducted approximately three months prior and three months after the reorganization, archival research and personal observation by the writer, an employee of the Agency. Mintzberg's (1983, 1989) conceptual framework of structural configurations provided a basis for analysis of the case study data. The paper concludes that the innovative configuration is an appropriate form for the organization in view of its mandate and strategic direction but notes that it is also a difficult configuration to sustain, subject to pressures for increasing bureaucratization and susceptible to internal and external politicization. The paper recommends that the Agency do its best to maintain the configuration by educating staff about its nature and resist pressures which might shape it into a more conventional, professional form. The paper further finds Mintzberg's framework descriptive and helpful in providing limited, broad understanding of the Agency, its issues and choices for change; however, factors which can have significant impact such as political pressure, personal idiosyncrasies of leaders and centralization of office sites make any detailed prescriptions for organizational change somewhat elusive.",
+    "year": 2008,
+    "lang": "en",
+    "type": "article",
+    "venue": "cIRcle (University of British Columbia)",
+    "topic": "Open Education and E-Learning",
+    "field": "Computer Science",
+    "ca_institutions": "University of British Columbia",
+    "funders": []
+  },
+  {
+    "id": "W7036037083",
+    "title": "AstÃ©rosismologie de l'Ã©toile naine blanche variable GD 1212",
+    "abstract": "MÃ©moire numÃ©risÃ© par la Division de la gestion de documents et des archives de l'UniversitÃ© de MontrÃ©al",
+    "year": 2012,
+    "lang": "fr",
+    "type": "other",
+    "venue": "Library and Archives Canada (Government of Canada)",
+    "topic": "Ichthyology and Marine Biology",
+    "field": "Environmental Science",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W1964604709",
+    "title": "La justice contractuelle : mythe ou réalité ?",
+    "abstract": "Le Code civil du Québec prône une nouvelle philosophie de justice contractuelle qui vise notamment à protéger la partie faible à un contrat. Cette nouvelle approche remet en question la théorie de l'autonomie de la volonté. Dans le présent texte, l'auteure souligne, dans un premier temps, les motifs pour lesquels cette théorie a été remise en question et les nouvelles avenues suggérées. On constate alors que la notion de bonne foi est au coeur du débat. Puis, dans un deuxième temps, après avoir jeté un coup d'oeil sur cette notion, l'auteure traite de l'efficacité concrète des dispositions sur les clauses abusives.",
+    "year": 2005,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Les Cahiers de droit",
+    "topic": "Law, Economics, and Judicial Systems",
+    "field": "Economics, Econometrics and Finance",
+    "ca_institutions": "Université du Québec à Montréal",
+    "funders": []
+  }
+]
+warning: loading hooks from both /Users/choxos/.codex/hooks.json and /Users/choxos/.codex/config.toml; prefer a single representation for this layer
+2026-07-13T03:21:27.418461Z ERROR rmcp::transport::worker: worker quit with fatal: Transport channel closed, when Auth(AuthorizationRequired)
+warning: Skill descriptions were shortened to fit the 2% skills context budget. Codex can still see every skill, but some descriptions are shorter. Disable unused skills or plugins to leave more room for the rest.
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart Failed
+hook: SessionStart Completed
+hook: SessionStart Completed
+hook: SessionStart Completed
+hook: SessionStart Completed
+hook: SessionStart Failed
+hook: UserPromptSubmit
+hook: UserPromptSubmit
+hook: UserPromptSubmit Failed
+hook: UserPromptSubmit Failed
+codex
+[
+  {"id":"W4300920754","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"The chapter concerns the Supreme Court of Canada rather than research as an object of study."},
+  {"id":"W3123851494","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The experimental study examines laser ablation of alumina, not research practice."},
+  {"id":"W3122956505","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The paper develops vehicle-routing formulations and algorithms rather than studying research itself."},
+  {"id":"W2782133747","tier":"OUT","genre":"other","about_ca":false,"confidence":"low","reason":"The abstract only identifies a conference presentation and provides too little information to assess the object."},
+  {"id":"W2337018665","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The interview study examines collaboration between First Nations and local governments, not research practice."},
+  {"id":"W3212269695","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"The article analyzes Quebec pay-equity law through feminist theories rather than studying research."},
+  {"id":"W133122769","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study measures properties of particle collisions and does not study research itself."},
+  {"id":"W4253710338","tier":"OUT","genre":"editorial/commentary","about_ca":false,"confidence":"high","reason":"The headline concerns lobbying by Canadian cities rather than research practice or governance."},
+  {"id":"W1970193084","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study characterizes semiconductor films and their defects, not research itself."},
+  {"id":"W2795530412","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The work concerns the global impacts of a hurricane, not the practice of science."},
+  {"id":"W4404060536","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study examines teachers’ use of prescribed teaching materials rather than research practice."},
+  {"id":"W3128229421","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"The work discusses conceptual and measurement issues in population surveillance of multimorbidity, not research itself."},
+  {"id":"W2126997884","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"The article compares administrative legal systems and does not study research."},
+  {"id":"W2494965242","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The model study evaluates ocean respiration estimates rather than research methods as an object."},
+  {"id":"W1990801760","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"The article discusses linguistic pluralism and translation in India, not research practice."},
+  {"id":"W2970597142","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The empirical study examines depression, alexithymia, and emotion perception rather than research itself."},
+  {"id":"W2143606571","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The biochemical study investigates hormonal regulation of fatty acid synthase, not research practice."},
+  {"id":"W2182425999","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The thesis analyzes an industrial purchasing strategy rather than research itself."},
+  {"id":"W4390201636","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study evaluates Alzheimer’s disease detection in patients, not research practice."},
+  {"id":"W4380448259","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The clinical study examines frailty and immunosenescence in kidney disease, not research itself."},
+  {"id":"W6923568107","tier":"OUT","genre":"other","about_ca":false,"confidence":"low","reason":"The title alone identifies a British Columbia retail topic but does not indicate a study of research."},
+  {"id":"W1524213711","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"The overview concerns ecolabels and ecotourism rather than research practice."},
+  {"id":"W2051001825","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study examines impulsivity and gambling severity, not research itself."},
+  {"id":"W2931718085","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"The article applies intersectionality and care ethics to housing and public health rather than studying research."},
+  {"id":"W4415417687","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The clinical study examines cognitive impairment and dementia in Parkinson’s disease, not research practice."},
+  {"id":"W2766466178","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The paper studies transparency regulation and foreign investment in Canadian oil, not research itself."},
+  {"id":"W4367663466","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The engineering paper develops and tests a frequency-locked loop, not research practice."},
+  {"id":"W6958885860","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The survey examines Canadians’ cancer knowledge and beliefs rather than research itself."},
+  {"id":"W6931757955","tier":"OUT","genre":"infrastructure/announcement","about_ca":false,"confidence":"high","reason":"The dataset is a digitized geographic map and is not a study of research."},
+  {"id":"W3084554721","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The paper analyzes cosmological measurements of the sound horizon and Hubble constant, not research practice."},
+  {"id":"W2058935282","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study tests an influenza vaccine vector in mice rather than studying research itself."},
+  {"id":"W4238345982","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The paper designs and tests a high-voltage pulse generator, not research practice."},
+  {"id":"W2920856460","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The paper develops beamforming optimization algorithms rather than studying research."},
+  {"id":"W4225069485","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"The theoretical analysis concerns black-hole geometry and does not study research itself."},
+  {"id":"W2921371567","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study concerns dendritic polymers for heavy-metal removal, not research practice."},
+  {"id":"W6987383385","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"The historical work examines imperial trade policy rather than research itself."},
+  {"id":"W7056313560","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The thesis studies a Manitoba radio station and Mennonite identity, not research practice."},
+  {"id":"W2763307789","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"The article describes Quebec labor legislation rather than studying research itself."},
+  {"id":"W2545325326","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The engineering study develops and measures a digitally controlled oscillator, not research practice."},
+  {"id":"W2001961563","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study examines autobiographical memory during psychotherapy for depression, not research itself."},
+  {"id":"W6902536685","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The qualitative study evaluates implementation of an Ontario hospital funding reform rather than research practice."},
+  {"id":"W7030465652","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The work describes a new dinosaur species and does not study research itself."},
+  {"id":"W115029218","tier":"OUT","genre":"editorial/commentary","about_ca":false,"confidence":"high","reason":"The record is a literary review of a novel rather than a study of research."},
+  {"id":"W6949318732","tier":"OUT","genre":"other","about_ca":false,"confidence":"high","reason":"The record is promotional and corrupted handbook content, not a study of research."},
+  {"id":"W6903552386","tier":"OUT","genre":"infrastructure/announcement","about_ca":false,"confidence":"high","reason":"The item is supplemental geological research material and does not study research practice."},
+  {"id":"W369500825","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"The item concerns an artist and sculpture exhibition rather than research itself."},
+  {"id":"W2765969840","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The evaluation examines a faculty-development teaching program, not research practice."},
+  {"id":"W2297712559","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The case study analyzes restructuring of an educational agency rather than research itself."},
+  {"id":"W7036037083","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The title identifies an astrophysics thesis about a variable white dwarf, not research practice."},
+  {"id":"W1964604709","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"The article analyzes contractual justice and Quebec civil law rather than studying research."}
+]
+hook: Stop
+hook: Stop
+hook: Stop
+hook: Stop Completed
+hook: Stop Completed
+hook: Stop Failed
+tokens used
+40,379

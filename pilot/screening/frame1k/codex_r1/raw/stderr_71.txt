@@ -1,0 +1,905 @@
+Reading additional input from stdin...
+OpenAI Codex v0.144.0
+--------
+workdir: /Users/choxos/Documents/GitHub/CaRN-data-challenge
+model: gpt-5.6-luna
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: high
+reasoning summaries: none
+session id: 019f590f-8497-7861-a66b-c1f854b59c68
+--------
+user
+# MétaCan screening rubric (v1.0)
+
+**Locked before screening. Version-controlled. Any change is a new version with a dated entry in `DEVIATIONS.md`.**
+
+Both machine screeners and both human coders work from this document and nothing else. The rubric is the
+instrument; if two coders disagree, the rubric is what they are adjudicated against.
+
+---
+
+## The unit
+
+One work (journal article, preprint, book chapter, report, dataset, or software), identified by its OpenAlex ID.
+You see: title, abstract, publication year, language, venue, OpenAlex topic and field, Canadian institutional
+affiliations, funders.
+
+## The question
+
+**Is the object of study *research itself*?**
+
+Metaresearch studies how research is done, reported, funded, evaluated, disseminated, or governed. The test is
+what the work is *about*, not what field it appears in and not what vocabulary it uses.
+
+A cardiology trial is not metaresearch. A study of *how cardiology trials report their outcomes* is.
+
+---
+
+## Tier
+
+Assign exactly one.
+
+### T1: Core metaresearch
+The primary object of study is research itself. Typical objects:
+
+- research **methods** and their properties (bias, reporting, statistical practice, study design)
+- **reproducibility**, replication, data and code sharing
+- **research integrity**: misconduct, retraction, questionable research practices, authorship
+- **peer review** and editorial process *as objects of study*
+- **research evaluation**, metrics, rankings, funding allocation
+- **scholarly communication**: publishing models, open access, preprints *as objects of study*
+- **bibliometrics and scientometrics** applied to a research literature
+- the **research workforce**: careers, equity, training, capacity
+- **evidence synthesis methodology** (not an individual systematic review's clinical answer, but work *about* how
+  syntheses are done)
+
+### T2: Adjacent
+Empirically or conceptually grounded work on science as a social system that is not framed as metaresearch but
+studies it:
+
+- **science and technology studies (STS)**: social studies of scientific knowledge, practice, controversy
+- **library and information science**: information behaviour of researchers, repositories, discovery
+- **research infrastructure** studies: platforms, data repositories, identifiers, standards
+- **history and philosophy of science** *when the object is contemporary research practice*
+- **research policy** analysis grounded in evidence
+
+T2 is where the field's diversity lives. Be generous here: a paper does not have to call itself metaresearch to
+be studying research.
+
+### T3: Contextual
+Relevant to the ecosystem, mapped and released, but **never pooled into the analytic corpus**:
+
+- editorials, commentaries, opinion pieces about research practice
+- policy documents and position statements
+- announcements of infrastructure, tools, or initiatives
+- news, obituaries, corrections, letters
+
+### OUT: Not metaresearch
+Everything else. Includes, and this is the most common error:
+
+- **A study that uses a method is not a study of the method.** A meta-analysis answering a clinical question is
+  OUT. A study of how meta-analyses handle heterogeneity is T1.
+- **Mentioning a metaresearch term is not studying it.** A lab paper reporting "assay reproducibility", a methods
+  section saying "peer reviewed", a licence note saying "open access": all OUT.
+- **Domain research that happens to be bibliometric in method** but whose object is the domain, not the research:
+  e.g. a bibliometric map of diabetes treatments, produced to summarise diabetes knowledge. Borderline; see below.
+
+---
+
+## The three errors that matter most
+
+These are where the pilot showed retrieval and screening break down. Read them twice.
+
+1. **Polysemy.** `reproducibility` in a biochemistry paper means the assay gives the same reading twice. In a
+   metaresearch paper it means the reproducibility crisis. Only the second is in scope. The same applies to
+   `validation`, `replication`, `bias`, `peer review`, `open access`. **Judge the sense, not the token.**
+
+2. **Method vs. object.** Using bibliometrics ≠ studying research. Ask: *if this paper is right, what do we now
+   know more about: a scientific question, or the practice of science?* If the former, OUT.
+
+3. **Absence of vocabulary is not absence of content.** An STS paper about laboratory practice, or an LIS paper
+   about how researchers find data, may use none of the field's keywords and still be squarely T2. **Do not
+   require the vocabulary.** This is the error that makes the field look smaller and more anglophone than it is.
+
+---
+
+## Canadian linkage
+
+Record which apply (this is metadata, not an inclusion test; the estimand is defined separately in
+`PROTOCOL.md`):
+
+- `CA_AFF`: at least one author affiliated with a Canadian institution
+- `CA_FUND`: funded by CIHR, NSERC, SSHRC, or CFI
+- `ABOUT_CA`: the Canadian research system is a substantive object of study (not a passing mention, not one
+  country among forty in a global comparison)
+
+## Genre
+
+`empirical` · `conceptual` · `editorial/commentary` · `policy` · `infrastructure/announcement` · `other`
+
+OpenAlex's `type` is unreliable and this field is commentary-heavy, so genre is coded, not inherited.
+
+## Language of the work
+
+As published. Do not infer from the venue.
+
+---
+
+## Confidence
+
+- `high`: the rubric decides this cleanly.
+- `medium`: the rubric decides, but a reasonable coder could differ.
+- `low`: genuinely on the boundary, or the abstract is missing/too thin to judge.
+
+**`low` is a legitimate answer and is not a failure.** Records coded `low` by either screener are routed to
+adjudication. A screener that never says `low` is not being careful; it is being confident.
+
+---
+
+## Worked examples
+
+| Title (abridged) | Tier | Why |
+|---|---|---|
+| "Data sharing practices in 500 randomised trials" | **T1** | The object is reporting practice. |
+| "Reproducibility of a Western blot protocol" | **OUT** | Assay reproducibility. Polysemy trap. |
+| "Trends in citation of retracted papers" | **T1** | Object is the literature's own behaviour. |
+| "Laboratory life in a Canadian genomics centre: an ethnography" | **T2** | STS. No metaresearch vocabulary; still studies research. |
+| "How do researchers discover datasets? A survey" | **T2** | LIS, information behaviour of researchers. |
+| "Effectiveness of statins: a network meta-analysis" | **OUT** | Uses a synthesis method to answer a clinical question. |
+| "How network meta-analyses handle inconsistency: a review of 200 reviews" | **T1** | Object is the method. |
+| "Announcing the Canadian Research Data Repository" | **T3** | Infrastructure announcement. Mapped, not pooled. |
+| "Open access mandates are failing early-career researchers" (editorial) | **T3** | Commentary about research practice. |
+| "Bibliometric analysis of diabetes research 2000–2020" | **T2** | Borderline. Bibliometric method, and the object *is* a research literature, so it studies research output. Code T2, `medium`. |
+| "Le libre accès dans les revues québécoises : état des lieux" | **T1** | Scholarly communication, object is publishing practice. French. |
+
+---
+
+## Instructions to the screener
+
+Read the title and abstract. Apply the rubric. Do not use outside knowledge of the authors or the journal's
+reputation. If the abstract is missing, judge on the title alone and set confidence to `low` unless the title is
+unambiguous.
+
+Return the schema in `protocol/screening-schema.json`. One object per work. No prose, no preamble.
+--------------------------------------------------------------------------------
+You are screening works for MetaCan, a map of Canadian metaresearch.
+
+Apply the rubric above to every record in the JSON array below. Return a JSON
+array with one object per work, conforming to protocol/screening-schema.json:
+
+  {"id": "W...", "tier": "T1|T2|T3|OUT", "genre": "...", "about_ca": true|false,
+   "confidence": "high|medium|low", "reason": "one sentence"}
+
+Rules:
+- Return the JSON array and NOTHING else. No prose, no preamble, no code fences.
+- Every input id must appear exactly once in the output.
+- Do not run commands, read files, or browse. Classify from the RECORDS alone.
+
+RECORDS:
+[
+  {
+    "id": "W1973172443",
+    "title": "Analysing sociolinguistic variation. By Sali A. Tagliamonte. (Key topics in sociolinguistics.) Cambridge: Cambridge University Press, 2006. Pp. xi, 284. ISBN 100521778182. $34.99.",
+    "abstract": "Reviewed by: Analysing sociolinguistic variation Robert Bayley Analysing sociolinguistic variation. By Sali A. Tagliamonte. (Key topics in sociolinguistics.) Cambridge: Cambridge University Press, 2006. Pp. xi, 284. ISBN 100521778182. $34.99. The quantitative analysis of linguistic variation has long been a central concern of sociolinguistics. For many years following the publication of Cedergren and Sankoff's (1974) seminal article on variable rules, however, knowledge of variation analysis was, as Guy observed, 'primarily . . . transmitted by word-of-mouth, an academic version of the preliterate tradition of oral history' (1988:124). Happily, that state of affairs no longer obtains as the field now has a number of guides to both the practical and the technical details of variation analysis. These include Young and Bayley's (1996) guide to the versions of the VARBRUL programs available in the mid 1990s, Bayley's (2002) overview of the principles of variation analysis, and Paolillo's (2002) detailed explanation of the statistical basis of VARBRUL. To this very partial listing, we can now add Sali Tagliamonte's highly accessible step-by-step guide to analyzing variation, from selecting participants and collecting the data through transcription and coding to performing the actual analysis and finally to interpreting the results. T illustrates these steps with variables selected from her own very extensive British and Canadian corpora. The volume, directed toward advanced undergraduate and graduate students, is divided into twelve chapters and also offers considerable online material. Ch. 1 provides an overview of the relationship between linguistics and sociolinguistics, and more specifically, between variationist sociolinguistics as practiced by William Labov and many others (among them, of course, T herself) and other areas of sociolinguistic inquiry such as the ethnography of communication and the sociology of language. T views the dual focus of variationist sociolinguistics on linguistic and social structure as the discipline's defining characteristic. The chapter includes brief discussions of key sociolinguistic concepts including the 'vernacular', the speech community, form/function asymmetry, linguistic variables, the quantitative method, the principle of accountability, circumscribing the variable context (or defining the envelope of variation, that is, what counts as an instance of the variable under investigation?), and hypothesis testing. Chs. 2 and 3 deal with data collection. Ch. 2 concentrates on sampling, with separate sections on the random sampling that characterized early sociolinguistic research (e.g. Labov 1966), social [End Page 900] networks, and the stratified random samples that are common in sociolinguistic research today. T provides examples of the success of the 'friend of a friend' method from her own fieldwork in the African Nova Scotian communities she studied with Shana Poplack (Poplack & Tagliamonte 1991). In Ch. 3, T goes to the heart of data collection—the sociolinguistic interview, a set of procedures designed to elicit the maximum amount of relatively informal speech. T emphasizes thorough preparation, including gaining familiarity with the concerns of the community under study. Managing the substantial amount of data that is necessary for even a relatively small-scale investigation of a speech community is one of the challenges that all researchers face. In Ch. 4, T deals with the practical issues of transcription and corpus construction. Deciding on the level of detail for initial transcription is among the more difficult questions covered in this chapter. T recommends transcribing in standard orthography with standard punctuation, unless the researcher has a compelling reason for doing otherwise. The selection of a linguistic variable is covered in Ch. 5. T provides a variety of examples of possible variables, using data from her York, England corpus as well as data from Ontario. The variables include the classic cases of alveolarization of -ing and coronal stop deletion as well as the quotative be like. In fact, she uses a single excerpt from the York corpus to illustrate the presence of sixteen variables at the phonological, morphosyntactic, and discourse/pragmatic levels, any one of which might provide a suitable topic for investigation. Ch. 6 deals with the most labor-intensive phase of any variationist study—constructing hypotheses and coding the data to test the hypotheses the researcher has developed. As in the previous chapters, T provides effective illustrations, using as examples variable -t,d deletion and variable -ly use. Chs. 7–10 provide...",
+    "year": 2009,
+    "lang": "en",
+    "type": "article",
+    "venue": "Language",
+    "topic": "Linguistic Variation and Morphology",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2036171795",
+    "title": "Les cellules souches et leurs implications en physiopathologie, en thérapeutique humaine et en dermatologie",
+    "abstract": "",
+    "year": 2009,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Annales de Dermatologie et de Vénéréologie",
+    "topic": "Hair Growth and Disorders",
+    "field": "Medicine",
+    "ca_institutions": "Université Laval",
+    "funders": []
+  },
+  {
+    "id": "W6976902796",
+    "title": "Additional file 1 of Improving the usefulness of evidence concerning the effectiveness of implementation strategies for knowledge products in primary healthcare: protocol for a series of systematic reviews",
+    "abstract": "Additional file 1. Detailed search strategy in Ovid Medline.",
+    "year": 2020,
+    "lang": "en",
+    "type": "article",
+    "venue": "Figshare",
+    "topic": "Health Policy Implementation Science",
+    "field": "Health Professions",
+    "ca_institutions": ["Université du Québec à Trois-Rivières", "McGill University", "Université de Montréal", "Centre for Interdisciplinary Research in Rehabilitation", "Université Laval"],
+    "funders": []
+  },
+  {
+    "id": "W2062914599",
+    "title": "Comparisons between SPECT and Quantitative EEG Measures of Cortical Impairment in Mild to Moderate Alzheimer’s Disease",
+    "abstract": "This study aimed at examining correlations between quantitative REM sleep EEG, regional cerebral blood flow measured by single photon emission computerized tomography (SPECT) and global cognitive functioning in nine patients with mild to moderate Alzheimer's disease. REM sleep EEG was not correlated with SPECT measures in any of the 6 regions studied. However, degrees of interhemispheric asymmetry calculated by both measures were concordant for the parieto-occipital region. Mini-mental state score correlated with REM sleep EEG slowing for left frontal, left and right parieto-occipital and left temporal regions but was not correlated with SPECT measures for any of the six regions. These results suggest that quantitative REM sleep EEG would be more useful than SPECT for evaluating cerebral dysfunctions in mild to moderate Alzheimer's disease.",
+    "year": 2008,
+    "lang": "en",
+    "type": "article",
+    "venue": "European Neurology",
+    "topic": "EEG and Brain-Computer Interfaces",
+    "field": "Neuroscience",
+    "ca_institutions": ["McGill University", "Douglas Mental Health University Institute", "Université de Montréal", "Hôpital du Sacré-Cœur de Montréal"],
+    "funders": []
+  },
+  {
+    "id": "W2075985483",
+    "title": "Duplication of the Extracranial Internal Carotid Artery Analyzed by MRI",
+    "abstract": "An abstract is not available for this content so a preview has been provided. As you have access to this content, a full PDF is available via the ‘Save PDF’ action button.",
+    "year": 2013,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Canadian Journal of Neurological Sciences / Journal Canadien des Sciences Neurologiques",
+    "topic": "Intracranial Aneurysms: Treatment and Complications",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W7017331245",
+    "title": "Assessment of Precision Irrigation on Potatoes in Southern Alberta",
+    "abstract": "Precision irrigation, in which water is applied at different times and rates across and within farm fields according to environmental and soil conditions, offers a promising solution for effective water resource management. Excess irrigation can lead to disease and lower yields while under irrigation leads to a deficit often resulting in reduced yields and quality. Understanding water requirements is key to making informed irrigation decisions. Optimizing water usage for potato crops in southern Alberta is important in the face of water scarcity challenges. This project evaluates precision irrigation scheduling performance, including creation of management zones within a field, to determine which field variables have the most effect on potato yield, and analyze the effectiveness of predictive software. The data collected from five irrigated potato fields in Southern Alberta from 2019 to 2022, as well as from the Integrated Agriculture Technology Center (IATC) in 2021 and 2022, were analyzed. Annually, soil parameters, topography, moisture usage, and yield were evaluated at 5-6 monitoring points per field to represent variations within that field. Soil moisture at each point was monitored using moisture sensors and the Alberta Irrigation Management Model (AIMM) software was used to estimate evapotranspiration (ET) and soil moisture changes at the IATC site. It was revealed that topographic complexity had the most significant influence on soil moisture dynamics, resulting in significant effects on potato yield. Soil moisture had a significant positive effect on yield during the tuber bulking stage, especially at a depth of 0-35cm, but a significant negative impact at a depth of 35-60cm. While variations in growing degree days and soil complexity did not consistently affect yield, there was a tendency towards a negative effect. Moisture content variations among points at the IATC sites had no significant relationship with yield, indicating success in the ability of predictive scheduling and VRI in reducing this source of yield variability. The AIMM model demonstrated higher reliability in prediction of irrigation requirements in 2022 than 2021, possibly due to differences in factors such as soil organic matter, bulk density of the soil, soil texture, weather, topography, and subsoil constraints, which affect model performance, but were not measured in this study. Precision irrigation offers a potential solution to address water scarcity challenges by optimizing water use efficiency and enhancing crop yield and quality through informed irrigation practices and technology integration.",
+    "year": 2024,
+    "lang": "en",
+    "type": "dissertation",
+    "venue": "University Library (University of Saskatchewan)",
+    "topic": "Soil Moisture and Remote Sensing",
+    "field": "Environmental Science",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2912219640",
+    "title": "Electricity Consumption in the Pork Production Chain From the Western Region of Paraná State, Brazil",
+    "abstract": "The development of swine farming resulted in the specialization and transformation of the productive chain with direct impact on the agroindustry. The intensive swine production is representative, with relevant performance in the international scenario, with an expressive increase in volumes and values produced and exported, contributing significantly to the performance of the Brazilian trade balance. This performance is due to the technological and organizational advances of the last decades. The constant changes and advances that swine farming has been undergoing promote the search for new ways of raising pigs. There is a constant incorporation of new technologies and an uninterrupted reorganization in the production systems in the industry, aiming to follow the industrial progress with greater cost reduction and increased profitability. In this context, the objective of this study was to evaluate the consumption of electric energy in the productive process of pig termination in rural properties in the western region of Paran&amp;aacute;. The study was conducted in three pig farms, where data were collected on the consumption of electricity in the production, slaughter and processing of pigs. The average specific energy consumption in the production of pigs in the termination stage was 0.0058 kWh kg-1, accounting for 1% of the process, while at slaughter it was 0.22 kWh kg-1, responsible for 38.22 kWh kg-1 % of consumption and processing of 0.35 kWh kg-1, accounting for 60.78%. Thus, results showed that the processing stage consumes the most energy within the pig meat production chain.",
+    "year": 2019,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Agricultural Science",
+    "topic": "Agricultural and Food Sciences",
+    "field": "Agricultural and Biological Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W6983124395",
+    "title": "Le rôle du travailleur social en soins palliatifs lorsque l'usager décède",
+    "abstract": "Dans cette recherche, nous jetons un regard sur l'aspect pragmatique de ce que vivent les travailleurs sociaux en soins palliatifs dans les premiers jours suivant le décès d'un usager qu'ils accompagnaient. Plus précisément, il est question de comprendre le rôle que ces professionnels peuvent jouer auprès des endeuillés après la mort d'un proche. Dans la pratique, sur le plan des soins palliatifs, le travailleur social tient compte des personnes qui gravitent autour de l'utilisateur de services en fin de vie. De ce fait, comment expliquer, lorsque survient le décès d'un usager, que ce professionnel n'intervienne plus auprès des aidants et des aidantes ? Ainsi, dans la majorité des cas, l'intervention s'arrête au décès du client avec la fermeture du dossier. Cependant, les politiques du ministère de la Santé et des Services sociaux du Québec prévoient que le psychologue ou le travailleur social rencontre les endeuillés après le décès, selon leurs besoins, pour un suivi de deuil (ministère de la Santé et Services sociaux, 2001). Cette recherche vise à mieux comprendre les raisons et les conséquences du retrait du travailleur social dans la première phase du deuil, c'est-à-dire celle du choc (Régnier &amp; Saint-Pierre, 2009). Elle tentera de mettre en lumière son rôle auprès des aidants et aidantes lorsque survient le décès d'un être cher, de mieux comprendre les besoins des aidants et des aidantes à cette étape du deuil et de clarifier le rôle du travailleur social par rapport aux autres professionnels qui oeuvrent auprès des endeuillés. La stratégie de recherche utilisée pour cette étude est de type qualitatif. Cette méthode s'appuie sur des données catégorielles qui ont pour but de représenter une mesure descriptive plutôt que numérique. En fait, celle-ci sert à expliquer un phénomène humain ou social (Lachance, 2005,) par une stratégie de recherche où il sera possible de comprendre quel est l'apport du travailleur social durant la première étape du processus de deuil vécu par les membres de la famille ou par l'entourage du disparu.",
+    "year": 2012,
+    "lang": "fr",
+    "type": "other",
+    "venue": "Constellation (Université du Québec à Chicoutimi)",
+    "topic": "Plant Pathogens and Resistance",
+    "field": "Agricultural and Biological Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4394399723",
+    "title": "Additional file 1 of How is the ecosystem services concept used as a tool to foster collaborative ecosystem governance? A systematic map protocol",
+    "abstract": "Additional file 1. ROSES protocol checklist.",
+    "year": 2022,
+    "lang": "en",
+    "type": "dataset",
+    "venue": "Figshare",
+    "topic": "Land Use and Ecosystem Services",
+    "field": "Environmental Science",
+    "ca_institutions": ["McGill University", "Brock University"],
+    "funders": []
+  },
+  {
+    "id": "W7039662525",
+    "title": "Monitoring nutrient-induced hypoxia and its effect on the invertebrate community in the southern Gulf of St. Lawrence, Canada",
+    "abstract": "Nutrient-induced impacts (eutrophication) in estuaries and coastal systems pose one of the greatest threats to aquatic ecosystem health. Given the economic, cultural and ecosystem importance of coastal systems, factors negatively impacting them have been a subject of study for decades. However, objective methods for quantifying the cumulative effects of nutrients have been elusive and, to date, inconsistent among studies and regions. This dissertation is composed of four data chapters of novel research to address the measurement and biological impacts of dissolved oxygen using high frequency data loggers at multiple estuaries and at a regional scale. The hypothesis tested in Chapter 2 was that high frequency dissolved oxygen measurements are an effective tool for discriminating between trophic status of estuaries of the southern Gulf of St. Lawrence, Canada. This was examined by determining whether the amount of dissolved oxygen was predicted by nutrient loading and water residence time. Using six months of raw\\ndissolved oxygen data from 15 southern Gulf of St. Lawrence estuaries, metrics were created that reflect symptoms of eutrophication and then analyzed using multivariate techniques. Ultimately, these metrics proved effective at discriminating between habitat type (algae or seagrass dominated) and were correlated with nitrate-N and water residence time. While dissolved oxygen measured in the upper estuary was successful at discriminating among estuaries it was unclear if those measurements are indicative of impacts at other spatial scales, leading to the second chapter. The primary hypothesis tested in Chapter 3 was that dissolved oxygen parameters in the upper estuary would relate to the severity of hypoxia on a larger spatial scale in the estuary. To examine the effect of spatial scale, dissolved oxygen was monitored along the salinity gradient from the upper estuary to the outer estuary, i.e. where the estuary entered a bay or the Northumberland Strait. In general, the upper estuary experienced symptoms of eutrophication earlier and sustained them longer than farther out the estuary, although impacts were observed farther out the estuary at the most impacted estuaries. Temperature and tidal amplitude were hypothesized to influence dissolved oxygen within an estuary, but only temperature had a significant effect and only in the upper estuary. The hypothesis tested in Chapter 4 was that invertebrate communities in the upper estuary would be affected by both hypoxia and the dominant vegetation there. Specifically, this study examined the influence of fine-scale dissolved oxygen on the invertebrate community in Ulva spp. and Zostera marina habitat. The invertebrate community was distinct between vegetation types and, in general, communities were more similar within than among estuaries. The exception was if the community had recently been exposed to sustained hypoxia/anoxia in the 48 hours prior to sampling. Communities affected by hypoxia were more similar to each other, regardless of site, and were differentiated from other communities by a higher proportion of hypoxia tolerant animals, e.g. some bivalves and gastropods, and a lower proportion of crustaceans. During field work for Chapter 4 it was observed that amphipods tended to swim throughout the water column during periods of hypoxia/anoxia and it was hypothesized that they may be using surface floating algal mats as refugia. Thus, the hypothesis tested in Chapter 5 was that invertebrate communities would differ between floating and submerged mats of Ulva spp.. Ultimately, floating mat communities were found to be distinct from submerged mats, mostly due to a greater occurrence of rare species. An\\nincrease in the proportion of epibenthic invertebrates on floating mats, relative to submerged mats, immediately following hypoxia supported the initial hypothesis. The primary implication was that some epibenthic invertebrates are capable of escaping hypoxia/anoxia through rafting and that they can potentially repopulate impacted areas through the same mechanism. The overall objective of this dissertation was to develop\\nscientifically sound methods for monitoring eutrophication. Ultimately, hourly measurements of dissolved oxygen in the upper estuary proved more sensitive, and less labour intensive, compared to monitoring macroinvertebrate communities and to many other methodologies used to assess eutrophication found in the literature. Refining nutrient loading, external and internal, and water residence time models used in this study should improve the relationship between predictor variables and dissolved oxygen in the upper estuary and at other spatial scales.",
+    "year": 2019,
+    "lang": "en",
+    "type": "article",
+    "venue": "IslandScholar (University of Prince Edward Island)",
+    "topic": "Paleontology and Evolutionary Biology",
+    "field": "Earth and Planetary Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W7001249414",
+    "title": "Sullivan City CCD",
+    "abstract": "Parent map for Sullivan City Census County Division, Texas showing the area of one geographic block for which the U.S. Census Bureau collected data. The plotted map scale is 1:12,500.",
+    "year": 2000,
+    "lang": "en",
+    "type": "other",
+    "venue": "The Portal to Texas History (University of North Texas)",
+    "topic": "Social Representations and Identity",
+    "field": "Psychology",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2998741351",
+    "title": "The schizophrenia risk isoform ZNF804AE3E4 affects dendritic spine",
+    "abstract": "",
+    "year": 2020,
+    "lang": "en",
+    "type": "letter",
+    "venue": "Schizophrenia Research",
+    "topic": "Schizophrenia research and treatment",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": "National Natural Science Foundation of China"
+  },
+  {
+    "id": "W4395806492",
+    "title": "Occurrence Download",
+    "abstract": "A dataset containing 27 species occurrences available in GBIF matching the query: { \"and\" : [ \"TaxonKey is Ravenelia texensis Ellis &amp; Galloway\", { \"or\" : [ \"Country is United States of America\", \"Country is Canada\" ] }, { \"not\" : { \"DatasetKey\" : [ \"is Global database of alien macrofungi\" ] } } ] } The dataset includes 27 records from 4 constituent datasets; see https://api.gbif.org/v1/occurrence/download/0127316-230530130749713/datasets/export for details. Data from some individual datasets included in this download may be licensed under less restrictive terms.",
+    "year": 2023,
+    "lang": "en",
+    "type": "dataset",
+    "venue": "Global Biodiversity Information Facility",
+    "topic": "Mycorrhizal Fungi and Plant Interactions",
+    "field": "Agricultural and Biological Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4395077547",
+    "title": "Brain Tumor MRI Segmentation Method Based on Segment Anything Model",
+    "abstract": "The precise segmentation of different types of brain tumor regions constitutes a critical task in medical image segmentation.Clinically, brain MRI contains abundant information, which can significantly assist doctors in the examination and diagnosis of brain tumor patients.With the advancement of artificial intelligence (AI) and computer technology, some foundational models have increasingly played a pivotal role in the field of computer vision.The Segment Anything Model (SAM) is a fundamental model in the realm of image segmentation, renowned for its exceptional zero-shot segmentation performance and transfer ability, achieving commendable results in natural image processing.To explore the efficacy of SAM in segmenting brain tumor MRI and address the issue of low segmentation accuracy due to uneven image grayscale, a method based on SAM feature fusion is proposed.Features fused from the Transformer and Convolutional Neural Network (CNN) are input into a mask decoder, leveraging the attention mechanism of the Transformer to more effectively capture the global relationships within images, thereby enhancing the precision of the output.Experiments have demonstrated that the method proposed in this study surpasses the segmentation performance of SAM alone, achieving precise segmentation of brain tumor MRI.",
+    "year": 2024,
+    "lang": "en",
+    "type": "article",
+    "venue": "Revue d intelligence artificielle",
+    "topic": "Brain Tumor Detection and Classification",
+    "field": "Neuroscience",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2808553566",
+    "title": "Net Charge Equals Positive Change",
+    "abstract": "This article discusses how streaming current monitors can enhance coagulation by making it easier to quantify dosing levels at Canada's largest low‐pressure, enhanced coagulation membrane water treatment plant. Pilot studies indicated a 30 percent increase in membrane performance and a 25 percent increase in water production during the same period. The article discusses the plant's source water, how this technology works, and the major operational challenge of determining the proper streaming current value (SCV), the objective being to find the optimum SCV that corresponds with optimum organics removal, particle destabilization, and plant performance.",
+    "year": 2007,
+    "lang": "en",
+    "type": "article",
+    "venue": "Opflow",
+    "topic": "Membrane Separation Technologies",
+    "field": "Environmental Science",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2048517242",
+    "title": "Alain Locke on Race and Reciprocity: The Necessity of Epideictic Rhetoric for Cultural Pluralism",
+    "abstract": "In this essay, Alain Locke's work is read as a search for an epideictic rhetoric. Locke, through his philosophy and editorial work, helps rethink the significance of epideictic rhetoric by articulating a pluralist notion of values and accounting for competition between value-systems. He suggested that race can and should be celebrated, and that acts of celebration should use aesthetic sensibilities capable of displaying the value of race. Showing the connections between Locke's philosophy and the rhetorical tradition illustrates the value and potential of a multi-cultural citizenry and the necessity of epideictic rhetoric in producing, maintaining, and negotiating relationships within such a community.",
+    "year": 2008,
+    "lang": "en",
+    "type": "article",
+    "venue": "Howard Journal of Communications",
+    "topic": "Rhetoric and Communication Studies",
+    "field": "Arts and Humanities",
+    "ca_institutions": "Concordia University",
+    "funders": []
+  },
+  {
+    "id": "W6910369314",
+    "title": "Conseil national de recherches Canada : rapport annuel 2007-2008",
+    "abstract": "Commentaires et analyse des tats",
+    "year": 2008,
+    "lang": "fr",
+    "type": "report",
+    "ca_institutions": [],
+    "funders": "National Research Council Canada"
+  },
+  {
+    "id": "W2144285153",
+    "title": "Harnessing Innovation to Support Medical Residents in Education and Practice: An Exploration of Need and Preference",
+    "abstract": "",
+    "year": 2012,
+    "lang": "en",
+    "type": "book-chapter",
+    "topic": "Innovations in Medical Education",
+    "field": "Medicine",
+    "ca_institutions": ["Kwantlen Polytechnic University", "University of Toronto", "University of British Columbia"],
+    "funders": []
+  },
+  {
+    "id": "W2784991661",
+    "title": "Individual determinants of social foraging tactic use when resources are defendable: An experiment with zebra finches",
+    "abstract": "In a social foraging context where individuals can search either for food (i.e. produce) or for opportunities to join (i.e. scrounge), bold individuals, generally, tend to produce more than shy individuals. Yet, the underlying cause of this link remains poorly understood. In particular, bold individuals might rely more on the producer tactic because they have less chance to detect joining opportunities compared to shy individuals or because they prefer more risky and uncertain behavioural tactics. To assess the importance of both mechanisms, we conducted a laboratory experiment with zebra finches ( Taenyopigia guttata ) that were observed while searching for defendable food patches using either the producer or the scrounger tactic, when their arrival order on the grid was either free or imposed by the experimenter. As anticipated, we detected a strong effect of neophobia on producer-scrounger tactic use, but contrary to most previous experiments in which food patches were not defendable, shy individuals, in the present study, relied more on the producer tactic. In addition, we found that arrival order had no significant effect on foraging tactic use in bold and shy individuals. Thus, our results support the hypothesis that producer-scrounger tactic use would not be determined by the ability of individuals to detect scrounging opportunities, but rather by their tolerance to uncertainty and risk. Furthermore, our findings have important evolutionary implications as they suggest that temporal and/or spatial heterogeneity in resource distribution, through influencing the success of each behavioural type, would contribute in maintaining personality differences within populations.",
+    "year": 2018,
+    "lang": "en",
+    "type": "preprint",
+    "topic": "Animal Behavior and Reproduction",
+    "field": "Agricultural and Biological Sciences",
+    "ca_institutions": "Université de Montréal",
+    "funders": []
+  },
+  {
+    "id": "W4289847450",
+    "title": "CaSR modulates proliferation of the superficial zone cells in temporomandibular joint cartilage via the PTHrP nuclear localization sequence",
+    "abstract": "",
+    "year": 2022,
+    "lang": "en",
+    "type": "preprint",
+    "venue": "Research Square",
+    "topic": "Fibroblast Growth Factor Research",
+    "field": "Biochemistry, Genetics and Molecular Biology",
+    "ca_institutions": [],
+    "funders": ["National Natural Science Foundation of China", "McGill University", "Yale University"]
+  },
+  {
+    "id": "W7057112089",
+    "title": "The I.A.A.F. and I.O.C, their relationship and its impact on women's participation in track and field at the Olympic Games, 1912-1932.",
+    "abstract": "",
+    "year": 2000,
+    "lang": "en",
+    "type": "other",
+    "venue": "Library and Archives Canada (Government of Canada)",
+    "topic": "Laser Design and Applications",
+    "field": "Engineering",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2073841094",
+    "title": "Effects of protein maturation on the noise in gene expression",
+    "abstract": "Fluorescent proteins are frequently used as reporters for gene expression in living cells, either by being expressed in tandem with a protein of interest or through the creation of fusion proteins. The data yielded by the fluorescence output are of considerable interest in efforts to formulate quantitative models of cellular behavior underway in fields such as systems biology and synthetic biology. An often neglected aspect of these proteins, however, is their maturation: Before a fluorescent protein can generate a fluorescent signal, it must mature through a series of steps (folding, cyclization, and oxidation) that may take from many minutes to over a day. The presence of these maturation steps creates a distinction between the observed gene expression profile and the actual profile. We examine this effect through a simplified gene expression model and conclude that fluorescent protein maturation can have significant effects on estimates of both the mean protein levels and the variability in gene expression. The model shows that in many regimes, the observed variability will be increased by the maturation process, but indicates the existence of regimes in which the observed variability will actually be less than the true variability of the target protein. The latter effect arises from a low-pass filtering effect introduced by the chain of maturation reactions. The results suggest that the maturation of fluorescent proteins should be taken into account when using such proteins as quantitative indicators of gene expression levels.",
+    "year": 2008,
+    "lang": "en",
+    "type": "article",
+    "venue": "Physical Review E",
+    "topic": "Gene Regulatory Network Analysis",
+    "field": "Biochemistry, Genetics and Molecular Biology",
+    "ca_institutions": ["College of Family Physicians of Canada", "University of Toronto"],
+    "funders": "Natural Sciences and Engineering Research Council of Canada"
+  },
+  {
+    "id": "W1673751173",
+    "title": "A Practical, Global Perspective on Using Administrative Data to Conduct Intensive Care Unit Research",
+    "abstract": "Various data sources can be used to conduct research on critical illness and intensive care unit (ICU) use. Most published studies derive from randomized controlled trials, large-scale clinical databases, or retrospective chart reviews. However, few investigators have access to such data sources or possess the resources to create them. Hospital administrative data, also called health claims data, constitute an important alternative data source that can be used to address a broad range of research questions, including many that would be difficult to study in interventional studies. Such data often contain information that allows identification of ICU care, specific types of critical illness, and ICU-related procedures. The strengths of using administrative databases are that many are population-based, cover broad geographic regions, and are large enough to provide high statistical power and precise effect estimates. Linking hospital data to other databases regarding chronic care facilities, home care services, or rehabilitation services, for example, can expand the scope of research questions that can be answered. However, the limitations of administrative data must be recognized. They are not collected for research purposes; thus, data elements may vary in accuracy, and key clinical variables such as ICU-specific physiologic and laboratory data are usually lacking. Specific efforts should be made to validate the data elements used, as has been done in several world regions. As with any other research question, it is imperative that the analysis plan be carefully defined in advance and that appropriate attention be paid to potential sources of bias and confounding.",
+    "year": 2015,
+    "lang": "en",
+    "type": "review",
+    "venue": "Annals of the American Thoracic Society",
+    "topic": "Sepsis Diagnosis and Treatment",
+    "field": "Medicine",
+    "ca_institutions": ["Toronto Western Hospital", "University of Manitoba"],
+    "funders": []
+  },
+  {
+    "id": "W2178268226",
+    "title": "ASPECTS decay during inter-facility transfer predicts patient outcomes in endovascular reperfusion for ischemic stroke: a unique assessment of dynamic physiologic change over time",
+    "abstract": "BACKGROUND: Pretreatment Alberta Stroke Program Early CT Scores (ASPECTS) is associated with clinical outcomes. The rate of decline between subsequent images, however, may be more predictive of outcomes as it integrates time and physiology. METHODS: A cohort of patients transferred from six primary stroke centers and treated with intra-arterial therapy (IAT) was retrospectively studied. Absolute ASPECTS decay was defined as ((ASPECTS First CT-ASPECTS Second CT)/hours elapsed between images). A logistic regression model was performed to determine if the rate of ASPECTS decay predicted good outcomes at 90 days (modified Rankin Scale score of 0-2). RESULTS: 106 patients with a mean age of 66±14 years and a median National Institutes of Health Stroke Scale score of 19 (IQR 15-23) were analyzed. Median time between initial CT at the outside hospital to repeat CT at our facility was 2.7 h (IQR 2.0-3.6). Patients with good outcomes had lower rates of absolute ASPECTS decay compared with those who did not (0.14±0.23 score/h vs 0.49±0.39 score/h; p<0.001). In multivariable modeling, the absolute rate of ASPECTS decay (OR 0.043; 95% CI 0.004 to 0.471; p=0.01) was a stronger predictor of good patient outcome than static pretreatment ASPECTS obtained before IAT (OR 0.64; 95% CI 0.38 to 1.04; p=0.075). In practical terms, every 1 unit increase in ASPECTS decline per hour correlates with a 23-fold lower probability of a good outcome. CONCLUSIONS: Patients with faster rates of ASPECTS decay during inter-facility transfers are associated with worse clinical outcomes. This value may reflect the rate of physiological infarct expansion and thus serve as a tool in patient selection for IAT.",
+    "year": 2014,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of NeuroInterventional Surgery",
+    "topic": "Acute Ischemic Stroke Management",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": "Stryker"
+  },
+  {
+    "id": "W1785986601",
+    "title": "Un théâtre à la recherche d'auteurs",
+    "abstract": "Un thtre la recherche d'auteurs Par David Lonergan\" Fragile, le thtre en Acadie.D'autant plus qu'un faible nombre des crivains qui se sont aventurs dans ce domaine ont persist.Ce qui n'a pas t sans poser quelques problmes aux compagnies, parfois contraintes de crer des textes qui auraient demand des rcritures.Nulle surprise, ds lors, que trs peu de textes soient publis.Par contre, la situation change.E n Acadie, il existe deux compagnies que l'on pourrait qualifier d'institutionnelles, le Thtre populaire d'Acadie (Caraquet, cr en 1974) et le thtre l'Escaouette (Moncton, 1978), auxquelles s'ajoutent le collectif Moncton Sable (1997) et le Thtre Alacenne (2005), tous deux de Moncton.Le Pays de la Sagouine (Bouctouche, 1992) complte le paysage.Quant l'dition de thtre en Acadie, il y eut les ditions d'Acadie jusqu' leur faillite en 2000 et, depuis, quelques textes aux ditions La Grande Mare de Tracadie-Sheila.Rcemment, les ditions Prise de parole de Sudbury ont dcid de publier des oeuvres acadiennes.Pour susciter l'criture, le thtre l'Escaouette organise aux deux ans depuis 2001 le Festival haute voix (FHV), un vnement consacr la mise en lecture de textes indits, et appuy par des ateliers d'criture.Sur la trentaine de textes qui y ont t prsents, fort peu ont connu une cration la scne pour de multiples raisons : ncessit de rcritures, limite dans la capacit de production des compagnies, quasi-absence de productions autogres.Si l'on regarde l'ensemble de la production depuis 1990, on constate que trois auteurs se dmarquent : Antonine Maillet, surtout par le Pays de la Sagouine, France Daigle, l'auteure principale de Moncton Sable, et Hermngilde Chiasson, l'auteur maison de l'Escaouette.Trois jeunes auteurs semblent vouloir faire oeuvre : Emma Hach dont les pices ont t cres tant par des compagnies professionnelles que par des troupes communautaires, Mlanie Lger avec le Thtre Alacenne et l'Escaouette, et Marcel-Romain Thriault avec le Thtre populaire d'Acadie (TPA).",
+    "year": 2009,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Érudit (Université de Montréal)",
+    "topic": "Historical and Literary Analyses",
+    "field": "Arts and Humanities",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W6909189679",
+    "title": "British Columbia North Coast Drifter Buoy Deployed 2015-04-06",
+    "abstract": "The Institute of Ocean Sciences Drifter SN 203 was deployed on 2015-04-06 on British Columbia North Coast. These are drifter deployments that were deployed at a latitude greater than 50 degrees along the British Columbia coast. This device is a Drifter Buoy. Drifter buoys float on the sea surface and are used to investigate ocean currents and other parameters like temperature and salinity. It was deployed on a mobile platform. Data from this deployment were archived and made available through Ocean Networks Canada's Oceans 3.0 digital infrastructure, with quality assurance and derived data products following established practices.",
+    "year": 2018,
+    "lang": "en",
+    "type": "dataset",
+    "venue": "Ocean Networks Canada Society",
+    "topic": "Art, Technology, and Culture",
+    "field": "Arts and Humanities",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4213273432",
+    "title": "Nanopore ReCappable sequencing maps SARS-CoV-2 5′ capping sites and provides new insights into the structure of sgRNAs",
+    "abstract": "The SARS-CoV-2 virus has a complex transcriptome characterised by multiple, nested subgenomic RNAsused to express structural and accessory proteins. Long-read sequencing technologies such as nanopore direct RNA sequencing can recover full-length transcripts, greatly simplifying the assembly of structurally complex RNAs. However, these techniques do not detect the 5' cap, thus preventing reliable identification and quantification of full-length, coding transcript models. Here we used Nanopore ReCappable Sequencing (NRCeq), a new technique that can identify capped full-length RNAs, to assemble a complete annotation of SARS-CoV-2 sgRNAs and annotate the location of capping sites across the viral genome. We obtained robust estimates of sgRNA expression across cell lines and viral isolates and identified novel canonical and non-canonical sgRNAs, including one that uses a previously un-annotated leader-to-body junction site. The data generated in this work constitute a useful resource for the scientific community and provide important insights into the mechanisms that regulate the transcription of SARS-CoV-2 sgRNAs.",
+    "year": 2022,
+    "lang": "en",
+    "type": "article",
+    "venue": "Nucleic Acids Research",
+    "topic": "Advanced biosensing and bioanalysis techniques",
+    "field": "Biochemistry, Genetics and Molecular Biology",
+    "ca_institutions": [],
+    "funders": ["National Human Genome Research Institute", "Biotechnology and Biological Sciences Research Council", "Medical Research Council", "National Institutes of Health", "U.S. Food and Drug Administration", "Hamilton Health Sciences Foundation", "Associazione Italiana per la Ricerca sul Cancro", "Oxford Nanopore Technologies"]
+  },
+  {
+    "id": "W7062282197",
+    "title": "Sleep Apnea Detection by Tracheal Motion and Sound, and Oximetry via Application of Deep Neural Networks",
+    "abstract": "Nasim Montazeri Ghahjaverestan,1,2 Cristiano Aguiar,3 Richard Hummel,3 Xiaoshu Cao,4,5 Jackson Yu,3 T Douglas Bradley2,3,5,6 1Sleep and Brain Health Laboratory, Sunnybrook Research Institute, Toronto, Ontario, Canada; 2Faculty of Medicine, University of Toronto, Toronto, Ontario, Canada; 3Bresotec Inc, Toronto, Ontario, Canada; 4Institute of Biomedical Engineering, University of Toronto, Toronto, Ontario, Canada; 5KITE, Toronto Rehabilitation Institute, University Health Network, Toronto, Ontario, Canada; 6Department of Medicine of the University Health Network, Toronto General Hospital, Toronto, Ontario, CanadaCorrespondence: T Douglas Bradley, University Health Network Toronto General Hospital, Room 9N-943, 200 Elizabeth Street, Toronto, ON, M5G 2C4, Canada, Tel +416-340-4719, Fax +416-340-4197, Email douglas.bradley@utoronto.caPurpose: Sleep apnea (SA) is highly prevalent, but under diagnosed due to inaccessibility of sleep testing. To address this issue, portable devices for home sleep testing have been developed to provide convenience with reasonable accuracy in diagnosing SA. The objective of this study was to test the validity a novel portable sleep apnea testing device, BresoDX1, in SA diagnosis, via recording of trachea-sternal motion, tracheal sound and oximetry.Patients and Methods: Adults with a suspected sleep disorder were recruited to undergo in-laboratory polysomnography (PSG) and a simultaneous BresoDX1 recording. Data from BresoDX1 were collected and features related to breathing sounds, body motions and oximetry were extracted. A deep neural network (DNN) model was trained with 61-second epochs of the extracted features to detect apneas and hypopneas from which an apnea-hypopnea index (AHI) was calculated. The AHI estimated by BresoDX1 (AHIbreso) was compared to the AHI determined from PSG (AHIPSG) and the sensitivity and specificity of SA diagnosis were assessed at an AHIPSG ≥ 15.Results: Two-hundred thirty-three participants (mean ± SD) 50 ± 16 years of age, with BMI of 29.8 ± 6.6 and AHI of 19.5 ± 22.7, were included. There was a strong relationship between AHIbreso and AHIPSG (r = 0.91, p < 0.001). SA detection for an AHIPSG ≥ 15 was highly sensitive (90.0%) and specific (85.9%).Conclusion: We conclude that the DNN model we developed via recording and analyses of trachea-sternal motion and sound along with oximetry provides an accurate estimate of the AHIPSG with high sensitivity and specificity. Therefore, BresoDX1 is a simple, convenient and accurate portable SA monitoring device that could be employed for home SA testing in the future.Keywords: sleep apnea, portable sleep testing, tracheal acoustics",
+    "year": 2023,
+    "lang": "en",
+    "type": "article",
+    "venue": "DOAJ (DOAJ: Directory of Open Access Journals)",
+    "topic": "Magnetic confinement fusion research",
+    "field": "Physics and Astronomy",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4416930627",
+    "title": "Review: Religion, Art, and Visual Culture: A Cross Cultural Reader, edited by S. Brent Plate",
+    "abstract": "",
+    "year": 2006,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Religion and Popular Culture",
+    "topic": "Visual Culture and Art Theory",
+    "field": "Arts and Humanities",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4238825643",
+    "title": "10.3991/ijoe.v9iS1.2279",
+    "abstract": "This DOI is not currently attached to any metadata records. DOIs can’t actually ever be deleted (they’re persistent), but sometimes our members create DOIs in error. We do have a process to approximate deletion which we follow only in rare cases where the DOI has been genuinely created in error, and most crucially, if the DOI has never been published anywhere online or in print and never otherwise distributed to or communicated with anyone (authors, readers, reviewers, etc.",
+    "year": 2000,
+    "lang": "en",
+    "type": "article",
+    "venue": "Time to knit",
+    "topic": "Hermeneutics and Narrative Identity",
+    "field": "Arts and Humanities",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W3097854130",
+    "title": "Le Montréal d’André Melançon",
+    "abstract": "",
+    "year": 2018,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Érudit (Université de Montréal)",
+    "topic": "Canadian Identity and History",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4391428684",
+    "title": "Performance of machine translators in translating French medical research abstracts to English: A comparative study of DeepL, Google Translate, and CUBBITT",
+    "abstract": "BACKGROUND: Non-English speaking researchers may find it difficult to write articles in English and may be tempted to use machine translators (MTs) to facilitate their task. We compared the performance of DeepL, Google Translate, and CUBBITT for the translation of abstracts from French to English. METHODS: We selected ten abstracts published in 2021 in two high-impact bilingual medical journals (CMAJ and Canadian Family Physician) and used nine metrics of Recall-Oriented Understudy for Gisting Evaluation (ROUGE-1 recall/precision/F1-score, ROUGE-2 recall/precision/F1-score, and ROUGE-L recall/precision/F1-score) to evaluate the accuracy of the translation (scores ranging from zero to one [= maximum]). We also used the fluency score assigned by ten raters to evaluate the stylistic quality of the translation (ranging from ten [= incomprehensible] to fifty [= flawless English]). We used Kruskal-Wallis tests to compare the medians between the three MTs. For the human evaluation, we also examined the original English text. RESULTS: Differences in medians were not statistically significant for the nine metrics of ROUGE (medians: min-max = 0.5246-0.7392 for DeepL, 0.4634-0.7200 for Google Translate, 0.4815-0.7316 for CUBBITT, all p-values > 0.10). For the human evaluation, CUBBITT tended to score higher than DeepL, Google Translate, and the original English text (median = 43 for CUBBITT, vs. 39, 38, and 40, respectively, p-value = 0.003). CONCLUSION: The three MTs performed similarly when tested with ROUGE, but CUBBITT was slightly better than the other two using human evaluation. Although we only included abstracts and did not evaluate the time required for post-editing, we believe that French-speaking researchers could use DeepL, Google Translate, or CUBBITT when writing articles in English.",
+    "year": 2024,
+    "lang": "en",
+    "type": "article",
+    "venue": "PLoS ONE",
+    "topic": "Artificial Intelligence in Healthcare and Education",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4402630461",
+    "title": "Vitamin D supplementation to prevent acute respiratory infections: systematic review and meta-analysis of stratified aggregate data",
+    "abstract": "ABSTRACT Background A 2021 meta-analysis of 37 randomised controlled trials (RCTs) of vitamin D supplementation for prevention of acute respiratory infections (ARI) revealed a statistically significant protective effect of the intervention (odds ratio [OR] 0.92, 95% confidence interval [CI] 0.86 to 0.99). Since then, 6 eligible RCTs have completed, including one large trial (n=15,804). Methods Updated systematic review and meta-analysis of data from RCTs of vitamin D for ARI prevention using a random effects model. Sub-group analyses were done to determine whether effects of vitamin D on risk of ARI varied according to baseline 25-hydroxyvitamin D (25[OH]D) concentration, dosing regimen or age. We searched MEDLINE, EMBASE, the Cochrane Central Register of Controlled Trials, Web of Science and the ClinicalTrials.gov were searched between May 2020 (previous search) and April 2024. No language restrictions were imposed. Double-blind RCTs supplementing vitamin D for any duration, with placebo or low-dose vitamin D control, were eligible if approved by Research Ethics Committee and if ARI incidence was collected prospectively and pre-specified as an efficacy outcome. Aggregate data, stratified by baseline 25(OH)D concentration and age, were obtained from study authors. The study was registered with PROSPERO (no. CRD42024527191). Findings We identified 6 new RCTs (19,337 participants). Data were obtained for 16,086 (83.2%) participants in 3 new RCTs and combined with data from 48,488 participants in 43 previously identified RCTs. For the primary comparison of any vitamin D vs. placebo, the intervention did not significantly affect overall ARI risk (OR 0.94, 95% CI 0.88 to 1.00, P=0.057; 40 studies; I 2 26.4%). Pre-specified subgroup analysis did not reveal evidence of effect modification by age, baseline vitamin D status, or dosing regimen. Vitamin D did not influence the proportion of participants experiencing at least one serious adverse event (OR 0.96, 95% CI 0.90 to 1.04; 38 studies; I 2 0.0%). A funnel plot showed left-sided asymmetry (P=0.002, Egger’s test). Interpretation This updated meta-analysis yielded a similar point estimate for the overall effect of vitamin D supplementation on ARI risk to that obtained previously, but the 95% CI for this effect estimate now spans 1.00, indicating no statistically significant protection. Funding None Research in context Evidence before this study We searched MEDLINE, EMBASE, the Cochrane Central Register of Controlled Trials (CENTRAL), Web of Science and the ClinicalTrials.gov registry from 1 st May 2020 (date of our previous search) to 30 th April 2024 for randomised Controlled Trials and meta-analyses of randomised Controlled Trials evaluating effectiveness of vitamin D supplementation for the prevention of acute respiratory infections. Our previous meta-analysis of 43 randomised Controlled Trials (RCTs) of vitamin D supplementation for prevention of acute respiratory infections (ARI) conducted in 2021 revealed a statistically significant protective effect of the intervention (OR 0.92, 95% CI 0.86 to 0.99). A further 6 eligible RCTs, contributing data from 19,337 participants have now completed, including one large trial (n=15,804). Added value of this study Our meta-analysis of aggregate data from 64,086 participants in 46 randomised controlled trials, stratified by baseline 25(OH)D concentration and age, provides an updated estimate of the protective effects of vitamin D against acute respiratory infection overall (OR 0.94, 95% CI 0.88 to 1.00), and in sub-groups defined by baseline vitamin D status, age, and dosing frequency, amount and duration. Implications of all the available evidence Updated meta-analysis including the latest available RCT data shows no statistically significant protective effect of vitamin D supplementation against ARI, either overall or in sub-group analyses.",
+    "year": 2024,
+    "lang": "en",
+    "type": "preprint",
+    "venue": "medRxiv",
+    "topic": "Human Health and Disease",
+    "field": "Medicine",
+    "ca_institutions": ["McMaster University", "Impact", "St. Michael's Hospital"],
+    "funders": "Barts Charity"
+  },
+  {
+    "id": "W2345002404",
+    "title": "Facial Swelling Associated with Impaction of the Deciduous and Permanent Maxillary Fourth Premolars in a Dog with Patent Ductus Arteriosus",
+    "abstract": "A three-year-old Labrador retriever was referred for decreased appetite, a painful swelling in the region of the maxillary right fourth premolar, and a heart murmur indicative of patent ductus arteriosus (PDA) diagnosed 1.5-weeks prior to presentation. Oral examination and intraoral dental radiographs showed impaction of the maxillary right fourth premolar surrounded by reactive alveolar bone. Necrotic bone, remnants of the deciduous maxillary right fourth premolar, and the impacted permanent maxillary right fourth premolar were removed following surgical exploration of the area. The PDA was repaired without complication 2-weeks following oral surgery. The extraction site was healing appropriately, and the dog's inappetence and painful facial swelling had resolved.",
+    "year": 2001,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Veterinary Dentistry",
+    "topic": "Cardiovascular Conditions and Treatments",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W6977785891",
+    "title": "The epidemiology of tuberculosis-associated hyperglycemia in individuals newly screened for type 2 diabetes mellitus: systematic review and meta-analysis",
+    "abstract": "Abstract Background There is scarce evidence that tuberculosis (TB) can cause diabetes in those not previously known to be diabetic. Whilst the World Health Organization (WHO) recommends screening for Diabetes Mellitus (DM) at the onset of TB treatment, nevertheless, it remains to be elucidated which patients with TB-associated hyperglycemia are at higher risk for developing DM and stand to benefit from a more regular follow-up. This review aims to firstly quantify the reduction of newly detected hyperglycemia burden in TB patients who are on treatment over time; secondly, determine the burden of TB-associated hyperglycemia after follow-up, and thirdly, synthesize literature on risk factors for unresolved TB-associated hyperglycemia in previously undiagnosed individuals. Methods We searched PUBMED, EMBASE, SCOPUS, and Global Health for articles on TB-associated hyperglycemia up to September 30th, 2019. Search terms included Tuberculosis and hyperglycemia/DM, and insulin resistance. We appraised studies, extracted data, and conducted a meta-analysis to assess the change of the burden of hyperglycemia in prospective studies. The review is registered in the PROSPERO database (CRD42019118173). Results Eleven studies were included in the meta-analysis yielding a total of 677 (27,3%) of patients with newly detected hyperglycemia at baseline. The mean quality score of eligible studies using the Newcastle-Ottawa Quality Assessment Scale was 7.1 out of 9 (range 6-9). The pooled unresolved new cases of hyperglycemia at the end of follow up was 50% (95% CI: 36–64%) and the total pooled burden of hyperglycemia at 3–6 months of follow up was 11% (95% CI: 7–16%), with both estimates displaying a high heterogeneity, which remained significant after performing a sub-analysis by DM diagnostic method and 3 months of follow up. As only 2 studies explored risk factors for unresolved hyperglycemia, no meta-analysis was performed on risk factors. Conclusion Our meta-analysis showed that although in half of the patients with newly observed hyperglycemia at baseline, it remained unresolved at a follow-up of 3 to 6 months, the total burden of hyperglycemia is slightly above 10%, 3 months after initiating TB treatment. Studies are warranted to assess whether risk factors including HIV positivity, smoking, and extensive pulmonary TB disease put patients at higher risk for DM.",
+    "year": 2020,
+    "lang": "en",
+    "type": "other",
+    "venue": "Figshare",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4415723818",
+    "title": "Comparative Pharmacokinetics and Safety of a Micellar Chrysin–Quercetin–Rutin Formulation: A Randomized Crossover Trial",
+    "abstract": "Chrysin is a dietary flavonoid with antioxidant and anti-inflammatory activity, but its clinical potential is limited by poor oral bioavailability. This randomized double-blind three period crossover trial evaluated the pharmacokinetics of a novel micellar chrysin formulation co-encapsulated with quercetin and rutin (LMC) compared with a non-micellar chrysin formulation (NMC) and unformulated chrysin (UFC). Secondary objectives included in vitro permeability (Caco-2) and a 30-day safety assessment of daily LMC supplementation. Sixteen healthy adults received a single oral dose of each formulation in randomized order separated by a 7-day washout. Plasma chrysin was quantified over 24 h to determine pharmacokinetic parameters. In vitro Caco-2 assays evaluated permeability, and clinical biochemistry of 15 participants were assessed weekly during 30 days of daily LMC use. LMC achieved &gt;2-fold higher systemic exposure than unformulated chrysin (AUC0–24 = 914.8 ± 697.5 ng·h/mL; Cmax = 87.3 ± 59.4 ng/mL; both p &lt; 0.05) and &gt;2.6-fold higher than NMC, supported by &gt;10-fold higher in vitro permeability. Daily LMC supplementation was well tolerated, with only mild, reversible adverse events and no clinically relevant safety changes, despite higher systemic exposure. Small, but significant, reductions in fasting glucose were observed in both sexes. The novel micellar chrysin–quercetin–rutin formulation substantially improved bioavailability and was well tolerated during 30 days of daily use, supporting its potential as an advanced delivery strategy for flavonoids with poor oral absorption and identifying glucose regulation as a physiological effect of interest.",
+    "year": 2025,
+    "lang": "en",
+    "type": "article",
+    "venue": "Antioxidants",
+    "topic": "Flavonoids in Medical Research",
+    "field": "Medicine",
+    "ca_institutions": "Burnaby Hospital",
+    "funders": []
+  },
+  {
+    "id": "W4408091719",
+    "title": "CRISPR-mediated detection of Pneumocystis transcripts in bronchoalveolar, oropharyngeal, and serum specimens for Pneumocystis pneumonia diagnosis",
+    "abstract": "BACKGROUNDPneumocystis jirovecii pneumonia (PCP) is a leading cause of fungal pneumonia, but its diagnosis primarily relies on invasive bronchoalveolar lavage (BAL) specimens that are difficult to obtain. Oropharyngeal swabs and serum could improve the PCP diagnostic workflow, and we hypothesized that CRISPR could enhance assay sensitivity to allow robust P. jirovecii diagnosis using swabs and serum. Herein, we describe the development of an ultrasensitive RT-PCR-coupled CRISPR assay with high active-infection specificity in infant swabs and adult BAL and serum.METHODSMouse analyses employed an RT-PCR CRISPR assay to analyze P. murina transcripts in WT and Rag2-/- mouse lung RNA, BAL, and serum at 2-, 4-, and 6-weeks after infection. Human studies used an optimized RT-PCR CRISPR assay to detect P. jirovecii transcripts in infant oropharyngeal swab samples, adult serum, and adult BAL specimens from patients who were infected with P. jirovecii and those who were not.RESULTSThe P. murina assays sensitively detected Pneumocystis RNA in the serum of infected mice throughout infection. Oropharyngeal swab CRISPR assay results identified infants infected with P. jirovecii with greater sensitivity (96.3% versus 66.7%) and specificity (100% versus 90.6%) than RT-qPCR compared with mitochondrial large subunit rRNA gene (mtLSU) standard marker, and CRISPR results achieved higher sensitivity than RT-qPCR results (93.3% versus 26.7%) in adult serum specimens.CONCLUSIONSince swabs are routinely collected in pediatric patients with pneumonia and serum is easier to obtain than BAL, this assay approach could improve the accuracy and timing of pediatric and adult Pneumocystis diagnosis by achieving specificity for active infection and potentially avoiding the requirement for BAL specimens.FUNDINGThe work was supported by the NIH (R01AI120033), NHLBI (R35HL139930), the Louisiana Board of Regents Endowed Chairs for Eminent Scholars program, and by research funding provided by National Institute of Allergy and Infectious Diseases (NIAID) (R01AI144168, R01AI175618, R01AI173021). This research was also funded by the NIHR (project 134342) using UK aid from the UK government to support global health research.",
+    "year": 2025,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Clinical Investigation",
+    "topic": "Pneumocystis jirovecii pneumonia detection and treatment",
+    "field": "Medicine",
+    "ca_institutions": ["University of Toronto", "University Health Network"],
+    "funders": ["National Institute of Allergy and Infectious Diseases", "National Heart, Lung, and Blood Institute", "National Institute for Health and Care Research"]
+  },
+  {
+    "id": "W4310454375",
+    "title": "La réussite éducative en formation professionnelle : validation d’un premier questionnaire",
+    "abstract": "Considérant l’absence d’outils permettant de mesurer la réussite éducative en formation professionnelle, cette étude visait à développer et à valider un tel instrument. Le Questionnaire de réussite éducative en formation professionnelle (QRÉ-FP) comprend 24 énoncés mesurant la réussite éducative selon les trois missions de l’école québécoise : instruire, socialiser et qualifier. Une collecte par questionnaire a été effectuée en personne auprès de 212 élèves francophones dans la région de Montréal, dont 50 ont répondu de nouveau 4 semaines plus tard. Le QRÉ-FP présente des qualités psychométriques solides. L’analyse factorielle exploratoire révèle trois facteurs (instruire, socialiser, qualifier) possédant une stabilité temporelle et une consistance interne satisfaisantes. L’analyse factorielle confirmatoire démontre une bonne adéquation du modèle tripartite. L’estime de soi et le sentiment d’efficacité personnelle sont corrélés aux scores du QRÉ-FP. En conclusion, ce questionnaire offre un outil utile en contexte de recherche et d’intervention auprès des élèves en formation professionnelle.",
+    "year": 2022,
+    "lang": "fr",
+    "type": "article",
+    "venue": "Canadian Journal of Education / Revue canadienne de l éducation",
+    "topic": "Disability Education and Employment",
+    "field": "Social Sciences",
+    "ca_institutions": "Université du Québec à Montréal",
+    "funders": []
+  },
+  {
+    "id": "W2028974574",
+    "title": "Tree-width of graphs without a 3×3 grid minor",
+    "abstract": "",
+    "year": 2008,
+    "lang": "en",
+    "type": "article",
+    "venue": "Discrete Applied Mathematics",
+    "topic": "Advanced Graph Theory Research",
+    "field": "Computer Science",
+    "ca_institutions": "McGill University",
+    "funders": []
+  },
+  {
+    "id": "W1981242581",
+    "title": "Auer rod-like inclusions in κ light chain myeloma",
+    "abstract": "![Figure][1] \n\nA 56-year-old woman with a history of dyslipidemia and hepatic steatosis presented with weight loss and progressive proteinuria. The presenting blood count was normal: white blood cells, 10.9 × 109/L; hemoglobin, 15.5 g/dL; platelet count, 236 × 109/L. No significant rouleaux",
+    "year": 2013,
+    "lang": "en",
+    "type": "article",
+    "venue": "Blood",
+    "topic": "Amyloidosis: Diagnosis, Treatment, Outcomes",
+    "field": "Biochemistry, Genetics and Molecular Biology",
+    "ca_institutions": "Hôpital Maisonneuve-Rosemont",
+    "funders": []
+  },
+  {
+    "id": "W2299066600",
+    "title": "Spatial Organization of Epigenomes",
+    "abstract": "",
+    "year": 2016,
+    "lang": "en",
+    "type": "article",
+    "venue": "Current Molecular Biology Reports",
+    "topic": "Genomics and Chromatin Dynamics",
+    "field": "Biochemistry, Genetics and Molecular Biology",
+    "ca_institutions": "McGill University",
+    "funders": ["Canadian Institutes of Health Research", "U.S. Public Health Service"]
+  },
+  {
+    "id": "W2078350655",
+    "title": "Rosa Luxemburg and Hannah Arendt: Against the Destruction of Political Spheres of Freedom",
+    "abstract": "Freedom, understood as active participation in public life, connects the thinking of Rosa Luxemburg with that of Hannah Arendt. Biographically separated through the rise and victory of the totalitarian movements, they both developed a concept of the political that is oriented toward freedom and that demonstrates—in spite of their different historical experiences—essential common features: both authors emphasize the recognition of difference as a presupposition for a critical discussion of norms, traditions, and authorities, for the capacity to make unconstrained judgments, and for the ability to take personal responsibility.",
+    "year": 2005,
+    "lang": "en",
+    "type": "article",
+    "venue": "Hypatia",
+    "topic": "Hannah Arendt's Political Philosophy",
+    "field": "Social Sciences",
+    "ca_institutions": [],
+    "funders": "Institute of Aboriginal Peoples Health"
+  },
+  {
+    "id": "W1975432039",
+    "title": "Functionality of Kamut and Millet flours in macro wire cut cookie systems",
+    "abstract": "",
+    "year": 2013,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Food Science and Technology",
+    "topic": "Food composition and properties",
+    "field": "Nursing",
+    "ca_institutions": "University of Guelph",
+    "funders": []
+  },
+  {
+    "id": "W2326491169",
+    "title": "Increased Productivity, Role in Alleviating Food Insecurity Possible",
+    "abstract": "First paragraphs It's true that urban agriculture may provide a modest contribution to most cities' food supply. However, Hallsworth and Wong (2013) fail to recognize the range of cities across North America as well as the numerous opportunities to increase the productivity of urban agriculture and its potential role in alleviating food insecurity. They also under¬emphasize the value of urban agriculture beyond the quantity of food produced. There are many cities — Detroit, Cleveland, and Milwaukee come to mind — with large amounts of open space and notions of incorporating agriculture into the fabric of a 21st century green city. The authors fail to acknowledge the potential for expanded productivity per unit of land beyond what is currently observed, for example with the use of passive solar, season-extension methods. In Michigan, with average low temperatures below Vancouver's, unheated hoophouses allow for at least 30 crops to be grown, many year-round (Colasanti, Matts, Blackburn, Corrin, & Hausler, 2010). The authors dismiss what can be grown in a 4-square-meter (43-square-feet) garden as \"suitable only for... personal enjoyment,\" but during the frost-free period an extra vegetable serving for a family of four per day is easily accomplished in this space....",
+    "year": 2013,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Agriculture Food Systems and Community Development",
+    "topic": "Urban Agriculture and Sustainability",
+    "field": "Agricultural and Biological Sciences",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W3165532882",
+    "title": "Control of high-order nonlinear systems under error-to-actuator based event-triggered framework",
+    "abstract": "This paper solves the finite-time tracking problem of a class of high-order nonlinear systems under event-triggered input. Unlike existing event-triggered frameworks based on signal transmission channels from the sensor to the controller or from the controller to the actuator, these developed trigger mechanisms only compare the difference between the signal to be transmitted and the holding signal. By introducing internal trigger conditions and external trigger conditions, a novel error-to-actuator based event-triggered framework is proposed. It further considers the response of the trigger mechanism to system control performance such that the tracking performance of the system can be guaranteed while reducing the number of signal transmissions. In addition, filter-based techniques (such as the dynamic surface control method), for the first time, are utilised to eliminate some strong constraints that exist in the literature for most high-order nonlinear systems. The effectiveness of the proposed approach is evaluated on simulation examples including comparative studies and a practical example.",
+    "year": 2021,
+    "lang": "en",
+    "type": "article",
+    "venue": "International Journal of Control",
+    "topic": "Adaptive Control of Nonlinear Systems",
+    "field": "Engineering",
+    "ca_institutions": "Carleton University",
+    "funders": "National Natural Science Foundation of China"
+  },
+  {
+    "id": "W2973077959",
+    "title": "Transitions between technological generations of alternative fuel vehicles in Brazil",
+    "abstract": "",
+    "year": 2019,
+    "lang": "en",
+    "type": "article",
+    "venue": "Energy Policy",
+    "topic": "Innovation Diffusion and Forecasting",
+    "field": "Decision Sciences",
+    "ca_institutions": "University of Guelph",
+    "funders": ["Coordenação de Aperfeiçoamento de Pessoal de Nível Superior", "Fundação de Amparo à Pesquisa do Estado de São Paulo", "Research Centre for Gas Innovation", "Shell"]
+  },
+  {
+    "id": "W2114908519",
+    "title": "Understanding models’ forecasting performance",
+    "abstract": "",
+    "year": 2011,
+    "lang": "en",
+    "type": "article",
+    "venue": "Journal of Econometrics",
+    "topic": "Monetary Policy and Economic Impact",
+    "field": "Economics, Econometrics and Finance",
+    "ca_institutions": "Bank of Canada",
+    "funders": []
+  },
+  {
+    "id": "W3126106505",
+    "title": "La responsabilità per danni a persone o cose dell'handler aeroportuale nello standard ground handling agreement (SGHA)",
+    "abstract": "Nell’ambito del trasporto aereo uno tra i settori che prima di altri ha beneficiato di un’apertura alla concorrenza è senza dubbio quello dei servizi di handling aeroportuale. La gestione di tali servizi è stata pressoché sottratta al monopolio della società di gestione aeroportuale con l’adozione della direttiva 67/96/CEE che ha trovato attuazione in Italia con il d.lgs. n. 18/99. Con tale intervento viene sancito il definitivo abbandono delle forme di gestione aeroportuale dei servizi di handling in regime di monopolio legale in favore del libero accesso al mercato, sia pure entro limiti determinati elaborati in funzione delle capacità, delle caratteristiche delle diverse tipologie di servizi, dei vincoli esistenti e dell’esigenza di garantire il buon funzionamento degli aeroporti. L’esercizio di tali servizi è stata conferita, sin dai tempi immediatamente successivi alla creazione di nuovi insediamenti aeroportuali, ad enti o società ai quali lo Stato ha demandato la gestione dei sistemi aeroportuali con criteri tesi a valorizzare nella loro conduzione l’aspetto imprenditoriale.&#13;\\nIl successivo processo di liberalizzazione dei servizi di handling avviato a livello europeo negli anni novanta con la direttiva 67/96/CEE ha mutato definitivamente la natura del soggetto erogatore del servizio, consentendo l’ingresso dei privati e inducendo il gestore a rivedere il proprio ruolo di operatore economico. Questi, sia per effetto della disciplina comunitaria che lo ha indotto a costituire società ad hoc per l’erogazione dei servizi in parola, sia per un mutamento delle proprie strategie aziendali maggiormente orientate alle attività di business commerciale e retail, ha via via abbandonato le gestioni dirette dei servizi di handling per concentrarsi sulla maggiore redditività delle prime. Sin dai primi anni novanta per regolare i rapporti contrattuali con gli operatori aerei è stato elaborato nell’ambito della IATA uno schema contrattuale denominato Standard Ground Handling Agreement (SGHA), rimasto pressoché immutato nell’arco di un ventennio. Tale contratto è stato caratterizzato sin dall’originaria formulazione da clausole particolarmente favorevoli agli handlers. &#13;\\nLa ragione per la quale tali clausole sono rimaste pressoché immutate (in particolare, quelle relative alla responsabilità dell’handler) nonostante il venir meno del meccanismo di limitazione di responsabilità del vettore con l’adozione della Convenzione di Montreal del 1999, meccanismo che un tempo giustificava un regime di minor rigore nei confronti dell’operatore di handling, si fonderebbe sul fatto che gli operatori di handling, laddove fossero chiamati a pagare l’intero ammontare del danno arrecato, si troverebbero nell’impossibilità di garantire adeguati standard di sicurezza per carenza delle necessarie risorse finanziarie. In considerazione di quanto detto, sono ben pochi gli adattamenti subiti nel corso del tempo dallo SGHA per lo più giustificati dall’evolversi delle tecnologie applicate al settore dei servizi ed all’intensificarsi dei traffici aerei.",
+    "year": 2016,
+    "lang": "it",
+    "type": "book-chapter",
+    "venue": "Archivio istituzionale della ricerca (Alma Mater Studiorum Università di Bologna)",
+    "topic": "Automotive and Human Injury Biomechanics",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W2948429247",
+    "title": "The Road to Responsive: University of Toronto Libraries’ Journey to a New Library Catalogue Interface",
+    "abstract": "With the recent surge in the mobile device market and an ever expanding patron base with increasingly divergent levels of technical ability, the University of Toronto Libraries embarked on the development of a new catalogue discovery layer to fit the needs of its diverse users. The result: a mobile-friendly, flexible and intuitive web application that brings the full power of a faceted library catalogue to users without compromising quality or performance, employing Responsive Web Design principles.",
+    "year": 2014,
+    "lang": "en",
+    "type": "article",
+    "venue": "DOAJ (DOAJ: Directory of Open Access Journals)",
+    "topic": "Library Collection Development and Digital Resources",
+    "field": "Computer Science",
+    "ca_institutions": [],
+    "funders": []
+  },
+  {
+    "id": "W4232325870",
+    "title": "ADVANCED APPLICATION OF ARTERIAL EMBOLIZATION FOR COMPLEX HEPATIC INJURY-IS ALTERNATIVE TO SURGICAL TREATMENT?",
+    "abstract": "Departments: Abstracts of Papers Presented at the Annual Scientific Meeting of the Trauma Association of Canada, Held Jointly with the Australasian Trauma Society: April 6–9, 2005: Westin Resort Whistler, Banff Canada: PDF Only",
+    "year": 2005,
+    "lang": "en",
+    "type": "article",
+    "venue": "The Journal of Trauma: Injury, Infection, and Critical Care",
+    "topic": "Abdominal Trauma and Injuries",
+    "field": "Medicine",
+    "ca_institutions": [],
+    "funders": []
+  }
+]
+warning: loading hooks from both /Users/choxos/.codex/hooks.json and /Users/choxos/.codex/config.toml; prefer a single representation for this layer
+2026-07-13T01:20:27.792489Z ERROR rmcp::transport::worker: worker quit with fatal: Transport channel closed, when Auth(AuthorizationRequired)
+warning: Skill descriptions were shortened to fit the 2% skills context budget. Codex can still see every skill, but some descriptions are shorter. Disable unused skills or plugins to leave more room for the rest.
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart Failed
+hook: SessionStart Completed
+hook: SessionStart Completed
+hook: SessionStart Failed
+hook: SessionStart Completed
+hook: SessionStart Failed
+hook: UserPromptSubmit
+hook: UserPromptSubmit
+hook: UserPromptSubmit Failed
+hook: UserPromptSubmit Failed
+codex
+[
+  {"id":"W1973172443","tier":"T3","genre":"editorial/commentary","about_ca":false,"confidence":"high","reason":"This is a book review discussing sociolinguistic research methods rather than an empirical study of research practice."},
+  {"id":"W2036171795","tier":"OUT","genre":"other","about_ca":false,"confidence":"low","reason":"The title indicates a biomedical study of stem cells and dermatology, not research itself."},
+  {"id":"W6976902796","tier":"OUT","genre":"other","about_ca":false,"confidence":"high","reason":"This is a supplementary search strategy used in a healthcare systematic-review protocol, not a study of synthesis methodology."},
+  {"id":"W2062914599","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study evaluates neurological measures in patients with Alzheimer's disease rather than research practice."},
+  {"id":"W2075985483","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The title clearly identifies a biomedical anatomical case or observation, not metaresearch."},
+  {"id":"W7017331245","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study investigates irrigation and potato yield, not how research is conducted or communicated."},
+  {"id":"W2912219640","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The object is electricity consumption in pork production rather than research itself."},
+  {"id":"W6983124395","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The qualitative study examines social-work practice in palliative care, not research practice."},
+  {"id":"W4394399723","tier":"OUT","genre":"other","about_ca":false,"confidence":"high","reason":"This supplementary checklist documents a systematic-map protocol whose object is ecosystem governance, not evidence-synthesis methodology."},
+  {"id":"W7039662525","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The dissertation studies eutrophication, hypoxia, and invertebrate communities rather than research itself."},
+  {"id":"W7001249414","tier":"OUT","genre":"other","about_ca":false,"confidence":"high","reason":"This is a geographic map of a Texas census division, not a study of research."},
+  {"id":"W2998741351","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The title identifies a biomedical study of a schizophrenia-related isoform, not metaresearch."},
+  {"id":"W4395806492","tier":"OUT","genre":"other","about_ca":false,"confidence":"high","reason":"This dataset contains fungal species occurrences and does not study research practice or research outputs."},
+  {"id":"W4395077547","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The paper develops an image-segmentation method for brain tumors, not a method for conducting research."},
+  {"id":"W2808553566","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The article evaluates water-treatment operations rather than research itself."},
+  {"id":"W2048517242","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"The essay analyzes Alain Locke's rhetoric and cultural pluralism, not the research system."},
+  {"id":"W6910369314","tier":"T3","genre":"other","about_ca":true,"confidence":"high","reason":"This annual report concerns the Canadian national research institution and is contextual material about the Canadian research system."},
+  {"id":"W2144285153","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"low","reason":"The title concerns innovation in medical-resident education and practice, not research itself."},
+  {"id":"W2784991661","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The experiment studies zebra-finch foraging behavior rather than research practice."},
+  {"id":"W4289847450","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The title identifies a biomedical study of cartilage-cell proliferation, not metaresearch."},
+  {"id":"W7057112089","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"The work examines Olympic organizations and women's participation in sport, not research itself."},
+  {"id":"W2073841094","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"The model studies fluorescent-protein effects on gene-expression measurements, not the practice of research."},
+  {"id":"W1673751173","tier":"T1","genre":"conceptual","about_ca":false,"confidence":"high","reason":"The article directly examines the strengths, limitations, validation, bias, and use of administrative data for conducting research."},
+  {"id":"W2178268226","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The cohort study predicts stroke outcomes from imaging changes rather than studying research methods."},
+  {"id":"W1785986601","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"The article analyzes authors and theatre production in Acadia, not research itself."},
+  {"id":"W6909189679","tier":"OUT","genre":"other","about_ca":false,"confidence":"high","reason":"This dataset records an oceanographic buoy deployment and does not study research practice or outputs."},
+  {"id":"W4213273432","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study investigates SARS-CoV-2 transcript structure using sequencing, not research itself."},
+  {"id":"W7062282197","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study validates a device for detecting sleep apnea rather than examining research methodology."},
+  {"id":"W4416930627","tier":"OUT","genre":"editorial/commentary","about_ca":false,"confidence":"high","reason":"This is a book review about religion, art, and visual culture, not research practice."},
+  {"id":"W4238825643","tier":"T3","genre":"infrastructure/announcement","about_ca":false,"confidence":"high","reason":"The record concerns DOI metadata and deletion procedures, making it contextual scholarly-communication infrastructure material."},
+  {"id":"W3097854130","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"The work concerns a filmmaker and Montréal cultural history, not the research system."},
+  {"id":"W4391428684","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study compares machine-translation performance on medical abstracts rather than studying research practice."},
+  {"id":"W4402630461","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"This meta-analysis uses evidence synthesis to answer a clinical question about vitamin D, not to study synthesis methodology."},
+  {"id":"W2345002404","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The case report concerns dental pathology in a dog, not research itself."},
+  {"id":"W6977785891","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The meta-analysis estimates tuberculosis-associated hyperglycemia rather than studying how evidence synthesis is conducted."},
+  {"id":"W4415723818","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The randomized trial evaluates a flavonoid formulation's pharmacokinetics and safety, not research practice."},
+  {"id":"W4408091719","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study develops a diagnostic assay for Pneumocystis pneumonia rather than studying research methods."},
+  {"id":"W4310454375","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The questionnaire validation measures educational success and does not study research itself."},
+  {"id":"W2028974574","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"The title identifies a mathematical graph-theory result, not metaresearch."},
+  {"id":"W1981242581","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The article presents a biomedical case involving myeloma inclusions, not research practice."},
+  {"id":"W2299066600","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"The work concerns epigenome organization, a biological subject rather than research itself."},
+  {"id":"W2078350655","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"The article analyzes the political philosophies of Luxemburg and Arendt, not the research system."},
+  {"id":"W1975432039","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The study examines flour functionality in cookies, not research practice."},
+  {"id":"W2326491169","tier":"OUT","genre":"editorial/commentary","about_ca":false,"confidence":"high","reason":"This commentary debates urban agriculture and food insecurity rather than research itself."},
+  {"id":"W3165532882","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"The paper develops a control-theory framework for nonlinear systems, not a framework for conducting research."},
+  {"id":"W2973077959","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"The work studies transitions in alternative-fuel vehicle technologies, not research practice."},
+  {"id":"W2114908519","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"The title concerns forecasting performance of economic models, not the practice of research itself."},
+  {"id":"W3126106505","tier":"OUT","genre":"conceptual","about_ca":false,"confidence":"high","reason":"The chapter analyzes liability in airport ground handling agreements, not research."},
+  {"id":"W2948429247","tier":"T3","genre":"infrastructure/announcement","about_ca":false,"confidence":"high","reason":"The article reports development of a university library catalogue interface as contextual infrastructure material."},
+  {"id":"W4232325870","tier":"OUT","genre":"empirical","about_ca":false,"confidence":"high","reason":"The title identifies a clinical treatment study of arterial embolization for hepatic injury, not metaresearch."}
+]
+hook: Stop
+hook: Stop
+hook: Stop
+hook: Stop Completed
+hook: Stop Completed
+hook: Stop Failed
+tokens used
+26,797
