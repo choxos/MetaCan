@@ -1,0 +1,603 @@
+Reading additional input from stdin...
+OpenAI Codex v0.144.0
+--------
+workdir: /Users/choxos/Documents/GitHub/CaRN-data-challenge
+model: gpt-5.6-luna
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: medium
+reasoning summaries: none
+session id: 019f5bf0-e699-7ca0-947e-d2f88dd6174d
+--------
+user
+You are screening scholarly works for the MetaCan project. Apply the rubric below to EVERY record and output ONE JSON array with ONE object per record, conforming EXACTLY to the JSON schema below. Output ONLY the JSON array, no prose before or after it.
+
+# THE RUBRIC (v3.1, locked)
+
+# MétaCan screening rubric (v3.1)
+
+**Status: LOCKED, 2026-07-13.** Supersedes v2.2. No screening ran under v3.0, which lived for hours: an adversarial review found that its Murad quotation inserted the word "treatment" into a sentence this document calls verbatim (D29). v3.1 corrects that quotation from the PDF, fixes the Kataoka page range, aligns the funder clause with the protocol, corrects two glosses against their sources, and adds the study-design vocabulary that v3.0 demanded but never listed. Since D29, `pilot/check_quotes.R` fails the build if any quotation marked verbatim is not a substring of its cited PDF.
+
+**No number produced so far was made under v3.** The pilot ran under v1.0; the 179-work re-screen under v2.0. Both instruments are kept byte for byte, so every figure stays attributable to the text that produced it. v3 is the instrument the **full screen** runs under, and the **v2-to-v3 difference is reported as a finding**.
+
+---
+
+## What changed, and why it is not cosmetic
+
+v1 and v2 had a tier hierarchy: **T1 core / T2 adjacent / T3 contextual**. That structure had a defect at its root, and the data found it before I did.
+
+> **"Adjacent" is defined by negation.** It means *not-T1*. A category whose only content is "near the important one" cannot be applied consistently, and **OUT-vs-adjacent was the largest tier confusion at every sample size we measured.** The models were not failing. **The category was empty.**
+
+It was also a value judgment I had no standing to make. Calling science and technology studies "adjacent" says STS is peripheral to metascience. **STS is a field with its own founding literature, its own journals, and its own account of what studying science means.**
+
+**v3 deletes the hierarchy.** Every tradition is a **category with its own positive definition, taken from its own literature, quoted verbatim from a source in `docs/reference/definitions/`.** There is no residual bucket. A record may carry **more than one** category, because the traditions genuinely overlap and forcing a single label is what created the problem.
+
+**Nothing here is cited from memory.** Every quotation below was read from the PDF named beside it. In a project whose worst deviation (D26) was that its own definition of metaresearch was mine and uncited for its entire life, a recalled citation would be the single worst thing this document could contain.
+
+---
+
+## The definitional problem is the field's, not this project's, and the field says so in print
+
+- **Puljak L, Lovric Makaric Z, Buljan I, Pieper D.** *What is a meta-epidemiological study? Analysis of published literature indicated heterogeneous study designs and definitions.* J Comp Eff Res. 2020. doi:10.2217/cer-2019-0201
+  > Analysed **175 information sources**. *"Definitions of meta-epidemiological studies varied and some studies used the term meta-epidemiological study to describe methodological research-on-research studies."* Conclusion: *"Research community would benefit from consensus about definition of meta-epidemiological study."*
+
+- **Kataoka Y, et al.** J Clin Epidemiol. 2023;154:219-220.
+  > A **published dispute** with Puljak, opening by naming *"the currently confusing nomenclatures around 'meta-epidemiology' and related terms such as 'meta-research' and 'research-on-research'."*
+
+- **Stevens ER, Laynor G.** *Recognizing the value of meta-research and making it easier to find.* J Med Libr Assoc. 2023;111(4). doi:10.5195/jmla.2023.1758
+  > *"The breadth of meta-research presents a significant challenge for identifying published meta-research studies,"* and it notes **the lack of a MeSH heading** for meta-research.
+
+**Those are claims about humans.** The pilot's numbers are claims about **models disagreeing under one rubric**. They are consistent, they are not the same estimand, and **only the human audit closes the gap** (`DEVIATIONS.md` D27).
+
+---
+
+## The categories
+
+A work may carry **more than one**. **Categories are not ranked and none is primary: the released landscape is the union of the defined categories, with every overlap reported.** The call's primary estimand is reported over `metaresearch` because that is the field the call names; that is a **reporting choice, not a rank**, and each of the other traditions gets the same per-category estimate.
+
+### 1. `metaresearch`
+
+> **"Meta-research is an evolving scientific discipline that aims to evaluate and improve research practices. It includes thematic areas of methods, reporting, reproducibility, evaluation, and incentives (how to do, report, verify, correct, and reward science)."**
+>
+> Ioannidis JPA, Fanelli D, Dunne DD, Goodman SN. *Meta-research: Evaluation and Improvement of Research Methods and Practices.* PLoS Biol. 2015;13(10):e1002264.
+> See also Ioannidis JPA. PLoS Biol. 2018;16(3):e2005468; METRICS, Stanford: <https://metrics.stanford.edu/research>
+
+Every `metaresearch` record carries a **`domain`**, taken verbatim from those five thematic areas and glossed by Ioannidis's own parenthetical:
+
+| `domain` | Ioannidis's gloss | operationally |
+|---|---|---|
+| `methods` | *how to **do** science* | design, conduct, analysis, bias, statistical practice, evidence-synthesis methodology; Ioannidis's own description of this area ends *"research integrity and ethics"* |
+| `reporting` | *how to **report** science* | reporting standards and completeness |
+| `reproducibility` | *how to **verify** science* | replication, data and code sharing, transparency |
+| `evaluation` | *how to **correct** science* | peer review and editorial process, research assessment, metrics |
+| `incentives` | *how to **reward** science* | funding allocation, careers and the research workforce, reward structures |
+
+**RULE 1 stands** (carried from v2; it resolved the largest single seam): *a work is `metaresearch` on methods only if its object is methods **as used, reported or performed by researchers**. Developing, deriving, validating or teaching a technique for a domain is OUT, however generic the technique.* **An instance of a research practice is not a study of it.**
+
+### 2. `metaepidemiology` — **CONTESTED IN PRINT. Both definitions are coded.**
+
+There is **no consensus definition** (Puljak 2020, above). **This rubric does not invent one.** It codes **both published definitions** and **flags where they disagree**, because the dispute is live, it is between named researchers in peer-reviewed journals, and hiding it inside a single label would destroy the only evidence of it.
+
+- **`metaepi_narrow`** — Murad MH, Wang Z. *Guidelines for reporting meta-epidemiological methodology research.* Evid Based Med. 2017;22(4):139-142. doi:10.1136/ebmed-2017-110713
+  > *"Meta-epidemiological studies adopt a systematic review or meta-analysis approach to examine the impact of certain characteristics of clinical studies on the observed effect and provide empirical evidence for hypothesised associations."*
+  >
+  > *(v3.0 quoted this sentence as 'the observed **treatment** effect'. The word is not in the paper; it narrowed Murad's definition while claiming his authority for the narrowing, and it survived a LOCK. D29.)*
+
+- **`metaepi_broad`** — Kataoka Y, et al. J Clin Epidemiol. 2023;154:219-220. *(Not 219-221: page 221 is Puljak's reply, which is the other side of the dispute.)*
+  > *"The greatest common defining concept of 'meta-epidemiological studies' would be **any studies in which the unit of analysis is a study, not a patient**."*
+
+**Where the two differ, the record is flagged, and the size of that class is reported as a finding.** A published dispute is a boundary to be *measured*, not settled by fiat.
+
+### 3. `bibliometrics` (scientometrics)
+
+> **"Scientometrics is the study of the quantitative aspects of the process of science as a communication system. It is centrally, but not only, concerned with the analysis of citations in the academic literature."**
+>
+> Mingers J, Leydesdorff L. *A Review of Theory and Practice in Scientometrics.* Eur J Oper Res. 2015. doi:10.1016/j.ejor.2015.04.002
+> Founding work: Price DJ de Solla. *Networks of Scientific Papers.* Science. 1965;149(3683):510-515.
+
+**Boundary with `metaresearch`, and it resolves v1's self-contradiction** (v1's T1 bullet and its own worked example gave opposite answers): a study that **characterises a literature** by quantitative means is `bibliometrics`. A study that uses bibliometric means to **make a claim about research practice** (citation distortion, reporting trends, citation of retracted work) is **also `metaresearch`**, and carries both. **v3 does not force the choice; that forcing was the bug.**
+
+### 4. `sts` (science and technology studies)
+
+> **"co-production is shorthand for the proposition that the ways in which we know and represent the world (both nature and society) are inseparable from the ways in which we choose to live in it."**
+> **"The idiom of co-production ... represents a major synthesis of scholarship in science and technology studies (S&TS)."**
+>
+> Jasanoff S (ed.). *States of Knowledge: The Co-Production of Science and the Social Order.* Routledge, 2004.
+
+> **"We study science in action and not ready made science or technology; to do so, we either arrive before the facts and machines are blackboxed or we follow the controversies that reopen them."**
+>
+> Latour B. *Science in Action: How to Follow Scientists and Engineers through Society.* Harvard University Press.
+
+**Operational test:** the work studies **science or technology as social practice**: how knowledge and social order are produced together, how facts are made rather than found, how controversies open and close. **The object must be science, research, or technoscientific knowledge**, at any period. *(v1 restricted history and philosophy of science to "contemporary research practice", an unexamined adverb that silently excluded the entire history of Canadian science. It is deleted.)*
+
+### 5. `scholarly_communication`
+
+> **"Scholarly communication is a rich and complex sociotechnical system formed over a period of centuries."**
+> **"...used here in the broader sense to include the formal and informal activities associated with the use and dissemination of information through public and private channels."**
+>
+> Borgman CL. *Scholarship in the Digital Age: Information, Infrastructure, and the Internet.* MIT Press, 2007.
+
+### 6. `open_science`
+
+> **"Open science is a set of principles and practices that aim to make scientific research from all fields accessible to everyone for the benefits of scientists and society as a whole."**
+> **"Open science is about making sure not only that scientific knowledge is accessible but also that the production of that knowledge itself is inclusive, equitable and sustainable."**
+>
+> UNESCO. *Recommendation on Open Science* (introduction), 2021. **193 countries adopted it.**
+
+The second sentence is the reason this category is not a synonym for "open access": UNESCO's definition makes **inclusivity and equity of knowledge production** part of open science itself, which is the criterion this challenge is judged on.
+
+### 7. `research_integrity` — **defined by its OBJECT; the sources do not define the field, and that is recorded**
+
+**Honest limitation, stated rather than hidden.** The two sources supplied define **what counts as misconduct** and **what publication ethics covers**. **Neither defines "research integrity research" as a discipline** the way Ioannidis defines metaresearch or Jasanoff defines STS. So this category is defined by its **object**, and the gap is on the record.
+
+> **"...the analysis was limited to behaviours that distort scientific knowledge: fabrication, falsification, 'cooking' of data, etc... Survey questions on plagiarism and other forms of professional misconduct were excluded."**
+>
+> Fanelli D. *How Many Scientists Fabricate and Falsify Research? A Systematic Review and Meta-Analysis of Survey Data.* PLoS ONE. 2009;4(5):e5738.
+
+> Publication ethics, per **COPE** (Committee on Publication Ethics), *Ethics Toolkit for Journal Editors and Publishers.*
+
+**Operational test:** the object is **research misconduct, questionable research practices, retraction, authorship, or publication ethics**, *as an object of study*. **Fanelli's boundary is adopted and its exclusion is carried:** fabrication, falsification and data cooking are in; **plagiarism and professional misconduct are recorded but marked, because Fanelli's own scope excludes them** and a rubric that silently widened his boundary while citing him would be misquoting its own source.
+
+**This category overlaps `metaresearch` heavily**: Ioannidis's own description of the *methods* area ends *"research integrity and ethics"*, so integrity research is inside metaresearch by his definition. **That overlap is expected and allowed**, because v3 is multi-label. It is not a hierarchy.
+
+### `insufficient_payload`
+
+Not a judgment; a statement that the record **cannot be screened** (a scraping artifact as a title, boilerplate in the abstract field, a title and abstract from different papers, spam). **Reported, never silently dropped**: the size of this class is a finding about OpenAlex.
+
+### `OUT`
+
+None of the above. **"OUT" now means "in no defined category", not "not near the important one."** That is the whole change.
+
+---
+
+## Canadian linkage
+
+- `CA_AFF` — at least one Canadian institutional affiliation. **Warning, measured:** OpenAlex misassigns these. **At least 17,466** works enter the frame with, as their *only* Canadian institution, one of six suspect assignments: a parse failure that is not an institution at all (`Impact`, attached to a Spanish COVID essay) or a real organization attached to papers it has nothing to do with (`Discovery Air (Canada)` on a Brazilian linguistics paper). That is a **lower bound** from six audited strings (finding 27), and the records are **flagged for audit, not deleted**. A Canadian affiliation is *evidence*, not proof.
+- `CA_FUND` — ≥1 funder whose OpenAlex `country_code` is Canada: an **external criterion, not a curated list**. *(An earlier four-funder list (CIHR, NSERC, SSHRC, CFI) failed twice: three of its four hardcoded IDs pointed at other funders, and even corrected it missed Canada Research Chairs, the Government of Canada, NRC, Mitacs, Genome Canada, and every provincial agency. OpenAlex knows 2,182 Canadian funders; `R/pin_entities.R` pins them.)*
+- **`ABOUT_CA_SYSTEM`** — the Canadian **research system or academy** is a substantive object. *A Canadian institution as setting is not this.*
+- **`ABOUT_CA_TOPIC`** — Canada is a substantive subject, whether or not research is the object.
+
+*(v1 had one boolean and it could not separate "Canadian data, universal claim" from "a claim about Canada". Four screening agents proposed this split independently.)*
+
+## Study design
+
+Coded for every work, from **this vocabulary and no other** (v3.0 said "coded for every work" and never listed the values, which is D20's exact shape: a field every screener codes and no two code alike):
+
+| `study_design` | MEDLINE publication type it is validated against |
+|---|---|
+| `randomized_trial` | Randomized Controlled Trial |
+| `nonrandomized_trial` | Controlled Clinical Trial |
+| `observational` | Observational Study |
+| `systematic_review` | Systematic Review |
+| `meta_analysis` | Meta-Analysis |
+| `case_report` | Case Reports |
+| `qualitative` | *(none; ships as a score, marked unvalidated)* |
+| `simulation_or_modeling` | *(none; ships as a score, marked unvalidated)* |
+| `bench_or_experimental` | *(none; ships as a score, marked unvalidated)* |
+| `theoretical_or_conceptual` | *(none; ships as a score, marked unvalidated)* |
+| `not_applicable` | *(the work is not empirical research: editorials, datasets, software)* |
+| `design_other` | *(none; ships as a score, marked unvalidated)* |
+
+**Validated against MEDLINE publication types, per record and not per year.** *(v3.0 called these "human-indexed by NLM", which is false; v3.1's first correction said "human-indexed until April 2022", which is also false. NLM stopped fully human indexing as universal practice around 2011 and completed automation in 2022, so a YEAR CUTOFF cannot separate the eras. The reference subset is defined by NLM's **record-level `IndexingMethod`** field: absent = fully human, `Curated` = automated with human review, `Automated` = machine. Human records are the reference; the others measure **agreement with another machine** and are reported as such.)*
+
+**Class-specific calendar eligibility, because a publication type that did not exist cannot be a negative.** *Observational Study* entered the vocabulary in **2014** and *Systematic Review* in **2019**. A 2008 cohort study carries no *Observational Study* tag, and treating that absence as "not observational" would train and score the model against a censoring artifact. Each design class is therefore validated **only on records published after its type existed**, and that eligibility window is prespecified per class. Where MEDLINE does not reach (most of the physical sciences, humanities and social sciences), the label ships as a **score, not an assertion**, and is **marked unvalidated**. *The dataset states, per field, which of its own annotations it has earned the right to assert.*
+
+## Genre
+
+**One vocabulary, defined here, and `screening-schema-v3.json` QUOTES this list rather than paraphrasing it.**
+
+`empirical` · `review` · `methods` · `commentary` · `editorial` · `protocol` · `dataset` · `software` · `other`
+
+*(In v1 the rubric and the schema named **two different vocabularies for this field**, overlapping on two values out of thirteen. Every screener was handed both and obeyed both privately; the validator checked `tier` and had never been asked to look at `genre`, so 16,800 labels passed every check that ran. See D20 and finding 24. **A codebook is code. It gets a test.**)*
+
+## `tier` is RETIRED
+
+v3 replaces it with `categories`, which is **multi-label**. The values `T1`, `T2`, `T3` and `OUT` remain in the **legacy** `screening-schema.json` **only so that the v1 and v2 label files stay readable**; the v3 contract, `screening-schema-v3.json`, **does not contain the field**, so no new screening can emit them. `OUT` in v3 means an empty `categories` array: *in no defined category*, not *near the important one*.
+
+## Confidence
+
+`high` / `medium` / `low`. **If the abstract is missing, judge on the title alone and set confidence to `low` unless the title is unambiguous.** The schema **quotes** this sentence; it does not paraphrase it (D24).
+
+**`low` is a legitimate answer.** A screener that never says `low` is not being careful; it is being confident.
+
+---
+
+## Sources
+
+Every quotation above was read from a PDF in **`docs/reference/definitions/`**, which is committed. Nothing is cited from memory, and since D29 that is a checked property, not a promise: `pilot/check_quotes.R` fails the build if any quotation marked verbatim is not a substring of its cited PDF. `pilot/check_instrument.R` fails the build if this rubric and `screening-schema-v3.json` disagree about any field, in either direction.
+
+
+# THE OUTPUT SCHEMA (screening-schema-v3.json)
+
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "MetaCan screening output, rubric v3.1",
+  "description": "The output contract for every screening run under rubric v3.1. This document QUOTES the rubric; it never paraphrases it. Where a description below restates a rule, the wording is copied from docs/protocol/rubric-v3.md, because the schema misquoting the rubric is D24 and two documents that disagree are two instruments (D20). pilot/check_instrument.R fails the build if this file and the rubric disagree about any field, in either direction. The legacy screening-schema.json remains ONLY so that v1 and v2 label files stay readable; no new screening validates against it.",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["id", "categories", "study_design", "genre", "about_ca_system", "about_ca_topic", "confidence"],
+    "properties": {
+      "id": {
+        "type": "string",
+        "pattern": "^W\\d+$",
+        "description": "The OpenAlex work id, exactly as given in the payload."
+      },
+      "categories": {
+        "type": "array",
+        "items": {
+          "enum": ["metaresearch", "metaepi_narrow", "metaepi_broad", "bibliometrics", "sts", "scholarly_communication", "open_science", "research_integrity", "insufficient_payload"]
+        },
+        "uniqueItems": true,
+        "description": "Every category the work belongs to; a work may carry more than one, and categories are not ranked and none is primary. An EMPTY array is OUT, which means 'in no defined category', not 'near the important one'. insufficient_payload means the record cannot be screened (a scraping artifact as a title, boilerplate in the abstract field, a title and abstract from different papers, spam) and is reported, never silently dropped."
+      },
+      "domain": {
+        "enum": ["methods", "reporting", "reproducibility", "evaluation", "incentives", null],
+        "description": "REQUIRED when categories contains metaresearch, and null otherwise. Taken verbatim from Ioannidis's five thematic areas: methods, reporting, reproducibility, evaluation, and incentives (how to do, report, verify, correct, and reward science)."
+      },
+      "study_design": {
+        "enum": ["randomized_trial", "nonrandomized_trial", "observational", "systematic_review", "meta_analysis", "case_report", "qualitative", "simulation_or_modeling", "bench_or_experimental", "theoretical_or_conceptual", "not_applicable", "design_other"],
+        "description": "Coded for every work, from this vocabulary and no other. not_applicable means the work is not empirical research: editorials, datasets, software."
+      },
+      "genre": {
+        "enum": ["empirical", "review", "methods", "commentary", "editorial", "protocol", "dataset", "software", "other"],
+        "description": "One vocabulary, defined in the rubric, and this schema QUOTES that list rather than paraphrasing it."
+      },
+      "about_ca_system": {
+        "type": "boolean",
+        "description": "ABOUT_CA_SYSTEM: the Canadian research system or academy is a substantive object. A Canadian institution as setting is not this."
+      },
+      "about_ca_topic": {
+        "type": "boolean",
+        "description": "ABOUT_CA_TOPIC: Canada is a substantive subject, whether or not research is the object."
+      },
+      "confidence": {
+        "enum": ["high", "medium", "low"],
+        "description": "If the abstract is missing, judge on the title alone and set confidence to low unless the title is unambiguous. low is a legitimate answer: a screener that never says low is not being careful; it is being confident."
+      },
+      "reason": {
+        "type": "string",
+        "maxLength": 400,
+        "description": "One sentence naming the rubric rule the decision rests on."
+      }
+    }
+  }
+}
+
+
+# THE RECORDS
+
+[
+ {
+  "id": "W2943459228",
+  "title": "From Research Evidence to “Evidence by Proxy”? Organizational Enactment of Evidence‐Based Health Care in Four High‐Income Countries",
+  "abstract": "Abstract Drawing on multiple qualitative case studies of evidence‐based health care conducted in Sweden, Canada, Australia, and the United Kingdom, the authors systematically explore the composition, circulation, and role of codified knowledge deployed in the organizational enactment of evidence‐based practice. The article describes the “chain of codified knowledge,” which reflects the institutionalization of evidence‐based practice as organizational business as usual, and shows that it is dominated by performance standards, policies and procedures, and locally collected (improvement and audit) data. These interconnected forms of “evidence by proxy,” which are informed by research partly or indirectly, enable simplification, selective reinforcement, and contextualization of scientific knowledge. The analysis reveals the dual effects of this codification dynamic on evidence‐based practice and highlights the influence of macro‐level ideological, historical, and technological factors on the composition and circulation of codified knowledge in the organizational enactment of evidence‐based health care in different countries .",
+  "year": 2019,
+  "lang": "en",
+  "type": "article",
+  "venue": "Public Administration Review",
+  "topic": "Health Policy Implementation Science",
+  "field": "Health Professions"
+ },
+ {
+  "id": "W4239293221",
+  "title": "Sur la pensée de Colette Guillaumin",
+  "abstract": "",
+  "year": 2017,
+  "lang": "fr",
+  "type": "article",
+  "venue": "Sociologie et sociétés",
+  "topic": "Philosophical and Theoretical Analysis",
+  "field": "Arts and Humanities"
+ },
+ {
+  "id": "W3013557364",
+  "title": "Precision health through prediction modelling: factors to consider before implementing a prediction model in clinical practice",
+  "abstract": "ABSTRACT INTRODUCTION Precision medical practice emphasises early detection, improved surveillance and prevention through targeted intervention. Prediction models can help identify high-risk individuals to be targeted for healthy behavioural changes or medical treatment to prevent disease development and assist both health professionals and patients to make informed decisions. Concerns exist regarding the adequacy, accuracy, validity and reliability of prediction models. AIM The purpose of this study is to introduce readers to the basic concept of prediction modelling in precision health and recommend factors to consider before implementing a prediction model in clinical practice. METHODS Prediction models developed maintaining proper process and with quality prediction and validation can be used in clinical practice to improve patient care. RESULTS Aspects of prediction models that should be considered before implementation include: appropriateness of the model for the intended purpose; adequacy of the model; validation, face validity and clinical impact studies of the model; a parsimonious model with data easily measured in clinical settings; and easily accessible models with decision support for successful implementation. DISCUSSION Choosing clinical prediction models requires cautious consideration and several practical factors before implementing a model in clinical practice.",
+  "year": 2020,
+  "lang": "en",
+  "type": "article",
+  "venue": "Journal of Primary Health Care",
+  "topic": "Health Systems, Economic Evaluations, Quality of Life",
+  "field": "Economics, Econometrics and Finance"
+ },
+ {
+  "id": "W1872548620",
+  "title": "Femmes et théories de la société : remarques sur les effets thériques de la colère des opprimées",
+  "abstract": "De ce qu'on appelle \"théories de la société\", toutes ont été, et sont, la forme intellectuelle de rapports sociaux déterminés. Selon l'auteur, l'entrée des minoritaires dans le domaine théorique produit un bouleversement des perspectives, une subversion. D'ailleurs, les premiers textes théoriques venant des minoritaires sont toujours disqualifiés et présentés comme des produits \"politiques\", des pamphlets, des propos terroristes. Cependant, ils finissent par l'intégration dans la théorie. Ainsi, l'absence des femmes dans les sciences humaines était l'un des effets des relations sociales de sexe. Pour les femmes, devenir un objet dans la théorie était la conséquence nécessaire de devenir un sujet dans l'histoire. L'auteur montre dans ce texte, comment les analyses des femmes ont déjà des conséquences théoriques visibles et importantes et d'autres, qui se révéleront ultérieurement.",
+  "year": 2002,
+  "lang": "fr",
+  "type": "article",
+  "venue": "Sociologie et sociétés",
+  "topic": "Social Sciences and Humanities",
+  "field": "Social Sciences"
+ },
+ {
+  "id": "W2730918267",
+  "title": "Lifestyle Inequalities: Explaining Socioeconomic Differences in Preventive Practices of Clinically Overweight Women After Menopause",
+  "abstract": "Excess weight and menopause are two major factors increasing aging women’s vulnerability to chronic diseases. However, social position and socioeconomic status have also been identified as major determinants influencing both health behaviors and the development of such diseases. This study focuses on the socioeconomic variations of behavioral risk factors of chronic diseases in aging women. By drawing on Bourdieu’s sociocultural theory of practice, 40 semistructured interviews were conducted to investigate preventive health practices of clinically overweight, postmenopausal women from contrasting socioeconomic classes living in Canada. Findings emphasize class-based differences with respect to long-term health and preventive practices according to three major themes: priority to long-term time horizons, attention given to risk factors of diseases, and control over future health. Health care providers should strive to work in concert with all subgroups of women to better understand their values, worldviews, and needs to decrease health inequalities after menopause.",
+  "year": 2017,
+  "lang": "en",
+  "type": "article",
+  "venue": "Qualitative Health Research",
+  "topic": "Obesity and Health Practices",
+  "field": "Health Professions"
+ },
+ {
+  "id": "W2589097179",
+  "title": "The structure of adult ADHD",
+  "abstract": "Abstract Although DSM‐5 stipulates that symptoms of attention‐deficit hyperactivity disorder (ADHD) are the same for adults as children, clinical observations suggest that adults have more diverse deficits than children in higher‐level executive functioning and emotional control. Previous psychometric analyses to evaluate these observations have been limited in ways addressed in the current study, which analyzes the structure of an expanded set of adult ADHD symptoms in three pooled US samples: a national household sample, a sample of health plan members, and a sample of adults referred for evaluation at an adult ADHD clinic. Exploratory factor analysis found four factors representing executive dysfunction/inattention (including, but not limited to, all the DSM‐5 inattentive symptoms, with non‐DSM symptoms having factor loadings comparable to those of DSM symptoms), hyperactivity, impulsivity, and emotional dyscontrol. Empirically‐derived multivariate symptom profiles were broadly consistent with the DSM‐5 inattentive‐only, hyperactive/impulsive‐only, and combined presentations, but with inattention including executive dysfunction/inattention and hyperactivity‐only limited to hyperactivity without high symptoms of impulsivity. These results show that executive dysfunction is as central as DSM‐5 symptoms to adult ADHD, while emotional dyscontrol is more distinct but nonetheless part of the combined presentation of adult ADHD.",
+  "year": 2017,
+  "lang": "en",
+  "type": "article",
+  "venue": "International Journal of Methods in Psychiatric Research",
+  "topic": "Attention Deficit Hyperactivity Disorder",
+  "field": "Medicine"
+ },
+ {
+  "id": "W2056984434",
+  "title": "Admission of the very elderly to the intensive care unit: Family members’ perspectives on clinical decision-making from a multicenter cohort study",
+  "abstract": "Background: Little is known about the perspectives and experiences of family members of very elderly patients who are admitted to the intensive care unit. Aim: To describe family members’ perspectives about care provided to very elderly critically ill patients. Design: Multicenter, prospective, cohort study. Participants and setting: In total, 535 family members of patients aged 80 years or older admitted to 22 intensive care units for more than 24 h. Results: Family members reported that the “patient be comfortable and suffer as little as possible” was their most important value and “the belief that life should be preserved at all costs” was their least important value considered in making treatment decisions. Most family members (57.9%) preferred that life support be used for their family member, whereas 24.1% preferred comfort measures only, and 14.4% were unsure of their treatment preferences. Only 57.3% reported that a doctor had talked to them about treatment options for the patient. Overall, 29.7% of patients received life-sustaining treatments for more than 7 days and 50.3% of these died in hospital. Families were most satisfied with the skill and competency of nurses and least satisfied with being included and supported in the decision-making process and with their sense of control over the patient’s care. Conclusion: There is incongruity between family values and preferences for end-of-life care and actual care received for very elderly patients who are admitted to the intensive care unit. Deficiencies in communication and decision-making may be associated with prolonged use of life-sustaining treatments in very elderly critically ill patients, many of whom ultimately die.",
+  "year": 2015,
+  "lang": "en",
+  "type": "article",
+  "venue": "Palliative Medicine",
+  "topic": "Palliative Care and End-of-Life Issues",
+  "field": "Medicine"
+ },
+ {
+  "id": "W2103936380",
+  "title": "Advertising of Prescription-Only Medicines to the Public: Does Evidence of Benefit Counterbalance Harm?",
+  "abstract": "Since the global withdrawal of rofecoxib (Vioxx) in 2004, concerns about public health effects of direct-to-consumer advertising (DTCA) have grown. A systematic review of the research evidence on behavioral, health, and cost effects, published in 2005, found four studies meeting inclusion criteria, which showed that DTCA increases prescribing volume and patient demand, and shifts prescribing. From 2005 to 2010, nine studies met similar criteria. These largely confirm previous results. Additional effects include a shift to less appropriate prescribing, differential effects by patient price sensitivity and drug type, switches to less cost-effective treatment, and sustained sales despite a price increase. Claimed effects on adherence do not stand up to scrutiny and are based mainly on negative trials. There is no evidence of improved treatment quality or early provision of needed care. If policy is to be informed by evidence, the strength of research methods and ability to assess causality need to be considered.",
+  "year": 2012,
+  "lang": "en",
+  "type": "review",
+  "venue": "Annual Review of Public Health",
+  "topic": "Pharmaceutical industry and healthcare",
+  "field": "Pharmacology, Toxicology and Pharmaceutics"
+ },
+ {
+  "id": "W2799507680",
+  "title": "547 Systematic review evidence in one minute or less",
+  "abstract": "",
+  "year": 2018,
+  "lang": "en",
+  "type": "article",
+  "venue": null,
+  "topic": "Meta-analysis and systematic reviews",
+  "field": "Decision Sciences"
+ },
+ {
+  "id": "W2084126787",
+  "title": "Comparison of Methods for Collecting and Modeling Dissimilarity Data: Applications to Complex Sound Stimuli",
+  "abstract": "1. Multivariate Behav Res. 2011 Sep 30;46(5):779-811. doi: \n10.1080/00273171.2011.606748.\n\nComparison of Methods for Collecting and Modeling Dissimilarity Data: \nApplications to Complex Sound Stimuli.\n\nGiordano BL(1), Guastavino C(1), Murphy E(2), Ogg M(1), Smith BK(1), McAdams \nS(1).\n\nAuthor information:\n(1)a McGill University.\n(2)b Dublin City University.\n\nSorting procedures are frequently adopted as an alternative to dissimilarity \nratings to measure the dissimilarity of large sets of stimuli in a comparatively \nshort time. However, systematic empirical research on the consequences of this \nexperiment-design choice is lacking. We carried out a behavioral experiment to \nassess the extent to which sorting procedures compare to dissimilarity ratings \nin terms of efficiency, reliability, and accuracy, and the extent to which data \nfrom different data-collection methods are redundant and are better fit by \ndifferent distance models. Participants estimated the dissimilarity of either \nsemantically charged environmental sounds or semantically neutral synthetic \nsounds. We considered free and hierarchical sorting and derived indications \nconcerning the properties of constrained and truncated hierarchical sorting \nmethods from hierarchical sorting data. Results show that the higher efficiency \nof sorting methods comes at a considerable cost in terms of data reliability and \naccuracy. This loss appears to be minimized with truncated hierarchical sorting \nmethods that start from a relatively low number of groups of stimuli. Finally, \nvariations in data-collection method differentially affect the fit of various \ndistance models at the group-average and individual levels. On the basis of \nthese results, we suggest adopting sorting as an alternative to \ndissimilarity-rating methods only when strictly necessary. We also suggest \nanalyzing the raw behavioral dissimilarities, and avoiding modeling them with \none single distance model.\n\nDOI: 10.1080/00273171.2011.606748\nPMID: 26736045",
+  "year": 2011,
+  "lang": "en",
+  "type": "article",
+  "venue": "Multivariate Behavioral Research",
+  "topic": "Multisensory perception and integration",
+  "field": "Psychology"
+ },
+ {
+  "id": "W3197240121",
+  "title": "Coronavirus Disease 2019 (COVID-19): A Literature Review from a Nursing Perspective",
+  "abstract": "Introduction: As the COVID-19 pandemic ravages the world, nursing resources, and capacities play an essential role in disease management. This literature review focuses on the central issues related to the nursing care of patients affected by COVID-19. Material and Methods: This literature review was conducted with an extensive search of databases, including PubMed, Web of Science (WOS), and Scopus, using the keywords \"COVID19\", \"2019-nCoV disease\", \"2019 novel coronavirus infection\", \"Nurse\", \"Nursing Care\", and \"Nursing management.\" The span of the literature search was between December 01, 2020, and January 12, 2021. A total of 28 original and English-language articles were selected for inclusion in the review. Results: Nursing interventions such as monitoring, oxygen therapy, and the use of Extra Corporeal Membrane Oxygenation (ECMO) in the care of COVID-19 patients, caring for ICU patients with COVID-19, rehabilitation of COVID-19 patients, nurses' experiences and barriers in the care of patients with COVID-19, and also the ethical challenges in the care of patients with COVID-19, were found to be valuable in managing COVID-19 patients. Conclusion: Nurses have a pivotal role to play in the care of patients with COVID-19. Therefore, providing comprehensive and quality nursing care supported by experience and research is necessary to successfully reduce the length of hospital stay and decrease the morbidity and mortality rates of COVID-19.",
+  "year": 2021,
+  "lang": "en",
+  "type": "review",
+  "venue": "Biomedicine",
+  "topic": "COVID-19 Clinical Research Studies",
+  "field": "Medicine"
+ },
+ {
+  "id": "W4391036364",
+  "title": "Fatigue and Mental Illness Symptoms in Long COVID: Protocol for a Prospective Cohort Multicenter Observational Study",
+  "abstract": "Background The aftermath of the COVID-19 pandemic continues to affect millions worldwide, resulting in persisting postvirus complaints and impacting peoples’ quality of life. Long COVID, characterized by lingering symptoms like fatigue and mental illness, can extend beyond a few months, necessitating further research to understand its implications. Objective This study aims to quantify the degree of physical and psychological fatigue in patients following COVID-19 infection and examine its correlation with mental health disorders. Methods Using a consecutive nonrandom sampling technique, we will conduct a prospective cohort multicenter observational study in 5 Portuguese hospitals. Symptomatic adult patients with previous COVID-19 attending follow-up consultations will be enrolled. We will include patients who had mild, moderate, and severe acute disease. We will assess clinical outcomes related to COVID-19, including the type of respiratory support such as high-flow nasal cannula, noninvasive ventilation, and invasive mechanical ventilation. The exclusion criteria will include previous severe psychiatric disorders confirmed by a psychiatrist; refusal or inability to respond to the questionnaire; concomitant neurological disorder; persistent fatigue symptoms during the 6 months before infection; and the need for invasive mechanical ventilation during COVID-19 infection due to a high prevalence of postintensive care syndrome. Our primary outcome is the prevalence of fatigue in patients with post–COVID-19 depression and/or anxiety, as measured by the Chalder Fatigue Scale (CFQ-11) and the Hospital Anxiety and Depression Scale (HADS). The secondary outcomes will include an assessment of health-related quality of life via the EQ-5D questionnaire and an exploration of the prevalence of symptoms of posttraumatic stress disorder (PTSD) using the 14-item Posttraumatic Stress Scale (PTSS-14). We will also examine the association between mental health symptoms and the severity of acute COVID-19. The post–COVID-19 data will be collected at least 6 months after the positive test and no longer than 9 months during the clinical appointment. Results We expect our multicenter study on patients post COVID-19 to reveal a significant link between mental illness symptoms and both physical and psychological fatigue. Patients with heightened depression and anxiety may report increased levels of fatigue. Additionally, we expect to find persistent PTSD symptoms in a subset of par",
+  "year": 2024,
+  "lang": "en",
+  "type": "article",
+  "venue": "JMIR Research Protocols",
+  "topic": "Long-Term Effects of COVID-19",
+  "field": "Medicine"
+ },
+ {
+  "id": "W2028829563",
+  "title": "Describing the content of primary care: limitations of Canadian billing data",
+  "abstract": "1. BMC Fam Pract. 2012 Feb 15;13:7. doi: 10.1186/1471-2296-13-7.\n\nDescribing the content of primary care: limitations of Canadian billing data.\n\nKatz A(1), Halas G, Dillon M, Sloshower J.\n\nAuthor information:\n(1)Department of Family Medicine, Faculty of Medicine, University of Manitoba, \nWinnipeg, Manitoba, Canada. alan_katz@cpe.umanitoba.ca\n\nBACKGROUND: Primary health care systems are designed to provide comprehensive \npatient care. However, the ICD 9 coding system used for billing purposes in \nCanada neither characterizes nor captures the scope of clinical practice or \ncomplexity of physician-patient interactions. This study aims to describe the \ncontent of primary care clinical encounters and examine the limitations of using \nadministrative data to capture the content of these visits. Although a number of \nU.S studies have described the content of primary care encounters, this is the \nfirst Canadian study to do so.\nMETHODS: Study-specific data collection forms were completed by 16 primary care \nphysicians in community health and family practice clinics in Winnipeg, \nManitoba, Canada. The data collection forms were completed immediately following \nthe patient encounter and included patient and visit characteristics, such as \nprimary reason for visit, topics discussed, actions taken, degree of complexity \nas well as diagnosis and ICD-9 codes.\nRESULTS: Data was collected for 760 patient encounters. The diagnostic codes \noften did not reflect the dominant topic of the visit or the topic requiring the \nmost amount of time. Physicians often address multiple problems and provide \nnumerous services thus increasing the complexity of care.\nCONCLUSION: This is one of the first Canadian studies to critically analyze the \ncontent of primary care clinical encounters. The data allowed a greater \nunderstanding of primary care clinical encounters and attests to the \ndeficiencies of singular ICD-9 coding which fails to capture the \ncomprehensiveness and complexity of the primary care encounter. As primary care \nreform initiatives in the U.S and Canada attempt to transform the way family \nphysicians deliver care, it becomes increasingly important that other tools for \nstructuring primary care data are considered in order to help physicians, \nresearchers and policy makers understand the breadth and complexity of primary \ncare.\n\nDOI: 10.1186/1471-2296-13-7\nPMCID: PMC3305652\nPMID: 22335900 [Indexed for MEDLINE]",
+  "year": 2012,
+  "lang": "en",
+  "type": "article",
+  "venue": "BMC Family Practice",
+  "topic": "Medical Coding and Health Information",
+  "field": "Health Professions"
+ },
+ {
+  "id": "W2596539274",
+  "title": "Evropský kongres pracovního práva a sociálního zabezpečení",
+  "abstract": "",
+  "year": 2008,
+  "lang": "cs",
+  "type": "article",
+  "venue": "DOAJ (DOAJ: Directory of Open Access Journals)",
+  "topic": "Education, Psychology, and Social Research",
+  "field": "Social Sciences"
+ },
+ {
+  "id": "W2990864246",
+  "title": "Sports Medicine Update",
+  "abstract": "1. Emerg Med Clin North Am. 2020 Feb;38(1):207-222. doi:\n10.1016/j.emc.2019.09.010.\n\nSports Medicine Update: Concussion.\n\nMisch MR(1), Raukar NP(2).\n\nAuthor information:\n(1)Division of Emergency Medicine, Department of Family and Community Medicine, \nUniversity of Toronto, Toronto, Canada. Electronic address: \nMichael.r.misch@gmail.com.\n(2)Department of Emergency Medicine, Mayo Clinic, 200 First Street, Southwest, \nRochester, MN 55905, USA.\n\nA systematic approach is required for patients with a suspected concussion. \nAlthough standardized tools can aid in assessment, the diagnosis of concussion \nremains a clinical one. At the time of diagnosis, patients should be given both \nverbal and written review of the common symptoms of concussion, expected course \nof recovery, as well as strategies to manage symptoms. Most patients benefit \nfrom a brief period of rest, followed by a gradual reintroduction of activities, \nand a graduated return-to-sport protocol. Patients with prolonged recovery from \na concussion may benefit from exercise, vestibular, and cognitive rehabilitation \nprograms.\n\nCopyright © 2019 Elsevier Inc. All rights reserved.\n\nDOI: 10.1016/j.emc.2019.09.010\nPMID: 31757251 [Indexed for MEDLINE]",
+  "year": 2019,
+  "lang": "en",
+  "type": "review",
+  "venue": "Emergency Medicine Clinics of North America",
+  "topic": "Traumatic Brain Injury Research",
+  "field": "Medicine"
+ },
+ {
+  "id": "W4414617249",
+  "title": "Protocol for an observational cohort study integrating real-world data and microsimulation to assess imaging surveillance strategies in stage I–IIIA NSCLC patients in OneFlorida+",
+  "abstract": "Introduction Although lung cancer remains the leading cause of cancer deaths in the US, recent advances in early detection and treatment have led to improvements in survival. However, there is a considerable risk of recurrence or second primary lung cancer (SPLC) following curative-intent treatment in patients with early-stage non-small cell lung cancer (NSCLC). Professional societies recommend routine surveillance with CT to optimise the detection of potential recurrence and SPLC at a localised stage. However, no definitive evidence demonstrates the effect of imaging surveillance on survival in patients with NSCLC. To close these research gaps, the Advancing Precision Lung Cancer Surveillance and Outcomes in Diverse Populations (PLuS2) study will leverage real-world electronic health records (EHRs) data to evaluate surveillance outcomes among patients with and without guideline-adherent surveillance. The overarching goal of the PLuS2 study is to assess the long-term effectiveness of surveillance strategies in real-world settings. Methods and analysis PLuS2 is an observational study designed to assemble a cohort of patients with incident pathologically confirmed stage I/II/IIIA NSCLC who have completed curative-intent therapy. Patients undergoing imaging surveillance will be followed from 2012 to 2026 by linking EHRs with tumour registry data in the OneFlorida+ Clinical Research Consortium. Data will be consolidated into a unified repository to achieve three primary aims: (1) Examine the utilisation and determinants of CT imaging surveillance by race/ethnicity and socioeconomic status, (2) Compare clinical endpoints, including recurrence, SPLCs and survival of patients who undergo semiannual versus annual CT imaging and (3) Use the observational data in conjunction with validated microsimulation models to simulate imaging surveillance outcomes within the US population. To our knowledge, this study represents the first attempt to integrate real-world data and microsimulation models to assess the long-term impact and effectiveness of imaging surveillance strategies. Ethics and dissemination This study involves human participants and was approved by the University of Florida Institutional Review Board (IRB), University of Florida IRB 01, under approval number IRB202300782. The results will be disseminated through publications and presentations at national and international conferences. Safety considerations encompass ensuring the confidentiality of patient in",
+  "year": 2025,
+  "lang": "en",
+  "type": "article",
+  "venue": "BMJ Open",
+  "topic": "Lung Cancer Diagnosis and Treatment",
+  "field": "Medicine"
+ },
+ {
+  "id": "W4250047758",
+  "title": "Classification des fonctions des administrations publiques (CFAP/COFOG)",
+  "abstract": "",
+  "year": 2017,
+  "lang": "fr",
+  "type": "book-chapter",
+  "venue": "Panorama des administrations publiques",
+  "topic": "Healthcare Systems and Practices",
+  "field": "Health Professions"
+ },
+ {
+  "id": "W4413092258",
+  "title": "Physical Therapy and Social Media: Protocol for a Critical Interpretive Synthesis of Ethical and Social Issues",
+  "abstract": "OBJECTIVE: This study aims to critically review existing literature and develop a theory to understand the ethical and social issues related to social media uses by physical therapists. METHODS: The review will follow the Critical Interpretive Synthesis method by Dixon-Woods et al. Databases such as Medline, Embase, CINAHL, and Web of Science will be searched for studies published in English and French from 2000 to 2025. Two reviewers will select studies, extracting and analyzing data. Ethical and social issues will be critically appraised, and new concepts will be synthesized. DISCUSSION: This review critically examines ethical and social issues in the use of social media in physical therapy, highlighting gaps in literature and guiding future research. Despite some methodological limitations, it offers a nuanced, context-sensitive synthesis. The findings aim to support ethical reflection in physical therapy and related fields. JOSPT Methods 2025;1(3):96-101. Epub 16 July 2025. doi:10.2519/josptmethods.2025.0134",
+  "year": 2025,
+  "lang": "en",
+  "type": "article",
+  "venue": "JOSPT Methods",
+  "topic": "Social Media in Health Education",
+  "field": "Social Sciences"
+ },
+ {
+  "id": "W2772752708",
+  "title": "Les forces du changement stratégique et les causalités communes. Le cas des primes versées aux banquiers : perspectives",
+  "abstract": "Parmi les rares conclusions rigoureuses de la littérature consacrée aux politiques publiques, on trouve le fait que la dynamique politique est à la fois une fonction de stabilité et de volatilité. Et bien que la plupart des théories relatives à la politique publique postulent que la survenue de moments critiques politiques constitue une condition nécessaire à un changement d’envergure, les études qui cherchent à démêler l’écheveau des mécanismes sous-jacents de ces moments critiques demeurent relativement rares. Le présent article développe l’hypothèse selon laquelle ces moments critiques, généralement considérés comme des vecteurs de changements d’envergure, impliquent pour l’essentiel une causalité commune. Nous montrons que les forces du changement ont une nature commune et qui les renforce mutuellement à l’aide d’une étude de cas axée sur la réglementation relative aux primes. Le présent article, qui se base sur une analyse documentaire et une analyse de programme politique, démontre que la plupart des changements de la règlementation relative aux primes étaient marginaux. Nous soutenons que la nature intrinsèquement attrayante de la récompense des performances, combinée à une totale absence d’alternatives soutenues par une coalition forte et visant à modérer l’appétit du risque sur les marchés financiers, semble jouer un rôle dans la résilience des pratiques en matière de primes. En théorie, l’étude de cas contribue au développement de la théorie de la causalité commune qui entraîne des changements politiques majeurs. Sur le mode empirique, elle expose un mécanisme clé utilisé par le secteur financier pour résister aux réformes : proposer une alternative que personne ne peut refuser. Remarques à l’intention des praticiens La littérature relative à la politique exprime un vaste consensus quant au fait que les changements politiques résultent généralement de forces multiples. Nous identifions cette causalité commune des changements politiques et suggérons que parmi les forces du changement, une alternative politique forte capable d’unir une vaste coalition de parties prenantes constitue une condition nécessaire à un changement politique. Il est donc peu probable que les réformes financières, et plus spécifiquement la pratique des primes, soient moins le résultat d’une réglementation stricte que d’alternatives réelles pour récompenser l’excellence professionnelle et réduire l’appétit du risque.",
+  "year": 2017,
+  "lang": "fr",
+  "type": "article",
+  "venue": "Revue Internationale des Sciences Administratives",
+  "topic": "Social Sciences and Governance",
+  "field": "Social Sciences"
+ },
+ {
+  "id": "W4390430457",
+  "title": "Investigation on Gender and Leadership in STEM in Higher Education: Methodology Design",
+  "abstract": "Institutional actions and policies implemented by universities hold the potential to significantly impact the inclusion of women in leadership roles within STEM fields. This article describes the methodological design approved by the local ethics committee to conduct the research in Brazil, with the primary objective of understanding the degree to which discursive productions on gender affect women’s career experiences and leadership paths within STEM fields in higher education. Discursive productions include structures of power such as university policies, climate, culture, and projects. It is expected that the work will provide valuable insights and support for researchers sharing similar goals and who work to reduce gender inequalities in STEM.",
+  "year": 2023,
+  "lang": "en",
+  "type": "article",
+  "venue": "Interfases",
+  "topic": "Science and Science Education",
+  "field": "Social Sciences"
+ },
+ {
+  "id": "W2896789432",
+  "title": "Estimating Risks of Arrest and Criminal Populations: Regression Adjustments to Capture–Recapture Models",
+  "abstract": "The size of criminal populations is unknown, and policy decisions are typically based only on the number of offenses and offenders that come to the attention of the criminal justice system. However, the size of criminal populations may follow different trends than what is observed in official data. We use a regression-adjusted capture–recapture model to estimate the number of people at risk of arrest for offenses involving amphetamine-type stimulants (ATS) from arrests and rearrests occurring in Quebec, Canada, controlling for year of first arrest, age, and gender. The 4,989 individuals arrested were the visible part of an estimated 42,541 [36,936, 48,145] individuals otherwise at risk of arrest (12%). Additional results show that trends in criminal populations and risks of arrest vary across offense type and drug classifications.",
+  "year": 2018,
+  "lang": "en",
+  "type": "article",
+  "venue": "Crime & Delinquency",
+  "topic": "Census and Population Estimation",
+  "field": "Mathematics"
+ },
+ {
+  "id": "W2124352716",
+  "title": "Catching the shimmers of the social: from the limits of reflexivity to methodological creativity",
+  "abstract": "With the questioning of the neutral objective researcher, reflexivity has jumped to the forefront of qualitative research, thus positioning the embodied researcher within the research process. In its power to reveal tacit embodied social structures, reflexivity is touted as the hallmark of methodological validation while also being described as a messy process, particularly in participatory research. In this article, we use illustrative examples from our participatory research exploring the healing practices of racialized minority youth in Canada to highlight the limits of reflexivity and participation. We examine the messy processes in the preliminary phase of our research project and the invaluable insights we took into developing a creative methodology.",
+  "year": 2014,
+  "lang": "en",
+  "type": "article",
+  "venue": "Qualitative Research",
+  "topic": "Participatory Visual Research Methods",
+  "field": "Social Sciences"
+ },
+ {
+  "id": "W3094472893",
+  "title": "Big data's first election victory",
+  "abstract": "",
+  "year": 2020,
+  "lang": "en",
+  "type": "article",
+  "venue": "The New Scientist",
+  "topic": "Big Data Technologies and Applications",
+  "field": "Decision Sciences"
+ },
+ {
+  "id": "W3197702270",
+  "title": "The Secured Credit Premium and the Issuance of Secured Debt",
+  "abstract": "",
+  "year": 2020,
+  "lang": "en",
+  "type": "report",
+  "venue": "National Bureau of Economic Research",
+  "topic": "Housing Market and Economics",
+  "field": "Economics, Econometrics and Finance"
+ },
+ {
+  "id": "W2243728887",
+  "title": "Potential budget impact of capecitabine versus 5-FU/LV as adjuvant chemotherapy for stage III (SIII) colon cancer in Canada and its provinces",
+  "abstract": "6581 Background: Adjuvant chemotherapy for SIII colon cancer is an accepted standard of care. Oral Capecitabine (CAP) has been shown to be at least equivalent and possibly superior to 5FU/LV (Mayo regimen) with regards to a superior relapse free survival. This new option is associated with a higher drug cost but improved toxicity profile and appears to be cost-effective (CE). An economic analysis was undertaken to examine the potential budget impact for CAP in Canada and its provinces for 2007 onwards. Methods: A previously developed cost-effectiveness model was adapted to a prevalence perspective to project the net budgetary impact of CAP over a 5 year horizon. The projected population and incidence of colon cancer for each Canadian province from 2007–2016 was obtained and the proportion of patients with SIII colon cancer suitable for adjuvant chemotherapy was estimated from the literature. The average budget impact in the first 5 years (start up phase) and subsequent years (steady state) was assessed in Canadian $. Results: The projected average annual impact for Canada is 13.9 million (M) during the start up phase and $11.8 M during the steady state phase (NL $210K, PEI $63K, NS $424K, NB $282K, QC $2.92M, ON $4.66M, MB $464K, SK $336K, AB $993K and BC 1.45M). Budget impact is greater during the initial start-up phase (2007–11), as the steady state impact (2012–16) includes relapses avoided over a 5-year period. Sensitivity analyses for key parameters will be provided. Conclusions: The annual budget impact of CAP decreases over time and reaches a steady state after 5 years when the full impact of decreased recurrences is captured. As CAP appears to be CE, budget impact analysis has the potential to assist in the planning of healthcare funding resources regarding this treatment option. [Table: see text]",
+  "year": 2007,
+  "lang": "en",
+  "type": "article",
+  "venue": "Journal of Clinical Oncology",
+  "topic": "Health Systems, Economic Evaluations, Quality of Life",
+  "field": "Economics, Econometrics and Finance"
+ }
+]
+warning: loading hooks from both /Users/choxos/.codex/hooks.json and /Users/choxos/.codex/config.toml; prefer a single representation for this layer
+2026-07-13T14:45:49.461458Z ERROR rmcp::transport::worker: worker quit with fatal: Transport channel closed, when Auth(AuthorizationRequired)
+warning: Skill descriptions were shortened to fit the 2% skills context budget. Codex can still see every skill, but some descriptions are shorter. Disable unused skills or plugins to leave more room for the rest.
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart Failed
+hook: SessionStart Completed
+hook: SessionStart Completed
+hook: SessionStart Completed
+hook: SessionStart Completed
+hook: SessionStart Failed
+hook: UserPromptSubmit
+hook: UserPromptSubmit
+hook: UserPromptSubmit Failed
+hook: UserPromptSubmit Failed
+codex
+[
+  {"id":"W2943459228","categories":["sts"],"domain":null,"study_design":"qualitative","genre":"empirical","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"Studies science and research evidence as socially organized knowledge in practice."},
+  {"id":"W4239293221","categories":[],"domain":null,"study_design":"theoretical_or_conceptual","genre":"commentary","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"The work does not study science, research, or any defined category."},
+  {"id":"W3013557364","categories":[],"domain":null,"study_design":"theoretical_or_conceptual","genre":"methods","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"Developing and explaining a clinical prediction technique is not metaresearch under Rule 1."},
+  {"id":"W1872548620","categories":[],"domain":null,"study_design":"theoretical_or_conceptual","genre":"commentary","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"The work concerns feminist social theory rather than a defined study of science or research."},
+  {"id":"W2730918267","categories":[],"domain":null,"study_design":"qualitative","genre":"empirical","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"The study examines health practices, not research practices or another defined category."},
+  {"id":"W2589097179","categories":[],"domain":null,"study_design":"observational","genre":"empirical","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"The work is an empirical clinical psychometric study outside the defined categories."},
+  {"id":"W2056984434","categories":[],"domain":null,"study_design":"observational","genre":"empirical","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"The cohort study concerns family perspectives on clinical care, not a defined category."},
+  {"id":"W2103936380","categories":[],"domain":null,"study_design":"systematic_review","genre":"review","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"The review evaluates evidence about medicine advertising rather than research practice itself."},
+  {"id":"W2799507680","categories":[],"domain":null,"study_design":"not_applicable","genre":"other","about_ca_system":false,"about_ca_topic":false,"confidence":"low","reason":"The missing abstract prevents reliable screening beyond the title."},
+  {"id":"W2084126787","categories":["metaresearch"],"domain":"methods","study_design":"bench_or_experimental","genre":"methods","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"The study evaluates alternative research data-collection and modeling methods as used by researchers."},
+  {"id":"W3197240121","categories":[],"domain":null,"study_design":"design_other","genre":"review","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"The literature review concerns nursing care for COVID-19 rather than a defined category."},
+  {"id":"W4391036364","categories":[],"domain":null,"study_design":"observational","genre":"protocol","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"This is a protocol for a clinical observational cohort study, not a study of research practice."},
+  {"id":"W2028829563","categories":[],"domain":null,"study_design":"observational","genre":"empirical","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"The study analyzes primary care encounters and billing-data limitations, not research methods."},
+  {"id":"W2596539274","categories":[],"domain":null,"study_design":"not_applicable","genre":"other","about_ca_system":false,"about_ca_topic":false,"confidence":"low","reason":"The missing abstract prevents reliable screening beyond the title."},
+  {"id":"W2990864246","categories":[],"domain":null,"study_design":"design_other","genre":"review","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"The clinical concussion update is a medical review outside the defined categories."},
+  {"id":"W4414617249","categories":[],"domain":null,"study_design":"observational","genre":"protocol","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"This is a protocol for an observational clinical cohort using microsimulation, not research-on-research."},
+  {"id":"W4250047758","categories":[],"domain":null,"study_design":"not_applicable","genre":"other","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"The classification document does not study science or research as an object."},
+  {"id":"W4413092258","categories":[],"domain":null,"study_design":"systematic_review","genre":"protocol","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"This is a protocol for a critical interpretive literature synthesis, not a defined category."},
+  {"id":"W2772752708","categories":[],"domain":null,"study_design":"design_other","genre":"empirical","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"The case study analyzes financial policy change rather than research or science."},
+  {"id":"W4390430457","categories":[],"domain":null,"study_design":"qualitative","genre":"protocol","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"The methodology concerns gender and leadership in higher education, not science as a social practice."},
+  {"id":"W2896789432","categories":[],"domain":null,"study_design":"observational","genre":"empirical","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"Applying a capture-recapture model to criminal justice data is a domain technique, excluded by Rule 1."},
+  {"id":"W2124352716","categories":["metaresearch","sts"],"domain":"methods","study_design":"qualitative","genre":"empirical","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"The work studies research methodology as social practice and evaluates reflexivity and participation in research."},
+  {"id":"W3094472893","categories":[],"domain":null,"study_design":"not_applicable","genre":"commentary","about_ca_system":false,"about_ca_topic":false,"confidence":"low","reason":"The missing abstract leaves only a general science-and-technology news title."},
+  {"id":"W3197702270","categories":[],"domain":null,"study_design":"not_applicable","genre":"other","about_ca_system":false,"about_ca_topic":false,"confidence":"low","reason":"The missing abstract prevents reliable study-design and category screening."},
+  {"id":"W2243728887","categories":[],"domain":null,"study_design":"simulation_or_modeling","genre":"empirical","about_ca_system":false,"about_ca_topic":true,"confidence":"high","reason":"The work applies a healthcare budget-impact model and does not study research practice."}
+]
+hook: Stop
+hook: Stop
+hook: Stop
+hook: Stop Completed
+hook: Stop Completed
+hook: Stop Failed
+tokens used
+30,009

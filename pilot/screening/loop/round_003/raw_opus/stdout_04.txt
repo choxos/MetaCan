@@ -1,0 +1,279 @@
+```json
+[
+ {
+  "id": "W4360988722",
+  "categories": ["sts"],
+  "domain": null,
+  "study_design": "theoretical_or_conceptual",
+  "genre": "other",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "low",
+  "reason": "Title alone suggests a conceptual interrogation of a technology's claim to 'listen', which fits sts (science or technology as social practice); no abstract, so confidence is low."
+ },
+ {
+  "id": "W2590316147",
+  "categories": [],
+  "domain": null,
+  "study_design": "qualitative",
+  "genre": "empirical",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "medium",
+  "reason": "Object is clinical guideline implementation by healthcare organisations, not methods as used, reported or performed by researchers (RULE 1), so it is in no defined category."
+ },
+ {
+  "id": "W6921300489",
+  "categories": ["metaresearch"],
+  "domain": "methods",
+  "study_design": "not_applicable",
+  "genre": "dataset",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "low",
+  "reason": "Supplementary file of a study of search filters and citation searching for locating psychometric articles, which is evidence-synthesis methodology as used by researchers (metaresearch, methods); screenable on title only, so low."
+ },
+ {
+  "id": "W1562377822",
+  "categories": ["metaresearch"],
+  "domain": "methods",
+  "study_design": "design_other",
+  "genre": "empirical",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "low",
+  "reason": "Social desirability bias is a bias in how research is performed and reported by researchers, which is the methods domain; no abstract, so design and confidence are held low."
+ },
+ {
+  "id": "W4312193665",
+  "categories": [],
+  "domain": null,
+  "study_design": "design_other",
+  "genre": "review",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "Clinical narrative review of hemodynamic monitors; the object is patient monitoring, not research practice, so it is in no defined category, and the Canadian affiliation is setting only."
+ },
+ {
+  "id": "W2320714254",
+  "categories": [],
+  "domain": null,
+  "study_design": "not_applicable",
+  "genre": "commentary",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "low",
+  "reason": "News item on clinician participation in a US clinical quality reporting program, not a study of research practice; no abstract, so confidence is low."
+ },
+ {
+  "id": "W4211257651",
+  "categories": [],
+  "domain": null,
+  "study_design": "qualitative",
+  "genre": "empirical",
+  "about_ca_system": false,
+  "about_ca_topic": true,
+  "confidence": "high",
+  "reason": "Environmental and biographical history of conservation in Toronto's Don River Valley: Canada is a substantive subject (ABOUT_CA_TOPIC), but science or research is not the object, so no category applies."
+ },
+ {
+  "id": "W2963250813",
+  "categories": [],
+  "domain": null,
+  "study_design": "bench_or_experimental",
+  "genre": "empirical",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "Bench study of caspase-6 activation in Huntington disease; an instance of research practice is not a study of it (RULE 1), and the UBC affiliation is setting only."
+ },
+ {
+  "id": "W3168220787",
+  "categories": [],
+  "domain": null,
+  "study_design": "simulation_or_modeling",
+  "genre": "methods",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "medium",
+  "reason": "Validating and tuning a cyclone detection and tracking technique for atmospheric science is developing or validating a technique for a domain, which RULE 1 places outside metaresearch however generic the technique."
+ },
+ {
+  "id": "W4398635616",
+  "categories": ["insufficient_payload"],
+  "domain": null,
+  "study_design": "not_applicable",
+  "genre": "dataset",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "The title is a bare filename ('640555_2.roi') with no abstract, topic or field, so the record cannot be screened; reported, never silently dropped."
+ },
+ {
+  "id": "W4301958563",
+  "categories": [],
+  "domain": null,
+  "study_design": "not_applicable",
+  "genre": "commentary",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "low",
+  "reason": "Title alone gives no evidence that research, science, or scholarly communication is the object; judged on the title, so confidence is low."
+ },
+ {
+  "id": "W4409181783",
+  "categories": ["metaresearch"],
+  "domain": "methods",
+  "study_design": "not_applicable",
+  "genre": "commentary",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "medium",
+  "reason": "The object is bias in how all-cause mortality studies are designed and analysed by researchers, which is metaresearch on methods; it is a commentary, not a systematic-review-style analysis with the study as unit, so neither metaepi definition is met."
+ },
+ {
+  "id": "W4229444047",
+  "categories": [],
+  "domain": null,
+  "study_design": "bench_or_experimental",
+  "genre": "empirical",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "Materials engineering experiment on wood impregnation and dowel connections; the object is a material, not research practice, so it is in no defined category."
+ },
+ {
+  "id": "W2544958871",
+  "categories": ["sts"],
+  "domain": null,
+  "study_design": "not_applicable",
+  "genre": "commentary",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "low",
+  "reason": "A book review of a history of physiology and the concept of life around 1800; the object is scientific knowledge, and v3 admits sts at any period, but with no abstract confidence is low."
+ },
+ {
+  "id": "W194942664",
+  "categories": [],
+  "domain": null,
+  "study_design": "design_other",
+  "genre": "review",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "low",
+  "reason": "Book chapter on fetal cardiac physiology; the object is clinical physiology, not research practice, though with no abstract the genre and design are inferred from the title."
+ },
+ {
+  "id": "W6891698444",
+  "categories": [],
+  "domain": null,
+  "study_design": "not_applicable",
+  "genre": "other",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "low",
+  "reason": "Short French-language piece on liquid water on Mars; the object is a planetary science finding, not research practice, and with no abstract confidence is low."
+ },
+ {
+  "id": "W6901716049",
+  "categories": [],
+  "domain": null,
+  "study_design": "not_applicable",
+  "genre": "commentary",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "low",
+  "reason": "Ergonomics commentary with a proverbial title and no abstract; nothing indicates science or research is the object, so it falls in no defined category."
+ },
+ {
+  "id": "W4387337535",
+  "categories": [],
+  "domain": null,
+  "study_design": "simulation_or_modeling",
+  "genre": "empirical",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "medium",
+  "reason": "Structural dynamics of imperfect beams; an instance of domain research, not a study of research practice (RULE 1), though the design is inferred from the title alone."
+ },
+ {
+  "id": "W7128476924",
+  "categories": [],
+  "domain": null,
+  "study_design": "observational",
+  "genre": "empirical",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "Empirical geographic analysis of corruption in MENA using Transparency International data; the object is governance, not science or research, so no category applies."
+ },
+ {
+  "id": "W1992708519",
+  "categories": [],
+  "domain": null,
+  "study_design": "case_report",
+  "genre": "empirical",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "CT study of a single Ptolemaic mummy's dental packing; the object is an archaeological specimen, not research practice, and the Canadian affiliations are setting only."
+ },
+ {
+  "id": "W2049810186",
+  "categories": [],
+  "domain": null,
+  "study_design": "simulation_or_modeling",
+  "genre": "empirical",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "medium",
+  "reason": "Evaluating numerical weather prediction models against dropsonde observations is validating a technique for a domain, which RULE 1 places outside metaresearch."
+ },
+ {
+  "id": "W4416435722",
+  "categories": [],
+  "domain": null,
+  "study_design": "observational",
+  "genre": "empirical",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "Digital public health surveillance of COVID-19 in Lebanon; the object is disease surveillance, not research practice, so it is in no defined category."
+ },
+ {
+  "id": "W2948779853",
+  "categories": [],
+  "domain": null,
+  "study_design": "observational",
+  "genre": "empirical",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "low",
+  "reason": "Ecology of non-native ungulate impacts on arthropods and soil function; the object is an ecosystem, not research practice, but with no abstract the study design is inferred from the title."
+ },
+ {
+  "id": "W2051439883",
+  "categories": [],
+  "domain": null,
+  "study_design": "simulation_or_modeling",
+  "genre": "methods",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "medium",
+  "reason": "Deriving forward modeling and inversion for high-susceptibility magnetic materials is developing a technique for a domain, which RULE 1 places outside metaresearch however generic the technique."
+ },
+ {
+  "id": "W4238727447",
+  "categories": ["insufficient_payload"],
+  "domain": null,
+  "study_design": "not_applicable",
+  "genre": "other",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "The record is journal cover and front matter, not a screenable work; reported as insufficient_payload rather than silently dropped."
+ }
+]
+```

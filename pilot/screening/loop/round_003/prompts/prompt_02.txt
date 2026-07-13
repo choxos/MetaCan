@@ -1,0 +1,535 @@
+You are screening scholarly works for the MetaCan project. Apply the rubric below to EVERY record and output ONE JSON array with ONE object per record, conforming EXACTLY to the JSON schema below. Output ONLY the JSON array, no prose before or after it.
+
+# THE RUBRIC (v3.1, locked)
+
+# MétaCan screening rubric (v3.1)
+
+**Status: LOCKED, 2026-07-13.** Supersedes v2.2. No screening ran under v3.0, which lived for hours: an adversarial review found that its Murad quotation inserted the word "treatment" into a sentence this document calls verbatim (D29). v3.1 corrects that quotation from the PDF, fixes the Kataoka page range, aligns the funder clause with the protocol, corrects two glosses against their sources, and adds the study-design vocabulary that v3.0 demanded but never listed. Since D29, `pilot/check_quotes.R` fails the build if any quotation marked verbatim is not a substring of its cited PDF.
+
+**No number produced so far was made under v3.** The pilot ran under v1.0; the 179-work re-screen under v2.0. Both instruments are kept byte for byte, so every figure stays attributable to the text that produced it. v3 is the instrument the **full screen** runs under, and the **v2-to-v3 difference is reported as a finding**.
+
+---
+
+## What changed, and why it is not cosmetic
+
+v1 and v2 had a tier hierarchy: **T1 core / T2 adjacent / T3 contextual**. That structure had a defect at its root, and the data found it before I did.
+
+> **"Adjacent" is defined by negation.** It means *not-T1*. A category whose only content is "near the important one" cannot be applied consistently, and **OUT-vs-adjacent was the largest tier confusion at every sample size we measured.** The models were not failing. **The category was empty.**
+
+It was also a value judgment I had no standing to make. Calling science and technology studies "adjacent" says STS is peripheral to metascience. **STS is a field with its own founding literature, its own journals, and its own account of what studying science means.**
+
+**v3 deletes the hierarchy.** Every tradition is a **category with its own positive definition, taken from its own literature, quoted verbatim from a source in `docs/reference/definitions/`.** There is no residual bucket. A record may carry **more than one** category, because the traditions genuinely overlap and forcing a single label is what created the problem.
+
+**Nothing here is cited from memory.** Every quotation below was read from the PDF named beside it. In a project whose worst deviation (D26) was that its own definition of metaresearch was mine and uncited for its entire life, a recalled citation would be the single worst thing this document could contain.
+
+---
+
+## The definitional problem is the field's, not this project's, and the field says so in print
+
+- **Puljak L, Lovric Makaric Z, Buljan I, Pieper D.** *What is a meta-epidemiological study? Analysis of published literature indicated heterogeneous study designs and definitions.* J Comp Eff Res. 2020. doi:10.2217/cer-2019-0201
+  > Analysed **175 information sources**. *"Definitions of meta-epidemiological studies varied and some studies used the term meta-epidemiological study to describe methodological research-on-research studies."* Conclusion: *"Research community would benefit from consensus about definition of meta-epidemiological study."*
+
+- **Kataoka Y, et al.** J Clin Epidemiol. 2023;154:219-220.
+  > A **published dispute** with Puljak, opening by naming *"the currently confusing nomenclatures around 'meta-epidemiology' and related terms such as 'meta-research' and 'research-on-research'."*
+
+- **Stevens ER, Laynor G.** *Recognizing the value of meta-research and making it easier to find.* J Med Libr Assoc. 2023;111(4). doi:10.5195/jmla.2023.1758
+  > *"The breadth of meta-research presents a significant challenge for identifying published meta-research studies,"* and it notes **the lack of a MeSH heading** for meta-research.
+
+**Those are claims about humans.** The pilot's numbers are claims about **models disagreeing under one rubric**. They are consistent, they are not the same estimand, and **only the human audit closes the gap** (`DEVIATIONS.md` D27).
+
+---
+
+## The categories
+
+A work may carry **more than one**. **Categories are not ranked and none is primary: the released landscape is the union of the defined categories, with every overlap reported.** The call's primary estimand is reported over `metaresearch` because that is the field the call names; that is a **reporting choice, not a rank**, and each of the other traditions gets the same per-category estimate.
+
+### 1. `metaresearch`
+
+> **"Meta-research is an evolving scientific discipline that aims to evaluate and improve research practices. It includes thematic areas of methods, reporting, reproducibility, evaluation, and incentives (how to do, report, verify, correct, and reward science)."**
+>
+> Ioannidis JPA, Fanelli D, Dunne DD, Goodman SN. *Meta-research: Evaluation and Improvement of Research Methods and Practices.* PLoS Biol. 2015;13(10):e1002264.
+> See also Ioannidis JPA. PLoS Biol. 2018;16(3):e2005468; METRICS, Stanford: <https://metrics.stanford.edu/research>
+
+Every `metaresearch` record carries a **`domain`**, taken verbatim from those five thematic areas and glossed by Ioannidis's own parenthetical:
+
+| `domain` | Ioannidis's gloss | operationally |
+|---|---|---|
+| `methods` | *how to **do** science* | design, conduct, analysis, bias, statistical practice, evidence-synthesis methodology; Ioannidis's own description of this area ends *"research integrity and ethics"* |
+| `reporting` | *how to **report** science* | reporting standards and completeness |
+| `reproducibility` | *how to **verify** science* | replication, data and code sharing, transparency |
+| `evaluation` | *how to **correct** science* | peer review and editorial process, research assessment, metrics |
+| `incentives` | *how to **reward** science* | funding allocation, careers and the research workforce, reward structures |
+
+**RULE 1 stands** (carried from v2; it resolved the largest single seam): *a work is `metaresearch` on methods only if its object is methods **as used, reported or performed by researchers**. Developing, deriving, validating or teaching a technique for a domain is OUT, however generic the technique.* **An instance of a research practice is not a study of it.**
+
+### 2. `metaepidemiology` — **CONTESTED IN PRINT. Both definitions are coded.**
+
+There is **no consensus definition** (Puljak 2020, above). **This rubric does not invent one.** It codes **both published definitions** and **flags where they disagree**, because the dispute is live, it is between named researchers in peer-reviewed journals, and hiding it inside a single label would destroy the only evidence of it.
+
+- **`metaepi_narrow`** — Murad MH, Wang Z. *Guidelines for reporting meta-epidemiological methodology research.* Evid Based Med. 2017;22(4):139-142. doi:10.1136/ebmed-2017-110713
+  > *"Meta-epidemiological studies adopt a systematic review or meta-analysis approach to examine the impact of certain characteristics of clinical studies on the observed effect and provide empirical evidence for hypothesised associations."*
+  >
+  > *(v3.0 quoted this sentence as 'the observed **treatment** effect'. The word is not in the paper; it narrowed Murad's definition while claiming his authority for the narrowing, and it survived a LOCK. D29.)*
+
+- **`metaepi_broad`** — Kataoka Y, et al. J Clin Epidemiol. 2023;154:219-220. *(Not 219-221: page 221 is Puljak's reply, which is the other side of the dispute.)*
+  > *"The greatest common defining concept of 'meta-epidemiological studies' would be **any studies in which the unit of analysis is a study, not a patient**."*
+
+**Where the two differ, the record is flagged, and the size of that class is reported as a finding.** A published dispute is a boundary to be *measured*, not settled by fiat.
+
+### 3. `bibliometrics` (scientometrics)
+
+> **"Scientometrics is the study of the quantitative aspects of the process of science as a communication system. It is centrally, but not only, concerned with the analysis of citations in the academic literature."**
+>
+> Mingers J, Leydesdorff L. *A Review of Theory and Practice in Scientometrics.* Eur J Oper Res. 2015. doi:10.1016/j.ejor.2015.04.002
+> Founding work: Price DJ de Solla. *Networks of Scientific Papers.* Science. 1965;149(3683):510-515.
+
+**Boundary with `metaresearch`, and it resolves v1's self-contradiction** (v1's T1 bullet and its own worked example gave opposite answers): a study that **characterises a literature** by quantitative means is `bibliometrics`. A study that uses bibliometric means to **make a claim about research practice** (citation distortion, reporting trends, citation of retracted work) is **also `metaresearch`**, and carries both. **v3 does not force the choice; that forcing was the bug.**
+
+### 4. `sts` (science and technology studies)
+
+> **"co-production is shorthand for the proposition that the ways in which we know and represent the world (both nature and society) are inseparable from the ways in which we choose to live in it."**
+> **"The idiom of co-production ... represents a major synthesis of scholarship in science and technology studies (S&TS)."**
+>
+> Jasanoff S (ed.). *States of Knowledge: The Co-Production of Science and the Social Order.* Routledge, 2004.
+
+> **"We study science in action and not ready made science or technology; to do so, we either arrive before the facts and machines are blackboxed or we follow the controversies that reopen them."**
+>
+> Latour B. *Science in Action: How to Follow Scientists and Engineers through Society.* Harvard University Press.
+
+**Operational test:** the work studies **science or technology as social practice**: how knowledge and social order are produced together, how facts are made rather than found, how controversies open and close. **The object must be science, research, or technoscientific knowledge**, at any period. *(v1 restricted history and philosophy of science to "contemporary research practice", an unexamined adverb that silently excluded the entire history of Canadian science. It is deleted.)*
+
+### 5. `scholarly_communication`
+
+> **"Scholarly communication is a rich and complex sociotechnical system formed over a period of centuries."**
+> **"...used here in the broader sense to include the formal and informal activities associated with the use and dissemination of information through public and private channels."**
+>
+> Borgman CL. *Scholarship in the Digital Age: Information, Infrastructure, and the Internet.* MIT Press, 2007.
+
+### 6. `open_science`
+
+> **"Open science is a set of principles and practices that aim to make scientific research from all fields accessible to everyone for the benefits of scientists and society as a whole."**
+> **"Open science is about making sure not only that scientific knowledge is accessible but also that the production of that knowledge itself is inclusive, equitable and sustainable."**
+>
+> UNESCO. *Recommendation on Open Science* (introduction), 2021. **193 countries adopted it.**
+
+The second sentence is the reason this category is not a synonym for "open access": UNESCO's definition makes **inclusivity and equity of knowledge production** part of open science itself, which is the criterion this challenge is judged on.
+
+### 7. `research_integrity` — **defined by its OBJECT; the sources do not define the field, and that is recorded**
+
+**Honest limitation, stated rather than hidden.** The two sources supplied define **what counts as misconduct** and **what publication ethics covers**. **Neither defines "research integrity research" as a discipline** the way Ioannidis defines metaresearch or Jasanoff defines STS. So this category is defined by its **object**, and the gap is on the record.
+
+> **"...the analysis was limited to behaviours that distort scientific knowledge: fabrication, falsification, 'cooking' of data, etc... Survey questions on plagiarism and other forms of professional misconduct were excluded."**
+>
+> Fanelli D. *How Many Scientists Fabricate and Falsify Research? A Systematic Review and Meta-Analysis of Survey Data.* PLoS ONE. 2009;4(5):e5738.
+
+> Publication ethics, per **COPE** (Committee on Publication Ethics), *Ethics Toolkit for Journal Editors and Publishers.*
+
+**Operational test:** the object is **research misconduct, questionable research practices, retraction, authorship, or publication ethics**, *as an object of study*. **Fanelli's boundary is adopted and its exclusion is carried:** fabrication, falsification and data cooking are in; **plagiarism and professional misconduct are recorded but marked, because Fanelli's own scope excludes them** and a rubric that silently widened his boundary while citing him would be misquoting its own source.
+
+**This category overlaps `metaresearch` heavily**: Ioannidis's own description of the *methods* area ends *"research integrity and ethics"*, so integrity research is inside metaresearch by his definition. **That overlap is expected and allowed**, because v3 is multi-label. It is not a hierarchy.
+
+### `insufficient_payload`
+
+Not a judgment; a statement that the record **cannot be screened** (a scraping artifact as a title, boilerplate in the abstract field, a title and abstract from different papers, spam). **Reported, never silently dropped**: the size of this class is a finding about OpenAlex.
+
+### `OUT`
+
+None of the above. **"OUT" now means "in no defined category", not "not near the important one."** That is the whole change.
+
+---
+
+## Canadian linkage
+
+- `CA_AFF` — at least one Canadian institutional affiliation. **Warning, measured:** OpenAlex misassigns these. **At least 17,466** works enter the frame with, as their *only* Canadian institution, one of six suspect assignments: a parse failure that is not an institution at all (`Impact`, attached to a Spanish COVID essay) or a real organization attached to papers it has nothing to do with (`Discovery Air (Canada)` on a Brazilian linguistics paper). That is a **lower bound** from six audited strings (finding 27), and the records are **flagged for audit, not deleted**. A Canadian affiliation is *evidence*, not proof.
+- `CA_FUND` — ≥1 funder whose OpenAlex `country_code` is Canada: an **external criterion, not a curated list**. *(An earlier four-funder list (CIHR, NSERC, SSHRC, CFI) failed twice: three of its four hardcoded IDs pointed at other funders, and even corrected it missed Canada Research Chairs, the Government of Canada, NRC, Mitacs, Genome Canada, and every provincial agency. OpenAlex knows 2,182 Canadian funders; `R/pin_entities.R` pins them.)*
+- **`ABOUT_CA_SYSTEM`** — the Canadian **research system or academy** is a substantive object. *A Canadian institution as setting is not this.*
+- **`ABOUT_CA_TOPIC`** — Canada is a substantive subject, whether or not research is the object.
+
+*(v1 had one boolean and it could not separate "Canadian data, universal claim" from "a claim about Canada". Four screening agents proposed this split independently.)*
+
+## Study design
+
+Coded for every work, from **this vocabulary and no other** (v3.0 said "coded for every work" and never listed the values, which is D20's exact shape: a field every screener codes and no two code alike):
+
+| `study_design` | MEDLINE publication type it is validated against |
+|---|---|
+| `randomized_trial` | Randomized Controlled Trial |
+| `nonrandomized_trial` | Controlled Clinical Trial |
+| `observational` | Observational Study |
+| `systematic_review` | Systematic Review |
+| `meta_analysis` | Meta-Analysis |
+| `case_report` | Case Reports |
+| `qualitative` | *(none; ships as a score, marked unvalidated)* |
+| `simulation_or_modeling` | *(none; ships as a score, marked unvalidated)* |
+| `bench_or_experimental` | *(none; ships as a score, marked unvalidated)* |
+| `theoretical_or_conceptual` | *(none; ships as a score, marked unvalidated)* |
+| `not_applicable` | *(the work is not empirical research: editorials, datasets, software)* |
+| `design_other` | *(none; ships as a score, marked unvalidated)* |
+
+**Validated against MEDLINE publication types, per record and not per year.** *(v3.0 called these "human-indexed by NLM", which is false; v3.1's first correction said "human-indexed until April 2022", which is also false. NLM stopped fully human indexing as universal practice around 2011 and completed automation in 2022, so a YEAR CUTOFF cannot separate the eras. The reference subset is defined by NLM's **record-level `IndexingMethod`** field: absent = fully human, `Curated` = automated with human review, `Automated` = machine. Human records are the reference; the others measure **agreement with another machine** and are reported as such.)*
+
+**Class-specific calendar eligibility, because a publication type that did not exist cannot be a negative.** *Observational Study* entered the vocabulary in **2014** and *Systematic Review* in **2019**. A 2008 cohort study carries no *Observational Study* tag, and treating that absence as "not observational" would train and score the model against a censoring artifact. Each design class is therefore validated **only on records published after its type existed**, and that eligibility window is prespecified per class. Where MEDLINE does not reach (most of the physical sciences, humanities and social sciences), the label ships as a **score, not an assertion**, and is **marked unvalidated**. *The dataset states, per field, which of its own annotations it has earned the right to assert.*
+
+## Genre
+
+**One vocabulary, defined here, and `screening-schema-v3.json` QUOTES this list rather than paraphrasing it.**
+
+`empirical` · `review` · `methods` · `commentary` · `editorial` · `protocol` · `dataset` · `software` · `other`
+
+*(In v1 the rubric and the schema named **two different vocabularies for this field**, overlapping on two values out of thirteen. Every screener was handed both and obeyed both privately; the validator checked `tier` and had never been asked to look at `genre`, so 16,800 labels passed every check that ran. See D20 and finding 24. **A codebook is code. It gets a test.**)*
+
+## `tier` is RETIRED
+
+v3 replaces it with `categories`, which is **multi-label**. The values `T1`, `T2`, `T3` and `OUT` remain in the **legacy** `screening-schema.json` **only so that the v1 and v2 label files stay readable**; the v3 contract, `screening-schema-v3.json`, **does not contain the field**, so no new screening can emit them. `OUT` in v3 means an empty `categories` array: *in no defined category*, not *near the important one*.
+
+## Confidence
+
+`high` / `medium` / `low`. **If the abstract is missing, judge on the title alone and set confidence to `low` unless the title is unambiguous.** The schema **quotes** this sentence; it does not paraphrase it (D24).
+
+**`low` is a legitimate answer.** A screener that never says `low` is not being careful; it is being confident.
+
+---
+
+## Sources
+
+Every quotation above was read from a PDF in **`docs/reference/definitions/`**, which is committed. Nothing is cited from memory, and since D29 that is a checked property, not a promise: `pilot/check_quotes.R` fails the build if any quotation marked verbatim is not a substring of its cited PDF. `pilot/check_instrument.R` fails the build if this rubric and `screening-schema-v3.json` disagree about any field, in either direction.
+
+
+# THE OUTPUT SCHEMA (screening-schema-v3.json)
+
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "MetaCan screening output, rubric v3.1",
+  "description": "The output contract for every screening run under rubric v3.1. This document QUOTES the rubric; it never paraphrases it. Where a description below restates a rule, the wording is copied from docs/protocol/rubric-v3.md, because the schema misquoting the rubric is D24 and two documents that disagree are two instruments (D20). pilot/check_instrument.R fails the build if this file and the rubric disagree about any field, in either direction. The legacy screening-schema.json remains ONLY so that v1 and v2 label files stay readable; no new screening validates against it.",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["id", "categories", "study_design", "genre", "about_ca_system", "about_ca_topic", "confidence"],
+    "properties": {
+      "id": {
+        "type": "string",
+        "pattern": "^W\\d+$",
+        "description": "The OpenAlex work id, exactly as given in the payload."
+      },
+      "categories": {
+        "type": "array",
+        "items": {
+          "enum": ["metaresearch", "metaepi_narrow", "metaepi_broad", "bibliometrics", "sts", "scholarly_communication", "open_science", "research_integrity", "insufficient_payload"]
+        },
+        "uniqueItems": true,
+        "description": "Every category the work belongs to; a work may carry more than one, and categories are not ranked and none is primary. An EMPTY array is OUT, which means 'in no defined category', not 'near the important one'. insufficient_payload means the record cannot be screened (a scraping artifact as a title, boilerplate in the abstract field, a title and abstract from different papers, spam) and is reported, never silently dropped."
+      },
+      "domain": {
+        "enum": ["methods", "reporting", "reproducibility", "evaluation", "incentives", null],
+        "description": "REQUIRED when categories contains metaresearch, and null otherwise. Taken verbatim from Ioannidis's five thematic areas: methods, reporting, reproducibility, evaluation, and incentives (how to do, report, verify, correct, and reward science)."
+      },
+      "study_design": {
+        "enum": ["randomized_trial", "nonrandomized_trial", "observational", "systematic_review", "meta_analysis", "case_report", "qualitative", "simulation_or_modeling", "bench_or_experimental", "theoretical_or_conceptual", "not_applicable", "design_other"],
+        "description": "Coded for every work, from this vocabulary and no other. not_applicable means the work is not empirical research: editorials, datasets, software."
+      },
+      "genre": {
+        "enum": ["empirical", "review", "methods", "commentary", "editorial", "protocol", "dataset", "software", "other"],
+        "description": "One vocabulary, defined in the rubric, and this schema QUOTES that list rather than paraphrasing it."
+      },
+      "about_ca_system": {
+        "type": "boolean",
+        "description": "ABOUT_CA_SYSTEM: the Canadian research system or academy is a substantive object. A Canadian institution as setting is not this."
+      },
+      "about_ca_topic": {
+        "type": "boolean",
+        "description": "ABOUT_CA_TOPIC: Canada is a substantive subject, whether or not research is the object."
+      },
+      "confidence": {
+        "enum": ["high", "medium", "low"],
+        "description": "If the abstract is missing, judge on the title alone and set confidence to low unless the title is unambiguous. low is a legitimate answer: a screener that never says low is not being careful; it is being confident."
+      },
+      "reason": {
+        "type": "string",
+        "maxLength": 400,
+        "description": "One sentence naming the rubric rule the decision rests on."
+      }
+    }
+  }
+}
+
+
+# THE RECORDS
+
+[
+ {
+  "id": "W4313824971",
+  "title": "Accumulation of Biological and Behavioral Data of Female Sex Workers Using Respondent-Driven Sampling: Protocol for a Systematic Review",
+  "abstract": "Background Respondent-driven sampling (RDS) is a nonprobability sampling technique that allows the extrapolation of its outcome to the target population. This approach is typically used to overcome the difficulties in studying hidden or difficult-to-reach groups. Objective The purpose of this protocol is to generate a systematic review on the accumulation of biological and behavioral data of female sex workers (FSWs) through different surveys that use the RDS method from around the world in the near future. The future systematic review will discuss the initiation, actualization, and problems of RDS during the accumulation of biological and behavioral data of FSWs through surveys from around the world. Methods The behavior and biological data of FSWs will be extracted from peer-reviewed studies published between 2010 and 2022 and that are acquired through RDS. Using PubMed, Google Scholar, the Cochrane database, Scopus, Science Direct, and the Global Health network, all papers that are available will be obtained using the search phrases “respondent-driven” and “Female Sex Workers” OR “FSW” OR “sex workers” OR “SW.” According to STROBE-RDS (Strengthening the Reporting of Observational Studies in Epidemiology for Respondent-Driven Sampling) criteria, the data will be retrieved through a data extraction form and will be organized using World Health Organization classifications of areas. The Newcastle-Ottawa Quality Assessment Scale will be used to measure bias risk and overall study quality. Results The future systematic review that will be generated from this protocol will offer evidence for or against the claim that using the RDS technique to recruit participants from “hidden” or “hard-to-reach” populations is the best strategy. The results will be disseminated through a peer-reviewed publication. Data collection started on April 1, 2023, and the systematic review is expected to be published by December 15, 2023. Conclusions A minimum set of parameters for specific methodological, analytical, and testing procedures, including RDS methods to evaluate the overall quality of any RDS survey, will be provided by the future systematic review, in accordance with this protocol, to assist researchers, policy makers, and service providers in improving RDS methods for the surveillance of any key population. Trial Registration PROSPERO CRD42022346470; https://tinyurl.com/54xe2s3k International Registered Report Identifier (IRRID) DERR1-10.2196/43722",
+  "year": 2023,
+  "lang": "en",
+  "type": "review",
+  "venue": "JMIR Research Protocols",
+  "topic": "HIV, Drug Use, Sexual Risk",
+  "field": "Medicine"
+ },
+ {
+  "id": "W4403465827",
+  "title": "Navigating Ethical Tensions Through Critical Reflexivity: A Participatory Filmmaking Research Project With Children With Disabilities",
+  "abstract": "This paper illustrates the importance of critical reflexivity in guiding socially and ethically responsible participatory research through an analysis of reflexive notes pertaining to the process of a participatory filmmaking research project with children with disabilities. Within this process, numerous ethical tensions emerged in the field regarding the participation of children with disabilities, authenticity of stories shared, navigating facilitator’s voice, issues of representation of child co-researchers, safety and risks associated with sharing everyday realities within the film, and limits to immediate action. The practice of individual and shared critical reflexivity among researchers, and inclusivity of child co-researchers, was central in navigating ethical tensions. This paper makes transparent the process of critical reflexivity within a participatory action research project by highlighting the ethical tensions faced, contextualizing them within cultural practices and power relations, and sharing strategies used to address ‘ethics in practice.’ We end by proposing practical strategies to enhance reflexive research practices in participatory work.",
+  "year": 2024,
+  "lang": "en",
+  "type": "article",
+  "venue": "Journal of Participatory Research Methods",
+  "topic": "Participatory Visual Research Methods",
+  "field": "Social Sciences"
+ },
+ {
+  "id": "W1545194763",
+  "title": "Understanding the Fear of Globalisation",
+  "abstract": "Abstract Why does the public seem to have much stronger opposition to the current wave of globalisation than to the previous rounds of trade liberalisation? This paper identifies some of the key differences between globalisation and trade liberalisation that could be responsible for phenomenon. We show that (i) while both globalisation and trade liberalisation create inter‐sector income distribution, the former also creates intra‐sector income distribution and intra‐sector uncertainty and (ii) that these features imply lower public support for globalisation.",
+  "year": 2011,
+  "lang": "en",
+  "type": "article",
+  "venue": "World Economy",
+  "topic": "Global trade and economics",
+  "field": "Economics, Econometrics and Finance"
+ },
+ {
+  "id": "W2494134454",
+  "title": "Book Review: S. HASINOFF & D. MANDZUK. (2015). Case Studies in Educational Foundations: Canadian Perspectives",
+  "abstract": "",
+  "year": 2016,
+  "lang": "en",
+  "type": "article",
+  "venue": "McGill Journal of Education / Revue des sciences de l'éducation de McGill",
+  "topic": "Evaluation and Performance Assessment",
+  "field": "Decision Sciences"
+ },
+ {
+  "id": "W2767228437",
+  "title": "Les violences basées sur l’honneur au Canada et au Québec",
+  "abstract": "Les violences basées sur l’honneur (VBH) incarnent une problématique peu visible, mal comprise et encore taboue. De plus, elles sont difficiles à aborder de peur de stigmatiser au passage certaines communautés issues de l’immigration. L’absence de consensus sur la définition ainsi que sur la terminologie à utiliser pour décrire la problématique soulève des questionnements sur la prévention et l’intervention en situation de VBH. En effet, dans ce contexte, les enjeux entourant l’intervention se complexifient non seulement pour identifier et soutenir les victimes, mais également pour dénoncer les agresseurs lorsqu’il s’agit de membres de la famille. L’« affaire Shafia », largement médiatisée, a particulièrement ébranlé les sociétés québécoise et canadienne et a déclenché une prise de conscience collective sur les mesures à mettre en place afin de prévenir les situations de VBH et de protéger les victimes de tels actes. Dans les années suivant l’affaire Shafia, des lois ont été adoptées autant au fédéral qu’au provincial afin de protéger les victimes des VBH. Il est encore trop tôt pour évaluer leur efficacité, mais déjà on peut constater que si, a priori, ces mesures législatives sont accueillies favorablement, elles méritent qu’on les examine ne serait-ce que pour envisager les effets, plus ou moins souhaités, qu’elles risquent d’entraîner.",
+  "year": 2017,
+  "lang": "fr",
+  "type": "article",
+  "venue": "Criminologie",
+  "topic": "Historical and Scientific Studies",
+  "field": "Medicine"
+ },
+ {
+  "id": "W2123466869",
+  "title": "Politiques des enfants de la rue au Chili",
+  "abstract": "Cet article pose la question : « Que représentent les enfants de la rue au Chili, pays censé être le modèle économique de l’Amérique latine? ». Il trace une trajectoire dans laquelle la violence structurelle, inhérente au projet néolibéral imposé aux citoyens chiliens sous le régime autoritaire de Pinochet (1973-1990), a transformé les enfants de la rue, socialement vulnérables, en « criminels en devenir », déviants et indésirables. Malgré leurs bonnes intentions, les institutions étatiques ont étiqueté et socialisé les enfants de la rue en « criminels en devenir », statut qui compromet leur citoyenneté future. Ce « continuum de violence » pervers est cause de la souffrance sociale des enfants de la rue dont les vies sont encastrées dans de multiples formes de violence, structurelle, institutionnelle, symbolique et quotidienne, qui les détruisent. Cet article suggère enfin que les enfants de la rue sont le secret public du néolibéralisme.",
+  "year": 2006,
+  "lang": "fr",
+  "type": "article",
+  "venue": "Anthropologie et Sociétés",
+  "topic": "Public Health and Social Inequalities",
+  "field": "Social Sciences"
+ },
+ {
+  "id": "W4407927480",
+  "title": "Using the Information Metric to Analyze Clinical Rating Scales",
+  "abstract": "A rating scale is a set of categories designed to obtain information about a quantitative or a qualitative attribute. Item response theory (IRT) proposes that a probability function over a single latent variable represents the overall attribute evolution that the scale is designed to assess. Here we utilize an information theory approach to IRT to analyze rating scale data. The proposed IRT analyses, based on surprisal, offer new tools for assessing raters, rated items, and the whole rating scale. The information transformation from probability to surprisal is a new lens from which to view choice data and is an important augmentation of probability-based IRT. It also offers new graphical tools to measure the amount of information captured by an item in an additive metric, and to measure covariation among items using mutual information. The proposed methodology is illustrated using two scales from real clinical data and the proposed approach is compared with analyses made with the commonly used parametric IRT graded response model. Practical implications of the proposed methodology are provided.",
+  "year": 2025,
+  "lang": "en",
+  "type": "article",
+  "venue": "Journal of Educational and Behavioral Statistics",
+  "topic": "Health Systems, Economic Evaluations, Quality of Life",
+  "field": "Economics, Econometrics and Finance"
+ },
+ {
+  "id": "W2143559286",
+  "title": "Found Poems, Member Checking and Crises of Representation",
+  "abstract": "In order to establish veracity , qualitative researchers frequently rely on member checks to insure credibility by giving participants opportunities to correct errors, challenge interpretations and assess results; however, member checks are not without drawbacks. This paper describes an innovative approach to conducting member checks. Six members of a learning organization participated in two group interviews to examine the use of poetry as a method to promote individual and organizational learning. Several weeks later, participants received a copy of their transcripts and were asked to create a “found poem” to reflect their thoughts and feelings about using poetry as a learning tool. There was resonance between the interview themes produced by traditional open coding methods and those using participant - created found poems. However, the found poems added an emotional depth and connect ion that was missing from the traditional approach of coding qualitative data. This suggests that participant - created found poems can provide an agentic alternative to the usual method of member checking and also expand the notions of aesthetic approaches within qualitative research.",
+  "year": 2015,
+  "lang": "en",
+  "type": "article",
+  "venue": "The Qualitative Report",
+  "topic": "Participatory Visual Research Methods",
+  "field": "Social Sciences"
+ },
+ {
+  "id": "W2143469417",
+  "title": "Action Research Built on Uncertain Foundations: The internship and action-research in a graduate teaching degree",
+  "abstract": "This paper analyses action research’s uncertain foundations in graduate teaching degrees. This analysis focuses on one Master of Teaching program in Australia, and is conducted by the program coordinator in partnership with a recent graduate of the program. Uncertainty is traced to the structural incoherence of the program that is created by the influence of disparate philosophies of teacher education. The philosophy and practice of the program is informed by both the scholar teacher and reflective practitioner models of teacher education. It is argued that these models are incommensurable and lead to a poor use of action research during the internship of the program. The action research would be more authentic if a phronetic model of teacher education underpinned the entire program rather than just the final internship. This phronetic model will remain an ideal because of the prevailing hegemony of neo-liberalism that supports a means-rationality associated with performing to the graduate standards rather than a values-rationality associated with developing a lifelong habit of phronetic practice.",
+  "year": 2013,
+  "lang": "en",
+  "type": "article",
+  "venue": "McGill Journal of Education / Revue des sciences de l éducation de McGill",
+  "topic": "Innovative Education and Learning Practices",
+  "field": "Social Sciences"
+ },
+ {
+  "id": "W4366448066",
+  "title": "Stake, R. E. (2010). <i>Qualitative Research: Studying How Things Work.</i> New York, NY: Guilford Press. 244 pages.",
+  "abstract": "",
+  "year": 2011,
+  "lang": "en",
+  "type": "article",
+  "venue": "Canadian Journal of Program Evaluation",
+  "topic": "Evaluation and Performance Assessment",
+  "field": "Decision Sciences"
+ },
+ {
+  "id": "W3104993560",
+  "title": "Win Big Fast! An Evaluation of Mobile Applications Available in Australia for Problem Gambling",
+  "abstract": "With the increase in availability of gambling applications (apps) for mobile phones, it has never been easier for individuals to access gaming systems. A proportion of these users will be affected by gambling disorder (GD). Traditional therapies for GD can be geographically and financially difficult to access. Mobile health apps can be useful for other addictions and provide another avenue of treatment for GD. Our objective in this study was to review the features, models of treatment, and aims of apps marketed to assist people in addressing their gambling. We searched the three largest app stores in Australia and performed a descriptive analysis based on the Mobile App Rating Scale of the apps purporting to be of assistance in managing GD or problem gambling. The number of apps available for addressing GD in Australia was vastly outnumbered by the number of apps for gambling or gaming. Apps that met the inclusion criteria most often aimed at total cessation of gambling, but did not use a recognizable therapeutic model. A majority of apps featured a single tool, most often a sober time tracker. Few of the apps were affiliated with existing services, and those that were tended to have a broader range of features and tools. Mobile apps present another way for individuals who are struggling with GD or problem gambling to access treatment. For apps to be effective, more attention needs to be paid to their design in order for them to be both useful and noticeable in the milieu of more invitingly designed apps that promote gambling.RésuméÉtant donné le nombre grandissant d’applications de jeux de hasard pour téléphone mobile, il n’a jamais été aussi facile d’accéder à des systèmes de jeu. Un certain nombre des utilisateurs de ces appareils développeront une dépendance au jeu (DJ). Les thérapies conventionnelles en matière de DJ peuvent être difficiles d’accès en raison de la distance géographique et de leur coût. Les applications mobiles dédiées à la santé, parfois pour traiter d’autres formes de dépendance, pourraient offrir des possibilités de traitement du jeu pathologique. Nous avons analysé les caractéristiques, les modèles de traitement et les objectifs des applications qui prétendent aider les individus à dominer leur DP. Nous avons fouillé les trois principales boutiques d’applications d’Australie à la recherche de tels produits, puis les avons soumis à une analyse descriptive fondée sur un Mobile App Rating Scale [échelle d’évaluation des applications m",
+  "year": 2020,
+  "lang": "en",
+  "type": "article",
+  "venue": "Journal of Gambling Issues",
+  "topic": "Gambling Behavior and Treatments",
+  "field": "Psychology"
+ },
+ {
+  "id": "W2059788789",
+  "title": "Helping students reflect: lessons from cognitive psychology",
+  "abstract": "1. Adv Health Sci Educ Theory Pract. 2013 Oct;18(4):817-24. doi: \n10.1007/s10459-012-9373-0. Epub 2012 May 8.\n\nHelping students reflect: lessons from cognitive psychology.\n\nPoole G(1), Jones L, Whitfield M.\n\nAuthor information:\n(1)Faculty of Medicine, Centre for Health Education Scholarship, University of \nBritish Columbia, Jim Pattison Pavilion North, VGH, 910 West 10th Avenue, Suite \n3300, Vancouver, BC, Canada, gary.poole@ubc.ca.\n\nThe challenges of teaching students to reflect on experience and, thus, learn \nfrom it, are better understood with the application of constructs from cognitive \npsychology. The present paper focuses on two such constructs-self-schemas and \nscripts-to help educators better understand both the threats and opportunities \nassociated with effective reflection. Emotion is presented as an important \naccompaniment to reflection. Suggestions are presented, using the notions of \nself-schemas and scripts, to help students manage the emotion associated with \nreflection and to enhance the value of that reflection.\n\nDOI: 10.1007/s10459-012-9373-0\nPMID: 22566035 [Indexed for MEDLINE]",
+  "year": 2012,
+  "lang": "en",
+  "type": "article",
+  "venue": "Advances in Health Sciences Education",
+  "topic": "Reflective Practices in Education",
+  "field": "Social Sciences"
+ },
+ {
+  "id": "W2923392668",
+  "title": "Embedding Psychiatric Risk Flags Within an Electronic Health Record: Initial Findings and Lessons Learned",
+  "abstract": "",
+  "year": 2019,
+  "lang": "en",
+  "type": "article",
+  "venue": "Healthcare Quarterly",
+  "topic": "Ethics in Clinical Research",
+  "field": "Medicine"
+ },
+ {
+  "id": "W1980348059",
+  "title": "Qualitative Meta-Synthesis: Reflections on the Utility and Challenges in Occupational Therapy",
+  "abstract": "Background. A qualitative meta-synthesis is an approach to synthesizing relevant findings from across qualitative studies on a particular topic using methods consistent with qualitative research. Purpose. Using examples of recently completed qualitative meta-synthesis projects, the purpose of this paper is to present the meta-synthesis approach; highlight the key steps, processes, and issues involved; and demonstrate its potential to advance knowledge about occupation and occupation-based practice. Key Issues. The qualitative meta-synthesis approach allows us to take stock of the current state of knowledge in a given area in order to ensure that we have explored the phenomenon from different perspectives and to begin to push the field forward by allowing us to develop deeper insights and understandings. Implications. Despite certain limitations and challenges associated with the approach, qualitative meta-syntheses can provide new knowledge through critical analysis and interpretation to inform client, practitioner, and policy audiences.",
+  "year": 2008,
+  "lang": "en",
+  "type": "article",
+  "venue": "Canadian Journal of Occupational Therapy",
+  "topic": "Occupational Therapy Practice and Research",
+  "field": "Health Professions"
+ },
+ {
+  "id": "W2964854296",
+  "title": "Simultaneous, Delayed and Liver-First Hepatic Resections for Synchronous Colorectal Liver Metastases: A Systematic Review and Network Meta-Analysis",
+  "abstract": "1. J Clin Med Res. 2019 Aug;11(8):572-582. doi: 10.14740/jocmr3887. Epub 2019 Jul\n 27.\n\nSimultaneous, Delayed and Liver-First Hepatic Resections for Synchronous \nColorectal Liver Metastases: A Systematic Review and Network Meta-Analysis.\n\nGavriilidis P(1), Katsanos K(2), Sutcliffe RP(1), Simopoulos C(3), Azoulay D(4), \nRoberts KJ(1).\n\nAuthor information:\n(1)Department of Hepato-Pancreato-Biliary and Liver Transplant Surgery, Queen \nElizabeth University Hospitals Birmingham NHS Foundation Trust, Birmingham B15 \n2TH, UK.\n(2)Department of Interventional Radiology, Patras University Hospital, School of \nMedicine, Rion, 26504 Patras, Greece.\n(3)The 2nd Department of Surgery, Medical School, Democritus University of \nThrace, 68100 Alexandroupolis, Greece.\n(4)Department of Hepato-Pancreato-Biliary and Liver Transplantation, Henri \nMondor University Hospital, 94010 Creteil, France.\n\nBACKGROUND: Systematic reviews and meta-analyses that compare simultaneous, \ndelayed and liver-first approach for synchronous colorectal liver metastases \nhave found no significant differences. The aim of this study was to determine \nthe best treatment strategy on the basis of effect sizes and the probabilities \nof treatment ranking by using a network meta-analysis. Moreover, first-time \npairwise and network meta-analyses were used to estimate the existing evidence, \nand their results were compared to detect any discrepancies between them.\nMETHODS: Systematic review, pairwise meta-analysis and network meta-analysis \nwere performed. The primary and secondary outcomes were 5-year overall survival \nand postoperative major morbidity, respectively.\nRESULTS: No significant differences in long-term survival and major morbidity \nwere found amongst the three approaches. The hazard ratios (95% confidence \ninterval) for 5-year overall survival for the simultaneous, delayed and \nliver-first approaches were 0.93 (0.69 - 1.24, P = 0.613), 0.97 (0.87 - 1.07, P \n= 0.596) and 0.90 (0.67 - 1.22, P = 0.499), respectively. Moreover, the \nliver-first approach with a surface under the cumulative ranking area score of \n89% was ranked as the potentially best treatment option based on probabilities \nof treatment ranking.\nCONCLUSIONS: On the basis of the relative ranking of treatments, the liver-first \napproach ranked first, followed by the delayed and simultaneous approaches. \nTherefore, a three-arm randomized controlled trial that compares the \nliver-first, simultaneous and delayed approaches needs to shed fu",
+  "year": 2019,
+  "lang": "en",
+  "type": "review",
+  "venue": "Journal of Clinical Medicine Research",
+  "topic": "Hepatocellular Carcinoma Treatment and Prognosis",
+  "field": "Medicine"
+ },
+ {
+  "id": "W7165757493",
+  "title": "AN ASSESMENT OF EUTHANASIA OR MERCY KILLING AND ITS IMPACT ON HUMAN AND PEOPLE’S RIGHTS",
+  "abstract": "There is no gain in saying that it that so many people suffering terminal or life-threatening illnesses cry and request that their life be terminated rather than continuous stay on their sick bed for a long time especially when they are in pains and do not have the hope of recovering from such illnesses. An ill patient gets to a stage and becomes worrisome and therefore, request that his or her life be ended since there seem no hope of recovering from such illness. This demand or request on the part of the patient is sequel to the fact that these ill persons have suffered perpetually and it has got to the stage of preferring death to living while the suffering persists and they remain in anguish. A 55-year-old Canadian woman recently requested to die over a continuous illness of COVID which has prevented her from the ‘simple joys of living’.",
+  "year": 2024,
+  "lang": "en",
+  "type": "article",
+  "venue": "ABU Law Journal",
+  "topic": "Palliative Care and End-of-Life Issues",
+  "field": "Medicine"
+ },
+ {
+  "id": "W2099729640",
+  "title": "Sur un concept contesté",
+  "abstract": "L’avènement des télévisons satellitaires arabes dans le paysage médiatique du Sud et de l’Est de la Méditerranée soulève de nombreuses questions sur la nature de la sphère publique qui en a résulté. Bien que la généalogie de cette sphère puisse être retracée dans des médias plus anciens tels que la radio égyptienne et son programme « La voix des Arabes », elle s’en démarque par sa nature (comment des télévisions non-nationales peuvent-elles rassembler dans un ensemble commun des groupes nationaux déjà établis ?), mais aussi par ses effets « fédérateurs lâches » et néanmoins persistants. Cet article discute le concept de « sphère publique arabe » en traitant de ses conditions de possibilité et en le rapportant aux débats sur la sphère publique libérale démocratique, et sur les modernités alternatives. Les télévisions satellitaires créent-elles la sphère publique arabe, comme semblent le suggérer certains travaux ? Si oui, quelles en sont les prémisses ? Il est difficile de prétendre à la transnationalité de la sphère publique sans une mise en relation avec « le substrat social » des sphères publiques nationales. Nous montrerons ce lien en nous appuyant sur une recherche de terrain effectuée au Maghreb. Il s’agit de reposer la question d’un espace public virtuel, si problématique dans sa réalisation mais si riche en possibilités.",
+  "year": 2012,
+  "lang": "fr",
+  "type": "article",
+  "venue": "Anthropologie et Sociétés",
+  "topic": "Multiculturalism, Politics, Migration, Gender",
+  "field": "Social Sciences"
+ },
+ {
+  "id": "W2560370233",
+  "title": "Measuring Evaluation Capacity in Ontario Public Health Units",
+  "abstract": "Abstract: This article presents a study of organizational capacity to do and use evaluation, conducted in 32 public health units in the province of Ontario. Methods include an organizational self-assessment using an instrument developed by Bourgeois, Toews, Whynot, and Lamarche (2013) as well as key informant interviews. Overall, our findings point to the fact that evaluation capacity is still developing in Ontario public health units; factors that support evaluation capacity in these organizations include the presence of an organization-wide evaluation policy, the availability of full-time evaluation staff in a supporting role, greater staff involvement in evaluation, and a standardized evaluation process. These findings highlight the importance of organizational structures and systems to evaluation utilization and provide potential areas of improvement for organizations wishing to improve their evaluation capacity.",
+  "year": 2016,
+  "lang": "en",
+  "type": "article",
+  "venue": "Canadian Journal of Program Evaluation",
+  "topic": "Evaluation and Performance Assessment",
+  "field": "Decision Sciences"
+ },
+ {
+  "id": "W4250175648",
+  "title": "Matrix-Solid Phase Dispersion (MSPD)",
+  "abstract": "",
+  "year": 2017,
+  "lang": "it",
+  "type": "dataset",
+  "venue": "IUPAC Standards Online",
+  "topic": "Analytical chemistry methods development",
+  "field": "Chemistry"
+ },
+ {
+  "id": "W4402576324",
+  "title": "Surface and Depth in Sensory Ethnography: Casting Bodied Experience in an Arts-Based Interviewing Practice",
+  "abstract": "Arts-based research can provide pivotal avenues for researchers and participants to explore experiences that are difficult to put into words. Arts-based methods offer important opportunities for participants to develop reflexive understanding through material interaction with art and mark-making supplies. While sensorial and embodied experiences are entangled with arts-based methods, there is little methodological and theoretical work that puts arts-based research methods into conversation with sensory ethnography. This methods paper provides a detailed, critical reflection on the development and implementation of the sensorial arts-based exercise, Beneath the Surface, for research that examines solid-organ transplant recipients’ embodied experiences through a crip/feminist/materialist framework. Adapted from art therapy practices, Beneath the Surface generated a novel context for the articulation of embodied experience, creating space for the expression of sensations and feelings that fall outside the dominant cultural narratives of transplant, such as the “gift of life” or a “second chance,” that demand absolute gratitude. Beneath the Surface contributes to theoretical discussions surrounding embodiment, inscription, and interiority. The exercise also demands attention to ethical deliberations, highlighting the critical importance of developing trauma-informed research protocols and addressing the historically fraught relationship between critical disability studies and art therapy.",
+  "year": 2024,
+  "lang": "en",
+  "type": "article",
+  "venue": "International Journal of Qualitative Methods",
+  "topic": "Participatory Visual Research Methods",
+  "field": "Social Sciences"
+ },
+ {
+  "id": "W2558376145",
+  "title": "La contribution des enseignants à la pertinence de l’éducation de base en Afrique de l’Ouest : le cas du Sénégal",
+  "abstract": "Cet article vise à comprendre quelle est la contribution des enseignants à une éducation de base de qualité au Sénégal, avec un accent particulier sur le concept d’éducation « pertinente ». Après avoir fait un détour par la caractérisation des concepts de qualité et de pertinence, nous contextualisons la situation des enseignants au Sénégal, puis nous présentons l’intérêt d’explorer les liens entre ces concepts et la question enseignante. D’un point de vue méthodologique, les données proviennent essentiellement d’entretiens et d’observations. Il ressort de nos analyses que les enseignants de manière générale ne sont pas en capacité de permettre une éducation pertinente. Toutefois, cette recherche met en avant certains facteurs favorables à plus de pertinence.",
+  "year": 2017,
+  "lang": "fr",
+  "type": "article",
+  "venue": "McGill Journal of Education / Revue des sciences de l éducation de McGill",
+  "topic": "Education, sociology, and vocational training",
+  "field": "Social Sciences"
+ },
+ {
+  "id": "W4378070634",
+  "title": "War Trauma Effects on Civilians",
+  "abstract": "&#x0D; &#x0D; &#x0D; This qualitative study explored the effect of war trauma on Iraqi civilians by examining YouTube videos that contained interviews with civilians, doctors, and military personnel giving their reactions and experience with war trauma and PTSD. This study examined 12 videos of civilians in Iraq and refugee camps, psychiatrists, and veterans who served in the Iraq war, and it identified the following themes: killing or death of family members due to war violence, fear, PTSD, nightmares, and anger. This study identifies the emotional responses to war trauma, and it demonstrates that most civilians have also developed other mental disorders due to exposure to war and life-threatening conditions.&#x0D; &#x0D; &#x0D;",
+  "year": 2023,
+  "lang": "en",
+  "type": "article",
+  "venue": "Crossing Borders Student Reflections on Global Social Issues",
+  "topic": "Resilience and Mental Health",
+  "field": "Psychology"
+ },
+ {
+  "id": "W4405366177",
+  "title": "Examining Youth Sector Stakeholders’ Experiences in an Online Program Evaluation Certificate",
+  "abstract": "Evaluation is a critical skill for practitioners, yet many youth workers lack sufficient training. The current study examined youth sector stakeholders’ experiences in an online program evaluation certificate. A total of 233 participants from six cohorts (i.e., three years) completed pre- and post-certificate surveys measuring their satisfaction and learnings from the certificate. Results revealed that participants were generally satisfied with the certificate and reported significant improvements in their perceived knowledge after participation ( p &lt; .001). Findings point to the utility of online certificates for enhancing evaluation capacity in the Canadian youth work sphere and inform future directions for research and practice.",
+  "year": 2023,
+  "lang": "en",
+  "type": "article",
+  "venue": "Canadian Journal of Program Evaluation",
+  "topic": "Evaluation and Performance Assessment",
+  "field": "Decision Sciences"
+ },
+ {
+  "id": "W2333110603",
+  "title": "Are We Ready for an Impact Factor?",
+  "abstract": "",
+  "year": 2009,
+  "lang": "en",
+  "type": "article",
+  "venue": "Canadian Journal of Occupational Therapy",
+  "topic": "scientometrics and bibliometrics research",
+  "field": "Decision Sciences"
+ },
+ {
+  "id": "W2081069584",
+  "title": "Evaluating Meta-analyses in the General Surgical Literature",
+  "abstract": "1. Ann Surg. 2005 Mar;241(3):450-9. doi: 10.1097/01.sla.0000154258.30305.df.\n\nEvaluating meta-analyses in the general surgical literature: a critical \nappraisal.\n\nDixon E(1), Hameed M, Sutherland F, Cook DJ, Doig C.\n\nAuthor information:\n(1)Department of Surgery, University of Calgary, Calgary, Alberta, Canada.\n\nComment in\n    Ann Surg. 2006 Feb;243(2):289; author reply 289-90. doi: \n10.1097/01.sla.0000198346.55968.d6.\n\nOBJECTIVE: To assess the methodologic quality of meta-analyses of general \nsurgery topics published in peer-reviewed journals.\nSUMMARY BACKGROUND DATA: Systematic reviews and meta-analysis are used to seek, \nsummarize, and interpret primary studies on a given topic. Accordingly, \nsystematic reviews and meta-analyses of high-quality primary studies may be the \nhighest level of evidence for issues of prevention and treatment in \nevidence-based medicine. However, not all published meta-analyses are rigorously \nperformed.\nMETHODS: We searched MEDLINE (from January 1, 1997, to September 1, 2002) and \nreference lists and solicited general surgery specialists to identify relevant \nmeta-analyses. Inclusion criteria were use of meta-analytic methods to pool the \nresults of primary studies in general surgery on issues of diagnosis, causation, \nprognosis, or treatment. Our search strategies identified 487 potentially \nrelevant articles. After excluding articles based on a priori criteria, 51 \nmeta-analyses fulfilled eligibility criteria. In duplicate and independently, 2 \nreviewers assessed the quality of these meta-analyses using a 10-item index \ncalled the Overview Quality Assessment Questionnaire.\nRESULTS: Overall concordance between 2 independent reviewers was good \n(interobserver agreement 81%, and a kappa of 0.62 (95% CI 0.55-0.69). Of 51 \nrelevant articles, 38 were published in surgical journals. Most studies had \nmajor methodologic flaws (median score of 3.3, scale of 1-7). Factors associated \nwith low overall scientific quality included the absence of any prior \nmeta-analyses publications by authors and meta-analyses produced by surgical \ndepartment members without external collaboration.\nCONCLUSIONS: This critical appraisal of meta-analyses published in the general \nsurgery literature demonstrates frequent methodologic flaws. The quality of \nthese reports limits the validity of the findings and the inferences that can be \nmade about the primary studies reviewed. To improve the quality of future \nmeta-analyses, we recommend following guideline",
+  "year": 2005,
+  "lang": "en",
+  "type": "article",
+  "venue": "Annals of Surgery",
+  "topic": "Meta-analysis and systematic reviews",
+  "field": "Decision Sciences"
+ }
+]

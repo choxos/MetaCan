@@ -1,0 +1,535 @@
+You are screening scholarly works for the MetaCan project. Apply the rubric below to EVERY record and output ONE JSON array with ONE object per record, conforming EXACTLY to the JSON schema below. Output ONLY the JSON array, no prose before or after it.
+
+# THE RUBRIC (v3.1, locked)
+
+# MétaCan screening rubric (v3.1)
+
+**Status: LOCKED, 2026-07-13.** Supersedes v2.2. No screening ran under v3.0, which lived for hours: an adversarial review found that its Murad quotation inserted the word "treatment" into a sentence this document calls verbatim (D29). v3.1 corrects that quotation from the PDF, fixes the Kataoka page range, aligns the funder clause with the protocol, corrects two glosses against their sources, and adds the study-design vocabulary that v3.0 demanded but never listed. Since D29, `pilot/check_quotes.R` fails the build if any quotation marked verbatim is not a substring of its cited PDF.
+
+**No number produced so far was made under v3.** The pilot ran under v1.0; the 179-work re-screen under v2.0. Both instruments are kept byte for byte, so every figure stays attributable to the text that produced it. v3 is the instrument the **full screen** runs under, and the **v2-to-v3 difference is reported as a finding**.
+
+---
+
+## What changed, and why it is not cosmetic
+
+v1 and v2 had a tier hierarchy: **T1 core / T2 adjacent / T3 contextual**. That structure had a defect at its root, and the data found it before I did.
+
+> **"Adjacent" is defined by negation.** It means *not-T1*. A category whose only content is "near the important one" cannot be applied consistently, and **OUT-vs-adjacent was the largest tier confusion at every sample size we measured.** The models were not failing. **The category was empty.**
+
+It was also a value judgment I had no standing to make. Calling science and technology studies "adjacent" says STS is peripheral to metascience. **STS is a field with its own founding literature, its own journals, and its own account of what studying science means.**
+
+**v3 deletes the hierarchy.** Every tradition is a **category with its own positive definition, taken from its own literature, quoted verbatim from a source in `docs/reference/definitions/`.** There is no residual bucket. A record may carry **more than one** category, because the traditions genuinely overlap and forcing a single label is what created the problem.
+
+**Nothing here is cited from memory.** Every quotation below was read from the PDF named beside it. In a project whose worst deviation (D26) was that its own definition of metaresearch was mine and uncited for its entire life, a recalled citation would be the single worst thing this document could contain.
+
+---
+
+## The definitional problem is the field's, not this project's, and the field says so in print
+
+- **Puljak L, Lovric Makaric Z, Buljan I, Pieper D.** *What is a meta-epidemiological study? Analysis of published literature indicated heterogeneous study designs and definitions.* J Comp Eff Res. 2020. doi:10.2217/cer-2019-0201
+  > Analysed **175 information sources**. *"Definitions of meta-epidemiological studies varied and some studies used the term meta-epidemiological study to describe methodological research-on-research studies."* Conclusion: *"Research community would benefit from consensus about definition of meta-epidemiological study."*
+
+- **Kataoka Y, et al.** J Clin Epidemiol. 2023;154:219-220.
+  > A **published dispute** with Puljak, opening by naming *"the currently confusing nomenclatures around 'meta-epidemiology' and related terms such as 'meta-research' and 'research-on-research'."*
+
+- **Stevens ER, Laynor G.** *Recognizing the value of meta-research and making it easier to find.* J Med Libr Assoc. 2023;111(4). doi:10.5195/jmla.2023.1758
+  > *"The breadth of meta-research presents a significant challenge for identifying published meta-research studies,"* and it notes **the lack of a MeSH heading** for meta-research.
+
+**Those are claims about humans.** The pilot's numbers are claims about **models disagreeing under one rubric**. They are consistent, they are not the same estimand, and **only the human audit closes the gap** (`DEVIATIONS.md` D27).
+
+---
+
+## The categories
+
+A work may carry **more than one**. **Categories are not ranked and none is primary: the released landscape is the union of the defined categories, with every overlap reported.** The call's primary estimand is reported over `metaresearch` because that is the field the call names; that is a **reporting choice, not a rank**, and each of the other traditions gets the same per-category estimate.
+
+### 1. `metaresearch`
+
+> **"Meta-research is an evolving scientific discipline that aims to evaluate and improve research practices. It includes thematic areas of methods, reporting, reproducibility, evaluation, and incentives (how to do, report, verify, correct, and reward science)."**
+>
+> Ioannidis JPA, Fanelli D, Dunne DD, Goodman SN. *Meta-research: Evaluation and Improvement of Research Methods and Practices.* PLoS Biol. 2015;13(10):e1002264.
+> See also Ioannidis JPA. PLoS Biol. 2018;16(3):e2005468; METRICS, Stanford: <https://metrics.stanford.edu/research>
+
+Every `metaresearch` record carries a **`domain`**, taken verbatim from those five thematic areas and glossed by Ioannidis's own parenthetical:
+
+| `domain` | Ioannidis's gloss | operationally |
+|---|---|---|
+| `methods` | *how to **do** science* | design, conduct, analysis, bias, statistical practice, evidence-synthesis methodology; Ioannidis's own description of this area ends *"research integrity and ethics"* |
+| `reporting` | *how to **report** science* | reporting standards and completeness |
+| `reproducibility` | *how to **verify** science* | replication, data and code sharing, transparency |
+| `evaluation` | *how to **correct** science* | peer review and editorial process, research assessment, metrics |
+| `incentives` | *how to **reward** science* | funding allocation, careers and the research workforce, reward structures |
+
+**RULE 1 stands** (carried from v2; it resolved the largest single seam): *a work is `metaresearch` on methods only if its object is methods **as used, reported or performed by researchers**. Developing, deriving, validating or teaching a technique for a domain is OUT, however generic the technique.* **An instance of a research practice is not a study of it.**
+
+### 2. `metaepidemiology` — **CONTESTED IN PRINT. Both definitions are coded.**
+
+There is **no consensus definition** (Puljak 2020, above). **This rubric does not invent one.** It codes **both published definitions** and **flags where they disagree**, because the dispute is live, it is between named researchers in peer-reviewed journals, and hiding it inside a single label would destroy the only evidence of it.
+
+- **`metaepi_narrow`** — Murad MH, Wang Z. *Guidelines for reporting meta-epidemiological methodology research.* Evid Based Med. 2017;22(4):139-142. doi:10.1136/ebmed-2017-110713
+  > *"Meta-epidemiological studies adopt a systematic review or meta-analysis approach to examine the impact of certain characteristics of clinical studies on the observed effect and provide empirical evidence for hypothesised associations."*
+  >
+  > *(v3.0 quoted this sentence as 'the observed **treatment** effect'. The word is not in the paper; it narrowed Murad's definition while claiming his authority for the narrowing, and it survived a LOCK. D29.)*
+
+- **`metaepi_broad`** — Kataoka Y, et al. J Clin Epidemiol. 2023;154:219-220. *(Not 219-221: page 221 is Puljak's reply, which is the other side of the dispute.)*
+  > *"The greatest common defining concept of 'meta-epidemiological studies' would be **any studies in which the unit of analysis is a study, not a patient**."*
+
+**Where the two differ, the record is flagged, and the size of that class is reported as a finding.** A published dispute is a boundary to be *measured*, not settled by fiat.
+
+### 3. `bibliometrics` (scientometrics)
+
+> **"Scientometrics is the study of the quantitative aspects of the process of science as a communication system. It is centrally, but not only, concerned with the analysis of citations in the academic literature."**
+>
+> Mingers J, Leydesdorff L. *A Review of Theory and Practice in Scientometrics.* Eur J Oper Res. 2015. doi:10.1016/j.ejor.2015.04.002
+> Founding work: Price DJ de Solla. *Networks of Scientific Papers.* Science. 1965;149(3683):510-515.
+
+**Boundary with `metaresearch`, and it resolves v1's self-contradiction** (v1's T1 bullet and its own worked example gave opposite answers): a study that **characterises a literature** by quantitative means is `bibliometrics`. A study that uses bibliometric means to **make a claim about research practice** (citation distortion, reporting trends, citation of retracted work) is **also `metaresearch`**, and carries both. **v3 does not force the choice; that forcing was the bug.**
+
+### 4. `sts` (science and technology studies)
+
+> **"co-production is shorthand for the proposition that the ways in which we know and represent the world (both nature and society) are inseparable from the ways in which we choose to live in it."**
+> **"The idiom of co-production ... represents a major synthesis of scholarship in science and technology studies (S&TS)."**
+>
+> Jasanoff S (ed.). *States of Knowledge: The Co-Production of Science and the Social Order.* Routledge, 2004.
+
+> **"We study science in action and not ready made science or technology; to do so, we either arrive before the facts and machines are blackboxed or we follow the controversies that reopen them."**
+>
+> Latour B. *Science in Action: How to Follow Scientists and Engineers through Society.* Harvard University Press.
+
+**Operational test:** the work studies **science or technology as social practice**: how knowledge and social order are produced together, how facts are made rather than found, how controversies open and close. **The object must be science, research, or technoscientific knowledge**, at any period. *(v1 restricted history and philosophy of science to "contemporary research practice", an unexamined adverb that silently excluded the entire history of Canadian science. It is deleted.)*
+
+### 5. `scholarly_communication`
+
+> **"Scholarly communication is a rich and complex sociotechnical system formed over a period of centuries."**
+> **"...used here in the broader sense to include the formal and informal activities associated with the use and dissemination of information through public and private channels."**
+>
+> Borgman CL. *Scholarship in the Digital Age: Information, Infrastructure, and the Internet.* MIT Press, 2007.
+
+### 6. `open_science`
+
+> **"Open science is a set of principles and practices that aim to make scientific research from all fields accessible to everyone for the benefits of scientists and society as a whole."**
+> **"Open science is about making sure not only that scientific knowledge is accessible but also that the production of that knowledge itself is inclusive, equitable and sustainable."**
+>
+> UNESCO. *Recommendation on Open Science* (introduction), 2021. **193 countries adopted it.**
+
+The second sentence is the reason this category is not a synonym for "open access": UNESCO's definition makes **inclusivity and equity of knowledge production** part of open science itself, which is the criterion this challenge is judged on.
+
+### 7. `research_integrity` — **defined by its OBJECT; the sources do not define the field, and that is recorded**
+
+**Honest limitation, stated rather than hidden.** The two sources supplied define **what counts as misconduct** and **what publication ethics covers**. **Neither defines "research integrity research" as a discipline** the way Ioannidis defines metaresearch or Jasanoff defines STS. So this category is defined by its **object**, and the gap is on the record.
+
+> **"...the analysis was limited to behaviours that distort scientific knowledge: fabrication, falsification, 'cooking' of data, etc... Survey questions on plagiarism and other forms of professional misconduct were excluded."**
+>
+> Fanelli D. *How Many Scientists Fabricate and Falsify Research? A Systematic Review and Meta-Analysis of Survey Data.* PLoS ONE. 2009;4(5):e5738.
+
+> Publication ethics, per **COPE** (Committee on Publication Ethics), *Ethics Toolkit for Journal Editors and Publishers.*
+
+**Operational test:** the object is **research misconduct, questionable research practices, retraction, authorship, or publication ethics**, *as an object of study*. **Fanelli's boundary is adopted and its exclusion is carried:** fabrication, falsification and data cooking are in; **plagiarism and professional misconduct are recorded but marked, because Fanelli's own scope excludes them** and a rubric that silently widened his boundary while citing him would be misquoting its own source.
+
+**This category overlaps `metaresearch` heavily**: Ioannidis's own description of the *methods* area ends *"research integrity and ethics"*, so integrity research is inside metaresearch by his definition. **That overlap is expected and allowed**, because v3 is multi-label. It is not a hierarchy.
+
+### `insufficient_payload`
+
+Not a judgment; a statement that the record **cannot be screened** (a scraping artifact as a title, boilerplate in the abstract field, a title and abstract from different papers, spam). **Reported, never silently dropped**: the size of this class is a finding about OpenAlex.
+
+### `OUT`
+
+None of the above. **"OUT" now means "in no defined category", not "not near the important one."** That is the whole change.
+
+---
+
+## Canadian linkage
+
+- `CA_AFF` — at least one Canadian institutional affiliation. **Warning, measured:** OpenAlex misassigns these. **At least 17,466** works enter the frame with, as their *only* Canadian institution, one of six suspect assignments: a parse failure that is not an institution at all (`Impact`, attached to a Spanish COVID essay) or a real organization attached to papers it has nothing to do with (`Discovery Air (Canada)` on a Brazilian linguistics paper). That is a **lower bound** from six audited strings (finding 27), and the records are **flagged for audit, not deleted**. A Canadian affiliation is *evidence*, not proof.
+- `CA_FUND` — ≥1 funder whose OpenAlex `country_code` is Canada: an **external criterion, not a curated list**. *(An earlier four-funder list (CIHR, NSERC, SSHRC, CFI) failed twice: three of its four hardcoded IDs pointed at other funders, and even corrected it missed Canada Research Chairs, the Government of Canada, NRC, Mitacs, Genome Canada, and every provincial agency. OpenAlex knows 2,182 Canadian funders; `R/pin_entities.R` pins them.)*
+- **`ABOUT_CA_SYSTEM`** — the Canadian **research system or academy** is a substantive object. *A Canadian institution as setting is not this.*
+- **`ABOUT_CA_TOPIC`** — Canada is a substantive subject, whether or not research is the object.
+
+*(v1 had one boolean and it could not separate "Canadian data, universal claim" from "a claim about Canada". Four screening agents proposed this split independently.)*
+
+## Study design
+
+Coded for every work, from **this vocabulary and no other** (v3.0 said "coded for every work" and never listed the values, which is D20's exact shape: a field every screener codes and no two code alike):
+
+| `study_design` | MEDLINE publication type it is validated against |
+|---|---|
+| `randomized_trial` | Randomized Controlled Trial |
+| `nonrandomized_trial` | Controlled Clinical Trial |
+| `observational` | Observational Study |
+| `systematic_review` | Systematic Review |
+| `meta_analysis` | Meta-Analysis |
+| `case_report` | Case Reports |
+| `qualitative` | *(none; ships as a score, marked unvalidated)* |
+| `simulation_or_modeling` | *(none; ships as a score, marked unvalidated)* |
+| `bench_or_experimental` | *(none; ships as a score, marked unvalidated)* |
+| `theoretical_or_conceptual` | *(none; ships as a score, marked unvalidated)* |
+| `not_applicable` | *(the work is not empirical research: editorials, datasets, software)* |
+| `design_other` | *(none; ships as a score, marked unvalidated)* |
+
+**Validated against MEDLINE publication types, per record and not per year.** *(v3.0 called these "human-indexed by NLM", which is false; v3.1's first correction said "human-indexed until April 2022", which is also false. NLM stopped fully human indexing as universal practice around 2011 and completed automation in 2022, so a YEAR CUTOFF cannot separate the eras. The reference subset is defined by NLM's **record-level `IndexingMethod`** field: absent = fully human, `Curated` = automated with human review, `Automated` = machine. Human records are the reference; the others measure **agreement with another machine** and are reported as such.)*
+
+**Class-specific calendar eligibility, because a publication type that did not exist cannot be a negative.** *Observational Study* entered the vocabulary in **2014** and *Systematic Review* in **2019**. A 2008 cohort study carries no *Observational Study* tag, and treating that absence as "not observational" would train and score the model against a censoring artifact. Each design class is therefore validated **only on records published after its type existed**, and that eligibility window is prespecified per class. Where MEDLINE does not reach (most of the physical sciences, humanities and social sciences), the label ships as a **score, not an assertion**, and is **marked unvalidated**. *The dataset states, per field, which of its own annotations it has earned the right to assert.*
+
+## Genre
+
+**One vocabulary, defined here, and `screening-schema-v3.json` QUOTES this list rather than paraphrasing it.**
+
+`empirical` · `review` · `methods` · `commentary` · `editorial` · `protocol` · `dataset` · `software` · `other`
+
+*(In v1 the rubric and the schema named **two different vocabularies for this field**, overlapping on two values out of thirteen. Every screener was handed both and obeyed both privately; the validator checked `tier` and had never been asked to look at `genre`, so 16,800 labels passed every check that ran. See D20 and finding 24. **A codebook is code. It gets a test.**)*
+
+## `tier` is RETIRED
+
+v3 replaces it with `categories`, which is **multi-label**. The values `T1`, `T2`, `T3` and `OUT` remain in the **legacy** `screening-schema.json` **only so that the v1 and v2 label files stay readable**; the v3 contract, `screening-schema-v3.json`, **does not contain the field**, so no new screening can emit them. `OUT` in v3 means an empty `categories` array: *in no defined category*, not *near the important one*.
+
+## Confidence
+
+`high` / `medium` / `low`. **If the abstract is missing, judge on the title alone and set confidence to `low` unless the title is unambiguous.** The schema **quotes** this sentence; it does not paraphrase it (D24).
+
+**`low` is a legitimate answer.** A screener that never says `low` is not being careful; it is being confident.
+
+---
+
+## Sources
+
+Every quotation above was read from a PDF in **`docs/reference/definitions/`**, which is committed. Nothing is cited from memory, and since D29 that is a checked property, not a promise: `pilot/check_quotes.R` fails the build if any quotation marked verbatim is not a substring of its cited PDF. `pilot/check_instrument.R` fails the build if this rubric and `screening-schema-v3.json` disagree about any field, in either direction.
+
+
+# THE OUTPUT SCHEMA (screening-schema-v3.json)
+
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "MetaCan screening output, rubric v3.1",
+  "description": "The output contract for every screening run under rubric v3.1. This document QUOTES the rubric; it never paraphrases it. Where a description below restates a rule, the wording is copied from docs/protocol/rubric-v3.md, because the schema misquoting the rubric is D24 and two documents that disagree are two instruments (D20). pilot/check_instrument.R fails the build if this file and the rubric disagree about any field, in either direction. The legacy screening-schema.json remains ONLY so that v1 and v2 label files stay readable; no new screening validates against it.",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["id", "categories", "study_design", "genre", "about_ca_system", "about_ca_topic", "confidence"],
+    "properties": {
+      "id": {
+        "type": "string",
+        "pattern": "^W\\d+$",
+        "description": "The OpenAlex work id, exactly as given in the payload."
+      },
+      "categories": {
+        "type": "array",
+        "items": {
+          "enum": ["metaresearch", "metaepi_narrow", "metaepi_broad", "bibliometrics", "sts", "scholarly_communication", "open_science", "research_integrity", "insufficient_payload"]
+        },
+        "uniqueItems": true,
+        "description": "Every category the work belongs to; a work may carry more than one, and categories are not ranked and none is primary. An EMPTY array is OUT, which means 'in no defined category', not 'near the important one'. insufficient_payload means the record cannot be screened (a scraping artifact as a title, boilerplate in the abstract field, a title and abstract from different papers, spam) and is reported, never silently dropped."
+      },
+      "domain": {
+        "enum": ["methods", "reporting", "reproducibility", "evaluation", "incentives", null],
+        "description": "REQUIRED when categories contains metaresearch, and null otherwise. Taken verbatim from Ioannidis's five thematic areas: methods, reporting, reproducibility, evaluation, and incentives (how to do, report, verify, correct, and reward science)."
+      },
+      "study_design": {
+        "enum": ["randomized_trial", "nonrandomized_trial", "observational", "systematic_review", "meta_analysis", "case_report", "qualitative", "simulation_or_modeling", "bench_or_experimental", "theoretical_or_conceptual", "not_applicable", "design_other"],
+        "description": "Coded for every work, from this vocabulary and no other. not_applicable means the work is not empirical research: editorials, datasets, software."
+      },
+      "genre": {
+        "enum": ["empirical", "review", "methods", "commentary", "editorial", "protocol", "dataset", "software", "other"],
+        "description": "One vocabulary, defined in the rubric, and this schema QUOTES that list rather than paraphrasing it."
+      },
+      "about_ca_system": {
+        "type": "boolean",
+        "description": "ABOUT_CA_SYSTEM: the Canadian research system or academy is a substantive object. A Canadian institution as setting is not this."
+      },
+      "about_ca_topic": {
+        "type": "boolean",
+        "description": "ABOUT_CA_TOPIC: Canada is a substantive subject, whether or not research is the object."
+      },
+      "confidence": {
+        "enum": ["high", "medium", "low"],
+        "description": "If the abstract is missing, judge on the title alone and set confidence to low unless the title is unambiguous. low is a legitimate answer: a screener that never says low is not being careful; it is being confident."
+      },
+      "reason": {
+        "type": "string",
+        "maxLength": 400,
+        "description": "One sentence naming the rubric rule the decision rests on."
+      }
+    }
+  }
+}
+
+
+# THE RECORDS
+
+[
+ {
+  "id": "W4360988722",
+  "title": "Is Machine Listening Listening?",
+  "abstract": "",
+  "year": 2022,
+  "lang": "en",
+  "type": "article",
+  "venue": "DOAJ (DOAJ: Directory of Open Access Journals)",
+  "topic": "Communication in Education and Healthcare",
+  "field": "Psychology"
+ },
+ {
+  "id": "W2590316147",
+  "title": "Sustaining guideline implementation: A multisite perspective on activities, challenges and supports",
+  "abstract": "Aims and objectives To examine activities conducted, challenges encountered and supports used when sustaining nursing practice guideline implementation in multiple healthcare organisations over 3 years. Background Numerous models and frameworks exist to guide the implementation of guidelines, yet very few focus on sustaining improved practice changes. It is not known if one intervention or multiple interventions are required, nor the long‐term activities, challenges and supports for sustaining improved practices. Design Qualitative descriptive study. Methods We conducted focus group interviews with steering committee members and individual interviews with leaders and direct care providers at the end of a 3‐year guideline implementation study. The National Health Service Sustainability Model was used to guide data collection and analysis. Results The eight sites included three teaching hospitals, a community hospital, a long‐term care facility, two community health agencies and a community health centre. Individual interviews were conducted with 36 leaders and 26 direct care providers. Focus group interviews were conducted with steering committee members ( n = 70) at each site. Guideline implementation activities ( n = 45) included developing new outcome monitoring systems, conducting chart audits, communicating progress to internal stakeholders, appointing interprofessional staff to steering committees, developing educational sessions and resources for staff and patients, revising policies and procedures, and developing partnerships with external organisations. Supports included lessons learned from previous and concurrent change initiatives, and commitment, involvement and positive attitudes of staff and leaders. Conclusion Activities identified by the participants addressed all 10 factors in the Sustainability Model in the three areas of process, staff and organisation. The challenges and supports encountered provide insights into the process of guideline implementation and sustainability. Relevance to clinical practice A multilevel action plan for staff, leaders and the organisation is recommended when introducing and sustaining practice changes.",
+  "year": 2017,
+  "lang": "en",
+  "type": "article",
+  "venue": "Journal of Clinical Nursing",
+  "topic": "Health Policy Implementation Science",
+  "field": "Health Professions"
+ },
+ {
+  "id": "W6921300489",
+  "title": "Additional file 1 of Insights from using an outcomes measurement properties search filter and conducting citation searches to locate psychometric articles of tools used to measure context attributes",
+  "abstract": "",
+  "year": 2024,
+  "lang": "en",
+  "type": "article",
+  "venue": "Figshare",
+  "topic": "Meta-analysis and systematic reviews",
+  "field": "Decision Sciences"
+ },
+ {
+  "id": "W1562377822",
+  "title": "Exploring Social Desirability Bias",
+  "abstract": "",
+  "year": 2003,
+  "lang": "en",
+  "type": "article",
+  "venue": "Journal of Business Ethics",
+  "topic": "Ethics in Business and Education",
+  "field": "Decision Sciences"
+ },
+ {
+  "id": "W4312193665",
+  "title": "Beyond Conventional Hemodynamic Monitoring—Monitoring to Improve Our Understanding of Disease Process and Interventions",
+  "abstract": "1. Crit Care Clin. 2023 Apr;39(2):243-254. doi: 10.1016/j.ccc.2022.09.002. Epub \n2022 Dec 22.\n\nBeyond Conventional Hemodynamic Monitoring-Monitoring to Improve Our \nUnderstanding of Disease Process and Interventions.\n\nRamírez M(1), Mazwi ML(2), Bronicki RA(3), Checchia PA(3), Ong JSM(4).\n\nAuthor information:\n(1)Division of Pediatric Critical Care Medicine, Department of Pediatrics, New \nYork University Langone Medical Center, Hassenfeld Children's Hospital, New \nYork, NY 10016, USA.\n(2)Department of Critical Care Medicine, Division of Cardiology, The Hospital \nfor Sick Children, 555 University Avenue, Toronto, Ontario M5G 1X8, Canada.\n(3)Division of Critical Care Medicine, Department of Pediatrics, Baylor College \nof Medicine, Texas Children's Hospital, 6621 Fannin, WT6-006, Houston, TX 77030, \nUSA.\n(4)Division of Paediatric Critical Care, Khoo Teck Puat - University Children's \nMedical Institute, NUHS Tower Block Level 12, 1E Kent Ridge Road, Singapore \n119228; Department of Paediatrics, Yong Loo Lin School of Medicine, National \nUniversity of Singapore, 21 Lower Kent Ridge Road, Singapore 119077. Electronic \naddress: jacqueline_ong@nuhs.edu.sg.\n\nMonitoring the hemodynamic state of patients is a hallmark of any intensive care \nenvironment. However, no single monitoring strategy can provide all the \nnecessary data to paint the entire picture of the state of a patient; each \nmonitor has strengths and weaknesses, advantages, and limitations. We review the \ncurrently available hemodynamic monitors used in pediatric critical care units \nusing a clinical scenario. This provides the reader with a construct to \nunderstand the progression from basic to more advanced monitoring modalities and \nhow they serve to inform the practitioner at the bedside.\n\nCopyright © 2022 Elsevier Inc. All rights reserved.\n\nDOI: 10.1016/j.ccc.2022.09.002\nPMID: 36898771 [Indexed for MEDLINE]",
+  "year": 2022,
+  "lang": "en",
+  "type": "review",
+  "venue": "Critical Care Clinics",
+  "topic": "Hemodynamic Monitoring and Therapy",
+  "field": "Medicine"
+ },
+ {
+  "id": "W2320714254",
+  "title": "Government PQRI Quality Reporting Program Getting Short Shrift from Oncologists",
+  "abstract": "",
+  "year": 2010,
+  "lang": "en",
+  "type": "article",
+  "venue": "Oncology Times",
+  "topic": "Economic and Financial Impacts of Cancer",
+  "field": "Economics, Econometrics and Finance"
+ },
+ {
+  "id": "W4211257651",
+  "title": "An Intimate Understanding of Place: Charles Sauriol and Toronto’s Don River Valley, 1927–1989",
+  "abstract": "Every summer from 1927 to 1968, Toronto conservationist Charles Sauriol and his family moved from their city home to a rustic cottage just a few kilometres away, within the urban wilderness of Toronto’s Don River Valley. In his years as a cottager, Sauriol saw the valley change from a picturesque setting of rural farms and woodlands to an increasingly threatened corridor of urban green space. His intimate familiarity with the valley led to a lifelong quest to protect it. This paper explores the history of conservation in the Don River Valley through Sauriol’s experiences. Changes in the approaches to protecting urban nature, I argue, are reflected in Sauriol’s personal experience – the strategies he employed, the language he used, and the losses he suffered as a result of urban planning policies. Over the course of Sauriol’s career as a conservationist, from the 1940s to the 1990s, the river increasingly became a symbol of urban health – specifically, the health of the relationship between urban residents and the natural environment upon which they depend. Drawing from a rich range of sources, including diary entries, published memoirs, and unpublished manuscripts and correspondence, this paper reflects upon the ways that biography can inform histories of place and better our understanding of individual responses to changing landscapes. Chaque été de 1927 à 1968, l’écologiste torontois Charles Sauriol et sa famille quittent leur maison de ville pour s’installer dans un chalet rustique quelques kilomètres plus loin, dans la zone naturelle de la vallée de la rivière Don, au cœur de Toronto. Durant ces années, Sauriol a vu la vallée pittoresques, aux fermes et régions boisées se transformer en corridor vert urbain toujours plus menacé. Fort de sa très grande connaissance de la vallée, tout au long de sa vie, il se donnera pour mission de la protéger. Cet article explore l’histoire de la conservation dans la vallée de la rivière Don par le biais de ce qu’a vécu Sauriol. Je soutiens que l’expérience personnelle de Sauriol, y compris les stratégies qu’il a employées, le langage qu’il a utilisé, les pertes qu’il a luimême subies dans la foulée des politiques de planification urbaine – reflète les changements d’approche déployés pour assurer la protection de la nature urbaine. Au fil de la carrière d’écologiste de Sauriol, des années 1940 aux années 1990, la rivière est devenue une représentation symbolique de plus en plus puissante de la santé urbaine et plus pré",
+  "year": 2011,
+  "lang": "en",
+  "type": "article",
+  "venue": "Canadian Historical Review",
+  "topic": "American Environmental and Regional History",
+  "field": "Environmental Science"
+ },
+ {
+  "id": "W2963250813",
+  "title": "Activation of Caspase-6 Is Promoted by a Mutant Huntingtin Fragment and Blocked by an Allosteric Inhibitor Compound",
+  "abstract": "1. Cell Chem Biol. 2019 Sep 19;26(9):1295-1305.e6. doi: \n10.1016/j.chembiol.2019.07.001. Epub 2019 Jul 25.\n\nActivation of Caspase-6 Is Promoted by a Mutant Huntingtin Fragment and Blocked \nby an Allosteric Inhibitor Compound.\n\nEhrnhoefer DE(1), Skotte NH(2), Reinshagen J(3), Qiu X(2), Windshügel B(3), \nJaishankar P(4), Ladha S(2), Petina O(5), Khankischpur M(5), Nguyen YTN(2), \nCaron NS(2), Razeto A(3), Meyer Zu Rheda M(3), Deng Y(2), Huynh KT(2), Wittig \nI(6), Gribbon P(3), Renslo AR(4), Geffken D(5), Gul S(3), Hayden MR(2).\n\nAuthor information:\n(1)Centre for Molecular Medicine and Therapeutics (CMMT), Department of Medical \nGenetics, University of British Columbia, 950 West 28th Avenue, Vancouver, BC \nV5Z 4H4, Canada. Electronic address: ehrnhoefer@bio.mx.\n(2)Centre for Molecular Medicine and Therapeutics (CMMT), Department of Medical \nGenetics, University of British Columbia, 950 West 28th Avenue, Vancouver, BC \nV5Z 4H4, Canada.\n(3)Fraunhofer Institute for Molecular Biology and Applied Ecology IME - \nScreeningPort, Schnackenburgallee 114, 22525 Hamburg, Germany.\n(4)Department of Pharmaceutical Chemistry and Small Molecule Discovery Center, \nUniversity of California, San Francisco, 600 16th Street, San Francisco, CA \n94158, USA.\n(5)University of Hamburg, Institut für Pharmazie, Bundesstraße 45, 20146 \nHamburg, Germany.\n(6)Functional Proteomics, ZBC, Faculty of Medicine, Goethe University, \nTheodor-Stern-Kai 7/Haus 26, 60590 Frankfurt, Germany.\n\nAberrant activation of caspase-6 (C6) in the absence of other hallmarks of \napoptosis has been demonstrated in cells and tissues from patients with \nHuntington disease (HD) and animal models. C6 activity correlates with disease \nprogression in patients with HD and the cleavage of mutant huntingtin (mHTT) \nprotein is thought to strongly contribute to disease pathogenesis. Here we show \nthat the mHTT1-586 fragment generated by C6 cleavage interacts with the zymogen \nform of the enzyme, stabilizing a conformation that contains an active site and \nis prone to full activation. This shift toward enhanced activity can be \nprevented by a small-molecule inhibitor that blocks the interaction between C6 \nand mHTT1-586. Molecular docking studies suggest that the inhibitor binds an \nallosteric site in the C6 zymogen. The interaction of mHTT1-586 with C6 may \ntherefore promote a self-reinforcing, feedforward cycle of C6 zymogen activation \nand mHTT cleavage driving HD pathogenesis.\n\nCopyright © 2019 Elsevier Ltd. All rights res",
+  "year": 2019,
+  "lang": "en",
+  "type": "article",
+  "venue": "Cell chemical biology",
+  "topic": "Genetic Neurodegenerative Diseases",
+  "field": "Neuroscience"
+ },
+ {
+  "id": "W3168220787",
+  "title": "Sensitivity of Northern Hemisphere Cyclone Detection and Tracking Results to Fine Spatial and Temporal Resolution using ERA5",
+  "abstract": "Abstract Lagrangian detection and tracking algorithms are frequently used to study the development, distribution, and trends of extratropical cyclones. Past research shows that results from these algorithms are sensitive to both spatial and temporal resolution of the gridded input fields, with coarser resolutions typically underestimating cyclone frequency by failing to capture weak, small, and short-lived systems. The fifth-generation atmospheric reanalysis from the European Centre for Medium-Range Weather Forecasts (ERA5) offers finer resolution, and therefore more precise information regarding storm locations and development than previous global reanalyses. However, our sensitivity tests show that using ERA5 sea-level pressure fields at their finest possible resolution does not necessarily lead to better cyclone detection and tracking. If a common number of nearest neighbors is used when detecting minima in sea-level pressure (like past studies), finer spatial resolution leads to noisier fields that unrealistically break up multi-center cyclones. Using a common search distance instead (with more neighbors at finer resolution) resolves the issue without smoothing inputs. Doing this also makes cyclone frequency, lifespan, and average depth insensitive to refining spatial resolution beyond 100 km. Results using 6-h and 3-h temporal resolutions have only minor differences, but using 1-h temporal resolution with a maximum allowed propagation speed of 150 km h -1 leads to unrealistic track splitting. This can be counteracted by increasing the maximum propagation speed, but modest sensitivity to temporal resolution persists for several cyclone characteristics. Therefore, we recommend caution if applying existing algorithms to temporal resolutions finer than 3-h and careful evaluation of algorithm settings.",
+  "year": 2021,
+  "lang": "en",
+  "type": "article",
+  "venue": "Monthly Weather Review",
+  "topic": "Climate variability and models",
+  "field": "Environmental Science"
+ },
+ {
+  "id": "W4398635616",
+  "title": "640555_2.roi",
+  "abstract": "",
+  "year": 2020,
+  "lang": "en",
+  "type": "dataset",
+  "venue": "Harvard Dataverse",
+  "topic": null,
+  "field": null
+ },
+ {
+  "id": "W4301958563",
+  "title": "Too Important To Be Left to Amateurs",
+  "abstract": "",
+  "year": 2010,
+  "lang": "fr",
+  "type": "article",
+  "venue": "DOAJ (DOAJ: Directory of Open Access Journals)",
+  "topic": "Nursing Education, Practice, and Leadership",
+  "field": "Nursing"
+ },
+ {
+  "id": "W4409181783",
+  "title": "Biases inherent in all-cause mortality studies: implications for shaping the 2025–2030 dietary guidelines for Americans on alcohol consumption",
+  "abstract": "1. Lancet Reg Health Am. 2025 Apr 4;46:101083. doi: 10.1016/j.lana.2025.101083. \neCollection 2025 Jun.\n\nBiases inherent in all-cause mortality studies: implications for shaping the \n2025-2030 dietary guidelines for Americans on alcohol consumption.\n\nShield K(1)(2)(3), Keyes K(4)(5), Martinez P(6), Milam AJ(7), Rehm J(1)(2), \nNaimi TS(8).\n\nAuthor information:\n(1)Institute for Mental Health Policy Research, Centre for Addiction and Mental \nHealth, 250 College Street, Toronto, M5T 1R8, Canada.\n(2)Dalla Lana School of Public Health, University of Toronto, 155 College St., \nToronto, ON, M5T 3M7, Canada.\n(3)Epidemiology and Biostatistics, Schulich School of Medicine & Dentistry, 1465 \nRichmond Street, London, ON, N6G 2M1, Canada.\n(4)Department of Epidemiology, Mailman School of Public Health, Columbia \nUniversity, New York, NY, 10032, USA.\n(5)New York State Psychiatric Institute, Columbia University, 1051 Riverside \nDrive, Box 123, New York, NY, 10032, USA.\n(6)Alcohol Research Group, Public Health Institute, 6001 Shellmound St., Suite \n450, Emeryville, CA, 94608, USA.\n(7)Department of Anesthesiology and Perioperative Medicine, Mayo Clinic, 5777 E \nMayo Boulevard, Phoenix, AZ, 85054, USA.\n(8)Canadian Institute for Substance Use Research, 2300 McKenzie Ave Rm. 273, \nVictoria, BC, V8W 2Y2, Canada.\n\nDOI: 10.1016/j.lana.2025.101083\nPMCID: PMC12002884\nPMID: 40242500\n\nConflict of interest statement: Dr. Tim Naimi acknowledges receiving funding \nfrom the Government of British Columbia for public health research. The \nGovernment of British Columbia is responsible for the distribution and sale of \nalcoholic beverages. Drs. Kevin Shield, Katherine Keyes, Priscilla Martinez, \nAdam J. Milam, and Jürgen Rehm declare no competing interests.",
+  "year": 2025,
+  "lang": "en",
+  "type": "article",
+  "venue": "The Lancet Regional Health - Americas",
+  "topic": "Alcohol Consumption and Health Effects",
+  "field": "Medicine"
+ },
+ {
+  "id": "W4229444047",
+  "title": "Performance evaluation of a wood treatment for connections with dowel-type bolts",
+  "abstract": "Recent studies have shown the advantage of wood impregnation on increasing the dowel-bearing strength of black spruce wood by almost 50%. The aim of the present study was to improve the mechanical performance of a dowel-type connection through an impregnation method for black spruce wood. The results showed that wood treatments improved the mechanical performance of dowel-type connections. The dowel-bearing strength increased up to 25%, while the stiffness increased up to 52%. The increase obtained was lower in comparison with the previous studies, however. A lower polymer quantity, resulted in a shorter vacuum time, and a lower temperature polymerization used in wood treatment brought the process closer to an industrial application.",
+  "year": 2022,
+  "lang": "en",
+  "type": "article",
+  "venue": "BioResources",
+  "topic": "Wood Treatment and Properties",
+  "field": "Engineering"
+ },
+ {
+  "id": "W2544958871",
+  "title": "Hanulak, Robert, Maschine – Organismus – Gesellschaft. Physiologische Aspekte eines Lebensbegriffs um 1800",
+  "abstract": "",
+  "year": 2013,
+  "lang": "de",
+  "type": "article",
+  "venue": "Revue de l’Institut français d’histoire en Allemagne",
+  "topic": "German Literature and Culture Studies",
+  "field": "Arts and Humanities"
+ },
+ {
+  "id": "W194942664",
+  "title": "Fetal Myocardial Mechanics",
+  "abstract": "",
+  "year": 2013,
+  "lang": "en",
+  "type": "book-chapter",
+  "venue": null,
+  "topic": "Cardiovascular Function and Risk Factors",
+  "field": "Medicine"
+ },
+ {
+  "id": "W6891698444",
+  "title": "De l'eau liquide sur Mars",
+  "abstract": "",
+  "year": 2015,
+  "lang": "fr",
+  "type": "article",
+  "venue": "NPARC",
+  "topic": "Planetary Science and Exploration",
+  "field": "Physics and Astronomy"
+ },
+ {
+  "id": "W6901716049",
+  "title": "An Ounce of Discretion Is Worth a Pound of Wit — Ergonomics Is a Healthy Choice",
+  "abstract": "",
+  "year": 2013,
+  "lang": "en",
+  "type": "article",
+  "venue": "Greater South Information System",
+  "topic": "Ergonomics and Musculoskeletal Disorders",
+  "field": "Psychology"
+ },
+ {
+  "id": "W4387337535",
+  "title": "Non-planar vibrations of beams with geometric imperfections and hysteretic boundary conditions",
+  "abstract": "",
+  "year": 2023,
+  "lang": "en",
+  "type": "article",
+  "venue": "Nonlinear Dynamics",
+  "topic": "Vibration and Dynamic Analysis",
+  "field": "Engineering"
+ },
+ {
+  "id": "W7128476924",
+  "title": "Corruption in the Middle East and North Africa: A Geographic Perspective",
+  "abstract": "Corruption—rent-seeking behaviour in which a few benefit at the expense of the many—is widespread and deeply entrenched throughout the Middle East and North Africa (MENA) region. This article examines this issue geographically. It opens with a discussion of the causes and consequences of corruption, noting its multiple forms and levels of severity and the contexts in which it tends to thrive. Second, the article focuses on MENA corruption in particular, emphasizing the deleterious role of oil exports (the “resource curse”) and offering a series of vignettes of corruption in different countries. Third, it offers an empirical analysis, using data from Transparency International, which illustrates the relative severity of corruption in the area and its relationship to several economic and political variables. The conclusion highlights the principal findings and notes that although anti-corruption campaigns usually fail, other measures can be taken.",
+  "year": 2015,
+  "lang": null,
+  "type": "article",
+  "venue": "Arab world geographer",
+  "topic": "Natural Resources and Economic Development",
+  "field": "Economics, Econometrics and Finance"
+ },
+ {
+  "id": "W1992708519",
+  "title": "Early dental intervention in the Redpath Ptolemaic Theban Male",
+  "abstract": "1. Int J Paleopathol. 2012 Dec;2(4):217-222. doi: 10.1016/j.ijpp.2012.09.005.\nEpub  2012 Oct 4.\n\nEarly dental intervention in the Redpath Ptolemaic Theban Male.\n\nWade AD(1), Hurnanen J(2), Lawson B(3), Tampieri D(4), Nelson AJ(5).\n\nAuthor information:\n(1)Department of Anthropology, University of Western Ontario, London, ON, \nCanada. Electronic address: awade4@uwo.ca.\n(2)Department of Forensic Medicine, Hjelt Institute, Univ. of Helsinki, \nHelsinki, Finland.\n(3)World Cultures, Redpath Museum, McGill University, Montreal, QC, Canada.\n(4)Montreal Neurological Institute and Hospital, McGill University, Montreal, \nQC, Canada.\n(5)Department of Anthropology, University of Western Ontario, London, ON, \nCanada.\n\nA computed tomography study of the remains of a Ptolemaic male mummy from Thebes \n(RM2718; 350-60 BCE), one of three ancient Egyptian human mummies curated at \nMcGill University's Redpath Museum, demonstrates the packing of a large \ninterproximal carious lesion with a protective linen barrier. The dental packing \ndescribed here is unique among ancient Egyptian mummies studied to date, and \nrepresents one of only a few recorded dental interventions in ancient Egypt. \nSuch a finding lends further support for the existence of a group of dental \nspecialists practicing interventional medicine in ancient Egypt. While the \nphysical evidence, to date for other interventions, may be scarce, the findings \npresented here should underline the need to continue to look for evidence of \ndental packing as well as other therapeutic dental interventions in the ancient \nworld.\n\nCopyright © 2012 Elsevier Inc. All rights reserved.\n\nDOI: 10.1016/j.ijpp.2012.09.005\nPMID: 29539368",
+  "year": 2012,
+  "lang": "en",
+  "type": "article",
+  "venue": "International Journal of Paleopathology",
+  "topic": "Archaeology and Historical Studies",
+  "field": "Arts and Humanities"
+ },
+ {
+  "id": "W2049810186",
+  "title": "Driftsonde Observations to Evaluate Numerical Weather Prediction of the Late 2006 African Monsoon",
+  "abstract": "Abstract During the international African Monsoon Multidisciplinary Analysis (AMMA) project, stratospheric balloons carrying gondolas called driftsondes capable of dropping meteorological sondes were deployed over West Africa and the tropical Atlantic Ocean. The goals of the deployment were to test the technology and to study the African easterly waves, which are often the forerunners of hurricanes. Between 29 August and 22 September 2006, 124 sondes were dropped over the seven easterly waves that moved across Africa into the Atlantic between about 10° and 20°N, where almost no in situ vertical information exists. Conditions included waves that developed into Tropical Storm Florence and Hurricanes Gordon and Helene. In this study, a selection of numerical weather prediction model outputs has been compared with the dropsondes to assess the effect of some developments in data assimilation on the quality of analyses and forecasts. By comparing two different versions of the Action de Recherche Petite Echelle Grande Echelle (ARPEGE) model of Météo-France with the dropsondes, first the benefits of the last data assimilation updates are quantified. Then comparisons are carried out using the ARPEGE model and the Integrated Forecast System (IFS) model of the European Centre for Medium-Range Weather Forecasts. It is shown that the two models represent very well the vertical structure of temperature and humidity over both land and sea, and particularly within the Saharan air layer, which displays humidity below 5%–10%. Conversely, the models are less able to represent the vertical structure of the meridional wind. This problem seems to be common to ARPEGE and IFS, and its understanding still requires further investigations.",
+  "year": 2012,
+  "lang": "en",
+  "type": "article",
+  "venue": "Journal of Applied Meteorology and Climatology",
+  "topic": "Meteorological Phenomena and Simulations",
+  "field": "Earth and Planetary Sciences"
+ },
+ {
+  "id": "W4416435722",
+  "title": "Digital Survey–Based Tracing of COVID-19 Over the Early Pandemic: Comprehensive Geospatial and Symptomatic Analysis in Lebanon",
+  "abstract": "Abstract Background In response to the early spread of COVID-19 in Lebanon, the University of Balamand developed the HAYATI app, a community-focused, geographic information system (GIS)–based digital health platform aimed at enhancing public health surveillance. At the time, while the Lebanese Ministry of Public Health utilized centralized dashboards to report confirmed cases and monitor national trends, no interactive tool existed to engage the public directly in real-time risk assessment and surveillance, especially in underserved regions. Objective The aim of this study was to design, implement, and evaluate the effectiveness of the HAYATI app as a GIS-integrated digital surveillance tool to identify high-risk individuals and support targeted testing and contact tracing during the early stages of the COVID-19 pandemic in Lebanon. Methods The HAYATI app was launched in March 2020 using ArcGIS Survey123 and real-time dashboards, incorporating a risk scoring algorithm based on 21 clinical and behavioral criteria. Between April 2020 and March 2021, self-reported data were collected from 10,235 individuals across Lebanon. Participants identified as high or major risk through the automated scoring algorithm were referred for free polymerase chain reaction testing at the University of Balamand. Test results were securely communicated to local municipalities and the Ministry of Public Health. Data were analyzed for associations between symptoms and positivity rates, as well as geographic and demographic trends using spatial analysis tools. Results Of the 10,235 individuals who submitted data, 1782 were classified as high or major risk and referred for polymerase chain reaction testing. Among them, 394 (22.1%) tested positive for SARS-CoV-2. Loss of smell and taste was strongly associated with positive test results ( P &lt;.001). The highest positivity rates were observed among individuals aged 18‐29 years and in the North Governorate. GIS mapping enabled real-time visualization of case clusters, which informed localized containment responses. Conclusions The HAYATI app effectively filled a critical surveillance gap during the early pandemic phase in Lebanon. By integrating GIS technology, automated risk stratification, and community-level engagement, it provided a scalable model for public health surveillance in resource-limited settings. This approach has potential for broader applications in managing future outbreaks and endemic diseases through decentralized",
+  "year": 2025,
+  "lang": "en",
+  "type": "article",
+  "venue": "JMIR Public Health and Surveillance",
+  "topic": "Data-Driven Disease Surveillance",
+  "field": "Medicine"
+ },
+ {
+  "id": "W2948779853",
+  "title": "Non-native ungulates indirectly impact foliar arthropods but not soil function",
+  "abstract": "",
+  "year": 2019,
+  "lang": "en",
+  "type": "article",
+  "venue": "Biological Invasions",
+  "topic": "Ecology and Vegetation Dynamics Studies",
+  "field": "Environmental Science"
+ },
+ {
+  "id": "W2051439883",
+  "title": "Magnetic forward modeling and inversion for materials of high susceptibility",
+  "abstract": "",
+  "year": 2002,
+  "lang": "en",
+  "type": "article",
+  "venue": null,
+  "topic": "Geophysical and Geoelectrical Methods",
+  "field": "Earth and Planetary Sciences"
+ },
+ {
+  "id": "W4238727447",
+  "title": "JFQ volume 46 issue 6 Cover and Front matter",
+  "abstract": "",
+  "year": 2011,
+  "lang": "en",
+  "type": "article",
+  "venue": "Journal of Financial and Quantitative Analysis",
+  "topic": "Diverse Scientific and Economic Studies",
+  "field": "Economics, Econometrics and Finance"
+ }
+]
