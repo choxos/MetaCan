@@ -132,7 +132,11 @@ docs/proposal/metacan-proposal.pdf: docs/proposal/metacan-proposal.md docs/propo
 #
 # Headings are not demoted; each appendix keeps its own H1, retitled in place, so
 # the section numbering inside the rubric survives the bundle intact.
-PROTOCOL_PARTS := docs/protocol/PROTOCOL.md docs/protocol/rubric.md docs/protocol/rubric-v2-proposal.md
+# The preregistration must carry THE RUBRIC THE WORK RUNS UNDER, not just the one the
+# pilot ran under. It was bundling v1 and the v2 EVIDENCE document while the LOCKED
+# v2.2 (the instrument the funded screen actually uses) travelled nowhere. A protocol
+# that does not contain its own instrument is a protocol whose instrument can drift.
+PROTOCOL_PARTS := docs/protocol/PROTOCOL.md docs/protocol/rubric-v2.md docs/protocol/rubric.md docs/protocol/rubric-v2-proposal.md
 
 protocol: docs/protocol/PROTOCOL.pdf
 
@@ -140,10 +144,13 @@ docs/protocol/PROTOCOL.pdf: $(PROTOCOL_PARTS) docs/protocol/protocol.tex
 	@mkdir -p build
 	@cp docs/protocol/PROTOCOL.md build/protocol_bundle.md
 	@printf '\n\\newpage\n\n' >> build/protocol_bundle.md
-	@sed '1s|^# .*|# Appendix A. Screening rubric v1.0: LOCKED, and the instrument the pilot ran under|' \
+	@sed '1s|^# .*|# Appendix A. Screening rubric v2.2: LOCKED, and the instrument the funded work runs under|' \
+		docs/protocol/rubric-v2.md >> build/protocol_bundle.md
+	@printf '\n\\newpage\n\n' >> build/protocol_bundle.md
+	@sed '1s|^# .*|# Appendix B. Screening rubric v1.0: SUPERSEDED, and the instrument every pilot number was produced under|' \
 		docs/protocol/rubric.md >> build/protocol_bundle.md
 	@printf '\n\\newpage\n\n' >> build/protocol_bundle.md
-	@sed '1s|^# .*|# Appendix B. Rubric v2: PROPOSED, NOT APPLIED, and not in force for any number in this document|' \
+	@sed '1s|^# .*|# Appendix C. The seam census: how v2 was derived, published before it was resolved|' \
 		docs/protocol/rubric-v2-proposal.md >> build/protocol_bundle.md
 	@pandoc build/protocol_bundle.md -o $@ \
 		--pdf-engine=xelatex \
