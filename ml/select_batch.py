@@ -63,12 +63,22 @@ def loop_labelled_ids():
     return ids
 
 
-def train_heads():
-    """Heads on EVERYTHING labelled so far: the 5,600 v1 works + every loop round's v3 labels."""
+def train_heads(include_holdout=False):
+    """Heads on everything labelled so far EXCEPT the frozen evaluation holdout.
+
+    The holdout (a fixed quarter of the v1 works, L.frozen_holdout_ids) stays out of every
+    training corpus while the loop is being judged: the first live evaluation trained on
+    it and reported AP 0.969 against memorized works (D35). include_holdout=True is for
+    the POST-GATE frame model only, and ml/score_frame.py may pass it only when
+    pilot/results/maturity.json says passed.
+    """
     ids, recs, y_by_arm, w, strata = L.load_all()
     fields = features.PAYLOAD_FRAME_PARITY
+    hold = set() if include_holdout else L.frozen_holdout_ids()
+    keep = [i for i, wid in enumerate(ids) if wid not in hold]
+    recs = [recs[i] for i in keep]
     texts = [features.render(r, fields) for r in recs]
-    Y = {a: list(y_by_arm[a]["strict"]) for a in L.ARMS}
+    Y = {a: [int(y_by_arm[a]["strict"][i]) for i in keep] for a in L.ARMS}
 
     # v3 loop labels: metaresearch in categories == the strict target
     if os.path.isdir(LOOP_DIR):

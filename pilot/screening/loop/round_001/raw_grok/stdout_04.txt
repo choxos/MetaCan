@@ -1,0 +1,281 @@
+I'll read the full screening prompt and schema so I can apply the rubric to every record and emit only the JSON array.Screening all 25 records against the v3.1 rubric and emitting the JSON array only.
+
+```json
+[
+  {
+    "id": "W6901980189",
+    "categories": ["insufficient_payload"],
+    "domain": null,
+    "study_design": "not_applicable",
+    "genre": "other",
+    "about_ca_system": false,
+    "about_ca_topic": false,
+    "confidence": "low",
+    "reason": "OpenAlex supplementary-file shell (Additional file 3) with empty abstract; cannot screen the parent CIS of population-health scale-up literature from this payload alone."
+  },
+  {
+    "id": "W4361283423",
+    "categories": [],
+    "domain": null,
+    "study_design": "systematic_review",
+    "genre": "review",
+    "about_ca_system": false,
+    "about_ca_topic": false,
+    "confidence": "high",
+    "reason": "Clinical systematic review of structural neuroimaging similarities between depression and psychosis; object is patient brain features, not research practices (OUT)."
+  },
+  {
+    "id": "W4256397300",
+    "categories": [],
+    "domain": null,
+    "study_design": "not_applicable",
+    "genre": "dataset",
+    "about_ca_system": false,
+    "about_ca_topic": false,
+    "confidence": "low",
+    "reason": "Title-only RNAO clinical best-practice guideline on woman-abuse screening; clinical practice guidance, not a defined metascientific category."
+  },
+  {
+    "id": "W4403277459",
+    "categories": [],
+    "domain": null,
+    "study_design": "theoretical_or_conceptual",
+    "genre": "commentary",
+    "about_ca_system": false,
+    "about_ca_topic": false,
+    "confidence": "high",
+    "reason": "Practice recommendations for AI use in health promotion; applied clinical guidance, not evaluation of research methods or practices."
+  },
+  {
+    "id": "W3122679125",
+    "categories": ["sts"],
+    "domain": null,
+    "study_design": "theoretical_or_conceptual",
+    "genre": "other",
+    "about_ca_system": false,
+    "about_ca_topic": false,
+    "confidence": "low",
+    "reason": "Title alone frames scientific advice to public policy-making as an object of study (science–policy/STS); empty abstract forces low confidence."
+  },
+  {
+    "id": "W2137464739",
+    "categories": [],
+    "domain": null,
+    "study_design": "theoretical_or_conceptual",
+    "genre": "methods",
+    "about_ca_system": false,
+    "about_ca_topic": false,
+    "confidence": "low",
+    "reason": "Software-engineering migration framework; RULE 1 excludes developing domain techniques as metaresearch methods (OUT)."
+  },
+  {
+    "id": "W6992035391",
+    "categories": [],
+    "domain": null,
+    "study_design": "theoretical_or_conceptual",
+    "genre": "other",
+    "about_ca_system": false,
+    "about_ca_topic": false,
+    "confidence": "low",
+    "reason": "Comparative ethnomusicology of Inuit and Siberian throat singing; not science/research as object (OUT)."
+  },
+  {
+    "id": "W4386530542",
+    "categories": [],
+    "domain": null,
+    "study_design": "systematic_review",
+    "genre": "protocol",
+    "about_ca_system": false,
+    "about_ca_topic": false,
+    "confidence": "high",
+    "reason": "JBI protocol for qualitative SR of nursing students’ clinical preceptorship during COVID; object is education experiences, not research practice."
+  },
+  {
+    "id": "W2346308355",
+    "categories": [],
+    "domain": null,
+    "study_design": "observational",
+    "genre": "empirical",
+    "about_ca_system": false,
+    "about_ca_topic": false,
+    "confidence": "low",
+    "reason": "Forest ecology study of sugar maple crown structure under competition; domain science, empty abstract (OUT)."
+  },
+  {
+    "id": "W2982098039",
+    "categories": [],
+    "domain": null,
+    "study_design": "observational",
+    "genre": "empirical",
+    "about_ca_system": false,
+    "about_ca_topic": true,
+    "confidence": "high",
+    "reason": "GSC open-file mineral-indicator chemistry for NWT and Manitoba deposits; geology OUT, Canada is substantive geographic subject."
+  },
+  {
+    "id": "W7066211591",
+    "categories": [],
+    "domain": null,
+    "study_design": "bench_or_experimental",
+    "genre": "empirical",
+    "about_ca_system": false,
+    "about_ca_topic": false,
+    "confidence": "low",
+    "reason": "Title-only agronomy question on camelina salinity tolerance; plant science, not a defined category."
+  },
+  {
+    "id": "W2008952010",
+    "categories": [],
+    "domain": null,
+    "study_design": "bench_or_experimental",
+    "genre": "empirical",
+    "about_ca_system": false,
+    "about_ca_topic": false,
+    "confidence": "high",
+    "reason": "Molecular systems-biology paper on Sir2 and transcriptional burst size; instance of biology research, not study of research practice."
+  },
+  {
+    "id": "W2533706679",
+    "categories": [],
+    "domain": null,
+    "study_design": "observational",
+    "genre": "empirical",
+    "about_ca_system": false,
+    "about_ca_topic": false,
+    "confidence": "low",
+    "reason": "Title-only retrospective cohort on OPEP device and COPD exacerbation costs; clinical health economics (OUT)."
+  },
+  {
+    "id": "W4403760706",
+    "categories": [],
+    "domain": null,
+    "study_design": "observational",
+    "genre": "empirical",
+    "about_ca_system": false,
+    "about_ca_topic": false,
+    "confidence": "low",
+    "reason": "Clinical image-guided prostate radiotherapy experience; Canadian city is setting only, not ABOUT_CA_SYSTEM/TOPIC."
+  },
+  {
+    "id": "W2107899052",
+    "categories": [],
+    "domain": null,
+    "study_design": "observational",
+    "genre": "empirical",
+    "about_ca_system": false,
+    "about_ca_topic": false,
+    "confidence": "high",
+    "reason": "Paleoclimate/geology paper linking Storegga slide timing to the 8.2 ka event; natural science object (OUT)."
+  },
+  {
+    "id": "W4254034155",
+    "categories": [],
+    "domain": null,
+    "study_design": "theoretical_or_conceptual",
+    "genre": "methods",
+    "about_ca_system": false,
+    "about_ca_topic": false,
+    "confidence": "low",
+    "reason": "CS dissertation on spectrum requirements for wireless mesh networks; engineering technique, RULE 1 OUT for metaresearch."
+  },
+  {
+    "id": "W2030967170",
+    "categories": [],
+    "domain": null,
+    "study_design": "design_other",
+    "genre": "review",
+    "about_ca_system": false,
+    "about_ca_topic": false,
+    "confidence": "high",
+    "reason": "Cell-biology review of meiotic/mitotic spindle assembly in C. elegans; domain biology, not research-on-research."
+  },
+  {
+    "id": "W2391079959",
+    "categories": [],
+    "domain": null,
+    "study_design": "theoretical_or_conceptual",
+    "genre": "methods",
+    "about_ca_system": false,
+    "about_ca_topic": false,
+    "confidence": "low",
+    "reason": "Title-only cloud security system (OmniSep data isolation); CS systems work, empty abstract (OUT)."
+  },
+  {
+    "id": "W2167059005",
+    "categories": [],
+    "domain": null,
+    "study_design": "observational",
+    "genre": "empirical",
+    "about_ca_system": false,
+    "about_ca_topic": true,
+    "confidence": "high",
+    "reason": "Survey of e-business adoption by Quebec forestry SMEs; technology-adoption business study, Quebec is substantive subject, not research system."
+  },
+  {
+    "id": "W6992399825",
+    "categories": [],
+    "domain": null,
+    "study_design": "qualitative",
+    "genre": "other",
+    "about_ca_system": false,
+    "about_ca_topic": true,
+    "confidence": "low",
+    "reason": "Title-only study of Quebec road-safety publicity and state constraint; public policy/sociology of safety, not science as object."
+  },
+  {
+    "id": "W2325964580",
+    "categories": [],
+    "domain": null,
+    "study_design": "bench_or_experimental",
+    "genre": "empirical",
+    "about_ca_system": false,
+    "about_ca_topic": false,
+    "confidence": "high",
+    "reason": "Organic-chemistry synthesis and liquid-crystal properties of QPP dyes; wet-lab chemistry instance (OUT)."
+  },
+  {
+    "id": "W2614034306",
+    "categories": [],
+    "domain": null,
+    "study_design": "bench_or_experimental",
+    "genre": "empirical",
+    "about_ca_system": false,
+    "about_ca_topic": false,
+    "confidence": "low",
+    "reason": "Title-only polymer/DNA-knot dynamics paper; physical science experiment, empty abstract (OUT)."
+  },
+  {
+    "id": "W4403203719",
+    "categories": ["metaresearch"],
+    "domain": "reproducibility",
+    "study_design": "design_other",
+    "genre": "methods",
+    "about_ca_system": false,
+    "about_ca_topic": false,
+    "confidence": "high",
+    "reason": "Metaresearch on Many Labs 2: methodological limits of cultural-heterogeneity tests in multi-site replication; domain reproducibility (how to verify science)."
+  },
+  {
+    "id": "W2106999253",
+    "categories": [],
+    "domain": null,
+    "study_design": "observational",
+    "genre": "empirical",
+    "about_ca_system": false,
+    "about_ca_topic": false,
+    "confidence": "high",
+    "reason": "Descriptive study of medium-sized exporters’ marketing information systems; business/management object, not research practice."
+  },
+  {
+    "id": "W2020579751",
+    "categories": [],
+    "domain": null,
+    "study_design": "not_applicable",
+    "genre": "other",
+    "about_ca_system": false,
+    "about_ca_topic": false,
+    "confidence": "high",
+    "reason": "Materials-science erratum to an SOFC thermodynamics paper; correction notice is not empirical research and fits no defined category."
+  }
+]
+```

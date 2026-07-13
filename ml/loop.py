@@ -67,23 +67,31 @@ GATE = {
 
 
 def frozen_holdout():
-    """The SAME holdout every round: a fixed quarter of the v1-labelled works, by seed 11.
+    """The SAME holdout every round, from the ONE canonical definition (L.frozen_holdout_ids).
 
-    Same seed as the simulation (ml/active.py), same reason as D33: a metric on a set the
-    loop can edit is not a metric. These works are never selected, never trained on, and
-    the loop's batches come from the FRAME, which is disjoint from them by construction.
+    The first live evaluation defined the holdout here with a local seed while train_heads
+    trained on all 5,600 works, holdout included, and reported AP 0.969: a metric against
+    memorized data, D33's class exactly (D35). Now both sides import the same id set, and
+    the assertion below fails the run if a single holdout work ever reaches training.
     """
     ids, recs, y_by_arm, w, strata = L.load_all()
-    rng = np.random.default_rng(11)
-    hold = rng.choice(len(ids), size=int(len(ids) * 0.25), replace=False)
+    hold_ids = L.frozen_holdout_ids()
+    hold = [i for i, wid in enumerate(ids) if wid in hold_ids]
     texts = [features.render(recs[i], features.PAYLOAD_FRAME_PARITY) for i in hold]
-    y = L.consensus(y_by_arm, "strict", "majority")[hold]
-    return texts, y, w[hold]
+    y = L.consensus(y_by_arm, "strict", "majority")[np.array(hold)]
+    return texts, y, w[np.array(hold)], hold_ids
 
 
 def evaluate_after_round(round_no: int):
-    vec, heads, n_train = train_heads()
-    ho_texts, ho_y, ho_w = frozen_holdout()
+    vec, heads, n_train = train_heads(include_holdout=False)
+    ho_texts, ho_y, ho_w, hold_ids = frozen_holdout()
+    # the leak that produced AP 0.969 must be structurally impossible, not just fixed:
+    # no holdout work in any loop batch, ever, and training must be smaller than the
+    # full labelled corpus by at least the holdout's size.
+    assert not (hold_ids & loop_labelled_ids()), "a frozen-holdout work entered a loop batch"
+    n_loop = sum(1 for _ in loop_labelled_ids())
+    assert n_train <= 5600 - len(hold_ids) + n_loop, (
+        f"train corpus ({n_train}) is larger than labelled-minus-holdout; the holdout is leaking")
     X = vec.transform(ho_texts)
     S = np.vstack([heads[a].predict_proba(X)[:, 1] for a in L.ARMS])
     mean_s = S.mean(axis=0)

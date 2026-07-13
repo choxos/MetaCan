@@ -1,0 +1,15 @@
+{
+ "criteria": {
+  "ap_plateau_rel_gain_lt": 0.02,
+  "ap_plateau_window": 5,
+  "churn_lt": 0.05,
+  "churn_consecutive": 3,
+  "rank_spearman_gt": 0.98,
+  "rank_consecutive": 3
+ },
+ "ap_plateau": false,
+ "churn_ok": false,
+ "rank_ok": false,
+ "passed": false,
+ "meaning_of_passed": "The student's imitation of its teachers has stopped moving. NOT that it is right: the human audit measures, this gate only spends the frame pass."
+}

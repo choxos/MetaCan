@@ -5,7 +5,7 @@
 # completeness. Usage: run_loop_round.sh <round:001> <grok|codex>
 set -u
 ROUND=${1:?usage: run_loop_round.sh <round> <grok|codex>}
-MODEL=${2:?usage: run_loop_round.sh <round> <grok|codex>}
+MODEL=${2:?usage: run_loop_round.sh <round> <grok|codex|opus>}
 DIR=pilot/screening/loop/round_${ROUND}
 RAW=$DIR/raw_${MODEL}
 mkdir -p "$RAW"
@@ -18,6 +18,9 @@ for p in "$DIR"/prompts/prompt_*.txt; do
   if [ "$MODEL" = "grok" ]; then
     /Users/choxos/.grok/bin/grok --prompt-file "$p" -m grok-4.5 --reasoning-effort medium \
       --disable-web-search --no-subagents > "$RAW/stdout_${ch}.txt" 2> "$RAW/stderr_${ch}.txt"
+  elif [ "$MODEL" = "opus" ]; then
+    claude -p --model claude-opus-4-8 --max-turns 3 \
+      "$(cat "$p")" > "$RAW/stdout_${ch}.txt" 2> "$RAW/stderr_${ch}.txt"
   else
     codex exec --model gpt-5.6-luna -c model_reasoning_effort='"medium"' --sandbox read-only \
       --skip-git-repo-check "$(cat "$p")" > "$RAW/stdout_${ch}.txt" 2> "$RAW/stderr_${ch}.txt"

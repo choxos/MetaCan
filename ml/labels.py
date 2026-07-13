@@ -141,3 +141,19 @@ def consensus(y: dict, key: str, rule: str = "majority") -> np.ndarray:
     if rule == "any":
         return (votes >= 1).astype(int)
     raise ValueError(f"unknown consensus rule: {rule}")
+
+
+def frozen_holdout_ids() -> set:
+    """The frozen evaluation holdout: a fixed quarter of the v1-labelled works, seed 11.
+
+    ONE definition, imported everywhere, because the live loop's first evaluation defined
+    the holdout in one module and trained on all 5,600 works in another, and reported
+    AP 0.969 against works the model had memorized. Same class as D33: a metric computed
+    on data the model was given. These ids stay OUT of every training corpus until the
+    maturity gate has passed; only the post-gate frame model may train on them.
+    """
+    import numpy as np
+    ids = sorted(load_payloads())
+    rng = np.random.default_rng(11)
+    hold = rng.choice(len(ids), size=int(len(ids) * 0.25), replace=False)
+    return {ids[i] for i in hold}

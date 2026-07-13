@@ -1,0 +1,1140 @@
+[
+ {
+  "id": "W1875271326",
+  "categories": [],
+  "domain": null,
+  "study_design": "not_applicable",
+  "genre": "other",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "Explicit book review; not empirical research and fits no defined category (OUT)."
+ },
+ {
+  "id": "W190177613",
+  "categories": [],
+  "domain": null,
+  "study_design": "theoretical_or_conceptual",
+  "genre": "other",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "low",
+  "reason": "Sociology of taste and mass sport culture; missing abstract and no metascience object (OUT)."
+ },
+ {
+  "id": "W1967604805",
+  "categories": [],
+  "domain": null,
+  "study_design": "theoretical_or_conceptual",
+  "genre": "commentary",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "low",
+  "reason": "Title alone suggests higher-education commentary on doctoral narratives, not research practices as object; missing abstract forces empty categories (OUT) and low confidence."
+ },
+ {
+  "id": "W1969898458",
+  "categories": [],
+  "domain": null,
+  "study_design": "observational",
+  "genre": "methods",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "Joint frailty dynamic prediction tool applied to French breast-cancer cohorts; method development and clinical application, not study of research practices."
+ },
+ {
+  "id": "W1994503692",
+  "categories": [],
+  "domain": null,
+  "study_design": "theoretical_or_conceptual",
+  "genre": "methods",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "low",
+  "reason": "Title-only constrained estimation for censored data; Rule 1 OUT as statistical method development; low confidence without abstract."
+ },
+ {
+  "id": "W2004383711",
+  "categories": [],
+  "domain": null,
+  "study_design": "simulation_or_modeling",
+  "genre": "methods",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "Pure statistical test development for multivariate uniformity with Monte Carlo evaluation; Rule 1 excludes technique derivation for a domain from metaresearch."
+ },
+ {
+  "id": "W2008765054",
+  "categories": [],
+  "domain": null,
+  "study_design": "theoretical_or_conceptual",
+  "genre": "methods",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "Large-sample theory and normality tests for Box-Cox linear models; pure statistical methodology, not metaresearch."
+ },
+ {
+  "id": "W2008952010",
+  "categories": [],
+  "domain": null,
+  "study_design": "bench_or_experimental",
+  "genre": "empirical",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "Molecular systems-biology paper on Sir2 and transcriptional burst size; instance of biology research, not study of research practice."
+ },
+ {
+  "id": "W2010741163",
+  "categories": [],
+  "domain": null,
+  "study_design": "theoretical_or_conceptual",
+  "genre": "methods",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "low",
+  "reason": "Title indicates ensemble variable-selection method for the Cox model; Rule 1 keeps technique development OUT of metaresearch; abstract missing."
+ },
+ {
+  "id": "W2017784796",
+  "categories": [],
+  "domain": null,
+  "study_design": "simulation_or_modeling",
+  "genre": "methods",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "Derives MSE estimators for small-area means with survey weights; Rule 1 OUT as survey-statistics technique development."
+ },
+ {
+  "id": "W2018803201",
+  "categories": [
+   "metaresearch",
+   "metaepi_narrow",
+   "metaepi_broad"
+  ],
+  "domain": "methods",
+  "study_design": "meta_analysis",
+  "genre": "empirical",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "Compares RCT versus observational designs' impact on effect estimates with the study as unit of analysis, satisfying both metaepi definitions and metaresearch methods."
+ },
+ {
+  "id": "W2020579751",
+  "categories": [],
+  "domain": null,
+  "study_design": "not_applicable",
+  "genre": "other",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "Materials-science erratum to an SOFC thermodynamics paper; correction notice is not empirical research and fits no defined category."
+ },
+ {
+  "id": "W2023910207",
+  "categories": [],
+  "domain": null,
+  "study_design": "design_other",
+  "genre": "review",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "Compares NEXAFS microscopy and TEM-EELS for soft-matter materials analysis; Canadian facilities are setting only, not ABOUT_CA_SYSTEM or a research-practice object."
+ },
+ {
+  "id": "W2028930346",
+  "categories": [],
+  "domain": null,
+  "study_design": "systematic_review",
+  "genre": "review",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "Systematic review of published definitions of eHealth as a clinical/IT concept; not research-on-research or another defined category (OUT)."
+ },
+ {
+  "id": "W2030967170",
+  "categories": [],
+  "domain": null,
+  "study_design": "design_other",
+  "genre": "review",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "Cell-biology review of meiotic/mitotic spindle assembly in C. elegans; domain biology, not research-on-research."
+ },
+ {
+  "id": "W2033133921",
+  "categories": [],
+  "domain": null,
+  "study_design": "simulation_or_modeling",
+  "genre": "methods",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "Variance estimation in fisheries integrated assessment models is applied statistical methodology; Rule 1 OUT."
+ },
+ {
+  "id": "W2048608576",
+  "categories": [],
+  "domain": null,
+  "study_design": "simulation_or_modeling",
+  "genre": "methods",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "Efficient sieve estimation for partly linear additive hazards with current status data; statistical technique development excluded by Rule 1."
+ },
+ {
+  "id": "W2052632059",
+  "categories": [],
+  "domain": null,
+  "study_design": "design_other",
+  "genre": "review",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "Clinical toxicology review of veterinary drugs used in human suicide; object is clinical safety, not research integrity or practices (OUT)."
+ },
+ {
+  "id": "W2106891714",
+  "categories": [],
+  "domain": null,
+  "study_design": "theoretical_or_conceptual",
+  "genre": "methods",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "Proposes robust likelihood inference for public-policy statistics; Rule 1 OUT as technique development, not study of research practices."
+ },
+ {
+  "id": "W2106999253",
+  "categories": [],
+  "domain": null,
+  "study_design": "observational",
+  "genre": "empirical",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "Descriptive study of medium-sized exporters\u2019 marketing information systems; business/management object, not research practice."
+ },
+ {
+  "id": "W2107899052",
+  "categories": [],
+  "domain": null,
+  "study_design": "observational",
+  "genre": "empirical",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "Paleoclimate/geology paper linking Storegga slide timing to the 8.2 ka event; natural science object (OUT)."
+ },
+ {
+  "id": "W2112153192",
+  "categories": [],
+  "domain": null,
+  "study_design": "simulation_or_modeling",
+  "genre": "methods",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "Robust binary regression estimator with continuous outcomes; Rule 1 OUT as statistical technique development."
+ },
+ {
+  "id": "W2112262946",
+  "categories": [],
+  "domain": null,
+  "study_design": "theoretical_or_conceptual",
+  "genre": "methods",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "low",
+  "reason": "Title-only GMM over-identification tests paper; Rule 1 OUT as econometric technique; low confidence without abstract."
+ },
+ {
+  "id": "W2137464739",
+  "categories": [],
+  "domain": null,
+  "study_design": "theoretical_or_conceptual",
+  "genre": "methods",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "low",
+  "reason": "Software-engineering migration framework; RULE 1 excludes developing domain techniques as metaresearch methods (OUT)."
+ },
+ {
+  "id": "W2167059005",
+  "categories": [],
+  "domain": null,
+  "study_design": "observational",
+  "genre": "empirical",
+  "about_ca_system": false,
+  "about_ca_topic": true,
+  "confidence": "high",
+  "reason": "Survey of e-business adoption by Quebec forestry SMEs; technology-adoption business study, Quebec is substantive subject, not research system."
+ },
+ {
+  "id": "W2280732594",
+  "categories": [],
+  "domain": null,
+  "study_design": "theoretical_or_conceptual",
+  "genre": "commentary",
+  "about_ca_system": false,
+  "about_ca_topic": true,
+  "confidence": "low",
+  "reason": "Title frames evaluation management with Canada as case (ABOUT_CA_TOPIC); missing abstract prevents metascience or ABOUT_CA_SYSTEM assignment (OUT)."
+ },
+ {
+  "id": "W2325964580",
+  "categories": [],
+  "domain": null,
+  "study_design": "bench_or_experimental",
+  "genre": "empirical",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "Organic-chemistry synthesis and liquid-crystal properties of QPP dyes; wet-lab chemistry instance (OUT)."
+ },
+ {
+  "id": "W2346308355",
+  "categories": [],
+  "domain": null,
+  "study_design": "observational",
+  "genre": "empirical",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "low",
+  "reason": "Forest ecology study of sugar maple crown structure under competition; domain science, empty abstract (OUT)."
+ },
+ {
+  "id": "W2391079959",
+  "categories": [],
+  "domain": null,
+  "study_design": "theoretical_or_conceptual",
+  "genre": "methods",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "low",
+  "reason": "Title-only cloud security system (OmniSep data isolation); CS systems work, empty abstract (OUT)."
+ },
+ {
+  "id": "W2514259613",
+  "categories": [],
+  "domain": null,
+  "study_design": "simulation_or_modeling",
+  "genre": "methods",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "Develops a probability-scale residual for regression diagnostics; object is a statistical technique, not research practices (Rule 1)."
+ },
+ {
+  "id": "W2533706679",
+  "categories": [],
+  "domain": null,
+  "study_design": "observational",
+  "genre": "empirical",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "low",
+  "reason": "Title-only retrospective cohort on OPEP device and COPD exacerbation costs; clinical health economics (OUT)."
+ },
+ {
+  "id": "W2555286646",
+  "categories": [],
+  "domain": null,
+  "study_design": "simulation_or_modeling",
+  "genre": "methods",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "Gaussian-process emulation for infectious-disease spatial models is computational statistical technique; Rule 1 OUT."
+ },
+ {
+  "id": "W2614034306",
+  "categories": [],
+  "domain": null,
+  "study_design": "bench_or_experimental",
+  "genre": "empirical",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "low",
+  "reason": "Title-only polymer/DNA-knot dynamics paper; physical science experiment, empty abstract (OUT)."
+ },
+ {
+  "id": "W2737290167",
+  "categories": [],
+  "domain": null,
+  "study_design": "simulation_or_modeling",
+  "genre": "methods",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "Nonparametric shape tests for functions with noisy observations; mathematical statistics method development, not metaresearch."
+ },
+ {
+  "id": "W2756078004",
+  "categories": [],
+  "domain": null,
+  "study_design": "simulation_or_modeling",
+  "genre": "methods",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "Bayesian inference for accelerated life testing is domain statistical technique development; Rule 1 OUT."
+ },
+ {
+  "id": "W2766219675",
+  "categories": [],
+  "domain": null,
+  "study_design": "simulation_or_modeling",
+  "genre": "methods",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "Extends CTMLE with regression shrinkage for causal estimation; developing an analysis technique is OUT under Rule 1."
+ },
+ {
+  "id": "W2800440924",
+  "categories": [],
+  "domain": null,
+  "study_design": "simulation_or_modeling",
+  "genre": "methods",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "Robust precision-matrix estimation via weighted median regression; Rule 1 OUT as technique development for association networks."
+ },
+ {
+  "id": "W2963982265",
+  "categories": [],
+  "domain": null,
+  "study_design": "simulation_or_modeling",
+  "genre": "methods",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "Proposes the component lasso sparse regression method; Rule 1 OUT as technique derivation, not study of research practices."
+ },
+ {
+  "id": "W2982098039",
+  "categories": [],
+  "domain": null,
+  "study_design": "observational",
+  "genre": "empirical",
+  "about_ca_system": false,
+  "about_ca_topic": true,
+  "confidence": "high",
+  "reason": "GSC open-file mineral-indicator chemistry for NWT and Manitoba deposits; geology OUT, Canada is substantive geographic subject."
+ },
+ {
+  "id": "W2990669119",
+  "categories": [],
+  "domain": null,
+  "study_design": "observational",
+  "genre": "empirical",
+  "about_ca_system": true,
+  "about_ca_topic": true,
+  "confidence": "high",
+  "reason": "Describes student participation in University of Alberta governance; Canadian academy is substantive object (ABOUT_CA_SYSTEM/TOPIC) but no metascience category (OUT)."
+ },
+ {
+  "id": "W3008905790",
+  "categories": [],
+  "domain": null,
+  "study_design": "simulation_or_modeling",
+  "genre": "methods",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "Proposes a variance estimator for propensity-score matching with replacement for survival outcomes; developing an analytic technique is OUT under Rule 1."
+ },
+ {
+  "id": "W3108842605",
+  "categories": [],
+  "domain": null,
+  "study_design": "simulation_or_modeling",
+  "genre": "methods",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "Uncertainty estimation for functional linear mixed models is statistical method development; Rule 1 OUT."
+ },
+ {
+  "id": "W3119252148",
+  "categories": [
+   "scholarly_communication"
+  ],
+  "domain": null,
+  "study_design": "design_other",
+  "genre": "empirical",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "low",
+  "reason": "Title targets alternative dissertation formats in education doctorates, i.e. forms of scholarly dissemination (Borgman); abstract missing so design/genre are uncertain."
+ },
+ {
+  "id": "W3122679125",
+  "categories": [
+   "sts"
+  ],
+  "domain": null,
+  "study_design": "theoretical_or_conceptual",
+  "genre": "other",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "low",
+  "reason": "Title alone frames scientific advice to public policy-making as an object of study (science\u2013policy/STS); empty abstract forces low confidence."
+ },
+ {
+  "id": "W3134339722",
+  "categories": [],
+  "domain": null,
+  "study_design": "theoretical_or_conceptual",
+  "genre": "commentary",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "Applies knowledge translation to evidence-informed health professions education; technique for an education domain, not methods as used by researchers (RULE 1 OUT)."
+ },
+ {
+  "id": "W3164239396",
+  "categories": [],
+  "domain": null,
+  "study_design": "theoretical_or_conceptual",
+  "genre": "other",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "Mechanism-design/auction theory on multi-good screening under informational robustness; no defined metascience category (OUT)."
+ },
+ {
+  "id": "W3188186504",
+  "categories": [
+   "scholarly_communication"
+  ],
+  "domain": null,
+  "study_design": "systematic_review",
+  "genre": "review",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "Systematic review of academic writing groups as formal/informal scholarly writing and dissemination practices (Borgman scholarly_communication); not metaresearch under Rule 1."
+ },
+ {
+  "id": "W3193090929",
+  "categories": [],
+  "domain": null,
+  "study_design": "theoretical_or_conceptual",
+  "genre": "methods",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "Mixture priors to avoid prior-data conflict in regression; Rule 1 OUT as Bayesian method development."
+ },
+ {
+  "id": "W3202267396",
+  "categories": [],
+  "domain": null,
+  "study_design": "simulation_or_modeling",
+  "genre": "methods",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "Shrinkage quantile regression for high-dimensional panel data with structural breaks; method development plus environmental application, Rule 1 OUT."
+ },
+ {
+  "id": "W3215636343",
+  "categories": [],
+  "domain": null,
+  "study_design": "simulation_or_modeling",
+  "genre": "methods",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "Sensitivity-analysis framework paired with BSSANOVA classification method; domain technique development excluded by Rule 1."
+ },
+ {
+  "id": "W324831",
+  "categories": [],
+  "domain": null,
+  "study_design": "theoretical_or_conceptual",
+  "genre": "other",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "low",
+  "reason": "Title alone does not establish a defined metascience category; missing abstract yields OUT with low confidence."
+ },
+ {
+  "id": "W4233904704",
+  "categories": [
+   "insufficient_payload"
+  ],
+  "domain": null,
+  "study_design": "not_applicable",
+  "genre": "dataset",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "low",
+  "reason": "Single anatomical term as title with empty abstract in IUPAC Standards Online; dictionary/dataset scraping-style record (insufficient_payload)."
+ },
+ {
+  "id": "W4238878334",
+  "categories": [],
+  "domain": null,
+  "study_design": "not_applicable",
+  "genre": "dataset",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "low",
+  "reason": "IUPAC Standards Online single-term dataset entry with empty abstract; not research-on-research or any defined category."
+ },
+ {
+  "id": "W4240341889",
+  "categories": [],
+  "domain": null,
+  "study_design": "not_applicable",
+  "genre": "dataset",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "low",
+  "reason": "IUPAC Standards Online single-term dataset entry with empty abstract; no defined category applies."
+ },
+ {
+  "id": "W4244055162",
+  "categories": [],
+  "domain": null,
+  "study_design": "not_applicable",
+  "genre": "dataset",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "low",
+  "reason": "IUPAC Standards Online term entry with empty abstract; no defined category applies."
+ },
+ {
+  "id": "W4244710111",
+  "categories": [
+   "insufficient_payload"
+  ],
+  "domain": null,
+  "study_design": "not_applicable",
+  "genre": "dataset",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "low",
+  "reason": "Single anatomical term as title with empty abstract in IUPAC Standards Online; dictionary/dataset scraping-style record (insufficient_payload)."
+ },
+ {
+  "id": "W4253167613",
+  "categories": [],
+  "domain": null,
+  "study_design": "not_applicable",
+  "genre": "dataset",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "low",
+  "reason": "IUPAC Standards Online single-term dataset entry with empty abstract; OUT of all defined categories."
+ },
+ {
+  "id": "W4254034155",
+  "categories": [],
+  "domain": null,
+  "study_design": "theoretical_or_conceptual",
+  "genre": "methods",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "low",
+  "reason": "CS dissertation on spectrum requirements for wireless mesh networks; engineering technique, RULE 1 OUT for metaresearch."
+ },
+ {
+  "id": "W4256284424",
+  "categories": [],
+  "domain": null,
+  "study_design": "theoretical_or_conceptual",
+  "genre": "methods",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "Parametric generalized-gamma distribution properties and survival-data application; statistical modeling technique, not metaresearch."
+ },
+ {
+  "id": "W4256397300",
+  "categories": [],
+  "domain": null,
+  "study_design": "not_applicable",
+  "genre": "dataset",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "low",
+  "reason": "Title-only RNAO clinical best-practice guideline on woman-abuse screening; clinical practice guidance, not a defined metascientific category."
+ },
+ {
+  "id": "W4280585721",
+  "categories": [],
+  "domain": null,
+  "study_design": "not_applicable",
+  "genre": "commentary",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "low",
+  "reason": "Title-only reflections on student-partner research co-creation; no defined category clear from title alone; low confidence without abstract."
+ },
+ {
+  "id": "W4309201063",
+  "categories": [],
+  "domain": null,
+  "study_design": "simulation_or_modeling",
+  "genre": "methods",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "Censored quantile regression rank scores and tests; Rule 1 OUT as statistical method development."
+ },
+ {
+  "id": "W4309349999",
+  "categories": [],
+  "domain": null,
+  "study_design": "simulation_or_modeling",
+  "genre": "methods",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "Econometric specification tests for diffusion models; technique development and application to exchange rates, not study of research practice."
+ },
+ {
+  "id": "W4318067345",
+  "categories": [],
+  "domain": null,
+  "study_design": "simulation_or_modeling",
+  "genre": "methods",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "Proposes performance measures for personalized treatment-effect models; Rule 1 OUT as method development for clinical prediction, not evaluation of research practices."
+ },
+ {
+  "id": "W4319790982",
+  "categories": [],
+  "domain": null,
+  "study_design": "theoretical_or_conceptual",
+  "genre": "methods",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "low",
+  "reason": "Title indicates measurement-error correction method for mediation under additive hazards; Rule 1 OUT; abstract missing."
+ },
+ {
+  "id": "W4321379785",
+  "categories": [],
+  "domain": null,
+  "study_design": "systematic_review",
+  "genre": "protocol",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "Protocol for a clinical systematic review of patient self-management interventions; object is clinical care, not research practices (OUT / RULE 1)."
+ },
+ {
+  "id": "W4360824212",
+  "categories": [],
+  "domain": null,
+  "study_design": "design_other",
+  "genre": "empirical",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "low",
+  "reason": "Title indicates clinical heart-failure risk modeling; missing abstract and domain technique for care, not research practices (RULE 1 OUT)."
+ },
+ {
+  "id": "W4361283423",
+  "categories": [],
+  "domain": null,
+  "study_design": "systematic_review",
+  "genre": "review",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "Clinical systematic review of structural neuroimaging similarities between depression and psychosis; object is patient brain features, not research practices (OUT)."
+ },
+ {
+  "id": "W4383216509",
+  "categories": [],
+  "domain": null,
+  "study_design": "theoretical_or_conceptual",
+  "genre": "methods",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "low",
+  "reason": "Title indicates change-point testing in linear models via weighted residuals; statistical method development OUT under Rule 1; abstract missing."
+ },
+ {
+  "id": "W4385884435",
+  "categories": [],
+  "domain": null,
+  "study_design": "observational",
+  "genre": "empirical",
+  "about_ca_system": false,
+  "about_ca_topic": true,
+  "confidence": "high",
+  "reason": "Mixed-methods study of English-speaking Black Quebecers' education and employability; Canada/Quebec is the subject but not the research system or a metascience category (OUT)."
+ },
+ {
+  "id": "W4386530542",
+  "categories": [],
+  "domain": null,
+  "study_design": "systematic_review",
+  "genre": "protocol",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "JBI protocol for qualitative SR of nursing students\u2019 clinical preceptorship during COVID; object is education experiences, not research practice."
+ },
+ {
+  "id": "W4387865167",
+  "categories": [],
+  "domain": null,
+  "study_design": "qualitative",
+  "genre": "empirical",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "Qualitative nursing study of prayer and spiritual support as clinical practice; Vancouver is only a study site, not Canadian research-system or topic object (OUT)."
+ },
+ {
+  "id": "W4389692720",
+  "categories": [
+   "insufficient_payload"
+  ],
+  "domain": null,
+  "study_design": "not_applicable",
+  "genre": "other",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "low",
+  "reason": "Record is a bare Acknowledgements book-chapter title with empty abstract; cannot be screened as a scholarly work."
+ },
+ {
+  "id": "W4389693951",
+  "categories": [
+   "insufficient_payload"
+  ],
+  "domain": null,
+  "study_design": "not_applicable",
+  "genre": "other",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "low",
+  "reason": "Record is book frontmatter with empty abstract; not screenable scholarly content (insufficient_payload)."
+ },
+ {
+  "id": "W4389694333",
+  "categories": [
+   "insufficient_payload"
+  ],
+  "domain": null,
+  "study_design": "not_applicable",
+  "genre": "other",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "low",
+  "reason": "Record is book acknowledgements with empty abstract; not screenable scholarly content (insufficient_payload)."
+ },
+ {
+  "id": "W4390905989",
+  "categories": [],
+  "domain": null,
+  "study_design": "theoretical_or_conceptual",
+  "genre": "methods",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "low",
+  "reason": "Title alone suggests statistical-model variability theory; no abstract to show research-practice object, so OUT under Rule 1."
+ },
+ {
+  "id": "W4399025718",
+  "categories": [],
+  "domain": null,
+  "study_design": "simulation_or_modeling",
+  "genre": "methods",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "Likelihood-ratio change-point test for random coefficient models; Rule 1 OUT as econometric method development."
+ },
+ {
+  "id": "W4399279333",
+  "categories": [],
+  "domain": null,
+  "study_design": "theoretical_or_conceptual",
+  "genre": "other",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "low",
+  "reason": "Macroeconomics title on monetary-policy transmission; missing abstract yields OUT with low confidence."
+ },
+ {
+  "id": "W4400115549",
+  "categories": [],
+  "domain": null,
+  "study_design": "theoretical_or_conceptual",
+  "genre": "commentary",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "Advocates implementation science to improve fisheries management decisions; object is resource-management practice, not research practices (OUT)."
+ },
+ {
+  "id": "W4400148214",
+  "categories": [],
+  "domain": null,
+  "study_design": "simulation_or_modeling",
+  "genre": "methods",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "Order-restricted tests for nonlinear mixed-effects models with measurement error; Rule 1 OUT as statistical method development."
+ },
+ {
+  "id": "W4400584230",
+  "categories": [],
+  "domain": null,
+  "study_design": "simulation_or_modeling",
+  "genre": "methods",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "Statistical technique for prediction-model risk under covariate shift; Rule 1 OUT because developing estimators is not studying research practices as used by researchers."
+ },
+ {
+  "id": "W4401369456",
+  "categories": [],
+  "domain": null,
+  "study_design": "systematic_review",
+  "genre": "review",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "Qualitative systematic review of immigrant breast-cancer survivorship care experiences; clinical health-services object (OUT)."
+ },
+ {
+  "id": "W4401741113",
+  "categories": [
+   "metaresearch"
+  ],
+  "domain": "methods",
+  "study_design": "theoretical_or_conceptual",
+  "genre": "methods",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "Critical reflection on limits of the 'acte de narration' method as used by researchers studying historical representations, matching metaresearch methods (how to do science)."
+ },
+ {
+  "id": "W4403203719",
+  "categories": [
+   "metaresearch"
+  ],
+  "domain": "reproducibility",
+  "study_design": "design_other",
+  "genre": "methods",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "Metaresearch on Many Labs 2: methodological limits of cultural-heterogeneity tests in multi-site replication; domain reproducibility (how to verify science)."
+ },
+ {
+  "id": "W4403277459",
+  "categories": [],
+  "domain": null,
+  "study_design": "theoretical_or_conceptual",
+  "genre": "commentary",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "Practice recommendations for AI use in health promotion; applied clinical guidance, not evaluation of research methods or practices."
+ },
+ {
+  "id": "W4403760706",
+  "categories": [],
+  "domain": null,
+  "study_design": "observational",
+  "genre": "empirical",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "low",
+  "reason": "Clinical image-guided prostate radiotherapy experience; Canadian city is setting only, not ABOUT_CA_SYSTEM/TOPIC."
+ },
+ {
+  "id": "W4406245583",
+  "categories": [],
+  "domain": null,
+  "study_design": "theoretical_or_conceptual",
+  "genre": "methods",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "low",
+  "reason": "Title indicates pseudo-empirical likelihood methods for causal inference; technique development OUT under Rule 1; abstract missing."
+ },
+ {
+  "id": "W4406483015",
+  "categories": [],
+  "domain": null,
+  "study_design": "systematic_review",
+  "genre": "review",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "medium",
+  "reason": "Systematic review of machine-learning methods for clinical EEG; validating techniques for a domain is OUT by RULE 1."
+ },
+ {
+  "id": "W4409249547",
+  "categories": [
+   "insufficient_payload"
+  ],
+  "domain": null,
+  "study_design": "not_applicable",
+  "genre": "other",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "Abstract is organizational blog boilerplate announcing internal programs, not a screenable scholarly research record (insufficient_payload)."
+ },
+ {
+  "id": "W4409912679",
+  "categories": [
+   "open_science",
+   "scholarly_communication",
+   "metaresearch"
+  ],
+  "domain": "incentives",
+  "study_design": "qualitative",
+  "genre": "empirical",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "Document analysis of Open Science policies for EDI and public participation; open_science and scholarly communication by object, and metaresearch on incentives for inclusive knowledge production."
+ },
+ {
+  "id": "W6901980189",
+  "categories": [
+   "insufficient_payload"
+  ],
+  "domain": null,
+  "study_design": "not_applicable",
+  "genre": "other",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "low",
+  "reason": "OpenAlex supplementary-file shell (Additional file 3) with empty abstract; cannot screen the parent CIS of population-health scale-up literature from this payload alone."
+ },
+ {
+  "id": "W6920285657",
+  "categories": [],
+  "domain": null,
+  "study_design": "not_applicable",
+  "genre": "dataset",
+  "about_ca_system": false,
+  "about_ca_topic": true,
+  "confidence": "high",
+  "reason": "Data Planet citation of Statistics Canada CANSIM innovation/R&D plant-location series; Canada is the data subject, but the record is a catalog dataset, not research-on-research."
+ },
+ {
+  "id": "W6938995380",
+  "categories": [
+   "insufficient_payload"
+  ],
+  "domain": null,
+  "study_design": "not_applicable",
+  "genre": "dataset",
+  "about_ca_system": false,
+  "about_ca_topic": true,
+  "confidence": "low",
+  "reason": "Title is a Data-Planet/CANSIM catalog citation dump with empty abstract; cannot be screened as a scholarly work (insufficient_payload); Canada is the data subject."
+ },
+ {
+  "id": "W6939876685",
+  "categories": [
+   "insufficient_payload"
+  ],
+  "domain": null,
+  "study_design": "not_applicable",
+  "genre": "other",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "Figshare 'Additional file' supplementary artifact of a clinical review protocol, not a screenable primary scholarly work (insufficient_payload)."
+ },
+ {
+  "id": "W6949330925",
+  "categories": [
+   "scholarly_communication"
+  ],
+  "domain": null,
+  "study_design": "not_applicable",
+  "genre": "other",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "low",
+  "reason": "Title indicates AI for documentary/literature research in health sciences (scholarly information use); title-only so low confidence."
+ },
+ {
+  "id": "W6992035391",
+  "categories": [],
+  "domain": null,
+  "study_design": "theoretical_or_conceptual",
+  "genre": "other",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "low",
+  "reason": "Comparative ethnomusicology of Inuit and Siberian throat singing; not science/research as object (OUT)."
+ },
+ {
+  "id": "W6992399825",
+  "categories": [],
+  "domain": null,
+  "study_design": "qualitative",
+  "genre": "other",
+  "about_ca_system": false,
+  "about_ca_topic": true,
+  "confidence": "low",
+  "reason": "Title-only study of Quebec road-safety publicity and state constraint; public policy/sociology of safety, not science as object."
+ },
+ {
+  "id": "W6996219658",
+  "categories": [],
+  "domain": null,
+  "study_design": "design_other",
+  "genre": "methods",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "low",
+  "reason": "Report on methods to assess demand for integrated education in Northern Ireland; domain method development, not research-on-research (RULE 1 OUT)."
+ },
+ {
+  "id": "W7066211591",
+  "categories": [],
+  "domain": null,
+  "study_design": "bench_or_experimental",
+  "genre": "empirical",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "low",
+  "reason": "Title-only agronomy question on camelina salinity tolerance; plant science, not a defined category."
+ },
+ {
+  "id": "W7084451137",
+  "categories": [],
+  "domain": null,
+  "study_design": "observational",
+  "genre": "empirical",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "low",
+  "reason": "Title suggests healthcare professionals' post-graduation communication skills; missing abstract and no metascience object (OUT)."
+ }
+]

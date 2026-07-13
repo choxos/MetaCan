@@ -1,4 +1,4 @@
-I'll read the full screening prompt (rubric, schema, and records) and apply it to every record.Screening each record under rubric v3.1 (Rule 1: technique development is OUT; multi-label categories; missing abstracts → low confidence).[
+[
   {
     "id": "W4400584230",
     "categories": [],
@@ -8,7 +8,7 @@ I'll read the full screening prompt (rubric, schema, and records) and apply it t
     "about_ca_system": false,
     "about_ca_topic": false,
     "confidence": "high",
-    "reason": "Statistical technique for prediction-model risk under covariate shift; Rule 1 OUT because developing estimators is not studying research practices as used by researchers."
+    "reason": "RULE 1: deriving robust estimators for model performance is developing a technique, not a study of research practice, so it is OUT."
   },
   {
     "id": "W4318067345",
@@ -19,7 +19,7 @@ I'll read the full screening prompt (rubric, schema, and records) and apply it t
     "about_ca_system": false,
     "about_ca_topic": false,
     "confidence": "high",
-    "reason": "Proposes performance measures for personalized treatment-effect models; Rule 1 OUT as method development for clinical prediction, not evaluation of research practices."
+    "reason": "RULE 1: proposing new performance measures for prediction models is developing a technique, not studying research practice, so it is OUT."
   },
   {
     "id": "W2756078004",
@@ -30,7 +30,7 @@ I'll read the full screening prompt (rubric, schema, and records) and apply it t
     "about_ca_system": false,
     "about_ca_topic": false,
     "confidence": "high",
-    "reason": "Bayesian inference for accelerated life testing is domain statistical technique development; Rule 1 OUT."
+    "reason": "RULE 1: developing a Bayesian inference method for life testing is a technique, not a study of research practice, so it is OUT."
   },
   {
     "id": "W2963982265",
@@ -41,18 +41,18 @@ I'll read the full screening prompt (rubric, schema, and records) and apply it t
     "about_ca_system": false,
     "about_ca_topic": false,
     "confidence": "high",
-    "reason": "Proposes the component lasso sparse regression method; Rule 1 OUT as technique derivation, not study of research practices."
+    "reason": "RULE 1: proposing a new sparse regression method is developing a technique, however generic, so it is OUT."
   },
   {
     "id": "W6938995380",
-    "categories": ["insufficient_payload"],
+    "categories": [],
     "domain": null,
     "study_design": "not_applicable",
     "genre": "dataset",
     "about_ca_system": false,
     "about_ca_topic": true,
-    "confidence": "low",
-    "reason": "Title is a Data-Planet/CANSIM catalog citation dump with empty abstract; cannot be screened as a scholarly work (insufficient_payload); Canada is the data subject."
+    "confidence": "medium",
+    "reason": "OUT: a Statistics Canada R&D data table is in no defined category, but Canada is a substantive subject so ABOUT_CA_TOPIC holds."
   },
   {
     "id": "W1994503692",
@@ -62,8 +62,8 @@ I'll read the full screening prompt (rubric, schema, and records) and apply it t
     "genre": "methods",
     "about_ca_system": false,
     "about_ca_topic": false,
-    "confidence": "low",
-    "reason": "Title-only constrained estimation for censored data; Rule 1 OUT as statistical method development; low confidence without abstract."
+    "confidence": "medium",
+    "reason": "RULE 1: constrained estimation and likelihood intervals is a statistical technique, not a study of research practice, so it is OUT."
   },
   {
     "id": "W2017784796",
@@ -74,7 +74,7 @@ I'll read the full screening prompt (rubric, schema, and records) and apply it t
     "about_ca_system": false,
     "about_ca_topic": false,
     "confidence": "high",
-    "reason": "Derives MSE estimators for small-area means with survey weights; Rule 1 OUT as survey-statistics technique development."
+    "reason": "RULE 1: deriving an MSE estimator for small area means is developing a technique, not studying research practice, so it is OUT."
   },
   {
     "id": "W2033133921",
@@ -85,7 +85,7 @@ I'll read the full screening prompt (rubric, schema, and records) and apply it t
     "about_ca_system": false,
     "about_ca_topic": false,
     "confidence": "high",
-    "reason": "Variance estimation in fisheries integrated assessment models is applied statistical methodology; Rule 1 OUT."
+    "reason": "RULE 1: variance estimation methodology for assessment models is a technique, not a study of research practice, so it is OUT."
   },
   {
     "id": "W4400148214",
@@ -96,29 +96,29 @@ I'll read the full screening prompt (rubric, schema, and records) and apply it t
     "about_ca_system": false,
     "about_ca_topic": false,
     "confidence": "high",
-    "reason": "Order-restricted tests for nonlinear mixed-effects models with measurement error; Rule 1 OUT as statistical method development."
+    "reason": "RULE 1: order-restricted tests for mixed-effects models is developing a technique, not studying research practice, so it is OUT."
   },
   {
     "id": "W2112262946",
     "categories": [],
     "domain": null,
-    "study_design": "theoretical_or_conceptual",
+    "study_design": "simulation_or_modeling",
     "genre": "methods",
     "about_ca_system": false,
     "about_ca_topic": false,
-    "confidence": "low",
-    "reason": "Title-only GMM over-identification tests paper; Rule 1 OUT as econometric technique; low confidence without abstract."
+    "confidence": "medium",
+    "reason": "RULE 1: GMM over-identification tests is a statistical technique, not a study of research practice, so it is OUT."
   },
   {
     "id": "W3188186504",
-    "categories": ["scholarly_communication"],
+    "categories": [],
     "domain": null,
     "study_design": "systematic_review",
     "genre": "review",
     "about_ca_system": false,
     "about_ca_topic": false,
-    "confidence": "high",
-    "reason": "Systematic review of academic writing groups as formal/informal scholarly writing and dissemination practices (Borgman scholarly_communication); not metaresearch under Rule 1."
+    "confidence": "medium",
+    "reason": "OUT: the object is a higher-education pedagogical strategy (academic writing groups), not a study of research practice under any category definition."
   },
   {
     "id": "W3108842605",
@@ -129,7 +129,7 @@ I'll read the full screening prompt (rubric, schema, and records) and apply it t
     "about_ca_system": false,
     "about_ca_topic": false,
     "confidence": "high",
-    "reason": "Uncertainty estimation for functional linear mixed models is statistical method development; Rule 1 OUT."
+    "reason": "RULE 1: deriving uncertainty measures for functional linear mixed models is a technique, not a study of research practice, so it is OUT."
   },
   {
     "id": "W2800440924",
@@ -140,7 +140,7 @@ I'll read the full screening prompt (rubric, schema, and records) and apply it t
     "about_ca_system": false,
     "about_ca_topic": false,
     "confidence": "high",
-    "reason": "Robust precision-matrix estimation via weighted median regression; Rule 1 OUT as technique development for association networks."
+    "reason": "RULE 1: robust precision matrix estimation is developing a statistical technique, not studying research practice, so it is OUT."
   },
   {
     "id": "W4280585721",
@@ -151,7 +151,7 @@ I'll read the full screening prompt (rubric, schema, and records) and apply it t
     "about_ca_system": false,
     "about_ca_topic": false,
     "confidence": "low",
-    "reason": "Title-only reflections on student-partner research co-creation; no defined category clear from title alone; low confidence without abstract."
+    "reason": "RULE 1 spirit: a reflective account of one's own co-created research is an instance of a research practice, not a study of it; abstract missing."
   },
   {
     "id": "W2112153192",
@@ -162,7 +162,7 @@ I'll read the full screening prompt (rubric, schema, and records) and apply it t
     "about_ca_system": false,
     "about_ca_topic": false,
     "confidence": "high",
-    "reason": "Robust binary regression estimator with continuous outcomes; Rule 1 OUT as statistical technique development."
+    "reason": "RULE 1: proposing a robust binary regression estimator is developing a technique, not studying research practice, so it is OUT."
   },
   {
     "id": "W4399025718",
@@ -173,7 +173,7 @@ I'll read the full screening prompt (rubric, schema, and records) and apply it t
     "about_ca_system": false,
     "about_ca_topic": false,
     "confidence": "high",
-    "reason": "Likelihood-ratio change-point test for random coefficient models; Rule 1 OUT as econometric method development."
+    "reason": "RULE 1: a likelihood ratio change-point test for random coefficient models is a technique, not a study of research practice, so it is OUT."
   },
   {
     "id": "W4389693951",
@@ -183,8 +183,8 @@ I'll read the full screening prompt (rubric, schema, and records) and apply it t
     "genre": "other",
     "about_ca_system": false,
     "about_ca_topic": false,
-    "confidence": "low",
-    "reason": "Record is book frontmatter with empty abstract; not screenable scholarly content (insufficient_payload)."
+    "confidence": "medium",
+    "reason": "insufficient_payload: the title is book frontmatter with no abstract, a boilerplate record that cannot be screened."
   },
   {
     "id": "W2555286646",
@@ -195,7 +195,7 @@ I'll read the full screening prompt (rubric, schema, and records) and apply it t
     "about_ca_system": false,
     "about_ca_topic": false,
     "confidence": "high",
-    "reason": "Gaussian-process emulation for infectious-disease spatial models is computational statistical technique; Rule 1 OUT."
+    "reason": "RULE 1: Gaussian process emulators for disease models is developing an inference technique, not studying research practice, so it is OUT."
   },
   {
     "id": "W4233904704",
@@ -206,7 +206,7 @@ I'll read the full screening prompt (rubric, schema, and records) and apply it t
     "about_ca_system": false,
     "about_ca_topic": false,
     "confidence": "low",
-    "reason": "Single anatomical term as title with empty abstract in IUPAC Standards Online; dictionary/dataset scraping-style record (insufficient_payload)."
+    "reason": "insufficient_payload: a bare anatomical term as the title of an IUPAC standards entry, with no abstract, cannot be screened."
   },
   {
     "id": "W4309201063",
@@ -217,7 +217,7 @@ I'll read the full screening prompt (rubric, schema, and records) and apply it t
     "about_ca_system": false,
     "about_ca_topic": false,
     "confidence": "high",
-    "reason": "Censored quantile regression rank scores and tests; Rule 1 OUT as statistical method development."
+    "reason": "RULE 1: censored quantile regression rank-score inference is developing a technique, not studying research practice, so it is OUT."
   },
   {
     "id": "W4244710111",
@@ -228,18 +228,18 @@ I'll read the full screening prompt (rubric, schema, and records) and apply it t
     "about_ca_system": false,
     "about_ca_topic": false,
     "confidence": "low",
-    "reason": "Single anatomical term as title with empty abstract in IUPAC Standards Online; dictionary/dataset scraping-style record (insufficient_payload)."
+    "reason": "insufficient_payload: a bare anatomical term as the title of an IUPAC standards entry, with no abstract, cannot be screened."
   },
   {
     "id": "W6949330925",
-    "categories": ["scholarly_communication"],
+    "categories": [],
     "domain": null,
     "study_design": "not_applicable",
     "genre": "other",
     "about_ca_system": false,
     "about_ca_topic": false,
     "confidence": "low",
-    "reason": "Title indicates AI for documentary/literature research in health sciences (scholarly information use); title-only so low confidence."
+    "reason": "RULE 1: a title-only piece on using AI for literature searching reads as teaching/using a technique, which is OUT; abstract missing."
   },
   {
     "id": "W4389694333",
@@ -249,29 +249,29 @@ I'll read the full screening prompt (rubric, schema, and records) and apply it t
     "genre": "other",
     "about_ca_system": false,
     "about_ca_topic": false,
-    "confidence": "low",
-    "reason": "Record is book acknowledgements with empty abstract; not screenable scholarly content (insufficient_payload)."
+    "confidence": "medium",
+    "reason": "insufficient_payload: the title is book acknowledgements with no abstract, a boilerplate record that cannot be screened."
   },
   {
     "id": "W2106891714",
     "categories": [],
     "domain": null,
-    "study_design": "theoretical_or_conceptual",
+    "study_design": "simulation_or_modeling",
     "genre": "methods",
     "about_ca_system": false,
     "about_ca_topic": false,
     "confidence": "high",
-    "reason": "Proposes robust likelihood inference for public-policy statistics; Rule 1 OUT as technique development, not study of research practices."
+    "reason": "RULE 1: proposing robust likelihood inference methods is developing a technique, not studying research practice, so it is OUT (public policy is only the application)."
   },
   {
     "id": "W3193090929",
     "categories": [],
     "domain": null,
-    "study_design": "theoretical_or_conceptual",
+    "study_design": "simulation_or_modeling",
     "genre": "methods",
     "about_ca_system": false,
     "about_ca_topic": false,
     "confidence": "high",
-    "reason": "Mixture priors to avoid prior-data conflict in regression; Rule 1 OUT as Bayesian method development."
+    "reason": "RULE 1: mixture-prior elicitation to avoid prior-data conflict is developing a technique, not studying research practice, so it is OUT."
   }
 ]

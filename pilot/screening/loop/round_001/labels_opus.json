@@ -1,0 +1,1128 @@
+[
+ {
+  "id": "W1875271326",
+  "categories": [],
+  "domain": null,
+  "study_design": "not_applicable",
+  "genre": "commentary",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "low",
+  "reason": "A book review is not empirical research and is in no defined category (OUT); title-only judgment sets confidence low."
+ },
+ {
+  "id": "W190177613",
+  "categories": [],
+  "domain": null,
+  "study_design": "theoretical_or_conceptual",
+  "genre": "other",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "low",
+  "reason": "A sociology-of-taste essay on sport and mass culture is in no defined category (OUT); title-only judgment sets confidence low."
+ },
+ {
+  "id": "W1967604805",
+  "categories": [],
+  "domain": null,
+  "study_design": "theoretical_or_conceptual",
+  "genre": "commentary",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "low",
+  "reason": "Doctoral-education narratives are an education-studies topic in no defined category, so categories is empty (OUT means 'in no defined category'); title-only judgment sets confidence low."
+ },
+ {
+  "id": "W1969898458",
+  "categories": [],
+  "domain": null,
+  "study_design": "simulation_or_modeling",
+  "genre": "methods",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "RULE 1: develops a joint-frailty dynamic-prediction technique applied to cancer data, which is OUT rather than a study of research practice."
+ },
+ {
+  "id": "W1994503692",
+  "categories": [],
+  "domain": null,
+  "study_design": "theoretical_or_conceptual",
+  "genre": "methods",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "medium",
+  "reason": "RULE 1: constrained estimation and likelihood intervals is a statistical technique, not a study of research practice, so it is OUT."
+ },
+ {
+  "id": "W2004383711",
+  "categories": [],
+  "domain": null,
+  "study_design": "simulation_or_modeling",
+  "genre": "methods",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "RULE 1: the work develops and validates a new statistical test (a technique), which is OUT rather than a study of research practice."
+ },
+ {
+  "id": "W2008765054",
+  "categories": [],
+  "domain": null,
+  "study_design": "theoretical_or_conceptual",
+  "genre": "methods",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "RULE 1: derives large-sample theory and normality tests for Box-Cox models (a technique), which is OUT."
+ },
+ {
+  "id": "W2008952010",
+  "categories": [],
+  "domain": null,
+  "study_design": "bench_or_experimental",
+  "genre": "empirical",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "A molecular-biology experiment on gene-expression noise is not a study of research practices, so OUT."
+ },
+ {
+  "id": "W2010741163",
+  "categories": [],
+  "domain": null,
+  "study_design": "simulation_or_modeling",
+  "genre": "methods",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "low",
+  "reason": "RULE 1: develops a variable-selection technique for the Cox model, which is OUT; abstract missing so confidence is low."
+ },
+ {
+  "id": "W2017784796",
+  "categories": [],
+  "domain": null,
+  "study_design": "simulation_or_modeling",
+  "genre": "methods",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "RULE 1: deriving an MSE estimator for small area means is developing a technique, not studying research practice, so it is OUT."
+ },
+ {
+  "id": "W2018803201",
+  "categories": [
+   "metaresearch",
+   "metaepi_narrow",
+   "metaepi_broad"
+  ],
+  "domain": "methods",
+  "study_design": "meta_analysis",
+  "genre": "review",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "Comparing RCT vs observational effect estimates examines a study characteristic's impact on findings: metaresearch/methods and meta-epidemiology under both the narrow (Murad) and broad (Kataoka, unit of analysis is a study) definitions."
+ },
+ {
+  "id": "W2020579751",
+  "categories": [],
+  "domain": null,
+  "study_design": "not_applicable",
+  "genre": "other",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "medium",
+  "reason": "An erratum to a materials-science fuel-cell paper is in no defined category (OUT)."
+ },
+ {
+  "id": "W2023910207",
+  "categories": [],
+  "domain": null,
+  "study_design": "design_other",
+  "genre": "review",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "RULE 1: compares materials-science microscopy techniques (an instance of methodology), not a study of research practice, so OUT; Canadian Light Source is only a setting."
+ },
+ {
+  "id": "W2028930346",
+  "categories": [],
+  "domain": null,
+  "study_design": "systematic_review",
+  "genre": "review",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "medium",
+  "reason": "A systematic review of a domain term's published definitions (eHealth) studies a concept, not research methods/reporting/reproducibility/evaluation/incentives, so it is OUT."
+ },
+ {
+  "id": "W2030967170",
+  "categories": [],
+  "domain": null,
+  "study_design": "not_applicable",
+  "genre": "review",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "A narrative review of cell-biology spindle assembly is a biological review, not a study of research practices, so OUT."
+ },
+ {
+  "id": "W2033133921",
+  "categories": [],
+  "domain": null,
+  "study_design": "simulation_or_modeling",
+  "genre": "methods",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "RULE 1: variance estimation methodology for assessment models is a technique, not a study of research practice, so it is OUT."
+ },
+ {
+  "id": "W2048608576",
+  "categories": [],
+  "domain": null,
+  "study_design": "simulation_or_modeling",
+  "genre": "methods",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "RULE 1: develops an efficient estimation method for the partly-linear additive-hazards model (a technique), which is OUT."
+ },
+ {
+  "id": "W2052632059",
+  "categories": [],
+  "domain": null,
+  "study_design": "design_other",
+  "genre": "review",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "A veterinary clinical review educating practitioners is in no defined category (OUT)."
+ },
+ {
+  "id": "W2106891714",
+  "categories": [],
+  "domain": null,
+  "study_design": "simulation_or_modeling",
+  "genre": "methods",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "RULE 1: proposing robust likelihood inference methods is developing a technique, not studying research practice, so it is OUT (public policy is only the application)."
+ },
+ {
+  "id": "W2106999253",
+  "categories": [],
+  "domain": null,
+  "study_design": "observational",
+  "genre": "empirical",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "A descriptive study of SME marketing-information systems studies business behavior, not research practices, so OUT."
+ },
+ {
+  "id": "W2107899052",
+  "categories": [],
+  "domain": null,
+  "study_design": "observational",
+  "genre": "empirical",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "A paleoclimate and geology reinterpretation is not about research practices, so OUT."
+ },
+ {
+  "id": "W2112153192",
+  "categories": [],
+  "domain": null,
+  "study_design": "simulation_or_modeling",
+  "genre": "methods",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "RULE 1: proposing a robust binary regression estimator is developing a technique, not studying research practice, so it is OUT."
+ },
+ {
+  "id": "W2112262946",
+  "categories": [],
+  "domain": null,
+  "study_design": "simulation_or_modeling",
+  "genre": "methods",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "medium",
+  "reason": "RULE 1: GMM over-identification tests is a statistical technique, not a study of research practice, so it is OUT."
+ },
+ {
+  "id": "W2137464739",
+  "categories": [],
+  "domain": null,
+  "study_design": "theoretical_or_conceptual",
+  "genre": "methods",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "medium",
+  "reason": "Developing a software-migration framework is a technique for a domain, which RULE 1 places OUT."
+ },
+ {
+  "id": "W2167059005",
+  "categories": [],
+  "domain": null,
+  "study_design": "observational",
+  "genre": "empirical",
+  "about_ca_system": false,
+  "about_ca_topic": true,
+  "confidence": "high",
+  "reason": "A survey of e-business adoption among Quebec forestry SMEs studies business behavior not research practices, so OUT; Quebec is a substantive Canadian subject (ABOUT_CA_TOPIC)."
+ },
+ {
+  "id": "W2280732594",
+  "categories": [],
+  "domain": null,
+  "study_design": "theoretical_or_conceptual",
+  "genre": "commentary",
+  "about_ca_system": false,
+  "about_ca_topic": true,
+  "confidence": "low",
+  "reason": "Program evaluation 'in the case of Canada' makes Canada a substantive subject (ABOUT_CA_TOPIC) but is not research assessment, so it fits no topical category (OUT); title-only judgment sets confidence low."
+ },
+ {
+  "id": "W2325964580",
+  "categories": [],
+  "domain": null,
+  "study_design": "bench_or_experimental",
+  "genre": "empirical",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "A synthetic-chemistry study of liquid-crystal derivatives is not about research practices, so OUT."
+ },
+ {
+  "id": "W2346308355",
+  "categories": [],
+  "domain": null,
+  "study_design": "observational",
+  "genre": "empirical",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "medium",
+  "reason": "A forest-ecology field study's object is tree growth, not research practices, so OUT."
+ },
+ {
+  "id": "W2391079959",
+  "categories": [],
+  "domain": null,
+  "study_design": "design_other",
+  "genre": "methods",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "medium",
+  "reason": "A cloud-security systems paper develops a technique for a domain, which RULE 1 places OUT."
+ },
+ {
+  "id": "W2514259613",
+  "categories": [],
+  "domain": null,
+  "study_design": "simulation_or_modeling",
+  "genre": "methods",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "RULE 1: proposes a new probability-scale residual (a technique), which is OUT rather than a study of research practice."
+ },
+ {
+  "id": "W2533706679",
+  "categories": [],
+  "domain": null,
+  "study_design": "observational",
+  "genre": "empirical",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "medium",
+  "reason": "A clinical retrospective cohort on a COPD device is an instance of clinical research, not a study of it (RULE 1), so OUT."
+ },
+ {
+  "id": "W2555286646",
+  "categories": [],
+  "domain": null,
+  "study_design": "simulation_or_modeling",
+  "genre": "methods",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "RULE 1: Gaussian process emulators for disease models is developing an inference technique, not studying research practice, so it is OUT."
+ },
+ {
+  "id": "W2614034306",
+  "categories": [],
+  "domain": null,
+  "study_design": "simulation_or_modeling",
+  "genre": "empirical",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "medium",
+  "reason": "A polymer-physics study of DNA-knot dynamics is not about research practices, so OUT."
+ },
+ {
+  "id": "W2737290167",
+  "categories": [],
+  "domain": null,
+  "study_design": "simulation_or_modeling",
+  "genre": "methods",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "RULE 1: proposes a new nonparametric shape test (a technique), which is OUT rather than a study of research practice."
+ },
+ {
+  "id": "W2756078004",
+  "categories": [],
+  "domain": null,
+  "study_design": "simulation_or_modeling",
+  "genre": "methods",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "RULE 1: developing a Bayesian inference method for life testing is a technique, not a study of research practice, so it is OUT."
+ },
+ {
+  "id": "W2766219675",
+  "categories": [],
+  "domain": null,
+  "study_design": "simulation_or_modeling",
+  "genre": "methods",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "RULE 1: develops a collaborative-targeted-learning/regression-shrinkage estimator (a technique), which is OUT."
+ },
+ {
+  "id": "W2800440924",
+  "categories": [],
+  "domain": null,
+  "study_design": "simulation_or_modeling",
+  "genre": "methods",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "RULE 1: robust precision matrix estimation is developing a statistical technique, not studying research practice, so it is OUT."
+ },
+ {
+  "id": "W2963982265",
+  "categories": [],
+  "domain": null,
+  "study_design": "simulation_or_modeling",
+  "genre": "methods",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "RULE 1: proposing a new sparse regression method is developing a technique, however generic, so it is OUT."
+ },
+ {
+  "id": "W2982098039",
+  "categories": [],
+  "domain": null,
+  "study_design": "not_applicable",
+  "genre": "dataset",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "A geological open-file data report makes a universal exploration-methods claim from Canadian samples, so OUT and Canada is data source not substantive subject."
+ },
+ {
+  "id": "W2990669119",
+  "categories": [],
+  "domain": null,
+  "study_design": "qualitative",
+  "genre": "empirical",
+  "about_ca_system": true,
+  "about_ca_topic": true,
+  "confidence": "medium",
+  "reason": "Governance of a Canadian university is the Canadian academy as a substantive object (ABOUT_CA_SYSTEM/TOPIC), but higher-education governance fits no topical category (OUT)."
+ },
+ {
+  "id": "W3008905790",
+  "categories": [],
+  "domain": null,
+  "study_design": "simulation_or_modeling",
+  "genre": "methods",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "RULE 1: proposes a variance estimator for propensity-score matching (a technique), which is OUT."
+ },
+ {
+  "id": "W3108842605",
+  "categories": [],
+  "domain": null,
+  "study_design": "simulation_or_modeling",
+  "genre": "methods",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "RULE 1: deriving uncertainty measures for functional linear mixed models is a technique, not a study of research practice, so it is OUT."
+ },
+ {
+  "id": "W3119252148",
+  "categories": [
+   "scholarly_communication"
+  ],
+  "domain": null,
+  "study_design": "design_other",
+  "genre": "review",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "low",
+  "reason": "scholarly_communication (Borgman): dissertation formats concern how scholarly outputs are structured and disseminated; abstract missing so confidence is low."
+ },
+ {
+  "id": "W3122679125",
+  "categories": [
+   "sts"
+  ],
+  "domain": null,
+  "study_design": "theoretical_or_conceptual",
+  "genre": "other",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "low",
+  "reason": "Object is scientific advice as it enters policy, i.e. science as social practice per the STS operational test; confidence low because only the title is available."
+ },
+ {
+  "id": "W3134339722",
+  "categories": [],
+  "domain": null,
+  "study_design": "theoretical_or_conceptual",
+  "genre": "commentary",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "medium",
+  "reason": "Applying knowledge translation/implementation science to health-professions education applies a technique to a domain, which RULE 1 places OUT; McGill is affiliation, not subject."
+ },
+ {
+  "id": "W3164239396",
+  "categories": [],
+  "domain": null,
+  "study_design": "theoretical_or_conceptual",
+  "genre": "other",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "Economic mechanism-design theory is in no defined category (OUT)."
+ },
+ {
+  "id": "W3188186504",
+  "categories": [],
+  "domain": null,
+  "study_design": "systematic_review",
+  "genre": "review",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "medium",
+  "reason": "OUT: the object is a higher-education pedagogical strategy (academic writing groups), not a study of research practice under any category definition."
+ },
+ {
+  "id": "W3193090929",
+  "categories": [],
+  "domain": null,
+  "study_design": "simulation_or_modeling",
+  "genre": "methods",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "RULE 1: mixture-prior elicitation to avoid prior-data conflict is developing a technique, not studying research practice, so it is OUT."
+ },
+ {
+  "id": "W3202267396",
+  "categories": [],
+  "domain": null,
+  "study_design": "simulation_or_modeling",
+  "genre": "methods",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "RULE 1: develops a shrinkage quantile-regression method for panel data (a technique), which is OUT."
+ },
+ {
+  "id": "W3215636343",
+  "categories": [],
+  "domain": null,
+  "study_design": "simulation_or_modeling",
+  "genre": "methods",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "RULE 1: develops a sensitivity-analysis/classification framework (a technique), which is OUT."
+ },
+ {
+  "id": "W324831",
+  "categories": [],
+  "domain": null,
+  "study_design": "theoretical_or_conceptual",
+  "genre": "other",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "low",
+  "reason": "A disciplinary body-of-knowledge essay for modeling and simulation is in no defined category (OUT); title-only judgment sets confidence low."
+ },
+ {
+  "id": "W4233904704",
+  "categories": [
+   "insufficient_payload"
+  ],
+  "domain": null,
+  "study_design": "not_applicable",
+  "genre": "dataset",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "low",
+  "reason": "insufficient_payload: a bare anatomical term as the title of an IUPAC standards entry, with no abstract, cannot be screened."
+ },
+ {
+  "id": "W4238878334",
+  "categories": [],
+  "domain": null,
+  "study_design": "not_applicable",
+  "genre": "dataset",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "low",
+  "reason": "OUT: an IUPAC endocrine-disruptor standards dataset term in no defined category; abstract missing and one-word title so confidence is low."
+ },
+ {
+  "id": "W4240341889",
+  "categories": [],
+  "domain": null,
+  "study_design": "not_applicable",
+  "genre": "dataset",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "low",
+  "reason": "OUT: an IUPAC endocrine-disruptor standards dataset term in no defined category; abstract missing and one-word title so confidence is low."
+ },
+ {
+  "id": "W4244055162",
+  "categories": [],
+  "domain": null,
+  "study_design": "not_applicable",
+  "genre": "dataset",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "low",
+  "reason": "OUT: an IUPAC standards dataset term in no defined category; abstract missing and short title so confidence is low."
+ },
+ {
+  "id": "W4244710111",
+  "categories": [
+   "insufficient_payload"
+  ],
+  "domain": null,
+  "study_design": "not_applicable",
+  "genre": "dataset",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "low",
+  "reason": "insufficient_payload: a bare anatomical term as the title of an IUPAC standards entry, with no abstract, cannot be screened."
+ },
+ {
+  "id": "W4253167613",
+  "categories": [],
+  "domain": null,
+  "study_design": "not_applicable",
+  "genre": "dataset",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "low",
+  "reason": "OUT: an IUPAC endocrine-disruptor standards dataset term in no defined category; abstract missing and short title so confidence is low."
+ },
+ {
+  "id": "W4254034155",
+  "categories": [],
+  "domain": null,
+  "study_design": "simulation_or_modeling",
+  "genre": "other",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "medium",
+  "reason": "A wireless-networking dissertation develops an engineering technique, which RULE 1 places OUT."
+ },
+ {
+  "id": "W4256284424",
+  "categories": [],
+  "domain": null,
+  "study_design": "simulation_or_modeling",
+  "genre": "methods",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "RULE 1: develops and applies a generalized-gamma survival distribution (a technique), which is OUT."
+ },
+ {
+  "id": "W4256397300",
+  "categories": [],
+  "domain": null,
+  "study_design": "not_applicable",
+  "genre": "other",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "medium",
+  "reason": "A clinical best-practice guideline's object is patient care, not research practices, so it is in no defined category (OUT)."
+ },
+ {
+  "id": "W4280585721",
+  "categories": [],
+  "domain": null,
+  "study_design": "not_applicable",
+  "genre": "commentary",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "low",
+  "reason": "RULE 1 spirit: a reflective account of one's own co-created research is an instance of a research practice, not a study of it; abstract missing."
+ },
+ {
+  "id": "W4309201063",
+  "categories": [],
+  "domain": null,
+  "study_design": "simulation_or_modeling",
+  "genre": "methods",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "RULE 1: censored quantile regression rank-score inference is developing a technique, not studying research practice, so it is OUT."
+ },
+ {
+  "id": "W4309349999",
+  "categories": [],
+  "domain": null,
+  "study_design": "simulation_or_modeling",
+  "genre": "methods",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "RULE 1: develops specification tests for diffusion models (a technique), which is OUT."
+ },
+ {
+  "id": "W4318067345",
+  "categories": [],
+  "domain": null,
+  "study_design": "simulation_or_modeling",
+  "genre": "methods",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "RULE 1: proposing new performance measures for prediction models is developing a technique, not studying research practice, so it is OUT."
+ },
+ {
+  "id": "W4319790982",
+  "categories": [],
+  "domain": null,
+  "study_design": "simulation_or_modeling",
+  "genre": "methods",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "low",
+  "reason": "RULE 1: develops a measurement-error-correction method for mediation analysis (a technique), which is OUT; abstract missing so confidence is low."
+ },
+ {
+  "id": "W4321379785",
+  "categories": [],
+  "domain": null,
+  "study_design": "systematic_review",
+  "genre": "protocol",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "A clinical systematic-review/meta-analysis protocol studies patient outcomes, not research practice, so it is OUT (RULE 1: an instance of a research practice is not a study of it)."
+ },
+ {
+  "id": "W4360824212",
+  "categories": [],
+  "domain": null,
+  "study_design": "simulation_or_modeling",
+  "genre": "empirical",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "low",
+  "reason": "Building a clinical risk-prediction regression model develops a technique for a domain, which RULE 1 places OUT; title-only judgment sets confidence low."
+ },
+ {
+  "id": "W4361283423",
+  "categories": [],
+  "domain": null,
+  "study_design": "systematic_review",
+  "genre": "review",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "A clinical systematic review is an instance of evidence synthesis, and RULE 1 holds an instance of a research practice is not a study of it, so OUT."
+ },
+ {
+  "id": "W4383216509",
+  "categories": [],
+  "domain": null,
+  "study_design": "simulation_or_modeling",
+  "genre": "methods",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "low",
+  "reason": "RULE 1: develops a change-detection test using weighted residuals (a technique), which is OUT; abstract missing so confidence is low."
+ },
+ {
+  "id": "W4385884435",
+  "categories": [],
+  "domain": null,
+  "study_design": "observational",
+  "genre": "empirical",
+  "about_ca_system": false,
+  "about_ca_topic": true,
+  "confidence": "high",
+  "reason": "A study of minority education/employment outcomes in Quebec makes Canada a substantive subject (ABOUT_CA_TOPIC) but fits no topical category (OUT); a Canadian community as subject is not the research system."
+ },
+ {
+  "id": "W4386530542",
+  "categories": [],
+  "domain": null,
+  "study_design": "systematic_review",
+  "genre": "protocol",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "A systematic review protocol on nursing students' clinical experiences is an instance of evidence synthesis about a clinical topic, not a study of research practices (RULE 1), so OUT."
+ },
+ {
+  "id": "W4387865167",
+  "categories": [],
+  "domain": null,
+  "study_design": "qualitative",
+  "genre": "empirical",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "A qualitative study of prayer in nursing care is a clinical/social topic in no defined category (OUT); a Canadian city as setting is not ABOUT_CA."
+ },
+ {
+  "id": "W4389692720",
+  "categories": [
+   "insufficient_payload"
+  ],
+  "domain": null,
+  "study_design": "not_applicable",
+  "genre": "other",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "low",
+  "reason": "insufficient_payload: the title is boilerplate front-matter ('Acknowledgements') and the record cannot be screened."
+ },
+ {
+  "id": "W4389693951",
+  "categories": [
+   "insufficient_payload"
+  ],
+  "domain": null,
+  "study_design": "not_applicable",
+  "genre": "other",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "medium",
+  "reason": "insufficient_payload: the title is book frontmatter with no abstract, a boilerplate record that cannot be screened."
+ },
+ {
+  "id": "W4389694333",
+  "categories": [
+   "insufficient_payload"
+  ],
+  "domain": null,
+  "study_design": "not_applicable",
+  "genre": "other",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "medium",
+  "reason": "insufficient_payload: the title is book acknowledgements with no abstract, a boilerplate record that cannot be screened."
+ },
+ {
+  "id": "W4390905989",
+  "categories": [],
+  "domain": null,
+  "study_design": "theoretical_or_conceptual",
+  "genre": "methods",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "low",
+  "reason": "RULE 1: a statistical-modeling methodology paper (a technique), which is OUT; abstract missing so confidence is low."
+ },
+ {
+  "id": "W4399025718",
+  "categories": [],
+  "domain": null,
+  "study_design": "simulation_or_modeling",
+  "genre": "methods",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "RULE 1: a likelihood ratio change-point test for random coefficient models is a technique, not a study of research practice, so it is OUT."
+ },
+ {
+  "id": "W4399279333",
+  "categories": [],
+  "domain": null,
+  "study_design": "simulation_or_modeling",
+  "genre": "other",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "low",
+  "reason": "Monetary-policy macroeconomics is in no defined category (OUT); title-only judgment sets confidence low."
+ },
+ {
+  "id": "W4400115549",
+  "categories": [],
+  "domain": null,
+  "study_design": "theoretical_or_conceptual",
+  "genre": "commentary",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "Advocating implementation science for a domain (fisheries management) applies a technique to a domain, which RULE 1 places OUT."
+ },
+ {
+  "id": "W4400148214",
+  "categories": [],
+  "domain": null,
+  "study_design": "simulation_or_modeling",
+  "genre": "methods",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "RULE 1: order-restricted tests for mixed-effects models is developing a technique, not studying research practice, so it is OUT."
+ },
+ {
+  "id": "W4400584230",
+  "categories": [],
+  "domain": null,
+  "study_design": "simulation_or_modeling",
+  "genre": "methods",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "RULE 1: deriving robust estimators for model performance is developing a technique, not a study of research practice, so it is OUT."
+ },
+ {
+  "id": "W4401369456",
+  "categories": [],
+  "domain": null,
+  "study_design": "systematic_review",
+  "genre": "review",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "A qualitative systematic review of patient survivorship experience studies patients, not research practice, so it is OUT (its object is patients, not studies)."
+ },
+ {
+  "id": "W4401741113",
+  "categories": [
+   "metaresearch"
+  ],
+  "domain": "methods",
+  "study_design": "theoretical_or_conceptual",
+  "genre": "methods",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "medium",
+  "reason": "A reflection on the limits of a research method as used by researchers over 20 years is metaresearch on methods (methods = how researchers do science)."
+ },
+ {
+  "id": "W4403203719",
+  "categories": [
+   "metaresearch"
+  ],
+  "domain": "reproducibility",
+  "study_design": "design_other",
+  "genre": "empirical",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "Object is the replicability of psychological effects and the methods to detect heterogeneity, i.e. metaresearch on reproducibility (how to verify science)."
+ },
+ {
+  "id": "W4403277459",
+  "categories": [],
+  "domain": null,
+  "study_design": "not_applicable",
+  "genre": "commentary",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "Recommendations developed for the health-promotion domain are an instance of practice, not a study of research practices (RULE 1), so OUT."
+ },
+ {
+  "id": "W4403760706",
+  "categories": [],
+  "domain": null,
+  "study_design": "observational",
+  "genre": "empirical",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "medium",
+  "reason": "A single-center radiotherapy clinical series is an instance of clinical research, not a study of research practices, so OUT; Halifax is setting not subject."
+ },
+ {
+  "id": "W4406245583",
+  "categories": [],
+  "domain": null,
+  "study_design": "simulation_or_modeling",
+  "genre": "methods",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "low",
+  "reason": "RULE 1: develops pseudo-empirical-likelihood methods for causal inference (a technique), which is OUT; abstract missing so confidence is low."
+ },
+ {
+  "id": "W4406483015",
+  "categories": [],
+  "domain": null,
+  "study_design": "systematic_review",
+  "genre": "review",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "low",
+  "reason": "A systematic review of machine-learning methods for a domain (EEG) reviews techniques for a domain, which RULE 1 places OUT; title-only judgment sets confidence low."
+ },
+ {
+  "id": "W4409249547",
+  "categories": [],
+  "domain": null,
+  "study_design": "not_applicable",
+  "genre": "other",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "low",
+  "reason": "A non-scholarly organizational program update is screenable but fits no defined category (OUT means 'in no defined category')."
+ },
+ {
+  "id": "W4409912679",
+  "categories": [
+   "open_science"
+  ],
+  "domain": null,
+  "study_design": "qualitative",
+  "genre": "empirical",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "high",
+  "reason": "Analyzing EDI and public participation in Open Science policy matches UNESCO's open-science criterion of inclusive, equitable knowledge production (open_science)."
+ },
+ {
+  "id": "W6901980189",
+  "categories": [],
+  "domain": null,
+  "study_design": "not_applicable",
+  "genre": "dataset",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "low",
+  "reason": "Supplementary file of a synthesis about population-health intervention scale-up, whose object is health practice not research practices, so it is in no defined category (OUT)."
+ },
+ {
+  "id": "W6920285657",
+  "categories": [],
+  "domain": null,
+  "study_design": "not_applicable",
+  "genre": "dataset",
+  "about_ca_system": false,
+  "about_ca_topic": true,
+  "confidence": "low",
+  "reason": "OUT: a raw Statistics Canada R&D data table, not a study in any category, but Canada/Canadian R&D is a substantive subject so ABOUT_CA_TOPIC is true."
+ },
+ {
+  "id": "W6938995380",
+  "categories": [],
+  "domain": null,
+  "study_design": "not_applicable",
+  "genre": "dataset",
+  "about_ca_system": false,
+  "about_ca_topic": true,
+  "confidence": "medium",
+  "reason": "OUT: a Statistics Canada R&D data table is in no defined category, but Canada is a substantive subject so ABOUT_CA_TOPIC holds."
+ },
+ {
+  "id": "W6939876685",
+  "categories": [
+   "insufficient_payload"
+  ],
+  "domain": null,
+  "study_design": "not_applicable",
+  "genre": "dataset",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "low",
+  "reason": "'Additional file 5: of...' is a supplementary-file scraping artifact surfaced as a work and cannot be screened (insufficient_payload)."
+ },
+ {
+  "id": "W6949330925",
+  "categories": [],
+  "domain": null,
+  "study_design": "not_applicable",
+  "genre": "other",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "low",
+  "reason": "RULE 1: a title-only piece on using AI for literature searching reads as teaching/using a technique, which is OUT; abstract missing."
+ },
+ {
+  "id": "W6992035391",
+  "categories": [],
+  "domain": null,
+  "study_design": "qualitative",
+  "genre": "other",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "medium",
+  "reason": "An ethnomusicological comparison of throat-singing traditions is not about research practices, so it is in no defined category (OUT)."
+ },
+ {
+  "id": "W6992399825",
+  "categories": [],
+  "domain": null,
+  "study_design": "qualitative",
+  "genre": "other",
+  "about_ca_system": false,
+  "about_ca_topic": true,
+  "confidence": "medium",
+  "reason": "A sociological study of Quebec state road-safety marketing is not about research practices, so OUT; Quebec is a substantive Canadian subject (ABOUT_CA_TOPIC)."
+ },
+ {
+  "id": "W6996219658",
+  "categories": [],
+  "domain": null,
+  "study_design": "design_other",
+  "genre": "methods",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "low",
+  "reason": "A methods report for assessing education demand applies methods to a domain question, which RULE 1 places OUT; title-only judgment sets confidence low."
+ },
+ {
+  "id": "W7066211591",
+  "categories": [],
+  "domain": null,
+  "study_design": "bench_or_experimental",
+  "genre": "empirical",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "medium",
+  "reason": "A crop salinity-tolerance study's object is plant physiology, not research practices, so OUT."
+ },
+ {
+  "id": "W7084451137",
+  "categories": [],
+  "domain": null,
+  "study_design": "observational",
+  "genre": "empirical",
+  "about_ca_system": false,
+  "about_ca_topic": false,
+  "confidence": "low",
+  "reason": "Surveying healthcare professionals' opinions on communication skills is a clinical/education topic in no defined category (OUT); title-only judgment sets confidence low."
+ }
+]

@@ -1069,3 +1069,35 @@ I have now written, in this project, three variants of the same error, and this 
 **Every one of them produced output that looked correct.** And this one had the additional property that its wrong answer *confirmed my thesis*. The zero-probability hole made the sample tidier. The literature corroboration made the evidence feel stronger. Now a bug produced a result that flattered the project's central claim, and I was three paragraphs into believing it.
 
 **The errors that survive are the ones that flatter you.** That sentence is in this file five times now. It keeps earning its place.
+
+## D34. A screening arm went looking for the other arms' answers, and the harness had never said not to.
+
+**Date:** 2026-07-13. **Caught because the arm SAID SO in its completion report.**
+
+### What happened
+
+The live loop's first round runs three teachers independently on the same 100 works; the between-teacher disagreement is a measured quantity the audit stratifies on. The Opus arm for chunk 04 reported, in its own words, that it used *"calibration from the completed sibling arm (raw_codex)"* for its hardest boundary calls. It had read another teacher's labels before writing its own.
+
+Nothing in the harness forbade it. The agents run in the repository, the sibling arm's raw output sits in a sibling directory, and an agent that wants calibration will find it. **Correlated arms are worse than one arm**, because they produce the agreement of one model wearing three names, and every downstream number that treats the arms as independent (the disagreement stratum, the between-model spread, the adjudication) silently inherits the correlation.
+
+### The repair
+
+The contaminated chunk was **discarded before assembly** (the validator never saw it) and re-screened by a fresh agent whose instructions state the independence requirement, name the directories it must not read, and say why. The scripted arms cannot contaminate this way: the CLI teachers receive the prompt on stdin and have no repository access.
+
+### The lesson
+
+The disagreement between arms is a measurement, and a measurement's independence assumptions have to be **enforced, not presumed**. Every prior screen got independence for free because the arms ran on different machines through different CLIs; the moment one arm ran as an agent inside the repository, the assumption stopped being structural and nobody had written it down. It is written down now, in the arm's own instructions, which is the only place an agent reads.
+
+## D35. The live loop's first evaluation reported AP 0.969, and the model had been trained on the holdout.
+
+**Date:** 2026-07-13. **Caught because 0.969 was too good for a model whose honest ceiling is 0.15.**
+
+### What happened
+
+The simulation (finding 31) excluded its holdout from selection. The LIVE loop's evaluator defined the same holdout locally, in `ml/loop.py`, while the trainer in `ml/select_batch.py` trained on **all 5,600 labelled works, holdout included**. Two modules, two ideas of what "held out" meant, no shared definition. Round 1 reported holdout AP **0.969** against works the model had memorized. The honest number, after the fix, is **0.152**.
+
+This is D33's class again (a metric computed on data the process controls), one file to the left, on the same day D33 was recorded. Writing the deviation did not prevent the recurrence; only structure does.
+
+### The repair
+
+One canonical definition, `ml/labels.py::frozen_holdout_ids()`, imported by both sides. `train_heads()` excludes it unless the maturity gate has passed. And two assertions run every evaluation: no holdout work may appear in any loop batch, and the training corpus must be smaller than labelled-minus-holdout. The number 0.969 appears in this entry so that the next person who sees an evaluation that good checks the corpus before the champagne.

@@ -1,0 +1,603 @@
+Reading additional input from stdin...
+OpenAI Codex v0.144.0
+--------
+workdir: /Users/choxos/Documents/GitHub/CaRN-data-challenge
+model: gpt-5.6-luna
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: medium
+reasoning summaries: none
+session id: 019f5bbd-9cd1-7b12-bd25-5557105927b3
+--------
+user
+You are screening scholarly works for the MetaCan project. Apply the rubric below to EVERY record and output ONE JSON array with ONE object per record, conforming EXACTLY to the JSON schema below. Output ONLY the JSON array, no prose before or after it.
+
+# THE RUBRIC (v3.1, locked)
+
+# MétaCan screening rubric (v3.1)
+
+**Status: LOCKED, 2026-07-13.** Supersedes v2.2. No screening ran under v3.0, which lived for hours: an adversarial review found that its Murad quotation inserted the word "treatment" into a sentence this document calls verbatim (D29). v3.1 corrects that quotation from the PDF, fixes the Kataoka page range, aligns the funder clause with the protocol, corrects two glosses against their sources, and adds the study-design vocabulary that v3.0 demanded but never listed. Since D29, `pilot/check_quotes.R` fails the build if any quotation marked verbatim is not a substring of its cited PDF.
+
+**No number produced so far was made under v3.** The pilot ran under v1.0; the 179-work re-screen under v2.0. Both instruments are kept byte for byte, so every figure stays attributable to the text that produced it. v3 is the instrument the **full screen** runs under, and the **v2-to-v3 difference is reported as a finding**.
+
+---
+
+## What changed, and why it is not cosmetic
+
+v1 and v2 had a tier hierarchy: **T1 core / T2 adjacent / T3 contextual**. That structure had a defect at its root, and the data found it before I did.
+
+> **"Adjacent" is defined by negation.** It means *not-T1*. A category whose only content is "near the important one" cannot be applied consistently, and **OUT-vs-adjacent was the largest tier confusion at every sample size we measured.** The models were not failing. **The category was empty.**
+
+It was also a value judgment I had no standing to make. Calling science and technology studies "adjacent" says STS is peripheral to metascience. **STS is a field with its own founding literature, its own journals, and its own account of what studying science means.**
+
+**v3 deletes the hierarchy.** Every tradition is a **category with its own positive definition, taken from its own literature, quoted verbatim from a source in `docs/reference/definitions/`.** There is no residual bucket. A record may carry **more than one** category, because the traditions genuinely overlap and forcing a single label is what created the problem.
+
+**Nothing here is cited from memory.** Every quotation below was read from the PDF named beside it. In a project whose worst deviation (D26) was that its own definition of metaresearch was mine and uncited for its entire life, a recalled citation would be the single worst thing this document could contain.
+
+---
+
+## The definitional problem is the field's, not this project's, and the field says so in print
+
+- **Puljak L, Lovric Makaric Z, Buljan I, Pieper D.** *What is a meta-epidemiological study? Analysis of published literature indicated heterogeneous study designs and definitions.* J Comp Eff Res. 2020. doi:10.2217/cer-2019-0201
+  > Analysed **175 information sources**. *"Definitions of meta-epidemiological studies varied and some studies used the term meta-epidemiological study to describe methodological research-on-research studies."* Conclusion: *"Research community would benefit from consensus about definition of meta-epidemiological study."*
+
+- **Kataoka Y, et al.** J Clin Epidemiol. 2023;154:219-220.
+  > A **published dispute** with Puljak, opening by naming *"the currently confusing nomenclatures around 'meta-epidemiology' and related terms such as 'meta-research' and 'research-on-research'."*
+
+- **Stevens ER, Laynor G.** *Recognizing the value of meta-research and making it easier to find.* J Med Libr Assoc. 2023;111(4). doi:10.5195/jmla.2023.1758
+  > *"The breadth of meta-research presents a significant challenge for identifying published meta-research studies,"* and it notes **the lack of a MeSH heading** for meta-research.
+
+**Those are claims about humans.** The pilot's numbers are claims about **models disagreeing under one rubric**. They are consistent, they are not the same estimand, and **only the human audit closes the gap** (`DEVIATIONS.md` D27).
+
+---
+
+## The categories
+
+A work may carry **more than one**. **Categories are not ranked and none is primary: the released landscape is the union of the defined categories, with every overlap reported.** The call's primary estimand is reported over `metaresearch` because that is the field the call names; that is a **reporting choice, not a rank**, and each of the other traditions gets the same per-category estimate.
+
+### 1. `metaresearch`
+
+> **"Meta-research is an evolving scientific discipline that aims to evaluate and improve research practices. It includes thematic areas of methods, reporting, reproducibility, evaluation, and incentives (how to do, report, verify, correct, and reward science)."**
+>
+> Ioannidis JPA, Fanelli D, Dunne DD, Goodman SN. *Meta-research: Evaluation and Improvement of Research Methods and Practices.* PLoS Biol. 2015;13(10):e1002264.
+> See also Ioannidis JPA. PLoS Biol. 2018;16(3):e2005468; METRICS, Stanford: <https://metrics.stanford.edu/research>
+
+Every `metaresearch` record carries a **`domain`**, taken verbatim from those five thematic areas and glossed by Ioannidis's own parenthetical:
+
+| `domain` | Ioannidis's gloss | operationally |
+|---|---|---|
+| `methods` | *how to **do** science* | design, conduct, analysis, bias, statistical practice, evidence-synthesis methodology; Ioannidis's own description of this area ends *"research integrity and ethics"* |
+| `reporting` | *how to **report** science* | reporting standards and completeness |
+| `reproducibility` | *how to **verify** science* | replication, data and code sharing, transparency |
+| `evaluation` | *how to **correct** science* | peer review and editorial process, research assessment, metrics |
+| `incentives` | *how to **reward** science* | funding allocation, careers and the research workforce, reward structures |
+
+**RULE 1 stands** (carried from v2; it resolved the largest single seam): *a work is `metaresearch` on methods only if its object is methods **as used, reported or performed by researchers**. Developing, deriving, validating or teaching a technique for a domain is OUT, however generic the technique.* **An instance of a research practice is not a study of it.**
+
+### 2. `metaepidemiology` — **CONTESTED IN PRINT. Both definitions are coded.**
+
+There is **no consensus definition** (Puljak 2020, above). **This rubric does not invent one.** It codes **both published definitions** and **flags where they disagree**, because the dispute is live, it is between named researchers in peer-reviewed journals, and hiding it inside a single label would destroy the only evidence of it.
+
+- **`metaepi_narrow`** — Murad MH, Wang Z. *Guidelines for reporting meta-epidemiological methodology research.* Evid Based Med. 2017;22(4):139-142. doi:10.1136/ebmed-2017-110713
+  > *"Meta-epidemiological studies adopt a systematic review or meta-analysis approach to examine the impact of certain characteristics of clinical studies on the observed effect and provide empirical evidence for hypothesised associations."*
+  >
+  > *(v3.0 quoted this sentence as 'the observed **treatment** effect'. The word is not in the paper; it narrowed Murad's definition while claiming his authority for the narrowing, and it survived a LOCK. D29.)*
+
+- **`metaepi_broad`** — Kataoka Y, et al. J Clin Epidemiol. 2023;154:219-220. *(Not 219-221: page 221 is Puljak's reply, which is the other side of the dispute.)*
+  > *"The greatest common defining concept of 'meta-epidemiological studies' would be **any studies in which the unit of analysis is a study, not a patient**."*
+
+**Where the two differ, the record is flagged, and the size of that class is reported as a finding.** A published dispute is a boundary to be *measured*, not settled by fiat.
+
+### 3. `bibliometrics` (scientometrics)
+
+> **"Scientometrics is the study of the quantitative aspects of the process of science as a communication system. It is centrally, but not only, concerned with the analysis of citations in the academic literature."**
+>
+> Mingers J, Leydesdorff L. *A Review of Theory and Practice in Scientometrics.* Eur J Oper Res. 2015. doi:10.1016/j.ejor.2015.04.002
+> Founding work: Price DJ de Solla. *Networks of Scientific Papers.* Science. 1965;149(3683):510-515.
+
+**Boundary with `metaresearch`, and it resolves v1's self-contradiction** (v1's T1 bullet and its own worked example gave opposite answers): a study that **characterises a literature** by quantitative means is `bibliometrics`. A study that uses bibliometric means to **make a claim about research practice** (citation distortion, reporting trends, citation of retracted work) is **also `metaresearch`**, and carries both. **v3 does not force the choice; that forcing was the bug.**
+
+### 4. `sts` (science and technology studies)
+
+> **"co-production is shorthand for the proposition that the ways in which we know and represent the world (both nature and society) are inseparable from the ways in which we choose to live in it."**
+> **"The idiom of co-production ... represents a major synthesis of scholarship in science and technology studies (S&TS)."**
+>
+> Jasanoff S (ed.). *States of Knowledge: The Co-Production of Science and the Social Order.* Routledge, 2004.
+
+> **"We study science in action and not ready made science or technology; to do so, we either arrive before the facts and machines are blackboxed or we follow the controversies that reopen them."**
+>
+> Latour B. *Science in Action: How to Follow Scientists and Engineers through Society.* Harvard University Press.
+
+**Operational test:** the work studies **science or technology as social practice**: how knowledge and social order are produced together, how facts are made rather than found, how controversies open and close. **The object must be science, research, or technoscientific knowledge**, at any period. *(v1 restricted history and philosophy of science to "contemporary research practice", an unexamined adverb that silently excluded the entire history of Canadian science. It is deleted.)*
+
+### 5. `scholarly_communication`
+
+> **"Scholarly communication is a rich and complex sociotechnical system formed over a period of centuries."**
+> **"...used here in the broader sense to include the formal and informal activities associated with the use and dissemination of information through public and private channels."**
+>
+> Borgman CL. *Scholarship in the Digital Age: Information, Infrastructure, and the Internet.* MIT Press, 2007.
+
+### 6. `open_science`
+
+> **"Open science is a set of principles and practices that aim to make scientific research from all fields accessible to everyone for the benefits of scientists and society as a whole."**
+> **"Open science is about making sure not only that scientific knowledge is accessible but also that the production of that knowledge itself is inclusive, equitable and sustainable."**
+>
+> UNESCO. *Recommendation on Open Science* (introduction), 2021. **193 countries adopted it.**
+
+The second sentence is the reason this category is not a synonym for "open access": UNESCO's definition makes **inclusivity and equity of knowledge production** part of open science itself, which is the criterion this challenge is judged on.
+
+### 7. `research_integrity` — **defined by its OBJECT; the sources do not define the field, and that is recorded**
+
+**Honest limitation, stated rather than hidden.** The two sources supplied define **what counts as misconduct** and **what publication ethics covers**. **Neither defines "research integrity research" as a discipline** the way Ioannidis defines metaresearch or Jasanoff defines STS. So this category is defined by its **object**, and the gap is on the record.
+
+> **"...the analysis was limited to behaviours that distort scientific knowledge: fabrication, falsification, 'cooking' of data, etc... Survey questions on plagiarism and other forms of professional misconduct were excluded."**
+>
+> Fanelli D. *How Many Scientists Fabricate and Falsify Research? A Systematic Review and Meta-Analysis of Survey Data.* PLoS ONE. 2009;4(5):e5738.
+
+> Publication ethics, per **COPE** (Committee on Publication Ethics), *Ethics Toolkit for Journal Editors and Publishers.*
+
+**Operational test:** the object is **research misconduct, questionable research practices, retraction, authorship, or publication ethics**, *as an object of study*. **Fanelli's boundary is adopted and its exclusion is carried:** fabrication, falsification and data cooking are in; **plagiarism and professional misconduct are recorded but marked, because Fanelli's own scope excludes them** and a rubric that silently widened his boundary while citing him would be misquoting its own source.
+
+**This category overlaps `metaresearch` heavily**: Ioannidis's own description of the *methods* area ends *"research integrity and ethics"*, so integrity research is inside metaresearch by his definition. **That overlap is expected and allowed**, because v3 is multi-label. It is not a hierarchy.
+
+### `insufficient_payload`
+
+Not a judgment; a statement that the record **cannot be screened** (a scraping artifact as a title, boilerplate in the abstract field, a title and abstract from different papers, spam). **Reported, never silently dropped**: the size of this class is a finding about OpenAlex.
+
+### `OUT`
+
+None of the above. **"OUT" now means "in no defined category", not "not near the important one."** That is the whole change.
+
+---
+
+## Canadian linkage
+
+- `CA_AFF` — at least one Canadian institutional affiliation. **Warning, measured:** OpenAlex misassigns these. **At least 17,466** works enter the frame with, as their *only* Canadian institution, one of six suspect assignments: a parse failure that is not an institution at all (`Impact`, attached to a Spanish COVID essay) or a real organization attached to papers it has nothing to do with (`Discovery Air (Canada)` on a Brazilian linguistics paper). That is a **lower bound** from six audited strings (finding 27), and the records are **flagged for audit, not deleted**. A Canadian affiliation is *evidence*, not proof.
+- `CA_FUND` — ≥1 funder whose OpenAlex `country_code` is Canada: an **external criterion, not a curated list**. *(An earlier four-funder list (CIHR, NSERC, SSHRC, CFI) failed twice: three of its four hardcoded IDs pointed at other funders, and even corrected it missed Canada Research Chairs, the Government of Canada, NRC, Mitacs, Genome Canada, and every provincial agency. OpenAlex knows 2,182 Canadian funders; `R/pin_entities.R` pins them.)*
+- **`ABOUT_CA_SYSTEM`** — the Canadian **research system or academy** is a substantive object. *A Canadian institution as setting is not this.*
+- **`ABOUT_CA_TOPIC`** — Canada is a substantive subject, whether or not research is the object.
+
+*(v1 had one boolean and it could not separate "Canadian data, universal claim" from "a claim about Canada". Four screening agents proposed this split independently.)*
+
+## Study design
+
+Coded for every work, from **this vocabulary and no other** (v3.0 said "coded for every work" and never listed the values, which is D20's exact shape: a field every screener codes and no two code alike):
+
+| `study_design` | MEDLINE publication type it is validated against |
+|---|---|
+| `randomized_trial` | Randomized Controlled Trial |
+| `nonrandomized_trial` | Controlled Clinical Trial |
+| `observational` | Observational Study |
+| `systematic_review` | Systematic Review |
+| `meta_analysis` | Meta-Analysis |
+| `case_report` | Case Reports |
+| `qualitative` | *(none; ships as a score, marked unvalidated)* |
+| `simulation_or_modeling` | *(none; ships as a score, marked unvalidated)* |
+| `bench_or_experimental` | *(none; ships as a score, marked unvalidated)* |
+| `theoretical_or_conceptual` | *(none; ships as a score, marked unvalidated)* |
+| `not_applicable` | *(the work is not empirical research: editorials, datasets, software)* |
+| `design_other` | *(none; ships as a score, marked unvalidated)* |
+
+**Validated against MEDLINE publication types, per record and not per year.** *(v3.0 called these "human-indexed by NLM", which is false; v3.1's first correction said "human-indexed until April 2022", which is also false. NLM stopped fully human indexing as universal practice around 2011 and completed automation in 2022, so a YEAR CUTOFF cannot separate the eras. The reference subset is defined by NLM's **record-level `IndexingMethod`** field: absent = fully human, `Curated` = automated with human review, `Automated` = machine. Human records are the reference; the others measure **agreement with another machine** and are reported as such.)*
+
+**Class-specific calendar eligibility, because a publication type that did not exist cannot be a negative.** *Observational Study* entered the vocabulary in **2014** and *Systematic Review* in **2019**. A 2008 cohort study carries no *Observational Study* tag, and treating that absence as "not observational" would train and score the model against a censoring artifact. Each design class is therefore validated **only on records published after its type existed**, and that eligibility window is prespecified per class. Where MEDLINE does not reach (most of the physical sciences, humanities and social sciences), the label ships as a **score, not an assertion**, and is **marked unvalidated**. *The dataset states, per field, which of its own annotations it has earned the right to assert.*
+
+## Genre
+
+**One vocabulary, defined here, and `screening-schema-v3.json` QUOTES this list rather than paraphrasing it.**
+
+`empirical` · `review` · `methods` · `commentary` · `editorial` · `protocol` · `dataset` · `software` · `other`
+
+*(In v1 the rubric and the schema named **two different vocabularies for this field**, overlapping on two values out of thirteen. Every screener was handed both and obeyed both privately; the validator checked `tier` and had never been asked to look at `genre`, so 16,800 labels passed every check that ran. See D20 and finding 24. **A codebook is code. It gets a test.**)*
+
+## `tier` is RETIRED
+
+v3 replaces it with `categories`, which is **multi-label**. The values `T1`, `T2`, `T3` and `OUT` remain in the **legacy** `screening-schema.json` **only so that the v1 and v2 label files stay readable**; the v3 contract, `screening-schema-v3.json`, **does not contain the field**, so no new screening can emit them. `OUT` in v3 means an empty `categories` array: *in no defined category*, not *near the important one*.
+
+## Confidence
+
+`high` / `medium` / `low`. **If the abstract is missing, judge on the title alone and set confidence to `low` unless the title is unambiguous.** The schema **quotes** this sentence; it does not paraphrase it (D24).
+
+**`low` is a legitimate answer.** A screener that never says `low` is not being careful; it is being confident.
+
+---
+
+## Sources
+
+Every quotation above was read from a PDF in **`docs/reference/definitions/`**, which is committed. Nothing is cited from memory, and since D29 that is a checked property, not a promise: `pilot/check_quotes.R` fails the build if any quotation marked verbatim is not a substring of its cited PDF. `pilot/check_instrument.R` fails the build if this rubric and `screening-schema-v3.json` disagree about any field, in either direction.
+
+
+# THE OUTPUT SCHEMA (screening-schema-v3.json)
+
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "MetaCan screening output, rubric v3.1",
+  "description": "The output contract for every screening run under rubric v3.1. This document QUOTES the rubric; it never paraphrases it. Where a description below restates a rule, the wording is copied from docs/protocol/rubric-v3.md, because the schema misquoting the rubric is D24 and two documents that disagree are two instruments (D20). pilot/check_instrument.R fails the build if this file and the rubric disagree about any field, in either direction. The legacy screening-schema.json remains ONLY so that v1 and v2 label files stay readable; no new screening validates against it.",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["id", "categories", "study_design", "genre", "about_ca_system", "about_ca_topic", "confidence"],
+    "properties": {
+      "id": {
+        "type": "string",
+        "pattern": "^W\\d+$",
+        "description": "The OpenAlex work id, exactly as given in the payload."
+      },
+      "categories": {
+        "type": "array",
+        "items": {
+          "enum": ["metaresearch", "metaepi_narrow", "metaepi_broad", "bibliometrics", "sts", "scholarly_communication", "open_science", "research_integrity", "insufficient_payload"]
+        },
+        "uniqueItems": true,
+        "description": "Every category the work belongs to; a work may carry more than one, and categories are not ranked and none is primary. An EMPTY array is OUT, which means 'in no defined category', not 'near the important one'. insufficient_payload means the record cannot be screened (a scraping artifact as a title, boilerplate in the abstract field, a title and abstract from different papers, spam) and is reported, never silently dropped."
+      },
+      "domain": {
+        "enum": ["methods", "reporting", "reproducibility", "evaluation", "incentives", null],
+        "description": "REQUIRED when categories contains metaresearch, and null otherwise. Taken verbatim from Ioannidis's five thematic areas: methods, reporting, reproducibility, evaluation, and incentives (how to do, report, verify, correct, and reward science)."
+      },
+      "study_design": {
+        "enum": ["randomized_trial", "nonrandomized_trial", "observational", "systematic_review", "meta_analysis", "case_report", "qualitative", "simulation_or_modeling", "bench_or_experimental", "theoretical_or_conceptual", "not_applicable", "design_other"],
+        "description": "Coded for every work, from this vocabulary and no other. not_applicable means the work is not empirical research: editorials, datasets, software."
+      },
+      "genre": {
+        "enum": ["empirical", "review", "methods", "commentary", "editorial", "protocol", "dataset", "software", "other"],
+        "description": "One vocabulary, defined in the rubric, and this schema QUOTES that list rather than paraphrasing it."
+      },
+      "about_ca_system": {
+        "type": "boolean",
+        "description": "ABOUT_CA_SYSTEM: the Canadian research system or academy is a substantive object. A Canadian institution as setting is not this."
+      },
+      "about_ca_topic": {
+        "type": "boolean",
+        "description": "ABOUT_CA_TOPIC: Canada is a substantive subject, whether or not research is the object."
+      },
+      "confidence": {
+        "enum": ["high", "medium", "low"],
+        "description": "If the abstract is missing, judge on the title alone and set confidence to low unless the title is unambiguous. low is a legitimate answer: a screener that never says low is not being careful; it is being confident."
+      },
+      "reason": {
+        "type": "string",
+        "maxLength": 400,
+        "description": "One sentence naming the rubric rule the decision rests on."
+      }
+    }
+  }
+}
+
+
+# THE RECORDS
+
+[
+ {
+  "id": "W2004383711",
+  "title": "Testing multivariate uniformity: The distance‐to‐boundary method",
+  "abstract": "Abstract Given a random sample taken on a compact domain S ⊂ d , the authors propose a new method for testing the hypothesis of uniformity of the underlying distribution. The test statistic is based on the distance of every observation to the boundary of S . The proposed test has a number of interesting properties. In particular, it is feasible and particularly suitable for high dimensional data; it is distribution free for a wide range of choices of 5; it can be adapted to the case that the support of S is unknown; and it also allows for one‐sided versions. Moreover, the results suggest that, in some cases, this procedure does not suffer from the well‐known curse of dimensionality. The authors study the properties of this test from both a theoretical and practical point of view. In particular, an extensive Monte Carlo simulation study allows them to compare their methods with some alternative procedures. They conclude that the proposed test provides quite a satisfactory balance between power, computational simplicity, and adaptability to different dimensions and supports.",
+  "year": 2006,
+  "lang": "en",
+  "type": "article",
+  "venue": "Canadian Journal of Statistics",
+  "topic": "Advanced Statistical Methods and Models",
+  "field": "Mathematics"
+ },
+ {
+  "id": "W4238878334",
+  "title": "Feminization",
+  "abstract": "",
+  "year": 2017,
+  "lang": "en",
+  "type": "dataset",
+  "venue": "IUPAC Standards Online",
+  "topic": "Effects and risks of endocrine disrupting chemicals",
+  "field": "Environmental Science"
+ },
+ {
+  "id": "W4240341889",
+  "title": "Intrauterine",
+  "abstract": "",
+  "year": 2017,
+  "lang": "en",
+  "type": "dataset",
+  "venue": "IUPAC Standards Online",
+  "topic": "Effects and risks of endocrine disrupting chemicals",
+  "field": "Environmental Science"
+ },
+ {
+  "id": "W2010741163",
+  "title": "Variable selection by ensembles for the Cox model",
+  "abstract": "",
+  "year": 2011,
+  "lang": "en",
+  "type": "article",
+  "venue": "Journal of Statistical Computation and Simulation",
+  "topic": "Statistical Methods and Inference",
+  "field": "Mathematics"
+ },
+ {
+  "id": "W2514259613",
+  "title": "Probability‐scale residuals for continuous, discrete, and censored data",
+  "abstract": "Abstract We describe a new residual for general regression models defined as , where y is the observed outcome and is a random variable from the fitted distribution. This probability‐scale residual (PSR) can be written as , whereas the popular observed‐minus‐expected residual can be thought of as . Therefore the PSR is useful in settings where differences are not meaningful or where the expectation of the fitted distribution cannot be calculated. We present several desirable properties of the PSR that make it useful for diagnostics and measuring residual correlation, especially across different outcome types. We demonstrate its utility for continuous, ordered discrete, and censored outcomes, including current status data, and with various models including Cox regression, quantile regression, and ordinal cumulative probability models, for which fully specified distributions are not desirable or needed, and in some cases suitable residuals are not available. The residual is illustrated with simulated data and real data sets from HIV‐infected patients on therapy in the southeastern United States and Latin America. The Canadian Journal of Statistics 44: 463–479; 2016 © 2016 Statistical Society of Canada",
+  "year": 2016,
+  "lang": "en",
+  "type": "article",
+  "venue": "Canadian Journal of Statistics",
+  "topic": "Statistical Methods and Bayesian Inference",
+  "field": "Mathematics"
+ },
+ {
+  "id": "W2737290167",
+  "title": "Nonparametric Tests for Convexity/Monotonicity/Positivity of Multivariate Functions with Noisy Observations",
+  "abstract": "We propose a new method of testing for a function's convexity, monotonicity, or positivity, based on some noisy observations of the function made over a finite set $\\mathcal{T}$ of points in the domain, where the observations can be made multiple times at each point in $\\mathcal{T}$. One of the traditional approaches to the test of a function's shape characteristic is to fit a convex, a monotone, or a positive function, depending on the shape characteristic we wish to test for, to the data set minimizing the sum of squared errors, and to compute the sum of squared differences (SSD) between the fit and the data set. While the traditional approach proceeds by observing the SSD as the number of points in $\\mathcal{T}$ increases to infinity, we propose observing the SSD as $r$, the number of observations taken at each point in $\\mathcal{T}$, increases to infinity. This new way of observing the asymptotic behavior of the SSD leads to a test procedure that does not require the estimation of any additional parameters, and hence, is easy to implement. The proposed test procedure is proven to achieve a prescribed power as $r \\rightarrow \\infty$. Numerical examples illustrate that the proposed test successfully detects the convexity/monotonicity/positivity of a function, as well as the non-convexity/non-monotonicity/non-positivity of a function.",
+  "year": 2017,
+  "lang": "en",
+  "type": "article",
+  "venue": "International Journal of Statistics and Probability",
+  "topic": "Statistical Methods and Inference",
+  "field": "Mathematics"
+ },
+ {
+  "id": "W4389692720",
+  "title": "Acknowledgements",
+  "abstract": "",
+  "year": 2022,
+  "lang": "en",
+  "type": "book-chapter",
+  "venue": "University of Regina Press eBooks",
+  "topic": "Indigenous Health, Education, and Rights",
+  "field": "Social Sciences"
+ },
+ {
+  "id": "W3008905790",
+  "title": "Variance estimation when using propensity‐score matching with replacement with survival or time‐to‐event outcomes",
+  "abstract": "Propensity‐score matching is a popular analytic method to estimate the effects of treatments when using observational data. Matching on the propensity score typically requires a pool of potential controls that is larger than the number of treated or exposed subjects. The most common approach to matching on the propensity score is matching without replacement, in which each control subject is matched to at most one treated subject. Failure to find a matched control for each treated subject can lead to “bias due to incomplete matching.” To avoid this bias, it is important to identify a matched control subject for each treated subject. An alternative to matching without replacement is matching with replacement, in which control subjects are allowed to be matched to multiple treated subjects. A limitation to the use of matching with replacement is that variance estimation must account for both the matched nature of the sample and for some control subjects being included in multiple matched sets. While a variance estimator has been proposed for when outcomes are continuous, no such estimator has been proposed for use with time‐to‐event outcomes, which are common in medical and epidemiological research. We propose a variance estimator for the hazard ratio when matching with replacement. We conducted a series of Monte Carlo simulations to examine the performance of this estimator. We illustrate the utility of matching with replacement to estimate the effect of smoking cessation counseling on survival in smokers discharged from hospital with a heart attack.",
+  "year": 2020,
+  "lang": "en",
+  "type": "article",
+  "venue": "Statistics in Medicine",
+  "topic": "Advanced Causal Inference Techniques",
+  "field": "Mathematics"
+ },
+ {
+  "id": "W4309349999",
+  "title": "Empirical‐process‐based specification tests for diffusion models",
+  "abstract": "Abstract We develop two joint tests for the parametric drift and volatility functions of a diffusion model based on empirical processes. One key feature of our joint tests is that they account for different convergence rates of parameter estimators. The tests are of classical Kolmogorov–Smirnov and Cramér–von Mises types, and are asymptotically distribution free. The proposed tests have nontrivial power against a class of local alternatives with different convergence rates for the drift and volatility terms. Monte Carlo simulations show that the tests perform quite well in finite samples and outperform the nonparametric test of Hong and Li. The new tests are applied to EUR/USD exchange rate data and generate some interesting empirical findings that are consistent with our theoretical results and simulation studies.",
+  "year": 2022,
+  "lang": "en",
+  "type": "article",
+  "venue": "Canadian Journal of Statistics",
+  "topic": "Stochastic processes and financial applications",
+  "field": "Economics, Econometrics and Finance"
+ },
+ {
+  "id": "W4390905989",
+  "title": "On the Variability of Statistical Models",
+  "abstract": "",
+  "year": 2023,
+  "lang": "en",
+  "type": "article",
+  "venue": null,
+  "topic": "Statistical Methods and Inference",
+  "field": "Mathematics"
+ },
+ {
+  "id": "W3215636343",
+  "title": "Sensitivity analysis in classification using Bayesian smoothing spline ANOVA probit regression",
+  "abstract": "For many classification problems, in addition to providing accurate classification results, very often it is equally important to determine which predictors are contributing to the results, and by how much. This motivates this article, where a new sensitivity analysis framework is developed for classification problems to address this issue. The effectiveness of this framework is illustrated through simulation studies and application to real data. Notice that this framework can be coupled with different classification methods. However, in practice it is recommended to pair it with a classification method called Bayesian smoothing spline ANOVA probit regression (BSSANOVA). When compared with other existing methods through numerical experiments, BSSANOVA performs extremely well for both classification and sensitivity analysis.",
+  "year": 2021,
+  "lang": "en",
+  "type": "article",
+  "venue": "Canadian Journal of Statistics",
+  "topic": "Advanced Statistical Methods and Models",
+  "field": "Mathematics"
+ },
+ {
+  "id": "W2008765054",
+  "title": "Box‐Cox transformations in linear models: Large sample theory and tests of normality",
+  "abstract": "Abstract The authors provide a rigorous large sample theory for linear models whose response variable has been subjected to the Box‐Cox transformation. They provide a continuous asymptotic approximation to the distribution of estimators of natural parameters of the model. They show, in particular, that the maximum likelihood estimator of the ratio of slope to residual standard deviation is consistent and relatively stable. The authors further show the importance for inference of normality of the errors and give tests for normality based on the estimated residuals. For non‐normal errors, they give adjustments to the log‐likelihood and to asymptotic standard errors.",
+  "year": 2002,
+  "lang": "en",
+  "type": "article",
+  "venue": "Canadian Journal of Statistics",
+  "topic": "Statistical Methods and Inference",
+  "field": "Mathematics"
+ },
+ {
+  "id": "W4244055162",
+  "title": "Kingdon Trap",
+  "abstract": "",
+  "year": 2016,
+  "lang": "en",
+  "type": "dataset",
+  "venue": "IUPAC Standards Online",
+  "topic": "Shoulder and Clavicle Injuries",
+  "field": "Medicine"
+ },
+ {
+  "id": "W4319790982",
+  "title": "Measurement error correction in mediation analysis under the additive hazards model",
+  "abstract": "",
+  "year": 2023,
+  "lang": "en",
+  "type": "article",
+  "venue": "Communications in Statistics - Simulation and Computation",
+  "topic": "Advanced Causal Inference Techniques",
+  "field": "Mathematics"
+ },
+ {
+  "id": "W4406245583",
+  "title": "Pseudo-empirical likelihood methods for causal inference",
+  "abstract": "",
+  "year": 2025,
+  "lang": "en",
+  "type": "article",
+  "venue": "Electronic Journal of Statistics",
+  "topic": "Advanced Causal Inference Techniques",
+  "field": "Mathematics"
+ },
+ {
+  "id": "W2023910207",
+  "title": "Comparison of NEXAFS microscopy and TEM-EELS for studies of soft matter",
+  "abstract": "1. Micron. 2008;39(3):311-9. doi: 10.1016/j.micron.2007.09.008. Epub 2007 Oct 2.\n\nComparison of NEXAFS microscopy and TEM-EELS for studies of soft matter.\n\nHitchcock AP(1), Dynes JJ, Johansson G, Wang J, Botton G.\n\nAuthor information:\n(1)Brockhouse Institute for Materials Research, McMaster University, Hamilton, \nON, Canada L8S 4M1. aph@mcmaster.ca\n\nIn the last 20 years, synchrotron based soft X-ray microscopy has emerged as a \npowerful technique for chemical microanalysis. By efficiently measuring \nnear-edge X-ray absorption spectroscopy (NEXAFS) at high spatial resolution, it \nproduces information analogous to that delivered by electron energy loss \nspectroscopy in a transmission electron microscope (TEM-EELS). NEXAFS microscopy \nhas significant advantages for studies of soft matter, which is typically a \nchallenge for TEM-EELS due to radiation damage. It provides unique capabilities \nfor studying wet samples. Here, we describe current state-of-the-art soft X-ray \nmicroscopy instrumentation and techniques (including the recently commissioned \nspectromicroscopy facility at the Canadian Light Source in Saskatoon), provide \nbrief descriptions of a few recent applications, and make explicit comparisons \nof the strengths and limitations of NEXAFS microscopy - in particular, scanning \ntransmission X-ray microscopy (STXM) - relative to TEM-EELS for spatially \nresolved materials analysis by inner shell spectroscopy.\n\nDOI: 10.1016/j.micron.2007.09.008\nPMID: 17996451 [Indexed for MEDLINE]",
+  "year": 2007,
+  "lang": "en",
+  "type": "article",
+  "venue": "Micron",
+  "topic": "Advanced Electron Microscopy Techniques and Applications",
+  "field": "Biochemistry, Genetics and Molecular Biology"
+ },
+ {
+  "id": "W4253167613",
+  "title": "Atresia, Follicular",
+  "abstract": "",
+  "year": 2017,
+  "lang": "en",
+  "type": "dataset",
+  "venue": "IUPAC Standards Online",
+  "topic": "Effects and risks of endocrine disrupting chemicals",
+  "field": "Environmental Science"
+ },
+ {
+  "id": "W4383216509",
+  "title": "Testing for changes in linear models using weighted residuals",
+  "abstract": "",
+  "year": 2023,
+  "lang": "en",
+  "type": "article",
+  "venue": "Journal of Multivariate Analysis",
+  "topic": "Statistical Methods and Inference",
+  "field": "Mathematics"
+ },
+ {
+  "id": "W1969898458",
+  "title": "Dynamic prediction of risk of death using history of cancer recurrences in joint frailty models",
+  "abstract": "Evaluating the prognosis of patients according to their demographic, biological, or disease characteristics is a major issue, as it may be used for guiding treatment decisions. In cancer studies, typically, more than one endpoint can be observed before death. Patients may undergo several types of events, such as local recurrences and distant metastases, with death as the terminal event. Accuracy of clinical decisions may be improved when the history of these different events is considered. Thus, it may be useful to dynamically predict patients’ risk of death using recurrence history. As previously applied within the framework of joint models for longitudinal and time to event data, we propose a dynamic prediction tool based on joint frailty models. Joint modeling accounts for the dependence between recurrent events and death, by the introduction of a random effect shared by the two processes. We estimate the probability of death between the prediction time t and a horizon t + w , conditional on information available at time t . Prediction can be updated with the occurrence of a new event. We proposed and compared three prediction settings, taking into account three different information levels. The proposed tools are applied to patients diagnosed with a primary invasive breast cancer and treated with breast‐conserving surgery, followed for more than 10 years in a French comprehensive cancer center. Copyright © 2013 John Wiley &amp; Sons, Ltd.",
+  "year": 2013,
+  "lang": "en",
+  "type": "article",
+  "venue": "Statistics in Medicine",
+  "topic": "Statistical Methods and Inference",
+  "field": "Mathematics"
+ },
+ {
+  "id": "W6920285657",
+  "title": "Most Recent Data (2005). Statistics Canada. CANSIM: Seniors - Work and Retirement | Country: Canada | Table: Survey of innovation, logging and manufacturing industries, percentage of plants with research and development services that were supplied from different locations | Variable: From the rest of Canada, Chemical manufacturing, Plants that bought research and development services, Non-innovative plants | Units: %, 2005. Data-Planet™ Statistical Ready Reference by Conquest Systems, Inc. Dataset-ID: 075-001-186.",
+  "abstract": "",
+  "year": 2015,
+  "lang": "en",
+  "type": "other",
+  "venue": "Data Planet",
+  "topic": null,
+  "field": null
+ },
+ {
+  "id": "W3119252148",
+  "title": "Alternative dissertation formats in education-based doctorates",
+  "abstract": "",
+  "year": 2021,
+  "lang": "en",
+  "type": "article",
+  "venue": "Higher Education Research & Development",
+  "topic": "Doctoral Education Challenges and Solutions",
+  "field": "Health Professions"
+ },
+ {
+  "id": "W2766219675",
+  "title": "Collaborative targeted learning using regression shrinkage",
+  "abstract": "Causal inference practitioners are routinely presented with the challenge of model selection and, in particular, reducing the size of the covariate set with the goal of improving estimation efficiency. Collaborative targeted minimum loss‐based estimation (CTMLE) is a general framework for constructing doubly robust semiparametric causal estimators that data‐adaptively limit model complexity in the propensity score to optimize a preferred loss function. This stepwise complexity reduction is based on a loss function placed on a strategically updated model for the outcome variable through which the error is assessed using cross‐validation. We demonstrate how the existing stepwise variable selection CTMLE can be generalized using regression shrinkage of the propensity score. We present 2 new algorithms that involve stepwise selection of the penalization parameter(s) in the regression shrinkage. Simulation studies demonstrate that, under a misspecified outcome model, mean squared error and bias can be reduced by a CTMLE procedure that separately penalizes individual covariates in the propensity score. We demonstrate these approaches in an example using electronic medical data with sparse indicator covariates to evaluate the relative safety of 2 similarly indicated asthma therapies for pregnant women with moderate asthma.",
+  "year": 2017,
+  "lang": "en",
+  "type": "article",
+  "venue": "Statistics in Medicine",
+  "topic": "Advanced Causal Inference Techniques",
+  "field": "Mathematics"
+ },
+ {
+  "id": "W4256284424",
+  "title": "On Generalized Gamma Distribution and Its Application to Survival Data",
+  "abstract": "The generalized gamma distribution is a continuous probability distribution with three parameters. It is a generalization of the two-parameter gamma distribution. Since many distributions commonly used for parametric models in survival analysis (such as the Exponential distribution , the Weibull distribution and the Gamma distribution) are special cases of the generalized gamma, it is sometimes used to determine which parametric model is appropriate for a given set of data. Generalized gamma distribution is one of the distributions used in frailty modeling. In this study , it is shown that generalized gamma distribution has three sub-families and its application to the analysis of a survival data has also been explored. The parametric modeling approach has been carried out to find the expected results.",
+  "year": 2019,
+  "lang": "en",
+  "type": "article",
+  "venue": "International Journal of Statistics and Probability",
+  "topic": "Statistical Methods and Inference",
+  "field": "Mathematics"
+ },
+ {
+  "id": "W3202267396",
+  "title": "Shrinkage quantile regression for panel data with multiple structural breaks",
+  "abstract": "We consider a shrinkage quantile regression model for high‐dimensional panel data with multiple structural breaks. The structural breaks are assumed to be common across all individuals, but may vary across different quantile levels while sharing an identical location shift effect. We impose an L 1 penalty on the individual effects and an L 1 ‐type fusion penalty to estimate both the slope coefficients and the structural breaks by combining information at multiple quantile levels. The proposed method can detect “partial” changes of the regression coefficients and consistently estimate both the number and dates of the breaks with probability tending to 1. We establish the asymptotic properties of the proposed regression coefficient estimators as well as their post‐selection counterparts, where the dimensionality of the covariates is allowed to diverge. Simulation results demonstrate that the proposed method works well in finite‐sample cases. Using the proposed method, we obtain many interesting results by analyzing a dataset concerning environmental Kuznets curves.",
+  "year": 2021,
+  "lang": "en",
+  "type": "article",
+  "venue": "Canadian Journal of Statistics",
+  "topic": "Statistical Methods and Inference",
+  "field": "Mathematics"
+ },
+ {
+  "id": "W2048608576",
+  "title": "Efficient Estimation of the Partly Linear Additive Hazards Model with Current Status Data",
+  "abstract": "Abstract This paper focuses on efficient estimation, optimal rates of convergence and effective algorithms in the partly linear additive hazards regression model with current status data. We use polynomial splines to estimate both cumulative baseline hazard function with monotonicity constraint and nonparametric regression functions with no such constraint. We propose a simultaneous sieve maximum likelihood estimation for regression parameters and nuisance parameters and show that the resultant estimator of regression parameter vector is asymptotically normal and achieves the semiparametric information bound. In addition, we show that rates of convergence for the estimators of nonparametric functions are optimal. We implement the proposed estimation through a backfitting algorithm on generalized linear models. We conduct simulation studies to examine the finite‐sample performance of the proposed estimation method and present an analysis of renal function recovery data for illustration.",
+  "year": 2014,
+  "lang": "en",
+  "type": "article",
+  "venue": "Scandinavian Journal of Statistics",
+  "topic": "Statistical Methods and Inference",
+  "field": "Mathematics"
+ }
+]
+warning: loading hooks from both /Users/choxos/.codex/hooks.json and /Users/choxos/.codex/config.toml; prefer a single representation for this layer
+2026-07-13T13:49:51.493579Z ERROR rmcp::transport::worker: worker quit with fatal: Transport channel closed, when Auth(AuthorizationRequired)
+warning: Skill descriptions were shortened to fit the 2% skills context budget. Codex can still see every skill, but some descriptions are shorter. Disable unused skills or plugins to leave more room for the rest.
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart
+hook: SessionStart Failed
+hook: SessionStart Completed
+hook: SessionStart Completed
+hook: SessionStart Completed
+hook: SessionStart Completed
+hook: SessionStart Failed
+hook: UserPromptSubmit
+hook: UserPromptSubmit
+hook: UserPromptSubmit Failed
+hook: UserPromptSubmit Failed
+codex
+[
+  {"id":"W2004383711","categories":[],"domain":null,"study_design":"simulation_or_modeling","genre":"methods","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"Developing a statistical test is not a study of research practice under Rule 1."},
+  {"id":"W4238878334","categories":[],"domain":null,"study_design":"not_applicable","genre":"dataset","about_ca_system":false,"about_ca_topic":false,"confidence":"low","reason":"The record is a dataset entry with no abstract and does not study a defined category."},
+  {"id":"W4240341889","categories":[],"domain":null,"study_design":"not_applicable","genre":"dataset","about_ca_system":false,"about_ca_topic":false,"confidence":"low","reason":"The record is a dataset entry with no abstract and does not study a defined category."},
+  {"id":"W2010741163","categories":[],"domain":null,"study_design":"theoretical_or_conceptual","genre":"methods","about_ca_system":false,"about_ca_topic":false,"confidence":"low","reason":"The title indicates statistical technique development, which is OUT under Rule 1."},
+  {"id":"W2514259613","categories":[],"domain":null,"study_design":"simulation_or_modeling","genre":"methods","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"Developing residuals for regression models is not a study of research practice under Rule 1."},
+  {"id":"W2737290167","categories":[],"domain":null,"study_design":"simulation_or_modeling","genre":"methods","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"Developing nonparametric tests for functions is not a study of research practice under Rule 1."},
+  {"id":"W4389692720","categories":[],"domain":null,"study_design":"not_applicable","genre":"other","about_ca_system":false,"about_ca_topic":false,"confidence":"low","reason":"The title alone does not establish membership in any defined category."},
+  {"id":"W3008905790","categories":[],"domain":null,"study_design":"simulation_or_modeling","genre":"methods","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"Developing a variance estimator for propensity-score matching is not a study of research practice under Rule 1."},
+  {"id":"W4309349999","categories":[],"domain":null,"study_design":"simulation_or_modeling","genre":"methods","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"Developing specification tests for diffusion models is not a study of research practice under Rule 1."},
+  {"id":"W4390905989","categories":[],"domain":null,"study_design":"theoretical_or_conceptual","genre":"methods","about_ca_system":false,"about_ca_topic":false,"confidence":"low","reason":"The title alone indicates statistical-model development rather than study of research practice."},
+  {"id":"W3215636343","categories":[],"domain":null,"study_design":"simulation_or_modeling","genre":"methods","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"Developing a classification sensitivity-analysis framework is not a study of research practice under Rule 1."},
+  {"id":"W2008765054","categories":[],"domain":null,"study_design":"theoretical_or_conceptual","genre":"methods","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"Developing Box-Cox asymptotic theory and normality tests is not a study of research practice under Rule 1."},
+  {"id":"W4244055162","categories":[],"domain":null,"study_design":"not_applicable","genre":"dataset","about_ca_system":false,"about_ca_topic":false,"confidence":"low","reason":"The record is a dataset entry with no abstract and does not study a defined category."},
+  {"id":"W4319790982","categories":[],"domain":null,"study_design":"theoretical_or_conceptual","genre":"methods","about_ca_system":false,"about_ca_topic":false,"confidence":"low","reason":"The title indicates development of a statistical correction method, which is OUT under Rule 1."},
+  {"id":"W4406245583","categories":[],"domain":null,"study_design":"theoretical_or_conceptual","genre":"methods","about_ca_system":false,"about_ca_topic":false,"confidence":"low","reason":"The title indicates causal-inference method development, which is OUT under Rule 1."},
+  {"id":"W2023910207","categories":[],"domain":null,"study_design":"bench_or_experimental","genre":"review","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"The work compares microscopy technologies rather than studying research practice as an object."},
+  {"id":"W4253167613","categories":[],"domain":null,"study_design":"not_applicable","genre":"dataset","about_ca_system":false,"about_ca_topic":false,"confidence":"low","reason":"The record is a dataset entry with no abstract and does not study a defined category."},
+  {"id":"W4383216509","categories":[],"domain":null,"study_design":"theoretical_or_conceptual","genre":"methods","about_ca_system":false,"about_ca_topic":false,"confidence":"low","reason":"The title indicates development of a statistical testing method, which is OUT under Rule 1."},
+  {"id":"W1969898458","categories":[],"domain":null,"study_design":"observational","genre":"methods","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"Developing a dynamic prediction tool for cancer outcomes is not a study of research practice under Rule 1."},
+  {"id":"W6920285657","categories":[],"domain":null,"study_design":"not_applicable","genre":"dataset","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"The title clearly identifies a statistical dataset record, not a study in a defined category."},
+  {"id":"W3119252148","categories":["scholarly_communication"],"domain":null,"study_design":"design_other","genre":"other","about_ca_system":false,"about_ca_topic":false,"confidence":"low","reason":"Alternative dissertation formats concern the formal and sociotechnical communication of scholarship."},
+  {"id":"W2766219675","categories":[],"domain":null,"study_design":"simulation_or_modeling","genre":"methods","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"Developing targeted-learning algorithms is not a study of research practice under Rule 1."},
+  {"id":"W4256284424","categories":[],"domain":null,"study_design":"observational","genre":"methods","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"Developing and applying a generalized gamma distribution is not a study of research practice under Rule 1."},
+  {"id":"W3202267396","categories":[],"domain":null,"study_design":"simulation_or_modeling","genre":"methods","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"Developing shrinkage quantile-regression methods is not a study of research practice under Rule 1."},
+  {"id":"W2048608576","categories":[],"domain":null,"study_design":"simulation_or_modeling","genre":"methods","about_ca_system":false,"about_ca_topic":false,"confidence":"high","reason":"Developing efficient estimators for a hazards model is not a study of research practice under Rule 1."}
+]
+hook: Stop
+hook: Stop
+hook: Stop
+hook: Stop Completed
+hook: Stop Completed
+hook: Stop Failed
+tokens used
+27,566

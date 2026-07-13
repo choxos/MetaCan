@@ -244,6 +244,20 @@ with the majority *teacher*, so the entire curve is **imitation, not accuracy**,
 simulation runs on labels that already exist: it shows the loop's mechanics and **cannot** show
 that it matures on 4.3M unlabelled works.
 
+**The staged schedule, and the gate the frame pass must earn.** The model never scores the frame on the
+strength of the pilot labels alone. It improves on LIVE batches drawn from the frame itself (composition
+as above), retrained every round, against a batch-size schedule that grows as the model stabilizes:
+rounds 1-10 at 100 works, 11-25 at 250, 26-40 at 500, then 1,000 per round until the gate passes or the
+label budget is spent. At finding 13's measured token rates, 10,000 teacher-labelled works cost ~$27 and
+100,000 cost ~$265: money is not the constraint, wall-clock is, and the growing batch matches how much a
+retrain can learn once the model holds tens of thousands of labels. The gate is prespecified and machine-
+checked (`ml/loop.py`, written to `pilot/results/maturity.json`): on a frozen holdout never queried and
+never trained on, (i) relative AP gain under 2% across the last five rounds, (ii) positive-set churn under
+0.05 for three consecutive rounds, (iii) consecutive-round rank correlation above 0.98 for three
+consecutive rounds. `ml/score_frame.py` REFUSES a full-frame pass until `passed` is true; a forced
+baseline pass marks every row it writes `v0-immature`. "Passed" means the student's imitation of its
+teachers has stopped moving, and nothing more: the human audit measures.
+
 **Study design, the one annotation with an external reference standard.** MEDLINE publication
 types are assigned by NLM independently of this project, so a design label can be **wrong in a
 way the pipeline cannot hide**. Three constraints, all prespecified:
