@@ -14,6 +14,10 @@ for p in "$DIR"/prompts/prompt_*.txt; do
   ch=$(basename "$p" | sed 's/prompt_\(.*\)\.txt/\1/')
   out=$RAW/chunk_${ch}.json
   [ -s "$out" ] && continue
+  # mkdir is atomic: with N parallel workers on one arm, exactly one wins each chunk.
+  lock=$RAW/.lock_${ch}
+  mkdir "$lock" 2>/dev/null || continue
+  trap 'rmdir "$lock" 2>/dev/null' EXIT
   echo "[loop $ROUND $MODEL] chunk $ch"
   if [ "$MODEL" = "grok" ]; then
     /Users/choxos/.grok/bin/grok --prompt-file "$p" -m grok-4.5 --reasoning-effort medium \
@@ -28,26 +32,42 @@ for p in "$DIR"/prompts/prompt_*.txt; do
     codex exec --model gpt-5.6-luna -c model_reasoning_effort='"medium"' --sandbox read-only \
       --skip-git-repo-check "$(cat "$p")" < /dev/null > "$RAW/stdout_${ch}.txt" 2> "$RAW/stderr_${ch}.txt"
   fi
-  python3 - "$RAW/stdout_${ch}.txt" "$out" <<'PY'
+  rmdir "$lock" 2>/dev/null
+  # BOTH STREAMS, NOT JUST STDOUT.
+  #
+  # The codex CLI sometimes writes its whole answer to stderr and leaves stdout
+  # empty. This parser read stdout only, so 42 of round_100's 414 chunks were
+  # declared "no v3 JSON array" while their labels sat complete in stderr_NNN.txt,
+  # and the resilient wrapper then retried each of them thirty times, failing
+  # identically every time. A retry loop cannot rescue a parser pointed at the
+  # wrong stream. Read where the model actually wrote.
+  python3 - "$RAW/stdout_${ch}.txt" "$RAW/stderr_${ch}.txt" "$out" <<'PY'
 import json, sys
-raw = open(sys.argv[1]).read()
-best = None; i = raw.find('[')
-while i != -1:
-    j = raw.rfind(']')
-    while j > i:
-        try:
-            c = json.loads(raw[i:j+1])
-            if isinstance(c, list) and c and isinstance(c[0], dict) and 'categories' in c[0]:
-                best = c
-            break
-        except Exception:
-            j = raw.rfind(']', 0, j)
-    if best: break
-    i = raw.find('[', i + 1)
+
+def extract(path):
+    try:
+        raw = open(path, errors='replace').read()
+    except OSError:
+        return None
+    i = raw.find('[')
+    while i != -1:
+        j = raw.rfind(']')
+        while j > i:
+            try:
+                c = json.loads(raw[i:j+1])
+                if isinstance(c, list) and c and isinstance(c[0], dict) and 'categories' in c[0]:
+                    return c
+                break
+            except Exception:
+                j = raw.rfind(']', 0, j)
+        i = raw.find('[', i + 1)
+    return None
+
+best = extract(sys.argv[1]) or extract(sys.argv[2])
 if best:
-    json.dump(best, open(sys.argv[2], 'w'))
+    json.dump(best, open(sys.argv[3], 'w'))
 else:
-    print("no v3 JSON array in stdout", file=sys.stderr); sys.exit(3)
+    print("no v3 JSON array in stdout OR stderr", file=sys.stderr); sys.exit(3)
 PY
 done
 # assemble: chunks -> one labels file, then VALIDATE (set equality + schema)
