@@ -288,6 +288,60 @@ export default async function WorkDetail({ params }: { params: { lang: string; i
         </section>
       )}
 
+      {/* Machine labels, when this work is one of the few hundred labelled so
+          far. Per-model, disagreement visible, framed as what they are. Their
+          ABSENCE renders nothing at all here: on a detail page silence is
+          honest, whereas the cohort list annotates absence explicitly. */}
+      {w.labels.length > 0 && (
+        <section className="card p-6">
+          <h2 className="font-serif text-xl">{t.workDetail.labelsTitle}</h2>
+          <p className="mt-1 text-sm leading-relaxed" style={{ color: 'var(--ink-4)' }}>
+            {t.workDetail.labelsSub}
+          </p>
+          <div className="mt-4 grid gap-3 md:grid-cols-3">
+            {w.labels.map((l) => (
+              <div key={l.model} className="card p-4">
+                <div className="flex items-center justify-between gap-2">
+                  <span className="font-medium">{l.model}</span>
+                  <span
+                    className="chip"
+                    style={{ borderColor: 'var(--ink-5)', color: 'var(--ink-3)', background: 'transparent' }}
+                  >
+                    {l.confidence ?? '—'}
+                  </span>
+                </div>
+                <div className="mt-2 space-y-1 text-xs" style={{ color: 'var(--ink-4)' }}>
+                  <div>
+                    {t.workDetail.labelCategories}:{' '}
+                    {l.categories.length
+                      ? l.categories.map((c) => t.cohort.categoryNames[c] ?? c).join(', ')
+                      : t.workRow.labelNoCats}
+                  </div>
+                  <div>
+                    {t.workDetail.labelDesign}:{' '}
+                    {l.studyDesign ? (t.cohort.designNames[l.studyDesign] ?? l.studyDesign) : '—'}
+                  </div>
+                  <div>
+                    {t.workDetail.labelDomain}: {l.domain ?? '—'}
+                  </div>
+                  <div>
+                    {t.workDetail.labelGenre}: {l.genre ?? '—'}
+                  </div>
+                  <div>
+                    {t.workDetail.labelAboutSystem}:{' '}
+                    {l.aboutCaSystem === null ? '—' : l.aboutCaSystem ? t.common.yes : t.common.no}
+                  </div>
+                  <div>
+                    {t.workDetail.labelAboutTopic}:{' '}
+                    {l.aboutCaTopic === null ? '—' : l.aboutCaTopic ? t.common.yes : t.common.no}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
       {/* The machine scores: a PROVISIONAL baseline from an immature model. The
           banner is not decoration; it is the contract under which these numbers
           may be shown at all. See ScoreBanner and pilot/results/maturity.json. */}

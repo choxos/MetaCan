@@ -7,7 +7,7 @@ import { SITE_URL, localePath } from '@/lib/lang'
  * is a curation, not an enumeration, and the works are reachable through
  * /works and the API.
  */
-const PAGES = ['/', '/works', '/screen', '/analytics', '/findings', '/api-docs', '/about']
+const PAGES = ['/', '/works', '/screen', '/landscape', '/findings', '/api-docs', '/about']
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return PAGES.flatMap((path) =>
