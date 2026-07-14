@@ -5,6 +5,8 @@
 -- database is inferred, and every work carries the ROUTES that admitted it, so a
 -- reader can always ask "why is this here?" and get an answer.
 
+DROP TABLE IF EXISTS query_permalink CASCADE;
+DROP TABLE IF EXISTS work_label CASCADE;
 DROP TABLE IF EXISTS work_score CASCADE;
 DROP TABLE IF EXISTS screened CASCADE;
 DROP TABLE IF EXISTS retractions CASCADE;
@@ -117,4 +119,51 @@ CREATE TABLE work_score (
   score_gpt         DOUBLE PRECISION,
   score_spread      DOUBLE PRECISION,  -- |score_opus - score_gpt|: the teachers' disagreement
   validation_status TEXT               -- verbatim from the scoring run; currently score_only:v0-immature-baseline
+);
+
+-- ---------------------------------------------------------------------------
+-- work_label: per-model category and study-design labels, one row per
+-- (work, model).
+--
+-- These are MACHINE LABELS from frontier LLMs, unvalidated. They come from the
+-- labelling rounds under pilot/screening/loop/round_*/ and are loaded by
+-- deploy/load_labels.py, which is idempotent and re-run as new rounds land.
+-- The table is SPARSE ON PURPOSE: only a few hundred works carry labels today,
+-- and nothing that reads it may treat an absent row as a negative label. Every
+-- surface that filters on it must say how many works in the cohort carry
+-- labels at all.
+--
+-- `categories` is a set, not a single value: a work can be metaresearch AND
+-- open_science. `study_design` is single-valued per model. No study_design
+-- here is MEDLINE-validated yet; when that validation lands it will be carried
+-- explicitly, never assumed.
+-- ---------------------------------------------------------------------------
+CREATE TABLE work_label (
+  id              VARCHAR(20) REFERENCES works(id) ON DELETE CASCADE,
+  model           VARCHAR(16),   -- opus | gpt | grok
+  categories      TEXT[],        -- metaresearch, metaepi_narrow, metaepi_broad, bibliometrics,
+                                 -- sts, scholarly_communication, open_science, research_integrity
+                                 -- (empty = the model put the work in no category;
+                                 --  insufficient_payload = the model refused to judge)
+  domain          VARCHAR(24),
+  study_design    VARCHAR(32),   -- randomized_trial .. design_other, not_applicable
+  genre           VARCHAR(16),
+  about_ca_system BOOLEAN,
+  about_ca_topic  BOOLEAN,
+  confidence      VARCHAR(8),    -- high | medium | low
+  PRIMARY KEY (id, model)
+);
+
+-- ---------------------------------------------------------------------------
+-- query_permalink: citable cohort queries.
+--
+-- A cohort's filter state serializes canonically, hashes, and lands here, so
+-- /q/<hash> can render the same query forever. The row stores the FILTERS, not
+-- the results: the frame is a pinned snapshot, so re-running the query is the
+-- honest way to reproduce the counts, and the page recomputes them live.
+-- ---------------------------------------------------------------------------
+CREATE TABLE query_permalink (
+  hash       VARCHAR(16) PRIMARY KEY,   -- sha256 of the canonical filter string, truncated
+  filters    JSONB NOT NULL,            -- the canonical WorkFilters object
+  created_at TIMESTAMPTZ NOT NULL DEFAULT now()
 );

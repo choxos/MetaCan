@@ -34,6 +34,29 @@ CREATE INDEX idx_screened_n_in    ON screened (n_in);
 CREATE INDEX idx_screened_stratum ON screened (stratum);
 CREATE INDEX idx_retr_nature      ON retractions (nature);
 
+-- The cohort builder's venue and topic facets filter by exact value. Without
+-- these, a topic filter is a 700 ms parallel seq scan over 4.3M rows (measured
+-- with EXPLAIN ANALYZE); with them it is milliseconds. They are cheap on disk
+-- (31 MB and 34 MB respectively) because btree deduplication collapses the
+-- ~4,500 distinct topics and ~85,000 distinct venues.
+CREATE INDEX idx_works_topic       ON works (topic);
+CREATE INDEX idx_works_venue_btree ON works (venue);
+
+-- Typeahead sources for the venue and topic facets: tiny derived tables
+-- (85k and 4.5k rows) an ILIKE can scan in milliseconds, instead of hundreds
+-- of MB of trigram indexes on a 99%-full disk. The frame is a pinned snapshot,
+-- so these never go stale; rebuild them here, after any works reload.
+DROP TABLE IF EXISTS facet_venue;
+DROP TABLE IF EXISTS facet_topic;
+CREATE TABLE facet_venue AS
+  SELECT venue, COUNT(*)::int AS works FROM works
+  WHERE venue IS NOT NULL AND venue <> '' GROUP BY venue;
+CREATE TABLE facet_topic AS
+  SELECT topic, COUNT(*)::int AS works FROM works
+  WHERE topic IS NOT NULL AND topic <> '' GROUP BY topic;
+
 ANALYZE works;
 ANALYZE screened;
 ANALYZE retractions;
+ANALYZE facet_venue;
+ANALYZE facet_topic;

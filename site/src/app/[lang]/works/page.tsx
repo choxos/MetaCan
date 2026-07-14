@@ -34,8 +34,10 @@ function parse(sp: Record<string, string | string[] | undefined>): WorkFilters {
     type: s('type'),
     field: s('field'),
     route: (['aff', 'fund', 'venue', 'about', 'no_aff'] as const).find((r) => r === route),
-    retracted: s('retracted') === '1',
-    no_abstract: s('no_abstract') === '1',
+    // `retracted` is tri-state in WorkFilters (false means EXCLUDE retracted),
+    // so an unchecked box must be undefined, never false.
+    retracted: s('retracted') === '1' ? true : undefined,
+    no_abstract: s('no_abstract') === '1' ? true : undefined,
     n_in: num('n_in'),
     sort: (['cited', 'year_desc', 'year_asc'] as const).find((x) => x === s('sort')) ?? 'cited',
     page: num('page') ?? 1,

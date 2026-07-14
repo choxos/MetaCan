@@ -127,6 +127,68 @@ export default function ApiDocs({ params }: { params: { lang: string } }) {
 
       <Endpoint
         t={t}
+        path="/api/v1/cohort"
+        desc={t.apiDocs.cohortDesc(p)}
+        note={t.apiDocs.cohortNote}
+        params={[
+          { name: 'topic', type: 'string', desc: t.apiDocs.cohortParams.topic },
+          { name: 'venue', type: 'string', desc: t.apiDocs.cohortParams.venue },
+          {
+            name: 'route_aff, route_fund, route_venue, route_about',
+            type: '1 | 0',
+            desc: t.apiDocs.cohortParams.routesTri,
+          },
+          { name: 'retracted', type: '1 | 0', desc: t.apiDocs.cohortParams.retracted },
+          { name: 'abstract', type: 'has | none', desc: t.apiDocs.cohortParams.abstract },
+          {
+            name: 'category',
+            type: 'metaresearch | metaepi_narrow | metaepi_broad | bibliometrics | sts | scholarly_communication | open_science | research_integrity',
+            desc: t.apiDocs.cohortParams.category,
+          },
+          {
+            name: 'design',
+            type: 'randomized_trial | nonrandomized_trial | observational | systematic_review | meta_analysis | case_report | qualitative | simulation_or_modeling | bench_or_experimental | theoretical_or_conceptual | not_applicable | design_other',
+            desc: t.apiDocs.cohortParams.design,
+          },
+          { name: 'agreement', type: 'any | all', desc: t.apiDocs.cohortParams.agreement },
+          { name: 'labeled', type: '1 | 0', desc: t.apiDocs.cohortParams.labeled },
+        ]}
+        example={t.apiDocs.cohortExample(BASE)}
+      />
+
+      <Endpoint
+        t={t}
+        path="/api/v1/cohort/export"
+        desc={t.apiDocs.exportDesc}
+        note={t.apiDocs.exportNote}
+        params={[{ name: 'format', type: 'csv | json', desc: t.apiDocs.exportParams.format }]}
+        example={t.apiDocs.exportExample(BASE)}
+      />
+
+      <Endpoint
+        t={t}
+        method="POST"
+        path="/api/v1/permalink"
+        desc={t.apiDocs.permalinkDesc}
+        example={t.apiDocs.permalinkExample(BASE)}
+      />
+
+      <Endpoint
+        t={t}
+        path="/api/v1/facets/{venue,topic}"
+        desc={t.apiDocs.facetsDesc}
+        example={t.apiDocs.facetsExample(BASE)}
+      />
+
+      <Endpoint
+        t={t}
+        path="/api/v1/stats/labels"
+        desc={t.apiDocs.labelsStatsDesc}
+        example={`curl -sS ${BASE}/api/v1/stats/labels | jq '{coverage, top: .by_category[:3]}'`}
+      />
+
+      <Endpoint
+        t={t}
         path="/api/v1/stats/summary"
         desc={t.apiDocs.summaryDesc}
         example={`curl -sS ${BASE}/api/v1/stats/summary | jq`}
