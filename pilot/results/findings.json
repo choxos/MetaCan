@@ -576,6 +576,29 @@
     },
     "computed_at_utc": "2026-07-13T11:55:02Z"
   },
+  "gemma_gate": {
+    "headline": "THE FREE MODEL FAILED THE GATE, AND THE GATE WAS AIMED AT THE WRONG BAR. Gemma-4-31B screened 700 works under rubric v3.1 (100% schema-clean) and scored Jaccard 0.44 on metaresearch and 0.515 on any-category against the frontier union, under the prespecified 0.60 bar, SO IT DOES NOT LABEL THE FRAME: the rule stands because rules that move after the numbers exist are not rules. But the frontier models agree with each other at only 0.384 and 0.36 on the same works, because every loop batch is selected FOR disagreement: the gate demanded of a free model what the frontier models do not achieve among themselves there, and Gemma beat the frontier's own mutual agreement on both targets. Test 2 is prespecified on the random_baseline stratum with the rationale as the bar: J(gemma, union) >= J(opus, gpt).",
+    "values": {
+      "model": "google/gemma-4-31b-it (free)",
+      "n_works": 700,
+      "schema_clean_return_rate": 1,
+      "jaccard_metaresearch_gemma_vs_union": 0.44,
+      "jaccard_metaresearch_opus_vs_gpt": 0.384,
+      "jaccard_anycat_gemma_vs_union": 0.515,
+      "jaccard_anycat_opus_vs_gpt": 0.36,
+      "study_design_exact": {
+        "gemma_vs_opus": 0.643,
+        "gemma_vs_gpt": 0.614,
+        "opus_vs_gpt_for_reference": 0.73
+      },
+      "prespecified_rule": "Jaccard >= 0.60 vs the frontier union, on metaresearch AND any-category",
+      "passed": false,
+      "rule_honored": true,
+      "gate_was_miscalibrated_because": "the 0.60 bar was set from round-001's 0.44-0.75 pairwise range without registering that loop batches are selected FOR disagreement, which depresses every agreement statistic computed on them. On the same 700 works the frontier models agree with each other at 0.384/0.360: below the bar Gemma was held to, and Gemma beat both numbers.",
+      "test2_prespecified": "On the enriched sample's random_baseline stratum (1,500 works, not selected for disagreement), Gemma passes if J(gemma, frontier_union) >= J(opus, gpt) on both metaresearch and any-category. Written before any of those labels exist."
+    },
+    "computed_at_utc": "2026-07-14T00:08:32Z"
+  },
   "instrument_contradicts_itself": {
     "headline": "THE LOCKED INSTRUMENT CONTRADICTS ITSELF, AND NOTHING CAUGHT IT. The rubric and the output schema name TWO DIFFERENT controlled vocabularies for the same field, `genre`, overlapping on 2 values (empirical and other); 4 terms exist only in the rubric and 7 only in the schema. Every screener was handed both and told to obey both, and each invented its own reconciliation: GPT-5.6 and Grok followed the rubric and are therefore 26.9% and 20.9% ILLEGAL against the schema, while Opus drew from both lists at once and emitted 13 distinct values. The validator checked `tier` and never checked `genre`, so 16,800 labels passed every check that ran. It was found by an agent mentioning it in one clause of a report about something else. Nothing crashed; the variable simply meant a different thing in each arm, and the variance would have been attributed to the models. The labels are NOT repaired, because harmonising the arms after seeing them would destroy the only evidence that they diverged; the genre field is reported as unusable and the fix belongs in the instrument, at a version boundary.",
     "values": {

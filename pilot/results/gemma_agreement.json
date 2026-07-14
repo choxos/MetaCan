@@ -1,0 +1,87 @@
+{
+ "n_works": 700,
+ "backend": "nvidia",
+ "per_category": [
+  {
+   "category": "metaresearch",
+   "n_opus": 103,
+   "n_gpt": 52,
+   "n_gemma": 104,
+   "jaccard_gemma_vs_frontier_union": 0.44,
+   "jaccard_opus_vs_gpt": 0.384
+  },
+  {
+   "category": "metaepi_narrow",
+   "n_opus": 2,
+   "n_gpt": 2,
+   "n_gemma": 0,
+   "jaccard_gemma_vs_frontier_union": 0.0,
+   "jaccard_opus_vs_gpt": 1.0
+  },
+  {
+   "category": "metaepi_broad",
+   "n_opus": 33,
+   "n_gpt": 15,
+   "n_gemma": 4,
+   "jaccard_gemma_vs_frontier_union": 0.07,
+   "jaccard_opus_vs_gpt": 0.143
+  },
+  {
+   "category": "bibliometrics",
+   "n_opus": 2,
+   "n_gpt": 2,
+   "n_gemma": 5,
+   "jaccard_gemma_vs_frontier_union": 0.4,
+   "jaccard_opus_vs_gpt": 1.0
+  },
+  {
+   "category": "sts",
+   "n_opus": 14,
+   "n_gpt": 9,
+   "n_gemma": 19,
+   "jaccard_gemma_vs_frontier_union": 0.241,
+   "jaccard_opus_vs_gpt": 0.353
+  },
+  {
+   "category": "scholarly_communication",
+   "n_opus": 13,
+   "n_gpt": 14,
+   "n_gemma": 3,
+   "jaccard_gemma_vs_frontier_union": 0.095,
+   "jaccard_opus_vs_gpt": 0.35
+  },
+  {
+   "category": "open_science",
+   "n_opus": 8,
+   "n_gpt": 6,
+   "n_gemma": 7,
+   "jaccard_gemma_vs_frontier_union": 0.667,
+   "jaccard_opus_vs_gpt": 0.75
+  },
+  {
+   "category": "research_integrity",
+   "n_opus": 4,
+   "n_gpt": 2,
+   "n_gemma": 4,
+   "jaccard_gemma_vs_frontier_union": 1.0,
+   "jaccard_opus_vs_gpt": 0.5
+  },
+  {
+   "category": "ANY_CATEGORY",
+   "n_opus": 142,
+   "n_gpt": 77,
+   "n_gemma": 136,
+   "jaccard_gemma_vs_frontier_union": 0.515,
+   "jaccard_opus_vs_gpt": 0.36
+  }
+ ],
+ "study_design_exact_match": {
+  "gemma_vs_opus": 0.643,
+  "gemma_vs_gpt": 0.614,
+  "opus_vs_gpt_for_reference": 0.73
+ },
+ "decision_rule": "Jaccard >= 0.60 vs the frontier union, on metaresearch AND any-category",
+ "rule_written_before_the_numbers": true,
+ "passed": false,
+ "consequence": "Gemma does NOT label the frame; the ML classifier trained on frontier labels stays the frame-wide annotator, and Gemma is reported as a measured negative result"
+}
