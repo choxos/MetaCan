@@ -451,6 +451,15 @@ const en = {
     aboutCanada: 'about Canada',
     confidence: 'confidence',
     tierAdjacent: 'T3 · adjacent, not in scope',
+    labelsTitle: 'Machine labels (frontier LLM, unvalidated)',
+    labelsSub:
+      'Per-model category and study-design labels from the labelling rounds. They are machine output, unvalidated, and the disagreement between models ships as data. No study design here is MEDLINE-validated yet.',
+    labelCategories: 'Categories',
+    labelDesign: 'Study design',
+    labelDomain: 'Domain',
+    labelGenre: 'Genre',
+    labelAboutSystem: 'About the Canadian research system',
+    labelAboutTopic: 'About a Canadian topic',
     scoresTitle: 'Machine scores (provisional)',
     scoresSub:
       'The two teacher heads of the student model, read on this work. A score orders the frame for review; it never asserts a category, and the validation status ships verbatim with every row.',
@@ -1384,6 +1393,15 @@ const fr: Dictionary = {
     aboutCanada: 'porte sur le Canada',
     confidence: 'confiance',
     tierAdjacent: 'T3 · adjacent, hors champ',
+    labelsTitle: 'Étiquettes machine (grand modèle de langage de pointe, non validées)',
+    labelsSub:
+      "Étiquettes de catégorie et de devis d'étude par modèle, issues des rondes d'étiquetage. C'est une sortie machine, non validée, et le désaccord entre modèles est livré comme donnée. Aucun devis ici n'est encore validé contre MEDLINE.",
+    labelCategories: 'Catégories',
+    labelDesign: "Devis d'étude",
+    labelDomain: 'Domaine',
+    labelGenre: 'Genre',
+    labelAboutSystem: 'Porte sur le système de recherche canadien',
+    labelAboutTopic: 'Porte sur un sujet canadien',
     scoresTitle: 'Scores machine (provisoires)',
     scoresSub:
       "Les deux têtes enseignantes du modèle étudiant, lues sur ce travail. Un score ordonne la base pour la relecture; il n'affirme jamais une catégorie, et le statut de validation accompagne chaque rangée tel quel.",
