@@ -347,6 +347,108 @@ export const getRetractionStates = unstable_cache(
   { revalidate: HOUR, tags: ['stats'] },
 )
 
+/**
+ * The label landscape: what the machine-labelled subset looks like, by
+ * category, study design, year and language.
+ *
+ * The work_label table is a few thousand rows, so the aggregation happens in
+ * node over one fetch instead of six GROUP BYs. Two counts per bucket, on
+ * purpose: `any_model` (at least one model applied the value) and `all_models`
+ * (every model that labelled the work applied it), because the gap between
+ * them IS the finding; a single number would hide the disagreement, and the
+ * disagreement is this project's deliverable.
+ *
+ * Every figure is over the LABELLED SUBSET ONLY. `coverage` states its size
+ * against the whole frame, and no consumer may present these counts as frame
+ * totals.
+ */
+export interface LabelStats {
+  coverage: { labeled_works: number; label_rows: number; frame_works: number; models: string[] }
+  by_category: Array<{ category: string; any_model: number; all_models: number }>
+  by_design: Array<{ design: string; any_model: number; all_models: number }>
+  by_year: Array<{ year: number; labeled: number }>
+  by_lang: Array<{ lang: string; labeled: number }>
+}
+
+export const getLabelStats = unstable_cache(
+  async (): Promise<LabelStats> => {
+    const [labels, frameWorks] = await Promise.all([
+      prisma.workLabel.findMany({
+        select: {
+          id: true,
+          model: true,
+          categories: true,
+          studyDesign: true,
+          work: { select: { year: true, lang: true } },
+        },
+      }),
+      prisma.work.count(),
+    ])
+
+    const byWork = new Map<string, typeof labels>()
+    for (const l of labels) {
+      const arr = byWork.get(l.id)
+      if (arr) arr.push(l)
+      else byWork.set(l.id, [l])
+    }
+
+    const catAny = new Map<string, number>()
+    const catAll = new Map<string, number>()
+    const desAny = new Map<string, number>()
+    const desAll = new Map<string, number>()
+    const byYear = new Map<number, number>()
+    const byLang = new Map<string, number>()
+    const models = new Set<string>()
+
+    for (const rows of byWork.values()) {
+      for (const r of rows) models.add(r.model)
+
+      const cats = new Set(rows.flatMap((r) => r.categories))
+      for (const c of cats) {
+        catAny.set(c, (catAny.get(c) ?? 0) + 1)
+        if (rows.every((r) => r.categories.includes(c))) catAll.set(c, (catAll.get(c) ?? 0) + 1)
+      }
+
+      const designs = new Set(rows.map((r) => r.studyDesign).filter((d): d is string => d !== null))
+      for (const d of designs) {
+        desAny.set(d, (desAny.get(d) ?? 0) + 1)
+        if (rows.every((r) => r.studyDesign === d)) desAll.set(d, (desAll.get(d) ?? 0) + 1)
+      }
+
+      const w = rows[0]?.work
+      if (w === undefined) continue
+      if (w.year !== null) byYear.set(w.year, (byYear.get(w.year) ?? 0) + 1)
+      const lg = w.lang && w.lang !== '' ? w.lang : 'unknown'
+      byLang.set(lg, (byLang.get(lg) ?? 0) + 1)
+    }
+
+    const desc = <K,>(m: Map<K, number>) => [...m.entries()].sort((a, b) => b[1] - a[1])
+
+    return {
+      coverage: {
+        labeled_works: byWork.size,
+        label_rows: labels.length,
+        frame_works: frameWorks,
+        models: [...models].sort(),
+      },
+      by_category: desc(catAny).map(([category, any_model]) => ({
+        category,
+        any_model,
+        all_models: catAll.get(category) ?? 0,
+      })),
+      by_design: desc(desAny).map(([design, any_model]) => ({
+        design,
+        any_model,
+        all_models: desAll.get(design) ?? 0,
+      })),
+      by_year: [...byYear.entries()].sort((a, b) => a[0] - b[0]).map(([year, labeled]) => ({ year, labeled })),
+      by_lang: desc(byLang).map(([lang, labeled]) => ({ lang, labeled })),
+    }
+  },
+  ['mc:label-stats'],
+  { revalidate: HOUR, tags: ['stats'] },
+)
+
 /** Distinct filter values for the browse UI. Small, and cached for a day. */
 export const getFacets = unstable_cache(
   async (): Promise<{ langs: string[]; types: string[]; fields: string[] }> => {

@@ -58,12 +58,18 @@ export default function RootLayout({
   const t = getDict(lang)
   const p = (path: string) => localePath(lang, path)
 
+  // Two tiers, on purpose. The site is a TOOL first: the cohort builder (the
+  // home page), the Landscape and the API are what a meta-researcher came for.
+  // The project's account of itself (the screen, the findings, the about page)
+  // is kept in full but demoted to a labelled secondary group.
   const NAV = [
-    { href: p('/works'), label: t.nav.works },
-    { href: p('/screen'), label: t.nav.screen },
-    { href: p('/analytics'), label: t.nav.analytics },
-    { href: p('/findings'), label: t.nav.findings },
+    { href: p('/'), label: t.nav.cohort },
+    { href: p('/landscape'), label: t.nav.landscape },
     { href: p('/api-docs'), label: t.nav.api },
+  ]
+  const NAV_SECONDARY = [
+    { href: p('/screen'), label: t.nav.screen },
+    { href: p('/findings'), label: t.nav.findings },
     { href: p('/about'), label: t.nav.about },
   ]
 
@@ -83,12 +89,20 @@ export default function RootLayout({
                 <span style={{ color: 'var(--mc)' }}>Méta</span>
                 <span style={{ color: 'var(--ink)', marginLeft: -8 }}>Can</span>
               </Link>
-              <nav className="flex flex-1 flex-wrap gap-4 text-sm" style={{ color: 'var(--ink-3)' }}>
+              <nav className="flex flex-1 flex-wrap items-baseline gap-4 text-sm" style={{ color: 'var(--ink-3)' }}>
                 {NAV.map((n) => (
-                  <Link key={n.href} href={n.href} className="hover:text-[var(--mc)]">
+                  <Link key={n.href} href={n.href} className="font-medium hover:text-[var(--mc)]">
                     {n.label}
                   </Link>
                 ))}
+                <span className="hidden items-baseline gap-3 text-xs md:inline-flex" style={{ color: 'var(--ink-5)' }}>
+                  <span>{t.nav.howBuilt}</span>
+                  {NAV_SECONDARY.map((n) => (
+                    <Link key={n.href} href={n.href} className="hover:text-[var(--mc)]">
+                      {n.label}
+                    </Link>
+                  ))}
+                </span>
               </nav>
               {/* useSearchParams inside needs a Suspense boundary on statically rendered pages. */}
               <Suspense fallback={null}>

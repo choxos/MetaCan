@@ -40,18 +40,24 @@ const en = {
     workNotFound: 'Work not found',
     screen: 'The three-model screen',
     analytics: 'Analytics',
+    landscape: 'Landscape',
     findings: 'Findings',
     api: 'API',
     about: 'About',
+    qTitle: (hash: string) => `Cohort ${hash}`,
+    qNotFound: 'Cohort not found',
   },
 
   nav: {
     works: 'Works',
     screen: 'The screen',
     analytics: 'Analytics',
+    landscape: 'Landscape',
     findings: 'Findings',
     api: 'API',
     about: 'About',
+    cohort: 'Cohort builder',
+    howBuilt: 'How this was built:',
   },
 
   common: {
@@ -148,6 +154,156 @@ const en = {
     empty: 'No works match these filters.',
   },
 
+  /**
+   * The cohort builder: the front page, and the reason the site exists. Every
+   * label here sits next to a value that is ALSO the API's vocabulary
+   * (?category=metaresearch works in both languages), so only the human words
+   * switch.
+   */
+  cohort: {
+    title: 'Build a cohort',
+    sub: (n: string) =>
+      `Query the ${n} Canadian works in the frame, see the exact count, export it, cite it. Every filter state is a URL; every URL is a reproducible query.`,
+    topic: 'Topic',
+    venue: 'Venue',
+    typeaheadMin: 'type 2+ characters to search',
+    typeaheadNone: 'no matches',
+    typeaheadClear: 'clear',
+    category: 'Category',
+    anyCategory: 'Any category',
+    design: 'Study design',
+    anyDesign: 'Any design',
+    agreement: 'Label agreement',
+    agreementAny: 'any model suffices',
+    agreementAll: 'all models must agree',
+    labeled: 'Label status',
+    labeledAny: 'Any',
+    labeledOnly: 'Labelled works only',
+    labeledNone: 'Unlabelled works only',
+    retraction: 'Retraction',
+    retractionAny: 'Any',
+    retractionOnly: 'Retracted only',
+    retractionExclude: 'Exclude retracted',
+    abstract: 'Abstract',
+    abstractAny: 'Any',
+    abstractHas: 'Has abstract',
+    abstractNone: 'No abstract',
+    routes: 'Canadian routes',
+    routeAny: 'any',
+    routeRequire: 'required',
+    routeExclude: 'excluded',
+    routeAffLabel: 'Affiliation',
+    routeFundLabel: 'Funder',
+    routeVenueLabel: 'Venue route',
+    routeAboutLabel: 'About Canada',
+    routesHint:
+      'The four routes compose: require the funder route and exclude affiliation to get the funder-only stratum no affiliation-based frame ever sees.',
+    labelFacetsTitle: 'Machine labels',
+    labelFacetsHint:
+      'Frontier-LLM labels, unvalidated, and sparse: most of the frame is not labelled yet. Filtering on a category or design restricts the cohort to labelled works; absence of a label is never a negative label.',
+    /** The sentence that must travel with every filtered result set. */
+    coverage: (labeled: string, total: string) => `Labels cover ${labeled} of ${total} works in this cohort.`,
+    coverageNote:
+      'The rest are unlabelled, which is not a negative label: the label table is sparse today and grows as labelling rounds land.',
+    categoryNames: {
+      metaresearch: 'Metaresearch',
+      metaepi_narrow: 'Meta-epidemiology (narrow)',
+      metaepi_broad: 'Meta-epidemiology (broad)',
+      bibliometrics: 'Bibliometrics',
+      sts: 'Science and technology studies',
+      scholarly_communication: 'Scholarly communication',
+      open_science: 'Open science',
+      research_integrity: 'Research integrity',
+      // Not a facet: the model declined to judge on the evidence it was given.
+      // It appears in Landscape counts because hiding it would overstate the rest.
+      insufficient_payload: 'Insufficient payload (model declined to judge)',
+    } as Record<string, string>,
+    designNames: {
+      randomized_trial: 'Randomized trial',
+      nonrandomized_trial: 'Non-randomized trial',
+      observational: 'Observational',
+      systematic_review: 'Systematic review',
+      meta_analysis: 'Meta-analysis',
+      case_report: 'Case report',
+      qualitative: 'Qualitative',
+      simulation_or_modeling: 'Simulation or modeling',
+      bench_or_experimental: 'Bench or experimental',
+      theoretical_or_conceptual: 'Theoretical or conceptual',
+      not_applicable: 'Not applicable',
+      design_other: 'Other design',
+    } as Record<string, string>,
+    exportTitle: 'Export',
+    exportCsv: 'CSV',
+    exportJson: 'JSON',
+    exportNote: (cap: string) =>
+      `The current cohort, streamed from the database: every work column, the machine labels, the provisional scores, and the per-row validation status. Exports are capped at ${cap} rows.`,
+    exportTruncated: (total: string, cap: string) =>
+      `This cohort has ${total} works, more than the ${cap}-row export cap: the file will contain the first ${cap} ordered by OpenAlex id, and says so in its last line. Narrow the cohort, page the API, or rebuild the frame from the repository for the rest.`,
+    citeButton: 'Cite this cohort',
+    citeWorking: 'minting…',
+    citeCopy: 'copy',
+    citeCopied: 'copied',
+    citeNote:
+      'Mints a permanent /q/ link for this exact query. The same filters always produce the same link, whoever asks.',
+    apiLine: 'This cohort over the API:',
+  },
+
+  landscape: {
+    title: 'Landscape',
+    sub: 'What the machine-labelled subset of the frame looks like: categories, study designs, years, languages. Below it, the frame described by itself.',
+    bannerTitle: 'Read the coverage before the counts',
+    banner: (labeled: string, frame: string, pct: string) =>
+      `Labels cover ${labeled} of the ${frame} works in the frame (${pct}). Every count in this section is over that labelled subset only; it says what the labelled works look like, never how much of the frame is in a category. These are machine labels (frontier LLM, unvalidated), and an unlabelled work is NOT a negative.`,
+    tileLabeled: 'Labelled works',
+    tileLabeledNote: 'works with at least one model label',
+    tileRows: 'Label rows',
+    tileRowsNote: 'one per (work, model) pair',
+    tileModels: 'Models',
+    tileModelsNote: 'each work is labelled by up to three',
+    byCategoryTitle: 'Labelled works by category',
+    byCategoryNote:
+      'A work counts under a category if at least one model applied it; the darker figure requires every model that labelled the work to agree. The gap between the two columns is the models disagreeing, and that gap is a finding, not noise.',
+    byDesignTitle: 'Labelled works by study design',
+    byDesignNote:
+      'Same two readings: any model, and all models in agreement. No design label here is MEDLINE-validated yet; when that validation lands it will be marked explicitly.',
+    byYearTitle: 'Labelled works by year',
+    byYearNote:
+      'Where the labelling rounds have reached so far. This is coverage of the label table, not a property of the field.',
+    byLangTitle: 'Labelled works by language',
+    byLangNote: 'Coverage again: the labelling rounds sample the frame, and the frame is 6% French.',
+    thCategory: 'Category',
+    thDesign: 'Study design',
+    thYear: 'Year',
+    thLang: 'Language',
+    thAny: 'Any model',
+    thAll: 'All models agree',
+    thLabeled: 'Labelled works',
+    frameTitle: 'The frame itself',
+    frameSub: (n: string) =>
+      `Everything below is over all ${n} works, labelled or not. Every figure is a query against the database, computed at request time and cached for an hour; nothing here is a number someone typed.`,
+  },
+
+  qpage: {
+    eyebrow: 'A citable cohort query',
+    title: (hash: string) => `Cohort q/${hash}`,
+    sub: 'This link names a query, not a result list. The filters below are stored; the counts are recomputed live against the pinned snapshot every time the page loads, because re-running the query is the honest way to reproduce a number.',
+    filtersTitle: 'The query',
+    noFilters: 'No filters: this cohort is the entire frame.',
+    countsTitle: 'Counts, recomputed now',
+    totalLabel: 'Works in the cohort',
+    labeledLabel: 'Carry machine labels',
+    labeledNote: 'frontier-LLM labels, unvalidated; the rest are unlabelled, not negative',
+    snapshotTitle: 'Snapshot',
+    snapshotLine: (release: string, built: string) =>
+      `OpenAlex pinned release ${release} (all 482 partitions, publication years 2000 to 2025); frame built ${built}. The snapshot is byte-identical forever, so this query returns the same works on any future day.`,
+    citeTitle: 'Suggested citation',
+    citation: (n: string, hash: string, date: string, release: string) =>
+      `Sofi-Mahmudi A. MetaCan: the Canadian research frame. Cohort q/${hash} (${n} works; retrieved ${date}). https://metacan.xera.ac/q/${hash}. Data: OpenAlex pinned snapshot ${release}.`,
+    openBuilder: 'Open this cohort in the builder →',
+    apiLabel: 'The same cohort over the API',
+    exportLabel: 'Export',
+  },
+
   filters: {
     searchPlaceholder: 'Search titles — full-text over 4,299,418 works',
     searchAria: 'Search titles',
@@ -204,6 +360,22 @@ const en = {
     retractionMissedTitle: (nature: string) =>
       `${nature} — recorded by Retraction Watch, NOT flagged by OpenAlex.`,
     retractionMissedSuffix: ' · OpenAlex missed it',
+    // Label provenance, on every cohort row. The framing is part of the data:
+    // these are machine labels from frontier LLMs, unvalidated.
+    labelsPrefix: 'labels',
+    labelChipTitle: (model: string, cats: string, design: string, conf: string) =>
+      `Machine label (frontier LLM, unvalidated). ${model} said: categories [${cats || 'none'}], study design ${design || 'none'}, confidence ${conf || 'unstated'}.`,
+    labelNoCats: 'no category',
+    agreementAgree: 'models agree',
+    agreementAgreeTitle: 'Every model that labelled this work gave the same categories and study design.',
+    agreementSplit: 'models split',
+    agreementSplitTitle:
+      'The models that labelled this work disagree on its categories or study design. The disagreement ships as data; it is not averaged away.',
+    agreementSingle: 'one model',
+    agreementSingleTitle: 'Only one model has labelled this work so far, so there is nobody to agree or disagree with.',
+    unlabelled: 'unlabelled',
+    unlabelledTitle:
+      'No model has labelled this work yet. The label table is sparse and grows as labelling rounds land; absence of a label is NOT a negative label.',
   },
 
   /**
@@ -699,6 +871,66 @@ const en = {
       'The field breakdown, plus languages, the abstract gap by type, top venues, top funders, and the four-state retraction record — everything the analytics page draws, in one call.',
     findingsDesc:
       'All 22 findings, served verbatim from the file the pilot scripts write. Every number quoted anywhere on this site comes from here.',
+    cohortDesc: (p: P) => (
+      <>
+        The cohort builder&apos;s own query. Same parser, same function as{' '}
+        <Link href={p('/')} className="link">
+          the front page
+        </Link>
+        , so the API cannot answer a different question from the page above it. Takes every /api/v1/works
+        parameter, plus the facets below.
+      </>
+    ),
+    cohortNote: (
+      <>
+        <strong>The count is exact, and the label coverage travels with it.</strong>{' '}
+        <code className="font-mono text-xs">meta.total</code> is the real N (a cohort is cited by its N), and{' '}
+        <code className="font-mono text-xs">meta.labels_cover</code> says how many works in THIS cohort carry
+        machine labels. The label table is sparse; an empty <code className="font-mono text-xs">labels</code> array
+        means <em>unlabelled</em>, never &ldquo;not in the category&rdquo;.
+      </>
+    ),
+    cohortParams: {
+      topic: "Exact OpenAlex primary topic. Values come from the typeahead: /api/v1/facets/topic?q=…",
+      venue: 'Exact venue string. Values come from /api/v1/facets/venue?q=…',
+      routesTri:
+        'Tri-state route facets: 1 requires the route, 0 excludes it, absent means any. They compose (route_fund=1&route_aff=0 is the funder-only stratum), which the single `route` parameter cannot express.',
+      retracted: '1 = retracted only; 0 = exclude retracted; absent = any.',
+      abstract: 'has = only works with an abstract; none = only works without.',
+      category:
+        'Label facet: works at least one model put in this category. Machine labels (frontier LLM, unvalidated); filtering on this restricts the cohort to labelled works.',
+      design: 'Label facet: works at least one model gave this study design. Not MEDLINE-validated yet.',
+      agreement:
+        'any (default) = one model suffices; all = every model that labelled the work must agree on the filtered value.',
+      labeled: '1 = only works with at least one label row; 0 = only unlabelled works.',
+    },
+    cohortExample: (base: string) =>
+      `# Metaresearch-labelled observational works, 2015 onward, with exact count:\ncurl -sS "${base}/api/v1/cohort?category=metaresearch&design=observational&year_from=2015" \\\n  | jq '{total: .meta.total, labels_cover: .meta.labels_cover, first: .results[0].title}'\n\n# The funder-only stratum: Canadian-funded works with NO Canadian affiliation:\ncurl -sS "${base}/api/v1/cohort?route_fund=1&route_aff=0&per_page=5" | jq '.meta.total'`,
+    exportDesc:
+      'The whole cohort as a file, streamed from the database: every work column, the machine labels with their agreement, the provisional scores, and the per-row validation_status, verbatim.',
+    exportNote: (
+      <>
+        <strong>Capped at 100,000 rows.</strong> The truncation is never silent: it is declared in{' '}
+        <code className="font-mono text-xs">meta.truncated</code> (JSON), in a trailing comment line (CSV), and in
+        the <code className="font-mono text-xs">X-Export-Truncated</code> header. Past the cap, narrow the cohort or
+        rebuild the frame from the repository.
+      </>
+    ),
+    exportParams: {
+      format: 'csv (default) or json. Everything else is the same filter vocabulary as /api/v1/cohort.',
+    },
+    exportExample: (base: string) =>
+      `# A labelled cohort as CSV:\ncurl -sSL "${base}/api/v1/cohort/export?category=metaresearch&format=csv" -o cohort.csv\n\n# As JSON, metadata first:\ncurl -sS "${base}/api/v1/cohort/export?design=systematic_review&year_from=2020&format=json" | jq '.meta'`,
+    permalinkDesc:
+      'Mint the citable /q/<hash> permalink for a filter state. Idempotent: the hash is a function of the canonical filters, so the same cohort always gets the same URL, whoever asks and whenever.',
+    permalinkExample: (base: string) =>
+      `curl -sS -X POST "${base}/api/v1/permalink?category=metaresearch&year_from=2015" \\\n  | jq '{url, total, labels_cover}'`,
+    labelsStatsDesc:
+      'The label landscape: coverage, categories, study designs, years and languages over the machine-labelled subset. The same function the Landscape page renders, so the two cannot drift.',
+    facetsDesc:
+      'Search-as-you-type over the ~85,000 distinct venues and ~4,500 distinct topics, with frame-wide counts. Two characters minimum.',
+    facetsExample: (base: string) =>
+      `curl -sS "${base}/api/v1/facets/venue?q=canadian+journal" | jq '.results[:3]'\ncurl -sS "${base}/api/v1/facets/topic?q=peer+review" | jq '.results[:3]'`,
     notesTitle: 'Notes',
     noteCors: (
       <>
@@ -744,18 +976,24 @@ const fr: Dictionary = {
     workNotFound: 'Travail introuvable',
     screen: 'Le tri à trois modèles',
     analytics: 'Analytique',
+    landscape: 'Panorama',
     findings: 'Constats',
     api: 'API',
     about: 'À propos',
+    qTitle: (hash: string) => `Cohorte ${hash}`,
+    qNotFound: 'Cohorte introuvable',
   },
 
   nav: {
     works: 'Travaux',
     screen: 'Le tri',
     analytics: 'Analytique',
+    landscape: 'Panorama',
     findings: 'Constats',
     api: 'API',
     about: 'À propos',
+    cohort: 'Bâtir une cohorte',
+    howBuilt: 'Comment ce site a été construit :',
   },
 
   common: {
@@ -856,6 +1094,148 @@ const fr: Dictionary = {
     empty: 'Aucun travail ne correspond à ces filtres.',
   },
 
+  cohort: {
+    title: 'Bâtir une cohorte',
+    sub: (n: string) =>
+      `Interrogez les ${n} travaux canadiens de la base, obtenez le compte exact, exportez-le, citez-le. Chaque état des filtres est une URL; chaque URL est une requête reproductible.`,
+    topic: 'Sujet',
+    venue: 'Revue',
+    typeaheadMin: 'saisissez au moins 2 caractères',
+    typeaheadNone: 'aucun résultat',
+    typeaheadClear: 'effacer',
+    category: 'Catégorie',
+    anyCategory: 'Toutes les catégories',
+    design: "Devis d'étude",
+    anyDesign: 'Tous les devis',
+    agreement: 'Accord des étiquettes',
+    agreementAny: 'un seul modèle suffit',
+    agreementAll: 'tous les modèles doivent concorder',
+    labeled: 'État des étiquettes',
+    labeledAny: 'Tous',
+    labeledOnly: 'Travaux étiquetés seulement',
+    labeledNone: 'Travaux non étiquetés seulement',
+    retraction: 'Rétractation',
+    retractionAny: 'Tous',
+    retractionOnly: 'Rétractés seulement',
+    retractionExclude: 'Exclure les rétractés',
+    abstract: 'Résumé',
+    abstractAny: 'Tous',
+    abstractHas: 'Avec résumé',
+    abstractNone: 'Sans résumé',
+    routes: 'Voies canadiennes',
+    routeAny: 'toutes',
+    routeRequire: 'exigée',
+    routeExclude: 'exclue',
+    routeAffLabel: 'Affiliation',
+    routeFundLabel: 'Financement',
+    routeVenueLabel: 'Voie de la revue',
+    routeAboutLabel: 'Porte sur le Canada',
+    routesHint:
+      "Les quatre voies se composent : exigez la voie du financement et excluez l'affiliation pour obtenir la strate financée-seulement qu'aucune base fondée sur l'affiliation ne voit jamais.",
+    labelFacetsTitle: 'Étiquettes machine',
+    labelFacetsHint:
+      "Étiquettes de grands modèles de langage de pointe, non validées et clairsemées : la majeure partie de la base n'est pas encore étiquetée. Filtrer sur une catégorie ou un devis restreint la cohorte aux travaux étiquetés; l'absence d'étiquette n'est jamais une étiquette négative.",
+    coverage: (labeled: string, total: string) =>
+      `Les étiquettes couvrent ${labeled} des ${total} travaux de cette cohorte.`,
+    coverageNote:
+      "Les autres sont non étiquetés, ce qui n'est pas une étiquette négative : la table des étiquettes est clairsemée aujourd'hui et s'enrichit au fil des rondes d'étiquetage.",
+    categoryNames: {
+      metaresearch: 'Métarecherche',
+      metaepi_narrow: 'Méta-épidémiologie (sens strict)',
+      metaepi_broad: 'Méta-épidémiologie (sens large)',
+      bibliometrics: 'Bibliométrie',
+      sts: 'Études des sciences et des technologies',
+      scholarly_communication: 'Communication savante',
+      open_science: 'Science ouverte',
+      research_integrity: 'Intégrité de la recherche',
+      insufficient_payload: 'Charge utile insuffisante (le modèle a refusé de juger)',
+    } as Record<string, string>,
+    designNames: {
+      randomized_trial: 'Essai randomisé',
+      nonrandomized_trial: 'Essai non randomisé',
+      observational: 'Observationnel',
+      systematic_review: 'Revue systématique',
+      meta_analysis: 'Méta-analyse',
+      case_report: 'Étude de cas',
+      qualitative: 'Qualitatif',
+      simulation_or_modeling: 'Simulation ou modélisation',
+      bench_or_experimental: 'Expérimental (laboratoire)',
+      theoretical_or_conceptual: 'Théorique ou conceptuel',
+      not_applicable: 'Sans objet',
+      design_other: 'Autre devis',
+    } as Record<string, string>,
+    exportTitle: 'Exporter',
+    exportCsv: 'CSV',
+    exportJson: 'JSON',
+    exportNote: (cap: string) =>
+      `La cohorte courante, diffusée en continu depuis la base de données : toutes les colonnes des travaux, les étiquettes machine, les scores provisoires et l'état de validation de chaque rangée. Les exportations sont plafonnées à ${cap} rangées.`,
+    exportTruncated: (total: string, cap: string) =>
+      `Cette cohorte compte ${total} travaux, plus que le plafond d'exportation de ${cap} rangées : le fichier contiendra les ${cap} premières, ordonnées par identifiant OpenAlex, et le déclare à sa dernière ligne. Resserrez la cohorte, paginez l'API, ou reconstruisez la base depuis le dépôt pour le reste.`,
+    citeButton: 'Citer cette cohorte',
+    citeWorking: 'création…',
+    citeCopy: 'copier',
+    citeCopied: 'copié',
+    citeNote:
+      'Crée un lien /q/ permanent pour cette requête exacte. Les mêmes filtres produisent toujours le même lien, qui que soit le demandeur.',
+    apiLine: "Cette cohorte par l'API :",
+  },
+
+  landscape: {
+    title: 'Panorama',
+    sub: "À quoi ressemble le sous-ensemble étiqueté par machine : catégories, devis d'étude, années, langues. En dessous, la base décrite par elle-même.",
+    bannerTitle: 'Lisez la couverture avant les comptes',
+    banner: (labeled: string, frame: string, pct: string) =>
+      `Les étiquettes couvrent ${labeled} des ${frame} travaux de la base (${pct}). Chaque compte de cette section porte sur ce seul sous-ensemble étiqueté; il dit à quoi ressemblent les travaux étiquetés, jamais quelle part de la base appartient à une catégorie. Ce sont des étiquettes machine (grand modèle de langage de pointe, non validées), et un travail non étiqueté n'est PAS un négatif.`,
+    tileLabeled: 'Travaux étiquetés',
+    tileLabeledNote: "travaux portant au moins une étiquette de modèle",
+    tileRows: "Rangées d'étiquettes",
+    tileRowsNote: 'une par paire (travail, modèle)',
+    tileModels: 'Modèles',
+    tileModelsNote: "chaque travail est étiqueté par jusqu'à trois modèles",
+    byCategoryTitle: 'Travaux étiquetés par catégorie',
+    byCategoryNote:
+      "Un travail compte sous une catégorie si au moins un modèle la lui a attribuée; le chiffre plus foncé exige que tous les modèles qui ont étiqueté le travail concordent. L'écart entre les deux colonnes, c'est le désaccord des modèles, et cet écart est un constat, pas du bruit.",
+    byDesignTitle: "Travaux étiquetés par devis d'étude",
+    byDesignNote:
+      "Les deux mêmes lectures : au moins un modèle, puis tous les modèles en accord. Aucun devis ici n'est encore validé contre MEDLINE; quand cette validation arrivera, elle sera marquée explicitement.",
+    byYearTitle: 'Travaux étiquetés par année',
+    byYearNote:
+      "Là où les rondes d'étiquetage se sont rendues jusqu'ici. C'est la couverture de la table des étiquettes, pas une propriété du domaine.",
+    byLangTitle: 'Travaux étiquetés par langue',
+    byLangNote: "Encore la couverture : les rondes échantillonnent la base, et la base est à 6 % francophone.",
+    thCategory: 'Catégorie',
+    thDesign: "Devis d'étude",
+    thYear: 'Année',
+    thLang: 'Langue',
+    thAny: 'Au moins un modèle',
+    thAll: 'Tous les modèles concordent',
+    thLabeled: 'Travaux étiquetés',
+    frameTitle: 'La base elle-même',
+    frameSub: (n: string) =>
+      `Tout ce qui suit porte sur les ${n} travaux, étiquetés ou non. Chaque chiffre est une requête sur la base de données, calculée à la demande et mise en cache une heure; rien ici n'est un nombre saisi à la main.`,
+  },
+
+  qpage: {
+    eyebrow: 'Une requête de cohorte citable',
+    title: (hash: string) => `Cohorte q/${hash}`,
+    sub: "Ce lien nomme une requête, pas une liste de résultats. Les filtres ci-dessous sont conservés; les comptes sont recalculés en direct contre l'instantané épinglé à chaque chargement, car réexécuter la requête est la façon honnête de reproduire un nombre.",
+    filtersTitle: 'La requête',
+    noFilters: 'Aucun filtre : cette cohorte est la base entière.',
+    countsTitle: "Comptes, recalculés à l'instant",
+    totalLabel: 'Travaux dans la cohorte',
+    labeledLabel: 'Portent des étiquettes machine',
+    labeledNote: 'étiquettes de modèles de pointe, non validées; les autres sont non étiquetés, non négatifs',
+    snapshotTitle: 'Instantané',
+    snapshotLine: (release: string, built: string) =>
+      `Version épinglée d'OpenAlex du ${release} (les 482 partitions, années de publication 2000 à 2025); base construite le ${built}. L'instantané est identique à l'octet près pour toujours : cette requête renverra les mêmes travaux quel que soit le jour.`,
+    citeTitle: 'Citation suggérée',
+    citation: (n: string, hash: string, date: string, release: string) =>
+      `Sofi-Mahmudi A. MetaCan : la base de sondage de la recherche canadienne. Cohorte q/${hash} (${n} travaux; consultée le ${date}). https://metacan.xera.ac/q/${hash}. Données : instantané OpenAlex épinglé du ${release}.`,
+    openBuilder: 'Ouvrir cette cohorte dans le constructeur →',
+    apiLabel: "La même cohorte par l'API",
+    exportLabel: 'Exporter',
+  },
+
   filters: {
     searchPlaceholder: 'Rechercher dans les titres : plein texte sur 4 299 418 travaux',
     searchAria: 'Rechercher dans les titres',
@@ -913,6 +1293,22 @@ const fr: Dictionary = {
     retractionMissedTitle: (nature: string) =>
       `${nature} : consigné par Retraction Watch, NON signalé par OpenAlex.`,
     retractionMissedSuffix: ' · manqué par OpenAlex',
+    labelsPrefix: 'étiquettes',
+    labelChipTitle: (model: string, cats: string, design: string, conf: string) =>
+      `Étiquette machine (grand modèle de langage de pointe, non validée). ${model} a répondu : catégories [${cats || 'aucune'}], devis d'étude ${design || 'aucun'}, confiance ${conf || 'non précisée'}.`,
+    labelNoCats: 'aucune catégorie',
+    agreementAgree: 'modèles en accord',
+    agreementAgreeTitle:
+      "Tous les modèles qui ont étiqueté ce travail ont donné les mêmes catégories et le même devis d'étude.",
+    agreementSplit: 'modèles en désaccord',
+    agreementSplitTitle:
+      "Les modèles qui ont étiqueté ce travail divergent sur ses catégories ou son devis d'étude. Le désaccord est livré comme donnée; il n'est pas moyenné.",
+    agreementSingle: 'un seul modèle',
+    agreementSingleTitle:
+      "Un seul modèle a étiqueté ce travail jusqu'ici : personne avec qui concorder ou diverger.",
+    unlabelled: 'non étiqueté',
+    unlabelledTitle:
+      "Aucun modèle n'a encore étiqueté ce travail. La table des étiquettes est clairsemée et s'enrichit au fil des rondes; l'absence d'étiquette n'est PAS une étiquette négative.",
   },
 
   scoreBanner: {
@@ -1418,6 +1814,67 @@ const fr: Dictionary = {
       "La répartition par domaine, plus les langues, l'écart des résumés par type, les principales revues, les principaux organismes subventionnaires et le dossier de rétractation à quatre états : tout ce que dessine la page Analytique, en un seul appel.",
     findingsDesc:
       'Les 22 constats, servis tels quels depuis le fichier qu’écrivent les scripts du pilote. Chaque nombre cité où que ce soit sur ce site vient d’ici.',
+    cohortDesc: (p: P) => (
+      <>
+        La requête du constructeur de cohortes lui-même. Même analyseur, même fonction que{' '}
+        <Link href={p('/')} className="link">
+          la page d&apos;accueil
+        </Link>
+        , de sorte que l&apos;API ne peut pas répondre à une autre question que la page au-dessus d&apos;elle.
+        Accepte tous les paramètres de /api/v1/works, plus les facettes ci-dessous.
+      </>
+    ),
+    cohortNote: (
+      <>
+        <strong>Le compte est exact, et la couverture des étiquettes l&apos;accompagne.</strong>{' '}
+        <code className="font-mono text-xs">meta.total</code> est le vrai N (une cohorte se cite par son N), et{' '}
+        <code className="font-mono text-xs">meta.labels_cover</code> dit combien de travaux de CETTE cohorte portent
+        des étiquettes machine. La table des étiquettes est clairsemée; un tableau{' '}
+        <code className="font-mono text-xs">labels</code> vide signifie <em>non étiqueté</em>, jamais « hors de la
+        catégorie ».
+      </>
+    ),
+    cohortParams: {
+      topic: 'Sujet principal OpenAlex exact. Les valeurs viennent de la saisie semi-automatique : /api/v1/facets/topic?q=…',
+      venue: 'Nom de revue exact. Les valeurs viennent de /api/v1/facets/venue?q=…',
+      routesTri:
+        "Facettes de voies à trois états : 1 exige la voie, 0 l'exclut, absent signifie « toutes ». Elles se composent (route_fund=1&route_aff=0 donne la strate financée-seulement), ce que le seul paramètre route ne peut pas exprimer.",
+      retracted: '1 = rétractés seulement; 0 = exclure les rétractés; absent = tous.',
+      abstract: 'has = seulement les travaux avec résumé; none = seulement ceux sans résumé.',
+      category:
+        "Facette d'étiquette : les travaux qu'au moins un modèle a placés dans cette catégorie. Étiquettes machine (grand modèle de langage de pointe, non validées); ce filtre restreint la cohorte aux travaux étiquetés.",
+      design: "Facette d'étiquette : les travaux auxquels au moins un modèle a attribué ce devis d'étude. Pas encore validé contre MEDLINE.",
+      agreement:
+        'any (défaut) = un modèle suffit; all = tous les modèles ayant étiqueté le travail doivent concorder sur la valeur filtrée.',
+      labeled: "1 = seulement les travaux portant au moins une étiquette; 0 = seulement les travaux non étiquetés.",
+    },
+    cohortExample: (base: string) =>
+      `# Travaux observationnels étiquetés métarecherche, depuis 2015, avec compte exact :\ncurl -sS "${base}/api/v1/cohort?category=metaresearch&design=observational&year_from=2015" \\\n  | jq '{total: .meta.total, labels_cover: .meta.labels_cover, first: .results[0].title}'\n\n# La strate financée-seulement : travaux financés au Canada SANS affiliation canadienne :\ncurl -sS "${base}/api/v1/cohort?route_fund=1&route_aff=0&per_page=5" | jq '.meta.total'`,
+    exportDesc:
+      "La cohorte entière en un fichier, diffusé en continu depuis la base de données : toutes les colonnes des travaux, les étiquettes machine avec leur accord, les scores provisoires et l'état de validation de chaque rangée, tel quel.",
+    exportNote: (
+      <>
+        <strong>Plafonné à 100 000 rangées.</strong> La troncature n&apos;est jamais silencieuse : elle est déclarée
+        dans <code className="font-mono text-xs">meta.truncated</code> (JSON), dans une ligne de commentaire finale
+        (CSV) et dans l&apos;en-tête <code className="font-mono text-xs">X-Export-Truncated</code>. Au-delà du
+        plafond, resserrez la cohorte ou reconstruisez la base depuis le dépôt.
+      </>
+    ),
+    exportParams: {
+      format: 'csv (défaut) ou json. Tout le reste suit le même vocabulaire de filtres que /api/v1/cohort.',
+    },
+    exportExample: (base: string) =>
+      `# Une cohorte étiquetée en CSV :\ncurl -sSL "${base}/api/v1/cohort/export?category=metaresearch&format=csv" -o cohort.csv\n\n# En JSON, métadonnées d'abord :\ncurl -sS "${base}/api/v1/cohort/export?design=systematic_review&year_from=2020&format=json" | jq '.meta'`,
+    permalinkDesc:
+      "Créer le permalien citable /q/<hash> d'un état de filtres. Idempotent : le hachage est une fonction des filtres canoniques, la même cohorte reçoit donc toujours la même URL, qui que soit le demandeur et quel que soit le moment.",
+    permalinkExample: (base: string) =>
+      `curl -sS -X POST "${base}/api/v1/permalink?category=metaresearch&year_from=2015" \\\n  | jq '{url, total, labels_cover}'`,
+    labelsStatsDesc:
+      "Le panorama des étiquettes : couverture, catégories, devis d'étude, années et langues sur le sous-ensemble étiqueté par machine. La même fonction que rend la page Panorama, de sorte que les deux ne peuvent pas diverger.",
+    facetsDesc:
+      'Saisie semi-automatique sur les ~85 000 revues distinctes et ~4 500 sujets distincts, avec les comptes sur toute la base. Deux caractères au minimum.',
+    facetsExample: (base: string) =>
+      `curl -sS "${base}/api/v1/facets/venue?q=canadian+journal" | jq '.results[:3]'\ncurl -sS "${base}/api/v1/facets/topic?q=peer+review" | jq '.results[:3]'`,
     notesTitle: 'Remarques',
     noteCors: (
       <>

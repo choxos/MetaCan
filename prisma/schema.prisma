@@ -47,6 +47,7 @@ model Work {
   retraction Retraction?
   screened   Screened?
   score      WorkScore?
+  labels     WorkLabel[]
 
   @@map("works")
 }
@@ -134,4 +135,45 @@ model WorkScore {
   work Work @relation(fields: [id], references: [id], onDelete: Cascade)
 
   @@map("work_score")
+}
+
+/// Per-model category and study-design labels from the labelling rounds under
+/// pilot/screening/loop (one round_NNN directory per round), loaded by
+/// deploy/load_labels.py. MACHINE LABELS from frontier LLMs, unvalidated, and
+/// SPARSE ON PURPOSE: only a few
+/// hundred works carry rows today. Nothing that reads this table may treat an
+/// absent row as a negative label, and every surface that filters on it must
+/// say how many works in the cohort carry labels at all.
+model WorkLabel {
+  id            String   @db.VarChar(20)
+  /// opus | gpt | grok
+  model         String   @db.VarChar(16)
+  /// A set, not a single value: a work can be metaresearch AND open_science.
+  /// insufficient_payload means the model refused to judge on the evidence.
+  categories    String[]
+  domain        String?  @db.VarChar(24)
+  /// No study_design here is MEDLINE-validated yet; when that validation lands
+  /// it will be carried explicitly, never assumed.
+  studyDesign   String?  @map("study_design") @db.VarChar(32)
+  genre         String?  @db.VarChar(16)
+  aboutCaSystem Boolean? @map("about_ca_system")
+  aboutCaTopic  Boolean? @map("about_ca_topic")
+  confidence    String?  @db.VarChar(8)
+
+  work Work @relation(fields: [id], references: [id], onDelete: Cascade)
+
+  @@id([id, model])
+  @@map("work_label")
+}
+
+/// Citable cohort queries: the canonical filter state behind /q/<hash>. The row
+/// stores the FILTERS, never the results; the page recomputes counts live,
+/// because re-running the query against the pinned snapshot is the honest way
+/// to reproduce them.
+model QueryPermalink {
+  hash      String   @id @db.VarChar(16)
+  filters   Json
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+
+  @@map("query_permalink")
 }

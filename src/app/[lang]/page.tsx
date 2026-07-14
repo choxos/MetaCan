@@ -1,126 +1,144 @@
 import Link from 'next/link'
-import { prisma } from '@/lib/db'
+import { cohortSearch, EXPORT_CAP } from '@/lib/query'
+import { canonicalFilters, filtersToQuery } from '@/lib/permalink'
+import { filtersFromRecord } from '@/lib/api'
+import { getFacets } from '@/lib/stats'
+import { WorkRow } from '@/components/WorkRow'
+import { CohortFilters } from '@/components/CohortFilters'
+import { CohortActions } from '@/components/CohortActions'
 import { getDict } from '@/lib/i18n'
-import { formatInt, formatPct, isLang, localePath, type Lang } from '@/lib/lang'
+import { formatInt, isLang, localePath, type Lang } from '@/lib/lang'
 
-export const revalidate = 3600
+export const dynamic = 'force-dynamic'
 
 /**
- * The home page leads with the frame's own argument, not with a welcome.
+ * The front page IS the query tool.
  *
- * The number that matters is not 4.3M works. It is the 1.57M works an
- * affiliation-only frame would never have seen, because that gap is the reason
- * this project exists and it is measured rather than asserted.
+ * MetaCan exists so that a meta-researcher can define a cohort of Canadian
+ * works, count it exactly, export it, and cite it. That workflow starts here,
+ * on the first screen, not behind a navigation item. The project's argument
+ * for itself (the frame flip, the disagreement dossier, the measured limits)
+ * still exists in full, one level down under "How this was built".
+ *
+ * Every filter state is a URL; the URL is the query; the query is citable via
+ * /q/<hash>. The page, /api/v1/cohort and the export all parse the SAME
+ * parameters with the SAME function, so no surface can answer a different
+ * question from another.
  */
-async function stats() {
-  const [total, noAff, noAbstract, screened, retr, eoc] = await Promise.all([
-    prisma.work.count(),
-    prisma.work.count({ where: { routeCaAff: false } }),
-    prisma.work.count({ where: { hasAbstract: false } }),
-    prisma.screened.count(),
-    prisma.retraction.count(),
-    prisma.retraction.count({ where: { nature: 'Expression of concern' } }),
-  ])
-  return { total, noAff, noAbstract, screened, retr, eoc }
-}
-
-export default async function Home({ params }: { params: { lang: string } }) {
+export default async function Home({
+  params,
+  searchParams,
+}: {
+  params: { lang: string }
+  searchParams: Record<string, string | string[] | undefined>
+}) {
   const lang: Lang = isLang(params.lang) ? params.lang : 'en'
   const t = getDict(lang)
   const p = (path: string) => localePath(lang, path)
   const n = (x: number) => formatInt(lang, x)
 
-  const s = await stats()
-  const pctNoAff = formatPct(lang, (s.noAff / s.total) * 100)
-  const pctNoAbs = formatPct(lang, (s.noAbstract / s.total) * 100)
+  const f = filtersFromRecord(searchParams)
+  const [{ rows, total, labeled, page, perPage }, facets] = await Promise.all([cohortSearch(f), getFacets()])
+  const pages = Math.max(Math.ceil(total / perPage), 1)
+
+  // The canonical query string: what the export, the API link and the
+  // permalink all receive. Pagination and sort are presentation, not cohort
+  // membership, so they are not part of it.
+  const canonicalQuery = filtersToQuery(canonicalFilters(f))
+
+  const qs = (over: Record<string, string | number | undefined>) => {
+    const sp = new URLSearchParams()
+    for (const [k, v] of Object.entries({ ...searchParams, ...over })) {
+      if (v !== undefined && v !== '' && typeof v !== 'object') sp.set(k, String(v))
+    }
+    return `?${sp.toString()}`
+  }
 
   return (
-    <div className="space-y-12">
-      <section>
-        <p className="mb-3 text-xs uppercase tracking-wider" style={{ color: 'var(--mc)' }}>
-          {t.home.eyebrow}
+    <div className="space-y-6">
+      <div>
+        <h1 className="font-serif text-3xl">{t.cohort.title}</h1>
+        <p className="mt-1 max-w-3xl text-sm leading-relaxed" style={{ color: 'var(--ink-4)' }}>
+          {t.cohort.sub(n(4_299_418))}
         </p>
-        <h1 className="font-serif text-4xl leading-tight md:text-5xl" style={{ maxWidth: '24ch' }}>
-          {t.home.h1}
-        </h1>
-        <p className="mt-5 max-w-2xl text-base leading-relaxed" style={{ color: 'var(--ink-3)' }}>
-          {t.home.lead}
-        </p>
-      </section>
+      </div>
 
-      <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <Stat label={t.home.statFrameLabel} value={n(s.total)} note={t.home.statFrameNote} />
-        <Stat
-          label={t.home.statNoAffLabel}
-          value={n(s.noAff)}
-          note={t.home.statNoAffNote(pctNoAff)}
-          tone="mc"
-          href={`${p('/works')}?route=no_aff`}
-        />
-        <Stat
-          label={t.home.statNoAbsLabel}
-          value={n(s.noAbstract)}
-          note={t.home.statNoAbsNote(pctNoAbs)}
-          tone="contested"
-          href={`${p('/works')}?no_abstract=1`}
-        />
-        <Stat
-          label={t.home.statScreenedLabel}
-          value={n(s.screened)}
-          note={t.home.statScreenedNote}
-          href={p('/screen')}
-        />
-      </section>
+      <CohortFilters facets={facets} lang={lang} />
 
-      <section className="card p-6">
-        <h2 className="font-serif text-2xl">{t.home.card1Title}</h2>
-        <p className="mt-3 max-w-3xl leading-relaxed" style={{ color: 'var(--ink-3)' }}>
-          {t.home.card1P1}
-        </p>
-        <p className="mt-3 max-w-3xl leading-relaxed" style={{ color: 'var(--ink-3)' }}>
-          {t.home.card1P2(p)}
-        </p>
-      </section>
+      <CohortActions query={canonicalQuery} total={total} exportCap={EXPORT_CAP} lang={lang} />
 
-      <section className="card p-6">
-        <h2 className="font-serif text-2xl">{t.home.card2Title}</h2>
-        <p className="mt-3 max-w-3xl leading-relaxed" style={{ color: 'var(--ink-3)' }}>
-          {t.home.card2Body(n(s.retr), n(s.eoc))}
+      <div className="space-y-1">
+        <div className="flex items-baseline justify-between text-sm" style={{ color: 'var(--ink-3)' }}>
+          <span className="tabular font-medium" style={{ color: 'var(--ink)' }}>
+            {t.works.countWorks(n(total))}
+            {f.q ? t.works.matching(f.q) : null}
+          </span>
+          <span className="tabular text-xs" style={{ color: 'var(--ink-4)' }}>
+            {t.common.pageOf(n(page), n(pages))}
+          </span>
+        </div>
+        {/* The coverage sentence: mandatory on every cohort, because the label
+            table is sparse and absence of a label is not a negative label. */}
+        <p className="text-xs leading-snug" style={{ color: 'var(--ink-4)' }}>
+          {t.cohort.coverage(n(labeled), n(total))} <span style={{ color: 'var(--ink-5)' }}>{t.cohort.coverageNote}</span>
         </p>
-        <Link href={`${p('/works')}?retracted=1`} className="link mt-4 inline-block text-sm">
-          {t.home.card2Link}
+      </div>
+
+      {rows.length === 0 ? (
+        <div className="card p-8 text-center" style={{ color: 'var(--ink-4)' }}>
+          {t.works.empty}
+        </div>
+      ) : (
+        <div className="space-y-2">
+          {rows.map((w) => (
+            <WorkRow
+              key={w.id}
+              lang={lang}
+              w={{
+                ...w,
+                labels: w.labels.map((l) => ({
+                  model: l.model,
+                  categories: l.categories,
+                  studyDesign: l.studyDesign,
+                  confidence: l.confidence,
+                })),
+              }}
+            />
+          ))}
+        </div>
+      )}
+
+      <div className="flex justify-between pt-2">
+        {page > 1 ? (
+          <Link className="link text-sm" href={qs({ page: page - 1 })}>
+            {t.common.previous}
+          </Link>
+        ) : (
+          <span />
+        )}
+        {page < pages ? (
+          <Link className="link text-sm" href={qs({ page: page + 1 })}>
+            {t.common.next}
+          </Link>
+        ) : (
+          <span />
+        )}
+      </div>
+
+      <p className="border-t pt-4 text-xs leading-relaxed" style={{ color: 'var(--ink-5)' }}>
+        {t.nav.howBuilt}{' '}
+        <Link href={p('/screen')} className="link">
+          {t.nav.screen}
         </Link>
-      </section>
+        {' · '}
+        <Link href={p('/findings')} className="link">
+          {t.nav.findings}
+        </Link>
+        {' · '}
+        <Link href={p('/about')} className="link">
+          {t.nav.about}
+        </Link>
+      </p>
     </div>
   )
-}
-
-function Stat({
-  label,
-  value,
-  note,
-  tone,
-  href,
-}: {
-  label: string
-  value: string
-  note: string
-  tone?: 'mc' | 'contested'
-  href?: string
-}) {
-  const color = tone === 'mc' ? 'var(--mc)' : tone === 'contested' ? 'var(--contested)' : 'var(--ink)'
-  const body = (
-    <div className="card h-full p-5">
-      <div className="text-xs uppercase tracking-wider" style={{ color: 'var(--ink-4)' }}>
-        {label}
-      </div>
-      <div className="tabular mt-2 text-3xl font-semibold" style={{ color }}>
-        {value}
-      </div>
-      <div className="mt-2 text-xs leading-snug" style={{ color: 'var(--ink-4)' }}>
-        {note}
-      </div>
-    </div>
-  )
-  return href ? <Link href={href}>{body}</Link> : body
 }
