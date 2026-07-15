@@ -1,4 +1,4 @@
-.PHONY: pilot pilot-offline findings proposal protocol deps clean help harvest-status lint check collaboration-network collaboration-authorships
+.PHONY: pilot pilot-offline findings proposal protocol deps deps-ci clean help harvest-status lint check collaboration-network collaboration-authorships
 
 # Every numbered finding, 01 through 13. The old glob was `pilot/0*.R`, which
 # silently stopped at 09: findings 10-13 (agreement, the abstract bias, the topic
@@ -12,6 +12,7 @@ PILOTS := $(filter-out pilot/09_screening.R, $(sort $(wildcard pilot/[0-9][0-9]_
 
 help:
 	@echo "make deps           install R dependencies"
+	@echo "make deps-ci        install R dependencies used by committed CI checks"
 	@echo "make pilot          run every pilot script against the live OpenAlex API"
 	@echo "make pilot-offline  re-derive every number from the archived responses, no network"
 	@echo "make findings       render pilot/results/FINDINGS.md"
@@ -24,6 +25,9 @@ help:
 
 deps:
 	@Rscript -e 'pkgs <- c("httr2","jsonlite","xml2","dplyr","purrr","tibble","glue","cli","openssl","DBI","duckdb"); new <- pkgs[!vapply(pkgs, requireNamespace, logical(1), quietly = TRUE)]; if (length(new)) install.packages(new, repos = "https://cloud.r-project.org")'
+
+deps-ci:
+	@Rscript -e 'pkgs <- c("jsonlite","purrr","glue","cli"); new <- pkgs[!vapply(pkgs, requireNamespace, logical(1), quietly = TRUE)]; if (length(new)) install.packages(new, repos = "https://cloud.r-project.org")'
 
 # findings.json IS REBUILT FROM EMPTY, EVERY TIME. This is not a tidiness habit.
 #
