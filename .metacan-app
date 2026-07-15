@@ -1,9 +1,2 @@
-# This directory is the MetaCan web application served at metacan.xera.ac.
-#
-# deploy/deploy.sh finds the app by looking for this marker file, never by a
-# hard-coded path. That is deliberate: the research repo is being reorganized,
-# and this directory can be renamed or moved without breaking the deploy, as
-# long as the marker travels with it.
-#
-# Exactly one tracked .metacan-app may exist in the repo. If there are none, or
-# more than one, the deploy stops and says so rather than guessing.
+# Marker for the MétaCan application root. Repository tools use it both before
+# and after the website is published as the standalone webapp branch.

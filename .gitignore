@@ -1,17 +1,13 @@
-# deploy/deploy.sh splits this directory out to the `deploy/metacan` branch,
-# whose root IS this directory. So this file lands as the root .gitignore of the
-# server's checkout at /var/www/metacan, and it is what keeps node_modules, the
-# build output and the Postgres URL out of git on both sides.
-
-# Build products.
+# Local dependencies and build products.
 node_modules/
 .next/
 out/
 tsconfig.tsbuildinfo
 
-# DATABASE_URL. Lives on the server only. The repo is going public; the root
-# .gitignore already ignores .env everywhere, and this repeats it here because
-# the root .gitignore is NOT part of the split and so never reaches the server.
+# Credentials and local configuration.
 .env
 .env.*
 !.env.example
+
+# Operating system files.
+.DS_Store
