@@ -151,16 +151,15 @@ record_finding(
     )
   ),
   headline = glue(
-    "AN INDEPENDENT BLINDED JUDGE SAYS THE RUBRIC IS SILENT ON {round(100*silent/nrow(v))}% OF THE WORKS THE MODELS FOUGHT OVER. Fable 5, ",
-    "which is not one of the three screened arms, adjudicated all {nrow(v)} contested works seeing three screener opinions ",
+    "A BLINDED FOURTH MODEL CLASSIFIED {round(100*silent/nrow(v))}% OF THE SELECTED DISAGREEMENTS AS INVOLVING A RUBRIC SEAM. Fable 5, ",
+    "which is not one of the three screened arms, reviewed all {nrow(v)} contested works seeing three screener opinions ",
     "as A/B/C in random order with no model names, so it was asked which reading of the RUBRIC is right rather than ",
     "which model to trust. It shows no arm preference (spread {spread}x, chi-square p = {signif(chi$p.value, 3)}), so it is not a fourth vote ",
-    "for one of the screeners, and it overruled ALL THREE on {n_none} works. Its verdict on the instrument: the rubric is ",
-    "SILENT on {silent} of {nrow(v)} contested works, and only {sum(v$seam == 'none')} splits are a screener misapplying a rule that actually ",
-    "exists. THE FIELD'S BOUNDARY IS BEING SET BY THE SCREENER, NOT BY THE INSTRUMENT. The seams that cost the most ",
-    "agreement are {top$seam[1]} ({top$n[1]} works), {top$seam[2]} ({top$n[2]}), and {top$seam[3]} ({top$n[3]}). This is what converts adjudication ",
-    "from a tiebreak into a measurement: not 179 answers, but a frequency-weighted census of which sentences the ",
-    "rubric is missing and exactly how many works each one costs. The judge's TIERS are used for nothing and produce ",
-    "no estimate: a model cannot certify a model, and that argument applies to the judge too."
+    "for one of the screeners, and it overruled ALL THREE on {n_none} works. It assigned a rubric-seam category to ",
+    "{silent} of {nrow(v)} contested works, and assigned 'none' to {sum(v$seam == 'none')} splits where it read an existing rule as sufficient. ",
+    "The most frequent model-assigned seams are {top$seam[1]} ({top$n[1]} works), {top$seam[2]} ({top$n[2]}), ",
+    "and {top$seam[3]} ({top$n[3]}). These counts are hypotheses for rubric revision, not proof that the rubric is silent or ",
+    "that any field boundary has been located. The judge's tiers are used for nothing and produce no estimate: a model ",
+    "cannot certify a model, and that argument applies to the judge too."
   )
 )

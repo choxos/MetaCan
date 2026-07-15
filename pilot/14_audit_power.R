@@ -54,9 +54,11 @@
 #   what the screener can see looks like metaresearch. Such a work does not sit near
 #   the threshold. It sits deep in the settled rejects, where (i) never looks.
 #
-#   THE MEASURED DEFICIT. 31.5% of the frame carries no abstract, and there the
-#   screen finds HALF as much metaresearch (0.78% vs 1.55%, p = 0.023, robust to
-#   adjustment for year and language). A third of the frame is judged on a title.
+#   THE MEASURED DIFFERENCE. 31.5% of the frame carries no abstract, and there one
+#   historical model assigned positive labels at roughly half the rate observed
+#   among works with abstracts (0.78% vs 1.55%, p = 0.023, robust to adjustment for
+#   year and language). A third of the frame is judged on a title. The difference
+#   does not establish accuracy, bias, or field prevalence.
 #
 #   AND THE HARNESS MADE IT WORSE. DEVIATIONS.md D1: the pilot screen was sent six
 #   of the eight fields the rubric mandates. Venue, OpenAlex topic, field,
@@ -172,10 +174,11 @@ cli_alert_warning(
 cli_alert_danger(
   "What IS claimed, and it is enough. MECHANISM: the rubric says judge on the title alone when the \\
    abstract is missing, and the rubric ALSO says T2 work may use none of the field's vocabulary. A \\
-   work with neither is rejected CONFIDENTLY -- it sits deep in the settled rejects, not near the \\
+   work with neither is rejected CONFIDENTLY. It sits deep in the settled rejects, not near the \\
    threshold, so score-stratified sampling never looks at it. MEASURED: {rb$no_abstract_share_pct}% of the frame \\
-   carries no abstract, and there the screen finds {rb$base_rate_no_abstract_pct}% metaresearch against \\
-   {rb$base_rate_has_abstract_pct}% (p = {rb$chisq_p_abstract}). A third of the frame is judged on a title."
+   carries no abstract. There, one historical model assigned positive labels at {rb$base_rate_no_abstract_pct}% against \\
+   {rb$base_rate_has_abstract_pct}% where abstracts were available (p = {rb$chisq_p_abstract}). This is model behaviour, \\
+   not evidence of accuracy or field prevalence."
 )
 cli_alert_danger(
   "AND THE HARNESS MADE IT WORSE (DEVIATIONS.md D1). The pilot screen was sent SIX of the EIGHT \\

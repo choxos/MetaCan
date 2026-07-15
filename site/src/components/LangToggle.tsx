@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname, useSearchParams } from 'next/navigation'
+import { useEffect, useState } from 'react'
 import { LANGS, LANG_COOKIE, LANG_LABEL, type Lang } from '@/lib/lang'
 
 /**
@@ -10,18 +11,27 @@ import { LANGS, LANG_COOKIE, LANG_LABEL, type Lang } from '@/lib/lang'
  * straight to the other one. French is not hidden behind an interaction,
  * which is the honest layout for a bilingual site.
  *
- * Each option is a real link to the SAME page in the other language (query
- * string preserved), so it works without JavaScript and can be opened in a
- * new tab. The click also writes the preference cookie; the middleware reads
- * it on later visits. Only this explicit click ever sets the cookie.
+ * After mount, each option is a real link to the same page in the other
+ * language with its query string preserved. The server preview uses stable
+ * home targets because rewritten paths can differ during hydration. The click
+ * also writes the preference cookie; only this explicit click sets it.
  */
 export function LangToggle({ lang }: { lang: Lang }) {
-  const pathname = usePathname() ?? '/'
+  const routedPathname = usePathname() ?? '/'
+  const [pathname, setPathname] = useState('')
   const search = useSearchParams()?.toString()
-  const qs = search ? `?${search}` : ''
+  const qs = pathname && search ? `?${search}` : ''
+
+  useEffect(() => setPathname(routedPathname), [routedPathname])
 
   // Current path without its language prefix.
-  const bare = pathname === '/fr' ? '/' : pathname.startsWith('/fr/') ? pathname.slice(3) : pathname
+  const currentPathname = pathname || '/'
+  const bare =
+    currentPathname === '/fr'
+      ? '/'
+      : currentPathname.startsWith('/fr/')
+        ? currentPathname.slice(3)
+        : currentPathname
 
   const hrefFor = (code: Lang) => (code === 'fr' ? (bare === '/' ? '/fr' : `/fr${bare}`) : bare) + qs
 
@@ -51,7 +61,7 @@ export function LangToggle({ lang }: { lang: Lang }) {
             lang={code}
             hrefLang={code === 'fr' ? 'fr-CA' : 'en-CA'}
             title={LANG_LABEL[code]}
-            className="px-2 py-1.5 font-medium uppercase tracking-wider"
+            className="inline-flex min-h-11 min-w-11 items-center justify-center px-2 font-medium uppercase tracking-wider"
             style={{
               borderLeft: i > 0 ? '1px solid var(--border)' : undefined,
               background: active ? 'var(--surface-3)' : 'transparent',

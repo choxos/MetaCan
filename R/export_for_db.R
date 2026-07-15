@@ -4,9 +4,9 @@
 # WHY NOT ABSTRACTS. Measured, not guessed: the abstract inverted indexes are
 # 8.6 GB of the frame's 9.3 GB of text. The VPS has 13 GB free. Loading them
 # would leave no headroom on a box already at 96%, so the works table ships with
-# every field EXCEPT the abstract, and the detail page fetches the abstract live
-# from OpenAlex (free, cached). Abstracts ARE stored for the 1,000 screened
-# works, where they are part of the evidence rather than a convenience.
+# every field EXCEPT the abstract. The detail page prefers PubMed, then Europe
+# PMC, then OpenAlex, with each upstream response cached. Abstracts ARE stored
+# for the 1,000 screened works, where they are evidence rather than a convenience.
 #
 # Everything here is a projection of data/frame/canadian_works.parquet, which is
 # itself a projection of the pinned OpenAlex snapshot. Nothing is invented.

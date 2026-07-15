@@ -159,9 +159,9 @@ cli_alert_danger(
 )
 cli_alert_info(
   "So that interval is not a confidence interval for the base rate. It is a confidence \\
-   interval for HOW MANY T1/T2 LABELS ONE MODEL EMITS, which is not a quantity anyone \\
-   needs. The honest uncertainty on the field's size is the screener-swap range, and it \\
-   is why the human audit is the study rather than a validation appendix."
+   interval for HOW MANY T1/T2 LABELS ONE MODEL EMITS. The screener-swap range describes \\
+   variation between these model outputs; it is not uncertainty about the field's size. \\
+   Accuracy and prevalence require the planned human-coded probability sample."
 )
 
 write_json(d, "pilot/screening/disagreements.json", pretty = TRUE, auto_unbox = TRUE)
@@ -172,11 +172,11 @@ record_finding(
   list(
     n_double_screened          = nrow(j),
     # the swap: the number the disagreement counts imply
-    base_rate_screener_a_pct   = round(100 * p_a, 2),
-    base_rate_screener_b_pct   = round(100 * p_b, 2),
+    model_positive_rate_screener_a_pct = round(100 * p_a, 2),
+    model_positive_rate_screener_b_pct = round(100 * p_b, 2),
     swap_ratio_x               = round(max(swap) / min(swap), 2),
-    field_size_screener_a      = round(p_a * FRAME_CANADIAN),
-    field_size_screener_b      = round(p_b * FRAME_CANADIAN),
+    extrapolated_model_positive_count_a = round(p_a * FRAME_CANADIAN),
+    extrapolated_model_positive_count_b = round(p_b * FRAME_CANADIAN),
     published_binomial_ci_contains_b = FALSE,
     screener_a                 = "claude-sonnet-4-6 (40 agents, medium effort)",
     screener_b                 = "gpt-5.6-sol (codex)",
@@ -201,11 +201,11 @@ record_finding(
     )
   ),
   headline = glue(
-    "Swap which model is called 'the screener' and the base rate moves from {round(100*p_a, 2)}% to ",
-    "{round(100*p_b, 2)}%: a {round(max(swap)/min(swap), 1)}x spread, from {format(round(p_a*FRAME_CANADIAN), big.mark=',')} to ",
-    "{format(round(p_b*FRAME_CANADIAN), big.mark=',')} works in the frame. The two screeners agree on in/out for ",
+    "Two historical models assigned positive labels to {round(100*p_a, 2)}% and {round(100*p_b, 2)}% of the weighted sample: ",
+    "a {round(max(swap)/min(swap), 1)}x span that extrapolates to {format(round(p_a*FRAME_CANADIAN), big.mark=',')} and ",
+    "{format(round(p_b*FRAME_CANADIAN), big.mark=',')} model-positive works. The two models agree on in/out for ",
     "{round(100*w_agree, 1)}% of the frame (design-weighted), but that figure is dominated by the settled ",
-    "rejects: agreement falls to {by_stratum$agree_pct[by_stratum$stratum == 'boundary']}% inside the contested boundary. THE SCREENER-SWAP ",
-    "RANGE, NOT THE BINOMIAL CI ON EITHER MODEL ALONE, IS THE HONEST UNCERTAINTY ON THE FIELD'S SIZE."
+    "rejects: agreement falls to {by_stratum$agree_pct[by_stratum$stratum == 'boundary']}% in the boundary stratum. The span measures ",
+    "variation between these model outputs. It is neither a confidence interval nor uncertainty about the field's size."
   )
 )

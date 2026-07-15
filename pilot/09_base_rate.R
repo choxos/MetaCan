@@ -83,7 +83,8 @@ cli_li("the topic route retrieved    : {format(TOPIC_ROUTE, big.mark=',')}")
 # prints is a number the script still claims, whatever the comments say. The
 # route's coverage is its RECALL, measured in finding 12 (12%, 95% CI 5.6-21.6%).
 cli_alert_info("Coverage of the route is NOT {format(TOPIC_ROUTE, big.mark=',')}/{format(round(est), big.mark=',')}. \\
-                That divides a retrieved set by a true field size. See finding 12: recall is 12%.")
+                That divides a retrieved set by a model-positive extrapolation. Finding 12 instead measures agreement \\
+                with the same historical model labels and reports 12% recall against that machine reference.")
 
 cli_h2("Where the in-scope works are")
 cat("\nby language:\n"); print(d |> filter(tier %in% c("T1","T2")) |> count(language, sort = TRUE))
@@ -125,20 +126,20 @@ record_finding(
     binomial_ci_is_not_the_uncertainty = TRUE,
     caveat = paste(
       "Machine labels, not a human gold standard, and the binomial CI above is",
-      "sampling error on ONE screener; the honest uncertainty is the screener-swap",
-      "range in finding 10 (1.06% to 2.37%). The partition is also not a uniform draw:",
-      "it under-represents works with abstracts, where the screen finds 2x more",
-      "metaresearch (finding 11). This is a hypothesis with a denominator; the",
+      "sampling error on ONE screener. The screener-swap span in finding 10 is",
+      "model-output variation, not uncertainty about field size. The partition is also",
+      "not a uniform draw: it under-represents works with abstracts, where the model",
+      "assigns positive labels at roughly twice the rate (finding 11). This is a hypothesis",
+      "with a denominator; the",
       "human-coded probability sample tests it. Do NOT divide topic_route_retrieved",
       "by estimated_field_size; see finding 12."
     )
   ),
   headline = glue(
-    "Screening {format(n, big.mark=',')} unfiltered Canadian works against the rubric puts metaresearch at ",
-    "{round(100*rate, 2)}% of Canadian research, implying ~{format(round(est), big.mark=',')} works in the {format(FRAME_CANADIAN, big.mark=',')}-work ",
-    "frame, sizing the field without a search strategy at all. The 95% CI on this screener's labels is ",
-    "{round(100*ci[1],2)}-{round(100*ci[2],2)}%, but that is sampling error, NOT the uncertainty: swap the screener and ",
-    "the estimate lands outside it (finding 10). The field is somewhere between 37,000 and 83,000 works, and ",
-    "only the human audit can narrow that."
+    "One historical model assigned positive labels to {round(100*rate, 2)}% of {format(n, big.mark=',')} unfiltered Canadian works, ",
+    "which extrapolates to ~{format(round(est), big.mark=',')} model-positive works in the {format(FRAME_CANADIAN, big.mark=',')}-work frame. ",
+    "The {round(100*ci[1],2)}-{round(100*ci[2],2)}% interval is sampling error for this model's emitted labels. A second model's ",
+    "rate falls outside it (finding 10). Neither rate estimates scientific truth or field prevalence; a human-coded ",
+    "probability sample is required."
   )
 )

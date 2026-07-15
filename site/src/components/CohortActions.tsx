@@ -87,8 +87,8 @@ export function CohortActions({
         <button
           onClick={mint}
           disabled={minting}
-          className="rounded-md px-3 py-1.5 text-sm font-medium text-white disabled:opacity-60"
-          style={{ background: 'var(--mc)' }}
+          className="rounded-md px-3 py-1.5 text-sm font-medium disabled:opacity-60"
+          style={{ background: 'var(--mc)', color: 'var(--on-mc)' }}
         >
           {minting ? t.cohort.citeWorking : t.cohort.citeButton}
         </button>

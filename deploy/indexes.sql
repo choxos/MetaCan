@@ -42,6 +42,17 @@ CREATE INDEX idx_retr_nature      ON retractions (nature);
 CREATE INDEX idx_works_topic       ON works (topic);
 CREATE INDEX idx_works_venue_btree ON works (venue);
 
+-- Exact membership filters for the semicolon-delimited record facets. The three
+-- source columns total 905 MB of text on the release frame. Array GIN indexes
+-- keep each chip click exact while avoiding the measured 1.5 to 3.1 second
+-- sequential scans over 4.3 million works.
+CREATE INDEX idx_works_institution_members ON works USING GIN
+  (string_to_array(ca_institutions, '; '));
+CREATE INDEX idx_works_funder_members ON works USING GIN
+  (string_to_array(funders, '; '));
+CREATE INDEX idx_works_keyword_members ON works USING GIN
+  (string_to_array(keywords, '; '));
+
 -- Typeahead sources for the venue and topic facets: tiny derived tables
 -- (85k and 4.5k rows) an ILIKE can scan in milliseconds, instead of hundreds
 -- of MB of trigram indexes on a 99%-full disk. The frame is a pinned snapshot,

@@ -8,11 +8,10 @@ script on stdout that upserts every row. The script is idempotent: it creates
 the table if it is missing, and re-running it after a new round lands simply
 upserts the new rows and rewrites the old ones with identical values.
 
-The database lives on the VPS and is not exposed publicly, so the SQL is piped
-over ssh:
-
-    python3 deploy/load_labels.py | ssh hetzner-vps \
-      'cd /var/www/metacan && psql "$(grep ^DATABASE_URL= .env | cut -d= -f2- | tr -d \")" -v ON_ERROR_STOP=1'
+The database lives on the VPS and is not exposed publicly. Pipe the SQL over
+SSH only after configuring libpq through environment fields and a mode 0600
+PGPASSFILE, following deploy/load-classifier-release.sh. Never put the database
+URL or password in the psql command line.
 
 Rows whose work id is not in the works table are skipped with a NOTICE rather
 than failing the transaction; the frame is pinned, so in practice this means a

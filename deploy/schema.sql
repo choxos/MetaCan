@@ -6,6 +6,8 @@
 -- reader can always ask "why is this here?" and get an answer.
 
 DROP TABLE IF EXISTS query_permalink CASCADE;
+DROP TABLE IF EXISTS recent_sync_run CASCADE;
+DROP TABLE IF EXISTS recent_work CASCADE;
 DROP TABLE IF EXISTS work_label CASCADE;
 DROP TABLE IF EXISTS work_score CASCADE;
 DROP TABLE IF EXISTS screened CASCADE;
@@ -17,7 +19,8 @@ DROP TABLE IF EXISTS works CASCADE;
 --
 -- No abstract column, and that is a measured decision rather than a shortcut:
 -- the abstract inverted indexes are 8.6 GB of the frame's 9.3 GB of text, and the
--- host has 13 GB free. The detail page fetches an abstract live from OpenAlex.
+-- host has 13 GB free. The detail page prefers PubMed, then Europe PMC, then
+-- OpenAlex, and caches each upstream response.
 -- `has_abstract` is stored, because WHETHER a work has one is itself a finding
 -- (23.3% do not, and the screen finds half as much metaresearch there).
 -- ---------------------------------------------------------------------------
@@ -49,6 +52,76 @@ CREATE TABLE works (
   funders         TEXT,
   keywords        TEXT
 );
+
+-- Separate storage keeps the registered release and its citable cohorts immutable.
+CREATE TABLE recent_work (
+  id                    VARCHAR(20) PRIMARY KEY,
+  doi                   TEXT,
+  title                 TEXT NOT NULL,
+  publication_date      DATE NOT NULL,
+  year                  SMALLINT,
+  lang                  VARCHAR(8),
+  type                  VARCHAR(32),
+  venue                 TEXT,
+  topic                 TEXT,
+  field                 TEXT,
+  cited_by              INTEGER NOT NULL DEFAULT 0,
+  is_retracted          BOOLEAN NOT NULL DEFAULT FALSE,
+  has_abstract          BOOLEAN NOT NULL DEFAULT FALSE,
+  abstract              TEXT,
+  pmid                  VARCHAR(32),
+  pmcid                 VARCHAR(32),
+  route_ca_aff          BOOLEAN NOT NULL DEFAULT FALSE,
+  route_ca_fund         BOOLEAN NOT NULL DEFAULT FALSE,
+  route_ca_venue        BOOLEAN NOT NULL DEFAULT FALSE,
+  route_about_ca        BOOLEAN NOT NULL DEFAULT FALSE,
+  ca_institutions       TEXT[] NOT NULL DEFAULT '{}',
+  funders               TEXT[] NOT NULL DEFAULT '{}',
+  keywords              TEXT[] NOT NULL DEFAULT '{}',
+  authors               JSONB NOT NULL,
+  openalex_updated_date DATE,
+  route_version         VARCHAR(64) NOT NULL,
+  source_window_start   DATE NOT NULL,
+  source_window_end     DATE NOT NULL,
+  first_seen_at         TIMESTAMPTZ NOT NULL DEFAULT now(),
+  last_seen_at          TIMESTAMPTZ NOT NULL,
+  synced_at             TIMESTAMPTZ NOT NULL
+);
+
+CREATE INDEX idx_recent_work_publication
+  ON recent_work (publication_date DESC, id);
+CREATE INDEX idx_recent_work_institutions
+  ON recent_work USING GIN (ca_institutions);
+CREATE INDEX idx_recent_work_funders
+  ON recent_work USING GIN (funders);
+CREATE INDEX idx_recent_work_keywords
+  ON recent_work USING GIN (keywords);
+
+CREATE TABLE recent_sync_run (
+  id             BIGSERIAL PRIMARY KEY,
+  status         VARCHAR(16) NOT NULL,
+  started_at     TIMESTAMPTZ NOT NULL DEFAULT now(),
+  completed_at   TIMESTAMPTZ,
+  requested_days INTEGER NOT NULL,
+  window_start   DATE NOT NULL,
+  window_end     DATE NOT NULL,
+  route_version  VARCHAR(64) NOT NULL,
+  api_requests   INTEGER NOT NULL DEFAULT 0,
+  returned_rows  INTEGER NOT NULL DEFAULT 0,
+  candidate_rows INTEGER NOT NULL DEFAULT 0,
+  matched_rows   INTEGER NOT NULL DEFAULT 0,
+  stored_rows    INTEGER NOT NULL DEFAULT 0,
+  error          TEXT,
+  CONSTRAINT recent_sync_run_status_check
+    CHECK (status IN ('running', 'succeeded', 'failed', 'interrupted'))
+);
+
+CREATE INDEX idx_recent_sync_started
+  ON recent_sync_run (started_at DESC);
+-- This process lock prevents two jobs from replacing the same window concurrently.
+CREATE UNIQUE INDEX idx_recent_sync_single_running
+  ON recent_sync_run (status)
+  WHERE status = 'running';
 
 -- ---------------------------------------------------------------------------
 -- retractions: Retraction Watch's post-publication state (finding 17).
@@ -108,10 +181,11 @@ CREATE TABLE screened (
 --
 -- Source: data/db/frame_scores.parquet (4,299,418 rows). Load, after works:
 --
---   python: export the parquet to CSV, gzip it, then on the host
---   zcat work_score.csv.gz | psql "$DATABASE_URL" \
+--   export the parquet to CSV and gzip it. On the host, configure libpq with
+--   environment fields and a mode 0600 PGPASSFILE, then run:
+--   zcat work_score.csv.gz | psql \
 --     -c "\copy work_score FROM STDIN WITH (FORMAT csv, HEADER true)"
---   psql "$DATABASE_URL" -c "ANALYZE work_score;"
+--   psql -c "ANALYZE work_score;"
 -- ---------------------------------------------------------------------------
 CREATE TABLE work_score (
   id                VARCHAR(20) PRIMARY KEY REFERENCES works(id) ON DELETE CASCADE,

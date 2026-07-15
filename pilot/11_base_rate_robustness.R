@@ -63,16 +63,16 @@
 # ------------------------------------------------------------------------------
 # WHAT SURVIVES, AND IT IS STILL WORTH REPORTING
 # ------------------------------------------------------------------------------
-# The MAIN EFFECT is real and robust: 31.5% of the frame has no abstract, and the
-# screen finds 0.78% metaresearch there against 1.55% where an abstract exists
-# (p = 0.023). It survives adjustment for publication year and language
-# (adjusted OR 2.21, p = 0.009).
+# The measured association in this historical model's outputs is robust: 31.5%
+# of the frame has no abstract, and the model-positive rate is 0.78% there against
+# 1.55% where an abstract exists (p = 0.023). The association survives adjustment
+# for publication year and language (adjusted OR 2.21, p = 0.009).
 #
-# That is a genuine coverage problem: a third of the frame is screened on its
-# title alone, and the screen finds half as much there. It is a reason to
-# stratify the human audit on abstract availability. It is NOT, on this evidence,
-# a demonstration that the pipeline is differentially blind to STS and LIS, and
-# this script no longer says it is.
+# A third of the frame is screened on its title alone, and the model assigns
+# positive labels at roughly half the rate there. This motivates stratifying the
+# human validation sample on abstract availability. It is NOT, on this evidence,
+# a demonstration of classification bias, accuracy, true prevalence, or a
+# differential effect on STS and LIS.
 #
 # The honest position is the weaker one, and the weaker one is still a finding.
 
@@ -233,19 +233,17 @@ if (!older_ok || !nonen_ok) {
   )
 }
 
-# The direction of the residual bias is COMPUTED, not asserted. An earlier
-# version hard-coded this string, which in a metaresearch project is indefensible.
-bias_dir <- if (r_no < r_yes) {
-  glue("anti-conservative for coverage claims: the partition over-represents \\
-        abstract-less works ({no_abs_share}%), where the screen finds {round(r_yes/r_no, 1)}x less \\
-        metaresearch, so 1.31% likely UNDER-states the frame's base rate, and the \\
-        field is larger than the headline implies")
+association_dir <- if (r_no < r_yes) {
+  glue("the partition over-represents abstract-less works ({no_abs_share}%), where the \\
+        historical model assigned positive labels at {round(r_yes/r_no, 1)}x lower rate; \\
+        the direction of any effect on human-validated prevalence is unknown")
 } else {
-  glue("conservative: the screen finds more metaresearch in the abstract-less \\
-        stratum, which the partition over-represents")
+  glue("the historical model assigned positive labels at a higher rate in the \\
+        abstract-less stratum, which the partition over-represents; the direction \\
+        of any effect on human-validated prevalence is unknown")
 }
-cli_h2("Direction of the residual bias")
-cli_text(bias_dir)
+cli_h2("Direction of the machine-label association")
+cli_text(association_dir)
 
 record_finding(
   "base_rate_robustness",
@@ -289,7 +287,7 @@ record_finding(
     p_no_abstract_given_english_pct     = round(100 * p_noabs_en, 1),
     p_no_abstract_given_non_english_pct = round(100 * p_noabs_non, 1),
     erudit_profile_claim_holds    = older_ok && nonen_ok,
-    residual_bias_direction       = as.character(bias_dir),
+    residual_machine_label_association = as.character(association_dir),
     supersedes = paste(
       "THREE retractions live here. (1) An earlier version tested ERA only, called the",
       "base rate robust, and published 3100/2900/1500 as percentages (a dplyr",
@@ -303,9 +301,10 @@ record_finding(
     ),
     caveat = paste(
       "What survives is the MAIN EFFECT and only the main effect: a third of the frame",
-      "is screened on its title alone and the screen finds half as much metaresearch",
-      "there (p = 0.023, robust to adjustment for year and language). That is a real",
-      "coverage problem and a reason to stratify the audit on abstract availability. It",
+      "is screened on its title alone and the historical model assigns positive labels",
+      "at roughly half the rate there (p = 0.023, robust to adjustment for year and",
+      "language). That is a machine-label association, not evidence of accuracy or true",
+      "prevalence, and it is a reason to stratify human validation on abstract availability. It",
       "is NOT evidence of differential blindness by tradition, and this finding no longer",
       "says it is. Separately, the era check is underpowered (75 events, 3 strata) and",
       "cannot refute an era effect; it merely fails to detect one. And note D2: the",
@@ -313,12 +312,12 @@ record_finding(
     )
   ),
   headline = glue(
-    "The base rate's real bias is not recency but MISSING ABSTRACTS: {no_abs_share}% of the partition has none, ",
-    "and the screen finds {r_no}% metaresearch there against {r_yes}% where an abstract exists ",
-    "(chi-square p = {round(ct_abs$p.value, 3)}, robust to adjustment for year and language). A third of the frame is ",
-    "screened on its title alone. What this does NOT show, and an earlier draft wrongly claimed, is that the ",
-    "blindness is DIFFERENTIAL by tradition: the T2 no-abstract cell holds {t2_n} works and the interaction is not ",
+    "Abstract availability is associated with historical machine labels: {no_abs_share}% of the partition has no abstract, ",
+    "and the model assigned positive labels to {r_no}% there against {r_yes}% where an abstract exists ",
+    "(chi-square p = {round(ct_abs$p.value, 3)}, robust to adjustment for year and language). This is a model-positive rate ",
+    "difference, not evidence of classification bias, accuracy, or true prevalence. What this does NOT show, and an earlier ",
+    "draft wrongly claimed, is differential behaviour by tradition: the T2 no-abstract cell holds {t2_n} works and the interaction is not ",
     "significant (p = {round(p_int, 3)}). That claim is withdrawn, as is 'Erudit's exact profile' (the stratum is ",
-    "{round(100*share_en_in_noabs)}% English and the works are NEWER, not older). The main effect is the finding."
+    "{round(100*share_en_in_noabs)}% English and the works are newer, not older)."
   )
 )

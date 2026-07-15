@@ -5,10 +5,11 @@
 # ------------------------------------------------------------------------------
 # THE DEFECT THIS ATTACKS
 # ------------------------------------------------------------------------------
-# Finding 11, the most consequential measured bias in this project: where a work
-# has NO ABSTRACT, the screen finds 0.78% metaresearch against 1.55% where one
-# exists (p = 0.023, robust to adjustment for year and language). On the real
-# frame the exposure is 23.3%: 1,003,117 works read by TITLE ALONE.
+# Finding 11 measured a difference in one historical model's outputs: where a work
+# has NO ABSTRACT, the model assigned positive labels at 0.78% against 1.55% where
+# an abstract exists (p = 0.023, robust to adjustment for year and language). This
+# does not establish accuracy, bias, or field prevalence. On the real frame the
+# exposure is 23.3%: 1,003,117 works read by TITLE ALONE.
 #
 # ------------------------------------------------------------------------------
 # PART A: THE CASCADE. Ask four sources, not one.
@@ -46,9 +47,9 @@
 #
 # So the abstract gap is NOT a random metadata failure that a better index fixes.
 # It is STRUCTURAL: the works without abstracts are disproportionately the ones no
-# abstract service covers, and no source in the chain reaches them. The residue is
-# humanities-shaped, book-shaped and francophone-shaped, which is precisely the
-# material an inclusive map of Canadian metaresearch exists to include.
+# abstract service covers, and no source in the chain reaches them uniformly. The
+# remaining records differ by work type and language. Human validation is required
+# to learn whether those metadata differences correspond to outcome differences.
 #
 # ------------------------------------------------------------------------------
 # PART B: WHAT "JUST SCREEN THE ONES WITH ABSTRACTS" ACTUALLY COSTS
@@ -57,13 +58,14 @@
 # is defensible, and it is NOT free, and the difference between those two claims
 # is the whole point of this project.
 #
-# Restricting to abstract-bearing works is a SELECTION ON A COVARIATE THAT
-# PREDICTS THE OUTCOME. Finding 11 measured the association; finding 5's D5
-# retraction established the stratum is not what I had assumed. So this part
+# Restricting to abstract-bearing works changes the observed frame composition.
+# Finding 11 measured an association with historical model output, not with a
+# human-validated outcome. Finding 5's D5 retraction established that the stratum
+# is not what I had assumed. So this part
 # measures, on the real frame, exactly which works such a rule would delete:
 # which types, which languages, which venues. It is reported as a DECLARED
-# EXCLUSION with a measured bias, never as a silent frame restriction, and the
-# audit retains a sampling floor in the excluded stratum so the cost stays
+# EXCLUSION with measured composition differences, never as a silent frame
+# restriction, and the validation design retains a sampling floor in the excluded stratum so the cost stays
 # estimable rather than becoming invisible.
 
 suppressPackageStartupMessages({
@@ -106,10 +108,9 @@ bc <- by_type$pct_dropped[by_type$type == "book-chapter"]
 cli_alert_danger(
   "A rule that screens only abstract-bearing works deletes {bc}% of BOOK CHAPTERS, \\
    {by_type$pct_dropped[by_type$type=='letter']}% of LETTERS and {by_type$pct_dropped[by_type$type=='editorial']}% of EDITORIALS, against {by_type$pct_dropped[by_type$type=='article']}% of ARTICLES. \\
-   Those are the genres where T2 (STS, LIS) and T3 (commentary, policy) live, and finding 11 \\
-   already measured that the screen finds HALF as much metaresearch in the no-abstract stratum. \\
-   THIS IS A SELECTION ON A COVARIATE THAT PREDICTS THE OUTCOME. It may still be the right \\
-   call, but it is an EXCLUSION with a measured cost, not a scoping convenience."
+   The restriction changes the frame's work-type composition. Finding 11 also found a lower \\
+   historical machine-positive rate in the no-abstract stratum, but did not measure accuracy. \\
+   The effect on human-validated outcomes remains unknown."
 )
 
 # --- PART A: the cascade -------------------------------------------------------
@@ -235,7 +236,7 @@ record_finding(
     pct_frame_no_abstract      = gap$pct,
     pct_dropped_by_type        = as.list(setNames(by_type$pct_dropped, by_type$type)),
     pct_dropped_by_language    = as.list(setNames(by_lang$pct_dropped, by_lang$language)),
-    abstracts_only_is_a_selection_on_the_outcome = TRUE,
+    abstracts_only_changes_observed_composition = TRUE,
     # Part A: the cascade
     sampled                    = nrow(j),
     sources                    = "PubMed (Entrez) -> Europe PMC (REST) -> Crossref (REST)",
@@ -247,8 +248,8 @@ record_finding(
     crossref_recovered         = n_cr,
     europepmc_recovered        = n_ep,
     pubmed_recovered           = n_pm,
-    no_discipline_agnostic_rescue_exists = TRUE,
-    the_gap_is_structural_not_a_metadata_failure = TRUE,
+    crossref_is_not_load_bearing_in_this_sample = TRUE,
+    abstract_recovery_varies_by_type_and_language = TRUE,
     recovery_pct_by_type       = as.list(setNames(tt$pct, tt$k)),
     recovery_pct_english       = if (length(en)) en else NA_real_,
     recovery_pct_french        = if (length(fr)) fr else NA_real_,
@@ -261,24 +262,22 @@ record_finding(
       "with a DOI can be looked up, so the DOI-less part of the stratum is untouched and its size",
       "bounds what any cascade can do. PubMed and Europe PMC are biomedical; Crossref is not, and",
       "it is in the chain for exactly that reason: a cascade of biomedical indexes would close the",
-      "gap unevenly and make the residual bias MORE discipline-shaped while appearing to improve",
-      "coverage. That reasoning was right and the remedy is not available: Crossref recovered 2 of",
+      "gap unevenly and make the residual coverage more discipline-shaped while appearing to improve",
+      "coverage. Crossref recovered 2 of",
       "189 and Europe PMC 7, because publishers largely do not deposit abstracts to Crossref, so no",
-      "discipline-agnostic rescue exists (D15). Restricting screening to abstract-bearing works",
-      "remains a DECLARED EXCLUSION with a measured cost, not a scoping convenience, and the audit",
-      "keeps a sampling floor in the excluded stratum so that cost stays estimable."
+      "discipline-agnostic rescue was observed in this sample (D15). Restricting screening to",
+      "abstract-bearing works changes the work-type and language composition. Its effect on human-valid",
+      "outcomes is unknown, so validation keeps a sampling floor in the excluded stratum."
     )
   ),
   headline = glue(
-    "The screen's largest measured bias is the abstract gap: {gap$pct}% of the frame ({format(gap$no_abs, big.mark=',')} works) has NO ABSTRACT, ",
-    "and finding 11 showed the screen finds HALF as much metaresearch there. Cascading PubMed, Europe PMC and ",
+    "Abstract availability is uneven: {gap$pct}% of the frame ({format(gap$no_abs, big.mark=',')} works) has no abstract, ",
+    "and a historical pilot model assigned positive labels at roughly half the rate there. This is a machine-label association, not an accuracy estimate. Cascading PubMed, Europe PMC and ",
     "Crossref recovers {round(pct, 1)}% of a 500-work sample, cutting title-only exposure to ~{resid}% of the frame. But I BUILT THE ",
     "CASCADE AROUND CROSSREF as the discipline-agnostic rescue, and it recovered {n_cr} abstracts against PubMed's {n_pm}: ",
-    "publishers do not deposit them, so THAT RESCUE DOES NOT EXIST (D15). The gap is therefore not a metadata ",
-    "failure a better index fixes; it is STRUCTURAL. Recovery is {tt$pct[tt$k=='review']}% for reviews against {tt$pct[tt$k=='book-chapter']}% for book chapters, ",
-    "{round(en,1)}% English against {round(fr,1)}% French. So the tempting shortcut, 'just screen the works that have abstracts', is a ",
-    "SELECTION ON A COVARIATE THAT PREDICTS THE OUTCOME which would delete {bc}% of book chapters against ",
-    "{by_type$pct_dropped[by_type$type=='article']}% of articles, AND the works it deletes are exactly the works no cascade can rescue. Defensible only as a ",
-    "DECLARED exclusion with a measured cost, and the audit keeps a sampling floor in it."
+    "Crossref was not a meaningful rescue in this sample (D15). Recovery is {tt$pct[tt$k=='review']}% for reviews against ",
+    "{tt$pct[tt$k=='book-chapter']}% for book chapters, {round(en,1)}% English against {round(fr,1)}% French. Restricting screening to works with abstracts ",
+    "would remove {bc}% of book chapters against {by_type$pct_dropped[by_type$type=='article']}% of articles, changing the composition of the frame. ",
+    "The effect on human-validated outcomes remains unknown, so validation retains a sampling floor among works without abstracts."
   )
 )

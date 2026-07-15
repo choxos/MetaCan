@@ -40,9 +40,9 @@
 # WHAT THE SECOND SCREENER IS FOR, AND WHY IT RUNS ON A SAMPLE. Finding 10: two
 # machine screeners cannot establish accuracy (they share training data and fail
 # together), so their agreement is a PROCESS metric. What the second one is for is
-# (a) locating the contested boundary the human audit oversamples, and (b) the
-# screener-swap range that is the honest uncertainty on the field's size. Both are
-# SAMPLE quantities. Neither needs the frame.
+# (a) locating disagreements that the human validation sample oversamples, and
+# (b) measuring variation between the two screeners' outputs. Both are sample
+# quantities. Neither establishes accuracy or uncertainty about the field.
 
 suppressPackageStartupMessages({
   library(jsonlite); library(dplyr); library(purrr); library(cli); library(glue)

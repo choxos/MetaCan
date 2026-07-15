@@ -152,14 +152,13 @@ record_finding(
     )
   ),
   headline = glue(
-    "WRITING THE MISSING SENTENCES RESOLVED {round(100*resolved/nrow(k))}% OF THE DISAGREEMENTS THEY WERE WRITTEN AGAINST. The 179 works ",
+    "UNDER V2, {round(100*resolved/nrow(k))}% OF THE SELECTED V1 MODEL DISAGREEMENTS BECAME UNANIMOUS. The 179 works ",
     "three frontier models split on under rubric v1 were re-screened, by the same three models, under a v2 whose ",
     "rules were written against a published, frequency-weighted census of WHICH SENTENCES THE RUBRIC WAS MISSING. ",
-    "{resolved} of {nrow(k)} are now unanimous, and the pairwise Jaccard of the in-scope sets moves from {round(mean(j1, na.rm=TRUE), 2)} to {round(mean(j2, na.rm=TRUE), 2)}. This is a ",
-    "measurement almost nobody makes, and it is available ONLY because the ambiguity was enumerated, adjudicated ",
-    "and PUBLISHED BEFORE it was resolved: the census went out first, so v2 could not be quietly tuned until the ",
-    "numbers looked good. SCOPE, stated rather than blurred: these works were SELECTED FOR DISAGREEMENT, so this ",
-    "says the rules resolve the cases they were written for; it does NOT say frame-wide agreement rose, because ",
+    "{resolved} of {nrow(k)} are now unanimous, and the pairwise Jaccard of the in-scope sets moves from {round(mean(j1, na.rm=TRUE), 2)} to {round(mean(j2, na.rm=TRUE), 2)}. The ",
+    "comparison was fixed by publishing the seam census before v2 was evaluated. SCOPE, stated rather than blurred: ",
+    "these works were SELECTED FOR DISAGREEMENT, so this shows how the same models changed on the cases used to develop ",
+    "the revision; it does NOT say frame-wide agreement or accuracy rose, because ",
     "regression to the mean alone would move a set selected this way. The unbiased test is a full re-screen of ",
     "all 5,600 under v2, prespecified, and it is what the funded work runs."
   )

@@ -69,9 +69,9 @@ cli_li("carry a venue    : {format(f$with_venue, big.mark=',')} ({pct(f$with_ven
 cli_li("carry an abstract: {format(f$with_abstract, big.mark=',')} ({pct(f$with_abstract)}%)")
 cli_li("French           : {format(f$french, big.mark=',')} ({pct(f$french)}%)")
 cli_alert_warning(
-  "{round(100 - pct(f$with_abstract), 1)}% of the frame has NO ABSTRACT, and finding 11 measured that the screen finds \\
-   HALF as much metaresearch there. Finding 19 shows that gap is STRUCTURAL: no abstract service \\
-   in the cascade reaches the book chapters, letters and francophone material it is made of."
+  "{round(100 - pct(f$with_abstract), 1)}% of the frame has NO ABSTRACT. In finding 11, one historical model assigned \\
+   positive labels at roughly half the rate observed among works with abstracts. Finding 19 shows that abstract recovery \\
+   varies substantially by work type and language. The effect on human-validated outcomes remains unknown."
 )
 
 record_finding(

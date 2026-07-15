@@ -1,137 +1,90 @@
 # MétaCan
 
-**An open, provenance-tracked, coverage-audited map of Canadian metaresearch.**
+MétaCan is a provenance-tracked map of Canadian metaresearch built around one question: what does a bibliographic pipeline miss inside the sources it claims to cover?
 
-Proposal to the [Canadian Metaresearch Data Challenge](https://opensciencecanada.ca). 2nd Canadian Open Science
-Conference, University of Ottawa, 27–29 October 2026.
+Ahmad Sofi-Mahmudi, independent researcher, <ahmad.pub@gmail.com>
 
-Ahmad Sofi-Mahmudi · independent researcher · <ahmad.pub@gmail.com>
+## Current status
 
----
+The frozen Canadian frame contains **4,299,418 works** from 482 partitions of a pinned OpenAlex snapshot. This count comes from [`data/frame/frame_summary.json`](data/frame/frame_summary.json), not from an extrapolation.
 
-> **Every MétaCan record will show why it was found and why it counts as Canadian, and a bilingual human audit
-> will quantify what the pipeline missed.**
+The repository contains two different bodies of screening evidence. They must not be combined without an explicit analysis:
 
-## Layout
+- The historical pilot produced the generated finding store in [`pilot/results/findings.json`](pilot/results/findings.json). Its source analyses use several samples and earlier model panels. Those machine labels are preliminary evidence about pipeline behaviour, not a human reference standard.
+- The v1 release uses the same 10,348-work sample for two direct screening arms: Codex and Gemma. Both arms have complete, schema-valid coverage of the sampled IDs. Opus stopped after 82 of 414 chunks; its partial record is preserved but excluded from assembly, comparison, and classifier training.
 
-```
-docs/            everything a reader reads
-  proposal/      the 2-page submission (make proposal; the build FAILS on a third page)
-  protocol/      the preregistration, both rubric versions, the schema, known defects
-  reference/     the call for proposals and prior drafts
-pilot/           every numbered finding, and the screening runs behind them
-R/               the frame harvester, the strata, the findings store
-site/            the bilingual explorer (metacan.xera.ac)
-deploy/          one-command redeploy
-legacy/          superseded. `app/` is a static prototype nothing points at any more.
-DEVIATIONS.md    every error, with the number it changed and the guard that now runs
-```
+The v1 teacher-imitation classifier is complete. Version `metacan-v1-d91a1de5be90` was trained from a clean source tree on the two direct arms and applied to all 4,299,418 frame records. Its 39 available heads reproduce Codex or Gemma decisions; they do not estimate scientific truth or population prevalence. Direct labels and classifier predictions remain separate in the data model, APIs, filters, exports, and interface. See [`CLASSIFIER_VALIDATION.md`](CLASSIFIER_VALIDATION.md) for the internal evaluation and full-frame verification, and [`RELEASE.md`](RELEASE.md) for hashes, coverage, interpretation, and public assets.
 
-Three guards run on every build, and each one exists because that exact failure
-already happened:
+The active application source is [`site/`](site/). The configured deployment target is `metacan.xera.ac`, but this README does not assert that the public deployment matches the current repository revision. Live status is established only by the release and browser verification gates.
 
-- `check_strata_partition.R`: the strata must sum to the frame. They once did not, and
-  549,370 works (12.9%) had an inclusion probability of exactly zero.
-- `check_instrument.R`: the rubric and its schema must agree. They once named two
-  different vocabularies for the same field, and 16,800 labels passed anyway.
-- `check_self_masking.R`: a dplyr bug that published "3100%" as a base rate, three times.
+The application includes a separate rolling OpenAlex layer. Deployment is configured to retrieve a complete 30-day publication window every day at 05:15 server time, evaluate the same four Canadian routes, and replace that window atomically after a successful retrieval. The updater also accepts any window from 15 through 30 days. Until the first successful keyed run, the interface reports that no live window is available. This operational table never changes the frozen 4,299,418 work release or its citable cohort links. The public surface is `/recent`, with JSON at `/api/v1/recent`.
 
-## Why
+No OSF registration or Zenodo DOI is claimed at this stage. The protocol is a working protocol, not a completed registration.
 
-Mapping a research community from bibliographic metadata invites one specific failure: you map what your retrieval
-could see, then present it as a map of the field. The gap is rarely measured.
+## Repository layout
 
-I have measured it before. Benchmarking automated publication linkage against a reference standard built by two
-independent human reviewers, the matcher was accurate on every record that reached it (sensitivity 92.2%,
-PPV 94.3%), but its overall sensitivity was **44.5%**. Half the publications the humans found were never
-retrieved at all. The loss was in *retrieval*, and no internal quality check would have caught it.
-
-So this project treats retrieval error as a measured outcome rather than a limitations paragraph.
-
-## Don't search for metaresearch. Search for Canada, then screen.
-
-The usual design retrieves what *looks like* metaresearch, then asks whether it is Canadian. That makes the field
-boundary a property of your keyword list, and it is why such maps can never be audited: a lexicon cannot show you
-what it never surfaced, so there is nothing to measure the miss against.
-
-This project inverts it. The frame is **all Canadian research**: an external, checkable criterion (3.5M works).
-Field membership becomes a *classification* question over that frame, not a *retrieval* question over the
-literature. Then you can just **count**.
-
-I screened **5,737 unfiltered Canadian works** (not a metaresearch search; a slice of Canadian research) against
-a locked rubric ([`docs/protocol/rubric.md`](docs/protocol/rubric.md)), with two independent machine screeners.
-
-> **Metaresearch is 1.31% of Canadian research** by one screener's labels; **≈45,850 works** across the 3.5M-work
-> frame. The binomial CI (1.03–1.64%) is *not* the uncertainty: swap the screener and the field is **37,032 to
-> 83,022 works** (finding 10), and finding 16 says even that range understates it. Scored against those same
-> labels, the best topic-based retrieval route finds **12%** of the field (95% CI 5.6–21.6%): it misses **66 of
-> the 75** metaresearch works it was shown.
-
-## The pilot, and what it killed
-
-Sixteen analyses. Run them yourself with `make pilot`, or re-derive every number with **no network at all** from
-the raw responses archived here: `make pilot-offline`. `pilot/results/FINDINGS.md` is the rendered table and is
-the authoritative one; the excerpt below is a sampler, not the list.
-
-| Finding | Consequence |
-|---|---|
-| **Metaresearch is 1.31% of Canadian research** (95% CI 1.03–1.64%), so **≈45,850 works** across the 3.5M-work frame. | The field sized by counting, with no search strategy at all. This is the quantity capture–recapture failed to produce. |
-| Scored against the rubric, the topic route finds **12%** of Canadian metaresearch (95% CI 5.6–21.6%) at **60%** precision. It misses **66 of 75**. | OpenAlex files a work by what it is *about*, and metaresearch about cardiology reads as cardiology. The field is invisible to topic retrieval **precisely because it is about other fields.** |
-| Swap which model is called "the screener" and the base rate moves from **1.06%** to **2.37%**: a **2.2x** spread, **37,032** against **83,022** works. The two agree on in/out for **96.6%** of the **1,290** double-screened works (κ = **0.681**), and for **95%** inside the contested boundary against **99%** in the settled mass. | Agreement is a **process metric**, not accuracy. The screener-swap range, not the binomial CI on either model alone, is the honest uncertainty on the field's size. The disagreements locate the field's edge empirically. |
-| **31.5%** of the frame carries no abstract, and the screen finds **0.78%** metaresearch there against **1.55%** where one exists (p = 0.023). An earlier version of this row also claimed the blindness was *differential* by tradition (T2 losing 3.6x against T1's 1.4x); that claim rests on a cell of **four works** (interaction p = 0.141) and is **withdrawn** (`DEVIATIONS.md` D6). | A real, significant coverage bias, found in our own data before a reviewer found it, and not overstated into a differential one. The human audit is stratified on abstract availability because of it. |
-| Three agents of **one** model, on **one** rubric and prompt, disagree beyond chance even after conditioning on what they were shown (CMH p = **0.0056**; replicated in a second arm at **0.015**), and Haiku's in-scope set overlaps Sonnet's by **16%** despite 98% agreement. | **Rate agreement is not set agreement**, and the noise inside one model is at least the size of the swap between models. No machine pass measures this field; machine labels stratify the human audit, which is the instrument. |
-| **0 of 4,516** OpenAlex topics name metaresearch, metascience, research integrity, reproducibility or STS. The 11 carrying its content span **7 OpenAlex fields**. | No single route encloses the field. |
-| **64%** of works in that topic space (508,744 / 793,883) have **no raw affiliation string**. | Affiliation-only "Canadian" is structurally broken. |
-| **Érudit, the main francophone Canadian platform, matches 0 OpenAlex sources** (its OAI-PMH endpoint is live, with **379** harvestable sets). | An OpenAlex-only pipeline cannot even *ask* how francophone the corpus is. |
-| `reproducibility` alone returns **43,392** Canadian works: **0.8%** on-topic. | Polysemy defeats keyword retrieval. Screening must be semantic. |
-| **The OpenAlex API is metered** (1,000 credits per ~11h; a $0.10 free tier). Enumerating the frame needs 17,537 calls: **8.2 days per pass**. | An API-based study at this scale is not reproducible. The pinned S3 snapshot is free, unmetered, and byte-identical forever. |
-| Naive capture–recapture returns **N̂ = 467,541**, implying Canada produces **59%** of the world's metaresearch, against an observed 1.9%. | **The estimator is void here. We cut it.** |
-
-That last row is the one I would want a reviewer to read. Capture–recapture is the obvious way to estimate what a
-search missed, it is what I intended to propose, and it does not work here: the routes are endogenous, so the
-unseen cell is not identified, and the estimate is not even a safe lower bound. I found this out by running it.
-The base rate above gets the same quantity honestly, and a **two-phase stratified probability audit** samples the
-screened-out stratum directly instead of inferring it.
-
-## What is here
-
-```
-docs/proposal/   the 2-page attachment (build FAILS if it spills to 3), and the form answers
-docs/protocol/   PROTOCOL.md  the OSF-ready preregistration: estimand, frame, audit design
-            rubric.md    the locked screening rubric, with the three errors that decide everything
-pilot/      the analyses; every number above, with raw responses archived in pilot/raw/
-            screening/   6,202 Canadian works, both screeners' labels, and their disagreements
-R/          OpenAlex client (cursor paging, polite pool, 429 handling, response archiving),
-            snapshot.R (DuckDB over the pinned S3 parquet), the frame definitions, findings accumulator
-app/        the bilingual explorer (Next.js; EN/FR; reads findings.json, hardcodes nothing)
+```text
+data/             frame metadata and local data links
+docs/proposal/    two-page submission attachment and form answers
+docs/protocol/    working protocol, locked rubrics, and output schemas
+pilot/            numbered analyses, archived inputs, and screening runs
+R/                frame construction and research checks
+ml/               screening validation and classifier workflows
+site/             active bilingual Next.js application
+deploy/           database and application deployment tooling
+legacy/           superseded prototypes
+DEVIATIONS.md     numbered methodological and implementation deviations
 ```
 
-Read [`docs/protocol/PROTOCOL.md`](docs/protocol/PROTOCOL.md) for the method. Read
-[`pilot/results/FINDINGS.md`](pilot/results/FINDINGS.md) for the numbers.
+## Why the frame comes before the field label
 
-## Reproduce it
+A conventional map first retrieves records that look like metaresearch, then checks whether they are Canadian. That makes the field boundary depend on the retrieval vocabulary. It also makes missed work hard to measure because excluded records disappear before screening.
+
+MétaCan reverses the order. It first builds an enumerable Canadian frame from checkable metadata routes. It then treats field membership as a classification question over that frame. Each work retains the route that admitted it, so retrieval behaviour can be studied rather than hidden.
+
+The approach does not make machine screening correct. The historical pilot shows why model agreement cannot substitute for human validity. Direct model labels identify records where models differ and support sampling. Human coding remains the planned source of design-based estimates.
+
+## Evidence hierarchy
+
+When two files disagree, use this order:
+
+1. Frozen source artifacts and their machine-readable summaries.
+2. Generated result stores, especially `pilot/results/findings.json`.
+3. Screening status, validation, and provenance manifests for the named round and arm.
+4. Rendered tables and narrative documents.
+
+[`pilot/results/FINDINGS.md`](pilot/results/FINDINGS.md) is generated from the finding store. It is the entry point for historical pilot results. Sample sizes in that file refer to the analysis named in each row. They do not describe the active two-arm release screen unless the row says so explicitly.
+
+## Build and validation commands
 
 ```bash
-make deps           # httr2, jsonlite, xml2, dplyr, purrr, tibble, glue, cli, openssl
-make pilot          # run every pilot against the live OpenAlex API
-make pilot-offline  # re-derive every number from archived responses, no network
-make findings       # regenerate pilot/results/FINDINGS.md
-make proposal       # render the 2-page PDF; FAILS the build if it exceeds 2 pages
+make lint       # research consistency checks
+make proposal   # build the submission PDF and enforce the two-page limit
+make protocol   # build the protocol with its rubric appendices
 ```
 
-R 4.4+. No API key needed: OpenAlex's polite pool wants only an email, set in `R/openalex.R`.
+The repository also exposes `make pilot` and `make pilot-offline`. They are research workflows, not a guarantee that a clean machine can currently recreate every artifact. A release claim requires a clean-environment run, pinned dependencies, and verification of all local source data. Language model labels are not deterministic. Their reproducibility record is therefore the exact prompt, raw response, model identity, hashes, and validation outcome, not an assertion that a second call will return the same label.
 
-The archiving is not incidental. **OpenAlex changes daily**, so an API query is not a reproducible artefact unless
-the response itself is kept. Every response this pilot received is committed under `pilot/raw/`, which is why
-`make pilot-offline` works and why the numbers in the proposal cannot drift from the code that produced them.
+No API key is required to read the committed documentation or generated findings. Some data, model, and deployment workflows require local files or credentials that are not committed.
 
-## Limitation, stated at the top rather than the bottom
+The recent-work updater uses `DATABASE_URL`. A free `OPENALEX_API_KEY` is required for database-writing and scheduled runs because the complete query set exceeds the anonymous daily allowance. The retrieval and route checks can be exercised without a database write:
 
-Coverage is estimated **within a frozen frame** of OpenAlex plus Érudit. Scholarship indexed by neither is not
-estimated by this design, and I make no claim about it. The audit answers *"what did the pipeline miss inside the
-sources I claim to cover?"* That is a bounded question, honestly answerable, rather than an unbounded one that
-would require me to pretend.
+```bash
+cd site
+npm run sync:recent -- --dry-run --days 15
+npm run test:recent-sync
+```
+
+The production database predates Prisma migration tracking. Migration `20260714000000_existing_schema_baseline` describes that existing schema. `npm run db:preflight` distinguishes a fresh database, a resolved baseline, and a complete legacy schema that needs the baseline marked as applied. It refuses a partial legacy schema. The deployment script performs that check before `prisma migrate deploy`, then refreshes empty facet tables after the migrations. Prisma explicitly maps the recent-layer indexes and array defaults. The recent-run status constraint, single-running partial index, classifier row-count constraint, and single-active classifier index remain raw SQL-managed objects because Prisma cannot represent those contracts completely.
+
+## Scope and limitations
+
+The frame is bounded by the pinned OpenAlex snapshot and the project’s Canadian metadata routes. Work absent from the covered sources, or lacking every detectable Canadian signal, is outside what this design can estimate.
+
+The current screening evidence is machine generated. It supports instrument development and sampling, but it does not establish accuracy. The planned human study includes independent coding, an unresolved outcome for insufficient evidence, and design weights tied to recorded selection probabilities.
+
+No sensitive identity is inferred. Derived labels involving Indigenous-governed data are not released without appropriate governance.
 
 ## Licence
 
-Code: MIT. Data and documentation: CC BY 4.0.
+Code is licensed under MIT. Data and documentation are licensed under CC BY 4.0. See [`DATA-LICENSE.md`](DATA-LICENSE.md) for the notice and suggested attribution.

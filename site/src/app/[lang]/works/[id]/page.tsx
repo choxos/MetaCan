@@ -1,162 +1,199 @@
-import Link from 'next/link'
-import { notFound } from 'next/navigation'
-import { getWork, fetchAbstract } from '@/lib/query'
-import { getDict, type Dictionary } from '@/lib/i18n'
-import { formatInt, isLang, langAlternates, numberLocale, type Lang } from '@/lib/lang'
-import { localePath } from '@/lib/lang'
-import { ScoreBanner } from '@/components/ScoreBanner'
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import { displayText } from "@/lib/display-text";
+import { getWork } from "@/lib/query";
+import { fetchAbstract } from "@/lib/abstracts";
+import { resolveClassifierContext } from "@/lib/predictions";
+import { getDict, type Dictionary } from "@/lib/i18n";
+import { formatInt, isLang, langAlternates, type Lang } from "@/lib/lang";
+import { localePath } from "@/lib/lang";
+import {
+  DirectLabelsPanel,
+  LegacyScoresPanel,
+} from "@/components/WorkDetailEvidence";
+import { WorkClassifierPanel } from "@/components/WorkClassifierPanel";
+import { WorkScreenPanel } from "@/components/WorkScreenPanel";
+import { ReadableAbstract } from "@/components/ReadableAbstract";
 
-export const dynamic = 'force-dynamic'
+export const dynamic = "force-dynamic";
 
-export async function generateMetadata({ params }: { params: { lang: string; id: string } }) {
-  const lang: Lang = isLang(params.lang) ? params.lang : 'en'
-  const w = await getWork(params.id)
+export async function generateMetadata(props: {
+  params: Promise<{ lang: string; id: string }>;
+}) {
+  const params = await props.params;
+  const lang: Lang = isLang(params.lang) ? params.lang : "en";
+  const w = await getWork(params.id);
   return {
-    title: w?.title?.slice(0, 60) ?? getDict(lang).meta.workNotFound,
+    title: w?.title
+      ? displayText(w.title).slice(0, 60)
+      : getDict(lang).meta.workNotFound,
     alternates: langAlternates(lang, `/works/${params.id}`),
-  }
+  };
 }
 
-const ROUTE_KEYS = ['routeCaAff', 'routeCaFund', 'routeCaVenue', 'routeAboutCa'] as const
+const ROUTE_KEYS = [
+  "routeCaAff",
+  "routeCaFund",
+  "routeCaVenue",
+  "routeAboutCa",
+] as const;
 
 function routeDefs(t: Dictionary) {
   return [
-    { key: 'routeCaAff', name: t.workDetail.routeAffName, why: t.workDetail.routeAffWhy },
-    { key: 'routeCaFund', name: t.workDetail.routeFundName, why: t.workDetail.routeFundWhy },
-    { key: 'routeCaVenue', name: t.workDetail.routeVenueName, why: t.workDetail.routeVenueWhy },
-    { key: 'routeAboutCa', name: t.workDetail.routeAboutName, why: t.workDetail.routeAboutWhy },
-  ] as Array<{ key: (typeof ROUTE_KEYS)[number]; name: string; why: string }>
+    {
+      key: "routeCaAff",
+      name: t.workDetail.routeAffName,
+      why: t.workDetail.routeAffWhy,
+    },
+    {
+      key: "routeCaFund",
+      name: t.workDetail.routeFundName,
+      why: t.workDetail.routeFundWhy,
+    },
+    {
+      key: "routeCaVenue",
+      name: t.workDetail.routeVenueName,
+      why: t.workDetail.routeVenueWhy,
+    },
+    {
+      key: "routeAboutCa",
+      name: t.workDetail.routeAboutName,
+      why: t.workDetail.routeAboutWhy,
+    },
+  ] as Array<{ key: (typeof ROUTE_KEYS)[number]; name: string; why: string }>;
 }
 
-function Field({ label, children }: { label: string; children: React.ReactNode }) {
+function Field({
+  label,
+  notAvailable,
+  children,
+}: {
+  label: string;
+  notAvailable?: string;
+  children: React.ReactNode;
+}) {
   return (
     <div className="border-b py-2.5 last:border-0">
-      <dt className="text-xs uppercase tracking-wider" style={{ color: 'var(--ink-4)' }}>
+      <dt
+        className="text-xs uppercase tracking-wider"
+        style={{ color: "var(--ink-4)" }}
+      >
         {label}
       </dt>
-      <dd className="mt-0.5 break-words">{children ?? <span style={{ color: 'var(--ink-5)' }}>—</span>}</dd>
+      <dd className="mt-0.5 break-words">
+        {children ?? (
+          <span style={{ color: "var(--ink-5)" }}>{notAvailable}</span>
+        )}
+      </dd>
     </div>
-  )
+  );
 }
 
-/** A score in [0, 1] as a bar. The number is the datum; the bar only makes two of them comparable at a glance. */
-function ScoreBar({ label, value, lang, color }: { label: string; value: number | null; lang: Lang; color: string }) {
-  const pct = value === null ? 0 : Math.max(0, Math.min(1, value)) * 100
-  const shown =
-    value === null
-      ? '—'
-      : value.toLocaleString(numberLocale(lang), { minimumFractionDigits: 3, maximumFractionDigits: 3 })
-  return (
-    <div>
-      <div className="flex items-baseline justify-between gap-2 text-sm">
-        <span>{label}</span>
-        <span className="tabular" style={{ color: 'var(--ink-3)' }}>
-          {shown}
-        </span>
-      </div>
-      <div className="mt-1 h-2 overflow-hidden rounded-full" style={{ background: 'var(--surface-3)' }}>
-        <div className="h-2 rounded-full" style={{ width: `${pct}%`, background: color }} />
-      </div>
-    </div>
-  )
-}
-
-/** One model's verdict. The reason is the point: a tier without a reason is not evidence. */
-function ModelCard({
-  t,
-  model,
-  tier,
-  genre,
-  aboutCa,
-  confidence,
-  reason,
-}: {
-  t: Dictionary
-  model: string
-  tier: string | null
-  genre: string | null
-  aboutCa: boolean | null
-  confidence: string | null
-  reason: string | null
+export default async function WorkDetail(props: {
+  params: Promise<{ lang: string; id: string }>;
 }) {
-  // T1/T2 are in scope; T3 is ADJACENT and is NOT (the rubric's `n_in` counts T1 and
-  // T2 only). Painting T3 as in-scope would contradict the consensus banner above:
-  // a work all three call T3 has n_in = 0.
-  const isIn = tier === 'T1' || tier === 'T2'
-  const color = isIn ? 'var(--in-scope)' : tier === 'T3' ? 'var(--contested)' : 'var(--out)'
-  const label = tier === 'T3' ? t.workDetail.tierAdjacent : tier || 'OUT'
-  return (
-    <div className="card p-4">
-      <div className="flex items-center justify-between gap-2">
-        <span className="font-medium">{model}</span>
-        <span className="chip" style={{ borderColor: color, color, background: 'transparent' }}>
-          {label}
-        </span>
-      </div>
-      <div className="mt-2 space-y-1 text-xs" style={{ color: 'var(--ink-4)' }}>
-        {genre && <div>{t.workDetail.genre(genre)}</div>}
-        <div>
-          {t.workDetail.aboutCanada}: {aboutCa === null ? '—' : aboutCa ? t.common.yes : t.common.no}
-        </div>
-        <div>
-          {t.workDetail.confidence}: {confidence ?? '—'}
-        </div>
-      </div>
-      {reason && (
-        <p className="mt-3 border-t pt-3 text-sm leading-relaxed" style={{ color: 'var(--ink-3)' }}>
-          {reason}
-        </p>
-      )}
-    </div>
-  )
-}
+  const params = await props.params;
+  const lang: Lang = isLang(params.lang) ? params.lang : "en";
+  const t = getDict(lang);
+  const p = (path: string) => localePath(lang, path);
+  const filterHref = (values: Record<string, string | number>) => {
+    const search = new URLSearchParams(
+      Object.entries(values).map(([key, value]) => [key, String(value)]),
+    );
+    return `${p("/works")}?${search.toString()}`;
+  };
 
-export default async function WorkDetail({ params }: { params: { lang: string; id: string } }) {
-  const lang: Lang = isLang(params.lang) ? params.lang : 'en'
-  const t = getDict(lang)
-  const p = (path: string) => localePath(lang, path)
+  const classifier = await resolveClassifierContext({}, true);
+  const w = await getWork(params.id, classifier);
+  if (!w) notFound();
 
-  const w = await getWork(params.id)
-  if (!w) notFound()
+  const enrichment = await fetchAbstract(w.id, w.doi);
+  const abstract = enrichment?.text
+    ? enrichment
+    : w.screened?.abstract
+      ? ({ text: w.screened.abstract, source: "screening_record" } as const)
+      : null;
+  const s = w.screened;
+  const r = w.retraction;
 
-  // The abstract is NOT in the database, by design: the inverted indexes are
-  // 8.6 GB of the frame's 9.3 GB of text and the host has 13 GB free. So it is
-  // fetched live, and cached for a day. If OpenAlex is down or the work has none,
-  // this is null and the page says so rather than pretending.
-  const abstract = w.screened?.abstract ?? (await fetchAbstract(w.id))
-  const s = w.screened
-  const r = w.retraction
-  const sc = w.score
-
-  const admitted = routeDefs(t).filter((route) => w[route.key])
+  const admitted = routeDefs(t).filter((route) => w[route.key]);
   const chips = (arr: string) =>
     arr
-      .split(';')
+      .split(";")
       .map((x) => x.trim())
-      .filter(Boolean)
+      .filter(Boolean);
 
   return (
     <div className="space-y-8">
       <div>
-        <Link href={p('/works')} className="link text-sm">
+        <Link href={p("/works")} className="link text-sm">
           {t.workDetail.back}
         </Link>
-        <h1 className="mt-2 font-serif text-3xl leading-tight">{w.title || t.common.noTitle}</h1>
-        <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm" style={{ color: 'var(--ink-4)' }}>
-          <span className="tabular">{w.year ?? '—'}</span>
-          {w.type && <span>· {w.type}</span>}
-          {w.lang && <span>· {w.lang}</span>}
-          <span className="tabular">· {t.workDetail.citations(formatInt(lang, w.citedBy))}</span>
+        <h1 className="mt-2 font-serif text-3xl leading-tight">
+          {w.title ? displayText(w.title) : t.common.noTitle}
+        </h1>
+        <div
+          className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm"
+          style={{ color: "var(--ink-4)" }}
+        >
+          {w.year ? (
+            <Link
+              className="link tabular"
+              href={filterHref({ year_from: w.year, year_to: w.year })}
+              title={t.workDetail.filterHint}
+            >
+              {w.year}
+            </Link>
+          ) : (
+            <span>{t.common.notAvailable}</span>
+          )}
+          {w.type && (
+            <span>
+              ·{" "}
+              <Link
+                className="link"
+                href={filterHref({ type: w.type })}
+                title={t.workDetail.filterHint}
+              >
+                {w.type}
+              </Link>
+            </span>
+          )}
+          {w.lang && (
+            <span>
+              ·{" "}
+              <Link
+                className="link"
+                href={filterHref({ lang: w.lang })}
+                title={t.workDetail.filterHint}
+              >
+                {w.lang}
+              </Link>
+            </span>
+          )}
+          <span className="tabular">
+            · {t.workDetail.citations(formatInt(lang, w.citedBy))}
+          </span>
           <span>
-            ·{' '}
-            <a className="link" href={`https://openalex.org/${w.id}`} target="_blank" rel="noreferrer">
+            ·{" "}
+            <a
+              className="link"
+              href={`https://openalex.org/${w.id}`}
+              target="_blank"
+              rel="noreferrer"
+            >
               {t.workDetail.onOpenAlex(w.id)}
             </a>
           </span>
           {w.doi && (
             <span>
-              ·{' '}
-              <a className="link" href={`https://doi.org/${w.doi}`} target="_blank" rel="noreferrer">
+              ·{" "}
+              <a
+                className="link"
+                href={`https://doi.org/${w.doi}`}
+                target="_blank"
+                rel="noreferrer"
+              >
                 {w.doi}
               </a>
             </span>
@@ -168,20 +205,28 @@ export default async function WorkDetail({ params }: { params: { lang: string; i
           bibliographic record, and it says why each route admitted the work. */}
       <section className="card p-6">
         <h2 className="font-serif text-xl">{t.workDetail.whyTitle}</h2>
-        <p className="mt-1 text-sm" style={{ color: 'var(--ink-4)' }}>
+        <p className="mt-1 text-sm" style={{ color: "var(--ink-4)" }}>
           {t.workDetail.whySub}
         </p>
 
         <div className="mt-4 space-y-2">
           {admitted.map((route) => (
-            <div key={route.key} className="flex gap-3 rounded-md p-3" style={{ background: 'var(--surface-2)' }}>
+            <div
+              key={route.key}
+              className="flex flex-col items-start gap-2 rounded-md p-3 sm:flex-row sm:gap-3"
+              style={{ background: "var(--surface-2)" }}
+            >
               <span
-                className="chip shrink-0"
-                style={{ borderColor: 'var(--mc)', color: 'var(--mc)', background: 'transparent' }}
+                className="chip shrink-0 self-start"
+                style={{
+                  borderColor: "var(--mc)",
+                  color: "var(--mc)",
+                  background: "transparent",
+                }}
               >
                 {route.name}
               </span>
-              <span className="text-sm" style={{ color: 'var(--ink-3)' }}>
+              <span className="text-sm" style={{ color: "var(--ink-3)" }}>
                 {route.why}
               </span>
             </div>
@@ -191,270 +236,296 @@ export default async function WorkDetail({ params }: { params: { lang: string; i
         {!w.routeCaAff && (
           <p
             className="mt-4 rounded-md border p-3 text-sm leading-relaxed"
-            style={{ borderColor: 'var(--mc-accent)', color: 'var(--ink-2)' }}
+            style={{ borderColor: "var(--mc-accent)", color: "var(--ink-2)" }}
           >
             {t.workDetail.noAffCallout}
           </p>
         )}
       </section>
 
-      {/* Retraction: the four-state record, not the boolean. */}
-      {(r || w.isRetracted) && (
-        <section className="card p-6" style={{ borderColor: 'var(--retraction)' }}>
+      <div className="grid items-start gap-8 lg:grid-cols-[minmax(0,1fr)_22rem]">
+        <div className="min-w-0 space-y-8">
+          {/* Retraction: the four-state record, not the boolean. */}
+          {(r || w.isRetracted) && (
+            <section
+              className="card p-6"
+              style={{ borderColor: "var(--retraction)" }}
+            >
           <h2 className="font-serif text-xl">{t.workDetail.postPubTitle}</h2>
           {r ? (
             <>
               <dl className="mt-3">
-                <Field label={t.workDetail.nature}>{r.nature}</Field>
-                <Field label={t.workDetail.reason}>{r.reason}</Field>
-                <Field label={t.workDetail.date}>{r.retractionDate}</Field>
+                <Field
+                  label={t.workDetail.nature}
+                  notAvailable={t.common.notAvailable}
+                >
+                  {r.nature}
+                </Field>
+                <Field
+                  label={t.workDetail.reason}
+                  notAvailable={t.common.notAvailable}
+                >
+                  {r.reason}
+                </Field>
+                <Field
+                  label={t.workDetail.date}
+                  notAvailable={t.common.notAvailable}
+                >
+                  {r.retractionDate}
+                </Field>
                 <Field label={t.workDetail.flagged}>
                   {r.openalexFlagged ? (
                     t.workDetail.flaggedYes
                   ) : (
-                    <span style={{ color: 'var(--retraction)' }}>{t.workDetail.flaggedNo}</span>
+                    <span style={{ color: "var(--retraction)" }}>
+                      {t.workDetail.flaggedNo}
+                    </span>
                   )}
                 </Field>
               </dl>
-              <p className="mt-3 text-sm leading-relaxed" style={{ color: 'var(--ink-4)' }}>
+              <p
+                className="mt-3 text-sm leading-relaxed"
+                style={{ color: "var(--ink-4)" }}
+              >
                 {t.workDetail.rwSource}
               </p>
             </>
           ) : (
-            <p className="mt-2 text-sm" style={{ color: 'var(--ink-3)' }}>
+            <p className="mt-2 text-sm" style={{ color: "var(--ink-3)" }}>
               {t.workDetail.openalexOnly}
             </p>
           )}
-        </section>
-      )}
+            </section>
+          )}
 
-      {/* The screen. Only 1,000 of the 4.3M works have this. */}
-      {s && (
-        <section>
-          <div className="mb-3 flex flex-wrap items-baseline justify-between gap-2">
-            <h2 className="font-serif text-xl">{t.workDetail.screenTitle}</h2>
-            <Link href={p('/screen')} className="link text-sm">
-              {t.workDetail.screenAll}
-            </Link>
-          </div>
+          {s && <WorkScreenPanel screened={s} lang={lang} t={t} />}
 
-          <div
-            className="card mb-3 p-4"
-            style={{
-              borderColor: s.nIn === 3 ? 'var(--in-scope)' : s.nIn && s.nIn > 0 ? 'var(--contested)' : 'var(--border)',
-            }}
+          <DirectLabelsPanel labels={w.labels} lang={lang} t={t} />
+
+          <WorkClassifierPanel
+            context={classifier}
+            prediction={w.predictions[0]}
+            lang={lang}
+            t={t}
+          />
+
+          <LegacyScoresPanel score={w.score} lang={lang} t={t} />
+
+          <section className="card p-6">
+            <h2 className="font-serif text-xl">
+              {t.workDetail.abstractTitle}
+            </h2>
+            {abstract?.text ? (
+              <>
+                <ReadableAbstract
+                  text={abstract.text}
+                  expandLabel={t.workDetail.abstractExpand}
+                  collapseLabel={t.workDetail.abstractCollapse}
+                />
+                <p className="mt-3 text-xs" style={{ color: "var(--ink-5)" }}>
+                  {abstract.source === "screening_record"
+                    ? t.workDetail.abstractStored
+                    : abstract.source === "pubmed"
+                      ? t.workDetail.abstractPubMed
+                      : abstract.source === "europe_pmc"
+                        ? t.workDetail.abstractEuropePmc
+                        : t.workDetail.abstractOpenAlex}
+                </p>
+              </>
+            ) : (
+              <p
+                className="mt-3 text-sm leading-relaxed"
+                style={{ color: "var(--ink-4)" }}
+              >
+                {w.hasAbstract
+                  ? t.workDetail.abstractUnavailable
+                  : t.workDetail.abstractNone}
+              </p>
+            )}
+          </section>
+        </div>
+
+        <aside className="min-w-0 lg:sticky lg:top-20">
+          <section className="card p-6">
+            <h2 className="font-serif text-xl">{t.workDetail.recordTitle}</h2>
+            <dl className="mt-2">
+          <Field
+            label={t.workDetail.venue}
+            notAvailable={t.common.notAvailable}
           >
-            <p className="text-sm leading-relaxed" style={{ color: 'var(--ink-2)' }}>
-              {s.nIn === 3
-                ? t.workDetail.consensus3
-                : s.nIn === 0
-                  ? t.workDetail.consensus0
-                  : t.workDetail.consensusN(s.nIn ?? 0)}
-            </p>
-            <div className="mt-2 text-xs" style={{ color: 'var(--ink-4)' }}>
-              {t.workDetail.stratumLine(s.stratum ?? '—', s.weight?.toFixed(2) ?? '—')}
-            </div>
-          </div>
-
-          <div className="grid gap-3 md:grid-cols-3">
-            <ModelCard
-              t={t}
-              model="Claude Opus 4.8"
-              tier={s.opusTier}
-              genre={s.opusGenre}
-              aboutCa={s.opusAboutCa}
-              confidence={s.opusConfidence}
-              reason={s.opusReason}
-            />
-            <ModelCard
-              t={t}
-              model="GPT-5.6 (high)"
-              tier={s.gptTier}
-              genre={s.gptGenre}
-              aboutCa={s.gptAboutCa}
-              confidence={s.gptConfidence}
-              reason={s.gptReason}
-            />
-            <ModelCard
-              t={t}
-              model="Grok 4.5"
-              tier={s.grokTier}
-              genre={s.grokGenre}
-              aboutCa={s.grokAboutCa}
-              confidence={s.grokConfidence}
-              reason={s.grokReason}
-            />
-          </div>
-        </section>
-      )}
-
-      {/* Machine labels, when this work is one of the few hundred labelled so
-          far. Per-model, disagreement visible, framed as what they are. Their
-          ABSENCE renders nothing at all here: on a detail page silence is
-          honest, whereas the cohort list annotates absence explicitly. */}
-      {w.labels.length > 0 && (
-        <section className="card p-6">
-          <h2 className="font-serif text-xl">{t.workDetail.labelsTitle}</h2>
-          <p className="mt-1 text-sm leading-relaxed" style={{ color: 'var(--ink-4)' }}>
-            {t.workDetail.labelsSub}
-          </p>
-          <div className="mt-4 grid gap-3 md:grid-cols-3">
-            {w.labels.map((l) => (
-              <div key={l.model} className="card p-4">
-                <div className="flex items-center justify-between gap-2">
-                  <span className="font-medium">{l.model}</span>
-                  <span
-                    className="chip"
-                    style={{ borderColor: 'var(--ink-5)', color: 'var(--ink-3)', background: 'transparent' }}
-                  >
-                    {l.confidence ?? '—'}
-                  </span>
-                </div>
-                <div className="mt-2 space-y-1 text-xs" style={{ color: 'var(--ink-4)' }}>
-                  <div>
-                    {t.workDetail.labelCategories}:{' '}
-                    {l.categories.length
-                      ? l.categories.map((c) => t.cohort.categoryNames[c] ?? c).join(', ')
-                      : t.workRow.labelNoCats}
-                  </div>
-                  <div>
-                    {t.workDetail.labelDesign}:{' '}
-                    {l.studyDesign ? (t.cohort.designNames[l.studyDesign] ?? l.studyDesign) : '—'}
-                  </div>
-                  <div>
-                    {t.workDetail.labelDomain}: {l.domain ?? '—'}
-                  </div>
-                  <div>
-                    {t.workDetail.labelGenre}: {l.genre ?? '—'}
-                  </div>
-                  <div>
-                    {t.workDetail.labelAboutSystem}:{' '}
-                    {l.aboutCaSystem === null ? '—' : l.aboutCaSystem ? t.common.yes : t.common.no}
-                  </div>
-                  <div>
-                    {t.workDetail.labelAboutTopic}:{' '}
-                    {l.aboutCaTopic === null ? '—' : l.aboutCaTopic ? t.common.yes : t.common.no}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-      )}
-
-      {/* The machine scores: a PROVISIONAL baseline from an immature model. The
-          banner is not decoration; it is the contract under which these numbers
-          may be shown at all. See ScoreBanner and pilot/results/maturity.json. */}
-      {sc && (
-        <section className="card p-6" style={{ borderColor: 'var(--contested)' }}>
-          <h2 className="font-serif text-xl">{t.workDetail.scoresTitle}</h2>
-          <div className="mt-3">
-            <ScoreBanner t={t} />
-          </div>
-          <p className="mt-3 text-sm leading-relaxed" style={{ color: 'var(--ink-4)' }}>
-            {t.workDetail.scoresSub}
-          </p>
-
-          <div className="mt-4 space-y-4">
-            <ScoreBar label={t.workDetail.scoreOpus} value={sc.scoreOpus} lang={lang} color="var(--mc)" />
-            <ScoreBar label={t.workDetail.scoreGpt} value={sc.scoreGpt} lang={lang} color="var(--mc-accent)" />
-          </div>
-
-          <dl className="mt-4">
-            <Field label={t.workDetail.scoreSpread}>
-              {sc.scoreSpread === null ? null : (
-                <>
-                  <span className="tabular" style={{ color: 'var(--contested)' }}>
-                    {sc.scoreSpread.toLocaleString(numberLocale(lang), {
-                      minimumFractionDigits: 3,
-                      maximumFractionDigits: 3,
-                    })}
-                  </span>{' '}
-                  <span className="text-xs" style={{ color: 'var(--ink-4)' }}>
-                    · {t.workDetail.scoreSpreadNote}
-                  </span>
-                </>
-              )}
-            </Field>
-            <Field label={t.workDetail.validationStatus}>
-              {sc.validationStatus === null ? null : (
-                <>
-                  <code className="font-mono text-xs">{sc.validationStatus}</code>{' '}
-                  <span className="text-xs" style={{ color: 'var(--ink-4)' }}>
-                    · {t.workDetail.validationStatusNote}
-                  </span>
-                </>
-              )}
-            </Field>
-          </dl>
-        </section>
-      )}
-
-      <section className="card p-6">
-        <h2 className="font-serif text-xl">{t.workDetail.abstractTitle}</h2>
-        {abstract ? (
-          <>
-            <p className="mt-3 leading-relaxed" style={{ color: 'var(--ink-2)' }}>
-              {abstract}
-            </p>
-            <p className="mt-3 text-xs" style={{ color: 'var(--ink-5)' }}>
-              {s?.abstract ? t.workDetail.abstractStored : t.workDetail.abstractFetched}
-            </p>
-          </>
-        ) : (
-          <p className="mt-3 text-sm leading-relaxed" style={{ color: 'var(--ink-4)' }}>
-            {w.hasAbstract ? t.workDetail.abstractUnavailable : t.workDetail.abstractNone}
-          </p>
-        )}
-      </section>
-
-      <section className="card p-6">
-        <h2 className="font-serif text-xl">{t.workDetail.recordTitle}</h2>
-        <dl className="mt-2">
-          <Field label={t.workDetail.venue}>{w.venue}</Field>
-          <Field label={t.workDetail.topic}>{w.topic}</Field>
-          <Field label={t.workDetail.field}>{w.field}</Field>
-          <Field label={t.workDetail.institutions}>
+            {w.venue ? (
+              <Link
+                className="link"
+                href={filterHref({ venue: w.venue })}
+                title={t.workDetail.filterHint}
+              >
+                {displayText(w.venue)}
+              </Link>
+            ) : null}
+          </Field>
+          <Field
+            label={t.workDetail.topic}
+            notAvailable={t.common.notAvailable}
+          >
+            {w.topic ? (
+              <Link
+                className="link"
+                href={filterHref({ topic: w.topic })}
+                title={t.workDetail.filterHint}
+              >
+                {displayText(w.topic)}
+              </Link>
+            ) : null}
+          </Field>
+          <Field
+            label={t.workDetail.field}
+            notAvailable={t.common.notAvailable}
+          >
+            {w.field ? (
+              <Link
+                className="link"
+                href={filterHref({ field: w.field })}
+                title={t.workDetail.filterHint}
+              >
+                {displayText(w.field)}
+              </Link>
+            ) : null}
+          </Field>
+          <Field
+            label={t.workDetail.authors}
+            notAvailable={t.common.notAvailable}
+          >
+            {enrichment?.authors.length ? (
+              <ul className="space-y-3">
+                {enrichment.authors.map((author) => (
+                  <li key={author.id}>
+                    <a
+                      className="link text-sm font-medium"
+                      href={`https://openalex.org/${author.id}`}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      {displayText(author.name)}
+                    </a>
+                    <span className="mt-1 flex flex-wrap gap-1">
+                      {author.institutions.map((institution) => (
+                        <Link
+                          key={institution.id}
+                          className="chip record-filter-chip"
+                          href={filterHref({ institution: institution.name })}
+                          title={t.workDetail.filterHint}
+                        >
+                          {displayText(institution.name)}
+                        </Link>
+                      ))}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            ) : null}
+          </Field>
+          <Field
+            label={t.workDetail.institutions}
+            notAvailable={t.common.notAvailable}
+          >
             {w.caInstitutions ? (
               <span className="flex flex-wrap gap-1">
                 {chips(w.caInstitutions).map((i, k) => (
-                  <span key={k} className="chip">
-                    {i}
-                  </span>
+                  <Link
+                    key={k}
+                    className="chip record-filter-chip"
+                    href={filterHref({ institution: i })}
+                    title={t.workDetail.filterHint}
+                  >
+                    {displayText(i)}
+                  </Link>
                 ))}
               </span>
             ) : null}
           </Field>
-          <Field label={t.workDetail.funders}>
+          <Field
+            label={t.workDetail.funders}
+            notAvailable={t.common.notAvailable}
+          >
             {w.funders ? (
               <span className="flex flex-wrap gap-1">
                 {chips(w.funders).map((i, k) => (
-                  <span key={k} className="chip">
-                    {i}
-                  </span>
+                  <Link
+                    key={k}
+                    className="chip record-filter-chip"
+                    href={filterHref({ funder: i })}
+                    title={t.workDetail.filterHint}
+                  >
+                    {displayText(i)}
+                  </Link>
                 ))}
               </span>
             ) : null}
           </Field>
-          <Field label={t.workDetail.keywords}>
+          <Field
+            label={t.workDetail.keywords}
+            notAvailable={t.common.notAvailable}
+          >
             {w.keywords ? (
               <span className="flex flex-wrap gap-1">
                 {chips(w.keywords).map((i, k) => (
-                  <span key={k} className="chip">
-                    {i}
-                  </span>
+                  <Link
+                    key={k}
+                    className="chip record-filter-chip"
+                    href={filterHref({ keyword: i })}
+                    title={t.workDetail.filterHint}
+                  >
+                    {displayText(i)}
+                  </Link>
                 ))}
               </span>
             ) : null}
           </Field>
-          <Field label={t.workDetail.hasAbstract}>{w.hasAbstract ? t.common.yes : t.common.no}</Field>
+          <Field label={t.workDetail.hasAbstract}>
+            <Link
+              className="link"
+              href={filterHref({ abstract: w.hasAbstract ? "has" : "none" })}
+              title={t.workDetail.filterHint}
+            >
+              {w.hasAbstract ? t.common.yes : t.common.no}
+            </Link>
+          </Field>
+          {enrichment?.pmid && (
+            <Field label={t.workDetail.pmid}>
+              <a
+                className="link font-mono text-sm"
+                href={`https://pubmed.ncbi.nlm.nih.gov/${enrichment.pmid}/`}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {enrichment.pmid}
+              </a>
+            </Field>
+          )}
+          {enrichment?.pmcid && (
+            <Field label={t.workDetail.pmcid}>
+              <a
+                className="link font-mono text-sm"
+                href={`https://pmc.ncbi.nlm.nih.gov/articles/${enrichment.pmcid}/`}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {enrichment.pmcid}
+              </a>
+            </Field>
+          )}
           <Field label={t.workDetail.api}>
-            <a className="link font-mono text-xs" href={`/api/v1/works/${w.id}`}>
+            <a
+              className="link font-mono text-xs"
+              href={`/api/v1/works/${w.id}`}
+            >
               /api/v1/works/{w.id}
             </a>
           </Field>
-        </dl>
-      </section>
+            </dl>
+          </section>
+        </aside>
+      </div>
     </div>
-  )
+  );
 }

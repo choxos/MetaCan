@@ -41,8 +41,6 @@
 # pick a batch, re-scored under the frozen final model to check the loop has not walked
 # away from the frame. That question 400 anchors CAN answer.
 #
-#   THE LOOP LEARNS. THE PREREGISTERED HUMAN AUDIT MEASURES.
-#
 # ------------------------------------------------------------------------------
 # AND THE BUG, WHICH SAID THE OPPOSITE
 # ------------------------------------------------------------------------------
@@ -103,11 +101,11 @@ record_finding(
     active_over_random_x = round(a1 / r1, 1),
     active_beats_random_in_rounds = cv$active_beats_random_in_rounds,
     holdout_churn_final = cv$final_churn,
-    pi_directive_vindicated = TRUE,
+    active_arm_outperformed_random_control_in_simulation = TRUE,
     what_ap_measures_here = paste(
       "Agreement with the MAJORITY TEACHER, not accuracy. A rising curve is better imitation of three LLMs",
-      "that overlap each other at Jaccard ~0.5. No amount of imitation crosses that gap, and the audit is",
-      "the only instrument that can."
+      "that overlap each other at Jaccard ~0.5. No amount of imitation establishes accuracy; a",
+      "human-coded probability sample is required."
     ),
     anchors_n = last$n_anchors,
     anchors_positives = last$anchor_positives_seen,
@@ -136,9 +134,10 @@ record_finding(
     "held-out positive-set churn falling to {cv$final_churn}. At a ~1% base rate a random batch of 100 holds one positive, ",
     "and the control curve is what that buys. BUT the anchors, which were supposed to keep an unbiased ",
     "evaluation stream alive, hold {last$anchor_positives_seen} positives after {last$n_anchors} draws: prevalence {last$anchor_prevalence_hat} with a 95% interval ",
-    "{last$anchor_ci_width} wide, WIDER THAN THE QUANTITY ITSELF. They are demoted to drift sentinels. THE LOOP LEARNS; THE ",
-    "PREREGISTERED HUMAN AUDIT MEASURES. And AP here is agreement with the majority TEACHER, so the whole curve ",
-    "is imitation, not accuracy. The first version of this script said the loop DEGRADED, because it measured ",
+    "{last$anchor_ci_width} wide, WIDER THAN THE QUANTITY ITSELF. They are demoted to drift sentinels. AP here is agreement ",
+    "with the majority TEACHER, so the whole curve is imitation, not accuracy. The planned human study is not ",
+    "preregistered and remains necessary to measure accuracy. ",
+    "The first version of this script said the loop DEGRADED, because it measured ",
     "AP on the shrinking pool the algorithm was itself editing; the churn sat at exactly 1.000 for twenty ",
     "rounds, which is a constant, not a measurement (D33)."
   )

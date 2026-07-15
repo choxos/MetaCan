@@ -305,7 +305,7 @@
   "positives_among_them": 3,
   "design_weighted_prevalence": 0.0057,
   "ci_width": 0.01594,
-  "verdict": "The anchors are a valid probability sample and a USELESS evaluation stream. After 20 rounds they hold 3 positives, and the 95% interval on prevalence is 0.016 wide against a point estimate of 0.006: the interval is wider than the quantity. They cannot power precision, recall, AP or calibration, and this loop does not ask them to. THE LOOP LEARNS; THE PREREGISTERED HUMAN AUDIT MEASURES. The anchors are kept as DRIFT SENTINELS, rescored under the frozen final model, and they are never used to select a batch."
+  "verdict": "The anchors are a valid probability sample but an unusable evaluation stream. After 20 rounds they hold 3 positives, and the 95% interval on prevalence is 0.016 wide against a point estimate of 0.006: the interval is wider than the quantity. They cannot estimate precision, recall, AP, or calibration. The anchors are kept as drift sentinels, rescored under the frozen final model, and never used to select a batch. A separate human-coded probability sample remains necessary for validation and is not preregistered."
  },
  "what_this_simulation_shows": "The loop's MECHANICS and the shape of its learning curve, on labels that already exist.",
  "what_this_simulation_does_NOT_show": "That the loop matures on 4.3M unlabelled works. Every 'query' here reveals a label already collected: it is in-sample recycling. It also says nothing about the v3.1 instrument, under which no screening has run. And held-out AP is measured against the MAJORITY TEACHER, so a rising curve means the student is imitating three LLMs better, NOT that it is getting closer to the field. A wrong model can plateau immediately and look mature.",

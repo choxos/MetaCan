@@ -41,6 +41,7 @@ documentation/*.htm
 # `git status`, which is one `git add -A` away from publishing them.
 .env
 .env.*
+!site/.env.example
 *.key
 secrets/
 deploy/.dbpass
@@ -74,6 +75,13 @@ site/*.tsbuildinfo
 __pycache__/
 *.py[cod]
 .omo/
+
+# The compact model and metadata are release inputs. Fold assignments and
+# out-of-fold predictions are reproducible working artefacts kept outside Git.
+!artifacts/frame_classifier/metadata.json
+!artifacts/frame_classifier/model.joblib
+artifacts/frame_classifier/folds.parquet
+artifacts/frame_classifier/oof_predictions.parquet
 
 # Large screening transcripts ship as release assets. Consolidated labels and
 # their provenance hashes remain in Git.

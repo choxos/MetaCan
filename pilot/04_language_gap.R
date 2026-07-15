@@ -53,7 +53,8 @@ record_finding(
   ),
   headline = glue(
     "French is {round(pct_fr, 1)}% ({format(n_fr, big.mark = ',')}/{format(total, big.mark = ',')}) ",
-    "of Canadian metaresearch in OpenAlex. A dedicated French lexicon finds ",
-    "{format(fr_hits, big.mark = ',')} Canadian works, against {format(en_hits, big.mark = ',')} in English."
+    "of the OpenAlex topic-defined metaresearch subset used here. A dedicated French lexicon retrieves ",
+    "{format(fr_hits, big.mark = ',')} Canadian works, against {format(en_hits, big.mark = ',')} in English. ",
+    "These are retrieval counts, not a language-specific prevalence or sensitivity estimate."
   )
 )

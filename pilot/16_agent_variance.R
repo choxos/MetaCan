@@ -314,14 +314,14 @@ record_finding(
   # next to a computed 0.113 (DEVIATIONS.md D12). Nothing in this headline is a
   # literal.
   headline = glue(
-    "Haiku, the model finding 13 budgets the entire screen on, lands near Sonnet's base rate ",
-    "({round(100*hi,2)}% vs {round(100*ai,2)}%) and agrees with it on {agree(k$tier_h, k$tier_a)}% of the frame, but their in-scope SETS overlap ",
+    "Haiku, the model finding 13 budgets the entire screen on, lands near Sonnet's model-positive rate ",
+    "({round(100*hi,2)}% vs {round(100*ai,2)}%) and agrees with it on {agree(k$tier_h, k$tier_a)}% of the frame, but their positive-label SETS overlap ",
     "{jac(k$tier_a, k$tier_h)}% unweighted and {wjac(k$tier_a, k$tier_h)}% design-weighted (Sonnet-GPT: {jac(k$tier_a, k$tier_b)}%/{wjac(k$tier_a, k$tier_b)}%); of Sonnet's {nrow(pos)} positives Haiku ",
     "agrees on {sum(IN(pos$tier_h))}. RATE AGREEMENT IS NOT SET AGREEMENT. Worse: agents of the SAME model on the SAME ",
-    "prompt disagree beyond chance in BOTH arms after conditioning on stratum (CMH p = {signif(t6$cmh_p, 2)} and ",
+    "prompt vary beyond chance in BOTH arms after conditioning on stratum (CMH p = {signif(t6$cmh_p, 2)} and ",
     "{signif(t8$cmh_p, 2)}), with raw spreads {t6$raw_spread}x and {t8$raw_spread}x against {BETWEEN_MODEL_X}x between models, and the agents' ordering ",
-    "FLIPS between arms. The noise inside one model is at least the size of the difference between ",
-    "models, and the pilot's own 40-agent screen is too underpowered to rule the same instability out ",
+    "FLIPS between arms. Within-model variation is at least the size of the between-model difference ",
+    "in these runs, and the pilot's own 40-agent screen is too underpowered to rule the same instability out ",
     "({zero} of {nrow(pc)} chunks found zero metaresearch; p = {signif(ctp$p.value, 3)})."
   )
 )

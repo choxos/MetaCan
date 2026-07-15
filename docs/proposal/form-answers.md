@@ -2,6 +2,8 @@
 
 Copy these into the web form. The 2-page attachment is `metacan-proposal.pdf`.
 
+This file preserves the application text as submitted. It is not the current release description. Current execution status, limitations, and artifact hashes are recorded in `README.md` and `RELEASE.md`.
+
 ---
 
 ## Project Information

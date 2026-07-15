@@ -109,7 +109,7 @@ cli_alert_info(
 
 cli_h2("The correction")
 cli_alert_danger("An earlier draft reported 32.4% coverage (14,873 / 45,850). That was wrong.")
-cli_text("It divided a retrieved set by a true field size: incommensurable quantities. \\
+cli_text("It divided a retrieved set by an extrapolated model-positive count: incommensurable quantities. \\
           The recall CI ({round(100*rc[1],1)}-{round(100*rc[2],1)}%) excludes 32.4% entirely.")
 
 # --- what does NOT reconcile, stated rather than buried -----------------------
@@ -148,7 +148,7 @@ record_finding(
     route_size_implied_by_sample = round(implied),
     route_size_from_api          = API_ROUTE_SIZE,
     reconciliation_gap_x         = round(API_ROUTE_SIZE / implied, 2),
-    supersedes            = "the earlier 32.4% figure (14,873/45,850), which divided a retrieved set by a true field size",
+    supersedes            = "the earlier 32.4% figure (14,873/45,850), which divided a retrieved set by an extrapolated model-positive count",
     caveat = paste(
       "Small n on the positive class (", tp + fn, "metaresearch works, of which",
       tp + fp, "were on the route), so the intervals are wide. Separately, the",
@@ -159,10 +159,9 @@ record_finding(
     )
   ),
   headline = glue(
-    "Scored against the rubric, the topic route retrieves {round(100*recall)}% of Canadian ",
-    "metaresearch (95% CI {round(100*rc[1],1)}-{round(100*rc[2],1)}%) at {round(100*precision)}% ",
-    "precision: it misses {fn} of {tp+fn}. It fails because OpenAlex files a work by what it is ",
-    "about, and metaresearch about cardiology reads as cardiology: the field is invisible to topic ",
-    "retrieval precisely because it is about other fields."
+    "Against one historical model's labels, the topic route retrieves {round(100*recall)}% of model-positive works ",
+    "(95% CI {round(100*rc[1],1)}-{round(100*rc[2],1)}%) at {round(100*precision)}% model-label precision: it misses ",
+    "{fn} of {tp+fn} model positives. This measures agreement with a machine screen, not sensitivity or precision ",
+    "against human-coded field membership."
   )
 )

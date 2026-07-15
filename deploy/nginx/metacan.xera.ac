@@ -6,6 +6,8 @@
 # the deploy branch, and it does not contain this repo's deploy/ directory.
 #
 # Install (needs root):
+#   sudo cp ~/metacan-rate-limits.conf /etc/nginx/conf.d/metacan-rate-limits.conf
+#   sudo cp ~/metacan-app.conf /etc/nginx/snippets/metacan-app.conf
 #   sudo cp ~/metacan.xera.ac.nginx /etc/nginx/sites-available/metacan.xera.ac
 #   sudo ln -sfn /etc/nginx/sites-available/metacan.xera.ac /etc/nginx/sites-enabled/metacan.xera.ac
 #   sudo nginx -t && sudo systemctl reload nginx
@@ -25,36 +27,5 @@ server {
     listen 80;
     server_name metacan.xera.ac;
 
-    location / {
-        proxy_pass http://127.0.0.1:3111;
-        proxy_http_version 1.1;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection 'upgrade';
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto $scheme;
-        proxy_cache_bypass $http_upgrade;
-
-        # /works and /analytics run GROUP BYs over 4.3M rows on a cold cache. The
-        # default 60s read timeout is enough in practice, but a cold /analytics
-        # after a deploy is the one request that can beat it.
-        proxy_read_timeout 120s;
-        proxy_connect_timeout 120s;
-        proxy_send_timeout 120s;
-    }
-
-    # Next.js content-hashes these, so they are safe to cache hard and forever.
-    location /_next/static {
-        proxy_pass http://127.0.0.1:3111;
-        proxy_cache_valid 60m;
-        add_header Cache-Control "public, immutable, max-age=31536000";
-    }
-
-    location /_next/image {
-        proxy_pass http://127.0.0.1:3111;
-        proxy_cache_valid 60m;
-    }
-
-    client_max_body_size 10M;
+    include /etc/nginx/snippets/metacan-app.conf;
 }

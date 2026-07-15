@@ -211,8 +211,8 @@ cli_li("gpt  vs grok : {jac(k$gpt,  k$grok)}%")
 #
 # So the load-bearing claim is the one that was already true before the pretty
 # decomposition was layered on top of it: RATE AGREEMENT IS NOT SET AGREEMENT, and
-# the field's boundary is a REGION the models each cut differently. That does not
-# need the coarse/fine split, and it is what the proposal says.
+# the models select materially different sets. That does not need the coarse/fine
+# split, and it is what the proposal says.
 #
 # The spreads are still reported below, because withdrawing a claim means showing
 # the numbers that withdrew it. See DEVIATIONS.md D23.
@@ -256,8 +256,8 @@ cli_li("  by exactly two                      : {two_in}")
 cli_li("  by exactly ONE (the contested edge)  : {one_in} ({round(100*one_in/any_in)}%)")
 cli_alert_danger(
   "Only {round(100*all_in/any_in)}% of the works ANY model calls metaresearch are called metaresearch by ALL THREE. \\
-   {round(100*one_in/any_in)}% rest on a SINGLE model's opinion. The field's boundary is not a line the models \\
-   share; it is a region they each cut differently, and its size is the honest uncertainty."
+   {round(100*one_in/any_in)}% rest on a SINGLE model's opinion. This measures variation among model decisions, \\
+   not the field boundary, accuracy, or uncertainty about field size."
 )
 
 # --- 2. does disagreement cluster where this project claims to care? ------------
@@ -333,12 +333,11 @@ record_finding(
     jaccard_opus_gpt        = jac(k$opus, k$gpt),
     jaccard_opus_grok       = jac(k$opus, k$grok),
     jaccard_gpt_grok        = jac(k$gpt,  k$grok),
-    # the sharpest result: the disagreement is in the BOUNDARY, not the recognition
     n_about_research_at_all = as.list(coarse),
     n_in_scope              = as.list(fine),
     spread_about_research_x = coarse_x,
     spread_in_scope_x       = fine_x,
-    variance_is_in_the_rubric_not_the_models = TRUE,
+    model_disagreement_is_not_field_uncertainty = TRUE,
     called_in_scope_by_any  = any_in,
     unanimous_in_scope      = all_in,
     pct_unanimous_of_any    = round(100 * all_in / any_in),
@@ -353,25 +352,25 @@ record_finding(
       "These are MACHINE labels and none of them is truth (finding 15). The unanimity rate is not",
       "accuracy: three models sharing training data can be wrong together, and they are most",
       "correlated exactly on the boundary cases the field's definition turns on. What this",
-      "measures is where the RUBRIC is underspecified, which is a property of the instrument and",
-      "is exactly what a criteria document needs. Base rates are design-weighted from a stratified",
-      "sample, so they estimate the frame; the Jaccard and unanimity figures are unweighted set",
-      "quantities over the sample and are NOT frame estimates."
+      "measures is where these models apply the rubric differently. It does not establish why",
+      "they differ or whether the rubric is underspecified. The model-positive rates are",
+      "design-weighted from a stratified sample; the Jaccard and unanimity figures are unweighted",
+      "set quantities over the sample and are NOT frame estimates."
     )
   ),
   headline = glue(
     "Three frontier models (Opus 4.8, GPT-5.6 high, Grok 4.5) screened the same {format(nrow(k), big.mark=',')} works, drawn from the real ",
     "4.3M frame under a design whose seven strata PARTITION it (an earlier five-stratum design could not reach 12.9% ",
-    "of the frame at all; D22). Design-weighted base rates span {round(min(rates), 2)}% to {round(max(rates), 2)}% ({round(max(rates)/min(rates), 1)}x). But the RATE is not the ",
+    "of the frame at all; D22). Design-weighted model-positive rates span {round(min(rates), 2)}% to {round(max(rates), 2)}% ({round(max(rates)/min(rates), 1)}x). But the RATE is not the ",
     "finding, the SETS are: of the {any_in} works ANY model called metaresearch, only {all_in} ({round(100*all_in/any_in)}%) were called metaresearch by ",
     "ALL THREE, and {one_in} ({round(100*one_in/any_in)}%) rest on a SINGLE model's opinion; pairwise Jaccard on the in-scope sets is about 50%. ",
-    "THE FIELD'S BOUNDARY IS NOT A LINE THE MODELS SHARE; IT IS A REGION THEY EACH CUT DIFFERENTLY, and that result ",
-    "is STABLE across n = 1,000, 2,000 and {format(nrow(k), big.mark=',')} (unanimity 37%, 37%, {round(100*all_in/any_in)}%). ",
+    "The models selected different sets, and that pattern is stable across n = 1,000, 2,000 and {format(nrow(k), big.mark=',')} ",
+    "(unanimity 37%, 37%, {round(100*all_in/any_in)}%). This describes model decision variation, not the true field boundary or statistical uncertainty. ",
     "A SECOND, PRETTIER CLAIM DID NOT SURVIVE: at n = 2,000 the models agreed markedly more on 'is this about research ",
     "at all' ({coarse_x}x here) than on 'is it in scope' ({fine_x}x here), and this project said so in capitals; at n = {format(nrow(k), big.mark=',')} the ",
     "two spreads are within noise (ratio {decomp_ratio}) and the claim is WITHDRAWN (D23). The largest tier confusion is OUT-vs-T2, ",
     "every time, at every sample size: the adjacent traditions the inclusiveness criterion exists to protect. ",
-    "The deliverable is not a base rate. It is the disagreement dossier, the {nrow(dossier)} works that mark the empirical ",
-    "boundary, each carrying all three models' stated reasons, and the criteria that have to be written against them."
+    "The useful artifact is the disagreement dossier: {nrow(dossier)} works any model called in scope, each carrying all three ",
+    "models' stated reasons. It supports rubric development and human validation; it does not establish field membership."
   )
 )

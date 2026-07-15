@@ -1,9 +1,15 @@
-import type { NextRequest } from 'next/server'
-import { searchWorks, MAX_PER_PAGE } from '@/lib/query'
-import { json, filtersFromParams, OPTIONS } from '@/lib/api'
+import type { NextRequest } from "next/server";
+import { searchWorks, MAX_PER_PAGE } from "@/lib/query";
+import {
+  json,
+  filtersFromParams,
+  invalidFilterResponse,
+  OPTIONS,
+} from "@/lib/api";
+import { classifierMeta, predictionView } from "@/lib/predictions";
 
-export const dynamic = 'force-dynamic'
-export { OPTIONS }
+export const dynamic = "force-dynamic";
+export { OPTIONS };
 
 /**
  * GET /api/v1/works
@@ -13,8 +19,11 @@ export { OPTIONS }
  * it is a bug nobody notices for a year.
  */
 export async function GET(req: NextRequest) {
-  const f = filtersFromParams(req.nextUrl.searchParams)
-  const { rows, total, page, perPage, capped } = await searchWorks(f)
+  const f = filtersFromParams(req.nextUrl.searchParams);
+  const invalid = invalidFilterResponse(f);
+  if (invalid) return invalid;
+  const { rows, total, page, perPage, capped, classifier } =
+    await searchWorks(f);
 
   return json({
     meta: {
@@ -26,6 +35,7 @@ export async function GET(req: NextRequest) {
       total: capped ? 10_000 : total,
       total_is_capped: capped,
       filters: f,
+      classifier: classifierMeta(classifier),
     },
     results: rows.map((w) => ({
       id: w.id,
@@ -48,7 +58,10 @@ export async function GET(req: NextRequest) {
         about_ca: w.routeAboutCa,
       },
       retraction: w.retraction
-        ? { nature: w.retraction.nature, openalex_flagged: w.retraction.openalexFlagged }
+        ? {
+            nature: w.retraction.nature,
+            openalex_flagged: w.retraction.openalexFlagged,
+          }
         : null,
       screen: w.screened
         ? {
@@ -58,6 +71,7 @@ export async function GET(req: NextRequest) {
             grok_tier: w.screened.grokTier,
           }
         : null,
+      prediction: predictionView(w.predictions[0], classifier),
     })),
-  })
+  });
 }

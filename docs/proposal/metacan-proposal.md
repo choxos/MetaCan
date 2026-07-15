@@ -128,7 +128,8 @@ could stop doing was defining anyone by their distance from me; §1 is that repa
 **Érudit, the main francophone Canadian platform, matches 0 OpenAlex sources by name** (OAI-PMH live, 379 sets); whether OpenAlex
 holds its corpus under other source records is **unmeasured until the ISSN/DOI crosswalk runs (W3)**, and the verified harvest
 supplies the rest. Funder metadata skews against the traditions the call asks me to include (**NSERC carries 9.2× SSHRC's**), and
-**23.3% of the frame (1,003,117 works) has no abstract**, where the pilot screen finds half as much metaresearch (p = 0.023).
+**23.3% of the frame (1,003,117 works) has no abstract**; one historical model assigned positive labels at 0.78% there versus
+1.55% with abstracts (p = 0.023). This measures model behaviour, not accuracy or field prevalence.
 
 **Assumptions named.** The base rate rests on machine labels: **a hypothesis with a denominator, not a result**, and coverage holds
 *within the frame*. No sensitive identity is inferred; no derived labels where Indigenous-governed data are implicated; OCAP®

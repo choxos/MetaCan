@@ -1,6 +1,6 @@
 {
   "abstract_cascade": {
-    "headline": "The screen's largest measured bias is the abstract gap: 23.3% of the frame (1,003,117 works) has NO ABSTRACT, and finding 11 showed the screen finds HALF as much metaresearch there. Cascading PubMed, Europe PMC and Crossref recovers 37.8% of a 500-work sample, cutting title-only exposure to ~14.5% of the frame. But I BUILT THE CASCADE AROUND CROSSREF as the discipline-agnostic rescue, and it recovered 2 abstracts against PubMed's 180: publishers do not deposit them, so THAT RESCUE DOES NOT EXIST (D15). The gap is therefore not a metadata failure a better index fixes; it is STRUCTURAL. Recovery is 91.2% for reviews against 6.2% for book chapters, 38.8% English against 15.4% French. So the tempting shortcut, 'just screen the works that have abstracts', is a SELECTION ON A COVARIATE THAT PREDICTS THE OUTCOME which would delete 61.6% of book chapters against 22.1% of articles, AND the works it deletes are exactly the works no cascade can rescue. Defensible only as a DECLARED exclusion with a measured cost, and the audit keeps a sampling floor in it.",
+    "headline": "Abstract availability is uneven: 23.3% of the frame (1,003,117 works) has no abstract, and a historical pilot model assigned positive labels at roughly half the rate there. This is a machine-label association, not an accuracy estimate. Cascading PubMed, Europe PMC and Crossref recovers 37.8% of a 500-work sample, cutting title-only exposure to ~14.5% of the frame. Crossref was not a meaningful rescue in this sample: it recovered 2 abstracts against PubMed's 180. Recovery is 91.2% for reviews against 6.2% for book chapters, and 38.8% for English against 15.4% for French. Restricting screening to works with abstracts would remove 61.6% of book chapters against 22.1% of articles, changing the composition of the frame. The effect on human-validated outcomes remains unknown, so validation retains a sampling floor among works without abstracts.",
     "values": {
       "frame_works": 4299418,
       "frame_works_no_abstract": 1003117,
@@ -22,7 +22,7 @@
         "fr": 21.6,
         "en": 23.7
       },
-      "abstracts_only_is_a_selection_on_the_outcome": true,
+      "abstracts_only_changes_observed_composition": true,
       "sampled": 500,
       "sources": "PubMed (Entrez) -> Europe PMC (REST) -> Crossref (REST)",
       "recovered": 189,
@@ -36,8 +36,8 @@
       "crossref_recovered": 2,
       "europepmc_recovered": 7,
       "pubmed_recovered": 180,
-      "no_discipline_agnostic_rescue_exists": true,
-      "the_gap_is_structural_not_a_metadata_failure": true,
+      "crossref_is_not_load_bearing_in_this_sample": true,
+      "abstract_recovery_varies_by_type_and_language": true,
       "recovery_pct_by_type": {
         "review": 91.2,
         "article": 40.5,
@@ -48,12 +48,42 @@
       "recovery_pct_english": 38.8,
       "recovery_pct_french": 15.4,
       "residual_pct_frame_title_only": 14.5,
-      "caveat": "Run on a 500-work hash-ordered sample of the no-abstract stratum, not the frame: the cascade is rate-limited and a million lookups is days. The recovery rate is an estimate with sampling error, and it is an estimate of a CEILING (an abstract that EXISTS is recoverable; it does not follow the screen then classifies the work correctly). Only works with a DOI can be looked up, so the DOI-less part of the stratum is untouched and its size bounds what any cascade can do. PubMed and Europe PMC are biomedical; Crossref is not, and it is in the chain for exactly that reason: a cascade of biomedical indexes would close the gap unevenly and make the residual bias MORE discipline-shaped while appearing to improve coverage. That reasoning was right and the remedy is not available: Crossref recovered 2 of 189 and Europe PMC 7, because publishers largely do not deposit abstracts to Crossref, so no discipline-agnostic rescue exists (D15). Restricting screening to abstract-bearing works remains a DECLARED EXCLUSION with a measured cost, not a scoping convenience, and the audit keeps a sampling floor in the excluded stratum so that cost stays estimable."
+      "caveat": "Run on a 500-work hash-ordered sample of the no-abstract stratum, not the frame: the cascade is rate-limited and a million lookups is days. The recovery rate is an estimate with sampling error, and it is an estimate of a CEILING (an abstract that EXISTS is recoverable; it does not follow the screen then classifies the work correctly). Only works with a DOI can be looked up, so the DOI-less part of the stratum is untouched and its size bounds what any cascade can do. PubMed and Europe PMC are biomedical; Crossref is not, and it is in the chain for exactly that reason: a cascade of biomedical indexes would close the gap unevenly and make the residual coverage more discipline-shaped while appearing to improve coverage. Crossref recovered 2 of 189 and Europe PMC 7, because publishers largely do not deposit abstracts to Crossref, so no discipline-agnostic rescue was observed in this sample (D15). Restricting screening to abstract-bearing works changes the work-type and language composition. Its effect on human-valid outcomes is unknown, so validation keeps a sampling floor in the excluded stratum."
     },
     "computed_at_utc": "2026-07-13T11:55:17Z"
   },
+  "active_learning": {
+    "headline": "Against a random-batch control at identical budget, active acquisition takes held-out AP from 0.0143 to 0.1391 while the control reaches 0.0502: 2.8x, winning 18 of 20 rounds, with held-out positive-set churn falling to 0.1111. The random anchors hold 3 positives after 400 draws, with an estimated prevalence of 0.0057 and a 95% interval 0.01594 wide. They cannot estimate precision, recall, AP, or calibration and are retained only as drift sentinels. AP here is agreement with the majority teacher, so the curve measures imitation, not accuracy. The planned human study is not preregistered and remains necessary to measure accuracy.",
+    "values": {
+      "batch": {
+        "batch_size": 100,
+        "max_disagreement": 50,
+        "max_uncertainty": 30,
+        "random_anchor": 20
+      },
+      "rounds": 20,
+      "ap_active_start": 0.0143,
+      "ap_active_end": 0.1391,
+      "ap_random_start": 0.0238,
+      "ap_random_end": 0.0502,
+      "active_over_random_x": 2.8,
+      "active_beats_random_in_rounds": 18,
+      "holdout_churn_final": 0.1111,
+      "active_arm_outperformed_random_control_in_simulation": true,
+      "what_ap_measures_here": "Agreement with the MAJORITY TEACHER, not accuracy. A rising curve is better imitation of three LLMs that overlap each other at Jaccard ~0.5. No amount of imitation establishes accuracy; a human-coded probability sample is required.",
+      "anchors_n": 400,
+      "anchors_positives": 3,
+      "anchors_prevalence": 0.0057,
+      "anchors_ci_width": 0.01594,
+      "anchors_are_a_usable_evaluation_stream": false,
+      "anchors_demoted_to": "drift sentinels, rescored under the frozen final model, never used to pick a batch",
+      "simulation_caveat": "Every query reveals a label that already exists: 16,800 labels over 5,600 works. This is in-sample recycling. It demonstrates the loop's MECHANICS and cannot show that the loop matures on 4.3M unlabelled works, nor validate the v3.1 instrument, under which no screening has run.",
+      "superseded_result": "The first version of this experiment measured AP and churn on the POOL of unrevealed works. Active learning REMOVES contested works from the pool by construction, so the pool gets easier every round and the evaluation target moves under the metric. It reported AP FALLING from 0.019 to 0.011 with churn pinned at exactly 1.000 for twenty straight rounds, and the conclusion was going to be 'the loop degrades'. The constant churn is what gave it away. A metric computed on a set the algorithm is actively editing is not a metric. See DEVIATIONS.md D33."
+    },
+    "computed_at_utc": "2026-07-13T13:17:42Z"
+  },
   "adjudication": {
-    "headline": "AN INDEPENDENT BLINDED JUDGE SAYS THE RUBRIC IS SILENT ON 89% OF THE WORKS THE MODELS FOUGHT OVER. Fable 5, which is not one of the three screened arms, adjudicated all 179 contested works seeing three screener opinions as A/B/C in random order with no model names, so it was asked which reading of the RUBRIC is right rather than which model to trust. It shows no arm preference (spread 1.16x, chi-square p = 0.493), so it is not a fourth vote for one of the screeners, and it overruled ALL THREE on 6 works. Its verdict on the instrument: the rubric is SILENT on 159 of 179 contested works, and only 17 splits are a screener misapplying a rule that actually exists. THE FIELD'S BOUNDARY IS BEING SET BY THE SCREENER, NOT BY THE INSTRUMENT. The seams that cost the most agreement are methods_dev_vs_study (39 works), lis_sts_asymmetry (26), and history_of_science (19). This is what converts adjudication from a tiebreak into a measurement: not 179 answers, but a frequency-weighted census of which sentences the rubric is missing and exactly how many works each one costs. The judge's TIERS are used for nothing and produce no estimate: a model cannot certify a model, and that argument applies to the judge too.",
+    "headline": "A blinded fourth model classified 89% of the selected disagreements as involving a rubric seam. Fable 5 reviewed all 179 contested works with the three screener opinions presented as A/B/C in random order. It showed no arm preference (spread 1.16x, chi-square p = 0.493) and overruled all three on 6 works. It assigned a rubric-seam category to 159 works and assigned 'none' to 17. The most frequent model-assigned seams were methods_dev_vs_study (39 works), lis_sts_asymmetry (26), and history_of_science (19). These counts are hypotheses for rubric revision, not proof that the rubric is silent or that any field boundary has been located. The fourth model's tiers are used for nothing and produce no estimate.",
     "values": {
       "judge": "Fable 5 (xhigh), which is NOT one of the three screened arms",
       "blinded": true,
@@ -108,7 +138,7 @@
     "computed_at_utc": "2026-07-13T11:54:42Z"
   },
   "agent_variance": {
-    "headline": "Haiku, the model finding 13 budgets the entire screen on, lands near Sonnet's base rate (1.27% vs 1.06%) and agrees with it on 98.1% of the frame, but their in-scope SETS overlap 16% unweighted and 10% design-weighted (Sonnet-GPT: 54%/37%); of Sonnet's 58 positives Haiku agrees on 12. RATE AGREEMENT IS NOT SET AGREEMENT. Worse: agents of the SAME model on the SAME prompt disagree beyond chance in BOTH arms after conditioning on stratum (CMH p = 0.0056 and 0.015), with raw spreads 3.1x and 5.2x against 2.2x between models, and the agents' ordering FLIPS between arms. The noise inside one model is at least the size of the difference between models, and the pilot's own 40-agent screen is too underpowered to rule the same instability out (5 of 37 chunks found zero metaresearch; p = 0.113).",
+    "headline": "Haiku, the model finding 13 budgets the entire screen on, lands near Sonnet's model-positive rate (1.27% vs 1.06%) and agrees with it on 98.1% of the frame, but their positive-label sets overlap 16% unweighted and 10% design-weighted (Sonnet-GPT: 54%/37%); of Sonnet's 58 positives Haiku agrees on 12. Rate agreement is not set agreement. Agents of the same model on the same prompt vary beyond chance in both arms after conditioning on stratum (CMH p = 0.0056 and 0.015), with raw spreads 3.1x and 5.2x against 2.2x between models, and the agents' ordering flips between arms. Within-model variation is at least the size of the between-model difference in these runs, and the pilot's own 40-agent screen is too underpowered to rule the same instability out (5 of 37 chunks found zero metaresearch; p = 0.113).",
     "values": {
       "n_works": 1290,
       "base_rate_sonnet_pct": 1.06,
@@ -148,14 +178,14 @@
     "computed_at_utc": "2026-07-13T11:54:57Z"
   },
   "agreement": {
-    "headline": "Swap which model is called 'the screener' and the base rate moves from 1.06% to 2.37%: a 2.2x spread, from 45,397 to 101,776 works in the frame. The two screeners agree on in/out for 98.4% of the frame (design-weighted), but that figure is dominated by the settled rejects: agreement falls to 95% inside the contested boundary. THE SCREENER-SWAP RANGE, NOT THE BINOMIAL CI ON EITHER MODEL ALONE, IS THE HONEST UNCERTAINTY ON THE FIELD'S SIZE.",
+    "headline": "Two historical models assigned positive labels to 1.06% and 2.37% of the weighted sample: a 2.2x span that extrapolates to 45,397 and 101,776 model-positive works. The two models agree on in/out for 98.4% of the frame (design-weighted), but that figure is dominated by the settled rejects: agreement falls to 95% in the boundary stratum. The span measures variation between these model outputs. It is neither a confidence interval nor uncertainty about the field's size.",
     "values": {
       "n_double_screened": 1290,
-      "base_rate_screener_a_pct": 1.06,
-      "base_rate_screener_b_pct": 2.37,
+      "model_positive_rate_screener_a_pct": 1.06,
+      "model_positive_rate_screener_b_pct": 2.37,
       "swap_ratio_x": 2.24,
-      "field_size_screener_a": 45397,
-      "field_size_screener_b": 101776,
+      "extrapolated_model_positive_count_a": 45397,
+      "extrapolated_model_positive_count_b": 101776,
       "published_binomial_ci_contains_b": false,
       "screener_a": "claude-sonnet-4-6 (40 agents, medium effort)",
       "screener_b": "gpt-5.6-sol (codex)",
@@ -246,7 +276,7 @@
     "computed_at_utc": "2026-07-13T11:54:49Z"
   },
   "base_rate": {
-    "headline": "Screening 5,737 unfiltered Canadian works against the rubric puts metaresearch at 1.31% of Canadian research, implying ~56,206 works in the 4,299,418-work frame, sizing the field without a search strategy at all. The 95% CI on this screener's labels is 1.03-1.64%, but that is sampling error, NOT the uncertainty: swap the screener and the estimate lands outside it (finding 10). The field is somewhere between 37,000 and 83,000 works, and only the human audit can narrow that.",
+    "headline": "One historical model assigned positive labels to 1.31% of 5,737 unfiltered Canadian works, which extrapolates to ~56,206 model-positive works in the 4,299,418-work frame. The 1.03-1.64% interval is sampling error for this model's emitted labels. A second model's rate falls outside it (finding 10). Neither rate estimates scientific truth or field prevalence; a human-coded probability sample is required.",
     "values": {
       "n_screened": 5737,
       "screener": "claude-sonnet-4-6, 40 agents, medium effort, locked rubric",
@@ -267,12 +297,12 @@
       "estimated_field_hi": 70338,
       "topic_route_retrieved": 14873,
       "binomial_ci_is_not_the_uncertainty": true,
-      "caveat": "Machine labels, not a human gold standard, and the binomial CI above is sampling error on ONE screener; the honest uncertainty is the screener-swap range in finding 10 (1.06% to 2.37%). The partition is also not a uniform draw: it under-represents works with abstracts, where the screen finds 2x more metaresearch (finding 11). This is a hypothesis with a denominator; the human-coded probability sample tests it. Do NOT divide topic_route_retrieved by estimated_field_size; see finding 12."
+      "caveat": "Machine labels, not a human gold standard, and the binomial CI above is sampling error on ONE screener. The screener-swap span in finding 10 is model-output variation, not uncertainty about field size. The partition is also not a uniform draw: it under-represents works with abstracts, where the model assigns positive labels at roughly twice the rate (finding 11). This is a hypothesis with a denominator; the human-coded probability sample tests it. Do NOT divide topic_route_retrieved by estimated_field_size; see finding 12."
     },
     "computed_at_utc": "2026-07-13T11:54:45Z"
   },
   "base_rate_robustness": {
-    "headline": "The base rate's real bias is not recency but MISSING ABSTRACTS: 31.5% of the partition has none, and the screen finds 0.78% metaresearch there against 1.55% where an abstract exists (chi-square p = 0.023, robust to adjustment for year and language). A third of the frame is screened on its title alone. What this does NOT show, and an earlier draft wrongly claimed, is that the blindness is DIFFERENTIAL by tradition: the T2 no-abstract cell holds 4 works and the interaction is not significant (p = 0.141). That claim is withdrawn, as is 'Erudit's exact profile' (the stratum is 99% English and the works are NEWER, not older). The main effect is the finding.",
+    "headline": "Abstract availability is associated with historical machine labels: 31.5% of the partition has no abstract, and the model assigned positive labels to 0.78% there against 1.55% where an abstract exists (chi-square p = 0.023, robust to adjustment for year and language). This is a model-positive rate difference, not evidence of classification bias, accuracy, or true prevalence. What this does not show, and an earlier draft wrongly claimed, is differential behaviour by tradition: the T2 no-abstract cell holds 4 works and the interaction is not significant (p = 0.141). That claim is withdrawn, as is 'Erudit's exact profile' (the stratum is 99% English and the works are newer, not older).",
     "values": {
       "partition": "updated_date=2026-06-24",
       "records_sent_to_screener": 6202,
@@ -311,9 +341,9 @@
       "p_no_abstract_given_english_pct": 32,
       "p_no_abstract_given_non_english_pct": 12.7,
       "erudit_profile_claim_holds": false,
-      "residual_bias_direction": "anti-conservative for coverage claims: the partition over-represents abstract-less works (31.5%), where the screen finds 2x less metaresearch, so 1.31% likely UNDER-states the frame's base rate, and the field is larger than the headline implies",
+      "residual_machine_label_association": "the partition over-represents abstract-less works (31.5%), where the historical model assigned positive labels at 2x lower rate; the direction of any effect on human-validated prevalence is unknown",
       "supersedes": "THREE retractions live here. (1) An earlier version tested ERA only, called the base rate robust, and published 3100/2900/1500 as percentages (a dplyr summarise() column-masking bug). (2) It then claimed the blindness is DIFFERENTIAL, T2 losing 3.6x against T1's 1.4x, and made that the proposal's whole answer to the inclusiveness criterion. The T2 no-abstract cell holds FOUR works and the interaction is not significant (p = 0.141). WITHDRAWN. (3) It claimed missing abstracts track 'older, non-English' records, 'Erudit's exact profile'. Backwards: they are NEWER, and the stratum is 99% ENGLISH. WITHDRAWN. See DEVIATIONS.md D4, D5, D6.",
-      "caveat": "What survives is the MAIN EFFECT and only the main effect: a third of the frame is screened on its title alone and the screen finds half as much metaresearch there (p = 0.023, robust to adjustment for year and language). That is a real coverage problem and a reason to stratify the audit on abstract availability. It is NOT evidence of differential blindness by tradition, and this finding no longer says it is. Separately, the era check is underpowered (75 events, 3 strata) and cannot refute an era effect; it merely fails to detect one. And note D2: the harness silently dropped 465 records, non-randomly, on this very covariate."
+      "caveat": "What survives is the MAIN EFFECT and only the main effect: a third of the frame is screened on its title alone and the historical model assigns positive labels at roughly half the rate there (p = 0.023, robust to adjustment for year and language). That is a machine-label association, not evidence of accuracy or true prevalence, and it is a reason to stratify human validation on abstract availability. It is NOT evidence of differential blindness by tradition, and this finding no longer says it is. Separately, the era check is underpowered (75 events, 3 strata) and cannot refute an era effect; it merely fails to detect one. And note D2: the harness silently dropped 465 records, non-randomly, on this very covariate."
     },
     "computed_at_utc": "2026-07-13T11:54:47Z"
   },
@@ -397,6 +427,56 @@
       "estimator_void": true
     },
     "computed_at_utc": "2026-07-13T11:54:44Z"
+  },
+  "classifier": {
+    "headline": "THE CLASSIFIER MAY NOT LABEL, AND THE NUMBERS SAY WHY. Design-weighted, out-of-fold, venue-grouped: the teacher heads reach AP 0.17 to 0.135 at AUC ~0.8, with a 4.68x top-decile lift that is real and is lift toward MACHINE labels. THE ESTIMAND MOVES THE SCORE 2.7x (unanimous 0.0783, majority 0.1364, any 0.2093), so there is no 'the' target and choosing one silently settles the question the audit exists to answer. AND THE UNANIMOUS CORE IS THE HARDEST TO LEARN, not the easiest: if the boundary were a shared line with noise around it, the agreed core would be the separable part, and it is not. The between-head spread predicts where the teachers split at 3.74x the base rate: real, weak, and reported as an efficiency gain rather than a map. Finally, the abstract is worth MORE THAN ANY MODELLING CHOICE (+0.1145 AP, 84% relative), and the frame cannot serve it: works.csv stores has_abstract, a boolean, and no text. The DEPLOYABLE model is the WORSE one, the build now FAILS if a model is trained on a field inference cannot supply, and the gap is a priced budget decision rather than an assumption.",
+    "values": {
+      "evaluation": "out-of-fold, venue-grouped, vectorizer fitted on train folds only, DESIGN-WEIGHTED",
+      "why_design_weighted": "The 5,600 works are a stratified sample: French carries weight 311, aff_core 1,119. An unweighted AP is an AP over a population that does not exist. Both are reported; the gap is a fact about the design.",
+      "ap_design_weighted_by_teacher": {
+        "opus": 0.17,
+        "gpt": 0.135,
+        "grok": 0.1417
+      },
+      "ap_design_weighted_by_consensus_rule": {
+        "unanimous": 0.0783,
+        "majority": 0.1364,
+        "any": 0.2093
+      },
+      "estimand_moves_performance_x": 2.7,
+      "unanimous_core_is_hardest_to_learn": true,
+      "top_decile_lift": {
+        "opus": 4.68,
+        "gpt": 3.93,
+        "grok": 5.28
+      },
+      "ap_by_language_opus": {
+        "en": 0.1757,
+        "fr": 0.181
+      },
+      "ap_by_language_gpt": {
+        "en": 0.1425,
+        "fr": 0.089
+      },
+      "french_is_model_dependent": "GPT's boundary is markedly less learnable in French (AP 0.089 vs 0.1425 in English) while Opus's is not ( 0.181 vs 0.1757 ). 'Character n-grams do the French work' was an assertion; measured per language, it is true for one teacher and false for another.",
+      "predicting_teacher_disagreement": {
+        "n_contested": 89,
+        "base_rate": 0.0159,
+        "average_precision": 0.0594,
+        "lift_over_base": 3.74,
+        "verdict": "Real but weak. It buys an efficiency gain for the audit's disagreement stratum. It is NOT a trustworthy standalone map of the contested region, and shared teacher bias is invisible to it: if all three are wrong the same way the spread is zero and the work looks settled."
+      },
+      "payload_skew": {
+        "ap_frame_parity": 0.1364,
+        "ap_with_abstract": 0.2509,
+        "abstract_is_worth_ap": 0.1145,
+        "why_the_deployable_model_is_the_worse_one": "data/db/works.csv stores has_abstract, a boolean, and no abstract text. A model trained with abstracts scores a payload the 4.3M works do not have. Reporting the abstract model's number as the classifier's performance would be reporting a metric for a model that cannot run. The difference is what re-extracting abstracts from the snapshot would buy, and it is a budget decision with a number attached rather than an assumption."
+      },
+      "ships_a_category_label": false,
+      "why_no_label": "Distilled from our own metaresearch labels, a student reproduced its own teacher's positive set at Jaccard 0.17 (finding 25). Two independent adversarial reviews reached the same verdict from different directions: per-teacher heads are useful for ALLOCATING HUMAN EFFORT and cosmetic as a solution to the contested boundary. Scores ship. Labels do not.",
+      "what_the_classifier_is_actually_for": "Not cost. Finding 13 says the LLM can read every work in the frame for $1,261, so there was never anything to avoid, and a proposal that budgeted the full screen while justifying a cheap substitute for it was describing two studies (D32). It is for: a calibrated score the audit stratifies on; rubric revisions testable in minutes instead of one $1,261 pass each; a frame-wide estimate of where the three teachers would split, which three full passes would cost 3x and ~25 days; and learnability as evidence about the boundary."
+    },
+    "computed_at_utc": "2026-07-13T13:12:02Z"
   },
   "distillation_ceiling": {
     "headline": "A CLASSIFIER TRAINED ON LLM LABELS CANNOT EVEN REPRODUCE ITS OWN TEACHER, LET ALONE ADJUDICATE THREE. Students distilled from each model match their own teacher at Jaccard 0.17, while the three teachers match EACH OTHER at 0.5 to 0.56: the classifier is a worse approximation of Opus than Grok is. Distilling from Opus also moves you AWAY from Grok (-0.35), so distillation does not bridge the models' disagreement, it degrades away from all of them. THE SELF-TRAINING LOOP THEN REFUTED MY OWN PREDICTION. I argued at length that it would shrink the positive class toward the confident anglophone core; run on 20,000 works the models never saw, it did not: positive rate drift +0.00 points, French share drift +0.00 points, because class weighting prevents the collapse, exactly as the adversarial review warned before the run ('a serious risk, NOT A THEOREM'). What the loop DID do is reach a fixed point immediately and recycle its own labels (224 -> 424 training positives, then nothing): it CONVERGED WITHOUT LEARNING, and a fixed point looks identical from the inside whether its labels are right or wrong. What the classifier IS worth is the stratifier: 48.2% of the in-scope works sit in its top decile against a blind baseline of 10%, a 4.8x lift in in-scope works found per unit of human coding effort, and design-weighted estimates stay unbiased however noisy it is. THE MACHINE DECIDES WHERE THE HUMANS LOOK. IT NEVER SUPPLIES A LABEL.",
@@ -495,6 +575,29 @@
       "caveat": "CIHR's CSV carries no DOIs and no publication links, so this is an AGGREGATE reconciliation, not a record-level known-item join, and NO RECALL POINT ESTIMATE is claimed. It establishes a CEILING on CA-FUND (the route cannot see a funder OpenAlex never recorded), which is a bound, not a measurement. The papers-per-grant ratio is reported because I ran it, and it REFUTES the hypothesis I wrote before running it: at 4.03 per grant it is a plausible publication rate and shows no CIHR under-tagging at all. It is also the wrong instrument, for the same reason the retracted 32.4% coverage figure was (D3): its numerator and denominator are not linked record to record, so the quotient has no estimand behind it. Record-level linkage is finding 21."
     },
     "computed_at_utc": "2026-07-13T11:55:02Z"
+  },
+  "gemma_gate": {
+    "headline": "THE FREE MODEL FAILED THE GATE, AND THE GATE WAS AIMED AT THE WRONG BAR. Gemma-4-31B screened 700 works under rubric v3.1 (100% schema-clean) and scored Jaccard 0.44 on metaresearch and 0.515 on any-category against the frontier union, under the prespecified 0.60 bar, SO IT DOES NOT LABEL THE FRAME: the rule stands because rules that move after the numbers exist are not rules. But the frontier models agree with each other at only 0.384 and 0.36 on the same works, because every loop batch is selected FOR disagreement: the gate demanded of a free model what the frontier models do not achieve among themselves there, and Gemma beat the frontier's own mutual agreement on both targets. Test 2 is prespecified on the random_baseline stratum with the rationale as the bar: J(gemma, union) >= J(opus, gpt).",
+    "values": {
+      "model": "google/gemma-4-31b-it (free)",
+      "n_works": 700,
+      "schema_clean_return_rate": 1,
+      "jaccard_metaresearch_gemma_vs_union": 0.44,
+      "jaccard_metaresearch_opus_vs_gpt": 0.384,
+      "jaccard_anycat_gemma_vs_union": 0.515,
+      "jaccard_anycat_opus_vs_gpt": 0.36,
+      "study_design_exact": {
+        "gemma_vs_opus": 0.643,
+        "gemma_vs_gpt": 0.614,
+        "opus_vs_gpt_for_reference": 0.73
+      },
+      "prespecified_rule": "Jaccard >= 0.60 vs the frontier union, on metaresearch AND any-category",
+      "passed": false,
+      "rule_honored": true,
+      "gate_was_miscalibrated_because": "the 0.60 bar was set from round-001's 0.44-0.75 pairwise range without registering that loop batches are selected FOR disagreement, which depresses every agreement statistic computed on them. On the same 700 works the frontier models agree with each other at 0.384/0.360: below the bar Gemma was held to, and Gemma beat both numbers.",
+      "test2_prespecified": "On the enriched sample's random_baseline stratum (1,500 works, not selected for disagreement), Gemma passes if J(gemma, frontier_union) >= J(opus, gpt) on both metaresearch and any-category. Written before any of those labels exist."
+    },
+    "computed_at_utc": "2026-07-14T00:08:32Z"
   },
   "instrument_contradicts_itself": {
     "headline": "THE LOCKED INSTRUMENT CONTRADICTS ITSELF, AND NOTHING CAUGHT IT. The rubric and the output schema name TWO DIFFERENT controlled vocabularies for the same field, `genre`, overlapping on 2 values (empirical and other); 4 terms exist only in the rubric and 7 only in the schema. Every screener was handed both and told to obey both, and each invented its own reconciliation: GPT-5.6 and Grok followed the rubric and are therefore 26.9% and 20.9% ILLEGAL against the schema, while Opus drew from both lists at once and emitted 13 distinct values. The validator checked `tier` and never checked `genre`, so 16,800 labels passed every check that ran. It was found by an agent mentioning it in one clause of a report about something else. Nothing crashed; the variable simply meant a different thing in each arm, and the variance would have been attributed to the models. The labels are NOT repaired, because harmonising the arms after seeing them would destroy the only evidence that they diverged; the genre field is reported as unusable and the fix belongs in the instrument, at a version boundary.",
@@ -600,7 +703,7 @@
     "computed_at_utc": "2026-07-13T11:54:49Z"
   },
   "language_gap": {
-    "headline": "French is 2.7% (395/14,873) of Canadian metaresearch in OpenAlex. A dedicated French lexicon finds 168 Canadian works, against 8,026 in English.",
+    "headline": "French is 2.7% (395/14,873) of the OpenAlex topic-defined metaresearch subset used here. A dedicated French lexicon retrieves 168 Canadian works, against 8,026 in English. These are retrieval counts, not a language-specific prevalence or sensitivity estimate.",
     "values": {
       "canadian_topic_works": 14873,
       "n_english": 14028,
@@ -704,7 +807,7 @@
     "computed_at_utc": "2026-07-13T11:55:00Z"
   },
   "screening_cost": {
-    "headline": "The full rubric over the 4,299,418-work frame with two screeners costs $6,567, not the $30,633 an earlier version of this script reported: the rubric is a system prompt sent once per CALL, and the pilot's own chunks batch 155 works per call, so it was overcharged 4.7x. That error was not cosmetic. It made me propose a cheap TRIAGE in front of the screen, which is a RETRIEVAL STEP in a project whose central finding is that retrieval destroys these maps. With the arithmetic right the triage is unnecessary: the full rubric over EVERY work in the frame, plus a second screener on a 20,000-record sample, costs $1,110 and leaves ~$1,790 for the human coder. THE PREFILTER IS DELETED.",
+    "headline": "The full rubric over the 4,299,418-work frame with two screeners costs $6,567, not the $30,633 an earlier version of this script reported: the rubric is a system prompt sent once per CALL, and the pilot's own chunks batch 155 works per call, so it was overcharged 4.7x. That error was not cosmetic. It made me propose a cheap TRIAGE in front of the screen, which is a RETRIEVAL STEP in a project whose central finding is that retrieval destroys these maps. With the arithmetic right the triage is unnecessary: the full rubric over EVERY work in the frame, plus a second screener on a 20,000-record sample, costs $1,110 at the v1 instrument and $1,279 at the locked v3.1 instrument that will actually run. THE PREFILTER IS DELETED. And the compute is SELF-FUNDED: the call's CAD $4,000 covers, in its own words, 'travel, accommodation, and related participation costs', not inference and not coder wages (D30).",
     "values": {
       "measured_from": "pilot/screening/chunks/*.json (6-field), pilot/screening/haiku/p8_guided/chunk_*.json (8-field), docs/protocol/rubric.md; not asserted",
       "chars_per_token_assumed": 4,
@@ -725,7 +828,13 @@
       "cost_second_screener_on_sample_usd": 15,
       "second_screener_n": 20000,
       "total_no_prefilter_usd": 1110,
-      "left_for_human_coder_usd": 1790,
+      "tokens_rubric_v31": 4604,
+      "tokens_per_label_v31": 49,
+      "cost_full_rubric_whole_frame_v31_usd": 1261,
+      "cost_second_screener_v31_usd": 18,
+      "total_no_prefilter_v31_usd": 1279,
+      "award_pays_for_compute": false,
+      "award_purpose_in_the_calls_words": "travel, accommodation, and related participation costs",
       "prefilter_needed": false,
       "prefilter_design_total_usd": 1004,
       "prefilter_saving_usd": -106,
@@ -736,7 +845,7 @@
       "supersedes": "an earlier version charged the rubric once per work, reported $24,379 for the full-frame two-screener design, called it 'eight times the grant', and used that to justify a cheap prefilter. The rubric is a system prompt sent once per CALL, and the pilot's own chunks batch 155 works per call. DEVIATIONS.md D7.",
       "caveat": "Token counts use a 4-chars-per-token approximation and list prices as of 2026-07; both will move, and the conclusion is robust to +/-25% in either. Screening the frame with a cheaper model than the pilot used makes the CHOICE OF MODEL more consequential, not less: finding 10 shows two screeners already imply base rates a factor of two apart. That is precisely why the second screener and the screener-swap range are reported, and why the human audit is the study."
     },
-    "computed_at_utc": "2026-07-13T11:54:48Z"
+    "computed_at_utc": "2026-07-13T12:23:27Z"
   },
   "the_frame": {
     "headline": "The frame is BUILT, not estimated. All 482 partitions of a pinned OpenAlex snapshot were streamed and filtered, and the Canadian frame holds 4,299,418 works, each exactly once. For most of this project's life 'the frame' was 3,507,205, an EXTRAPOLATION from a single partition, hardcoded in six scripts; the estimate was 18% LOW, and every cost, audit-power and field-size figure computed against it has moved. The route that matters: 1,565,226 works (36.4% of the frame) are INVISIBLE TO AFFILIATION ALONE. A frame built on Canadian affiliation would hold 2,734,192 works and would never see them. That is finding 2 at frame scale, and it is why the frame is a union of four routes and why every record carries the provenance of the route that admitted it.",
@@ -766,7 +875,7 @@
     "computed_at_utc": "2026-07-13T11:55:21Z"
   },
   "three_model_screen": {
-    "headline": "Three frontier models (Opus 4.8, GPT-5.6 high, Grok 4.5) screened the same 5,600 works, drawn from the real 4.3M frame under a design whose seven strata PARTITION it (an earlier five-stratum design could not reach 12.9% of the frame at all; D22). Design-weighted base rates span 2.54% to 3.81% (1.5x). But the RATE is not the finding, the SETS are: of the 274 works ANY model called metaresearch, only 104 (38%) were called metaresearch by ALL THREE, and 117 (43%) rest on a SINGLE model's opinion; pairwise Jaccard on the in-scope sets is about 50%. THE FIELD'S BOUNDARY IS NOT A LINE THE MODELS SHARE; IT IS A REGION THEY EACH CUT DIFFERENTLY, and that result is STABLE across n = 1,000, 2,000 and 5,600 (unanimity 37%, 37%, 38%). A SECOND, PRETTIER CLAIM DID NOT SURVIVE: at n = 2,000 the models agreed markedly more on 'is this about research at all' (1.43x here) than on 'is it in scope' (1.51x here), and this project said so in capitals; at n = 5,600 the two spreads are within noise (ratio 1.06) and the claim is WITHDRAWN (D23). The largest tier confusion is OUT-vs-T2, every time, at every sample size: the adjacent traditions the inclusiveness criterion exists to protect. The deliverable is not a base rate. It is the disagreement dossier, the 274 works that mark the empirical boundary, each carrying all three models' stated reasons, and the criteria that have to be written against them.",
+    "headline": "Three frontier models (Opus 4.8, GPT-5.6 high, Grok 4.5) screened the same 5,600 works from the real 4.3M frame. Design-weighted model-positive rates span 2.54% to 3.81%. Of the 274 works any model called metaresearch, 104 (38%) were called metaresearch by all three and 117 (43%) rest on a single model's opinion; pairwise Jaccard on the positive-label sets is about 50%. The models selected different sets, and that pattern was similar at n = 1,000, 2,000 and 5,600. This describes model decision variation, not the true field boundary or statistical uncertainty. The disagreement dossier preserves all three reasons for rubric development and human validation; it does not establish field membership.",
     "values": {
       "frame": "the real 4.3M-work Canadian frame (all 482 OpenAlex partitions)",
       "payload": "the rubric's FULL eight fields, including venue (repairs D1)",
@@ -797,7 +906,7 @@
       },
       "spread_about_research_x": 1.43,
       "spread_in_scope_x": 1.51,
-      "variance_is_in_the_rubric_not_the_models": true,
+      "model_disagreement_is_not_field_uncertainty": true,
       "called_in_scope_by_any": 274,
       "unanimous_in_scope": 104,
       "pct_unanimous_of_any": 38,
@@ -827,12 +936,12 @@
       "gpt_schema_violations_first_pass": 18,
       "gpt_violation_note": "GPT-5.6 (high) wrote GENRE values ('empirical', 'conceptual') into the TIER field on 18 of 1,000 records in its first pass, in 3 of 20 chunks. The validator caught it because the harness reconciles files against a manifest rather than trusting the model's report. Those chunks were RE-RUN, not repaired: coercing a model's output to the schema is fitting the instrument to the data.",
       "deliverable": "pilot/screening/frame1k/disagreement_dossier.json: every work any model called in-scope, with all three labels. This, not the base rate, is what the criteria must be written against.",
-      "caveat": "These are MACHINE labels and none of them is truth (finding 15). The unanimity rate is not accuracy: three models sharing training data can be wrong together, and they are most correlated exactly on the boundary cases the field's definition turns on. What this measures is where the RUBRIC is underspecified, which is a property of the instrument and is exactly what a criteria document needs. Base rates are design-weighted from a stratified sample, so they estimate the frame; the Jaccard and unanimity figures are unweighted set quantities over the sample and are NOT frame estimates."
+      "caveat": "These are MACHINE labels and none of them is truth (finding 15). The unanimity rate is not accuracy: three models sharing training data can be wrong together, and they are most correlated exactly on the boundary cases the field's definition turns on. What this measures is where these models apply the rubric differently. It does not establish why they differ or whether the rubric is underspecified. The model-positive rates are design-weighted from a stratified sample; the Jaccard and unanimity figures are unweighted set quantities over the sample and are NOT frame estimates."
     },
     "computed_at_utc": "2026-07-13T11:55:21Z"
   },
   "topic_route_recall": {
-    "headline": "Scored against the rubric, the topic route retrieves 12% of Canadian metaresearch (95% CI 5.6-21.6%) at 60% precision: it misses 66 of 75. It fails because OpenAlex files a work by what it is about, and metaresearch about cardiology reads as cardiology: the field is invisible to topic retrieval precisely because it is about other fields.",
+    "headline": "Against one historical model's labels, the topic route retrieves 12% of model-positive works (95% CI 5.6-21.6%) at 60% model-label precision: it misses 66 of 75 model positives. This measures agreement with a machine screen, not sensitivity or precision against human-coded field membership.",
     "values": {
       "n_screened": 5737,
       "n_metaresearch": 75,
@@ -858,7 +967,7 @@
       "route_size_implied_by_sample": 11241,
       "route_size_from_api": 14873,
       "reconciliation_gap_x": 1.32,
-      "supersedes": "the earlier 32.4% figure (14,873/45,850), which divided a retrieved set by a true field size",
+      "supersedes": "the earlier 32.4% figure (14,873/45,850), which divided a retrieved set by an extrapolated model-positive count",
       "caveat": "Small n on the positive class ( 75 metaresearch works, of which 15 were on the route), so the intervals are wide. Separately, the sample-implied route size does not reconcile with the API's 14,873 and I cannot say why at n = 15 on-route works; the likeliest cause is that one updated_date partition is not a uniform draw (finding 11). Recall is unaffected: it is a within-sample ratio, not an extrapolation."
     },
     "computed_at_utc": "2026-07-13T11:54:47Z"
@@ -930,14 +1039,22 @@
     "computed_at_utc": "2026-07-13T11:55:20Z"
   },
   "v1_to_v2": {
-    "headline": "WRITING THE MISSING SENTENCES RESOLVED 54% OF THE DISAGREEMENTS THEY WERE WRITTEN AGAINST. The 179 works three frontier models split on under rubric v1 were re-screened, by the same three models, under a v2 whose rules were written against a published, frequency-weighted census of WHICH SENTENCES THE RUBRIC WAS MISSING. 96 of 179 are now unanimous, and the pairwise Jaccard of the in-scope sets moves from 0.19 to 0.36. This is a measurement almost nobody makes, and it is available ONLY because the ambiguity was enumerated, adjudicated and PUBLISHED BEFORE it was resolved: the census went out first, so v2 could not be quietly tuned until the numbers looked good. SCOPE, stated rather than blurred: these works were SELECTED FOR DISAGREEMENT, so this says the rules resolve the cases they were written for; it does NOT say frame-wide agreement rose, because regression to the mean alone would move a set selected this way. The unbiased test is a full re-screen of all 5,600 under v2, prespecified, and it is what the funded work runs.",
+    "headline": "Under v2, 54% of the selected v1 model disagreements became unanimous. The same three models re-screened the 179 works on which they had disagreed under v1, using a revision developed from those cases. 96 of 179 became unanimous, and pairwise Jaccard of the positive-label sets moved from 0.19 to 0.36. The comparison was fixed by publishing the seam census before v2 was evaluated. These works were selected for disagreement, so this shows model behaviour on the development set; it does not show frame-wide agreement or accuracy. A full prespecified re-screen is required for an unbiased comparison.",
     "values": {
       "contested_under_v1": 179,
       "unanimous_under_v2": 96,
       "pct_resolved": 54,
       "still_contested": 83,
-      "in_scope_by_model_v1": [129, 68, 53],
-      "in_scope_by_model_v2": [73, 32, 44],
+      "in_scope_by_model_v1": [
+        129,
+        68,
+        53
+      ],
+      "in_scope_by_model_v2": [
+        73,
+        32,
+        44
+      ],
       "jaccard_v1_mean": 0.187,
       "jaccard_v2_mean": 0.362,
       "sequence": "lock v1; screen 5,600 works with three models; have an independent blinded judge adjudicate every disagreement AND name the seam that caused it; PUBLISH the seam census; write v2 against the census and lock it BEFORE re-screening; re-screen; report the difference, whatever it is. Publishing the census before resolving it is what stops v2 being tuned until the numbers improve.",

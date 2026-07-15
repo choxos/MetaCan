@@ -1,10 +1,20 @@
-import type { NextRequest } from 'next/server'
-import { cohortSearch, labelAgreement, MAX_PER_PAGE } from '@/lib/query'
-import { canonicalFilters, hashFilters, SNAPSHOT } from '@/lib/permalink'
-import { json, filtersFromParams, OPTIONS } from '@/lib/api'
+import type { NextRequest } from "next/server";
+import { cohortSearch, labelAgreement, MAX_PER_PAGE } from "@/lib/query";
+import { canonicalFilters, hashFilters, SNAPSHOT } from "@/lib/permalink";
+import {
+  json,
+  filtersFromParams,
+  invalidFilterResponse,
+  OPTIONS,
+} from "@/lib/api";
+import {
+  classifierMeta,
+  pinClassifierFilters,
+  predictionView,
+} from "@/lib/predictions";
 
-export const dynamic = 'force-dynamic'
-export { OPTIONS }
+export const dynamic = "force-dynamic";
+export { OPTIONS };
 
 /**
  * GET /api/v1/cohort
@@ -21,8 +31,12 @@ export { OPTIONS }
  *      provisional score with its validation status, verbatim.
  */
 export async function GET(req: NextRequest) {
-  const f = filtersFromParams(req.nextUrl.searchParams)
-  const { rows, total, labeled, page, perPage } = await cohortSearch(f)
+  const f = filtersFromParams(req.nextUrl.searchParams);
+  const invalid = invalidFilterResponse(f);
+  if (invalid) return invalid;
+  const { rows, total, labeled, classified, page, perPage, classifier } =
+    await cohortSearch(f);
+  const pinnedFilters = pinClassifierFilters(f, classifier);
 
   return json({
     meta: {
@@ -35,15 +49,18 @@ export async function GET(req: NextRequest) {
       // `total` carry at least one machine label; the rest are UNLABELLED,
       // which is not a negative label.
       labels_cover: labeled,
-      label_status: 'machine label (frontier LLM, unvalidated)',
-      score_status: 'score_only:v0-immature-baseline (scores rank; they never assert a category)',
+      classified_cover: classified,
+      label_status: "direct machine screening, unvalidated",
+      score_status:
+        "score_only:v0-immature-baseline (scores rank; they never assert a category)",
+      classifier: classifierMeta(classifier),
       snapshot: {
-        source: 'OpenAlex, pinned release, all 482 partitions',
+        source: "OpenAlex, pinned release, all 482 partitions",
         release: SNAPSHOT.release,
         frame_built: SNAPSHOT.built,
       },
-      query_hash: hashFilters(f),
-      filters: canonicalFilters(f),
+      query_hash: hashFilters(pinnedFilters),
+      filters: canonicalFilters(pinnedFilters),
     },
     results: rows.map((w) => ({
       id: w.id,
@@ -68,7 +85,10 @@ export async function GET(req: NextRequest) {
       funders: w.funders,
       keywords: w.keywords,
       retraction: w.retraction
-        ? { nature: w.retraction.nature, openalex_flagged: w.retraction.openalexFlagged }
+        ? {
+            nature: w.retraction.nature,
+            openalex_flagged: w.retraction.openalexFlagged,
+          }
         : null,
       screen_n_in: w.screened?.nIn ?? null,
       score: w.score
@@ -92,6 +112,7 @@ export async function GET(req: NextRequest) {
         confidence: l.confidence,
       })),
       label_agreement: labelAgreement(w.labels),
+      prediction: predictionView(w.predictions[0], classifier),
     })),
-  })
+  });
 }

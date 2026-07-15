@@ -14,3 +14,4 @@ tsconfig.tsbuildinfo
 # the root .gitignore is NOT part of the split and so never reaches the server.
 .env
 .env.*
+!.env.example

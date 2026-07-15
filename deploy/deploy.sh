@@ -42,6 +42,7 @@ APP_ROOT="${METACAN_APP_ROOT:-/var/www/metacan}"
 DEPLOY_BRANCH="${METACAN_DEPLOY_BRANCH:-deploy/metacan}"
 PM2_NAME="${METACAN_PM2_NAME:-metacan}"
 PORT="${METACAN_PORT:-3111}"
+CANDIDATE_PORT="${METACAN_CANDIDATE_PORT:-4111}"
 REPO_URL="${METACAN_REPO_URL:-https://github.com/choxos/CaRN-data-challenge.git}"
 DOMAIN="${METACAN_DOMAIN:-metacan.xera.ac}"
 
@@ -93,6 +94,15 @@ Commit them, ignore them, or remove them."
 printf '    clean at %s\n' "$(git rev-parse --short HEAD)"
 
 
+if [ -n "${METACAN_CLASSIFIER_PREDICTIONS:-}" ]; then
+    step "Loading the classifier release"
+    ./deploy/load-classifier-release.sh \
+        "$METACAN_CLASSIFIER_PREDICTIONS" \
+        "${METACAN_CLASSIFIER_METADATA:-$PWD/artifacts/frame_classifier/metadata.json}" \
+        "${METACAN_CLASSIFIER_CONTRACT:-${METACAN_CLASSIFIER_PREDICTIONS}.json}"
+fi
+
+
 # ------------------------------------------------------- publish the deploy branch
 # ONE squashed commit of the app tree at HEAD, not `git subtree split`. The split
 # replays the app directory's entire history, and that history briefly tracked
@@ -109,7 +119,9 @@ tree_sha="$(git rev-parse "HEAD:$APP_DIR")"
 split_sha="$(git commit-tree "$tree_sha" -m "deploy: $APP_DIR at $(git rev-parse --short HEAD)")"
 [ -n "$split_sha" ] || die "git commit-tree produced nothing for $APP_DIR"
 
-git push --force origin "${split_sha}:refs/heads/${DEPLOY_BRANCH}"
+remote_ref="refs/heads/${DEPLOY_BRANCH}"
+remote_sha="$(git ls-remote --heads origin "$remote_ref" | awk '{print $1}')"
+git push --force-with-lease="${remote_ref}:${remote_sha}" origin "${split_sha}:${remote_ref}"
 printf '    %s -> %s\n' "$DEPLOY_BRANCH" "${split_sha:0:12}"
 
 
@@ -118,7 +130,11 @@ printf '    %s -> %s\n' "$DEPLOY_BRANCH" "${split_sha:0:12}"
 # sudo commands at the end if the vhost is not live yet.
 step "Staging the nginx vhost on $SSH_HOST"
 scp -q deploy/nginx/"$DOMAIN" "$SSH_HOST:${DOMAIN}.nginx"
+scp -q deploy/nginx/metacan-rate-limits.conf "$SSH_HOST:metacan-rate-limits.conf"
+scp -q deploy/nginx/metacan-app.conf "$SSH_HOST:metacan-app.conf"
 printf '    staged at ~/%s.nginx\n' "$DOMAIN"
+printf '    staged at ~/metacan-rate-limits.conf\n'
+printf '    staged at ~/metacan-app.conf\n'
 
 
 # --------------------------------------------------------------------- server side
@@ -130,6 +146,8 @@ ssh "$SSH_HOST" \
     REPO_URL="$REPO_URL" \
     PM2_NAME="$PM2_NAME" \
     PORT="$PORT" \
+    CANDIDATE_PORT="$CANDIDATE_PORT" \
+    DEPLOY_SHA="$split_sha" \
     DOMAIN="$DOMAIN" \
     bash -s <<'SERVER'
 set -euo pipefail
@@ -137,123 +155,313 @@ die() { printf '\ndeploy(server): %s\n' "$*" >&2; exit 1; }
 
 command -v npm  >/dev/null || die "npm is not on PATH"
 command -v pm2  >/dev/null || die "pm2 is not on PATH"
+command -v node >/dev/null || die "node is not on PATH"
+command -v crontab >/dev/null || die "crontab is not on PATH"
+command -v curl >/dev/null || die "curl is not on PATH"
 
-# 1. Make APP_ROOT a checkout of the deploy branch, whose root is the app.
-current_branch="$(git -C "$APP_ROOT" rev-parse --abbrev-ref HEAD 2>/dev/null || true)"
+case "$PORT:$CANDIDATE_PORT" in
+    *[!0-9:]*|:*) die "METACAN_PORT and METACAN_CANDIDATE_PORT must be numeric" ;;
+esac
+[ "$PORT" != "$CANDIDATE_PORT" ] || die "the serving and candidate ports must differ"
 
-if [ "$current_branch" = "$DEPLOY_BRANCH" ]; then
-    echo "--> updating the existing checkout"
-    git -C "$APP_ROOT" fetch --force --quiet origin "$DEPLOY_BRANCH"
-    git -C "$APP_ROOT" reset --hard --quiet FETCH_HEAD
-else
-    echo "--> $APP_ROOT is not a $DEPLOY_BRANCH checkout, rebuilding it"
+RELEASES_ROOT="$APP_ROOT/releases"
+CURRENT_LINK="$APP_ROOT/current"
+ENV_FILE="$APP_ROOT/.env"
+LOG_ROOT="$APP_ROOT/logs"
+BASELINE_MIGRATION="20260714000000_existing_schema_baseline"
+legacy_target=""
 
-    # Rescue the secret before anything moves. .env is deliberately not in git,
-    # so a fresh clone would not bring it back.
+# Convert the previous single-checkout layout once. The environment file moves
+# to a stable parent, while the old checkout stays available as a dated backup.
+if [ ! -d "$RELEASES_ROOT" ]; then
+    echo "--> preparing the immutable release layout"
     saved_env=""
     if [ -e "$APP_ROOT" ]; then
-        found="$(find "$APP_ROOT" -maxdepth 2 -name .env -not -path '*/node_modules/*' 2>/dev/null | head -1)"
-        if [ -n "$found" ]; then
-            saved_env="$(mktemp)"
-            cp "$found" "$saved_env"
-            echo "    rescued $found"
+        legacy_app=""
+        if [ -f "$APP_ROOT/package.json" ]; then
+            legacy_app="$APP_ROOT"
+        else
+            legacy_markers="$(find "$APP_ROOT" -maxdepth 3 -name .metacan-app -not -path '*/node_modules/*' 2>/dev/null)"
+            legacy_marker_count="$(printf '%s\n' "$legacy_markers" | sed '/^$/d' | wc -l | tr -d ' ')"
+            if [ "$legacy_marker_count" -eq 1 ]; then
+                candidate_legacy_app="$(dirname "$legacy_markers")"
+                if [ -f "$candidate_legacy_app/package.json" ]; then
+                    legacy_app="$candidate_legacy_app"
+                fi
+            fi
         fi
+        found=""
+        for candidate in "$APP_ROOT/.env" "$APP_ROOT/site/.env"; do
+            if [ -f "$candidate" ]; then
+                found="$candidate"
+                break
+            fi
+        done
+        if [ -z "$found" ]; then
+            found="$(find "$APP_ROOT" -maxdepth 3 -name .env -not -path '*/node_modules/*' -print -quit 2>/dev/null)"
+        fi
+        [ -n "$found" ] || die "no environment file was found in the existing checkout.
+The existing application was not moved. Add DATABASE_URL and OPENALEX_API_KEY
+to its environment file, then re-run the deployment."
+
+        legacy_database_url="$(sed -n 's/^DATABASE_URL=//p' "$found" | head -1)"
+        legacy_database_url="${legacy_database_url#\"}"
+        legacy_database_url="${legacy_database_url%\"}"
+        [ -n "$legacy_database_url" ] || die "$found has no usable DATABASE_URL value.
+The existing application was not moved."
+        legacy_openalex_key="$(sed -n 's/^OPENALEX_API_KEY=//p' "$found" | head -1)"
+        legacy_openalex_key="${legacy_openalex_key#\"}"
+        legacy_openalex_key="${legacy_openalex_key%\"}"
+        [ -n "$legacy_openalex_key" ] || die "$found has no usable OPENALEX_API_KEY value.
+The existing application was not moved. Add a free OpenAlex API key directly
+to this file, then re-run the deployment."
+        unset legacy_database_url legacy_openalex_key
+
+        saved_env="$(mktemp)"
+        cp "$found" "$saved_env"
+        chmod 600 "$saved_env"
+        echo "    preserved the environment file"
         backup="${APP_ROOT}.old.$(date +%Y%m%d%H%M%S)"
         mv "$APP_ROOT" "$backup"
-        echo "    previous tree kept at $backup"
+        echo "    previous checkout kept at $backup"
+        if [ -n "$legacy_app" ]; then
+            legacy_target="${backup}${legacy_app#"$APP_ROOT"}"
+            echo "    previous application retained as the first rollback target"
+        fi
     fi
-
-    git clone --quiet --branch "$DEPLOY_BRANCH" --single-branch "$REPO_URL" "$APP_ROOT"
-
+    mkdir -p "$RELEASES_ROOT" "$LOG_ROOT"
     if [ -n "$saved_env" ]; then
-        cp "$saved_env" "$APP_ROOT/.env"
-        chmod 600 "$APP_ROOT/.env"
-        rm -f "$saved_env"
-        echo "    restored .env"
+        mv "$saved_env" "$ENV_FILE"
+        chmod 600 "$ENV_FILE"
     fi
+else
+    mkdir -p "$RELEASES_ROOT" "$LOG_ROOT"
 fi
 
-# 2. The whole point of the exercise: the web root IS the app.
-[ -f "$APP_ROOT/package.json"  ] || die "$APP_ROOT/package.json is missing: the deploy branch root is not the app"
-[ -f "$APP_ROOT/.metacan-app"  ] || die "$APP_ROOT/.metacan-app is missing: this is not the MetaCan app"
+[ -f "$ENV_FILE" ] || die "$ENV_FILE is missing.
+It holds DATABASE_URL and OPENALEX_API_KEY outside every release. Restore it and re-run."
+chmod 600 "$ENV_FILE"
 
-# 3. The database URL. Never invent one, never guess: fail and say what is wrong.
-[ -f "$APP_ROOT/.env" ] || die "$APP_ROOT/.env is missing.
-It holds DATABASE_URL and is deliberately kept out of git. Restore it and re-run."
-grep -q '^DATABASE_URL=' "$APP_ROOT/.env" || die "$APP_ROOT/.env has no DATABASE_URL line"
+# Validate required values without printing either secret.
+database_url_value="$(sed -n 's/^DATABASE_URL=//p' "$ENV_FILE" | head -1)"
+database_url_value="${database_url_value#\"}"
+database_url_value="${database_url_value%\"}"
+[ -n "$database_url_value" ] || die "$ENV_FILE has no usable DATABASE_URL value"
+openalex_key_value="$(sed -n 's/^OPENALEX_API_KEY=//p' "$ENV_FILE" | head -1)"
+openalex_key_value="${openalex_key_value#\"}"
+openalex_key_value="${openalex_key_value%\"}"
+[ -n "$openalex_key_value" ] || die "$ENV_FILE has no usable OPENALEX_API_KEY value.
+The complete daily recent-work sync exceeds the anonymous OpenAlex allowance.
+Add a free OpenAlex API key directly to this file and re-run the deployment."
+unset openalex_key_value
 
-# 4. Install and build. If the build fails we stop here WITHOUT restarting pm2:
-#    the old build keeps serving, but this deploy exits non-zero and says so
-#    rather than silently publishing a broken or stale tree.
-cd "$APP_ROOT"
+# Clone a new immutable release. The serving symlink is untouched until every
+# preparation step and the candidate health check have succeeded.
+release_id="$(date +%Y%m%d%H%M%S)-${DEPLOY_SHA:0:12}"
+release_dir="$RELEASES_ROOT/$release_id"
+[ ! -e "$release_dir" ] || die "release directory already exists: $release_dir"
+echo "--> cloning release $release_id"
+git clone --quiet --branch "$DEPLOY_BRANCH" --single-branch "$REPO_URL" "$release_dir"
+[ "$(git -C "$release_dir" rev-parse HEAD)" = "$DEPLOY_SHA" ] \
+    || die "the cloned deploy branch does not match the published release"
+ln -s ../../.env "$release_dir/.env"
+[ -f "$release_dir/package.json" ] || die "the release has no package.json"
+[ -f "$release_dir/.metacan-app" ] || die "the release has no .metacan-app marker"
+
+cd "$release_dir"
 echo "--> npm ci"
 npm ci --no-audit --no-fund
-echo "--> npm run build"
-# The build prerenders pages against the SAME Postgres the live app is using,
-# and this host caps max_connections at 50, most of which the live app's idle
-# pool already holds. Prisma's default pool (2 x cores + 1, per build worker)
-# blows through the remainder and the build dies mid-prerender with "too many
-# clients". So the BUILD runs with a small explicit pool; the runtime app is
-# untouched.
-build_db_url="$(grep '^DATABASE_URL=' .env | head -1 | cut -d= -f2- | sed -e 's/^"//' -e 's/"$//')"
+
+# The build and migrations use a small pool. This leaves capacity for the
+# release that is still serving throughout preparation.
+build_db_url="$database_url_value"
+unset database_url_value
 case "$build_db_url" in
     *\?*) build_db_url="${build_db_url}&connection_limit=5" ;;
     *)    build_db_url="${build_db_url}?connection_limit=5" ;;
 esac
-DATABASE_URL="$build_db_url" npm run build
 
-# 5. Point pm2 at the new root. The cwd changed, so the process is recreated
-#    rather than reloaded.
-echo "--> restarting pm2 process '$PM2_NAME'"
+echo "--> checking the Prisma migration baseline"
+baseline_status="$(DATABASE_URL="$build_db_url" node scripts/check-prisma-baseline.mjs)"
+case "$baseline_status" in
+    clean|resolved) ;;
+    needs-resolve)
+        echo "    marking the verified legacy baseline as applied"
+        DATABASE_URL="$build_db_url" npx prisma migrate resolve \
+            --applied "$BASELINE_MIGRATION"
+        ;;
+    *) die "unexpected migration baseline status: $baseline_status" ;;
+esac
+
+echo "--> applying database migrations"
+DATABASE_URL="$build_db_url" npx prisma migrate deploy
+echo "--> refreshing empty facet tables"
+DATABASE_URL="$build_db_url" node scripts/refresh-facets.mjs
+echo "--> refreshing the recent OpenAlex layer when stale"
+DATABASE_URL="$build_db_url" node scripts/sync-recent-openalex.mjs --if-stale-hours 20
+echo "--> building the release"
+DATABASE_URL="$build_db_url" npm run build
+unset build_db_url baseline_status
+
+health_check() {
+    local check_port="$1"
+    local label="$2"
+    local code=""
+    for _ in $(seq 1 30); do
+        code="$(curl -s -o /dev/null -w '%{http_code}' --max-time 10 \
+            "http://127.0.0.1:${check_port}/" || true)"
+        [ "$code" = "200" ] && break
+        sleep 2
+    done
+    if [ "$code" != "200" ]; then
+        printf '    %s did not answer HTTP 200 on port %s\n' "$label" "$check_port" >&2
+        return 1
+    fi
+
+    local summary_json
+    summary_json="$(curl -fsS --max-time 60 \
+        "http://127.0.0.1:${check_port}/api/v1/stats/summary")" || return 1
+    printf '%s' "$summary_json" | node -e '
+let body = "";
+process.stdin.setEncoding("utf8");
+process.stdin.on("data", chunk => { body += chunk; });
+process.stdin.on("end", () => {
+  const value = JSON.parse(body);
+  if (value.works !== 4299418) process.exit(1);
+});
+' || return 1
+
+    local classifier_json
+    classifier_json="$(curl -fsS --max-time 60 \
+        "http://127.0.0.1:${check_port}/api/v1/works?label_source=classifier&per_page=1")" \
+        || return 1
+    printf '%s' "$classifier_json" | node -e '
+let body = "";
+process.stdin.setEncoding("utf8");
+process.stdin.on("data", chunk => { body += chunk; });
+process.stdin.on("end", () => {
+  const classifier = JSON.parse(body)?.meta?.classifier;
+  if (classifier?.version !== "metacan-v1-d91a1de5be90") process.exit(1);
+  if (classifier?.frame_rows_covered !== 4299418) process.exit(1);
+});
+' || return 1
+
+    curl -fsS --max-time 60 \
+        "http://127.0.0.1:${check_port}/api/v1/works/W2096287682" >/dev/null \
+        || return 1
+    echo "    $label is healthy on port $check_port"
+}
+
+candidate_name="${PM2_NAME}-candidate"
+echo "--> starting the candidate release"
+pm2 delete "$candidate_name" >/dev/null 2>&1 || true
+PORT="$CANDIDATE_PORT" pm2 start npm --name "$candidate_name" \
+    --cwd "$release_dir" -- start >/dev/null
+if ! health_check "$CANDIDATE_PORT" "candidate release"; then
+    pm2 logs "$candidate_name" --lines 80 --nostream >&2 || true
+    pm2 delete "$candidate_name" >/dev/null 2>&1 || true
+    die "candidate health checks failed; the serving release was not changed"
+fi
+
+previous_target="$(readlink -f "$CURRENT_LINK" 2>/dev/null || true)"
+if [ -z "$previous_target" ] && [ -n "$legacy_target" ]; then
+    previous_target="$legacy_target"
+fi
+next_link="$APP_ROOT/.current.$$"
+ln -s "$release_dir" "$next_link"
+mv -Tf "$next_link" "$CURRENT_LINK"
+
+echo "--> activating release $release_id"
 pm2 delete "$PM2_NAME" >/dev/null 2>&1 || true
-pm2 start npm --name "$PM2_NAME" --cwd "$APP_ROOT" -- start
+PORT="$PORT" pm2 start npm --name "$PM2_NAME" \
+    --cwd "$CURRENT_LINK" -- start >/dev/null
+
+if ! health_check "$PORT" "serving release"; then
+    echo "    serving health checks failed; restoring the previous release" >&2
+    if [ -n "$previous_target" ] && [ -d "$previous_target" ]; then
+        rollback_link="$APP_ROOT/.current.rollback.$$"
+        ln -s "$previous_target" "$rollback_link"
+        mv -Tf "$rollback_link" "$CURRENT_LINK"
+        pm2 delete "$PM2_NAME" >/dev/null 2>&1 || true
+        PORT="$PORT" pm2 start npm --name "$PM2_NAME" \
+            --cwd "$CURRENT_LINK" -- start >/dev/null
+        health_check "$PORT" "restored release" \
+            || die "the new release failed and the previous release could not be restored"
+        pm2 save >/dev/null
+    else
+        pm2 delete "$PM2_NAME" >/dev/null 2>&1 || true
+    fi
+    pm2 delete "$candidate_name" >/dev/null 2>&1 || true
+    die "the new release failed its serving health checks and was rolled back"
+fi
+
+pm2 delete "$candidate_name" >/dev/null 2>&1 || true
 pm2 save >/dev/null
 
-# 6. Prove it actually serves, and that the database answers. A build that boots
-#    but cannot reach Postgres is a failed deploy, not a successful one.
-echo "--> health check"
-code=""
-for _ in $(seq 1 30); do
-    code="$(curl -s -o /dev/null -w '%{http_code}' --max-time 10 "http://127.0.0.1:${PORT}/" || true)"
-    [ "$code" = "200" ] && break
-    sleep 2
-done
-[ "$code" = "200" ] || die "the app did not answer 200 on 127.0.0.1:${PORT} within 60s.
-Check: pm2 logs $PM2_NAME"
+echo "--> installing the daily OpenAlex schedule"
+cron_file="$(mktemp)"
+(crontab -l 2>/dev/null || true) | awk '!/metacan_recent_sync/' > "$cron_file"
+node_bin="$(command -v node)"
+printf '15 5 * * * cd "%s" && "%s" scripts/sync-recent-openalex.mjs --if-stale-hours 20 >> "%s/recent-sync.log" 2>&1 # metacan_recent_sync\n' \
+    "$CURRENT_LINK" "$node_bin" "$LOG_ROOT" >> "$cron_file"
+crontab "$cron_file"
+rm -f "$cron_file"
+echo "    daily update scheduled for 05:15 server time"
+echo "    release $release_id is active"
 
-curl -fsS --max-time 60 "http://127.0.0.1:${PORT}/api/v1/stats/summary" >/dev/null \
-    || die "the app is up but its database query failed. Check DATABASE_URL in $APP_ROOT/.env"
-
-echo "    app healthy on 127.0.0.1:${PORT}, database reachable"
-
-# 7. Is nginx actually routing the domain yet? This needs root to fix, so only report.
-if [ -e "/etc/nginx/sites-enabled/${DOMAIN}" ]; then
-    echo "    nginx vhost is installed"
+if [ -e "/etc/nginx/sites-available/${DOMAIN}" ] && \
+   [ -e "/etc/nginx/conf.d/metacan-rate-limits.conf" ] && \
+   [ -e "/etc/nginx/snippets/metacan-app.conf" ] && \
+   grep -Fq "server_name ${DOMAIN};" "/etc/nginx/sites-available/${DOMAIN}" && \
+   grep -Fq "include /etc/nginx/snippets/metacan-app.conf;" "/etc/nginx/sites-available/${DOMAIN}" && \
+   cmp -s "$HOME/metacan-rate-limits.conf" "/etc/nginx/conf.d/metacan-rate-limits.conf" && \
+   cmp -s "$HOME/metacan-app.conf" "/etc/nginx/snippets/metacan-app.conf"; then
+    echo "    installed nginx configuration matches the staged files"
 else
-    echo "    NOTE: no nginx vhost for ${DOMAIN} yet (needs root, see below)"
+    echo "    nginx activation is required after this application release"
 fi
 SERVER
 
 
 # --------------------------------------------------------------------------- done
-step "Deployed"
+step "Application release activated"
 
-vhost_live="$(ssh "$SSH_HOST" "test -e /etc/nginx/sites-enabled/${DOMAIN} && echo yes || echo no")"
+nginx_state="$(ssh "$SSH_HOST" DOMAIN="$DOMAIN" bash -s <<'NGINX_CHECK'
+set -euo pipefail
+if [ -e "/etc/nginx/sites-available/${DOMAIN}" ] && \
+   [ -e "/etc/nginx/conf.d/metacan-rate-limits.conf" ] && \
+   [ -e "/etc/nginx/snippets/metacan-app.conf" ] && \
+   grep -Fq "server_name ${DOMAIN};" "/etc/nginx/sites-available/${DOMAIN}" && \
+   grep -Fq "include /etc/nginx/snippets/metacan-app.conf;" "/etc/nginx/sites-available/${DOMAIN}" && \
+   cmp -s "$HOME/metacan-rate-limits.conf" "/etc/nginx/conf.d/metacan-rate-limits.conf" && \
+   cmp -s "$HOME/metacan-app.conf" "/etc/nginx/snippets/metacan-app.conf"; then
+    echo current
+else
+    echo needs-install
+fi
+NGINX_CHECK
+)"
 
-if [ "$vhost_live" = "yes" ]; then
-    code="$(curl -s -o /dev/null -w '%{http_code}' --max-time 15 "http://${DOMAIN}/" || true)"
-    printf '    http://%s/ -> HTTP %s\n' "$DOMAIN" "$code"
+if [ "$nginx_state" = "current" ]; then
+    code="$(curl -s -o /dev/null -w '%{http_code}' --max-time 15 "https://${DOMAIN}/" || true)"
+    printf '    https://%s/ -> HTTP %s\n' "$DOMAIN" "$code"
+    [ "$code" = "200" ] || die "the public HTTPS endpoint did not return HTTP 200"
 else
     cat <<EOF
 
-    The app is built, running and healthy on the server, but nginx does not yet
-    route ${DOMAIN} to it. That step needs root. Paste these, in order:
+    The application release is active and healthy on the server. The staged
+    nginx files differ from the installed files or are missing. Root access is
+    required to activate the matching proxy and request limits. Run these in
+    order:
 
       sudo cp ~/${DOMAIN}.nginx /etc/nginx/sites-available/${DOMAIN}
+      sudo cp ~/metacan-rate-limits.conf /etc/nginx/conf.d/metacan-rate-limits.conf
+      sudo cp ~/metacan-app.conf /etc/nginx/snippets/metacan-app.conf
       sudo ln -sfn /etc/nginx/sites-available/${DOMAIN} /etc/nginx/sites-enabled/${DOMAIN}
       sudo nginx -t
       sudo systemctl reload nginx
       sudo certbot --nginx -d ${DOMAIN} --agree-tos -m ahmad.pub@gmail.com --redirect
 
 EOF
+    exit 2
 fi

@@ -1,4 +1,4 @@
-.PHONY: pilot pilot-offline findings proposal protocol deps clean help harvest-status lint
+.PHONY: pilot pilot-offline findings proposal protocol deps clean help harvest-status lint collaboration-network collaboration-authorships
 
 # Every numbered finding, 01 through 13. The old glob was `pilot/0*.R`, which
 # silently stopped at 09: findings 10-13 (agreement, the abstract bias, the topic
@@ -16,11 +16,13 @@ help:
 	@echo "make pilot-offline  re-derive every number from the archived responses, no network"
 	@echo "make findings       render pilot/results/FINDINGS.md"
 	@echo "make proposal       render the 2-page PDF (FAILS if it spills to 3 pages)"
-	@echo "make protocol       render the preregistration PDF (protocol + both rubrics, one file)"
+	@echo "make protocol       render the working protocol PDF with its rubric appendices"
 	@echo "make harvest-status progress of the OpenAlex frame harvest, in bytes (partitions lie)"
+	@echo "make collaboration-network rebuild the institution and available author networks"
+	@echo "make collaboration-authorships resume the full Canadian authorship harvest"
 
 deps:
-	@Rscript -e 'pkgs <- c("httr2","jsonlite","xml2","dplyr","purrr","tibble","glue","cli","openssl"); \
+	@Rscript -e 'pkgs <- c("httr2","jsonlite","xml2","dplyr","purrr","tibble","glue","cli","openssl","DBI","duckdb"); \
 	             new <- pkgs[!vapply(pkgs, requireNamespace, logical(1), quietly = TRUE)]; \
 	             if (length(new)) install.packages(new, repos = "https://cloud.r-project.org")'
 
@@ -107,6 +109,13 @@ findings:
 harvest-status:
 	@Rscript R/harvest_progress.R
 
+collaboration-network:
+	@Rscript R/build_collaboration_network.R
+
+collaboration-authorships:
+	@Rscript R/harvest_collaboration_authorships.R
+	@$(MAKE) --no-print-directory collaboration-network
+
 # A proposal that needs a third page is not a proposal that respects the brief.
 proposal: docs/proposal/metacan-proposal.pdf
 
@@ -128,21 +137,21 @@ docs/proposal/metacan-proposal.pdf: docs/proposal/metacan-proposal.md docs/propo
 		echo "OK: proposal is $$pages page(s), $$words words."; \
 	fi
 
-# The preregistration is the OPPOSITE document from the 2-pager: no page limit, and
-# one job, which is to be registered BEFORE the data are seen.
+# The working protocol is the opposite document from the 2-pager: it has no page
+# limit and carries the study design with its instruments.
 #
 # It ships as ONE self-contained PDF, and the reason is the whole point of the
 # appendix structure. A protocol that says "coded against docs/protocol/rubric.md" and
-# links out to it is a protocol whose coding manual can be edited afterwards with
-# nothing in the registered artifact to contradict it. So the rubric the pilot
+# links out to it is a protocol whose coding manual can be edited with no bundled
+# artifact to contradict it. So the rubric the pilot
 # actually ran under (v1, LOCKED) travels inside the PDF as Appendix A, and the
 # revision the screeners' disagreement argues for (v2, PROPOSED, NOT APPLIED)
-# travels as Appendix B, clearly marked as not yet in force. After registration,
+# travels as Appendix B, clearly marked as not yet in force. Within each release,
 # "which rubric was this screened under" is answerable from the PDF alone.
 #
 # Headings are not demoted; each appendix keeps its own H1, retitled in place, so
 # the section numbering inside the rubric survives the bundle intact.
-# The preregistration must carry THE RUBRIC THE WORK RUNS UNDER, not just the one the
+# The protocol must carry the rubric the work runs under, not just the one the
 # pilot ran under. It was bundling v1 and the v2 EVIDENCE document while the LOCKED
 # v2.2 (the instrument the funded screen actually uses) travelled nowhere. A protocol
 # that does not contain its own instrument is a protocol whose instrument can drift.

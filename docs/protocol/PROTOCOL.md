@@ -5,9 +5,9 @@
 Ahmad Sofi-Mahmudi · Independent researcher · ahmad.pub@gmail.com
 Repository: <https://github.com/choxos/CaRN-data-challenge>
 
-**Status: preregistration draft.** To be registered on OSF **before the frame is built and before any retrieval
-is run**. Registration date, OpenAlex snapshot version, and Érudit harvest date will be stamped into
-`RELEASE.md` at v1.0 and cannot be revised afterwards.
+**Status: working protocol; not registered.** The frame and v1 classifier were completed before any OSF registration. This document therefore makes no preregistration claim. `RELEASE.md` records the executed v1 workflow, immutable hashes, and remaining limitations.
+
+**Execution note.** Sections below retain the prospective human validation plan and historical design record. Intended human coding, design-based estimates, registration, and archival deposits remain future work unless `RELEASE.md` explicitly records their completion.
 
 ---
 
@@ -41,8 +41,8 @@ The five that determine the design:
 | # | Result | Design consequence |
 |---|---|---|
 | 12 | Scored against the rubric, the best topic route retrieves **12%** of Canadian metaresearch (95% CI 5.6 to 21.6), at 60% precision. It misses **66 of 75**. OpenAlex files a work by what it is *about*, so metaresearch about cardiology reads as cardiology. | **The field is invisible to topic retrieval precisely because it is about other fields.** Retrieval is demoted to provenance; screening over a Canadian frame is the gate. |
-| 10 | Swap which model is "the screener" and the base rate moves from **1.06% to 2.37%** (design-weighted, same 1,290 records): 37,032 vs 83,022 works. The published binomial CI contains neither. | Machine agreement is a **process metric**, not accuracy. The screener-swap range, not the binomial interval, is the honest uncertainty. The human audit is the study. |
-| 11 | **31.5%** of the pilot partition (**23.3%** of the built frame: 1,003,117 works, finding 19) has no abstract, and the screen finds 0.78% metaresearch there against 1.55% where one exists (p = 0.023; robust to adjustment for year and language). An earlier version of this table also claimed the blindness was **differential** (T2 losing 3.6x against T1's 1.4x). **That cell holds four works and the interaction is not significant (p = 0.141). WITHDRAWN** (DEVIATIONS.md D6). | A third of the frame is screened on its title alone and the screen finds half as much there. The audit stratifies on abstract availability. It is **not** evidence of differential blindness by tradition, and this protocol no longer says it is. |
+| 10 | Swap which model is "the screener" and the model-positive rate moves from **1.06% to 2.37%** (design-weighted, same 1,290 records): 37,032 vs 83,022 works. The published binomial CI contains neither. | Machine agreement is a **process metric**, not accuracy. The screener-swap range measures variation among model outputs, not uncertainty about field size. The human study is required. |
+| 11 | **31.5%** of the pilot partition (**23.3%** of the built frame: 1,003,117 works, finding 19) has no abstract. A historical model assigned positive labels to 0.78% there against 1.55% where one exists (p = 0.023; robust to adjustment for year and language). This is a machine-label association, not an accuracy or prevalence estimate. An earlier version also claimed differential behaviour by tradition. **That cell holds four works and the interaction is not significant (p = 0.141). WITHDRAWN** (DEVIATIONS.md D6). | Human validation stratifies on abstract availability. The historical association does not establish differential classification error by tradition. |
 | 14 | A simple random sample of the screened-out mass **cannot measure screening sensitivity**: 600 records return an expected **0.4** misses; twenty would need **2,009 coder-hours** against 65 budgeted. | The two-phase audit as first specified was impossible. **See §6.0 and §6.1.** |
 | 16 | Haiku lands near Sonnet's base rate (1.27% vs 1.06%, 98.1% agreement) but their in-scope sets overlap **16%** unweighted, **10%** design-weighted; of Sonnet's 58 positives Haiku confirms **12**. And agents of ONE model on ONE prompt disagree beyond chance after conditioning on what they were shown (CMH p = **0.0056**, replicated at **0.015**), with the agents' ordering flipping between arms. | **Rate agreement is not set agreement, and no machine pass measures this field.** The machine screen is demoted to a **stratifier** for the audit: design weights stay unbiased under a noisy stratifier, only efficiency suffers, and power is computed at Haiku-realistic concentration. Machine tiers are released marked provisional; every reported prevalence is design-weighted human coding. |
 | D1 | **The pilot screen did not obey this rubric.** It was sent 6 of the 8 fields §5 mandates: **venue, OpenAlex topic and field, Canadian affiliations and funders were all withheld.** Every pilot number came from a title-and-abstract screen. | The most serious defect in the project. The full screen sends the rubric's complete payload and reports the difference as a finding. **See DEVIATIONS.md D1.** |
@@ -123,6 +123,11 @@ the size from the artifact the harvest writes, so no script can hardcode it agai
   be re-run by a reviewer).
 - A **pinned Érudit OAI-PMH harvest** (`https://oai.erudit.org/oai/`, 379 sets; harvest date stamped).
 
+**Operational live layer.** Deployment is configured to retrieve a 15 to 30 day publication window from the
+OpenAlex API each day. The interface reports whether a complete keyed run has succeeded. This rolling layer is not
+part of F. It is excluded from all v1 counts, estimates, classifier hashes, and citable query permalinks, and the
+interface labels it as operational and unclassified.
+
 **Sources that DO NOT contribute records, and must not.** Retraction Watch, ClinicalTrials.gov, and the CIHR project
 database are used, and **none of them admits a work to F**. A retracted cardiology paper is retracted *cardiology*; a
 trial registration is not a publication; a grant is not a work. Admitting them would let an interesting signal
@@ -133,11 +138,11 @@ masquerade as the estimand, which is the error this protocol exists to prevent. 
 - **Reference standards.** ClinicalTrials.gov knows a Canadian trial happened *independently of any pipeline*, so it
   cannot be wrong in the pipeline's favour. It is the only reference standard here **not made of machine labels**
   (finding 21), and §6.1 uses it for known-item recall alongside the venue set.
-- **Enrichment.** PubMed / Europe PMC / Crossref supply abstracts OpenAlex lacks (finding 19). **Preprints are
+- **Enrichment.** PubMed and Europe PMC supply preferred abstracts; OpenAlex supplies the remainder (finding 19). **Preprints are
   already in F** and need no ingest: measured against bioRxiv and medRxiv's own API, OpenAlex indexes 99.6% of what
   the servers hold (finding 20).
 
-**Window.** Publication years 2000–2025 inclusive.
+**Window.** Publication years 2000 to 2025 inclusive.
 
 **Membership.** A record enters F if it carries **any identifiable Canadian signal**: CA-AFF · CA-FUND · Canada named
 in title, abstract or keywords (EN/FR) · published in a Canadian venue · is an Érudit record. Every record stores
@@ -156,9 +161,10 @@ of routes, and for provenance on every record.
 
 ## 5. Screening (retrieval is demoted to provenance)
 
-Every record in F is **classified**, not retrieved. Retrieval routes still run (candidate topics and venues;
-bilingual lexical and semantic similarity to the seed corpus; citation neighbours of curated seeds), and every
-record stores the set of routes that surfaced it. But those routes are **provenance, not the gate**: they answer
+Every record in F receives teacher-imitation scores and paired decisions for supported category and study-design
+targets. Retrieval routes still run (candidate topics and venues; bilingual lexical and semantic similarity to the
+seed corpus; citation neighbours of curated seeds), and every record stores the set of routes that surfaced it.
+Those routes are **provenance, not the gate**: they answer
 "how would a conventional search have found this?", which is exactly the question the coverage audit needs, and
 they are never allowed to decide membership.
 
@@ -176,35 +182,37 @@ population (§6.3).
 
 ### 5.3 Genre label
 `empirical` · `conceptual` · `editorial/commentary` · `policy` · `infrastructure/announcement` · `other`.
-Assigned by the classifier because OpenAlex's `type` is unreliable and this field is unusually commentary-heavy.
+Recorded in the historical pilot and retained as a planned human-coding field. Classifier v1 does not assign genre.
 
-### 5.4 Classifier
-Multilingual sentence embeddings (cross-lingual by construction) over title + abstract, plus an LLM screening
-pass with **published prompts** and temperature 0. The decision **threshold is locked before evaluation** and
-recorded in the protocol registration.
+### 5.4 Released classifier
 
-**The classifier plays no part in constructing the reference standard against which it is judged** (§6.2). No LLM
-output is shown to the human coders.
+Classifier v1 is a sparse logistic regression system with word and character TF-IDF features. It uses only fields available for every inference record: title, venue, topic, field, language, type, and year. Abstract and DOI are excluded because the full frame cannot supply them consistently. Five cross-fitted folds are grouped by normalized venue.
+
+Separate binary heads imitate Codex and Gemma for each category and study design target. Codex has 20 available heads. Gemma has 19; `design_other` lacks the minimum positive and negative support. The release stores teacher scores, an inclusive candidate union, and a conservative consensus intersection. These are retrieval aids. They are not direct labels, calibrated prevalence probabilities, or human validation.
+
+The exact training and application contracts, source commit, hashes, thresholds, support counts, and full-frame output are recorded in `RELEASE.md` and the machine-readable artifact metadata.
 
 ## 6. Validation: two-phase stratified probability audit
 
 The core of the study, and the thing the field usually skips.
 
-## 5.5 The classifier: what it may do, what it may not, and what it is actually for
+### 5.5 Historical classifier development record
+
+This section records analyses that informed the released design. It does not override the v1 contract in §5.4 or establish that the future human study has been completed.
 
 **It was proposed as a way to avoid LLM-labelling 4.3M works, and that premise is false.**
 Finding 13 measured the cost: the full v3.1 rubric over **every work in the frame is $1,261**.
 There was never anything to avoid, and a proposal that budgeted the full screen in one
 paragraph while justifying a cheap substitute for it in the next was describing two studies
-(D32). The screen reads every work. The classifier is a **different instrument**, and it is
-preregistered here as one.
+(D32). The executed direct screen covers the 10,348-work enriched sample. Classifier v1 applies
+teacher imitation to every frame record. This protocol is not registered.
 
-**What it may not do: emit a category label.** Not thresholded, not "provisional", not for the
-confident core. Distilled from our own metaresearch labels, a student reproduced **its own
+**What it may not do: be interpreted as a validated category label.** Distilled from our own
+metaresearch labels, a student reproduced **its own
 teacher's positive set at Jaccard 0.17** (finding 25). Two independent adversarial reviews
 reached the same verdict by different routes: per-teacher heads are useful for **allocating
-human effort** and **cosmetic as a solution to the contested boundary**. Scores ship; labels
-do not.
+human effort** and **cosmetic as a solution to the contested boundary**. Scores and explicitly
+named retrieval decisions ship; scientific classification claims do not.
 
 **What it is for, each measured rather than asserted (finding 30):**
 
@@ -244,19 +252,7 @@ with the majority *teacher*, so the entire curve is **imitation, not accuracy**,
 simulation runs on labels that already exist: it shows the loop's mechanics and **cannot** show
 that it matures on 4.3M unlabelled works.
 
-**The staged schedule, and the gate the frame pass must earn.** The model never scores the frame on the
-strength of the pilot labels alone. It improves on LIVE batches drawn from the frame itself (composition
-as above), retrained every round, against a batch-size schedule that grows as the model stabilizes:
-rounds 1-10 at 100 works, 11-25 at 250, 26-40 at 500, then 1,000 per round until the gate passes or the
-label budget is spent. At finding 13's measured token rates, 10,000 teacher-labelled works cost ~$27 and
-100,000 cost ~$265: money is not the constraint, wall-clock is, and the growing batch matches how much a
-retrain can learn once the model holds tens of thousands of labels. The gate is prespecified and machine-
-checked (`ml/loop.py`, written to `pilot/results/maturity.json`): on a frozen holdout never queried and
-never trained on, (i) relative AP gain under 2% across the last five rounds, (ii) positive-set churn under
-0.05 for three consecutive rounds, (iii) consecutive-round rank correlation above 0.98 for three
-consecutive rounds. `ml/score_frame.py` REFUSES a full-frame pass until `passed` is true; a forced
-baseline pass marks every row it writes `v0-immature`. "Passed" means the student's imitation of its
-teachers has stopped moving, and nothing more: the human audit measures.
+**The executed v1 gate.** The released model was trained on 10,348 live frame records with exact two-arm coverage. Training had to start from a clean source commit. Every head had to meet the minimum support rule or be marked unavailable. Full-frame application used resumable partitions with input, model, feature, schema, and output hashes. Final assembly then verified all 4,299,418 ordered identifiers and the complete output hash. Passing these checks establishes artifact integrity and teacher imitation only. It does not establish scientific accuracy.
 
 **Study design, the one annotation with an external reference standard.** MEDLINE publication
 types are assigned by NLM independently of this project, so a design label can be **wrong in a
@@ -295,14 +291,14 @@ false starts is not a preregistration.
 ### 6.1 Design: three instruments, not one
 
 **(i) Score-stratified probability sampling of the screened-out set.** This is salvageable, and only because the
-misses **concentrate**. The pilot measured where: of the 37 works screener B pulled into scope that screener A
-rejected, **30 sit in the contested boundary and only 6 in the settled rejects**. So:
+misses **concentrate**. The pilot measured where: of the 37 works screener B labelled in scope after screener A
+labelled them out, **30 sit in the pilot disagreement region and only 6 in the three-model negative region**. So:
 
 - Partition **F** into **screened-in** (any v3 category) and **screened-out** (empty `categories`).
 - Draw a **stratified probability sample from both**, with **known, recorded selection probabilities**. Strata
   cross: `language (EN/FR/other)` × `source (OpenAlex/Érudit)` × `partition` × `screener score` ×
   `abstract availability`.
-- Oversample heavily: the **contested boundary** (where the pilot shows the misses concentrate); French records;
+- Oversample heavily: the **pilot disagreement region** (where the pilot shows the model differences concentrate); French records;
   Érudit records; adjacent STS/LIS material; **records with no abstract** (finding 11); under-represented provinces
   and genres.
 - Sample size set to achieve a target half-width on screening sensitivity within the French stratum, the scarcest
@@ -315,7 +311,7 @@ budget confirming obvious exclusions. Without stratification the audit is uninfo
 prevents contamination; it does not create information. Two humans independently reading the same missing abstract
 cannot discover metaresearch that only the full text reveals, and design weights correct selection probabilities,
 not outcome misclassification. So: (a) sampled records are coded on the **best ascertainable evidence**, the
-finding-19 full-text cascade (PubMed, Europe PMC, Crossref) plus publisher pages where the cascade fails, not on
+finding-19 evidence cascade (PubMed, Europe PMC, OpenAlex) plus publisher pages where the cascade fails, not on
 the models' own payload; (b) the coding scheme includes an **`unresolved`** outcome, and unresolved is reported,
 never imputed; (c) every estimate is stated **conditional on ascertainment**, with the unresolved fraction
 alongside it; (d) the release is layered: **human-verified / high-precision / provisional / contested**, so no
@@ -331,10 +327,10 @@ pipeline without its recall measured this way first.**
 
 **(iii) Known-item recall on an external criterion, because (i) is blind exactly where the bias is.**
 
-Score-stratified sampling finds the works the screener *almost* caught. It is structurally blind to the ones it
-rejected *confidently*, and finding 11 identifies precisely which those are: T2 material (STS, LIS, the
-humanities) with no abstract, rejected on a title carrying none of the field's vocabulary. Such a work is not near
-the threshold. It is deep in the settled rejects, where (i) never looks. **An instrument that is blind where the
+Score-stratified sampling finds the works the pilot screener *almost* labelled positive. It is structurally blind to
+confident negative model labels, and finding 11 identifies precisely which those may be: T2 material (STS, LIS, the
+humanities) with no abstract, labelled from a title carrying none of the field's vocabulary. Such a work is not near
+the threshold. It is deep in the pilot model-negative region, where (i) never looks. **An instrument that is blind where the
 bias lives is worse than no instrument, because it returns a confident number.**
 
 So a third instrument, on a criterion no screener can be blind to: **venue**. A reference set of Canadian-authored
@@ -369,9 +365,7 @@ the boundary.
   French-stratum estimates are withdrawn, not imputed.**
 
 ### 6.2a What the machine screen does, and what it cannot do
-One full-frame LLM pass (a cheap model) labels every work in F against the locked rubric; a second model relabels
-a 20,000-record stratified sample. Disagreements are recorded and routed to the human audit. Inter-model agreement
-is published and **reported as a process metric**.
+The executed v1 workflow directly screens one 10,348-work enriched sample with Codex and Gemma. Each arm covers the same identifiers. Their disagreements are recorded and published as process metrics. A teacher-imitation classifier then produces scores and named retrieval decisions for all works in F. No full-frame direct language model screen and no human validation are claimed.
 
 It is not, and will not be presented as, an accuracy estimate, and after finding 16 it is not presented as a
 *measurement* of anything. Agreement fails twice. First, two language models share training data, lexical priors
@@ -383,12 +377,7 @@ conditioning on what each was shown, in two arms, with their ordering flipping b
 "duplicate screening"**: that term's warrant comes from independent *human* judgement, and borrowing it for two
 models would be a misrepresentation of method. The accuracy claim rests on §6.2 and nowhere else.
 
-What the machine pass *does* contribute is real and, after finding 16, precisely bounded: **stratification**
-(a noisy stratifier costs the audit efficiency, never validity, because design weights use known selection
-probabilities), an empirically located boundary (the disagreements), and the throughput to organize 4.3M works
-for sampling at all. **Machine tiers are released marked provisional. Every prevalence this study reports is
-design-weighted human coding. No machine number is reported as the field.** The pilot's machine base rate (§2,
-finding 9) stands as the motivating hypothesis the audit tests, not as a result the audit inherits.
+What the machine workflow contributes is precisely bounded: stratification for future sampling, records where models disagree for rubric development, and throughput to organize 4.3 million works. Machine decisions are released as unvalidated retrieval aids. This release reports no human-coded prevalence and no machine number as the field. The pilot machine-positive rate remains a motivating hypothesis, not a population result.
 
 **Agent-level controls, because finding 16 and D11 demand them:** agents receive randomized, fixed-size chunks
 recorded in an assignment manifest at run time; a duplicate-agent reliability arm re-screens a common subsample;
@@ -405,7 +394,7 @@ Using **design weights** (inverse selection probability):
 
 All reported with confusion-matrix counts and interval estimates, not bare percentages.
 
-**Capture–recapture is not used, and this is a considered decision, not an oversight.** The routes are endogenous:
+**Capture-recapture is not used, and this is a considered decision, not an oversight.** The routes are endogenous:
 R3 depends on the seed set and any author-based expansion depends on authors surfaced by R1/R2. Log-linear
 multi-list models cannot identify the all-zero cell without an untestable restriction on the highest-order
 interaction, and with endogenously constructed lists that restriction is not credible. Nor is the estimate a safe
@@ -430,16 +419,9 @@ field; the corpus is constructed and validated first, and only then described.
 
 ## 8. Outputs and release
 
-1. **Dataset** (CSV + Parquet; Frictionless schema): one row per work, carrying route provenance, the five linkage
-   flags, language, genre, tier, classifier score, and audit status.
-2. **Validation report**: design-weighted estimates, confusion matrices, and the differential bias report,
-   **including the errors**, not only the headline accuracy.
-3. **Code**: the full pipeline, `targets` DAG, Docker image, lockfiles.
-4. **Documentation**: Quarto site, a **Datasheet for Datasets**, and this protocol with its registration stamp.
-5. **A bilingual explorer** for people who do not write code.
+The v1 release contains the full-frame prediction Parquet and application contract, the trained classifier artifact, the preserved two-arm screening record, source code, checksums, release documentation, and a bilingual explorer. `RELEASE.md` is the authority for exact names and hashes.
 
-Versioned on GitHub; each release archived to **Zenodo with a DOI**. Public corrections accepted against a
-transparent version history.
+The following remain planned: human-coded estimates, a validation report, a Frictionless data package, an OSF registration, and a Zenodo archive with a DOI. Their description in this protocol is a future work plan, not a release claim.
 
 ## 9. Ethics and governance
 

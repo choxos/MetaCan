@@ -29,16 +29,16 @@
 #
 # See DEVIATIONS.md D22 and finding 26.
 
+FRAME <- "data/frame/canadian_works.parquet"
+if (!file.exists(FRAME)) {
+  message("! no frame at '", FRAME, "'; skipping the partition check (run R/harvest_frame.R first)")
+  quit(status = 0)
+}
+
 suppressPackageStartupMessages({
   library(duckdb); library(DBI); library(cli); library(glue)
 })
 source("R/strata.R")
-
-FRAME <- "data/frame/canadian_works.parquet"
-if (!file.exists(FRAME)) {
-  cli_alert_warning("no frame at {.path {FRAME}}; skipping the partition check (run R/harvest_frame.R first)")
-  quit(status = 0)
-}
 
 con <- dbConnect(duckdb())
 on.exit(dbDisconnect(con, shutdown = TRUE), add = TRUE)

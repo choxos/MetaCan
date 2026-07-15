@@ -14,7 +14,7 @@ export function ThemeToggle({ label }: { label: string }) {
     <button
       aria-label={label}
       onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
-      className="rounded-md border p-2"
+      className="inline-flex h-11 w-11 items-center justify-center rounded-md border"
       style={{ background: 'var(--surface-2)' }}
     >
       {mounted && (resolvedTheme === 'dark' ? <Sun size={16} /> : <Moon size={16} />)}
