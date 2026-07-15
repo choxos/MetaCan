@@ -6,11 +6,13 @@
     "dev": "next dev",
     "build": "prisma generate && next build",
     "start": "next start -p ${PORT:-3111}",
+    "check": "npm run type-check && npm run test:recent-sync && npm run test:content",
     "type-check": "tsc --noEmit",
     "sync:recent": "node scripts/sync-recent-openalex.mjs",
     "test:recent-sync": "node --test scripts/test/recent-openalex.test.mjs",
     "test:content": "tsx --test src/lib/content.test.ts",
     "db:preflight": "node scripts/check-prisma-baseline.mjs",
+    "db:migrate": "prisma migrate deploy",
     "db:refresh-facets": "node scripts/refresh-facets.mjs",
     "db:push": "prisma db push",
     "postinstall": "prisma generate"
