@@ -1,4 +1,4 @@
-name: CI
+name: Research pipeline CI
 
 on:
   push:
@@ -10,11 +10,11 @@ permissions:
   contents: read
 
 concurrency:
-  group: ci-${{ github.workflow }}-${{ github.ref }}
+  group: research-ci-${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-  research:
+  validate:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -47,7 +47,7 @@ jobs:
           ml/full_frame_classifier.py
           deploy/load_classifier.py
 
-      - name: Test the classifier pipeline
+      - name: Test classifier and database contracts
         run: uv run pytest -q
 
       - uses: r-lib/actions/setup-r@v2
@@ -55,78 +55,15 @@ jobs:
       - name: Install R dependencies
         run: make deps
 
-      - name: Check the research pipeline contracts
+      - name: Check research pipeline contracts
         run: make lint
 
       - name: Confirm generated findings are current
-        run: make findings && git diff --exit-code -- pilot/results/FINDINGS.md site/src/data/findings.json site/src/data/frame_scores.json
+        run: make findings && git diff --exit-code -- pilot/results/FINDINGS.md pilot/results/findings.json
 
-  site:
-    runs-on: ubuntu-latest
-    services:
-      postgres:
-        image: postgres:16
-        env:
-          POSTGRES_DB: metacan_ci
-          POSTGRES_USER: metacan_ci
-          POSTGRES_PASSWORD: metacan_ci
-        ports:
-          - 5432:5432
-        options: >-
-          --health-cmd "pg_isready -U metacan_ci -d metacan_ci"
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-    env:
-      DATABASE_URL: postgresql://metacan_ci:metacan_ci@127.0.0.1:5432/metacan_ci
-    defaults:
-      run:
-        working-directory: site
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: npm
-          cache-dependency-path: site/package-lock.json
-
-      - name: Install site dependencies
-        run: npm ci
-
-      - name: Validate the Prisma schema
-        run: npx prisma validate
-
-      - name: Check the migration baseline on a fresh database
-        run: npm run db:preflight | grep -Fx clean
-
-      - name: Apply migrations to a fresh database
-        run: npx prisma migrate deploy
-
-      - name: Confirm the migration baseline is resolved
-        run: npm run db:preflight | grep -Fx resolved
-
-      - name: Confirm empty-frame facet refresh is safe
-        run: npm run db:refresh-facets
-
-      - name: Check TypeScript
-        run: npm run type-check
-
-      - name: Test recent OpenAlex synchronization
-        run: npm run test:recent-sync
-
-      - name: Test content rendering and export safety
-        run: npm run test:content
-
-      - name: Confirm French finding translations are current
-        run: node ../deploy/i18n-findings.mjs && git diff --exit-code -- src/lib/findings-fr.ts
-
-      - name: Check production dependency security
-        run: npm audit --audit-level=high
-
-      - name: Build the production site
-        run: npm run build
-
-      - name: Confirm site findings match the research output
-        working-directory: .
-        run: diff -u pilot/results/findings.json site/src/data/findings.json
+      - name: Validate machine readable metadata
+        run: |
+          python -m json.tool codemeta.json >/dev/null
+          python -m json.tool ro-crate-metadata.json >/dev/null
+          python -m json.tool .zenodo.json >/dev/null
+          uvx cffconvert --validate

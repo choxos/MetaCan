@@ -6,7 +6,7 @@ ROOT="$(git rev-parse --show-toplevel 2>/dev/null)"
 PREDICTIONS="${1:?usage: load-classifier-release.sh PREDICTIONS [METADATA] [CONTRACT]}"
 METADATA="${2:-$ROOT/artifacts/frame_classifier/metadata.json}"
 CONTRACT="${3:-${PREDICTIONS}.json}"
-ENV_FILE="${METACAN_ENV_FILE:-$ROOT/site/.env}"
+ENV_FILE="${METACAN_ENV_FILE:-$ROOT/.env}"
 
 die() { printf 'load-classifier-release: %s\n' "$*" >&2; exit 1; }
 

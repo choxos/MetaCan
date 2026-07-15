@@ -1,4 +1,4 @@
-.PHONY: pilot pilot-offline findings proposal protocol deps clean help harvest-status lint collaboration-network collaboration-authorships
+.PHONY: pilot pilot-offline findings proposal protocol deps clean help harvest-status lint check collaboration-network collaboration-authorships
 
 # Every numbered finding, 01 through 13. The old glob was `pilot/0*.R`, which
 # silently stopped at 09: findings 10-13 (agreement, the abstract bias, the topic
@@ -20,6 +20,7 @@ help:
 	@echo "make harvest-status progress of the OpenAlex frame harvest, in bytes (partitions lie)"
 	@echo "make collaboration-network rebuild the institution and available author networks"
 	@echo "make collaboration-authorships resume the full Canadian authorship harvest"
+	@echo "make check          run the research code and data contract gates"
 
 deps:
 	@Rscript -e 'pkgs <- c("httr2","jsonlite","xml2","dplyr","purrr","tibble","glue","cli","openssl","DBI","duckdb"); \
@@ -91,20 +92,13 @@ lint:
 	@Rscript pilot/check_strata_partition.R
 	@Rscript pilot/check_quotes.R
 
-# The site renders its own COPY of findings.json (app/src/data/). Copying it here,
-# in the same target that renders FINDINGS.md, is what keeps the two from
-# diverging: they diverged once, and the stale copy kept serving a finding the
-# pilot had already retracted (DEVIATIONS.md D11). The app's build guard then
-# fails loudly on any finding that lacks a card, which is the second half of the
-# same defense.
+check: lint
+	@uv run ruff check ml/classifier_*.py ml/full_frame_classifier.py deploy/load_classifier.py tests/test_classifier_*.py tests/test_full_frame_classifier_cli.py tests/test_load_classifier.py
+	@uv run basedpyright ml/classifier_*.py ml/full_frame_classifier.py deploy/load_classifier.py
+	@uv run pytest -q
+
 findings:
 	@Rscript pilot/render_findings.R
-	@for d in app/src/data site/src/data; do \
-		if [ -d "$$d" ]; then cp pilot/results/findings.json "$$d/findings.json"; echo "synced $$d/findings.json"; fi; \
-		if [ -f "$$d/frame_scores.json" ] && [ -f pilot/results/frame_scores.json ]; then \
-			cp pilot/results/frame_scores.json "$$d/frame_scores.json"; echo "synced $$d/frame_scores.json"; \
-		fi; \
-	done
 
 harvest-status:
 	@Rscript R/harvest_progress.R

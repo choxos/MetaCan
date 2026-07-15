@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+message: "If you use MétaCan, cite the repository and the exact version or commit used."
+type: software
+title: "MétaCan: Canadian metaresearch frame and classifier pipeline"
+version: 1.0.0
+date-released: 2026-07-15
+abstract: "MétaCan builds a provenance tracked Canadian research frame from a pinned OpenAlex snapshot, preserves four admission routes, records machine screening evidence, and applies a teacher imitation classifier to all 4,299,418 frozen works. Human classification accuracy has not yet been established."
+authors:
+  - family-names: Sofi-Mahmudi
+    given-names: Ahmad
+    email: ahmad.pub@gmail.com
+    orcid: "https://orcid.org/0000-0001-6829-0823"
+repository-code: "https://github.com/choxos/MetaCan"
+url: "https://metacan.xera.ac"
+license: MIT
+keywords:
+  - metaresearch
+  - Canada
+  - OpenAlex
+  - bibliometrics
+  - research integrity
+  - reproducible research
+  - machine learning

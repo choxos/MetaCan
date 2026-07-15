@@ -1,0 +1,23 @@
+name: Research or interpretation question
+description: Ask about methods, evidence, or interpretation
+title: "[Question]: "
+labels: ["question"]
+body:
+  - type: textarea
+    id: question
+    attributes:
+      label: Question
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      description: Include relevant work identifiers, filters, release fields, or protocol sections.
+  - type: checkboxes
+    id: distinction
+    attributes:
+      label: Evidence distinction
+      options:
+        - label: I understand that machine agreement and classifier output are not human accuracy estimates.
+          required: true

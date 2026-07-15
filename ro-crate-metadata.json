@@ -1,0 +1,142 @@
+{
+  "@context": "https://w3id.org/ro/crate/1.1/context",
+  "@graph": [
+    {
+      "@type": "CreativeWork",
+      "@id": "ro-crate-metadata.json",
+      "conformsTo": {
+        "@id": "https://w3id.org/ro/crate/1.1"
+      },
+      "about": {
+        "@id": "./"
+      },
+      "description": "Machine readable provenance and packaging metadata for MétaCan."
+    },
+    {
+      "@type": "Dataset",
+      "@id": "./",
+      "name": "MétaCan: Canadian metaresearch frame and classifier pipeline",
+      "description": "Research software, methods, machine screening evidence, release metadata, and database construction files for the frozen 4,299,418 work MétaCan frame.",
+      "datePublished": "2026-07-15",
+      "dateModified": "2026-07-15",
+      "version": "1.0.0",
+      "identifier": "https://github.com/choxos/MetaCan",
+      "license": [
+        {
+          "@id": "https://spdx.org/licenses/MIT.html"
+        },
+        {
+          "@id": "https://creativecommons.org/licenses/by/4.0/"
+        }
+      ],
+      "author": {
+        "@id": "https://orcid.org/0000-0001-6829-0823"
+      },
+      "mainEntity": {
+        "@id": "#pipeline"
+      },
+      "hasPart": [
+        {
+          "@id": "#pipeline"
+        },
+        {
+          "@id": "data/frame/frame_summary.json"
+        },
+        {
+          "@id": "artifacts/frame_classifier/metadata.json"
+        },
+        {
+          "@id": "docs/protocol/PROTOCOL.md"
+        },
+        {
+          "@id": "RELEASE.md"
+        },
+        {
+          "@id": "https://github.com/choxos/MetaCan/tree/webapp"
+        }
+      ]
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "@id": "#pipeline",
+      "name": "MétaCan research and database pipeline",
+      "codeRepository": "https://github.com/choxos/MetaCan",
+      "version": "1.0.0",
+      "programmingLanguage": [
+        "R",
+        "Python",
+        "SQL"
+      ],
+      "runtimePlatform": [
+        "R",
+        "Python 3.12 or 3.13",
+        "PostgreSQL 16"
+      ],
+      "license": {
+        "@id": "https://spdx.org/licenses/MIT.html"
+      },
+      "author": {
+        "@id": "https://orcid.org/0000-0001-6829-0823"
+      }
+    },
+    {
+      "@type": "Dataset",
+      "@id": "data/frame/frame_summary.json",
+      "name": "MétaCan frozen frame summary",
+      "description": "Machine readable row counts and route totals for the frozen Canadian frame.",
+      "encodingFormat": "application/json",
+      "license": {
+        "@id": "https://creativecommons.org/licenses/by/4.0/"
+      }
+    },
+    {
+      "@type": "Dataset",
+      "@id": "artifacts/frame_classifier/metadata.json",
+      "name": "MétaCan classifier metadata",
+      "description": "Machine readable training contract, dependencies, model hashes, target support, thresholds, and evaluation metrics for metacan-v1-d91a1de5be90.",
+      "encodingFormat": "application/json",
+      "license": {
+        "@id": "https://creativecommons.org/licenses/by/4.0/"
+      }
+    },
+    {
+      "@type": "CreativeWork",
+      "@id": "docs/protocol/PROTOCOL.md",
+      "name": "MétaCan working protocol",
+      "encodingFormat": "text/markdown",
+      "license": {
+        "@id": "https://creativecommons.org/licenses/by/4.0/"
+      }
+    },
+    {
+      "@type": "CreativeWork",
+      "@id": "RELEASE.md",
+      "name": "MétaCan v1 release record",
+      "encodingFormat": "text/markdown"
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "@id": "https://github.com/choxos/MetaCan/tree/webapp",
+      "name": "MétaCan web application",
+      "codeRepository": "https://github.com/choxos/MetaCan/tree/webapp",
+      "url": "https://metacan.xera.ac",
+      "isBasedOn": {
+        "@id": "#pipeline"
+      },
+      "license": {
+        "@id": "https://spdx.org/licenses/MIT.html"
+      }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://orcid.org/0000-0001-6829-0823",
+      "name": "Ahmad Sofi-Mahmudi",
+      "email": "ahmad.pub@gmail.com"
+    },
+    {
+      "@type": "CreativeWork",
+      "@id": "https://w3id.org/ro/crate/1.1",
+      "name": "RO-Crate 1.1"
+    }
+  ]
+}

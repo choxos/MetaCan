@@ -1,0 +1,56 @@
+{
+  "@context": "https://doi.org/10.5063/schema/codemeta-2.0",
+  "@type": "SoftwareSourceCode",
+  "@id": "https://github.com/choxos/MetaCan",
+  "name": "MétaCan",
+  "description": "Reproducible Canadian research frame construction, screening, classifier, database, and release pipeline for MétaCan.",
+  "codeRepository": "https://github.com/choxos/MetaCan",
+  "url": "https://metacan.xera.ac",
+  "issueTracker": "https://github.com/choxos/MetaCan/issues",
+  "license": "https://spdx.org/licenses/MIT.html",
+  "version": "1.0.0",
+  "softwareVersion": "1.0.0",
+  "dateModified": "2026-07-15",
+  "programmingLanguage": [
+    "R",
+    "Python",
+    "SQL"
+  ],
+  "runtimePlatform": [
+    "R",
+    "Python 3.12 or 3.13",
+    "PostgreSQL 16"
+  ],
+  "operatingSystem": "OS Independent",
+  "applicationCategory": "Research software",
+  "developmentStatus": "active",
+  "keywords": [
+    "metaresearch",
+    "Canada",
+    "OpenAlex",
+    "bibliometrics",
+    "research integrity",
+    "reproducible research",
+    "machine learning"
+  ],
+  "softwareRequirements": [
+    "R dependencies listed by make deps",
+    "Python dependencies locked in uv.lock",
+    "PostgreSQL 16"
+  ],
+  "author": {
+    "@type": "Person",
+    "@id": "https://orcid.org/0000-0001-6829-0823",
+    "givenName": "Ahmad",
+    "familyName": "Sofi-Mahmudi",
+    "email": "ahmad.pub@gmail.com"
+  },
+  "relatedLink": [
+    "https://github.com/choxos/MetaCan/tree/webapp",
+    "https://metacan.xera.ac",
+    "https://metacan.xera.ac/api-docs"
+  ],
+  "readme": "https://github.com/choxos/MetaCan/blob/main/README.md",
+  "contIntegration": "https://github.com/choxos/MetaCan/actions",
+  "buildInstructions": "https://github.com/choxos/MetaCan#quick-validation"
+}

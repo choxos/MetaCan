@@ -1,7 +1,0 @@
-# Certbot adds the TLS listener and redirect to this virtual host.
-server {
-    listen 80;
-    server_name metacan.xera.ac;
-
-    include /etc/nginx/snippets/metacan-app.conf;
-}

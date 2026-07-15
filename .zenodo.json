@@ -1,0 +1,33 @@
+{
+  "title": "MétaCan: Canadian metaresearch frame and classifier pipeline",
+  "description": "A reproducible pipeline for building a provenance tracked Canadian research frame, preserving machine screening evidence, training and applying a teacher imitation classifier, and creating the MétaCan PostgreSQL database. Human classification accuracy has not yet been established.",
+  "upload_type": "software",
+  "license": "MIT",
+  "creators": [
+    {
+      "name": "Sofi-Mahmudi, Ahmad",
+      "orcid": "0000-0001-6829-0823"
+    }
+  ],
+  "keywords": [
+    "metaresearch",
+    "Canada",
+    "OpenAlex",
+    "bibliometrics",
+    "research integrity",
+    "reproducible research",
+    "machine learning"
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "https://github.com/choxos/MetaCan",
+      "relation": "isSupplementTo",
+      "scheme": "url"
+    },
+    {
+      "identifier": "https://metacan.xera.ac",
+      "relation": "isSupplementTo",
+      "scheme": "url"
+    }
+  ]
+}

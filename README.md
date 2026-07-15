@@ -1,90 +1,125 @@
 # MétaCan
 
-MétaCan is a provenance-tracked map of Canadian metaresearch built around one question: what does a bibliographic pipeline miss inside the sources it claims to cover?
+[![Research pipeline CI](https://github.com/choxos/MetaCan/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/choxos/MetaCan/actions/workflows/ci.yml)
+[![Licence: MIT](https://img.shields.io/badge/Licence-MIT-blue.svg)](LICENSE)
+[![FAIR metadata](https://img.shields.io/badge/FAIR-metadata-118AB2.svg)](FAIR.md)
+
+MétaCan is a provenance tracked map of Canadian metaresearch. This branch contains the research methods, Canadian frame construction, screening records, classifier pipeline, database schema, data loaders, and release evidence.
+
+The deployable website is maintained separately on the [`webapp`](https://github.com/choxos/MetaCan/tree/webapp) branch. Keeping the two branches distinct makes the research pipeline readable without mixing it with application dependencies and production configuration.
 
 Ahmad Sofi-Mahmudi, independent researcher, <ahmad.pub@gmail.com>
 
-## Current status
+## Release status
 
-The frozen Canadian frame contains **4,299,418 works** from 482 partitions of a pinned OpenAlex snapshot. This count comes from [`data/frame/frame_summary.json`](data/frame/frame_summary.json), not from an extrapolation.
+The frozen frame contains **4,299,418 unique works** from all 482 partitions of the pinned OpenAlex snapshot. The exact frame and classifier identifiers are recorded in [`RELEASE.md`](RELEASE.md).
 
-The repository contains two different bodies of screening evidence. They must not be combined without an explicit analysis:
+Classifier version `metacan-v1-d91a1de5be90` was trained on 10,348 works with complete Codex and Gemma screening arms, then applied to all 4,299,418 frame records. Its 39 available heads imitate the two machine teachers. They do not estimate scientific truth, classification accuracy, or population prevalence. Human validation remains outstanding. See [`CLASSIFIER_VALIDATION.md`](CLASSIFIER_VALIDATION.md).
 
-- The historical pilot produced the generated finding store in [`pilot/results/findings.json`](pilot/results/findings.json). Its source analyses use several samples and earlier model panels. Those machine labels are preliminary evidence about pipeline behaviour, not a human reference standard.
-- The v1 release uses the same 10,348-work sample for two direct screening arms: Codex and Gemma. Both arms have complete, schema-valid coverage of the sampled IDs. Opus stopped after 82 of 414 chunks; its partial record is preserved but excluded from assembly, comparison, and classifier training.
+No OSF registration, Zenodo archive, DOI, or completed human validation is claimed at this stage.
 
-The v1 teacher-imitation classifier is complete. Version `metacan-v1-d91a1de5be90` was trained from a clean source tree on the two direct arms and applied to all 4,299,418 frame records. Its 39 available heads reproduce Codex or Gemma decisions; they do not estimate scientific truth or population prevalence. Direct labels and classifier predictions remain separate in the data model, APIs, filters, exports, and interface. See [`CLASSIFIER_VALIDATION.md`](CLASSIFIER_VALIDATION.md) for the internal evaluation and full-frame verification, and [`RELEASE.md`](RELEASE.md) for hashes, coverage, interpretation, and public assets.
+## Branches
 
-The active application source is [`site/`](site/). The configured deployment target is `metacan.xera.ac`, but this README does not assert that the public deployment matches the current repository revision. Live status is established only by the release and browser verification gates.
+| Branch | Purpose |
+|---|---|
+| `main` | Methods, protocols, frame construction, screening, classifier, database creation, tests, and release records |
+| `webapp` | Standalone bilingual Next.js application, Prisma migrations, recent OpenAlex updater, CI, and production guidance |
 
-The application includes a separate rolling OpenAlex layer. Deployment is configured to retrieve a complete 30-day publication window every day at 05:15 server time, evaluate the same four Canadian routes, and replace that window atomically after a successful retrieval. The updater also accepts any window from 15 through 30 days. Until the first successful keyed run, the interface reports that no live window is available. This operational table never changes the frozen 4,299,418 work release or its citable cohort links. The public surface is `/recent`, with JSON at `/api/v1/recent`.
-
-No OSF registration or Zenodo DOI is claimed at this stage. The protocol is a working protocol, not a completed registration.
-
-## Repository layout
+## Pipeline map
 
 ```text
-data/             frame metadata and local data links
-docs/proposal/    two-page submission attachment and form answers
-docs/protocol/    working protocol, locked rubrics, and output schemas
-pilot/            numbered analyses, archived inputs, and screening runs
-R/                frame construction and research checks
-ml/               screening validation and classifier workflows
-site/             active bilingual Next.js application
-deploy/           database and application deployment tooling
-legacy/           superseded prototypes
-DEVIATIONS.md     numbered methodological and implementation deviations
+OpenAlex snapshot
+      |
+      v
+R/ frame construction and Canadian route provenance
+      |
+      v
+pilot/ sampling, screening records, and generated findings
+      |
+      v
+ml/ two teacher classifier training, application, and verification
+      |
+      v
+deploy/ PostgreSQL schema, indexes, normalization, and release loaders
+      |
+      v
+webapp branch and metacan.xera.ac
 ```
 
-## Why the frame comes before the field label
+### Frame construction
 
-A conventional map first retrieves records that look like metaresearch, then checks whether they are Canadian. That makes the field boundary depend on the retrieval vocabulary. It also makes missed work hard to measure because excluded records disappear before screening.
+- [`R/snapshot.R`](R/snapshot.R) defines the pinned snapshot interface.
+- [`R/harvest_frame.R`](R/harvest_frame.R) processes every snapshot partition and records resumable progress.
+- [`R/frame.R`](R/frame.R) defines the four Canadian admission routes.
+- [`R/frame_lexicon.R`](R/frame_lexicon.R) owns the versioned geographic lexicon.
+- [`R/export_for_db.R`](R/export_for_db.R) produces the database import files.
+- [`data/frame/frame_summary.json`](data/frame/frame_summary.json) records the frozen row and route counts.
 
-MétaCan reverses the order. It first builds an enumerable Canadian frame from checkable metadata routes. It then treats field membership as a classification question over that frame. Each work retains the route that admitted it, so retrieval behaviour can be studied rather than hidden.
+### Screening and methods
 
-The approach does not make machine screening correct. The historical pilot shows why model agreement cannot substitute for human validity. Direct model labels identify records where models differ and support sampling. Human coding remains the planned source of design-based estimates.
+- [`docs/protocol/PROTOCOL.md`](docs/protocol/PROTOCOL.md) is the working study protocol.
+- [`docs/protocol/rubric-v3.md`](docs/protocol/rubric-v3.md) is the locked current instrument.
+- [`pilot/screening`](pilot/screening) preserves prompts, consolidated labels, and provenance manifests.
+- [`pilot/results/findings.json`](pilot/results/findings.json) is the machine readable historical finding store.
+- [`DEVIATIONS.md`](DEVIATIONS.md) records methodological and implementation deviations.
+
+### Classifier
+
+- [`ml/full_frame_classifier.py`](ml/full_frame_classifier.py) exposes `validate`, `train`, `apply`, and `verify` commands.
+- [`artifacts/frame_classifier`](artifacts/frame_classifier) contains the compact model and release metadata.
+- [`tests`](tests) covers training data contracts, grouped folds, feature parity, resumable application, full frame verification, and database loading.
+- [`RELEASE.md`](RELEASE.md) records hashes for the model, frame, predictions, and public assets.
+
+### Database
+
+- [`deploy/schema.sql`](deploy/schema.sql) creates the frozen frame and historical evidence tables.
+- [`deploy/normalize.sql`](deploy/normalize.sql) normalizes imported values.
+- [`deploy/indexes.sql`](deploy/indexes.sql) creates query indexes and materialized facet tables.
+- [`deploy/classifier-schema.sql`](deploy/classifier-schema.sql) creates classifier release and prediction tables.
+- [`deploy/load_labels.py`](deploy/load_labels.py) loads direct machine labels.
+- [`deploy/load-classifier-release.sh`](deploy/load-classifier-release.sh) verifies and loads a full classifier release.
+
+See [`DATABASE.md`](DATABASE.md) for the creation order, required local inputs, and validation checks.
+
+## Quick validation
+
+Python 3.12 or 3.13, R, and `uv` are required.
+
+```bash
+uv sync --locked --dev
+make deps
+make check
+```
+
+Use the classifier command help for the exact artifact paths required by each stage:
+
+```bash
+uv run python -m ml.full_frame_classifier --help
+```
+
+The committed documentation and generated findings require no API credential. Snapshot retrieval, model screening, database loading, and deployment use local data or credentials that are deliberately excluded from Git.
 
 ## Evidence hierarchy
 
 When two files disagree, use this order:
 
-1. Frozen source artifacts and their machine-readable summaries.
+1. Frozen source artifacts and their machine readable summaries.
 2. Generated result stores, especially `pilot/results/findings.json`.
 3. Screening status, validation, and provenance manifests for the named round and arm.
 4. Rendered tables and narrative documents.
 
-[`pilot/results/FINDINGS.md`](pilot/results/FINDINGS.md) is generated from the finding store. It is the entry point for historical pilot results. Sample sizes in that file refer to the analysis named in each row. They do not describe the active two-arm release screen unless the row says so explicitly.
+## Citation and FAIR metadata
 
-## Build and validation commands
-
-```bash
-make lint       # research consistency checks
-make proposal   # build the submission PDF and enforce the two-page limit
-make protocol   # build the protocol with its rubric appendices
-```
-
-The repository also exposes `make pilot` and `make pilot-offline`. They are research workflows, not a guarantee that a clean machine can currently recreate every artifact. A release claim requires a clean-environment run, pinned dependencies, and verification of all local source data. Language model labels are not deterministic. Their reproducibility record is therefore the exact prompt, raw response, model identity, hashes, and validation outcome, not an assertion that a second call will return the same label.
-
-No API key is required to read the committed documentation or generated findings. Some data, model, and deployment workflows require local files or credentials that are not committed.
-
-The recent-work updater uses `DATABASE_URL`. A free `OPENALEX_API_KEY` is required for database-writing and scheduled runs because the complete query set exceeds the anonymous daily allowance. The retrieval and route checks can be exercised without a database write:
-
-```bash
-cd site
-npm run sync:recent -- --dry-run --days 15
-npm run test:recent-sync
-```
-
-The production database predates Prisma migration tracking. Migration `20260714000000_existing_schema_baseline` describes that existing schema. `npm run db:preflight` distinguishes a fresh database, a resolved baseline, and a complete legacy schema that needs the baseline marked as applied. It refuses a partial legacy schema. The deployment script performs that check before `prisma migrate deploy`, then refreshes empty facet tables after the migrations. Prisma explicitly maps the recent-layer indexes and array defaults. The recent-run status constraint, single-running partial index, classifier row-count constraint, and single-active classifier index remain raw SQL-managed objects because Prisma cannot represent those contracts completely.
+`CITATION.cff`, `codemeta.json`, `ro-crate-metadata.json`, and `.zenodo.json` expose machine readable authorship, ORCID, version, licence, runtime, provenance, and related application links. [`FAIR.md`](FAIR.md) maps these records to the FAIR principles and states the remaining gaps without claiming a DOI or archival deposit.
 
 ## Scope and limitations
 
-The frame is bounded by the pinned OpenAlex snapshot and the project’s Canadian metadata routes. Work absent from the covered sources, or lacking every detectable Canadian signal, is outside what this design can estimate.
+The frame is bounded by the pinned OpenAlex snapshot and the recorded Canadian metadata routes. Work absent from covered sources, or lacking every detectable Canadian signal, remains outside what this design can estimate.
 
-The current screening evidence is machine generated. It supports instrument development and sampling, but it does not establish accuracy. The planned human study includes independent coding, an unresolved outcome for insufficient evidence, and design weights tied to recorded selection probabilities.
+The machine screening evidence supports instrument development and sampling. It does not establish accuracy. The planned human study includes independent coding, an unresolved category for insufficient evidence, and design weights tied to recorded selection probabilities.
 
-No sensitive identity is inferred. Derived labels involving Indigenous-governed data are not released without appropriate governance.
+No sensitive identity is inferred. Derived labels involving Indigenous governed data are not released without appropriate governance.
 
 ## Licence
 
-Code is licensed under MIT. Data and documentation are licensed under CC BY 4.0. See [`DATA-LICENSE.md`](DATA-LICENSE.md) for the notice and suggested attribution.
+Code is licensed under MIT. Data and documentation are licensed under CC BY 4.0. See [`DATA-LICENSE.md`](DATA-LICENSE.md) for attribution and source specific conditions.

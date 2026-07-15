@@ -1,0 +1,58 @@
+name: Bug report
+description: Report a reproducible MétaCan problem
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: What went wrong?
+    validations:
+      required: true
+  - type: dropdown
+    id: branch
+    attributes:
+      label: Affected surface
+      options:
+        - Main research pipeline
+        - Web application branch
+        - Production website or API
+        - Documentation or metadata
+        - Not sure
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Minimal reproducible example
+      description: Include the smallest command, input, or URL that shows the problem.
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behaviour
+    validations:
+      required: true
+  - type: textarea
+    id: observed
+    attributes:
+      label: Observed behaviour
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version or commit
+      description: Provide the release, branch commit, or classifier version.
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before submission
+      options:
+        - label: I searched existing issues.
+          required: true
+        - label: I removed credentials, private data, and restricted metadata.
+          required: true
