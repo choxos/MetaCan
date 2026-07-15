@@ -28,7 +28,9 @@ The exact category set agreement rate is 0.820255 unweighted and 0.941198 after 
 |---|---|
 | Version | `metacan-v1-d91a1de5be90` |
 | Training rows | 10,348 |
-| Source commit | `48cffaf5aebcdcbd6873c032513d1ff17b7fcb33` |
+| Training source commit | `48cffaf5aebcdcbd6873c032513d1ff17b7fcb33` |
+| Public source equivalent | `75b336ac242c34a441f82ca49e678c36775f0819` |
+| Source tree object | `954348d6f0fc098d0f3b2514280a606d76d6a134` |
 | Source tree | Clean |
 | Available Codex heads | 20 of 20 |
 | Available Gemma heads | 19 of 20 |
@@ -36,6 +38,8 @@ The exact category set agreement rate is 0.820255 unweighted and 0.941198 after 
 | Model SHA256 | `2aa7c89b5df35a262221ad33daf49f52df8ec66a488455cdacce4ff2b3ced617` |
 | Feature contract SHA256 | `f9a7f4b1e4d6ed4dc03dfbf3cb7de45ceabc4a7398680607ace2bb81b1daabac` |
 | Output schema SHA256 | `9590ca7afafe8abc22eca9ede70c31ac7b8fa86c7037cdbe5c717e9f5b29dc5f` |
+
+The training source commit predates release history normalization. Its public equivalent has the identical Git tree object shown above. The classifier version and artifact metadata retain the training commit because that exact identifier was part of the version seed.
 
 The classifier has 39 available binary teacher heads. Each score imitates one direct screening arm on the enriched sample. Both candidate union and consensus intersection decisions require two available teacher heads, so decisions cover the 19 targets available for both arms. For those targets, the candidate union includes a work when either teacher score crosses its recorded threshold; the consensus intersection requires both.
 
