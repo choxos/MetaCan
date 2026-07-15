@@ -17,24 +17,20 @@ The 15 day window is the production default for the current free OpenAlex allowa
 
 ## Update sequence
 
-Confirm the checkout is clean and that a current database backup exists. Then run:
+Confirm that a current database backup exists. Then run:
 
 ```bash
 cd /var/www/metacan
-git fetch origin webapp
-git switch webapp
-git merge --ff-only origin/webapp
-npm ci
-npm run db:preflight
-npm run db:migrate
-npm run db:refresh-facets
-npm run build
-npm run sync:recent -- --if-stale-hours 20
-pm2 restart metacan --update-env
-pm2 save
+./ops/deploy-production.sh
 ```
 
-The build must finish before PM2 restarts. If any command before the restart fails, the running process remains untouched.
+The script stops PM2 immediately before building, restores the previous build after a failure, and restarts before any OpenAlex update. It also retains the previous build's hashed static assets so an already open browser tab can finish loading after a release.
+
+The recent layer is operational work, not part of the application release. Let the daily job run it after the OpenAlex allowance resets. To request a guarded update manually after deployment, run:
+
+```bash
+npm run sync:recent -- --if-stale-hours 20
+```
 
 ## Daily update
 

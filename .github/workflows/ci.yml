@@ -65,6 +65,9 @@ jobs:
       - name: Check application code
         run: npm run check
 
+      - name: Validate production deployment script
+        run: bash -n ops/deploy-production.sh
+
       - name: Validate citation metadata
         run: uvx cffconvert --validate
 
