@@ -1,10 +1,32 @@
-import type { NextRequest } from 'next/server'
-import { cohortCount, exportChunk, labelAgreement, EXPORT_CAP, type ExportRow } from '@/lib/query'
-import { canonicalFilters, filtersToQuery, hashFilters, SNAPSHOT } from '@/lib/permalink'
-import { CORS, filtersFromParams, OPTIONS } from '@/lib/api'
+import type { NextRequest } from "next/server";
+import {
+  cohortCount,
+  exportChunk,
+  labelAgreement,
+  EXPORT_CAP,
+  type ExportRow,
+} from "@/lib/query";
+import {
+  canonicalFilters,
+  filtersToQuery,
+  hashFilters,
+  SNAPSHOT,
+} from "@/lib/permalink";
+import {
+  CORS,
+  filtersFromParams,
+  invalidFilterResponse,
+  OPTIONS,
+} from "@/lib/api";
+import {
+  classifierMeta,
+  pinClassifierFilters,
+  resolveClassifierContext,
+} from "@/lib/predictions";
+import { csvCell } from "@/lib/csv";
 
-export const dynamic = 'force-dynamic'
-export { OPTIONS }
+export const dynamic = "force-dynamic";
+export { OPTIONS };
 
 /**
  * GET /api/v1/cohort/export?format=csv|json&<filters>
@@ -22,154 +44,175 @@ export { OPTIONS }
  * field means UNLABELLED, which is not a negative label.
  */
 
-const CHUNK = 5_000
+const CHUNK = 5_000;
 
 const CSV_COLUMNS = [
-  'id',
-  'doi',
-  'title',
-  'year',
-  'lang',
-  'type',
-  'venue',
-  'topic',
-  'field',
-  'cited_by',
-  'is_retracted',
-  'has_abstract',
-  'route_ca_aff',
-  'route_ca_fund',
-  'route_ca_venue',
-  'route_about_ca',
-  'ca_institutions',
-  'funders',
-  'keywords',
-  'score_opus',
-  'score_gpt',
-  'score_spread',
-  'validation_status',
-  'label_models',
-  'label_agreement',
-  'label_categories_union',
-  'labels_json',
-] as const
-
-function csvCell(v: unknown): string {
-  if (v === null || v === undefined) return ''
-  const s = String(v)
-  return /[",\n\r]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s
-}
+  "id",
+  "doi",
+  "title",
+  "year",
+  "lang",
+  "type",
+  "venue",
+  "topic",
+  "field",
+  "cited_by",
+  "is_retracted",
+  "has_abstract",
+  "route_ca_aff",
+  "route_ca_fund",
+  "route_ca_venue",
+  "route_about_ca",
+  "ca_institutions",
+  "funders",
+  "keywords",
+  "score_opus",
+  "score_gpt",
+  "score_spread",
+  "validation_status",
+  "label_models",
+  "label_agreement",
+  "label_categories_union",
+  "labels_json",
+  "prediction_json",
+] as const;
 
 function csvRow(r: ExportRow): string {
-  const labels = r.labels ?? []
+  const labels = r.labels ?? [];
   const agreement = labelAgreement(
-    labels.map((l) => ({ categories: l.categories, studyDesign: l.study_design })),
-  )
-  const union = [...new Set(labels.flatMap((l) => l.categories))].sort()
+    labels.map((l) => ({
+      categories: l.categories,
+      studyDesign: l.study_design,
+    })),
+  );
+  const union = [...new Set(labels.flatMap((l) => l.categories))].sort();
   const cells: Record<(typeof CSV_COLUMNS)[number], unknown> = {
     ...r,
-    label_models: labels.map((l) => l.model).join(';'),
-    label_agreement: agreement ?? '',
-    label_categories_union: union.join(';'),
-    labels_json: labels.length ? JSON.stringify(labels) : '',
-  }
-  return CSV_COLUMNS.map((c) => csvCell(cells[c])).join(',') + '\n'
+    label_models: labels.map((l) => l.model).join(";"),
+    label_agreement: agreement ?? "",
+    label_categories_union: union.join(";"),
+    labels_json: labels.length ? JSON.stringify(labels) : "",
+    prediction_json: r.prediction ? JSON.stringify(r.prediction) : "",
+  };
+  return CSV_COLUMNS.map((c) => csvCell(cells[c])).join(",") + "\n";
 }
 
 function jsonRow(r: ExportRow): string {
-  const labels = r.labels ?? []
+  const labels = r.labels ?? [];
   return JSON.stringify({
     ...r,
     labels,
     label_agreement: labelAgreement(
-      labels.map((l) => ({ categories: l.categories, studyDesign: l.study_design })),
+      labels.map((l) => ({
+        categories: l.categories,
+        studyDesign: l.study_design,
+      })),
     ),
-  })
+  });
 }
 
 export async function GET(req: NextRequest) {
-  const sp = req.nextUrl.searchParams
-  const format = sp.get('format') === 'json' ? 'json' : 'csv'
-  const f = filtersFromParams(sp)
-  const hash = hashFilters(f)
+  const sp = req.nextUrl.searchParams;
+  const format = sp.get("format") === "json" ? "json" : "csv";
+  const f = filtersFromParams(sp);
+  const invalid = invalidFilterResponse(f);
+  if (invalid) return invalid;
+  const classifier = await resolveClassifierContext(f);
+  const pinnedFilters = pinClassifierFilters(f, classifier);
+  const hash = hashFilters(pinnedFilters);
 
-  const { total, labeled } = await cohortCount(f)
-  const truncated = total > EXPORT_CAP
+  const { total, labeled, classified } = await cohortCount(
+    pinnedFilters,
+    classifier,
+  );
+  const truncated = total > EXPORT_CAP;
 
   const meta = {
     query_hash: hash,
-    filters: canonicalFilters(f),
+    filters: canonicalFilters(pinnedFilters),
     cohort_total: total,
     labels_cover: labeled,
+    classified_cover: classified,
     exported: Math.min(total, EXPORT_CAP),
     export_cap: EXPORT_CAP,
     truncated,
-    label_status: 'machine label (frontier LLM, unvalidated)',
-    score_status: 'score_only:v0-immature-baseline',
+    label_status: "machine label (frontier LLM, unvalidated)",
+    score_status: "score_only:v0-immature-baseline",
+    classifier: classifierMeta(classifier),
     snapshot: {
-      source: 'OpenAlex, pinned release, all 482 partitions',
+      source: "OpenAlex, pinned release, all 482 partitions",
       release: SNAPSHOT.release,
       frame_built: SNAPSHOT.built,
     },
     permalink: `https://metacan.xera.ac/q/${hash}`,
-    api: `https://metacan.xera.ac/api/v1/cohort?${filtersToQuery(canonicalFilters(f))}`,
-  }
+    api: `https://metacan.xera.ac/api/v1/cohort?${filtersToQuery(canonicalFilters(pinnedFilters))}`,
+  };
 
-  const encoder = new TextEncoder()
+  const encoder = new TextEncoder();
   const stream = new ReadableStream<Uint8Array>({
     async start(controller) {
-      const write = (s: string) => controller.enqueue(encoder.encode(s))
+      const write = (s: string) => controller.enqueue(encoder.encode(s));
       try {
-        if (format === 'json') {
-          write(`{"meta":${JSON.stringify(meta)},"results":[`)
+        if (format === "json") {
+          write(`{"meta":${JSON.stringify(meta)},"results":[`);
         } else {
-          write(CSV_COLUMNS.join(',') + '\n')
+          write(CSV_COLUMNS.join(",") + "\n");
         }
 
-        let cursor = ''
-        let sent = 0
-        let first = true
+        let cursor = "";
+        let sent = 0;
+        let first = true;
         while (sent < EXPORT_CAP) {
-          const limit = Math.min(CHUNK, EXPORT_CAP - sent)
-          const rows = await exportChunk(f, cursor, limit)
-          const last = rows[rows.length - 1]
-          if (last === undefined) break
+          const limit = Math.min(CHUNK, EXPORT_CAP - sent);
+          const rows = await exportChunk(
+            pinnedFilters,
+            cursor,
+            limit,
+            classifier,
+          );
+          const last = rows[rows.length - 1];
+          if (last === undefined) break;
           for (const r of rows) {
-            if (format === 'json') {
-              write((first ? '' : ',') + jsonRow(r))
-              first = false
+            if (format === "json") {
+              write((first ? "" : ",") + jsonRow(r));
+              first = false;
             } else {
-              write(csvRow(r))
+              write(csvRow(r));
             }
           }
-          sent += rows.length
-          cursor = last.id
-          if (rows.length < limit) break
+          sent += rows.length;
+          cursor = last.id;
+          if (rows.length < limit) break;
         }
 
-        if (format === 'json') {
-          write(']}')
+        if (format === "json") {
+          write("]}");
         } else if (truncated) {
           // Declared in-band too: a file that silently stops at 100,000 rows
           // looks complete, and this one is not.
-          write(`# TRUNCATED: cohort has ${total} works; export capped at ${EXPORT_CAP} rows (ordered by id). Page /api/v1/cohort, or rebuild the frame from the repository, for the rest.\n`)
+          write(
+            `# TRUNCATED: cohort has ${total} works; export capped at ${EXPORT_CAP} rows (ordered by id). Page /api/v1/cohort, or rebuild the frame from the repository, for the rest.\n`,
+          );
         }
-        controller.close()
+        controller.close();
       } catch (e) {
-        controller.error(e)
+        controller.error(e);
       }
     },
-  })
+  });
 
-  const stamp = new Date().toISOString().slice(0, 10)
+  const stamp = new Date().toISOString().slice(0, 10);
   return new Response(stream, {
     headers: {
       ...CORS,
-      'Content-Type': format === 'json' ? 'application/json; charset=utf-8' : 'text/csv; charset=utf-8',
-      'Content-Disposition': `attachment; filename="metacan-cohort-${hash}-${stamp}.${format}"`,
-      'Cache-Control': 'no-store',
-      'X-Cohort-Total': String(total),
-      'X-Export-Truncated': truncated ? 'true' : 'false',
+      "Content-Type":
+        format === "json"
+          ? "application/json; charset=utf-8"
+          : "text/csv; charset=utf-8",
+      "Content-Disposition": `attachment; filename="metacan-cohort-${hash}-${stamp}.${format}"`,
+      "Cache-Control": "no-store",
+      "X-Cohort-Total": String(total),
+      "X-Export-Truncated": truncated ? "true" : "false",
     },
-  })
+  });
 }

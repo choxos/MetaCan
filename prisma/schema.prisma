@@ -14,42 +14,113 @@ datasource db {
 /// The frame: every Canadian work in the pinned OpenAlex snapshot (all 482
 /// partitions). No abstract column by design; the abstract inverted indexes are
 /// 8.6 GB of the frame's 9.3 GB of text, and the host has 13 GB free, so the
-/// detail page fetches an abstract live from OpenAlex. `hasAbstract` IS stored,
-/// because whether a work has one is itself a finding: 23.3% do not, and the
-/// screen finds half as much metaresearch there.
+/// detail page prefers PubMed, then Europe PMC, then OpenAlex and caches each
+/// upstream response. `hasAbstract` IS stored,
+/// because whether a work has one is itself a finding: 23.3% do not, and a
+/// historical model assigned positive labels at roughly half the rate there.
 model Work {
-  id           String   @id @db.VarChar(20)
+  id          String  @id @db.VarChar(20)
   /// TEXT, not VarChar(255): the longest DOI in the frame is 294 characters (a
   /// malformed OpenAlex record, a PDF URL glued to a DOI prefix). See schema.sql.
-  doi          String?
-  title        String
-  year         Int?     @db.SmallInt
-  lang         String?  @db.VarChar(8)
-  type         String?  @db.VarChar(32)
-  venue        String?
-  topic        String?
-  field        String?
-  citedBy      Int      @default(0) @map("cited_by")
-  isRetracted  Boolean  @default(false) @map("is_retracted")
-  hasAbstract  Boolean  @default(false) @map("has_abstract")
+  doi         String?
+  title       String
+  year        Int?    @db.SmallInt
+  lang        String? @db.VarChar(8)
+  type        String? @db.VarChar(32)
+  venue       String?
+  topic       String?
+  field       String?
+  citedBy     Int     @default(0) @map("cited_by")
+  isRetracted Boolean @default(false) @map("is_retracted")
+  hasAbstract Boolean @default(false) @map("has_abstract")
 
   /// PROVENANCE. Why is this work in the frame? A frame that forgets how it
   /// found something cannot be audited, and that is the entire thesis.
-  routeCaAff   Boolean  @default(false) @map("route_ca_aff")
-  routeCaFund  Boolean  @default(false) @map("route_ca_fund")
-  routeCaVenue Boolean  @default(false) @map("route_ca_venue")
-  routeAboutCa Boolean  @default(false) @map("route_about_ca")
+  routeCaAff   Boolean @default(false) @map("route_ca_aff")
+  routeCaFund  Boolean @default(false) @map("route_ca_fund")
+  routeCaVenue Boolean @default(false) @map("route_ca_venue")
+  routeAboutCa Boolean @default(false) @map("route_about_ca")
 
   caInstitutions String? @map("ca_institutions")
   funders        String?
   keywords       String?
 
-  retraction Retraction?
-  screened   Screened?
-  score      WorkScore?
-  labels     WorkLabel[]
+  retraction  Retraction?
+  screened    Screened?
+  score       WorkScore?
+  labels      WorkLabel[]
+  predictions WorkPrediction[]
 
   @@map("works")
+}
+
+/// The rolling OpenAlex layer. It is separate from Work so the registered
+/// 4.3 million work release, its counts, and its citable cohort links remain
+/// immutable. A daily job replaces one complete 15 to 30 day publication
+/// window atomically while retaining earlier successful windows.
+model RecentWork {
+  id              String   @id @db.VarChar(20)
+  doi             String?
+  title           String
+  publicationDate DateTime @map("publication_date") @db.Date
+  year            Int?     @db.SmallInt
+  lang            String?  @db.VarChar(8)
+  type            String?  @db.VarChar(32)
+  venue           String?
+  topic           String?
+  field           String?
+  citedBy         Int      @default(0) @map("cited_by")
+  isRetracted     Boolean  @default(false) @map("is_retracted")
+  hasAbstract     Boolean  @default(false) @map("has_abstract")
+  abstract        String?
+  pmid            String?  @db.VarChar(32)
+  pmcid           String?  @db.VarChar(32)
+
+  routeCaAff   Boolean @default(false) @map("route_ca_aff")
+  routeCaFund  Boolean @default(false) @map("route_ca_fund")
+  routeCaVenue Boolean @default(false) @map("route_ca_venue")
+  routeAboutCa Boolean @default(false) @map("route_about_ca")
+
+  caInstitutions String[] @default([]) @map("ca_institutions")
+  funders        String[] @default([])
+  keywords       String[] @default([])
+  authors        Json
+
+  openalexUpdatedDate DateTime? @map("openalex_updated_date") @db.Date
+  routeVersion       String    @map("route_version") @db.VarChar(64)
+  sourceWindowStart  DateTime  @map("source_window_start") @db.Date
+  sourceWindowEnd    DateTime  @map("source_window_end") @db.Date
+  firstSeenAt        DateTime  @default(now()) @map("first_seen_at") @db.Timestamptz(6)
+  lastSeenAt         DateTime  @map("last_seen_at") @db.Timestamptz(6)
+  syncedAt           DateTime  @map("synced_at") @db.Timestamptz(6)
+
+  @@index([publicationDate(sort: Desc), id], map: "idx_recent_work_publication")
+  @@index([caInstitutions], type: Gin, map: "idx_recent_work_institutions")
+  @@index([funders], type: Gin, map: "idx_recent_work_funders")
+  @@index([keywords], type: Gin, map: "idx_recent_work_keywords")
+  @@map("recent_work")
+}
+
+/// One operational record per attempted daily update. A partial unique index
+/// in the SQL migration permits only one row with status running at a time.
+model RecentSyncRun {
+  id            BigInt    @id @default(autoincrement())
+  status        String    @db.VarChar(16)
+  startedAt     DateTime  @default(now()) @map("started_at") @db.Timestamptz(6)
+  completedAt   DateTime? @map("completed_at") @db.Timestamptz(6)
+  requestedDays Int       @map("requested_days")
+  windowStart   DateTime  @map("window_start") @db.Date
+  windowEnd     DateTime  @map("window_end") @db.Date
+  routeVersion  String    @map("route_version") @db.VarChar(64)
+  apiRequests   Int       @default(0) @map("api_requests")
+  returnedRows  Int       @default(0) @map("returned_rows")
+  candidateRows Int       @default(0) @map("candidate_rows")
+  matchedRows   Int       @default(0) @map("matched_rows")
+  storedRows    Int       @default(0) @map("stored_rows")
+  error         String?
+
+  @@index([startedAt(sort: Desc)], map: "idx_recent_sync_started")
+  @@map("recent_sync_run")
 }
 
 /// Retraction Watch's post-publication state (finding 17). Separate from
@@ -78,36 +149,36 @@ model Retraction {
 /// `weight` is the design weight; the sample is stratified, so any rate computed
 /// from it without the weight is wrong.
 model Screened {
-  id        String  @id @db.VarChar(20)
-  stratum   String? @db.VarChar(32)
-  stratumN  Int?    @map("stratum_n")
-  weight    Float?
-  title     String?
-  abstract  String?
-  year      Int?    @db.SmallInt
-  lang      String? @db.VarChar(8)
-  type      String? @db.VarChar(32)
-  venue     String?
-  topic     String?
-  field     String?
+  id       String  @id @db.VarChar(20)
+  stratum  String? @db.VarChar(32)
+  stratumN Int?    @map("stratum_n")
+  weight   Float?
+  title    String?
+  abstract String?
+  year     Int?    @db.SmallInt
+  lang     String? @db.VarChar(8)
+  type     String? @db.VarChar(32)
+  venue    String?
+  topic    String?
+  field    String?
 
-  opusTier       String? @map("opus_tier") @db.VarChar(8)
-  opusGenre      String? @map("opus_genre") @db.VarChar(48)
+  opusTier       String?  @map("opus_tier") @db.VarChar(8)
+  opusGenre      String?  @map("opus_genre") @db.VarChar(48)
   opusAboutCa    Boolean? @map("opus_about_ca")
-  opusConfidence String? @map("opus_confidence") @db.VarChar(8)
-  opusReason     String? @map("opus_reason")
+  opusConfidence String?  @map("opus_confidence") @db.VarChar(8)
+  opusReason     String?  @map("opus_reason")
 
-  gptTier       String? @map("gpt_tier") @db.VarChar(8)
-  gptGenre      String? @map("gpt_genre") @db.VarChar(48)
+  gptTier       String?  @map("gpt_tier") @db.VarChar(8)
+  gptGenre      String?  @map("gpt_genre") @db.VarChar(48)
   gptAboutCa    Boolean? @map("gpt_about_ca")
-  gptConfidence String? @map("gpt_confidence") @db.VarChar(8)
-  gptReason     String? @map("gpt_reason")
+  gptConfidence String?  @map("gpt_confidence") @db.VarChar(8)
+  gptReason     String?  @map("gpt_reason")
 
-  grokTier       String? @map("grok_tier") @db.VarChar(8)
-  grokGenre      String? @map("grok_genre") @db.VarChar(48)
+  grokTier       String?  @map("grok_tier") @db.VarChar(8)
+  grokGenre      String?  @map("grok_genre") @db.VarChar(48)
   grokAboutCa    Boolean? @map("grok_about_ca")
-  grokConfidence String? @map("grok_confidence") @db.VarChar(8)
-  grokReason     String? @map("grok_reason")
+  grokConfidence String?  @map("grok_confidence") @db.VarChar(8)
+  grokReason     String?  @map("grok_reason")
 
   nIn Int? @map("n_in") @db.SmallInt
 
@@ -164,6 +235,50 @@ model WorkLabel {
 
   @@id([id, model])
   @@map("work_label")
+}
+
+/// One immutable classifier release. Target arrays define the positions used
+/// by every packed WorkPrediction score vector for this version.
+model ClassifierModel {
+  version             String   @id @db.VarChar(64)
+  createdAt           DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  active              Boolean  @default(false)
+  rowCount            Int      @map("row_count")
+  outputHash          String   @map("output_hash") @db.Char(64)
+  frameHash           String   @map("frame_hash") @db.Char(64)
+  modelHash           String   @map("model_hash") @db.Char(64)
+  featureContractHash String   @map("feature_contract_hash") @db.Char(64)
+  schemaHash          String   @map("schema_hash") @db.Char(64)
+  scoreEncoding       String   @default("uint16_le_65535") @map("score_encoding") @db.VarChar(32)
+  targets             String[]
+  codexTargets        String[] @map("codex_targets")
+  gemmaTargets        String[] @map("gemma_targets")
+  decisionTargets     String[] @map("decision_targets")
+  interpretation      String
+  metadata            Json
+
+  predictions WorkPrediction[]
+
+  @@map("classifier_model")
+}
+
+/// Full-frame teacher-imitation output. Scores are unsigned 16-bit values in
+/// little-endian order and align with the target arrays on ClassifierModel.
+/// Missing rows mean unknown coverage, never a negative classification.
+model WorkPrediction {
+  id                    String   @db.VarChar(20)
+  classifierVersion     String   @map("classifier_version") @db.VarChar(64)
+  candidateUnion        String[] @map("candidate_union")
+  consensusIntersection String[] @map("consensus_intersection")
+  codexScores           Bytes    @map("codex_scores")
+  gemmaScores           Bytes    @map("gemma_scores")
+
+  work       Work            @relation(fields: [id], references: [id], onDelete: Cascade)
+  classifier ClassifierModel @relation(fields: [classifierVersion], references: [version], onDelete: Cascade)
+
+  @@id([id, classifierVersion])
+  @@index([classifierVersion, id])
+  @@map("work_prediction")
 }
 
 /// Citable cohort queries: the canonical filter state behind /q/<hash>. The row
