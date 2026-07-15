@@ -7,6 +7,46 @@
     "type": "object",
     "additionalProperties": false,
     "required": ["id", "categories", "study_design", "genre", "about_ca_system", "about_ca_topic", "confidence"],
+    "allOf": [
+      {
+        "if": {
+          "properties": {
+            "categories": {
+              "contains": {"const": "metaresearch"}
+            }
+          },
+          "required": ["categories"]
+        },
+        "then": {
+          "required": ["domain"],
+          "properties": {
+            "domain": {
+              "enum": ["methods", "reporting", "reproducibility", "evaluation", "incentives"]
+            }
+          }
+        },
+        "else": {
+          "properties": {
+            "domain": {"type": "null"}
+          }
+        }
+      },
+      {
+        "if": {
+          "properties": {
+            "categories": {
+              "contains": {"const": "insufficient_payload"}
+            }
+          },
+          "required": ["categories"]
+        },
+        "then": {
+          "properties": {
+            "categories": {"maxItems": 1}
+          }
+        }
+      }
+    ],
     "properties": {
       "id": {
         "type": "string",

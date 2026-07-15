@@ -9,6 +9,17 @@
 # only after 30 consecutive passes with zero new chunks, which is a real,
 # persistent failure and not a permission window.
 ROUND=$1; MODEL=$2
+if [ "$ROUND" = "100" ]; then
+  case "$MODEL" in
+    codex|gemma)
+      exec uv run python -m ml.repair_round100 repair --arm "$MODEL"
+      ;;
+    opus)
+      echo "[wrapper] round 100 Opus screening is paused"
+      exit 2
+      ;;
+  esac
+fi
 DIR=pilot/screening/loop/round_${ROUND}
 RAW=$DIR/raw_${MODEL}
 TOTAL=$(ls "$DIR"/prompts/prompt_*.txt 2>/dev/null | wc -l | tr -d ' ')

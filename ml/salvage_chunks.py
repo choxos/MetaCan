@@ -22,80 +22,90 @@ are the ones the EPERM window killed before codex produced anything at all.
 
 from __future__ import annotations
 
-import json
-import os
 import sys
+from pathlib import Path
 
-RD = "pilot/screening/loop/round_100"
-CHUNK = 25
+from ml.screening_chunks import InvalidChunk, ValidatedChunk
+from ml.screening_repair import extract_json_arrays
+from ml.screening_round import (
+    CandidateProvenance,
+    CandidateRejected,
+    ChunkKey,
+    ScreeningArm,
+    accept_candidate,
+    inspect_existing,
+    load_round_contract,
+    quarantine_existing,
+)
 
-
-def extract_array(raw: str):
-    """Same contract as the harness: the model writes prose, the HARNESS writes labels."""
-    i = raw.find("[")
-    while i != -1:
-        j = raw.rfind("]")
-        while j > i:
-            try:
-                c = json.loads(raw[i:j + 1])
-                if isinstance(c, list) and c and isinstance(c[0], dict) and "categories" in c[0]:
-                    return c
-                break
-            except Exception:
-                j = raw.rfind("]", 0, j)
-        i = raw.find("[", i + 1)
-    return None
+RD = Path("pilot/screening/loop/round_100")
 
 
-def main(arm="codex"):
-    raw_dir = f"{RD}/raw_{arm}"
-    batch = json.load(open(f"{RD}/batch.json"))
-    chunks = [batch[i:i + CHUNK] for i in range(0, len(batch), CHUNK)]
-
-    salvaged, unrecoverable, mismatched = [], [], []
-    for k, recs in enumerate(chunks, start=1):
-        out = f"{raw_dir}/chunk_{k:03d}.json"
-        if os.path.exists(out) and os.path.getsize(out) > 0:
+def main(arm: str = "codex") -> None:
+    contract = load_round_contract(RD)
+    screening_arm = ScreeningArm(arm)
+    raw_dir = RD / f"raw_{arm}"
+    salvaged: list[int] = []
+    unrecoverable: list[int] = []
+    for expectation in contract.expectations:
+        number = int(expectation.number)
+        key = ChunkKey(screening_arm, number)
+        inspected = inspect_existing(contract, key)
+        if isinstance(inspected, ValidatedChunk):
             continue
-        want = {r["id"] for r in recs}
-        found = None
+        if isinstance(inspected, InvalidChunk):
+            quarantine_existing(contract, key)
+        found = False
         for stream in ("stdout", "stderr"):
-            p = f"{raw_dir}/{stream}_{k:03d}.txt"
-            if not os.path.exists(p):
+            path = raw_dir / f"{stream}_{number:03d}.txt"
+            if not path.is_file():
                 continue
             try:
-                raw = open(p, errors="replace").read()
+                raw = path.read_text(encoding="utf-8", errors="replace")
             except OSError:
                 continue
-            arr = extract_array(raw)
-            if not arr:
-                continue
-            got = {r.get("id") for r in arr}
-            # THE CHECK THAT MAKES SALVAGE SAFE: a stream may hold a stale array from
-            # an earlier attempt, or a truncated one. Only an array whose ids ARE this
-            # chunk's ids is this chunk's labels.
-            if got == want:
-                found = arr
+            for candidate in extract_json_arrays(raw):
+                try:
+                    accept_candidate(
+                        contract,
+                        key,
+                        candidate,
+                        CandidateProvenance(
+                            model_id="gpt-5.6-luna" if arm == "codex" else None,
+                            backend=None,
+                            attempt=None,
+                            source_stream=stream,
+                            origin="preexisting",
+                        ),
+                    )
+                except CandidateRejected:
+                    continue
+                found = True
                 break
-            mismatched.append((k, stream, len(got & want), len(want)))
+            if found:
+                break
         if found:
-            json.dump(found, open(out, "w"))
-            salvaged.append(k)
+            salvaged.append(number)
         else:
-            unrecoverable.append(k)
+            unrecoverable.append(number)
 
-    print(f"[salvage {arm}] salvaged {len(salvaged)} chunks from disk: "
-          f"{' '.join(f'{k:03d}' for k in salvaged) or 'none'}")
-    if mismatched:
-        print(f"[salvage {arm}] {len(mismatched)} arrays found but rejected on id mismatch "
-              f"(partial/stale output, NOT trusted):")
-        for k, s, hit, tot in mismatched[:10]:
-            print(f"    chunk {k:03d} ({s}): {hit}/{tot} ids match")
-    print(f"[salvage {arm}] {len(unrecoverable)} chunks have no recoverable array and must be re-run: "
-          f"{' '.join(f'{k:03d}' for k in unrecoverable) or 'none'}")
-    n = len([1 for k in range(1, len(chunks) + 1)
-             if os.path.exists(f"{raw_dir}/chunk_{k:03d}.json")])
-    print(f"[salvage {arm}] {n}/{len(chunks)} chunks now present")
+    print(
+        f"[salvage {arm}] salvaged {len(salvaged)} chunks from disk: "
+        f"{' '.join(f'{number:03d}' for number in salvaged) or 'none'}"
+    )
+    print(
+        f"[salvage {arm}] {len(unrecoverable)} chunks have no recoverable array "
+        "and must be re-run: "
+        f"{' '.join(f'{number:03d}' for number in unrecoverable) or 'none'}"
+    )
+    valid = sum(
+        isinstance(
+            inspect_existing(contract, ChunkKey(screening_arm, int(expectation.number))),
+            ValidatedChunk,
+        )
+        for expectation in contract.expectations
+    )
+    print(f"[salvage {arm}] {valid}/{len(contract.expectations)} chunks now valid")
 
 
 if __name__ == "__main__":

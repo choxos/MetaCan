@@ -1,0 +1,26 @@
+{
+  "arms": {
+    "codex": {
+      "chunks_expected": 414,
+      "chunks_present": 414,
+      "included": true,
+      "records": 10348,
+      "status": "complete"
+    },
+    "gemma": {
+      "chunks_expected": 414,
+      "chunks_present": 414,
+      "included": true,
+      "records": 10348,
+      "status": "complete"
+    },
+    "opus": {
+      "action": "paused",
+      "chunks_expected": 414,
+      "chunks_present": 82,
+      "included": false,
+      "status": "incomplete"
+    }
+  },
+  "batch_records": 10348
+}

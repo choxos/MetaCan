@@ -4,8 +4,19 @@
 # HARNESS writes the label files, and the validator is the only authority on
 # completeness. Usage: run_loop_round.sh <round:001> <grok|codex>
 set -u
-ROUND=${1:?usage: run_loop_round.sh <round> <grok|codex>}
-MODEL=${2:?usage: run_loop_round.sh <round> <grok|codex|opus>}
+ROUND=${1:?usage: run_loop_round.sh <round> <grok|codex|gemma>}
+MODEL=${2:?usage: run_loop_round.sh <round> <grok|codex|gemma|opus>}
+if [ "$ROUND" = "100" ]; then
+  case "$MODEL" in
+    codex|gemma)
+      exec uv run python -m ml.repair_round100 repair --arm "$MODEL"
+      ;;
+    opus)
+      echo "round 100 Opus screening is paused"
+      exit 2
+      ;;
+  esac
+fi
 DIR=pilot/screening/loop/round_${ROUND}
 RAW=$DIR/raw_${MODEL}
 mkdir -p "$RAW"

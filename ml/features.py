@@ -26,6 +26,8 @@ rather than hidden behind a score nobody could reproduce at inference time.
 from __future__ import annotations
 
 import re
+from collections.abc import Mapping, Sequence
+from typing import Final
 
 import numpy as np
 from scipy import sparse
@@ -34,25 +36,49 @@ from sklearn.pipeline import FeatureUnion
 
 # Every field the frame (data/db/works.csv) can supply for all 4,299,418 works.
 # `abstract` is deliberately ABSENT: the frame stores has_abstract, not the text.
-FRAME_FIELDS = frozenset(
+FRAME_FIELDS: Final = frozenset(
     {
-        "id", "doi", "title", "year", "lang", "type", "venue", "topic", "field",
-        "cited_by", "is_retracted", "has_abstract", "route_ca_aff", "route_ca_fund",
-        "route_ca_venue", "route_about_ca", "ca_institutions", "funders", "keywords",
+        "id",
+        "doi",
+        "title",
+        "year",
+        "lang",
+        "type",
+        "venue",
+        "topic",
+        "field",
+        "cited_by",
+        "is_retracted",
+        "has_abstract",
+        "route_ca_aff",
+        "route_ca_fund",
+        "route_ca_venue",
+        "route_about_ca",
+        "ca_institutions",
+        "funders",
+        "keywords",
     }
 )
 
 # The two payloads a model may be trained on, named so the choice is explicit and a
 # reader can see which one shipped.
-PAYLOAD_FRAME_PARITY = ["title", "venue", "topic", "field", "lang", "type", "year"]
-PAYLOAD_WITH_ABSTRACT = PAYLOAD_FRAME_PARITY + ["abstract"]
+PAYLOAD_FRAME_PARITY: Final = (
+    "title",
+    "venue",
+    "topic",
+    "field",
+    "lang",
+    "type",
+    "year",
+)
+PAYLOAD_WITH_ABSTRACT: Final = (*PAYLOAD_FRAME_PARITY, "abstract")
 
 
 class PayloadSkew(RuntimeError):
     """Raised when a model would be trained on a field inference cannot supply."""
 
 
-def assert_payload_parity(fields) -> None:
+def assert_payload_parity(fields: Sequence[str]) -> None:
     """FAIL if training would see a field the frame cannot serve.
 
     Called by the trainer before it fits anything. A model that trips this is not
@@ -71,20 +97,20 @@ def assert_payload_parity(fields) -> None:
 _WS = re.compile(r"\s+")
 
 
-def _clean(x) -> str:
+def _clean(x: object) -> str:
     if x is None or (isinstance(x, float) and np.isnan(x)):
         return ""
     return _WS.sub(" ", str(x)).strip()
 
 
-def render(rec: dict, fields) -> str:
+def render(rec: Mapping[str, object], fields: Sequence[str]) -> str:
     """One record to one string, field-tagged.
 
     Fields are TAGGED rather than concatenated bare, so the model can tell a word in a
     title from the same word in a venue name. 'Scientometrics' as a venue is a near
     certainty; 'scientometrics' in a title is a topic. Untagged, they are one feature.
     """
-    parts = []
+    parts: list[str] = []
     for f in fields:
         v = _clean(rec.get(f))
         if not v:

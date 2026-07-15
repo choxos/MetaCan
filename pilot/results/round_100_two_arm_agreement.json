@@ -1,0 +1,214 @@
+{
+  "arms": [
+    "codex",
+    "gemma"
+  ],
+  "categories": {
+    "metaresearch": {
+      "codex_positive_count": 1300,
+      "design_weighted_jaccard": 0.2519027481561596,
+      "gemma_positive_count": 1454,
+      "intersection_count": 937,
+      "jaccard": 0.5156851953769951,
+      "union_count": 1817
+    },
+    "metaepi_narrow": {
+      "codex_positive_count": 52,
+      "design_weighted_jaccard": 0.1881235505759522,
+      "gemma_positive_count": 27,
+      "intersection_count": 21,
+      "jaccard": 0.3620689655172414,
+      "union_count": 58
+    },
+    "metaepi_broad": {
+      "codex_positive_count": 153,
+      "design_weighted_jaccard": 0.11763587449265836,
+      "gemma_positive_count": 123,
+      "intersection_count": 91,
+      "jaccard": 0.4918918918918919,
+      "union_count": 185
+    },
+    "bibliometrics": {
+      "codex_positive_count": 835,
+      "design_weighted_jaccard": 0.676928269425383,
+      "gemma_positive_count": 893,
+      "intersection_count": 804,
+      "jaccard": 0.8701298701298701,
+      "union_count": 924
+    },
+    "sts": {
+      "codex_positive_count": 225,
+      "design_weighted_jaccard": 0.14233723390565223,
+      "gemma_positive_count": 324,
+      "intersection_count": 181,
+      "jaccard": 0.49184782608695654,
+      "union_count": 368
+    },
+    "scholarly_communication": {
+      "codex_positive_count": 352,
+      "design_weighted_jaccard": 0.27571978108181083,
+      "gemma_positive_count": 196,
+      "intersection_count": 156,
+      "jaccard": 0.3979591836734694,
+      "union_count": 392
+    },
+    "open_science": {
+      "codex_positive_count": 174,
+      "design_weighted_jaccard": 0.3855481281091849,
+      "gemma_positive_count": 212,
+      "intersection_count": 133,
+      "jaccard": 0.525691699604743,
+      "union_count": 253
+    },
+    "research_integrity": {
+      "codex_positive_count": 454,
+      "design_weighted_jaccard": 0.5416496474402176,
+      "gemma_positive_count": 429,
+      "intersection_count": 333,
+      "jaccard": 0.6054545454545455,
+      "union_count": 550
+    },
+    "insufficient_payload": {
+      "codex_positive_count": 456,
+      "design_weighted_jaccard": 0.47332917180462314,
+      "gemma_positive_count": 160,
+      "intersection_count": 133,
+      "jaccard": 0.2753623188405797,
+      "union_count": 483
+    },
+    "ANY_DEFINED_CATEGORY": {
+      "codex_positive_count": 2723,
+      "design_weighted_jaccard": 0.3445049765945255,
+      "gemma_positive_count": 3012,
+      "intersection_count": 2371,
+      "jaccard": 0.7048156956004756,
+      "union_count": 3364
+    }
+  },
+  "exact_category_set_agreement": {
+    "agreement_count": 8488,
+    "agreement_rate": 0.8202551217626595,
+    "design_weighted_agreement_rate": 0.9411982010413471,
+    "records": 10348
+  },
+  "genre_agreement": {
+    "agreement_count": 7947,
+    "agreement_rate": 0.767974487823734,
+    "design_weighted_agreement_rate": 0.7811790862033947,
+    "records": 10348
+  },
+  "interpretation": "This descriptive report measures process agreement between Codex and Gemma. It does not measure accuracy or establish scientific truth.",
+  "records": 10348,
+  "strata_any_defined_category": {
+    "classifier_contested": {
+      "codex_positive_count": 12,
+      "design_weighted_jaccard": 0.380952380952381,
+      "gemma_positive_count": 17,
+      "intersection_count": 8,
+      "jaccard": 0.38095238095238093,
+      "union_count": 21
+    },
+    "classifier_top": {
+      "codex_positive_count": 400,
+      "design_weighted_jaccard": 0.5274261603375527,
+      "gemma_positive_count": 324,
+      "intersection_count": 250,
+      "jaccard": 0.5274261603375527,
+      "union_count": 474
+    },
+    "enrich_bibliometrics": {
+      "codex_positive_count": 792,
+      "design_weighted_jaccard": 0.9269729093050648,
+      "gemma_positive_count": 844,
+      "intersection_count": 787,
+      "jaccard": 0.9269729093050648,
+      "union_count": 849
+    },
+    "enrich_design_observational": {
+      "codex_positive_count": 18,
+      "design_weighted_jaccard": 0.46875,
+      "gemma_positive_count": 29,
+      "intersection_count": 15,
+      "jaccard": 0.46875,
+      "union_count": 32
+    },
+    "enrich_design_trials": {
+      "codex_positive_count": 37,
+      "design_weighted_jaccard": 0.45454545454545464,
+      "gemma_positive_count": 43,
+      "intersection_count": 25,
+      "jaccard": 0.45454545454545453,
+      "union_count": 55
+    },
+    "enrich_metaepi": {
+      "codex_positive_count": 217,
+      "design_weighted_jaccard": 0.6378737541528239,
+      "gemma_positive_count": 276,
+      "intersection_count": 192,
+      "jaccard": 0.6378737541528239,
+      "union_count": 301
+    },
+    "enrich_metaresearch": {
+      "codex_positive_count": 171,
+      "design_weighted_jaccard": 0.6593886462882096,
+      "gemma_positive_count": 209,
+      "intersection_count": 151,
+      "jaccard": 0.6593886462882096,
+      "union_count": 229
+    },
+    "enrich_open_science": {
+      "codex_positive_count": 166,
+      "design_weighted_jaccard": 0.7477064220183486,
+      "gemma_positive_count": 215,
+      "intersection_count": 163,
+      "jaccard": 0.7477064220183486,
+      "union_count": 218
+    },
+    "enrich_research_integrity": {
+      "codex_positive_count": 481,
+      "design_weighted_jaccard": 0.7334558823529411,
+      "gemma_positive_count": 462,
+      "intersection_count": 399,
+      "jaccard": 0.7334558823529411,
+      "union_count": 544
+    },
+    "enrich_scholarly_communication": {
+      "codex_positive_count": 131,
+      "design_weighted_jaccard": 0.5845410628019324,
+      "gemma_positive_count": 197,
+      "intersection_count": 121,
+      "jaccard": 0.5845410628019324,
+      "union_count": 207
+    },
+    "enrich_sts": {
+      "codex_positive_count": 267,
+      "design_weighted_jaccard": 0.6494565217391304,
+      "gemma_positive_count": 340,
+      "intersection_count": 239,
+      "jaccard": 0.6494565217391305,
+      "union_count": 368
+    },
+    "french": {
+      "codex_positive_count": 13,
+      "design_weighted_jaccard": 0.409090909090909,
+      "gemma_positive_count": 18,
+      "intersection_count": 9,
+      "jaccard": 0.4090909090909091,
+      "union_count": 22
+    },
+    "random_baseline": {
+      "codex_positive_count": 18,
+      "design_weighted_jaccard": 0.27272727272727276,
+      "gemma_positive_count": 38,
+      "intersection_count": 12,
+      "jaccard": 0.2727272727272727,
+      "union_count": 44
+    }
+  },
+  "study_design_agreement": {
+    "agreement_count": 6591,
+    "agreement_rate": 0.6369346733668342,
+    "design_weighted_agreement_rate": 0.6672039246561644,
+    "records": 10348
+  }
+}

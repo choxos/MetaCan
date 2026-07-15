@@ -1,12 +1,12 @@
 # The OpenAlex snapshot partition (815 MB). Not committed: it is a public,
-# immutable artefact addressable by release date, so committing it would bloat
+# immutable artifact addressable by release date, so committing it would bloat
 # the repo without adding reproducibility. R/snapshot.R fetches it on demand and
 # the release is pinned (SNAPSHOT_RELEASE), which is what actually makes the
 # extraction reproducible.
 data/snapshot/
 *.parquet
 
-# Rendered output. The .md source and the Makefile are the artefacts; the PDF is
+# Rendered output. The .md source and the Makefile are the artifacts; the PDF is
 # a build product and `make proposal` regenerates it (and fails on a third page).
 proposal/*.pdf
 proposal/*.aux
@@ -33,7 +33,7 @@ documentation/*.html
 documentation/*.htm
 # The screening inputs and labels ARE the study. findings 09-13 all read
 # canadian_sample.rds, so excluding it would mean a fresh clone cannot run
-# `make pilot-offline` -- and the proposal's central reproducibility claim
+# `make pilot-offline`; otherwise the proposal's central reproducibility claim
 # would be false. 3.1 MB is a fine price for that claim being true.
 .gstack/
 # Secrets. The repo is going public. `.env` carries the OpenAI/xAI/Anthropic keys and
@@ -51,7 +51,7 @@ build/
 protocol/*.pdf
 logs/
 
-# The local DuckDB/Postgres materialisation of the frame. Rebuilt by R/, not a source.
+# The local DuckDB/Postgres materialization of the frame. Rebuilt by R/, not a source.
 # This also keeps the 2.1 GB works.csv out of history; it ships to the host by scp,
 # because a 2 GB CSV in git history is forever.
 data/db/
@@ -69,3 +69,14 @@ site/out/
 site/*.tsbuildinfo
 **/node_modules/
 **/.next/
+
+# Python and local implementation evidence.
+__pycache__/
+*.py[cod]
+.omo/
+
+# Large screening transcripts ship as release assets. Consolidated labels and
+# their provenance hashes remain in Git.
+pilot/screening/loop/round_*/prompts/
+pilot/screening/loop/round_*/raw_*/
+pilot/screening/loop/round_*/quarantine/
