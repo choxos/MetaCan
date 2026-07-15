@@ -23,9 +23,7 @@ help:
 	@echo "make check          run the research code and data contract gates"
 
 deps:
-	@Rscript -e 'pkgs <- c("httr2","jsonlite","xml2","dplyr","purrr","tibble","glue","cli","openssl","DBI","duckdb"); \
-	             new <- pkgs[!vapply(pkgs, requireNamespace, logical(1), quietly = TRUE)]; \
-	             if (length(new)) install.packages(new, repos = "https://cloud.r-project.org")'
+	@Rscript -e 'pkgs <- c("httr2","jsonlite","xml2","dplyr","purrr","tibble","glue","cli","openssl","DBI","duckdb"); new <- pkgs[!vapply(pkgs, requireNamespace, logical(1), quietly = TRUE)]; if (length(new)) install.packages(new, repos = "https://cloud.r-project.org")'
 
 # findings.json IS REBUILT FROM EMPTY, EVERY TIME. This is not a tidiness habit.
 #
