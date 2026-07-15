@@ -83,7 +83,7 @@ Options:
 Environment:
   DATABASE_URL                          Required unless --dry-run is used
   OPENALEX_API_KEY                      Required for a database-writing sync
-  METACAN_RECENT_DAYS                   Default window, 30 when omitted
+  METACAN_RECENT_DAYS                   Default window, 15 when omitted
   METACAN_OPENALEX_MAX_PAGES_PER_QUERY  Safety limit, 2000 when omitted
   METACAN_OPENALEX_INTERVAL_MS           Delay between calls, 125 when omitted`
 }
@@ -453,7 +453,7 @@ async function main() {
   }
 
   const days = parseRecentDays(
-    options.days ?? process.env.METACAN_RECENT_DAYS ?? 30,
+    options.days ?? process.env.METACAN_RECENT_DAYS ?? 15,
   )
   const window = recentDateWindow(days, parseToday(options.today))
   const config = routeConfig()

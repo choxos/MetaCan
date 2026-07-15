@@ -9,10 +9,11 @@ Keep production values in `/var/www/metacan/.env` with mode 600. The required va
 ```dotenv
 DATABASE_URL="postgresql://..."
 OPENALEX_API_KEY="..."
-METACAN_RECENT_DAYS="30"
+METACAN_RECENT_DAYS="15"
 ```
 
 Do not place credentials in Git, shell history, process arguments, or deployment logs.
+The 15 day window is the production default for the current free OpenAlex allowance. Increase it to 30 only after confirming that the API key has enough daily budget.
 
 ## Update sequence
 

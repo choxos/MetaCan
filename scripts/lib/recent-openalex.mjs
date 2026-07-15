@@ -388,6 +388,11 @@ function retryDelay(response, attempt) {
   return Math.min(750 * 2 ** attempt, 30_000)
 }
 
+function retryWouldCrossDailyReset(response) {
+  const retryAfter = Number(response.headers.get('retry-after'))
+  return response.status === 429 && Number.isFinite(retryAfter) && retryAfter > 60
+}
+
 export class OpenAlexClient {
   constructor({
     apiKey,
@@ -441,7 +446,8 @@ export class OpenAlexClient {
       if (response.ok) return response.json()
       if (
         attempt < this.maxRetries &&
-        (response.status === 429 || response.status >= 500)
+        (response.status === 429 || response.status >= 500) &&
+        !retryWouldCrossDailyReset(response)
       ) {
         await wait(retryDelay(response, attempt))
         continue

@@ -1091,7 +1091,7 @@ const en = {
       </>
     ),
     recentParams: {
-      days: "Inclusive publication window. The default is 30 days.",
+      days: "Inclusive publication window. The default is 15 days.",
       q: "Case-insensitive substring search over recent titles.",
       route: "Require one of the four Canadian admission routes.",
       facets:
@@ -2347,7 +2347,7 @@ const fr: Dictionary = {
       </>
     ),
     recentParams: {
-      days: "Période de publication inclusive. La valeur par défaut est 30 jours.",
+      days: "Période de publication inclusive. La valeur par défaut est 15 jours.",
       q: "Recherche de sous-chaîne insensible à la casse dans les titres récents.",
       route: "Exiger l'une des quatre voies d'admission canadiennes.",
       facets:

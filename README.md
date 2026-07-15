@@ -51,10 +51,10 @@ The migration baseline supports both a fresh database and the existing productio
 The rolling layer is intentionally separate from the frozen release. A keyed update retrieves a complete publication window, evaluates the four recorded Canadian routes, and replaces that window only after successful retrieval.
 
 ```bash
-npm run sync:recent -- --days 30
+npm run sync:recent -- --days 15
 ```
 
-The accepted window is 15 through 30 days. Production uses `--if-stale-hours 20` so overlapping scheduled runs do not repeat a fresh update.
+The accepted window is 15 through 30 days. The 15 day default is designed for the current free OpenAlex daily allowance. A 30 day run remains available after confirming that the key has enough budget. Production uses `--if-stale-hours 20` so overlapping scheduled runs do not repeat a fresh update.
 
 ## Deployment
 

@@ -370,3 +370,21 @@ test('OpenAlex page safety limit fails before a partial result can be stored', a
     /no partial result was stored/,
   )
 })
+
+test('OpenAlex daily budget exhaustion fails without futile retries', async () => {
+  let requests = 0
+  const client = new OpenAlexClient({
+    minimumIntervalMs: 0,
+    maxRetries: 5,
+    fetchImpl: async () => {
+      requests += 1
+      return Response.json(
+        { error: 'Rate limit exceeded' },
+        { status: 429, headers: { 'retry-after': '3600' } },
+      )
+    },
+  })
+
+  await assert.rejects(client.request('/works', {}), /HTTP 429/)
+  assert.equal(requests, 1)
+})
