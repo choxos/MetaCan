@@ -1,5 +1,9 @@
 # MétaCan web application
 
+[![Web application CI](https://github.com/choxos/MetaCan/actions/workflows/ci.yml/badge.svg?branch=webapp)](https://github.com/choxos/MetaCan/actions/workflows/ci.yml)
+[![Licence: MIT](https://img.shields.io/badge/Licence-MIT-blue.svg)](LICENSE)
+[![FAIR metadata](https://img.shields.io/badge/FAIR-metadata-118AB2.svg)](FAIR.md)
+
 This branch contains the deployable MétaCan website. The research methods, frozen frame construction, screening records, classifier pipeline, database loaders, and release evidence live on the [`main`](https://github.com/choxos/MetaCan/tree/main) branch.
 
 The application is a bilingual Next.js interface over the frozen 4,299,418 work frame and a separate rolling OpenAlex layer. Classifier output is presented as unvalidated teacher imitation. It is never presented as scientific truth or a prevalence estimate.
@@ -55,6 +59,10 @@ The accepted window is 15 through 30 days. Production uses `--if-stale-hours 20`
 ## Deployment
 
 Production deployment instructions and health checks are in [`DEPLOYMENT.md`](DEPLOYMENT.md). Nginx configuration is versioned under [`ops/nginx`](ops/nginx).
+
+## Citation and FAIR metadata
+
+The branch includes `CITATION.cff`, `codemeta.json`, and `ro-crate-metadata.json`. The live application serves the same records and advertises them through HTTP `Link` headers. [`FAIR.md`](FAIR.md) maps the findability, accessibility, interoperability, and reuse controls and lists the remaining gaps without claiming a DOI or completed human validation.
 
 ## Licence
 

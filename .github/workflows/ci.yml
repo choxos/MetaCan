@@ -40,6 +40,8 @@ jobs:
           node-version: 22
           cache: npm
 
+      - uses: astral-sh/setup-uv@v6
+
       - name: Install dependencies
         run: npm ci
 
@@ -60,6 +62,9 @@ jobs:
 
       - name: Check application code
         run: npm run check
+
+      - name: Validate citation metadata
+        run: uvx cffconvert --validate
 
       - name: Verify French finding translations
         run: node scripts/i18n-findings.mjs && git diff --exit-code -- src/lib/findings-fr.ts

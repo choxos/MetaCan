@@ -12,6 +12,12 @@ const contentSecurityPolicy = [
   "form-action 'self'",
   "frame-ancestors 'none'",
 ].join('; ')
+const fairLinks = [
+  '<https://github.com/choxos/MetaCan>; rel="cite-as"',
+  '</codemeta.json>; rel="describedby"; type="application/ld+json"',
+  '</ro-crate-metadata.json>; rel="describedby"; type="application/ld+json"',
+  '<https://spdx.org/licenses/MIT.html>; rel="license"',
+].join(', ')
 
 module.exports = {
   reactStrictMode: true,
@@ -36,6 +42,7 @@ module.exports = {
           { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
           { key: 'X-Content-Type-Options', value: 'nosniff' },
           { key: 'X-Frame-Options', value: 'DENY' },
+          { key: 'Link', value: fairLinks },
           {
             key: 'Permissions-Policy',
             value:

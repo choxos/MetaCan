@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+message: "If you use the MétaCan web application, cite the repository and the exact version or commit used."
+type: software
+title: "MétaCan web application"
+version: 1.0.0
+date-released: 2026-07-15
+abstract: "Bilingual Next.js application for exploring the frozen MétaCan Canadian research frame, its recorded admission routes, direct machine screening evidence, teacher imitation classifier output, collaboration network, and a separate rolling OpenAlex layer. Human classifier accuracy has not yet been established."
+authors:
+  - family-names: Sofi-Mahmudi
+    given-names: Ahmad
+    email: ahmad.pub@gmail.com
+    orcid: "https://orcid.org/0000-0001-6829-0823"
+repository-code: "https://github.com/choxos/MetaCan/tree/webapp"
+url: "https://metacan.xera.ac"
+license: MIT
+keywords:
+  - metaresearch
+  - Canada
+  - OpenAlex
+  - Next.js
+  - research software
+  - bibliometrics

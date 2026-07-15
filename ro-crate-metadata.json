@@ -1,0 +1,100 @@
+{
+  "@context": "https://w3id.org/ro/crate/1.1/context",
+  "@graph": [
+    {
+      "@type": "CreativeWork",
+      "@id": "ro-crate-metadata.json",
+      "conformsTo": {
+        "@id": "https://w3id.org/ro/crate/1.1"
+      },
+      "about": {
+        "@id": "./"
+      },
+      "description": "Machine readable provenance and packaging metadata for the MétaCan web application."
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "@id": "./",
+      "name": "MétaCan web application",
+      "description": "Bilingual interface and API for the frozen MétaCan research frame and its separate rolling OpenAlex layer.",
+      "datePublished": "2026-07-15",
+      "dateModified": "2026-07-15",
+      "version": "1.0.0",
+      "identifier": "https://github.com/choxos/MetaCan/tree/webapp",
+      "codeRepository": "https://github.com/choxos/MetaCan/tree/webapp",
+      "url": "https://metacan.xera.ac",
+      "programmingLanguage": [
+        "TypeScript",
+        "JavaScript",
+        "SQL"
+      ],
+      "runtimePlatform": [
+        "Node.js 22",
+        "PostgreSQL 16"
+      ],
+      "license": {
+        "@id": "https://spdx.org/licenses/MIT.html"
+      },
+      "author": {
+        "@id": "https://orcid.org/0000-0001-6829-0823"
+      },
+      "isBasedOn": {
+        "@id": "https://github.com/choxos/MetaCan"
+      },
+      "hasPart": [
+        {
+          "@id": "package.json"
+        },
+        {
+          "@id": "prisma/schema.prisma"
+        },
+        {
+          "@id": "DESIGN.md"
+        },
+        {
+          "@id": "https://metacan.xera.ac/api-docs"
+        }
+      ]
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "@id": "https://github.com/choxos/MetaCan",
+      "name": "MétaCan research and database pipeline",
+      "codeRepository": "https://github.com/choxos/MetaCan"
+    },
+    {
+      "@type": "CreativeWork",
+      "@id": "package.json",
+      "name": "Node.js package manifest",
+      "encodingFormat": "application/json"
+    },
+    {
+      "@type": "CreativeWork",
+      "@id": "prisma/schema.prisma",
+      "name": "MétaCan database client schema",
+      "encodingFormat": "text/plain"
+    },
+    {
+      "@type": "CreativeWork",
+      "@id": "DESIGN.md",
+      "name": "MétaCan design contract",
+      "encodingFormat": "text/markdown"
+    },
+    {
+      "@type": "WebAPI",
+      "@id": "https://metacan.xera.ac/api-docs",
+      "name": "MétaCan public API"
+    },
+    {
+      "@type": "Person",
+      "@id": "https://orcid.org/0000-0001-6829-0823",
+      "name": "Ahmad Sofi-Mahmudi",
+      "email": "ahmad.pub@gmail.com"
+    },
+    {
+      "@type": "CreativeWork",
+      "@id": "https://w3id.org/ro/crate/1.1",
+      "name": "RO-Crate 1.1"
+    }
+  ]
+}
