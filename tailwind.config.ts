@@ -12,6 +12,8 @@ const config: Config = {
           dark: 'var(--mc-dark)',
           accent: 'var(--mc-accent)',
         },
+        teal: 'var(--teal)',
+        'on-mc': 'var(--on-mc)',
         bg: 'var(--bg)',
         surface: { DEFAULT: 'var(--surface)', 2: 'var(--surface-2)', 3: 'var(--surface-3)' },
         border: { DEFAULT: 'var(--border)', strong: 'var(--border-strong)' },

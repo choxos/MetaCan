@@ -1,5 +1,7 @@
 import { unstable_cache } from 'next/cache'
 import { prisma } from '@/lib/db'
+import { cohortCount, type WorkFilters } from '@/lib/query'
+import { hashFilters } from '@/lib/permalink'
 
 /**
  * Aggregations over the frame, shared by /analytics and /api/v1/stats/*.
@@ -31,13 +33,15 @@ export interface Summary {
   retraction_notices: number
   routes: { aff: number; fund: number; venue: number; about: number }
   screen_consensus: { n_in_0: number; n_in_1: number; n_in_2: number; n_in_3: number }
+  /** What the frame can see: metadata coverage of the frozen release. */
+  coverage: { has_venue: number; has_abstract: number; french: number; no_funder: number }
   snapshot: string
 }
 
 export const getSummary = unstable_cache(
   async (): Promise<Summary> => {
-    // One pass over the table for the six frame-wide counts. Six separate
-    // count()s would be six sequential scans of 4.3M rows.
+    // One pass over the table for the frame-wide counts. Separate count()s
+    // would each be a sequential scan of 4.3M rows.
     const [row] = await prisma.$queryRaw<
       Array<Record<string, bigint>>
     >`SELECT
@@ -48,7 +52,11 @@ export const getSummary = unstable_cache(
         COUNT(*) FILTER (WHERE route_ca_aff)            AS aff,
         COUNT(*) FILTER (WHERE route_ca_fund)           AS fund,
         COUNT(*) FILTER (WHERE route_ca_venue)          AS venue,
-        COUNT(*) FILTER (WHERE route_about_ca)          AS about
+        COUNT(*) FILTER (WHERE route_about_ca)          AS about,
+        COUNT(*) FILTER (WHERE venue IS NOT NULL AND venue <> '')      AS has_venue,
+        COUNT(*) FILTER (WHERE has_abstract)                           AS has_abstract,
+        COUNT(*) FILTER (WHERE lang = 'fr')                            AS french,
+        COUNT(*) FILTER (WHERE funders IS NULL OR funders = '')        AS no_funder
       FROM works`
 
     const [scr] = await prisma.$queryRaw<
@@ -81,6 +89,12 @@ export const getSummary = unstable_cache(
         n_in_1: toN(scr?.n1),
         n_in_2: toN(scr?.n2),
         n_in_3: toN(scr?.n3),
+      },
+      coverage: {
+        has_venue: toN(row?.has_venue),
+        has_abstract: toN(row?.has_abstract),
+        french: toN(row?.french),
+        no_funder: toN(row?.no_funder),
       },
       snapshot: 'OpenAlex, pinned release, all 482 partitions',
     }
@@ -348,17 +362,17 @@ export const getRetractionStates = unstable_cache(
 )
 
 /**
- * The label landscape: what the machine-labelled subset looks like, by
+ * The label landscape: what the machine-labeled subset looks like, by
  * category, study design, year and language.
  *
  * The work_label table is a few thousand rows, so the aggregation happens in
  * node over one fetch instead of six GROUP BYs. Two counts per bucket, on
  * purpose: `any_model` (at least one model applied the value) and `all_models`
- * (every model that labelled the work applied it), because the gap between
+ * (every model that labeled the work applied it), because the gap between
  * them IS the finding; a single number would hide the disagreement, and the
  * disagreement is this project's deliverable.
  *
- * Every figure is over the LABELLED SUBSET ONLY. `coverage` states its size
+ * Every figure is over the LABELED SUBSET ONLY. `coverage` states its size
  * against the whole frame, and no consumer may present these counts as frame
  * totals.
  */
@@ -450,6 +464,88 @@ export const getLabelStats = unstable_cache(
 )
 
 /** Distinct filter values for the browse UI. Small, and cached for a day. */
+/**
+ * The home page's cohort preview: the three most-cited works in the frame,
+ * with their labels, exactly what the cohort builder's unfiltered first page
+ * leads with. Cached: the frame is pinned, so this cannot go stale between
+ * deploys, and the front page must not pay a 4.3M-row ORDER BY on every view
+ * (idx_works_cited makes the scan cheap, but cheap times every hit still
+ * loses to zero).
+ */
+export interface PreviewWork {
+  id: string
+  title: string
+  year: number | null
+  type: string | null
+  lang: string | null
+  venue: string | null
+  field: string | null
+  citedBy: number
+  hasAbstract: boolean
+  routeCaAff: boolean
+  routeCaFund: boolean
+  routeCaVenue: boolean
+  routeAboutCa: boolean
+  labels: Array<{ model: string; categories: string[]; studyDesign: string | null }>
+}
+
+export const getTopCited = unstable_cache(
+  async (limit = 3): Promise<PreviewWork[]> => {
+    const rows = await prisma.work.findMany({
+      orderBy: { citedBy: 'desc' },
+      take: limit,
+      select: {
+        id: true,
+        title: true,
+        year: true,
+        type: true,
+        lang: true,
+        venue: true,
+        field: true,
+        citedBy: true,
+        hasAbstract: true,
+        routeCaAff: true,
+        routeCaFund: true,
+        routeCaVenue: true,
+        routeAboutCa: true,
+        labels: { select: { model: true, categories: true, studyDesign: true } },
+      },
+    })
+    return rows
+  },
+  ['mc:top-cited'],
+  { revalidate: HOUR, tags: ['stats'] },
+)
+
+/**
+ * The API docs' sample response: the funder-without-affiliation French
+ * stratum, counted live and hashed with the SAME functions the API uses, so
+ * the sample panel can never show a number the endpoint would not return.
+ */
+export const getApiSample = unstable_cache(
+  async (): Promise<{ total: number; directLabeled: number; predicted: number; hash: string }> => {
+    const filters: WorkFilters = { route_fund: true, route_aff: false, lang: 'fr' }
+    const counts = await cohortCount(filters)
+    return { ...counts, hash: hashFilters(filters) }
+  },
+  ['mc:api-sample'],
+  { revalidate: HOUR, tags: ['stats'] },
+)
+
+/**
+ * The distilled classifier's version string, read from the prediction table
+ * itself rather than from copy, so the site can never claim a version the
+ * database does not carry.
+ */
+export const getPredictionModelVersion = unstable_cache(
+  async (): Promise<string | null> => {
+    const row = await prisma.workPrediction.findFirst({ select: { modelVersion: true } })
+    return row?.modelVersion ?? null
+  },
+  ['mc:prediction-version'],
+  { revalidate: HOUR, tags: ['stats'] },
+)
+
 export const getFacets = unstable_cache(
   async (): Promise<{ langs: string[]; types: string[]; fields: string[] }> => {
     const [langs, types, fields] = await Promise.all([

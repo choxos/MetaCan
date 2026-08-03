@@ -5,7 +5,8 @@ import { getDict } from '@/lib/i18n'
 import { formatInt, type Lang } from '@/lib/lang'
 
 /**
- * Export and citation actions for the current cohort.
+ * The cohort header's action buttons, per the design: Export CSV, Copy /q/
+ * permalink, API query, plus the JSON export.
  *
  * The export links are plain <a> downloads: the browser streams the file
  * straight from /api/v1/cohort/export, and this component's only jobs are to
@@ -13,8 +14,8 @@ import { formatInt, type Lang } from '@/lib/lang'
  * whether the cohort exceeds the export cap. A cap discovered after the
  * download would be a silent truncation, which this project does not do.
  *
- * "Cite this cohort" mints the /q/<hash> permalink. Idempotent server-side:
- * the same filters always return the same URL.
+ * "Copy /q/ permalink" mints the citable /q/<hash> link. Idempotent
+ * server-side: the same filters always return the same URL.
  */
 export function CohortActions({
   query,
@@ -43,80 +44,44 @@ export function CohortActions({
       if (!r.ok) return
       const j = (await r.json()) as { url: string }
       setPermalink(j.url)
+      try {
+        await navigator.clipboard.writeText(j.url)
+        setCopied(true)
+        setTimeout(() => setCopied(false), 1500)
+      } catch {
+        /* the URL is rendered below; a refused clipboard is survivable */
+      }
     } finally {
       setMinting(false)
     }
   }
 
-  const copy = async () => {
-    if (!permalink) return
-    try {
-      await navigator.clipboard.writeText(permalink)
-      setCopied(true)
-      setTimeout(() => setCopied(false), 1500)
-    } catch {
-      /* the URL is visible and selectable; a failed clipboard is survivable */
-    }
-  }
-
   return (
-    <div className="card p-4">
-      <div className="flex flex-wrap items-center gap-3">
-        <span className="text-xs uppercase tracking-wider" style={{ color: 'var(--ink-4)' }}>
-          {t.cohort.exportTitle}
-        </span>
-        <a
-          href={`/api/v1/cohort/export?format=csv${qs}`}
-          className="rounded-md border px-3 py-1.5 text-sm font-medium"
-          style={{ borderColor: 'var(--mc)', color: 'var(--mc)' }}
-          download
-        >
-          {t.cohort.exportCsv}
+    <div className="flex flex-col items-start gap-1.5 sm:items-end">
+      <div className="flex flex-wrap gap-2">
+        <a className="btn" href={`/api/v1/cohort/export?format=csv${qs}`} download>
+          {t.cohort.exportCsvBtn}
         </a>
-        <a
-          href={`/api/v1/cohort/export?format=json${qs}`}
-          className="rounded-md border px-3 py-1.5 text-sm font-medium"
-          style={{ borderColor: 'var(--mc)', color: 'var(--mc)' }}
-          download
-        >
-          {t.cohort.exportJson}
+        <a className="btn" href={`/api/v1/cohort/export?format=json${qs}`} download>
+          {t.cohort.exportJsonBtn}
         </a>
-
-        <span className="mx-1 hidden h-5 border-l sm:inline-block" />
-
-        <button
-          onClick={mint}
-          disabled={minting}
-          className="rounded-md px-3 py-1.5 text-sm font-medium disabled:opacity-60"
-          style={{ background: 'var(--mc)', color: 'var(--on-mc)' }}
-        >
-          {minting ? t.cohort.citeWorking : t.cohort.citeButton}
+        <button onClick={mint} disabled={minting} className="btn disabled:opacity-60">
+          {minting ? t.cohort.citeWorking : copied ? t.cohort.citeCopied : t.cohort.copyPermalinkBtn}
         </button>
-
-        {permalink && (
-          <span className="flex items-center gap-2 text-sm">
-            <a href={permalink} className="link font-mono text-xs" style={{ color: 'var(--mc)' }}>
-              {permalink.replace(/^https?:\/\//, '')}
-            </a>
-            <button onClick={copy} className="link text-xs" style={{ color: 'var(--ink-4)' }}>
-              {copied ? t.cohort.citeCopied : t.cohort.citeCopy}
-            </button>
-          </span>
-        )}
+        <a className="btn font-mono" href={`/api/v1/cohort${query ? `?${query}` : ''}`}>
+          {t.cohort.apiQueryBtn}
+        </a>
       </div>
-
-      <p className="mt-2 text-xs leading-snug" style={{ color: 'var(--ink-5)' }}>
+      {permalink && (
+        <a href={permalink} className="link font-mono text-xs">
+          {permalink.replace(/^https?:\/\//, '')}
+        </a>
+      )}
+      <p className="max-w-[560px] text-xs leading-snug sm:text-right" style={{ color: 'var(--ink-5)' }}>
         {truncated
           ? t.cohort.exportTruncated(formatInt(lang, total), formatInt(lang, exportCap))
           : t.cohort.exportNote(formatInt(lang, exportCap))}{' '}
         {t.cohort.citeNote}
-      </p>
-
-      <p className="mt-1 text-xs" style={{ color: 'var(--ink-5)' }}>
-        {t.cohort.apiLine}{' '}
-        <a href={`/api/v1/cohort${query ? `?${query}` : ''}`} className="link font-mono">
-          /api/v1/cohort{query ? `?${query}` : ''}
-        </a>
       </p>
     </div>
   )

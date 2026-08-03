@@ -2,36 +2,26 @@
 
 import Link from 'next/link'
 import { usePathname, useSearchParams } from 'next/navigation'
-import { useEffect, useState } from 'react'
 import { LANGS, LANG_COOKIE, LANG_LABEL, type Lang } from '@/lib/lang'
 
 /**
- * EN | FR segmented control, same design decision as the prototype's toggle:
- * with only two languages both options stay visible and the reader clicks
- * straight to the other one. French is not hidden behind an interaction,
- * which is the honest layout for a bilingual site.
+ * EN | FR segmented control, per the design: both options stay visible in a
+ * mono-face pill, and the reader clicks straight to the other language.
+ * French is not hidden behind an interaction, which is the honest layout for
+ * a bilingual site.
  *
- * After mount, each option is a real link to the same page in the other
- * language with its query string preserved. The server preview uses stable
- * home targets because rewritten paths can differ during hydration. The click
- * also writes the preference cookie; only this explicit click sets it.
+ * Each option is a real link to the SAME page in the other language (query
+ * string preserved), so it works without JavaScript and can be opened in a
+ * new tab. The click also writes the preference cookie; the middleware reads
+ * it on later visits. Only this explicit click ever sets the cookie.
  */
 export function LangToggle({ lang }: { lang: Lang }) {
-  const routedPathname = usePathname() ?? '/'
-  const [pathname, setPathname] = useState('')
+  const pathname = usePathname() ?? '/'
   const search = useSearchParams()?.toString()
-  const qs = pathname && search ? `?${search}` : ''
-
-  useEffect(() => setPathname(routedPathname), [routedPathname])
+  const qs = search ? `?${search}` : ''
 
   // Current path without its language prefix.
-  const currentPathname = pathname || '/'
-  const bare =
-    currentPathname === '/fr'
-      ? '/'
-      : currentPathname.startsWith('/fr/')
-        ? currentPathname.slice(3)
-        : currentPathname
+  const bare = pathname === '/fr' ? '/' : pathname.startsWith('/fr/') ? pathname.slice(3) : pathname
 
   const hrefFor = (code: Lang) => (code === 'fr' ? (bare === '/' ? '/fr' : `/fr${bare}`) : bare) + qs
 
@@ -47,10 +37,10 @@ export function LangToggle({ lang }: { lang: Lang }) {
     <div
       role="group"
       aria-label={lang === 'fr' ? 'Langue' : 'Language'}
-      className="inline-flex items-center overflow-hidden rounded-md border text-xs"
-      style={{ background: 'var(--surface-2)' }}
+      className="flex shrink-0 overflow-hidden rounded-md border"
+      style={{ fontFamily: 'var(--font-mono-stack)', fontSize: 11, fontWeight: 500 }}
     >
-      {LANGS.map((code, i) => {
+      {LANGS.map((code) => {
         const active = code === lang
         return (
           <Link
@@ -61,14 +51,13 @@ export function LangToggle({ lang }: { lang: Lang }) {
             lang={code}
             hrefLang={code === 'fr' ? 'fr-CA' : 'en-CA'}
             title={LANG_LABEL[code]}
-            className="inline-flex min-h-11 min-w-11 items-center justify-center px-2 font-medium uppercase tracking-wider"
+            className="px-2 py-1.5 uppercase"
             style={{
-              borderLeft: i > 0 ? '1px solid var(--border)' : undefined,
-              background: active ? 'var(--surface-3)' : 'transparent',
-              color: active ? 'var(--ink)' : 'var(--ink-4)',
+              background: active ? 'var(--ink)' : 'transparent',
+              color: active ? 'var(--bg)' : 'var(--ink-3)',
             }}
           >
-            {code}
+            {code.toUpperCase()}
           </Link>
         )
       })}

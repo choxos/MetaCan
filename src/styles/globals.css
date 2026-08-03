@@ -2,84 +2,63 @@
 @tailwind components;
 @tailwind utilities;
 
-.abstract-viewport {
-  position: relative;
-  width: 100%;
-}
-
-.abstract-body {
-  color: var(--ink-2);
-  font-size: 1rem;
-  line-height: 1.8;
-  margin: 0;
-  overflow-wrap: anywhere;
-  text-wrap: pretty;
-}
-
-.abstract-section + .abstract-section {
-  margin-top: 1.35rem;
-}
-
-.abstract-section-label {
-  margin: 0 0 0.35rem;
-  color: var(--mc);
-  font-family: var(--font-mono), monospace;
-  font-size: 0.7rem;
-  font-weight: 650;
-  letter-spacing: 0.12em;
-  line-height: 1.4;
-  text-transform: uppercase;
-}
-
 /* =============================================================
-   MétaCan design system
-   Tokens ported from XeraRetractionTracker redesign/v2, with a
-   different palette: XRT is Xera blue; MétaCan is a Canadian
-   maple red, desaturated so it reads as archival rather than
-   flag-waving, on the same warm-paper neutrals.
+   MétaCan: design system
+   Tokens are the design file's :root and [data-theme="dark"]
+   custom-property blocks, verbatim. Brand red is a muted maple;
+   the teal is the "invisible to affiliation" counterweight and
+   the live-sync accent; amber marks sparse coverage and
+   unvalidated machine output.
    ============================================================= */
 
 :root {
-  /* Brand */
-  --mc: #B02A30;          /* maple, muted */
-  --mc-light: #CE4A50;
+  --font-sans-stack: var(--font-sans), Inter, system-ui, sans-serif;
+  --font-serif-stack: var(--font-serif), 'Source Serif 4', Georgia, serif;
+  --font-mono-stack: var(--font-mono), 'JetBrains Mono', ui-monospace, Menlo, monospace;
+
+  --mc: #B02A30;
   --mc-dark: #8A1F24;
-  --mc-accent: #1F6F6B;   /* the counterweight: a cold teal for "measured" */
   --on-mc: #FFFFFF;
-  --control-border: #77776F;
+  --teal: #1F6F6B;
+  --contested: #B45309;
 
-  /* Semantic: the four post-publication states OpenAlex's boolean cannot hold */
-  --retraction: #DC2626;
-  --concern: #B45309;
-  --correction: #2563EB;
-  --reinstatement: #047857;
-
-  /* The map's own semantics */
-  --in-scope: #1F6F6B;    /* metaresearch */
-  --contested: #B45309;   /* the models disagree: the field's real boundary */
-  --out: #6B6B61;
-
-  /* Neutrals: warm paper */
   --bg: #FAFAF7;
   --surface: #FFFFFF;
   --surface-2: #F4F4EE;
   --surface-3: #ECECE4;
   --border: #E4E4DA;
   --border-strong: #D4D4C8;
+
   --ink: #0B0B0A;
   --ink-2: #2C2C28;
   --ink-3: #56564E;
-  --ink-4: #6B6B61;
-  --ink-5: #6B6B61;
+  --ink-4: #8A8A7E;
+  --ink-5: #B5B5AA;
+
+  --mc-border: rgba(176, 42, 48, .4);
+  --teal-bg: rgba(31, 111, 107, .07);
+  --teal-border: rgba(31, 111, 107, .35);
+  --amber-bg: rgba(180, 83, 9, .07);
+  --amber-border: rgba(180, 83, 9, .4);
+  --hdr: rgba(250, 250, 247, .92);
+
+  /* Aliases kept for existing components. --mc-accent IS the teal. */
+  --mc-light: #CE4A50;
+  --mc-accent: var(--teal);
+  --in-scope: var(--teal);
+  --out: #6B6B61;
+
+  /* The four post-publication states OpenAlex's boolean cannot hold */
+  --retraction: #DC2626;
+  --concern: #B45309;
+  --correction: #2563EB;
+  --reinstatement: #047857;
 
   --r-sm: 4px;
   --r-md: 6px;
   --r-lg: 10px;
-  --r-xl: 16px;
+  --r-xl: 14px;
 
-  --pad: 20px;
-  --pad-sm: 12px;
-  --row-h: 44px;
   --text-base: 14px;
 
   --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
@@ -90,21 +69,16 @@
   --chart-tooltip-border: var(--border);
 }
 
+/* next-themes stamps BOTH the class and data-theme on <html>; the dark block
+   answers to either so Tailwind's dark: variants and the design's
+   [data-theme="dark"] selector cannot disagree. */
+[data-theme='dark'],
 .dark {
   --mc: #E2555B;
-  --mc-light: #F07A80;
   --mc-dark: #B02A30;
-  --mc-accent: #4FB3AD;
   --on-mc: #0B0E14;
-  --control-border: #667085;
-
-  --in-scope: #4FB3AD;
+  --teal: #4FB3AD;
   --contested: #E0A44A;
-  --out: #8B93A6;
-  --retraction: #FF777D;
-  --concern: #F3B95F;
-  --correction: #7EB6FF;
-  --reinstatement: #58D6A5;
 
   --bg: #0B0E14;
   --surface: #11151E;
@@ -112,46 +86,83 @@
   --surface-3: #1E2433;
   --border: #232A3B;
   --border-strong: #2E3650;
+
   --ink: #F3F4F8;
   --ink-2: #D9DCE5;
   --ink-3: #9DA3B4;
   --ink-4: #8B93A6;
-  --ink-5: #8B93A6;
+  --ink-5: #6E7689;
+
+  --mc-border: rgba(226, 85, 91, .45);
+  --teal-bg: rgba(79, 179, 173, .1);
+  --teal-border: rgba(79, 179, 173, .45);
+  --amber-bg: rgba(224, 164, 74, .1);
+  --amber-border: rgba(224, 164, 74, .45);
+  --hdr: rgba(11, 14, 20, .92);
+
+  --mc-light: #F07A80;
+  --out: #8B93A6;
 }
 
 * { border-color: var(--border); }
 
-button,
-select,
-textarea,
-input:not([type="hidden"]) {
-  border-color: var(--control-border);
-}
-
 body {
+  margin: 0;
   background: var(--bg);
   color: var(--ink);
-  font-family: var(--font-sans), system-ui, sans-serif;
+  font-family: var(--font-sans-stack);
   font-size: var(--text-base);
+  line-height: 1.55;
   -webkit-font-smoothing: antialiased;
 }
 
-.skip-link {
-  position: fixed;
-  top: 0;
-  left: 1rem;
-  z-index: 60;
-  padding: 0.65rem 0.9rem;
-  border-radius: var(--r-md);
-  background: var(--mc);
-  color: var(--on-mc);
-  font-weight: 650;
-  transform: translateY(-150%);
-  transition: transform 120ms ease;
+::selection { background: rgba(176, 42, 48, .2); }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
 }
 
-.skip-link:focus {
-  transform: translateY(0.5rem);
+@keyframes mcPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: .35; }
+}
+
+.fade-in { animation: fadeIn .35s var(--ease); }
+
+/* The page container: 1320px, 32px gutters, per the design. */
+.mc-container {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+@media (min-width: 640px) {
+  .mc-container { padding-left: 32px; padding-right: 32px; }
+}
+
+/* Mono microcopy: eyebrows, table heads, meta lines. */
+.eyebrow {
+  font-family: var(--font-mono-stack);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+  font-weight: 500;
+}
+
+.micro-label {
+  font-family: var(--font-mono-stack);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--ink-4);
+}
+
+.mono-meta {
+  font-family: var(--font-mono-stack);
+  font-size: 11px;
+  color: var(--ink-4);
 }
 
 /* Numbers in a table must line up. Non-negotiable on a data site. */
@@ -164,94 +175,218 @@ body {
   border-radius: var(--r-lg);
 }
 
+.card-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+.card-head h2,
+.card-head h3 {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+  font-family: var(--font-sans-stack);
+}
+
+/* Chips: mono, pill, per the design's chip() kinds. */
 .chip {
-  display: inline-flex; align-items: center; gap: 4px;
-  padding: 2px 8px; border-radius: 999px;
-  font-size: 12px; font-weight: 500; line-height: 1.5;
-  border: 1px solid var(--border);
-  background: var(--surface-2);
-  color: var(--ink-3);
-  white-space: nowrap;
-}
-
-.record-filter-chip {
-  min-width: 44px;
-  max-width: 100%;
-  justify-content: center;
-  cursor: pointer;
-  white-space: normal;
-  overflow-wrap: anywhere;
-  text-align: left;
-  transition: border-color 120ms ease, color 120ms ease, background 120ms ease;
-}
-
-.record-filter-chip:hover {
-  border-color: var(--mc);
-  color: var(--mc);
-  background: var(--surface-3);
-}
-
-.collaboration-plot {
-  overflow-x: auto;
-  overflow-y: hidden;
-  background: radial-gradient(circle at center, var(--surface-2), var(--surface));
-  scrollbar-color: var(--ink-4) var(--surface-3);
-  scrollbar-gutter: stable;
-}
-
-.collaboration-plot svg {
-  display: block;
-  width: 100%;
-  min-width: 720px;
-  height: auto;
-}
-
-@media (min-width: 768px) {
-  .collaboration-plot svg {
-    min-width: 0;
-  }
-}
-
-.network-node circle {
-  fill: var(--mc);
-  fill-opacity: 0.78;
-  stroke: var(--surface);
-  stroke-width: 2;
-  transition: fill-opacity 120ms ease, stroke-width 120ms ease;
-}
-
-.network-node text {
-  fill: var(--on-mc);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-family: var(--font-mono-stack);
   font-size: 11px;
-  font-weight: 700;
-  text-anchor: middle;
-  pointer-events: none;
+  font-weight: 500;
+  line-height: 1.5;
+  white-space: nowrap;
+  border: 1px solid var(--border);
+  color: var(--ink-3);
+  background: transparent;
+}
+.chip-route { color: var(--mc); border-color: var(--mc-border); }
+.chip-cat { color: var(--teal); border-color: var(--teal-border); background: var(--teal-bg); }
+.chip-teal { color: var(--teal); border-color: var(--teal-border); }
+.chip-amber { color: var(--contested); border-color: var(--amber-border); }
+.chip-amber-bg { color: var(--contested); border-color: var(--amber-border); background: var(--amber-bg); }
+.chip-live {
+  color: var(--teal);
+  border-color: var(--teal-border);
+  background: var(--teal-bg);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 10px;
 }
 
-.network-node:hover circle,
-.network-node:focus circle {
-  fill-opacity: 1;
-  stroke: var(--mc-accent);
-  stroke-width: 4;
+.pulse-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: var(--teal);
+  display: inline-block;
+  animation: mcPulse 1.6s ease-in-out infinite;
 }
 
-/* Wide content scrolls inside its own box. The page body never scrolls sideways. */
-.scroll-x {
-  overflow-x: auto;
-  scrollbar-color: var(--ink-4) var(--surface-3);
-  scrollbar-gutter: stable both-edges;
-  scrollbar-width: thin;
+/* Callouts: teal for the invisible-to-affiliation argument and live sync;
+   amber for sparse coverage and unvalidated machine output. */
+.callout-teal {
+  background: var(--teal-bg);
+  border: 1px solid var(--teal-border);
+  border-radius: var(--r-md);
+  padding: 11px 14px;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--teal);
+}
+.callout-amber {
+  background: var(--amber-bg);
+  border: 1px solid var(--amber-border);
+  border-radius: var(--r-md);
+  padding: 11px 14px;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--contested);
+}
+.callout-plain {
+  background: var(--surface-2);
+  border-radius: var(--r-md);
+  padding: 10px 12px;
+  font-size: 11px;
+  line-height: 1.5;
+  color: var(--ink-3);
 }
 
-.scroll-x::-webkit-scrollbar { height: 10px; }
-.scroll-x::-webkit-scrollbar-track { background: var(--surface-3); }
-.scroll-x::-webkit-scrollbar-thumb {
-  background: var(--ink-4);
-  border: 2px solid var(--surface-3);
+/* Thin meter bars (6px, pill) used by the routes / coverage / landscape panels. */
+.meter {
+  height: 6px;
+  background: var(--surface-3);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.meter > div {
+  height: 100%;
   border-radius: 999px;
 }
 
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  padding: 7px 12px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink-2);
+  background: var(--surface);
+  cursor: pointer;
+  font-family: var(--font-sans-stack);
+  white-space: nowrap;
+}
+.btn:hover { border-color: var(--border-strong); color: var(--ink); }
+.btn-primary {
+  background: var(--mc);
+  color: var(--on-mc);
+  border-color: var(--mc);
+}
+.btn-primary:hover { background: var(--mc-dark); border-color: var(--mc-dark); color: var(--on-mc); }
+.btn-ink {
+  background: var(--ink);
+  color: var(--bg);
+  border-color: var(--ink);
+  border-radius: 999px;
+}
+.btn-ink:hover { color: var(--bg); opacity: .9; }
+
+/* Form controls inside the query panel. */
+.field-label {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--ink-3);
+  margin-bottom: 5px;
+  display: block;
+}
+.control {
+  width: 100%;
+  min-width: 0;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  padding: 8px 10px;
+  font-size: 13px;
+  color: var(--ink);
+  font-family: var(--font-sans-stack);
+}
+.control:focus { outline: 2px solid var(--mc); outline-offset: 1px; }
+.control-mono { font-family: var(--font-mono-stack); }
+
+/* Tri-state segmented control for the four Canadian routes. */
+.seg {
+  display: inline-flex;
+  flex-shrink: 0;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  overflow: hidden;
+}
+.seg button {
+  padding: 3px 7px;
+  border: 0;
+  cursor: pointer;
+  font-family: var(--font-mono-stack);
+  font-size: 10px;
+  background: transparent;
+  color: var(--ink-4);
+}
+.seg button[aria-pressed='true'] {
+  background: var(--ink);
+  color: var(--bg);
+}
+
+/* Facet checkbox rows in the cohort rail. */
+.facet-row {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 4px 0;
+  font-size: 13px;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  font-family: var(--font-sans-stack);
+  text-align: left;
+  width: 100%;
+  color: var(--ink-2);
+}
+.facet-box {
+  width: 14px;
+  height: 14px;
+  border: 1px solid var(--border-strong);
+  border-radius: 3px;
+  background: var(--surface);
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+}
+.facet-box[data-on='true'] {
+  background: var(--mc);
+  border-color: var(--mc);
+}
+
+/* Row hover on clickable result rows. */
+.row-hover:hover { background: var(--surface-2); }
+
+/* Wide content scrolls inside its own box. The page body never scrolls sideways. */
+.scroll-x { max-width: 100%; overflow-x: auto; }
+
 a { color: inherit; }
+a:hover { color: var(--mc); }
 a.link { color: var(--mc); text-decoration: none; }
 a.link:hover { text-decoration: underline; }
 
@@ -259,49 +394,4 @@ a.link:hover { text-decoration: underline; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
-}
-
-@media (max-width: 767px) {
-  button,
-  select,
-  input:not([type="hidden"]),
-  summary,
-  a.chip,
-  [role="group"] a {
-    min-height: 44px;
-  }
-
-  summary {
-    display: inline-flex;
-    align-items: center;
-  }
-
-  main a[href]:not(.network-node),
-  footer a[href] {
-    display: inline-flex;
-    min-width: 44px;
-    min-height: 44px;
-    align-items: center;
-  }
-
-  [role="group"] a {
-    display: inline-flex;
-    align-items: center;
-  }
-
-  .collaboration-legend a {
-    min-height: 44px;
-    display: inline-flex;
-    align-items: center;
-  }
-
-  .card:has(.recharts-responsive-container) {
-    overflow-x: auto;
-    scrollbar-color: var(--ink-4) var(--surface-3);
-    scrollbar-gutter: stable both-edges;
-  }
-
-  .card .recharts-responsive-container {
-    min-width: 560px;
-  }
 }

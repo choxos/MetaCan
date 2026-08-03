@@ -1,86 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { LANG_COOKIE, isLang } from '@/lib/lang'
-
-interface RatePolicy {
-  name: string
-  limit: number
-  windowMs: number
-}
-
-interface RateWindow {
-  count: number
-  resetsAt: number
-}
-
-const RATE_STATE_MAX_ENTRIES = 10_000
-const rateWindows = new Map<string, RateWindow>()
-
-function ratePolicy(pathname: string): RatePolicy | null {
-  if (pathname === '/api/v1/cohort/export') {
-    return { name: 'export', limit: 4, windowMs: 60_000 }
-  }
-  if (pathname === '/api/v1/permalink') {
-    return { name: 'permalink', limit: 10, windowMs: 60_000 }
-  }
-  if (/^\/api\/v1\/(?:works|recent)\/[^/]+$/.test(pathname)) {
-    return { name: 'detail', limit: 60, windowMs: 60_000 }
-  }
-  if (pathname === '/api' || pathname.startsWith('/api/')) {
-    return { name: 'api', limit: 600, windowMs: 60_000 }
-  }
-  return null
-}
-
-function clientAddress(req: NextRequest): string {
-  const forwarded = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim()
-  return forwarded || req.headers.get('x-real-ip') || 'unknown'
-}
-
-function rateLimit(req: NextRequest): NextResponse | null {
-  if (req.method === 'OPTIONS') return null
-  const policy = ratePolicy(req.nextUrl.pathname)
-  if (!policy) return null
-
-  const now = Date.now()
-  const key = `${policy.name}:${clientAddress(req)}`
-  const current = rateWindows.get(key)
-  const window =
-    current && current.resetsAt > now
-      ? current
-      : { count: 0, resetsAt: now + policy.windowMs }
-  window.count += 1
-  rateWindows.set(key, window)
-
-  if (rateWindows.size > RATE_STATE_MAX_ENTRIES) {
-    for (const [candidate, value] of rateWindows) {
-      if (value.resetsAt <= now || rateWindows.size > RATE_STATE_MAX_ENTRIES) {
-        rateWindows.delete(candidate)
-      }
-      if (rateWindows.size <= RATE_STATE_MAX_ENTRIES) break
-    }
-  }
-
-  if (window.count <= policy.limit) return null
-  const retryAfter = Math.max(1, Math.ceil((window.resetsAt - now) / 1_000))
-  return NextResponse.json(
-    { error: 'Too many requests. Try again shortly.' },
-    {
-      status: 429,
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Cache-Control': 'no-store',
-        'Retry-After': String(retryAfter),
-      },
-    },
-  )
-}
+import { DEFAULT_LANG, LANG_COOKIE, isLang } from '@/lib/lang'
 
 /**
  * Language routing.
  *
- * English uses bare paths; French uses /fr. This middleware handles language
- * preference redirects. next.config.js maps known bare English pages into
- * app/[lang] and normalizes explicit /en URLs before middleware runs.
+ * URL scheme: English is the bare path, French is /fr/<path>. Pages live under
+ * app/[lang]/, so a bare English URL must be REWRITTEN (URL unchanged, /en
+ * prepended internally) and a /fr URL passes through as-is.
  *
  * The preference cookie redirects in exactly two cases, both explicit:
  *   1. The reader chose French earlier (cookie fr) and opens a bare URL:
@@ -89,9 +15,11 @@ function rateLimit(req: NextRequest): NextResponse | null {
  *      Accept-Language: redirect / to /fr. A francophone reader should not
  *      have to ask for French on this site of all sites.
  *
- * Only the language toggle sets the cookie. A shared French link must not
- * change an anglophone reader's stored preference. An explicit /fr URL is
- * always treated as an explicit request for French.
+ * Deliberately NOT done: setting the cookie from a mere /fr visit (a shared
+ * French link must not flip an anglophone's stored preference; only the
+ * toggle sets the cookie), and redirecting deep English links for fr-cookie
+ * readers is done but /fr links are never redirected for en-cookie readers,
+ * because an explicit /fr URL is an explicit request for French.
  */
 
 /**
@@ -116,9 +44,6 @@ function isExempt(pathname: string): boolean {
 export function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl
 
-  const limited = rateLimit(req)
-  if (limited) return limited
-
   if (isExempt(pathname)) return NextResponse.next()
 
   // Explicit French URL: strip nothing, rewrite nothing; app/[lang] matches it.
@@ -126,8 +51,12 @@ export function middleware(req: NextRequest) {
     return NextResponse.next()
   }
 
+  // /en is not a public URL (English is the bare path). Normalize it away so
+  // the same page never lives at two URLs.
   if (pathname === '/en' || pathname.startsWith('/en/')) {
-    return NextResponse.next()
+    const url = req.nextUrl.clone()
+    url.pathname = pathname === '/en' ? '/' : pathname.slice(3)
+    return NextResponse.redirect(url, 308)
   }
 
   const cookie = req.cookies.get(LANG_COOKIE)?.value
@@ -151,7 +80,10 @@ export function middleware(req: NextRequest) {
     }
   }
 
-  return NextResponse.next()
+  // English: serve the bare URL from app/[lang] by prepending /en internally.
+  const url = req.nextUrl.clone()
+  url.pathname = pathname === '/' ? `/${DEFAULT_LANG}` : `/${DEFAULT_LANG}${pathname}`
+  return NextResponse.rewrite(url)
 }
 
 export const config = {

@@ -3,11 +3,11 @@
  * imports: the client-side facet panel needs these lists, and importing them
  * from query.ts would drag PrismaClient into the browser bundle.
  *
- * These values are the API's vocabulary, verbatim from the labelling rounds
+ * These values are the API's vocabulary, verbatim from the labeling rounds
  * (deploy/load_labels.py validates every file against the same lists).
  */
 
-/** The category vocabulary the labelling rounds use. Facet values, verbatim. */
+/** The category vocabulary the labeling rounds use. Facet values, verbatim. */
 export const LABEL_CATEGORIES = [
   'metaresearch',
   'metaepi_narrow',
@@ -18,6 +18,8 @@ export const LABEL_CATEGORIES = [
   'open_science',
   'research_integrity',
 ] as const
+
+export const PREDICTION_CATEGORIES = [...LABEL_CATEGORIES, 'insufficient_payload'] as const
 
 /** The study-design vocabulary. None of these is MEDLINE-validated yet. */
 export const STUDY_DESIGNS = [
@@ -36,7 +38,7 @@ export const STUDY_DESIGNS = [
 ] as const
 
 /**
- * Label agreement on one work: did the models that labelled it say the same
+ * Label agreement on one work: did the models that labeled it say the same
  * thing? `agree` means identical category sets AND identical study designs;
  * `split` means they differ somewhere. One model alone cannot agree with
  * anyone, so a single row reports `single`.

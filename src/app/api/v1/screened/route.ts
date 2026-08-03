@@ -35,19 +35,11 @@ export async function GET(req: NextRequest) {
 
   return json({
     meta: {
-      evidence_status: 'historical_unvalidated_machine_pilot',
-      screen_round: 'historical_pilot',
-      models: ['gpt', 'grok', 'opus'],
       page,
       per_page: perPage,
       max_per_page: MAX_PER_PAGE,
       total,
       filters: f,
-      genre_field: {
-        status: 'raw_unusable_historical_output',
-        exposed_as: 'genre_raw',
-        note: 'The historical arms received contradictory genre vocabularies. These raw values are not comparable and must not be interpreted as classifications.',
-      },
       // The headline, so a consumer of the API cannot miss the point of the table.
       summary: {
         n_screened: summary.n_screened,
@@ -56,8 +48,8 @@ export async function GET(req: NextRequest) {
         pct_all_three: summary.pct_all_three,
         one_model_only: summary.n_in_1,
         pct_single_model: summary.pct_single_model,
-        note: `In this historical unvalidated machine pilot, ${summary.any_in} works received at least one metaresearch label and ${summary.n_in_3} (${summary.pct_all_three}%) received that label from all three models. These are model-agreement counts, not validated field labels. The sample is stratified: any descriptive rate must use the design weight.`,
-        tiers: 'n_in counts historical pilot T1 and T2 model labels. T3 is the pilot adjacent label. These machine labels do not establish scientific inclusion.',
+        note: `Of the ${summary.any_in} works ANY model called metaresearch, only ${summary.n_in_3} (${summary.pct_all_three}%) were called metaresearch by all three. The sample is stratified: any rate computed from it must use the design weight.`,
+        tiers: 'T1 (core metaresearch) and T2 (metaresearch) count as IN SCOPE. T3 is ADJACENT and does NOT: n_in counts T1 and T2 only. Treating "tier != OUT" as in-scope will give you a per-model count larger than the union of all three, which is impossible.',
         per_model_in_scope: summary.per_model,
       },
     },
@@ -75,9 +67,9 @@ export async function GET(req: NextRequest) {
       /** Design weight (inverse selection probability). Ignore it and your rate is wrong. */
       weight: r.weight,
       n_in: r.nIn,
-      opus: { tier: r.opusTier, genre_raw: r.opusGenre, about_ca: r.opusAboutCa, confidence: r.opusConfidence, reason: r.opusReason },
-      gpt: { tier: r.gptTier, genre_raw: r.gptGenre, about_ca: r.gptAboutCa, confidence: r.gptConfidence, reason: r.gptReason },
-      grok: { tier: r.grokTier, genre_raw: r.grokGenre, about_ca: r.grokAboutCa, confidence: r.grokConfidence, reason: r.grokReason },
+      opus: { tier: r.opusTier, genre: r.opusGenre, about_ca: r.opusAboutCa, confidence: r.opusConfidence, reason: r.opusReason },
+      gpt: { tier: r.gptTier, genre: r.gptGenre, about_ca: r.gptAboutCa, confidence: r.gptConfidence, reason: r.gptReason },
+      grok: { tier: r.grokTier, genre: r.grokGenre, about_ca: r.grokAboutCa, confidence: r.grokConfidence, reason: r.grokReason },
     })),
   })
 }

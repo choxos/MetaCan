@@ -2,12 +2,12 @@ import type { MetadataRoute } from 'next'
 import { SITE_URL, localePath } from '@/lib/lang'
 
 /**
- * The seven navigable pages, in both languages, each declaring the other as
- * its alternate. The 4.3M work detail pages are deliberately absent: a sitemap
+ * The navigable pages, in both languages, each declaring the other as its
+ * alternate. The 4.3M work detail pages are deliberately absent: a sitemap
  * is a curation, not an enumeration, and the works are reachable through
- * /works and the API.
+ * /cohort and the API.
  */
-const PAGES = ['/', '/works', '/screen', '/landscape', '/findings', '/api-docs', '/about']
+const PAGES = ['/', '/cohort', '/recent', '/works', '/screen', '/landscape', '/findings', '/api-docs', '/about']
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return PAGES.flatMap((path) =>

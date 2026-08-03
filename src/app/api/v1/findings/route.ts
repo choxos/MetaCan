@@ -15,9 +15,7 @@ export async function GET() {
     meta: {
       count: Object.keys(findings).length,
       source: 'pilot/results/findings.json',
-      evidence_status: 'historical_unvalidated_machine_pilot',
-      human_validation: 'pending',
-      note: 'Written by the pilot scripts and rendered verbatim. These outputs measure machine behaviour, not human-coded field truth.',
+      note: 'Written by the pilot scripts. The site renders this file; it does not restate it.',
     },
     findings,
   })
