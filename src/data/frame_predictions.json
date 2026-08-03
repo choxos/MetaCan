@@ -1,0 +1,87 @@
+{
+  "model_version": "metacan-v3-hybrid-931329e0061c",
+  "generated_at_utc": "2026-08-03T02:49:12.093975+00:00",
+  "n_predictions": 4299418,
+  "prediction_status": "machine_predicted_unvalidated",
+  "provenance": {
+    "codex_side": "distilled SPECTER2 student, calibrated top-K decision policy 8ed616afcb56, support-gated per head",
+    "gemma_side": "direct full-frame Gemma labels, title-only instrument (no abstract); not interchangeable with the abstract-fed round-100 teacher pass"
+  },
+  "candidate_policy": "positive_for_either_source_codex_student_or_direct_gemma",
+  "consensus_policy": "positive_for_both_sources",
+  "hard_label_heads": [
+    "metaresearch",
+    "insufficient_payload"
+  ],
+  "category_order": [
+    "metaresearch",
+    "metaepi_narrow",
+    "metaepi_broad",
+    "bibliometrics",
+    "sts",
+    "scholarly_communication",
+    "open_science",
+    "research_integrity",
+    "insufficient_payload"
+  ],
+  "categorical_score_order": {
+    "domain": [
+      "not_metaresearch",
+      "methods",
+      "reporting",
+      "reproducibility",
+      "evaluation",
+      "incentives"
+    ],
+    "study_design": [
+      "randomized_trial",
+      "nonrandomized_trial",
+      "observational",
+      "systematic_review",
+      "meta_analysis",
+      "case_report",
+      "qualitative",
+      "simulation_or_modeling",
+      "bench_or_experimental",
+      "theoretical_or_conceptual",
+      "not_applicable",
+      "design_other"
+    ],
+    "genre": [
+      "empirical",
+      "review",
+      "methods",
+      "commentary",
+      "editorial",
+      "protocol",
+      "dataset",
+      "software",
+      "other"
+    ]
+  },
+  "sources": {
+    "student_scores": {
+      "path": "data/db/frame_predictions_v2.parquet",
+      "sha256": "f62ee27685ea1011cc02389d7a06db0f4802aa995b710d94dd494c5d59e0cded"
+    },
+    "codex_policy": {
+      "path": "data/db/frame_predictions_v2cal.meta.json",
+      "policy_version": "8ed616afcb56"
+    },
+    "gemma_labels": {
+      "path": "data/db/gemma_frame_labels.parquet",
+      "sha256": "0a6a33559158a9d5b0ead9f9ce20bed782b6ab4520c91374a0c83bf1a210ac02"
+    }
+  },
+  "output": {
+    "path": "data/db/frame_predictions_v3.parquet",
+    "sha256": "77bf69eeac44946ac04bfebef4080baedf43fddd050c5aac57f469a7e2892722"
+  },
+  "limitations": [
+    "predictions are machine outputs and not human validated labels",
+    "the Gemma side is a direct model label read from the title only; it overcalls metaresearch and undercalls abstract-dependent heads relative to the abstract-fed pass",
+    "the Codex side is a distilled student calibrated to design-weighted sample rates; heads without adequate sample support carry no Codex decision, so their consensus is empty",
+    "counts are not frame-calibrated prevalence; prevalence claims come from the design-weighted human sample with intervals",
+    "direct Codex labels exist only for the 10,348-work training sample"
+  ]
+}

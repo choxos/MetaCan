@@ -1,0 +1,13 @@
+{
+ "n_scored": 4299418,
+ "model_version": "v0-immature-baseline",
+ "teacher_heads": [
+  "opus",
+  "gpt"
+ ],
+ "mean_teacher_spread": 0.2432,
+ "p99_teacher_spread": 0.3963,
+ "n_works_where_teachers_would_split": 540,
+ "validation_status_of_every_category_score": "score_only:v0-immature-baseline",
+ "no_category_label_ships": true
+}

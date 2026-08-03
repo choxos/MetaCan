@@ -1,0 +1,438 @@
+{
+  "model_version": "codex-gemma-dda1882f352a",
+  "generated_at_utc": "2026-07-15T21:32:46.668367+00:00",
+  "purpose": "full_frame_teacher_distillation",
+  "training_rows": 10348,
+  "teachers": {
+    "codex": "gpt-5.6-luna",
+    "gemma": "gemma-4-31b-it"
+  },
+  "evaluation": {
+    "split": "five_fold_grouped_by_venue",
+    "weights": "inverse_selection_probability_design_weights",
+    "codex": {
+      "binary": {
+        "category__metaresearch": {
+          "metric_scope": "out_of_fold_teacher_fidelity",
+          "sample_positive_count": 1274,
+          "design_weighted_prevalence": 0.00609511048794959,
+          "average_precision_unweighted": 0.5311422124413824,
+          "average_precision_design_weighted": 0.20214939553828723,
+          "threshold_policy": "maximize_design_weighted_f2",
+          "threshold": 0.02885319743103003,
+          "weighted_f2": 0.33602975709104443,
+          "weighted_precision_at_threshold": 0.2902736130775992,
+          "weighted_recall_at_threshold": 0.3498151940691198
+        },
+        "category__metaepi_narrow": {
+          "metric_scope": "out_of_fold_teacher_fidelity",
+          "sample_positive_count": 52,
+          "design_weighted_prevalence": 4.760942446895701e-05,
+          "average_precision_unweighted": 0.014181535541167644,
+          "average_precision_design_weighted": 0.00013348455586204816,
+          "threshold_policy": "maximize_design_weighted_f2",
+          "threshold": 0.0012751925631315265,
+          "weighted_f2": 0.0014106609318294582,
+          "weighted_precision_at_threshold": 0.00028354727906067825,
+          "weighted_recall_at_threshold": 0.2261274164560683
+        },
+        "category__metaepi_broad": {
+          "metric_scope": "out_of_fold_teacher_fidelity",
+          "sample_positive_count": 149,
+          "design_weighted_prevalence": 0.0004518262720887451,
+          "average_precision_unweighted": 0.1925435978703962,
+          "average_precision_design_weighted": 0.06618370900350859,
+          "threshold_policy": "maximize_design_weighted_f2",
+          "threshold": 0.014628865533292786,
+          "weighted_f2": 0.2005633992472006,
+          "weighted_precision_at_threshold": 0.06973217688210796,
+          "weighted_recall_at_threshold": 0.37774368462658325
+        },
+        "category__bibliometrics": {
+          "metric_scope": "out_of_fold_teacher_fidelity",
+          "sample_positive_count": 834,
+          "design_weighted_prevalence": 0.002108972847041709,
+          "average_precision_unweighted": 0.7590540274386078,
+          "average_precision_design_weighted": 0.21676960907480686,
+          "threshold_policy": "maximize_design_weighted_f2",
+          "threshold": 0.01120712385878521,
+          "weighted_f2": 0.2826047302788463,
+          "weighted_precision_at_threshold": 0.2775045010338812,
+          "weighted_recall_at_threshold": 0.28390921550199005
+        },
+        "category__sts": {
+          "metric_scope": "out_of_fold_teacher_fidelity",
+          "sample_positive_count": 226,
+          "design_weighted_prevalence": 0.003636639147551333,
+          "average_precision_unweighted": 0.059348493078678774,
+          "average_precision_design_weighted": 0.022632996163089284,
+          "threshold_policy": "maximize_design_weighted_f2",
+          "threshold": 0.0013001715731901617,
+          "weighted_f2": 0.12874728154158982,
+          "weighted_precision_at_threshold": 0.03142490928068246,
+          "weighted_recall_at_threshold": 0.5702976185026316
+        },
+        "category__scholarly_communication": {
+          "metric_scope": "out_of_fold_teacher_fidelity",
+          "sample_positive_count": 343,
+          "design_weighted_prevalence": 0.003956793176257692,
+          "average_precision_unweighted": 0.2870148540776665,
+          "average_precision_design_weighted": 0.041817492955882905,
+          "threshold_policy": "maximize_design_weighted_f2",
+          "threshold": 0.0010370191980155696,
+          "weighted_f2": 0.11086806702626617,
+          "weighted_precision_at_threshold": 0.02591551672333631,
+          "weighted_recall_at_threshold": 0.6142763189456368
+        },
+        "category__open_science": {
+          "metric_scope": "out_of_fold_teacher_fidelity",
+          "sample_positive_count": 169,
+          "design_weighted_prevalence": 0.0010912893589361534,
+          "average_precision_unweighted": 0.2777952183338784,
+          "average_precision_design_weighted": 0.04596268008454113,
+          "threshold_policy": "maximize_design_weighted_f2",
+          "threshold": 0.005381362524676731,
+          "weighted_f2": 0.09041856773832595,
+          "weighted_precision_at_threshold": 0.028731257832899895,
+          "weighted_recall_at_threshold": 0.1951878565031282
+        },
+        "category__research_integrity": {
+          "metric_scope": "out_of_fold_teacher_fidelity",
+          "sample_positive_count": 473,
+          "design_weighted_prevalence": 0.000990496568972188,
+          "average_precision_unweighted": 0.1233447715143467,
+          "average_precision_design_weighted": 0.0070513674476380276,
+          "threshold_policy": "maximize_design_weighted_f2",
+          "threshold": 0.0012965265330729871,
+          "weighted_f2": 0.04315076317429419,
+          "weighted_precision_at_threshold": 0.009000650088390936,
+          "weighted_recall_at_threshold": 0.8386236756581638
+        },
+        "category__insufficient_payload": {
+          "metric_scope": "out_of_fold_teacher_fidelity",
+          "sample_positive_count": 443,
+          "design_weighted_prevalence": 0.06067705813667287,
+          "average_precision_unweighted": 0.11836133190961522,
+          "average_precision_design_weighted": 0.23152441991242084,
+          "threshold_policy": "maximize_design_weighted_f2",
+          "threshold": 0.0009133004983053971,
+          "weighted_f2": 0.42138075662592744,
+          "weighted_precision_at_threshold": 0.1863072209850243,
+          "weighted_recall_at_threshold": 0.6155480130142736
+        },
+        "about_ca_system": {
+          "metric_scope": "out_of_fold_teacher_fidelity",
+          "sample_positive_count": 131,
+          "design_weighted_prevalence": 0.005338619200878192,
+          "average_precision_unweighted": 0.038649844176697666,
+          "average_precision_design_weighted": 0.03644431507985145,
+          "threshold_policy": "maximize_design_weighted_f2",
+          "threshold": 0.0038241426346869176,
+          "weighted_f2": 0.21185632911739072,
+          "weighted_precision_at_threshold": 0.06971315993097,
+          "weighted_recall_at_threshold": 0.4321331681290368
+        },
+        "about_ca_topic": {
+          "metric_scope": "out_of_fold_teacher_fidelity",
+          "sample_positive_count": 890,
+          "design_weighted_prevalence": 0.1003005404972742,
+          "average_precision_unweighted": 0.5936170898718136,
+          "average_precision_design_weighted": 0.6386703170625085,
+          "threshold_policy": "maximize_design_weighted_f2",
+          "threshold": 0.00661503616072302,
+          "weighted_f2": 0.7233192398216044,
+          "weighted_precision_at_threshold": 0.4457067670797181,
+          "weighted_recall_at_threshold": 0.8567237678794022
+        }
+      },
+      "categorical": {
+        "domain": {
+          "metric_scope": "out_of_fold_teacher_fidelity",
+          "weighted_exact_agreement": 0.9939282482695541,
+          "unweighted_exact_agreement": 0.8788171627367607,
+          "class_counts": {
+            "not_metaresearch": 9074,
+            "methods": 703,
+            "reporting": 162,
+            "reproducibility": 85,
+            "evaluation": 261,
+            "incentives": 63
+          }
+        },
+        "study_design": {
+          "metric_scope": "out_of_fold_teacher_fidelity",
+          "weighted_exact_agreement": 0.5420212636578595,
+          "unweighted_exact_agreement": 0.4963277928102049,
+          "class_counts": {
+            "randomized_trial": 397,
+            "nonrandomized_trial": 35,
+            "observational": 2344,
+            "systematic_review": 622,
+            "meta_analysis": 147,
+            "case_report": 64,
+            "qualitative": 679,
+            "simulation_or_modeling": 232,
+            "bench_or_experimental": 719,
+            "theoretical_or_conceptual": 1105,
+            "not_applicable": 2228,
+            "design_other": 1776
+          }
+        },
+        "genre": {
+          "metric_scope": "out_of_fold_teacher_fidelity",
+          "weighted_exact_agreement": 0.6950694572027197,
+          "unweighted_exact_agreement": 0.6345187475840742,
+          "class_counts": {
+            "empirical": 4760,
+            "review": 1282,
+            "methods": 760,
+            "commentary": 1128,
+            "editorial": 354,
+            "protocol": 370,
+            "dataset": 444,
+            "software": 63,
+            "other": 1187
+          }
+        }
+      }
+    },
+    "gemma": {
+      "binary": {
+        "category__metaresearch": {
+          "metric_scope": "out_of_fold_teacher_fidelity",
+          "sample_positive_count": 1452,
+          "design_weighted_prevalence": 0.01729211845011298,
+          "average_precision_unweighted": 0.5621950486194803,
+          "average_precision_design_weighted": 0.14917406094211313,
+          "threshold_policy": "maximize_design_weighted_f2",
+          "threshold": 0.008353062991327969,
+          "weighted_f2": 0.24547295206601752,
+          "weighted_precision_at_threshold": 0.10932081427647791,
+          "weighted_recall_at_threshold": 0.3564600438988755
+        },
+        "category__metaepi_narrow": {
+          "metric_scope": "out_of_fold_teacher_fidelity",
+          "sample_positive_count": 27,
+          "design_weighted_prevalence": 1.066616547165772e-05,
+          "average_precision_unweighted": 0.0033436860169049243,
+          "average_precision_design_weighted": 1.7668957066734147e-05,
+          "threshold_policy": "maximize_design_weighted_f2",
+          "threshold": 0.00024522536106235944,
+          "weighted_f2": 0.00012388273560175512,
+          "weighted_precision_at_threshold": 2.4780338437462777e-05,
+          "weighted_recall_at_threshold": 0.6477656232457076
+        },
+        "category__metaepi_broad": {
+          "metric_scope": "out_of_fold_teacher_fidelity",
+          "sample_positive_count": 125,
+          "design_weighted_prevalence": 0.00087711067677122,
+          "average_precision_unweighted": 0.1646656696221497,
+          "average_precision_design_weighted": 0.024123554969759545,
+          "threshold_policy": "maximize_design_weighted_f2",
+          "threshold": 0.009915452995379851,
+          "weighted_f2": 0.1238913669829235,
+          "weighted_precision_at_threshold": 0.09057086051413567,
+          "weighted_recall_at_threshold": 0.13644026732516354
+        },
+        "category__bibliometrics": {
+          "metric_scope": "out_of_fold_teacher_fidelity",
+          "sample_positive_count": 892,
+          "design_weighted_prevalence": 0.0028619779759930814,
+          "average_precision_unweighted": 0.7340322586638122,
+          "average_precision_design_weighted": 0.17945029222431727,
+          "threshold_policy": "maximize_design_weighted_f2",
+          "threshold": 0.020813090344061664,
+          "weighted_f2": 0.21923565035648362,
+          "weighted_precision_at_threshold": 0.6216183761102472,
+          "weighted_recall_at_threshold": 0.18869877640242957
+        },
+        "category__sts": {
+          "metric_scope": "out_of_fold_teacher_fidelity",
+          "sample_positive_count": 328,
+          "design_weighted_prevalence": 0.0039050278162502034,
+          "average_precision_unweighted": 0.18513108421985702,
+          "average_precision_design_weighted": 0.014685419302784102,
+          "threshold_policy": "maximize_design_weighted_f2",
+          "threshold": 0.002714041772890342,
+          "weighted_f2": 0.09242899284344733,
+          "weighted_precision_at_threshold": 0.024954478808418088,
+          "weighted_recall_at_threshold": 0.28525353026780587
+        },
+        "category__scholarly_communication": {
+          "metric_scope": "out_of_fold_teacher_fidelity",
+          "sample_positive_count": 198,
+          "design_weighted_prevalence": 0.003708632025105767,
+          "average_precision_unweighted": 0.13773025389877894,
+          "average_precision_design_weighted": 0.12059426202750952,
+          "threshold_policy": "maximize_design_weighted_f2",
+          "threshold": 0.013793562760023234,
+          "weighted_f2": 0.34356652257444337,
+          "weighted_precision_at_threshold": 0.376666217523291,
+          "weighted_recall_at_threshold": 0.3361810122503113
+        },
+        "category__open_science": {
+          "metric_scope": "out_of_fold_teacher_fidelity",
+          "sample_positive_count": 213,
+          "design_weighted_prevalence": 0.00244906576252695,
+          "average_precision_unweighted": 0.29686897306789983,
+          "average_precision_design_weighted": 0.06772833129794854,
+          "threshold_policy": "maximize_design_weighted_f2",
+          "threshold": 0.008022923377294574,
+          "weighted_f2": 0.25821772042732827,
+          "weighted_precision_at_threshold": 0.16203119716022515,
+          "weighted_recall_at_threshold": 0.30321743567091763
+        },
+        "category__research_integrity": {
+          "metric_scope": "out_of_fold_teacher_fidelity",
+          "sample_positive_count": 438,
+          "design_weighted_prevalence": 0.0016921685326701389,
+          "average_precision_unweighted": 0.15013910786643944,
+          "average_precision_design_weighted": 0.01434262632525961,
+          "threshold_policy": "maximize_design_weighted_f2",
+          "threshold": 0.002301730118035874,
+          "weighted_f2": 0.09649200342025686,
+          "weighted_precision_at_threshold": 0.023261687921228704,
+          "weighted_recall_at_threshold": 0.4530717530440184
+        },
+        "category__insufficient_payload": {
+          "metric_scope": "out_of_fold_teacher_fidelity",
+          "sample_positive_count": 156,
+          "design_weighted_prevalence": 0.036207640162095996,
+          "average_precision_unweighted": 0.15297261165085033,
+          "average_precision_design_weighted": 0.3273324840261112,
+          "threshold_policy": "maximize_design_weighted_f2",
+          "threshold": 0.0007780096856492679,
+          "weighted_f2": 0.47020743955936595,
+          "weighted_precision_at_threshold": 0.23297173470266327,
+          "weighted_recall_at_threshold": 0.6307916117313345
+        },
+        "about_ca_system": {
+          "metric_scope": "out_of_fold_teacher_fidelity",
+          "sample_positive_count": 250,
+          "design_weighted_prevalence": 0.01061188621561794,
+          "average_precision_unweighted": 0.11149471943820849,
+          "average_precision_design_weighted": 0.07229801902225251,
+          "threshold_policy": "maximize_design_weighted_f2",
+          "threshold": 0.005637115017835141,
+          "weighted_f2": 0.2500922617484985,
+          "weighted_precision_at_threshold": 0.08759354046708143,
+          "weighted_recall_at_threshold": 0.4664040511423288
+        },
+        "about_ca_topic": {
+          "metric_scope": "out_of_fold_teacher_fidelity",
+          "sample_positive_count": 1055,
+          "design_weighted_prevalence": 0.12644304442972165,
+          "average_precision_unweighted": 0.6479947624751233,
+          "average_precision_design_weighted": 0.7156242604137911,
+          "threshold_policy": "maximize_design_weighted_f2",
+          "threshold": 0.017920393115983375,
+          "weighted_f2": 0.7813729972255721,
+          "weighted_precision_at_threshold": 0.5647033599933682,
+          "weighted_recall_at_threshold": 0.8642759757644218
+        }
+      },
+      "categorical": {
+        "domain": {
+          "metric_scope": "out_of_fold_teacher_fidelity",
+          "weighted_exact_agreement": 0.9827850695699358,
+          "unweighted_exact_agreement": 0.8644182450715114,
+          "class_counts": {
+            "not_metaresearch": 8896,
+            "methods": 666,
+            "reporting": 193,
+            "reproducibility": 117,
+            "evaluation": 377,
+            "incentives": 99
+          }
+        },
+        "study_design": {
+          "metric_scope": "out_of_fold_teacher_fidelity",
+          "weighted_exact_agreement": 0.6115088903900306,
+          "unweighted_exact_agreement": 0.5756667955160417,
+          "class_counts": {
+            "randomized_trial": 366,
+            "nonrandomized_trial": 95,
+            "observational": 3183,
+            "systematic_review": 547,
+            "meta_analysis": 162,
+            "case_report": 76,
+            "qualitative": 754,
+            "simulation_or_modeling": 405,
+            "bench_or_experimental": 594,
+            "theoretical_or_conceptual": 760,
+            "not_applicable": 3405,
+            "design_other": 1
+          }
+        },
+        "genre": {
+          "metric_scope": "out_of_fold_teacher_fidelity",
+          "weighted_exact_agreement": 0.7900387096783584,
+          "unweighted_exact_agreement": 0.7304793196752996,
+          "class_counts": {
+            "empirical": 6031,
+            "review": 1192,
+            "methods": 543,
+            "commentary": 398,
+            "editorial": 343,
+            "protocol": 379,
+            "dataset": 372,
+            "software": 42,
+            "other": 1048
+          }
+        }
+      }
+    }
+  },
+  "feature_contract": {
+    "included": [
+      "title",
+      "venue",
+      "topic",
+      "field",
+      "lang",
+      "type",
+      "year"
+    ],
+    "excluded": [
+      "abstract"
+    ],
+    "reason": "abstract text is unavailable across the full frame",
+    "representation": "stateless_word_and_character_hashing",
+    "features_per_channel": 262144,
+    "total_features": 524288
+  },
+  "decision_policy": {
+    "binary_candidate": "positive_for_either_teacher_head_at_its_design_weighted_f2_threshold",
+    "binary_consensus": "positive_for_both_teacher_heads_at_their_design_weighted_f2_thresholds",
+    "categorical_candidate": "highest_mean_teacher_score",
+    "categorical_consensus": "reported_only_when_both_teacher_heads_select_the_same_value"
+  },
+  "claims_not_supported": [
+    "accuracy against human judgments",
+    "frame calibrated probabilities",
+    "criterion validity",
+    "equivalence between direct model labels and distilled predictions"
+  ],
+  "prediction_status": "machine_predicted_unvalidated",
+  "inputs": {
+    "pilot/screening/bulk/sample.json": "51a5f57ad14cbb130f88d79a3c3de30aff1d9782a1d31c6b586840bac3642f65",
+    "pilot/screening/loop/round_100/labels_gpt.json": "1f6c3cafa47cfba362a18ecb2f32b00de7d5ee4b22f450f0e956c81bd85855c7",
+    "pilot/screening/loop/round_100/labels_gemma.json": "6565453a8a485386565c159db8e720c4237b5b6ecbf4721f7e06080f46be4cf7",
+    "docs/protocol/rubric-v3.md": "50a108c148fc2072b6fa226b0fd2830aa81e02b59f8c9e5c35f5bd8f07f30df7",
+    "docs/protocol/screening-schema-v3.json": "4e82b4ec9719c8cba431f560b20fcc78a22d609e3b147edeb7bd4be4deb5ae14",
+    "ml/distillation_features.py": "9ea694cd48ebb13bd55911ee33bed6444b1e2622c36d1e79cd2646c26f71efb7",
+    "ml/distillation_model.py": "a577a8e6ec75fc26016125b2dd69565ec60a5e9bf5e679701c7a9b8d0c7e2200",
+    "ml/distillation_targets.py": "71d33b7d4a1fefd2aedb35328671765e772d73e7355a15acfce71ca95cb19cee",
+    "ml/distillation_training.py": "e53bc8901a1db9ced167fe47e8e11dd7e55a3ee5931502c65ccf4df1d80e4041"
+  },
+  "artifact": {
+    "path": "data/db/distillation_model.joblib",
+    "sha256": "9dc943596747e9ff01a1c6782bdadca687af73e2d2516eb7c88460e3c3c1fb19"
+  },
+  "software": {
+    "python": "3.13.5",
+    "numpy": "2.3.2",
+    "scikit_learn": "1.8.0",
+    "joblib": "1.5.3"
+  }
+}
