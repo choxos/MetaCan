@@ -1,0 +1,66 @@
+{
+  "model_version": "metacan-v3-hybrid-931329e0061c",
+  "generated_at_utc": "2026-08-03T02:49:12.093975+00:00",
+  "n_predictions": 4299418,
+  "provenance": {
+    "codex": "distilled SPECTER2 student, calibrated top-K policy 8ed616afcb56, support-gated",
+    "gemma": "direct full-frame labels, title-only instrument (see data/db/gemma_frame_labels.meta.json)"
+  },
+  "sources": {
+    "student_scores": {
+      "path": "data/db/frame_predictions_v2.parquet",
+      "sha256": "f62ee27685ea1011cc02389d7a06db0f4802aa995b710d94dd494c5d59e0cded"
+    },
+    "codex_policy": {
+      "path": "data/db/frame_predictions_v2cal.meta.json",
+      "policy_version": "8ed616afcb56"
+    },
+    "gemma_labels": {
+      "path": "data/db/gemma_frame_labels.parquet",
+      "sha256": "0a6a33559158a9d5b0ead9f9ce20bed782b6ab4520c91374a0c83bf1a210ac02"
+    }
+  },
+  "validation": {
+    "metaresearch": {
+      "candidate": 74663,
+      "consensus": 15901
+    },
+    "metaepi_narrow": {
+      "candidate": 188,
+      "consensus": 0
+    },
+    "metaepi_broad": {
+      "candidate": 3772,
+      "consensus": 0
+    },
+    "bibliometrics": {
+      "candidate": 9844,
+      "consensus": 0
+    },
+    "sts": {
+      "candidate": 18903,
+      "consensus": 0
+    },
+    "scholarly_communication": {
+      "candidate": 9887,
+      "consensus": 0
+    },
+    "open_science": {
+      "candidate": 6068,
+      "consensus": 0
+    },
+    "research_integrity": {
+      "candidate": 5797,
+      "consensus": 0
+    },
+    "insufficient_payload": {
+      "candidate": 323855,
+      "consensus": 123363
+    }
+  },
+  "output": {
+    "path": "data/db/frame_predictions_v3.parquet",
+    "sha256": "77bf69eeac44946ac04bfebef4080baedf43fddd050c5aac57f469a7e2892722"
+  },
+  "prediction_status": "machine_predicted_unvalidated"
+}

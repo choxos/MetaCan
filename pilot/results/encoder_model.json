@@ -1,0 +1,207 @@
+{
+  "model_version": "metacan-v2-encoder-7f4a90baae60",
+  "generated_at_utc": "2026-07-19T19:31:37.666639+00:00",
+  "purpose": "full_frame_teacher_distillation (v2 encoder arm)",
+  "training_rows_eval_fit": 8733,
+  "holdout_rows": 1615,
+  "training_rows_final_fit": 10348,
+  "abstract_coverage_in_sample": 0.8062427522226517,
+  "evaluation_note": "Venue-grouped holdout (the venue string is inside the encoder text; a random split would leak it), thresholds fitted on the same holdout at beta=2, deployed weights refit on all rows. v1's report uses 5-fold grouped out-of-fold estimates of the same quantity; the two are compared as different estimators of one thing, not as one estimator. All metrics are TEACHER-IMITATION metrics under design weights; nothing here estimates scientific truth. French strata appear only where the holdout carries at least 10 French POSITIVES.",
+  "heads": {
+    "codex:category__metaresearch": {
+      "weighted_ap": 0.26931169213364525,
+      "threshold": 0.015654204413294792,
+      "positives_in_holdout": 233,
+      "fr_rows_in_holdout": 82,
+      "fr_positives_in_holdout": 1,
+      "weighted_ap_en": 0.2759905072956655
+    },
+    "codex:category__metaepi_narrow": {
+      "weighted_ap": 0.14547763607489908,
+      "threshold": 0.00677607674151659,
+      "positives_in_holdout": 8,
+      "fr_rows_in_holdout": 82,
+      "fr_positives_in_holdout": 0
+    },
+    "codex:category__metaepi_broad": {
+      "weighted_ap": 0.06300201668572422,
+      "threshold": 0.01285300962626934,
+      "positives_in_holdout": 26,
+      "fr_rows_in_holdout": 82,
+      "fr_positives_in_holdout": 0,
+      "weighted_ap_en": 0.0630175574657591
+    },
+    "codex:category__bibliometrics": {
+      "weighted_ap": 0.7605926086573358,
+      "threshold": 0.0445958711206913,
+      "positives_in_holdout": 119,
+      "fr_rows_in_holdout": 82,
+      "fr_positives_in_holdout": 0,
+      "weighted_ap_en": 0.7840948425676081
+    },
+    "codex:category__sts": {
+      "weighted_ap": 0.0181498885888519,
+      "threshold": 0.06053232401609421,
+      "positives_in_holdout": 19,
+      "fr_rows_in_holdout": 82,
+      "fr_positives_in_holdout": 2,
+      "weighted_ap_en": 0.021911676836516094
+    },
+    "codex:category__scholarly_communication": {
+      "weighted_ap": 0.17196986561638103,
+      "threshold": 0.043488334864377975,
+      "positives_in_holdout": 48,
+      "fr_rows_in_holdout": 82,
+      "fr_positives_in_holdout": 1,
+      "weighted_ap_en": 0.1852804487585129
+    },
+    "codex:category__open_science": {
+      "weighted_ap": 0.0132532365916155,
+      "threshold": 0.011169400997459888,
+      "positives_in_holdout": 24,
+      "fr_rows_in_holdout": 82,
+      "fr_positives_in_holdout": 1,
+      "weighted_ap_en": 0.014087185046860264
+    },
+    "codex:category__research_integrity": {
+      "weighted_ap": 0.0016298645306790766,
+      "threshold": 0.012897377833724022,
+      "positives_in_holdout": 58,
+      "fr_rows_in_holdout": 82,
+      "fr_positives_in_holdout": 0,
+      "weighted_ap_en": 0.0016935315129824708
+    },
+    "codex:category__insufficient_payload": {
+      "weighted_ap": 0.6229946420193773,
+      "threshold": 0.0656445175409317,
+      "positives_in_holdout": 32,
+      "fr_rows_in_holdout": 82,
+      "fr_positives_in_holdout": 5,
+      "weighted_ap_en": 0.6292712031067005
+    },
+    "codex:about_ca_system": {
+      "weighted_ap": 0.09941881925796914,
+      "threshold": 0.027093255892395973,
+      "positives_in_holdout": 23,
+      "fr_rows_in_holdout": 82,
+      "fr_positives_in_holdout": 3,
+      "weighted_ap_en": 0.11383366355752036
+    },
+    "codex:about_ca_topic": {
+      "weighted_ap": 0.8979047394623958,
+      "threshold": 0.09103751927614212,
+      "positives_in_holdout": 124,
+      "fr_rows_in_holdout": 82,
+      "fr_positives_in_holdout": 23,
+      "weighted_ap_fr": 0.8420824235610803,
+      "weighted_ap_en": 0.9097997364931334
+    },
+    "codex:domain": {
+      "weighted_accuracy": 0.9926350114574565
+    },
+    "codex:study_design": {
+      "weighted_accuracy": 0.7406056298174166
+    },
+    "codex:genre": {
+      "weighted_accuracy": 0.8709351472031241
+    },
+    "gemma:category__metaresearch": {
+      "weighted_ap": 0.18208322055858758,
+      "threshold": 0.014302846044301987,
+      "positives_in_holdout": 273,
+      "fr_rows_in_holdout": 82,
+      "fr_positives_in_holdout": 0,
+      "weighted_ap_en": 0.1880481565615553
+    },
+    "gemma:category__metaepi_narrow": {
+      "weighted_ap": 0.001145575765935432,
+      "threshold": 0.0023446788545697927,
+      "positives_in_holdout": 4,
+      "fr_rows_in_holdout": 82,
+      "fr_positives_in_holdout": 0
+    },
+    "gemma:category__metaepi_broad": {
+      "weighted_ap": 0.10344715735630326,
+      "threshold": 0.009360200725495815,
+      "positives_in_holdout": 20,
+      "fr_rows_in_holdout": 82,
+      "fr_positives_in_holdout": 0,
+      "weighted_ap_en": 0.10344779019515671
+    },
+    "gemma:category__bibliometrics": {
+      "weighted_ap": 0.37904068156645687,
+      "threshold": 0.01666879840195179,
+      "positives_in_holdout": 123,
+      "fr_rows_in_holdout": 82,
+      "fr_positives_in_holdout": 0,
+      "weighted_ap_en": 0.3821424158893259
+    },
+    "gemma:category__sts": {
+      "weighted_ap": 0.01784150397126736,
+      "threshold": 0.009509815834462643,
+      "positives_in_holdout": 28,
+      "fr_rows_in_holdout": 82,
+      "fr_positives_in_holdout": 5,
+      "weighted_ap_en": 0.08568672310688108
+    },
+    "gemma:category__scholarly_communication": {
+      "weighted_ap": 0.13043162044631468,
+      "threshold": 0.05761590227484703,
+      "positives_in_holdout": 30,
+      "fr_rows_in_holdout": 82,
+      "fr_positives_in_holdout": 1,
+      "weighted_ap_en": 0.1421959204062512
+    },
+    "gemma:category__open_science": {
+      "weighted_ap": 0.0536372087534344,
+      "threshold": 0.033323027193546295,
+      "positives_in_holdout": 27,
+      "fr_rows_in_holdout": 82,
+      "fr_positives_in_holdout": 2,
+      "weighted_ap_en": 0.05879707737871081
+    },
+    "gemma:category__research_integrity": {
+      "weighted_ap": 0.001762804026246603,
+      "threshold": 0.02345350943505764,
+      "positives_in_holdout": 50,
+      "fr_rows_in_holdout": 82,
+      "fr_positives_in_holdout": 0,
+      "weighted_ap_en": 0.0018769271440266663
+    },
+    "gemma:category__insufficient_payload": {
+      "weighted_ap": 0.48313950983362564,
+      "threshold": 0.03273352235555649,
+      "positives_in_holdout": 19,
+      "fr_rows_in_holdout": 82,
+      "fr_positives_in_holdout": 0,
+      "weighted_ap_en": 0.47825596364475753
+    },
+    "gemma:about_ca_system": {
+      "weighted_ap": 0.25365553904163635,
+      "threshold": 0.01802799291908741,
+      "positives_in_holdout": 41,
+      "fr_rows_in_holdout": 82,
+      "fr_positives_in_holdout": 2,
+      "weighted_ap_en": 0.2539015789004894
+    },
+    "gemma:about_ca_topic": {
+      "weighted_ap": 0.9205184111230151,
+      "threshold": 0.0747099444270134,
+      "positives_in_holdout": 136,
+      "fr_rows_in_holdout": 82,
+      "fr_positives_in_holdout": 32,
+      "weighted_ap_fr": 0.8816987568396137,
+      "weighted_ap_en": 0.9230160335589567
+    },
+    "gemma:domain": {
+      "weighted_accuracy": 0.9868821383864935
+    },
+    "gemma:study_design": {
+      "weighted_accuracy": 0.8206098713941062
+    },
+    "gemma:genre": {
+      "weighted_accuracy": 0.8734517757592345
+    }
+  },
+  "prediction_status": "machine_predicted_unvalidated"
+}

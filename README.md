@@ -46,6 +46,36 @@ deploy/ PostgreSQL schema, indexes, normalization, and release loaders
 webapp branch and metacan.xera.ac
 ```
 
+### Live v3 hybrid pipeline (serving metacan.xera.ac)
+
+The prediction layer serving the site was rebuilt in three stages after the
+1.0.0 release, and the exact code that ran is published here alongside the
+earlier `classifier_*` stack (the two stacks share data contracts but not
+module names; this one is the working-tree lineage behind the live model):
+
+- `ml/train_encoder.py` and `ml/apply_encoder.py`: a SPECTER2 text encoder
+  fine-tuned on the 10,348 paired teacher labels, reading title, recovered
+  abstract (`ml/build_abstracts.py`), and venue, scored over all 4,299,418
+  works.
+- `ml/calibrate_policy.py`: decision quotas aligned to design-weighted sample
+  rates on the design-covered universe, with per-head support gates. Quota
+  alignment, not probability calibration; the counts it forces are never
+  prevalence claims.
+- `ml/gemma_frame.py` plus `ml/assemble_gemma_frame.py`: a direct Gemma pass
+  over every frame work (title-only payload), assembled and validated against
+  the frozen frame ids.
+- `ml/hybrid_predictions.py`: the live layer, model
+  `metacan-v3-hybrid-931329e0061c`: candidate is the union of the direct
+  Gemma label and the calibrated encoder's Codex head; consensus is their
+  intersection. Frame-wide agreement of the encoder against the direct Gemma
+  labels is reported in `pilot/results/gemma_frame_eval.json` (the encoder
+  exceeds the TF-IDF student on all 11 binary heads). Release provenance for
+  each stage sits in `artifacts/v3-hybrid/`.
+
+These modules document their own run commands and are exercised by the
+research tree rather than this repository's CI, which continues to cover the
+`classifier_*` stack.
+
 ### Frame construction
 
 - [`R/snapshot.R`](R/snapshot.R) defines the pinned snapshot interface.

@@ -1,0 +1,503 @@
+{
+  "generated_at_utc": "2026-07-22T04:18:37.018795+00:00",
+  "survey": {
+    "weight_sum": 4258728.2299999995,
+    "n_sample": 10348,
+    "heads": {
+      "category__metaresearch": {
+        "codex": {
+          "rate": 0.006095110487949592,
+          "n_pos": 1274,
+          "ess_pos": 20.927685893285755,
+          "top_share": 0.0955873421175374,
+          "passes": true
+        },
+        "gemma": {
+          "rate": 0.01729211845011298,
+          "n_pos": 1452,
+          "ess_pos": 39.41730171516036,
+          "top_share": 0.03369254109244327,
+          "passes": true
+        },
+        "hard": true
+      },
+      "category__metaepi_narrow": {
+        "codex": {
+          "rate": 4.760942446895702e-05,
+          "n_pos": 52,
+          "ess_pos": 4.870797379574139,
+          "top_share": 0.418674502701775,
+          "passes": false
+        },
+        "gemma": {
+          "rate": 1.0666165471657722e-05,
+          "n_pos": 27,
+          "ess_pos": 5.116165334827625,
+          "top_share": 0.42761913777427496,
+          "passes": false
+        },
+        "hard": false
+      },
+      "category__metaepi_broad": {
+        "codex": {
+          "rate": 0.00045182627208874515,
+          "n_pos": 149,
+          "ess_pos": 32.43063238709512,
+          "top_share": 0.04411618656283714,
+          "passes": true
+        },
+        "gemma": {
+          "rate": 0.0008771106767712201,
+          "n_pos": 125,
+          "ess_pos": 2.2404344037127926,
+          "top_share": 0.6642438940551099,
+          "passes": false
+        },
+        "hard": false
+      },
+      "category__bibliometrics": {
+        "codex": {
+          "rate": 0.0021089728470417095,
+          "n_pos": 834,
+          "ess_pos": 6.53369961943067,
+          "top_share": 0.2762555299244711,
+          "passes": false
+        },
+        "gemma": {
+          "rate": 0.002861977975993082,
+          "n_pos": 892,
+          "ess_pos": 7.95548373406095,
+          "top_share": 0.20357089269831485,
+          "passes": false
+        },
+        "hard": false
+      },
+      "category__sts": {
+        "codex": {
+          "rate": 0.003636639147551334,
+          "n_pos": 226,
+          "ess_pos": 7.609963063853703,
+          "top_share": 0.16020709996704557,
+          "passes": false
+        },
+        "gemma": {
+          "rate": 0.003905027816250205,
+          "n_pos": 328,
+          "ess_pos": 8.7081057551511,
+          "top_share": 0.1491962257045542,
+          "passes": false
+        },
+        "hard": false
+      },
+      "category__scholarly_communication": {
+        "codex": {
+          "rate": 0.003956793176257693,
+          "n_pos": 343,
+          "ess_pos": 9.078985628789356,
+          "top_share": 0.14724434295725852,
+          "passes": false
+        },
+        "gemma": {
+          "rate": 0.0037086320251057676,
+          "n_pos": 198,
+          "ess_pos": 7.974626664365211,
+          "top_share": 0.15709712031600445,
+          "passes": false
+        },
+        "hard": false
+      },
+      "category__open_science": {
+        "codex": {
+          "rate": 0.0010912893589361536,
+          "n_pos": 169,
+          "ess_pos": 3.4481001861797047,
+          "top_share": 0.5338780284853067,
+          "passes": false
+        },
+        "gemma": {
+          "rate": 0.0024490657625269503,
+          "n_pos": 213,
+          "ess_pos": 5.827293101594228,
+          "top_share": 0.23789292242388965,
+          "passes": false
+        },
+        "hard": false
+      },
+      "category__research_integrity": {
+        "codex": {
+          "rate": 0.0009904965689721882,
+          "n_pos": 473,
+          "ess_pos": 2.797414610567064,
+          "top_share": 0.5882053807217045,
+          "passes": false
+        },
+        "gemma": {
+          "rate": 0.0016921685326701395,
+          "n_pos": 438,
+          "ess_pos": 4.120023401760329,
+          "top_share": 0.3443010552480232,
+          "passes": false
+        },
+        "hard": false
+      },
+      "category__insufficient_payload": {
+        "codex": {
+          "rate": 0.06067705813667289,
+          "n_pos": 443,
+          "ess_pos": 113.04397055367858,
+          "top_share": 0.009601906047315409,
+          "passes": true
+        },
+        "gemma": {
+          "rate": 0.036207640162096,
+          "n_pos": 156,
+          "ess_pos": 65.05931585638609,
+          "top_share": 0.01609095231966372,
+          "passes": true
+        },
+        "hard": true
+      },
+      "about_ca_system": {
+        "codex": {
+          "rate": 0.005338619200878193,
+          "n_pos": 131,
+          "ess_pos": 13.239432038661194,
+          "top_share": 0.10913222867815499,
+          "passes": true
+        },
+        "gemma": {
+          "rate": 0.010611886215617945,
+          "n_pos": 250,
+          "ess_pos": 24.51247621341787,
+          "top_share": 0.0549021540203069,
+          "passes": true
+        },
+        "hard": true
+      },
+      "about_ca_topic": {
+        "codex": {
+          "rate": 0.10030054049727423,
+          "n_pos": 890,
+          "ess_pos": 208.8960766230717,
+          "top_share": 0.005808696628824858,
+          "passes": true
+        },
+        "gemma": {
+          "rate": 0.12644304442972168,
+          "n_pos": 1055,
+          "ess_pos": 260.7113263116784,
+          "top_share": 0.00460773001855117,
+          "passes": true
+        },
+        "hard": true
+      }
+    }
+  },
+  "policy_version": "8ed616afcb56",
+  "policy": {
+    "category__metaresearch": {
+      "hard": true,
+      "teachers": {
+        "codex": {
+          "rate": 0.006095110487949592,
+          "n_pos": 1274,
+          "ess_pos": 20.93,
+          "top_share": 0.0956,
+          "passes": true,
+          "k": 25957,
+          "threshold": 0.18908706307411194,
+          "boundary_id": "W2072396417"
+        },
+        "gemma": {
+          "rate": 0.01729211845011298,
+          "n_pos": 1452,
+          "ess_pos": 39.42,
+          "top_share": 0.0337,
+          "passes": true,
+          "k": 73642,
+          "threshold": 0.165085107088089,
+          "boundary_id": "W2087938803"
+        }
+      }
+    },
+    "category__metaepi_narrow": {
+      "hard": false,
+      "teachers": {
+        "codex": {
+          "rate": 4.760942446895702e-05,
+          "n_pos": 52,
+          "ess_pos": 4.87,
+          "top_share": 0.4187,
+          "passes": false,
+          "k": 203
+        },
+        "gemma": {
+          "rate": 1.0666165471657722e-05,
+          "n_pos": 27,
+          "ess_pos": 5.12,
+          "top_share": 0.4276,
+          "passes": false,
+          "k": 45
+        }
+      }
+    },
+    "category__metaepi_broad": {
+      "hard": false,
+      "teachers": {
+        "codex": {
+          "rate": 0.00045182627208874515,
+          "n_pos": 149,
+          "ess_pos": 32.43,
+          "top_share": 0.0441,
+          "passes": true,
+          "k": 1924
+        },
+        "gemma": {
+          "rate": 0.0008771106767712201,
+          "n_pos": 125,
+          "ess_pos": 2.24,
+          "top_share": 0.6642,
+          "passes": false,
+          "k": 3735
+        }
+      }
+    },
+    "category__bibliometrics": {
+      "hard": false,
+      "teachers": {
+        "codex": {
+          "rate": 0.0021089728470417095,
+          "n_pos": 834,
+          "ess_pos": 6.53,
+          "top_share": 0.2763,
+          "passes": false,
+          "k": 8982
+        },
+        "gemma": {
+          "rate": 0.002861977975993082,
+          "n_pos": 892,
+          "ess_pos": 7.96,
+          "top_share": 0.2036,
+          "passes": false,
+          "k": 12188
+        }
+      }
+    },
+    "category__sts": {
+      "hard": false,
+      "teachers": {
+        "codex": {
+          "rate": 0.003636639147551334,
+          "n_pos": 226,
+          "ess_pos": 7.61,
+          "top_share": 0.1602,
+          "passes": false,
+          "k": 15487
+        },
+        "gemma": {
+          "rate": 0.003905027816250205,
+          "n_pos": 328,
+          "ess_pos": 8.71,
+          "top_share": 0.1492,
+          "passes": false,
+          "k": 16630
+        }
+      }
+    },
+    "category__scholarly_communication": {
+      "hard": false,
+      "teachers": {
+        "codex": {
+          "rate": 0.003956793176257693,
+          "n_pos": 343,
+          "ess_pos": 9.08,
+          "top_share": 0.1472,
+          "passes": false,
+          "k": 16851
+        },
+        "gemma": {
+          "rate": 0.0037086320251057676,
+          "n_pos": 198,
+          "ess_pos": 7.97,
+          "top_share": 0.1571,
+          "passes": false,
+          "k": 15794
+        }
+      }
+    },
+    "category__open_science": {
+      "hard": false,
+      "teachers": {
+        "codex": {
+          "rate": 0.0010912893589361536,
+          "n_pos": 169,
+          "ess_pos": 3.45,
+          "top_share": 0.5339,
+          "passes": false,
+          "k": 4648
+        },
+        "gemma": {
+          "rate": 0.0024490657625269503,
+          "n_pos": 213,
+          "ess_pos": 5.83,
+          "top_share": 0.2379,
+          "passes": false,
+          "k": 10430
+        }
+      }
+    },
+    "category__research_integrity": {
+      "hard": false,
+      "teachers": {
+        "codex": {
+          "rate": 0.0009904965689721882,
+          "n_pos": 473,
+          "ess_pos": 2.8,
+          "top_share": 0.5882,
+          "passes": false,
+          "k": 4218
+        },
+        "gemma": {
+          "rate": 0.0016921685326701395,
+          "n_pos": 438,
+          "ess_pos": 4.12,
+          "top_share": 0.3443,
+          "passes": false,
+          "k": 7206
+        }
+      }
+    },
+    "category__insufficient_payload": {
+      "hard": true,
+      "teachers": {
+        "codex": {
+          "rate": 0.06067705813667289,
+          "n_pos": 443,
+          "ess_pos": 113.04,
+          "top_share": 0.0096,
+          "passes": true,
+          "k": 258407,
+          "threshold": 0.29892387986183167,
+          "boundary_id": "W4206105180"
+        },
+        "gemma": {
+          "rate": 0.036207640162096,
+          "n_pos": 156,
+          "ess_pos": 65.06,
+          "top_share": 0.0161,
+          "passes": true,
+          "k": 154198,
+          "threshold": 0.3195744752883911,
+          "boundary_id": "W6962120858"
+        }
+      }
+    },
+    "about_ca_system": {
+      "hard": true,
+      "teachers": {
+        "codex": {
+          "rate": 0.005338619200878193,
+          "n_pos": 131,
+          "ess_pos": 13.24,
+          "top_share": 0.1091,
+          "passes": true,
+          "k": 22736,
+          "threshold": 0.13782568275928497,
+          "boundary_id": "W2315607470"
+        },
+        "gemma": {
+          "rate": 0.010611886215617945,
+          "n_pos": 250,
+          "ess_pos": 24.51,
+          "top_share": 0.0549,
+          "passes": true,
+          "k": 45193,
+          "threshold": 0.18465794622898102,
+          "boundary_id": "W6920347873"
+        }
+      }
+    },
+    "about_ca_topic": {
+      "hard": true,
+      "teachers": {
+        "codex": {
+          "rate": 0.10030054049727423,
+          "n_pos": 890,
+          "ess_pos": 208.9,
+          "top_share": 0.0058,
+          "passes": true,
+          "k": 427153,
+          "threshold": 0.5029273629188538,
+          "boundary_id": "W1568773973"
+        },
+        "gemma": {
+          "rate": 0.12644304442972168,
+          "n_pos": 1055,
+          "ess_pos": 260.71,
+          "top_share": 0.0046,
+          "passes": true,
+          "k": 538487,
+          "threshold": 0.3994767367839813,
+          "boundary_id": "W3124490475"
+        }
+      }
+    }
+  },
+  "validation": {
+    "category__metaresearch": {
+      "hard": true,
+      "derived_candidate": 74482,
+      "derived_consensus": 25116
+    },
+    "category__metaepi_narrow": {
+      "hard": false,
+      "derived_candidate": 0,
+      "derived_consensus": 0
+    },
+    "category__metaepi_broad": {
+      "hard": false,
+      "derived_candidate": 0,
+      "derived_consensus": 0
+    },
+    "category__bibliometrics": {
+      "hard": false,
+      "derived_candidate": 0,
+      "derived_consensus": 0
+    },
+    "category__sts": {
+      "hard": false,
+      "derived_candidate": 0,
+      "derived_consensus": 0
+    },
+    "category__scholarly_communication": {
+      "hard": false,
+      "derived_candidate": 0,
+      "derived_consensus": 0
+    },
+    "category__open_science": {
+      "hard": false,
+      "derived_candidate": 0,
+      "derived_consensus": 0
+    },
+    "category__research_integrity": {
+      "hard": false,
+      "derived_candidate": 0,
+      "derived_consensus": 0
+    },
+    "category__insufficient_payload": {
+      "hard": true,
+      "derived_candidate": 296577,
+      "derived_consensus": 184808
+    },
+    "about_ca_system": {
+      "hard": true,
+      "derived_candidate": 50233,
+      "derived_consensus": 17695
+    },
+    "about_ca_topic": {
+      "hard": true,
+      "derived_candidate": 538644,
+      "derived_consensus": 426996
+    }
+  }
+}

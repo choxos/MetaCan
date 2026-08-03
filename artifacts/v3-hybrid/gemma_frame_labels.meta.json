@@ -1,0 +1,32 @@
+{
+  "generated_at_utc": "2026-08-03T02:47:43.724115+00:00",
+  "n_labels": 4299418,
+  "instrument": "gemma direct, title-only payload (no abstract); not interchangeable with the abstract-fed round-100 teacher pass",
+  "payload_cols": [
+    "id",
+    "title",
+    "year",
+    "lang",
+    "type",
+    "venue",
+    "topic",
+    "field"
+  ],
+  "chunks": 171977,
+  "chunks_by_backend": {
+    "ollama": 126920,
+    "nvidia": 18085,
+    "gemini": 26278,
+    "openrouter": 689,
+    "puter": 5
+  },
+  "source_frame": {
+    "path": "data/db/works_full.parquet",
+    "sha256": "267cc14e52543ffee03957f84bbbd1099eca48337cd05f01be0067b86cdda274"
+  },
+  "output": {
+    "path": "data/db/gemma_frame_labels.parquet",
+    "sha256": "0a6a33559158a9d5b0ead9f9ce20bed782b6ab4520c91374a0c83bf1a210ac02"
+  },
+  "label_status": "machine_direct_unvalidated"
+}

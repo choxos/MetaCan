@@ -1,0 +1,13 @@
+{
+  "model_version": "metacan-v2-encoder-7f4a90baae60",
+  "generated_at_utc": "2026-07-22T03:51:53.013722+00:00",
+  "n_predictions": 4299418,
+  "source": "data/db/works_full.parquet",
+  "abstracts": "data/db/abstracts.parquet",
+  "abstracts_sha256": "8524911c689ed9812bc65e8e4d54869e0b1d170a57b550e0c1737b43008c2713",
+  "output": {
+    "path": "data/db/frame_predictions_v2.parquet",
+    "sha256": "f62ee27685ea1011cc02389d7a06db0f4802aa995b710d94dd494c5d59e0cded"
+  },
+  "prediction_status": "machine_predicted_unvalidated"
+}
