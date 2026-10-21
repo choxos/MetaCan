@@ -713,10 +713,15 @@ export async function getWork(id: string) {
  * Not stored: the inverted indexes are 8.6 GB of the frame's 9.3 GB of text and
  * the host has 13 GB free (see deploy/schema.sql). OpenAlex returns the abstract
  * as an INVERTED INDEX (token -> positions), so it is de-inverted here.
+ *
+ * Only that field is requested: Next.js keeps each response on disk for a day,
+ * and the whole record (about 33 KB, against 3 KB for the abstract) made that
+ * cache 13 GB at some 200,000 works a day.
  */
 export async function fetchAbstract(id: string): Promise<string | null> {
   try {
-    const r = await fetch(`https://api.openalex.org/works/${id}?mailto=ahmad.pub@gmail.com`, {
+    const url = `https://api.openalex.org/works/${id}?select=abstract_inverted_index&mailto=ahmad.pub@gmail.com`
+    const r = await fetch(url, {
       next: { revalidate: 86_400 },
     })
     if (!r.ok) return null
